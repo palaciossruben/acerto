@@ -1,0 +1,68 @@
+
+
+-- DB creation
+CREATE USER dbadmin WITH PASSWORD 'delmardelolvido';
+CREATE DATABASE maindb;
+GRANT ALL PRIVILEGES ON DATABASE maindb to dbadmin;
+
+
+--psql
+psql -d maindb -U dbadmin -p 5432
+
+
+-- start virtualenver
+source ./myvenv/bin/activate
+
+
+-- run server!!!
+python manage.py runserver
+
+
+-- migration:
+python manage.py makemigrations beta_invite
+python manage.py sqlmigrate beta_invite 0001
+python manage.py migrate
+
+
+-- django interactive
+python manage.py shell
+
+
+-- make new app
+python manage.py startapp invite_beta_app
+
+
+-- SMTP server
+python -m smtpd -n -c DebuggingServer localhost:1025
+
+
+-- AWS EC2
+Launch instance:
+1. select ubuntu
+2. select micro instance free tier.
+3. select security group "production": access to averyone with HTTP and HTTPS. SSH access only my ip.
+4. select/create key_pair, download, have it secure.
+5. Launch
+
+Connect to instance:
+chmod 400 /path/my-key-pair.pem
+ssh -i production_key.pem ubuntu@ec2-52-38-49-253.us-west-2.compute.amazonaws.com
+
+instance id: i-070e94a283f11f547
+instance public DNS: ec2-52-38-49-253.us-west-2.compute.amazonaws.com
+
+
+-- Setup EC2 instance
+sudo apt-get update
+sudo apt-get -y upgrade
+python3 -V
+sudo apt-get install -y python3-pip
+sudo apt-get install build-essential libssl-dev libffi-dev python-dev
+sudo apt install python-pip
+pip install --upgrade pip
+export LC_ALL=C
+pip install virtualenvwrapper
+
+
+-- build requirements on local:
+PYENV_VERSION=3.5.1 pipreqs testing_webpage/

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title style="text-align:center;">PeakU</title>
+</head>
+<body>
+
+<h1 style="text-align:center;">Find the perfect job customized for you</h1>
+<p style="text-align:center;">We are launching PeakU in private Beta. Enter your name and email to have exclusive access to
+our early release.</p>
+
+<form action="/beta_invite/" method="post" style="text-align:center;">
+  {% csrf_token %}
+  <br>
+  {% if error_message %}<p><strong style="color:red">{{ error_message }}</strong></p>{% endif %}
+  {% if successful_message %}<p><strong style="color:green">{{ successful_message }}</strong></p>{% endif %}
+  <input id="name" type="text" name="name" placeholder="name" value={{ name }}>
+  <input id="email" type="text" name="email" placeholder="my_email@example.com" value={{ email }}>
+  <br>
+  <input type="submit" value="Submit" style="text-align:center;">
+</form>
+
+<p style="text-align:center;">Reverse Counter PENDING!!!</p>
+
+</body>
+</html>
