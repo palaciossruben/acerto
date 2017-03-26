@@ -25,7 +25,7 @@ SECRET_KEY = 'ln-mvndq07lgoejq7+*x(w-d$hdbw642jp#%7@pxmmr+bw31%y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ec2-52-38-49-253.us-west-2.compute.amazonaws.com']
 
 
 # Application definition
@@ -78,8 +78,6 @@ WSGI_APPLICATION = 'testing_webpage.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'NAME': 'maindb',
         'USER': 'dbadmin',
         'PASSWORD': 'delmardelolvido',

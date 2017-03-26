@@ -7,7 +7,7 @@ GRANT ALL PRIVILEGES ON DATABASE maindb to dbadmin;
 
 
 --psql
-psql -d maindb -U dbadmin -p 5432
+psql -d maindb -U dbadmin -p 5432 -h localhost
 
 
 -- start virtualenver
@@ -52,6 +52,10 @@ instance id: i-070e94a283f11f547
 instance public DNS: ec2-52-38-49-253.us-west-2.compute.amazonaws.com
 
 
+
+---------------------- PRODUCTION ----------------------
+
+
 -- Setup EC2 instance
 sudo apt-get update
 sudo apt-get -y upgrade
@@ -61,7 +65,101 @@ sudo apt-get install build-essential libssl-dev libffi-dev python-dev
 sudo apt install python-pip
 pip install --upgrade pip
 export LC_ALL=C
-pip install virtualenvwrapper
+pip3 install virtualenvwrapper
+
+5.Add these lines in ~/.bashrc
+    export WORKON_HOME=$HOME/.virtualenvs
+    source /usr/local/bin/virtualenvwrapper.sh
+
+6. Source it.
+source ~/.bashrc
+
+mkvirtualenv myenv
+workon myenv
+
+
+-- install screen
+sudo apt-get install screen
+screen -v
+
+to check for sessions of screen:
+screen -ls
+
+
+-- install psql
+sudo apt-get install postgresql-client
+
+
+-- install postgres
+sudo apt-get install postgresql postgresql-contrib
+Then create db as above, and connect with psql as above.
+
+
+--  install psycopg2
+sudo pip3 install psycopg2
+
+
+-- install django
+sudo pip3 install django
+if error on locales do:
+    export LC_ALL="en_US.UTF-8"
+    export LC_CTYPE="en_US.UTF-8"
+    sudo dpkg-reconfigure locales
+
+
+-- install ipware
+sudo pip3 install django-ipware
+
+
+-- NGINX
+sudo apt-get install nginx
+test by:
+    sudo service nginx start
+and go to:
+    http://ec2-52-38-49-253.us-west-2.compute.amazonaws.com/
+stop:
+    sudo service nginx stop
+
+sudo vim /etc/nginx/nginx.conf
+Edit first line with:
+    user ubuntu ubuntu;
+
+With:
+sudo vim /etc/nginx/nginx.conf
+
+Add to top of http section:
+
+http {
+
+server_names_hash_bucket_size 64;
+server {
+
+       listen 80;
+       server_name ec2-52-38-49-253.us-west-2.compute.amazonaws.com;
+
+       access_log /var/log/nginx-access.log;
+       error_log /var/log/nginx-error.log;
+       root /home/ubuntu/project-root;
+
+       location / {
+           proxy_pass http://127.0.0.1:8000;
+           proxy_set_header Host $host;
+           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+       }
+   }
+  other stuff ....
+}
+
+
+Also change the location of the static file directory.
+ie root, not clear see: https://www.nginx.com/resources/admin-guide/serving-static-content/)????
+
+
+-- Gunicorn
+pip3 install gunicorn
+
+to run gunicorn:
+gunicorn app-name.wsgi
 
 
 -- build requirements on local:
