@@ -1,7 +1,7 @@
 
 
 -- DB creation
-CREATE USER dbadmin WITH PASSWORD 'delmardelolvido';
+CREATE USER dbadmin WITH PASSWORD 'like_mago_de_oz';
 CREATE DATABASE maindb;
 GRANT ALL PRIVILEGES ON DATABASE maindb to dbadmin;
 
