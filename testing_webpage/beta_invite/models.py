@@ -6,6 +6,7 @@ class User(models.Model):
     email = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
     ip = models.GenericIPAddressField(null=True)
+    ui_version = models.CharField(max_length=200)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -17,6 +18,7 @@ class User(models.Model):
 class Visitor(models.Model):
 
     ip = models.GenericIPAddressField(null=True)
+    ui_version = models.CharField(max_length=200)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

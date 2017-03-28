@@ -2,6 +2,7 @@ from django.shortcuts import render
 from beta_invite.models import User, Visitor
 from beta_invite.util import email_sender
 from ipware.ip import get_ip
+from beta_invite import constants as cts
 
 
 def is_email_valid(email):
@@ -24,7 +25,7 @@ def is_string_valid(any_string):
 
 def get_error_render(request, user, error_message):
 
-    return render(request, 'beta_invite/index.html', {
+    return render(request, cts.BETA_INVITE_VIEW_PATH, {
             'error_message': error_message,
             'name': user.name,
             'email': user.email,
@@ -38,12 +39,15 @@ def index(request):
     """
 
     ip = get_ip(request)
-    user = User(name=request.POST.get('name'), email=request.POST.get('email'), ip=ip)
+    user = User(name=request.POST.get('name'),
+                email=request.POST.get('email'),
+                ip=ip,
+                ui_version=cts.UI_VERSION)
 
     # first time loading. Fields have no value yet.
     if user.name is None or user.email is None:
-        Visitor(ip=ip).save()
-        return render(request, 'beta_invite/index.html', {})
+        Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
+        return render(request, cts.BETA_INVITE_VIEW_PATH, {})
 
     if is_string_valid(user.name):
 
@@ -52,7 +56,7 @@ def index(request):
             if is_email_valid(user.email):
                 user.save()
                 email_sender.send(user)
-                return render(request, 'beta_invite/index.html', {
+                return render(request, cts.BETA_INVITE_VIEW_PATH, {
                     'successful_message': "Successful submission, you will receive an email shortly :)",
                 })
             else:
