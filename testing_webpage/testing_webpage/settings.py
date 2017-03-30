@@ -26,7 +26,8 @@ SECRET_KEY = 'ln-mvndq07lgoejq7+*x(w-d$hdbw642jp#%7@pxmmr+bw31%y'
 DEBUG = True
 
 ALLOWED_HOSTS = ['ec2-52-38-133-146.us-west-2.compute.amazonaws.com',
-                 '127.0.0.1']
+                 '127.0.0.1',
+                 'peaku.co']
 
 
 # Application definition
