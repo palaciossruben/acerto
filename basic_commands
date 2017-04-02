@@ -169,3 +169,18 @@ PYENV_VERSION=3.5.1 gunicorn testing_webpage.wsgi
 
 -- build requirements on local, run without the virtual environment:
 PYENV_VERSION=3.5.1 pipreqs testing_webpage/
+
+
+-- To add static files do:
+1. Add this to the .conf nginx file, on the server section:
+
+location /static {
+        alias /home/ubuntu/acerto/testing_webpage/static; # your Django project's static files - amend as required
+    }
+
+2. add to settings:
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
+3. run
+./manage.py collectstatic -v0 --noinput
