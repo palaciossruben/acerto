@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% load static %}
+  <style type="text/css">
+    @font-face {
+        font-family: "CANDARA";
+        src: url('{% static 'fonts/CANDARA.ttf' %}');
+        src: local('{% static 'fonts/CANDARA.ttf' %}');
+    }
+    p.customfont {
+        font-family: "CANDARA", Verdana, Tahoma;
+    }
+  </style>
+<title style="text-align:center;">PeakU</title>
+</head>
+
+<body background="{% static 'beta_invite/bgg.jpg' %}">
+
+<!--<a class="scroll logo" style="font-family:CANDARA; font-size:65px; color:black; margin-bottom:-50px;"> <img src="{% static 'beta_invite/logo.png' %}" width="370px" ></a>-->
+
+  <center>
+    <img src="{% static 'beta_invite/logo.png' %}" width="315px" >
+    <p class="customfont" style="font-size:30px; margin-top:2px; color:#F8E676">Coming Soon</p>
+    <p class="customfont" style="font-size:13px; margin-top:-15px; color:#F8E676;">
+			We are launching PeakU in private Beta. <br>Enter your email to have exclusive access to our early release.
+    </p><div class="countdown simple" align="center" style="font-size: 3em;  margin-top:6px;margin-bottom: -16px; color:#F8E676;"  data-date="may, 28 , 2017 12:03:25"> </div>
+
+
+    <!--<div class="countdown simple" align="center" style="font-size: 3em; font-family:CANDARA;  margin-top:6px;margin-bottom: -16px; color:#F8E676;"  data-date="may, 28 , 2017 12:03:25"> </div>-->
+    <div class="countdown simple" align="center" style="font-size: 3em;  margin-top:6px;margin-bottom: -16px; color:#F8E676;"  data-date="may, 28 , 2017 12:03:25"> </div>
+
+    <p class="customfont" style="font-size:25px; margin-top:90px; color:#F8E676">SUBSCRIBE US</p>
+    <p class="customfont" style="font-size:13px; margin-top:-25px; color:#F8E676">Find the perfect job customized for you</p>
+  </center>
+
+  <form action="/beta_invite/" method="post" style="text-align:center; margin-top:-25px;">
+
+    {% csrf_token %}
+
+    <div id="container">
+      <br>
+
+        {% if error_message %}<p><strong style="color:red">{{ error_message }}</strong></p>{% endif %}
+        {% if successful_message %}<p><strong style="color:green">{{ successful_message }}</strong></p>{% endif %}
+
+        <input style="padding-left: 12px; font-size: 12px; height: 30px; margin-top:0px; border:solid 1px #F8E676; background-color:white; width: 250px;" id="name" type="text" name="name" placeholder="Your name" value={{ name }}>
+      <br>
+
+      <input style="padding-left: 12px; font-size: 12px; height: 30px; margin-top:15px; border:solid 1px #F8E676; background-color:white; width: 187px;" id="email" type="text" name="email" placeholder="Enter email" value={{ email }}>
+      <input style="height: 34px; border: solid 0px white; background:#F8E676; color:black; text-align:center; width: 60px" type="submit" value="Sure!">
+    </div>
+  </form>
+
+</body>
+</html>

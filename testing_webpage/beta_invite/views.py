@@ -1,3 +1,5 @@
+import smtplib
+
 from django.shortcuts import render
 from beta_invite.models import User, Visitor
 from beta_invite.util import email_sender
@@ -55,7 +57,13 @@ def index(request):
 
             if is_email_valid(user.email):
                 user.save()
-                email_sender.send(user)
+                try:
+                    email_sender.send(user)
+                except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
+                    return render(request, cts.BETA_INVITE_VIEW_PATH, {
+                        'error_message': "Cannot send confirmation email, please check it.",
+                        })
+
                 return render(request, cts.BETA_INVITE_VIEW_PATH, {
                     'successful_message': "Successful submission, you will receive an email shortly :)",
                 })

@@ -1,26 +1,469 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
+<html lang="en">
+{% load static %}
+  
 <head>
-<title style="text-align:center;">PeakU</title>
-</head>
-<body>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable=no">
+      <meta name="google-site-verification" content="LPqesGS5MnESQN-E-LNjZWtRrZAY4rO__YDq8WFjpOs" />
+      <title>PeakU | Comming Soon</title>
+      
+      <!-- ============ GOOGLE FONTS ============ -->
+      <link href='http://fonts.googleapis.com/css?family=Raleway:100,200,300,400,700,900' rel='stylesheet' type='text/css'>
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+      <link href='http://fonts.googleapis.com/css?family=Iceberg' rel='stylesheet' type='text/css'>
+       <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    	
+		<script type="text/javascript">!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var n;"undefined"!=typeof window?n=window:"undefined"!=typeof global?n=global:"undefined"!=typeof self&&(n=self),n.Countdown=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var defaultOptions = {
+  date: "December 7, 2015 15:03:25",
+  refresh: 1000,
+  offset: 0,
+  onEnd: function() {
+    return;
+  },
+  render: function (date) {
+    this.el.innerHTML = 
+                        "<div class='day' style='line-height:40px; float:left; width:150px;'> <div>" +date.days  +"</div>" + "<div> <span style='font-size:18px;'>days</span></div></div>  " +
+						"<div class='hours' style='line-height:40px; float:left; width:150px;'> <div>" +date.hours  +"</div>" + "<div> <span style='font-size:18px;'>hours</span></div></div>  " +
+						"<div class='min' style='line-height:40px; float:left; width:150px;'> <div>" +date.min  +"</div>" + "<div> <span style='font-size:18px;'>minutes</span></div></div>  " +
+						"<div class='sec' style='line-height:40px; float:left; width:150px;'> <div>" +date.sec  +"</div>" + "<div> <span style='font-size:18px;'>seconds</span></div></div>  " ;
+                        
+  }
+};
 
-<h1 style="text-align:center;">Find the perfect job customized for you</h1>
-<p style="text-align:center;">We are launching PeakU in private Beta. Enter your name and email to have exclusive access to
-our early release.</p>
+/**
+ * Countdown constructor
+ * @param {HTMLElement} el      DOM node of the countdown
+ * @param {Object}      options (optional) Options for the plugin
+ */
+var Countdown = function(el, options) {
 
-<form action="/beta_invite/" method="post" style="text-align:center;">
-  {% csrf_token %}
-  <br>
-  {% if error_message %}<p><strong style="color:red">{{ error_message }}</strong></p>{% endif %}
-  {% if successful_message %}<p><strong style="color:green">{{ successful_message }}</strong></p>{% endif %}
-  <input id="name" type="text" name="name" placeholder="name" value={{ name }}>
-  <input id="email" type="text" name="email" placeholder="my_email@example.com" value={{ email }}>
-  <br>
-  <input type="submit" value="Submit" style="text-align:center;">
-</form>
+  /**
+   * Reference to the DOM element
+   * @type {HTMLElement}
+   */
+  this.el = el;
 
-<p style="text-align:center;">Reverse Counter PENDING!!!</p>
+  /**
+   * Options of the countdown plugin
+   * @type {Object}
+   */
+  this.options = {};
+
+  /**
+   * Interval reference or false if counter is stopped
+   * @type {Mixed}
+   */
+  this.interval = false;
+
+  // merge default options and options into this.options
+  for (var i in defaultOptions) {
+    if (defaultOptions.hasOwnProperty(i)) {
+      this.options[i] = typeof options[i] !== 'undefined' ? options[i] : defaultOptions[i];
+
+      if (i === 'date' && typeof this.options.date !== 'object') {
+        this.options.date = new Date(this.options.date);
+      }
+
+      // bind context for functions
+      if (typeof this.options[i] === 'function') {
+        this.options[i] = this.options[i].bind(this);
+      }
+    }
+  }
+
+  /**
+   * Get the difference between now and the end date
+   * @return {Object} Object with the diff information (years, days, hours, min, sec, millisec)
+   */
+  this.getDiffDate = function() {
+    var diff = (this.options.date.getTime() - Date.now() + this.options.offset) / 1000;
+
+    var dateData = {
+      years:    0,
+      days:     0,
+      hours:    0,
+      min:      0,
+      sec:      0,
+      millisec: 0
+    };
+
+    if (diff <= 0) {
+      if (this.interval) {
+        this.stop();
+        this.options.onEnd();
+      }
+      return dateData;
+    }
+
+    if (diff >= (365.25 * 86400)) {
+      dateData.years = Math.floor(diff / (365.25 * 86400));
+      diff -= dateData.years * 365.25 * 86400;
+    }
+
+    if (diff >= 86400) {
+      dateData.days = Math.floor(diff / 86400);
+      diff -= dateData.days * 86400;
+    }
+
+    if (diff >= 3600) {
+      dateData.hours = Math.floor(diff / 3600);
+      diff -= dateData.hours * 3600;
+    }
+
+    if (diff >= 60) {
+      dateData.min = Math.floor(diff / 60);
+      diff -= dateData.min * 60;
+    }
+
+    dateData.sec = Math.round(diff);
+
+    dateData.millisec = diff % 1 * 1000;
+
+    return dateData;
+  }.bind(this);
+
+  /**
+   * Add leading zeros to a number
+   * @param  {Number} num    Input number
+   * @param  {Number} length Length of the desired output
+   * @return {String}        String of the desired length with leading zeros
+   */
+  this.leadingZeros = function(num, length) {
+    length = length || 2;
+    num = String(num);
+    if (num.length > length) {
+      return num;
+    }
+    return (Array(length + 1).join('0') + num).substr(-length);
+  };
+
+  /**
+   * Update the end date of the countdown
+   * @param  {Mixed}     newDate Date object or a String/Number that can be passed to the Date constructor
+   * @return {Countdown}         Countdown instance
+   */
+  this.update = function(newDate) {
+    if (typeof newDate !== 'object') {
+      newDate = new Date(newDate);
+    }
+    this.options.date = newDate;
+    this.render();
+    return this;
+  }.bind(this);
+
+  /**
+   * Stop the countdown refresh / rerender
+   * @return {Countdown} Countdown instance
+   */
+  this.stop = function() {
+    if (this.interval) {
+      clearInterval(this.interval);
+      this.interval = false;
+    }
+    return this;
+  }.bind(this);
+
+  /**
+   * Render the countdown
+   * @return {Countdown} Countdown instance
+   */
+  this.render = function() {
+    this.options.render(this.getDiffDate());
+    return this;
+  }.bind(this);
+
+  /**
+   * Start the countdown
+   * @return {Countdown} Countdown instance
+   */
+  this.start = function() {
+    // don't start if the countdown is already started
+    if (this.interval) { return; }
+
+    this.render();
+
+    if (this.options.refresh) {
+      this.interval = setInterval(this.render, this.options.refresh);
+    }
+
+    return this;
+  }.bind(this);
+
+  /**
+   * Update the offset
+   * @param  {Number}    offset New offset in ms
+   * @return {Countdown}        Countdown instance
+   */
+  this.updateOffset = function(offset) {
+    this.options.offset = offset;
+    return this;
+  }.bind(this);
+
+
+  // initial start of the countdown or initial render
+  this.start();
+};
+
+module.exports = Countdown;
+
+},{}],2:[function(require,module,exports){
+var Countdown = require('./countdown.js');
+var NAME = 'countdown';
+var DATA_ATTR = 'date';
+
+jQuery.fn.countdown = function(options) {
+  return $.each(this, function(i, el) {
+    var $el = $(el);
+    if (!$el.data(NAME)) {
+      // allow setting the date via the data-date attribute
+      if ($el.data(DATA_ATTR)) {
+        options.date = $el.data(DATA_ATTR);
+      }
+      $el.data(NAME, new Countdown(el, options));
+    }
+  });
+};
+
+module.exports = Countdown;
+
+},{"./countdown.js":1}]},{},[2])(2)
+});</script>
+		
+		<script type="text/javascript">
+      $(function() {
+        var endDate = "December 7, 2015 15:03:25";
+        $('.countdown.simple').countdown({ date: endDate });
+        $('.countdown.styled').countdown({
+          date: endDate,
+          render: function(data) {
+            $(this.el).html("<div>" + this.leadingZeros(data.years, 4) + " <span>years</span></div><div>" + this.leadingZeros(data.days, 3) + " <span>days</span></div><div>" + this.leadingZeros(data.hours, 2) + " <span>hrs</span></div><div>" + this.leadingZeros(data.min, 2) + " <span>min</span></div><div>" + this.leadingZeros(data.sec, 2) + " <span>sec</span></div>");
+			
+          }
+        });
+        $('.countdown.callback').countdown({
+          date: +(new Date) + 10000,
+          render: function(data) {
+            $(this.el).text(this.leadingZeros(data.sec, 2) + " sec");
+          },
+          onEnd: function() {
+            $(this.el).addClass('ended');
+          }
+        }).on("click", function() {
+          $(this).removeClass('ended').data('countdown').update(+(new Date) + 10000).start();
+        });
+        // End time for diff purposes
+        var endTimeDiff = new Date().getTime() + 15000;
+        // This is server's time
+        var timeThere = new Date();
+        // This is client's time (delayed)
+        var timeHere = new Date(timeThere.getTime() - 5434);
+        // Get the difference between client time and server time
+        var diff_ms = timeHere.getTime() - timeThere.getTime();
+        // Get the rounded difference in seconds
+        var diff_s = diff_ms / 1000 | 0;
+        
+        var notice = [];
+        notice.push('Server time: ' + timeThere.toDateString() + ' ' + timeThere.toTimeString());
+        notice.push('Your time: ' + timeHere.toDateString() + ' ' + timeHere.toTimeString());
+        notice.push('Time difference: ' + diff_s + ' seconds (' + diff_ms + ' milliseconds to be precise). Your time is a bit behind.');
+        
+        $('.offset-notice').html(notice.join('<br />'));
+        
+        $('.offset-server .countdown').countdown({
+          date: endTimeDiff,
+          offset: diff_s * 1000,
+          onEnd: function() {
+            $(this.el).addClass('ended');
+          }
+        });
+        
+        $('.offset-client .countdown').countdown({
+          date: endTimeDiff,
+          onEnd: function() {
+            $(this.el).addClass('ended');
+          }
+        });
+      });
+
+    </script>
+      <!-- CSS -->
+      <!-- Animate css -->
+      <!--<link rel="stylesheet" type="text/css" href="css/animate.css">-->
+      <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+      <!-- Font Awesome CSS -->
+      <!--<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />-->
+	  <link rel="stylesheet" type="text/css" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+
+      <!-- Custom styles CSS -->
+      <!--v<link rel="stylesheet" type="text/css" href="css/style.css">-->
+	  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+      
+      <!-- TODO: Favicon -->
+      <!--<link rel="shortcut icon" href="images/favicon.html{% static 'css/style.css' %}">-->
+  </head>
+
+
+  <!--<body style=" background:url(bgg.jpg) no-repeat center center fixed;    -webkit-background-size: cover;   -moz-background-size: cover;   -o-background-size: cover;   background-size: cover; ">-->
+  <body background="{% static 'beta_invite/bgg.jpg' %}">
+
+     <!-- PRELOADER -->
+    
+	  <script>
+	  	function myFunction() {
+			document.getElementById("page-loader1").style.display = "none";
+		}
+	  </script>
+     <!-- /PRELOADER -->
+	<style>
+		@font-face {
+		  font-family: "CANDARA";
+		  src: local("CANDARA"), url("font/CANDARA.woff") format("woff"), url("font/CANDARA.ttf") format("truetype");
+		}
+	</style>
+    
+
+   <!-- BEGIN WELCOME -->
+    <div class="welcome-section" id="top" style="">
+      <div class="title" style="margin-top:-140px;">
+        <a class="scroll logo" style="font-family:CANDARA; font-size:65px; color:black; margin-bottom:-50px;"> <img src="{% static 'beta_invite/logo.png' %}" width="370px" ></a>
+
+         <!-- COUNTDOWN -->
+		 	
+		 <h1 style="font-size:35px; margin-top:10px; color:#F8E676; ">Find your true passion</h1>
+        <p style="font-size:25px; margin-top:-10px; font-family:CANDARA;  color:#F8E676;">
+			We search millions of jobs and find the right one for you.
+		</p>
+         <!-- /COUNTDOWN -->
+
+		 <div class="container" style="margin-top:-20px;">
+		   <span data-sr="wait 0.5s, then enter top and move 40px over 1s" style="color:#134984; font-size:25px;">
+				<span style=" font-weight:500; color:#F8E676;">
+					<b style="font-weight:400; text-transform: uppercase;">Subscribe</b>
+					<p style="font-size: 15px; font-weight:400; margin:0px; padding:0px;">Subscribe before launch date and get Premium access</p>
+				</span>
+		   </span>
+			<div class="subscribe" data-sr="wait 0.5s, then enter bottom and move 40px over 1s" style="margin-top:-15px;">
+
+			  <!--<form method="post" action="contact_me.php">
+				 <input style=" font-family:Raleway; width:31%; color:black; height: 40px; border:solid 1px #F8E676; background-color:white;" class="email enteremail" id="awf_field-77637390" type="text" name="email" placeholder="Your Name" tabindex="500" onFocus=" if (this.value == '') { this.value = ''; }" onBlur="if (this.value == '') { this.value='';} " /> 
+				
+				<br><br>
+				 <input style=" font-family:Raleway; width:21%; color:black; height: 40px; border:solid 1px #F8E676; background-color:white;" class="email enteremail" id="awf_field-77637390" type="text" name="email" placeholder="Enter Your Email..." tabindex="500" onFocus=" if (this.value == '') { this.value = ''; }" onBlur="if (this.value == '') { this.value='';} " /> 
+				
+				 <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_67b3d97849b4de9b76e37af49_570e8cf20d" tabindex="-1" value=""></div>
+				 <button type="submit" id="signup-button" class="signup-button" style="height: 40px; border: solid 0px white; background:#F8E676; color:black;">Sure!</button>
+				 <label for="subscribe-email" class="subscribe-message"></label>
+			  </form>-->
+
+			  <form action="/beta_invite/" method="post" style="text-align:center; margin-top:0px;">
+
+				{% csrf_token %}
+				{% if error_message %}<p><strong style="color:red">{{ error_message }}</strong></p>{% endif %}
+				{% if successful_message %}<p><strong style="color:green">{{ successful_message }}</strong></p>{% endif %}
+				<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:0px; border:solid 1px #F8E676; background-color:white; width: 31%;" id="name" type="text" name="name" placeholder="Your name" value={{ name }}>
+				<br>
+				<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:15px; border:solid 1px #F8E676; background-color:white; width: 21%;" id="email" type="text" name="email" placeholder="Your email" value={{ email }}>
+				<input style="height: 44px; border: solid 0px white; background:#F8E676; color:black; text-align:center; width: 10%; font-size: 16px;" type="submit" value="Sure!">
+
+			  </form>
+
+			  <div class="countdown simple" align="center" style="font-size: 3em; font-family:CANDARA;  margin-top:10px ;margin-bottom: -16px; color:#F8E676;" data-date="june, 1 , 2017 23:59:59"> </div>
+			 
+			</div>
+		  </div>
+		  <br/>
+		 <div data-sr="wait 0.5s, then enter left and move 40px over 1s" style="margin-top:-10px; display:none;">
+            
+            <a href="#" target="_blank" class="footer-social" style="font-size:25px; color:rgba(0, 0, 0, 0.59);"><i class="fa fa-fw fa-instagram"></i></a>
+			
+			
+          </div>
+		  
+		  
+      </div>
+
+      <!-- ARROW SCROLL-->
+      <div class="arrow">
+
+
+      </div>
+      <!-- /ARROW SCROLL -->
+      <div class="container">
+
+       </div>
+    </div>
+    <!-- END WELCOME -->
+<script type="text/javascript">
+    <!--
+    (function() {
+        var IE = /*@cc_on!@*/false;
+        if (!IE) { return; }
+        if (document.compatMode && document.compatMode == 'BackCompat') {
+            if (document.getElementById("af-form-981758079")) {
+                document.getElementById("af-form-981758079").className = 'af-form af-quirksMode';
+            }
+            if (document.getElementById("af-body-981758079")) {
+                document.getElementById("af-body-981758079").className = "af-body inline af-quirksMode";
+            }
+            if (document.getElementById("af-header-981758079")) {
+                document.getElementById("af-header-981758079").className = "af-header af-quirksMode";
+            }
+            if (document.getElementById("af-footer-981758079")) {
+                document.getElementById("af-footer-981758079").className = "af-footer af-quirksMode";
+            }
+        }
+    })();
+    -->
+</script>
+   <style>
+   	
+	@media (max-width: 768px) {
+		.enteremail{ width:100% !important;}
+		.logo img{ width:250px;}
+		.title{ margin-top:-80px !important;}
+		.title p{ font-size:14px !important;}
+	}
+	
+	@media (max-width: 640px) {
+		.enteremail{ width:100% !important;}
+		.logo img{ width:250px;}
+		.title{ margin-top:-80px !important;}
+		.title p{ font-size:14px !important;}
+	}
+	
+	@media (max-width: 480px) {
+		.enteremail{ width:100% !important;}
+		.logo img{ width:180px; margin-top:20px;}
+		.title{ margin-top:-80px !important;}
+		.title p{ font-size:14px !important;}
+		.countdown .day{width:100px !important;}
+		.countdown .hours{width:100px !important;}
+		.countdown .min{width:100px !important;}
+		.countdown .sec{width:100px !important;}
+	}
+	@media (max-width: 360px) {
+		.enteremail{ width:100% !important;}
+		.logo img{ width:180px; margin-top:20px;}
+		.title{ margin-top:-96px !important;}
+		.title p{ font-size:14px !important;}
+		.countdown .day{width:180px !important;}
+		.countdown .hours{width:180px !important;}
+		.countdown .min{width:180px !important;}
+		.countdown .sec{width:180px !important;}
+	}
+	@media (max-width: 320px) {
+		.enteremail{ width:100% !important;}
+		.logo img{ width:180px; margin-top:20px;}
+		.title{ margin-top:-96px !important;}
+		.title p{ font-size:14px !important;}
+		.countdown .day{width:150px !important;}
+		.countdown .hours{width:150px !important;}
+		.countdown .min{width:150px !important;}
+		.countdown .sec{width:150px !important;}
+	}
+   </style>
 
 </body>
 </html>

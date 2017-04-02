@@ -10,12 +10,17 @@ GRANT ALL PRIVILEGES ON DATABASE maindb to dbadmin;
 psql -d maindb -U dbadmin -p 5432 -h localhost
 
 
+-- When pushing to production:
+1. Deactivate debug mode in settings.py
+2. For now deactivate the send_email function.
+
+
 -- start virtualenver
 source ./myvenv/bin/activate
 
 
 -- run server!!!
-python manage.py runserver
+python3 manage.py runserver
 
 
 -- migration:

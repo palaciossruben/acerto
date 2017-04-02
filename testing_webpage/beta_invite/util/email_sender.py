@@ -25,16 +25,13 @@ def send(user):
         msg = MIMEText(fp.read().format(name=get_first_name(user.name)))
 
     msg['Subject'] = 'Welcome to PeakU'
-    #msg['From'] = 'juan@acerto.co'
     msg['From'] = 'biosolardecolombia@gmail.com'
     msg['To'] = user.email
 
     # Send the message via our own SMTP server.
-    #s = smtplib.SMTP('localhost', 1025)
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
     server.login("biosolardecolombia", "Aa112358")
 
     server.send_message(msg)
-    #server.sendmail("biosolardecolombia@gmail.com", "biosolardecolombia@gmail.com", msg)
     server.quit()
