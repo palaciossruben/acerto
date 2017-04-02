@@ -65,7 +65,7 @@ def index(request):
                         })
 
                 return render(request, cts.BETA_INVITE_VIEW_PATH, {
-                    'successful_message': "Successful submission, you will receive an email shortly :)",
+                    'successful_message': "Successful submission :)",
                 })
             else:
                 return get_error_render(request, user, "Make sure you include a valid email.")
