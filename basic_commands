@@ -183,4 +183,7 @@ location /static {
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 3. run
-./manage.py collectstatic -v0 --noinput
+python3 manage.py collectstatic -v0 --noinput
+
+4. restart nginx:
+sudo /etc/init.d/nginx restart
