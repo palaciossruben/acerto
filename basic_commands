@@ -166,6 +166,22 @@ pip3 install gunicorn
 to run gunicorn:
 PYENV_VERSION=3.5.1 gunicorn testing_webpage.wsgi
 
+to run gunicorn on background do:
+PYENV_VERSION=3.5.1 gunicorn testing_webpage.wsgi &
+
+-- Installs htop
+sudo apt install htop
+
+-- execute:
+htop
+
+-- to see the running processes, get PID
+
+-- use PID for gentle kill:
+kill -TSTP [pid]
+
+-- hard kill with:
+kill -STOP [pid]
 
 -- build requirements on local, run without the virtual environment:
 PYENV_VERSION=3.5.1 pipreqs testing_webpage/
@@ -187,3 +203,4 @@ python3 manage.py collectstatic -v0 --noinput
 
 4. restart nginx:
 sudo /etc/init.d/nginx restart
+
