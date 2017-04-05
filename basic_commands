@@ -167,7 +167,7 @@ pip3 install gunicorn
 PYENV_VERSION=3.5.1 gunicorn testing_webpage.wsgi
 
 -- to run gunicorn on background do:
-PYENV_VERSION=3.5.1 gunicorn -b testing_webpage.wsgi &
+PYENV_VERSION=3.5.1 gunicorn testing_webpage.wsgi &
 
 -- TODO: to run on background should use:
 supervisord.org
@@ -213,8 +213,28 @@ python3 manage.py collectstatic -v0 --noinput
 sudo /etc/init.d/nginx restart
 
 
--- translation
+-- TRANSLATION
 
+-- EASY install GNU gettext in ubuntu:
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install gettext libgettextpo-dev
+
+-- HARD install GNU gettext, by following:
+http://www.marinamele.com/taskbuster-django-tutorial/internationalization-localization-languages-time-zones
+
+-- download with:
+wget 'http://ftp.gnu.org/pub/gnu/gettext/gettext-latest.tar.gz' -O gettext.tar.gz
+
+-- unzip with:
+tar -xzvf gettext.tar.gz
+
+-- to make install add sudo:
+sudo make install
+
+
+
+-- for every day functions:
 1. python3 manage.py makemessages -l es
 2. add translations
 3. python3 manage.py compilemessages -l es
