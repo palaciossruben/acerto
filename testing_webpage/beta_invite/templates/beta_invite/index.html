@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en">
+{% load i18n %}
 {% load static %}
   
 <head>
@@ -24,10 +25,10 @@ var defaultOptions = {
   },
   render: function (date) {
     this.el.innerHTML = 
-                        "<div class='day' style='line-height:40px; float:left; width:150px;'> <div>" +date.days  +"</div>" + "<div> <span style='font-size:18px;'>days</span></div></div>  " +
-						"<div class='hours' style='line-height:40px; float:left; width:150px;'> <div>" +date.hours  +"</div>" + "<div> <span style='font-size:18px;'>hours</span></div></div>  " +
-						"<div class='min' style='line-height:40px; float:left; width:150px;'> <div>" +date.min  +"</div>" + "<div> <span style='font-size:18px;'>minutes</span></div></div>  " +
-						"<div class='sec' style='line-height:40px; float:left; width:150px;'> <div>" +date.sec  +"</div>" + "<div> <span style='font-size:18px;'>seconds</span></div></div>  " ;
+                        "<div class='day' style='line-height:40px; float:left; width:150px;'> <div>" +date.days  +"</div>" + "<div> <span style='font-size:18px;'>{% trans "days" %}</span></div></div>  " +
+						"<div class='hours' style='line-height:40px; float:left; width:150px;'> <div>" +date.hours  +"</div>" + "<div> <span style='font-size:18px;'>{% trans "hours" %}</span></div></div>  " +
+						"<div class='min' style='line-height:40px; float:left; width:150px;'> <div>" +date.min  +"</div>" + "<div> <span style='font-size:18px;'>{% trans "minutes" %}</span></div></div>  " +
+						"<div class='sec' style='line-height:40px; float:left; width:150px;'> <div>" +date.sec  +"</div>" + "<div> <span style='font-size:18px;'>{% trans "seconds" %}</span></div></div>  " ;
                         
   }
 };
@@ -351,41 +352,36 @@ module.exports = Countdown;
 
          <!-- COUNTDOWN -->
 		 	
-		 <h1 style="font-size:35px; margin-top:10px; color:#F8E676; ">Find your true passion</h1>
+		 <h1 style="font-size:35px; margin-top:10px; color:#F8E676; ">{% trans "Find your true passion" %}</h1>
         <p style="font-size:25px; margin-top:-10px; font-family:CANDARA;  color:#F8E676;">
-			We search millions of jobs and find the right one for you.
+			{% blocktrans %}We search millions of jobs and find the right one for you{% endblocktrans %}
 		</p>
          <!-- /COUNTDOWN -->
 
 		 <div class="container" style="margin-top:-20px;">
 		   <span data-sr="wait 0.5s, then enter top and move 40px over 1s" style="color:#134984; font-size:25px;">
 				<span style=" font-weight:500; color:#F8E676;">
-					<b style="font-weight:400; text-transform: uppercase;">Subscribe</b>
-					<p style="font-size: 15px; font-weight:400; margin:0px; padding:0px;">Subscribe before launch date and get Premium access</p>
+					<b style="font-weight:400; text-transform: uppercase;">{% trans "Subscribe" %}</b>
+					<p style="font-size: 15px; font-weight:400; margin:0px; padding:0px;">{% blocktrans %}Subscribe before launch date and get free Premium access{% endblocktrans %}</p>
 				</span>
 		   </span>
 			<div class="subscribe" data-sr="wait 0.5s, then enter bottom and move 40px over 1s" style="margin-top:-15px;">
-
-			  <!--<form method="post" action="contact_me.php">
-				 <input style=" font-family:Raleway; width:31%; color:black; height: 40px; border:solid 1px #F8E676; background-color:white;" class="email enteremail" id="awf_field-77637390" type="text" name="email" placeholder="Your Name" tabindex="500" onFocus=" if (this.value == '') { this.value = ''; }" onBlur="if (this.value == '') { this.value='';} " /> 
-				
-				<br><br>
-				 <input style=" font-family:Raleway; width:21%; color:black; height: 40px; border:solid 1px #F8E676; background-color:white;" class="email enteremail" id="awf_field-77637390" type="text" name="email" placeholder="Enter Your Email..." tabindex="500" onFocus=" if (this.value == '') { this.value = ''; }" onBlur="if (this.value == '') { this.value='';} " /> 
-				
-				 <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_67b3d97849b4de9b76e37af49_570e8cf20d" tabindex="-1" value=""></div>
-				 <button type="submit" id="signup-button" class="signup-button" style="height: 40px; border: solid 0px white; background:#F8E676; color:black;">Sure!</button>
-				 <label for="subscribe-email" class="subscribe-message"></label>
-			  </form>-->
 
 			  <form action="/beta_invite/" method="post" style="text-align:center; margin-top:0px;">
 
 				{% csrf_token %}
 				{% if error_message %}<p><strong style="color:red">{{ error_message }}</strong></p>{% endif %}
 				{% if successful_message %}<p><strong style="color:green">{{ successful_message }}</strong></p>{% endif %}
-				<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:0px; border:solid 1px #F8E676; background-color:white; width: 31%;" id="name" type="text" name="name" placeholder="Your name" value={{ name }}>
+
+				{% trans "Your name" as name_placeholder %}
+				<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:0px; border:solid 1px #F8E676; background-color:white; width: 31%;" id="name" type="text" name="name" placeholder="{{ name_placeholder }}" value={{ name }}>
 				<br>
-				<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:15px; border:solid 1px #F8E676; background-color:white; width: 21%;" id="email" type="text" name="email" placeholder="Your email" value={{ email }}>
-				<input style="height: 44px; border: solid 0px white; background:#F8E676; color:black; text-align:center; width: 10%; font-size: 16px;" type="submit" value="Sure!">
+
+				{% trans "Your email" as email_placeholder %}
+				<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:15px; border:solid 1px #F8E676; background-color:white; width: 21%;" id="email" type="text" name="email" placeholder="{{ email_placeholder }}" value={{ email }}>
+
+				{% trans "Sure!" as submit_value %}
+				<input style="height: 44px; border: solid 0px white; background:#F8E676; color:black; text-align:center; width: 10%; font-size: 16px;" type="submit" value="{{ submit_value }}">
 
 			  </form>
 

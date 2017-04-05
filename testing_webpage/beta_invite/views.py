@@ -1,4 +1,5 @@
 import smtplib
+from django.utils.translation import ugettext as _
 
 from django.shortcuts import render
 from beta_invite.models import User, Visitor
@@ -66,11 +67,11 @@ def index(request):
                 #        })
 
                 return render(request, cts.BETA_INVITE_VIEW_PATH, {
-                    'successful_message': "Successful submission :)",
+                    'successful_message': _("Successful submission :)"),
                 })
             else:
-                return get_error_render(request, user, "Make sure you include a valid email.")
+                return get_error_render(request, user, _("Make sure you include a valid email."))
         else:
-            return get_error_render(request, user, "Missing email.")
+            return get_error_render(request, user, _("Missing email."))
     else:
-        return get_error_render(request, user, "Missing name.")
+        return get_error_render(request, user, _("Missing name."))
