@@ -63,7 +63,7 @@ def index(request):
                 #    email_sender.send(user)
                 #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
                 #    return render(request, cts.BETA_INVITE_VIEW_PATH, {
-                #        'error_message': "Cannot send confirmation email, please check it.",
+                #        'error_message': _("Cannot send confirmation email, please check it."),
                 #        })
 
                 return render(request, cts.BETA_INVITE_VIEW_PATH, {

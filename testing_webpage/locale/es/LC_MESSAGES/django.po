@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-05 02:41+0000\n"
+"POT-Creation-Date: 2017-04-06 01:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,7 +40,8 @@ msgstr "Encuentra tu verdadera pasión"
 
 #: beta_invite/templates/beta_invite/index.html:357
 msgid "We search millions of jobs and find the right one for you"
-msgstr "Buscamos entre millones de trabajos y encontramos el trabajo perfecto para ti"
+msgstr ""
+"Buscamos entre millones de trabajos y encontramos el trabajo perfecto para ti"
 
 #: beta_invite/templates/beta_invite/index.html:364
 msgid "Subscribe"
@@ -63,6 +64,10 @@ msgstr "Tu correo"
 msgid "Sure!"
 msgstr "Enviar!"
 
+#: beta_invite/views.py:66
+msgid "Cannot send confirmation email, please check it."
+msgstr "No se puede enviar el correo de confirmación, por favor revisa tu correo."
+
 #: beta_invite/views.py:70
 msgid "Successful submission :)"
 msgstr "Envio exitoso :)"
@@ -78,3 +83,11 @@ msgstr "Falta el correo"
 #: beta_invite/views.py:77
 msgid "Missing name."
 msgstr "Falta el nombre"
+
+#: testing_webpage/settings.py:120
+msgid "English"
+msgstr "Ingles"
+
+#: testing_webpage/settings.py:121
+msgid "Spanish"
+msgstr "Español"
