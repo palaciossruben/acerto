@@ -1,9 +1,8 @@
-from django.shortcuts import render
+from beta_invite import views as beta_views
 
 
 def index(request):
     """
-    :param request: can come with args "name" and "email", if not it will load the initial page.
-    :return: renders a view.
+    will render and have the same view as /beta_invite
     """
-    return render(request, 'beta_invite/index.html', {})
+    return beta_views.index(request)
