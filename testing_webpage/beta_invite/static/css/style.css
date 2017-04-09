@@ -78,7 +78,7 @@ a, a:hover, a:active, a:focus {
 }
 
 .container {
-	width: 80%;
+	width: 100%;
 	max-width: 1000px;
 	margin:0 auto;
 	padding: 20px;
