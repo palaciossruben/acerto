@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-06 01:17+0000\n"
+"POT-Creation-Date: 2017-04-19 01:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,69 +18,65 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: beta_invite/templates/beta_invite/index.html:28
+#: beta_invite/templates/beta_invite/index.html:45
 msgid "days"
 msgstr "días"
 
-#: beta_invite/templates/beta_invite/index.html:29
+#: beta_invite/templates/beta_invite/index.html:46
 msgid "hours"
 msgstr "horas"
 
-#: beta_invite/templates/beta_invite/index.html:30
+#: beta_invite/templates/beta_invite/index.html:47
 msgid "minutes"
 msgstr "minutos"
 
-#: beta_invite/templates/beta_invite/index.html:31
+#: beta_invite/templates/beta_invite/index.html:48
 msgid "seconds"
 msgstr "segundos"
 
-#: beta_invite/templates/beta_invite/index.html:355
+#: beta_invite/templates/beta_invite/index.html:372
 msgid "Find your true passion"
 msgstr "Encuentra tu verdadera pasión"
 
-#: beta_invite/templates/beta_invite/index.html:357
+#: beta_invite/templates/beta_invite/index.html:374
 msgid "We search millions of jobs and find the right one for you"
 msgstr ""
 "Buscamos entre millones de trabajos y encontramos el trabajo perfecto para ti"
 
-#: beta_invite/templates/beta_invite/index.html:364
+#: beta_invite/templates/beta_invite/index.html:381
 msgid "Subscribe"
 msgstr "Suscríbete"
 
-#: beta_invite/templates/beta_invite/index.html:365
+#: beta_invite/templates/beta_invite/index.html:382
 msgid "Subscribe before launch date and get free Premium access"
 msgstr ""
 "Suscríbete antes de la fecha de lanzamiento y obtén acceso Premium gratis"
 
-#: beta_invite/templates/beta_invite/index.html:376
-msgid "Your name"
-msgstr "Tu nombre"
+#: beta_invite/templates/beta_invite/index.html:393
+msgid "Your Full Name"
+msgstr "Tu Nombre Completo"
 
-#: beta_invite/templates/beta_invite/index.html:380
+#: beta_invite/templates/beta_invite/index.html:397
 msgid "Your email"
 msgstr "Tu correo"
 
-#: beta_invite/templates/beta_invite/index.html:383
+#: beta_invite/templates/beta_invite/index.html:400
 msgid "Sure!"
 msgstr "Enviar!"
 
-#: beta_invite/views.py:66
-msgid "Cannot send confirmation email, please check it."
-msgstr "No se puede enviar el correo de confirmación, por favor revisa tu correo."
-
-#: beta_invite/views.py:70
+#: beta_invite/views.py:76
 msgid "Successful submission :)"
 msgstr "Envio exitoso :)"
 
-#: beta_invite/views.py:73
+#: beta_invite/views.py:79
 msgid "Make sure you include a valid email."
 msgstr "Asegúrate de incluir un correo electrónico válido"
 
-#: beta_invite/views.py:75
+#: beta_invite/views.py:81
 msgid "Missing email."
 msgstr "Falta el correo"
 
-#: beta_invite/views.py:77
+#: beta_invite/views.py:83
 msgid "Missing name."
 msgstr "Falta el nombre"
 
@@ -91,3 +87,7 @@ msgstr "Ingles"
 #: testing_webpage/settings.py:121
 msgid "Spanish"
 msgstr "Español"
+
+#~ msgid "Cannot send confirmation email, please check it."
+#~ msgstr ""
+#~ "No se puede enviar el correo de confirmación, por favor revisa tu correo."

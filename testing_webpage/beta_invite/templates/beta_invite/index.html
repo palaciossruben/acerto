@@ -390,7 +390,7 @@ module.exports = Countdown;
 				{% if error_message %}<p><strong style="color:red">{{ error_message }}</strong></p>{% endif %}
 				{% if successful_message %}<p><strong style="color:green">{{ successful_message }}</strong></p>{% endif %}
 
-				{% trans "Your name" as name_placeholder %}
+				{% trans "Your Full Name" as name_placeholder %}
 				<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:0px; border:solid 1px #F8E676; background-color:white; width: 250px;" id="name" type="text" name="name" placeholder="{{ name_placeholder }}" value={{ name }}>
 				<br>
 
