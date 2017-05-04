@@ -24,9 +24,9 @@ python3 manage.py runserver
 
 
 -- migration:
-python manage.py makemigrations beta_invite
-python manage.py sqlmigrate beta_invite 0001
-python manage.py migrate
+python3 manage.py makemigrations beta_invite
+python3 manage.py sqlmigrate beta_invite 0001
+python3 manage.py migrate
 
 
 -- django interactive

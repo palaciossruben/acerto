@@ -1,9 +1,9 @@
 import smtplib
-import os
 from django.utils.translation import ugettext as _
 
 from django.shortcuts import render
 from beta_invite.models import User, Visitor
+import business
 from beta_invite.util import email_sender
 from ipware.ip import get_ip
 from beta_invite import constants as cts
@@ -42,6 +42,8 @@ def get_error_render(request, error_message, error_params):
 
 def inner_index(request, is_user_site):
     """
+    This view works for both user and business versions. It is displayed on 3 different urls: peaku.co, /business,
+    /beta_invite
     :param request: can come with args "name" and "email", if not it will load the initial page.
     :param is_user_site: Boolean indicating the user or business site.
     :return: renders a view.
@@ -52,33 +54,47 @@ def inner_index(request, is_user_site):
     is_desktop = not user_agent.is_mobile
 
     ip = get_ip(request)
-    user = User(name=request.POST.get('name'),
-                email=request.POST.get('email'),
-                ip=ip,
-                ui_version=cts.UI_VERSION)
+
+    if is_user_site:
+        user = User(name=request.POST.get('name'),
+                    email=request.POST.get('email'),
+                    ip=ip,
+                    ui_version=cts.UI_VERSION)
+    else:
+        user = business.models.User(name=request.POST.get('name'),
+                                    email=request.POST.get('email'),
+                                    ip=ip,
+                                    ui_version=cts.UI_VERSION)
 
     if is_user_site:  # user site
-        print("on user site")
         main_message = _("Discover your true passion")
         secondary_message = _("We search millions of jobs and find the right one for you")
+        action_url = '/beta_invite/'
     else:  # business site
-        print("on business site")
         main_message = _("Discover talented and engaged people")
         secondary_message = _("We search millions of profiles and find the ones that best suit your business")
+        action_url = '/business/'
 
     # first time loading. Fields have no value yet.
     if user.name is None or user.email is None:
-        Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
+
+        if is_user_site:
+            Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
+        else:
+            business.models.Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
+
         return render(request, cts.BETA_INVITE_VIEW_PATH, {'is_desktop': is_desktop,
                                                            'main_message': main_message,
-                                                           'secondary_message': secondary_message})
+                                                           'secondary_message': secondary_message,
+                                                           'action_url': action_url})
 
     error_params = {
             'name': user.name,
             'email': user.email,
             'is_desktop': is_desktop,
             'main_message': main_message,
-            'secondary_message': secondary_message
+            'secondary_message': secondary_message,
+            'action_url': action_url
         }
 
     if is_string_valid(user.name):
@@ -98,7 +114,8 @@ def inner_index(request, is_user_site):
                 return render(request, cts.BETA_INVITE_VIEW_PATH, {'successful_message': _("Successful submission :)"),
                                                                    'is_desktop': is_desktop,
                                                                    'main_message': main_message,
-                                                                   'secondary_message': secondary_message})
+                                                                   'secondary_message': secondary_message,
+                                                                   'action_url': action_url})
             else:
                 return get_error_render(request, _("Make sure you include a valid email."), error_params)
         else:

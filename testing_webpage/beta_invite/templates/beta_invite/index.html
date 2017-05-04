@@ -384,7 +384,7 @@ module.exports = Countdown;
 		   </span>
 			<div class="subscribe" data-sr="wait 0.5s, then enter bottom and move 40px over 1s" style="margin-top:-25px;">
 
-			  <form action="/beta_invite/" method="post" style="text-align:center; margin-top:0px;">
+			  <form action="{{ action_url }}" method="post" style="text-align:center; margin-top:0px;">
 
 				{% csrf_token %}
 				{% if error_message %}<p><strong style="color:red">{{ error_message }}</strong></p>{% endif %}
