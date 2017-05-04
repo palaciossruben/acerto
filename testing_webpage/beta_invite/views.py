@@ -1,4 +1,5 @@
 import smtplib
+import os
 from django.utils.translation import ugettext as _
 
 from django.shortcuts import render
@@ -27,19 +28,22 @@ def is_string_valid(any_string):
     return any_string is not None and any_string != ''
 
 
-def get_error_render(request, user, error_message, is_desktop):
+def get_error_render(request, error_message, error_params):
+    """
+    Args:
+        request: Request object
+        error_message: specific error message
+        error_params: dictionary with common params.
+    Returns: Renders page with error message.
+    """
+    error_params['error_message'] = error_message
+    return render(request, cts.BETA_INVITE_VIEW_PATH, error_params)
 
-    return render(request, cts.BETA_INVITE_VIEW_PATH, {
-            'error_message': error_message,
-            'name': user.name,
-            'email': user.email,
-            'is_desktop': is_desktop,
-        })
 
-
-def index(request):
+def inner_index(request, is_user_site):
     """
     :param request: can come with args "name" and "email", if not it will load the initial page.
+    :param is_user_site: Boolean indicating the user or business site.
     :return: renders a view.
     """
 
@@ -53,10 +57,29 @@ def index(request):
                 ip=ip,
                 ui_version=cts.UI_VERSION)
 
+    if is_user_site:  # user site
+        print("on user site")
+        main_message = _("Discover your true passion")
+        secondary_message = _("We search millions of jobs and find the right one for you")
+    else:  # business site
+        print("on business site")
+        main_message = _("Discover talented and engaged people")
+        secondary_message = _("We search millions of profiles and find the ones that best suit your business")
+
     # first time loading. Fields have no value yet.
     if user.name is None or user.email is None:
         Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
-        return render(request, cts.BETA_INVITE_VIEW_PATH, {'is_desktop': is_desktop})
+        return render(request, cts.BETA_INVITE_VIEW_PATH, {'is_desktop': is_desktop,
+                                                           'main_message': main_message,
+                                                           'secondary_message': secondary_message})
+
+    error_params = {
+            'name': user.name,
+            'email': user.email,
+            'is_desktop': is_desktop,
+            'main_message': main_message,
+            'secondary_message': secondary_message
+        }
 
     if is_string_valid(user.name):
 
@@ -72,12 +95,17 @@ def index(request):
                 #        'error_message': _("Cannot send confirmation email, please check it."),
                 #        })
 
-                return render(request, cts.BETA_INVITE_VIEW_PATH, {
-                    'successful_message': _("Successful submission :)"),
-                    'is_desktop': is_desktop})
+                return render(request, cts.BETA_INVITE_VIEW_PATH, {'successful_message': _("Successful submission :)"),
+                                                                   'is_desktop': is_desktop,
+                                                                   'main_message': main_message,
+                                                                   'secondary_message': secondary_message})
             else:
-                return get_error_render(request, user, _("Make sure you include a valid email."), is_desktop)
+                return get_error_render(request, _("Make sure you include a valid email."), error_params)
         else:
-            return get_error_render(request, user, _("Missing email."), is_desktop)
+            return get_error_render(request, _("Missing email."), error_params)
     else:
-        return get_error_render(request, user, _("Missing name."), is_desktop)
+        return get_error_render(request, _("Missing name."), error_params)
+
+
+def index(request):
+    return inner_index(request, is_user_site=True)

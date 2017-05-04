@@ -5,4 +5,4 @@ def index(request):
     """
     will render and have the same view as /beta_invite
     """
-    return beta_views.index(request)
+    return beta_views.inner_index(request, is_user_site=True)

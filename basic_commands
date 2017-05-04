@@ -241,3 +241,9 @@ sudo make install
 select ip from beta_invite_visitor where cast(ip as text) NOT LIKE '190.%';
 
 
+
+-- Get users to file and download
+Copy (select name, email from beta_invite_user) To '/home/ubuntu/path/to/file.csv' With CSV DELIMITER '	';
+alter user dbadmin superuser;
+
+scp -i production_key.pem user@host:/home/ubuntu/path/to/file.csv /local/path/to/file
