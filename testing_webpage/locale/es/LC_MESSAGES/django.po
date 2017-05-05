@@ -71,7 +71,7 @@ msgstr "Descubre personas talentosas y comprometidas"
 
 #: beta_invite/views.py:64
 msgid "We search millions of profiles and find the ones that best suit your business"
-msgstr "Buscamos millones de perfiles y encontramos los que mejor se adaptan a su negocio"
+msgstr "Buscamos millones de perfiles y encontramos los que mejor se adaptan a tu negocio"
 
 
 #: beta_invite/views.py:95
