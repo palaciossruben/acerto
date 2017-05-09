@@ -164,7 +164,7 @@ ie root, not clear see: https://www.nginx.com/resources/admin-guide/serving-stat
 pip3 install gunicorn
 
 -- to run gunicorn on background do:
-PYENV_VERSION=3.5.1 gunicorn testing_webpage.wsgi &
+workon myenv && PYENV_VERSION=3.5.1 gunicorn testing_webpage.wsgi &
 
 -- TODO: to run on background should use:
 supervisord.org
