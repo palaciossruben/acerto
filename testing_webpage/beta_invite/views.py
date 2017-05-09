@@ -71,7 +71,7 @@ def inner_index(request, is_user_site):
         secondary_message = _("We search millions of jobs and find the right one for you")
         action_url = '/beta_invite/'
     else:  # business site
-        main_message = _("Discover talented and engaged people")
+        main_message = _("Discover amazing people")
         secondary_message = _("We search millions of profiles and find the ones that best suit your business")
         action_url = '/business/'
 

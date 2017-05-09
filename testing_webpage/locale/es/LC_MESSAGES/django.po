@@ -65,8 +65,8 @@ msgstr "Buscamos entre millones de trabajos y encontramos el trabajo perfecto pa
 
 
 #: beta_invite/views.py:63
-msgid "Discover talented and engaged people"
-msgstr "Descubre personas talentosas y comprometidas"
+msgid "Discover amazing people"
+msgstr "Descubre personas increibles"
 
 
 #: beta_invite/views.py:64
