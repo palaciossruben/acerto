@@ -247,3 +247,10 @@ Copy (select name, email from beta_invite_user) To '/home/ubuntu/path/to/file.cs
 alter user dbadmin superuser;
 
 scp -i production_key.pem user@host:/home/ubuntu/path/to/file.csv /local/path/to/file
+
+
+-- link settings.py simlink:
+ln -s settings.{environment}.py settings.py
+
+where:
+environment = {production, development}
