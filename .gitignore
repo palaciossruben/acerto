@@ -63,3 +63,5 @@ myvenv
 
 .idea/**
 .python-version
+
+testing_webpage/subscribe/resumes/*
