@@ -1,0 +1,1 @@
+RESUMES_PATH = 'resumes'
