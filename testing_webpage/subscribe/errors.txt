@@ -1,6 +1,7 @@
 education level:
 3: Difficult detection Universitario tecnico, marika!!! (detect)
 20: OCR doesnt read a year. Therefore underestimates age and then downgrades degree!!!
+21: Has operator jobs didn't ever do anything with time studied.
 30: tricks algorithm into Universitario, marika!!! (detect)
 33: Almost detected "Tecnico" OCR errors. (read)
 36: tricks algorithm into Universitario, marika!!! (detect)
@@ -37,3 +38,8 @@ detect: 7
 read: 3
 	1. can read OCR, but with bad output text: 2
 	2. can read PDF, but with missing data: 1
+
+
+profession
+16: OCR bad quality.
+53: investigate further

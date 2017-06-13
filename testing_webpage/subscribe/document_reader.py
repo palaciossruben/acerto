@@ -68,6 +68,8 @@ def read_all(force=False):
             else:
                 text = read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename)
 
+            if folder == '53':
+                a=0
             final_dict[folder] = User(text)
             print('done with folder: {}'.format(folder))
 

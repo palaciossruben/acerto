@@ -1,12 +1,16 @@
 
 import re
 from datetime import datetime
+from cts import *
 
 STARTING_COLLEGE_AGE = 18
 
 # OCR: uses LATIN character ﬁ(FI) for spanish ñ.
-UNIQUE_LINE_AGE = ['\n\s*\d\d\s{1,3}a(?:n|ﬁ|ñ)os\s*\n', '\n\s*edad.{1,3}\d\d\s*\n', '\n\s*edad.{1,3}\d\d\s{1,3}a(?:n|ﬁ|ñ)os\s*\n']
-AGE_IN_TEXT = '(?:edad|tengo).{1,3}\d\d\s{1,3}a(?:n|ﬁ|ñ)os'
+UNIQUE_LINE_AGE = ['\n\s*\d\d\s{1,3}a' + ACCENT_N_PATTERN + 'os\s*\n',
+                   '\n\s*edad.{1,3}\d\d\s*\n',
+                   '\n\s*edad.{1,3}\d\d\s{1,3}a' + ACCENT_N_PATTERN + 'os\s*\n']
+
+AGE_IN_TEXT = '(?:edad|tengo).{1,3}\d\d\s{1,3}a' + ACCENT_N_PATTERN + 'os'
 
 MONTHS = {'enero': 1,
           'febrero': 2,

@@ -2,7 +2,8 @@ import re
 import nltk
 import operator
 
-import age
+import age_module
+from cts import *
 
 COLOMBIA = 'Colombia'
 ECUADOR = 'Ecuador'
@@ -41,6 +42,14 @@ UNDERGRADUATE = 'undergraduate'
 MASTER = 'masters'
 PHD = 'phd'
 
+EDUCATION_LEVEL_DURATIONS = {
+                             HIGH_SCHOOL: 18,
+                             TECHNICAL: 3,
+                             UNDERGRADUATE: 5,
+                             MASTER: 2,
+                             PHD: 4,
+                             }
+
 EDUCATION_LEVELS = {
                     HIGH_SCHOOL: 0,
                     TECHNICAL: 1,
@@ -70,6 +79,57 @@ MIN_TECHNICAL_AGE = 20
 # disables the plural of estudiante
 UNFINISHED_EDUCATION_KEYWORDS = ['estudiando', 'cursando', 'cursado', 'estudiante(?!s)', 'semestre', '\d\d\d\d.{0,7}actualidad', 'sin diploma']
 FINISHED_EDUCATION_KEYWORDS = ['culmina', 'egresad', 'finalizacion', 'finalizado']
+
+# General professions.
+DESIGN = 'design'
+ARTS = 'art'
+OPERATOR = 'operator'
+ENGINEERING = 'engineering'
+TECHNICAL_TRADES = 'technical_trades'
+ARCHITECTURE = 'architecture'
+BUSINESS = 'business_and_economics'
+SCIENCE = 'science'
+MARKETING = 'marketing'
+SOCIAL_SCIENCE = 'social_science'
+HEALTH_SCIENCES = 'health_sciences'
+PSYCHOLOGY = 'psychology'
+COMMUNICATION = 'communication'
+LAW_AND_POLITICAL_SCIENCE = 'law_and_political_science'
+ENVIRONMENTAL_SCIENCES = 'environmental_science'
+
+
+PROFESSION_KEYWORDS = {
+    DESIGN: ['dise' + ACCENT_N_PATTERN + 'o', 'dise' + ACCENT_N_PATTERN + 'ador', 'fotografia', 'dise' + ACCENT_N_PATTERN + 'adora'],
+    ARTS: ['arte'],
+    ENGINEERING: ['ingenieria', 'ingeniero', 'ingeniera', 'backend', 'frontend', 'SQL', 'programador', 'software', 'hardware', 'planos'],
+    TECHNICAL_TRADES: ['serigrafia', 'serigrafica'],
+    ARCHITECTURE: ['arquitectura', 'urbano'],
+    BUSINESS: ['administracion', 'administrador', 'economia', 'administrativo', 'administrativa', 'finanzas', 'financiero', 'MBA'],
+    SCIENCE: ['investigacion', 'biologia', 'fisica', 'quimica'],
+    MARKETING: ['marketing', 'mercadeo'],
+    SOCIAL_SCIENCE: ['ciencias sociales', 'investigacion', 'cultura', 'docencia', 'sociales', 'historico', 'investigadora', 'museo'],
+    HEALTH_SCIENCES: ['ciencias de la salud', 'enfermedad', 'medicos?', 'cirugia', 'quirurgico', 'salud ocupacional', 'emergencias'],
+    PSYCHOLOGY: ['psicologia', 'talento humano', 'recursos humanos', 'seleccion de personal'],
+    COMMUNICATION: ['comunicacion', 'audiovisual', 'tv', 'comunicacion social', 'periodismo', 'periodisticas', 'periodistica', 'comunicacion organizacional', 'television'],
+    LAW_AND_POLITICAL_SCIENCE: ['derecho', 'politica'],
+    ENVIRONMENTAL_SCIENCES: ['ambiente'],
+    OPERATOR: ['atencion al cliente']
+}
+
+PROFESSIONS = [DESIGN,
+               ENGINEERING,
+               TECHNICAL_TRADES,
+               ARCHITECTURE,
+               BUSINESS,
+               SCIENCE,
+               MARKETING,
+               SOCIAL_SCIENCE,
+               HEALTH_SCIENCES,
+               PSYCHOLOGY,
+               COMMUNICATION,
+               LAW_AND_POLITICAL_SCIENCE,
+               ENVIRONMENTAL_SCIENCES,
+               ARTS, ]
 
 
 class User:
@@ -152,11 +212,28 @@ class User:
     def get_city(text):
         return 'la'  # TODO: implement
 
-    @staticmethod
-    def get_experience(text):
+    def get_experience(self, text):
 
-        year_pattern = r'\d\d\d\d.{1,6}\d\d\d\d'
-        return
+        preparing_years = EDUCATION_LEVEL_DURATIONS[HIGH_SCHOOL]
+
+        if self.education_level == TECHNICAL:
+            preparing_years += EDUCATION_LEVEL_DURATIONS[TECHNICAL]
+
+        if self.education_level == UNDERGRADUATE:
+            preparing_years += EDUCATION_LEVEL_DURATIONS[UNDERGRADUATE]
+
+        if self.education_level == MASTER:
+            preparing_years += EDUCATION_LEVEL_DURATIONS[UNDERGRADUATE] + EDUCATION_LEVEL_DURATIONS[MASTER]
+
+        if self.education_level == PHD:
+            preparing_years += EDUCATION_LEVEL_DURATIONS[UNDERGRADUATE] +\
+                               EDUCATION_LEVEL_DURATIONS[MASTER] +\
+                               EDUCATION_LEVEL_DURATIONS[PHD]
+
+        if self.age is not None:
+            return (self.age - preparing_years)*0.56  # Empirically found the occupation rate to be 56%.
+        else:
+            return None
 
     def get_age(self, text):
         """Tries in this order:
@@ -166,46 +243,63 @@ class User:
             4. Infer age when the user finished college and add 5 years for undergrad and 3 years to technical, plus 18
         """
 
-        explicit_age = age.find_explicit_age(text)
+        explicit_age = age_module.find_explicit_age(text)
 
         if explicit_age is None:
-            birth_date = age.find_birth_date(text)
+            birth_date = age_module.find_birth_date(text)
             if birth_date is not None:
-                return age.age_given_birth(birth_date)
+                return age_module.age_given_birth(birth_date)
             else:
-                return age.get_college_starting_age(text)
+                return age_module.get_college_starting_age(text)
         else:
             return explicit_age
 
-    def __init__(self, text, country=None, institutions=(), education_level=None, city=None, experience=None, age=None):
+    def find_highest_scoring_profession(self, score_dict):
+
+        max_key_value = max(score_dict.items(), key=operator.itemgetter(1))
+
+        # 1 match maybe luck on operators case with no education:
+        #if max_key_value[1] == 1 and self.education_level == HIGH_SCHOOL:
+        #    return OPERATOR
+
+        if max_key_value[1] > 0:
+            return max_key_value[0]
+        else:
+            return OPERATOR
+
+    @staticmethod
+    def transform_to_pattern(keyword):
+        return '(?:(?![a-z]).|^|\n)' + keyword + '(?:(?![a-z]).|$|\n)'
+
+    def get_profession(self, text):
+
+        score_dict = {}
+        for profession, keywords in PROFESSION_KEYWORDS.items():
+            count = [len(re.findall(self.transform_to_pattern(keyword), text, re.IGNORECASE)) for keyword in keywords]
+            total_sum = sum(count)
+            opportunities = len(keywords)  # opportunities of doing a match, or number of keywords. This is statistics!
+            #score = total_sum/opportunities
+            score = total_sum
+            score_dict[profession] = score
+
+        return self.find_highest_scoring_profession(score_dict)
+
+    def set_attribute(self, value, text, attribute_name):
+
+        if value is None:
+            method_to_call = getattr(self, 'get_' + attribute_name)
+            value = method_to_call(text)
+
+        setattr(self, attribute_name, value)
+
+    def __init__(self, text, country=None, institutions=(), education_level=None, city=None, experience=None, age=None,
+                 profession=None):
         self.text = text
 
-        if age is None:
-            self.age = self.get_age(text)
-        else:
-            self.age = age
-
-        if country is None:
-            self.country = self.get_country(text)
-        else:
-            self.country = country
-
-        if city is None:
-            self.city = self.get_city(text)
-        else:
-            self.city = city
-
-        if len(institutions) == 0:
-            self.institutions = self.get_institutions(text)
-        else:
-            self.institutions = institutions
-
-        if education_level is None:
-            self.education_level = self.get_education_level(text)
-        else:
-            self.education_level = education_level
-
-        if experience is None:
-            self.experience = self.get_experience(text)
-        else:
-            self.experience = experience
+        self.set_attribute(age, text, 'age')
+        self.set_attribute(country, text, 'country')
+        self.set_attribute(city, text, 'city')
+        self.set_attribute(institutions, text, 'institutions')
+        self.set_attribute(education_level, text, 'education_level')
+        self.set_attribute(experience, text, 'experience')
+        self.set_attribute(profession, text, 'profession')
