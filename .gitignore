@@ -61,5 +61,19 @@ target/
 # Created by .ignore support plugin (hsz.mobi)
 myvenv
 
-.idea/**
+**/.idea/**
 .python-version
+private_commands
+
+
+i ============================================================================
+" Netrw Directory Listing                                        (netrw v140)
+"   /Users/juanpabloisaza/Desktop/whalerock/data-s3-reporting-extract/.git/modules
+"   Sorted by      name
+"   Sort sequence: [\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,*,\.o$,\.obj$,\.info$,\.swp$,\.bak$,\~$
+"   Quick Help: <F1>:help  -:go up dir  D:delete  R:rename  s:sort-by  x:exec
+" ============================================================================
+../
+data-tested-s3-reporting-extract/
+.swp
+testing_webpage/subscribe/resumes/*/pdf_images

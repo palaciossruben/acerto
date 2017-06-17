@@ -32,281 +32,7 @@
       <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
       <link href='http://fonts.googleapis.com/css?family=Iceberg' rel='stylesheet' type='text/css'>
 	  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    	
-		<script type="text/javascript">!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var n;"undefined"!=typeof window?n=window:"undefined"!=typeof global?n=global:"undefined"!=typeof self&&(n=self),n.Countdown=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var defaultOptions = {
-  date: "December 7, 2015 15:03:25",
-  refresh: 1000,
-  offset: 0,
-  onEnd: function() {
-    return;
-  },
-  render: function (date) {
-    this.el.innerHTML = 
-                        "<div class='day' style='line-height:25px; float:left; width:150px;'> <div>" +date.days  +"</div>" + "<div> <span style='font-size:18px;'>{% trans "days" %}</span></div></div>  " +
-						"<div class='hours' style='line-height:25px; float:left; width:150px;'> <div>" +date.hours  +"</div>" + "<div> <span style='font-size:18px;'>{% trans "hours" %}</span></div></div>  " +
-						"<div class='min' style='line-height:25px; float:left; width:150px;'> <div>" +date.min  +"</div>" + "<div> <span style='font-size:18px;'>{% trans "minutes" %}</span></div></div>  " +
-						"<div class='sec' style='line-height:25px; float:left; width:150px;'> <div>" +date.sec  +"</div>" + "<div> <span style='font-size:18px;'>{% trans "seconds" %}</span></div></div>  " ;
-                        
-  }
-};
 
-/**
- * Countdown constructor
- * @param {HTMLElement} el      DOM node of the countdown
- * @param {Object}      options (optional) Options for the plugin
- */
-var Countdown = function(el, options) {
-
-  /**
-   * Reference to the DOM element
-   * @type {HTMLElement}
-   */
-  this.el = el;
-
-  /**
-   * Options of the countdown plugin
-   * @type {Object}
-   */
-  this.options = {};
-
-  /**
-   * Interval reference or false if counter is stopped
-   * @type {Mixed}
-   */
-  this.interval = false;
-
-  // merge default options and options into this.options
-  for (var i in defaultOptions) {
-    if (defaultOptions.hasOwnProperty(i)) {
-      this.options[i] = typeof options[i] !== 'undefined' ? options[i] : defaultOptions[i];
-
-      if (i === 'date' && typeof this.options.date !== 'object') {
-        this.options.date = new Date(this.options.date);
-      }
-
-      // bind context for functions
-      if (typeof this.options[i] === 'function') {
-        this.options[i] = this.options[i].bind(this);
-      }
-    }
-  }
-
-  /**
-   * Get the difference between now and the end date
-   * @return {Object} Object with the diff information (years, days, hours, min, sec, millisec)
-   */
-  this.getDiffDate = function() {
-    var diff = (this.options.date.getTime() - Date.now() + this.options.offset) / 1000;
-
-    var dateData = {
-      years:    0,
-      days:     0,
-      hours:    0,
-      min:      0,
-      sec:      0,
-      millisec: 0
-    };
-
-    if (diff <= 0) {
-      if (this.interval) {
-        this.stop();
-        this.options.onEnd();
-      }
-      return dateData;
-    }
-
-    if (diff >= (365.25 * 86400)) {
-      dateData.years = Math.floor(diff / (365.25 * 86400));
-      diff -= dateData.years * 365.25 * 86400;
-    }
-
-    if (diff >= 86400) {
-      dateData.days = Math.floor(diff / 86400);
-      diff -= dateData.days * 86400;
-    }
-
-    if (diff >= 3600) {
-      dateData.hours = Math.floor(diff / 3600);
-      diff -= dateData.hours * 3600;
-    }
-
-    if (diff >= 60) {
-      dateData.min = Math.floor(diff / 60);
-      diff -= dateData.min * 60;
-    }
-
-    dateData.sec = Math.round(diff);
-
-    dateData.millisec = diff % 1 * 1000;
-
-    return dateData;
-  }.bind(this);
-
-  /**
-   * Add leading zeros to a number
-   * @param  {Number} num    Input number
-   * @param  {Number} length Length of the desired output
-   * @return {String}        String of the desired length with leading zeros
-   */
-  this.leadingZeros = function(num, length) {
-    length = length || 2;
-    num = String(num);
-    if (num.length > length) {
-      return num;
-    }
-    return (Array(length + 1).join('0') + num).substr(-length);
-  };
-
-  /**
-   * Update the end date of the countdown
-   * @param  {Mixed}     newDate Date object or a String/Number that can be passed to the Date constructor
-   * @return {Countdown}         Countdown instance
-   */
-  this.update = function(newDate) {
-    if (typeof newDate !== 'object') {
-      newDate = new Date(newDate);
-    }
-    this.options.date = newDate;
-    this.render();
-    return this;
-  }.bind(this);
-
-  /**
-   * Stop the countdown refresh / rerender
-   * @return {Countdown} Countdown instance
-   */
-  this.stop = function() {
-    if (this.interval) {
-      clearInterval(this.interval);
-      this.interval = false;
-    }
-    return this;
-  }.bind(this);
-
-  /**
-   * Render the countdown
-   * @return {Countdown} Countdown instance
-   */
-  this.render = function() {
-    this.options.render(this.getDiffDate());
-    return this;
-  }.bind(this);
-
-  /**
-   * Start the countdown
-   * @return {Countdown} Countdown instance
-   */
-  this.start = function() {
-    // don't start if the countdown is already started
-    if (this.interval) { return; }
-
-    this.render();
-
-    if (this.options.refresh) {
-      this.interval = setInterval(this.render, this.options.refresh);
-    }
-
-    return this;
-  }.bind(this);
-
-  /**
-   * Update the offset
-   * @param  {Number}    offset New offset in ms
-   * @return {Countdown}        Countdown instance
-   */
-  this.updateOffset = function(offset) {
-    this.options.offset = offset;
-    return this;
-  }.bind(this);
-
-
-  // initial start of the countdown or initial render
-  this.start();
-};
-
-module.exports = Countdown;
-
-},{}],2:[function(require,module,exports){
-var Countdown = require('./countdown.js');
-var NAME = 'countdown';
-var DATA_ATTR = 'date';
-
-jQuery.fn.countdown = function(options) {
-  return $.each(this, function(i, el) {
-    var $el = $(el);
-    if (!$el.data(NAME)) {
-      // allow setting the date via the data-date attribute
-      if ($el.data(DATA_ATTR)) {
-        options.date = $el.data(DATA_ATTR);
-      }
-      $el.data(NAME, new Countdown(el, options));
-    }
-  });
-};
-
-module.exports = Countdown;
-
-},{"./countdown.js":1}]},{},[2])(2)
-});</script>
-		
-		<script type="text/javascript">
-      $(function() {
-        var endDate = "December 7, 2015 15:03:25";
-        $('.countdown.simple').countdown({ date: endDate });
-        $('.countdown.styled').countdown({
-          date: endDate,
-          render: function(data) {
-            $(this.el).html("<div>" + this.leadingZeros(data.years, 4) + " <span>years</span></div><div>" + this.leadingZeros(data.days, 3) + " <span>days</span></div><div>" + this.leadingZeros(data.hours, 2) + " <span>hrs</span></div><div>" + this.leadingZeros(data.min, 2) + " <span>min</span></div><div>" + this.leadingZeros(data.sec, 2) + " <span>sec</span></div>");
-			
-          }
-        });
-        $('.countdown.callback').countdown({
-          date: +(new Date) + 10000,
-          render: function(data) {
-            $(this.el).text(this.leadingZeros(data.sec, 2) + " sec");
-          },
-          onEnd: function() {
-            $(this.el).addClass('ended');
-          }
-        }).on("click", function() {
-          $(this).removeClass('ended').data('countdown').update(+(new Date) + 10000).start();
-        });
-        // End time for diff purposes
-        var endTimeDiff = new Date().getTime() + 15000;
-        // This is server's time
-        var timeThere = new Date();
-        // This is client's time (delayed)
-        var timeHere = new Date(timeThere.getTime() - 5434);
-        // Get the difference between client time and server time
-        var diff_ms = timeHere.getTime() - timeThere.getTime();
-        // Get the rounded difference in seconds
-        var diff_s = diff_ms / 1000 | 0;
-        
-        var notice = [];
-        notice.push('Server time: ' + timeThere.toDateString() + ' ' + timeThere.toTimeString());
-        notice.push('Your time: ' + timeHere.toDateString() + ' ' + timeHere.toTimeString());
-        notice.push('Time difference: ' + diff_s + ' seconds (' + diff_ms + ' milliseconds to be precise). Your time is a bit behind.');
-        
-        $('.offset-notice').html(notice.join('<br />'));
-        
-        $('.offset-server .countdown').countdown({
-          date: endTimeDiff,
-          offset: diff_s * 1000,
-          onEnd: function() {
-            $(this.el).addClass('ended');
-          }
-        });
-        
-        $('.offset-client .countdown').countdown({
-          date: endTimeDiff,
-          onEnd: function() {
-            $(this.el).addClass('ended');
-          }
-        });
-      });
-
-    </script>
       <!-- CSS -->
       <!-- Animate css -->
       <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
@@ -368,19 +94,15 @@ module.exports = Countdown;
       <div class="title" style="margin-top:-140px;">
         <a class="scroll logo" style="font-family:CANDARA; font-size:65px; color:black; margin-bottom:-50px;"> <img src="{% static 'beta_invite/logo.png' %}" width="370px" ></a>
 
-         <!-- COUNTDOWN -->
-
 		  <h1 style="font-size:35px; margin-top:10px; color:#F8E676; ">{{ main_message }}</h1>
         <p style="font-size:18px; margin-top:-10px;  color:#F8E676;">
 			{{ secondary_message }}
 		</p>
-         <!-- /COUNTDOWN -->
 
 		 <div class="container" style="margin-top:5px;">
 		   <span data-sr="wait 0.5s, then enter top and move 40px over 1s" style="color:#134984; font-size:25px;">
 				<span style=" font-weight:500; color:#F8E676;">
 					<b style="font-weight:400; text-transform: uppercase;">{% trans "Subscribe" %}</b>
-					<p style="font-size: 15px; font-weight:400; margin:-5px; padding:0px;">{% blocktrans %}Subscribe before launch date and get free Premium access{% endblocktrans %}</p>
 				</span>
 		   </span>
 			<div class="subscribe" data-sr="wait 0.5s, then enter bottom and move 40px over 1s" style="margin-top:-25px;">
@@ -402,18 +124,12 @@ module.exports = Countdown;
 				<input style="height: 44px; border: solid 0px white; background:#F8E676; color:black; text-align:center; width: 81px; font-size: 16px;" type="submit" value="{{ submit_value }}">
 
 			  </form>
-
-
-			  {% if is_desktop %}<div class="countdown simple" align="center" style="font-size: 3em; font-family:CANDARA;  margin-top:20px ;margin-bottom: -16px; color:#F8E676;" data-date="june, 1 , 2017 23:59:59"> </div>{% endif %}
-
 			</div>
 		  </div>
 		  <br/>
 		 <div data-sr="wait 0.5s, then enter left and move 40px over 1s" style="margin-top:-10px; display:none;">
             
             <a href="#" target="_blank" class="footer-social" style="font-size:25px; color:rgba(0, 0, 0, 0.59);"><i class="fa fa-fw fa-instagram"></i></a>
-			
-			
           </div>
 
       </div>

@@ -9,7 +9,6 @@ GRANT ALL PRIVILEGES ON DATABASE maindb to dbadmin;
 --psql
 psql -d maindb -U dbadmin -p 5432 -h localhost
 
-
 -- When pushing to production:
 1. Deactivate debug mode in settings.py
 2. For now deactivate the send_email function.
@@ -48,13 +47,6 @@ Launch instance:
 3. select security group "production": access to averyone with HTTP and HTTPS. SSH access only my ip.
 4. select/create key_pair, download, have it secure.
 5. Launch
-
-Connect to instance:
-chmod 400 /path/my-key-pair.pem
-ssh -i production_key.pem ubuntu@ec2-52-38-133-146.us-west-2.compute.amazonaws.com
-
-instance id: i-070e94a283f11f547
-instance public DNS: ec2-52-38-133-146.us-west-2.compute.amazonaws.com
 
 
 
@@ -115,56 +107,16 @@ if error on locales do:
 -- install ipware
 sudo pip3 install django-ipware
 
-
--- NGINX
-sudo apt-get install nginx
-test by:
-    sudo service nginx start
-and go to:
-    http://ec2-52-38-133-146.us-west-2.compute.amazonaws.com/beta_invite/
-stop:
-    sudo service nginx stop
-
-sudo vim /etc/nginx/nginx.conf
-Edit first line with:
-    user ubuntu ubuntu;
-
-With:
-sudo vim /etc/nginx/nginx.conf
-
-Add to top of http section:
-
-http {
-
-server_names_hash_bucket_size 64;
-server {
-
-       listen 80;
-       server_name ec2-52-38-133-146.us-west-2.compute.amazonaws.com;
-
-       access_log /var/log/nginx-access.log;
-       error_log /var/log/nginx-error.log;
-       root /home/ubuntu/project-root;
-
-       location / {
-           proxy_pass http://127.0.0.1:8000;
-           proxy_set_header Host $host;
-           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-       }
-   }
-  other stuff ....
-}
-
-
-Also change the location of the static file directory.
-ie root, not clear see: https://www.nginx.com/resources/admin-guide/serving-static-content/)????
-
-
 -- Gunicorn
 pip3 install gunicorn
 
--- to run gunicorn on background do:
-workon myenv && PYENV_VERSION=3.5.1 gunicorn testing_webpage.wsgi &
+-- to run gunicorn on background do (reload works for small projects only):
+workon myenv && PYENV_VERSION=3.5.1 gunicorn --reload testing_webpage.wsgi &
+
+--alternative
+watchmedo shell-command --patterns="*.py;*.html;*.css;*.js" --recursive --command='echo "${watch_src_path}" && kill -HUP `cat gunicorn.pid`' . &
+workon myenv && PYENV_VERSION=3.5.1 python manage.py run_gunicorn 127.0.0.1:80 --pid=gunicorn.pid
+
 
 -- TODO: to run on background should use:
 supervisord.org
