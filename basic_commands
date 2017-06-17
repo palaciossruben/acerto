@@ -33,7 +33,7 @@ python manage.py shell
 
 
 -- make new app
-python manage.py startapp invite_beta_app
+python manage.py startapp beta_invite
 
 
 -- SMTP server
