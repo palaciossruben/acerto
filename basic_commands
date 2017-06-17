@@ -111,7 +111,7 @@ sudo pip3 install django-ipware
 pip3 install gunicorn
 
 -- to run gunicorn on background do (reload works for small projects only):
-workon myenv && PYENV_VERSION=3.5.1 gunicorn --reload testing_webpage.wsgi &
+workon myenv && PYENV_VERSION=3.5.2 gunicorn --reload testing_webpage.wsgi &
 
 --alternative
 watchmedo shell-command --patterns="*.py;*.html;*.css;*.js" --recursive --command='echo "${watch_src_path}" && kill -HUP `cat gunicorn.pid`' . &
