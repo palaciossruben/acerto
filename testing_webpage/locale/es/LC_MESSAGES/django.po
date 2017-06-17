@@ -42,11 +42,6 @@ msgstr "Descubre tu verdadera pasión"
 msgid "Subscribe"
 msgstr "Suscríbete"
 
-#: beta_invite/templates/beta_invite/index.html:383
-msgid "Subscribe before launch date and get free Premium access"
-msgstr ""
-"Suscríbete antes de la fecha de lanzamiento y obtén acceso Premium gratis"
-
 #: beta_invite/templates/beta_invite/index.html:394
 msgid "Your Full Name"
 msgstr "Tu Nombre Completo"
