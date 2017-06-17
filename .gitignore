@@ -76,4 +76,4 @@ i ============================================================================
 ../
 data-tested-s3-reporting-extract/
 .swp
-testing_webpage/subscribe/resumes/*
+testing_webpage/subscribe/resumes/*/pdf_images
