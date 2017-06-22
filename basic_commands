@@ -14,7 +14,7 @@ psql -d maindb -U dbadmin -p 5432 -h localhost
 2. For now deactivate the send_email function.
 
 
--- start virtualenver
+-- start virtualenv
 source ./myvenv/bin/activate
 
 
