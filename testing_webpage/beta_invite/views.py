@@ -7,25 +7,6 @@ import business
 from beta_invite.util import email_sender
 from ipware.ip import get_ip
 from beta_invite import constants as cts
-from user_agents import parse
-
-
-def is_email_valid(email):
-    """
-    Simple logic won't bother here
-    :param email: string
-    :return: boolean
-    """
-    return '@' in email and '.' in email
-
-
-def is_string_valid(any_string):
-    """
-    Validate all fields available.
-    :param any_string: string, cannot be null or empty
-    :return: boolean
-    """
-    return any_string is not None and any_string != ''
 
 
 def get_error_render(request, error_message, error_params):
@@ -49,10 +30,6 @@ def inner_index(request, is_user_site):
     :return: renders a view.
     """
 
-    ua_string = request.META['HTTP_USER_AGENT']
-    user_agent = parse(ua_string)
-    is_desktop = not user_agent.is_mobile
-
     ip = get_ip(request)
 
     if is_user_site:
@@ -75,7 +52,7 @@ def inner_index(request, is_user_site):
         secondary_message = _("We search millions of profiles and find the ones that best suit your business")
         action_url = '/business/'
 
-    # first time loading. Fields have no value yet.
+    # first time loading
     if user.name is None or user.email is None:
 
         if is_user_site:
@@ -83,45 +60,29 @@ def inner_index(request, is_user_site):
         else:
             business.models.Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
 
-        return render(request, cts.BETA_INVITE_VIEW_PATH, {'is_desktop': is_desktop,
-                                                           'main_message': main_message,
+        return render(request, cts.BETA_INVITE_VIEW_PATH, {'main_message': main_message,
                                                            'secondary_message': secondary_message,
-                                                           'action_url': action_url})
+                                                           'action_url': action_url,
+                                                           'missing_name_alert': _("Missing name."),
+                                                           'missing_email_alert': _("Missing email."),
+                                                           'invalid_email_alert': _("Make sure you include a valid email.")})
 
-    error_params = {
-            'name': user.name,
-            'email': user.email,
-            'is_desktop': is_desktop,
-            'main_message': main_message,
-            'secondary_message': secondary_message,
-            'action_url': action_url
-        }
+    user.save()
+    # TODO: deactivated until fixed on production.
+    #try:
+    #    email_sender.send(user)
+    #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
+    #    return render(request, cts.BETA_INVITE_VIEW_PATH, {
+    #        'error_message': _("Cannot send confirmation email, please check it."),
+    #        })
 
-    if is_string_valid(user.name):
-
-        if is_string_valid(user.email):
-
-            if is_email_valid(user.email):
-                user.save()
-                # TODO: deactivated until fixed on production.
-                #try:
-                #    email_sender.send(user)
-                #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
-                #    return render(request, cts.BETA_INVITE_VIEW_PATH, {
-                #        'error_message': _("Cannot send confirmation email, please check it."),
-                #        })
-
-                return render(request, cts.BETA_INVITE_VIEW_PATH, {'successful_message': _("Successful submission :)"),
-                                                                   'is_desktop': is_desktop,
-                                                                   'main_message': main_message,
-                                                                   'secondary_message': secondary_message,
-                                                                   'action_url': action_url})
-            else:
-                return get_error_render(request, _("Make sure you include a valid email."), error_params)
-        else:
-            return get_error_render(request, _("Missing email."), error_params)
-    else:
-        return get_error_render(request, _("Missing name."), error_params)
+    return render(request, cts.BETA_INVITE_VIEW_PATH, {'successful_message': _("Successful submission :)"),
+                                                       'main_message': main_message,
+                                                       'secondary_message': secondary_message,
+                                                       'action_url': action_url,
+                                                       'missing_name_alert': _("Missing name."),
+                                                       'missing_email_alert': _("Missing email."),
+                                                       'invalid_email_alert': _("Make sure you include a valid email.")})
 
 
 def index(request):
