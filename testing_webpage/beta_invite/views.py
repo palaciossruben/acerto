@@ -1,4 +1,6 @@
+import os
 import smtplib
+from django.core.files.storage import FileSystemStorage
 from django.utils.translation import ugettext as _
 
 from django.shortcuts import render
@@ -19,6 +21,33 @@ def get_error_render(request, error_message, error_params):
     """
     error_params['error_message'] = error_message
     return render(request, cts.BETA_INVITE_VIEW_PATH, error_params)
+
+
+def save_curriculum_from_request(request, user):
+    """
+    Saves file on machine resumes/* file system
+    Args:
+        request: HTTP request
+    Returns: None, just saves file.
+    """
+
+    # validate correct method and has file.
+    if request.method == 'POST' and len(request.FILES) != 0:
+
+        curriculum_file = request.FILES['curriculum']
+        fs = FileSystemStorage()
+
+        # TODO: make this dynamic
+        user_id_folder = str(user.id)
+        folder = os.path.join('subscribe/resumes', user_id_folder)
+
+        # create file path:
+        if not os.path.isdir(folder):
+            os.mkdir(folder)
+
+        file_path = os.path.join(folder, curriculum_file.name)
+
+        fs.save(file_path, curriculum_file)
 
 
 def inner_index(request, is_user_site):
@@ -65,10 +94,15 @@ def inner_index(request, is_user_site):
                                                            'action_url': action_url,
                                                            'missing_name_alert': _("Missing name."),
                                                            'missing_email_alert': _("Missing email."),
-                                                           'invalid_email_alert': _("Make sure you include a valid email.")})
+                                                           'invalid_email_alert': _("Make sure you include a valid email."),
+                                                           'missing_curriculum': _("Please upload a curriculum"),
+                                                           'upload_curriculum': _("Upload your resume")})
 
     user.save()
-    # TODO: deactivated until fixed on production.
+
+    save_curriculum_from_request(request, user)
+
+    # TODO: test santiago@peaku.co with new password.
     #try:
     #    email_sender.send(user)
     #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
@@ -82,7 +116,8 @@ def inner_index(request, is_user_site):
                                                        'action_url': action_url,
                                                        'missing_name_alert': _("Missing name."),
                                                        'missing_email_alert': _("Missing email."),
-                                                       'invalid_email_alert': _("Make sure you include a valid email.")})
+                                                       'invalid_email_alert': _("Make sure you include a valid email."),
+                                                       'missing_curriculum': _("Please upload a curriculum")})
 
 
 def index(request):
