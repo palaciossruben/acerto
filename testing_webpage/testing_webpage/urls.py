@@ -23,7 +23,6 @@ from . import views
 urlpatterns = [
     url(r'^beta_invite/', include('beta_invite.urls')),
     url(r'^business/', include('business.urls')),
-    url(r'^upload_file/', include('upload_file.urls')),
     url(r'^beta_invite_long_form/', include('beta_invite_long_form.urls')),
     url(r'^admin/', admin.site.urls),
 ]
