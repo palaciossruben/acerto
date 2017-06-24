@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-04 03:58+0000\n"
+"POT-Creation-Date: 2017-06-24 21:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,80 +18,89 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: beta_invite/templates/beta_invite/index.html:45
-msgid "days"
-msgstr "días"
-
-#: beta_invite/templates/beta_invite/index.html:46
-msgid "hours"
-msgstr "horas"
-
-#: beta_invite/templates/beta_invite/index.html:47
-msgid "minutes"
-msgstr "minutos"
-
-#: beta_invite/templates/beta_invite/index.html:48
-msgid "seconds"
-msgstr "segundos"
-
-#: beta_invite/templates/beta_invite/index.html:372 beta_invite/views.py:60
-msgid "Discover your true passion"
-msgstr "Descubre tu verdadera pasión"
-
-#: beta_invite/templates/beta_invite/index.html:382
+#: beta_invite/templates/beta_invite/index.html:80
+#: beta_invite_long_form/templates/beta_invite_long_form/index.html:105
 msgid "Subscribe"
 msgstr "Suscríbete"
 
-#: beta_invite/templates/beta_invite/index.html:394
+#: beta_invite/templates/beta_invite/index.html:92
+#: beta_invite_long_form/templates/beta_invite_long_form/index.html:116
 msgid "Your Full Name"
 msgstr "Tu Nombre Completo"
 
-#: beta_invite/templates/beta_invite/index.html:398
+#: beta_invite/templates/beta_invite/index.html:108
+#: beta_invite_long_form/templates/beta_invite_long_form/index.html:124
 msgid "Your email"
 msgstr "Tu correo"
 
-#: beta_invite/templates/beta_invite/index.html:401
+#: beta_invite/templates/beta_invite/index.html:113
+#: beta_invite_long_form/templates/beta_invite_long_form/index.html:127
 msgid "Sure!"
 msgstr "Enviar!"
 
-#: beta_invite/views.py:61
+#: beta_invite/views.py:76
+msgid "Discover your true passion"
+msgstr "Descubre tu verdadera pasión"
+
+#: beta_invite/views.py:77
 msgid "We search millions of jobs and find the right one for you"
-msgstr "Buscamos entre millones de trabajos y encontramos el trabajo perfecto para ti"
+msgstr ""
+"Buscamos entre millones de trabajos y encontramos el trabajo perfecto para ti"
 
-
-#: beta_invite/views.py:63
+#: beta_invite/views.py:80
 msgid "Discover amazing people"
 msgstr "Descubre personas increibles"
 
+#: beta_invite/views.py:81
+msgid ""
+"We search millions of profiles and find the ones that best suit your business"
+msgstr ""
+"Buscamos millones de perfiles y encontramos los que mejor se adaptan a tu "
+"negocio"
 
-#: beta_invite/views.py:64
-msgid "We search millions of profiles and find the ones that best suit your business"
-msgstr "Buscamos millones de perfiles y encontramos los que mejor se adaptan a tu negocio"
-
-
-#: beta_invite/views.py:95
-msgid "Successful submission :)"
-msgstr "Envio exitoso :)"
-
-#: beta_invite/views.py:100
-msgid "Make sure you include a valid email."
-msgstr "Asegúrate de incluir un correo electrónico válido"
-
-#: beta_invite/views.py:102
-msgid "Missing email."
-msgstr "Falta el correo"
-
-#: beta_invite/views.py:104
+#: beta_invite/views.py:95 beta_invite/views.py:117
 msgid "Missing name."
 msgstr "Falta el nombre"
 
-#: testing_webpage/settings.py:120
+#: beta_invite/views.py:96 beta_invite/views.py:118
+msgid "Missing email."
+msgstr "Falta el correo"
+
+#: beta_invite/views.py:97 beta_invite/views.py:119
+msgid "Make sure you include a valid email."
+msgstr "Asegúrate de incluir un correo electrónico válido"
+
+#: beta_invite/views.py:98 beta_invite/views.py:120
+msgid "Please upload a curriculum"
+msgstr "Porfavor sube tu curriculum"
+
+#: beta_invite/views.py:99
+msgid "Upload your resume"
+msgstr "Sube tu curriculum"
+
+#: beta_invite/views.py:113
+msgid "Successful submission :)"
+msgstr "Envio exitoso :)"
+
+#: testing_webpage/shared_settings.py:120
 msgid "English"
 msgstr "Ingles"
 
-#: testing_webpage/settings.py:121
+#: testing_webpage/shared_settings.py:121
 msgid "Spanish"
 msgstr "Español"
+
+#~ msgid "days"
+#~ msgstr "días"
+
+#~ msgid "hours"
+#~ msgstr "horas"
+
+#~ msgid "minutes"
+#~ msgstr "minutos"
+
+#~ msgid "seconds"
+#~ msgstr "segundos"
 
 #~ msgid "Cannot send confirmation email, please check it."
 #~ msgstr ""
