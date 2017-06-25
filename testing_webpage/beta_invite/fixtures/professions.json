@@ -1,0 +1,153 @@
+[{
+  "model": "beta_invite.profession",
+  "pk": 1,
+  "fields":{
+    "name": "Designer",
+    "name_es": "Diseñador"
+  }
+},
+{
+  "model": "beta_invite.profession",
+  "pk": 2,
+  "fields":{
+    "name": "Civil Engineer",
+    "name_es": "Ingeniero Civil"
+  }
+},
+{
+  "model": "beta_invite.profession",
+  "pk": 3,
+  "fields":{
+    "name": "Mechanical Engineer",
+    "name_es": "Ingeniero Mecánico"
+  }
+},
+{
+  "model": "beta_invite.profession",
+  "pk": 4,
+  "fields":{
+    "name": "IT Engineer",
+    "name_es": "Ingeniero IT"
+  }
+},
+{
+  "model": "beta_invite.profession",
+  "pk": 5,
+  "fields":{
+    "name": "Chemical Engineer",
+    "name_es": "Ingeniero Químico"
+  }
+},
+{
+  "model": "beta_invite.profession",
+  "pk": 6,
+  "fields":{
+    "name": "Electrical Engineer",
+    "name_es": "Ingeniero Eléctrico"
+  }
+},
+{
+  "model": "beta_invite.profession",
+  "pk": 7,
+  "fields":{
+    "name": "Skilled Trade",
+    "name_es": "Oficio Calificado"
+  }
+},
+{
+  "model": "beta_invite.profession",
+  "pk": 8,
+  "fields":{
+    "name": "Architect",
+    "name_es": "Arquitecto"
+  }
+},
+{
+  "model": "beta_invite.profession",
+  "pk": 9,
+  "fields":{
+    "name": "Business",
+    "name_es": "Negocios"
+  }
+},
+{
+  "model": "beta_invite.profession",
+  "pk": 10,
+  "fields":{
+    "name": "Scientist",
+    "name_es": "Científico"
+  }
+},
+{
+  "model": "beta_invite.profession",
+  "pk": 11,
+  "fields":{
+    "name": "Marketing and Advertisement",
+    "name_es": "Marketing y Públicidad"
+  }
+},
+{
+  "model": "beta_invite.profession",
+  "pk": 12,
+  "fields":{
+    "name": "Social Sciences",
+    "name_es": "Ciencias Sociales"
+  }
+},
+{
+  "model": "beta_invite.profession",
+  "pk": 13,
+  "fields":{
+    "name": "Health Sciences",
+    "name_es": "Ciencias de la Salud"
+  }
+},
+{
+  "model": "beta_invite.profession",
+  "pk": 14,
+  "fields":{
+    "name": "Psychologist",
+    "name_es": "Psycologo"
+  }
+},
+{
+  "model": "beta_invite.profession",
+  "pk": 15,
+  "fields":{
+    "name": "Communicator",
+    "name_es": "Comunicador"
+  }
+},
+{
+  "model": "beta_invite.profession",
+  "pk": 16,
+  "fields":{
+    "name": "Lawyer",
+    "name_es": "Abogado"
+  }
+},
+{
+  "model": "beta_invite.profession",
+  "pk": 17,
+  "fields":{
+    "name": "Political Expert",
+    "name_es": "Politólogo"
+  }
+},
+{
+  "model": "beta_invite.profession",
+  "pk": 18,
+  "fields":{
+    "name": "Environmental Science",
+    "name_es": "Ciencias Ambientales"
+  }
+},
+{
+  "model": "beta_invite.profession",
+  "pk": 19,
+  "fields":{
+    "name": "Artist",
+    "name_es": "Artista"
+  }
+}
+]

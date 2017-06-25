@@ -206,3 +206,7 @@ ln -s settings.{environment}.py settings.py
 
 where:
 environment = {production, development}
+
+
+-- Run Django Fixtures (Load data into database, and/or rewrite)
+python3 manage.py loaddata <my_json>.json
