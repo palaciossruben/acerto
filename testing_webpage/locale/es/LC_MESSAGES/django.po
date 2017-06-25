@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-25 07:38+0000\n"
+"POT-Creation-Date: 2017-06-25 09:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,8 +33,13 @@ msgstr "Tu Nombre Completo"
 msgid "Your email"
 msgstr "Tu correo"
 
-#: beta_invite/templates/beta_invite/index.html:115
-#: beta_invite_long_form/templates/beta_invite_long_form/index.html:145
+#: beta_invite/templates/beta_invite/index.html:106
+#: beta_invite_long_form/templates/beta_invite_long_form/index.html:136
+msgid "Upload your resume"
+msgstr "Sube tu curriculum"
+
+#: beta_invite/templates/beta_invite/index.html:116
+#: beta_invite_long_form/templates/beta_invite_long_form/index.html:162
 msgid "Sure!"
 msgstr "Enviar!"
 
@@ -42,11 +47,11 @@ msgstr "Enviar!"
 msgid "Thanks for registering, we will contact you soon!!!"
 msgstr "¡¡¡Gracias por registrarte, nos pondremos en contacto pronto!!!"
 
-#: beta_invite/views.py:69 beta_invite_long_form/views.py:51
+#: beta_invite/views.py:69 beta_invite_long_form/views.py:55
 msgid "Discover your true passion"
 msgstr "Descubre tu verdadera pasión"
 
-#: beta_invite/views.py:70 beta_invite_long_form/views.py:52
+#: beta_invite/views.py:70 beta_invite_long_form/views.py:56
 msgid "We search millions of jobs and find the right one for you"
 msgstr ""
 "Buscamos entre millones de trabajos y encontramos el trabajo perfecto para ti"
@@ -62,25 +67,13 @@ msgstr ""
 "Buscamos millones de perfiles y encontramos los que mejor se adaptan a tu "
 "negocio"
 
-#: beta_invite/views.py:88 beta_invite_long_form/views.py:73
-msgid "Missing name."
-msgstr "Falta el nombre"
+#: beta_invite_long_form/templates/beta_invite_long_form/index.html:147
+msgid "Experience in years:"
+msgstr "Experiencia en años:"
 
-#: beta_invite/views.py:89 beta_invite_long_form/views.py:74
-msgid "Missing email."
-msgstr "Falta el correo"
-
-#: beta_invite/views.py:90 beta_invite_long_form/views.py:75
-msgid "Make sure you include a valid email."
-msgstr "Asegúrate de incluir un correo electrónico válido"
-
-#: beta_invite/views.py:91 beta_invite_long_form/views.py:76
-msgid "Please upload a curriculum"
-msgstr "Porfavor sube tu curriculum"
-
-#: beta_invite/views.py:92 beta_invite_long_form/views.py:77
-msgid "Upload your resume"
-msgstr "Sube tu curriculum"
+#: beta_invite_long_form/templates/beta_invite_long_form/index.html:155
+msgid "Age in years:"
+msgstr "Edad en años:"
 
 #: testing_webpage/shared_settings.py:119
 msgid "English"
@@ -89,6 +82,18 @@ msgstr "Ingles"
 #: testing_webpage/shared_settings.py:120
 msgid "Spanish"
 msgstr "Español"
+
+#~ msgid "Missing name."
+#~ msgstr "Falta el nombre"
+
+#~ msgid "Missing email."
+#~ msgstr "Falta el correo"
+
+#~ msgid "Make sure you include a valid email."
+#~ msgstr "Asegúrate de incluir un correo electrónico válido"
+
+#~ msgid "Please upload a curriculum"
+#~ msgstr "Porfavor sube tu curriculum"
 
 #~ msgid "days"
 #~ msgstr "días"

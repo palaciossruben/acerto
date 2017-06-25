@@ -85,11 +85,7 @@ def inner_index(request, is_user_site):
         return render(request, cts.BETA_INVITE_VIEW_PATH, {'main_message': main_message,
                                                            'secondary_message': secondary_message,
                                                            'action_url': action_url,
-                                                           'missing_name_alert': _("Missing name."),
-                                                           'missing_email_alert': _("Missing email."),
-                                                           'invalid_email_alert': _("Make sure you include a valid email."),
-                                                           'missing_curriculum': _("Please upload a curriculum"),
-                                                           'upload_curriculum': _("Upload your resume")})
+                                                           })
 
     user.save()
 
