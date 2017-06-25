@@ -1,0 +1,58 @@
+[
+  {
+    "model": "beta_invite.country",
+    "pk": 1,
+    "fields":{
+      "name": "Colombia"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 2,
+    "fields": {
+      "name": "Ecuador"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 3,
+    "fields":{
+      "name": "Peru"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 4,
+    "fields": {
+      "name": "Chile"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 5,
+    "fields": {
+      "name": "Mexico"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 6,
+    "fields": {
+      "name": "Venezuela"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 7,
+    "fields": {
+      "name": "Bolivia"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 8,
+    "fields": {
+      "name": "Argentina"
+    }
+  }
+]

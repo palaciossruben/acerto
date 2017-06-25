@@ -1,0 +1,47 @@
+[
+{
+  "model": "beta_invite.educationLevel",
+  "pk": 1,
+  "fields":{
+    "name": "High School",
+    "name_es": "Bachiller",
+    "level": 0
+  }
+},
+{
+  "model": "beta_invite.educationLevel",
+  "pk": 2,
+  "fields":{
+    "name": "Technical",
+    "name_es": "Técnico",
+    "level": 1
+  }
+},
+{
+  "model": "beta_invite.educationLevel",
+  "pk": 3,
+  "fields":{
+    "name": "Undergraduate",
+    "name_es": "Profesional",
+    "level": 2
+  }
+},
+{
+  "model": "beta_invite.educationLevel",
+  "pk": 4,
+  "fields":{
+    "name": "Master",
+    "name_es": "Maestría",
+    "level": 3
+  }
+},
+{
+  "model": "beta_invite.educationLevel",
+  "pk": 5,
+  "fields":{
+    "name": "Phd",
+    "name_es": "Doctorado",
+    "level": 4
+  }
+}
+]
