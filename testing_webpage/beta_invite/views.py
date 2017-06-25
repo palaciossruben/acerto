@@ -11,18 +11,6 @@ from ipware.ip import get_ip
 from beta_invite import constants as cts
 
 
-def get_error_render(request, error_message, error_params):
-    """
-    Args:
-        request: Request object
-        error_message: specific error message
-        error_params: dictionary with common params.
-    Returns: Renders page with error message.
-    """
-    error_params['error_message'] = error_message
-    return render(request, cts.BETA_INVITE_VIEW_PATH, error_params)
-
-
 def save_curriculum_from_request(request, user):
     """
     Saves file on machine resumes/* file system
