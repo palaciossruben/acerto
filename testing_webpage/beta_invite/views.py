@@ -1,5 +1,6 @@
 import os
 import smtplib
+import unicodedata
 from django.core.files.storage import FileSystemStorage
 from django.utils.translation import ugettext as _
 
@@ -9,6 +10,10 @@ import business
 from beta_invite.util import email_sender
 from ipware.ip import get_ip
 from beta_invite import constants as cts
+
+
+def remove_accents(text):
+    return ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
 
 
 def save_curriculum_from_request(request, user):
@@ -33,7 +38,7 @@ def save_curriculum_from_request(request, user):
         if not os.path.isdir(folder):
             os.mkdir(folder)
 
-        file_path = os.path.join(folder, curriculum_file.name)
+        file_path = os.path.join(folder, remove_accents(curriculum_file.name))
 
         fs.save(file_path, curriculum_file)
 

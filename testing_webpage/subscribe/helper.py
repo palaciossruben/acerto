@@ -178,8 +178,7 @@ def get_pdf_text(folder_path, filename):
 
 
 def remove_accents(text):
-    return ''.join(c for c in unicodedata.normalize('NFD', text)
-                       if unicodedata.category(c) != 'Mn')
+    return ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
 
 
 def rename_filename(folder_path, filename):
@@ -199,44 +198,3 @@ def rename_filename(folder_path, filename):
     os.rename(os.path.join(folder_path, filename), os.path.join(folder_path, new_name))
 
     return new_name
-
-
-#import os
-#import argparse
-
-#from pdfrw import PdfReader, PdfWriter, PageMerge
-
-
-#def fixpage(*pages):
-#    result = PageMerge() + (x for x in pages if x is not None)
-#    result[-1].x += result[0].w
-#    return result.render()
-
-"""
-parser = argparse.ArgumentParser()
-parser.add_argument("input", help="Input pdf file name")
-parser.add_argument("-p", "--padding", action = "store_true",
-                    help="Padding the document so that all pages use the same type of sheet")
-args = parser.parse_args()
-
-inpfn = args.input
-outfn = 'booklet.' + os.path.basename(inpfn)
-ipages = PdfReader(inpfn).pages
-
-if args.padding:
-    pad_to = 4
-else:
-    pad_to = 2
-
-# Make sure we have a correct number of sides
-ipages += [None]*(-len(ipages)%pad_to)
-
-opages = []
-while len(ipages) > 2:
-    opages.append(fixpage(ipages.pop(), ipages.pop(0)))
-    opages.append(fixpage(ipages.pop(0), ipages.pop()))
-
-opages += ipages
-"""
-
-
