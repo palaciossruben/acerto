@@ -39,8 +39,8 @@ msgid "Sure!"
 msgstr "Enviar!"
 
 #: beta_invite/templates/beta_invite/success.html:80
-msgid "Thanks for registering we will contact you soon!!!"
-msgstr "¡¡¡Gracias por registrarte nos pondremos en contacto pronto!!!"
+msgid "Thanks for registering, we will contact you soon!!!"
+msgstr "¡¡¡Gracias por registrarte, nos pondremos en contacto pronto!!!"
 
 #: beta_invite/views.py:64 beta_invite_long_form/views.py:50
 msgid "Discover your true passion"
