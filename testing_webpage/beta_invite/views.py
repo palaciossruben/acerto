@@ -105,7 +105,8 @@ def inner_index(request, is_user_site):
                                                        'missing_name_alert': _("Missing name."),
                                                        'missing_email_alert': _("Missing email."),
                                                        'invalid_email_alert': _("Make sure you include a valid email."),
-                                                       'missing_curriculum': _("Please upload a curriculum")})
+                                                       'missing_curriculum': _("Please upload a curriculum"),
+                                                       'upload_curriculum': _("Upload your resume")})
 
 
 def index(request):
