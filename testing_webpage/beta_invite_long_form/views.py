@@ -6,6 +6,7 @@ from django.shortcuts import render
 from beta_invite.models import User, Visitor, Profession, EducationLevel, Country
 from ipware.ip import get_ip
 from beta_invite_long_form import constants as cts
+from beta_invite import constants as beta_invite_cts
 
 
 # TODO: Localization a las patadas
@@ -90,15 +91,6 @@ def index(request):
     #        'error_message': _("Cannot send confirmation email, please check it."),
     #        })
 
-    return render(request, cts.BETA_INVITE_LONG_FORM_VIEW_PATH, {'successful_message': _("Successful submission :)"),
-                                                                 'main_message': main_message,
-                                                                 'secondary_message': secondary_message,
-                                                                 'action_url': action_url,
-                                                                 'missing_name_alert': _("Missing name."),
-                                                                 'missing_email_alert': _("Missing email."),
-                                                                 'invalid_email_alert': _("Make sure you include a valid email."),
-                                                                 'missing_curriculum': _("Please upload a curriculum"),
-                                                                 'upload_curriculum': _("Upload your resume"),
-                                                                 'professions': professions,
-                                                                 'countries': countries,
-                                                                 'education_levels': education_levels})
+    return render(request, beta_invite_cts.SUCCESS_VIEW_PATH, {'main_message': main_message,
+                                                               'secondary_message': secondary_message,
+                                                               })
