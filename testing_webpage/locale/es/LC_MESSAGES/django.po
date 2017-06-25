@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-24 21:18+0000\n"
+"POT-Creation-Date: 2017-06-25 06:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,74 +19,79 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: beta_invite/templates/beta_invite/index.html:80
-#: beta_invite_long_form/templates/beta_invite_long_form/index.html:105
+#: beta_invite_long_form/templates/beta_invite_long_form/index.html:80
 msgid "Subscribe"
 msgstr "Suscríbete"
 
 #: beta_invite/templates/beta_invite/index.html:92
-#: beta_invite_long_form/templates/beta_invite_long_form/index.html:116
+#: beta_invite_long_form/templates/beta_invite_long_form/index.html:92
 msgid "Your Full Name"
 msgstr "Tu Nombre Completo"
 
-#: beta_invite/templates/beta_invite/index.html:108
-#: beta_invite_long_form/templates/beta_invite_long_form/index.html:124
+#: beta_invite/templates/beta_invite/index.html:99
+#: beta_invite_long_form/templates/beta_invite_long_form/index.html:99
 msgid "Your email"
 msgstr "Tu correo"
 
-#: beta_invite/templates/beta_invite/index.html:113
-#: beta_invite_long_form/templates/beta_invite_long_form/index.html:127
+#: beta_invite/templates/beta_invite/index.html:117
+#: beta_invite_long_form/templates/beta_invite_long_form/index.html:147
 msgid "Sure!"
 msgstr "Enviar!"
 
-#: beta_invite/views.py:76
+#: beta_invite/templates/beta_invite/success.html:80
+msgid "Thanks for registering we will contact you soon!!!"
+msgstr "¡¡¡Gracias por registrarte nos pondremos en contacto pronto!!!"
+
+#: beta_invite/views.py:64 beta_invite_long_form/views.py:50
 msgid "Discover your true passion"
 msgstr "Descubre tu verdadera pasión"
 
-#: beta_invite/views.py:77
+#: beta_invite/views.py:65 beta_invite_long_form/views.py:51
 msgid "We search millions of jobs and find the right one for you"
 msgstr ""
 "Buscamos entre millones de trabajos y encontramos el trabajo perfecto para ti"
 
-#: beta_invite/views.py:80
+#: beta_invite/views.py:68
 msgid "Discover amazing people"
 msgstr "Descubre personas increibles"
 
-#: beta_invite/views.py:81
+#: beta_invite/views.py:69
 msgid ""
 "We search millions of profiles and find the ones that best suit your business"
 msgstr ""
 "Buscamos millones de perfiles y encontramos los que mejor se adaptan a tu "
 "negocio"
 
-#: beta_invite/views.py:95 beta_invite/views.py:117
+#: beta_invite/views.py:83 beta_invite/views.py:105
+#: beta_invite_long_form/views.py:72 beta_invite_long_form/views.py:97
 msgid "Missing name."
 msgstr "Falta el nombre"
 
-#: beta_invite/views.py:96 beta_invite/views.py:118
+#: beta_invite/views.py:84 beta_invite/views.py:106
+#: beta_invite_long_form/views.py:73 beta_invite_long_form/views.py:98
 msgid "Missing email."
 msgstr "Falta el correo"
 
-#: beta_invite/views.py:97 beta_invite/views.py:119
+#: beta_invite/views.py:85 beta_invite/views.py:107
+#: beta_invite_long_form/views.py:74 beta_invite_long_form/views.py:99
 msgid "Make sure you include a valid email."
 msgstr "Asegúrate de incluir un correo electrónico válido"
 
-#: beta_invite/views.py:98 beta_invite/views.py:120
+#: beta_invite/views.py:86 beta_invite/views.py:108
+#: beta_invite_long_form/views.py:75 beta_invite_long_form/views.py:100
 msgid "Please upload a curriculum"
 msgstr "Porfavor sube tu curriculum"
 
-#: beta_invite/views.py:99
+#: beta_invite/views.py:87 beta_invite/views.py:109
+#: beta_invite_long_form/views.py:76 beta_invite_long_form/views.py:101
 msgid "Upload your resume"
 msgstr "Sube tu curriculum"
 
-#: beta_invite/views.py:113
-msgid "Successful submission :)"
-msgstr "Envio exitoso :)"
-
-#: testing_webpage/shared_settings.py:120
+#: testing_webpage/shared_settings.py:119
 msgid "English"
 msgstr "Ingles"
 
-#: testing_webpage/shared_settings.py:121
+#: testing_webpage/shared_settings.py:120
 msgid "Spanish"
 msgstr "Español"
 
