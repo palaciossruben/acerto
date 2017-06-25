@@ -27,6 +27,8 @@ def index(request):
     profession_id = request.POST.get('profession')
     education_level_id = request.POST.get('education_level')
     country_id = request.POST.get('country')
+    experience = request.POST.get('experience')
+    age = request.POST.get('age')
 
     profession = None
     if profession_id is not None:
@@ -40,6 +42,8 @@ def index(request):
                     profession=profession,
                     education_level=education_level,
                     country=country,
+                    experience=experience,
+                    age=age,
                     ip=ip,
                     ui_version=cts.UI_VERSION)
     else:
@@ -52,13 +56,13 @@ def index(request):
     secondary_message = _("We search millions of jobs and find the right one for you")
     action_url = '/beta_invite_long_form/'
 
-    languague_code = request.LANGUAGE_CODE
+    language_code = request.LANGUAGE_CODE
 
     professions = Profession.objects.all()
-    translate_list_of_objects(professions, languague_code)
+    translate_list_of_objects(professions, language_code)
 
     education_levels = EducationLevel.objects.all()
-    translate_list_of_objects(education_levels, languague_code)
+    translate_list_of_objects(education_levels, language_code)
 
     countries = Country.objects.all()
 
@@ -70,11 +74,6 @@ def index(request):
         return render(request, cts.BETA_INVITE_LONG_FORM_VIEW_PATH, {'main_message': main_message,
                                                                      'secondary_message': secondary_message,
                                                                      'action_url': action_url,
-                                                                     'missing_name_alert': _("Missing name."),
-                                                                     'missing_email_alert': _("Missing email."),
-                                                                     'invalid_email_alert': _("Make sure you include a valid email."),
-                                                                     'missing_curriculum': _("Please upload a curriculum"),
-                                                                     'upload_curriculum': _("Upload your resume"),
                                                                      'professions': professions,
                                                                      'countries': countries,
                                                                      'education_levels': education_levels})
