@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-25 09:10+0000\n"
+"POT-Creation-Date: 2017-06-26 18:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,34 +18,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: beta_invite/templates/beta_invite/index.html:80
-#: beta_invite_long_form/templates/beta_invite_long_form/index.html:80
+#: beta_invite/templates/beta_invite/index.html:77
+#: beta_invite_long_form/templates/beta_invite_long_form/index.html:77
 msgid "Subscribe"
 msgstr "Suscríbete"
 
-#: beta_invite/templates/beta_invite/index.html:90
-#: beta_invite_long_form/templates/beta_invite_long_form/index.html:90
+#: beta_invite/templates/beta_invite/index.html:87
+#: beta_invite_long_form/templates/beta_invite_long_form/index.html:87
 msgid "Your Full Name"
 msgstr "Tu Nombre Completo"
 
-#: beta_invite/templates/beta_invite/index.html:97
-#: beta_invite_long_form/templates/beta_invite_long_form/index.html:97
+#: beta_invite/templates/beta_invite/index.html:94
+#: beta_invite_long_form/templates/beta_invite_long_form/index.html:94
 msgid "Your email"
 msgstr "Tu correo"
 
-#: beta_invite/templates/beta_invite/index.html:106
-#: beta_invite_long_form/templates/beta_invite_long_form/index.html:136
+#: beta_invite/templates/beta_invite/index.html:103
+#: beta_invite_long_form/templates/beta_invite_long_form/index.html:133
 msgid "Upload your resume"
 msgstr "Sube tu curriculum"
 
-#: beta_invite/templates/beta_invite/index.html:116
-#: beta_invite_long_form/templates/beta_invite_long_form/index.html:162
+#: beta_invite/templates/beta_invite/index.html:113
+#: beta_invite_long_form/templates/beta_invite_long_form/index.html:159
 msgid "Sure!"
 msgstr "Enviar!"
 
 #: beta_invite/templates/beta_invite/success.html:80
 msgid "Thanks for registering, we will contact you soon!!!"
 msgstr "¡¡¡Gracias por registrarte, nos pondremos en contacto pronto!!!"
+
+#: beta_invite/util/email_sender.py:42
+msgid "Welcome to PeakU"
+msgstr "Bienvenido a PeakU"
 
 #: beta_invite/views.py:69 beta_invite_long_form/views.py:55
 msgid "Discover your true passion"
@@ -67,11 +71,11 @@ msgstr ""
 "Buscamos millones de perfiles y encontramos los que mejor se adaptan a tu "
 "negocio"
 
-#: beta_invite_long_form/templates/beta_invite_long_form/index.html:147
+#: beta_invite_long_form/templates/beta_invite_long_form/index.html:144
 msgid "Experience in years:"
 msgstr "Experiencia en años:"
 
-#: beta_invite_long_form/templates/beta_invite_long_form/index.html:155
+#: beta_invite_long_form/templates/beta_invite_long_form/index.html:152
 msgid "Age in years:"
 msgstr "Edad en años:"
 
