@@ -13,7 +13,7 @@
 	  <meta name="google-site-verification" content="tR13zEizNHyoMXQ0j8F1ImD0Xe3FdWFHUq-ksIKUscE" />
 
       <title>PeakU</title>
-      
+
       <!-- ============ GOOGLE FONTS ============ -->
       <link href='http://fonts.googleapis.com/css?family=Raleway:100,200,300,400,700,900' rel='stylesheet' type='text/css'>
       <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
@@ -31,7 +31,7 @@
 
       <!-- Custom styles CSS -->
 	  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-      
+
       <!-- Favicons -->
       <link rel="apple-touch-icon" sizes="57x57" href="{% static 'beta_invite/favicon.ico/apple-icon-57x57.png' %}">
 	  <link rel="apple-touch-icon" sizes="60x60" href="{% static 'beta_invite/favicon.ico/apple-icon-60x60.png' %}">
@@ -96,23 +96,11 @@
 				 border:solid 1px #F8E676; background-color:white; width: 250px;" id="email" type="email" name="email"
 				  placeholder="{{ email_placeholder }}" required="required">
 
-				  <br>
-
-				  <div style="margin-top:10px;">
-					  <p style="font-size:18px;  margin-bottom:-10px; color:#F8E676;">
-						 {% trans "Upload your resume" %}
-					  </p>
-
-					  <!--TODO: improve button styling to be like other inputs with: border:solid 1px #F8E676; background-color:white; -->
-					  <input style="font-family:Raleway; width: 250px; height: 30px; font-size: 14px;" type="file"
-					   name="curriculum" id="curriculum" required="required">
-				  </div>
-
 				<br>
 
 				{% trans "Sure!" as submit_value %}
 				<input style="height: 44px; border: solid 0px white; background:#F8E676; color:black; text-align:center;
-				 width: 81px; font-size: 16px; width: 266px; margin-bottom:40px;" type="submit" value="{{ submit_value }}">
+				 width: 81px; font-size: 16px; width: 266px; margin-bottom:40px; margin-top:15px;" type="submit" value="{{ submit_value }}">
 
 			  </form>
 
@@ -156,21 +144,21 @@
     -->
 </script>
    <style>
-   	
+
 	@media (max-width: 768px) {
 		.enteremail{ width:100% !important;}
 		.logo img{ width:250px;}
 		.title{ margin-top:-80px !important;}
 		.title p{ font-size:14px !important;}
 	}
-	
+
 	@media (max-width: 640px) {
 		.enteremail{ width:100% !important;}
 		.logo img{ width:250px;}
 		.title{ margin-top:-80px !important;}
 		.title p{ font-size:14px !important;}
 	}
-	
+
 	@media (max-width: 480px) {
 		.enteremail{ width:100% !important;}
 		.logo img{ width:180px; margin-top:20px;}
