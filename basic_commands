@@ -210,3 +210,7 @@ environment = {production, development}
 
 -- Run Django Fixtures (Load data into database, and/or rewrite)
 python3 manage.py loaddata <my_json>.json
+
+
+-- get requirements of project with:
+PYENV_VERSION=3.5.1 pipreqs testing_webpage/ --force
