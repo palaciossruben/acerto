@@ -77,3 +77,4 @@ i ============================================================================
 data-tested-s3-reporting-extract/
 .swp
 testing_webpage/subscribe/resumes/*/pdf_images
+testing_webpage/beta_invite/util/email_credentials.json
