@@ -91,13 +91,11 @@ def inner_index(request, is_user_site):
 
     save_curriculum_from_request(request, user)
 
-    # TODO: test santiago@peaku.co with new password.
+    # TODO: pay the monthly fee
     #try:
-    #    email_sender.send(user)
+    #    email_sender.send(user, request.LANGUAGE_CODE)
     #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
-    #    return render(request, cts.BETA_INVITE_VIEW_PATH, {
-    #        'error_message': _("Cannot send confirmation email, please check it."),
-    #        })
+    #    pass
 
     return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': main_message,
                                                    'secondary_message': secondary_message,
