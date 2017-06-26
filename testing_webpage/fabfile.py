@@ -31,6 +31,15 @@ def deploy():
             # download latest changes to repo.
             run('git pull origin master')
 
+            # install any missing python package
+            run('sudo pip3 install pipreqs')  # First install pipreqs if missing
+            run('PYENV_VERSION=3.5.2 pipreqs testing_webpage/../ --force')  # pipreqs updates requirements.txt
+
+            try:
+                run('sudo pip3 install -r requirements.txt')  # install packages if missing
+            except:  # shitty pdfminer
+                pass
+
             # collect static files, then restart nginx.
             run('python3 manage.py collectstatic -v0 --noinput')
             run('sudo /etc/init.d/nginx restart')
