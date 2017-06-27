@@ -43,7 +43,7 @@ def save_curriculum_from_request(request, user):
         fs.save(file_path, curriculum_file)
 
 
-def inner_index(request, is_user_site):
+def index(request):
     """
     This view works for both user and business versions. It is displayed on 3 different urls: peaku.co, /business,
     /beta_invite
@@ -54,34 +54,18 @@ def inner_index(request, is_user_site):
 
     ip = get_ip(request)
 
-    if is_user_site:
-        user = User(name=request.POST.get('name'),
-                    email=request.POST.get('email'),
-                    ip=ip,
-                    ui_version=cts.UI_VERSION)
-    else:
-        user = business.models.User(name=request.POST.get('name'),
-                                    email=request.POST.get('email'),
-                                    ip=ip,
-                                    ui_version=cts.UI_VERSION)
+    user = User(name=request.POST.get('name'),
+                email=request.POST.get('email'),
+                ip=ip,
+                ui_version=cts.UI_VERSION)
 
-    if is_user_site:  # user site
-        main_message = _("Discover your true passion")
-        secondary_message = _("We search millions of jobs and find the right one for you")
-        action_url = '/beta_invite/'
-    else:  # business site
-        main_message = _("Discover amazing people")
-        secondary_message = _("We search millions of profiles and find the ones that best suit your business")
-        action_url = '/business/'
+    main_message = _("Discover your true passion")
+    secondary_message = _("We search millions of jobs and find the right one for you")
+    action_url = '/beta_invite/'
 
     # first time loading
     if user.name is None or user.email is None:
-
-        if is_user_site:
-            Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
-        else:
-            business.models.Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
-
+        Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
         return render(request, cts.BETA_INVITE_VIEW_PATH, {'main_message': main_message,
                                                            'secondary_message': secondary_message,
                                                            'action_url': action_url,
@@ -100,7 +84,3 @@ def inner_index(request, is_user_site):
     return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': main_message,
                                                    'secondary_message': secondary_message,
                                                    })
-
-
-def index(request):
-    return inner_index(request, is_user_site=True)
