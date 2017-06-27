@@ -34,7 +34,6 @@ ALLOWED_HOSTS = ['ec2-52-38-133-146.us-west-2.compute.amazonaws.com',
 INSTALLED_APPS = [
     'beta_invite.apps.BetaInviteConfig',
     'business.apps.BusinessConfig',
-    'beta_invite_long_form.apps.BetaInviteLongFormConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
