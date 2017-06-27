@@ -5,6 +5,7 @@ app_name = 'beta_invite_long_form'
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^post$', views.post_index, name='post_index'),
 ]
 
 
