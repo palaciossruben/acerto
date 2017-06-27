@@ -11,6 +11,9 @@ from beta_invite.util import email_sender
 from ipware.ip import get_ip
 from beta_invite import constants as cts
 
+MAIN_MESSAGE = _("Discover your true passion")
+SECONDARY_MESSAGE = _("We search millions of jobs and find the right one for you")
+
 
 def remove_accents(text):
     return ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
@@ -30,7 +33,6 @@ def save_curriculum_from_request(request, user):
         curriculum_file = request.FILES['curriculum']
         fs = FileSystemStorage()
 
-        # TODO: make this dynamic
         user_id_folder = str(user.id)
         folder = os.path.join('subscribe/resumes', user_id_folder)
 
@@ -48,8 +50,27 @@ def index(request):
     This view works for both user and business versions. It is displayed on 3 different urls: peaku.co, /business,
     /beta_invite
     :param request: can come with args "name" and "email", if not it will load the initial page.
-    :param is_user_site: Boolean indicating the user or business site.
     :return: renders a view.
+    """
+
+    ip = get_ip(request)
+
+    action_url = '/beta_invite/post'
+
+    Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
+    return render(request, cts.BETA_INVITE_VIEW_PATH, {'main_message': MAIN_MESSAGE,
+                                                       'secondary_message': SECONDARY_MESSAGE,
+                                                       'action_url': action_url,
+                                                       })
+
+
+def post_index(request):
+    """
+    Action taken when a form is submitted, comming from index.html
+    Args:
+        request: A request object.
+
+    Returns: saves new User
     """
 
     ip = get_ip(request)
@@ -58,18 +79,6 @@ def index(request):
                 email=request.POST.get('email'),
                 ip=ip,
                 ui_version=cts.UI_VERSION)
-
-    main_message = _("Discover your true passion")
-    secondary_message = _("We search millions of jobs and find the right one for you")
-    action_url = '/beta_invite/'
-
-    # first time loading
-    if user.name is None or user.email is None:
-        Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
-        return render(request, cts.BETA_INVITE_VIEW_PATH, {'main_message': main_message,
-                                                           'secondary_message': secondary_message,
-                                                           'action_url': action_url,
-                                                           })
 
     user.save()
 
@@ -81,6 +90,6 @@ def index(request):
     #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
     #    pass
 
-    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': main_message,
-                                                   'secondary_message': secondary_message,
+    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': MAIN_MESSAGE,
+                                                   'secondary_message': SECONDARY_MESSAGE,
                                                    })
