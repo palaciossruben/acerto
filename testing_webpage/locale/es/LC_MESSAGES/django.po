@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-26 18:35+0000\n"
+"POT-Creation-Date: 2017-06-27 04:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,31 +19,44 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: beta_invite/templates/beta_invite/index.html:77
-#: beta_invite_long_form/templates/beta_invite_long_form/index.html:77
+#: beta_invite/templates/beta_invite/long_form.html:77
+#: business/templates/business/index.html:77
 msgid "Subscribe"
 msgstr "Suscríbete"
 
 #: beta_invite/templates/beta_invite/index.html:87
-#: beta_invite_long_form/templates/beta_invite_long_form/index.html:87
+#: beta_invite/templates/beta_invite/long_form.html:87
+#: business/templates/business/index.html:87
 msgid "Your Full Name"
 msgstr "Tu Nombre Completo"
 
 #: beta_invite/templates/beta_invite/index.html:94
-#: beta_invite_long_form/templates/beta_invite_long_form/index.html:94
+#: beta_invite/templates/beta_invite/long_form.html:94
+#: business/templates/business/index.html:94
 msgid "Your email"
 msgstr "Tu correo"
 
 #: beta_invite/templates/beta_invite/index.html:103
-#: beta_invite_long_form/templates/beta_invite_long_form/index.html:133
+#: beta_invite/templates/beta_invite/long_form.html:133
 msgid "Upload your resume"
 msgstr "Sube tu curriculum"
 
 #: beta_invite/templates/beta_invite/index.html:113
-#: beta_invite_long_form/templates/beta_invite_long_form/index.html:159
+#: beta_invite/templates/beta_invite/long_form.html:159
+#: business/templates/business/index.html:101
 msgid "Sure!"
 msgstr "Enviar!"
 
+#: beta_invite/templates/beta_invite/long_form.html:144
+msgid "Experience in years:"
+msgstr "Experiencia en años:"
+
+#: beta_invite/templates/beta_invite/long_form.html:152
+msgid "Age in years:"
+msgstr "Edad en años:"
+
 #: beta_invite/templates/beta_invite/success.html:80
+#: business/templates/business/success.html:80
 msgid "Thanks for registering, we will contact you soon!!!"
 msgstr "¡¡¡Gracias por registrarte, nos pondremos en contacto pronto!!!"
 
@@ -51,39 +64,31 @@ msgstr "¡¡¡Gracias por registrarte, nos pondremos en contacto pronto!!!"
 msgid "Welcome to PeakU"
 msgstr "Bienvenido a PeakU"
 
-#: beta_invite/views.py:69 beta_invite_long_form/views.py:55
+#: beta_invite/views.py:14
 msgid "Discover your true passion"
 msgstr "Descubre tu verdadera pasión"
 
-#: beta_invite/views.py:70 beta_invite_long_form/views.py:56
+#: beta_invite/views.py:15
 msgid "We search millions of jobs and find the right one for you"
 msgstr ""
 "Buscamos entre millones de trabajos y encontramos el trabajo perfecto para ti"
 
-#: beta_invite/views.py:73
+#: business/views.py:8
 msgid "Discover amazing people"
 msgstr "Descubre personas increibles"
 
-#: beta_invite/views.py:74
+#: business/views.py:9
 msgid ""
 "We search millions of profiles and find the ones that best suit your business"
 msgstr ""
 "Buscamos millones de perfiles y encontramos los que mejor se adaptan a tu "
 "negocio"
 
-#: beta_invite_long_form/templates/beta_invite_long_form/index.html:144
-msgid "Experience in years:"
-msgstr "Experiencia en años:"
-
-#: beta_invite_long_form/templates/beta_invite_long_form/index.html:152
-msgid "Age in years:"
-msgstr "Edad en años:"
-
-#: testing_webpage/shared_settings.py:119
+#: testing_webpage/shared_settings.py:118
 msgid "English"
 msgstr "Ingles"
 
-#: testing_webpage/shared_settings.py:120
+#: testing_webpage/shared_settings.py:119
 msgid "Spanish"
 msgstr "Español"
 
