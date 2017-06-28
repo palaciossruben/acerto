@@ -86,7 +86,7 @@
 
 				<div class="list-group">
 					{% for user in users %}
-						<a style="text-align:left" href="{% static '{{ user.curriculum_url }}' %}" class="list-group-item"><b>name:</b> {{ user.name }} <b>email:</b> {{ user.email }} <b>education_level:</b> {{ user.education_level.name }} <b>experience:</b> {{ user.experience }} years</a>
+						<a style="text-align:left" href="{% static user.curriculum_url %}" class="list-group-item"><b>name:</b> {{ user.name }} <b>email:</b> {{ user.email }} <b>education_level:</b> {{ user.education_level.name }} <b>experience:</b> {{ user.experience }} years</a>
 					{% endfor %}
 				</div>
 			</div>
