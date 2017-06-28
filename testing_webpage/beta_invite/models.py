@@ -67,6 +67,7 @@ class User(models.Model):
     profession = models.ForeignKey(Profession, null=True, on_delete=models.SET_NULL)
     education_level = models.ForeignKey(EducationLevel, null=True, on_delete=models.SET_NULL)
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
+    curriculum_url = models.CharField(max_length=200, default='#')
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
