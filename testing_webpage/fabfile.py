@@ -58,5 +58,8 @@ def deploy():
             if os.path.join(WORKING_PATH, 'gunicorn_pid') in list_dir(WORKING_PATH):
                 run('kill $(cat gunicorn_pid)')
 
+            # While down; migrate:
+            run('python3 manage.py migrate')
+
             # Last step: start gunicorn as a deamon.
             run('PYENV_VERSION=3.5.2 gunicorn -c gunicorn_cfg.py testing_webpage.wsgi')

@@ -136,8 +136,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
-
 STATIC_URL = '/static/'
+STATICFILES_DIRS = ['/subscribe/resumes']
 
 LOGGING = {
     'version': 1,
@@ -158,3 +158,5 @@ LOGGING = {
     },
 }
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
