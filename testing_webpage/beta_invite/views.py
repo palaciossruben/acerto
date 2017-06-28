@@ -78,11 +78,13 @@ def post_index(request):
 
     ip = get_ip(request)
 
-    # Saves here to get a id
     user = User(name=request.POST.get('name'),
                 email=request.POST.get('email'),
                 ip=ip,
-                ui_version=cts.UI_VERSION).save()
+                ui_version=cts.UI_VERSION)
+
+    # Saves here to get an id
+    user.save()
 
     user.curriculum_url = save_curriculum_from_request(request, user)
 
@@ -174,6 +176,8 @@ def post_long_form(request):
                 ip=ip,
                 ui_version=cts.UI_VERSION)
 
+    # Saves here to get an id
+    user.save()
     user.curriculum_url = save_curriculum_from_request(request, user)
     user.save()
 
