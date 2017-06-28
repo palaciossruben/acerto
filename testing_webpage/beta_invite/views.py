@@ -45,7 +45,7 @@ def save_curriculum_from_request(request, user):
         filename = fs.save(file_path, curriculum_file)
 
         # at last saves the curriculum url
-        return os.path.join('resumes', os.path.basename(filename))
+        return os.path.join('resumes', str(user.id), os.path.basename(filename))
 
 
 def index(request):
