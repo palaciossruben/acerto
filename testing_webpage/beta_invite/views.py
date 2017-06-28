@@ -11,8 +11,8 @@ from beta_invite.util import email_sender
 from ipware.ip import get_ip
 from beta_invite import constants as cts
 
-MAIN_MESSAGE = _("Discover your true passion")
-SECONDARY_MESSAGE = _("We search millions of jobs and find the right one for you")
+MAIN_MESSAGE = "Discover your true passion"
+SECONDARY_MESSAGE = "We search millions of jobs and find the right one for you"
 
 
 def remove_accents(text):
@@ -24,7 +24,7 @@ def save_curriculum_from_request(request, user):
     Saves file on machine resumes/* file system
     Args:
         request: HTTP request
-    Returns: None, just saves file.
+    Returns: file url or None if nothing is saves.
     """
 
     # validate correct method and has file.
@@ -42,7 +42,10 @@ def save_curriculum_from_request(request, user):
 
         file_path = os.path.join(folder, remove_accents(curriculum_file.name))
 
-        fs.save(file_path, curriculum_file)
+        filename = fs.save(file_path, curriculum_file)
+
+        # at last saves the curriculum url
+        return fs.url(filename)
 
 
 def index(request):
@@ -58,8 +61,8 @@ def index(request):
     action_url = '/beta_invite/post'
 
     Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
-    return render(request, cts.BETA_INVITE_VIEW_PATH, {'main_message': MAIN_MESSAGE,
-                                                       'secondary_message': SECONDARY_MESSAGE,
+    return render(request, cts.BETA_INVITE_VIEW_PATH, {'main_message': _(MAIN_MESSAGE),
+                                                       'secondary_message': _(SECONDARY_MESSAGE),
                                                        'action_url': action_url,
                                                        })
 
@@ -80,9 +83,9 @@ def post_index(request):
                 ip=ip,
                 ui_version=cts.UI_VERSION)
 
-    user.save()
+    user.curriculum_url = save_curriculum_from_request(request, user)
 
-    save_curriculum_from_request(request, user)
+    user.save()
 
     # TODO: pay the monthly fee
     #try:
@@ -90,8 +93,8 @@ def post_index(request):
     #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
     #    pass
 
-    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': MAIN_MESSAGE,
-                                                   'secondary_message': SECONDARY_MESSAGE,
+    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _(MAIN_MESSAGE),
+                                                   'secondary_message': _(SECONDARY_MESSAGE),
                                                    })
 
 
@@ -103,14 +106,13 @@ def translate_list_of_objects(objects, languague_code):
             o.name = o.name_es
 
 
-def long_form(request):
+def get_drop_down_values(language_code):
     """
-    will render and have the same view as /beta_invite except for message customization.
+    Gets lists of drop down values for several different fields.
+    Args:
+        language_code: 2 digit code (eg. 'es')
+    Returns: A tuple containing (Countries, EducationLevels, Profesions)
     """
-
-    ip = get_ip(request)
-    action_url = '/beta_invite/long_form/post'
-    language_code = request.LANGUAGE_CODE
 
     professions = Profession.objects.all()
     translate_list_of_objects(professions, language_code)
@@ -120,14 +122,27 @@ def long_form(request):
 
     countries = Country.objects.all()
 
+    return countries, education_levels, professions
+
+
+def long_form(request):
+    """
+    will render and have the same view as /beta_invite except for message customization.
+    """
+
+    ip = get_ip(request)
+    action_url = '/beta_invite/long_form/post'
+    countries, education_levels, professions = get_drop_down_values(request.LANGUAGE_CODE)
+
     Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
 
-    return render(request, cts.LONG_FORM_VIEW_PATH, {'main_message': MAIN_MESSAGE,
-                                                     'secondary_message': SECONDARY_MESSAGE,
+    return render(request, cts.LONG_FORM_VIEW_PATH, {'main_message': _(MAIN_MESSAGE),
+                                                     'secondary_message': _(SECONDARY_MESSAGE),
                                                      'action_url': action_url,
-                                                     'professions': professions,
                                                      'countries': countries,
-                                                     'education_levels': education_levels})
+                                                     'education_levels': education_levels,
+                                                     'professions': professions,
+                                                     })
 
 
 def post_long_form(request):
@@ -158,9 +173,8 @@ def post_long_form(request):
                 ip=ip,
                 ui_version=cts.UI_VERSION)
 
+    user.curriculum_url = save_curriculum_from_request(request, user)
     user.save()
-
-    save_curriculum_from_request(request, user)
 
     # TODO: missing santiago@peaku.co credentials.
     #try:
@@ -168,6 +182,6 @@ def post_long_form(request):
     #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
     #    pass
 
-    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': MAIN_MESSAGE,
-                                                   'secondary_message': SECONDARY_MESSAGE,
+    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _(MAIN_MESSAGE),
+                                                   'secondary_message': _(SECONDARY_MESSAGE),
                                                    })

@@ -26,6 +26,9 @@
       <!-- CSS -->
       <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
 
+      <!-- Bootstrap -->
+      <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+
       <!-- Font Awesome CSS -->
 	  <link rel="stylesheet" type="text/css" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
 
@@ -74,95 +77,20 @@
 		 <div class="container" style="margin-top:5px;">
 		   <span data-sr="wait 0.5s, then enter top and move 40px over 1s" style="color:#134984; font-size:25px;">
 				<span style=" font-weight:500; color:#F8E676;">
-					<b style="font-weight:400; text-transform: uppercase;">{% trans "Subscribe" %}</b>
+					<b style="font-weight:400; text-transform: uppercase;">{% trans "Download curriculums of matching profiles" %}</b>
 				</span>
 		   </span>
-			<div class="subscribe" data-sr="wait 0.5s, then enter bottom and move 40px over 1s" style="margin-top:-25px;">
 
-			  <form action="{{ action_url }}" method="post" style="text-align:center; margin-top:0px;"
-			   enctype="multipart/form-data">
+			<!--Table of Profiles-->
+			<div class="container">
 
-				{% csrf_token %}
-
-				{% trans "Your Full Name" as name_placeholder %}
-				<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:0px;
-				 border:solid 1px #F8E676; background-color:white; width: 250px;" id="name" type="text" name="name"
-				  placeholder="{{ name_placeholder }}" required="required" pattern="[A-Za-z]{1,20}">
-
-				<br>
-
-				 {% trans "Your email" as email_placeholder %}
-				<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:15px;
-				 border:solid 1px #F8E676; background-color:white; width: 250px;" id="email" type="email" name="email"
-				  placeholder="{{ email_placeholder }}" required="required">
-
-				  <br>
-
-				  <select style=" width: 266px; font-size: 14px; height: 44px; border:solid 1px #F8E676; background-color:white;
-				  margin-top:15px;"
-				   name="country">
-					  {% for country in countries%}
-						 <option value={{ country.id }}>{{ country.name }}</option>
-					  {% endfor %}
-				  </select>
-
-				  <br>
-
-				  <select style=" width: 266px; font-size: 14px; height: 44px; border:solid 1px #F8E676; background-color:white;
-				  margin-top:15px;"
-				   name="education_level">
-					  {% for level in education_levels%}
-						 <option value={{ level.id }}>{{ level.name }}</option>
-					  {% endfor %}
-				  </select>
-
-				  <br>
-
-				  <select style=" width: 266px; font-size: 14px; height: 44px; border:solid 1px #F8E676; background-color:white;
-				  margin-top:15px;"
-				   name="profession">
-					  {% for profession in professions%}
-						 <option value={{ profession.id }}>{{ profession.name }}</option>
-					  {% endfor %}
-				  </select>
-
-				  <br>
-
-				  <div style="margin-top:0px;">
-					  <p style="font-size:18px; margin-bottom:-10px; color:#F8E676;">
-						 {% trans "Upload your resume" %}
-					  </p>
-
-					  <!--TODO: improve button styling to be like other inputs with: border:solid 1px #F8E676; background-color:white; -->
-					  <input style="font-family:Raleway; height: 30px; font-size: 14px;" type="file" name="curriculum"
-					   id="curriculum" required="required">
-				  </div>
-
-				  <br>
-
-				  <div style="margin-top:-10px;">
-					  <label style="font-size:18px;  margin-bottom:0px; color:#F8E676;">{% trans "Experience in years:" %}</label>
-					  <input style="width: 50px; font-size: 14px; height: 30px;" name="experience" id="experience"
-					   type="number" value="0" min="0" max="60" />
-				  </div>
-
-				  <br>
-
-				  <div style="margin-top:-5px;">
-					  <label style="font-size:18px;  margin-bottom:-10px; color:#F8E676;">{% trans "Age in years:" %}</label>
-					  <input style="width: 50px; font-size: 14px; height: 30px;" name="age" id="age"
-					   type="number" value="25" min="16" max="100" />
-				  </div>
-
-				<br>
-
-				{% trans "Sure!" as submit_value %}
-				<input style="height: 44px; border: solid 0px white; background:#F8E676; color:black; text-align:center;
-				 width: 81px; font-size: 16px; width: 250px; margin-bottom:40px; margin-top:5px;" type="submit" value="{{ submit_value }}">
-
-			  </form>
-
+				<div class="list-group">
+					{% for user in users %}
+						<a style="text-align:left" href="{{ user.curriculum_url }}" class="list-group-item"><b>name:</b> {{ user.name }} <b>email:</b> {{ user.email }} <b>education_level:</b> {{ user.education_level.name }} <b>experience:</b> {{ user.experience }} years</a>
+					{% endfor %}
+				</div>
 			</div>
+
 		  </div>
 		  <br/>
 
