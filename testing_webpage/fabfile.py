@@ -48,18 +48,18 @@ def deploy():
             # updates translations to spanish
             run('python3 manage.py compilemessages -l es')
 
-            # reload fixtures: Will overwrite tables with DB fixtures.
-            # beta_invite fixtures
-            fixtures = list_dir('beta_invite/fixtures/')
-            for fixture_json in fixtures:
-                run('python3 manage.py loaddata {}'.format(fixture_json))
-
             # stop gunicorn if it is running.
             if os.path.join(WORKING_PATH, 'gunicorn_pid') in list_dir(WORKING_PATH):
                 run('kill $(cat gunicorn_pid)')
 
             # While down; migrate:
             run('python3 manage.py migrate')
+
+            # reload fixtures: Will overwrite tables with DB fixtures.
+            # beta_invite fixtures
+            fixtures = list_dir('beta_invite/fixtures/')
+            for fixture_json in fixtures:
+                run('python3 manage.py loaddata {}'.format(fixture_json))
 
             # Last step: start gunicorn as a deamon.
             run('PYENV_VERSION=3.5.2 gunicorn -c gunicorn_cfg.py testing_webpage.wsgi')
