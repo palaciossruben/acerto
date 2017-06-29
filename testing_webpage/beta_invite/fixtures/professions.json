@@ -157,5 +157,13 @@
     "name": "Various Trades",
     "name_es": "Oficios Varios"
   }
+},
+{
+  "model": "beta_invite.profession",
+  "pk": 21,
+  "fields": {
+    "name": "Other, not specified",
+    "name_es": "Otra, Sin Especificar"
+  }
 }
 ]

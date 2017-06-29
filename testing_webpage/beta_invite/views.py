@@ -104,6 +104,13 @@ def translate_list_of_objects(objects, language_code):
             o.name = o.name_es
 
 
+def get_name_field(language_code):
+    if language_code not in 'en':
+        return 'name_' + language_code
+    else:
+        return 'name'
+
+
 def get_drop_down_values(language_code):
     """
     Gets lists of drop down values for several different fields.
@@ -112,16 +119,16 @@ def get_drop_down_values(language_code):
     Returns: A tuple containing (Countries, Education, Professions)
     """
 
-    professions = Profession.objects.all()
+    professions = Profession.objects.all().order_by(get_name_field(language_code))
     translate_list_of_objects(professions, language_code)
-    professions.sort(key=lambda x: x.name)
+    #sorted(professions, key=lambda x: x.name)
 
-    education = Education.objects.all()
+    education = Education.objects.all().order_by('level')
     translate_list_of_objects(education, language_code)
-    education.sort(key=lambda x: x.level)
+    #sorted(education, key=lambda x: x.level)
 
-    countries = Country.objects.all()
-    countries.sort(key=lambda x: x.name)
+    countries = Country.objects.all().order_by('name')
+    #sorted(countries, key=lambda x: x.name)
 
     return countries, education, professions
 
