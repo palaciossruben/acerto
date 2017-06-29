@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-29 02:04+0000\n"
+"POT-Creation-Date: 2017-06-29 15:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,6 +97,10 @@ msgstr "Busca Curriculums en Nuestra Base de Datos"
 msgid "Search"
 msgstr "Buscar"
 
+#: business/views.py:26
+msgid "Discover amazing people"
+msgstr "Descubre personas increibles"
+
 #: testing_webpage/shared_settings.py:118
 msgid "English"
 msgstr "Ingles"
@@ -115,9 +119,6 @@ msgstr "Español"
 #~ msgstr ""
 #~ "Buscamos entre millones de trabajos y encontramos el trabajo perfecto "
 #~ "para ti"
-
-#~ msgid "Discover amazing people"
-#~ msgstr "Descubre personas increibles"
 
 #~ msgid ""
 #~ "We search millions of profiles and find the ones that best suit your "
