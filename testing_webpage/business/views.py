@@ -1,6 +1,6 @@
 from ipware.ip import get_ip
 from django.shortcuts import render
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 import business
 import beta_invite
