@@ -31,7 +31,7 @@
     "model": "beta_invite.country",
     "pk": 5,
     "fields": {
-      "name": "Mexico"
+      "name": "México"
     }
   },
   {
