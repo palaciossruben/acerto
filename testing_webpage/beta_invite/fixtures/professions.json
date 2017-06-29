@@ -3,7 +3,7 @@
   "pk": 1,
   "fields":{
     "name": "Designer",
-    "name_es": "Diseñador"
+    "name_es": "Diseñador/a"
   }
 },
 {
@@ -11,7 +11,7 @@
   "pk": 2,
   "fields":{
     "name": "Civil Engineer",
-    "name_es": "Ingeniero Civil"
+    "name_es": "Ingeniero/a Civil"
   }
 },
 {
@@ -19,7 +19,7 @@
   "pk": 3,
   "fields":{
     "name": "Mechanical Engineer",
-    "name_es": "Ingeniero Mecánico"
+    "name_es": "Ingeniero/a Mecánico"
   }
 },
 {
@@ -27,7 +27,7 @@
   "pk": 4,
   "fields":{
     "name": "IT Engineer",
-    "name_es": "Ingeniero IT"
+    "name_es": "Ingeniero/a IT"
   }
 },
 {
@@ -35,7 +35,7 @@
   "pk": 5,
   "fields":{
     "name": "Chemical Engineer",
-    "name_es": "Ingeniero Químico"
+    "name_es": "Ingeniero/a Químico"
   }
 },
 {
@@ -43,7 +43,7 @@
   "pk": 6,
   "fields":{
     "name": "Electrical Engineer",
-    "name_es": "Ingeniero Eléctrico"
+    "name_es": "Ingeniero/a Eléctrico"
   }
 },
 {
@@ -59,7 +59,7 @@
   "pk": 8,
   "fields":{
     "name": "Architect",
-    "name_es": "Arquitecto"
+    "name_es": "Arquitecto/a"
   }
 },
 {
@@ -75,7 +75,7 @@
   "pk": 10,
   "fields":{
     "name": "Scientist",
-    "name_es": "Científico"
+    "name_es": "Científico/a"
   }
 },
 {
@@ -107,7 +107,7 @@
   "pk": 14,
   "fields":{
     "name": "Psychologist",
-    "name_es": "Psícologo"
+    "name_es": "Psícologo/a"
   }
 },
 {
@@ -115,7 +115,7 @@
   "pk": 15,
   "fields":{
     "name": "Communicator",
-    "name_es": "Comunicador"
+    "name_es": "Comunicador/a"
   }
 },
 {
@@ -123,15 +123,15 @@
   "pk": 16,
   "fields":{
     "name": "Lawyer",
-    "name_es": "Abogado"
+    "name_es": "Abogado/a"
   }
 },
 {
   "model": "beta_invite.profession",
   "pk": 17,
   "fields":{
-    "name": "Political Expert",
-    "name_es": "Politólogo"
+    "name": "Government or Political Science",
+    "name_es": "Gobierno ó Ciencias Políticas"
   }
 },
 {

@@ -12,8 +12,8 @@
   "model": "beta_invite.education",
   "pk": 2,
   "fields":{
-    "name": "Technical",
-    "name_es": "Técnico",
+    "name": "Technician or studying a professional degree",
+    "name_es": "Técnico ó cursando grado profesional",
     "level": 1
   }
 },
