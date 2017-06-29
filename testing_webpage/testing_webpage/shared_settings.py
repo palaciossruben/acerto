@@ -137,7 +137,7 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [('resumes', 'subscribe/resumes')]
+STATICFILES_DIRS = [('resumes', 'media/resumes')]
 
 LOGGING = {
     'version': 1,
