@@ -1,5 +1,6 @@
 import os
 import smtplib
+import subprocess
 import unicodedata
 from django.core.files.storage import FileSystemStorage
 from django.utils.translation import ugettext as _
@@ -39,6 +40,9 @@ def save_curriculum_from_request(request, user):
         file_path = os.path.join(folder, remove_accents(curriculum_file.name))
 
         fs.save(file_path, curriculum_file)
+
+        # once saved it will collect the file
+        subprocess.call('python3 manage.py collectstatic -v0 --noinput', shell=True)
 
         # at last returns the curriculum url
         return file_path
