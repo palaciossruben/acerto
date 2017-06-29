@@ -69,7 +69,7 @@
         <a class="scroll logo" style="font-family:CANDARA; font-size:65px; color:black;
          margin-bottom:-50px;"> <img src="{% static 'beta_invite/logo.png' %}" width="370px" ></a>
 
-		  <h1 style="font-size:35px; margin-top:10px; color:#F8E676; ">{{ main_message }}</h1>
+		  <h1 style="font-size:35px; margin-top:30px; color:#F8E676; ">{{ main_message }}</h1>
         <p style="font-size:18px; margin-top:-10px;  color:#F8E676;">
 			{{ secondary_message }}
 		</p>
@@ -86,7 +86,7 @@
 
 				<div class="list-group">
 					{% for user in users %}
-						<a style="text-align:left" href="{% static user.curriculum_url %}" class="list-group-item"><b>{% trans "Name" %}:</b> {{ user.name }} <b>{% trans "Email" %}:</b> {{ user.email }} <b>{% trans "Education level" %}:</b> {{ user.education_level.name }} <b>{% trans "Experience" %}:</b> {{ user.experience }} {% trans years %}</a>
+						<a style="text-align:left" href="{% static user.curriculum_url %}" class="list-group-item"><b>{% trans "Name" %}:</b> {{ user.name }} <b>{% trans "Email" %}:</b> {{ user.email }} <b>{% trans "Education level" %}:</b> {{ user.education_level.name }} <b>{% trans "Experience" %}:</b> {{ user.experience }} {% trans "years" %}</a>
 					{% endfor %}
 				</div>
 			</div>
