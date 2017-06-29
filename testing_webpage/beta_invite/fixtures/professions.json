@@ -148,6 +148,14 @@
   "fields":{
     "name": "Artist",
     "name_es": "Artista"
+    }
+},
+{
+  "model": "beta_invite.profession",
+  "pk": 20,
+  "fields": {
+    "name": "Various Trades",
+    "name_es": "Oficios Varios"
   }
 }
 ]
