@@ -165,5 +165,13 @@
     "name": "Other, not specified",
     "name_es": "Otra, Sin Especificar"
   }
+},
+{
+  "model": "beta_invite.profession",
+  "pk": 22,
+  "fields": {
+    "name": "Economist",
+    "name_es": "Economista"
+  }
 }
 ]
