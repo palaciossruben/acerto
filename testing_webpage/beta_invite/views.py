@@ -12,9 +12,6 @@ from beta_invite.util import email_sender
 from ipware.ip import get_ip
 from beta_invite import constants as cts
 
-MAIN_MESSAGE = "Discover your true passion"
-SECONDARY_MESSAGE = "We search millions of jobs and find the right one for you"
-
 
 def remove_accents(text):
     return ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
@@ -61,8 +58,8 @@ def index(request):
     action_url = '/beta_invite/post'
 
     Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
-    return render(request, cts.BETA_INVITE_VIEW_PATH, {'main_message': _(MAIN_MESSAGE),
-                                                       'secondary_message': _(SECONDARY_MESSAGE),
+    return render(request, cts.BETA_INVITE_VIEW_PATH, {'main_message': _("Discover amazing people"),
+                                                       'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
                                                        'action_url': action_url,
                                                        })
 
@@ -94,8 +91,8 @@ def post_index(request):
     #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
     #    pass
 
-    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _(MAIN_MESSAGE),
-                                                   'secondary_message': _(SECONDARY_MESSAGE),
+    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover amazing people"),
+                                                   'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
                                                    })
 
 
@@ -137,8 +134,8 @@ def long_form(request):
 
     Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
 
-    return render(request, cts.LONG_FORM_VIEW_PATH, {'main_message': _(MAIN_MESSAGE),
-                                                     'secondary_message': _(SECONDARY_MESSAGE),
+    return render(request, cts.LONG_FORM_VIEW_PATH, {'main_message': _("Discover amazing people"),
+                                                     'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
                                                      'action_url': action_url,
                                                      'countries': countries,
                                                      'education_levels': education_levels,
@@ -185,6 +182,6 @@ def post_long_form(request):
     #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
     #    pass
 
-    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _(MAIN_MESSAGE),
-                                                   'secondary_message': _(SECONDARY_MESSAGE),
+    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover amazing people"),
+                                                   'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
                                                    })
