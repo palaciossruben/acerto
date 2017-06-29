@@ -110,6 +110,7 @@ def translate_users(users, language_code):
     if 'es' in language_code:
         for u in users:
             u.profession.name = u.profession.name_es
+            u.education.name = u.education.name_es
 
 
 def results(request):
