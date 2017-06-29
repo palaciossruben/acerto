@@ -97,9 +97,9 @@ def post_index(request):
 
 
 # TODO: Localization a las patadas
-def translate_list_of_objects(objects, languague_code):
+def translate_list_of_objects(objects, language_code):
     """Assigns to field name the language specific one."""
-    if 'es' in languague_code:
+    if 'es' in language_code:
         for o in objects:
             o.name = o.name_es
 
