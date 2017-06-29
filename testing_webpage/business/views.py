@@ -23,7 +23,7 @@ def index(request):
     action_url = '/business/post'
 
     business.models.Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
-    return render(request, cts.BUSINESS_VIEW_PATH, {'main_message': _(MAIN_MESSAGE),
+    return render(request, cts.BUSINESS_VIEW_PATH, {'main_message': _("Discover amazing people"),
                                                     'secondary_message': _(SECONDARY_MESSAGE),
                                                     'action_url': action_url,
                                                     })
