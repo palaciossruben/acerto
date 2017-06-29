@@ -109,16 +109,19 @@ def get_drop_down_values(language_code):
     Gets lists of drop down values for several different fields.
     Args:
         language_code: 2 digit code (eg. 'es')
-    Returns: A tuple containing (Countries, Education, Profesions)
+    Returns: A tuple containing (Countries, Education, Professions)
     """
 
     professions = Profession.objects.all()
     translate_list_of_objects(professions, language_code)
+    professions.sort(key=lambda x: x.name)
 
     education = Education.objects.all()
     translate_list_of_objects(education, language_code)
+    education.sort(key=lambda x: x.level)
 
     countries = Country.objects.all()
+    countries.sort(key=lambda x: x.name)
 
     return countries, education, professions
 
