@@ -88,7 +88,7 @@ def get_matching_users(request):
     education_level = Education.objects.get(pk=education_id)
 
     # Get all education levels at or above the object.
-    #education_set = education_level.level
+    education_set = Education.objects.filter(level__gte=education_level.level)
 
     country_id = request.POST.get('country')
     experience = request.POST.get('experience')
@@ -96,8 +96,8 @@ def get_matching_users(request):
     # TODO: missing education
     return User.objects.filter(country_id=country_id)\
         .filter(profession_id=profession_id)\
-        .filter(experience__gte=experience)#\
-        #.filter(education__in=education_set)
+        .filter(experience__gte=experience)\
+        .filter(education__in=education_set)
 
 
 def results(request):
