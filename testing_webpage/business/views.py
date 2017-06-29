@@ -7,9 +7,6 @@ import beta_invite
 from business import constants as cts
 from beta_invite.models import User, EducationLevel
 
-MAIN_MESSAGE = "Discover amazing people"
-SECONDARY_MESSAGE = "We search millions of profiles and find the ones that best suit your business"
-
 
 def index(request):
     """
@@ -24,7 +21,7 @@ def index(request):
 
     business.models.Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
     return render(request, cts.BUSINESS_VIEW_PATH, {'main_message': _("Discover amazing people"),
-                                                    'secondary_message': _(SECONDARY_MESSAGE),
+                                                    'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
                                                     'action_url': action_url,
                                                     })
 
@@ -50,8 +47,8 @@ def post_index(request):
     #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
     #    pass
 
-    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _(MAIN_MESSAGE),
-                                                   'secondary_message': _(SECONDARY_MESSAGE),
+    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover amazing people"),
+                                                   'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
                                                    })
 
 
@@ -69,8 +66,8 @@ def search(request):
     countries, education_levels, professions = beta_invite.views.get_drop_down_values(request.LANGUAGE_CODE)
 
     business.models.Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
-    return render(request, cts.SEARCH_VIEW_PATH, {'main_message': _(MAIN_MESSAGE),
-                                                  'secondary_message': _(SECONDARY_MESSAGE),
+    return render(request, cts.SEARCH_VIEW_PATH, {'main_message': _("Discover amazing people"),
+                                                  'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
                                                   'action_url': action_url,
                                                   'countries': countries,
                                                   'education_levels': education_levels,
@@ -107,7 +104,7 @@ def results(request):
 
     users = get_matching_users(request)
 
-    return render(request, cts.RESULTS_VIEW_PATH, {'main_message': _(MAIN_MESSAGE),
-                                                   'secondary_message': _(SECONDARY_MESSAGE),
+    return render(request, cts.RESULTS_VIEW_PATH, {'main_message': _("Discover amazing people"),
+                                                   'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
                                                    'users': users,
                                                    })
