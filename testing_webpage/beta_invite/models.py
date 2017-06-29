@@ -30,7 +30,7 @@ class Profession(models.Model):
         db_table = 'professions'
 
 
-class EducationLevel(models.Model):
+class Education(models.Model):
 
     name = models.CharField(max_length=200)
     name_es = models.CharField(max_length=200, null=True)
@@ -41,7 +41,7 @@ class EducationLevel(models.Model):
 
     # adds custom table name
     class Meta:
-        db_table = 'education_levels'
+        db_table = 'education'
 
 
 class Country(models.Model):
@@ -65,7 +65,7 @@ class User(models.Model):
     age = models.IntegerField(null=True)
     experience = models.IntegerField(null=True)
     profession = models.ForeignKey(Profession, null=True, on_delete=models.SET_NULL)
-    education_level = models.ForeignKey(EducationLevel, null=True, on_delete=models.SET_NULL)
+    education = models.ForeignKey(Education, null=True, on_delete=models.SET_NULL)
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
     curriculum_url = models.CharField(max_length=200, default='#')
 

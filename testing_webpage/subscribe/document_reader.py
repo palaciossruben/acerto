@@ -83,5 +83,5 @@ if __name__ == "__main__":
         print('folder {}, summary:'.format(key))
         print(user.country)
         print(user.institutions)
-        print(user.education_level)
+        print(user.education)
         print('age: ' + str(user.age))

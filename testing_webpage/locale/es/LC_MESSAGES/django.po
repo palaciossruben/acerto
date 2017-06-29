@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-29 15:53+0000\n"
+"POT-Creation-Date: 2017-06-29 16:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,13 +67,13 @@ msgstr "Bienvenido a PeakU"
 
 #: beta_invite/views.py:61 beta_invite/views.py:94 beta_invite/views.py:137
 #: beta_invite/views.py:185 business/views.py:23 business/views.py:50
-#: business/views.py:69 business/views.py:107
+#: business/views.py:69 business/views.py:112
 msgid "Discover amazing people"
 msgstr "Descubre personas increibles"
 
 #: beta_invite/views.py:62 beta_invite/views.py:95 beta_invite/views.py:138
 #: beta_invite/views.py:186 business/views.py:24 business/views.py:51
-#: business/views.py:70 business/views.py:108
+#: business/views.py:70 business/views.py:113
 msgid ""
 "We search millions of profiles and find the ones that best suit your business"
 msgstr ""
@@ -95,8 +95,8 @@ msgid "Email"
 msgstr "Correo"
 
 #: business/templates/business/results.html:89
-msgid "Education level"
-msgstr "Nivel educativo"
+msgid "Education"
+msgstr "Educación"
 
 #: business/templates/business/results.html:89
 #, fuzzy

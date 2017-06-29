@@ -1,4 +1,4 @@
-education level:
+education:
 3: Difficult detection Universitario tecnico, marika!!! (detect)
 20: OCR doesnt read a year. Therefore underestimates age and then downgrades degree!!!
 21: Has operator jobs didn't ever do anything with time studied.
@@ -8,7 +8,7 @@ education level:
 41: tricks algorithm into Universitario, marika!!! (detect)
 55: out of context "magister" on references (detect)
 
-education level by type:
+education by type:
 detect: 5
 	1. Technitian trying to be professional: 4
 	2. out of context word: 1
