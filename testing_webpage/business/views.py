@@ -100,6 +100,18 @@ def get_matching_users(request):
         .filter(education__in=education_set)
 
 
+def translate_users(users, language_code):
+    """
+    Args:
+        users: List of Users
+        language_code: can be 'es'
+    Returns: List of translated users
+    """
+    if 'es' in language_code:
+        for u in users:
+            u.profession.name = u.profession.name_es
+
+
 def results(request):
     """
     Args:
@@ -108,6 +120,8 @@ def results(request):
     """
 
     users = get_matching_users(request)
+
+    translate_users(users, request.LANGUAGE_CODE)
 
     return render(request, cts.RESULTS_VIEW_PATH, {'main_message': _("Discover amazing people"),
                                                    'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
