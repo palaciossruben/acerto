@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-27 04:50+0000\n"
+"POT-Creation-Date: 2017-06-29 02:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,6 +48,7 @@ msgid "Sure!"
 msgstr "Enviar!"
 
 #: beta_invite/templates/beta_invite/long_form.html:144
+#: business/templates/business/search.html:120
 msgid "Experience in years:"
 msgstr "Experiencia en años:"
 
@@ -64,25 +65,37 @@ msgstr "¡¡¡Gracias por registrarte, nos pondremos en contacto pronto!!!"
 msgid "Welcome to PeakU"
 msgstr "Bienvenido a PeakU"
 
-#: beta_invite/views.py:14
-msgid "Discover your true passion"
-msgstr "Descubre tu verdadera pasión"
+#: business/templates/business/results.html:80
+msgid "Download curriculums of matching profiles"
+msgstr "Descarga el curriculum de perfiles afines"
 
-#: beta_invite/views.py:15
-msgid "We search millions of jobs and find the right one for you"
-msgstr ""
-"Buscamos entre millones de trabajos y encontramos el trabajo perfecto para ti"
+#: business/templates/business/results.html:89
+msgid "Name"
+msgstr "Nombre"
 
-#: business/views.py:8
-msgid "Discover amazing people"
-msgstr "Descubre personas increibles"
+#: business/templates/business/results.html:89
+#, fuzzy
+#| msgid "Your email"
+msgid "Email"
+msgstr "Correo"
 
-#: business/views.py:9
-msgid ""
-"We search millions of profiles and find the ones that best suit your business"
-msgstr ""
-"Buscamos millones de perfiles y encontramos los que mejor se adaptan a tu "
-"negocio"
+#: business/templates/business/results.html:89
+msgid "Education level"
+msgstr "Nivel educativo"
+
+#: business/templates/business/results.html:89
+#, fuzzy
+#| msgid "Experience in years:"
+msgid "Experience"
+msgstr "Experiencia"
+
+#: business/templates/business/search.html:77
+msgid "Search our Curriculum Database"
+msgstr "Busca Curriculums en Nuestra Base de Datos"
+
+#: business/templates/business/search.html:127
+msgid "Search"
+msgstr "Buscar"
 
 #: testing_webpage/shared_settings.py:118
 msgid "English"
@@ -91,6 +104,27 @@ msgstr "Ingles"
 #: testing_webpage/shared_settings.py:119
 msgid "Spanish"
 msgstr "Español"
+
+#~ msgid "name"
+#~ msgstr "nombre"
+
+#~ msgid "Discover your true passion"
+#~ msgstr "Descubre tu verdadera pasión"
+
+#~ msgid "We search millions of jobs and find the right one for you"
+#~ msgstr ""
+#~ "Buscamos entre millones de trabajos y encontramos el trabajo perfecto "
+#~ "para ti"
+
+#~ msgid "Discover amazing people"
+#~ msgstr "Descubre personas increibles"
+
+#~ msgid ""
+#~ "We search millions of profiles and find the ones that best suit your "
+#~ "business"
+#~ msgstr ""
+#~ "Buscamos millones de perfiles y encontramos los que mejor se adaptan a tu "
+#~ "negocio"
 
 #~ msgid "Missing name."
 #~ msgstr "Falta el nombre"
