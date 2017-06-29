@@ -1,6 +1,6 @@
 [
 {
-  "model": "beta_invite.educationLevel",
+  "model": "beta_invite.education",
   "pk": 1,
   "fields":{
     "name": "High School",
@@ -9,7 +9,7 @@
   }
 },
 {
-  "model": "beta_invite.educationLevel",
+  "model": "beta_invite.education",
   "pk": 2,
   "fields":{
     "name": "Technical",
@@ -18,7 +18,7 @@
   }
 },
 {
-  "model": "beta_invite.educationLevel",
+  "model": "beta_invite.education",
   "pk": 3,
   "fields":{
     "name": "Undergraduate",
@@ -27,7 +27,7 @@
   }
 },
 {
-  "model": "beta_invite.educationLevel",
+  "model": "beta_invite.education",
   "pk": 4,
   "fields":{
     "name": "Master",
@@ -36,7 +36,7 @@
   }
 },
 {
-  "model": "beta_invite.educationLevel",
+  "model": "beta_invite.education",
   "pk": 5,
   "fields":{
     "name": "Phd",

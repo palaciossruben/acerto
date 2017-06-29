@@ -6,7 +6,7 @@ from django.core.files.storage import FileSystemStorage
 from django.utils.translation import ugettext as _
 
 from django.shortcuts import render
-from beta_invite.models import User, Visitor, Profession, EducationLevel, Country
+from beta_invite.models import User, Visitor, Profession, Education, Country
 import business
 from beta_invite.util import email_sender
 from ipware.ip import get_ip
@@ -109,18 +109,18 @@ def get_drop_down_values(language_code):
     Gets lists of drop down values for several different fields.
     Args:
         language_code: 2 digit code (eg. 'es')
-    Returns: A tuple containing (Countries, EducationLevels, Profesions)
+    Returns: A tuple containing (Countries, Education, Profesions)
     """
 
     professions = Profession.objects.all()
     translate_list_of_objects(professions, language_code)
 
-    education_levels = EducationLevel.objects.all()
-    translate_list_of_objects(education_levels, language_code)
+    education = Education.objects.all()
+    translate_list_of_objects(education, language_code)
 
     countries = Country.objects.all()
 
-    return countries, education_levels, professions
+    return countries, education, professions
 
 
 def long_form(request):
@@ -130,7 +130,7 @@ def long_form(request):
 
     ip = get_ip(request)
     action_url = '/beta_invite/long_form/post'
-    countries, education_levels, professions = get_drop_down_values(request.LANGUAGE_CODE)
+    countries, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
 
     Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
 
@@ -138,7 +138,7 @@ def long_form(request):
                                                      'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
                                                      'action_url': action_url,
                                                      'countries': countries,
-                                                     'education_levels': education_levels,
+                                                     'education': education,
                                                      'professions': professions,
                                                      })
 
@@ -152,19 +152,19 @@ def post_long_form(request):
     ip = get_ip(request)
 
     profession_id = request.POST.get('profession')
-    education_level_id = request.POST.get('education_level')
+    education_id = request.POST.get('education')
     country_id = request.POST.get('country')
     experience = request.POST.get('experience')
     age = request.POST.get('age')
 
     profession = Profession.objects.get(pk=profession_id)
-    education_level = EducationLevel.objects.get(pk=education_level_id)
+    education = Education.objects.get(pk=education_id)
     country = Country.objects.get(pk=country_id)
 
     user = User(name=request.POST.get('name'),
                 email=request.POST.get('email'),
                 profession=profession,
-                education_level=education_level,
+                education=education,
                 country=country,
                 experience=experience,
                 age=age,

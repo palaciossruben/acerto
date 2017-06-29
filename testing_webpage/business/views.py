@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 import business
 import beta_invite
 from business import constants as cts
-from beta_invite.models import User, EducationLevel
+from beta_invite.models import User, Education
 
 
 def index(request):
@@ -63,14 +63,14 @@ def search(request):
     ip = get_ip(request)
     action_url = '/business/results'
 
-    countries, education_levels, professions = beta_invite.views.get_drop_down_values(request.LANGUAGE_CODE)
+    countries, education, professions = beta_invite.views.get_drop_down_values(request.LANGUAGE_CODE)
 
     business.models.Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
     return render(request, cts.SEARCH_VIEW_PATH, {'main_message': _("Discover amazing people"),
                                                   'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
                                                   'action_url': action_url,
                                                   'countries': countries,
-                                                  'education_levels': education_levels,
+                                                  'education': education,
                                                   'professions': professions,
                                                   })
 
@@ -84,15 +84,20 @@ def get_matching_users(request):
     """
 
     profession_id = request.POST.get('profession')
-    education_level_id = request.POST.get('education_level')
-    education_level = EducationLevel.objects.get(pk=education_level_id)
+    education_id = request.POST.get('education')
+    education_level = Education.objects.get(pk=education_id)
+
+    # Get all education levels at or above the object.
+    #education_set = education_level.level
+
     country_id = request.POST.get('country')
     experience = request.POST.get('experience')
 
-    # TODO: missing education level
+    # TODO: missing education
     return User.objects.filter(country_id=country_id)\
         .filter(profession_id=profession_id)\
-        .filter(experience__gte=experience)
+        .filter(experience__gte=experience)#\
+        #.filter(education__in=education_set)
 
 
 def results(request):

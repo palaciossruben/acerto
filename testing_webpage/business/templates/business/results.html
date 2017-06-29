@@ -86,7 +86,7 @@
 
 				<div class="list-group">
 					{% for user in users %}
-						<a style="text-align:left" href="{% static user.curriculum_url %}" class="list-group-item"><b>{% trans "Name" %}:</b> {{ user.name }} <b>{% trans "Email" %}:</b> {{ user.email }} <b>{% trans "Education level" %}:</b> {{ user.education_level.name }} <b>{% trans "Experience" %}:</b> {{ user.experience }} {% trans "years" %}</a>
+						<a style="text-align:left" href="{% static user.curriculum_url %}" class="list-group-item"><b>{% trans "Name" %}:</b> {{ user.name }} <b>{% trans "Email" %}:</b> {{ user.email }} <b>{% trans "Education" %}:</b> {{ user.education.name }} <b>{% trans "Experience" %}:</b> {{ user.experience }} {% trans "years" %}</a>
 					{% endfor %}
 				</div>
 			</div>

@@ -42,21 +42,21 @@ UNDERGRADUATE = 'undergraduate'
 MASTER = 'masters'
 PHD = 'phd'
 
-EDUCATION_LEVEL_DURATIONS = {
-                             HIGH_SCHOOL: 18,
-                             TECHNICAL: 3,
-                             UNDERGRADUATE: 5,
-                             MASTER: 2,
-                             PHD: 4,
-                             }
+EDUCATION_DURATIONS = {
+                       HIGH_SCHOOL: 18,
+                       TECHNICAL: 3,
+                       UNDERGRADUATE: 5,
+                       MASTER: 2,
+                       PHD: 4,
+                       }
 
-EDUCATION_LEVELS = {
-                    HIGH_SCHOOL: 0,
-                    TECHNICAL: 1,
-                    UNDERGRADUATE: 2,
-                    MASTER: 3,
-                    PHD: 4
-                    }
+EDUCATION = {
+             HIGH_SCHOOL: 0,
+             TECHNICAL: 1,
+             UNDERGRADUATE: 2,
+             MASTER: 3,
+             PHD: 4
+             }
 
 # TODO: ideas:
 # USE compulsory relations: Soy Tecnologo
@@ -64,14 +64,14 @@ EDUCATION_LEVELS = {
 # Demand University that can by googled.
 # screenshots + OCR  max impact: 2/60
 
-EDUCATION_LEVEL_KEYWORDS = {
-                            HIGH_SCHOOL: ('colegio', 'estudiante', ),
-                            TECHNICAL: ('instituto', 'tecnico', 'tecnologo'),
-                            # profesional excludes "Perfil Profesional or Area Profesional" case.
-                            UNDERGRADUATE: ('universi(?!dades)', 'pregrado', 'bsc', r'(?!perfil|area|tecnico|resumen|experiencia|proyeccion)(\b\w+\b\s*profesional(?!(es|mente)))|(^\s*profesional)'),
-                            MASTER: ('maestria', 'magister', 'master', 'msc'),
-                            PHD: ['doctorado']
-                            }
+EDUCATION_KEYWORDS = {
+                      HIGH_SCHOOL: ('colegio', 'estudiante', ),
+                      TECHNICAL: ('instituto', 'tecnico', 'tecnologo'),
+                      # profesional excludes "Perfil Profesional or Area Profesional" case.
+                      UNDERGRADUATE: ('universi(?!dades)', 'pregrado', 'bsc', r'(?!perfil|area|tecnico|resumen|experiencia|proyeccion)(\b\w+\b\s*profesional(?!(es|mente)))|(^\s*profesional)'),
+                      MASTER: ('maestria', 'magister', 'master', 'msc'),
+                      PHD: ['doctorado']
+                      }
 
 MIN_UNDERGRAD_AGE = 22
 MIN_TECHNICAL_AGE = 20
@@ -171,40 +171,40 @@ class User:
         # positive points will count twice. Experimental evidence shows better performance.
         total = sum(positive) - sum(negative)
 
-        new_idx = max(EDUCATION_LEVELS[level] - (total < -1), 0)
+        new_idx = max(EDUCATION[level] - (total < -1), 0)
 
         # to be undergrad or more at least be MIN_UNDERGRAD_AGE.
-        if new_idx >= EDUCATION_LEVELS[UNDERGRADUATE] and self.age is not None and self.age < MIN_UNDERGRAD_AGE:
+        if new_idx >= EDUCATION[UNDERGRADUATE] and self.age is not None and self.age < MIN_UNDERGRAD_AGE:
             age_undergrad_score = 1
         else:
             age_undergrad_score = 0
 
         # to be technical or more at least be MIN_TECHNICAL_AGE.
-        if new_idx >= EDUCATION_LEVELS[TECHNICAL] and self.age is not None and self.age < MIN_TECHNICAL_AGE:
+        if new_idx >= EDUCATION[TECHNICAL] and self.age is not None and self.age < MIN_TECHNICAL_AGE:
             age_technical_score = 1
         else:
             age_technical_score = 0
 
         return new_idx - age_undergrad_score - age_technical_score
 
-    def get_education_level(self, text):
+    def get_education(self, text):
 
         levels_score = dict()
 
-        for level, patterns in EDUCATION_LEVEL_KEYWORDS.items():
+        for level, patterns in EDUCATION_KEYWORDS.items():
 
             # the level itself is a pattern
             patterns = [e for e in patterns] + [level]
 
             results = [len(re.findall(p, text, re.IGNORECASE)) for p in patterns]
 
-            levels_score[level] = (sum(results) > 0) * EDUCATION_LEVELS[level]
+            levels_score[level] = (sum(results) > 0) * EDUCATION[level]
 
         level = max(levels_score.items(), key=operator.itemgetter(1))[0]
 
         level_number = self.downgrade_if_not_completed(text, level)
 
-        level_names = list(EDUCATION_LEVELS.keys())
+        level_names = list(EDUCATION.keys())
 
         return level_names[level_number]
 
@@ -214,21 +214,21 @@ class User:
 
     def get_experience(self, text):
 
-        preparing_years = EDUCATION_LEVEL_DURATIONS[HIGH_SCHOOL]
+        preparing_years = EDUCATION_DURATIONS[HIGH_SCHOOL]
 
         if self.education_level == TECHNICAL:
-            preparing_years += EDUCATION_LEVEL_DURATIONS[TECHNICAL]
+            preparing_years += EDUCATION_DURATIONS[TECHNICAL]
 
         if self.education_level == UNDERGRADUATE:
-            preparing_years += EDUCATION_LEVEL_DURATIONS[UNDERGRADUATE]
+            preparing_years += EDUCATION_DURATIONS[UNDERGRADUATE]
 
         if self.education_level == MASTER:
-            preparing_years += EDUCATION_LEVEL_DURATIONS[UNDERGRADUATE] + EDUCATION_LEVEL_DURATIONS[MASTER]
+            preparing_years += EDUCATION_DURATIONS[UNDERGRADUATE] + EDUCATION_DURATIONS[MASTER]
 
         if self.education_level == PHD:
-            preparing_years += EDUCATION_LEVEL_DURATIONS[UNDERGRADUATE] +\
-                               EDUCATION_LEVEL_DURATIONS[MASTER] +\
-                               EDUCATION_LEVEL_DURATIONS[PHD]
+            preparing_years += EDUCATION_DURATIONS[UNDERGRADUATE] + \
+                               EDUCATION_DURATIONS[MASTER] + \
+                               EDUCATION_DURATIONS[PHD]
 
         if self.age is not None:
             return (self.age - preparing_years)*0.56  # Empirically found the occupation rate to be 56%.
@@ -292,7 +292,7 @@ class User:
 
         setattr(self, attribute_name, value)
 
-    def __init__(self, text, country=None, institutions=(), education_level=None, city=None, experience=None, age=None,
+    def __init__(self, text, country=None, institutions=(), education=None, city=None, experience=None, age=None,
                  profession=None):
         self.text = text
 
@@ -300,6 +300,6 @@ class User:
         self.set_attribute(country, text, 'country')
         self.set_attribute(city, text, 'city')
         self.set_attribute(institutions, text, 'institutions')
-        self.set_attribute(education_level, text, 'education_level')
+        self.set_attribute(education, text, 'education')
         self.set_attribute(experience, text, 'experience')
         self.set_attribute(profession, text, 'profession')
