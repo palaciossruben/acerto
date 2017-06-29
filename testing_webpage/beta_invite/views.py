@@ -34,18 +34,14 @@ def save_curriculum_from_request(request, user):
         fs = FileSystemStorage()
 
         user_id_folder = str(user.id)
-        folder = os.path.join('subscribe/resumes', user_id_folder)
-
-        # create file path:
-        if not os.path.isdir(folder):
-            os.mkdir(folder)
+        folder = os.path.join('resumes', user_id_folder)
 
         file_path = os.path.join(folder, remove_accents(curriculum_file.name))
 
-        filename = fs.save(file_path, curriculum_file)
+        fs.save(file_path, curriculum_file)
 
-        # at last saves the curriculum url
-        return os.path.join('resumes', str(user.id), os.path.basename(filename))
+        # at last returns the curriculum url
+        return file_path
 
 
 def index(request):
@@ -85,9 +81,7 @@ def post_index(request):
 
     # Saves here to get an id
     user.save()
-
     user.curriculum_url = save_curriculum_from_request(request, user)
-
     user.save()
 
     # TODO: pay the monthly fee
