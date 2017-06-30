@@ -216,16 +216,16 @@ class User:
 
         preparing_years = EDUCATION_DURATIONS[HIGH_SCHOOL]
 
-        if self.education_level == TECHNICAL:
+        if self.education == TECHNICAL:
             preparing_years += EDUCATION_DURATIONS[TECHNICAL]
 
-        if self.education_level == UNDERGRADUATE:
+        if self.education == UNDERGRADUATE:
             preparing_years += EDUCATION_DURATIONS[UNDERGRADUATE]
 
-        if self.education_level == MASTER:
+        if self.education == MASTER:
             preparing_years += EDUCATION_DURATIONS[UNDERGRADUATE] + EDUCATION_DURATIONS[MASTER]
 
-        if self.education_level == PHD:
+        if self.education == PHD:
             preparing_years += EDUCATION_DURATIONS[UNDERGRADUATE] + \
                                EDUCATION_DURATIONS[MASTER] + \
                                EDUCATION_DURATIONS[PHD]
@@ -259,7 +259,7 @@ class User:
         max_key_value = max(score_dict.items(), key=operator.itemgetter(1))
 
         # 1 match maybe luck on operators case with no education:
-        #if max_key_value[1] == 1 and self.education_level == HIGH_SCHOOL:
+        #if max_key_value[1] == 1 and self.education == HIGH_SCHOOL:
         #    return OPERATOR
 
         if max_key_value[1] > 0:
