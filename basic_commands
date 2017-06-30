@@ -214,3 +214,75 @@ python3 manage.py loaddata <my_json>.json
 
 -- get requirements of project with:
 PYENV_VERSION=3.5.1 pipreqs testing_webpage/ --force
+
+
+-- Additional python packages installs to read documents in multiple formats:
+sudo pip3 install PyPDF2
+sudo pip3 install pytesseract
+sudo pip3 install nltk
+
+-- make sure is version 2 as version 1 is not compatible with python3
+sudo pip3 install pdfminer2
+
+-- textract had a installation issue hat to clone:
+git clone https://github.com/deanmalmgren/textract.git
+
+-- for .doc with textract
+sudo apt-get update
+sudo apt-get install antiword
+
+-- and run:
+sudo python3 setup.py install
+
+-- then install textract dependency, to decode .docx files:
+sudo pip3 install docx2txt
+
+-- THIS IS A DIFFICULT STUFF: BE VERY CAREFUL AND METHODICAL
+-- NEEDS THE LATEST LEPTONICA VERSION.
+-- INSTALL TESSERACT
+sudo apt-get update
+sudo apt-get install g++ # or clang++ (presumably)
+sudo apt-get install autoconf automake libtool
+sudo apt-get install autoconf-archive
+sudo apt-get install pkg-config
+sudo apt-get install libpng12-dev
+sudo apt-get install libjpeg8-dev
+sudo apt-get install libtiff5-dev
+sudo apt-get install zlib1g-dev
+sudo apt-get install libicu-dev
+sudo apt-get install libpango1.0-dev
+sudo apt-get install libcairo2-dev
+
+-- INSTALL LEPTONICA, from source:
+-- make sure you download the latest version, see: https://www.linux.com/blog/using-tesseract-ubuntucd ~
+cd ~
+wget http://www.leptonica.org/source/leptonica-(latest_version_here).tar.gz
+tar -zxvf leptonica-(latest_version_here).tar.gz
+cd leptonica-(latest_version_here)
+./configure
+make
+sudo checkinstall
+sudo ldconfig
+
+-- check leptonica version:
+pkg-config --modversion lept
+
+-- INSTALL TESSERACT FROM SOURCE:
+cd ~
+git clone https://github.com/tesseract-ocr/tesseract.git
+cd tesseract
+./autogen.sh
+./configure
+make
+sudo make install
+sudo ldconfig
+
+-- Finally Add file:
+cd ~
+wget https://github.com/tesseract-ocr/tessdata/raw/master/eng.traineddata
+
+-- then move to tesseract dir:
+mv eng.traineddata /usr/local/share/tessdata/eng.traineddata
+
+-- When reading files install to be able to decode accents:
+pip install unidecode
