@@ -43,7 +43,7 @@ def read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename):
 
     text = h.remove_accents(text)
 
-    with open(parsed_path, 'w') as f:
+    with open(parsed_path, 'w', encoding='UTF-8') as f:
         f.write(text)
 
     return text
@@ -65,7 +65,7 @@ def read_and_predict(force=False):
             parsed_path = os.path.join(folder_path, parsed_filename)
             # Will used saved version, to save time parsing.
             if parsed_filename in docs and not force:
-                with open(parsed_path, 'r') as f:
+                with open(parsed_path, 'r', encoding='UTF-8') as f:
                     text = f.read()
             else:
                 text = read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename)
