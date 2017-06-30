@@ -54,5 +54,61 @@
     "fields": {
       "name": "Argentina"
     }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 9,
+    "fields": {
+      "name": "Paraguay"
+    }
+  },
+    {
+    "model": "beta_invite.country",
+    "pk": 10,
+    "fields": {
+      "name": "Uruguay"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 11,
+    "fields": {
+      "name": "Panamá"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 12,
+    "fields": {
+      "name": "Honduras"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 13,
+    "fields": {
+      "name": "El Salvador"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 14,
+    "fields": {
+      "name": "Guatemala"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 15,
+    "fields": {
+      "name": "Nicaragua"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 16,
+    "fields": {
+      "name": "Costa Rica"
+    }
   }
 ]
