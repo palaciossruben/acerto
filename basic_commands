@@ -221,6 +221,12 @@ sudo pip3 install PyPDF2
 sudo pip3 install pytesseract
 sudo pip3 install nltk
 
+-- For nltk download resources by
+python3 # enter python console
+>>> import nltk
+>>> nltk.download()
+select option 'd' then type 'popular'
+
 -- make sure is version 2 as version 1 is not compatible with python3
 sudo pip3 install pdfminer2
 
@@ -285,4 +291,9 @@ wget https://github.com/tesseract-ocr/tessdata/raw/master/eng.traineddata
 mv eng.traineddata /usr/local/share/tessdata/eng.traineddata
 
 -- When reading files install to be able to decode accents:
-pip install unidecode
+sudo pip3 install unidecode
+
+-- Advanced Libraries
+sudo pip3 install numpy
+sudo pip3 install sklearn
+sudo pip3 install scipy

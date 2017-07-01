@@ -136,6 +136,8 @@ def get_matching_users(request):
         .filter(experience__gte=experience)\
         .filter(education__in=education_set)
 
+    # TODO: NEEDS MORE DATA TO PROVE THAT DOWN HERE THIS IS WORKING!!!
+
     skills = request.POST.get('skills')
     tokenized_skills = remove_accents(nltk.word_tokenize(skills))
 

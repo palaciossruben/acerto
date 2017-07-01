@@ -8,6 +8,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from cts import *
 import helper as h
 
+
 def get_text_corpus(path, toy=False):
 
     if not toy:
