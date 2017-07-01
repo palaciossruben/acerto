@@ -131,20 +131,23 @@ def get_matching_users(request):
     country_id = request.POST.get('country')
     experience = request.POST.get('experience')
 
-    skills = request.POST.get('skills')
-    tokenized_skills = remove_accents(nltk.word_tokenize(skills))
-
-    # Opens word_user_dict
-    vocabulary_user_dict = pickle.load(open('subscribe/vocabulary_user_dict.p', 'rb'))
-    tokens_dict = {t: vocabulary_user_dict[t] for t in tokenized_skills if vocabulary_user_dict.get(t) is not None}
-
     users = User.objects.filter(country_id=country_id)\
         .filter(profession_id=profession_id)\
         .filter(experience__gte=experience)\
         .filter(education__in=education_set)
 
-    # Initializes all relevance in 0.
+    skills = request.POST.get('skills')
+    tokenized_skills = remove_accents(nltk.word_tokenize(skills))
 
+    # Opens word_user_dict
+    try:
+        vocabulary_user_dict = pickle.load(open('subscribe/vocabulary_user_dict.p', 'rb'))
+    except FileNotFoundError:
+        return users  # will not filter by words.
+
+    tokens_dict = {t: vocabulary_user_dict[t] for t in tokenized_skills if vocabulary_user_dict.get(t) is not None}
+
+    # Initializes all relevance in 0.
     user_relevance_dict = OrderedDict({user.id: 0 for user in users})
     for k, values in tokens_dict.items():
         for value_user_id, relevance in values:
