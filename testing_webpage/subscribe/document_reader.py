@@ -81,7 +81,6 @@ def read_all(force=False):
     :param force: Boolean indicating if the Curriculums have to be read again.
     """
     resumes_folders = os.listdir(RESUMES_PATH)
-    final_dict = dict()
 
     for folder in resumes_folders:
         folder_path = os.path.join(RESUMES_PATH, folder)
@@ -94,9 +93,11 @@ def read_all(force=False):
             if parsed_filename not in docs or force:
                 read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename)
 
+        print('done with folder: {}'.format(folder))
+
 
 if __name__ == "__main__":
-    read_all(force=True)
+    read_all(force=False)
 
     """
     for key, user in my_dict.items():
