@@ -8,6 +8,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from cts import *
 import helper as h
 
+
 def get_text_corpus(path, toy=False):
 
     if not toy:
@@ -71,8 +72,8 @@ def save_dictionary_scores(path):
         scores.append((word_str, score))
 
     scores.sort(key=lambda x: x[1])
-    for word_str, score in scores:
-        print('{}: {}'.format(word_str, score))
+    #for word_str, score in scores:
+    #    print('{}: {}'.format(word_str, score))
 
     pickle.dump(scores, open('autocomplete_scores.p', 'wb'))
 

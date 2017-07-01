@@ -25,6 +25,9 @@ def list_dir(directory=None):
 
 def deploy():
 
+    # Before anything, lets create or overwrite the backup db file ;)
+    run('pg_dump -U dbadmin -p 5432 -h localhost maindb > db_backup.sql')
+
     with cd(WORKING_PATH):
         with prefix(". /usr/local/bin/virtualenvwrapper.sh; workon myenv"):
 
