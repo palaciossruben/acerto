@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-29 16:30+0000\n"
+"POT-Creation-Date: 2017-07-01 01:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,7 +48,7 @@ msgid "Sure!"
 msgstr "Enviar!"
 
 #: beta_invite/templates/beta_invite/long_form.html:144
-#: business/templates/business/search.html:120
+#: business/templates/business/search.html:127
 msgid "Experience in years:"
 msgstr "Experiencia en años:"
 
@@ -65,15 +65,15 @@ msgstr "¡¡¡Gracias por registrarte, nos pondremos en contacto pronto!!!"
 msgid "Welcome to PeakU"
 msgstr "Bienvenido a PeakU"
 
-#: beta_invite/views.py:61 beta_invite/views.py:94 beta_invite/views.py:137
-#: beta_invite/views.py:185 business/views.py:23 business/views.py:50
-#: business/views.py:69 business/views.py:112
+#: beta_invite/views.py:61 beta_invite/views.py:94 beta_invite/views.py:147
+#: beta_invite/views.py:195 business/views.py:25 business/views.py:52
+#: business/views.py:71 business/views.py:134
 msgid "Discover amazing people"
-msgstr "Descubre personas increibles"
+msgstr "Descubre personas increíbles"
 
-#: beta_invite/views.py:62 beta_invite/views.py:95 beta_invite/views.py:138
-#: beta_invite/views.py:186 business/views.py:24 business/views.py:51
-#: business/views.py:70 business/views.py:113
+#: beta_invite/views.py:62 beta_invite/views.py:95 beta_invite/views.py:148
+#: beta_invite/views.py:196 business/views.py:26 business/views.py:53
+#: business/views.py:72 business/views.py:135
 msgid ""
 "We search millions of profiles and find the ones that best suit your business"
 msgstr ""
@@ -112,7 +112,13 @@ msgstr "años"
 msgid "Search our Curriculum Database"
 msgstr "Busca Curriculums en Nuestra Base de Datos"
 
-#: business/templates/business/search.html:127
+#: business/templates/business/search.html:119
+#, fuzzy
+#| msgid "Skills or any other custom requirement"
+msgid "Skills or any other custom information"
+msgstr "Habilidades o cualquier otro requerimiento"
+
+#: business/templates/business/search.html:134
 msgid "Search"
 msgstr "Buscar"
 

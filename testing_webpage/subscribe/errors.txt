@@ -43,3 +43,6 @@ read: 3
 profession
 16: OCR bad quality.
 53: investigate further
+
+
+GENERAL READING ERROR: Text on each line is missing spaces. With pypdf2, not reading with pdfminer2

@@ -166,7 +166,10 @@ def get_pdf_text(folder_path, filename):
     """Tries different libraries"""
     text = get_pdf_text_pdf_miner(filename)
     if text_has_no_data(text):
-        text = get_pdf_text_pypdf2(filename)
+        try:
+            text = get_pdf_text_pypdf2(filename)
+        except:
+            text = ''
 
     # Still nothing; then take out the big gun. Convert to png and use OCR
     if text_has_no_data(text):
@@ -177,8 +180,35 @@ def get_pdf_text(folder_path, filename):
     return text
 
 
-def remove_accents(text):
-    return ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
+def remove_accents_in_string(element):
+    """
+    Args:
+        element: anything.
+    Returns: Cleans accents only for strings.
+    """
+    if isinstance(element, str):
+        return ''.join(c for c in unicodedata.normalize('NFD', element) if unicodedata.category(c) != 'Mn')
+    else:
+        return element
+
+
+def remove_accents(an_object):
+    """
+    Several different objects can be cleaned.
+    Args:
+        an_object: can be list, string, tuple and dict
+    Returns: the cleaned obj, or a exception if not implemented.
+    """
+    if isinstance(an_object, str):
+        return remove_accents_in_string(an_object)
+    elif isinstance(an_object, list):
+        return [remove_accents_in_string(e) for e in an_object]
+    elif isinstance(an_object, tuple):
+        return tuple([remove_accents_in_string(e) for e in an_object])
+    elif isinstance(an_object, dict):
+        return {remove_accents_in_string(k): remove_accents_in_string(v) for k, v in an_object.items()}
+    else:
+        raise NotImplementedError
 
 
 def rename_filename(folder_path, filename):

@@ -1,3 +1,8 @@
+import nltk
+import pickle
+import unicodedata
+
+from collections import OrderedDict
 from ipware.ip import get_ip
 from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
@@ -75,6 +80,39 @@ def search(request):
                                                   })
 
 
+# TODO: duplicate code: see subscribe.helper
+def remove_accents_in_string(element):
+    """
+    Args:
+        element: anything.
+    Returns: Cleans accents only for strings.
+    """
+    if isinstance(element, str):
+        return ''.join(c for c in unicodedata.normalize('NFD', element) if unicodedata.category(c) != 'Mn')
+    else:
+        return element
+
+
+# TODO: duplicate code: see subscribe.helper
+def remove_accents(an_object):
+    """
+    Several different objects can be cleaned.
+    Args:
+        an_object: can be list, string, tuple and dict
+    Returns: the cleaned obj, or a exception if not implemented.
+    """
+    if isinstance(an_object, str):
+        return remove_accents_in_string(an_object)
+    elif isinstance(an_object, list):
+        return [remove_accents_in_string(e) for e in an_object]
+    elif isinstance(an_object, tuple):
+        return tuple([remove_accents_in_string(e) for e in an_object])
+    elif isinstance(an_object, dict):
+        return {remove_accents_in_string(k): remove_accents_in_string(v) for k, v in an_object.items()}
+    else:
+        raise NotImplementedError
+
+
 def get_matching_users(request):
     """
     Simple DB matching between criteria and DB.
@@ -93,11 +131,33 @@ def get_matching_users(request):
     country_id = request.POST.get('country')
     experience = request.POST.get('experience')
 
-    # TODO: missing education
-    return User.objects.filter(country_id=country_id)\
+    skills = request.POST.get('skills')
+    tokenized_skills = remove_accents(nltk.word_tokenize(skills))
+
+    # Opens word_user_dict
+    vocabulary_user_dict = pickle.load(open('subscribe/vocabulary_user_dict.p', 'rb'))
+    tokens_dict = {t: vocabulary_user_dict[t] for t in tokenized_skills if vocabulary_user_dict.get(t) is not None}
+
+    users = User.objects.filter(country_id=country_id)\
         .filter(profession_id=profession_id)\
         .filter(experience__gte=experience)\
         .filter(education__in=education_set)
+
+    # Initializes all relevance in 0.
+
+    user_relevance_dict = OrderedDict({user.id: 0 for user in users})
+    for k, values in tokens_dict.items():
+        for value_user_id, relevance in values:
+
+            if value_user_id in user_relevance_dict.keys():
+                # if there is no score yet, then assigns the relevance, else sums the relevance.
+                user_relevance_dict[value_user_id] += relevance
+
+    sorted_iterator = reversed(sorted(user_relevance_dict.items(), key=lambda x: x[1]))
+
+    # Only one query set with all objects.
+    users = User.objects.filter(pk__in=[user_id for user_id, _ in sorted_iterator])
+    return users
 
 
 def translate_users(users, language_code):
