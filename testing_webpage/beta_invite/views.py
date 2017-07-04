@@ -85,6 +85,8 @@ def post_index(request):
     user.curriculum_url = save_curriculum_from_request(request, user)
     user.save()
 
+    update_search_dictionary_on_background()
+
     # TODO: pay the monthly fee
     #try:
     #    email_sender.send(user, request.LANGUAGE_CODE)
@@ -153,6 +155,17 @@ def long_form(request):
                                                      })
 
 
+def update_search_dictionary_on_background():
+    """
+    A background process is spawned to update internal search structures.
+    First it goes into the subscribe directory, then it updates the missing text extractions. Then it generates the
+    relevance_dictionary.p
+    Returns: None
+    """
+    command = 'cd subscribe/ && python3 document_reader.py && python3 search_engine.py &'
+    os.system(command)
+
+
 def post_long_form(request):
     """
     Args:
@@ -185,6 +198,8 @@ def post_long_form(request):
     user.save()
     user.curriculum_url = save_curriculum_from_request(request, user)
     user.save()
+
+    update_search_dictionary_on_background()
 
     # TODO: missing santiago@peaku.co credentials.
     #try:
