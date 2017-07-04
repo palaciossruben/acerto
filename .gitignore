@@ -82,4 +82,4 @@ testing_webpage/media/**
 testing_webpage/static/**
 testing_webpage/subscribe/resumes/**
 testing_webpage/subscribe/autocomplete_scores.p
-testing_webpage/subscribe/vocabulary_user_dict.p
+testing_webpage/subscribe/relevance_dictionary.p

@@ -78,7 +78,7 @@ def save_dictionary_scores(path):
     pickle.dump(scores, open('autocomplete_scores.p', 'wb'))
 
 
-def save_word_user_dictionary(path):
+def save_relevance_dictionary(path):
     """
     For each word finds the user_id relevance. This is the data structure:
     word_user_dict = {
@@ -90,24 +90,24 @@ def save_word_user_dictionary(path):
     """
     data_tf_idf, vocabulary, text_corpus = get_text_stats(path)
 
-    vocabulary_user_dict = {}
+    relevance_dictionary = {}
     for word, num_word in vocabulary.items():
         values = []
         for document, (user_id, text) in enumerate(text_corpus.items()):
             relevance = data_tf_idf[document, num_word]
             if relevance > 0:
-                values.append((user_id, relevance))
+                values.append((int(user_id), relevance))
 
-        vocabulary_user_dict[word] = tuple(values)
+        relevance_dictionary[word] = tuple(values)
 
-    vocabulary_user_dict = h.remove_accents(vocabulary_user_dict)
+    relevance_dictionary = h.remove_accents(relevance_dictionary)
 
-    #for k, v in word_user_dict.items():
-    #    print(k + ': ' + str(v))
+    for k, v in relevance_dictionary.items():
+        print(k + ': ' + str(v))
 
-    pickle.dump(vocabulary_user_dict, open('vocabulary_user_dict.p', 'wb'))
+    pickle.dump(relevance_dictionary, open('relevance_dictionary.p', 'wb'))
 
 
 if __name__ == "__main__":
     save_dictionary_scores(RESUMES_PATH)
-    save_word_user_dictionary(RESUMES_PATH)
+    save_relevance_dictionary(RESUMES_PATH)
