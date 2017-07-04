@@ -6,6 +6,7 @@ from collections import OrderedDict
 from ipware.ip import get_ip
 from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
+from django.db.models import Case, When
 
 import business
 import beta_invite
@@ -136,18 +137,19 @@ def get_matching_users(request):
         .filter(experience__gte=experience)\
         .filter(education__in=education_set)
 
-    # TODO: NEEDS MORE DATA TO PROVE THAT DOWN HERE THIS IS WORKING!!!
-
     skills = request.POST.get('skills')
     tokenized_skills = remove_accents(nltk.word_tokenize(skills))
 
+    # remove capital letters
+    tokenized_skills = [t.lower() for t in tokenized_skills]
+
     # Opens word_user_dict
     try:
-        vocabulary_user_dict = pickle.load(open('subscribe/vocabulary_user_dict.p', 'rb'))
+        relevance_dictionary = pickle.load(open('subscribe/relevance_dictionary.p', 'rb'))
     except FileNotFoundError:
         return users  # will not filter by words.
 
-    tokens_dict = {t: vocabulary_user_dict[t] for t in tokenized_skills if vocabulary_user_dict.get(t) is not None}
+    tokens_dict = {t: relevance_dictionary[t] for t in tokenized_skills if relevance_dictionary.get(t) is not None}
 
     # Initializes all relevance in 0.
     user_relevance_dict = OrderedDict({user.id: 0 for user in users})
@@ -155,13 +157,22 @@ def get_matching_users(request):
         for value_user_id, relevance in values:
 
             if value_user_id in user_relevance_dict.keys():
-                # if there is no score yet, then assigns the relevance, else sums the relevance.
                 user_relevance_dict[value_user_id] += relevance
 
     sorted_iterator = reversed(sorted(user_relevance_dict.items(), key=lambda x: x[1]))
 
-    # Only one query set with all objects.
-    users = User.objects.filter(pk__in=[user_id for user_id, _ in sorted_iterator])
+    #import copy
+    #sorted_2 = copy.copy(sorted_iterator)
+
+    #print('SORTED ITERATOR IS:')
+    #for i in sorted_2:
+    #    print(i)
+
+    user_ids = [user_id[0] for user_id in sorted_iterator]
+
+    preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(user_ids)])
+    users = User.objects.filter(pk__in=user_ids).order_by(preserved)
+
     return users
 
 
