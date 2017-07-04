@@ -114,9 +114,66 @@ def remove_accents(an_object):
         raise NotImplementedError
 
 
+def retrieve_sorted_users(sorted_iterator):
+    """
+    An iterable object that outputs the sorted tuples (user_ids, relevance)
+    Args:
+        sorted_iterator: Iterable object.
+    Returns: Sorted User objects Query Set.
+    """
+    user_ids = [user_id[0] for user_id in sorted_iterator]
+
+    preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(user_ids)])
+    return User.objects.filter(pk__in=user_ids).order_by(preserved)
+
+
+def get_skills(request):
+    """
+    Args:
+        request: a Request obj
+    Returns: List with tokenized strings, lower cased and with no accents.
+    """
+    skills = request.POST.get('skills')
+    skills = remove_accents(nltk.word_tokenize(skills))
+
+    # remove capital letters
+    return [t.lower() for t in skills]
+
+
+def user_id_sorted_iterator(relevance_dictionary, users, skills):
+    """
+    Args:
+        relevance_dictionary: Vocabulary and relevance dict.
+        users: List of User objects from previous filters.
+        skills: List of processed strings.
+    Returns: A sorted iterator that returns tuples (user_id, relevance).
+    """
+    tokens_dict = {t: relevance_dictionary[t] for t in skills
+                   if relevance_dictionary.get(t) is not None}
+
+    # Initializes all relevance to 0.
+    user_relevance_dict = OrderedDict({user.id: 0 for user in users})
+    for k, values in tokens_dict.items():
+        for value_user_id, relevance in values:
+
+            if value_user_id in user_relevance_dict.keys():
+                user_relevance_dict[value_user_id] += relevance
+
+    return reversed(sorted(user_relevance_dict.items(), key=lambda x: x[1]))
+
+
+def print_sorted_iterator_on_debug(sorted_iterator):
+    import copy
+    sorted_2 = copy.copy(sorted_iterator)
+
+    print('SORTED ITERATOR IS:')
+    for i in sorted_2:
+        print(i)
+
+
 def get_matching_users(request):
     """
-    Simple DB matching between criteria and DB.
+    DB matching between criteria and DB.
     Args:
         request: Request obj
     Returns: List with matching Users
@@ -137,43 +194,17 @@ def get_matching_users(request):
         .filter(experience__gte=experience)\
         .filter(education__in=education_set)
 
-    skills = request.POST.get('skills')
-    tokenized_skills = remove_accents(nltk.word_tokenize(skills))
-
-    # remove capital letters
-    tokenized_skills = [t.lower() for t in tokenized_skills]
-
-    # Opens word_user_dict
+    # Opens word_user_dict, or returns unordered users.
     try:
         relevance_dictionary = pickle.load(open('subscribe/relevance_dictionary.p', 'rb'))
     except FileNotFoundError:
         return users  # will not filter by words.
 
-    tokens_dict = {t: relevance_dictionary[t] for t in tokenized_skills if relevance_dictionary.get(t) is not None}
+    sorted_iterator = user_id_sorted_iterator(relevance_dictionary, users, get_skills(request))
 
-    # Initializes all relevance in 0.
-    user_relevance_dict = OrderedDict({user.id: 0 for user in users})
-    for k, values in tokens_dict.items():
-        for value_user_id, relevance in values:
+    #print_sorted_iterator_on_debug(sorted_iterator)
 
-            if value_user_id in user_relevance_dict.keys():
-                user_relevance_dict[value_user_id] += relevance
-
-    sorted_iterator = reversed(sorted(user_relevance_dict.items(), key=lambda x: x[1]))
-
-    #import copy
-    #sorted_2 = copy.copy(sorted_iterator)
-
-    #print('SORTED ITERATOR IS:')
-    #for i in sorted_2:
-    #    print(i)
-
-    user_ids = [user_id[0] for user_id in sorted_iterator]
-
-    preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(user_ids)])
-    users = User.objects.filter(pk__in=user_ids).order_by(preserved)
-
-    return users
+    return retrieve_sorted_users(sorted_iterator)
 
 
 def translate_users(users, language_code):
