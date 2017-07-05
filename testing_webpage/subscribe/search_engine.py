@@ -6,20 +6,27 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
 from cts import *
+from collections import OrderedDict
 import helper as h
+
+
+def get_text_from_path(root_path, relative_path):
+    complete_path = os.path.join(root_path, relative_path, os.path.basename(relative_path) + '.txt')
+    return open(complete_path, encoding='UTF-8').read()
 
 
 def get_text_corpus(path, toy=False):
 
     if not toy:
-        text_dict = {os.path.basename(p): open(os.path.join(path, p, os.path.basename(p) + '.txt'), encoding='UTF-8').read()
-                     for p in os.listdir(path) if os.path.isdir(os.path.join(path, p))}
+        text_dict = [(int(os.path.basename(relative_path)), get_text_from_path(path, relative_path))
+                     for relative_path in os.listdir(path) if os.path.isdir(os.path.join(path, relative_path))]
+        text_dict = OrderedDict(text_dict)
     else:
         # Small data set to understand algorithms
-        text_dict = {1: 'common juan pedro',
-                     2: 'common camilo',
-                     3: 'common alberto high high high',
-                     4: ''}
+        text_dict = OrderedDict([(1, 'common juan pedro'),
+                                 (2, 'common camilo'),
+                                 (3, 'common alberto high high high'),
+                                 (4, '')])
 
     # filter any numbers:
     for user_id, text in text_dict.items():
@@ -34,7 +41,7 @@ def get_text_stats(path):
     Gets tf_idf transformed data and the vocabulary
     Args:
         path: The directory of the resumes
-    Returns: Tuple containing Sparse Matrix with tf_idf data,  vocabulary dictionary and text_corpus
+    Returns: Tuple containing Sparse Matrix with tf_idf data,  vocabulary dictionary and text_corpus (OrderedDict)
     """
     count_vectorizer = CountVectorizer()
     text_corpus_dict = get_text_corpus(path, toy=False)
