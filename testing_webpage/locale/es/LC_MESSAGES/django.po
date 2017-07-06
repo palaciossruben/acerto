@@ -46,7 +46,7 @@ msgstr "Sube tu curriculum"
 #: beta_invite/templates/beta_invite/long_form.html:159
 #: business/templates/business/index.html:101
 msgid "Sure!"
-msgstr "Enviar!"
+msgstr "¡Enviar!"
 
 #: beta_invite/templates/beta_invite/long_form.html:144
 #: business/templates/business/search.html:127
