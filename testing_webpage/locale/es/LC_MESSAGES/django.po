@@ -52,8 +52,6 @@ msgid "Select Country"
 msgstr "Seleccione el País"
 
 #: beta_invite/templates/beta_invite/long_form.html:113
-#, fuzzy
-#| msgid "Education"
 msgid "Select Education"
 msgstr "Seleccione su nivel Educativo"
 
