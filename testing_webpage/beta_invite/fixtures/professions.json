@@ -170,8 +170,8 @@
   "model": "beta_invite.profession",
   "pk": 22,
   "fields": {
-    "name": "Economist",
-    "name_es": "Economista"
+    "name": "Economics",
+    "name_es": "Ciencias Económicas"
   }
 }
 ]
