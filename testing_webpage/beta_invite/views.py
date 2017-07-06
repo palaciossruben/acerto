@@ -2,6 +2,7 @@ import os
 import smtplib
 import subprocess
 import unicodedata
+from user_agents import parse
 from django.core.files.storage import FileSystemStorage
 from django.utils.translation import ugettext as _
 
@@ -71,13 +72,17 @@ def post_index(request):
 
     Returns: saves new User
     """
+    # Gets information of client: such as if it is mobile
+    ua_string = request.META['HTTP_USER_AGENT']
+    user_agent = parse(ua_string)
 
     ip = get_ip(request)
 
     user = User(name=request.POST.get('name'),
                 email=request.POST.get('email'),
                 ip=ip,
-                ui_version=cts.UI_VERSION)
+                ui_version=cts.UI_VERSION,
+                is_mobile=user_agent.is_mobile,)
 
     # Saves here to get an id
     user.save()
@@ -170,6 +175,9 @@ def post_long_form(request):
         request: Request object
     Returns: Saves
     """
+    # Gets information of client: such as if it is mobile.
+    ua_string = request.META['HTTP_USER_AGENT']
+    user_agent = parse(ua_string)
     ip = get_ip(request)
 
     profession_id = request.POST.get('profession')
@@ -190,7 +198,8 @@ def post_long_form(request):
                 experience=experience,
                 age=age,
                 ip=ip,
-                ui_version=cts.UI_VERSION)
+                ui_version=cts.UI_VERSION,
+                is_mobile=user_agent.is_mobile)
 
     # Saves here to get an id
     user.save()
