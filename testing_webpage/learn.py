@@ -13,7 +13,6 @@ from sklearn.naive_bayes import MultinomialNB
 from beta_invite.models import User
 from django.db.models import Case, When
 #from subscribe import search_engine
-from subscribe.cts import *
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
 from collections import OrderedDict
@@ -89,7 +88,7 @@ def get_target_data(user_ids):
 
 def main():
 
-    data_tf_idf, vocabulary, input_dict, target_data = get_text_stats(RESUMES_PATH)
+    data_tf_idf, vocabulary, input_dict, target_data = get_text_stats('media/resumes')
 
     print('TF_IDF: ' + str(data_tf_idf))
     print('VOCABULARY: ' + str(vocabulary))
