@@ -99,8 +99,8 @@
 				  <br>
 
 				  <select style=" width: 266px; font-size: 14px; height: 44px; border:solid 1px #F8E676; background-color:white;
-				  margin-top:15px;"
-				   name="country">
+				  margin-top:15px;" name="country" required>
+					  <option value="">{% trans "Select Country" %}</option>
 					  {% for country in countries%}
 						 <option value={{ country.id }}>{{ country.name }}</option>
 					  {% endfor %}
@@ -109,8 +109,8 @@
 				  <br>
 
 				  <select style=" width: 266px; font-size: 14px; height: 44px; border:solid 1px #F8E676; background-color:white;
-				  margin-top:15px;"
-				   name="education">
+				  margin-top:15px;" name="education" required>
+					  <option value="">{% trans "Select Education" %}</option>
 					  {% for level in education%}
 						 <option value={{ level.id }}>{{ level.name }}</option>
 					  {% endfor %}
@@ -119,8 +119,8 @@
 				  <br>
 
 				  <select style=" width: 266px; font-size: 14px; height: 44px; border:solid 1px #F8E676; background-color:white;
-				  margin-top:15px;"
-				   name="profession">
+				  margin-top:15px;" name="profession" required>
+					  <option value="">{% trans "Select Profession" %}</option>
 					  {% for profession in professions%}
 						 <option value={{ profession.id }}>{{ profession.name }}</option>
 					  {% endfor %}
