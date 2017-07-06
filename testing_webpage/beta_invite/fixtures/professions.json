@@ -42,8 +42,8 @@
   "model": "beta_invite.profession",
   "pk": 6,
   "fields":{
-    "name": "Electrical Engineer",
-    "name_es": "Ingeniero/a Eléctrico"
+    "name": "Electrical/Electronic Engineer",
+    "name_es": "Ingeniero/a Eléctrico/Electrónico"
   }
 },
 {

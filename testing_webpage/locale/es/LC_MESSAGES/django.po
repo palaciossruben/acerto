@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-06 01:32+0000\n"
+"POT-Creation-Date: 2017-07-06 16:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,7 +38,6 @@ msgstr "Tu correo"
 
 #: beta_invite/templates/beta_invite/index.html:103
 #: beta_invite/templates/beta_invite/long_form.html:133
-#: beta_invite/templates/beta_invite/long_form.html:172
 msgid "Upload your resume"
 msgstr "Sube tu curriculum"
 
@@ -59,23 +58,27 @@ msgstr "Edad en años:"
 
 #: beta_invite/templates/beta_invite/success.html:80
 #: business/templates/business/success.html:80
-msgid "Thanks for registering, we will contact you soon!!!"
-msgstr "¡¡¡Gracias por registrarte, nos pondremos en contacto pronto!!!"
+msgid "Thanks for registering!"
+msgstr "¡Gracias por registrarte!"
+
+#: beta_invite/templates/beta_invite/success.html:84
+#: business/templates/business/success.html:84
+msgid "We will contact you soon"
+msgstr "Nos pondremos en contacto pronto"
 
 #: beta_invite/util/email_sender.py:42
 msgid "Welcome to PeakU"
 msgstr "Bienvenido a PeakU"
 
 #: beta_invite/views.py:61 beta_invite/views.py:95 beta_invite/views.py:148
-#: beta_invite/views.py:213
+#: beta_invite/views.py:208
 msgid "Discover your true passion"
 msgstr "Descubre tu verdadera pasión"
 
 #: beta_invite/views.py:62 beta_invite/views.py:96 beta_invite/views.py:149
-#: beta_invite/views.py:214
+#: beta_invite/views.py:209
 msgid "We search millions of jobs and find the right one for you"
-msgstr ""
-"Buscamos entre millones de trabajos y encontramos el trabajo perfecto para ti"
+msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
 
 #: business/templates/business/results.html:80
 msgid "Download curriculums of matching profiles"
@@ -86,8 +89,6 @@ msgid "Name"
 msgstr "Nombre"
 
 #: business/templates/business/results.html:89
-#, fuzzy
-#| msgid "Your email"
 msgid "Email"
 msgstr "Correo"
 
@@ -96,8 +97,6 @@ msgid "Education"
 msgstr "Educación"
 
 #: business/templates/business/results.html:89
-#, fuzzy
-#| msgid "Experience in years:"
 msgid "Experience"
 msgstr "Experiencia"
 
