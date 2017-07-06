@@ -58,9 +58,8 @@ def index(request):
     action_url = '/beta_invite/post'
 
     Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
-    return render(request, cts.BETA_INVITE_VIEW_PATH, {'main_message': _("Discover amazing people"),
-                                                       'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
-                                                       'action_url': action_url,
+    return render(request, cts.BETA_INVITE_VIEW_PATH, {'main_message': _("Discover your true passion"),
+                                                       'secondary_message': _("We search millions of jobs and find the right one for you"),                                                       'action_url': action_url,
                                                        })
 
 
@@ -93,8 +92,8 @@ def post_index(request):
     #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
     #    pass
 
-    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover amazing people"),
-                                                   'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
+    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover your true passion"),
+                                                   'secondary_message': _("We search millions of jobs and find the right one for you"),
                                                    })
 
 
@@ -146,9 +145,8 @@ def long_form(request):
 
     Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
 
-    return render(request, cts.LONG_FORM_VIEW_PATH, {'main_message': _("Discover amazing people"),
-                                                     'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
-                                                     'action_url': action_url,
+    return render(request, cts.LONG_FORM_VIEW_PATH, {'main_message': _("Discover your true passion"),
+                                                     'secondary_message': _("We search millions of jobs and find the right one for you"),                                                     'action_url': action_url,
                                                      'countries': countries,
                                                      'education': education,
                                                      'professions': professions,
@@ -207,6 +205,6 @@ def post_long_form(request):
     #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
     #    pass
 
-    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover amazing people"),
-                                                   'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
+    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover your true passion"),
+                                                   'secondary_message': _("We search millions of jobs and find the right one for you"),
                                                    })
