@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-01 01:48+0000\n"
+"POT-Creation-Date: 2017-07-06 01:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,6 +38,7 @@ msgstr "Tu correo"
 
 #: beta_invite/templates/beta_invite/index.html:103
 #: beta_invite/templates/beta_invite/long_form.html:133
+#: beta_invite/templates/beta_invite/long_form.html:172
 msgid "Upload your resume"
 msgstr "Sube tu curriculum"
 
@@ -65,20 +66,16 @@ msgstr "¡¡¡Gracias por registrarte, nos pondremos en contacto pronto!!!"
 msgid "Welcome to PeakU"
 msgstr "Bienvenido a PeakU"
 
-#: beta_invite/views.py:61 beta_invite/views.py:94 beta_invite/views.py:147
-#: beta_invite/views.py:195 business/views.py:25 business/views.py:52
-#: business/views.py:71 business/views.py:134
-msgid "Discover amazing people"
-msgstr "Descubre personas increíbles"
+#: beta_invite/views.py:61 beta_invite/views.py:95 beta_invite/views.py:148
+#: beta_invite/views.py:213
+msgid "Discover your true passion"
+msgstr "Descubre tu verdadera pasión"
 
-#: beta_invite/views.py:62 beta_invite/views.py:95 beta_invite/views.py:148
-#: beta_invite/views.py:196 business/views.py:26 business/views.py:53
-#: business/views.py:72 business/views.py:135
-msgid ""
-"We search millions of profiles and find the ones that best suit your business"
+#: beta_invite/views.py:62 beta_invite/views.py:96 beta_invite/views.py:149
+#: beta_invite/views.py:214
+msgid "We search millions of jobs and find the right one for you"
 msgstr ""
-"Buscamos millones de perfiles y encontramos los que mejor se adaptan a tu "
-"negocio"
+"Buscamos entre millones de trabajos y encontramos el trabajo perfecto para ti"
 
 #: business/templates/business/results.html:80
 msgid "Download curriculums of matching profiles"
@@ -122,6 +119,19 @@ msgstr "Habilidades o cualquier otro requerimiento"
 msgid "Search"
 msgstr "Buscar"
 
+#: business/views.py:29 business/views.py:56 business/views.py:75
+#: business/views.py:234
+msgid "Discover amazing people"
+msgstr "Descubre personas increíbles"
+
+#: business/views.py:30 business/views.py:57 business/views.py:76
+#: business/views.py:235
+msgid ""
+"We search millions of profiles and find the ones that best suit your business"
+msgstr ""
+"Buscamos millones de perfiles y encontramos los que mejor se adaptan a tu "
+"negocio"
+
 #: testing_webpage/shared_settings.py:118
 msgid "English"
 msgstr "Ingles"
@@ -132,14 +142,6 @@ msgstr "Español"
 
 #~ msgid "name"
 #~ msgstr "nombre"
-
-#~ msgid "Discover your true passion"
-#~ msgstr "Descubre tu verdadera pasión"
-
-#~ msgid "We search millions of jobs and find the right one for you"
-#~ msgstr ""
-#~ "Buscamos entre millones de trabajos y encontramos el trabajo perfecto "
-#~ "para ti"
 
 #~ msgid "Missing name."
 #~ msgstr "Falta el nombre"
