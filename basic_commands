@@ -1,5 +1,8 @@
 
 
+--DB DELETION: BE CAREFUL!!!
+DROP DATABASE dbadmin;
+
 -- DB creation
 CREATE USER dbadmin WITH PASSWORD 'like_mago_de_oz';
 CREATE DATABASE maindb;

@@ -10,11 +10,9 @@ env.always_use_pty = False
 WORKING_PATH = '/home/ubuntu/acerto/testing_webpage/'
 
 
-def list_files():
-    #with cd('acerto/testing_webpage'):
-    #    run('ls')
-    list_dir('Desktop/')
-
+def sync_local():
+    """Synchronizes local machine with last backup from DB and """
+    pass
 
 def list_dir(directory=None):
     directory = directory or env.cwd

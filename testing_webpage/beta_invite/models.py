@@ -69,6 +69,9 @@ class User(models.Model):
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
     curriculum_url = models.CharField(max_length=200, default='#')
 
+    # Detects if the user is in a mobile phone when registering.
+    is_mobile = models.NullBooleanField()
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
