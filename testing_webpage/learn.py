@@ -131,7 +131,7 @@ def main():
 
     target = [e for e in target_data.values()]
 
-    data_tf_idf_train, data_tf_idf_test, target_train, target_test = train_test_split(data_tf_idf, target, test_size=0.3)
+    data_tf_idf_train, data_tf_idf_test, target_train, target_test = train_test_split(data_tf_idf, target, test_size=0.1)
 
     # DIMENSIONALITY REDUCTION:
     #from sklearn.decomposition import TruncatedSVD
