@@ -66,8 +66,8 @@
   "model": "beta_invite.profession",
   "pk": 9,
   "fields":{
-    "name": "Business",
-    "name_es": "Negocios"
+    "name": "Business Administration",
+    "name_es": "Administración/Negocios"
   }
 },
 {
