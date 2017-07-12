@@ -19,6 +19,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from collections import OrderedDict
 from sklearn.model_selection import GridSearchCV
 
+
 def get_text_corpus(path, toy=False):
     """
     Args:
@@ -142,6 +143,193 @@ def get_errors_dict(target, predicted):
     return OrderedDict([(k, abs(tag-predicted)) for (k, tag), predicted in zip(target, predicted)])
 
 
+EPOCHS = 3000
+BATCH_SIZE = 100
+
+
+def neural_model(input_dim):
+
+    from keras.models import Sequential
+    from keras.layers import Dense
+
+    # Construct a model
+    model = Sequential()
+
+    layer = Dense(4, input_dim=input_dim, init='glorot_normal', activation='relu')
+    model.add(layer)
+
+    layer2 = Dense(3, init='glorot_normal', activation='sigmoid')
+    model.add(layer2)
+
+    layer3 = Dense(1, init='glorot_normal', activation='linear')
+    model.add(layer3)
+
+    model.compile(loss='mean_squared_error', optimizer='adam', metrics=['accuracy'])
+
+    return model
+
+
+
+"""
+def neural_model():
+
+    import numpy as np
+    from w2v import train_word2vec
+    import tensorflow as tf
+    sess = tf.Session()
+
+    from keras.models import Sequential, Model
+    from keras.layers import Activation, Dense, Dropout, Embedding, Flatten, Input, Merge, Convolution1D, MaxPooling1D
+    from keras import backend as K
+    K.set_session(sess)
+
+    np.random.seed(2)
+
+    # Parameters
+    # ==================================================
+    #
+    # Model Variations. See Kim Yoon's Convolutional Neural Networks for
+    # Sentence Classification, Section 3 for detail.
+
+    model_variation = 'CNN-non-static'  #  CNN-rand | CNN-non-static | CNN-static
+    print('Model variation is %s' % model_variation)
+
+    # Model Hyperparameters
+    sequence_length = 45
+    embedding_dim = 20
+    filter_sizes = (3, 4)
+    num_filters = 128
+    dropout_prob = (0.25, 0.5)
+    hidden_dims = 128
+
+    # Training parameters
+    batch_size = 32
+    num_epochs = 30
+    val_split = 0.1
+
+    # Word2Vec parameters, see train_word2vec
+    min_word_count = 1  # Minimum word count
+    context = 10        # Context window size
+
+    # Data Preparation
+    # ==================================================
+    #
+    # Load data
+    #x, y, vocabulary, vocabulary_inv = data_helpers.load_data()
+
+    if model_variation == 'CNN-non-static' or model_variation == 'CNN-static':
+        embedding_weights = train_word2vec(x, vocabulary_inv, embedding_dim, min_word_count, context)
+        if model_variation == 'CNN-static':
+            x = embedding_weights[0][x]
+    elif model_variation == 'CNN-rand':
+        embedding_weights = None
+    else:
+        raise ValueError('Unknown model variation')
+
+    # Shuffle data
+    shuffle_indices = np.random.permutation(np.arange(len(y)))
+    x_shuffled = x[shuffle_indices]
+    y_shuffled = y[shuffle_indices].argmax(axis=1)
+
+    print("Vocabulary Size: {:d}".format(len(vocabulary)))
+
+    # Building model
+    # ==================================================
+    #
+    # graph subnet with one input and one output,
+    # convolutional layers concatenated in parallel
+    graph_in = Input(shape=(sequence_length, embedding_dim))
+    convs = []
+    for fsz in filter_sizes:
+        conv = Convolution1D(nb_filter=num_filters,
+                             filter_length=fsz,
+                             border_mode='valid',
+                             activation='relu',
+                             subsample_length=1)(graph_in)
+        pool = MaxPooling1D(pool_length=2)(conv)
+        flatten = Flatten()(pool)
+        convs.append(flatten)
+
+    if len(filter_sizes) > 1:
+        out = Merge(mode='concat')(convs)
+    else:
+        out = convs[0]
+
+    graph = Model(input=graph_in, output=out)
+
+    # main sequential model
+    model = Sequential()
+    if not model_variation == 'CNN-static':
+        model.add(Embedding(len(vocabulary), embedding_dim, input_length=sequence_length,
+                            weights=embedding_weights))
+
+    model.add(Dropout(dropout_prob[0], input_shape=(sequence_length, embedding_dim)))
+    model.add(graph)
+    model.add(Dense(hidden_dims))
+    model.add(Dropout(dropout_prob[1]))
+    model.add(Activation('relu'))
+    model.add(Dense(1))
+    model.add(Activation('sigmoid'))
+    model.compile(loss='binary_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
+
+    # Training model
+    # ==================================================
+    model.fit(x_shuffled, y_shuffled, batch_size=batch_size,
+              nb_epoch=num_epochs, validation_split=val_split, verbose=1)
+
+    model.save('save_tmp.h5')
+"""
+
+
+def reduce_dimensionality(train_set, test_set):
+    """
+    DIMENSIONALITY REDUCTION:
+    Args:
+        train_set: set with train
+        test_set: set with test
+    Returns: Tuple with train and test set with dimension reduced.
+    """
+    print('REDUCING DIMENSIONALITY')
+    from sklearn.decomposition import TruncatedSVD
+
+    svd = TruncatedSVD(n_components=100, n_iter=7, random_state=42)
+    svd.fit(train_set)
+    print('SVD SUM: ' + str(svd.explained_variance_ratio_.sum()))
+
+    train_set = svd.transform(train_set)
+    test_set = svd.transform(test_set)
+
+    return train_set, test_set
+
+
+def grid_search(model, train_set, train_target):
+    """
+    Construct model with a search space on the hyper-parameters.
+    Args:
+        model: any sklearn model
+        train_set: input
+        train_target: output
+    Returns: a model with grid search into it.
+    """
+    #parameters = {'C': (1e3, 1e4, 1e6, 1e7),
+    #              'degree': (1, 2, 3, 4),
+    #              }
+
+    #parameters = {'gamma': (10, 1, 0.1, 0.01, 0.001),
+    #              'C': (1e3, 1.25e3, 2.5e3),
+    #              }
+
+    parameters = {'C': (1e2, 1e3, 1e4),
+                  }
+
+    model = GridSearchCV(model, parameters, n_jobs=-1).fit(train_set, train_target)
+
+    print('BEST GRID SEARCH SCORE: ' + str(model.best_score_))
+    print('BEST GRID SEARCH PARAMS: ' + str(model.best_params_))
+
+    return model
+
+
 def main():
 
     data_tf_idf, vocabulary, input_dict, target_data, count_vectorizer, tfidf_transformer = get_text_stats('media/resumes')
@@ -151,58 +339,39 @@ def main():
     #print('INPUT DICT: ' + str(input_dict))
     #print('TARGET DATA: ' + str(target_data))
 
-    #target = [e for e in target_data.values()]
-
-    # Fucking skleanr cannot take dictionaries, therefore the ORder Dict is converted to list containing tuples first.
+    # Fucking sklearn cannot take dictionaries, therefore the ORder Dict is converted to list containing tuples first.
     target_tuple_list = [(k, v) for k, v in target_data.items()]
 
     data_tf_idf_train, data_tf_idf_test, train_target, test_target = train_test_split(data_tf_idf, target_tuple_list,
                                                                                       test_size=0.05)
 
-    # DIMENSIONALITY REDUCTION:
-    #from sklearn.decomposition import TruncatedSVD
+    #data_tf_idf_train, data_tf_idf_test = reduce_dimensionality(data_tf_idf_train, data_tf_idf_test)
 
-    #svd = TruncatedSVD(n_components=10, n_iter=7, random_state=42)
-    #svd.fit(data_tf_idf_train)
-    #print('SVD SUM: ' + str(svd.explained_variance_ratio_.sum()))
 
-    #data_tf_idf_train = svd.transform(data_tf_idf_train)
-    #data_tf_idf_test = svd.transform(data_tf_idf_test)
+    #from sklearn.linear_model import SGDClassifier, SGDRegressor
 
-    #clf = SGDClassifier(loss='hinge', penalty='l2',
-    #                    alpha=1e-4, n_iter=5, random_state=42)
+    #model = SGDClassifier(loss='hinge', penalty='l2',
+    #                      alpha=1e-4, n_iter=5, random_state=42)
 
-    #clf = SVR(kernel='rbf', C=1e3, gamma=0.001)
-    clf = SVR(kernel='rbf', C=1e6, gamma=0.1)
-    #svr_lin = SVR(kernel='linear', C=1e3)
-    #clf = SVR(kernel='poly', C=1e3, degree=2)
+    #from scipy import shape
+
+    #model = neural_model(input_dim=shape(data_tf_idf_train)[1])
+
+    model = SVR(kernel='rbf', C=1e3, gamma=0.001)
 
     train_target_values = [v for _, v in train_target]
-    clf.fit(data_tf_idf_train, train_target_values)
+    model.fit(data_tf_idf_train, train_target_values)
+    #model.fit(data_tf_idf_train, train_target_values, nb_epoch=EPOCHS, batch_size=BATCH_SIZE)
 
-    #parameters = {#'vect__ngram_range': [(1, 1), (1, 2)],
-    #              #'tfidf__use_idf': (True, False),
-    #              'alpha': (10, 1, 1e-1, 1e-2, 1e-3, 1e-4),
-    #}
 
-    #parameters = {'gamma': (10, 1, 0.1, 0.01, 0.001),
-    #              'C': (1e3, 1.25e3, 2.5e3),
-    #              }
+    # grid_search(model, train_set, train_target)
+    # toy_test(count_vectorizer, tfidf_transformer, model)
 
-    #clf = GridSearchCV(clf, parameters, n_jobs=-1).fit(data_tf_idf_train, train_target_values)
-
-    #print(clf.best_score_)
-    #print(clf.best_params_)
-
-    # {'C': 1000.0, 'gamma': 0.001} {'C': 10000.0, 'gamma': 0.001}
-
-    # toy_test(count_vectorizer, tfidf_transformer, clf)
-
-    train_predicted = clf.predict(data_tf_idf_train)
+    train_predicted = model.predict(data_tf_idf_train)
     train_predicted = [int(round(e)) for e in train_predicted]
     print('TRAIN ACCURACY: ' + str(np.mean(train_predicted == train_target_values)))
 
-    test_predicted = clf.predict(data_tf_idf_test)
+    test_predicted = model.predict(data_tf_idf_test)
     test_predicted = np.array([int(round(e)) for e in test_predicted])
     test_target_values = np.array([e for _, e in test_target])
     test_target_keys = np.array([k for k, _ in test_target])
@@ -269,9 +438,7 @@ if __name__ == '__main__':
     average_test_error = get_avg_error_dict(test_error_list)
 
     # SORTED ERRORS
-    #print('AVERAGE TRAIN ERROR: ' + str(sort_error_dict(average_train_error)))
     print('AVERAGE TEST ERROR: ' + str(sort_error_dict(average_test_error)))
-
     print('AVERAGE TEST ACCURACY: ' + str(np.mean(accuracy)))
     print('STD-DEV TEST ACCURACY: ' + str(np.std(accuracy)))
 
