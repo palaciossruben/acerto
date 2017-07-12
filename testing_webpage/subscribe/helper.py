@@ -218,7 +218,7 @@ def get_relevance_index(text, relevance_dictionary):
 
     total_relevance = 0
     for word, relevance in relevance_dictionary.items():
-        repetitions = len(re.findall('(^|\s|\n){word}(^|\s|\n)'.format(word=word), text))
+        repetitions = len(re.findall('(^|\s|\n){word}(^|\s|\n)'.format(word=word), text.lower()))
         total_relevance += repetitions*relevance
 
     return total_relevance

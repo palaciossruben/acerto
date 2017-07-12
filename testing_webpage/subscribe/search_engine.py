@@ -112,8 +112,8 @@ def save_user_relevance_dictionary(path):
 
     user_relevance_dictionary = h.remove_accents(user_relevance_dictionary)
 
-    for k, v in user_relevance_dictionary.items():
-        print(k + ': ' + str(v))
+    #for k, v in user_relevance_dictionary.items():
+    #    print(k + ': ' + str(v))
 
     pickle.dump(user_relevance_dictionary, open('user_relevance_dictionary.p', 'wb'))
 
