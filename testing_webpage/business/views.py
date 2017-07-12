@@ -140,16 +140,16 @@ def get_skills(request):
     return [t.lower() for t in skills]
 
 
-def user_id_sorted_iterator(relevance_dictionary, users, skills):
+def user_id_sorted_iterator(user_relevance_dictionary, users, skills):
     """
     Args:
-        relevance_dictionary: Vocabulary and relevance dict.
+        user_relevance_dictionary: Vocabulary and relevance dict.
         users: List of User objects from previous filters.
         skills: List of processed strings.
     Returns: A sorted iterator that returns tuples (user_id, relevance).
     """
-    tokens_dict = {t: relevance_dictionary[t] for t in skills
-                   if relevance_dictionary.get(t) is not None}
+    tokens_dict = {t: user_relevance_dictionary[t] for t in skills
+                   if user_relevance_dictionary.get(t) is not None}
 
     # Initializes all relevance to 0.
     user_relevance_dict = OrderedDict({user.id: 0 for user in users})
@@ -196,11 +196,11 @@ def get_matching_users(request):
 
     # Opens word_user_dict, or returns unordered users.
     try:
-        relevance_dictionary = pickle.load(open('subscribe/relevance_dictionary.p', 'rb'))
+        user_relevance_dictionary = pickle.load(open('subscribe/user_relevance_dictionary.p', 'rb'))
     except FileNotFoundError:
         return users  # will not filter by words.
 
-    sorted_iterator = user_id_sorted_iterator(relevance_dictionary, users, get_skills(request))
+    sorted_iterator = user_id_sorted_iterator(user_relevance_dictionary, users, get_skills(request))
 
     #print_sorted_iterator_on_debug(sorted_iterator)
 

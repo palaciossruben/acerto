@@ -12,7 +12,10 @@ import helper as h
 
 def get_text_from_path(root_path, relative_path):
     complete_path = os.path.join(root_path, relative_path, os.path.basename(relative_path) + '.txt')
-    return open(complete_path, encoding='UTF-8').read()
+    try:
+        return open(complete_path, encoding='UTF-8').read()
+    except FileNotFoundError:
+        return ''
 
 
 def get_text_corpus(path, toy=False):
@@ -36,7 +39,7 @@ def get_text_corpus(path, toy=False):
     return text_dict
 
 
-def get_text_stats(path):
+def get_text_stats(path, use_idf):
     """
     Gets tf_idf transformed data and the vocabulary
     Args:
@@ -46,7 +49,7 @@ def get_text_stats(path):
     count_vectorizer = CountVectorizer()
     text_corpus_dict = get_text_corpus(path, toy=False)
     data_counts = count_vectorizer.fit_transform([e for e in text_corpus_dict.values()])
-    tf_transformer = TfidfTransformer(use_idf=True).fit(data_counts)
+    tf_transformer = TfidfTransformer(use_idf=use_idf).fit(data_counts)
 
     data_tf_idf = tf_transformer.transform(data_counts)
     vocabulary = count_vectorizer.vocabulary_
@@ -54,13 +57,13 @@ def get_text_stats(path):
     return data_tf_idf, vocabulary, text_corpus_dict
 
 
-def save_dictionary_scores(path):
+def save_relevance_dictionary(path):
     """
     For each word it will get a score of how desirable is to add the search criteria.
     This is useful for the autocomplete.
     """
 
-    data_tf_idf, vocabulary, text_corpus = get_text_stats(path)
+    data_tf_idf, vocabulary, text_corpus = get_text_stats(path, use_idf=False)
 
     scores = []
     for word_str, word_num_code in vocabulary.items():
@@ -82,10 +85,10 @@ def save_dictionary_scores(path):
     #for word_str, score in scores:
     #    print('{}: {}'.format(word_str, score))
 
-    pickle.dump(scores, open('autocomplete_scores.p', 'wb'))
+    pickle.dump({k: v for k, v in scores}, open('relevance_dictionary.p', 'wb'))
 
 
-def save_relevance_dictionary(path):
+def save_user_relevance_dictionary(path):
     """
     For each word finds the user_id relevance. This is the data structure:
     word_user_dict = {
@@ -95,9 +98,9 @@ def save_relevance_dictionary(path):
         path: The directory of the resumes
     Returns: Saves file with dictionary
     """
-    data_tf_idf, vocabulary, text_corpus = get_text_stats(path)
+    data_tf_idf, vocabulary, text_corpus = get_text_stats(path, use_idf=True)
 
-    relevance_dictionary = {}
+    user_relevance_dictionary = {}
     for word, num_word in vocabulary.items():
         values = []
         for document, (user_id, text) in enumerate(text_corpus.items()):
@@ -105,16 +108,16 @@ def save_relevance_dictionary(path):
             if relevance > 0:
                 values.append((int(user_id), relevance))
 
-        relevance_dictionary[word] = tuple(values)
+        user_relevance_dictionary[word] = tuple(values)
 
-    relevance_dictionary = h.remove_accents(relevance_dictionary)
+    user_relevance_dictionary = h.remove_accents(user_relevance_dictionary)
 
-    for k, v in relevance_dictionary.items():
+    for k, v in user_relevance_dictionary.items():
         print(k + ': ' + str(v))
 
-    pickle.dump(relevance_dictionary, open('relevance_dictionary.p', 'wb'))
+    pickle.dump(user_relevance_dictionary, open('user_relevance_dictionary.p', 'wb'))
 
 
 if __name__ == "__main__":
-    save_dictionary_scores(RESUMES_PATH)
     save_relevance_dictionary(RESUMES_PATH)
+    save_user_relevance_dictionary(RESUMES_PATH)

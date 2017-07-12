@@ -4,8 +4,8 @@ import os
 import time
 import numpy as np
 
+from sklearn.svm import SVR
 from django.core.wsgi import get_wsgi_application
-from sklearn.linear_model import SGDClassifier
 from sklearn.model_selection import train_test_split
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
@@ -17,7 +17,7 @@ from django.db.models import Case, When
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
 from collections import OrderedDict
-
+from sklearn.model_selection import GridSearchCV
 
 def get_text_corpus(path, toy=False):
     """
@@ -27,9 +27,21 @@ def get_text_corpus(path, toy=False):
     Returns: Dictionary of the form {id: text}
     """
     if not toy:
-        text_dict = {int(os.path.basename(p)):
-                     open(os.path.join(path, p, os.path.basename(p) + '.txt'), encoding='UTF-8').read()
-                     for p in os.listdir(path) if os.path.isdir(os.path.join(path, p))}
+
+        text_dict = {}
+
+        for p in os.listdir(path):
+            if os.path.isdir(os.path.join(path, p)):
+                try:
+                    text = open(os.path.join(path, p, os.path.basename(p) + '.txt'), encoding='UTF-8').read()
+                    text_dict[int(os.path.basename(p))] = text
+                except FileNotFoundError:
+                    # not a big deal file, if no file found.
+                    pass
+
+        #text_dict = {int(os.path.basename(p)):
+        #             open(os.path.join(path, p, os.path.basename(p) + '.txt'), encoding='UTF-8').read()
+        #             for p in os.listdir(path) if os.path.isdir(os.path.join(path, p))}
         text_dict = OrderedDict(text_dict)
     else:
         # Small data set to understand algorithms
@@ -120,6 +132,16 @@ def toy_test(count_vectorizer, tfidf_transformer, clf):
         print('%r => %s' % (doc, education_dict[level]))
 
 
+def get_errors_dict(target, predicted):
+    """
+    Args:
+        target: Dict where key is the User.id and values is the target education level.
+        predicted: Ordered List with predictions.
+    Returns: OrderDict with error per document.
+    """
+    return OrderedDict([(k, abs(tag-predicted)) for (k, tag), predicted in zip(target, predicted)])
+
+
 def main():
 
     data_tf_idf, vocabulary, input_dict, target_data, count_vectorizer, tfidf_transformer = get_text_stats('media/resumes')
@@ -129,9 +151,13 @@ def main():
     #print('INPUT DICT: ' + str(input_dict))
     #print('TARGET DATA: ' + str(target_data))
 
-    target = [e for e in target_data.values()]
+    #target = [e for e in target_data.values()]
 
-    data_tf_idf_train, data_tf_idf_test, target_train, target_test = train_test_split(data_tf_idf, target, test_size=0.1)
+    # Fucking skleanr cannot take dictionaries, therefore the ORder Dict is converted to list containing tuples first.
+    target_tuple_list = [(k, v) for k, v in target_data.items()]
+
+    data_tf_idf_train, data_tf_idf_test, train_target, test_target = train_test_split(data_tf_idf, target_tuple_list,
+                                                                                      test_size=0.05)
 
     # DIMENSIONALITY REDUCTION:
     #from sklearn.decomposition import TruncatedSVD
@@ -143,35 +169,83 @@ def main():
     #data_tf_idf_train = svd.transform(data_tf_idf_train)
     #data_tf_idf_test = svd.transform(data_tf_idf_test)
 
-    clf = SGDClassifier(loss='hinge', penalty='l2',
-                        alpha=1e-3, n_iter=5, random_state=42)
+    #clf = SGDClassifier(loss='hinge', penalty='l2',
+    #                    alpha=1e-4, n_iter=5, random_state=42)
 
-    clf.fit(data_tf_idf_train, target_train)
+    #clf = SVR(kernel='rbf', C=1e3, gamma=0.001)
+    clf = SVR(kernel='rbf', C=1e6, gamma=0.1)
+    #svr_lin = SVR(kernel='linear', C=1e3)
+    #clf = SVR(kernel='poly', C=1e3, degree=2)
 
-    #from sklearn.model_selection import GridSearchCV
+    train_target_values = [v for _, v in train_target]
+    clf.fit(data_tf_idf_train, train_target_values)
+
     #parameters = {#'vect__ngram_range': [(1, 1), (1, 2)],
     #              #'tfidf__use_idf': (True, False),
     #              'alpha': (10, 1, 1e-1, 1e-2, 1e-3, 1e-4),
     #}
 
-    #clf = GridSearchCV(clf, parameters, n_jobs=-1).fit(data_tf_idf_train, target_train)
+    #parameters = {'gamma': (10, 1, 0.1, 0.01, 0.001),
+    #              'C': (1e3, 1.25e3, 2.5e3),
+    #              }
 
-    # toy_test(count_vectorizer, tfidf_transformer, clf)
-
-    predicted = clf.predict(data_tf_idf_train)
-    print('TRAIN PREDICTION' + str(predicted))
-    print('TRAIN ACCURACY: ' + str(np.mean(predicted == target_train)))
-
-    predicted = clf.predict(data_tf_idf_test)
-    print('TEST PREDICTION' + str(predicted))
-    test_accuracy = np.mean(predicted == target_test)
-    print('TEST ACCURACY: ' + str(test_accuracy))
+    #clf = GridSearchCV(clf, parameters, n_jobs=-1).fit(data_tf_idf_train, train_target_values)
 
     #print(clf.best_score_)
     #print(clf.best_params_)
-    #print(clf.cv_results_)
 
-    return test_accuracy
+    # {'C': 1000.0, 'gamma': 0.001} {'C': 10000.0, 'gamma': 0.001}
+
+    # toy_test(count_vectorizer, tfidf_transformer, clf)
+
+    train_predicted = clf.predict(data_tf_idf_train)
+    train_predicted = [int(round(e)) for e in train_predicted]
+    print('TRAIN ACCURACY: ' + str(np.mean(train_predicted == train_target_values)))
+
+    test_predicted = clf.predict(data_tf_idf_test)
+    test_predicted = np.array([int(round(e)) for e in test_predicted])
+    test_target_values = np.array([e for _, e in test_target])
+    test_target_keys = np.array([k for k, _ in test_target])
+    test_accuracy = np.mean(test_predicted == test_target_values)
+
+    print('TEST USER IDS: ' + str(test_target_keys))
+    print('TEST TARGET' + str(test_target_values))
+    print('TEST PREDICTION' + str(test_predicted))
+    print('TEST ACCURACY: ' + str(test_accuracy))
+
+    train_error_dict = get_errors_dict(train_target, train_predicted)
+    test_error_dict = get_errors_dict(test_target, test_predicted)
+
+    return test_accuracy, train_error_dict, test_error_dict
+
+
+def get_avg_error_dict(error_list):
+    """
+    Returns Dictionary with avg error per User.id
+    Args:
+        error_list: A list containing dictionaries, each one of them has the error for particular User.id
+    Returns: Dictionary with User.id as key and value a tuple having average error and number of observations.
+        The avg error for each User.id. This can aid in finding particular weaknesses on the whole classification
+        pipeline.
+    """
+
+    avg_error_dict = {}
+    for d in error_list:
+        for k, error in d.items():
+            if avg_error_dict.get(k) is None:
+                avg_error_dict[k] = (error, 1)
+            else:
+                avg_error, num_observations = avg_error_dict[k]
+
+                # Here uses Weighted avg formula
+                new_avg_error = (avg_error*num_observations + error)/(num_observations + 1)
+                avg_error_dict[k] = (new_avg_error, num_observations + 1)
+
+    return avg_error_dict
+
+
+def sort_error_dict(average_error):
+    return sorted([(k, v) for k, v in average_error.items()], key=lambda x: -x[1][0])
 
 
 if __name__ == '__main__':
@@ -180,8 +254,23 @@ if __name__ == '__main__':
 
     num_experiments = 500
     accuracy = np.array([])
+    train_error_list = []
+    test_error_list = []
     for _ in range(num_experiments):
-        accuracy = np.append(accuracy, main())
+
+        current_accuracy, train_error_dict, test_error_dict = main()
+
+        accuracy = np.append(accuracy, current_accuracy)
+
+        train_error_list.append(train_error_dict)
+        test_error_list.append(test_error_dict)
+
+    average_train_error = get_avg_error_dict(train_error_list)
+    average_test_error = get_avg_error_dict(test_error_list)
+
+    # SORTED ERRORS
+    #print('AVERAGE TRAIN ERROR: ' + str(sort_error_dict(average_train_error)))
+    print('AVERAGE TEST ERROR: ' + str(sort_error_dict(average_test_error)))
 
     print('AVERAGE TEST ACCURACY: ' + str(np.mean(accuracy)))
     print('STD-DEV TEST ACCURACY: ' + str(np.std(accuracy)))

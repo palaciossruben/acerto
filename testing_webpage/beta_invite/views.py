@@ -162,7 +162,7 @@ def update_search_dictionary_on_background():
     """
     A background process is spawned to update internal search structures.
     First it goes into the subscribe directory, then it updates the missing text extractions. Then it generates the
-    relevance_dictionary.p
+    user_relevance_dictionary.p
     Returns: None
     """
     command = 'cd subscribe/ && python3 document_reader.py && python3 search_engine.py &'

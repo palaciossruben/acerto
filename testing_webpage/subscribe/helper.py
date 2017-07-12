@@ -1,7 +1,10 @@
 import os
 import io
+import re
+import nltk
 import shutil
 import PyPDF2
+import pickle
 import textract
 import subprocess
 import unicodedata
@@ -125,16 +128,40 @@ def get_pdf_text_pypdf2(filename):
     return text
 
 
+# TODO: Solve for different languages
 def text_has_no_data(text):
-    """Filters for many '\n' cases """
-    return len(text.replace('\n', '').replace(' ', '')) == 0
+    """
+    Finds if there is meaningful data on the text.
+    Args:
+        text: string.
+    Returns:
+    """
+
+    has_no_data = len(text.replace('\n', '').replace(' ', '')) == 0
+    if has_no_data:
+        return True  # empty file found
+    else:  # Try finding meaning
+        words = nltk.word_tokenize(text)
+
+        # make it faster by using my own relevance dictionary
+        with open('es-MX.dic', 'r', encoding='UTF-8') as vocabulary_file:
+
+            dictionary_text = remove_accents(vocabulary_file.read())
+            vocabulary = nltk.word_tokenize(dictionary_text)
+
+            for w in words:
+                if w in vocabulary:
+                    return False  # Found valid word
+
+        # Found no Spanish words
+        return True
 
 
 def get_image_num_name(image, count):
     return '{}-{}.png'.format(image, count)
 
 
-def last_chance(filename):
+def get_pdf_text_with_ocr(filename):
     """Convert to png and use OCR, this is  a last resort."""
 
     image_basename = os.path.splitext(filename)[0]
@@ -162,8 +189,15 @@ def last_chance(filename):
     return text
 
 
-def get_pdf_text(folder_path, filename):
-    """Tries different libraries"""
+def get_text_with_traditional_strategy(folder_path, filename):
+    """
+    Follows path from greater chance of success to least.
+    This is not perfect. Some tricky PDFS can join all words or separate every other character.
+    Args:
+        folder_path:
+        filename:
+    Returns: String with text
+    """
     text = get_pdf_text_pdf_miner(filename)
     if text_has_no_data(text):
         try:
@@ -173,11 +207,67 @@ def get_pdf_text(folder_path, filename):
 
     # Still nothing; then take out the big gun. Convert to png and use OCR
     if text_has_no_data(text):
-        text = last_chance(filename)
+        text = get_pdf_text_with_ocr(filename)
 
     text += get_text_from_pdf_images(folder_path, filename)
 
     return text
+
+
+def get_relevance_index(text, relevance_dictionary):
+
+    total_relevance = 0
+    for word, relevance in relevance_dictionary.items():
+        repetitions = len(re.findall('(^|\s|\n){word}(^|\s|\n)'.format(word=word), text))
+        total_relevance += repetitions*relevance
+
+    return total_relevance
+
+
+def get_text_with_relevance_index(folder_path, filename, relevance_dictionary):
+    """
+    Calculates relevance index for each strategy and goes with the one that has a higher payoff.
+    Args:
+        folder_path:
+        filename:
+        relevance_dictionary: A dict which keys are words and which values are the relevance score.
+    Returns: string
+    """
+    # chooses strategy that maximizes relevance index
+    pdf_miner_text = get_pdf_text_pdf_miner(filename)
+
+    # Unfortunately it can fail for no apparent reason.
+    try:
+        pypdf_text = get_pdf_text_pypdf2(filename)
+    except:
+        pypdf_text = ''
+
+    ocr_text = get_pdf_text_with_ocr(filename)
+
+    pdf_miner_index = get_relevance_index(pdf_miner_text, relevance_dictionary)
+    pypdf_index = get_relevance_index(pypdf_text, relevance_dictionary)
+    ocr_index = get_relevance_index(ocr_text, relevance_dictionary)
+
+    if max(pdf_miner_index, pypdf_index, ocr_index) == pdf_miner_index:
+        text = pdf_miner_text
+    elif max(pypdf_index, ocr_index) == pypdf_index:
+        text = pypdf_text
+    else:
+        text = ocr_text
+
+    text += get_text_from_pdf_images(folder_path, filename)
+    return text
+
+
+def get_pdf_text(folder_path, filename):
+    """Tries different libraries"""
+
+    # Opens word_user_dict, or returns unordered users.
+    try:
+        relevance_dictionary = pickle.load(open('relevance_dictionary.p', 'rb'))
+        return get_text_with_relevance_index(folder_path, filename, relevance_dictionary)
+    except FileNotFoundError:
+        return get_text_with_traditional_strategy(folder_path, filename)
 
 
 def remove_accents_in_string(element):
