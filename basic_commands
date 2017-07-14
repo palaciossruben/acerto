@@ -303,3 +303,33 @@ sudo pip3 install scipy
 
 -- Install pdfimages image extraction, on linux, using:
 sudo apt-get install poppler-utils
+
+
+
+-- Resize Disk on AWS Ubuntu:
+1. Log to console
+2. Go to Volumes
+3. Modify Volume
+4. Check progress on machine state attribute.
+5. Once progeress complete resize filesystem with (https://stackoverflow.com/questions/11014584/ec2-cant-resize-volume-after-increasing-size):
+
+    a. check partition mismatch:
+    lsblk
+
+    b. Install gsutils:
+    sudo apt install cloud-guest-utils
+
+    c. Resize partition:
+    sudo  growpart /dev/xvda 1
+
+    d. Check paritions again:
+    lsblk
+
+    e. Check before resizing:
+    df -h
+
+    f. Resize:
+    sudo resize2fs /dev/xvda1
+
+    g. Check after resizing:
+    df -h

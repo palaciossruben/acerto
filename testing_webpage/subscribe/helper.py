@@ -5,6 +5,7 @@ import nltk
 import shutil
 import PyPDF2
 import pickle
+import zipfile
 import textract
 import subprocess
 import unicodedata
@@ -15,23 +16,18 @@ from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
 from shutil import copyfile
-from PIL import Image, ImageEnhance, ImageFilter
-
+from PIL import Image
 from cts import *
 
 
 def get_image_text(filename):
     """outputs text from an image with tessarect-OCR"""
     im = Image.open(filename)
-    im = im.filter(ImageFilter.MedianFilter())
-    enhancer = ImageEnhance.Contrast(im)
-    im = enhancer.enhance(2)
-    im = im.convert('1')
 
     tmp_path = os.path.join(RESUMES_PATH, 'tmp.jpg')
     im.save(tmp_path)
     try:
-        text = pytesseract.image_to_string(Image.open(tmp_path))  #, lang='spa')
+        text = pytesseract.image_to_string(Image.open(tmp_path))#, lang='spa')
     except OSError:  # Error: image file is truncated (8 bytes not processed)
         return ''
 
@@ -65,7 +61,10 @@ def get_text_from_pdf_images(folder_path, pdf_path):
 def get_word_text(filename):
     """outputs text from .docx document"""
 
-    text = textract.process(filename).decode("utf-8")
+    try:
+        text = textract.process(filename).decode("utf-8")
+    except textract.exceptions.ShellError:
+        text = ''
 
     # If not enough info found will try with OCR on the doc images.
     # Get text from image trick: 1. rename to zip, 2. uncompress, 3. look inside.
@@ -74,8 +73,11 @@ def get_word_text(filename):
         zip_filename = zip_folder + '.zip'
         copyfile(filename, zip_filename)
 
-        import zipfile
-        zip_ref = zipfile.ZipFile(zip_filename, 'r')
+        try:
+            zip_ref = zipfile.ZipFile(zip_filename, 'r')
+        except zipfile.BadZipFile:  # can fail with: Bad magic number for central directory
+            return ''
+
         zip_ref.extractall(zip_folder)
         zip_ref.close()
 
@@ -212,8 +214,8 @@ def get_text_with_traditional_strategy(folder_path, filename):
     # Still nothing; then take out the big gun. Convert to png and use OCR
     if text_has_no_data(text):
         text = get_pdf_text_with_ocr(filename)
-
-    text += get_text_from_pdf_images(folder_path, filename)
+    else:  # If things are OK still some images might be missing:
+        text += get_text_from_pdf_images(folder_path, filename)
 
     return text
 
@@ -254,12 +256,13 @@ def get_text_with_relevance_index(folder_path, filename, relevance_dictionary):
 
     if max(pdf_miner_index, pypdf_index, ocr_index) == pdf_miner_index:
         text = pdf_miner_text
+        text += get_text_from_pdf_images(folder_path, filename)
     elif max(pypdf_index, ocr_index) == pypdf_index:
         text = pypdf_text
+        text += get_text_from_pdf_images(folder_path, filename)
     else:
         text = ocr_text
 
-    text += get_text_from_pdf_images(folder_path, filename)
     return text
 
 
