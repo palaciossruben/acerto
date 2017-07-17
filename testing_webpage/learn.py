@@ -330,7 +330,87 @@ def grid_search(model, train_set, train_target):
     return model
 
 
-def main():
+def rescale_index(target_idx, predicted, targets):
+    """
+    The arrays "predicted" and "targets" can be different length.
+    This is why we have to do a re-scaling
+    Args:
+        target_idx: A integer with the index of the targets list.
+        predicted: list with predicted values.
+        targets: list with target values.
+    Returns: Target index that corresponds to predicted one.
+    """
+
+    predicted_length = len(predicted)
+    target_length = len(targets)
+
+    return round(target_idx / target_length * predicted_length)
+
+
+def get_cutoff_values(predicted, targets):
+    """
+    The final distribution of values should be the same as the input distribution.
+    Based on this idea a re-scaling is done with the distribution percentiles of each class.
+    Args:
+        predicted: list with predicted values (These are float).
+        targets: Integer values the classes.
+    Returns: Values which dictate on which final class the prediction is.
+    """
+
+    # Sort both lists:
+    predicted = sorted(predicted)
+    targets = sorted(targets)
+
+    cutoffs = []
+    last_value = 0
+    for idx, v in enumerate(targets):
+        if last_value != v:  # There is a cutoff here.
+
+            # This covers general case when len(predicted) != len(targets)
+            predicted_idx = rescale_index(idx, predicted, targets)
+
+            if idx > 0:
+                mean = (predicted[predicted_idx] + predicted[predicted_idx-1])/2
+            else:
+                mean = predicted[predicted_idx]
+            cutoffs.append(mean)
+
+        last_value = v
+
+    return cutoffs
+
+
+def get_value(idx, cutoffs):
+
+    # beyond last value
+    if idx > len(cutoffs) - 1:
+        return 10000000000
+    else:
+        return cutoffs[idx]
+
+
+def cutoff_transform(cutoffs, predicted):
+
+    new_prediction = []
+    for p in predicted:
+        for idx, c in enumerate(cutoffs):
+            if c < p < get_value(idx+1, cutoffs):
+                new_prediction.append(idx+1)
+                break
+
+            if idx == 0 and p < c:
+                new_prediction.append(0)
+                break
+
+    return new_prediction
+
+
+def run_experiment(cutoffs=None):
+    """
+    Args:
+        cutoffs: Optional List with breakpoints for classification, else it will approximate by rounding
+    Returns: Arrays for meta-learning
+    """
 
     data_tf_idf, vocabulary, input_dict, target_data, count_vectorizer, tfidf_transformer = get_text_stats('media/resumes')
 
@@ -339,24 +419,15 @@ def main():
     #print('INPUT DICT: ' + str(input_dict))
     #print('TARGET DATA: ' + str(target_data))
 
-    # Fucking sklearn cannot take dictionaries, therefore the ORder Dict is converted to list containing tuples first.
+    # Fucking sklearn cannot take dictionaries, therefore the OrderedDict is converted to list containing tuples first.
     target_tuple_list = [(k, v) for k, v in target_data.items()]
 
     data_tf_idf_train, data_tf_idf_test, train_target, test_target = train_test_split(data_tf_idf, target_tuple_list,
-                                                                                      test_size=0.05)
+                                                                                      test_size=0.1)
 
     #data_tf_idf_train, data_tf_idf_test = reduce_dimensionality(data_tf_idf_train, data_tf_idf_test)
 
-
-    #from sklearn.linear_model import SGDClassifier, SGDRegressor
-
-    #model = SGDClassifier(loss='hinge', penalty='l2',
-    #                      alpha=1e-4, n_iter=5, random_state=42)
-
-    #from scipy import shape
-
     #model = neural_model(input_dim=shape(data_tf_idf_train)[1])
-
     model = SVR(kernel='rbf', C=1e3, gamma=0.001)
 
     train_target_values = [v for _, v in train_target]
@@ -368,11 +439,18 @@ def main():
     # toy_test(count_vectorizer, tfidf_transformer, model)
 
     train_predicted = model.predict(data_tf_idf_train)
+
     train_predicted = [int(round(e)) for e in train_predicted]
+
     print('TRAIN ACCURACY: ' + str(np.mean(train_predicted == train_target_values)))
 
-    test_predicted = model.predict(data_tf_idf_test)
-    test_predicted = np.array([int(round(e)) for e in test_predicted])
+    test_predicted_float = list(model.predict(data_tf_idf_test))
+
+    if cutoffs is not None:
+        test_predicted = cutoff_transform(cutoffs, test_predicted_float)
+    else:
+        test_predicted = np.array([int(round(e)) for e in test_predicted_float])
+
     test_target_values = np.array([e for _, e in test_target])
     test_target_keys = np.array([k for k, _ in test_target])
     test_accuracy = np.mean(test_predicted == test_target_values)
@@ -385,7 +463,7 @@ def main():
     train_error_dict = get_errors_dict(train_target, train_predicted)
     test_error_dict = get_errors_dict(test_target, test_predicted)
 
-    return test_accuracy, train_error_dict, test_error_dict
+    return test_accuracy, train_error_dict, test_error_dict, test_predicted_float, train_target_values
 
 
 def get_avg_error_dict(error_list):
@@ -417,29 +495,48 @@ def sort_error_dict(average_error):
     return sorted([(k, v) for k, v in average_error.items()], key=lambda x: -x[1][0])
 
 
-if __name__ == '__main__':
+def make_collective_experiment(num_experiments, cutoffs=None):
+    """
+    Args:
+        num_experiments: Number of iterations.
+    Returns:
+    """
 
-    start_time = time.time()
-
-    num_experiments = 500
     accuracy = np.array([])
     train_error_list = []
     test_error_list = []
+    all_train_target = []
+    all_test_predicted_float = []
     for _ in range(num_experiments):
 
-        current_accuracy, train_error_dict, test_error_dict = main()
+        current_accuracy, train_error_dict, test_error_dict, test_predicted_float, train_target_values = run_experiment(cutoffs=cutoffs)
+
+        all_train_target += train_target_values
+        all_test_predicted_float += test_predicted_float
 
         accuracy = np.append(accuracy, current_accuracy)
 
         train_error_list.append(train_error_dict)
         test_error_list.append(test_error_dict)
 
-    average_train_error = get_avg_error_dict(train_error_list)
     average_test_error = get_avg_error_dict(test_error_list)
 
     # SORTED ERRORS
     print('AVERAGE TEST ERROR: ' + str(sort_error_dict(average_test_error)))
     print('AVERAGE TEST ACCURACY: ' + str(np.mean(accuracy)))
     print('STD-DEV TEST ACCURACY: ' + str(np.std(accuracy)))
+
+    return all_test_predicted_float, all_train_target
+
+
+if __name__ == '__main__':
+
+    start_time = time.time()
+
+    all_test_predicted_float, all_train_target = make_collective_experiment(num_experiments=100)
+
+    #cutoffs = get_cutoff_values(all_test_predicted_float, all_train_target)
+    #print('CUTOFFS: ' + str(cutoffs))
+    #make_collective_experiment(100, cutoffs=cutoffs)
 
     print("--- %s seconds ---" % (time.time() - start_time))
