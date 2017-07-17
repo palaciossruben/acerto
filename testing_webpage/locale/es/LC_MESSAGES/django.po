@@ -108,7 +108,7 @@ msgstr "Empieza con 100 candidatos"
 #: business/templates/business/index.html:99
 #: business/templates/business/index.html:111
 msgid "AI Screening"
-msgstr "Acreening con Inteligencia Artificial"
+msgstr "Screening con Inteligencia Artificial"
 
 #: business/templates/business/index.html:88
 #: business/templates/business/index.html:100
