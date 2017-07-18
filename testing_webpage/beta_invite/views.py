@@ -1,5 +1,4 @@
 import os
-import smtplib
 import subprocess
 import unicodedata
 from user_agents import parse
@@ -8,14 +7,25 @@ from django.utils.translation import ugettext as _
 
 from django.shortcuts import render
 from beta_invite.models import User, Visitor, Profession, Education, Country
-import business
-from beta_invite.util import email_sender
 from ipware.ip import get_ip
 from beta_invite import constants as cts
 
 
 def remove_accents(text):
     return ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
+
+
+def rename_filename(filename):
+    """Removes accents, spaces and other chars to have a easier time later"""
+
+    replacement = {' ': '_', '(': '_', ')': '_'}
+
+    for my_char, replace_char in replacement.items():
+
+        if my_char in filename:
+            filename = filename.replace(my_char, replace_char)
+
+    return remove_accents(filename)
 
 
 def save_curriculum_from_request(request, user):
@@ -35,7 +45,7 @@ def save_curriculum_from_request(request, user):
         user_id_folder = str(user.id)
         folder = os.path.join('resumes', user_id_folder)
 
-        file_path = os.path.join(folder, remove_accents(curriculum_file.name))
+        file_path = os.path.join(folder, rename_filename(curriculum_file.name))
 
         fs.save(file_path, curriculum_file)
 
