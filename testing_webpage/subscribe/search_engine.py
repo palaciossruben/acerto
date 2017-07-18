@@ -1,5 +1,6 @@
 import os
 import re
+import time
 import pickle
 import numpy as np
 
@@ -67,17 +68,24 @@ def save_relevance_dictionary(path):
 
     scores = []
     for word_str, word_num_code in vocabulary.items():
-        values = []
-        for document in range(len(text_corpus)):
-            v = data_tf_idf[document, word_num_code]
-            values.append(v)
 
-        a = np.array(values)
+        corpus_length = len(text_corpus)
 
-        if len(a) == 0 or len(word_str) < 4:
+        # short words will have 0 score.
+        if corpus_length == 0 or len(word_str) < 4:
             score = 0
         else:
-            score = np.mean(a) + np.std(a)
+
+            col = data_tf_idf.getcol(word_num_code)
+
+            height = col.shape[0]
+            sqr = col.copy()  # take a copy of the col
+            sqr.data **= 2  # square the data, i.e. just the non-zero data
+
+            mean = col.mean()
+            variance = sqr.sum()/height - mean**2
+
+            score = mean + variance
 
         scores.append((word_str, score))
 
@@ -103,7 +111,7 @@ def save_user_relevance_dictionary(path):
     user_relevance_dictionary = {}
     for word, num_word in vocabulary.items():
         values = []
-        for document, (user_id, text) in enumerate(text_corpus.items()):
+        for document, user_id in enumerate(text_corpus.keys()):
             relevance = data_tf_idf[document, num_word]
             if relevance > 0:
                 values.append((int(user_id), relevance))
@@ -119,5 +127,14 @@ def save_user_relevance_dictionary(path):
 
 
 if __name__ == "__main__":
+
+    t0 = time.time()
     save_relevance_dictionary(RESUMES_PATH)
+    t1 = time.time()
+    print('RELEVANCE DICTIONARY: time:' + str(t1-t0))
+
+    t0 = time.time()
     save_user_relevance_dictionary(RESUMES_PATH)
+    t1 = time.time()
+    print('USER RELEVANCE DICTIONARY: time:' + str(t1-t0))
+
