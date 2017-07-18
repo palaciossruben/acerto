@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-17 20:46+0000\n"
+"POT-Creation-Date: 2017-07-18 03:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -127,8 +127,8 @@ msgid "We Recommend 3 candidates"
 msgstr "Recomendamos 3 candidatos"
 
 #: business/templates/business/index.html:91
-msgid "$200 / candidate"
-msgstr "$350 mil Pesos / candidato"
+msgid "$200 / contracted candidate"
+msgstr "$350 mil Pesos/candidato contratado"
 
 #: business/templates/business/index.html:97
 msgid "Agile Selection"
@@ -143,8 +143,8 @@ msgid "5 days process"
 msgstr "Toma 5 días"
 
 #: business/templates/business/index.html:103
-msgid "$300 / candidate"
-msgstr "$500 mil Pesos/candidato"
+msgid "$300 / contracted candidate"
+msgstr "$500 mil Pesos/candidato contratado"
 
 #: business/templates/business/index.html:109
 msgid "Custom Selection"
