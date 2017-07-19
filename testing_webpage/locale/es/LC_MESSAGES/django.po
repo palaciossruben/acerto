@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-18 03:03+0000\n"
+"POT-Creation-Date: 2017-07-19 19:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,19 +20,18 @@ msgstr ""
 
 #: beta_invite/templates/beta_invite/index.html:77
 #: beta_invite/templates/beta_invite/long_form.html:96
-#: business/templates/business/index.html:124
 msgid "Subscribe"
 msgstr "Suscríbete"
 
 #: beta_invite/templates/beta_invite/index.html:87
 #: beta_invite/templates/beta_invite/long_form.html:106
-#: business/templates/business/index.html:135
+#: business/templates/business/form.html:85
 msgid "Your Full Name"
 msgstr "Tu Nombre Completo"
 
 #: beta_invite/templates/beta_invite/index.html:94
 #: beta_invite/templates/beta_invite/long_form.html:113
-#: business/templates/business/index.html:142
+#: business/templates/business/form.html:92
 msgid "Your email"
 msgstr "Tu correo"
 
@@ -43,7 +42,7 @@ msgstr "Sube tu curriculum"
 
 #: beta_invite/templates/beta_invite/index.html:113
 #: beta_invite/templates/beta_invite/long_form.html:178
-#: business/templates/business/index.html:149
+#: business/templates/business/form.html:99
 msgid "Sure!"
 msgstr "¡Enviar!"
 
@@ -82,13 +81,13 @@ msgstr "Nos pondremos en contacto pronto"
 msgid "Welcome to PeakU"
 msgstr "Bienvenido a PeakU"
 
-#: beta_invite/views.py:62 beta_invite/views.py:100 beta_invite/views.py:153
-#: beta_invite/views.py:217
+#: beta_invite/views.py:72 beta_invite/views.py:110 beta_invite/views.py:163
+#: beta_invite/views.py:227
 msgid "Discover your true passion"
 msgstr "Descubre tu verdadera pasión"
 
-#: beta_invite/views.py:63 beta_invite/views.py:101 beta_invite/views.py:154
-#: beta_invite/views.py:218
+#: beta_invite/views.py:73 beta_invite/views.py:111 beta_invite/views.py:164
+#: beta_invite/views.py:228
 msgid "We search millions of jobs and find the right one for you"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
 
@@ -96,69 +95,69 @@ msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
 msgid "Select the best plan for you"
 msgstr "Selecciona el mejor plan para tí"
 
-#: business/templates/business/index.html:85
+#: business/templates/business/index.html:86
 msgid "Standard Selection"
 msgstr "Selección Básica"
 
-#: business/templates/business/index.html:86
-msgid "Starts with 100 candidates"
-msgstr "Empieza con 100 candidatos"
-
 #: business/templates/business/index.html:87
-#: business/templates/business/index.html:99
-#: business/templates/business/index.html:111
+msgid "Starts with 50 candidates"
+msgstr "Empieza con 50 candidatos"
+
+#: business/templates/business/index.html:88
+#: business/templates/business/index.html:101
+#: business/templates/business/index.html:114
 msgid "AI Screening"
 msgstr "Screening con Inteligencia Artificial"
 
-#: business/templates/business/index.html:88
-#: business/templates/business/index.html:100
-#: business/templates/business/index.html:112
+#: business/templates/business/index.html:89
+#: business/templates/business/index.html:102
+#: business/templates/business/index.html:115
 msgid "Personal Interview, soft and hard skills assessment"
 msgstr "Entrevista personal, evaluación de habilidades blandas y técnicas"
 
-#: business/templates/business/index.html:89
+#: business/templates/business/index.html:90
 msgid "10 days process"
 msgstr "Toma 10 días"
 
-#: business/templates/business/index.html:90
-#: business/templates/business/index.html:102
-#: business/templates/business/index.html:114
+#: business/templates/business/index.html:91
+#: business/templates/business/index.html:104
+#: business/templates/business/index.html:117
 msgid "We Recommend 3 candidates"
 msgstr "Recomendamos 3 candidatos"
 
-#: business/templates/business/index.html:91
+#: business/templates/business/index.html:92
 msgid "$200 / contracted candidate"
 msgstr "$350 mil Pesos/candidato contratado"
 
-#: business/templates/business/index.html:97
+#: business/templates/business/index.html:99
 msgid "Agile Selection"
 msgstr "Selección Ágil"
 
-#: business/templates/business/index.html:98
-msgid "Starts with 200 candidates"
-msgstr "Empieza con 200 candidatos"
+#: business/templates/business/index.html:100
+msgid "Starts with 100 candidates"
+msgstr "Empieza con 100 candidatos"
 
-#: business/templates/business/index.html:101
+#: business/templates/business/index.html:103
 msgid "5 days process"
 msgstr "Toma 5 días"
 
-#: business/templates/business/index.html:103
+#: business/templates/business/index.html:105
 msgid "$300 / contracted candidate"
 msgstr "$500 mil Pesos/candidato contratado"
 
-#: business/templates/business/index.html:109
+#: business/templates/business/index.html:112
 msgid "Custom Selection"
 msgstr "Personalizada"
 
-#: business/templates/business/index.html:110
+#: business/templates/business/index.html:113
 msgid "Starts with X candidates"
 msgstr "Número de candidatos a convenir"
 
-#: business/templates/business/index.html:113
+#: business/templates/business/index.html:116
 msgid "Y days process"
 msgstr "Tiempo a convenir"
 
-#: business/templates/business/index.html:115
+#: business/templates/business/index.html:118
 msgid "Ask for a Quote"
 msgstr "Pregunta por una cotización"
 
@@ -191,8 +190,6 @@ msgid "Search our Curriculum Database"
 msgstr "Busca Curriculums en Nuestra Base de Datos"
 
 #: business/templates/business/search.html:119
-#, fuzzy
-#| msgid "Skills or any other custom requirement"
 msgid "Skills or any other custom information"
 msgstr "Habilidades o cualquier otro requerimiento"
 
@@ -200,13 +197,13 @@ msgstr "Habilidades o cualquier otro requerimiento"
 msgid "Search"
 msgstr "Buscar"
 
-#: business/views.py:29 business/views.py:56 business/views.py:75
-#: business/views.py:234
+#: business/views.py:30 business/views.py:57 business/views.py:76
+#: business/views.py:235 business/views.py:285
 msgid "Discover amazing people"
 msgstr "Descubre personas increíbles"
 
-#: business/views.py:30 business/views.py:57 business/views.py:76
-#: business/views.py:235
+#: business/views.py:31 business/views.py:58 business/views.py:77
+#: business/views.py:236 business/views.py:286
 msgid ""
 "We search millions of profiles and find the ones that best suit your business"
 msgstr ""

@@ -1,0 +1,29 @@
+[
+  {
+    "model": "business.plan",
+    "pk": 1,
+    "fields":{
+      "name": "Basic",
+      "message": "You have selected the Basic Plan, just send us an additional bit of information to complete registration.",
+      "message_es": "Has seleccionado el Plan Básico, envíanos un poco más de información para completar tu registro."
+    }
+  },
+  {
+    "model": "business.plan",
+    "pk": 2,
+    "fields":{
+      "name": "Agile",
+      "message": "You have selected the Agile Plan, just send us an additional bit of information to complete registration.",
+      "message_es": "Has seleccionado el Plan Ágil, envíanos un poco más de información para completar tu registro."
+    }
+  },
+  {
+    "model": "business.plan",
+    "pk": 3,
+    "fields":{
+      "name": "Custom",
+      "message": "You have selected the Custom Plan, we will call you once you register.",
+      "message_es": "Has seleccionado el Plan Personalizado, te llamaremos una vez completes tu registro."
+    }
+  }
+]

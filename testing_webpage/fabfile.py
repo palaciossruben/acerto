@@ -127,6 +127,7 @@ def deploy():
             # reload fixtures: Will overwrite tables with DB fixtures.
             # beta_invite fixtures
             fixtures = list_dir('beta_invite/fixtures/')
+            fixtures += list_dir('business/fixtures/')
             for fixture_json in fixtures:
                 run('python3 manage.py loaddata {}'.format(fixture_json))
 
