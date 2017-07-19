@@ -118,7 +118,7 @@
 				  <br>
 
 				  <select style=" width: 266px; font-size: 14px; height: 44px; border:solid 1px #F8E676; background-color:white;
-				  margin-top:15px;" name="country" required>
+				  margin-top:15px; cursor:pointer;" name="country" required>
 					  <option value="">{% trans "Select Country" %}</option>
 					  {% for country in countries%}
 						 <option value={{ country.id }}>{{ country.name }}</option>
@@ -128,7 +128,7 @@
 				  <br>
 
 				  <select style=" width: 266px; font-size: 14px; height: 44px; border:solid 1px #F8E676; background-color:white;
-				  margin-top:15px;" name="education" required>
+				  margin-top:15px; cursor:pointer;" name="education" required>
 					  <option value="">{% trans "Select Education" %}</option>
 					  {% for level in education%}
 						 <option value={{ level.id }}>{{ level.name }}</option>
@@ -138,7 +138,7 @@
 				  <br>
 
 				  <select style=" width: 266px; font-size: 14px; height: 44px; border:solid 1px #F8E676; background-color:white;
-				  margin-top:15px;" name="profession" required>
+				  margin-top:15px; cursor:pointer;" name="profession" required>
 					  <option value="">{% trans "Select Profession" %}</option>
 					  {% for profession in professions%}
 						 <option value={{ profession.id }}>{{ profession.name }}</option>
@@ -153,7 +153,7 @@
 					  </p>
 
 					  <!--TODO: improve button styling to be like other inputs with: border:solid 1px #F8E676; background-color:white; -->
-					  <input style="font-family:Raleway; height: 30px; font-size: 14px;" type="file" name="curriculum"
+					  <input style="font-family:Raleway; height: 30px; font-size: 14px; cursor:pointer;" type="file" name="curriculum"
 					   id="curriculum" required="required">
 				  </div>
 
