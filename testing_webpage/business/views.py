@@ -277,6 +277,7 @@ def form_post(request):
     ip = get_ip(request)
     business_user = business.models.User(name=request.POST.get('name'),
                                          email=request.POST.get('email'),
+                                         phone=request.POST.get('phone'),
                                          ip=ip,
                                          ui_version=cts.UI_VERSION,
                                          plan=plan)

@@ -96,6 +96,13 @@
 
 				<br>
 
+				{% trans "Your phone" as phone_placeholder %}
+				<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:15px;
+				 border:solid 1px #F8E676; background-color:white; width: 250px;" id="phone" type="tel" name="phone"
+				  placeholder="{{ phone_placeholder }}" required="required" pattern="[0-9\(\)\+\.\s\-\_(ext)(extension)]{7,40}">
+
+				<br>
+
 				{% trans "Sure!" as submit_value %}
 				<input style="height: 44px; border: solid 0px white; background:#F8E676; color:black; text-align:center;
 				 width: 81px; font-size: 16px; width: 255px; margin-bottom:40px; margin-top:15px; cursor:pointer;" type="submit" value="{{ submit_value }}">

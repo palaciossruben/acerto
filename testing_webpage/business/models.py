@@ -22,6 +22,7 @@ class User(models.Model):
     ip = models.GenericIPAddressField(null=True)
     ui_version = models.CharField(max_length=200)
     plan = models.ForeignKey(Plan, null=True, on_delete=models.SET_NULL)
+    phone = models.CharField(max_length=40, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
