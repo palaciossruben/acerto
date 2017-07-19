@@ -1,114 +1,29 @@
 [
   {
-    "model": "beta_invite.country",
+    "model": "business.plan",
     "pk": 1,
     "fields":{
-      "name": "Colombia"
+      "name": "Basic",
+      "message": "You have selected the Basic Plan, just send us an additional bit of information to complete registration.",
+      "message_es": "Has seleccionado el Plan Básico, envíanos un poco más de información para completar tu registro."
     }
   },
   {
-    "model": "beta_invite.country",
+    "model": "business.plan",
     "pk": 2,
-    "fields": {
-      "name": "Ecuador"
+    "fields":{
+      "name": "Agile",
+      "message": "You have selected the Agile Plan, just send us an additional bit of information to complete registration.",
+      "message_es": "Has seleccionado el Plan Ágil, envíanos un poco más de información para completar tu registro."
     }
   },
   {
-    "model": "beta_invite.country",
+    "model": "business.plan",
     "pk": 3,
     "fields":{
-      "name": "Perú"
-    }
-  },
-  {
-    "model": "beta_invite.country",
-    "pk": 4,
-    "fields": {
-      "name": "Chile"
-    }
-  },
-  {
-    "model": "beta_invite.country",
-    "pk": 5,
-    "fields": {
-      "name": "México"
-    }
-  },
-  {
-    "model": "beta_invite.country",
-    "pk": 6,
-    "fields": {
-      "name": "Venezuela"
-    }
-  },
-  {
-    "model": "beta_invite.country",
-    "pk": 7,
-    "fields": {
-      "name": "Bolivia"
-    }
-  },
-  {
-    "model": "beta_invite.country",
-    "pk": 8,
-    "fields": {
-      "name": "Argentina"
-    }
-  },
-  {
-    "model": "beta_invite.country",
-    "pk": 9,
-    "fields": {
-      "name": "Paraguay"
-    }
-  },
-    {
-    "model": "beta_invite.country",
-    "pk": 10,
-    "fields": {
-      "name": "Uruguay"
-    }
-  },
-  {
-    "model": "beta_invite.country",
-    "pk": 11,
-    "fields": {
-      "name": "Panamá"
-    }
-  },
-  {
-    "model": "beta_invite.country",
-    "pk": 12,
-    "fields": {
-      "name": "Honduras"
-    }
-  },
-  {
-    "model": "beta_invite.country",
-    "pk": 13,
-    "fields": {
-      "name": "El Salvador"
-    }
-  },
-  {
-    "model": "beta_invite.country",
-    "pk": 14,
-    "fields": {
-      "name": "Guatemala"
-    }
-  },
-  {
-    "model": "beta_invite.country",
-    "pk": 15,
-    "fields": {
-      "name": "Nicaragua"
-    }
-  },
-  {
-    "model": "beta_invite.country",
-    "pk": 16,
-    "fields": {
-      "name": "Costa Rica"
+      "name": "Custom",
+      "message": "You have selected the Custom Plan, we will call you once you register.",
+      "message_es": "Has seleccionado el Plan Personalizado, te llamaremos una vez completes tu registro."
     }
   }
 ]

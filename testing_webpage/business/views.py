@@ -12,6 +12,7 @@ import business
 import beta_invite
 from business import constants as cts
 from beta_invite.models import User, Education
+from business.models import Plan
 
 
 def index(request):
@@ -234,4 +235,53 @@ def results(request):
     return render(request, cts.RESULTS_VIEW_PATH, {'main_message': _("Discover amazing people"),
                                                    'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
                                                    'users': users,
+                                                   })
+
+
+def translate_message(plan, language_code):
+    """
+    Args:
+        plan: Object of class Plan.
+        language_code:
+    Returns:
+    """
+    if 'es' in language_code:
+        plan.message = plan.message_es
+
+    return plan
+
+
+def form(request):
+    """
+    Args:
+        request: HTTP post request
+    Returns: Renders form.html.
+    """
+    plan_name = request.POST.get('plan_name')
+    plan = Plan.objects.get(name=plan_name)
+    plan = translate_message(plan, request.LANGUAGE_CODE)
+
+    return render(request, cts.FORM_VIEW_PATH, {'main_message': plan.message,
+                                                'plan_id': plan.id})
+
+
+def form_post(request):
+    """
+    Args:
+        request: HTTP post request
+    Returns: Renders form.html.
+    """
+    plan_id = request.POST.get('plan_id')
+    plan = Plan.objects.get(pk=plan_id)
+
+    ip = get_ip(request)
+    business_user = business.models.User(name=request.POST.get('name'),
+                                         email=request.POST.get('email'),
+                                         ip=ip,
+                                         ui_version=cts.UI_VERSION,
+                                         plan=plan)
+    business_user.save()
+
+    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover amazing people"),
+                                                   'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
                                                    })
