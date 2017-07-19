@@ -87,7 +87,7 @@
 				<br>
 
 			    <select style=" width: 266px; font-size: 14px; height: 44px; border:solid 1px #F8E676; background-color:white;
-			    margin-top:15px;"
+			    margin-top:15px; cursor:pointer"
 			     name="country">
 				   {% for country in countries%}
 				 	 <option value={{ country.id }}>{{ country.name }}</option>
@@ -97,7 +97,7 @@
 			    <br>
 
 				  <select style=" width: 266px; font-size: 14px; height: 44px; border:solid 1px #F8E676; background-color:white;
-				  margin-top:15px;"
+				  margin-top:15px; cursor:pointer"
 				   name="education">
 					  {% for level in education%}
 						 <option value={{ level.id }}>{{ level.name }}</option>
@@ -107,7 +107,7 @@
 			    <br>
 
 				<select style=" width: 266px; font-size: 14px; height: 44px; border:solid 1px #F8E676; background-color:white;
-				  margin-top:15px;"
+				  margin-top:15px; cursor:pointer"
 				   name="profession">
 					  {% for profession in professions%}
 						 <option value={{ profession.id }}>{{ profession.name }}</option>
@@ -133,7 +133,7 @@
 
 				{% trans "Search" as submit_value %}
 				<input style="height: 44px; border: solid 0px white; background:#F8E676; color:black; text-align:center;
-				 width: 81px; font-size: 16px; width: 266px; margin-bottom:40px; margin-top:15px;" type="submit" value="{{ submit_value }}">
+				 width: 81px; font-size: 16px; width: 266px; margin-bottom:40px; margin-top:15px; cursor:pointer;" type="submit" value="{{ submit_value }}">
 
 			  </form>
 
