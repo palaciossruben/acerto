@@ -96,6 +96,7 @@
 					<b style="font-weight:400; text-transform: uppercase;">{% trans "Subscribe" %}</b>
 				</span>
 		   </span>
+
 			<div class="subscribe" data-sr="wait 0.5s, then enter bottom and move 40px over 1s" style="margin-top:-25px;">
 
 			  <form action="{{ action_url }}" method="post" style="text-align:center; margin-top:0px;"
@@ -106,7 +107,7 @@
 				{% trans "Your Full Name" as name_placeholder %}
 				<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:0px;
 				 border:solid 1px #F8E676; background-color:white; width: 250px;" id="name" type="text" name="name"
-				  placeholder="{{ name_placeholder }}" required="required" pattern="[A-Za-z\sÁÉÍÓÚáéíóúÑñÜü]{1,200}">
+				  placeholder="{{ name_placeholder }}" required="required" pattern="[A-Za-z\sáéíóúÑñÜü]{1,200}">
 
 				<br>
 

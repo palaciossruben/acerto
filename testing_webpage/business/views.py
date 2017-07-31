@@ -1,18 +1,28 @@
+import os
+from django.core.wsgi import get_wsgi_application
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.testing_webpage.settings')
+application = get_wsgi_application()
+
 import nltk
 import pickle
 import unicodedata
 
+from django.contrib.auth.decorators import login_required
 from collections import OrderedDict
 from ipware.ip import get_ip
 from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import Case, When
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
 
 import business
 import beta_invite
 from business import constants as cts
-from beta_invite.models import User, Education
-from business.models import Plan
+from beta_invite.models import User, Country, Education, Profession
+from business.models import Plan, Offer
+from business.models import User as BusinessUser
 
 
 def index(request):
@@ -54,7 +64,7 @@ def post_index(request):
     #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
     #    pass
 
-    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover amazing people"),
+    return render(request, cts.POST_JOB_VIEW_PATH, {'main_message': _("Discover amazing people"),
                                                    'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
                                                    })
 
@@ -238,6 +248,27 @@ def results(request):
                                                    })
 
 
+def offer_detail(request):
+    """
+    Args:
+        request: HTTP request.
+    Returns: renders the detailed view of a given offer
+    """
+    offer_id = request.GET.get('id', None)
+
+    if offer_id is not None:
+
+        offer = Offer.objects.get(pk=offer_id)
+        users = [User.objects.get(pk=u_id) for u_id in offer.user_ids]
+        translate_users(users, request.LANGUAGE_CODE)
+
+        return render(request, cts.OFFER_RESULTS_VIEW_PATH, {'users': users,
+                                                             })
+
+    else:  # reloads home, if nothing found
+        home(request)
+
+
 def translate_message(plan, language_code):
     """
     Args:
@@ -251,38 +282,167 @@ def translate_message(plan, language_code):
     return plan
 
 
-def form(request):
+def signup(request):
     """
     Args:
         request: HTTP post request
     Returns: Renders form.html.
     """
     plan_name = request.POST.get('plan_name')
-    plan = Plan.objects.get(name=plan_name)
+    try:
+        plan = Plan.objects.get(name=plan_name)
+    except:
+        # If no plan object found will, use a default message
+        plan = Plan.objects.get(name='Default')
+
     plan = translate_message(plan, request.LANGUAGE_CODE)
 
-    return render(request, cts.FORM_VIEW_PATH, {'main_message': plan.message,
-                                                'plan_id': plan.id})
+    return render(request, cts.SIGNUP_VIEW_PATH, {'main_message': plan.message,
+                                                  'plan_id': plan.id})
+
+#from django import forms
 
 
-def form_post(request):
+#class SignupForm(UserCreationForm):
+
+    #password1 = forms.CharField(required=True)
+    #password2 = forms.CharField(required=True)
+
+#   def is_valid(self):
+#       """
+#       Overrides this method to have easier passwords. Fuck security for better user experience.
+#       Returns: Boolean
+#       """
+#       no_password_errors = [k for k, v in self.errors.items() if 'password' not in k]
+#       my_validation = self.is_bound and len(no_password_errors) == 0
+
+#       return my_validation
+
+
+def post_first_job(request):
     """
     Args:
         request: HTTP post request
     Returns: Renders form.html.
     """
     plan_id = request.POST.get('plan_id')
-    plan = Plan.objects.get(pk=plan_id)
+    try:
+        plan = Plan.objects.get(pk=plan_id)
+    except:
+        # Gets the default plan.
+        plan = Plan.objects.get(pk=4)
 
     ip = get_ip(request)
-    business_user = business.models.User(name=request.POST.get('name'),
-                                         email=request.POST.get('email'),
-                                         phone=request.POST.get('phone'),
-                                         ip=ip,
-                                         ui_version=cts.UI_VERSION,
-                                         plan=plan)
-    business_user.save()
+    signup_form = UserCreationForm(request.POST)
 
-    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover amazing people"),
-                                                   'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
-                                                   })
+    if signup_form.is_valid():
+        signup_form.save()
+        username = signup_form.cleaned_data.get('username')
+        password = signup_form.cleaned_data.get('password1')
+
+        # Creates a Authentication user
+        auth_user = authenticate(username=username,
+                                 password=password)
+
+        # New BusinessUser pointing to the AuthUser
+        business.models.User(name=request.POST.get('name'),
+                             email=request.POST.get('username'),
+                             phone=request.POST.get('phone'),
+                             ip=ip,
+                             ui_version=cts.UI_VERSION,
+                             plan=plan,
+                             auth_user_id=auth_user.id).save()
+
+        login(request, auth_user)
+
+        countries, education, professions = beta_invite.views.get_drop_down_values(request.LANGUAGE_CODE)
+
+        return render(request, cts.POST_JOB_VIEW_PATH, {'countries': countries,
+                                                        'education': education,
+                                                        'professions': professions
+                                                        })
+    else:
+        # TODO: send message showing errors on the form object: form.errors dictionary.
+        user_form = UserCreationForm()
+        return render(request, cts.SIGNUP_VIEW_PATH, {'main_message': plan.message,
+                                                      'plan_id': plan.id,
+                                                      'form': user_form})
+
+
+@login_required
+def post_job(request):
+    """
+    Creates the view for posting new job offers.
+    Args:
+        request: HTTP request object.
+    Returns: renders view.
+    """
+
+    countries, education, professions = beta_invite.views.get_drop_down_values(request.LANGUAGE_CODE)
+
+    return render(request, cts.POST_JOB_VIEW_PATH, {'countries': countries,
+                                                    'education': education,
+                                                    'professions': professions})
+
+
+def get_business_user(request):
+    """
+    Given a request that has the AuthUser.id will get the BusinessUser
+    Args:
+        request: HTTP request object.
+    Returns: A BusinessUser object.
+    """
+
+    auth_user_id = request.user.id
+    business_user = BusinessUser.objects.get(auth_user_id=auth_user_id)
+
+    return business_user
+
+
+@login_required
+def offer_results(request):
+    """
+    Will save and show the partial results of a job offer.
+    Args:
+        request: HTTP object.
+    Returns: Save and render results
+    """
+
+    profession_id = request.POST.get('profession')
+    profession = Profession.objects.get(pk=profession_id)
+    education_id = request.POST.get('education')
+    education = Education.objects.get(pk=education_id)
+
+    country_id = request.POST.get('country')
+    country = Country.objects.get(pk=country_id)
+    experience = request.POST.get('experience')
+
+    users = get_matching_users(request)
+    user_ids = [u.id for u in users]
+
+    Offer(business_user=get_business_user(request),
+          country=country,
+          education=education,
+          profession=profession,
+          experience=experience,
+          skills=get_skills(request),
+          user_ids=user_ids,).save()
+
+    translate_users(users, request.LANGUAGE_CODE)
+
+    return render(request, cts.OFFER_RESULTS_VIEW_PATH, {'users': users,
+                                                         })
+
+
+@login_required
+def home(request):
+    """
+    Dashboard View. It displays all offers of a
+    Args:
+        request: HTTP request.
+    Returns: displays all offers of a business
+    """
+
+    offers = Offer.objects.filter(business_user_id=get_business_user(request))
+    return render(request, cts.HOME_VIEW_PATH, {'offers': offers,
+                                                })

@@ -160,3 +160,12 @@ LOGGING = {
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+AUTHENTICATION_BACKENDS = (
+        'django.contrib.auth.backends.ModelBackend',
+    )
+
+LOGIN_URL = 'business:login'
+LOGOUT_URL = 'business:logout'
+LOGIN_REDIRECT_URL = 'business:home'
