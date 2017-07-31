@@ -4,6 +4,7 @@ import unicodedata
 from user_agents import parse
 from django.core.files.storage import FileSystemStorage
 from django.utils.translation import ugettext as _
+from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render
 from beta_invite.models import User, Visitor, Profession, Education, Country
@@ -227,3 +228,8 @@ def post_long_form(request):
     return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover your true passion"),
                                                    'secondary_message': _("We search millions of jobs and find the right one for you"),
                                                    })
+
+
+@login_required
+def home(request):
+    return render(request, 'success.html')

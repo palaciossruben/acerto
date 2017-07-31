@@ -25,5 +25,14 @@
       "message": "You have selected the Custom Plan, we will call you once you register.",
       "message_es": "Has seleccionado el Plan Personalizado, te llamaremos una vez completes tu registro."
     }
+  },
+  {
+    "model": "business.plan",
+    "pk": 4,
+    "fields":{
+      "name": "Default",
+      "message": "Send us an additional bit of information to complete registration.",
+      "message_es": "Envíanos un poco más de información para completar tu registro."
+    }
   }
 ]
