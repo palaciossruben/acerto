@@ -88,3 +88,21 @@ class Offer(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'offers'
+
+
+class Contact(models.Model):
+
+    name = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
+    phone = models.CharField(max_length=40, null=True)
+    message = models.CharField(max_length=5000, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '{0}, {1}, {2}, {3}'.format(self.name, self.email, self.phone, self.message)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'contacts'
