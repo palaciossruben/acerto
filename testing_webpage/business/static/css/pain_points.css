@@ -1,0 +1,24 @@
+#pain_points {
+    width: 550px;
+    margin:auto;
+    background: rgba(0,0,0,0.4);
+    padding: 10px 20px;
+    bax-sizing:border-box;
+    margin-top: 20px;
+    border-radius: 7px;
+    margin-bottom: 50px;
+}
+
+#pain_point_title {
+    color: #fff;
+    margin: 0;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.pain_point_bullet {
+    /*position:relative;
+    left:10px;*/
+    top:2px
+    font-size: 40px;
+}

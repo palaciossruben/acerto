@@ -22,4 +22,5 @@ urlpatterns = [
 
     # TODO: Worst hack ever replace for something like: \?id=[0-9]+
     url(r'^offer_detail/.*$', views.offer_detail, name='offer_detail'),
+    url(r'^contact_us$', views.contact_us, name='contact_us'),
 ]

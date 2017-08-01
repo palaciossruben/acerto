@@ -219,7 +219,7 @@ def post_long_form(request):
 
     update_search_dictionary_on_background()
 
-    # TODO: missing santiago@peaku.co credentials.
+    # TODO: just try it.
     #try:
     #    email_sender.send(user)
     #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails

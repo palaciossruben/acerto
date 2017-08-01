@@ -25,28 +25,79 @@ def read_email_credentials():
     return json.loads(json_data)
 
 
-def send(user, language_code):
+def send_email(user, password, recipient, subject, body):
 
-    # Open a plain text file for reading.  For this example, assume that
-    # the text file contains only ASCII characters.
+    gmail_user = user
+    gmail_pwd = password
+    FROM = user
+    TO = recipient if type(recipient) is list else [recipient]
+    SUBJECT = subject
+    TEXT = body
 
-    body_filename = 'email_body'
+    # Prepare actual message
+    message = """From: %s\nTo: %s\nSubject: %s\n\n%s
+    """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
+
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.ehlo()
+    server.starttls()
+    server.login(gmail_user, gmail_pwd)
+    server.sendmail(FROM, TO, message)
+    server.close()
+
+
+def send(user, language_code, body_filename, subject):
+    """
+    Sends an email
+    Args:
+        user: Any object that has fields 'name' and 'email'
+        language_code: eg: 'es' or 'en'
+        body_filename: the filename of the body content
+        subject: string with the email subject
+    Returns: Sends email
+    """
+
     if language_code != 'en':
         body_filename += '_{}'.format(language_code)
 
     with open(os.path.join(get_current_path(), body_filename)) as fp:
-        msg = MIMEText(fp.read().format(name=get_first_name(user.name)))
+        body = fp.read().format(name=get_first_name(user.name))
 
-    email_data = read_email_credentials()
+    sender_data = read_email_credentials()
 
-    msg['Subject'] = _('Welcome to PeakU')
-    msg['From'] = email_data['email']
-    msg['To'] = user.email
+    send_email(user=sender_data['email'],
+               password=sender_data['password'],
+               recipient=user.email,
+               subject=subject,
+               body=body)
 
-    # Send the message via our own SMTP server.
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login(email_data['email'], email_data['password'])
 
-    server.send_message(msg)
-    server.quit()
+def send_internal(contact, language_code, body_filename, subject):
+    """
+    Sends an email to the internal team.
+    Args:
+        contact: Any object that has fields 'name' and 'email'
+        language_code: eg: 'es' or 'en'
+        body_filename: the filename of the body content
+        subject: string with the email subject
+    Returns: Sends email
+    """
+
+    internal_team = ['santiago@peaku.co', 'juan@peaku.co', 'santiagopsa@gmail.com']
+
+    if language_code != 'en':
+        body_filename += '_{}'.format(language_code)
+
+    with open(os.path.join(get_current_path(), body_filename)) as fp:
+        body = fp.read().format(name=contact.name,
+                                email=contact.email,
+                                phone=contact.phone,
+                                message=contact.message)
+
+    sender_data = read_email_credentials()
+
+    send_email(user=sender_data['email'],
+               password=sender_data['password'],
+               recipient=internal_team,
+               subject=subject,
+               body=body)

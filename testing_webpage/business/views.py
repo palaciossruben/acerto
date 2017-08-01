@@ -1,4 +1,5 @@
 import os
+import smtplib
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.testing_webpage.settings')
@@ -19,9 +20,10 @@ from django.contrib.auth.forms import UserCreationForm
 
 import business
 import beta_invite
+from beta_invite.util import email_sender
 from business import constants as cts
 from beta_invite.models import User, Country, Education, Profession
-from business.models import Plan, Offer
+from business.models import Plan, Offer, Contact
 from business.models import User as BusinessUser
 
 
@@ -36,9 +38,11 @@ def index(request):
     ip = get_ip(request)
     action_url = '/business/post'
 
+    secondary_message = _("We do the entire personnel selection process for your company: From obtaining the first candidates to filtering them into a final triad.")
+
     business.models.Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
     return render(request, cts.BUSINESS_VIEW_PATH, {'main_message': _("Discover amazing people"),
-                                                    'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
+                                                    'secondary_message': secondary_message,
                                                     'action_url': action_url,
                                                     })
 
@@ -446,3 +450,32 @@ def home(request):
     offers = Offer.objects.filter(business_user_id=get_business_user(request))
     return render(request, cts.HOME_VIEW_PATH, {'offers': offers,
                                                 })
+
+
+def contact_us(request):
+    """
+    Save a comment from the contact form
+    Args:
+        request: HTTP obj
+    Returns: render a thanks page
+    """
+    contact = Contact(name=request.POST.get('name'),
+                      email=request.POST.get('email'),
+                      phone=request.POST.get('phone'),
+                      message=request.POST.get('message'),)
+
+    contact.save()
+
+    try:
+        email_sender.send(user=contact,
+                          language_code=request.LANGUAGE_CODE,
+                          body_filename='business_contact_email_body',
+                          subject=_('Welcome to PeakU'))
+        email_sender.send_internal(contact=contact,
+                                   language_code=request.LANGUAGE_CODE,
+                                   body_filename='contact_notification_email_body',
+                                   subject='Business User acaba de llenar formulario de contacto!!!')
+    except (smtplib.SMTPRecipientsRefused, smtplib.SMTPAuthenticationError, UnicodeEncodeError) as e:  # cannot send emails
+        pass
+
+    return render(request, cts.CONTACT_VIEW_PATH, {'main_message': _("Discover amazing people"),})
