@@ -171,13 +171,14 @@
 
 		  <!-- CONTACT FORM -->
 
-		  <a name="contactForm">
-
 		  <form action="contact_us" id="contact_form" method="post">
 
 			  {% csrf_token %}
 
 		  	  <h2 id="contact_form_title">{% trans "Contact Us" %}</h2>
+
+			  <!-- tag to scroll down to the contact form with url -->
+			  <a name="contactForm">
 
 			  {% trans "Your Full Name" as name_placeholder %}
 			  <input style="font-family:Raleway; font-size: 14px; height: 40px;
