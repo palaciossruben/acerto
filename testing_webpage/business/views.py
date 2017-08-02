@@ -364,7 +364,8 @@ def post_first_job(request):
 
         return render(request, cts.POST_JOB_VIEW_PATH, {'countries': countries,
                                                         'education': education,
-                                                        'professions': professions
+                                                        'professions': professions,
+                                                        'is_new_user': True,
                                                         })
     else:
         # TODO: send message showing errors on the form object: form.errors dictionary.
@@ -387,7 +388,9 @@ def post_job(request):
 
     return render(request, cts.POST_JOB_VIEW_PATH, {'countries': countries,
                                                     'education': education,
-                                                    'professions': professions})
+                                                    'professions': professions,
+                                                    'is_new_user': False,
+                                                    })
 
 
 def get_business_user(request):
