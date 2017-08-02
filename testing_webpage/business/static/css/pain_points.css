@@ -16,11 +16,19 @@
     margin-bottom: 20px;
 }
 
+#pain_points_list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 .pain_point_bullet {
-    /*position:relative;
-    left:10px;*/
-    top:2px
-    font-size: 40px;
+  font: 200 22px/1.5 Helvetica, Verdana, sans-serif;
+  border-bottom: 1px solid #ccc;
+}
+
+.pain_point_bullet:last-child {
+  border: none;
 }
 
 @media (max-width: 480px){
