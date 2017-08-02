@@ -22,3 +22,9 @@
     top:2px
     font-size: 40px;
 }
+
+@media (max-width: 480px){
+    #pain_points{
+        width: 100%;
+    }
+}
