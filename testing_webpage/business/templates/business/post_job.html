@@ -59,7 +59,13 @@
 	  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 	  <meta name="theme-color" content="#ffffff">
 
-	  {% if is_new_user %}
+
+
+  </head>
+
+ <body background="{% static 'beta_invite/bgg.jpg' %}">
+
+ 	{% if is_new_user %}
 		  <!-- Google Code for Registering Conversion Page -->
 		  <script type="text/javascript">
 		  /* <![CDATA[ */
@@ -77,10 +83,6 @@
 		  </div>
 		  </noscript>
 	  {% endif %}
-
-  </head>
-
- <body background="{% static 'beta_invite/bgg.jpg' %}">
 
 	{% trans "Log Out" as logout_value %}
 	<div align="right" style="margin-top:15px; margin-right:15px; cursor:pointer;">
