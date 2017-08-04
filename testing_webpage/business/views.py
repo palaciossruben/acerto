@@ -16,7 +16,6 @@ from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import Case, When
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
 
 import business
 import beta_invite
@@ -25,6 +24,7 @@ from business import constants as cts
 from beta_invite.models import User, Country, Education, Profession
 from business.models import Plan, Offer, Contact, Search
 from business.models import User as BusinessUser
+from business.custom_user_creation_form import CustomUserCreationForm
 
 
 def index(request):
@@ -310,24 +310,6 @@ def signup(request):
     return render(request, cts.SIGNUP_VIEW_PATH, {'main_message': plan.message,
                                                   'plan_id': plan.id})
 
-#from django import forms
-
-
-#class SignupForm(UserCreationForm):
-
-    #password1 = forms.CharField(required=True)
-    #password2 = forms.CharField(required=True)
-
-#   def is_valid(self):
-#       """
-#       Overrides this method to have easier passwords. Fuck security for better user experience.
-#       Returns: Boolean
-#       """
-#       no_password_errors = [k for k, v in self.errors.items() if 'password' not in k]
-#       my_validation = self.is_bound and len(no_password_errors) == 0
-
-#       return my_validation
-
 
 def post_first_job(request):
     """
@@ -343,7 +325,7 @@ def post_first_job(request):
         plan = Plan.objects.get(pk=4)
 
     ip = get_ip(request)
-    signup_form = UserCreationForm(request.POST)
+    signup_form = CustomUserCreationForm(request.POST)
 
     if signup_form.is_valid():
         signup_form.save()
@@ -374,7 +356,7 @@ def post_first_job(request):
                                                         })
     else:
         # TODO: send message showing errors on the form object: form.errors dictionary.
-        user_form = UserCreationForm()
+        user_form = CustomUserCreationForm()
         return render(request, cts.SIGNUP_VIEW_PATH, {'main_message': plan.message,
                                                       'plan_id': plan.id,
                                                       'form': user_form})
