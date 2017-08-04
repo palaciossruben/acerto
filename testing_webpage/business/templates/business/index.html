@@ -115,16 +115,24 @@
 			  <h2 id="pain_point_title">{% trans "Why choose us?" %}</h2>
 
 			  <ul id="pain_points_list">
-				  <li class="pain_point_bullet">{% trans "Save on employment exchanges" %}</li>
+				  <li class="pain_point_bullet">{% trans "We only for successful hiring" %}</li>
 				  <br>
 				  <li class="pain_point_bullet">{% trans "Save time reading and analyzing hundreds of resumes" %}</li>
 				  <br>
-				  <li class="pain_point_bullet">{% trans "Save time on pointless personal interviews" %}</li>
+				  <li class="pain_point_bullet">{% trans "Save time personal interviews" %}</li>
 				  <br>
 				  <li class="pain_point_bullet">{% trans "Experts help us choose the best candidates" %}</li>
 				  <br>
-				  <li class="pain_point_bullet">{% trans "We give the video recording of selected personnel" %}</li>
+				  <li class="pain_point_bullet">{% trans "We deliver a detailed report of selected candidates" %}</li>
 			  </ul>
+		  </div>
+
+			  {% trans "Free Trial!" as free_trial %}
+		  <div align="center" style="margin-top:100px; margin-bottom:100px; cursor:pointer;">
+			<form action="{% url 'business:search' %}">
+				<input style="height: 54px; width:250px; border: solid 0px white; background:#F8E676; color:black; text-align:center;
+					   font-size: 22px; cursor:pointer;" type="submit" value="{{ free_trial }}">
+			</form>
 		  </div>
 
 		  <!-- PRICING TABLE -->
