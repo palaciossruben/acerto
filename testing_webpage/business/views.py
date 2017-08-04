@@ -6,7 +6,6 @@ application = get_wsgi_application()
 
 import nltk
 import pickle
-import asyncio
 import smtplib
 import unicodedata
 
@@ -24,7 +23,7 @@ import beta_invite
 from beta_invite.util import email_sender
 from business import constants as cts
 from beta_invite.models import User, Country, Education, Profession
-from business.models import Plan, Offer, Contact
+from business.models import Plan, Offer, Contact, Search
 from business.models import User as BusinessUser
 
 
@@ -243,9 +242,15 @@ def results(request):
     Returns: renders results.html view.
     """
 
-    users = get_matching_users(request)
+    profession, education, country, experience, users, user_ids = get_common_search_info(request)
 
-    translate_users(users, request.LANGUAGE_CODE)
+    Search(ip=get_ip(request),
+           country=country,
+           education=education,
+           profession=profession,
+           experience=experience,
+           skills=get_skills(request),
+           user_ids=user_ids,).save()
 
     return render(request, cts.RESULTS_VIEW_PATH, {'main_message': _("Discover amazing people"),
                                                    'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
@@ -407,13 +412,12 @@ def get_business_user(request):
     return business_user
 
 
-@login_required
-def offer_results(request):
+def get_common_search_info(request):
     """
-    Will save and show the partial results of a job offer.
+    Given a Request object will do all search related stuff
     Args:
         request: HTTP object.
-    Returns: Save and render results
+    Returns: profession, education, country, experience, users, user_ids
     """
 
     profession_id = request.POST.get('profession')
@@ -426,7 +430,23 @@ def offer_results(request):
     experience = request.POST.get('experience')
 
     users = get_matching_users(request)
+    translate_users(users, request.LANGUAGE_CODE)
+
     user_ids = [u.id for u in users]
+
+    return profession, education, country, experience, users, user_ids
+
+
+@login_required
+def offer_results(request):
+    """
+    Will save and show the partial results of a job offer.
+    Args:
+        request: HTTP object.
+    Returns: Save and render results
+    """
+
+    profession, education, country, experience, users, user_ids = get_common_search_info(request)
 
     Offer(business_user=get_business_user(request),
           country=country,
@@ -435,8 +455,6 @@ def offer_results(request):
           experience=experience,
           skills=get_skills(request),
           user_ids=user_ids,).save()
-
-    translate_users(users, request.LANGUAGE_CODE)
 
     return render(request, cts.OFFER_RESULTS_VIEW_PATH, {'users': users,
                                                          })
