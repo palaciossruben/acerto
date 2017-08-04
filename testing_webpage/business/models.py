@@ -106,3 +106,37 @@ class Contact(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'contacts'
+
+
+class Search(models.Model):
+
+    ip = models.GenericIPAddressField(null=True)
+    country = models.ForeignKey(Country, null=True)
+    profession = models.ForeignKey(Profession, null=True)
+    education = models.ForeignKey(Education, null=True)
+    experience = models.IntegerField(null=True)
+    skills = JSONField(null=True)
+
+    def set_skills(self, x):
+        self.skills = json.dumps(x)
+
+    def get_skills(self):
+        return json.loads(self.skills)
+
+    user_ids = JSONField(null=True)
+
+    def set_user_ids(self, x):
+        self.user_ids = json.dumps(x)
+
+    def get_user_ids(self):
+        return json.loads(self.user_ids)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return 'id: {0}, ip: {1}, user_ids: {2}'.format(self.id, self.ip, self.user_ids)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'searches'
