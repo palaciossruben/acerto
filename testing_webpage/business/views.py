@@ -12,7 +12,7 @@ import unicodedata
 from django.contrib.auth.decorators import login_required
 from collections import OrderedDict
 from ipware.ip import get_ip
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import Case, When
 from django.contrib.auth import login, authenticate
@@ -235,7 +235,7 @@ def translate_users(users, language_code):
             u.education.name = u.education.name_es
 
 
-def results(request):
+def calculate_result(request):
     """
     Args:
         request: Request object
@@ -244,13 +244,30 @@ def results(request):
 
     profession, education, country, experience, users, user_ids = get_common_search_info(request)
 
-    Search(ip=get_ip(request),
-           country=country,
-           education=education,
-           profession=profession,
-           experience=experience,
-           skills=get_skills(request),
-           user_ids=user_ids,).save()
+    search_obj = Search(ip=get_ip(request),
+                        country=country,
+                        education=education,
+                        profession=profession,
+                        experience=experience,
+                        skills=get_skills(request),
+                        user_ids=user_ids,)
+
+    search_obj.save()
+
+    return redirect('results/{id}'.format(id=search_obj.id))
+
+
+def render_result(request, pk):
+    """
+    Gets a stored search back to life.
+    Args:
+        request: HTTP request.
+        pk: primary key of a search
+    Returns: Renders search results.
+    """
+
+    search_obj = Search.objects.get(pk=pk)
+    users = [User.objects.get(pk=u_id) for u_id in search_obj.user_ids]
 
     return render(request, cts.RESULTS_VIEW_PATH, {'main_message': _("Discover amazing people"),
                                                    'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
@@ -292,6 +309,7 @@ def translate_message(plan, language_code):
     return plan
 
 
+# TODO: print any error messages when trying to login.
 def signup(request):
     """
     Args:

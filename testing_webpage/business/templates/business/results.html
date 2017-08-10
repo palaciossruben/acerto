@@ -69,10 +69,14 @@
         <a class="scroll logo" style="font-family:CANDARA; font-size:65px; color:black;
          margin-bottom:-50px;"> <img src="{% static 'beta_invite/logo.png' %}" width="370px" ></a>
 
-		 <div class="container" style="margin-top:5px;">
+		 <div class="container" style="margin-top:45px;">
 		   <span data-sr="wait 0.5s, then enter top and move 40px over 1s" style="color:#134984; font-size:25px;">
 				<span style=" font-weight:500; color:#F8E676;">
-					<b style="font-weight:400; text-transform: uppercase;">{% trans "Download curriculums of matching profiles" %}</b>
+					{% if users %}
+						<b style="font-weight:400; text-transform: uppercase;">{% trans "Download curriculums of matching profiles" %}</b>
+					{% else %}
+						<b style="font-weight:400; text-transform: uppercase;">{% trans "Currently no profiles match this query, to solve this issue, call us (+57 311 6109340) or send an email to contacto@peaku.co" %}</b>
+					{% endif %}
 				</span>
 		   </span>
 
