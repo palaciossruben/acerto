@@ -87,7 +87,7 @@
 
 				<div class="list-group">
 					{% for offer in offers %}
-						<a style="text-align:left; cursor:pointer;" href="offer_detail/?id={{ offer.id }}" class="list-group-item"><b>{% trans "Country" %}:</b> {{ offer.country.name }} <b>{% trans "Education" %}:</b> {{ offer.education.name }} <b>{% trans "Profession" %}:</b> {{ offer.profession.name }} <b>{% trans "Experience" %}:</b> {{ offer.experience }} {% trans "years" %}</a>
+						<a style="text-align:left; cursor:pointer;" href="offer_detail?id={{ offer.id }}" class="list-group-item"><b>{% trans "Country" %}:</b> {{ offer.country.name }} <b>{% trans "Education" %}:</b> {{ offer.education.name }} <b>{% trans "Profession" %}:</b> {{ offer.profession.name }} <b>{% trans "Experience" %}:</b> {{ offer.experience }} {% trans "years" %}</a>
 					{% endfor %}
 				</div>
 			</div>
