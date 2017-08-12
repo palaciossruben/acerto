@@ -38,7 +38,7 @@ def index(request):
     ip = get_ip(request)
     action_url = '/business/post'
 
-    secondary_message = _("We do the entire personnel selection process for your company: From obtaining the first candidates to filtering them into a final triad.")
+    secondary_message = _("We do the entire personnel selection process for your company.")
 
     business.models.Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
     return render(request, cts.BUSINESS_VIEW_PATH, {'main_message': _("Discover amazing people"),
