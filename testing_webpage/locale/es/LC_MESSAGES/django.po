@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-04 22:02+0000\n"
+"POT-Creation-Date: 2017-08-12 00:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,7 +63,7 @@ msgstr "Selecciona tu Profesión"
 
 #: beta_invite/templates/beta_invite/long_form.html:164
 #: business/templates/business/post_job.html:157
-#: business/templates/business/search.html:127
+#: business/templates/business/search.html:171
 msgid "Experience in years:"
 msgstr "Experiencia en años:"
 
@@ -111,7 +111,7 @@ msgstr "País"
 
 #: business/templates/business/home.html:90
 #: business/templates/business/offer_results.html:94
-#: business/templates/business/results.html:88
+#: business/templates/business/results.html:89
 msgid "Education"
 msgstr "Educación"
 
@@ -121,13 +121,13 @@ msgstr "Profesión"
 
 #: business/templates/business/home.html:90
 #: business/templates/business/offer_results.html:94
-#: business/templates/business/results.html:88
+#: business/templates/business/results.html:89
 msgid "Experience"
 msgstr "Experiencia"
 
 #: business/templates/business/home.html:90
 #: business/templates/business/offer_results.html:94
-#: business/templates/business/results.html:88
+#: business/templates/business/results.html:89
 msgid "years"
 msgstr "años"
 
@@ -145,33 +145,33 @@ msgstr "Regístrate"
 msgid "Log In"
 msgstr "Inicia Sesión"
 
-#: business/templates/business/index.html:115
+#: business/templates/business/index.html:114
+msgid "Search Candidates"
+msgstr "Busca Candidatos"
+
+#: business/templates/business/index.html:123
 msgid "Why choose us?"
 msgstr "¿Por qué elegirnos?"
 
-#: business/templates/business/index.html:118
+#: business/templates/business/index.html:126
 msgid "We only for successful hiring"
 msgstr "Solo cobramos por contratación exitosa"
 
-#: business/templates/business/index.html:120
+#: business/templates/business/index.html:128
 msgid "Save time reading and analyzing hundreds of resumes"
 msgstr "No tienes que leer y analizar cientos de hojas de vida"
 
-#: business/templates/business/index.html:122
+#: business/templates/business/index.html:130
 msgid "Save time personal interviews"
 msgstr "Ahorra tiempo en entrevistas"
 
-#: business/templates/business/index.html:124
+#: business/templates/business/index.html:132
 msgid "Experts help us choose the best candidates"
 msgstr "Expertos nos ayudan en la elección de los mejores candidatos"
 
-#: business/templates/business/index.html:126
+#: business/templates/business/index.html:134
 msgid "We deliver a detailed report of selected candidates"
 msgstr "Entregamos un informe detallado de los candidatos seleccionados"
-
-#: business/templates/business/index.html:130
-msgid "Free Trial!"
-msgstr "¡Prueba Gratis!"
 
 #: business/templates/business/index.html:142
 msgid "Select the best plan for you"
@@ -298,12 +298,12 @@ msgid "Log In!"
 msgstr "¡Inicia Sesión!"
 
 #: business/templates/business/offer_results.html:82
-#: business/templates/business/results.html:76
+#: business/templates/business/results.html:77
 msgid "Download curriculums of matching profiles"
 msgstr "Descarga el curriculum de perfiles afines"
 
 #: business/templates/business/offer_results.html:84
-#: business/templates/business/results.html:78
+#: business/templates/business/results.html:79
 msgid ""
 "Currently no profiles match this query, to solve this issue, call us (+57 "
 "311 6109340) or send an email to contacto@peaku.co"
@@ -312,12 +312,12 @@ msgstr ""
 "problema, llamanos (+57 311 6109340) o mandanos un email a contacto@peak.co"
 
 #: business/templates/business/offer_results.html:94
-#: business/templates/business/results.html:88
+#: business/templates/business/results.html:89
 msgid "Name"
 msgstr "Nombre"
 
 #: business/templates/business/offer_results.html:94
-#: business/templates/business/results.html:88
+#: business/templates/business/results.html:89
 msgid "Email"
 msgstr "Correo"
 
@@ -337,15 +337,15 @@ msgstr "Habilidades u otros requerimientos"
 msgid "Post!"
 msgstr "¡Publicar!"
 
-#: business/templates/business/search.html:77
+#: business/templates/business/search.html:121
 msgid "Search our Curriculum Database"
 msgstr "Busca Curriculums en Nuestra Base de Datos"
 
-#: business/templates/business/search.html:119
+#: business/templates/business/search.html:163
 msgid "Skills or any other information"
 msgstr "Habilidades u otros requerimientos"
 
-#: business/templates/business/search.html:134
+#: business/templates/business/search.html:179
 msgid "Search"
 msgstr "Buscar"
 
@@ -368,26 +368,22 @@ msgid "Sign Up!"
 msgstr "¡Regístrate!"
 
 #: business/views.py:41
-msgid ""
-"We do the entire personnel selection process for your company: From "
-"obtaining the first candidates to filtering them into a final triad."
-msgstr ""
-"Realizamos todo el proceso de selección de personal para tu empresa: desde "
-"conseguir a los candidatos hasta entregar una triada idónea"
+msgid "We do the entire personnel selection process for your company."
+msgstr "Realizamos todo el proceso de selección de personal para tu empresa"
 
 #: business/views.py:44 business/views.py:71 business/views.py:90
-#: business/views.py:255 business/views.py:498
+#: business/views.py:272 business/views.py:515
 msgid "Discover amazing people"
 msgstr "Descubre personas increíbles"
 
-#: business/views.py:72 business/views.py:91 business/views.py:256
+#: business/views.py:72 business/views.py:91 business/views.py:273
 #, fuzzy
 #| msgid "We search millions of jobs and find the right one for you"
 msgid ""
 "We search millions of profiles and find the ones that best suit your business"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
 
-#: business/views.py:466
+#: business/views.py:483
 msgid "Welcome to PeakU"
 msgstr "Bienvenido a PeakU"
 
@@ -398,6 +394,9 @@ msgstr "Ingles"
 #: testing_webpage/shared_settings.py:119
 msgid "Spanish"
 msgstr "Español"
+
+#~ msgid "Free Trial!"
+#~ msgstr "¡Prueba Gratis!"
 
 #~ msgid "Save on employment exchanges"
 #~ msgstr "Evita gastos en bolsas de empleo"
