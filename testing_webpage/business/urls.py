@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^offer_detail.*$', views.offer_detail, name='offer_detail'),
     url(r'^contact_us$', views.contact_us, name='contact_us'),
     url(r'^results/(?P<pk>\d+)$', views.render_result, name='render_result'),
+    url(r'^popup_signup$', views.popup_signup, name='popup_signup'),
 ]
