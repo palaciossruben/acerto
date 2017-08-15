@@ -81,6 +81,15 @@
 	  </div>
 	  </noscript>
 
+	  <!-- any incoming error_message will print as an alert.-->
+	<script>
+		var error_message = "{{error_message}}";
+		if (error_message) {
+			alert(error_message);
+		}
+	</script>
+
+
 	{% trans "Log In" as login_value %}
 	<div align="right" style="margin-top:15px; margin-right:15px; cursor:pointer;">
 		<form style="cursor:pointer;" action="{% url 'business:login' %}">

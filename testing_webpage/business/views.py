@@ -83,7 +83,6 @@ def search(request):
 
     ip = get_ip(request)
     action_url = '/business/results'
-
     countries, education, professions = beta_invite.views.get_drop_down_values(request.LANGUAGE_CODE)
 
     business.models.Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
@@ -329,12 +328,13 @@ def signup(request):
                                                   'plan_id': plan.id})
 
 
-def post_first_job(request):
+def get_plan(request):
     """
     Args:
-        request: HTTP post request
-    Returns: Renders form.html.
+        request: HTTP request
+    Returns: Returns a Plan obj
     """
+
     plan_id = request.POST.get('plan_id')
     try:
         plan = Plan.objects.get(pk=plan_id)
@@ -342,42 +342,97 @@ def post_first_job(request):
         # Gets the default plan.
         plan = Plan.objects.get(pk=4)
 
-    ip = get_ip(request)
+    return translate_message(plan, request.LANGUAGE_CODE)
+
+
+def first_sign_in(signup_form, request):
+    """
+    This method is used to do stuff after validating signup-data. Also logs in.
+    Args:
+        signup_form: Form obj
+        request: HTTP obj
+    Returns: None, first auth and sign-in, saves objects
+    """
+
+    plan = get_plan(request)
+
+    signup_form.save()
+    username = signup_form.cleaned_data.get('username')
+    password = signup_form.cleaned_data.get('password1')
+
+    # Creates a Authentication user
+    auth_user = authenticate(username=username,
+                             password=password)
+
+    # New BusinessUser pointing to the AuthUser
+    business.models.User(name=request.POST.get('name'),
+                         email=request.POST.get('username'),
+                         phone=request.POST.get('phone'),
+                         ip=get_ip(request),
+                         ui_version=cts.UI_VERSION,
+                         plan=plan,
+                         auth_user_id=auth_user.id).save()
+
+    login(request, auth_user)
+
+
+def post_first_job(request):
+    """
+    Args:
+        request: HTTP post request
+    Returns: Renders form.html.
+    """
+
     signup_form = CustomUserCreationForm(request.POST)
 
     if signup_form.is_valid():
-        signup_form.save()
-        username = signup_form.cleaned_data.get('username')
-        password = signup_form.cleaned_data.get('password1')
 
-        # Creates a Authentication user
-        auth_user = authenticate(username=username,
-                                 password=password)
-
-        # New BusinessUser pointing to the AuthUser
-        business.models.User(name=request.POST.get('name'),
-                             email=request.POST.get('username'),
-                             phone=request.POST.get('phone'),
-                             ip=ip,
-                             ui_version=cts.UI_VERSION,
-                             plan=plan,
-                             auth_user_id=auth_user.id).save()
-
-        login(request, auth_user)
-
+        first_sign_in(signup_form, request)
         countries, education, professions = beta_invite.views.get_drop_down_values(request.LANGUAGE_CODE)
-
         return render(request, cts.POST_JOB_VIEW_PATH, {'countries': countries,
                                                         'education': education,
                                                         'professions': professions,
                                                         'is_new_user': True,
                                                         })
     else:
-        # TODO: send message showing errors on the form object: form.errors dictionary.
-        user_form = CustomUserCreationForm()
+
+        # Takes first element from the errors dictionary
+        error_message = [m[0] for m in signup_form.errors.values()][0]
+        plan = get_plan(request)
+
         return render(request, cts.SIGNUP_VIEW_PATH, {'main_message': plan.message,
                                                       'plan_id': plan.id,
-                                                      'form': user_form})
+                                                      'error_message': error_message})
+
+
+def popup_signup(request):
+    """
+    Args:
+        request: HTTP obj
+    Returns: Redirects.
+    """
+
+    signup_form = CustomUserCreationForm(request.POST)
+
+    if signup_form.is_valid():
+        first_sign_in(signup_form, request)
+        return redirect('business:search')
+    else:
+
+        # Takes first element from the errors dictionary
+        error_message = [m[0] for m in signup_form.errors.values()][0]
+
+        countries, education, professions = beta_invite.views.get_drop_down_values(request.LANGUAGE_CODE)
+        action_url = '/business/results'
+
+        return render(request, cts.SEARCH_VIEW_PATH, {'main_message': _("Discover amazing people"),
+                                                      'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
+                                                      'action_url': action_url,
+                                                      'countries': countries,
+                                                      'education': education,
+                                                      'professions': professions,
+                                                      'error_message': error_message,
+                                                      })
 
 
 @login_required

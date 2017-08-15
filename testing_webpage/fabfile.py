@@ -1,5 +1,6 @@
 import os
 import subprocess
+import psycopg2 as pg
 
 from uuid import getnode as get_mac
 from fabric.api import run, env, prefix
@@ -75,6 +76,20 @@ def sync_local(sync_media=True):
         # Fill in with data
         fill_sql = "{psql} -f {local_backup}".format(psql=dbadmin_psql, local_backup=local_backup)
         subprocess.call(fill_sql, shell=True)
+
+        # get connected to the database
+        maindb_connection = pg.connect("dbname=maindb user=dbadmin")
+        curs = maindb_connection.cursor()
+
+        # Update Sequences
+        curs.execute("SELECT setval('business_user_id_seq', (SELECT max(id) from business_users))")
+        curs.execute("SELECT setval('business_visitor_id_seq', (SELECT max(id) from business_visitor))")
+        curs.execute("SELECT setval('auth_user_id_seq', (SELECT max(id) from auth_user))")
+        curs.execute("SELECT setval('searches_id_seq', (SELECT max(id) from searches))")
+        curs.execute("SELECT setval('offers_id_seq', (SELECT max(id) from offers))")
+
+        # Closes connection
+        maindb_connection.close()
 
     else:
         raise Exception("WTF are you trying to do!!! Be careful not to erase production.")
