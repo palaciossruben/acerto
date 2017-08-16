@@ -146,39 +146,36 @@
 					onclick="Post('/business/signup', {plan_name: 'Basic', csrfmiddlewaretoken: '{{ csrf_token }}'});">
 
 				  <ul class="price">
-					<li class="header" id="standard_header">{% trans "Standard Selection" %}</li>
-					<li>{% trans "Starts with 50 candidates" %}</li>
-					<li>{% trans "AI Screening" %}</li>
-					<li>{% trans "Personal Interview, soft and hard skills assessment" %}</li>
-					<li>{% trans "10 days process" %}</li>
-					<li>{% trans "We Recommend 3 candidates" %}</li>
-					<li class="price_value">{% trans "$200 / contracted candidate" %}</li>
+					<li class="header" id="standard_header">{% trans "Search Engine" %}</li>
+					<li>{% trans "Resume search engine" %}</li>
+					<li>{% trans "-" %}</li>
+					<li>{% trans "-" %}</li>
+					<li>{% trans "-" %}</li>
+					<li class="price_value">{% trans "Free" %}</li>
 				  </ul>
 				</div>
 
 				<div class="columns" onmouseover="HoverOnAgile()"
 					 onclick="Post('/business/signup', {plan_name: 'Agile', csrfmiddlewaretoken: '{{ csrf_token }}'});">
 				  <ul class="price">
-					<li class="header" id="agile_header" style="background-color:green">{% trans "Agile Selection" %}</li>
-					<li>{% trans "Starts with 100 candidates" %}</li>
-					<li>{% trans "AI Screening" %}</li>
-					<li>{% trans "Personal Interview, soft and hard skills assessment" %}</li>
-					<li>{% trans "5 days process" %}</li>
-					<li>{% trans "We Recommend 3 candidates" %}</li>
-					<li class="price_value">{% trans "$300 / contracted candidate" %}</li>
+					<li class="header" id="agile_header" style="background-color:green">{% trans "Screening" %}</li>
+					<li>{% trans "Resume search engine" %}</li>
+					<li>{% trans "Search specific profiles on demand" %}</li>
+					<li>{% trans "Resume Screening" %}</li>
+					<li>{% trans "-" %}</li>
+					<li class="price_value">{% trans "$200 / contracted candidate" %}</li>
 				  </ul>
 				</div>
 
 				<div class="columns" onmouseover="HoverOnCustom()"
 					 onclick="Post('/business/signup', {plan_name: 'Custom', csrfmiddlewaretoken: '{{ csrf_token }}'});">
 				  <ul class="price">
-					<li class="header" id="custom_header">{% trans "Custom Selection" %}</li>
-					<li>{% trans "Starts with X candidates" %}</li>
-					<li>{% trans "AI Screening" %}</li>
+					<li class="header" id="custom_header">{% trans "Selection" %}</li>
+					<li>{% trans "Resume search engine" %}</li>
+					<li>{% trans "Search specific profiles on demand" %}</li>
+					<li>{% trans "Resume Screening" %}</li>
 					<li>{% trans "Personal Interview, soft and hard skills assessment" %}</li>
-					<li>{% trans "Y days process" %}</li>
-					<li>{% trans "We Recommend 3 candidates" %}</li>
-					<li class="price_value">{% trans "Ask for a Quote" %}</li>
+					<li class="price_value">{% trans "$300 / contracted candidate" %}</li>
 				  </ul>
 				</div>
 
