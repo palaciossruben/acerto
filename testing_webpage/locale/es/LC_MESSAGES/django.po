@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-15 02:45+0000\n"
+"POT-Creation-Date: 2017-08-16 16:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,17 +25,17 @@ msgstr "Suscríbete"
 
 #: beta_invite/templates/beta_invite/index.html:87
 #: beta_invite/templates/beta_invite/long_form.html:107
-#: business/templates/business/index.html:203
-#: business/templates/business/search.html:230
+#: business/templates/business/index.html:198
+#: business/templates/business/search.html:211
 #: business/templates/business/signup.html:120
 msgid "Your Full Name"
 msgstr "Tu Nombre Completo"
 
 #: beta_invite/templates/beta_invite/index.html:94
 #: beta_invite/templates/beta_invite/long_form.html:114
-#: business/templates/business/index.html:208
+#: business/templates/business/index.html:203
 #: business/templates/business/login.html:92
-#: business/templates/business/search.html:237
+#: business/templates/business/search.html:218
 #: business/templates/business/signup.html:127
 msgid "Your email"
 msgstr "Tu correo"
@@ -47,7 +47,7 @@ msgstr "Sube tu curriculum"
 
 #: beta_invite/templates/beta_invite/index.html:113
 #: beta_invite/templates/beta_invite/long_form.html:179
-#: business/templates/business/index.html:223
+#: business/templates/business/index.html:218
 msgid "Sure!"
 msgstr "¡Enviar!"
 
@@ -65,7 +65,7 @@ msgstr "Selecciona tu Profesión"
 
 #: beta_invite/templates/beta_invite/long_form.html:164
 #: business/templates/business/post_job.html:157
-#: business/templates/business/search.html:193
+#: business/templates/business/search.html:180
 msgid "Experience in years:"
 msgstr "Experiencia en años:"
 
@@ -100,7 +100,7 @@ msgstr "¡Gracias por tu interes!"
 #: business/templates/business/index.html:72
 #: business/templates/business/offer_results.html:66
 #: business/templates/business/post_job.html:87
-#: business/templates/business/search.html:109
+#: business/templates/business/search.html:96
 msgid "Log Out"
 msgstr "Cerrar Sesión"
 
@@ -140,12 +140,12 @@ msgstr "Adiciona +"
 
 #: business/templates/business/index.html:84
 #: business/templates/business/login.html:67
-#: business/templates/business/search.html:121
+#: business/templates/business/search.html:108
 msgid "Sign Up"
 msgstr "Regístrate"
 
 #: business/templates/business/index.html:90
-#: business/templates/business/search.html:127
+#: business/templates/business/search.html:114
 #: business/templates/business/signup.html:93
 msgid "Log In"
 msgstr "Inicia Sesión"
@@ -183,104 +183,89 @@ msgid "Select the best plan for you"
 msgstr "Selecciona el mejor plan para tí"
 
 #: business/templates/business/index.html:149
-msgid "Standard Selection"
-msgstr "Selección Básica"
+msgid "Search Engine"
+msgstr "Buscador"
 
 #: business/templates/business/index.html:150
-msgid "Starts with 50 candidates"
-msgstr "Empieza con 50 candidatos"
+#: business/templates/business/index.html:162
+#: business/templates/business/index.html:174
+msgid "Resume search engine"
+msgstr "Buscador de hojas de vida"
 
 #: business/templates/business/index.html:151
-#: business/templates/business/index.html:165
-#: business/templates/business/index.html:179
-msgid "AI Screening"
-msgstr "Screening con Inteligencia Artificial"
-
 #: business/templates/business/index.html:152
-#: business/templates/business/index.html:166
-#: business/templates/business/index.html:180
-msgid "Personal Interview, soft and hard skills assessment"
-msgstr "Entrevista personal, evaluación de habilidades blandas y técnicas"
-
 #: business/templates/business/index.html:153
-msgid "10 days process"
-msgstr "Toma 10 días"
+#: business/templates/business/index.html:165
+msgid "-"
+msgstr "-"
 
 #: business/templates/business/index.html:154
-#: business/templates/business/index.html:168
-#: business/templates/business/index.html:182
-msgid "We Recommend 3 candidates"
-msgstr "Recomendamos 3 candidatos"
+msgid "Free"
+msgstr "Gratis"
 
-#: business/templates/business/index.html:155
+#: business/templates/business/index.html:161
+msgid "Screening"
+msgstr "Screening"
+
+#: business/templates/business/index.html:163
+#: business/templates/business/index.html:175
+msgid "Search specific profiles on demand"
+msgstr "Búsqueda de perfiles especificos bajo pedido"
+
+#: business/templates/business/index.html:164
+#: business/templates/business/index.html:176
+msgid "Resume Screening"
+msgstr "Screening de hojas de vida"
+
+#: business/templates/business/index.html:166
 msgid "$200 / contracted candidate"
 msgstr "$350 mil Pesos/candidato contratado"
 
-#: business/templates/business/index.html:163
-msgid "Agile Selection"
-msgstr "Selección Ágil"
+#: business/templates/business/index.html:173
+msgid "Selection"
+msgstr "Selección"
 
-#: business/templates/business/index.html:164
-msgid "Starts with 100 candidates"
-msgstr "Empieza con 100 candidatos"
+#: business/templates/business/index.html:177
+msgid "Personal Interview, soft and hard skills assessment"
+msgstr "Entrevista personal, evaluación de habilidades blandas y técnicas"
 
-#: business/templates/business/index.html:167
-msgid "5 days process"
-msgstr "Toma 5 días"
-
-#: business/templates/business/index.html:169
+#: business/templates/business/index.html:178
 msgid "$300 / contracted candidate"
 msgstr "$500 mil Pesos/candidato contratado"
 
-#: business/templates/business/index.html:177
-msgid "Custom Selection"
-msgstr "Personalizada"
-
-#: business/templates/business/index.html:178
-msgid "Starts with X candidates"
-msgstr "Número de candidatos a convenir"
-
-#: business/templates/business/index.html:181
-msgid "Y days process"
-msgstr "Tiempo a convenir"
-
-#: business/templates/business/index.html:183
-msgid "Ask for a Quote"
-msgstr "Pregunta por una cotización"
-
-#: business/templates/business/index.html:201
+#: business/templates/business/index.html:196
 msgid "Contact Us"
 msgstr "Contáctanos"
 
-#: business/templates/business/index.html:213
+#: business/templates/business/index.html:208
 msgid "Your phone (optional)"
 msgstr "Tu teléfono (opcional)"
 
-#: business/templates/business/index.html:218
+#: business/templates/business/index.html:213
 msgid "Add a message (optional)"
 msgstr "Escríbe un comentario (opcional)"
 
-#: business/templates/business/index.html:238
+#: business/templates/business/index.html:233
 msgid "Home"
 msgstr "Inicio"
 
-#: business/templates/business/index.html:240
+#: business/templates/business/index.html:235
 msgid "Pricing"
 msgstr "Precios"
 
-#: business/templates/business/index.html:242
+#: business/templates/business/index.html:237
 msgid "About"
 msgstr "Acerca"
 
-#: business/templates/business/index.html:244
+#: business/templates/business/index.html:239
 msgid "Contact"
 msgstr "Contáctanos"
 
-#: business/templates/business/index.html:269
+#: business/templates/business/index.html:264
 msgid "About the company"
 msgstr "Acerca de la compañia"
 
-#: business/templates/business/index.html:270
+#: business/templates/business/index.html:265
 msgid ""
 "PeakU is a technology company that will transform the recruiting industry by "
 "targeting customer pain points and automating them with artificial "
@@ -342,38 +327,40 @@ msgstr "Habilidades u otros requerimientos"
 msgid "Post!"
 msgstr "¡Publicar!"
 
-#: business/templates/business/search.html:143
+#: business/templates/business/search.html:130
 msgid "Search our Curriculum Database"
 msgstr "Busca Curriculums en Nuestra Base de Datos"
 
-#: business/templates/business/search.html:185
+#: business/templates/business/search.html:172
 msgid "Skills or any other information"
 msgstr "Habilidades u otros requerimientos"
 
-#: business/templates/business/search.html:200
+#: business/templates/business/search.html:187
+#, fuzzy
+#| msgid "Search Engine"
 msgid "Search"
-msgstr "Buscar"
+msgstr "Buscador"
 
-#: business/templates/business/search.html:220
+#: business/templates/business/search.html:204
 msgid "SignUp to continue using the app ;)"
 msgstr "Regístrate para continuar usando la app ;)"
 
-#: business/templates/business/search.html:244
+#: business/templates/business/search.html:225
 #: business/templates/business/signup.html:134
 msgid "Your phone"
 msgstr "Tu teléfono"
 
-#: business/templates/business/search.html:251
+#: business/templates/business/search.html:232
 #: business/templates/business/signup.html:141
 msgid "Enter a password"
 msgstr "Digita una clave"
 
-#: business/templates/business/search.html:258
+#: business/templates/business/search.html:239
 #: business/templates/business/signup.html:148
 msgid "Confirm password"
 msgstr "Digita una clave"
 
-#: business/templates/business/search.html:265
+#: business/templates/business/search.html:246
 #: business/templates/business/signup.html:155
 msgid "Sign Up!"
 msgstr "¡Regístrate!"
@@ -382,19 +369,20 @@ msgstr "¡Regístrate!"
 msgid "We do the entire personnel selection process for your company."
 msgstr "Realizamos todo el proceso de selección de personal para tu empresa"
 
-#: business/views.py:44 business/views.py:71 business/views.py:90
-#: business/views.py:272 business/views.py:520
+#: business/views.py:44 business/views.py:71 business/views.py:89
+#: business/views.py:271 business/views.py:428 business/views.py:570
 msgid "Discover amazing people"
 msgstr "Descubre personas increíbles"
 
-#: business/views.py:72 business/views.py:91 business/views.py:273
+#: business/views.py:72 business/views.py:90 business/views.py:272
+#: business/views.py:429
 #, fuzzy
 #| msgid "We search millions of jobs and find the right one for you"
 msgid ""
 "We search millions of profiles and find the ones that best suit your business"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
 
-#: business/views.py:488
+#: business/views.py:538
 msgid "Welcome to PeakU"
 msgstr "Bienvenido a PeakU"
 
@@ -405,6 +393,36 @@ msgstr "Ingles"
 #: testing_webpage/shared_settings.py:119
 msgid "Spanish"
 msgstr "Español"
+
+#~ msgid "Ask for a Quote"
+#~ msgstr "Pregunta por una cotización"
+
+#~ msgid "Standard Selection"
+#~ msgstr "Selección Básica"
+
+#~ msgid "Starts with 50 candidates"
+#~ msgstr "Empieza con 50 candidatos"
+
+#~ msgid "10 days process"
+#~ msgstr "Toma 10 días"
+
+#~ msgid "We Recommend 3 candidates"
+#~ msgstr "Recomendamos 3 candidatos"
+
+#~ msgid "Starts with 100 candidates"
+#~ msgstr "Empieza con 100 candidatos"
+
+#~ msgid "5 days process"
+#~ msgstr "Toma 5 días"
+
+#~ msgid "Custom Selection"
+#~ msgstr "Personalizada"
+
+#~ msgid "Starts with X candidates"
+#~ msgstr "Número de candidatos a convenir"
+
+#~ msgid "Y days process"
+#~ msgstr "Tiempo a convenir"
 
 #~ msgid "Free Trial!"
 #~ msgstr "¡Prueba Gratis!"
