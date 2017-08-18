@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-18 00:50+0000\n"
+"POT-Creation-Date: 2017-08-18 21:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,7 +49,7 @@ msgstr "Suscríbete"
 
 #: beta_invite/templates/beta_invite/index.html:87
 #: beta_invite/templates/beta_invite/long_form.html:107
-#: business/templates/business/index.html:198
+#: business/templates/business/index.html:200
 #: business/templates/business/search.html:211
 #: business/templates/business/signup.html:120
 msgid "Your Full Name"
@@ -57,7 +57,7 @@ msgstr "Tu Nombre Completo"
 
 #: beta_invite/templates/beta_invite/index.html:94
 #: beta_invite/templates/beta_invite/long_form.html:114
-#: business/templates/business/index.html:203
+#: business/templates/business/index.html:205
 #: business/templates/business/login.html:92
 #: business/templates/business/search.html:218
 #: business/templates/business/signup.html:127
@@ -71,7 +71,7 @@ msgstr "Sube tu curriculum"
 
 #: beta_invite/templates/beta_invite/index.html:113
 #: beta_invite/templates/beta_invite/long_form.html:179
-#: business/templates/business/index.html:218
+#: business/templates/business/index.html:220
 msgid "Sure!"
 msgstr "¡Enviar!"
 
@@ -121,6 +121,7 @@ msgstr "¡Gracias por tu interes!"
 #: business/templates/business/home.html:66
 #: business/templates/business/index.html:72
 #: business/templates/business/offer_results.html:66
+#: business/templates/business/plan.html:66
 #: business/templates/business/post_job.html:87
 #: business/templates/business/search.html:96
 msgid "Log Out"
@@ -209,15 +210,15 @@ msgid "Search Engine"
 msgstr "Buscador"
 
 #: business/templates/business/index.html:150
-#: business/templates/business/index.html:162
-#: business/templates/business/index.html:174
+#: business/templates/business/index.html:163
+#: business/templates/business/index.html:176
 msgid "Resume search engine"
 msgstr "Buscador de hojas de vida"
 
 #: business/templates/business/index.html:151
 #: business/templates/business/index.html:152
 #: business/templates/business/index.html:153
-#: business/templates/business/index.html:165
+#: business/templates/business/index.html:166
 msgid "-"
 msgstr "-"
 
@@ -225,69 +226,69 @@ msgstr "-"
 msgid "Free"
 msgstr "Gratis"
 
-#: business/templates/business/index.html:161
+#: business/templates/business/index.html:162
 msgid "Screening"
 msgstr "Screening"
 
-#: business/templates/business/index.html:163
-#: business/templates/business/index.html:175
+#: business/templates/business/index.html:164
+#: business/templates/business/index.html:177
 msgid "Search specific profiles on demand"
 msgstr "Búsqueda de perfiles especificos bajo pedido"
 
-#: business/templates/business/index.html:164
-#: business/templates/business/index.html:176
+#: business/templates/business/index.html:165
+#: business/templates/business/index.html:178
 msgid "Resume Screening"
 msgstr "Screening de hojas de vida"
 
-#: business/templates/business/index.html:166
+#: business/templates/business/index.html:167
 msgid "$200 / contracted candidate"
 msgstr "$350 mil Pesos/candidato contratado"
 
-#: business/templates/business/index.html:173
+#: business/templates/business/index.html:175
 msgid "Selection"
 msgstr "Selección"
 
-#: business/templates/business/index.html:177
+#: business/templates/business/index.html:179
 msgid "Personal Interview, soft and hard skills assessment"
 msgstr "Entrevista personal, evaluación de habilidades blandas y técnicas"
 
-#: business/templates/business/index.html:178
+#: business/templates/business/index.html:180
 msgid "$300 / contracted candidate"
 msgstr "$500 mil Pesos/candidato contratado"
 
-#: business/templates/business/index.html:196
+#: business/templates/business/index.html:198
 msgid "Contact Us"
 msgstr "Contáctanos"
 
-#: business/templates/business/index.html:208
+#: business/templates/business/index.html:210
 msgid "Your phone (optional)"
 msgstr "Tu teléfono (opcional)"
 
-#: business/templates/business/index.html:213
+#: business/templates/business/index.html:215
 msgid "Add a message (optional)"
 msgstr "Escríbe un comentario (opcional)"
 
-#: business/templates/business/index.html:233
+#: business/templates/business/index.html:235
 msgid "Home"
 msgstr "Inicio"
 
-#: business/templates/business/index.html:235
+#: business/templates/business/index.html:237
 msgid "Pricing"
 msgstr "Precios"
 
-#: business/templates/business/index.html:237
+#: business/templates/business/index.html:239
 msgid "About"
 msgstr "Acerca"
 
-#: business/templates/business/index.html:239
+#: business/templates/business/index.html:241
 msgid "Contact"
 msgstr "Contáctanos"
 
-#: business/templates/business/index.html:264
+#: business/templates/business/index.html:266
 msgid "About the company"
 msgstr "Acerca de la compañia"
 
-#: business/templates/business/index.html:265
+#: business/templates/business/index.html:267
 msgid ""
 "PeakU is a technology company that will transform the recruiting industry by "
 "targeting customer pain points and automating them with artificial "
@@ -332,6 +333,10 @@ msgstr "Nombre"
 #: business/templates/business/results.html:88
 msgid "Email"
 msgstr "Correo"
+
+#: business/templates/business/plan.html:90
+msgid "I am interested!"
+msgstr "¡Estoy interesado/a!"
 
 #: business/templates/business/post_job.html:102
 msgid "Welcome to PeakU!"

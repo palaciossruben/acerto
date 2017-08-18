@@ -10,8 +10,11 @@ from beta_invite.models import Country, Education, Profession
 class Plan(models.Model):
 
     name = models.CharField(max_length=200)
+    name_es = models.CharField(max_length=200, null=True)
     message = models.CharField(max_length=200, null=True)
     message_es = models.CharField(max_length=200, null=True)
+    explanation = models.CharField(max_length=10000, null=True)
+    explanation_es = models.CharField(max_length=10000, null=True)
 
     def __str__(self):
         return '{0}'.format(self.name)

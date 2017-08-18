@@ -139,12 +139,11 @@
 		  <!-- tag to scroll down to the pricing table with url -->
 		    <a name="pricing">
 
-		  	<h2 style="color:#fff; margin-top:150px;">{% trans "Select the best plan for you" %}</h2>
+		  	<h2 style="color:#fff; margin-top:110px;">{% trans "Select the best plan for you" %}</h2>
 
 			<div class="container" style="margin-top:10px; margin-bottom:600px;">
 				<div class="columns" onmouseover="HoverOnStandard()"
-					onclick="Post('/business/signup', {plan_name: 'Basic', csrfmiddlewaretoken: '{{ csrf_token }}'});">
-
+					onclick="Post('plan/1', {plan_name: 'Search Engine', csrfmiddlewaretoken: '{{ csrf_token }}'});">
 				  <ul class="price">
 					<li class="header" id="standard_header">{% trans "Search Engine" %}</li>
 					<li>{% trans "Resume search engine" %}</li>
@@ -156,7 +155,7 @@
 				</div>
 
 				<div class="columns" onmouseover="HoverOnAgile()"
-					 onclick="Post('/business/signup', {plan_name: 'Agile', csrfmiddlewaretoken: '{{ csrf_token }}'});">
+					 onclick="Post('plan/2', {plan_name: 'Screening', csrfmiddlewaretoken: '{{ csrf_token }}'});">
 				  <ul class="price">
 					<li class="header" id="agile_header" style="background-color:green">{% trans "Screening" %}</li>
 					<li>{% trans "Resume search engine" %}</li>
@@ -168,7 +167,7 @@
 				</div>
 
 				<div class="columns" onmouseover="HoverOnCustom()"
-					 onclick="Post('/business/signup', {plan_name: 'Custom', csrfmiddlewaretoken: '{{ csrf_token }}'});">
+					 onclick="Post('plan/3', {plan_name: 'Selection', csrfmiddlewaretoken: '{{ csrf_token }}'});">
 				  <ul class="price">
 					<li class="header" id="custom_header">{% trans "Selection" %}</li>
 					<li>{% trans "Resume search engine" %}</li>

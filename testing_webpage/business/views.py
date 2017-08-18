@@ -568,3 +568,30 @@ def contact_us(request):
     #loop.close()
 
     return render(request, cts.CONTACT_VIEW_PATH, {'main_message': _("Discover amazing people"),})
+
+
+def translate_plan(plan_obj, language_code):
+    """
+    Args:
+        plan_obj: an obj Plan
+        language_code: can be 'es'
+    Returns: translated obj
+    """
+    if 'es' in language_code:
+        plan_obj.explanation = plan_obj.explanation_es
+        plan_obj.name = plan_obj.name_es
+
+    return plan_obj
+
+
+def plan(request, pk):
+    """
+    Args:
+        request: HTTP request
+        pk: primary key of the Plan object.
+    Returns: Renders the plan detailed explanation
+    """
+    plan_obj = Plan.objects.get(pk=pk)
+    plan_obj = translate_plan(plan_obj, request.LANGUAGE_CODE)
+
+    return render(request, cts.PLAN_VIEW_PATH, {'plan': plan_obj})
