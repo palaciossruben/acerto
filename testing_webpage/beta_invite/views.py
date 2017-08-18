@@ -65,20 +65,7 @@ def index(request):
     :return: renders a view.
     """
 
-    ip = get_ip(request)
-
-    action_url = '/beta_invite/long_form/post'
-
-    countries, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
-
-    Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
-    return render(request, cts.LONG_FORM_VIEW_PATH, {'main_message': _("Discover your true passion"),
-                                                     'secondary_message': _("We search millions of jobs and find the right one for you"),
-                                                     'action_url': action_url,
-                                                     'countries': countries,
-                                                     'education': education,
-                                                     'professions': professions,
-                                                     })
+    return render(request, cts.HOME_VIEW_PATH)
 
 
 def post_index(request):
