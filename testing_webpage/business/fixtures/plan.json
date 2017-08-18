@@ -3,27 +3,36 @@
     "model": "business.plan",
     "pk": 1,
     "fields":{
-      "name": "Basic",
+      "name": "Search Engine",
+      "name_es": "Buscador",
       "message": "You have selected the Basic Plan, just send us an additional bit of information to complete registration.",
-      "message_es": "Has seleccionado el Plan Básico, envíanos un poco más de información para completar tu registro."
+      "message_es": "Has seleccionado el Plan Buscador, envíanos un poco más de información para completar tu registro.",
+      "explanation": "This is a free plan, it allows companies to search for potential candidates in our database. However, this plan does not include additional searches, screening, interviews or tests.",
+      "explanation_es": "Este es un plan gratis, permite a las empresas buscar candidatos potenciales en nuestra base de datos. Sin embargo este plan no incluye búsquedas adicionales, screening, entrevistas o pruebas."
     }
   },
   {
     "model": "business.plan",
     "pk": 2,
     "fields":{
-      "name": "Agile",
-      "message": "You have selected the Agile Plan, just send us an additional bit of information to complete registration.",
-      "message_es": "Has seleccionado el Plan Ágil, envíanos un poco más de información para completar tu registro."
+      "name": "Screening",
+      "name_es": "Screening",
+      "message": "You have selected the Screening Plan, just send us an additional bit of information to complete registration.",
+      "message_es": "Has seleccionado el Plan Screening, envíanos un poco más de información para completar tu registro.",
+      "explanation": "This plan allows companies to look for candidates with very specific profiles. In addition, the curriculums obtained are screened by our experts and the best 3 are presented. However, this plan does not include interviews or tests. We only charge for hired employees.",
+      "explanation_es": "Este plan, permite que las empresas busquen candidatos con perfiles muy específicos. Además se hace un screening de los curriculums obtenidos y se escogen los 3 mejores de acuerdo a nuestros expertos. Sin embargo este plan no incluye  entrevistas o pruebas. Solo cobramos por empleado contratado."
     }
   },
   {
     "model": "business.plan",
     "pk": 3,
     "fields":{
-      "name": "Custom",
-      "message": "You have selected the Custom Plan, we will call you once you register.",
-      "message_es": "Has seleccionado el Plan Personalizado, te llamaremos una vez completes tu registro."
+      "name": "Selection",
+      "name_es": "Selección",
+      "message": "You have selected the Selection Plan, we will call you once you register.",
+      "message_es": "Has seleccionado el Plan Selección, te llamaremos una vez completes tu registro.",
+      "explanation": "This plan allows companies to look for candidates with very specific profiles. Additionally, a curriculum screening is performed to select candidates for a personal interview where English, interpersonal skills, and a technical test evaluate performance according to the company needs. The 3 best candidates pass over the most rigorous filter of any plan. We only charge for hired employees.",
+      "explanation_es": "Este plan, permite que las empresas busquen candidatos con perfiles muy específicos. Adicionalmente se hace una selección de los curriculums obtenidos y una entrevista donde se evalua inglés, habilidades interpersonales y una prueba técnica de acuerdo al cargo. La terna final pasa por la seleccion más rigurosa de cualquier plan. Solo cobramos por empleado contratado"
     }
   },
   {
@@ -31,6 +40,7 @@
     "pk": 4,
     "fields":{
       "name": "Default",
+      "name_es": "Por defecto",
       "message": "Send us an additional bit of information to complete registration.",
       "message_es": "Envíanos un poco más de información para completar tu registro."
     }
