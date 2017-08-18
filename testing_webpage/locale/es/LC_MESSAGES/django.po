@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-18 00:18+0000\n"
+"POT-Creation-Date: 2017-08-18 00:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,8 +31,8 @@ msgid "Who are you?"
 msgstr "¿Quién eres?"
 
 #: beta_invite/templates/beta_invite/home.html:83
-msgid "Employee"
-msgstr "Empleado"
+msgid "Person"
+msgstr "Persona"
 
 #: beta_invite/templates/beta_invite/home.html:89
 msgid "or"
@@ -106,13 +106,11 @@ msgstr "¡Gracias por registrarte!"
 msgid "We will contact you soon"
 msgstr "Nos pondremos en contacto pronto"
 
-#: beta_invite/views.py:68 beta_invite/views.py:121 beta_invite/views.py:174
-#: beta_invite/views.py:239
+#: beta_invite/views.py:104 beta_invite/views.py:157 beta_invite/views.py:222
 msgid "Discover your true passion"
 msgstr "Descubre tu verdadera pasión"
 
-#: beta_invite/views.py:69 beta_invite/views.py:122 beta_invite/views.py:175
-#: beta_invite/views.py:240
+#: beta_invite/views.py:105 beta_invite/views.py:158 beta_invite/views.py:223
 msgid "We search millions of jobs and find the right one for you"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
 
@@ -417,6 +415,9 @@ msgstr "Ingles"
 #: testing_webpage/shared_settings.py:119
 msgid "Spanish"
 msgstr "Español"
+
+#~ msgid "Employee"
+#~ msgstr "Empleado"
 
 #~ msgid "Ask for a Quote"
 #~ msgstr "Pregunta por una cotización"
