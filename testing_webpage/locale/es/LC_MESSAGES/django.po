@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-16 16:33+0000\n"
+"POT-Creation-Date: 2017-08-18 00:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,30 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: beta_invite/templates/beta_invite/home.html:69
+msgid "we connect you better"
+msgstr "Te conectamos mejor"
+
+#: beta_invite/templates/beta_invite/home.html:71
+msgid "We find the best match between employees and employer"
+msgstr "Encontramos el empleado y empleador perfecto."
+
+#: beta_invite/templates/beta_invite/home.html:77
+msgid "Who are you?"
+msgstr "¿Quién eres?"
+
+#: beta_invite/templates/beta_invite/home.html:83
+msgid "Employee"
+msgstr "Empleado"
+
+#: beta_invite/templates/beta_invite/home.html:89
+msgid "or"
+msgstr "o"
+
+#: beta_invite/templates/beta_invite/home.html:91
+msgid "Business"
+msgstr "Empresa"
 
 #: beta_invite/templates/beta_invite/index.html:77
 #: beta_invite/templates/beta_invite/long_form.html:96
@@ -82,13 +106,13 @@ msgstr "¡Gracias por registrarte!"
 msgid "We will contact you soon"
 msgstr "Nos pondremos en contacto pronto"
 
-#: beta_invite/views.py:75 beta_invite/views.py:117 beta_invite/views.py:170
-#: beta_invite/views.py:235
+#: beta_invite/views.py:68 beta_invite/views.py:121 beta_invite/views.py:174
+#: beta_invite/views.py:239
 msgid "Discover your true passion"
 msgstr "Descubre tu verdadera pasión"
 
-#: beta_invite/views.py:76 beta_invite/views.py:118 beta_invite/views.py:171
-#: beta_invite/views.py:236
+#: beta_invite/views.py:69 beta_invite/views.py:122 beta_invite/views.py:175
+#: beta_invite/views.py:240
 msgid "We search millions of jobs and find the right one for you"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
 
