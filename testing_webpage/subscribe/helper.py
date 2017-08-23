@@ -25,7 +25,12 @@ def get_image_text(filename):
     im = Image.open(filename)
 
     tmp_path = os.path.join(RESUMES_PATH, 'tmp.jpg')
-    im.save(tmp_path)
+
+    try:
+        im.save(tmp_path)
+    except IOError:
+        return ''
+
     try:
         text = pytesseract.image_to_string(Image.open(tmp_path))#, lang='spa')
     except OSError:  # Error: image file is truncated (8 bytes not processed)
