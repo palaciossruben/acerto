@@ -150,7 +150,7 @@ def long_form(request):
     """
 
     # passes campaign_id around to collect it in the POST form from this view: cts.LONG_FORM_VIEW_PATH
-    campaign_id = request.GET['campaign_id']
+    campaign_id = request.GET.get('campaign_id')
 
     ip = get_ip(request)
     action_url = '/beta_invite/long_form/post'
