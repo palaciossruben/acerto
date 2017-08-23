@@ -158,14 +158,19 @@ def long_form(request):
 
     Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
 
-    return render(request, cts.LONG_FORM_VIEW_PATH, {'main_message': _("Discover your true passion"),
-                                                     'secondary_message': _("We search millions of jobs and find the right one for you"),
-                                                     'action_url': action_url,
-                                                     'countries': countries,
-                                                     'education': education,
-                                                     'professions': professions,
-                                                     'campaign_id': campaign_id,
-                                                     })
+    param_dict = {'main_message': _("Discover your true passion"),
+                  'secondary_message': _("We search millions of jobs and find the right one for you"),
+                  'action_url': action_url,
+                  'countries': countries,
+                  'education': education,
+                  'professions': professions,
+                  'campaign_id': campaign_id,
+                  }
+
+    if campaign_id is not None:
+        param_dict['campaign_id'] = campaign_id
+
+    return render(request, cts.LONG_FORM_VIEW_PATH, param_dict)
 
 
 def update_search_dictionary_on_background():
@@ -190,15 +195,6 @@ def post_long_form(request):
     user_agent = parse(ua_string)
     ip = get_ip(request)
 
-    # finally collects the campaign_id.
-    campaign_id = request.POST.get('campaign_id')
-
-    # verify that the campaign exists.
-    try:
-        Campaign.objects.get(pk=campaign_id)
-    except ObjectDoesNotExist:
-        campaign_id = None
-
     profession_id = request.POST.get('profession')
     education_id = request.POST.get('education')
     country_id = request.POST.get('country')
@@ -209,17 +205,48 @@ def post_long_form(request):
     education = Education.objects.get(pk=education_id)
     country = Country.objects.get(pk=country_id)
 
-    user = User(name=request.POST.get('name'),
-                email=request.POST.get('email'),
-                profession=profession,
-                education=education,
-                country=country,
-                experience=experience,
-                age=age,
-                ip=ip,
-                ui_version=cts.UI_VERSION,
-                is_mobile=user_agent.is_mobile,
-                campaign_id=campaign_id,)
+    # finally collects the campaign_id.
+    campaign_id = request.POST.get('campaign_id')
+
+    # verify that the campaign exists.
+    if campaign_id is not None and campaign_id != 'None':
+        try:
+            Campaign.objects.get(pk=campaign_id)
+            user = User(name=request.POST.get('name'),
+                        email=request.POST.get('email'),
+                        profession=profession,
+                        education=education,
+                        country=country,
+                        experience=experience,
+                        age=age,
+                        ip=ip,
+                        ui_version=cts.UI_VERSION,
+                        is_mobile=user_agent.is_mobile,
+                        campaign_id=campaign_id)
+        except ObjectDoesNotExist:
+            user = User(name=request.POST.get('name'),
+                        email=request.POST.get('email'),
+                        profession=profession,
+                        education=education,
+                        country=country,
+                        experience=experience,
+                        age=age,
+                        ip=ip,
+                        ui_version=cts.UI_VERSION,
+                        is_mobile=user_agent.is_mobile)
+
+    else:
+        user = User(name=request.POST.get('name'),
+                    email=request.POST.get('email'),
+                    profession=profession,
+                    education=education,
+                    country=country,
+                    experience=experience,
+                    age=age,
+                    ip=ip,
+                    ui_version=cts.UI_VERSION,
+                    is_mobile=user_agent.is_mobile)
+
 
     # Saves here to get an id
     user.save()
