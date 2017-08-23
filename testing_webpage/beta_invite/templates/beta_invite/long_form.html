@@ -104,6 +104,8 @@
 
 				{% csrf_token %}
 
+				  <input type="hidden" name="campaign_id" value="{{ campaign_id }}" />
+
 				{% trans "Your Full Name" as name_placeholder %}
 				<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:0px;
 				 border:solid 1px #F8E676; background-color:white; width: 250px;" id="name" type="text" name="name"

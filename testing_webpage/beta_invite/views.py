@@ -5,9 +5,10 @@ from user_agents import parse
 from django.core.files.storage import FileSystemStorage
 from django.utils.translation import ugettext as _
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
 
 from django.shortcuts import render
-from beta_invite.models import User, Visitor, Profession, Education, Country
+from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign
 from ipware.ip import get_ip
 from beta_invite import constants as cts
 
@@ -148,6 +149,9 @@ def long_form(request):
     will render and have the same view as /beta_invite except for message customization.
     """
 
+    # passes campaign_id around to collect it in the POST form from this view: cts.LONG_FORM_VIEW_PATH
+    campaign_id = request.GET['campaign_id']
+
     ip = get_ip(request)
     action_url = '/beta_invite/long_form/post'
     countries, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
@@ -160,6 +164,7 @@ def long_form(request):
                                                      'countries': countries,
                                                      'education': education,
                                                      'professions': professions,
+                                                     'campaign_id': campaign_id,
                                                      })
 
 
@@ -185,6 +190,15 @@ def post_long_form(request):
     user_agent = parse(ua_string)
     ip = get_ip(request)
 
+    # finally collects the campaign_id.
+    campaign_id = request.POST.get('campaign_id')
+
+    # verify that the campaign exists.
+    try:
+        Campaign.objects.get(pk=campaign_id)
+    except ObjectDoesNotExist:
+        campaign_id = None
+
     profession_id = request.POST.get('profession')
     education_id = request.POST.get('education')
     country_id = request.POST.get('country')
@@ -204,7 +218,8 @@ def post_long_form(request):
                 age=age,
                 ip=ip,
                 ui_version=cts.UI_VERSION,
-                is_mobile=user_agent.is_mobile)
+                is_mobile=user_agent.is_mobile,
+                campaign_id=campaign_id,)
 
     # Saves here to get an id
     user.save()
