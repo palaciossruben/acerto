@@ -63,6 +63,7 @@ class Campaign(models.Model):
     profession = models.ForeignKey(Profession, null=True, on_delete=models.SET_NULL)
     education = models.ForeignKey(Education, null=True, on_delete=models.SET_NULL)
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
+    description = models.CharField(max_length=1000, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -87,7 +88,7 @@ class User(models.Model):
     education = models.ForeignKey(Education, null=True, on_delete=models.SET_NULL)
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
     curriculum_url = models.CharField(max_length=200, default='#')
-    campaign_id = models.ForeignKey(Campaign, null=True)
+    campaign = models.ForeignKey(Campaign, null=True)
 
     # Detects if the user is in a mobile phone when registering.
     is_mobile = models.NullBooleanField()
