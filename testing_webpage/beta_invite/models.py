@@ -56,6 +56,25 @@ class Country(models.Model):
         db_table = 'countries'
 
 
+class Campaign(models.Model):
+
+    name = models.CharField(max_length=200)
+    experience = models.IntegerField(null=True)
+    profession = models.ForeignKey(Profession, null=True, on_delete=models.SET_NULL)
+    education = models.ForeignKey(Education, null=True, on_delete=models.SET_NULL)
+    country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '{0}, {1}'.format(self.id, self.name)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'campaigns'
+
+
 class User(models.Model):
 
     email = models.CharField(max_length=200)
@@ -68,6 +87,7 @@ class User(models.Model):
     education = models.ForeignKey(Education, null=True, on_delete=models.SET_NULL)
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
     curriculum_url = models.CharField(max_length=200, default='#')
+    campaign_id = models.ForeignKey(Campaign, null=True)
 
     # Detects if the user is in a mobile phone when registering.
     is_mobile = models.NullBooleanField()
