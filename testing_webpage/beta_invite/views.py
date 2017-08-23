@@ -168,7 +168,7 @@ def long_form(request):
                   }
 
     if campaign_id is not None:
-        param_dict['campaign_id'] = campaign_id
+        param_dict['campaign_id'] = int(campaign_id)
 
     return render(request, cts.LONG_FORM_VIEW_PATH, param_dict)
 
@@ -208,45 +208,25 @@ def post_long_form(request):
     # finally collects the campaign_id.
     campaign_id = request.POST.get('campaign_id')
 
+    user = User(name=request.POST.get('name'),
+                email=request.POST.get('email'),
+                profession=profession,
+                education=education,
+                country=country,
+                experience=experience,
+                age=age,
+                ip=ip,
+                ui_version=cts.UI_VERSION,
+                is_mobile=user_agent.is_mobile)
+
     # verify that the campaign exists.
     if campaign_id is not None and campaign_id != 'None':
         try:
-            Campaign.objects.get(pk=campaign_id)
-            user = User(name=request.POST.get('name'),
-                        email=request.POST.get('email'),
-                        profession=profession,
-                        education=education,
-                        country=country,
-                        experience=experience,
-                        age=age,
-                        ip=ip,
-                        ui_version=cts.UI_VERSION,
-                        is_mobile=user_agent.is_mobile,
-                        campaign_id=campaign_id)
+            campaign = Campaign.objects.get(pk=int(campaign_id))
+            # under right conditions add the campaign before saving
+            user.campaign = campaign
         except ObjectDoesNotExist:
-            user = User(name=request.POST.get('name'),
-                        email=request.POST.get('email'),
-                        profession=profession,
-                        education=education,
-                        country=country,
-                        experience=experience,
-                        age=age,
-                        ip=ip,
-                        ui_version=cts.UI_VERSION,
-                        is_mobile=user_agent.is_mobile)
-
-    else:
-        user = User(name=request.POST.get('name'),
-                    email=request.POST.get('email'),
-                    profession=profession,
-                    education=education,
-                    country=country,
-                    experience=experience,
-                    age=age,
-                    ip=ip,
-                    ui_version=cts.UI_VERSION,
-                    is_mobile=user_agent.is_mobile)
-
+            pass
 
     # Saves here to get an id
     user.save()
@@ -269,3 +249,21 @@ def post_long_form(request):
 @login_required
 def home(request):
     return render(request, 'success.html')
+
+
+#from django.views.generic import ListView
+#from .models import Campaign
+#from django.forms import ModelForm
+
+
+#class CampaignForm(ModelForm):
+#    class Meta:
+#        model = Campaign
+#        fields = ['name', 'pages']
+
+
+#class CampaignsList(ListView):
+#    model = Campaign
+
+
+
