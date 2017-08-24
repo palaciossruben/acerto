@@ -12,8 +12,8 @@ from beta_invite.util import email_sender
 users = User.objects.filter(created_at__range=[str(datetime.now() - timedelta(days=1)), str(datetime.now())])
 
 
-email_sender.send_daily_report(language_code='es',
-                               body_filename='daily_report_email_body',
-                               subject='Daily report',
-                               recipient='juan@peaku.co',
-                               users=users)
+email_sender.send_report(language_code='es',
+                         body_filename='daily_report_email_body',
+                         subject='Daily report',
+                         recipient='juan@peaku.co',
+                         users=users)
