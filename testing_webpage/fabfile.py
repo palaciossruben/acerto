@@ -115,6 +115,9 @@ def deploy():
             # download latest changes to repo.
             run('git pull origin master')
 
+            # update the cron jobs, in case it has changed.
+            run('crontab cron.txt')
+
             # TODO: make pdfminer installation work!
             # install any missing python package
             #run('sudo pip3 install pipreqs')  # First install pipreqs if missing
