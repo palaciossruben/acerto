@@ -131,7 +131,7 @@ def create_nice_resumes_message(users):
     return '\n\n'.join(resume_summaries)
 
 
-def send_daily_report(language_code, body_filename, subject, recipient, users):
+def send_report(language_code, body_filename, subject, recipient, users):
     """
     Sends an email
     Args:
