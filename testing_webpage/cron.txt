@@ -1,0 +1,1 @@
+0 12 * * * python3 /home/ubuntu/acerto/testing_webpage/create_daily_report.py
