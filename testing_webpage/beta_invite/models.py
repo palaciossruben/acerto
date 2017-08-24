@@ -64,6 +64,7 @@ class Campaign(models.Model):
     education = models.ForeignKey(Education, null=True, on_delete=models.SET_NULL)
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
     description = models.CharField(max_length=1000, null=True)
+    description_es = models.CharField(max_length=1000, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
