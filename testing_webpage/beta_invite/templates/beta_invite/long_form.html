@@ -11,6 +11,8 @@
 	  <meta name="author" content="Juan Pablo Isaza">
 	  <meta name="google-site-verification" content="LPqesGS5MnESQN-E-LNjZWtRrZAY4rO__YDq8WFjpOs" />
 	  <meta name="google-site-verification" content="tR13zEizNHyoMXQ0j8F1ImD0Xe3FdWFHUq-ksIKUscE" />
+	  <!-- Make sure HTML understands accents -->
+	  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
       <title>PeakU</title>
 
@@ -86,8 +88,9 @@
          margin-bottom:-50px;"> <img src="{% static 'beta_invite/logo.png' %}" width="370px" ></a>
 
 		  <h1 style="font-size:35px; margin-top:10px; color:#F8E676; ">{{ main_message }}</h1>
+
         <p style="font-size:18px; margin-top:-10px;  color:#F8E676;">
-			{{ secondary_message }}
+			{% if campaign %} {{ campaign.description }} {% else %} {{ secondary_message }} {% endif %}
 		</p>
 
 		 <div class="container" style="margin-top:5px;">
