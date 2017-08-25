@@ -216,7 +216,6 @@ def post_long_form(request):
     education_id = request.POST.get('education')
     country_id = request.POST.get('country')
     experience = request.POST.get('experience')
-    age = request.POST.get('age')
 
     profession = Profession.objects.get(pk=profession_id)
     education = Education.objects.get(pk=education_id)
@@ -231,7 +230,6 @@ def post_long_form(request):
                 education=education,
                 country=country,
                 experience=experience,
-                age=age,
                 ip=ip,
                 ui_version=cts.UI_VERSION,
                 is_mobile=user_agent.is_mobile)
