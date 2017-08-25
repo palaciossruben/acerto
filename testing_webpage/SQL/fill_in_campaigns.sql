@@ -6,3 +6,15 @@ VALUES ('Systems Administrator', 'Excellent English. Experience with Windows OS,
 
 INSERT INTO campaigns (name, description, description_es, created_at, updated_at)
 VALUES ('C/C++ Developer', 'Multinational company position with excellent English. C/C++ experience, detailed oriented and good for team work.', 'Vacante en multinacional con alto nivel de Inglés. Experiencia en C/C++, orientado al detalle y capaz de trabajar en equipo', now(), now());
+
+UPDATE campaigns
+SET description_es = 'Alto nivel de Ingles. Experiencia en NodeJS y AWS para backend y AngularJS o Angular 2 en frontend. 2 o mas anos de experiencia.'
+WHERE id = 1;
+
+UPDATE campaigns
+SET description_es = 'Alto nivel de Inglés. Experiencia con Windows OS, Linus OS y VMware. Saber por lo menos un lenguaje de scripting. Disponibilidad 24/7'
+WHERE id = 2;
+
+UPDATE campaigns
+SET description_es = 'Vacante en multinacional con alto nivel de Inglés. Experiencia en C/C++, orientado al detalle y capaz de trabajar en equipo'
+WHERE id = 3;

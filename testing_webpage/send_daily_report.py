@@ -15,5 +15,5 @@ users = User.objects.filter(created_at__range=[str(datetime.now() - timedelta(da
 email_sender.send_report(language_code='es',
                          body_filename='daily_report_email_body',
                          subject='Daily report',
-                         recipient='juan@peaku.co',
+                         recipient=['juan@peaku.co', 'santiago@peaku.co'],
                          users=users)
