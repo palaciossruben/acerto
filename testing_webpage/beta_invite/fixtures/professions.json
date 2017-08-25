@@ -173,5 +173,13 @@
     "name": "Economics",
     "name_es": "Ciencias Económicas"
   }
+},
+{
+  "model": "beta_invite.profession",
+  "pk": 23,
+  "fields": {
+    "name": "Sales Professional",
+    "name_es": "Profesional en ventas"
+  }
 }
 ]
