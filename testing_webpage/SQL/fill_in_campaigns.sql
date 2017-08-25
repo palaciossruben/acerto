@@ -8,13 +8,23 @@ INSERT INTO campaigns (name, description, description_es, created_at, updated_at
 VALUES ('C/C++ Developer', 'Multinational company position with excellent English. C/C++ experience, detailed oriented and good for team work.', 'Vacante en multinacional con alto nivel de Inglés. Experiencia en C/C++, orientado al detalle y capaz de trabajar en equipo', now(), now());
 
 UPDATE campaigns
-SET description_es = 'Alto nivel de Ingles. Experiencia en NodeJS y AWS para backend y AngularJS o Angular 2 en frontend. 2 o mas anos de experiencia.'
+SET description_es = 'Alto nivel de Inglés. Experiencia en NodeJS y AWS para backend y AngularJS o Angular 2 en frontend. 2 o más años de experiencia.'
 WHERE id = 1;
 
 UPDATE campaigns
-SET description_es = 'Alto nivel de Inglés. Experiencia con Windows OS, Linus OS y VMware. Saber por lo menos un lenguaje de scripting. Disponibilidad 24/7'
+SET description_es = 'Alto nivel de Inglés. Experiencia con Windows OS, Linus OS y VMware. Saber por lo menos un lenguaje de scripting. Disponibilidad 24/7.'
 WHERE id = 2;
 
 UPDATE campaigns
-SET description_es = 'Vacante en multinacional con alto nivel de Inglés. Experiencia en C/C++, orientado al detalle y capaz de trabajar en equipo'
+SET description_es = 'Vacante en multinacional con alto nivel de Inglés. Experiencia en C/C++, orientado al detalle y capaz de trabajar en equipo.'
 WHERE id = 3;
+
+
+# The remote ubuntu machine does not support accents therefore I opted for a remote connection sending the correct spanish syntax:
+# follow this structure: ssh_commands psql.... \" SQL....\'string\' \".
+# note that SQL command cannot have ";" at the end.
+ssh -i production_key.pem <user>@<host> psql -d maindb -U dbadmin -p 5432 -h localhost -c \" UPDATE campaigns SET description_es = \'Alto nivel de Inglés. Experiencia en NodeJS y AWS para backend y AngularJS o Angular 2 en frontend. 2 o más años de experiencia.\' WHERE id = 1 \"
+
+ssh -i production_key.pem <user>@<host> psql -d maindb -U dbadmin -p 5432 -h localhost -c \" UPDATE campaigns SET description_es = \'Alto nivel de Inglés. Experiencia con Windows OS, Linus OS y VMware. Saber por lo menos un lenguaje de scripting. Disponibilidad 24/7.\' WHERE id = 2 \"
+
+ssh -i production_key.pem <user>@<host> psql -d maindb -U dbadmin -p 5432 -h localhost -c \" UPDATE campaigns SET description_es = \'Vacante en multinacional con alto nivel de Inglés. Experiencia en C/C++, orientado al detalle y capaz de trabajar en equipo.\' WHERE id = 3 \"
