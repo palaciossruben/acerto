@@ -117,7 +117,7 @@ def create_nice_resumes_message(users):
 
         resume_summaries.append('campaign: {campaign_name}\n'
                                 'name: {name}\n'
-                                'emial: {email}\n'
+                                'email: {email}\n'
                                 'country: {country}\n'
                                 'profession: {profession}\n'
                                 'education: {education}\n'
