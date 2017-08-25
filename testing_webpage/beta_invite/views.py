@@ -144,6 +144,17 @@ def get_drop_down_values(language_code):
     return countries, education, professions
 
 
+def translate_campaign(campaign, language_code):
+    """
+    Args:
+        campaign: Object
+        language_code: 'es', 'en' etc.
+    Returns: Inplace object translation
+    """
+    if language_code == 'es':
+        campaign.description = campaign.description_es
+
+
 def long_form(request):
     """
     will render and have the same view as /beta_invite except for message customization.
@@ -164,11 +175,17 @@ def long_form(request):
                   'countries': countries,
                   'education': education,
                   'professions': professions,
-                  'campaign_id': campaign_id,
                   }
 
     if campaign_id is not None:
         param_dict['campaign_id'] = int(campaign_id)
+        try:
+            campaign = Campaign.objects.get(pk=int(campaign_id))
+            translate_campaign(campaign, request.LANGUAGE_CODE)
+            # if campaign exists send it.
+            param_dict['campaign'] = campaign
+        except ObjectDoesNotExist:
+            pass
 
     return render(request, cts.LONG_FORM_VIEW_PATH, param_dict)
 
@@ -220,7 +237,7 @@ def post_long_form(request):
                 is_mobile=user_agent.is_mobile)
 
     # verify that the campaign exists.
-    if campaign_id is not None and campaign_id != 'None':
+    if campaign_id:
         try:
             campaign = Campaign.objects.get(pk=int(campaign_id))
             # under right conditions add the campaign before saving
@@ -249,21 +266,3 @@ def post_long_form(request):
 @login_required
 def home(request):
     return render(request, 'success.html')
-
-
-#from django.views.generic import ListView
-#from .models import Campaign
-#from django.forms import ModelForm
-
-
-#class CampaignForm(ModelForm):
-#    class Meta:
-#        model = Campaign
-#        fields = ['name', 'pages']
-
-
-#class CampaignsList(ListView):
-#    model = Campaign
-
-
-
