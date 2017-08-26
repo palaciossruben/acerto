@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-26 00:55+0000\n"
+"POT-Creation-Date: 2017-08-26 01:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -125,7 +125,6 @@ msgid "We will contact you soon"
 msgstr "Nos pondremos en contacto pronto"
 
 #: beta_invite/views.py:105 beta_invite/views.py:185 beta_invite/views.py:272
-#: beta_invite/views.py:296 beta_invite/views.py:364
 msgid "Discover your true passion"
 msgstr "Descubre tu verdadera pasión"
 
@@ -133,6 +132,10 @@ msgstr "Descubre tu verdadera pasión"
 #: beta_invite/views.py:297 beta_invite/views.py:365
 msgid "We search millions of jobs and find the right one for you"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
+
+#: beta_invite/views.py:296 beta_invite/views.py:364
+msgid "Find a job now"
+msgstr "Encuentra trabajo ya"
 
 #: business/templates/business/contact.html:96
 msgid "Thanks for reaching out!"
