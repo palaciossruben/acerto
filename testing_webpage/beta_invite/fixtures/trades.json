@@ -122,6 +122,14 @@
   "model": "beta_invite.trade",
   "pk": 16,
   "fields": {
+    "name": "Driver",
+    "name_es": "Conductor"
+  }
+},
+{
+  "model": "beta_invite.trade",
+  "pk": 17,
+  "fields": {
     "name": "Other, not specified",
     "name_es": "Otra, Sin Especificar"
   }
