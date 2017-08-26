@@ -1,0 +1,129 @@
+[{
+  "model": "beta_invite.trade",
+  "pk": 1,
+  "fields":{
+    "name": "Electrician",
+    "name_es": "Electricista"
+  }
+},
+{
+  "model": "beta_invite.trade",
+  "pk": 2,
+  "fields":{
+    "name": "Plumber",
+    "name_es": "Plomero"
+  }
+},
+{
+  "model": "beta_invite.trade",
+  "pk": 3,
+  "fields":{
+    "name": "Waiter",
+    "name_es": "Mesero"
+  }
+},
+{
+  "model": "beta_invite.trade",
+  "pk": 4,
+  "fields":{
+    "name": "Cook",
+    "name_es": "Cocinero"
+  }
+},
+{
+  "model": "beta_invite.trade",
+  "pk": 5,
+  "fields":{
+    "name": "Chef",
+    "name_es": "Chef"
+  }
+},
+{
+  "model": "beta_invite.trade",
+  "pk": 6,
+  "fields":{
+    "name": "Gardener",
+    "name_es": "Jardinero"
+  }
+},
+{
+  "model": "beta_invite.trade",
+  "pk": 7,
+  "fields":{
+    "name": "Singer",
+    "name_es": "Cantante"
+  }
+},
+{
+  "model": "beta_invite.trade",
+  "pk": 8,
+  "fields":{
+    "name": "Mechanic",
+    "name_es": "Mecánico"
+  }
+},
+{
+  "model": "beta_invite.trade",
+  "pk": 9,
+  "fields":{
+    "name": "Cleaning lady",
+    "name_es": "Empleada Domestica"
+  }
+},
+{
+  "model": "beta_invite.trade",
+  "pk": 10,
+  "fields":{
+    "name": "Courier",
+    "name_es": "Mensajero"
+  }
+},
+{
+  "model": "beta_invite.trade",
+  "pk": 11,
+  "fields":{
+    "name": "Construction Worker",
+    "name_es": "Obrero"
+  }
+},
+{
+  "model": "beta_invite.trade",
+  "pk": 12,
+  "fields":{
+    "name": "Dog Walker",
+    "name_es": "Paseador de Perros"
+  }
+},
+{
+  "model": "beta_invite.trade",
+  "pk": 13,
+  "fields":{
+    "name": "Carpenter",
+    "name_es": "Carpintero"
+  }
+},
+{
+  "model": "beta_invite.trade",
+  "pk": 14,
+  "fields":{
+    "name": "Domiciliario",
+    "name_es": "Domiciliario"
+  }
+},
+{
+  "model": "beta_invite.trade",
+  "pk": 15,
+  "fields": {
+    "name": "Appliance Repairman",
+    "name_es": "Reparador de Electrodomesticos"
+  }
+},
+{
+  "model": "beta_invite.trade",
+  "pk": 16,
+  "fields": {
+    "name": "Other, not specified",
+    "name_es": "Otra, Sin Especificar"
+  }
+}
+]
