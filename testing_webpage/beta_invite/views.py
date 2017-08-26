@@ -293,7 +293,7 @@ def fast_job(request):
 
     Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
 
-    param_dict = {'main_message': _("Discover your true passion"),
+    param_dict = {'main_message': _("Find a job now"),
                   'secondary_message': _("We search millions of jobs and find the right one for you"),
                   'action_url': action_url,
                   'countries': countries,
@@ -361,6 +361,6 @@ def post_fast_job(request):
     #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
     #    pass
 
-    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover your true passion"),
+    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Find a job now"),
                                                    'secondary_message': _("We search millions of jobs and find the right one for you"),
                                                    })
