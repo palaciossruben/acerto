@@ -30,6 +30,19 @@ class Profession(models.Model):
         db_table = 'professions'
 
 
+class Trade(models.Model):
+
+    name = models.CharField(max_length=200)
+    name_es = models.CharField(max_length=200, null=True)
+
+    def __str__(self):
+        return '{0}'.format(self.name)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'trades'
+
+
 class Education(models.Model):
 
     name = models.CharField(max_length=200)
@@ -103,3 +116,29 @@ class User(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'users'
+
+
+class TradeUser(models.Model):
+
+    name = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
+    phone = models.CharField(max_length=40, null=True)
+    country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
+    trade = models.ForeignKey(Trade, null=True, on_delete=models.SET_NULL)
+    description = models.CharField(max_length=1000, null=True)
+
+    # Detects if the user is in a mobile phone when registering.
+    is_mobile = models.NullBooleanField()
+    ip = models.GenericIPAddressField(null=True)
+    ui_version = models.CharField(max_length=200)
+    campaign = models.ForeignKey(Campaign, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '{0}, {1}'.format(self.name, self.email)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'trade_users'

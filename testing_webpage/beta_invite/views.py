@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 
 from django.shortcuts import render
-from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign
+from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser
 from ipware.ip import get_ip
 from beta_invite import constants as cts
 
@@ -132,16 +132,29 @@ def get_drop_down_values(language_code):
 
     professions = Profession.objects.all().order_by(get_name_field(language_code))
     translate_list_of_objects(professions, language_code)
-    #sorted(professions, key=lambda x: x.name)
 
     education = Education.objects.all().order_by('level')
     translate_list_of_objects(education, language_code)
-    #sorted(education, key=lambda x: x.level)
 
     countries = Country.objects.all().order_by('name')
-    #sorted(countries, key=lambda x: x.name)
 
     return countries, education, professions
+
+
+def get_trade_drop_down_values(language_code):
+    """
+    Gets lists of drop down for trades.
+    Args:
+        language_code: 2 digit code (eg. 'es')
+    Returns: A tuple containing (Countries, Education, Professions)
+    """
+
+    trades = Trade.objects.all().order_by(get_name_field(language_code))
+    translate_list_of_objects(trades, language_code)
+
+    countries = Country.objects.all().order_by('name')
+
+    return countries, trades
 
 
 def translate_campaign(campaign, language_code):
@@ -157,7 +170,7 @@ def translate_campaign(campaign, language_code):
 
 def long_form(request):
     """
-    will render and have the same view as /beta_invite except for message customization.
+    will render a form to input user data.
     """
 
     # passes campaign_id around to collect it in the POST form from this view: cts.LONG_FORM_VIEW_PATH
@@ -264,3 +277,90 @@ def post_long_form(request):
 @login_required
 def home(request):
     return render(request, 'success.html')
+
+
+def fast_job(request):
+    """
+    will render
+    """
+
+    # passes campaign_id around to collect it in the POST form from this view: cts.LONG_FORM_VIEW_PATH
+    campaign_id = request.GET.get('campaign_id')
+
+    ip = get_ip(request)
+    action_url = '/beta_invite/fast_job/post'
+    countries, trades = get_trade_drop_down_values(request.LANGUAGE_CODE)
+
+    Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
+
+    param_dict = {'main_message': _("Discover your true passion"),
+                  'secondary_message': _("We search millions of jobs and find the right one for you"),
+                  'action_url': action_url,
+                  'countries': countries,
+                  'trades': trades,
+                  }
+
+    if campaign_id is not None:
+        param_dict['campaign_id'] = int(campaign_id)
+        try:
+            campaign = Campaign.objects.get(pk=int(campaign_id))
+            translate_campaign(campaign, request.LANGUAGE_CODE)
+            # if campaign exists send it.
+            param_dict['campaign'] = campaign
+        except ObjectDoesNotExist:
+            pass
+
+    return render(request, cts.FAST_JOB_VIEW_PATH, param_dict)
+
+
+def post_fast_job(request):
+    """
+    Args:
+        request: Request object
+    Returns: Saves
+    """
+    # Gets information of client: such as if it is mobile.
+    ua_string = request.META['HTTP_USER_AGENT']
+    user_agent = parse(ua_string)
+    ip = get_ip(request)
+
+    trade_id = request.POST.get('trade')
+    country_id = request.POST.get('country')
+
+    trade = Trade.objects.get(pk=trade_id)
+    country = Country.objects.get(pk=country_id)
+
+    # finally collects the campaign_id.
+    campaign_id = request.POST.get('campaign_id')
+
+    trade_user = TradeUser(name=request.POST.get('name'),
+                           email=request.POST.get('email'),
+                           phone=request.POST.get('phone'),
+                           country=country,
+                           trade=trade,
+                           description=request.POST.get('description'),
+                           ip=ip,
+                           ui_version=cts.UI_VERSION,
+                           is_mobile=user_agent.is_mobile)
+
+    # verify that the campaign exists.
+    if campaign_id:
+        try:
+            campaign = Campaign.objects.get(pk=int(campaign_id))
+            # under right conditions add the campaign before saving
+            trade_user.campaign = campaign
+        except ObjectDoesNotExist:
+            pass
+
+    # Saves here to get an id
+    trade_user.save()
+
+    # TODO: just try it.
+    #try:
+    #    email_sender.send(user)
+    #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
+    #    pass
+
+    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover your true passion"),
+                                                   'secondary_message': _("We search millions of jobs and find the right one for you"),
+                                                   })
