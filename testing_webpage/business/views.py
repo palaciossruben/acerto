@@ -558,7 +558,6 @@ def contact_us(request):
 
     contact.save()
 
-
     send_contact_emails(contact, request.LANGUAGE_CODE)
 
     # TODO: make this shit work
@@ -595,3 +594,23 @@ def plan(request, pk):
     plan_obj = translate_plan(plan_obj, request.LANGUAGE_CODE)
 
     return render(request, cts.PLAN_VIEW_PATH, {'plan': plan_obj})
+
+
+def trade_client(request):
+    """
+    will render and have the same view as /beta_invite except for message customization.
+    Args:
+        request: Object
+    Returns: Save
+    """
+
+    ip = get_ip(request)
+    action_url = '/business/post'
+
+    secondary_message = _("")
+
+    business.models.Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
+    return render(request, cts.TRADE_CLIENT_VIEW_PATH, {'main_message': _(""),
+                                                        'secondary_message': secondary_message,
+                                                        'action_url': action_url,
+                                                        })
