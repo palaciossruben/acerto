@@ -3,7 +3,7 @@ function TurnOffAdblockAlert(){
     Displays message in case Adblock is turned on. Telling the user to turn it of before continuing.
     */
 
-    log.console("inside adblock")
+    console.log("inside adblock")
 
     var adBlockEnabled = false;
     var testAd = document.createElement('div');
@@ -35,18 +35,18 @@ function SetSignUpModal(is_authenticated, action_url){
     /*
     Sets up a modal to register a new user after exceeding 3 searches on the same browser.
     */
-    log.console("started SetSignUpModel")
+    console.log("started SetSignUpModel")
     var search_form = $('#search_form')[0];
 
     if (is_authenticated) {
         search_form.action = action_url;
     } else {
 
-        log.console("not authenticated")
+        console.log("not authenticated")
 
         if(typeof(Storage) !== "undefined") {
 
-            log.console("Valid storage")
+            console.log("Valid storage")
 
             if (localStorage.clickcount) {
                 localStorage.clickcount = Number(localStorage.clickcount)+1;
@@ -56,7 +56,7 @@ function SetSignUpModal(is_authenticated, action_url){
 
             if ( Number(localStorage.clickcount) > 3 ) {
 
-                log.console("more than 3 clicks")
+                console.log("more than 3 clicks")
 
                 var modal = $('#search_modal')[0];
                 var span = document.getElementsByClassName("close")[0];
