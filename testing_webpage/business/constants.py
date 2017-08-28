@@ -1,5 +1,6 @@
 UI_VERSION = "2.0 - Enhanced Business UI: adds pricing, real signup, candidate search and timeline results"
 BUSINESS_VIEW_PATH = 'business/index.html'
+TRADE_CLIENT_VIEW_PATH = 'business/trade_client.html'
 SEARCH_VIEW_PATH = 'business/search.html'
 POST_JOB_VIEW_PATH = 'business/post_job.html'
 RESULTS_VIEW_PATH = 'business/results.html'

@@ -1,5 +1,38 @@
-function SetSignUpModal(is_authenticated, action_url){
+function TurnOffAdblockAlert(){
+    /*
+    Displays message in case Adblock is turned on. Telling the user to turn it of before continuing.
+    */
 
+    var adBlockEnabled = false;
+    var testAd = document.createElement('div');
+    testAd.innerHTML = '&nbsp;';
+    testAd.className = 'adsbox';
+    document.body.appendChild(testAd);
+    window.setTimeout(function() {
+      if (testAd.offsetHeight === 0) {
+        adBlockEnabled = true;
+      }
+      testAd.remove();
+      console.log('AdBlock Enabled? ', adBlockEnabled)
+
+      if (adBlockEnabled === true) {
+
+        var language = window.navigator.userLanguage || window.navigator.language; //works IE/SAFARI/CHROME/FF
+
+        if (language == 'es'){
+            alert("Por favor apaga Adblock para que está webapp funcione correctamente.")
+        } else {
+            alert("Make sure you have Adblocker turned off for this app to work correctly.")
+        }
+      }
+    }, 100);
+}
+
+
+function SetSignUpModal(is_authenticated, action_url){
+    /*
+    Sets up a modal to register a new user after exceeding 3 searches on the same browser.
+    */
     var search_form = $('#search_form')[0];
 
     if (is_authenticated) {
@@ -18,6 +51,8 @@ function SetSignUpModal(is_authenticated, action_url){
 
                 var modal = $('#search_modal')[0];
                 var span = document.getElementsByClassName("close")[0];
+
+                TurnOffAdblockAlert()
 
                 //Display modal
                 modal.style.display = "block";
