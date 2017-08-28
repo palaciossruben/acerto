@@ -24,7 +24,7 @@
 	  <script type="text/javascript" src="{% static 'js/google_analytics.js' %}" async></script>
 
 	  <!-- Search -->
-	  <!--<script type="text/javascript" src="{% static 'js/search.js' %}" async></script>-->
+	  <!-- This cannot be loaded async, or a undefined function appears on production only: WTF-->
 	  <script type="text/javascript" src="{% static 'js/search.js' %}"></script>
 
       <!-- CSS -->
