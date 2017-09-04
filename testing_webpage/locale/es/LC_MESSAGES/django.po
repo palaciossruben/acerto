@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-04 16:36+0000\n"
+"POT-Creation-Date: 2017-09-04 17:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -222,7 +222,7 @@ msgstr "Solo cobramos por contratación exitosa"
 
 #: business/templates/business/index.html:128
 msgid "Save time reading and analyzing hundreds of resumes"
-msgstr "No tienes que leer y analizar cientos de hojas de vida"
+msgstr "No tienes que leer y analizar cientos de cvs"
 
 #: business/templates/business/index.html:130
 msgid "Save time personal interviews"
@@ -245,10 +245,8 @@ msgid "Search Engine"
 msgstr "Buscador"
 
 #: business/templates/business/index.html:149
-#: business/templates/business/index.html:161
-#: business/templates/business/index.html:173
-msgid "Resume search engine"
-msgstr "Buscador de hojas de vida"
+msgid "Limited resume search engine"
+msgstr "Buscador limitado de cv"
 
 #: business/templates/business/index.html:150
 #: business/templates/business/index.html:151
@@ -265,15 +263,20 @@ msgstr "Gratis"
 msgid "Screening"
 msgstr "Screening"
 
+#: business/templates/business/index.html:161
+#: business/templates/business/index.html:173
+msgid "Resume search engine"
+msgstr "Buscador de cv"
+
 #: business/templates/business/index.html:162
 #: business/templates/business/index.html:174
-msgid "Search specific profiles on demand"
-msgstr "Búsqueda de perfiles especificos bajo pedido"
+msgid "We search for specific profiles on other media"
+msgstr "Buscamos perfiles especificos en otros medios"
 
 #: business/templates/business/index.html:163
 #: business/templates/business/index.html:175
-msgid "Resume Screening"
-msgstr "Screening de hojas de vida"
+msgid "Resume Screening: We send manual filtered profiles each 24 hours"
+msgstr "Screening de cv: Mandamos candidatos filtrados manulmente cada 24 horas"
 
 #: business/templates/business/index.html:165
 msgid "$200 / contracted candidate"
@@ -458,8 +461,6 @@ msgstr "Descubre personas increíbles"
 
 #: business/views.py:72 business/views.py:90 business/views.py:291
 #: business/views.py:448
-#, fuzzy
-#| msgid "We search millions of jobs and find the right one for you"
 msgid ""
 "We search millions of profiles and find the ones that best suit your business"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
@@ -487,6 +488,9 @@ msgstr "Ingles"
 #: testing_webpage/shared_settings.py:119
 msgid "Spanish"
 msgstr "Español"
+
+#~ msgid "Resume Screening"
+#~ msgstr "Screening de cv"
 
 #~ msgid "Solve daily tasks"
 #~ msgstr "Soluciona tareas cotidianas"
