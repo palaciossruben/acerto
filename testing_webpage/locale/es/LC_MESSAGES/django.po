@@ -3,13 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: business/views.py:610 business/views.py:613
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-28 23:55+0000\n"
+"POT-Creation-Date: 2017-09-04 16:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,15 +19,16 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: beta_invite/templates/beta_invite/fast_job.html:99
-#: beta_invite/templates/beta_invite/long_form.html:99
+#: beta_invite/templates/beta_invite/long_form.html:104
 msgid "Apply Now!"
 msgstr "¡Aplica Ahora!"
 
 #: beta_invite/templates/beta_invite/fast_job.html:112
 #: beta_invite/templates/beta_invite/index.html:87
-#: beta_invite/templates/beta_invite/long_form.html:112
+#: beta_invite/templates/beta_invite/long_form.html:117
 #: business/templates/business/index.html:197
 #: business/templates/business/search.html:212
+#: business/templates/business/search_trade.html:194
 #: business/templates/business/signup.html:120
 #: business/templates/business/trade_client.html:135
 msgid "Your Full Name"
@@ -36,10 +36,11 @@ msgstr "Tu Nombre Completo"
 
 #: beta_invite/templates/beta_invite/fast_job.html:119
 #: beta_invite/templates/beta_invite/index.html:94
-#: beta_invite/templates/beta_invite/long_form.html:119
+#: beta_invite/templates/beta_invite/long_form.html:124
 #: business/templates/business/index.html:202
 #: business/templates/business/login.html:92
 #: business/templates/business/search.html:219
+#: business/templates/business/search_trade.html:201
 #: business/templates/business/signup.html:127
 #: business/templates/business/trade_client.html:140
 msgid "Your email"
@@ -47,12 +48,13 @@ msgstr "Tu correo"
 
 #: beta_invite/templates/beta_invite/fast_job.html:126
 #: business/templates/business/search.html:226
+#: business/templates/business/search_trade.html:208
 #: business/templates/business/signup.html:134
 msgid "Your phone"
 msgstr "Tu teléfono"
 
 #: beta_invite/templates/beta_invite/fast_job.html:135
-#: beta_invite/templates/beta_invite/long_form.html:128
+#: beta_invite/templates/beta_invite/long_form.html:133
 msgid "Select Country"
 msgstr "Selecciona tu País"
 
@@ -66,7 +68,7 @@ msgstr "Describe lo que haces."
 
 #: beta_invite/templates/beta_invite/fast_job.html:160
 #: beta_invite/templates/beta_invite/index.html:113
-#: beta_invite/templates/beta_invite/long_form.html:176
+#: beta_invite/templates/beta_invite/long_form.html:186
 #: business/templates/business/index.html:217
 #: business/templates/business/trade_client.html:155
 msgid "Sure!"
@@ -101,19 +103,19 @@ msgid "Subscribe"
 msgstr "Suscríbete"
 
 #: beta_invite/templates/beta_invite/index.html:103
-#: beta_invite/templates/beta_invite/long_form.html:158
+#: beta_invite/templates/beta_invite/long_form.html:163
 msgid "Upload your resume"
 msgstr "Sube tu curriculum"
 
-#: beta_invite/templates/beta_invite/long_form.html:138
+#: beta_invite/templates/beta_invite/long_form.html:143
 msgid "Select Education"
 msgstr "Selecciona tu Educación"
 
-#: beta_invite/templates/beta_invite/long_form.html:148
+#: beta_invite/templates/beta_invite/long_form.html:153
 msgid "Select Profession"
 msgstr "Selecciona tu Profesión"
 
-#: beta_invite/templates/beta_invite/long_form.html:169
+#: beta_invite/templates/beta_invite/long_form.html:179
 #: business/templates/business/post_job.html:157
 #: business/templates/business/search.html:181
 msgid "Experience in years:"
@@ -151,6 +153,7 @@ msgstr "¡Gracias por tu interes!"
 #: business/templates/business/plan.html:66
 #: business/templates/business/post_job.html:87
 #: business/templates/business/search.html:97
+#: business/templates/business/search_trade.html:97
 #: business/templates/business/trade_client.html:72
 msgid "Log Out"
 msgstr "Cerrar Sesión"
@@ -165,7 +168,7 @@ msgstr "País"
 
 #: business/templates/business/home.html:90
 #: business/templates/business/offer_results.html:94
-#: business/templates/business/results.html:88
+#: business/templates/business/results.html:95
 msgid "Education"
 msgstr "Educación"
 
@@ -175,13 +178,13 @@ msgstr "Profesión"
 
 #: business/templates/business/home.html:90
 #: business/templates/business/offer_results.html:94
-#: business/templates/business/results.html:88
+#: business/templates/business/results.html:96
 msgid "Experience"
 msgstr "Experiencia"
 
 #: business/templates/business/home.html:90
 #: business/templates/business/offer_results.html:94
-#: business/templates/business/results.html:88
+#: business/templates/business/results.html:106
 msgid "years"
 msgstr "años"
 
@@ -192,19 +195,20 @@ msgstr "Adiciona +"
 #: business/templates/business/index.html:84
 #: business/templates/business/login.html:67
 #: business/templates/business/search.html:109
+#: business/templates/business/search_trade.html:109
 #: business/templates/business/trade_client.html:84
 msgid "Sign Up"
 msgstr "Regístrate"
 
 #: business/templates/business/index.html:90
 #: business/templates/business/search.html:115
+#: business/templates/business/search_trade.html:115
 #: business/templates/business/signup.html:93
 #: business/templates/business/trade_client.html:90
 msgid "Log In"
 msgstr "Inicia Sesión"
 
 #: business/templates/business/index.html:114
-#: business/templates/business/trade_client.html:114
 msgid "Search Candidates"
 msgstr "Busca Candidatos"
 
@@ -351,12 +355,12 @@ msgid "Log In!"
 msgstr "¡Inicia Sesión!"
 
 #: business/templates/business/offer_results.html:82
-#: business/templates/business/results.html:76
+#: business/templates/business/results.html:79
 msgid "Download curriculums of matching profiles"
 msgstr "Descarga el curriculum de perfiles afines"
 
 #: business/templates/business/offer_results.html:84
-#: business/templates/business/results.html:78
+#: business/templates/business/results.html:81
 msgid ""
 "Currently no profiles match this query, to solve this issue, call us (+57 "
 "311 6109340) or send an email to contacto@peaku.co"
@@ -365,12 +369,12 @@ msgstr ""
 "problema, llamanos (+57 311 6109340) o mandanos un email a contacto@peak.co"
 
 #: business/templates/business/offer_results.html:94
-#: business/templates/business/results.html:88
+#: business/templates/business/results.html:93
 msgid "Name"
 msgstr "Nombre"
 
 #: business/templates/business/offer_results.html:94
-#: business/templates/business/results.html:88
+#: business/templates/business/results.html:94
 msgid "Email"
 msgstr "Correo"
 
@@ -403,50 +407,78 @@ msgid "Skills or any other information"
 msgstr "Habilidades u otros requerimientos"
 
 #: business/templates/business/search.html:188
+#: business/templates/business/search_trade.html:170
+#: business/templates/business/trade_client.html:114
 #, fuzzy
 #| msgid "Search Engine"
 msgid "Search"
 msgstr "Buscador"
 
 #: business/templates/business/search.html:205
+#: business/templates/business/search_trade.html:187
 msgid "SignUp to continue using the app ;)"
 msgstr "Regístrate para continuar usando la app ;)"
 
 #: business/templates/business/search.html:233
+#: business/templates/business/search_trade.html:215
 #: business/templates/business/signup.html:141
 msgid "Enter a password"
 msgstr "Digita una clave"
 
 #: business/templates/business/search.html:240
+#: business/templates/business/search_trade.html:222
 #: business/templates/business/signup.html:148
 msgid "Confirm password"
 msgstr "Digita una clave"
 
 #: business/templates/business/search.html:247
+#: business/templates/business/search_trade.html:229
 #: business/templates/business/signup.html:155
 msgid "Sign Up!"
 msgstr "¡Regístrate!"
+
+#: business/templates/business/search_trade.html:131
+#, fuzzy
+#| msgid "Search Engine"
+msgid "Search people"
+msgstr "Buscador"
+
+#: business/templates/business/search_trade.html:163
+msgid "Any other information"
+msgstr "Cualquier otra información"
 
 #: business/views.py:41
 msgid "We do the entire personnel selection process for your company."
 msgstr "Realizamos todo el proceso de selección de personal para tu empresa"
 
 #: business/views.py:44 business/views.py:71 business/views.py:89
-#: business/views.py:271 business/views.py:428 business/views.py:569
+#: business/views.py:290 business/views.py:447 business/views.py:588
 msgid "Discover amazing people"
 msgstr "Descubre personas increíbles"
 
-#: business/views.py:72 business/views.py:90 business/views.py:272
-#: business/views.py:429
+#: business/views.py:72 business/views.py:90 business/views.py:291
+#: business/views.py:448
 #, fuzzy
 #| msgid "We search millions of jobs and find the right one for you"
 msgid ""
 "We search millions of profiles and find the ones that best suit your business"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
 
-#: business/views.py:538
+#: business/views.py:557
 msgid "Welcome to PeakU"
 msgstr "Bienvenido a PeakU"
+
+#: business/views.py:629
+msgid ""
+"Find someone to help you with daily tasks such as cleaning your house, "
+"fixing the fridge or sending a message."
+msgstr ""
+"Encuentra a alguien que te ayude con tareas diarias como limpiar tu casa, "
+"arreglar la nevera o enviar un mensaje."
+
+#: business/views.py:632
+msgid "Solve everyday problems"
+msgstr "Soluciona problemas contidianos"
 
 #: testing_webpage/shared_settings.py:118
 msgid "English"
@@ -455,6 +487,9 @@ msgstr "Ingles"
 #: testing_webpage/shared_settings.py:119
 msgid "Spanish"
 msgstr "Español"
+
+#~ msgid "Solve daily tasks"
+#~ msgstr "Soluciona tareas cotidianas"
 
 #, fuzzy
 #~| msgid "Apply Now!"

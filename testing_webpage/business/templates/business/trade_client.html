@@ -111,11 +111,11 @@
 			{{ secondary_message }}
 		</p>
 
-			  {% trans "Search Candidates" as search_candidates %}
+			  {% trans "Search" as search %}
 		  <div align="center" style="margin-top:50px; margin-bottom:200px; cursor:pointer;">
-			<form action="{% url 'business:search' %}">
+			<form action="{% url 'business:search_trade' %}">
 				<input style="height: 54px; width:250px; border: solid 0px white; background:#F8E676; color:black; text-align:center;
-					   font-size: 22px; cursor:pointer;" type="submit" value="{{ search_candidates }}">
+					   font-size: 22px; cursor:pointer;" type="submit" value="{{ search }}">
 			</form>
 		  </div>
 

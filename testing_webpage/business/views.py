@@ -95,6 +95,25 @@ def search(request):
                                                   })
 
 
+def search_trade(request):
+    """
+    will render the search view.
+    Args:
+        request: Object
+    Returns: Save
+    """
+
+    ip = get_ip(request)
+    action_url = '/business/trade_results'
+    countries, trades = beta_invite.views.get_trade_drop_down_values(request.LANGUAGE_CODE)
+
+    business.models.Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
+    return render(request, cts.SEARCH_VIEW_PATH, {'action_url': action_url,
+                                                  'countries': countries,
+                                                  'trades': trades,
+                                                  })
+
+
 # TODO: duplicate code: see subscribe.helper
 def remove_accents_in_string(element):
     """
@@ -607,10 +626,10 @@ def trade_client(request):
     ip = get_ip(request)
     action_url = '/business/post'
 
-    secondary_message = _("")
+    secondary_message = _("Find someone to help you with daily tasks such as cleaning your house, fixing the fridge or sending a message.")
 
     business.models.Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
-    return render(request, cts.TRADE_CLIENT_VIEW_PATH, {'main_message': _(""),
+    return render(request, cts.TRADE_CLIENT_VIEW_PATH, {'main_message': _("Solve everyday problems"),
                                                         'secondary_message': secondary_message,
                                                         'action_url': action_url,
                                                         })
