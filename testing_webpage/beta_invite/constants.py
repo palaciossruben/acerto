@@ -4,3 +4,4 @@ SUCCESS_VIEW_PATH = 'beta_invite/success.html'
 LONG_FORM_VIEW_PATH = 'beta_invite/long_form.html'
 FAST_JOB_VIEW_PATH = 'beta_invite/fast_job.html'
 HOME_VIEW_PATH = 'beta_invite/home.html'
+DEFAULT_CAMPAIGN_ID = 5
