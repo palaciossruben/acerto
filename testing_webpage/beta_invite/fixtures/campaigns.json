@@ -1,0 +1,104 @@
+[
+  {
+    "model": "beta_invite.campaign",
+    "pk": 1,
+    "fields":{
+      "name": "Fullstack Javascript Developer",
+      "profession": null,
+      "education": null,
+      "country": null,
+      "description": "Work with a cutting edge Californian company, building the IoT (Internet of Things) of tommorrow.",
+      "description_es": "Trabaja en una compañia Californiana con tecnologia de punta, contruyendo el IoT (Internet of Things) del mañana.",
+      "title": "Fullstack Javascript Developer",
+      "title_es": "Desarrollador Fullstack Javascript",
+      "bullets": [1, 2, 3, 4, 5, 6, 7, 8, 14],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.campaign",
+    "pk": 2,
+    "fields": {
+      "name": "Systems Administrator",
+      "profession": null,
+      "education": null,
+      "country": null,
+      "description": "Work in a leading firm in the financial sector. Learn how things are done at the biggest stock market in the world: the NYSE, there is a big opportunity and challenge waiting for you.",
+      "description_es": "Trabaja en una empresa líder en el sector financiero. Aprende cómo se hacen las cosas en el mercado de valores más grande del mundo: la Bolsa de Nueva York, hay una gran oportunidad y desafío esperándote.",
+      "title": "Systems Administrator (junior, mid, and senior)",
+      "title_es": "Administrador de Sistemas (junior, mid y senior)",
+      "bullets": [1, 8, 13, 15, 16, 9, 10, 11],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.campaign",
+    "pk": 3,
+    "fields": {
+      "name": "C/C++ Developer",
+      "profession": null,
+      "education": null,
+      "country": null,
+      "description": "Work in a leading firm in the financial sector. Learn how things are done at the biggest stock market in the world: the NYSE, there is a big opportunity and challenge waiting for you.",
+      "description_es": "Trabaja en una empresa líder en el sector financiero. Aprende cómo se hacen las cosas en el mercado de valores más grande del mundo: la Bolsa de Nueva York, hay una gran oportunidad y desafío esperándote.",
+      "title": "C/C++ Developer",
+      "title_es": "C/C++ Developer",
+      "bullets": [1, 8, 13, 15, 16, 12],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.campaign",
+    "pk": 4,
+    "fields": {
+      "name": "Senior .NET/C# Developer",
+      "profession": null,
+      "education": null,
+      "country": null,
+      "description": "Work in a leading firm in the financial sector. Learn how things are done at the biggest stock market in the world: the NYSE, there is a big opportunity and challenge waiting for you.",
+      "description_es": "Trabaja en una empresa líder en el sector financiero. Aprende cómo se hacen las cosas en el mercado de valores más grande del mundo: la Bolsa de Nueva York, hay una gran oportunidad y desafío esperándote.",
+      "title": "Senior .NET and C# Developer",
+      "title_es": "Desarrollador Senior en .NET y C#",
+      "bullets": [1, 8, 13, 15, 16, 17],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.campaign",
+    "pk": 5,
+    "fields": {
+      "name": "Default Campaign",
+      "profession": null,
+      "education": null,
+      "country": null,
+      "description": "We have open positions in a diverse group of companies from each sector. By completing this form, you will have unlimited access to new positions every day. This is a 100% free service.",
+      "description_es": "Tenemos vacantes abiertas en diversas empresas de todos los sectores. Solo llenando este formulario, tendrás acceso ilimitado a nuevas vacantes todo los dias. Este es un servicio 100% gratuito.",
+      "title": "Send us your CV",
+      "title_es": "Envianos tu CV",
+      "bullets": [],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.campaign",
+    "pk": 6,
+    "fields": {
+      "name": "Product Designer",
+      "profession": null,
+      "education": null,
+      "country": null,
+      "description": "",
+      "description_es": "Trabaja en el futuro de los pagos en linea, estarás construyendo experiencias exquisitas para dar forma a productos intuitivos y funcionales que utilizan nuestros clientes.",
+      "title": "Product Designer",
+      "title_es": "Product Designer",
+      "bullets": [18, 19, 20, 21, 22, 23, 24],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  }
+]

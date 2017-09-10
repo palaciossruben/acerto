@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 
 from django.shortcuts import render
-from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser
+from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser, Bullet, BulletType
 from ipware.ip import get_ip
 from beta_invite import constants as cts
 
@@ -166,6 +166,24 @@ def translate_campaign(campaign, language_code):
     """
     if language_code == 'es':
         campaign.description = campaign.description_es
+        campaign.title = campaign.title_es
+
+
+def translate_bullets(bullets, lang_code):
+    """
+    Args:
+        bullets: array with bullet Objects
+        lang_code: 'es' for example
+    Returns: translated array
+    """
+    a = []
+    if lang_code == 'es':
+
+        for b in bullets:
+            b.name = b.name_es
+            a.append(b)
+
+    return a
 
 
 def long_form(request):
@@ -173,8 +191,12 @@ def long_form(request):
     will render a form to input user data.
     """
 
-    # passes campaign_id around to collect it in the POST form from this view: cts.LONG_FORM_VIEW_PATH
-    campaign_id = request.GET.get('campaign_id')
+    # Passes campaign_id around to collect it in the POST form from this view: cts.LONG_FORM_VIEW_PATH.
+    # Also uses campaign to customize view.
+    # If campaign_id is not found; will default to the default_campaign.
+    campaign_id = request.GET.get('campaign_id', cts.DEFAULT_CAMPAIGN_ID)
+    campaign = Campaign.objects.filter(pk=campaign_id).first()
+    translate_campaign(campaign, request.LANGUAGE_CODE)
 
     ip = get_ip(request)
     action_url = '/beta_invite/long_form/post'
@@ -182,12 +204,17 @@ def long_form(request):
 
     Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
 
+    perks = campaign.bullets.filter(bullet_type__in=BulletType.objects.filter(name='perk'))
+    requirements = campaign.bullets.filter(bullet_type__in=BulletType.objects.filter(name='requirement'))
+
     param_dict = {'main_message': _("Discover your true passion"),
-                  'secondary_message': _("We search millions of jobs and find the right one for you"),
                   'action_url': action_url,
                   'countries': countries,
                   'education': education,
                   'professions': professions,
+                  'job_title': campaign.title,
+                  'perks': translate_bullets(perks, request.LANGUAGE_CODE),
+                  'requirements': translate_bullets(requirements, request.LANGUAGE_CODE),
                   }
 
     if campaign_id is not None:

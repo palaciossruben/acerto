@@ -1,0 +1,221 @@
+[
+  {
+    "model": "beta_invite.bullet",
+    "pk": 1,
+    "fields":{
+      "name": "Advanced English",
+      "name_es": "Inglés Avanzado",
+      "bullet_type_id":2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 2,
+    "fields": {
+      "name": "Experience in NodeJS or AngularJS",
+      "name_es": "Experiencia en NodeJS or AngularJS",
+      "bullet_type_id":2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 3,
+    "fields": {
+      "name": "Experience in Javascript",
+      "name_es": "Experiencia en Javascript",
+      "bullet_type_id":2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 4,
+    "fields": {
+      "name": "Can work from a remote location 100%",
+      "name_es": "Puede trabajar remoto 100%",
+      "bullet_type_id": 1
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 5,
+    "fields": {
+      "name": "2 or more years of experience",
+      "name_es": "2 o más años de experiencia.",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 6,
+    "fields": {
+      "name": "Experience in AWS",
+      "name_es": "Experiencia en AWS",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 7,
+    "fields": {
+      "name": "Flexible schedule",
+      "name_es": "Horario flexible",
+      "bullet_type_id": 1
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 8,
+    "fields": {
+      "name": "Possibility of traveling to the US",
+      "name_es": "Posibilidad de viajar a Estados Unidos",
+      "bullet_type_id": 1
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 9,
+    "fields": {
+      "name": "Only for sysadmin senior: Experience with Windows OS, Linux OS and VMware",
+      "name_es": "Solo para sysadmin senior: Experiencia con Windows OS, Linux OS and VMware",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 10,
+    "fields": {
+      "name": "Only for sysadmin senior: Know a scripting language like: Python, Ruby, Perl or Php",
+      "name_es": "Solo para sysadmin senior: Saber un lenguaje de scripting como: Python, Ruby, Perl or Php",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 11,
+    "fields": {
+      "name": "Only for sysadmin senior: Able to work in a 24/7 environment",
+      "name_es": "Solo para sysadmin senior: Capaz de trabajar en un ambiente 24/7",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 12,
+    "fields": {
+      "name": "C/C++ experience",
+      "name_es": "Experiencia en C/C++",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 13,
+    "fields": {
+      "name": "Detailed oriented",
+      "name_es": "Orientado al detalle",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 14,
+    "fields": {
+      "name": "Think outside of the box",
+      "name_es": "Ser creativo e innovador",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 15,
+    "fields": {
+      "name": "Team player",
+      "name_es": "Trabajar en equipo",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 16,
+    "fields": {
+      "name": "Chill and play xbox",
+      "name_es": "Relajate y juega xbox",
+      "bullet_type_id": 1
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 17,
+    "fields": {
+      "name": "Experience on equity systems",
+      "name_es": "Experiencia en sistemas de acciones",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 18,
+    "fields": {
+      "name": "Excelent communication and oral skills",
+      "name_es": "Excelentes comunicación oral y escrita.",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 19,
+    "fields": {
+      "name": "Knowledge on how to research UX",
+      "name_es": "Conocimiento sobre investigación UX.",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 20,
+    "fields": {
+      "name": "Know how to use Sketch and Photoshop",
+      "name_es": "Saber usar Sketch y Photoshop.",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 21,
+    "fields": {
+      "name": "Experience prototyping with InVision",
+      "name_es": "Experiencia prototipando con InVision",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 22,
+    "fields": {
+      "name": "Mid level knowledge of HTML, CSS and Javascript.",
+      "name_es": "Conocimiento intermedio de HTML, CSS y Javascript.",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 23,
+    "fields": {
+      "name": "3 or more years building web apps.",
+      "name_es": "3 o más años de experiencia diseñando y construyendo web apps.",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 24,
+    "fields": {
+      "name": "Hands-on attitude and fast execution with measurable goals",
+      "name_es": "Actitud “hands-on” para ejecutar rápido y con objetivos medibles.",
+      "bullet_type_id": 2
+    }
+  }
+]
+
+
+

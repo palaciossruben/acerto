@@ -1,0 +1,23 @@
+[
+  {
+    "model": "beta_invite.bullettype",
+    "pk": 1,
+    "fields":{
+      "name": "perk"
+    }
+  },
+  {
+    "model": "beta_invite.bullettype",
+    "pk": 2,
+    "fields": {
+      "name": "requirement"
+    }
+  },
+  {
+    "model": "beta_invite.bullettype",
+    "pk": 3,
+    "fields": {
+      "name": "nice to have"
+    }
+  }
+]
