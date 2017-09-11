@@ -29,8 +29,8 @@ def send_email(user, password, recipient, subject, body):
     gmail_pwd = password
     FROM = user
     TO = recipient if type(recipient) is list else [recipient]
-    SUBJECT = subject
-    TEXT = body
+    SUBJECT = remove_accents(str(subject))
+    TEXT = remove_accents(str(body))
 
     # Prepare actual message
     message = """From: %s\nTo: %s\nSubject: %s\n\n%s
