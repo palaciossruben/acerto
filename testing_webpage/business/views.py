@@ -585,7 +585,7 @@ def contact_us(request):
     #loop.run_until_complete(send_contact_emails(contact, request.LANGUAGE_CODE))
     #loop.close()
 
-    return render(request, cts.CONTACT_VIEW_PATH, {'main_message': _("Discover amazing people"),})
+    return render(request, cts.CONTACT_VIEW_PATH, {'main_message': _("Discover amazing people"), })
 
 
 def translate_plan(plan_obj, language_code):
