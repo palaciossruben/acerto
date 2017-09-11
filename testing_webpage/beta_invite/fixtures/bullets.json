@@ -165,8 +165,8 @@
     "model": "beta_invite.bullet",
     "pk": 19,
     "fields": {
-      "name": "Knowledge on how to research UX",
-      "name_es": "Conocimiento sobre investigación UX.",
+      "name": "Experience with REST, Model-View-Controller, and GNU/Linux",
+      "name_es": "Experiencia con REST, Model-View-Controller y GNU/Linux",
       "bullet_type_id": 2
     }
   },
@@ -174,8 +174,8 @@
     "model": "beta_invite.bullet",
     "pk": 20,
     "fields": {
-      "name": "Know how to use Sketch and Photoshop",
-      "name_es": "Saber usar Sketch y Photoshop.",
+      "name": "Experience with Non-Relational databases such as mongodb and redis.",
+      "name_es": "Experiencia con bases de datos no relacionales como mongodb y redis.",
       "bullet_type_id": 2
     }
   },
@@ -183,23 +183,14 @@
     "model": "beta_invite.bullet",
     "pk": 21,
     "fields": {
-      "name": "Experience prototyping with InVision",
-      "name_es": "Experiencia prototipando con InVision",
+      "name": "Experience building Node.js apps in a scalable and maintainable manner",
+      "name_es": "Experiencia contruyendo apps en Node.js de forma escalable y mantenible",
       "bullet_type_id": 2
     }
   },
   {
     "model": "beta_invite.bullet",
     "pk": 22,
-    "fields": {
-      "name": "Mid level knowledge of HTML, CSS and Javascript.",
-      "name_es": "Conocimiento intermedio de HTML, CSS y Javascript.",
-      "bullet_type_id": 2
-    }
-  },
-  {
-    "model": "beta_invite.bullet",
-    "pk": 23,
     "fields": {
       "name": "3 or more years building web apps.",
       "name_es": "3 o más años de experiencia diseñando y construyendo web apps.",
@@ -208,7 +199,7 @@
   },
   {
     "model": "beta_invite.bullet",
-    "pk": 24,
+    "pk": 23,
     "fields": {
       "name": "Hands-on attitude and fast execution with measurable goals",
       "name_es": "Actitud “hands-on” para ejecutar rápido y con objetivos medibles.",
@@ -216,6 +207,3 @@
     }
   }
 ]
-
-
-
