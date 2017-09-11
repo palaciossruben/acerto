@@ -250,5 +250,77 @@
       "name_es": "Salarios muy competitivos",
       "bullet_type_id": 1
     }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 29,
+    "fields": {
+      "name": "Availability to work rotating shifts during the week",
+      "name_es": "Disponibilidad para trabajar en turnos rotativos durante la semana",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 30,
+    "fields": {
+      "name": "Buena ortografia (comunicación con clientes)",
+      "name_es": "Good spelling (communication with customers)",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 31,
+    "fields": {
+      "name": "Capacidad de realizar multiples tareas",
+      "name_es": "Ability to perform multiple tasks",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 32,
+    "fields": {
+      "name": "Capacidad comercial y de atención al cliente",
+      "name_es": "Sales and customer service skills",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 33,
+    "fields": {
+      "name": "Extra points if you have experience in the automotive world",
+      "name_es": "Puntos extra si cuentas con experiencia en el mundo automotriz",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 34,
+    "fields": {
+      "name": "We have a great team: with marvelous people and a warm workplace",
+      "name_es": "Contamos con un gran equipo de trabajo, ambiente calido y gente maravillosa",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 35,
+    "fields": {
+      "name": "Fridays afternoon we like to enjoy a beer with the team",
+      "name_es": "Los viernes en la tarde nos gusta disfrutar de unas cervezas con el equipo",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 36,
+    "fields": {
+      "name": "We do a monthly integration activity",
+      "name_es": "Mensualmente hacemos una actividad de integración",
+      "bullet_type_id": 2
+    }
   }
 ]

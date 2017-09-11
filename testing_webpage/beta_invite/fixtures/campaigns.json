@@ -93,10 +93,27 @@
       "education": null,
       "country": null,
       "description": "Work for a exciting startup that is revolutionizing the payment industry. Prevent frauds which allows our merchants to process payments on a smooth and secure way.",
-      "description_es": "Trabaja para un startup que está revolucionando la industria de pagos. Previene fraudes y permite que nuestros usuarios procesecen sus pagos de forma fácil y confiable.",
+      "description_es": "Trabaja para un startup que está revolucionando la industria de pagos. Previene fraudes y permite que nuestros usuarios procecen sus pagos de forma fácil y confiable.",
       "title": "Senior Back-End Engineer",
       "title_es": "Senior Back-End Engineer",
       "bullets": [7, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.campaign",
+    "pk": 7,
+    "fields": {
+      "name": "",
+      "profession": null,
+      "education": null,
+      "country": null,
+      "description": "Work for one of the companies selling products online for the fastest growing automotive sector in the country, be part of a great team with an excellent work environment.",
+      "description_es": "Trabaja para una de las empresas de venta de productos en linea para el sector automotriz con mayor crecimiento del país, sé parte de un gran equipo de trabajo con un excelente ambiente laboral.",
+      "title": "Sales Assitant",
+      "title_es": "Auxiliar Comercial",
+      "bullets": [29, 30, 31, 32, 33, 34, 35, 36],
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
