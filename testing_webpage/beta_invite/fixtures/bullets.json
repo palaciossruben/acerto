@@ -282,8 +282,8 @@
     "model": "beta_invite.bullet",
     "pk": 32,
     "fields": {
-      "name": "Capacidad comercial y de atención al cliente",
-      "name_es": "Sales and customer service skills",
+      "name": "Sales and customer service skills",
+      "name_es": "Capacidad comercial y de atención al cliente",
       "bullet_type_id": 2
     }
   },
