@@ -157,7 +157,7 @@
     "pk": 18,
     "fields": {
       "name": "Excelent communication and oral skills",
-      "name_es": "Excelentes comunicación oral y escrita.",
+      "name_es": "Excelente comunicación oral y escrita.",
       "bullet_type_id": 2
     }
   },
@@ -202,8 +202,53 @@
     "pk": 23,
     "fields": {
       "name": "Hands-on attitude and fast execution with measurable goals",
-      "name_es": "Actitud “hands-on” para ejecutar rápido y con objetivos medibles.",
+      "name_es": "Actitud “hands-on” para ejecutar rápido y con objetivos medibles",
       "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 24,
+    "fields": {
+      "name": "You can work 44 days from home each year",
+      "name_es": "Puedes trabajar 44 días desde la casa al año",
+      "bullet_type_id": 1
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 25,
+    "fields": {
+      "name": "More vacation than required by law",
+      "name_es": "Más vacaciones de lo que exije la ley",
+      "bullet_type_id": 1
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 26,
+    "fields": {
+      "name": "Big growth potential",
+      "name_es": "Gran potencial de crecimiento",
+      "bullet_type_id": 1
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 27,
+    "fields": {
+      "name": "Monthly talks with influential people",
+      "name_es": "Platicas mensuales con personas influyentes",
+      "bullet_type_id": 1
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 28,
+    "fields": {
+      "name": "Very competitive salaries",
+      "name_es": "Salarios muy competitivos",
+      "bullet_type_id": 1
     }
   }
 ]
