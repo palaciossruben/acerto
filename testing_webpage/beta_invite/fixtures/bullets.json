@@ -264,8 +264,8 @@
     "model": "beta_invite.bullet",
     "pk": 30,
     "fields": {
-      "name": "Buena ortografia (comunicación con clientes)",
-      "name_es": "Good spelling (communication with customers)",
+      "name": "Good spelling (communication with customers)",
+      "name_es": "Buena ortografia (comunicación con clientes)",
       "bullet_type_id": 2
     }
   },
@@ -273,8 +273,8 @@
     "model": "beta_invite.bullet",
     "pk": 31,
     "fields": {
-      "name": "Capacidad de realizar multiples tareas",
-      "name_es": "Ability to perform multiple tasks",
+      "name": "Ability to perform multiple tasks",
+      "name_es": "Capacidad de realizar multiples tareas",
       "bullet_type_id": 2
     }
   },
@@ -302,7 +302,7 @@
     "fields": {
       "name": "We have a great team: with marvelous people and a warm workplace",
       "name_es": "Contamos con un gran equipo de trabajo, ambiente calido y gente maravillosa",
-      "bullet_type_id": 2
+      "bullet_type_id": 1
     }
   },
   {
@@ -311,7 +311,7 @@
     "fields": {
       "name": "Fridays afternoon we like to enjoy a beer with the team",
       "name_es": "Los viernes en la tarde nos gusta disfrutar de unas cervezas con el equipo",
-      "bullet_type_id": 2
+      "bullet_type_id": 1
     }
   },
   {
@@ -320,7 +320,7 @@
     "fields": {
       "name": "We do a monthly integration activity",
       "name_es": "Mensualmente hacemos una actividad de integración",
-      "bullet_type_id": 2
+      "bullet_type_id": 1
     }
   }
 ]
