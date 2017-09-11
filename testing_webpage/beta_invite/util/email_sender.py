@@ -177,10 +177,16 @@ def send_internal(contact, language_code, body_filename, subject):
         body_filename += '_{}'.format(language_code)
 
     with open(os.path.join(get_current_path(), body_filename)) as fp:
+
+        try:
+            message = contact.message
+        except AttributeError:  # missing field
+            message = ''
+
         body = fp.read().format(name=contact.name,
                                 email=contact.email,
                                 phone=contact.phone,
-                                message=contact.message)
+                                message=message)
 
     sender_data = read_email_credentials()
 
