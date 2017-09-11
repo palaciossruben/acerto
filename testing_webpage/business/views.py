@@ -364,6 +364,21 @@ def get_plan(request):
     return translate_message(plan, request.LANGUAGE_CODE)
 
 
+def send_signup_emails(business_user, language_code):
+
+    try:
+        email_sender.send(user=business_user,
+                          language_code=language_code,
+                          body_filename='business_signup_email_body',
+                          subject=_('Welcome to PeakU'))
+        email_sender.send_internal(contact=business_user,
+                                   language_code=language_code,
+                                   body_filename='business_signup_notification_email_body',
+                                   subject='Business User acaba de registrarse!!!')
+    except (smtplib.SMTPRecipientsRefused, smtplib.SMTPAuthenticationError, UnicodeEncodeError) as e:  # cannot send emails
+        pass
+
+
 def first_sign_in(signup_form, request):
     """
     This method is used to do stuff after validating signup-data. Also logs in.
@@ -384,15 +399,19 @@ def first_sign_in(signup_form, request):
                              password=password)
 
     # New BusinessUser pointing to the AuthUser
-    business.models.User(name=request.POST.get('name'),
-                         email=request.POST.get('username'),
-                         phone=request.POST.get('phone'),
-                         ip=get_ip(request),
-                         ui_version=cts.UI_VERSION,
-                         plan=plan,
-                         auth_user_id=auth_user.id).save()
+    business_user = business.models.User(name=request.POST.get('name'),
+                                         email=request.POST.get('username'),
+                                         phone=request.POST.get('phone'),
+                                         ip=get_ip(request),
+                                         ui_version=cts.UI_VERSION,
+                                         plan=plan,
+                                         auth_user_id=auth_user.id)
+
+    business_user.save()
 
     login(request, auth_user)
+
+    send_signup_emails(business_user, request.LANGUAGE_CODE)
 
 
 def post_first_job(request):
