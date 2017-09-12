@@ -86,7 +86,7 @@
 
    <!-- BEGIN WELCOME -->
     <div class="welcome-section" id="top" style="">
-      <div class="title" style="margin-top:-140px;">
+      <div class="title" style="margin-top:-100px;">
         <a class="scroll logo" style="font-family:CANDARA; font-size:65px; color:black;
          margin-bottom:-50px;"> <img src="{% static 'beta_invite/logo.png' %}" width="200px" ></a>
 
@@ -197,14 +197,16 @@
 
 					  <br>
 
-					  <div style="margin-top:0px;">
-						  <p style="font-size:18px; margin-bottom:-10px; color:#F8E676;">
-							 {% trans "Upload your resume" %}
-						  </p>
+					  {% if is_desktop %}
+						  <div style="margin-top:0px;">
+							  <p style="font-size:18px; margin-bottom:-10px; color:#F8E676;">
+								 {% trans "Upload your resume" %}
+							  </p>
 
-						  <input style="font-family:Raleway; height: 30px; font-size: 14px; cursor:pointer; width:266px; margin: 0 auto;" type="file"
-						  	name="curriculum" id="curriculum" required="required">
-					  </div>
+							  <input style="font-family:Raleway; height: 30px; font-size: 14px; cursor:pointer; width:266px; margin: 0 auto;" type="file"
+								name="curriculum" id="curriculum" required="required">
+						  </div>
+					  {% endif %}
 
 					  <br>
 

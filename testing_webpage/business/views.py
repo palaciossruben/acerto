@@ -92,6 +92,7 @@ def search(request):
                                                   'countries': countries,
                                                   'education': education,
                                                   'professions': professions,
+                                                  'error_message': None,
                                                   })
 
 
