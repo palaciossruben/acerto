@@ -105,14 +105,14 @@
     "model": "beta_invite.campaign",
     "pk": 7,
     "fields": {
-      "name": "",
+      "name": "Sales Representative",
       "profession": null,
       "education": null,
       "country": null,
       "description": "Work for one of the companies selling products online for the fastest growing automotive sector in the country, be part of a great team with an excellent work environment.",
       "description_es": "Trabaja para una de las empresas de venta de productos en linea para el sector automotriz con mayor crecimiento del país, sé parte de un gran equipo de trabajo con un excelente ambiente laboral.",
-      "title": "Sales Assitant",
-      "title_es": "Auxiliar Comercial",
+      "title": "Sales Representative",
+      "title_es": "Asesor Comercial",
       "bullets": [29, 30, 31, 32, 33, 34, 35, 36],
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
