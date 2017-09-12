@@ -88,10 +88,9 @@
 
  	  <!-- any incoming error_message will print as an alert.-->
 	<script>
-		var error_message = "{{error_message}}";
-		if (error_message) {
-			alert(error_message);
-		}
+	    {% if error_message %}
+			alert("{{ error_message }}");
+		{% endif %}
 	</script>
 
  	{% if user.is_authenticated %}

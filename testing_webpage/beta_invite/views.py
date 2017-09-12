@@ -57,6 +57,9 @@ def save_curriculum_from_request(request, user):
         # at last returns the curriculum url
         return file_path
 
+    else:
+        return '#'
+
 
 def index(request):
     """
@@ -191,6 +194,10 @@ def long_form(request):
     will render a form to input user data.
     """
 
+    # Gets information of client: such as if it is mobile
+    ua_string = request.META['HTTP_USER_AGENT']
+    is_desktop = not parse(ua_string).is_mobile
+
     # Passes campaign_id around to collect it in the POST form from this view: cts.LONG_FORM_VIEW_PATH.
     # Also uses campaign to customize view.
     # If campaign_id is not found; will default to the default_campaign.
@@ -215,6 +222,7 @@ def long_form(request):
                   'job_title': campaign.title,
                   'perks': translate_bullets(perks, request.LANGUAGE_CODE),
                   'requirements': translate_bullets(requirements, request.LANGUAGE_CODE),
+                  'is_desktop': is_desktop,
                   }
 
     if campaign_id is not None:
@@ -273,6 +281,8 @@ def post_long_form(request):
                 ip=ip,
                 ui_version=cts.UI_VERSION,
                 is_mobile=user_agent.is_mobile)
+
+    import nltk
 
     # verify that the campaign exists.
     if campaign_id:
