@@ -88,7 +88,7 @@
     "model": "beta_invite.campaign",
     "pk": 6,
     "fields": {
-      "name": "Senior Back-End Engineer",
+      "name": "Back-End Engineer",
       "profession": null,
       "education": null,
       "country": null,
@@ -114,6 +114,23 @@
       "title": "Sales Representative",
       "title_es": "Asesor Comercial",
       "bullets": [29, 30, 31, 32, 33, 34, 35, 36],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.campaign",
+    "pk": 8,
+    "fields": {
+      "name": "Developer",
+      "profession": null,
+      "education": null,
+      "country": null,
+      "description": "Work for a exciting startup that is revolutionizing the payment industry. Build the future of payments.",
+      "description_es": "Trabaja para un startup que está revolucionando la industria de pagos. Contruye el futuro de los pagos.",
+      "title": "Developer",
+      "title_es": "Desarrollador",
+      "bullets": [7, 18, 23, 24, 25, 26, 27, 28],
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
