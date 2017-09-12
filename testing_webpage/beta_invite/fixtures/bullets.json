@@ -322,5 +322,23 @@
       "name_es": "Mensualmente hacemos una actividad de integración",
       "bullet_type_id": 1
     }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 37,
+    "fields": {
+      "name": "Likes to solve problems in non standard ways",
+      "name_es": "Le gusta resolver problemas de formas no tradicionales",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 38,
+    "fields": {
+      "name": "Excelent team player, has good social abilities",
+      "name_es": "Sabe trabajar en equipo y tiene excelentes habilidades sociales",
+      "bullet_type_id": 2
+    }
   }
 ]
