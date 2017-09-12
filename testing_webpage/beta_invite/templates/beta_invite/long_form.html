@@ -119,6 +119,26 @@
 					{% endfor %}
 				</ul>
 
+				<br>
+
+				<!-- non default campaign-->
+				{% if campaign.id != 5 %}
+					<form action="{% url 'beta_invite:long_form' %}" method="post" style="text-align:center; margin-top:0px;"
+						 enctype="multipart/form-data">
+
+					  {% csrf_token %}
+
+						<h3 style="color:#F8E676; font-size:20px; font-weight:400; text-transform: uppercase;">
+							{% trans "Don't want to apply to this position?" %}
+						</h3>
+
+					  {% trans "Apply to general position!" as change_to_default %}
+					  <input style="height: 44px; border: solid 0px white; background:#F8E676; color:black; text-align:center;
+							 width: 81px; font-size: 16px; width: 250px; margin-bottom:40px; margin-top:5px; cursor:pointer;" type="submit"
+							 value="{{ change_to_default }}">
+					</form>
+				  {% endif %}
+
 			  </div>
 
 		  	<div class="col-sm-6">
@@ -190,7 +210,7 @@
 
 					  <div style="margin-top:-10px;">
 						  <label style="font-size:18px;  margin-bottom:0px; color:#F8E676;">{% trans "Experience in years:" %}</label>
-						  <input style="color:grey; width: 50px; font-size: 14px; height: 30px;" name="experience" id="experience"
+						  <input style="color:black; width: 50px; font-size: 14px; height: 30px;" name="experience" id="experience"
 						   type="number" value="0" min="0" max="60" />
 					  </div>
 

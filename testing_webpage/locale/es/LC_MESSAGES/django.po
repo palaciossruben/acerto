@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-07 21:15+0000\n"
+"POT-Creation-Date: 2017-09-12 17:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,13 +19,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: beta_invite/templates/beta_invite/fast_job.html:99
-#: beta_invite/templates/beta_invite/long_form.html:126
+#: beta_invite/templates/beta_invite/long_form.html:146
 msgid "Apply Now!"
 msgstr "¡Aplica Ahora!"
 
 #: beta_invite/templates/beta_invite/fast_job.html:112
 #: beta_invite/templates/beta_invite/index.html:87
-#: beta_invite/templates/beta_invite/long_form.html:136
+#: beta_invite/templates/beta_invite/long_form.html:156
 #: business/templates/business/index.html:216
 #: business/templates/business/search.html:214
 #: business/templates/business/search_trade.html:194
@@ -36,7 +36,7 @@ msgstr "Tu Nombre Completo"
 
 #: beta_invite/templates/beta_invite/fast_job.html:119
 #: beta_invite/templates/beta_invite/index.html:94
-#: beta_invite/templates/beta_invite/long_form.html:143
+#: beta_invite/templates/beta_invite/long_form.html:163
 #: business/templates/business/index.html:221
 #: business/templates/business/login.html:92
 #: business/templates/business/search.html:221
@@ -54,7 +54,7 @@ msgid "Your phone"
 msgstr "Tu teléfono"
 
 #: beta_invite/templates/beta_invite/fast_job.html:135
-#: beta_invite/templates/beta_invite/long_form.html:152
+#: beta_invite/templates/beta_invite/long_form.html:172
 msgid "Select Country"
 msgstr "Selecciona tu País"
 
@@ -68,7 +68,7 @@ msgstr "Describe lo que haces."
 
 #: beta_invite/templates/beta_invite/fast_job.html:160
 #: beta_invite/templates/beta_invite/index.html:113
-#: beta_invite/templates/beta_invite/long_form.html:199
+#: beta_invite/templates/beta_invite/long_form.html:219
 #: business/templates/business/index.html:236
 #: business/templates/business/trade_client.html:155
 msgid "Sure!"
@@ -103,7 +103,7 @@ msgid "Subscribe"
 msgstr "Suscríbete"
 
 #: beta_invite/templates/beta_invite/index.html:103
-#: beta_invite/templates/beta_invite/long_form.html:182
+#: beta_invite/templates/beta_invite/long_form.html:202
 msgid "Upload your resume"
 msgstr "Sube tu curriculum"
 
@@ -111,15 +111,23 @@ msgstr "Sube tu curriculum"
 msgid "Perks"
 msgstr "Beneficios"
 
-#: beta_invite/templates/beta_invite/long_form.html:162
+#: beta_invite/templates/beta_invite/long_form.html:132
+msgid "Don't want to apply to this position?"
+msgstr "¿No quieres aplicar a esta posición?"
+
+#: beta_invite/templates/beta_invite/long_form.html:135
+msgid "Apply to general position!"
+msgstr "¡Aplicar a una posición general!"
+
+#: beta_invite/templates/beta_invite/long_form.html:182
 msgid "Select Education"
 msgstr "Selecciona tu Educación"
 
-#: beta_invite/templates/beta_invite/long_form.html:172
+#: beta_invite/templates/beta_invite/long_form.html:192
 msgid "Select Profession"
 msgstr "Selecciona tu Profesión"
 
-#: beta_invite/templates/beta_invite/long_form.html:192
+#: beta_invite/templates/beta_invite/long_form.html:212
 #: business/templates/business/post_job.html:157
 #: business/templates/business/search.html:183
 msgid "Experience in years:"
@@ -134,16 +142,16 @@ msgstr "¡Gracias por registrarte!"
 msgid "We will contact you soon"
 msgstr "Nos pondremos en contacto pronto"
 
-#: beta_invite/views.py:105 beta_invite/views.py:202 beta_invite/views.py:291
+#: beta_invite/views.py:105 beta_invite/views.py:210 beta_invite/views.py:299
 msgid "Discover your true passion"
 msgstr "Descubre tu verdadera pasión"
 
-#: beta_invite/views.py:106 beta_invite/views.py:292 beta_invite/views.py:316
-#: beta_invite/views.py:384
+#: beta_invite/views.py:106 beta_invite/views.py:300 beta_invite/views.py:324
+#: beta_invite/views.py:392
 msgid "We search millions of jobs and find the right one for you"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
 
-#: beta_invite/views.py:315 beta_invite/views.py:383
+#: beta_invite/views.py:323 beta_invite/views.py:391
 msgid "Find a job now"
 msgstr "Encuentra trabajo ya"
 
@@ -460,21 +468,21 @@ msgid "We do the entire personnel selection process for your company."
 msgstr "Realizamos todo el proceso de selección de personal para tu empresa"
 
 #: business/views.py:44 business/views.py:71 business/views.py:89
-#: business/views.py:290 business/views.py:447 business/views.py:588
+#: business/views.py:290 business/views.py:466 business/views.py:607
 msgid "Discover amazing people"
 msgstr "Descubre personas increíbles"
 
 #: business/views.py:72 business/views.py:90 business/views.py:291
-#: business/views.py:448
+#: business/views.py:467
 msgid ""
 "We search millions of profiles and find the ones that best suit your business"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
 
-#: business/views.py:557
+#: business/views.py:373 business/views.py:576
 msgid "Welcome to PeakU"
 msgstr "Bienvenido a PeakU"
 
-#: business/views.py:629
+#: business/views.py:648
 msgid ""
 "Find someone to help you with daily tasks such as cleaning your house, "
 "fixing the fridge or sending a message."
@@ -482,28 +490,26 @@ msgstr ""
 "Encuentra a alguien que te ayude con tareas diarias como limpiar tu casa, "
 "arreglar la nevera o enviar un mensaje."
 
-#: business/views.py:632
+#: business/views.py:651
 msgid "Solve everyday problems"
 msgstr "Soluciona problemas contidianos"
 
-#: testing_webpage/shared_settings.py:118
+#: testing_webpage/shared_settings.py:119
 msgid "English"
 msgstr "Ingles"
 
-#: testing_webpage/shared_settings.py:119
+#: testing_webpage/shared_settings.py:120
 msgid "Spanish"
 msgstr "Español"
+
+#~ msgid "Apply anyway!"
+#~ msgstr "¡Aplica de todas formas!"
 
 #~ msgid "Resume Screening"
 #~ msgstr "Screening de cv"
 
 #~ msgid "Solve daily tasks"
 #~ msgstr "Soluciona tareas cotidianas"
-
-#, fuzzy
-#~| msgid "Apply Now!"
-#~ msgid "Apply now!"
-#~ msgstr "¡Aplica Ahora!"
 
 #~ msgid "Age in years:"
 #~ msgstr "Edad en años:"
