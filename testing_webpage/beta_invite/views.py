@@ -1,4 +1,5 @@
 import os
+import smtplib
 import subprocess
 import unicodedata
 from user_agents import parse
@@ -11,6 +12,7 @@ from django.shortcuts import render
 from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser, Bullet, BulletType
 from ipware.ip import get_ip
 from beta_invite import constants as cts
+from beta_invite.util import email_sender
 
 
 def remove_accents(text):
@@ -257,7 +259,7 @@ def post_long_form(request):
     """
     # Gets information of client: such as if it is mobile.
     ua_string = request.META['HTTP_USER_AGENT']
-    user_agent = parse(ua_string)
+    is_mobile = parse(ua_string).is_mobile
     ip = get_ip(request)
 
     profession_id = request.POST.get('profession')
@@ -280,9 +282,7 @@ def post_long_form(request):
                 experience=experience,
                 ip=ip,
                 ui_version=cts.UI_VERSION,
-                is_mobile=user_agent.is_mobile)
-
-    import nltk
+                is_mobile=is_mobile)
 
     # verify that the campaign exists.
     if campaign_id:
@@ -300,11 +300,14 @@ def post_long_form(request):
 
     update_search_dictionary_on_background()
 
-    # TODO: just try it.
-    #try:
-    #    email_sender.send(user)
-    #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
-    #    pass
+    try:
+        email_body_name = 'user_signup_email_body'
+        if is_mobile:
+            email_body_name += '_mobile'
+
+        email_sender.send(user, request.LANGUAGE_CODE, email_body_name, _('Welcome to PeakU'))
+    except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
+        pass
 
     return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover your true passion"),
                                                    'secondary_message': _("We search millions of jobs and find the right one for you"),
