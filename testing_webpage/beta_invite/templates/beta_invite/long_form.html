@@ -134,20 +134,20 @@
 					  <input type="hidden" name="campaign_id" value="{{ campaign_id }}" />
 
 					{% trans "Your Full Name" as name_placeholder %}
-					<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:0px;
+					<input style="color::placeholder:grey; color:black; font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:0px;
 					 border:solid 1px #F8E676; background-color:white; width: 250px;" id="name" type="text" name="name"
 					  placeholder="{{ name_placeholder }}" required="required" pattern="[A-Za-z\sáéíóúÑñÜü]{1,200}">
 
 					<br>
 
 					 {% trans "Your email" as email_placeholder %}
-					<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:15px;
+					<input style="color::placeholder:grey; color:grey; color:black; font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:15px;
 					 border:solid 1px #F8E676; background-color:white; width: 250px;" id="email" type="email" name="email"
 					  placeholder="{{ email_placeholder }}" required="required">
 
 					  <br>
 
-					  <select style="color:grey; width: 250px; font-size: 14px; height: 44px; border:solid 1px #F8E676; background-color:white;
+					  <select style="color::placeholder:grey; color:black; width: 250px; font-size: 14px; height: 44px; border:solid 1px #F8E676; background-color:white;
 					  margin-top:15px; cursor:pointer;" name="country" required>
 						  <option value="">{% trans "Select Country" %}</option>
 						  {% for country in countries%}
@@ -157,7 +157,7 @@
 
 					  <br>
 
-					  <select style="color:grey; width: 250px; font-size: 14px; height: 44px; border:solid 1px #F8E676; background-color:white;
+					  <select style="color::placeholder:grey; color:black; width: 250px; font-size: 14px; height: 44px; border:solid 1px #F8E676; background-color:white;
 					  margin-top:15px; cursor:pointer;" name="education" required>
 						  <option value="">{% trans "Select Education" %}</option>
 						  {% for level in education%}
@@ -167,7 +167,7 @@
 
 					  <br>
 
-					  <select style="color:grey; width: 250px; font-size: 14px; height: 44px; border:solid 1px #F8E676; background-color:white;
+					  <select style="color::placeholder:grey; color:black; width: 250px; font-size: 14px; height: 44px; border:solid 1px #F8E676; background-color:white;
 					  margin-top:15px; cursor:pointer;" name="profession" required>
 						  <option value="">{% trans "Select Profession" %}</option>
 						  {% for profession in professions%}
