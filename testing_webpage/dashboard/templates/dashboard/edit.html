@@ -14,14 +14,24 @@
         {% csrf_token %}
 
         {% for candidate in candidates %}
-            <li>{{ candidate.user.name }}:
+            <li><h4>{{ candidate.user.name }}:</h4>
+
+                <p><strong>email:</strong> {{ candidate.user.email }}</p>
+                {% if candidate.user.curriculum_url != '#' %}
+                    <p><strong>cv:</strong> <a href="http://peaku.co/static/{{ candidate.user.curriculum_url }}">cv_link</a></p>
+                {% else %}
+                    <p><strong>cv:</strong> not available (<a href="http://peaku.co/request_cv/{{ candidate.user.id }}">request</a>)</p>
+                {% endif %}
+                <p><strong>country: </strong>{{ candidate.user.country.name }}</p>
+                <p><strong>profession: </strong>{{ candidate.user.profession.name }}</p>
+                <p><strong>education: </strong>{{ candidate.user.education.name }}</p>
 
                 <input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}" />
 
                 <br>
 
-                <input style="width:25%" name="{{ candidate.id }}_comment" type="text"
-                    value="{{ candidate.comment }}" placeholder="make any comment!">
+                <textarea name="{{ candidate.id }}_comment" cols="60" rows="5"
+                placeholder="add a comment!">{{ candidate.comment }}</textarea>
 
                 <br>
 
