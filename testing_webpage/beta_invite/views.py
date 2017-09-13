@@ -211,7 +211,7 @@ def long_form(request):
     action_url = '/beta_invite/long_form/post'
     countries, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
 
-    Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
+    Visitor(ip=ip, ui_version=cts.UI_VERSION, is_mobile=not is_desktop).save()
 
     perks = campaign.bullets.filter(bullet_type__in=BulletType.objects.filter(name='perk'))
     requirements = campaign.bullets.filter(bullet_type__in=BulletType.objects.filter(name='requirement'))
@@ -326,12 +326,14 @@ def fast_job(request):
 
     # passes campaign_id around to collect it in the POST form from this view: cts.LONG_FORM_VIEW_PATH
     campaign_id = request.GET.get('campaign_id')
+    ua_string = request.META['HTTP_USER_AGENT']
+    is_mobile = parse(ua_string).is_mobile
 
     ip = get_ip(request)
     action_url = '/beta_invite/fast_job/post'
     countries, trades = get_trade_drop_down_values(request.LANGUAGE_CODE)
 
-    Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
+    Visitor(ip=ip, ui_version=cts.UI_VERSION, is_mobile=is_mobile).save()
 
     param_dict = {'main_message': _("Find a job now"),
                   'secondary_message': _("We search millions of jobs and find the right one for you"),
