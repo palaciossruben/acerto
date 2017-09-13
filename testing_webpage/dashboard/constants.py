@@ -1,3 +1,3 @@
 MAIN_DASHBOARD = 'dashboard/index.html'
-DASHBOARD_CANDIDATE_EDIT = 'dashboard/candidate_edit.html'
+DASHBOARD_EDIT = 'dashboard/edit.html'
 DEFAULT_STATE = 1

@@ -2,7 +2,6 @@ from django.shortcuts import render
 from beta_invite.models import Campaign, User
 from dashboard.models import State, Candidate
 from dashboard import constants as cts
-from django.http import HttpResponse
 
 
 def index(request):
@@ -27,7 +26,7 @@ def fill_in_missing_candidates(users, campaign_id):
             Candidate(campaign_id=campaign_id, user_id=u.id, state_id=cts.DEFAULT_STATE).save()
 
 
-def campaign_candidate_edit(request, pk):
+def campaign_edit(request, pk):
     """
     Args:
         request: HTTP
@@ -55,7 +54,7 @@ def campaign_candidate_edit(request, pk):
     # TODO: recycle business search. Lot of work here: has to search according to campaign specification (education, profession, etc)
     candidates = Candidate.objects.filter(campaign_id=pk)
 
-    return render(request, cts.DASHBOARD_CANDIDATE_EDIT, {'states': states,
-                                                          'campaign_id': pk,
-                                                          'candidates': candidates
-                                                          })
+    return render(request, cts.DASHBOARD_EDIT, {'states': states,
+                                                'campaign_id': pk,
+                                                'candidates': candidates
+                                                })
