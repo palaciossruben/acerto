@@ -2,7 +2,7 @@
 <ul>
     {% for campaign in campaigns %}
     <li>{{ campaign.name }}  :
-    <a href="campaign_candidate_edit/{{ campaign.id }}">Edit Candidates</a>
+    <a href="{{ campaign.id }}">Edit</a>
     </li>
     {% endfor %}
 </ul>
