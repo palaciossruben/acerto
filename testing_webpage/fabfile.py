@@ -87,6 +87,8 @@ def sync_local(sync_media=True):
         curs.execute("SELECT setval('auth_user_id_seq', (SELECT max(id) from auth_user))")
         curs.execute("SELECT setval('searches_id_seq', (SELECT max(id) from searches))")
         curs.execute("SELECT setval('offers_id_seq', (SELECT max(id) from offers))")
+        curs.execute("SELECT setval('beta_invite_visitor_id_seq', (SELECT max(id) from visitors))")
+        curs.execute("SELECT setval('beta_invite_user_id_seq', (SELECT max(id) from users))")
 
         # Closes connection
         maindb_connection.close()

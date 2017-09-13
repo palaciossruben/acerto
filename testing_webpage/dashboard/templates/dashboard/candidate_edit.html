@@ -1,0 +1,50 @@
+<form action="../" method="post"
+       enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="submit" value="HOME">
+</form>
+
+
+<h1>Candidates</h1>
+<ul>
+
+    <form action="#" method="post"
+       enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        {% for candidate in candidates %}
+            <li>{{ candidate.user.name }}:
+
+                <input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}" />
+
+                <br>
+
+                <input style="width:25%" name="{{ candidate.id }}_comment" type="text"
+                    value="{{ candidate.comment }}" placeholder="make any comment!">
+
+                <br>
+
+              <select name="{{ candidate.id }}_state" required>
+                  <option value="{{ candidate.state_id}}">{{ candidate.state.name }}</option>
+                  {% for state in states%}
+                     <option value="{{ state.id }}">{{ state.name }}</option>
+                  {% endfor %}
+              </select>
+
+            </li>
+
+            <br>
+        {% endfor %}
+
+        <br>
+
+        <input type="submit" value="Save Changes!">
+
+    </form>
+</ul>
+
+<a href="new">Add Candidate</a>
+
+
+
