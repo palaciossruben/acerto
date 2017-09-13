@@ -25,6 +25,7 @@ from . import views
 urlpatterns = [
     url(r'^beta_invite/', include('beta_invite.urls')),
     url(r'^business/', include('business.urls')),
+    url(r'^dashboard/', include('dashboard.urls')),
     url(r'^admin/', admin.site.urls),
 ]
 

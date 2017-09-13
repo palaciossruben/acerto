@@ -1,0 +1,10 @@
+<h1>Campaigns</h1>
+<ul>
+    {% for campaign in campaigns %}
+    <li>{{ campaign.name }}  :
+    <a href="campaign_candidate_edit/{{ campaign.id }}">Edit Candidates</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="new">New</a>
