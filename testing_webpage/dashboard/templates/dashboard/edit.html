@@ -3,6 +3,8 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
 
+<script type="text/javascript" src="{% static 'js/edit.js' %}" async></script>
+
 
 <form action="../dashboard/" method="post"
        enctype="multipart/form-data">
@@ -16,7 +18,7 @@
 
 
     <!--TODO: refactor HTML-->
-    <form action="#" method="post"
+    <form action="#" method="post" id="main_form_id"
        enctype="multipart/form-data">
 
         {% csrf_token %}
@@ -75,7 +77,8 @@
 
                     <br>
                     <br>
-                    <input type="submit" name="save_changes" value="Save Changes!">
+                    <input type="submit" name="save_changes" value="Save Candidate!"
+                        onclick="send_candidate_id_in_params({{ candidate.id }})">
 
                 </li>
 
@@ -136,7 +139,9 @@
 
                     <br>
                     <br>
-                    <input type="submit" name="save_changes" value="Save Changes!">
+
+                    <input type="submit" name="save_changes" value="Save Candidate!"
+                        onclick="send_candidate_id_in_params({{ candidate.id }})">
 
                 </li>
 
