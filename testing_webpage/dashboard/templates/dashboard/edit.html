@@ -1,3 +1,9 @@
+<!--TODO: put it on the head-->
+{% load static %}
+<!-- Bootstrap -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+
+
 <form action="../dashboard/" method="post"
        enctype="multipart/form-data">
     {% csrf_token %}
@@ -8,44 +14,130 @@
 <h1>Candidates</h1>
 <ul>
 
+
+    <!--TODO: refactor HTML-->
     <form action="#" method="post"
        enctype="multipart/form-data">
 
         {% csrf_token %}
 
-        {% for candidate in candidates %}
-            <li><input type="checkbox" name="{{ candidate.id }}_checkbox"><h4>{{ candidate.user.name }}:</h4>
+        <div class="row" style="margin-top:45px;">
 
-                <p><strong>email:</strong> {{ candidate.user.email }}</p>
-                {% if candidate.user.curriculum_url != '#' %}
-                    <p><strong>cv:</strong> <a href="http://peaku.co/static/{{ candidate.user.curriculum_url }}">link</a></p>
-                {% else %}
-                    <p><strong>cv:</strong> not available (<a href="http://peaku.co/request_cv/{{ candidate.user.id }}">request</a>)</p>
-                {% endif %}
-                <p><strong>country: </strong>{{ candidate.user.country.name }}</p>
-                <p><strong>profession: </strong>{{ candidate.user.profession.name }}</p>
-                <p><strong>education: </strong>{{ candidate.user.education.name }}</p>
+            <div class="col-sm-6">
 
-                <input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}" />
-
+                <h3>Ungoing</h3>
                 <br>
 
-                <textarea name="{{ candidate.id }}_comment" cols="60" rows="5"
-                placeholder="add a comment!">{{ candidate.comment }}</textarea>
+                {% for candidate in candidates %}
+                <li>
+                    <input type="checkbox" name="{{ candidate.id }}_checkbox">
+
+                    <!--TODO: make this great again: Add and move people from a campaign-->
+                    <!--
+                    <input type="submit" name="add_to_campaign" value="Add">
+                    <p><strong> or </strong></p>
+                    <input type="submit" name="add_to_campaign" value="Move">
+                    <p><strong> to </strong></p>
+                    <select name="{{ candidate.id }}_campaign" required>
+                      <option value="{{ candidate.state_id }}">{{ candidate.state.name }}</option>
+                      {% for campaign in campaign%}
+                         <option value="{{ state.id }}">{{ state.name }}</option>
+                      {% endfor %}
+                    </select>-->
+
+                    <h4>{{ candidate.user.name }}:</h4>
+
+                    <p><strong>email:</strong> {{ candidate.user.email }}</p>
+                    {% if candidate.user.curriculum_url != '#' %}
+                        <p><strong>cv:</strong> <a href="http://peaku.co/static/{{ candidate.user.curriculum_url }}">link</a></p>
+                    {% else %}
+                        <p><strong>cv:</strong> not available (<a href="http://peaku.co/request_cv/{{ candidate.user.id }}">request</a>)</p>
+                    {% endif %}
+                    <p><strong>country: </strong>{{ candidate.user.country.name }}</p>
+                    <p><strong>profession: </strong>{{ candidate.user.profession.name }}</p>
+                    <p><strong>education: </strong>{{ candidate.user.education.name }}</p>
+
+                    <input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}" />
+
+                    <br>
+
+                    <textarea name="{{ candidate.id }}_comment" cols="60" rows="5"
+                    placeholder="add a comment!">{{ candidate.comment }}</textarea>
+
+                    <br>
+
+                  <select name="{{ candidate.id }}_state" required>
+                      <option value="{{ candidate.state_id}}">{{ candidate.state.name }}</option>
+                      {% for state in states%}
+                         <option value="{{ state.id }}">{{ state.name }}</option>
+                      {% endfor %}
+                  </select>
+
+                </li>
 
                 <br>
+                {% endfor %}
 
-              <select name="{{ candidate.id }}_state" required>
-                  <option value="{{ candidate.state_id}}">{{ candidate.state.name }}</option>
-                  {% for state in states%}
-                     <option value="{{ state.id }}">{{ state.name }}</option>
-                  {% endfor %}
-              </select>
+            </div>
+            <div class="col-sm-6">
 
-            </li>
+                <h3>Rejected</h3>
+                <br>
 
-            <br>
-        {% endfor %}
+                {% for candidate in rejected_candidates %}
+                <li>
+                    <input type="checkbox" name="{{ candidate.id }}_checkbox">
+
+                    <!--TODO: make this great again: Add and move people from a campaign-->
+                    <!--
+                    <input type="submit" name="add_to_campaign" value="Add">
+                    <p><strong> or </strong></p>
+                    <input type="submit" name="add_to_campaign" value="Move">
+                    <p><strong> to </strong></p>
+                    <select name="{{ candidate.id }}_campaign" required>
+                      <option value="{{ candidate.state_id }}">{{ candidate.state.name }}</option>
+                      {% for campaign in campaign%}
+                         <option value="{{ state.id }}">{{ state.name }}</option>
+                      {% endfor %}
+                    </select>-->
+
+                    <h4>{{ candidate.user.name }}:</h4>
+
+                    <p><strong>email:</strong> {{ candidate.user.email }}</p>
+                    {% if candidate.user.curriculum_url != '#' %}
+                        <p><strong>cv:</strong> <a href="http://peaku.co/static/{{ candidate.user.curriculum_url }}">link</a></p>
+                    {% else %}
+                        <p><strong>cv:</strong> not available (<a href="http://peaku.co/request_cv/{{ candidate.user.id }}">request</a>)</p>
+                    {% endif %}
+                    <p><strong>country: </strong>{{ candidate.user.country.name }}</p>
+                    <p><strong>profession: </strong>{{ candidate.user.profession.name }}</p>
+                    <p><strong>education: </strong>{{ candidate.user.education.name }}</p>
+
+                    <input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}" />
+
+                    <br>
+
+                    <textarea name="{{ candidate.id }}_comment" cols="60" rows="5"
+                    placeholder="add a comment!">{{ candidate.comment }}</textarea>
+
+                    <br>
+
+                  <select name="{{ candidate.id }}_state" required>
+                      <option value="{{ candidate.state_id}}">{{ candidate.state.name }}</option>
+                      {% for state in states%}
+                         <option value="{{ state.id }}">{{ state.name }}</option>
+                      {% endfor %}
+                  </select>
+
+                </li>
+
+                <br>
+                {% endfor %}
+
+            </div>
+        </div>
+
+
 
         <br>
 

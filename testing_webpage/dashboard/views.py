@@ -38,6 +38,7 @@ def get_subject(request, campaign_id):
     return request.POST.get('email_subject').format(campaign_name=campaign.title_es)
 
 
+# TODO: use Ajax to optimize rendering. Has no graphics therefore is very low priority.
 def campaign_edit(request, pk):
     """
     Args:
@@ -46,9 +47,8 @@ def campaign_edit(request, pk):
     Returns: This controls the candidates dashboard
     """
 
-    if request.POST.get('save_changes') is not None:
     # enters here when saving changes
-    #if request.method == 'POST':
+    if request.POST.get('save_changes') is not None:
 
         candidates = Candidate.objects.filter(campaign_id=pk)
 
@@ -57,6 +57,7 @@ def campaign_edit(request, pk):
             c.comment = request.POST.get('{}_comment'.format(c.id))
             c.save()
 
+    # enters here when sending an email
     if request.POST.get('send_mail') is not None:
 
         users = get_checked_box_users(pk, request)
@@ -68,6 +69,9 @@ def campaign_edit(request, pk):
                           with_localization=False,
                           body_is_filename=False)
 
+    # enters here when adding a candidate to another campaign.
+    # TODO: make thins great again.
+
     states = State.objects.all()
 
     # create missing candidates on the first try
@@ -76,9 +80,12 @@ def campaign_edit(request, pk):
     fill_in_missing_candidates(users, pk)
 
     # TODO: recycle business search. Lot of work here: has to search according to campaign specification (education, profession, etc)
-    candidates = Candidate.objects.filter(campaign_id=pk)
+    # Orders by desc priority field on the state object.
+    candidates = Candidate.objects.filter(campaign_id=pk, state__is_rejected=False).order_by('-state__priority')
+    rejected_candidates = Candidate.objects.filter(campaign_id=pk, state__is_rejected=True).order_by('-state__priority')
 
     return render(request, cts.DASHBOARD_EDIT, {'states': states,
                                                 'campaign_id': pk,
-                                                'candidates': candidates
+                                                'candidates': candidates,
+                                                'rejected_candidates': rejected_candidates
                                                 })
