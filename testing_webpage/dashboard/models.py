@@ -7,6 +7,7 @@ class State(models.Model):
 
     name = models.CharField(max_length=200)
     priority = models.IntegerField(default=1)
+    is_rejected = models.BooleanField(default=False)
 
     def __str__(self):
         return '{0}, {1}'.format(self.id, self.name)
