@@ -80,7 +80,8 @@ def campaign_edit(request, pk):
     fill_in_missing_candidates(users, pk)
 
     # TODO: recycle business search. Lot of work here: has to search according to campaign specification (education, profession, etc)
-    candidates = Candidate.objects.filter(campaign_id=pk)
+    # Orders by desc priority field on the state object.
+    candidates = Candidate.objects.filter(campaign_id=pk).order_by('-state__priority')
 
     return render(request, cts.DASHBOARD_EDIT, {'states': states,
                                                 'campaign_id': pk,
