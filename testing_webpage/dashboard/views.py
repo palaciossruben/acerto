@@ -50,12 +50,14 @@ def campaign_edit(request, pk):
     # enters here when saving changes
     if request.POST.get('save_changes') is not None:
 
-        candidates = Candidate.objects.filter(campaign_id=pk)
+        field = request.POST.get('candidate_id_changed')
+        candidate_id = int(field)
 
-        for c in candidates:
-            c.state_id = request.POST.get('{}_state'.format(c.id))
-            c.comment = request.POST.get('{}_comment'.format(c.id))
-            c.save()
+        candidate = Candidate.objects.filter(pk=candidate_id).first()
+
+        candidate.state_id = request.POST.get('{}_state'.format(candidate.id))
+        candidate.comment = request.POST.get('{}_comment'.format(candidate.id))
+        candidate.save()
 
     # enters here when sending an email
     if request.POST.get('send_mail') is not None:

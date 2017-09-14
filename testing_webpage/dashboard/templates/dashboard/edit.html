@@ -3,6 +3,8 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
 
+<script type="text/javascript" src="{% static 'js/edit.js' %}" async></script>
+
 
 <form action="../dashboard/" method="post"
        enctype="multipart/form-data">
@@ -16,7 +18,7 @@
 
 
     <!--TODO: refactor HTML-->
-    <form action="#" method="post"
+    <form action="#" method="post" id="main_form_id"
        enctype="multipart/form-data">
 
         {% csrf_token %}
@@ -66,16 +68,22 @@
 
                     <br>
 
-                  <select name="{{ candidate.id }}_state" required>
-                      <option value="{{ candidate.state_id}}">{{ candidate.state.name }}</option>
-                      {% for state in states%}
-                         <option value="{{ state.id }}">{{ state.name }}</option>
-                      {% endfor %}
-                  </select>
+                    <select name="{{ candidate.id }}_state" required>
+                          <option value="{{ candidate.state_id}}">{{ candidate.state.name }}</option>
+                          {% for state in states%}
+                             <option value="{{ state.id }}">{{ state.name }}</option>
+                          {% endfor %}
+                    </select>
+
+                    <br>
+                    <br>
+                    <input type="submit" name="save_changes" value="Save Candidate!"
+                        onclick="send_candidate_id_in_params({{ candidate.id }})">
 
                 </li>
 
                 <br>
+
                 {% endfor %}
 
             </div>
@@ -122,12 +130,18 @@
 
                     <br>
 
-                  <select name="{{ candidate.id }}_state" required>
-                      <option value="{{ candidate.state_id}}">{{ candidate.state.name }}</option>
-                      {% for state in states%}
-                         <option value="{{ state.id }}">{{ state.name }}</option>
-                      {% endfor %}
-                  </select>
+                    <select name="{{ candidate.id }}_state" required>
+                          <option value="{{ candidate.state_id}}">{{ candidate.state.name }}</option>
+                          {% for state in states%}
+                             <option value="{{ state.id }}">{{ state.name }}</option>
+                          {% endfor %}
+                    </select>
+
+                    <br>
+                    <br>
+
+                    <input type="submit" name="save_changes" value="Save Candidate!"
+                        onclick="send_candidate_id_in_params({{ candidate.id }})">
 
                 </li>
 
@@ -137,12 +151,7 @@
             </div>
         </div>
 
-
-
         <br>
-
-        <input type="submit" name="save_changes" value="Save Changes!">
-
         <br>
         <br>
         <br>
