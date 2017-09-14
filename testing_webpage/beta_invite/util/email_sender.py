@@ -25,6 +25,9 @@ def read_email_credentials():
 
 def send_email(user, password, recipient, subject, body):
 
+    # TODO: deactivates mail temporarily
+    return
+
     gmail_user = user
     gmail_pwd = password
     FROM = user
