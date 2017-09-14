@@ -66,16 +66,21 @@
 
                     <br>
 
-                  <select name="{{ candidate.id }}_state" required>
-                      <option value="{{ candidate.state_id}}">{{ candidate.state.name }}</option>
-                      {% for state in states%}
-                         <option value="{{ state.id }}">{{ state.name }}</option>
-                      {% endfor %}
-                  </select>
+                    <select name="{{ candidate.id }}_state" required>
+                          <option value="{{ candidate.state_id}}">{{ candidate.state.name }}</option>
+                          {% for state in states%}
+                             <option value="{{ state.id }}">{{ state.name }}</option>
+                          {% endfor %}
+                    </select>
+
+                    <br>
+                    <br>
+                    <input type="submit" name="save_changes" value="Save Changes!">
 
                 </li>
 
                 <br>
+
                 {% endfor %}
 
             </div>
@@ -122,12 +127,16 @@
 
                     <br>
 
-                  <select name="{{ candidate.id }}_state" required>
-                      <option value="{{ candidate.state_id}}">{{ candidate.state.name }}</option>
-                      {% for state in states%}
-                         <option value="{{ state.id }}">{{ state.name }}</option>
-                      {% endfor %}
-                  </select>
+                    <select name="{{ candidate.id }}_state" required>
+                          <option value="{{ candidate.state_id}}">{{ candidate.state.name }}</option>
+                          {% for state in states%}
+                             <option value="{{ state.id }}">{{ state.name }}</option>
+                          {% endfor %}
+                    </select>
+
+                    <br>
+                    <br>
+                    <input type="submit" name="save_changes" value="Save Changes!">
 
                 </li>
 
@@ -137,12 +146,7 @@
             </div>
         </div>
 
-
-
         <br>
-
-        <input type="submit" name="save_changes" value="Save Changes!">
-
         <br>
         <br>
         <br>
