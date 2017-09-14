@@ -44,30 +44,40 @@ def send_email(user, password, recipient, subject, body):
     server.close()
 
 
-def send(user, language_code, body_filename, subject):
+def send(users, language_code, body_input, subject, with_localization=True, body_is_filename=True):
     """
     Sends an email
     Args:
-        user: Any object that has fields 'name' and 'email'
+        users: Any object that has fields 'name' and 'email' or a list of users.
         language_code: eg: 'es' or 'en'
-        body_filename: the filename of the body content
+        body_input: the filename of the body content or the body itself
         subject: string with the email subject
+        with_localization: Boolean indicating whether emails are translated according to browser configuration.
+        body_is_filename: Boolean indicating whether the body_input is a filename or a string with content.
     Returns: Sends email
     """
 
-    if language_code != 'en':
-        body_filename += '_{}'.format(language_code)
+    if with_localization and language_code != 'en':
+        body_input += '_{}'.format(language_code)
 
-    with open(os.path.join(get_current_path(), body_filename)) as fp:
-        body = fp.read().format(name=get_first_name(user.name))
+    if type(users) != list:
+        users = [users]
 
-    sender_data = read_email_credentials()
+    for user in users:
 
-    send_email(user=sender_data['email'],
-               password=sender_data['password'],
-               recipient=user.email,
-               subject=subject,
-               body=body)
+        if body_is_filename:
+            with open(os.path.join(get_current_path(), body_input)) as fp:
+                body = fp.read().format(name=get_first_name(user.name))
+        else:
+            body = body_input.format(name=get_first_name(user.name))
+
+        sender_data = read_email_credentials()
+
+        send_email(user=sender_data['email'],
+                   password=sender_data['password'],
+                   recipient=user.email,
+                   subject=subject,
+                   body=body)
 
 
 def remove_accents_in_string(element):
@@ -139,7 +149,6 @@ def send_report(language_code, body_filename, subject, recipient, users):
         body_filename: the filename of the body content
         subject: string with the email subject
         recipient: email send to.
-        resumes: list of resumes to show
     Returns: Sends email
     """
 

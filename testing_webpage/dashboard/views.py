@@ -2,6 +2,7 @@ from django.shortcuts import render
 from beta_invite.models import Campaign, User
 from dashboard.models import State, Candidate
 from dashboard import constants as cts
+from beta_invite.util import email_sender
 
 
 def index(request):
@@ -26,6 +27,17 @@ def fill_in_missing_candidates(users, campaign_id):
             Candidate(campaign_id=campaign_id, user_id=u.id, state_id=cts.DEFAULT_STATE).save()
 
 
+def get_checked_box_users(campaign_id, request):
+    candidates = Candidate.objects.filter(campaign_id=campaign_id)
+    return [c.user for c in candidates if request.POST.get('{}_checkbox'.format(c.id))]
+
+
+# TODO: make this available on different langs.
+def get_subject(request, campaign_id):
+    campaign = Campaign.objects.filter(pk=campaign_id).first()
+    return request.POST.get('email_subject').format(campaign_name=campaign.title_es)
+
+
 def campaign_edit(request, pk):
     """
     Args:
@@ -34,8 +46,9 @@ def campaign_edit(request, pk):
     Returns: This controls the candidates dashboard
     """
 
+    if request.POST.get('save_changes') is not None:
     # enters here when saving changes
-    if request.method == 'POST':
+    #if request.method == 'POST':
 
         candidates = Candidate.objects.filter(campaign_id=pk)
 
@@ -43,6 +56,17 @@ def campaign_edit(request, pk):
             c.state_id = request.POST.get('{}_state'.format(c.id))
             c.comment = request.POST.get('{}_comment'.format(c.id))
             c.save()
+
+    if request.POST.get('send_mail') is not None:
+
+        users = get_checked_box_users(pk, request)
+
+        email_sender.send(users=users,
+                          language_code=request.LANGUAGE_CODE,
+                          body_input=request.POST.get('email_body'),
+                          subject=get_subject(request, pk),
+                          with_localization=False,
+                          body_is_filename=False)
 
     states = State.objects.all()
 
