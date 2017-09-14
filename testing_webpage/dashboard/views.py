@@ -81,9 +81,11 @@ def campaign_edit(request, pk):
 
     # TODO: recycle business search. Lot of work here: has to search according to campaign specification (education, profession, etc)
     # Orders by desc priority field on the state object.
-    candidates = Candidate.objects.filter(campaign_id=pk).order_by('-state__priority')
+    candidates = Candidate.objects.filter(campaign_id=pk, state__is_rejected=False).order_by('-state__priority')
+    rejected_candidates = Candidate.objects.filter(campaign_id=pk, state__is_rejected=True).order_by('-state__priority')
 
     return render(request, cts.DASHBOARD_EDIT, {'states': states,
                                                 'campaign_id': pk,
-                                                'candidates': candidates
+                                                'candidates': candidates,
+                                                'rejected_candidates': rejected_candidates
                                                 })
