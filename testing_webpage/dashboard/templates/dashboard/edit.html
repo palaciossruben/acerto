@@ -14,7 +14,23 @@
         {% csrf_token %}
 
         {% for candidate in candidates %}
-            <li><input type="checkbox" name="{{ candidate.id }}_checkbox"><h4>{{ candidate.user.name }}:</h4>
+            <li>
+                <input type="checkbox" name="{{ candidate.id }}_checkbox">
+
+                <!--TODO: make this great again: Add and move people from a campaign-->
+                <!--
+                <input type="submit" name="add_to_campaign" value="Add">
+                <p><strong> or </strong></p>
+                <input type="submit" name="add_to_campaign" value="Move">
+                <p><strong> to </strong></p>
+                <select name="{{ candidate.id }}_campaign" required>
+                  <option value="{{ candidate.state_id }}">{{ candidate.state.name }}</option>
+                  {% for campaign in campaign%}
+                     <option value="{{ state.id }}">{{ state.name }}</option>
+                  {% endfor %}
+                </select>-->
+
+                <h4>{{ candidate.user.name }}:</h4>
 
                 <p><strong>email:</strong> {{ candidate.user.email }}</p>
                 {% if candidate.user.curriculum_url != '#' %}

@@ -6,6 +6,7 @@ from beta_invite.models import User, Campaign
 class State(models.Model):
 
     name = models.CharField(max_length=200)
+    priority = models.IntegerField(default=1)
 
     def __str__(self):
         return '{0}, {1}'.format(self.id, self.name)

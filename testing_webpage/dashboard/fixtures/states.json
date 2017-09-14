@@ -3,49 +3,56 @@
     "model": "dashboard.state",
     "pk": 1,
     "fields":{
-      "name": "Backlog"
+      "name": "Backlog",
+      "priority":10
     }
   },
   {
     "model": "dashboard.state",
     "pk": 2,
     "fields":{
-      "name": "Screening rejected"
+      "name": "Screening rejected",
+      "priority":1
     }
   },
   {
     "model": "dashboard.state",
     "pk": 3,
     "fields":{
-      "name": "Waiting for Interview/tests/CV"
+      "name": "Waiting for Interview/tests/CV",
+      "priority":3
     }
   },
   {
     "model": "dashboard.state",
     "pk": 4,
     "fields":{
-      "name": "Rejected on Interview/tests"
+      "name": "Rejected on Interview/tests",
+      "priority":4
     }
   },
   {
     "model": "dashboard.state",
     "pk": 5,
     "fields":{
-      "name": "Sent to client"
+      "name": "Sent to client",
+      "priority":6
     }
   },
   {
     "model": "dashboard.state",
     "pk": 6,
     "fields":{
-      "name": "Rejected by client"
+      "name": "Rejected by client",
+      "priority":5
     }
   },
   {
     "model": "dashboard.state",
     "pk": 7,
     "fields":{
-      "name": "Got the job"
+      "name": "Got the job",
+      "priority":7
     }
   }
 ]
