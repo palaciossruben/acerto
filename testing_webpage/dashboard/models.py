@@ -20,7 +20,7 @@ class Candidate(models.Model):
     campaign = models.ForeignKey(Campaign, null=True, on_delete=models.SET_NULL)
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     state = models.ForeignKey(State, null=True, on_delete=models.SET_NULL)
-    comment = models.CharField(max_length=1000, null=True, default='')
+    comment = models.CharField(max_length=10000, null=True, default='')
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
