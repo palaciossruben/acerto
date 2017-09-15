@@ -1,0 +1,66 @@
+<li>
+<input type="checkbox" name="{{ candidate.id }}_checkbox">
+<h4 style="display:inline;">{{ candidate.user.name }}:</h4>
+
+<br>
+<br>
+
+<p><strong>email:</strong> {{ candidate.user.email }}</p>
+{% if candidate.user.curriculum_url != '#' %}
+    <p><strong>cv:</strong> <a href="http://peaku.co/static/{{ candidate.user.curriculum_url }}">link</a></p>
+{% else %}
+    <p><strong>cv:</strong> not available (<a href="http://peaku.co/request_cv/{{ candidate.user.id }}">request</a>)</p>
+{% endif %}
+<p><strong>country: </strong>{{ candidate.user.country.name }}</p>
+<p><strong>profession: </strong>{{ candidate.user.profession.name }}</p>
+<p><strong>education: </strong>{{ candidate.user.education.name }}</p>
+
+<br>
+
+<input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}" />
+
+<br>
+
+<textarea name="{{ candidate.id }}_comment" cols="60" rows="5"
+placeholder="add a comment!">{{ candidate.comment }}</textarea>
+
+<br>
+
+<select name="{{ candidate.id }}_state" required>
+      <option value="{{ candidate.state_id}}">{{ candidate.state.name }}</option>
+      {% for state in states%}
+         <option value="{{ state.id }}">{{ state.name }}</option>
+      {% endfor %}
+</select>
+
+<br>
+<br>
+<input type="submit" name="save_changes" value="Save Candidate!"
+    onclick="send_additional_params_in_form({{ candidate.id }}, 'update')">
+
+</li>
+
+
+<br>
+
+<!--TODO: make this great again: Add and move people from a campaign-->
+<input type="submit" name="add_to_campaign" value="Add" onclick="send_additional_params_in_form('{{ candidate.id }}', 'add')">
+<p style="display: inline;"><strong>or</strong></p>
+<input type="submit" name="move_to_campaign" value="Move" onclick="send_additional_params_in_form({{ candidate.id }}, 'move')">
+<p style="display: inline;"><strong>to</strong></p>
+
+<select name="{{ candidate.id }}_selected_campaign" required>
+  <option value="0">Select Campaign</option>
+  {% for campaign in campaigns%}
+     <option value="{{ campaign.id }}">{{ campaign.name }}</option>
+  {% endfor %}
+</select>
+
+<br>
+<br>
+
+<input type="submit" name="remove_from_campaign" value="Remove" onclick="send_additional_params_in_form({{ candidate.id }}, 'remove')">
+
+
+<br>
+<hr>
