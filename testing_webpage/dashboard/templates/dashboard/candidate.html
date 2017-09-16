@@ -26,7 +26,7 @@ placeholder="add a comment!">{{ candidate.comment }}</textarea>
 
 <br>
 
-<select name="{{ candidate.id }}_state" required>
+<select class="selectpicker" name="{{ candidate.id }}_state">
       <option value="{{ candidate.state_id}}">{{ candidate.state.name }}</option>
       {% for state in states%}
          <option value="{{ state.id }}">{{ state.name }}</option>
@@ -35,7 +35,7 @@ placeholder="add a comment!">{{ candidate.comment }}</textarea>
 
 <br>
 <br>
-<input type="submit" name="save_changes" value="Save Candidate!"
+<input type="button" class="btn btn-success" name="save_changes" value="Save Candidate!"
     onclick="send_additional_params_in_form({{ candidate.id }}, 'update')">
 
 </li>
@@ -44,12 +44,12 @@ placeholder="add a comment!">{{ candidate.comment }}</textarea>
 <br>
 
 <!--TODO: make this great again: Add and move people from a campaign-->
-<input type="submit" name="add_to_campaign" value="Add" onclick="send_additional_params_in_form('{{ candidate.id }}', 'add')">
+<input type="button" class="btn btn-primary" name="add_to_campaign" value="Add" onclick="send_additional_params_in_form('{{ candidate.id }}', 'add')">
 <p style="display: inline;"><strong>or</strong></p>
-<input type="submit" name="move_to_campaign" value="Move" onclick="send_additional_params_in_form({{ candidate.id }}, 'move')">
+<input type="button" class="btn btn-primary" name="move_to_campaign" value="Move" onclick="send_additional_params_in_form({{ candidate.id }}, 'move')">
 <p style="display: inline;"><strong>to</strong></p>
 
-<select name="{{ candidate.id }}_selected_campaign" required>
+<select class="selectpicker" name="{{ candidate.id }}_selected_campaign" >
   <option value="0">Select Campaign</option>
   {% for campaign in campaigns%}
      <option value="{{ campaign.id }}">{{ campaign.name }}</option>
@@ -59,8 +59,8 @@ placeholder="add a comment!">{{ candidate.comment }}</textarea>
 <br>
 <br>
 
-<input type="submit" name="remove_from_campaign" value="Remove" onclick="send_additional_params_in_form({{ candidate.id }}, 'remove')">
-
+<input type="button" class="btn btn-danger" name="remove_from_campaign" value="Delete!"
+    onclick="send_additional_params_in_form({{ candidate.id }}, 'remove')">
 
 <br>
 <hr>
