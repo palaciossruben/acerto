@@ -110,7 +110,7 @@ def send(users, language_code, body_input, subject, with_localization=True, body
 
         send_email(sender=sender_data['email'],
                    recipients=user.email,
-                   subject=subject,
+                   subject=subject.format(name=get_first_name(user.name)),
                    body=body,
                    mail_gun_url=sender_data['mailgun_url'],
                    mailgun_api_key=sender_data['mailgun_api_key'])
