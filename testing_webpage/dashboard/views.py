@@ -36,7 +36,10 @@ def get_checked_box_users(campaign_id, request):
 # TODO: make this available on different langs. Has a hardcoded title_es
 def get_subject(request, campaign_id):
     campaign = Campaign.objects.get(pk=campaign_id)
-    return request.POST.get('email_subject').format(campaign_name=campaign.title_es)
+
+    # passes on the '{name}', in case there is any.
+    return request.POST.get('email_subject').format(campaign_name=campaign.title_es,
+                                                    name='{name}')
 
 
 def user_in_campaign(user_id, campaign_id):
