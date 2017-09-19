@@ -6,4 +6,6 @@ Estamos procesando tu CV, pronto te contaremos.
 
 Saludos!!!
 
-Santiago
+{sender_name}
+{sender_position}
+{peaku_address}

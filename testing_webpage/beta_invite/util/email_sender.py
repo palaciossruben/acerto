@@ -1,6 +1,7 @@
 import os
 import json
 import smtplib
+import requests
 import unicodedata
 
 
@@ -23,7 +24,7 @@ def read_email_credentials():
     return json.loads(json_data)
 
 
-def send_email(user, password, recipient, subject, body):
+def send_email_through_smtp(user, password, recipient, subject, body):
 
     # TODO: deactivates mail temporarily
     return
@@ -47,6 +48,33 @@ def send_email(user, password, recipient, subject, body):
     server.close()
 
 
+def send_email(sender, recipients, subject, body, mail_gun_url, mailgun_api_key):
+    """
+    Sends emails over mailgun service
+    Args:
+        sender: an email.
+        recipients: email or lists of emails.
+        subject: email subject, string
+        body: email body, string
+        mail_gun_url: string
+        mailgun_api_key: string
+    Returns: sends emails.
+    """
+    recipients = recipients if type(recipients) is list else [recipients]
+
+    # TODO: can this be removed. Can mailgun manage unicode?
+    subject = remove_accents(str(subject))
+    body = remove_accents(str(body))
+
+    return requests.post(
+        mail_gun_url,
+        auth=("api", mailgun_api_key),
+        data={"from": sender,
+              "to": recipients,
+              "subject": subject,
+              "text": body})
+
+
 def send(users, language_code, body_input, subject, with_localization=True, body_is_filename=True):
     """
     Sends an email
@@ -66,21 +94,28 @@ def send(users, language_code, body_input, subject, with_localization=True, body
     if type(users) != list:
         users = [users]
 
+    sender_data = read_email_credentials()
+
     for user in users:
 
         if body_is_filename:
             with open(os.path.join(get_current_path(), body_input)) as fp:
-                body = fp.read().format(name=get_first_name(user.name))
+                body = fp.read().format(name=get_first_name(user.name),
+                                        sender_name=sender_data['sender_name'],
+                                        sender_position=sender_data['sender_position'],
+                                        peaku_address=sender_data['peaku_address'],)
         else:
-            body = body_input.format(name=get_first_name(user.name))
+            body = body_input.format(name=get_first_name(user.name),
+                                     sender_name=sender_data['sender_name'],
+                                     sender_position=sender_data['sender_position'],
+                                     peaku_address=sender_data['peaku_address'],)
 
-        sender_data = read_email_credentials()
-
-        send_email(user=sender_data['email'],
-                   password=sender_data['password'],
-                   recipient=user.email,
+        send_email(sender=sender_data['email'],
+                   recipients=user.email,
                    subject=subject,
-                   body=body)
+                   body=body,
+                   mail_gun_url=sender_data['mailgun_url'],
+                   mailgun_api_key=sender_data['mailgun_api_key'])
 
 
 def remove_accents_in_string(element):
@@ -144,14 +179,14 @@ def create_nice_resumes_message(users):
     return '\n\n'.join(resume_summaries)
 
 
-def send_report(language_code, body_filename, subject, recipient, users):
+def send_report(language_code, body_filename, subject, recipients, users):
     """
     Sends an email
     Args:
         language_code: eg: 'es' or 'en'
         body_filename: the filename of the body content
         subject: string with the email subject
-        recipient: email send to.
+        recipients: email send to.
     Returns: Sends email
     """
 
@@ -159,17 +194,22 @@ def send_report(language_code, body_filename, subject, recipient, users):
         body_filename += '_{}'.format(language_code)
 
     resumes = create_nice_resumes_message(users)
+    sender_data = read_email_credentials()
 
     with open(os.path.join(get_current_path(), body_filename)) as fp:
-        body = fp.read().format(new_resumes=resumes)
+        body = fp.read().format(new_resumes=resumes,
+                                sender_name=sender_data['sender_name'],
+                                sender_position=sender_data['sender_position'],
+                                peaku_address=sender_data['peaku_address'],)
 
     sender_data = read_email_credentials()
 
-    send_email(user=sender_data['email'],
-               password=sender_data['password'],
-               recipient=recipient,
+    send_email(sender=sender_data['email'],
+               recipients=recipients,
                subject=subject,
-               body=body)
+               body=body,
+               mail_gun_url=sender_data['mailgun_url'],
+               mailgun_api_key=sender_data['mailgun_api_key'])
 
 
 def send_internal(contact, language_code, body_filename, subject):
@@ -202,8 +242,9 @@ def send_internal(contact, language_code, body_filename, subject):
 
     sender_data = read_email_credentials()
 
-    send_email(user=sender_data['email'],
-               password=sender_data['password'],
-               recipient=internal_team,
+    send_email(sender=sender_data['email'],
+               recipients=internal_team,
                subject=subject,
-               body=body)
+               body=body,
+               mail_gun_url=sender_data['mailgun_url'],
+               mailgun_api_key=sender_data['mailgun_api_key'])
