@@ -63,8 +63,6 @@ def send_email(sender, recipients, subject, body, mail_gun_url, mailgun_api_key)
     recipients = recipients if type(recipients) is list else [recipients]
 
     # TODO: can this be removed. Can mailgun manage unicode?
-    subject = remove_accents(str(subject))
-    body = remove_accents(str(body))
 
     return requests.post(
         mail_gun_url,
