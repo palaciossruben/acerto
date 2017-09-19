@@ -94,15 +94,21 @@ def send(users, language_code, body_input, subject, with_localization=True, body
     if type(users) != list:
         users = [users]
 
+    sender_data = read_email_credentials()
+
     for user in users:
 
         if body_is_filename:
             with open(os.path.join(get_current_path(), body_input)) as fp:
-                body = fp.read().format(name=get_first_name(user.name))
+                body = fp.read().format(name=get_first_name(user.name),
+                                        sender_name=sender_data['sender_name'],
+                                        sender_position=sender_data['sender_position'],
+                                        peaku_address=sender_data['peaku_address'],)
         else:
-            body = body_input.format(name=get_first_name(user.name))
-
-        sender_data = read_email_credentials()
+            body = body_input.format(name=get_first_name(user.name),
+                                     sender_name=sender_data['sender_name'],
+                                     sender_position=sender_data['sender_position'],
+                                     peaku_address=sender_data['peaku_address'],)
 
         send_email(sender=sender_data['email'],
                    recipients=user.email,
@@ -188,9 +194,13 @@ def send_report(language_code, body_filename, subject, recipients, users):
         body_filename += '_{}'.format(language_code)
 
     resumes = create_nice_resumes_message(users)
+    sender_data = read_email_credentials()
 
     with open(os.path.join(get_current_path(), body_filename)) as fp:
-        body = fp.read().format(new_resumes=resumes)
+        body = fp.read().format(new_resumes=resumes,
+                                sender_name=sender_data['sender_name'],
+                                sender_position=sender_data['sender_position'],
+                                peaku_address=sender_data['peaku_address'],)
 
     sender_data = read_email_credentials()
 

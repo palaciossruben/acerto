@@ -1,3 +1,7 @@
 Hojas de vida en las ultimas 24 horas:
 
 {new_resumes}
+
+{sender_name}
+{sender_position}
+{peaku_address}
