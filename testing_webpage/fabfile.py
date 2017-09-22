@@ -146,14 +146,11 @@ def deploy():
 
             # reload fixtures: Will overwrite tables with DB fixtures.
             # beta_invite fixtures
-            fixtures_dirs = ['beta_invite/fixtures/', 'business/fixtures/', 'dashboard/fixtures/']
+            fixtures_dirs = ['beta_invite', 'business', 'dashboard']
+            fixtures_dirs = [f + '/fixtures/*' for f in fixtures_dirs]
 
-            fixtures = []
-            for fd in fixtures_dirs:
-                fixtures += list_dir(fd)
-
-            for fixture_json in fixtures:
-                run('python3 manage.py loaddata {}'.format(fixture_json))
+            for f in fixtures_dirs:
+                run('python3 manage.py loaddata {}'.format(f))
 
             # Last step: start gunicorn as a deamon.
             run('PYENV_VERSION=3.5.2 gunicorn -c gunicorn_cfg.py testing_webpage.wsgi')

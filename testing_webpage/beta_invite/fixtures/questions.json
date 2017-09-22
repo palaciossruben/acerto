@@ -1,0 +1,28 @@
+[
+  {
+    "model": "beta_invite.question",
+    "pk": 1,
+    "fields":{
+      "text": "What was/is your last salary?",
+      "text_es": "¿Cual es/fue tu último salario?",
+      "answers": [1, 2, 3, 4, 5],
+      "type": 1,
+      "correct_answers": [1, 2],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 2,
+    "fields":{
+      "text": "In a short text How would you sell someone a salt shaker?",
+      "text_es": "En un texto corto ¿Como le venderías a alguién un salero?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  }
+]

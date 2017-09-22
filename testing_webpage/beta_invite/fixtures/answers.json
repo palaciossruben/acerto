@@ -1,0 +1,52 @@
+[
+  {
+    "model": "beta_invite.answer",
+    "pk": 1,
+    "fields":{
+      "name": "Minimum Wage ($ 737.717 COP)",
+      "name_es": "Salario mínimo ($ 737.717 COP)",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 2,
+    "fields":{
+      "name": "Between $ 737.717 COP y $ 1'300.000 COP",
+      "name_es": "Entre $ 737.717 y $ 1'300.000 de pesos",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 3,
+    "fields":{
+      "name": "Between $ 1'300.0000 COP and $ 2'000.000 COP",
+      "name_es": "Entre $ 1'300.0000 y $ 2'000.000 pesos",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 4,
+    "fields":{
+      "name": "Between $ 2'00.0000 COP and $ 3'000.000 COP",
+      "name_es": "Entre $ 2'000.000 y 3'000.000 pesos",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 5,
+    "fields":{
+      "name": "More than $ 3'000.000 COP",
+      "name_es": "Mayor a $ 3'000.000 COP",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  }
+]
