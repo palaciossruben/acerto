@@ -96,6 +96,72 @@ class Bullet(models.Model):
         db_table = 'bullets'
 
 
+class QuestionType(models.Model):
+
+    name = models.CharField(max_length=200)
+    code = models.CharField(max_length=10, null=True)
+
+    def __str__(self):
+        return '{0}, {1}'.format(self.id, self.name)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'question_types'
+
+
+class Answer(models.Model):
+
+    name = models.CharField(max_length=1000)
+    name_es = models.CharField(max_length=1000, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '{0}, {1}'.format(self.id, self.name)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'answers'
+
+
+class Question(models.Model):
+
+    text = models.CharField(max_length=1000, null=True)
+    text_es = models.CharField(max_length=1000, null=True)
+    answers = models.ManyToManyField(Answer)
+    type = models.ForeignKey(QuestionType, null=True, on_delete=models.SET_NULL)
+    correct_answers = models.ManyToManyField(Answer, related_name='correct_answers')
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '{0}, {1}'.format(self.id, self.text)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'questions'
+
+
+class Test(models.Model):
+
+    name = models.CharField(max_length=200)
+    name_es = models.CharField(max_length=200, null=True)
+    questions = models.ManyToManyField(Question)
+    cut_score = models.IntegerField(default=70)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '{0}, {1}'.format(self.id, self.name)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'tests'
+
+
 class Campaign(models.Model):
 
     name = models.CharField(max_length=200)
@@ -108,6 +174,7 @@ class Campaign(models.Model):
     title = models.CharField(max_length=200, null=True)
     title_es = models.CharField(max_length=200, null=True)
     bullets = models.ManyToManyField(Bullet)
+    tests = models.ManyToManyField(Test)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -146,6 +213,25 @@ class User(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'users'
+
+
+class Survey(models.Model):
+
+    user = models.ForeignKey(User, null=True)
+    test = models.ForeignKey(Test)
+    question = models.ForeignKey(Question)
+    answer = models.ForeignKey(Answer, null=True, on_delete=models.SET_NULL)
+    text_answer = models.CharField(max_length=10000, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '{0}, {1}, {2}, {3}'.format(self.id, self.user, self.test, self.question)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'surveys'
 
 
 class TradeUser(models.Model):

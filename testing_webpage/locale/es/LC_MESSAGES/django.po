@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-12 17:53+0000\n"
+"POT-Creation-Date: 2017-09-22 04:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgstr "¡Aplica Ahora!"
 #: beta_invite/templates/beta_invite/index.html:87
 #: beta_invite/templates/beta_invite/long_form.html:156
 #: business/templates/business/index.html:216
-#: business/templates/business/search.html:214
+#: business/templates/business/search.html:213
 #: business/templates/business/search_trade.html:194
 #: business/templates/business/signup.html:122
 #: business/templates/business/trade_client.html:135
@@ -39,7 +39,7 @@ msgstr "Tu Nombre Completo"
 #: beta_invite/templates/beta_invite/long_form.html:163
 #: business/templates/business/index.html:221
 #: business/templates/business/login.html:92
-#: business/templates/business/search.html:221
+#: business/templates/business/search.html:220
 #: business/templates/business/search_trade.html:201
 #: business/templates/business/signup.html:129
 #: business/templates/business/trade_client.html:140
@@ -47,7 +47,7 @@ msgid "Your email"
 msgstr "Tu correo"
 
 #: beta_invite/templates/beta_invite/fast_job.html:126
-#: business/templates/business/search.html:228
+#: business/templates/business/search.html:227
 #: business/templates/business/search_trade.html:208
 #: business/templates/business/signup.html:136
 msgid "Your phone"
@@ -68,7 +68,7 @@ msgstr "Describe lo que haces."
 
 #: beta_invite/templates/beta_invite/fast_job.html:160
 #: beta_invite/templates/beta_invite/index.html:113
-#: beta_invite/templates/beta_invite/long_form.html:219
+#: beta_invite/templates/beta_invite/long_form.html:221
 #: business/templates/business/index.html:236
 #: business/templates/business/trade_client.html:155
 msgid "Sure!"
@@ -103,7 +103,7 @@ msgid "Subscribe"
 msgstr "Suscríbete"
 
 #: beta_invite/templates/beta_invite/index.html:103
-#: beta_invite/templates/beta_invite/long_form.html:202
+#: beta_invite/templates/beta_invite/long_form.html:203
 msgid "Upload your resume"
 msgstr "Sube tu curriculum"
 
@@ -127,31 +127,68 @@ msgstr "Selecciona tu Educación"
 msgid "Select Profession"
 msgstr "Selecciona tu Profesión"
 
-#: beta_invite/templates/beta_invite/long_form.html:212
+#: beta_invite/templates/beta_invite/long_form.html:214
 #: business/templates/business/post_job.html:157
-#: business/templates/business/search.html:183
+#: business/templates/business/search.html:182
 msgid "Experience in years:"
 msgstr "Experiencia en años:"
 
-#: beta_invite/templates/beta_invite/success.html:80
+#: beta_invite/templates/beta_invite/meet.html:77
+msgid ""
+"Hi, I'm Santiago, Congratulations on passing the tests! Let's schedule an "
+"appointment!"
+msgstr ""
+"Hola, soy Santiago, ¡Felicitaciones por pasar las pruebas! ¡Programemos una "
+"cita!"
+
+#: beta_invite/templates/beta_invite/meet.html:83
+msgid "Click here to schedule an appointment"
+msgstr "Has click aquí para agendar una cita"
+
+#: beta_invite/templates/beta_invite/meet.html:86
+msgid "Or contact me at santiago@peaku.co, skype: recutamiento@peaku.co"
+msgstr "O contactame en santiago@peaku.co, skype: reclutamiento@peaku.co"
+
+#: beta_invite/templates/beta_invite/test.html:83
 msgid "Thanks for registering!"
 msgstr "¡Gracias por registrarte!"
 
-#: beta_invite/templates/beta_invite/success.html:84
+#: beta_invite/templates/beta_invite/test.html:96
+msgid "Complete this few questions to know you better"
+msgstr "Completa estas preguntas para conocerte mejor"
+
+#: beta_invite/templates/beta_invite/test.html:102
+msgid "Test: "
+msgstr "Prueba: "
+
+#: beta_invite/templates/beta_invite/test.html:121
+msgid "Your Answer"
+msgstr "Tu Respuesta"
+
+#: beta_invite/templates/beta_invite/test.html:133
+msgid "Send Answers!!!"
+msgstr "¡Envia las Respuestas!"
+
+#: beta_invite/templates/beta_invite/test.html:140
 #: business/templates/business/contact.html:100
 msgid "We will contact you soon"
 msgstr "Nos pondremos en contacto pronto"
 
-#: beta_invite/views.py:105 beta_invite/views.py:210 beta_invite/views.py:299
+#: beta_invite/views.py:111 beta_invite/views.py:237 beta_invite/views.py:341
+#: beta_invite/views.py:482 beta_invite/views.py:486
 msgid "Discover your true passion"
 msgstr "Descubre tu verdadera pasión"
 
-#: beta_invite/views.py:106 beta_invite/views.py:300 beta_invite/views.py:324
-#: beta_invite/views.py:392
+#: beta_invite/views.py:112 beta_invite/views.py:342 beta_invite/views.py:371
+#: beta_invite/views.py:439 beta_invite/views.py:483 beta_invite/views.py:487
 msgid "We search millions of jobs and find the right one for you"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
 
-#: beta_invite/views.py:323 beta_invite/views.py:391
+#: beta_invite/views.py:337 business/views.py:374 business/views.py:577
+msgid "Welcome to PeakU"
+msgstr "Bienvenido a PeakU"
+
+#: beta_invite/views.py:370 beta_invite/views.py:438
 msgid "Find a job now"
 msgstr "Encuentra trabajo ya"
 
@@ -164,7 +201,7 @@ msgstr "¡Gracias por tu interes!"
 #: business/templates/business/offer_results.html:66
 #: business/templates/business/plan.html:108
 #: business/templates/business/post_job.html:87
-#: business/templates/business/search.html:99
+#: business/templates/business/search.html:98
 #: business/templates/business/search_trade.html:97
 #: business/templates/business/trade_client.html:72
 msgid "Log Out"
@@ -206,14 +243,14 @@ msgstr "Adiciona +"
 
 #: business/templates/business/index.html:103
 #: business/templates/business/login.html:67
-#: business/templates/business/search.html:111
+#: business/templates/business/search.html:110
 #: business/templates/business/search_trade.html:109
 #: business/templates/business/trade_client.html:84
 msgid "Sign Up"
 msgstr "Regístrate"
 
 #: business/templates/business/index.html:109
-#: business/templates/business/search.html:117
+#: business/templates/business/search.html:116
 #: business/templates/business/search_trade.html:115
 #: business/templates/business/signup.html:95
 #: business/templates/business/trade_client.html:90
@@ -414,48 +451,44 @@ msgstr "Habilidades u otros requerimientos"
 msgid "Post!"
 msgstr "¡Publicar!"
 
-#: business/templates/business/search.html:133
+#: business/templates/business/search.html:132
 msgid "Search our Curriculum Database"
 msgstr "Busca Curriculums en Nuestra Base de Datos"
 
-#: business/templates/business/search.html:175
+#: business/templates/business/search.html:174
 msgid "Skills or any other information"
 msgstr "Habilidades u otros requerimientos"
 
-#: business/templates/business/search.html:190
+#: business/templates/business/search.html:189
 #: business/templates/business/search_trade.html:170
 #: business/templates/business/trade_client.html:114
-#, fuzzy
-#| msgid "Search Engine"
 msgid "Search"
 msgstr "Buscador"
 
-#: business/templates/business/search.html:207
+#: business/templates/business/search.html:206
 #: business/templates/business/search_trade.html:187
 msgid "SignUp to continue using the app ;)"
 msgstr "Regístrate para continuar usando la app ;)"
 
-#: business/templates/business/search.html:235
+#: business/templates/business/search.html:234
 #: business/templates/business/search_trade.html:215
 #: business/templates/business/signup.html:143
 msgid "Enter a password"
 msgstr "Digita una clave"
 
-#: business/templates/business/search.html:242
+#: business/templates/business/search.html:241
 #: business/templates/business/search_trade.html:222
 #: business/templates/business/signup.html:150
 msgid "Confirm password"
 msgstr "Digita una clave"
 
-#: business/templates/business/search.html:249
+#: business/templates/business/search.html:248
 #: business/templates/business/search_trade.html:229
 #: business/templates/business/signup.html:157
 msgid "Sign Up!"
 msgstr "¡Regístrate!"
 
 #: business/templates/business/search_trade.html:131
-#, fuzzy
-#| msgid "Search Engine"
 msgid "Search people"
 msgstr "Buscador"
 
@@ -468,21 +501,17 @@ msgid "We do the entire personnel selection process for your company."
 msgstr "Realizamos todo el proceso de selección de personal para tu empresa"
 
 #: business/views.py:44 business/views.py:71 business/views.py:89
-#: business/views.py:290 business/views.py:466 business/views.py:607
+#: business/views.py:291 business/views.py:467 business/views.py:608
 msgid "Discover amazing people"
 msgstr "Descubre personas increíbles"
 
-#: business/views.py:72 business/views.py:90 business/views.py:291
-#: business/views.py:467
+#: business/views.py:72 business/views.py:90 business/views.py:292
+#: business/views.py:468
 msgid ""
 "We search millions of profiles and find the ones that best suit your business"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
 
-#: business/views.py:373 business/views.py:576
-msgid "Welcome to PeakU"
-msgstr "Bienvenido a PeakU"
-
-#: business/views.py:648
+#: business/views.py:649
 msgid ""
 "Find someone to help you with daily tasks such as cleaning your house, "
 "fixing the fridge or sending a message."
@@ -490,7 +519,7 @@ msgstr ""
 "Encuentra a alguien que te ayude con tareas diarias como limpiar tu casa, "
 "arreglar la nevera o enviar un mensaje."
 
-#: business/views.py:651
+#: business/views.py:652
 msgid "Solve everyday problems"
 msgstr "Soluciona problemas contidianos"
 
@@ -501,6 +530,12 @@ msgstr "Ingles"
 #: testing_webpage/shared_settings.py:120
 msgid "Spanish"
 msgstr "Español"
+
+#~ msgid ""
+#~ "You made it to the interview, congrants!!! Schedule an interview with me:"
+#~ msgstr ""
+#~ "¡¡¡Lograste pasar a la entrevista, felicitaciones!!!, agenda una "
+#~ "entrevista conmigo en:"
 
 #~ msgid "Apply anyway!"
 #~ msgstr "¡Aplica de todas formas!"

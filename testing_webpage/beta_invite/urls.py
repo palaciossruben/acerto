@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^long_form/post$', views.post_long_form, name='post_long_form'),
     url(r'^fast_job$', views.fast_job, name='fast_job'),
     url(r'^fast_job/post$', views.post_fast_job, name='fast_job_post'),
+    url(r'^long_form/test_result$', views.get_test_result, name='test_result'),
 ]

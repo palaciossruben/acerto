@@ -9,10 +9,11 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 
 from django.shortcuts import render
-from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser, Bullet, BulletType
+from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser, Bullet, BulletType, Test, Question, Survey
 from ipware.ip import get_ip
 from beta_invite import constants as cts
 from beta_invite.util import email_sender
+from beta_invite import text_analizer
 
 
 def remove_accents(text):
@@ -191,6 +192,23 @@ def translate_bullets(bullets, lang_code):
     return a
 
 
+def translate_tests(tests, lang_code):
+    """
+    Args:
+        tests: array with test Objects
+        lang_code: 'es' for example
+    Returns: translated array
+    """
+    a = []
+    if lang_code == 'es':
+
+        for t in tests:
+            t.name = t.name_es
+            a.append(t)
+
+    return a
+
+
 def long_form(request):
     """
     will render a form to input user data.
@@ -251,6 +269,24 @@ def update_search_dictionary_on_background():
     os.system(command)
 
 
+def get_campaign_from_request(request):
+    """Tries 2 ways to get the campaign_id, 1. on GET params, 2. on POST params.
+    If nothing works outputs the default campaign."""
+
+    campaign_id = request.GET.get('campaign_id')
+    if campaign_id is None:
+        campaign_id = request.POST.get('campaign_id', cts.DEFAULT_CAMPAIGN_ID)
+
+    try:
+        return Campaign.objects.get(pk=int(campaign_id))
+    except ObjectDoesNotExist:
+        return Campaign.objects.get(pk=cts.DEFAULT_CAMPAIGN_ID)
+
+
+def get_tests_questions_dict(tests):
+    return {test.id: [q.id for q in test.questions.all()] for test in tests}
+
+
 def post_long_form(request):
     """
     Args:
@@ -267,51 +303,55 @@ def post_long_form(request):
     country_id = request.POST.get('country')
     experience = request.POST.get('experience')
 
-    profession = Profession.objects.get(pk=profession_id)
-    education = Education.objects.get(pk=education_id)
-    country = Country.objects.get(pk=country_id)
+    campaign = get_campaign_from_request(request)
 
-    # finally collects the campaign_id.
-    campaign_id = request.POST.get('campaign_id')
+    tests = translate_tests(campaign.tests.all(), request.LANGUAGE_CODE)
 
-    user = User(name=request.POST.get('name'),
-                email=request.POST.get('email'),
-                profession=profession,
-                education=education,
-                country=country,
-                experience=experience,
-                ip=ip,
-                ui_version=cts.UI_VERSION,
-                is_mobile=is_mobile)
+    params = {'main_message': _("Discover your true passion"),
+              'secondary_message': _("We search millions of jobs and find the right one for you"),
+              'campaign_id': campaign.id,
+              'tests': tests,
+              'question_ids': get_tests_questions_dict(tests),
+              }
 
-    # verify that the campaign exists.
-    if campaign_id:
+    if profession_id is not None and education_id is not None and country_id is not None:
+
+        profession = Profession.objects.get(pk=profession_id)
+        education = Education.objects.get(pk=education_id)
+        country = Country.objects.get(pk=country_id)
+
+        user = User(name=request.POST.get('name'),
+                    email=request.POST.get('email'),
+                    profession=profession,
+                    education=education,
+                    country=country,
+                    experience=experience,
+                    ip=ip,
+                    ui_version=cts.UI_VERSION,
+                    is_mobile=is_mobile,
+                    campaign=campaign)
+
+        # verify that the campaign exists.
+
+        # Saves here to get an id
+        user.save()
+        user.curriculum_url = save_curriculum_from_request(request, user)
+        user.save()
+
+        params['user_id'] = user.id
+
+        update_search_dictionary_on_background()
+
         try:
-            campaign = Campaign.objects.get(pk=int(campaign_id))
-            # under right conditions add the campaign before saving
-            user.campaign = campaign
-        except ObjectDoesNotExist:
+            email_body_name = 'user_signup_email_body'
+            if is_mobile:
+                email_body_name += '_mobile'
+
+            email_sender.send(user, request.LANGUAGE_CODE, email_body_name, _('Welcome to PeakU'))
+        except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
             pass
 
-    # Saves here to get an id
-    user.save()
-    user.curriculum_url = save_curriculum_from_request(request, user)
-    user.save()
-
-    update_search_dictionary_on_background()
-
-    try:
-        email_body_name = 'user_signup_email_body'
-        if is_mobile:
-            email_body_name += '_mobile'
-
-        email_sender.send(user, request.LANGUAGE_CODE, email_body_name, _('Welcome to PeakU'))
-    except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
-        pass
-
-    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover your true passion"),
-                                                   'secondary_message': _("We search millions of jobs and find the right one for you"),
-                                                   })
+    return render(request, cts.SUCCESS_VIEW_PATH, params)
 
 
 @login_required
@@ -406,3 +446,67 @@ def post_fast_job(request):
     return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Find a job now"),
                                                    'secondary_message': _("We search millions of jobs and find the right one for you"),
                                                    })
+
+
+def average_list(array):
+    return sum(array)/len(array)
+
+
+def get_test_result(request):
+    """
+    Args:
+        request: HTTP object
+    Returns: Either end process or invites to interview.
+    """
+    campaign = get_campaign_from_request(request)
+    questions_dict = get_tests_questions_dict(campaign.tests.all())
+
+    scores = []
+    cut_scores = []
+    for test_id, question_ids in questions_dict.items():
+        total = 0
+        result = 0
+        cut_scores.append(Test.objects.get(pk=test_id).cut_score)
+        for q_id in question_ids:
+
+            question = Question.objects.get(pk=q_id)
+            answer_text = request.POST.get('test_{}_question_{}'.format(test_id, q_id))
+
+            survey = Survey(test_id=test_id,
+                            question_id=q_id)
+
+            user_id = request.POST.get('user_id')
+            if user_id != '':
+                survey.user_id = int(user_id)
+
+            total += 1
+            if question.type.code == 'SA':
+                if answer_text is not None:
+                    answer_id = int(answer_text)
+                    survey.answer_id = answer_id
+                    if answer_id in [q.id for q in Question.objects.get(pk=q_id).correct_answers.all()]:
+                        result += 1
+            elif question.type.code == 'OF':
+                survey.text_answer = answer_text
+                result += text_analizer.get_score(answer_text)
+            elif question.type.code == 'MA':
+                pass
+                # TODO: implement multiple answers.
+
+            survey.save()
+
+        test_score = text_analizer.handle_division_by_zero(result, total)
+        scores.append(test_score)
+
+    # simple average and to percentage
+    final_score = average_list(scores)*100
+    cut_score = average_list(cut_scores)
+
+    if final_score >= cut_score:  # passes
+        return render(request, cts.MEET_VIEW_PATH, {'main_message': _("Discover your true passion"),
+                                                    'secondary_message': _("We search millions of jobs and find the right one for you"),
+                                                    })
+    else:  # doesn't pass.
+        return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover your true passion"),
+                                                       'secondary_message': _("We search millions of jobs and find the right one for you"),
+                                                       })
