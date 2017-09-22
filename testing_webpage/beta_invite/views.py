@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 
 from django.shortcuts import render
-from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser, Bullet, BulletType, Test, Question, Survey
+from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser, Bullet, BulletType, Test, Question, Survey, Score
 from ipware.ip import get_ip
 from beta_invite import constants as cts
 from beta_invite.util import email_sender
@@ -495,11 +495,18 @@ def get_test_result(request):
 
             survey.save()
 
-        test_score = text_analizer.handle_division_by_zero(result, total)
+        test_score = text_analizer.handle_division_by_zero(result, total)*100
+
+        score = Score(test_id=test_id,
+                      value=test_score)
+        if user_id != '':
+            score.user_id = int(user_id)
+        score.save()
+
         scores.append(test_score)
 
-    # simple average and to percentage
-    final_score = average_list(scores)*100
+    # simple average and percentage
+    final_score = average_list(scores)
     cut_score = average_list(cut_scores)
 
     if final_score >= cut_score:  # passes
