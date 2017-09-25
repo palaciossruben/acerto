@@ -23,9 +23,19 @@
     "model": "dashboard.state",
     "pk": 3,
     "fields":{
-      "name": "Waiting for Interview/Tests/CV",
-      "code": "WITC",
+      "name": "Waiting for Tests",
+      "code": "WFT",
       "priority":3,
+      "is_rejected": false
+    }
+  },
+  {
+    "model": "dashboard.state",
+    "pk": 8,
+    "fields":{
+      "name": "Waiting for Interview",
+      "code": "WFI",
+      "priority":4,
       "is_rejected": false
     }
   },
@@ -33,9 +43,19 @@
     "model": "dashboard.state",
     "pk": 4,
     "fields":{
-      "name": "Rejected on Interview/Tests",
-      "code": "RIT",
-      "priority":4,
+      "name": "Rejected on Tests",
+      "code": "ROT",
+      "priority":5,
+      "is_rejected": true
+    }
+  },
+  {
+    "model": "dashboard.state",
+    "pk": 9,
+    "fields":{
+      "name": "Rejected on Interview",
+      "code": "ROI",
+      "priority":6,
       "is_rejected": true
     }
   },
@@ -45,7 +65,7 @@
     "fields":{
       "name": "Sent to client",
       "code": "STC",
-      "priority":6,
+      "priority":8,
       "is_rejected": false
     }
   },
@@ -55,7 +75,7 @@
     "fields":{
       "name": "Rejected by client",
       "code": "RBC",
-      "priority":5,
+      "priority":7,
       "is_rejected": true
     }
   },
@@ -65,7 +85,7 @@
     "fields":{
       "name": "Got the job",
       "code": "GTJ",
-      "priority":7,
+      "priority":9,
       "is_rejected": false
     }
   }

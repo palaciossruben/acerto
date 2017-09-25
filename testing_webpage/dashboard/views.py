@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from beta_invite.models import Campaign, User
+from beta_invite.models import Campaign, User, Evaluation
 from dashboard.models import State, Candidate
 from dashboard import constants as cts
 from beta_invite.util import email_sender
@@ -15,17 +15,46 @@ def index(request):
     return render(request, cts.MAIN_DASHBOARD, {'campaigns': campaigns})
 
 
+def is_their_a_passing_evaluation(evaluations):
+    """
+    Tries to find a passed evaluation.
+    Args:
+        evaluations: Collection of Evaluation objects.
+    Returns: Boolean
+    """
+    for e in evaluations:
+        if e.passed:
+            return True
+
+    return False
+
+
 def fill_in_missing_candidates(users, campaign_id):
     """
     Args:
         users: List of object User
         campaign_id: int id
-    Returns: None, just fills into DB missing Candidates. Every new Candidate is created on the default state.
+    Returns: None, just fills into DB missing Candidates. Every new Candidate is created on the default state or in the
+    WFI state.
     """
     for u in users:
+
         candidates = Candidate.objects.filter(campaign_id=campaign_id, user_id=u.id)
+
+        # Fills in only missing candidates.
         if len(candidates) == 0:
-            Candidate(campaign_id=campaign_id, user_id=u.id).save()
+
+            # Gets any evaluations, and if passed starts on the Waiting for Interview state.
+            evaluations = Evaluation.objects.filter(campaign_id=campaign_id, user_id=u.id)
+            if len(evaluations) > 0:
+                if is_their_a_passing_evaluation(evaluations):
+                    Candidate(campaign_id=campaign_id, user_id=u.id, state=State.objects.get(code='WFI')).save()
+                else:
+                    # When fails, then we give the chance of presenting again.
+                    Candidate(campaign_id=campaign_id, user_id=u.id, state=State.objects.get(code='WFT')).save()
+            else:
+                # Starts on Backlog default state, when no evaluation has been done.
+                Candidate(campaign_id=campaign_id, user_id=u.id).save()
 
 
 def get_checked_box_users(campaign_id, request):
@@ -107,16 +136,17 @@ def get_rendering_data(campaign_id):
 
     # TODO: recycle business search. Lot of work here: has to search according to campaign specification (education, profession, etc)
     # Orders by desc priority field on the state object.
-    backlog_candidates = get_candidates_from_state('BL', campaign_id)
-    waiting_candidates = get_candidates_from_state('WITC', campaign_id)
-    sent_to_client_candidates = get_candidates_from_state('STC', campaign_id)
-    got_job_candidates = get_candidates_from_state('GTJ', campaign_id)
+    backlog = get_candidates_from_state('BL', campaign_id)
+    waiting_tests = get_candidates_from_state('WFT', campaign_id)
+    waiting_interview = get_candidates_from_state('WFI', campaign_id)
+    sent_to_client = get_candidates_from_state('STC', campaign_id)
+    got_job = get_candidates_from_state('GTJ', campaign_id)
 
     rejected_candidates = Candidate.objects.filter(campaign_id=campaign_id,
                                                    state__is_rejected=True,
                                                    removed=False).order_by('-state__priority')
 
-    return backlog_candidates, waiting_candidates, sent_to_client_candidates, got_job_candidates, rejected_candidates, State.objects.all()
+    return backlog, waiting_tests, waiting_interview, sent_to_client, got_job, rejected_candidates, State.objects.all()
 
 
 def update_candidate(request, candidate):
@@ -162,7 +192,7 @@ def campaign_edit(request, pk):
                           with_localization=False,
                           body_is_filename=False)
 
-    backlog, waiting, sent_to_client, got_job, rejected, states = get_rendering_data(pk)
+    backlog, waiting_tests, waiting_interview, sent_to_client, got_job, rejected, states = get_rendering_data(pk)
 
     # all campaigns except the current one.
     campaigns_to_move_to = Campaign.objects.exclude(pk=pk)
@@ -170,7 +200,8 @@ def campaign_edit(request, pk):
     return render(request, cts.DASHBOARD_EDIT, {'states': states,
                                                 'campaign_id': pk,
                                                 'backlog': backlog,
-                                                'waiting': waiting,
+                                                'waiting_tests': waiting_tests,
+                                                'waiting_interview': waiting_interview,
                                                 'sent_to_client': sent_to_client,
                                                 'got_job': got_job,
                                                 'rejected': rejected,

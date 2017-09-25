@@ -39,14 +39,27 @@
                     </div>
                     <div class="col-sm-4">
 
-                        <h3>Waiting</h3>
+                        <h3>Waiting for Tests</h3>
                         <br>
 
-                        {% for candidate in waiting %}
+                        {% for candidate in waiting_tests %}
                             {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns%}
                         {% endfor %}
 
                     </div>
+                    <div class="col-sm-4">
+
+                        <h3>Waiting for Interview</h3>
+                        <br>
+
+                        {% for candidate in waiting_interview %}
+                            {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns%}
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top:45px;">
                     <div class="col-sm-4">
 
                         <h3>Sent To Client</h3>
@@ -57,9 +70,7 @@
                         {% endfor %}
 
                     </div>
-                </div>
 
-                <div class="row" style="margin-top:45px;">
                     <div class="col-sm-4">
 
                         <h3>Got Job</h3>
