@@ -1,66 +1,105 @@
 <!--TODO: put it on the head-->
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-<script type="text/javascript" src="{% static 'js/edit.js' %}" async></script>
 
-<form action="../dashboard/" method="post"
-       enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="submit" value="HOME">
-</form>
+<head>
 
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'js/edit.js' %}" async></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/edit.css' %}">
 
-<h1>{{ current_campaign.name }} Candidates</h1>
-<ul>
-
-    <!--TODO: refactor HTML-->
-    <form action="#" method="post" id="main_form_id"
-       enctype="multipart/form-data">
-
+    <form action="../dashboard/" method="post"
+           enctype="multipart/form-data">
         {% csrf_token %}
+        <input type="submit" value="HOME">
+    </form>
 
-        <div class="row" style="margin-top:45px;">
+</head>
 
-            <div class="col-sm-6">
+<body>
 
-                <h3>Ongoing</h3>
-                <br>
+    <h1>{{ current_campaign.name }} Candidates</h1>
+    <ul>
 
-                {% for candidate in candidates %}
-                    {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns%}
-                {% endfor %}
+        <form action="#" method="post" id="main_form_id"
+           enctype="multipart/form-data">
 
-            </div>
-            <div class="col-sm-6">
+            {% csrf_token %}
 
-                <h3>Rejected</h3>
-                <br>
+                <div class="row" style="margin-top:45px;">
 
-                {% for candidate in rejected_candidates %}
-                    {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns%}
-                {% endfor %}
-            </div>
-        </div>
+                    <div class="col-sm-4">
 
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <hr>
-        <br>
-        <br>
+                        <h3>Backlog</h3>
+                        <br>
 
-        <h3>Send customized mail</h3>
+                        {% for candidate in backlog %}
+                            {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns%}
+                        {% endfor %}
 
-        <input name="email_subject" style="width:32.5%"
-            value="Status de tu aplicación a {campaign_name} con PeakU">{{ candidate.comment }}</input>
+                    </div>
+                    <div class="col-sm-4">
 
-        <br>
-        <br>
+                        <h3>Waiting</h3>
+                        <br>
 
-        <textarea name="email_body" cols="60" rows="20"
-            placeholder="mail body, use tags {name}, {campaign_name} to customize" >
+                        {% for candidate in waiting %}
+                            {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns%}
+                        {% endfor %}
+
+                    </div>
+                    <div class="col-sm-4">
+
+                        <h3>Sent To Client</h3>
+                        <br>
+
+                        {% for candidate in sent_to_client %}
+                            {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns%}
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top:45px;">
+                    <div class="col-sm-4">
+
+                        <h3>Got Job</h3>
+                        <br>
+
+                        {% for candidate in got_job %}
+                            {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns%}
+                        {% endfor %}
+
+                    </div>
+                    <div class="col-sm-4">
+
+                        <h3>Rejected</h3>
+                        <br>
+
+                        {% for candidate in rejected %}
+                            {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns%}
+                        {% endfor %}
+                    </div>
+                </div>
+
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <hr>
+            <br>
+            <br>
+
+            <h3>Send customized mail</h3>
+
+            <input name="email_subject" style="width:32.5%"
+                value="Status de tu aplicación a {campaign_name} con PeakU">{{ candidate.comment }}</input>
+
+            <br>
+            <br>
+
+            <textarea name="email_body" cols="60" rows="20"
+                placeholder="mail body, use tags {name}, {campaign_name} to customize" >
 {name},
 
 write here ...
@@ -70,13 +109,17 @@ Saludos
 Santiago
 santiago@peaku.co
 PeakU
-        </textarea>
+            </textarea>
 
-        <br>
+            <br>
 
-        <input type="submit" name="send_mail" value="Send_email">
+            <input type="submit" name="send_mail" value="Send_email">
 
-    </form>
-</ul>
+        </form>
 
-<a href="new">Add Candidate</a>
+    </ul>
+
+    <a href="new">Add Candidate</a>
+
+
+</body>

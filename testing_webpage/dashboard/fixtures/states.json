@@ -4,6 +4,7 @@
     "pk": 1,
     "fields":{
       "name": "Backlog",
+      "code": "BL",
       "priority":10,
       "is_rejected": false
     }
@@ -13,6 +14,7 @@
     "pk": 2,
     "fields":{
       "name": "Screening rejected",
+      "code": "SR",
       "priority":1,
       "is_rejected": true
     }
@@ -21,7 +23,8 @@
     "model": "dashboard.state",
     "pk": 3,
     "fields":{
-      "name": "Waiting for Interview/tests/CV",
+      "name": "Waiting for Interview/Tests/CV",
+      "code": "WITC",
       "priority":3,
       "is_rejected": false
     }
@@ -30,7 +33,8 @@
     "model": "dashboard.state",
     "pk": 4,
     "fields":{
-      "name": "Rejected on Interview/tests",
+      "name": "Rejected on Interview/Tests",
+      "code": "RIT",
       "priority":4,
       "is_rejected": true
     }
@@ -40,6 +44,7 @@
     "pk": 5,
     "fields":{
       "name": "Sent to client",
+      "code": "STC",
       "priority":6,
       "is_rejected": false
     }
@@ -49,6 +54,7 @@
     "pk": 6,
     "fields":{
       "name": "Rejected by client",
+      "code": "RBC",
       "priority":5,
       "is_rejected": true
     }
@@ -58,6 +64,7 @@
     "pk": 7,
     "fields":{
       "name": "Got the job",
+      "code": "GTJ",
       "priority":7,
       "is_rejected": false
     }
