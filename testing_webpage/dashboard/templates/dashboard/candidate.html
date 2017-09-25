@@ -21,7 +21,7 @@
 
 <br>
 
-<textarea name="{{ candidate.id }}_comment" cols="60" rows="5"
+<textarea name="{{ candidate.id }}_comment" cols="40" rows="5"
 placeholder="add a comment!">{{ candidate.comment }}</textarea>
 
 <br>
@@ -47,6 +47,8 @@ placeholder="add a comment!">{{ candidate.comment }}</textarea>
 <input type="button" class="btn btn-primary" name="add_to_campaign" value="Add" onclick="send_additional_params_in_form('{{ candidate.id }}', 'add')">
 <p style="display: inline;"><strong>or</strong></p>
 <input type="button" class="btn btn-primary" name="move_to_campaign" value="Move" onclick="send_additional_params_in_form({{ candidate.id }}, 'move')">
+<br>
+<br>
 <p style="display: inline;"><strong>to</strong></p>
 
 <select class="selectpicker" name="{{ candidate.id }}_selected_campaign" >

@@ -87,6 +87,13 @@ def remove_candidate(candidate):
         return False
 
 
+def get_candidates_from_state(state_code, campaign_id):
+    return Candidate.objects.filter(campaign_id=campaign_id,
+                                    state__is_rejected=False,
+                                    state=State.objects.get(code=state_code),
+                                    removed=False).order_by('-state__priority')
+
+
 def get_rendering_data(campaign_id):
     """
     Args:
@@ -100,15 +107,16 @@ def get_rendering_data(campaign_id):
 
     # TODO: recycle business search. Lot of work here: has to search according to campaign specification (education, profession, etc)
     # Orders by desc priority field on the state object.
-    candidates = Candidate.objects.filter(campaign_id=campaign_id,
-                                          state__is_rejected=False,
-                                          removed=False).order_by('-state__priority')
+    backlog_candidates = get_candidates_from_state('BL', campaign_id)
+    waiting_candidates = get_candidates_from_state('WITC', campaign_id)
+    sent_to_client_candidates = get_candidates_from_state('STC', campaign_id)
+    got_job_candidates = get_candidates_from_state('GTJ', campaign_id)
 
     rejected_candidates = Candidate.objects.filter(campaign_id=campaign_id,
                                                    state__is_rejected=True,
                                                    removed=False).order_by('-state__priority')
 
-    return candidates, rejected_candidates, State.objects.all()
+    return backlog_candidates, waiting_candidates, sent_to_client_candidates, got_job_candidates, rejected_candidates, State.objects.all()
 
 
 def update_candidate(request, candidate):
@@ -154,15 +162,18 @@ def campaign_edit(request, pk):
                           with_localization=False,
                           body_is_filename=False)
 
-    candidates, rejected_candidates, states = get_rendering_data(pk)
+    backlog, waiting, sent_to_client, got_job, rejected, states = get_rendering_data(pk)
 
     # all campaigns except the current one.
     campaigns_to_move_to = Campaign.objects.exclude(pk=pk)
 
     return render(request, cts.DASHBOARD_EDIT, {'states': states,
                                                 'campaign_id': pk,
-                                                'candidates': candidates,
-                                                'rejected_candidates': rejected_candidates,
+                                                'backlog': backlog,
+                                                'waiting': waiting,
+                                                'sent_to_client': sent_to_client,
+                                                'got_job': got_job,
+                                                'rejected': rejected,
                                                 'campaigns': campaigns_to_move_to,
                                                 'current_campaign': Campaign.objects.get(pk=pk)
                                                 })
