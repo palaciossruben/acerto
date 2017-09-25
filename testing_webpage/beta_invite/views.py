@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 
 from django.shortcuts import render
-from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser, Bullet, BulletType, Test, Question, Survey, Score
+from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser, Bullet, BulletType, Test, Question, Survey, Score, Evaluation
 from ipware.ip import get_ip
 from beta_invite import constants as cts
 from beta_invite.util import email_sender
@@ -509,7 +509,14 @@ def get_test_result(request):
     final_score = average_list(scores)
     cut_score = average_list(cut_scores)
 
-    if final_score >= cut_score:  # passes
+    evaluation = Evaluation(user_id=user_id,
+                            campaign=campaign,
+                            cut_score=cut_score,
+                            final_score=final_score)
+
+    evaluation.save()
+
+    if evaluation.passed:
         return render(request, cts.MEET_VIEW_PATH, {'main_message': _("Discover your true passion"),
                                                     'secondary_message': _("We search millions of jobs and find the right one for you"),
                                                     })

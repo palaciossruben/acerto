@@ -275,3 +275,35 @@ class Score(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'scores'
+
+
+class Evaluation(models.Model):
+    """
+    Summary of all tests results for a given user.
+    """
+
+    user = models.ForeignKey(User)
+    campaign = models.ForeignKey(Campaign)
+    cut_score = models.FloatField()
+    final_score = models.FloatField()
+    passed = models.BooleanField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    # When saving will assign assign the passed Boolean.
+    def save(self, *args, **kwargs):
+        if self.passed is None:
+            self.passed = (self.final_score >= self.cut_score)
+        super(Evaluation, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return 'id={0}, user={1}, cut_score={2}, value={3}, passed={4}'.format(self.id,
+                                                                               self.user,
+                                                                               self.cut_score,
+                                                                               self.final_score,
+                                                                               self.passed)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'evaluations'
