@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-22 04:41+0000\n"
+"POT-Creation-Date: 2017-09-26 00:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,13 +19,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: beta_invite/templates/beta_invite/fast_job.html:99
-#: beta_invite/templates/beta_invite/long_form.html:146
+#: beta_invite/templates/beta_invite/long_form.html:147
 msgid "Apply Now!"
 msgstr "¡Aplica Ahora!"
 
 #: beta_invite/templates/beta_invite/fast_job.html:112
 #: beta_invite/templates/beta_invite/index.html:87
-#: beta_invite/templates/beta_invite/long_form.html:156
+#: beta_invite/templates/beta_invite/long_form.html:157
 #: business/templates/business/index.html:216
 #: business/templates/business/search.html:213
 #: business/templates/business/search_trade.html:194
@@ -36,7 +36,7 @@ msgstr "Tu Nombre Completo"
 
 #: beta_invite/templates/beta_invite/fast_job.html:119
 #: beta_invite/templates/beta_invite/index.html:94
-#: beta_invite/templates/beta_invite/long_form.html:163
+#: beta_invite/templates/beta_invite/long_form.html:164
 #: business/templates/business/index.html:221
 #: business/templates/business/login.html:92
 #: business/templates/business/search.html:220
@@ -47,6 +47,7 @@ msgid "Your email"
 msgstr "Tu correo"
 
 #: beta_invite/templates/beta_invite/fast_job.html:126
+#: beta_invite/templates/beta_invite/long_form.html:171
 #: business/templates/business/search.html:227
 #: business/templates/business/search_trade.html:208
 #: business/templates/business/signup.html:136
@@ -54,7 +55,7 @@ msgid "Your phone"
 msgstr "Tu teléfono"
 
 #: beta_invite/templates/beta_invite/fast_job.html:135
-#: beta_invite/templates/beta_invite/long_form.html:172
+#: beta_invite/templates/beta_invite/long_form.html:181
 msgid "Select Country"
 msgstr "Selecciona tu País"
 
@@ -68,7 +69,7 @@ msgstr "Describe lo que haces."
 
 #: beta_invite/templates/beta_invite/fast_job.html:160
 #: beta_invite/templates/beta_invite/index.html:113
-#: beta_invite/templates/beta_invite/long_form.html:221
+#: beta_invite/templates/beta_invite/long_form.html:237
 #: business/templates/business/index.html:236
 #: business/templates/business/trade_client.html:155
 msgid "Sure!"
@@ -103,35 +104,39 @@ msgid "Subscribe"
 msgstr "Suscríbete"
 
 #: beta_invite/templates/beta_invite/index.html:103
-#: beta_invite/templates/beta_invite/long_form.html:203
+#: beta_invite/templates/beta_invite/long_form.html:212
 msgid "Upload your resume"
 msgstr "Sube tu curriculum"
 
-#: beta_invite/templates/beta_invite/long_form.html:113
+#: beta_invite/templates/beta_invite/long_form.html:114
 msgid "Perks"
 msgstr "Beneficios"
 
-#: beta_invite/templates/beta_invite/long_form.html:132
+#: beta_invite/templates/beta_invite/long_form.html:133
 msgid "Don't want to apply to this position?"
 msgstr "¿No quieres aplicar a esta posición?"
 
-#: beta_invite/templates/beta_invite/long_form.html:135
+#: beta_invite/templates/beta_invite/long_form.html:136
 msgid "Apply to general position!"
 msgstr "¡Aplicar a una posición general!"
 
-#: beta_invite/templates/beta_invite/long_form.html:182
+#: beta_invite/templates/beta_invite/long_form.html:191
 msgid "Select Education"
 msgstr "Selecciona tu Educación"
 
-#: beta_invite/templates/beta_invite/long_form.html:192
+#: beta_invite/templates/beta_invite/long_form.html:201
 msgid "Select Profession"
 msgstr "Selecciona tu Profesión"
 
-#: beta_invite/templates/beta_invite/long_form.html:214
+#: beta_invite/templates/beta_invite/long_form.html:223
 #: business/templates/business/post_job.html:157
 #: business/templates/business/search.html:182
 msgid "Experience in years:"
 msgstr "Experiencia en años:"
+
+#: beta_invite/templates/beta_invite/long_form.html:232
+msgid "Authorized third parties can see this information."
+msgstr "Terceros autorizados pueden ver esta información."
 
 #: beta_invite/templates/beta_invite/meet.html:77
 msgid ""
@@ -153,42 +158,42 @@ msgstr "O contactame en santiago@peaku.co, skype: reclutamiento@peaku.co"
 msgid "Thanks for registering!"
 msgstr "¡Gracias por registrarte!"
 
-#: beta_invite/templates/beta_invite/test.html:96
+#: beta_invite/templates/beta_invite/test.html:97
 msgid "Complete this few questions to know you better"
 msgstr "Completa estas preguntas para conocerte mejor"
 
-#: beta_invite/templates/beta_invite/test.html:102
+#: beta_invite/templates/beta_invite/test.html:103
 msgid "Test: "
 msgstr "Prueba: "
 
-#: beta_invite/templates/beta_invite/test.html:121
+#: beta_invite/templates/beta_invite/test.html:122
 msgid "Your Answer"
 msgstr "Tu Respuesta"
 
-#: beta_invite/templates/beta_invite/test.html:133
+#: beta_invite/templates/beta_invite/test.html:134
 msgid "Send Answers!!!"
 msgstr "¡Envia las Respuestas!"
 
-#: beta_invite/templates/beta_invite/test.html:140
+#: beta_invite/templates/beta_invite/test.html:141
 #: business/templates/business/contact.html:100
 msgid "We will contact you soon"
 msgstr "Nos pondremos en contacto pronto"
 
-#: beta_invite/views.py:111 beta_invite/views.py:237 beta_invite/views.py:341
-#: beta_invite/views.py:482 beta_invite/views.py:486
+#: beta_invite/views.py:111 beta_invite/views.py:237 beta_invite/views.py:310
+#: beta_invite/views.py:521 beta_invite/views.py:525
 msgid "Discover your true passion"
 msgstr "Descubre tu verdadera pasión"
 
-#: beta_invite/views.py:112 beta_invite/views.py:342 beta_invite/views.py:371
-#: beta_invite/views.py:439 beta_invite/views.py:483 beta_invite/views.py:487
+#: beta_invite/views.py:112 beta_invite/views.py:311 beta_invite/views.py:380
+#: beta_invite/views.py:448 beta_invite/views.py:522 beta_invite/views.py:526
 msgid "We search millions of jobs and find the right one for you"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
 
-#: beta_invite/views.py:337 business/views.py:374 business/views.py:577
+#: beta_invite/views.py:351 business/views.py:374 business/views.py:577
 msgid "Welcome to PeakU"
 msgstr "Bienvenido a PeakU"
 
-#: beta_invite/views.py:370 beta_invite/views.py:438
+#: beta_invite/views.py:379 beta_invite/views.py:447
 msgid "Find a job now"
 msgstr "Encuentra trabajo ya"
 
