@@ -6,12 +6,24 @@
 <br>
 
 <p><strong>email:</strong> {{ candidate.user.email }}</p>
-<p><strong>phone:</strong> {{ candidate.user.phone }}</p>
-{% if candidate.user.curriculum_url != '#' %}
-    <p><strong>cv:</strong> <a href="http://peaku.co/static/{{ candidate.user.curriculum_url }}">link</a></p>
+<p><strong>phone:</strong>
+{% if candidate.user.phone is None %}
+    not available
 {% else %}
-    <p><strong>cv:</strong> not available (<a href="http://peaku.co/request_cv/{{ candidate.user.id }}">request</a>)</p>
+    {{ candidate.user.phone }}
 {% endif %}
+</p>
+
+<p> <strong>cv:</strong>
+{% if candidate.user.curriculum_url != '#' %}
+    <a href="http://peaku.co/static/{{ candidate.user.curriculum_url }}">link</a>
+{% else %}
+    not available
+{% endif %}
+<input type="file" name="{{ candidate.id }}_curriculum" id="curriculum">
+</p>
+
+
 <p><strong>country: </strong>{{ candidate.user.country.name }}</p>
 <p><strong>profession: </strong>{{ candidate.user.profession.name }}</p>
 <p><strong>education: </strong>{{ candidate.user.education.name }}</p>

@@ -33,18 +33,20 @@ def rename_filename(filename):
     return remove_accents(filename)
 
 
-def save_curriculum_from_request(request, user):
+def save_curriculum_from_request(request, user, param_name):
     """
     Saves file on machine resumes/* file system
     Args:
         request: HTTP request
+        user: Object
+        param_name: string, name of File on the request
     Returns: file url or None if nothing is saves.
     """
 
     # validate correct method and has file.
-    if request.method == 'POST' and len(request.FILES) != 0:
+    if request.method == 'POST' and len(request.FILES) != 0 and request.FILES[param_name] is not None:
 
-        curriculum_file = request.FILES['curriculum']
+        curriculum_file = request.FILES[param_name]
         fs = FileSystemStorage()
 
         user_id_folder = str(user.id)
@@ -97,7 +99,7 @@ def post_index(request):
 
     # Saves here to get an id
     user.save()
-    user.curriculum_url = save_curriculum_from_request(request, user)
+    user.curriculum_url = save_curriculum_from_request(request, user, 'curriculum')
     user.save()
 
     update_search_dictionary_on_background()
@@ -336,7 +338,7 @@ def post_long_form(request):
 
         # Saves here to get an id
         user.save()
-        user.curriculum_url = save_curriculum_from_request(request, user)
+        user.curriculum_url = save_curriculum_from_request(request, user, 'curriculum')
         user.save()
 
         params['user_id'] = user.id
