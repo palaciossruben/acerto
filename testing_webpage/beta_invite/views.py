@@ -322,6 +322,7 @@ def post_long_form(request):
 
         user = User(name=request.POST.get('name'),
                     email=request.POST.get('email'),
+                    phone=request.POST.get('phone'),
                     profession=profession,
                     education=education,
                     country=country,

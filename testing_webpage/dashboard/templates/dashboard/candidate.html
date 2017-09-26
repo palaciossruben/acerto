@@ -6,6 +6,7 @@
 <br>
 
 <p><strong>email:</strong> {{ candidate.user.email }}</p>
+<p><strong>phone:</strong> {{ candidate.user.phone }}</p>
 {% if candidate.user.curriculum_url != '#' %}
     <p><strong>cv:</strong> <a href="http://peaku.co/static/{{ candidate.user.curriculum_url }}">link</a></p>
 {% else %}
