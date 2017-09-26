@@ -34,6 +34,9 @@
         {% endif %}
     {% endfor %}
 
+<p><strong>Salary: </strong><input type="text" name="{{ candidate.id }}_salary" value="{{ candidate.salary }}"
+    placeholder="add salary"></p>
+
 <br>
 
 <input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}" />
