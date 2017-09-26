@@ -3,6 +3,7 @@ from beta_invite.models import Campaign, User, Evaluation
 from dashboard.models import State, Candidate
 from dashboard import constants as cts
 from beta_invite.util import email_sender
+from beta_invite.views import save_curriculum_from_request
 
 
 def index(request):
@@ -85,7 +86,7 @@ def add_candidate_to_campaign(request, candidate):
     Returns: Error message if user already is in campaign
     """
 
-    # Updates first, latest changes.
+    # Updates latest changes, first.
     update_candidate(request, candidate)
 
     selected_campaign_id = int(request.POST.get('{}_selected_campaign'.format(candidate.id)))
@@ -150,9 +151,21 @@ def get_rendering_data(campaign_id):
 
 
 def update_candidate(request, candidate):
+    """
+    Args:
+        request: HTTP
+        candidate: Object
+    Returns: Saves Candidate and optionally the curriculum.
+    """
     candidate.state_id = request.POST.get('{}_state'.format(candidate.id))
     candidate.comment = request.POST.get('{}_comment'.format(candidate.id))
     candidate.save()
+
+    filename = save_curriculum_from_request(request, candidate.user, '{}_curriculum'.format(candidate.id))
+
+    if filename != '#':
+        candidate.user.curriculum_url = filename
+        candidate.user.save()
 
 
 # TODO: use Ajax to optimize rendering. Has no graphics therefore is very low priority.
