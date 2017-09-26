@@ -53,7 +53,7 @@
                         <br>
 
                         {% for candidate in waiting_interview %}
-                            {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns%}
+                            {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns %}
                         {% endfor %}
 
                     </div>
@@ -66,7 +66,7 @@
                         <br>
 
                         {% for candidate in sent_to_client %}
-                            {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns%}
+                            {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns %}
                         {% endfor %}
 
                     </div>
@@ -77,7 +77,7 @@
                         <br>
 
                         {% for candidate in got_job %}
-                            {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns%}
+                            {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns %}
                         {% endfor %}
 
                     </div>
@@ -87,7 +87,7 @@
                         <br>
 
                         {% for candidate in rejected %}
-                            {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns%}
+                            {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns %}
                         {% endfor %}
                     </div>
                 </div>

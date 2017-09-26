@@ -512,12 +512,15 @@ def get_test_result(request):
     final_score = average_list(scores)
     cut_score = average_list(cut_scores)
 
-    evaluation = Evaluation(user_id=user_id,
-                            campaign=campaign,
+    evaluation = Evaluation(campaign=campaign,
                             cut_score=cut_score,
                             final_score=final_score)
 
     evaluation.save()
+
+    user = User.objects.get(pk=user_id)
+    user.evaluations.add(evaluation)
+    user.save()
 
     if evaluation.passed:
         return render(request, cts.MEET_VIEW_PATH, {'main_message': _("Discover your true passion"),
