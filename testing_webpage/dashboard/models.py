@@ -26,6 +26,7 @@ class Candidate(models.Model):
     state = models.ForeignKey(State, null=True, on_delete=models.SET_NULL, default=cts.DEFAULT_STATE)
     comment = models.CharField(max_length=10000, null=True, default='')
     removed = models.BooleanField(default=False)
+    salary = models.CharField(max_length=100, default='')
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

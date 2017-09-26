@@ -158,6 +158,11 @@ def update_candidate(request, candidate):
     """
     candidate.state_id = request.POST.get('{}_state'.format(candidate.id))
     candidate.comment = request.POST.get('{}_comment'.format(candidate.id))
+
+    salary = request.POST.get('{}_salary'.format(candidate.id))
+    if salary is not None:
+        candidate.salary = salary
+
     candidate.save()
 
     filename = save_curriculum_from_request(request, candidate.user, '{}_curriculum'.format(candidate.id))
