@@ -187,6 +187,36 @@ class Campaign(models.Model):
         db_table = 'campaigns'
 
 
+class Evaluation(models.Model):
+    """
+    Summary of all tests results for a given user.
+    """
+
+    campaign = models.ForeignKey(Campaign)
+    cut_score = models.FloatField()
+    final_score = models.FloatField()
+    passed = models.BooleanField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    # When saving will assign the passed Boolean.
+    def save(self, *args, **kwargs):
+        if self.passed is None:
+            self.passed = (self.final_score >= self.cut_score)
+        super(Evaluation, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return 'id={0}, cut_score={1}, value={2}, passed={3}'.format(self.id,
+                                                                     self.cut_score,
+                                                                     self.final_score,
+                                                                     self.passed)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'evaluations'
+
+
 class User(models.Model):
 
     email = models.CharField(max_length=200)
@@ -201,6 +231,7 @@ class User(models.Model):
     curriculum_url = models.CharField(max_length=200, default='#')
     campaign = models.ForeignKey(Campaign, null=True)
     phone = models.CharField(max_length=40, null=True)
+    evaluations = models.ManyToManyField(Evaluation, null=True)
 
     # Detects if the user is in a mobile phone when registering.
     is_mobile = models.NullBooleanField()
@@ -276,35 +307,3 @@ class Score(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'scores'
-
-
-class Evaluation(models.Model):
-    """
-    Summary of all tests results for a given user.
-    """
-
-    user = models.ForeignKey(User)
-    campaign = models.ForeignKey(Campaign)
-    cut_score = models.FloatField()
-    final_score = models.FloatField()
-    passed = models.BooleanField()
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    # When saving will assign the passed Boolean.
-    def save(self, *args, **kwargs):
-        if self.passed is None:
-            self.passed = (self.final_score >= self.cut_score)
-        super(Evaluation, self).save(*args, **kwargs)
-
-    def __str__(self):
-        return 'id={0}, user={1}, cut_score={2}, value={3}, passed={4}'.format(self.id,
-                                                                               self.user,
-                                                                               self.cut_score,
-                                                                               self.final_score,
-                                                                               self.passed)
-
-    # adds custom table name
-    class Meta:
-        db_table = 'evaluations'

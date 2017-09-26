@@ -46,9 +46,8 @@ def fill_in_missing_candidates(users, campaign_id):
         if len(candidates) == 0:
 
             # Gets any evaluations, and if passed starts on the Waiting for Interview state.
-            evaluations = Evaluation.objects.filter(campaign_id=campaign_id, user_id=u.id)
-            if len(evaluations) > 0:
-                if is_their_a_passing_evaluation(evaluations):
+            if len(u.evaluations.all()) > 0:
+                if is_their_a_passing_evaluation(u.evaluations.all()):
                     Candidate(campaign_id=campaign_id, user_id=u.id, state=State.objects.get(code='WFI')).save()
                 else:
                     # When fails, then we give the chance of presenting again.

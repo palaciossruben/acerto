@@ -28,6 +28,12 @@
 <p><strong>profession: </strong>{{ candidate.user.profession.name }}</p>
 <p><strong>education: </strong>{{ candidate.user.education.name }}</p>
 
+    {% for e in candidate.user.evaluations.all %}
+        {% if candidate.campaign_id == e.campaign_id %}
+            <p><strong>test (cut: {{ e.cut_score }}): </strong> {{ e.final_score }}</p>
+        {% endif %}
+    {% endfor %}
+
 <br>
 
 <input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}" />
