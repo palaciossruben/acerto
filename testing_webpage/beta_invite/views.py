@@ -343,7 +343,7 @@ def post_long_form(request):
 
         params['user_id'] = user.id
 
-        update_search_dictionary_on_background()
+        #update_search_dictionary_on_background()
 
         try:
             email_body_name = 'user_signup_email_body'
@@ -353,6 +353,12 @@ def post_long_form(request):
             email_sender.send(user, request.LANGUAGE_CODE, email_body_name, _('Welcome to PeakU'))
         except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
             pass
+
+    else:
+        # Adds the user id to the params, to be able to track answers, later on.
+        user_id = request.GET.get('user_id')
+        if user_id is not None:
+            params['user_id'] = int(user_id)
 
     return render(request, cts.SUCCESS_VIEW_PATH, params)
 

@@ -73,6 +73,11 @@ def send_email(sender, recipients, subject, body, mail_gun_url, mailgun_api_key)
               "text": body})
 
 
+def get_test_url(user):
+    return 'http://peaku.co/beta_invite/long_form/post?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
+                                                                                                           campaign_id=user.campaign_id)
+
+
 def send(users, language_code, body_input, subject, with_localization=True, body_is_filename=True):
     """
     Sends an email
@@ -104,6 +109,7 @@ def send(users, language_code, body_input, subject, with_localization=True, body
                                         peaku_address=sender_data['peaku_address'],)
         else:
             body = body_input.format(name=get_first_name(user.name),
+                                     test_url=get_test_url(user),
                                      sender_name=sender_data['sender_name'],
                                      sender_position=sender_data['sender_position'],
                                      peaku_address=sender_data['peaku_address'],)
