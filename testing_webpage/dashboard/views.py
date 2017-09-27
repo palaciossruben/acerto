@@ -16,7 +16,7 @@ def index(request):
     return render(request, cts.MAIN_DASHBOARD, {'campaigns': campaigns})
 
 
-def is_their_a_passing_evaluation(evaluations):
+def has_passing_evaluation(evaluations):
     """
     Tries to find a passed evaluation.
     Args:
@@ -30,7 +30,47 @@ def is_their_a_passing_evaluation(evaluations):
     return False
 
 
-def fill_in_missing_candidates(users, campaign_id):
+def update_candidate_state(candidate, user):
+    """
+    Changes state if test were presented or have improved.
+    Args:
+        candidate: Object
+        user: Object
+    Returns: None, just updates
+    """
+
+    if len(user.evaluations.all()) > 0:
+
+        if has_passing_evaluation(user.evaluations.all()):
+            candidate.state = State.objects.get(code='WFI')
+            candidate.save()
+        else:  # Fails tests
+            candidate.state = State.objects.get(code='WFT')
+            candidate.save()
+
+
+def fill_in_missing_candidate(campaign_id, user):
+    """
+    Creates a new candidate, depending on several factors.
+    Args:
+        campaign_id: Campaign id, int
+        user: Object
+    Returns:
+    """
+
+    # Gets any evaluations, and if passed starts on the Waiting for Interview state.
+    if len(user.evaluations.all()) > 0:
+        if has_passing_evaluation(user.evaluations.all()):
+            Candidate(campaign_id=campaign_id, user_id=user.id, state=State.objects.get(code='WFI')).save()
+        else:
+            # When fails, then we give the chance of presenting again.
+            Candidate(campaign_id=campaign_id, user_id=user.id, state=State.objects.get(code='WFT')).save()
+    else:
+        # Starts on Backlog default state, when no evaluation has been done.
+        Candidate(campaign_id=campaign_id, user_id=user.id).save()
+
+
+def fill_and_update_candidates(users, campaign_id):
     """
     Args:
         users: List of object User
@@ -38,23 +78,16 @@ def fill_in_missing_candidates(users, campaign_id):
     Returns: None, just fills into DB missing Candidates. Every new Candidate is created on the default state or in the
     WFI state.
     """
-    for u in users:
+    for user in users:
 
-        candidates = Candidate.objects.filter(campaign_id=campaign_id, user_id=u.id)
+        candidates = Candidate.objects.filter(campaign_id=campaign_id, user_id=user.id)
 
-        # Fills in only missing candidates.
+        # Create
         if len(candidates) == 0:
-
-            # Gets any evaluations, and if passed starts on the Waiting for Interview state.
-            if len(u.evaluations.all()) > 0:
-                if is_their_a_passing_evaluation(u.evaluations.all()):
-                    Candidate(campaign_id=campaign_id, user_id=u.id, state=State.objects.get(code='WFI')).save()
-                else:
-                    # When fails, then we give the chance of presenting again.
-                    Candidate(campaign_id=campaign_id, user_id=u.id, state=State.objects.get(code='WFT')).save()
-            else:
-                # Starts on Backlog default state, when no evaluation has been done.
-                Candidate(campaign_id=campaign_id, user_id=u.id).save()
+            fill_in_missing_candidate(campaign_id, user)
+        else:  # Update
+            candidate = candidates.first()
+            update_candidate_state(candidate, user)
 
 
 def get_checked_box_users(campaign_id, request):
@@ -132,7 +165,7 @@ def get_rendering_data(campaign_id):
     # create missing candidates on the first try, that have not been removed previously
     users = User.objects.filter(campaign_id=campaign_id)
 
-    fill_in_missing_candidates(users, campaign_id)
+    fill_and_update_candidates(users, campaign_id)
 
     # TODO: recycle business search. Lot of work here: has to search according to campaign specification (education, profession, etc)
     # Orders by desc priority field on the state object.
