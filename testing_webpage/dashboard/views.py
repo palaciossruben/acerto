@@ -190,12 +190,11 @@ def update_candidate(request, candidate):
     Returns: Saves Candidate and optionally the curriculum.
     """
     candidate.state_id = request.POST.get('{}_state'.format(candidate.id))
-    #candidate.comment = request.POST.get('{}_comment'.format(candidate.id))
 
     text = request.POST.get('{}_comment'.format(candidate.id))
     if text is not None and text != '':
 
-        # erasing the old comment field, is done for retro-compatibility purposes only.
+        # Erasing the old comment field is done for retro-compatibility purposes only.
         candidate.comment = ''
 
         comment = Comment(text=text)
