@@ -23,10 +23,6 @@
 	  <!-- Google Analytics -->
 	  <script type="text/javascript" src="{% static 'js/google_analytics.js' %}" async></script>
 
-	  <!-- Search -->
-	  <!-- This cannot be loaded async, or a undefined function appears on production only: WTF-->
-	  <script type="text/javascript" src="{% static 'js/search.js' %}"></script>
-
       <!-- CSS -->
       <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
 
@@ -35,9 +31,6 @@
 
       <!-- Custom styles CSS -->
 	  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-
-	  <!-- Modal CSS -->
-      <link rel="stylesheet" type="text/css" href="{% static 'css/modal.css' %}">
 
       <!-- Favicons -->
       <link rel="apple-touch-icon" sizes="57x57" href="{% static 'beta_invite/favicon.ico/apple-icon-57x57.png' %}">
@@ -86,13 +79,6 @@
 		</div>
 		</noscript>
 
- 	  <!-- any incoming error_message will print as an alert.-->
-	<script>
-	    {% if error_message %}
-			alert("{{ error_message }}");
-		{% endif %}
-	</script>
-
  	{% if user.is_authenticated %}
 
 		{% trans "Log Out" as logout_value %}
@@ -132,10 +118,10 @@
 					<b style="font-weight:400; text-transform: uppercase;">{% trans "Search our Curriculum Database" %}</b>
 				</span>
 		   </span>
-			<div class="subscribe" data-sr="wait 0.5s, then enter bottom and move 40px over 1s" style="margin-top:-25px;">
+			<div class="subscribe" style="margin-top:-25px;">
 
 			   <form id="search_form" method="post" style="text-align:center; margin-top:0px;"
-			   enctype="multipart/form-data">
+			   enctype="multipart/form-data" action="{{ action_url }}">
 
 				{% csrf_token %}
 
@@ -189,82 +175,14 @@
 				{% trans "Search" as submit_value %}
 				<input style="height: 44px; border: solid 0px white; background:#F8E676; color:black; text-align:center;
 				 width: 81px; font-size: 16px; width: 266px; margin-bottom:40px; margin-top:35px; cursor:pointer;"
-				 type="submit" value="{{ submit_value }}" onsubmit="IncreaseCounter();">
+				 type="submit" value="{{ submit_value }}" >
 
 			  </form>
 
 			</div>
 		  </div>
 		  <br/>
-
-			<!-- The Modal -->
-			<div id="search_modal" class="modal">
-
-			  <!-- Modal content -->
-			  <div style="background-color:#F2F2F2" class="modal-content">
-				<span class="close">&times;</span>
-				<h1 style="font-size:17px; color:black; margin-bottom: 20px">{% trans "SignUp to continue using the app ;)" %}</h1>
-
-					<form action="{% url 'business:popup_signup' %}" method="post" style="text-align:center; margin-top:0px;"
-				   enctype="multipart/form-data">
-
-					{% csrf_token %}
-
-					{% trans "Your Full Name" as name_placeholder %}
-					<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:0px;
-					 border:solid 1px #F8E676; background-color:white; width: 250px;" id="name" type="text" name="name"
-					  placeholder="{{ name_placeholder }}" required="required" pattern="[A-Za-z\sáéíóúÑñÜü]{1,200}">
-
-					<br>
-
-					 {% trans "Your email" as email_placeholder %}
-					<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:15px;
-					 border:solid 1px #F8E676; background-color:white; width: 250px;" id="username" type="email" name="username"
-					  placeholder="{{ email_placeholder }}" required="required">
-
-					<br>
-
-					{% trans "Your phone" as phone_placeholder %}
-					<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:15px;
-					 border:solid 1px #F8E676; background-color:white; width: 250px;" id="phone" type="tel" name="phone"
-					  placeholder="{{ phone_placeholder }}" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
-
-					<br>
-
-					{% trans "Enter a password" as password1_placeholder %}
-					<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:15px;
-					 border:solid 1px #F8E676; background-color:white; width: 250px;" id="password1" type="password" name="password1"
-					  placeholder="{{ password1_placeholder }}" required="required">
-
-					<br>
-
-					{% trans "Confirm password" as password2_placeholder %}
-					<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:15px;
-					 border:solid 1px #F8E676; background-color:white; width: 250px;" id="password2" type="password" name="password2"
-					  placeholder="{{ password2_placeholder }}" required="required">
-
-					<br>
-
-					{% trans "Sign Up!" as submit_value %}
-					<input style="height: 44px; border: solid 0px white; background:#F8E676; color:black; text-align:center;
-					 width: 81px; font-size: 16px; width: 255px; margin-bottom:40px; margin-top:15px; cursor:pointer;" type="submit" value="{{ submit_value }}">
-
-				  </form>
-
-			  </div>
-
-			</div>
-
-			<!-- SignUp modal awful logic! -->
-			<script>
-			{% if user.is_authenticated %}
-				var is_authenticated = true;
-			{% else %}
-				var is_authenticated = false;
-			{% endif %}
-
-			SetSignUpModal(is_authenticated, "{{ action_url }}")
-			</script>
+		  <br/>
 
       </div>
 

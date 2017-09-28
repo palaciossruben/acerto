@@ -26,8 +26,8 @@
       <!-- CSS -->
       <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
 
-	  <!-- CSS -->
-      <link rel="stylesheet" type="text/css" href="{% static 'css/results.css' %}">
+	  <!-- Modal CSS -->
+      <link rel="stylesheet" type="text/css" href="{% static 'css/modal.css' %}">
 
       <!-- Bootstrap -->
       <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
@@ -37,6 +37,9 @@
 
       <!-- Custom styles CSS -->
 	  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+	  <!-- This cannot be loaded async, or a undefined function appears on production only: WTF-->
+	  <script type="text/javascript" src="{% static 'js/results.js' %}"></script>
 
       <!-- Favicons -->
       <link rel="apple-touch-icon" sizes="57x57" href="{% static 'beta_invite/favicon.ico/apple-icon-57x57.png' %}">
@@ -65,6 +68,13 @@
   </head>
 
  <body background="{% static 'beta_invite/bgg.jpg' %}">
+
+    <!-- any incoming error_message will print as an alert.-->
+	<script>
+	    {% if error_message %}
+			alert("{{ error_message }}");
+		{% endif %}
+	</script>
 
    <!-- BEGIN WELCOME -->
     <div class="welcome-section" id="top" style="">
@@ -112,6 +122,75 @@
 
 		  </div>
       </div>
+
+	<!-- The Modal -->
+	<div id="search_modal" class="modal">
+
+	  <!-- Modal content -->
+	  <div style="background-color:#F2F2F2" class="modal-content">
+		<span class="close">&times;</span>
+		<h1 style="font-size:17px; color:black; margin-bottom: 20px">{% trans "SignUp to continue using the app ;)" %}</h1>
+
+			<form action="{% url 'business:popup_signup' %}" method="post" style="text-align:center; margin-top:0px;"
+		   enctype="multipart/form-data" id="modal_form_id">
+
+			{% csrf_token %}
+
+			{% trans "Your Full Name" as name_placeholder %}
+			<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:0px;
+			 border:solid 1px #F8E676; background-color:white; width: 250px;" id="name" type="text" name="name"
+			  placeholder="{{ name_placeholder }}" required="required" pattern="[A-Za-z\sáéíóúÑñÜü]{1,200}">
+
+			<br>
+
+			 {% trans "Your email" as email_placeholder %}
+			<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:15px;
+			 border:solid 1px #F8E676; background-color:white; width: 250px;" id="username" type="email" name="username"
+			  placeholder="{{ email_placeholder }}" required="required">
+
+			<br>
+
+			{% trans "Your phone" as phone_placeholder %}
+			<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:15px;
+			 border:solid 1px #F8E676; background-color:white; width: 250px;" id="phone" type="tel" name="phone"
+			  placeholder="{{ phone_placeholder }}" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
+
+			<br>
+
+			{% trans "Enter a password" as password1_placeholder %}
+			<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:15px;
+			 border:solid 1px #F8E676; background-color:white; width: 250px;" id="password1" type="password" name="password1"
+			  placeholder="{{ password1_placeholder }}" required="required">
+
+			<br>
+
+			{% trans "Confirm password" as password2_placeholder %}
+			<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:15px;
+			 border:solid 1px #F8E676; background-color:white; width: 250px;" id="password2" type="password" name="password2"
+			  placeholder="{{ password2_placeholder }}" required="required">
+
+			<br>
+
+			{% trans "Sign Up!" as submit_value %}
+			<input style="height: 44px; border: solid 0px white; background:#F8E676; color:black; text-align:center;
+			 width: 81px; font-size: 16px; width: 255px; margin-bottom:40px; margin-top:15px; cursor:pointer;" type="submit" value="{{ submit_value }}" onclick="AddPath();">
+
+		  </form>
+
+	  </div>
+
+	</div>
+
+	<!-- SignUp modal awful logic! -->
+	<script>
+	{% if user.is_authenticated %}
+		var is_authenticated = true;
+	{% else %}
+		var is_authenticated = false;
+	{% endif %}
+
+	SetSignUpModal(is_authenticated);
+	</script>
 
       <!-- ARROW SCROLL-->
       <div class="arrow">
