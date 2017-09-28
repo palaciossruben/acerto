@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from beta_invite.models import Campaign, User, Evaluation
-from dashboard.models import State, Candidate
+from dashboard.models import State, Candidate, Comment
 from dashboard import constants as cts
 from beta_invite.util import email_sender
 from beta_invite.views import save_curriculum_from_request
@@ -190,7 +190,16 @@ def update_candidate(request, candidate):
     Returns: Saves Candidate and optionally the curriculum.
     """
     candidate.state_id = request.POST.get('{}_state'.format(candidate.id))
-    candidate.comment = request.POST.get('{}_comment'.format(candidate.id))
+
+    text = request.POST.get('{}_comment'.format(candidate.id))
+    if text is not None and text != '':
+
+        # Erasing the old comment field is done for retro-compatibility purposes only.
+        candidate.comment = ''
+
+        comment = Comment(text=text)
+        comment.save()
+        candidate.comments.add(comment)
 
     salary = request.POST.get('{}_salary'.format(candidate.id))
     if salary is not None:

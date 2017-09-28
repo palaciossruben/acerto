@@ -27,6 +27,7 @@
 <p><strong>country: </strong>{{ candidate.user.country.name }}</p>
 <p><strong>profession: </strong>{{ candidate.user.profession.name }}</p>
 <p><strong>education: </strong>{{ candidate.user.education.name }}</p>
+<p><strong>created_at: </strong>{{ candidate.user.created_at }}</p>
 
     {% for e in candidate.user.evaluations.all %}
         {% if candidate.campaign_id == e.campaign_id %}
@@ -40,6 +41,13 @@
 <br>
 
 <input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}" />
+
+<br>
+
+    {% for c in candidate.comments.all %}
+        <p><strong>{{ c.created_at }}</strong></p>
+        <p>{{ c.text }}</p>
+    {% endfor %}
 
 <br>
 
