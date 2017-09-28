@@ -287,11 +287,14 @@ def render_result(request, pk):
 
     search_obj = Search.objects.get(pk=pk)
     users = [User.objects.get(pk=u_id) for u_id in search_obj.user_ids]
+    params = {'main_message': _("Discover amazing people"),
+              'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
+              'users': users}
 
-    return render(request, cts.RESULTS_VIEW_PATH, {'main_message': _("Discover amazing people"),
-                                                   'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
-                                                   'users': users,
-                                                   })
+    if hasattr(request, 'error_message') and request.error_message is not None:
+        params['error_message'] = request.error_message
+
+    return render(request, cts.RESULTS_VIEW_PATH, params)
 
 
 def offer_detail(request):
@@ -308,8 +311,7 @@ def offer_detail(request):
         users = [User.objects.get(pk=u_id) for u_id in offer.user_ids]
         translate_users(users, request.LANGUAGE_CODE)
 
-        return render(request, cts.OFFER_RESULTS_VIEW_PATH, {'users': users,
-                                                             })
+        return render(request, cts.OFFER_RESULTS_VIEW_PATH, {'users': users})
 
     else:  # reloads home, if nothing found
         home(request)
@@ -368,9 +370,9 @@ def get_plan(request):
 def send_signup_emails(business_user, language_code):
 
     try:
-        email_sender.send(user=business_user,
+        email_sender.send(users=business_user,
                           language_code=language_code,
-                          body_filename='business_signup_email_body',
+                          body_input='business_signup_email_body',
                           subject=_('Welcome to PeakU'))
         email_sender.send_internal(contact=business_user,
                                    language_code=language_code,
@@ -455,23 +457,20 @@ def popup_signup(request):
 
     if signup_form.is_valid():
         first_sign_in(signup_form, request)
-        return redirect('business:search')
+        return redirect(request.POST.get('result_path'))
     else:
-
-        # Takes first element from the errors dictionary
         error_message = [m[0] for m in signup_form.errors.values()][0]
+        request.error_message = error_message
 
-        countries, education, professions = beta_invite.views.get_drop_down_values(request.LANGUAGE_CODE)
-        action_url = '/business/results'
-
-        return render(request, cts.SEARCH_VIEW_PATH, {'main_message': _("Discover amazing people"),
-                                                      'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
-                                                      'action_url': action_url,
-                                                      'countries': countries,
-                                                      'education': education,
-                                                      'professions': professions,
-                                                      'error_message': error_message,
-                                                      })
+        path = request.POST.get('result_path')
+        if path is not None:
+            # last part of url is result_id
+            result_id = int(path.split('/')[-1])
+            return render_result(request, result_id)
+        else:
+            # Defensive programming: not the best, but better than an error.
+            # We have lost the result_id
+            return redirect('business:search')
 
 
 @login_required
@@ -550,8 +549,7 @@ def offer_results(request):
           skills=get_skills(request),
           user_ids=user_ids,).save()
 
-    return render(request, cts.OFFER_RESULTS_VIEW_PATH, {'users': users,
-                                                         })
+    return render(request, cts.OFFER_RESULTS_VIEW_PATH, {'users': users})
 
 
 @login_required
