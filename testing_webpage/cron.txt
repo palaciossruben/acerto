@@ -1,1 +1,2 @@
 0 12 * * * python3 /home/ubuntu/acerto/testing_webpage/send_daily_report.py
+0 9 * * * cd /home/ubuntu/acerto/testing_webpage/subscribe/ && python3 document_reader.py >> document_parsing_log.txt && python3 search_engine.py >> document_parsing_log.txt
