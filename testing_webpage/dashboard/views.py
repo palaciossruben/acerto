@@ -33,13 +33,14 @@ def has_passing_evaluation(evaluations):
 def update_candidate_state(candidate, user):
     """
     Changes state if test were presented or have improved.
+    This only applies for new users that come from BL or WFT
     Args:
         candidate: Object
         user: Object
     Returns: None, just updates
     """
 
-    if len(user.evaluations.all()) > 0:
+    if len(user.evaluations.all()) > 0 and candidate.state.code in ['BL', 'WFT']:
 
         if has_passing_evaluation(user.evaluations.all()):
             candidate.state = State.objects.get(code='WFI')
@@ -202,7 +203,7 @@ def update_candidate(request, candidate):
         candidate.comments.add(comment)
 
     salary = request.POST.get('{}_salary'.format(candidate.id))
-    if salary is not None:
+    if salary is not None and salary != '':
         candidate.salary = salary
 
     candidate.save()
