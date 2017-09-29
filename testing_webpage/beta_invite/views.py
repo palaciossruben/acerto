@@ -524,9 +524,10 @@ def get_test_result(request):
 
     evaluation.save()
 
-    user = User.objects.get(pk=user_id)
-    user.evaluations.add(evaluation)
-    user.save()
+    if user_id != '':
+        user = User.objects.get(pk=user_id)
+        user.evaluations.add(evaluation)
+        user.save()
 
     if evaluation.passed:
         return render(request, cts.MEET_VIEW_PATH, {'main_message': _("Discover your true passion"),
