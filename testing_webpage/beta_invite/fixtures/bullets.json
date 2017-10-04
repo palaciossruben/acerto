@@ -385,5 +385,32 @@
       "name_es": "Ambiente descomplicado con mesa de futbolín y playstation",
       "bullet_type_id": 1
     }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 44,
+    "fields": {
+      "name": "You can test what you make, enjoy building a product for thousands of users everyday",
+      "name_es": "Puedes probar lo que haces, disfuta ",
+      "bullet_type_id": 1
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 45,
+    "fields": {
+      "name": "Every day we enjoy healthy for for free.",
+      "name_es": "Cada día disfrutamos comida sana grátis",
+      "bullet_type_id": 1
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 46,
+    "fields": {
+      "name": "Team work: Your colleagues are open and will always be ready to share knowledge and experiences.",
+      "name_es": "Trabajo en Equipo: Tus colegas estarán abiertos a compartir el conocimiento y sus experiencias.",
+      "bullet_type_id": 1
+    }
   }
 ]
