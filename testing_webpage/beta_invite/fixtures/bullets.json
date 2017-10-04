@@ -336,9 +336,54 @@
     "model": "beta_invite.bullet",
     "pk": 38,
     "fields": {
-      "name": "Excelent team player, has good social abilities",
-      "name_es": "Sabe trabajar en equipo y tiene excelentes habilidades sociales",
+      "name": "Excellent team player, has good social abilities",
+      "name_es": "Sabes trabajar en equipo y tienes excelentes habilidades sociales",
       "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 39,
+    "fields": {
+      "name": "Knows objective-C (Swift is a plus)",
+      "name_es": "Tienes conocimiento de objective-C (Swift es un plus)",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 40,
+    "fields": {
+      "name": "Experience working on production environments preferably with agile workflows",
+      "name_es": "Tienes experiencia trabajando en ambientes de producción con flujos de trabajo agiles preferiblemente",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 41,
+    "fields": {
+      "name": "1 optional remote working day",
+      "name_es": "1 día de trabajo remoto desde la casa (opcional)",
+      "bullet_type_id": 1
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 42,
+    "fields": {
+      "name": "Free code Fridays (20% of time to work on a open project related to the business)",
+      "name_es": "Trabajo libre los viernes (20% del tiempo libre para trabajar en un proyecto abierto que esté relacionado con el negocio)",
+      "bullet_type_id": 1
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 43,
+    "fields": {
+      "name": "Uncomplicated environment with foosball table and playstation",
+      "name_es": "Ambiente descomplicado con mesa de futbolín y playstation",
+      "bullet_type_id": 1
     }
   }
 ]
