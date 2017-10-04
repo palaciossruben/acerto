@@ -6,8 +6,6 @@ function addQuestion(){
     */
 
     // Number of inputs to create
-    //var number = document.getElementById("member").value;
-    // Container <div> where dynamic content will be placed
     var container = document.getElementById("question_container");
 
     // Append a node with a random text
@@ -25,10 +23,6 @@ function addQuestion(){
     remove_button.class = "btn btn-danger"
     remove_button.value = "Delete!"
     container.appendChild(remove_button);
-
-    //<input type="button" name="remove_from_campaign"
-    //onclick="send_additional_params_in_form({{ candidate.id }}, 'remove')">
-
 
     container.appendChild(remove_button);
     // Append a line break
