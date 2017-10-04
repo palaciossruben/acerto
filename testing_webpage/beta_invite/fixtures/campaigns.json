@@ -160,5 +160,23 @@
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.campaign",
+    "pk": 10,
+    "fields":{
+      "name": "iOS Developer",
+      "profession": null,
+      "education": null,
+      "country": null,
+      "description": "Work on a startup with a fast paced environment that has grown to millions of users. Solve the world's traffic issues, while enjoying time with a great and welcoming team.",
+      "description_es": "Trabaja en una startup con ambiente agil, que ha crecido a millones de usuarios. Resuelve el tráfico en latinoamerica, mientras distrutas el tiempo con un gran equipo.",
+      "title": "iOS developer",
+      "title_es": "Desarrollador iOS",
+      "bullets": [7, 38, 39, 40, 41, 42, 43],
+      "tests": [],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
   }
 ]
