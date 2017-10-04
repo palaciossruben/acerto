@@ -1,10 +1,23 @@
 <h1>Campaigns</h1>
 <ul>
     {% for campaign in campaigns %}
-    <li>{{ campaign.name }}  :
-    <a href="{{ campaign.id }}">Edit</a>
-    </li>
+        <li>{{ campaign.name }}
+        <a href="campaign/{{ campaign.id }}">Edit</a>
+        </li>
     {% endfor %}
 </ul>
 
-<a href="new">New</a>
+<a href="new_campaign">New</a>
+
+<hr>
+
+<h1>Tests</h1>
+<ul>
+    {% for test in tests %}
+        <li>{{ test.name }}
+        <a href="test/{{ test.id }}">Edit</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<a href="test/new">New</a>
