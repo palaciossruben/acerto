@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from beta_invite.models import Campaign, User, Evaluation
+from beta_invite.models import Campaign, User, Evaluation, Test
 from dashboard.models import State, Candidate, Comment
 from dashboard import constants as cts
 from beta_invite.util import email_sender
@@ -13,7 +13,9 @@ def index(request):
     Returns: renders main view with a list of campaigns
     """
     campaigns = Campaign.objects.all()
-    return render(request, cts.MAIN_DASHBOARD, {'campaigns': campaigns})
+    tests = Test.objects.all()
+    return render(request, cts.MAIN_DASHBOARD, {'campaigns': campaigns,
+                                                'tests': tests})
 
 
 def has_passing_evaluation(evaluations):
@@ -216,7 +218,7 @@ def update_candidate(request, candidate):
 
 
 # TODO: use Ajax to optimize rendering. Has no graphics therefore is very low priority.
-def campaign_edit(request, pk):
+def edit_campaign(request, pk):
     """
     Args:
         request: HTTP
@@ -268,3 +270,13 @@ def campaign_edit(request, pk):
                                                 'campaigns': campaigns_to_move_to,
                                                 'current_campaign': Campaign.objects.get(pk=pk)
                                                 })
+
+
+def edit_test():
+    # TODO: implement
+    pass
+
+
+def new_test(request):
+    # TODO: implement
+    return render(request, cts.NEW_TEST, {})
