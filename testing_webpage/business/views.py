@@ -205,6 +205,26 @@ def print_sorted_iterator_on_debug(sorted_iterator):
         print(i)
 
 
+def get_filtered_users(country_id, profession_id, experience, education_id):
+    """
+    Filters users given certain conditions.
+    Args:
+        country_id: int
+        profession_id: int
+        experience: int
+        education_id: int
+    Returns:
+    """
+    # Get all education levels at or above.
+    education_level = Education.objects.get(pk=education_id)
+    education_set = Education.objects.filter(level__gte=education_level.level)
+
+    return User.objects.filter(country_id=country_id)\
+        .filter(profession_id=profession_id)\
+        .filter(experience__gte=experience)\
+        .filter(education__in=education_set)
+
+
 def get_matching_users(request):
     """
     DB matching between criteria and DB.
@@ -215,18 +235,11 @@ def get_matching_users(request):
 
     profession_id = request.POST.get('profession')
     education_id = request.POST.get('education')
-    education_level = Education.objects.get(pk=education_id)
-
-    # Get all education levels at or above the object.
-    education_set = Education.objects.filter(level__gte=education_level.level)
 
     country_id = request.POST.get('country')
     experience = request.POST.get('experience')
 
-    users = User.objects.filter(country_id=country_id)\
-        .filter(profession_id=profession_id)\
-        .filter(experience__gte=experience)\
-        .filter(education__in=education_set)
+    users = get_filtered_users(country_id, profession_id, experience, education_id)
 
     # Opens word_user_dict, or returns unordered users.
     try:
