@@ -5,18 +5,18 @@
     {% load static %}
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-    <script type="text/javascript" src="{% static 'js/edit_campaign.js' %}" async></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/edit.css' %}">
-
-    <form action="../dashboard/" method="post"
-           enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="submit" value="HOME">
-    </form>
+    <script type="text/javascript" src="{% static 'js/campaign/edit.js' %}" async></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/campaign/edit.css' %}">
 
 </head>
 
 <body>
+
+    <form action="../" method="post"
+           enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="submit" value="HOME">
+    </form>
 
     <h1>{{ current_campaign.name }} Candidates</h1>
     <ul>
@@ -34,7 +34,7 @@
                         <br>
 
                         {% for candidate in backlog %}
-                            {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns%}
+                            {% include "dashboard/campaign/candidate.html" with candidate=candidate campaigns=campaigns%}
                         {% endfor %}
 
                     </div>
@@ -44,7 +44,7 @@
                         <br>
 
                         {% for candidate in waiting_tests %}
-                            {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns%}
+                            {% include "dashboard/campaign/candidate.html" with candidate=candidate campaigns=campaigns%}
                         {% endfor %}
 
                     </div>
@@ -54,7 +54,7 @@
                         <br>
 
                         {% for candidate in waiting_interview %}
-                            {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns %}
+                            {% include "dashboard/campaign/candidate.html" with candidate=candidate campaigns=campaigns %}
                         {% endfor %}
 
                     </div>
@@ -67,7 +67,7 @@
                         <br>
 
                         {% for candidate in sent_to_client %}
-                            {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns %}
+                            {% include "dashboard/campaign/candidate.html" with candidate=candidate campaigns=campaigns %}
                         {% endfor %}
 
                     </div>
@@ -78,7 +78,7 @@
                         <br>
 
                         {% for candidate in got_job %}
-                            {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns %}
+                            {% include "dashboard/campaign/candidate.html" with candidate=candidate campaigns=campaigns %}
                         {% endfor %}
 
                     </div>
@@ -88,7 +88,7 @@
                         <br>
 
                         {% for candidate in rejected %}
-                            {% include "dashboard/candidate.html" with candidate=candidate campaigns=campaigns %}
+                            {% include "dashboard/campaign/candidate.html" with candidate=candidate campaigns=campaigns %}
                         {% endfor %}
                     </div>
                 </div>
