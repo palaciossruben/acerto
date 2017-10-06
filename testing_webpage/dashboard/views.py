@@ -1,9 +1,12 @@
-from django.shortcuts import render
-from beta_invite.models import Campaign, User, Evaluation, Test
+import re
+
+from django.core import serializers
+from django.shortcuts import render, redirect
+from beta_invite.models import Campaign, User, Evaluation, Test, BulletType, Bullet
 from dashboard.models import State, Candidate, Comment
 from dashboard import constants as cts
 from beta_invite.util import email_sender
-from beta_invite.views import save_curriculum_from_request
+from beta_invite.views import save_curriculum_from_request, get_drop_down_values
 
 
 def index(request):
@@ -280,3 +283,76 @@ def edit_test():
 def new_test(request):
     # TODO: implement
     return render(request, cts.NEW_TEST, {})
+
+
+def new_campaign(request):
+
+    countries, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
+
+    bullet_types_json = serializers.serialize("json", BulletType.objects.all())
+
+    return render(request, cts.NEW_CAMPAIGN, {'countries': countries,
+                                              'education': education,
+                                              'professions': professions,
+                                              'bullet_types_json': bullet_types_json,
+                                              })
+
+
+def create_campaign(request):
+
+    # saves to create id first.
+    campaign = Campaign()
+    campaign.save()
+
+    attributes = {}
+    bullets = {}
+    for key, value in request.POST.items():
+        attributes[key] = value
+
+        if hasattr(Campaign, key):
+            setattr(campaign, key, value)
+        elif 'bullet' in key:  # Special case
+
+            # TODO: how to update?
+
+            dict_id = int(re.findall('^\d+', key)[0])
+
+            if 'type' in key:
+
+                if dict_id in bullets.keys():
+                    b = bullets[dict_id]
+                    b.bullet_type_id = value
+                    b.save()
+                else:
+                    b = Bullet(bullet_type_id=value)
+                    b.save()
+                    bullets[dict_id] = b
+                    campaign.bullets.add(b)
+
+            elif re.match(r'.*bullet_name$', key):
+
+                if dict_id in bullets.keys():
+                    b = bullets[dict_id]
+                    b.name = value
+                    b.save()
+                else:
+                    b = Bullet(name=value)
+                    b.save()
+                    bullets[dict_id] = b
+                    campaign.bullets.add(b)
+
+            elif re.match(r'.*bullet_name_es$', key):
+
+                if dict_id in bullets.keys():
+                    b = bullets[dict_id]
+                    b.name_es = value
+                    b.save()
+                else:
+                    b = Bullet(name_es=value)
+                    b.save()
+                    bullets[dict_id] = b
+                    campaign.bullets.add(b)
+
+    campaign.save()
+
+    return redirect('../')
