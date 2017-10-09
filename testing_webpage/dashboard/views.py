@@ -221,7 +221,7 @@ def update_candidate(request, candidate):
 
 
 # TODO: use Ajax to optimize rendering. Has no graphics therefore is very low priority.
-def edit_campaign(request, pk):
+def edit_campaign_candidates(request, pk):
     """
     Args:
         request: HTTP
@@ -288,14 +288,85 @@ def new_test(request):
 def new_campaign(request):
 
     countries, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
-
     bullet_types_json = serializers.serialize("json", BulletType.objects.all())
 
     return render(request, cts.NEW_CAMPAIGN, {'countries': countries,
                                               'education': education,
                                               'professions': professions,
                                               'bullet_types_json': bullet_types_json,
+                                              'action_url': 'create',
+                                              'title': 'New Campaign',
                                               })
+
+
+def update_bullet_attr(campaign, dict_id, key_bullet_dict, value, attribute_name):
+    """
+    Uses meta-programing, and updates or creates new Bullet objects.
+    Args:
+        campaign: Object
+        dict_id: temporal id to distinguish between different new ids only.
+        key_bullet_dict: dictionary containing new stored bullets to add.
+        value:
+        attribute_name: the name of the Bullet object attribute.
+    Returns: None, just update
+    """
+    if dict_id in key_bullet_dict.keys():  # Updates bullet.
+        b = key_bullet_dict[dict_id]
+        setattr(b, attribute_name, value)
+        b.save()
+    else:  # creates new Bullet
+        b = Bullet(**{attribute_name: value})
+        b.save()
+        key_bullet_dict[dict_id] = b
+        campaign.bullets.add(b)
+
+
+def update_campaign(campaign, request):
+    """
+    Args:
+        campaign: Campaign Object
+        request: HTTP request
+    Returns: None, just updates the campaign object.
+    """
+    key_bullet_dict = {}
+    for key, value in request.POST.items():
+
+        if hasattr(Campaign, key):
+            setattr(campaign, key, value)
+
+        # When there is a new_bullet.
+        elif 'new_bullet' in key:
+
+            dict_id = int(re.findall('^\d+', key)[0])
+
+            if 'type' in key:
+                update_bullet_attr(campaign, dict_id, key_bullet_dict, value, 'bullet_type_id')
+
+            elif re.match(r'.*bullet_name$', key):
+                update_bullet_attr(campaign, dict_id, key_bullet_dict, value, 'name')
+
+            elif re.match(r'.*bullet_name_es$', key):
+                update_bullet_attr(campaign, dict_id, key_bullet_dict, value, 'name_es')
+
+        # updates existing bullets
+        elif re.search('\d+_bullet', key):
+
+            # gets the bullet id.
+            bullet_pk = int(re.findall(r'\d+', key)[0])
+            bullet = Bullet.objects.get(pk=bullet_pk)
+
+            if 'type' in key:
+                bullet.bullet_type_id = value
+
+            elif re.match(r'.*bullet_name$', key):
+                bullet.name = value
+
+            elif re.match(r'.*bullet_name_es$', key):
+                bullet.name_es = value
+
+            bullet.save()
+
+    campaign.save()
 
 
 def create_campaign(request):
@@ -304,55 +375,28 @@ def create_campaign(request):
     campaign = Campaign()
     campaign.save()
 
-    attributes = {}
-    bullets = {}
-    for key, value in request.POST.items():
-        attributes[key] = value
-
-        if hasattr(Campaign, key):
-            setattr(campaign, key, value)
-        elif 'bullet' in key:  # Special case
-
-            # TODO: how to update?
-
-            dict_id = int(re.findall('^\d+', key)[0])
-
-            if 'type' in key:
-
-                if dict_id in bullets.keys():
-                    b = bullets[dict_id]
-                    b.bullet_type_id = value
-                    b.save()
-                else:
-                    b = Bullet(bullet_type_id=value)
-                    b.save()
-                    bullets[dict_id] = b
-                    campaign.bullets.add(b)
-
-            elif re.match(r'.*bullet_name$', key):
-
-                if dict_id in bullets.keys():
-                    b = bullets[dict_id]
-                    b.name = value
-                    b.save()
-                else:
-                    b = Bullet(name=value)
-                    b.save()
-                    bullets[dict_id] = b
-                    campaign.bullets.add(b)
-
-            elif re.match(r'.*bullet_name_es$', key):
-
-                if dict_id in bullets.keys():
-                    b = bullets[dict_id]
-                    b.name_es = value
-                    b.save()
-                else:
-                    b = Bullet(name_es=value)
-                    b.save()
-                    bullets[dict_id] = b
-                    campaign.bullets.add(b)
-
-    campaign.save()
+    update_campaign(campaign, request)
 
     return redirect('../')
+
+
+def edit_campaign(request, pk):
+
+    campaign = Campaign.objects.get(pk=pk)
+
+    if request.method == "POST":
+        update_campaign(campaign, request)
+
+    countries, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
+    bullet_types = BulletType.objects.all()
+    bullet_types_json = serializers.serialize("json", bullet_types)
+
+    return render(request, cts.NEW_CAMPAIGN, {'countries': countries,
+                                              'education': education,
+                                              'professions': professions,
+                                              'bullet_types': bullet_types,
+                                              'bullet_types_json': bullet_types_json,
+                                              'campaign': campaign,
+                                              'action_url': '#',
+                                              'title': 'Update Campaign',
+                                              })

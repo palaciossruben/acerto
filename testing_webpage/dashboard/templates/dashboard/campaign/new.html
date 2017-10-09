@@ -9,69 +9,77 @@
 </head>
 <body>
 
-    <form style="margin-top: 40px; margin-left:40px;" action="create" method="post">
+    <form style="margin-top: 40px; margin-left:40px;" action="{{ action_url }}" method="post">
 
         {% csrf_token %}
 
-        <h1>New Campaign</h1>
+        <h1>{{ title }}</h1>
 
         <br>
         <br>
 
-        <input style="width: 250px;" type="text" name="name"
+        <input style="width: 250px;" type="text" name="name" value="{{ campaign.name }}"
           placeholder="Add internal campaign name in English" required="required">
 
         <br>
         <br>
 
-        <input style="width: 250px;" type="text" name="title"
+        <input style="width: 250px;" type="text" name="title" value="{{ campaign.title }}"
           placeholder="Add campaign title in English" required="required">
 
         <br>
         <br>
 
-        <input style="width: 250px;" type="text" name="title_es"
+        <input style="width: 250px;" type="text" name="title_es" value="{{ campaign.title_es }}"
           placeholder="Add a campaign title in Spanish" required="required">
 
         <br>
         <br>
 
         <select name="country_id" required>
-          <option value="">Select Country</option>
-          {% for country in countries%}
-             <option value={{ country.id }}>{{ country.name }}</option>
-          {% endfor %}
+
+            {% if campaign %}
+                {% with default_id=campaign.country.id default_name=campaign.country.name %}
+                    <option value="{{ default_id }}">{{ default_name }}</option>
+                {% endwith %}
+            {% else %}
+                {% with default_id="" default_name="Select Country" %}
+                    <option value="{{ default_id }}">{{ default_name }}</option>
+                {% endwith %}
+            {% endif %}
+
+            {% for country in countries%}
+                <option value={{ country.id }}>{{ country.name }}</option>
+            {% endfor %}
         </select>
 
         <br>
         <br>
 
         <textarea name="description" cols="40" rows="5"
-        placeholder="add description in English"></textarea>
+        placeholder="add description in English">{{ campaign.description }}</textarea>
 
         <br>
         <br>
 
         <textarea name="description_es" cols="40" rows="5"
-        placeholder="add description in Spanish"></textarea>
-
-        <br>
-        <br>
-
-        <script>
-            var objects = JSON.parse('{{ bullet_types_json | escapejs }}');
-
-            /*for (var i = 0; i < objects.length; i++){
-                o = objects[i]
-                alert(o.fields.name)
-            }*/
-
-        </script>
+        placeholder="add description in Spanish">{{ campaign.description_es }}</textarea>
 
         <br>
         <br>
 
         <select name="profession_id" required>
+
+            {% if campaign %}
+                {% with default_id=campaign.profession.id default_name=campaign.profession.name %}
+                    <option value="{{ default_id }}">{{ default_name }}</option>
+                {% endwith %}
+            {% else %}
+                {% with default_id="" default_name="Select Profession" %}
+                    <option value="{{ default_id }}">{{ default_name }}</option>
+                {% endwith %}
+            {% endif %}
+
           <option value="">Select Profession</option>
           {% for profession in professions%}
              <option value={{ profession.id }}>{{ profession.name }}</option>
@@ -82,7 +90,17 @@
         <br>
 
         <select name="education_id" required>
-          <option value="">Select Education</option>
+
+            {% if campaign %}
+                {% with default_id=campaign.education.id default_name=campaign.education.name %}
+                    <option value="{{ default_id }}">{{ default_name }}</option>
+                {% endwith %}
+            {% else %}
+                {% with default_id="" default_name="Select Education" %}
+                    <option value="{{ default_level }}">{{ default_name }}</option>
+                {% endwith %}
+            {% endif %}
+
           {% for level in education%}
              <option value={{ level.id }}>{{ level.name }}</option>
           {% endfor %}
@@ -92,9 +110,9 @@
         <br>
 
         <div style="margin-top:-10px;">
-          <label >Experience in years:</label>
-          <input name="experience" id="experience"
-           type="number" value="0" min="0" max="60" />
+            <label >Experience in years:</label>
+            <input name="experience" id="experience"
+             type="number" value="{{ campaign.experience }}" min="0" max="60" />
         </div>
 
         <br>
@@ -110,6 +128,10 @@
 
         <input style="margin-bottom:100px;" type="button" class="btn btn-success" name="add_bullet" value="Add Bullet!"
           onclick="addBullet('{{ bullet_types_json | escapejs }}');">
+
+        {% for bullet in campaign.bullets.all %}
+            {% include "dashboard/campaign/bullet.html" with bullet=bullet bullet_types=bullet_types %}
+        {% endfor %}
 
         <!-- This empty container is filled dynamically with JS.-->
         <div id="bullet_container"/>
