@@ -3,7 +3,7 @@ var bullet_number = 1;
 function addBulletTypeSelector(container, bullet_types) {
 
     var bullet_type = document.createElement("select");
-    bullet_type.name = bullet_number + "bullet_type";
+    bullet_type.name = bullet_number + "_new_bullet_type";
     bullet_type.required = true;
     container.appendChild(bullet_type);
 
@@ -43,11 +43,11 @@ function addBullet(bullet_types){
 
     container.appendChild(document.createElement("br"));
 
-    build_text_field(container, bullet_number + "_bullet_name", "add text in english")
+    build_text_field(container, bullet_number + "_new_bullet_name", "add text in english")
 
     container.appendChild(document.createElement("br"));
 
-    build_text_field(container, bullet_number + "_bullet_name_es", "add text in spanish")
+    build_text_field(container, bullet_number + "_new_bullet_name_es", "add text in spanish")
 
     container.appendChild(document.createElement("br"));
 

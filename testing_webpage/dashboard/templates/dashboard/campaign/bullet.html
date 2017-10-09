@@ -1,0 +1,20 @@
+<br>
+<input type="text" width="500px" name="{{ bullet.id }}_bullet_name" placeholder="add text in english"
+    value="{{ bullet.name }}">
+<br>
+<input type="text" width="500px" name="{{ bullet.id }}_bullet_name_es" placeholder="add text in spanish"
+    value="{{ bullet.name_es }}">
+<br>
+
+<select name="{{ bullet.id }}_bullet_type" required>
+
+    <option value="{{ bullet.bullet_type.id }}">{{ bullet.bullet_type.name }}</option>
+
+    {% for bullet_type in bullet_types %}
+        <option value="{{ bullet_type.id }}">{{ bullet_type.name }}</option>
+    {% endfor %}
+</select>
+
+<input type="button" class="btn btn-danger" value="Delete!" onclick="deleteBullet()">
+
+<br>
