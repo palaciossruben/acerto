@@ -538,5 +538,50 @@
       "name_es": "Experiencia diseñando interfaces móviles o web",
       "bullet_type_id": 2
     }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 61,
+    "fields": {
+      "name": "Metric driven",
+      "name_es": "Orientado al analisis y las métricas",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 62,
+    "fields": {
+      "name": "Can do A/B testing",
+      "name_es": "Sabe hacer A/B testing",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 63,
+    "fields": {
+      "name": "Self starter and autonomous",
+      "name_es": "Autonomo y con mucha iniciativa",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 64,
+    "fields": {
+      "name": "Creative, can take risks and innovates",
+      "name_es": "Creativo, arriesgado e innovador",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 65,
+    "fields": {
+      "name": "Can work both product and marketing",
+      "name_es": "Puedes aportar a producto y marketing",
+      "bullet_type_id": 2
+    }
   }
 ]
