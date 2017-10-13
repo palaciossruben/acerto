@@ -238,5 +238,68 @@
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 26,
+    "fields":{
+      "name": "Try new things often",
+      "name_es": "Experimentar nuevas cosas a menudo",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 27,
+    "fields":{
+      "name": "Follow the top growth hacker trend and go to conferences",
+      "name_es": "Seguir lo último en growth hacking e ir a conferencias.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 28,
+    "fields":{
+      "name": "Go to growth hacking conferences with top notch Growth Hackers",
+      "name_es": "Ir a conferencias con los mejores Growth Hackers",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 29,
+    "fields":{
+      "name": "Is a general purpose programming language such as Python or C",
+      "name_es": "Es un lenguaje de programación de proposito general similar a Python o C",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 30,
+    "fields":{
+      "name": "It is a programming framework such as Ruby on Rails, Django or Node.js",
+      "name_es": "Es un framework web como Ruby on Rails, Django o Node.js",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 31,
+    "fields":{
+      "name": "It is used to communicate and retreive information from databases such as PostgreSQL",
+      "name_es": "Se usa para comunicarse y extraer información de bases de datos como PostgreSQL",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
   }
 ]
+
+
+

@@ -226,5 +226,24 @@
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.campaign",
+    "pk": 13,
+    "fields":{
+      "name": "Growth Hacker",
+      "profession": 4,
+      "education": 3,
+      "country": 1,
+      "experience": 5,
+      "description": "Build the future of payments; enjoy working in Tpaga, an exciting startup that is revolutionizing the payment industry",
+      "description_es": "Construye el futuro de los pagos en linea; disfruta trabajando en Tpaga, una startup que está revolucionando la industria de pagos.",
+      "title": "Growth Hacker",
+      "title_es": "Growth Hacker",
+      "bullets": [54, 55, 56, 57, 58, 59, 61, 62, 63, 64, 65],
+      "tests": [4],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
   }
 ]

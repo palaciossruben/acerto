@@ -115,7 +115,58 @@
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 10,
+    "fields":{
+      "text": "What was the last time you hacked a non-computer system?",
+      "text_es": "¿Cuál fue la última vez que hackeaste un sistema no-computacional?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 11,
+    "fields":{
+      "text": "Which of the following is the best to become a great growth hacker?",
+      "text_es": "¿Cuál de las siguientes formas es la mejor para ser un gran growth hacker?",
+      "answers": [26, 27, 28],
+      "type": 1,
+      "correct_answers": [26],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 12,
+    "fields":{
+      "text": "What is SQL?",
+      "text_es": "¿Qué es SQL?",
+      "answers": [29, 30, 31],
+      "type": 1,
+      "correct_answers": [31],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 13,
+    "fields":{
+      "text": "PeakU is a new recruitment service that offers a high-end headhunter for the price of a stocj exchange. How would you help PeakU acquire business clients faster?",
+      "text_es": "PeakU es un nuevo servicio de reclutamiento que ofrece una experiencia de un cazatalentos al precio de una bolsa de empleo. ¿Tu cómo ayudarías a que PeakU adquiriera nuevos clientes-empresas de forma más rápida?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
   }
 ]
-
 
