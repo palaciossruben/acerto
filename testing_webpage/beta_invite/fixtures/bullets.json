@@ -529,5 +529,14 @@
       "name_es": "Y al final de un día pesado relajate en una comoda hamaca",
       "bullet_type_id": 1
     }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 60,
+    "fields": {
+      "name": "Experience designing mobile or web interfaces",
+      "name_es": "Experiencia diseñando interfaces móviles o web",
+      "bullet_type_id": 2
+    }
   }
 ]

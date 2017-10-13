@@ -76,5 +76,46 @@
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 7,
+    "fields":{
+      "text": "Describe your creative process.",
+      "text_es": "Describe tu proceso creativo",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 8,
+    "fields":{
+      "text": "Tell us about a project you've completed that has made you the most proud?",
+      "text_es": "Cuentanos de un proyecto, por el cual estés muy orgulloso/a",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 9,
+    "fields":{
+      "text": "How do you work with engineers/Product Managers/other designers?",
+      "text_es": "¿Cómo trabajas con ingenieros/Product Managers/otros diseñadores?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
   }
 ]
+
+
