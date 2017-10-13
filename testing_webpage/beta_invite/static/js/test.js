@@ -3,7 +3,7 @@ function add_checked_values(questions_dict){
     form = document.getElementById('test_form_id');
 
     for (var test_id in questions_dict) {
-        if (questions_dict.hasOwnProperty(test_id) {
+        if (questions_dict.hasOwnProperty(test_id)) {
 
             test_questions_ids = questions_dict[test_id];
 
