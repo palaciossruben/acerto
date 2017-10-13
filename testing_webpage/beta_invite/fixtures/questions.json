@@ -81,11 +81,11 @@
     "model": "beta_invite.question",
     "pk": 7,
     "fields":{
-      "text": "Describe your creative process.",
-      "text_es": "Describe tu proceso creativo",
-      "answers": [],
-      "type": 3,
-      "correct_answers": [],
+      "text": "Do you have experience in mobile or web design?",
+      "text_es": "¿Tienes experiencia en diseño mobil o web?",
+      "answers": [32, 33],
+      "type": 1,
+      "correct_answers": [33],
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -167,6 +167,19 @@
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
-  }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 14,
+    "fields":{
+      "text": "What has been the hardest project you have done? Why it was a challenge?",
+      "text_es": "¿Cuál fue el proyecto más dificil que has hecho? ¿Por qué fue retador?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
 ]
 
