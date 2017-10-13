@@ -48,5 +48,195 @@
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 6,
+    "fields":{
+      "name": "Less than 3M COP",
+      "name_es": "Menos de 3M de pesos",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 7,
+    "fields":{
+      "name": "Between 3M COP and 6M COP",
+      "name_es": "Entre 3M y 6M de pesos",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 8,
+    "fields":{
+      "name": "Between 6M COP and 8M COP",
+      "name_es": "Entre 6M y 8M de pesos",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 9,
+    "fields":{
+      "name": "More than 8M COP",
+      "name_es": "Más de 8M de pesos",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 10,
+    "fields":{
+      "name": "20",
+      "name_es": "20",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 11,
+    "fields":{
+      "name": "21",
+      "name_es": "21",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 12,
+    "fields":{
+      "name": "22",
+      "name_es": "22",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 13,
+    "fields":{
+      "name": "23",
+      "name_es": "23",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 14,
+    "fields":{
+      "name": "24",
+      "name_es": "24",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 15,
+    "fields":{
+      "name": "I would tell him that one thing is the personal side of things and another thing is the professional side of things. And he should not mix both.",
+      "name_es": "Le dejaría en claro que una cosa es la relación personal y otra es la profesional. Y que ambas no deberían mezclarse",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 17,
+    "fields":{
+      "name": "I would try to understand his motives in order to propose according to his line of thought and from his perspective",
+      "name_es": "Trataría de entender cuales son sus motivos; y de acuerdo a ellos propondría soluciones",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 18,
+    "fields":{
+      "name": "I would follow the new boss instructions in order for him to change his attitude",
+      "name_es": "Seguría las instrucciones del nuevo jefe para que cambie de actitud",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 19,
+    "fields":{
+      "name": "I would align the interest of the whole team and negotiate with the new boss, according to everybody interest",
+      "name_es": "Alinearia los intereses de todo el equipo para llegar a un acuerdo con el nuevo jefe",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 20,
+    "fields":{
+      "name": "I would raise my hand and speak my discomfort and why it happens",
+      "name_es": "Levantaría la mano y diría cual es mi malestar y por que",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 21,
+    "fields":{
+      "name": "O(1)",
+      "name_es": "O(1)",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 22,
+    "fields":{
+      "name": "O(log(n))",
+      "name_es": "O(log(n))",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 23,
+    "fields":{
+      "name": "O(n)",
+      "name_es": "O(n)",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 24,
+    "fields":{
+      "name": "O(n*log(n))",
+      "name_es": "O(n*log(n))",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 25,
+    "fields":{
+      "name": "O(n^2)",
+      "name_es": "O(n^2)",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
   }
 ]
