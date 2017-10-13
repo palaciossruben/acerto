@@ -103,7 +103,7 @@
       "education": null,
       "country": null,
       "experience": null,
-      "description": "Work for a exciting startup that is revolutionizing the payment industry. Prevent frauds which allows our merchants to process payments on a smooth and secure way.",
+      "description": "Work for an exciting startup that is revolutionizing the payment industry. Prevent frauds which allows our merchants to process payments on a smooth and secure way.",
       "description_es": "Trabaja para un startup que está revolucionando la industria de pagos. Previene fraudes y permite que nuestros usuarios procecen sus pagos de forma fácil y confiable.",
       "title": "Back-End Engineer",
       "title_es": "Back-End Engineer",
@@ -142,7 +142,7 @@
       "country": null,
       "experience": null,
       "description": "Work for a exciting startup that is revolutionizing the payment industry. Build the future of payments.",
-      "description_es": "Trabaja para un startup que está revolucionando la industria de pagos. Contruye el futuro de los pagos.",
+      "description_es": "Trabaja para un startup que está revolucionando la industria de pagos. Construye el futuro de los pagos.",
       "title": "Developer",
       "title_es": "Desarrollador",
       "bullets": [7, 18, 23, 24, 25, 26, 27, 28, 37, 38],
@@ -185,6 +185,25 @@
       "title_es": "Desarrollador iOS",
       "bullets": [7, 38, 39, 40, 41, 42, 43, 44, 45, 46],
       "tests": [],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.campaign",
+    "pk": 11,
+    "fields":{
+      "name": "Fullstack Developer",
+      "profession": 4,
+      "education": 3,
+      "country": 1,
+      "experience": 5,
+      "description": "Build the future of payments; enjoy working in Tpaga, an exciting startup that is revolutionizing the payment industry",
+      "description_es": "Construye el futuro de los pagos en linea; disfruta trabajando en Tpaga, una startup que está revolucionando la industria de pagos.",
+      "title": "Fullstack Developer",
+      "title_es": "Desarrollador Fullstack",
+      "bullets": [47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59],
+      "tests": [2],
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }

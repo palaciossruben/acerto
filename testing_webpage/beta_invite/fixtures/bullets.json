@@ -400,7 +400,7 @@
     "pk": 45,
     "fields": {
       "name": "Every day we enjoy healthy for for free.",
-      "name_es": "Cada día disfrutamos comida sana grátis",
+      "name_es": "Cada día disfrutamos comida sana y gratis",
       "bullet_type_id": 1
     }
   },
@@ -410,6 +410,123 @@
     "fields": {
       "name": "Team work: Your colleagues are open and will always be ready to share knowledge and experiences.",
       "name_es": "Trabajo en Equipo: Tus colegas estarán abiertos a compartir el conocimiento y sus experiencias.",
+      "bullet_type_id": 1
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 47,
+    "fields": {
+      "name": "It is desirable to have 5 or more years of experience",
+      "name_es": "Es deseable tener 5 o más años de experiencia",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 48,
+    "fields": {
+      "name": "Experience with MVC architecture and REST APIs",
+      "name_es": "Experiencia con MVC y APIs REST",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 49,
+    "fields": {
+      "name": "Nice to have experience in Python and Django but not extrictly necessary",
+      "name_es": "Es un plus tener experiencia en Python y Django pero no es estrictamente necesario",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 50,
+    "fields": {
+      "name": "Nice to have experience working on a startup environment",
+      "name_es": "Es un plus haber trabajado en un ambiente de startup",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 51,
+    "fields": {
+      "name": "Be a self starter individual with autonomy",
+      "name_es": "Tener autonomía e iniciativa",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 52,
+    "fields": {
+      "name": "Be comfortable, having technical discussions",
+      "name_es": "Sentirse comodo teniendo discusiones técnicas",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 53,
+    "fields": {
+      "name": "Be on call 24/7 one week each 2 months",
+      "name_es": "Estar alerta 24/7 una semana cada 2 meses",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 54,
+    "fields": {
+      "name": "Lunch and a treat with teammates once a month",
+      "name_es": "Almuerzo con los compañeros de trabajo una vez al mes",
+      "bullet_type_id": 1
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 55,
+    "fields": {
+      "name": "Be part of the team that drives the company core; and as such have a huge impact on the daily lives of millions of people",
+      "name_es": "Se parte del core de la compañia; y como tal ten impacto en la vida de millones de personas",
+      "bullet_type_id": 1
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 56,
+    "fields": {
+      "name": "Work in a home environment with a garden, ping pong, fusball and xbox",
+      "name_es": "Trabaja en un ambiente casero con jardín, ping pong, futbolín y xbox",
+      "bullet_type_id": 1
+    }
+  },
+    {
+    "model": "beta_invite.bullet",
+    "pk": 57,
+    "fields": {
+      "name": "Free snacks, good coffee, beer and fruits",
+      "name_es": "Comida Gratis: buen café, cerveza y frutas",
+      "bullet_type_id": 1
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 58,
+    "fields": {
+      "name": "Laptop and to screens",
+      "name_es": "Portatil y 2 pantallas",
+      "bullet_type_id": 1
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 59,
+    "fields": {
+      "name": "And at the end of a hard day relax in a comfortable hammock",
+      "name_es": "Y al final de un día pesado relajate en una comoda hamaca",
       "bullet_type_id": 1
     }
   }
