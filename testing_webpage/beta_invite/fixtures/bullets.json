@@ -583,5 +583,68 @@
       "name_es": "Puedes aportar a producto y marketing",
       "bullet_type_id": 2
     }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 66,
+    "fields": {
+      "name": "2 years of experience",
+      "name_es": "2 años de experiencia",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 67,
+    "fields": {
+      "name": "Knows AngularJS",
+      "name_es": "Sabe AngularJS",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 68,
+    "fields": {
+      "name": "Good skills in UX and UI",
+      "name_es": "Buenas bases en UX y UI",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 69,
+    "fields": {
+      "name": "Big career growth opportunity at a high potential startup",
+      "name_es": "Buenas oportunidades de crecimiento en tu carrera en una startup con alto potencial",
+      "bullet_type_id": 1
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 70,
+    "fields": {
+      "name": "Excellent working environment",
+      "name_es": "Excelente ambiente de trabajo",
+      "bullet_type_id": 1
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 71,
+    "fields": {
+      "name": "NodeJS, SQL, AWS and REST",
+      "name_es": "NodeJS, SQL, AWS y REST",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 72,
+    "fields": {
+      "name": "Can scale and optimize an application",
+      "name_es": "puede escalar y optimizar una aplicación",
+      "bullet_type_id": 2
+    }
   }
 ]
