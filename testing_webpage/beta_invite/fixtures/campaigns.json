@@ -250,7 +250,7 @@
     "model": "beta_invite.campaign",
     "pk": 14,
     "fields":{
-      "name": "Mobile/Frontend Developer",
+      "name": "Mobile/Frontend Developer (CertiTaxi)",
       "profession": 4,
       "education": 3,
       "country": 1,
@@ -269,7 +269,7 @@
     "model": "beta_invite.campaign",
     "pk": 15,
     "fields":{
-      "name": "Mobile/Frontend Developer",
+      "name": "Backend Developer (CertiTaxi)",
       "profession": 4,
       "education": 3,
       "country": 1,
