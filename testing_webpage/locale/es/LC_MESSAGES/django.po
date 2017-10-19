@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-19 04:45+0000\n"
+"POT-Creation-Date: 2017-10-19 18:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,13 +19,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: beta_invite/templates/beta_invite/fast_job.html:99
-#: beta_invite/templates/beta_invite/long_form.html:146
+#: beta_invite/templates/beta_invite/long_form.html:126
 msgid "Apply Now!"
 msgstr "¡Aplica Ahora!"
 
 #: beta_invite/templates/beta_invite/fast_job.html:112
 #: beta_invite/templates/beta_invite/index.html:87
-#: beta_invite/templates/beta_invite/long_form.html:156
+#: beta_invite/templates/beta_invite/long_form.html:136
 #: business/templates/business/index.html:203
 #: business/templates/business/results.html:152
 #: business/templates/business/search_trade.html:194
@@ -36,7 +36,7 @@ msgstr "Tu Nombre Completo"
 
 #: beta_invite/templates/beta_invite/fast_job.html:119
 #: beta_invite/templates/beta_invite/index.html:94
-#: beta_invite/templates/beta_invite/long_form.html:163
+#: beta_invite/templates/beta_invite/long_form.html:143
 #: business/templates/business/index.html:208
 #: business/templates/business/login.html:92
 #: business/templates/business/results.html:159
@@ -47,7 +47,7 @@ msgid "Your email"
 msgstr "Tu correo"
 
 #: beta_invite/templates/beta_invite/fast_job.html:126
-#: beta_invite/templates/beta_invite/long_form.html:170
+#: beta_invite/templates/beta_invite/long_form.html:150
 #: business/templates/business/results.html:166
 #: business/templates/business/search_trade.html:208
 #: business/templates/business/signup.html:136
@@ -55,7 +55,7 @@ msgid "Your phone"
 msgstr "Tu teléfono"
 
 #: beta_invite/templates/beta_invite/fast_job.html:135
-#: beta_invite/templates/beta_invite/long_form.html:180
+#: beta_invite/templates/beta_invite/long_form.html:160
 msgid "Select Country"
 msgstr "Selecciona tu País"
 
@@ -69,7 +69,7 @@ msgstr "Describe lo que haces."
 
 #: beta_invite/templates/beta_invite/fast_job.html:160
 #: beta_invite/templates/beta_invite/index.html:113
-#: beta_invite/templates/beta_invite/long_form.html:236
+#: beta_invite/templates/beta_invite/long_form.html:216
 #: business/templates/business/index.html:223
 #: business/templates/business/trade_client.html:155
 msgid "Sure!"
@@ -104,7 +104,7 @@ msgid "Subscribe"
 msgstr "Suscríbete"
 
 #: beta_invite/templates/beta_invite/index.html:103
-#: beta_invite/templates/beta_invite/long_form.html:211
+#: beta_invite/templates/beta_invite/long_form.html:191
 msgid "Upload your resume"
 msgstr "Sube tu curriculum"
 
@@ -112,31 +112,31 @@ msgstr "Sube tu curriculum"
 msgid "Perks"
 msgstr "Beneficios"
 
-#: beta_invite/templates/beta_invite/long_form.html:132
-msgid "Don't want to apply to this position?"
-msgstr "¿No quieres aplicar a esta posición?"
-
-#: beta_invite/templates/beta_invite/long_form.html:135
-msgid "Apply to general position!"
-msgstr "¡Aplicar a una posición general!"
-
-#: beta_invite/templates/beta_invite/long_form.html:190
+#: beta_invite/templates/beta_invite/long_form.html:170
 msgid "Select Education"
 msgstr "Selecciona tu Educación"
 
-#: beta_invite/templates/beta_invite/long_form.html:200
+#: beta_invite/templates/beta_invite/long_form.html:180
 msgid "Select Profession"
 msgstr "Selecciona tu Profesión"
 
-#: beta_invite/templates/beta_invite/long_form.html:222
+#: beta_invite/templates/beta_invite/long_form.html:202
 #: business/templates/business/post_job.html:157
 #: business/templates/business/search.html:152
 msgid "Experience in years:"
 msgstr "Experiencia en años:"
 
-#: beta_invite/templates/beta_invite/long_form.html:231
+#: beta_invite/templates/beta_invite/long_form.html:211
 msgid "Authorized third parties can see this information."
 msgstr "Terceros autorizados pueden ver esta información."
+
+#: beta_invite/templates/beta_invite/long_form.html:237
+msgid "Don't want to apply to this position?"
+msgstr "¿No quieres aplicar a esta posición?"
+
+#: beta_invite/templates/beta_invite/long_form.html:240
+msgid "Apply to another job!"
+msgstr "¡Aplica a una otro trabajo!"
 
 #: beta_invite/templates/beta_invite/meet.html:99
 msgid ""
