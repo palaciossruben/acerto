@@ -1,4 +1,5 @@
 import os
+import time
 import helper as h
 
 from user import User
@@ -72,7 +73,6 @@ def read_and_predict(force=False):
                 text = read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename)
 
             final_dict[folder] = User(text)
-            print('done with folder: {}'.format(folder))
 
     return final_dict
 
@@ -98,13 +98,8 @@ def read_all(force=False):
 
 
 if __name__ == "__main__":
-    read_all(force=False)
 
-    """
-    for key, user in my_dict.items():
-        print('folder {}, summary:'.format(key))
-        print(user.country)
-        print(user.institutions)
-        print(user.education)
-        print('age: ' + str(user.age))
-    """
+    t0 = time.time()
+    read_all(force=False)
+    t1 = time.time()
+    print('DOCUMENT READER, took:' + str(t1-t0))
