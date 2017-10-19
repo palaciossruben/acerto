@@ -4,21 +4,20 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.testing_webpage.settings')
 application = get_wsgi_application()
 
-import nltk
 import pickle
 import smtplib
-import unicodedata
 
 from django.contrib.auth.decorators import login_required
 from collections import OrderedDict
 from ipware.ip import get_ip
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext_lazy as _
-from django.db.models import Case, When
 from django.contrib.auth import login, authenticate
 
 import business
 import beta_invite
+from business import util
+from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
 from beta_invite.models import User, Country, Education, Profession
@@ -69,8 +68,8 @@ def post_index(request):
     #    pass
 
     return render(request, cts.POST_JOB_VIEW_PATH, {'main_message': _("Discover amazing people"),
-                                                   'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
-                                                   })
+                                                    'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
+                                                    })
 
 
 def search(request):
@@ -115,65 +114,6 @@ def search_trade(request):
                                                   })
 
 
-# TODO: duplicate code: see subscribe.helper
-def remove_accents_in_string(element):
-    """
-    Args:
-        element: anything.
-    Returns: Cleans accents only for strings.
-    """
-    if isinstance(element, str):
-        return ''.join(c for c in unicodedata.normalize('NFD', element) if unicodedata.category(c) != 'Mn')
-    else:
-        return element
-
-
-# TODO: duplicate code: see subscribe.helper
-def remove_accents(an_object):
-    """
-    Several different objects can be cleaned.
-    Args:
-        an_object: can be list, string, tuple and dict
-    Returns: the cleaned obj, or a exception if not implemented.
-    """
-    if isinstance(an_object, str):
-        return remove_accents_in_string(an_object)
-    elif isinstance(an_object, list):
-        return [remove_accents_in_string(e) for e in an_object]
-    elif isinstance(an_object, tuple):
-        return tuple([remove_accents_in_string(e) for e in an_object])
-    elif isinstance(an_object, dict):
-        return {remove_accents_in_string(k): remove_accents_in_string(v) for k, v in an_object.items()}
-    else:
-        raise NotImplementedError
-
-
-def retrieve_sorted_users(sorted_iterator):
-    """
-    An iterable object that outputs the sorted tuples (user_ids, relevance)
-    Args:
-        sorted_iterator: Iterable object.
-    Returns: Sorted User objects Query Set.
-    """
-    user_ids = [user_id[0] for user_id in sorted_iterator]
-
-    preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(user_ids)])
-    return User.objects.filter(pk__in=user_ids).order_by(preserved)
-
-
-def get_skills(request):
-    """
-    Args:
-        request: a Request obj
-    Returns: List with tokenized strings, lower cased and with no accents.
-    """
-    skills = request.POST.get('skills')
-    skills = remove_accents(nltk.word_tokenize(skills))
-
-    # remove capital letters
-    return [t.lower() for t in skills]
-
-
 def user_id_sorted_iterator(user_relevance_dictionary, users, skills):
     """
     Args:
@@ -193,16 +133,8 @@ def user_id_sorted_iterator(user_relevance_dictionary, users, skills):
             if value_user_id in user_relevance_dict.keys():
                 user_relevance_dict[value_user_id] += relevance
 
+    # Sorts by DESC relevance.
     return reversed(sorted(user_relevance_dict.items(), key=lambda x: x[1]))
-
-
-def print_sorted_iterator_on_debug(sorted_iterator):
-    import copy
-    sorted_2 = copy.copy(sorted_iterator)
-
-    print('SORTED ITERATOR IS:')
-    for i in sorted_2:
-        print(i)
 
 
 def get_filtered_users(country_id, profession_id, experience, education_id):
@@ -247,24 +179,31 @@ def get_matching_users(request):
     except FileNotFoundError:
         return users  # will not filter by words.
 
-    sorted_iterator = user_id_sorted_iterator(user_relevance_dictionary, users, get_skills(request))
+    sorted_iterator = user_id_sorted_iterator(user_relevance_dictionary, users, search_module.get_text(request))
 
-    #print_sorted_iterator_on_debug(sorted_iterator)
-
-    return retrieve_sorted_users(sorted_iterator)
+    return search_module.retrieve_sorted_users(sorted_iterator)
 
 
-def translate_users(users, language_code):
+def calculate_result2(request):
     """
     Args:
-        users: List of Users
-        language_code: can be 'es'
-    Returns: List of translated users
+        request: Request object
+    Returns: renders results.html view.
     """
-    if 'es' in language_code:
-        for u in users:
-            u.profession.name = u.profession.name_es
-            u.education.name = u.education.name_es
+
+    user_ids = search_module.get_common_search_info2(request, 'subscribe/word_user_dictionary.p')
+
+    search_obj = Search(ip=get_ip(request),
+                        country=None,
+                        education=None,
+                        profession=None,
+                        experience=None,
+                        skills=search_module.get_text(request),
+                        user_ids=user_ids, )
+
+    search_obj.save()
+
+    return redirect('results/{id}'.format(id=search_obj.id))
 
 
 def calculate_result(request):
@@ -281,8 +220,8 @@ def calculate_result(request):
                         education=education,
                         profession=profession,
                         experience=experience,
-                        skills=get_skills(request),
-                        user_ids=user_ids,)
+                        skills=search_module.get_text(request),
+                        user_ids=user_ids, )
 
     search_obj.save()
 
@@ -322,7 +261,7 @@ def offer_detail(request):
 
         offer = Offer.objects.get(pk=offer_id)
         users = [User.objects.get(pk=u_id) for u_id in offer.user_ids]
-        translate_users(users, request.LANGUAGE_CODE)
+        util.translate_users(users, request.LANGUAGE_CODE)
 
         return render(request, cts.OFFER_RESULTS_VIEW_PATH, {'users': users})
 
@@ -536,7 +475,7 @@ def get_common_search_info(request):
     experience = request.POST.get('experience')
 
     users = get_matching_users(request)
-    translate_users(users, request.LANGUAGE_CODE)
+    util.translate_users(users, request.LANGUAGE_CODE)
 
     user_ids = [u.id for u in users]
 
@@ -559,8 +498,8 @@ def offer_results(request):
           education=education,
           profession=profession,
           experience=experience,
-          skills=get_skills(request),
-          user_ids=user_ids,).save()
+          skills=search_module.get_text(request),
+          user_ids=user_ids, ).save()
 
     return render(request, cts.OFFER_RESULTS_VIEW_PATH, {'users': users})
 

@@ -19,7 +19,12 @@ def get_text_from_path(root_path, relative_path):
 
 
 def get_text_corpus(path, toy=False):
-
+    """
+    Args:
+        path: RESUMES_PATH
+        toy: Boolean indicating whether should take the real data or a toy example.
+    Returns: OrderedDict with the
+    """
     if not toy:
         text_dict = [(int(os.path.basename(relative_path)), get_text_from_path(path, relative_path))
                      for relative_path in os.listdir(path) if os.path.isdir(os.path.join(path, relative_path))]
@@ -28,7 +33,7 @@ def get_text_corpus(path, toy=False):
         # Small data set to understand algorithms
         text_dict = OrderedDict([(1, 'common juan pedro'),
                                  (2, 'common camilo'),
-                                 (3, 'common alberto high high high'),
+                                 (3, 'common alberto high high high high'),
                                  (4, '')])
 
     # filter any numbers:
@@ -89,10 +94,26 @@ def save_relevance_dictionary(path):
         scores.append((word_str, score))
 
     scores.sort(key=lambda x: x[1])
-    #for word_str, score in scores:
-    #    print('{}: {}'.format(word_str, score))
 
     pickle.dump({k: v for k, v in scores}, open('relevance_dictionary.p', 'wb'))
+
+
+def add_position_effect(text, relevance, word):
+    """
+    The relevance has a n additional factor: A word near the top of the document should be more
+    important than at the bottom.
+    Args:
+        text: string
+        relevance: float
+        word: string
+    Returns: modified relevance
+    """
+
+    if len(text) > 0:
+        position_percent = (len(text) - text.lower().find(word))/len(text)
+        relevance *= position_percent
+
+    return relevance
 
 
 def save_user_relevance_dictionary(path):
@@ -111,18 +132,18 @@ def save_user_relevance_dictionary(path):
     for word, num_word in vocabulary.items():
         values = []
         for document, user_id in enumerate(text_corpus.keys()):
+
             relevance = data_tf_idf[document, num_word]
+
             if relevance > 0:
+                relevance = add_position_effect(text_corpus[user_id], relevance, word)
                 values.append((int(user_id), relevance))
 
-        user_relevance_dictionary[word] = tuple(values)
+            user_relevance_dictionary[word] = tuple(values)
 
     user_relevance_dictionary = h.remove_accents(user_relevance_dictionary)
 
-    #for k, v in user_relevance_dictionary.items():
-    #    print(k + ': ' + str(v))
-
-    pickle.dump(user_relevance_dictionary, open('user_relevance_dictionary.p', 'wb'))
+    pickle.dump(user_relevance_dictionary, open('word_user_dictionary.p', 'wb'))
 
 
 if __name__ == "__main__":
