@@ -136,7 +136,9 @@ def add_candidate_to_campaign(request, candidate):
                                   campaign_id=selected_campaign_id,
                                   state=candidate.state,
                                   comment=candidate.comment)
-        new_candidate.user.campaign_id = selected_campaign_id
+        user = new_candidate.user
+        user.campaign_id = selected_campaign_id
+        user.save()
         new_candidate.save()
         return True
 
