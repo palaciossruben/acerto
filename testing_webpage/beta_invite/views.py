@@ -532,6 +532,7 @@ def get_test_result(request):
     if evaluation.passed:
         return render(request, cts.MEET_VIEW_PATH, {'main_message': _("Discover your true passion"),
                                                     'secondary_message': _("We search millions of jobs and find the right one for you"),
+                                                    'campaign': campaign,
                                                     })
     else:  # doesn't pass.
         return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover your true passion"),

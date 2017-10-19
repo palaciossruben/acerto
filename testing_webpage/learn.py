@@ -69,7 +69,8 @@ def get_text_stats(path):
     count_vectorizer = CountVectorizer()
     text_corpus_dict = get_text_corpus(path, toy=False)
 
-    target_dict = get_target_data([user_id for user_id in text_corpus_dict.keys()])
+    user_ids = [user_id for user_id in text_corpus_dict.keys()]
+    target_dict = get_target_data(user_ids)
 
     input_dict = OrderedDict([(user_id, text) for user_id, text in text_corpus_dict.items() if user_id in target_dict.keys()])
 
@@ -95,12 +96,23 @@ def retrieve_sorted_users(user_ids):
 
 def get_target_data(user_ids):
     """
+    Discriminates professionals from non-professionals
     Args:
         user_ids: List of User ids.
     Returns: User education in the same order of the user ids.
     """
     users = retrieve_sorted_users(user_ids)
-    return OrderedDict([(u.id, u.education.level) for u in users if u.education is not None])
+
+    tmp_tuples = []
+    for u in users:
+        if u.education is not None:
+            if u.education.level >= 2:
+                education = 1
+            else:
+                education = 0
+            tmp_tuples.append((u.id, education))
+
+    return OrderedDict(tmp_tuples)
 
 
 def get_education():
@@ -423,7 +435,7 @@ def run_experiment(cutoffs=None):
     target_tuple_list = [(k, v) for k, v in target_data.items()]
 
     data_tf_idf_train, data_tf_idf_test, train_target, test_target = train_test_split(data_tf_idf, target_tuple_list,
-                                                                                      test_size=0.1)
+                                                                                      test_size=0.3)
 
     #data_tf_idf_train, data_tf_idf_test = reduce_dimensionality(data_tf_idf_train, data_tf_idf_test)
 
@@ -499,6 +511,7 @@ def make_collective_experiment(num_experiments, cutoffs=None):
     """
     Args:
         num_experiments: Number of iterations.
+        cutoffs: ????
     Returns:
     """
 

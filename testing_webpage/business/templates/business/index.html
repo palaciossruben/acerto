@@ -114,13 +114,16 @@ mixpanel.init("d60ac5ae289f60c7f824d49a4d15be30");</script>
 			{{ secondary_message }}
 		</p>
 
-			  {% trans "Search Candidates" as search_candidates %}
 		  <div align="center" style="margin-top:50px; margin-bottom:200px; cursor:pointer;">
-			<form action="{% url 'business:search' %}">
-				<input style="height: 54px; width:250px; border: solid 0px white; background:#F8E676; color:black; text-align:center;
-					   font-size: 22px; cursor:pointer;" type="submit" value="{{ search_candidates }}">
-			</form>
+			  <form action="{% url 'business:results' %}">
+				  {% trans "Briefly describe the position" as search_candidates %}
+				<input style="color::placeholder:grey; color:black; font-family:Raleway; padding-left: 15px;
+				 font-size: 14px; height: 40px; margin-top:15px; border:solid 1px #F8E676; background-color:white;
+				 width: 500px;" type="text" name="search_text"
+				  placeholder="{{ search_candidates }}" required="required">
+			  </form>
 		  </div>
+
 
 		  <div id="pain_points">
 			  <h2 id="pain_point_title">{% trans "Why choose us?" %}</h2>
