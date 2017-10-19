@@ -121,7 +121,7 @@ def add_candidate_to_campaign(request, candidate):
     Args:
         request: A HTTP request
         candidate: Candidate object
-    Returns: Error message if user already is in campaign
+    Returns: Boolean indicating whether a new candidate was added
     """
 
     # Updates latest changes, first.
@@ -132,10 +132,12 @@ def add_candidate_to_campaign(request, candidate):
     if selected_campaign_id == cts.CAMPAIGN_ID_NULL or user_in_campaign(candidate.user_id, selected_campaign_id):
         return False
     else:
-        Candidate(user_id=candidate.user_id,
-                  campaign_id=selected_campaign_id,
-                  state=candidate.state,
-                  comment=candidate.comment).save()
+        new_candidate = Candidate(user_id=candidate.user_id,
+                                  campaign_id=selected_campaign_id,
+                                  state=candidate.state,
+                                  comment=candidate.comment)
+        new_candidate.user.campaign_id = selected_campaign_id
+        new_candidate.save()
         return True
 
 
