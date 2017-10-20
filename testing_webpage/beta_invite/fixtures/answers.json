@@ -253,8 +253,8 @@
     "model": "beta_invite.answer",
     "pk": 27,
     "fields":{
-      "name": "Follow the top growth hacker trend and go to conferences",
-      "name_es": "Seguir lo último en growth hacking e ir a conferencias.",
+      "name": "Make a diploma in sales from the hand of the best sellers worldwide",
+      "name_es": "Hacer un diplomado en ventas de la mano de los mejores vendedores a nivel mundial",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -263,8 +263,8 @@
     "model": "beta_invite.answer",
     "pk": 28,
     "fields":{
-      "name": "Go to growth hacking conferences with top notch Growth Hackers",
-      "name_es": "Ir a conferencias con los mejores Growth Hackers",
+      "name": "Study from the top books in the area",
+      "name_es": "Estudiar de los libros más conocidos en el area",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
