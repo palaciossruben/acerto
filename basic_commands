@@ -311,7 +311,8 @@ sudo apt-get install poppler-utils
 2. Go to Volumes
 3. Modify Volume
 4. Check progress on machine state attribute.
-5. Once progeress complete resize filesystem with (https://stackoverflow.com/questions/11014584/ec2-cant-resize-volume-after-increasing-size):
+5. Check progress on volume state attribute.
+6. Once progress complete resize filesystem with (https://stackoverflow.com/questions/11014584/ec2-cant-resize-volume-after-increasing-size):
 
     a. check partition mismatch:
     lsblk
