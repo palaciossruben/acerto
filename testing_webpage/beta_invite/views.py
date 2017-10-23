@@ -208,7 +208,9 @@ def translate_tests(tests, lang_code):
             t.name = t.name_es
             a.append(t)
 
-    return a
+        return a
+    else:
+        return tests
 
 
 def long_form(request):
