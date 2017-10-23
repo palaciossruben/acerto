@@ -133,8 +133,8 @@
     "model": "beta_invite.question",
     "pk": 11,
     "fields":{
-      "text": "Which of the following is the best to become a great growth hacker?",
-      "text_es": "¿Cuál de las siguientes formas es la mejor para ser un gran growth hacker?",
+      "text": "Which of the following is the best to become a better professional?",
+      "text_es": "¿Cuál de las siguientes formas es la mejor para ser mejor en tu carrera?",
       "answers": [26, 27, 28],
       "type": 1,
       "correct_answers": [26],
