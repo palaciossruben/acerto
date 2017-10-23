@@ -51,7 +51,7 @@
     "model": "beta_invite.test",
     "pk": 5,
     "fields":{
-      "name": "General Software skills",
+      "name": "General Software skills (Mexico)",
       "name_es": "Habilidades en desarrollo de Software (México)",
       "questions": [4, 5, 6, 14],
       "cut_score": 75,
