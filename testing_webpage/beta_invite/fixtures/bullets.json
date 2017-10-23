@@ -633,8 +633,8 @@
     "model": "beta_invite.bullet",
     "pk": 71,
     "fields": {
-      "name": "NodeJS, SQL, AWS and REST",
-      "name_es": "NodeJS, SQL, AWS y REST",
+      "name": "Only for backend position better to know: NodeJS, SQL, AWS and REST",
+      "name_es": "Solo para posición backend, es una ventaja saber: NodeJS, SQL, AWS y REST",
       "bullet_type_id": 2
     }
   },
@@ -644,6 +644,15 @@
     "fields": {
       "name": "Can scale and optimize an application",
       "name_es": "puede escalar y optimizar una aplicación",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 73,
+    "fields": {
+      "name": "Only for mobile/frontend position better to know: mobile, AngularJS",
+      "name_es": "Solo para posición móvil/frontend, es una ventaja saber: móvil, AngularJS",
       "bullet_type_id": 2
     }
   }
