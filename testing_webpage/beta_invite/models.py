@@ -133,6 +133,7 @@ class Question(models.Model):
     type = models.ForeignKey(QuestionType, null=True, on_delete=models.SET_NULL)
     correct_answers = models.ManyToManyField(Answer, related_name='correct_answers')
     image_path = models.CharField(max_length=200, null=True)
+    order = models.IntegerField(default=1)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
