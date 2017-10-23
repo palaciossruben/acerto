@@ -318,8 +318,145 @@
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 34,
+    "fields":{
+      "name": "Find the first duplicate ELEMENT.",
+      "name_es": "Encontrar el primer ELEMENTO repetido.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 35,
+    "fields":{
+      "name": "Find the INDEX of the first duplicate element, additionally return -1 if there are no repeated elements.",
+      "name_es": "Encontrar el INDICE del primer elemento repetido, adicionalemente retornar -1 si no hay elementos repetidos.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 36,
+    "fields":{
+      "name": "Find the first duplicate ELEMENT, additionally return -1 if there are no duplicates.",
+      "name_es": "Encontrar el primer ELEMENTO repetido, adicionalmente retornar -1 si no hay elementos repetidos.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 37,
+    "fields":{
+      "name": "Find the first duplicate ELEMENT, return -1 if there are no duplicates. Also the values of the elements are between 1 and a.length",
+      "name_es": "Encontrar el primer ELEMENTO repetido, retornar -1 si no hay elementos repetidos. Además los valores de los elementos están entre 1 y a.length.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 38,
+    "fields":{
+      "name": "The code has a bug, because indexes cannot be negative.",
+      "name_es": "El código tiene un bug, ya que los indices negativos no están permitidos.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 39,
+    "fields":{
+      "name": "If it never finds a duplicate then it returns -1 as the problem asks.",
+      "name_es": "Si nunca encuentra un elemento duplicado retorna -1 como lo exige el problema.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 40,
+    "fields":{
+      "name": "It is similar to 'return 0' in C. There should always be a 'return' so there are no memory leaks.",
+      "name_es": "Es similar a 'return 0' en C. Siempre debe haber un 'return' para evitar leaks de memoria.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 41,
+    "fields":{
+      "name": "None of the above.",
+      "name_es": "Ninguna de las anteriores.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 42,
+    "fields":{
+      "name": "mySet stores the ELEMENTS that already passed. If it finds a duplicate element, it returns it. mySet is MORE efficient than a array.",
+      "name_es": "mySet guarda los ELEMENTOS por los que ya pasó. Si encuentra un elemento repetido, lo retorna. mySet es MAS eficiente que un arreglo.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 43,
+    "fields":{
+      "name": "mySet stores the INDICES that already passed. If it finds a duplicate element, it returns it. mySet is MORE efficient than an array.",
+      "name_es": "mySet guarda los INDICES por los que ya pasó. Si encuentra un elemento repetido, lo retorna. mySet es MAS eficiente que un arreglo.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 44,
+    "fields":{
+      "name": "mySet stores the INDICES that already passed. If it finds a duplicate element, it returns it. mySet is LESS efficient than an array.",
+      "name_es": "mySet guarda los INDICES por los que ya pasó. Si encuentra un elemento repetido, lo retorna. mySet es MENOS eficiente que un arreglo.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 45,
+    "fields":{
+      "name": "mySet stores the ELEMENTS that already passed. If it finds a duplicate element, it returns it. mySet is LESS efficient than an array.",
+      "name_es": "mySet guarda los ELEMENTOS por los que ya pasó. Si encuentra un elemento repetido, lo retorna. mySet es MENOS eficiente que un arreglo.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 46,
+    "fields":{
+      "name": "The code on the RIGHT is faster because Set() inserts elements FASTER than the array",
+      "name_es": "El código de la derecha es más veloz por que el Set() inserta elementos más RAPIDO que el arreglo.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 47,
+    "fields":{
+      "name": "The code on the LEFT is faster because Set() inserts elements SLOWER than the array",
+      "name_es": "El código de la IZQUIERDA es más veloz por que el Set() inserta elementos más LENTO que el arreglo.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
   }
 ]
-
-
-

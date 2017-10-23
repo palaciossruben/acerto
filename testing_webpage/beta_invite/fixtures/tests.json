@@ -58,5 +58,17 @@
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.test",
+    "pk": 6,
+    "fields":{
+      "name": "Algorithms and logic",
+      "name_es": "Algoritmos y lógica",
+      "questions": [18, 19, 20, 21, 22],
+      "cut_score": 65,
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
   }
 ]

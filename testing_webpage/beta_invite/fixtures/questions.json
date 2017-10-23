@@ -206,8 +206,7 @@
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
-  }
-  ,
+  },
   {
     "model": "beta_invite.question",
     "pk": 17,
@@ -220,6 +219,74 @@
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 18,
+    "fields":{
+      "text": "What does this statement asks?",
+      "text_es": "¿Qué pregunta este enunciado?",
+      "answers": [34, 35, 36, 37],
+      "type": 1,
+      "correct_answers": [37],
+      "image_path": "beta_invite/questions/18/first_duplicate_statement.png",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 19,
+    "fields":{
+      "text": "How would you solve the problem stated above?",
+      "text_es": "¿Cómo solucionarias el problema anterior?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 20,
+    "fields":{
+      "text": "This is a possible solution to the problem. Why the last line returns -1?",
+      "text_es": "Esta es una posible solución al problema. ¿Por qué en la última linea retorna -1?",
+      "answers": [38, 39, 40, 41],
+      "type": 1,
+      "correct_answers": [39],
+      "image_path": "beta_invite/questions/20/slow_array_code.png",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 21,
+    "fields":{
+      "text": "This is another possible solution. What does the data structure mySet do?",
+      "text_es": "Esta es otra posible solución ¿Qué hace la estructura de datos mySet?",
+      "answers": [42, 43, 44, 45],
+      "type": 1,
+      "correct_answers": [42],
+      "image_path": "beta_invite/questions/21/fast_set_code.png",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 22,
+    "fields":{
+      "text": "To solve the problem, which of the 2 codes is faster?",
+      "text_es": "Para resolver el problema, ¿cuál de los 2 códigos es más veloz?",
+      "answers": [46, 47],
+      "type": 1,
+      "correct_answers": [46],
+      "image_path": "beta_invite/questions/22/algorithms_comparison.png",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
   }
 ]
-
