@@ -146,7 +146,7 @@
       "title": "Developer",
       "title_es": "Desarrollador",
       "bullets": [7, 18, 23, 24, 25, 26, 27, 28, 37, 38],
-      "tests": [5],
+      "tests": [6],
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
