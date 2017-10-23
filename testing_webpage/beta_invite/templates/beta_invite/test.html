@@ -16,7 +16,8 @@
         <br>
         <h2>{% trans "Test: " %} {{ test.name }}</h2>
 
-        {% for question in test.questions.all %}
+        <!--Orders questions according to preset ordering-->
+        {% for question in test.questions.all|dictsort:"order" %}
 
             <br>
             <br>

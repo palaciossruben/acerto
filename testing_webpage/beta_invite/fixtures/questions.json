@@ -230,6 +230,7 @@
       "type": 1,
       "correct_answers": [37],
       "image_path": "beta_invite/questions/18/first_duplicate_statement.png",
+      "order": 1,
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -243,6 +244,7 @@
       "answers": [],
       "type": 3,
       "correct_answers": [],
+      "order": 2,
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -256,6 +258,7 @@
       "answers": [38, 39, 40, 41],
       "type": 1,
       "correct_answers": [39],
+      "order": 3,
       "image_path": "beta_invite/questions/20/slow_array_code.png",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
@@ -270,6 +273,7 @@
       "answers": [42, 43, 44, 45],
       "type": 1,
       "correct_answers": [42],
+      "order": 4,
       "image_path": "beta_invite/questions/21/fast_set_code.png",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
@@ -284,6 +288,7 @@
       "answers": [46, 47],
       "type": 1,
       "correct_answers": [46],
+      "order": 5,
       "image_path": "beta_invite/questions/22/algorithms_comparison.png",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
