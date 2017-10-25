@@ -500,9 +500,10 @@ def get_test_result(request):
             elif question.type.code == 'OF':
                 survey.text_answer = answer_text
                 result += text_analizer.get_score(answer_text)
-            elif question.type.code == 'MA':
+            elif question.type.code == 'MA':  # TODO: implement multiple answers.
                 pass
-                # TODO: implement multiple answers.
+            elif question.type.code == 'DOB':  # TODO: implement degree of belief.
+                pass
 
             survey.save()
 

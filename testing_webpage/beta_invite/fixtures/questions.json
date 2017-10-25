@@ -245,8 +245,8 @@
     "model": "beta_invite.question",
     "pk": 19,
     "fields":{
-      "text": "How would you solve the problem stated above?",
-      "text_es": "¿Cómo solucionarias el problema anterior?",
+      "text": "Explain to us in words: How would you solve the problem stated above?",
+      "text_es": "Explícanos en palabras: ¿Cómo solucionarias el problema anterior?",
       "answers": [],
       "type": 3,
       "correct_answers": [],
@@ -311,6 +311,21 @@
       "correct_answers": [46],
       "order": 5,
       "image_path": "beta_invite/questions/22/algorithms_comparison.png",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 23,
+    "fields":{
+      "text": "You find it difficult to introduce yourself to other people?",
+      "text_es": "¿Te resulta difícil presentarte a otras personas?",
+      "answers": [],
+      "type": 4,
+      "correct_answers": [],
+      "order": 1,
+      "additional_params": {"from": "I","to": "E"},
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }

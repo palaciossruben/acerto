@@ -1,0 +1,92 @@
+[
+  {
+    "model": "beta_invite.personalitytype",
+    "pk": 1,
+    "fields":{
+      "name": "Extroverted",
+      "code": "E",
+      "opposite": "I"
+    }
+  },
+  {
+    "model": "beta_invite.personalitytype",
+    "pk": 2,
+    "fields":{
+      "name": "Introverted",
+      "code": "I",
+      "opposite": "E"
+    }
+  },
+  {
+    "model": "beta_invite.personalitytype",
+    "pk": 3,
+    "fields":{
+      "name": "Sensing",
+      "code": "S",
+      "opposite": "N"
+    }
+  },
+  {
+    "model": "beta_invite.personalitytype",
+    "pk": 4,
+    "fields":{
+      "name": "Intuitive",
+      "code": "N",
+      "opposite": "S"
+    }
+  },
+  {
+    "model": "beta_invite.personalitytype",
+    "pk": 5,
+    "fields":{
+      "name": "Thinking",
+      "code": "T",
+      "opposite": "F"
+    }
+  },
+  {
+    "model": "beta_invite.personalitytype",
+    "pk": 6,
+    "fields":{
+      "name": "Feeling",
+      "code": "F",
+      "opposite": "T"
+    }
+  },
+  {
+    "model": "beta_invite.personalitytype",
+    "pk": 7,
+    "fields":{
+      "name": "Judging",
+      "code": "J",
+      "opposite": "P"
+    }
+  },
+  {
+    "model": "beta_invite.personalitytype",
+    "pk": 8,
+    "fields":{
+      "name": "Perceiving",
+      "code": "P",
+      "opposite": "J"
+    }
+  },
+  {
+    "model": "beta_invite.personalitytype",
+    "pk": 9,
+    "fields":{
+      "name": "Assertive",
+      "code": "A",
+      "opposite": "U"
+    }
+  },
+  {
+    "model": "beta_invite.personalitytype",
+    "pk": 10,
+    "fields":{
+      "name": "Turbulent",
+      "code": "U",
+      "opposite": "A"
+    }
+  }
+]

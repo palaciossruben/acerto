@@ -29,7 +29,8 @@
 
             <h3>{{ question.text_es }}</h3>
 
-            {% if question.type.id == 1 %}
+            <!-- TODO: implement multiple check boxes-->
+            {% if question.type.code == 'SA' %}
 
                 {% get_current_language as LANGUAGE_CODE %}
 
@@ -39,12 +40,39 @@
                         style="font-size:12px;" value="{{ answer.id }}"> {{ answer.name_es }} <br>
 
                 {% endfor %}
-            {% else %}
+            {% elif question.type.code == 'OF' %}
 
-                <!-- TODO: implement multiple check boxes-->
                 {% trans "Your Answer" as text_placeholder %}
                 <textarea style="font-size:15px" name="test_{{ test.id }}_question_{{ question.id }}"
                     cols="60" rows="5" placeholder="{{ text_placeholder }}"></textarea>
+
+            {% elif question.type.code == 'DOB' %}
+
+                <div style="width: 655px; margin: auto;">
+
+                    <div style="float: left">
+                        <div class="hidden-xs col-sm-3 caption left sets-answer">{% trans "Agree" %}</div>
+                    </div>
+
+                    <div style="float: left; margin-left: 20px;">
+                        <input type="radio" name="test_{{ test.id }}_question_{{ question.id }}"
+                            style="font-size:12px; border: 0px; width: 100%; height: 3em; overflow: hidden;" value="1"> {{ answer.name_es }} <br>
+                    </div>
+
+                    <div style="float: left; margin-left: 20px;">
+                        <input type="radio" name="test_{{ test.id }}_question_{{ question.id }}"
+                            style="font-size:12px; border: 0px; width: 100%; height: 1em; overflow: hidden;" value="0"> {{ answer.name_es }} <br>
+                    </div>
+
+                    <div style="float: left; margin-left: 20px;">
+                        <input type="radio" name="test_{{ test.id }}_question_{{ question.id }}"
+                            style="font-size:12px; border: 0px; width: 100%; height: 3em;" value="-1"> {{ answer.name_es }} <br>
+                    </div>
+
+                    <div style="float: left; margin-left: 20px;">
+                        <div class="hidden-xs col-sm-3 caption left sets-answer">{% trans "Disagree" %}</div>
+                    </div>
+                </div>
 
             {% endif %}
         {% endfor %}
