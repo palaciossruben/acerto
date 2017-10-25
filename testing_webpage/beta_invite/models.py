@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.fields import JSONField
 
 
 class Visitor(models.Model):
@@ -134,6 +135,7 @@ class Question(models.Model):
     correct_answers = models.ManyToManyField(Answer, related_name='correct_answers')
     image_path = models.CharField(max_length=200, null=True)
     order = models.IntegerField(default=1)
+    additional_params = JSONField(null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -309,3 +311,17 @@ class Score(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'scores'
+
+
+class PersonalityType(models.Model):
+
+    name = models.CharField(max_length=200, null=True)
+    code = models.CharField(max_length=2, null=True)
+    opposite = models.CharField(max_length=2, null=True)
+
+    def __str__(self):
+        return 'id={0}, name={1}, code={2}, opposite={3}'.format(self.id, self.name, self.code, self.opposite)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'personality_types'

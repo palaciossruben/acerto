@@ -70,5 +70,17 @@
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.test",
+    "pk": 7,
+    "fields":{
+      "name": "personality - no wrong or right answers.",
+      "name_es": "personalidad - no hay respuestas correctas o incorrectas",
+      "questions": [23],
+      "cut_score": 0,
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
   }
 ]
