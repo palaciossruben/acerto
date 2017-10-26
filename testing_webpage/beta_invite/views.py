@@ -504,6 +504,11 @@ def get_test_result(request):
                 pass
             elif question.type.code == 'DOB':  # TODO: implement degree of belief.
                 pass
+            elif question.type.code == 'NI':
+                number = int(answer_text)
+                survey.numeric_answer = number
+                if question.params['min_correct'] <= number <= question.params['max_correct']:
+                    result += 1
 
             survey.save()
 

@@ -5,8 +5,8 @@
     "fields":{
       "name": "Sales representative",
       "name_es": "Asesor Comercial",
-      "questions": [1, 2],
-      "cut_score": 80,
+      "questions": [1, 2, 24],
+      "cut_score": 90,
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
