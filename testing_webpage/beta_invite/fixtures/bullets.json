@@ -655,5 +655,23 @@
       "name_es": "Solo para posición móvil/frontend, es una ventaja saber: móvil, AngularJS",
       "bullet_type_id": 2
     }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 74,
+    "fields": {
+      "name": "Experience with Xcode and Swift, have published work on the store",
+      "name_es": "Tener experiencia con Xcode y Swift, haber publicado en la tienda",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 75,
+    "fields": {
+      "name": "Its a big plus to have your own published projects",
+      "name_es": "Es un gran plus tener tus propios proyectos publicados en la tienda.",
+      "bullet_type_id": 2
+    }
   }
 ]
