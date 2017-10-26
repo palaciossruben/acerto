@@ -44,8 +44,8 @@
     "model": "beta_invite.question",
     "pk": 4,
     "fields":{
-      "text": "Which number (x) should come next in the series?   1   1   2   3   5   8   13   x",
-      "text_es": "¿Qué número (x) sigue en la serie?   1   1   2   3   5   8   13   x",
+      "text": "Which number (x) should come next in the series?   1,   1,   2,   3,   5,   8,   13,   x",
+      "text_es": "¿Qué número (x) sigue en la serie?   1,   1,   2,   3,   5,   8,   13,   x",
       "answers": [10, 11, 12, 13, 14],
       "type": 1,
       "correct_answers": [11],
@@ -341,8 +341,8 @@
     "model": "beta_invite.question",
     "pk": 25,
     "fields":{
-      "text": "Which number (x) should come next in the series?   4   6   9   6   14   6   x",
-      "text_es": "¿Qué número (x) sigue en la serie?   4   6   9   6   14   6   x",
+      "text": "Which number (x) should come next in the series?   4,   6,   9,   6,   14,   6,   19,   6,   x",
+      "text_es": "¿Qué número (x) sigue en la serie?   4,   6,   9,   6,   14,   6,   19,   6,   x",
       "answers": [48, 49, 50, 51],
       "type": 1,
       "correct_answers": [50],

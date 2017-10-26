@@ -483,8 +483,8 @@
     "model": "beta_invite.answer",
     "pk": 50,
     "fields":{
-      "name": "19",
-      "name_es": "19",
+      "name": "24",
+      "name_es": "24",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
