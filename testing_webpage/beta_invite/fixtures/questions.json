@@ -4,10 +4,11 @@
     "pk": 1,
     "fields":{
       "text": "What was/is your last salary?",
-      "text_es": "¿Cual es/fue tu último salario?",
+      "text_es": "¿Cuál es/fue tu último salario?",
       "answers": [1, 2, 3, 4, 5],
       "type": 1,
       "correct_answers": [1, 2],
+      "order": 2,
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -17,10 +18,11 @@
     "pk": 2,
     "fields":{
       "text": "In a short text How would you sell someone a salt shaker?",
-      "text_es": "En un texto corto ¿Como le venderías a alguién un salero?",
+      "text_es": "En un texto corto ¿Cómo le venderías a alguién un salero?",
       "answers": [],
       "type": 3,
       "correct_answers": [],
+      "order": 3,
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -30,7 +32,7 @@
     "pk": 3,
     "fields":{
       "text": "What is your expected monthly salary?",
-      "text_es": "¿Que salario mensual esperas?",
+      "text_es": "¿Qué salario mensual esperas?",
       "answers": [6, 7, 8, 9],
       "type": 1,
       "correct_answers": [6, 7, 8],
@@ -56,7 +58,7 @@
     "pk": 5,
     "fields":{
       "text": "Imagine that suddenly there is a boss change on your workplace and you have to deal with a difficult person that says no to everything. How would you deal with this situation?",
-      "text_es": "Imaginate que de repente te cambian tu jefe en el trabajo y ponen a una persona difícil de tratar que dice a todo que no. ¿Qué harias para resolver esta situación?",
+      "text_es": "Imagínate que de repente te cambian tu jefe en el trabajo y ponen a una persona difícil de tratar que dice a todo que no. ¿Qué harías para resolver esta situación?",
       "answers": [15, 17, 18, 19, 20],
       "type": 1,
       "correct_answers": [17, 19],
@@ -69,7 +71,7 @@
     "pk": 6,
     "fields":{
       "text": "What is the time-complexity of retreiving an element from a linked-list with n elements?",
-      "text_es": "¿Cuál es la complejidad de acceder a un elemento en una lista encadenada con n elementos?",
+      "text_es": "¿Cuál es la complejidad de acceder a un elemento en una lista enlazadas con n elementos?",
       "answers": [21, 22, 23, 24, 25],
       "type": 1,
       "correct_answers": [23],
@@ -82,7 +84,7 @@
     "pk": 7,
     "fields":{
       "text": "Do you have experience in mobile or web design?",
-      "text_es": "¿Tienes experiencia en diseño mobil o web?",
+      "text_es": "¿Tienes experiencia en diseño móvil o web?",
       "answers": [32, 33],
       "type": 1,
       "correct_answers": [33],
@@ -138,7 +140,7 @@
       "answers": [26, 27, 28],
       "type": 1,
       "correct_answers": [26],
-      "order": 5,
+      "order": 2,
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -166,7 +168,7 @@
       "answers": [],
       "type": 3,
       "correct_answers": [],
-      "order": 1,
+      "order": 4,
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -193,7 +195,7 @@
       "answers": [],
       "type": 3,
       "correct_answers": [],
-      "order": 2,
+      "order": 5,
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -207,7 +209,7 @@
       "answers": [32, 33],
       "type": 1,
       "correct_answers": [33],
-      "order": 4,
+      "order": 1,
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -217,7 +219,7 @@
     "pk": 17,
     "fields":{
       "text": "Tell us something non-conventional that you have done?",
-      "text_es": "¿Cuentanos algo no convencial que hallas echo?",
+      "text_es": "¿Cuéntanos algo no convencional que hayas hecho?",
       "answers": [],
       "type": 3,
       "correct_answers": [],
@@ -260,7 +262,7 @@
     "pk": 20,
     "fields":{
       "text": "This is a possible solution to the problem. Why the last line returns -1?",
-      "text_es": "Esta es una posible solución al problema. ¿Por qué en la última linea retorna -1?",
+      "text_es": "Esta es una posible solución al problema. ¿Por qué la última linea retorna -1?",
       "answers": [38, 39, 40, 41],
       "type": 1,
       "correct_answers": [39],
@@ -302,21 +304,6 @@
   },
   {
     "model": "beta_invite.question",
-    "pk": 22,
-    "fields":{
-      "text": "To solve the problem, which of the 2 codes is faster?",
-      "text_es": "Para resolver el problema, ¿cuál de los 2 códigos es más veloz?",
-      "answers": [46, 47],
-      "type": 1,
-      "correct_answers": [46],
-      "order": 5,
-      "image_path": "beta_invite/questions/22/algorithms_comparison.png",
-      "created_at": "2017-08-24 02:42:49.0957+00",
-      "updated_at": "2017-08-24 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.question",
     "pk": 23,
     "fields":{
       "text": "You find it difficult to introduce yourself to other people?",
@@ -325,7 +312,27 @@
       "type": 4,
       "correct_answers": [],
       "order": 1,
-      "additional_params": {"from": "I","to": "E"},
+      "params": {"from": "I","to": "E"},
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 24,
+    "fields":{
+      "text": "What's your age?",
+      "text_es": "¿Cuál es tu edad?",
+      "answers": [],
+      "type": 5,
+      "correct_answers": [],
+      "order": 1,
+      "params": {"min": 0,
+                 "max": 100,
+                 "min_correct": 18,
+                 "max_correct": 25,
+                 "default":20
+                },
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }

@@ -135,7 +135,7 @@ class Question(models.Model):
     correct_answers = models.ManyToManyField(Answer, related_name='correct_answers')
     image_path = models.CharField(max_length=200, null=True)
     order = models.IntegerField(default=1)
-    additional_params = JSONField(null=True)
+    params = JSONField(null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -258,6 +258,7 @@ class Survey(models.Model):
     question = models.ForeignKey(Question)
     answer = models.ForeignKey(Answer, null=True, on_delete=models.SET_NULL)
     text_answer = models.CharField(max_length=10000, null=True)
+    numeric_answer = models.FloatField(null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

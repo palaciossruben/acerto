@@ -74,6 +74,13 @@
                     </div>
                 </div>
 
+            {% elif question.type.code == 'NI' %}
+
+                <div style="margin-top:-10px;">
+                    <input style="color:black; width: 50px; font-size: 14px; height: 30px;" name="test_{{ test.id }}_question_{{ question.id }}"
+                        type="number" value="{{ question.params.default }}" min="{{ question.params.min }}" max="{{ question.params.max }}" />
+                </div>
+
             {% endif %}
         {% endfor %}
     {% endfor %}

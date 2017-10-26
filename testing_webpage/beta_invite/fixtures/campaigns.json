@@ -117,7 +117,7 @@
     "model": "beta_invite.campaign",
     "pk": 7,
     "fields": {
-      "name": "Sales Representative",
+      "name": "Sales Representative (Neumarket)",
       "profession": null,
       "education": null,
       "country": null,
