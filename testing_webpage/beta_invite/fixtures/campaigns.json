@@ -3,7 +3,7 @@
     "model": "beta_invite.campaign",
     "pk": 1,
     "fields":{
-      "name": "Fullstack Javascript Developer",
+      "name": "Fullstack Javascript Developer (Smartenit) INACTIVE",
       "profession": null,
       "education": null,
       "country": null,
@@ -22,7 +22,7 @@
     "model": "beta_invite.campaign",
     "pk": 2,
     "fields": {
-      "name": "Systems Administrator",
+      "name": "Systems Administrator (Vichara) INACTIVE",
       "profession": null,
       "education": null,
       "country": null,
@@ -41,7 +41,7 @@
     "model": "beta_invite.campaign",
     "pk": 3,
     "fields": {
-      "name": "C/C++ Developer",
+      "name": "C/C++ Developer (Vichara) INACTIVE",
       "profession": null,
       "education": null,
       "country": null,
@@ -60,7 +60,7 @@
     "model": "beta_invite.campaign",
     "pk": 4,
     "fields": {
-      "name": "Senior .NET/C# Developer",
+      "name": "Senior .NET/C# Developer (Vichara) INACTIVE",
       "profession": null,
       "education": null,
       "country": null,
@@ -79,7 +79,7 @@
     "model": "beta_invite.campaign",
     "pk": 5,
     "fields": {
-      "name": "Default Campaign",
+      "name": "Default Campaign ACTIVE",
       "profession": null,
       "education": null,
       "country": null,
@@ -98,7 +98,7 @@
     "model": "beta_invite.campaign",
     "pk": 6,
     "fields": {
-      "name": "Back-End Engineer",
+      "name": "Back-End Engineer (Conekta) INACTIVE",
       "profession": null,
       "education": null,
       "country": null,
@@ -117,7 +117,7 @@
     "model": "beta_invite.campaign",
     "pk": 7,
     "fields": {
-      "name": "Sales Representative (Neumarket)",
+      "name": "Sales Representative (Neumarket) ACTIVE",
       "profession": null,
       "education": null,
       "country": null,
@@ -136,7 +136,7 @@
     "model": "beta_invite.campaign",
     "pk": 8,
     "fields": {
-      "name": "Developer (Conekta)",
+      "name": "Developer (Conekta) ",
       "profession": null,
       "education": null,
       "country": null,
@@ -155,7 +155,7 @@
     "model": "beta_invite.campaign",
     "pk": 9,
     "fields":{
-      "name": "Cloud Architect (Smartenit)",
+      "name": "Cloud Architect (Smartenit) INACTIVE",
       "profession": null,
       "education": null,
       "country": null,
@@ -174,7 +174,7 @@
     "model": "beta_invite.campaign",
     "pk": 10,
     "fields":{
-      "name": "iOS Developer (Tappsi)",
+      "name": "iOS Developer (Tappsi) INACTIVE",
       "profession": 4,
       "education": 3,
       "country": 1,
@@ -193,7 +193,7 @@
     "model": "beta_invite.campaign",
     "pk": 11,
     "fields":{
-      "name": "Fullstack Developer (Tpaga)",
+      "name": "Fullstack Developer (Tpaga) INACTIVE",
       "profession": 4,
       "education": 3,
       "country": 1,
@@ -212,7 +212,7 @@
     "model": "beta_invite.campaign",
     "pk": 12,
     "fields":{
-      "name": "UI/UX Designer (Tpaga)",
+      "name": "UI/UX Designer (Tpaga) PAUSED",
       "profession": 4,
       "education": 3,
       "country": 1,
@@ -231,7 +231,7 @@
     "model": "beta_invite.campaign",
     "pk": 13,
     "fields":{
-      "name": "Growth Hacker (Tpaga)",
+      "name": "Growth Hacker (Tpaga) ACTIVE",
       "profession": 4,
       "education": 3,
       "country": 1,
@@ -250,7 +250,7 @@
     "model": "beta_invite.campaign",
     "pk": 14,
     "fields":{
-      "name": "Developer (Certi Taxi)",
+      "name": "Developer (Certi Taxi) ACTIVE",
       "profession": 4,
       "education": 3,
       "country": 1,
@@ -269,7 +269,7 @@
     "model": "beta_invite.campaign",
     "pk": 15,
     "fields":{
-      "name": "Backend Developer (CertiTaxi)",
+      "name": "Backend Developer (CertiTaxi) INACTIVE",
       "profession": 4,
       "education": 3,
       "country": 1,
@@ -288,7 +288,7 @@
     "model": "beta_invite.campaign",
     "pk": 16,
     "fields":{
-      "name": "Fullstack Developer (Tpaga)",
+      "name": "Lead iOS Developer (Tpaga) ACTIVE",
       "profession": 4,
       "education": 3,
       "country": 1,
