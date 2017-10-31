@@ -88,5 +88,15 @@
       "priority":9,
       "is_rejected": false
     }
+  },
+  {
+    "model": "dashboard.state",
+    "pk": 10,
+    "fields":{
+      "name": "Did interview, standby",
+      "code": "DIS",
+      "priority":9,
+      "is_rejected": false
+    }
   }
 ]
