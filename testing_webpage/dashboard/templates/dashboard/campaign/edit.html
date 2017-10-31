@@ -61,6 +61,18 @@
                 </div>
 
                 <div class="row" style="margin-top:45px;">
+
+                    <div class="col-sm-4">
+
+                        <h3>Did Interview, in Standby</h3>
+                        <br>
+
+                        {% for candidate in did_interview_in_standby %}
+                            {% include "dashboard/campaign/candidate.html" with candidate=candidate campaigns=campaigns %}
+                        {% endfor %}
+
+                    </div>
+
                     <div class="col-sm-4">
 
                         <h3>Sent To Client</h3>
@@ -82,6 +94,10 @@
                         {% endfor %}
 
                     </div>
+                </div>
+
+                <div class="row" style="margin-top:45px;">
+
                     <div class="col-sm-4">
 
                         <h3>Rejected</h3>

@@ -182,6 +182,7 @@ def get_rendering_data(campaign_id):
     backlog = get_candidates_from_state('BL', campaign_id)
     waiting_tests = get_candidates_from_state('WFT', campaign_id)
     waiting_interview = get_candidates_from_state('WFI', campaign_id)
+    did_interview_in_standby = get_candidates_from_state('DIS', campaign_id)
     sent_to_client = get_candidates_from_state('STC', campaign_id)
     got_job = get_candidates_from_state('GTJ', campaign_id)
 
@@ -189,7 +190,7 @@ def get_rendering_data(campaign_id):
                                                    state__is_rejected=True,
                                                    removed=False).order_by('-state__priority')
 
-    return backlog, waiting_tests, waiting_interview, sent_to_client, got_job, rejected_candidates, State.objects.all()
+    return backlog, waiting_tests, waiting_interview, did_interview_in_standby, sent_to_client, got_job, rejected_candidates, State.objects.all()
 
 
 def update_candidate(request, candidate):
@@ -261,7 +262,7 @@ def edit_campaign_candidates(request, pk):
                           with_localization=False,
                           body_is_filename=False)
 
-    backlog, waiting_tests, waiting_interview, sent_to_client, got_job, rejected, states = get_rendering_data(pk)
+    backlog, waiting_tests, waiting_interview, did_interview_in_standby, sent_to_client, got_job, rejected, states = get_rendering_data(pk)
 
     # all campaigns except the current one.
     campaigns_to_move_to = Campaign.objects.exclude(pk=pk)
@@ -271,6 +272,7 @@ def edit_campaign_candidates(request, pk):
                                                 'backlog': backlog,
                                                 'waiting_tests': waiting_tests,
                                                 'waiting_interview': waiting_interview,
+                                                'did_interview_in_standby': did_interview_in_standby,
                                                 'sent_to_client': sent_to_client,
                                                 'got_job': got_job,
                                                 'rejected': rejected,
