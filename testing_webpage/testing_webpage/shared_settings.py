@@ -170,3 +170,7 @@ AUTHENTICATION_BACKENDS = (
 LOGIN_URL = 'business:login'
 LOGOUT_URL = 'business:logout'
 LOGIN_REDIRECT_URL = 'business:home'
+
+
+# Disables this limit.
+DATA_UPLOAD_MAX_NUMBER_FIELDS = None
