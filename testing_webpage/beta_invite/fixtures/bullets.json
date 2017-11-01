@@ -673,5 +673,41 @@
       "name_es": "Es un gran plus tener tus propios proyectos publicados en la tienda.",
       "bullet_type_id": 2
     }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 76,
+    "fields": {
+      "name": "Able to make numerical analysis with tools such as MS Excel.",
+      "name_es": "Habilidades en analisis númerico en herramientas tales como MS Excel.",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 77,
+    "fields": {
+      "name": "Able to deal with high profile B2B clients",
+      "name_es": "Capaz de manejar cuentas de clientes B2B grandes",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 78,
+    "fields": {
+      "name": "Creative; able to come up with out of the box solutions",
+      "name_es": "Creativo; capaz de solucionar problemas de formas innovadoras",
+      "bullet_type_id": 2
+    }
+  },
+  {
+    "model": "beta_invite.bullet",
+    "pk": 79,
+    "fields": {
+      "name": "Identify clients needs and come up with solutions.",
+      "name_es": "Identificar necesidades del cliente y encontrarles una solución",
+      "bullet_type_id": 2
+    }
   }
 ]
