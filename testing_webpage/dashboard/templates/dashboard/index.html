@@ -2,9 +2,12 @@
 <ul>
     {% for campaign in campaigns %}
         <li>{{ campaign.name }}
+        <br>
         <a href="campaign/{{ campaign.id }}">Candidates</a>
         <br>
         <a href="campaign/edit/{{ campaign.id }}">Edit</a>
+        <br>
+        <a href="campaign/interview/{{ campaign.id }}">Interview</a>
         </li>
         <br>
     {% endfor %}
