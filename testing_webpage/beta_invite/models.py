@@ -136,6 +136,7 @@ class Question(models.Model):
     image_path = models.CharField(max_length=200, null=True)
     order = models.IntegerField(default=1)
     params = JSONField(null=True)
+    video_token = models.CharField(max_length=200, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -166,6 +167,23 @@ class Test(models.Model):
         db_table = 'tests'
 
 
+class Interview(models.Model):
+
+    name = models.CharField(max_length=200, null=True)
+    name_es = models.CharField(max_length=200, null=True)
+    questions = models.ManyToManyField(Question)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '{0}, {1}'.format(self.id, self.name)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'interviews'
+
+
 class Campaign(models.Model):
 
     name = models.CharField(max_length=200)
@@ -179,6 +197,7 @@ class Campaign(models.Model):
     title_es = models.CharField(max_length=200, null=True)
     bullets = models.ManyToManyField(Bullet)
     tests = models.ManyToManyField(Test)
+    interviews = models.ManyToManyField(Interview)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

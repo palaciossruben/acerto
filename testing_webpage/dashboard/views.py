@@ -2,7 +2,7 @@ import re
 
 from django.core import serializers
 from django.shortcuts import render, redirect
-from beta_invite.models import Campaign, User, Evaluation, Test, BulletType, Bullet
+from beta_invite.models import Campaign, User, Evaluation, Test, BulletType, Bullet, Interview, Question
 from dashboard.models import State, Candidate, Comment
 from dashboard import constants as cts
 from beta_invite.util import email_sender
@@ -406,3 +406,58 @@ def edit_campaign(request, pk):
                                               'action_url': '#',
                                               'title': 'Update Campaign',
                                               })
+
+
+def get_question_array(video_token):
+    """
+    Args:
+        video_token:
+    Returns:
+    """
+
+    if video_token is not None:
+        question = Question(video_token=video_token)
+        question.save()
+        return [question]
+    else:
+        return []
+
+
+def interview(request, pk):
+
+    new_video_token = request.POST.get('new_video_token')
+    interview_name = request.POST.get('interview_name')
+    interview_name_es = request.POST.get('interview_name_es')
+
+    campaign = Campaign.objects.get(pk=pk)
+
+    question_array = get_question_array(new_video_token)
+
+    # if no interview, then it creates a new one.
+    if len(campaign.interviews.all()) == 0:
+
+        interview_obj = Interview(name=interview_name,
+                                  name_es=interview_name_es)
+        interview_obj.save()  # saves to get the id. Cannot add questions without having an id.
+
+        interview_obj.questions = question_array
+
+        interview_obj.save()  # saves to add the questions.
+
+        campaign.interviews = [interview_obj]
+        campaign.save()
+
+    else:  # there is already an interview.
+
+        # TODO: change this when a campaign has more than 1 interview.
+        interview_obj = campaign.interviews.all()[0]
+        if len(question_array) > 0:
+            interview_obj.questions.add(question_array[0])
+        interview_obj.save()
+
+    import os
+    print(os.listdir('.'))
+
+    return render(request, cts.INTERVIEW, {'video_tokens': [q.video_token for q in interview_obj.questions.all()],
+                                           'ziggeo_api_key': open('./dashboard/static/ziggeo_api_key.txt').read()})
+

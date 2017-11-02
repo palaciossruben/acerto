@@ -55,3 +55,5 @@ class Candidate(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'candidates'
+
+
