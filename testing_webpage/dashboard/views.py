@@ -455,9 +455,6 @@ def interview(request, pk):
             interview_obj.questions.add(question_array[0])
         interview_obj.save()
 
-    import os
-    print(os.listdir('.'))
-
     return render(request, cts.INTERVIEW, {'video_tokens': [q.video_token for q in interview_obj.questions.all()],
                                            'ziggeo_api_key': open('./dashboard/static/ziggeo_api_key.txt').read().replace('\n', '')})
 
