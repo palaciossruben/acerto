@@ -136,7 +136,7 @@ msgstr "¿No quieres aplicar a esta posición?"
 
 #: beta_invite/templates/beta_invite/long_form.html:240
 msgid "Apply to another job!"
-msgstr "¡Aplica a una otro trabajo!"
+msgstr "¡Aplica a otro trabajo!"
 
 #: beta_invite/templates/beta_invite/meet.html:99
 msgid ""
