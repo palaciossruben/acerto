@@ -253,8 +253,8 @@
     "model": "beta_invite.answer",
     "pk": 27,
     "fields":{
-      "name": "Make a diploma in sales from the hand of the best sellers worldwide",
-      "name_es": "Hacer un diplomado en ventas de la mano de los mejores vendedores a nivel mundial",
+      "name": "Make a diploma with worldwide experts in your area",
+      "name_es": "Hacer un diplomado de la mano de expertos en tu area, a nivel mundial",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
