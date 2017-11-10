@@ -16,6 +16,10 @@ def get_content_of_file(file_path):
     """
     try:
         content = open(file_path).read()
+
+        if not content or len(content) == 0:
+            return None
+
         return content[:-1] if content[-1] == '\n' else content
     except FileNotFoundError:
         return None
