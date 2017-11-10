@@ -11,7 +11,7 @@ ZiggeoApi.Events.on("system_ready", function() {
 
         form = document.getElementById('main_form_id');
         video_token = document.createElement('input');
-        video_token.setAttribute('name', 'new_video_token');
+        video_token.setAttribute('name', 'new_video');
         video_token.setAttribute('type', 'hidden');
         video_token.setAttribute('value', recorder.get('video'));
         form.appendChild(video_token);
@@ -23,10 +23,3 @@ function submit_form() {
     form = document.getElementById('main_form_id');
     form.submit();
 }
-
-
-/*
-TODO: make the remove button work!
-function remove_video_from_campaign({{ q.video_token }}, {{ campaign.id }}){
-}
-*/

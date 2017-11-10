@@ -120,6 +120,7 @@ def compute_related_words():
 if __name__ == '__main__':
 
     t0 = time.time()
+    # TODO: Get relevances with word2vec and gensim.
     compute_related_words()
     t1 = time.time()
     print('CONTEXT SEARCH TOOK: ' + str(t1-t0))

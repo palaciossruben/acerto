@@ -1,5 +1,6 @@
 import re
 
+import common
 from django.core import serializers
 from django.shortcuts import render, redirect
 from beta_invite.models import Campaign, User, Evaluation, Test, BulletType, Bullet, Interview, Question
@@ -7,6 +8,7 @@ from dashboard.models import State, Candidate, Comment
 from dashboard import constants as cts
 from beta_invite.util import email_sender
 from beta_invite.views import save_curriculum_from_request, get_drop_down_values
+from dashboard import interview_module
 
 
 def index(request):
@@ -408,30 +410,17 @@ def edit_campaign(request, pk):
                                               })
 
 
-def get_question_array(video_token):
-    """
-    Args:
-        video_token:
-    Returns:
-    """
-
-    if video_token is not None:
-        question = Question(video_token=video_token)
-        question.save()
-        return [question]
-    else:
-        return []
-
-
 def interview(request, pk):
 
     new_video_token = request.POST.get('new_video_token')
+    new_question_text = request.POST.get('new_question_text')
+    new_question_text_es = request.POST.get('new_question_text_es')
     interview_name = request.POST.get('interview_name')
     interview_name_es = request.POST.get('interview_name_es')
 
     campaign = Campaign.objects.get(pk=pk)
 
-    question_array = get_question_array(new_video_token)
+    new_question = interview_module.get_new_question(new_question_text, new_question_text_es, new_video_token)
 
     # if no interview, then it creates a new one.
     if len(campaign.interviews.all()) == 0:
@@ -440,7 +429,8 @@ def interview(request, pk):
                                   name_es=interview_name_es)
         interview_obj.save()  # saves to get the id. Cannot add questions without having an id.
 
-        interview_obj.questions = question_array
+        if new_question is not None:
+            interview_obj.questions.add(new_question)
 
         interview_obj.save()  # saves to add the questions.
 
@@ -451,10 +441,29 @@ def interview(request, pk):
 
         # TODO: change this when a campaign has more than 1 interview.
         interview_obj = campaign.interviews.all()[0]
-        if len(question_array) > 0:
-            interview_obj.questions.add(question_array[0])
+        if new_question is not None:
+            interview_module.assign_order_to_question(new_question, interview_obj)
+            interview_obj.questions.add(new_question)
+
         interview_obj.save()
 
-    return render(request, cts.INTERVIEW, {'video_tokens': [q.video_token for q in interview_obj.questions.all()],
-                                           'ziggeo_api_key': open('./dashboard/static/ziggeo_api_key.txt').read().replace('\n', '')})
+        interview_module.update_old_question_statements(request, interview_obj, new_question)
 
+    return render(request, cts.INTERVIEW, {'questions': [q for q in interview_obj.questions.order_by('order').all()],
+                                           'ziggeo_api_key': common.get_ziggeo_api_key()
+                                           })
+
+
+def edit_intro_video(request):
+    """
+    Edits the intro video of the interview.
+    Args:
+        request: HTTP
+    Returns: Render view.
+    """
+    new_video = request.POST.get('new_video')
+    if new_video is not None:
+        common.set_intro_video(new_video)
+
+    return render(request, cts.EDIT_INTRO_VIDEO, {'current_video': common.get_intro_video(),
+                                                  'ziggeo_api_key': common.get_ziggeo_api_key()})
