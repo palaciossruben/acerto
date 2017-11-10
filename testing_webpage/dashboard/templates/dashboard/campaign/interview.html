@@ -22,32 +22,55 @@
     <div style="margin-left:30px;">
         <h1>Current Video Questions</h1>
 
-        {% for token in video_tokens %}
-            <ziggeoplayer ziggeo-video='{{token}}'
-                ziggeo-width=320
-                ziggeo-height=240>
-            </ziggeoplayer>
-            <br>
-        {% endfor %}
-
-        <br>
-        <br>
-
-        <h3>Record new video question</h3>
-        <ziggeorecorder ziggeo-timelimit=15
-            ziggeo-width=320
-            ziggeo-height=240
-            ziggeo-theme='modern'
-            id="myRecorder"
-            disable_snapshots="disable_snapshots">
-        </ziggeorecorder>
-
         <form action="#" method="post" id="main_form_id">
 
-                {% csrf_token %}
+            {% csrf_token %}
 
-                <input type="button" class="btn btn-success" name="save_changes" value="Save!"
-                    onclick="submit_form()">
+            {% for q in questions %}
+                <br>
+                <br>
+                <ziggeoplayer ziggeo-video='{{q.video_token}}'
+                    ziggeo-width=320
+                    ziggeo-height=240>
+                </ziggeoplayer>
+                <br>
+
+                <textarea name="{{ q.video_token }}_text" cols="40" rows="5"
+                    placeholder="add a question text in English!">{{ q.text }}</textarea>
+                <br>
+
+                <textarea name="{{ q.video_token }}_text_es" cols="40" rows="5"
+                    placeholder="add a question text in Spanish!">{{ q.text_es }}</textarea>
+                <br>
+
+                <!--TODO-->
+                <!--<input type="button" class="btn btn-danger" name="remove_from_interview" value="Delete!"
+                    onclick="remove_video_from_campaign({{ q.video_token }}, {{ campaign.id }})">-->
+
+                <br>
+            {% endfor %}
+
+            <br>
+            <br>
+
+            <h3>Record new video question</h3>
+            <ziggeorecorder ziggeo-timelimit=60
+                ziggeo-width=320
+                ziggeo-height=240
+                ziggeo-theme='modern'
+                id="myRecorder">
+            </ziggeorecorder>
+            <br>
+
+            <textarea name="new_question_text" cols="40" rows="5"
+                    placeholder="add a question text in English!">{{ q.text }}</textarea>
+            <br>
+            <textarea name="new_question_text_es" cols="40" rows="5"
+                placeholder="add a question text in Spanish!">{{ q.text_es }}</textarea>
+            <br>
+
+            <input type="button" class="btn btn-success" name="save_changes" value="Save!"
+                onclick="submit_form()">
         </form>
     </div>
 
