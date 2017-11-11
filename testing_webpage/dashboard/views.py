@@ -179,7 +179,8 @@ def get_rendering_data(campaign_id):
 
     fill_and_update_candidates(users, campaign_id)
 
-    # TODO: recycle business search. Lot of work here: has to search according to campaign specification (education, profession, etc)
+    # TODO: recycle business search. Lot of work here: has to search according to campaign specification
+    # (education, profession, etc)
     # Orders by desc priority field on the state object.
     backlog = get_candidates_from_state('BL', campaign_id)
     waiting_tests = get_candidates_from_state('WFT', campaign_id)
