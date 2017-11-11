@@ -13,7 +13,7 @@
       "title": "Fullstack Javascript Developer",
       "title_es": "Desarrollador Fullstack Javascript",
       "bullets": [1, 2, 3, 4, 5, 6, 7, 8, 14],
-      "tests": [],
+      "tests": [6],
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
