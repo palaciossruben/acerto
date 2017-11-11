@@ -20,58 +20,28 @@
 <body>
 
     <div style="margin-left:30px;">
-        <h1>Current Video Questions</h1>
+        <h1>Questions and Answers</h1>
 
-        <form action="#" method="post" id="main_form_id">
-
-            {% csrf_token %}
-
-            {% for q in questions %}
-                <br>
-                <br>
-                <ziggeoplayer ziggeo-video='{{q.video_token}}'
-                    ziggeo-width=320
-                    ziggeo-height=240>
-                </ziggeoplayer>
-                <br>
-
-                <textarea name="{{ q.video_token }}_text" cols="40" rows="5"
-                    placeholder="add a question text in English!">{{ q.text }}</textarea>
-                <br>
-
-                <textarea name="{{ q.video_token }}_text_es" cols="40" rows="5"
-                    placeholder="add a question text in Spanish!">{{ q.text_es }}</textarea>
-                <br>
-
-                <!--TODO-->
-                <!--<input type="button" class="btn btn-danger" name="remove_from_interview" value="Delete!"
-                    onclick="remove_video_from_campaign({{ q.video_token }}, {{ campaign.id }})">-->
-
-                <br>
-            {% endfor %}
-
+        {% for question, survey in question_answer_tuples %}
             <br>
             <br>
-
-            <h3>Record new video question</h3>
-            <ziggeorecorder ziggeo-timelimit=60
+            <ziggeoplayer ziggeo-video='{{question.video_token}}'
                 ziggeo-width=320
-                ziggeo-height=240
-                ziggeo-theme='modern'
-                id="myRecorder">
-            </ziggeorecorder>
+                ziggeo-height=240>
+            </ziggeoplayer>
+
+            <br>
+            <p>{{ question.text }}</p>
             <br>
 
-            <textarea name="new_question_text" cols="40" rows="5"
-                    placeholder="add a question text in English!">{{ q.text }}</textarea>
-            <br>
-            <textarea name="new_question_text_es" cols="40" rows="5"
-                placeholder="add a question text in Spanish!">{{ q.text_es }}</textarea>
+            <ziggeoplayer ziggeo-video='{{survey.video_token}}'
+                ziggeo-width=320
+                ziggeo-height=240>
+            </ziggeoplayer>
+
             <br>
 
-            <input type="button" class="btn btn-success" name="save_changes" value="Save!"
-                onclick="submit_form()">
-        </form>
+        {% endfor %}
     </div>
 
 </body>

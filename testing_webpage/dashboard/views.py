@@ -3,7 +3,7 @@ import re
 import common
 from django.core import serializers
 from django.shortcuts import render, redirect
-from beta_invite.models import Campaign, User, Evaluation, Test, BulletType, Bullet, Interview, Question
+from beta_invite.models import Campaign, User, Evaluation, Test, BulletType, Bullet, Interview, Question, Survey
 from dashboard.models import State, Candidate, Comment
 from dashboard import constants as cts
 from beta_invite.util import email_sender
@@ -449,9 +449,9 @@ def interview(request, pk):
 
         interview_module.update_old_question_statements(request, interview_obj, new_question)
 
-    return render(request, cts.INTERVIEW, {'questions': [q for q in interview_obj.questions.order_by('order').all()],
-                                           'ziggeo_api_key': common.get_ziggeo_api_key()
-                                           })
+    return render(request, cts.INTERVIEW_QUESTIONS, {'questions': [q for q in interview_obj.questions.order_by('order').all()],
+                                                     'ziggeo_api_key': common.get_ziggeo_api_key()
+                                                     })
 
 
 def edit_intro_video(request):
@@ -467,3 +467,27 @@ def edit_intro_video(request):
 
     return render(request, cts.EDIT_INTRO_VIDEO, {'current_video': common.get_intro_video(),
                                                   'ziggeo_api_key': common.get_ziggeo_api_key()})
+
+
+def get_sorted_tuples(surveys):
+    """
+    Args:
+        surveys: Survey Objects.
+    Returns: (Question, Survey) tuples. Sorted by Question.order
+    """
+    question_answer_tuples = zip([s.question for s in surveys], surveys)
+    return sorted(question_answer_tuples, key=lambda my_tuple: my_tuple[0].order)
+
+
+def check_interview(request):
+    """
+    Args:
+        request: HTTP
+    Returns: Renders the whole interview.
+    """
+
+    candidate = Candidate.objects.get(pk=request.GET.get('candidate_id'))
+    surveys = Survey.objects.filter(user=candidate.user, campaign=candidate.campaign).all()
+
+    return render(request, cts.INTERVIEW, {'ziggeo_api_key': common.get_ziggeo_api_key(),
+                                           'question_answer_tuples': get_sorted_tuples(surveys)})

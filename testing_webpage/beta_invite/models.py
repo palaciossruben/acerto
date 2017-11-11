@@ -148,6 +148,16 @@ class Question(models.Model):
     class Meta:
         db_table = 'questions'
 
+    def translate(self, lang_code):
+        """
+        Args:
+            self: Me
+            lang_code: 'es' for example
+        Returns: translates
+        """
+        if lang_code == 'es':
+            self.text = self.text_es
+
 
 class Test(models.Model):
 
@@ -273,11 +283,14 @@ class User(models.Model):
 class Survey(models.Model):
 
     user = models.ForeignKey(User, null=True)
-    test = models.ForeignKey(Test)
+    campaign = models.ForeignKey(Campaign, null=True)
+    test = models.ForeignKey(Test, null=True)
     question = models.ForeignKey(Question)
     answer = models.ForeignKey(Answer, null=True, on_delete=models.SET_NULL)
     text_answer = models.CharField(max_length=10000, null=True)
     numeric_answer = models.FloatField(null=True)
+    interview = models.ForeignKey(Interview, null=True)
+    video_token = models.CharField(max_length=200, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

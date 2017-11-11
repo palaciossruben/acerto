@@ -38,16 +38,19 @@
 <p><strong>Salary: </strong><input type="text" name="{{ candidate.id }}_salary" value="{{ candidate.salary }}"
     placeholder="add salary"></p>
 
+
+<a href="check_interview?candidate_id={{ candidate.id }}">Interview</a>
+
 <br>
 
 <input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}" />
 
 <br>
 
-    {% for c in candidate.comments.all %}
-        <p><strong>{{ c.created_at }}</strong></p>
-        <p>{{ c.text }}</p>
-    {% endfor %}
+{% for c in candidate.comments.all %}
+    <p><strong>{{ c.created_at }}</strong></p>
+    <p>{{ c.text }}</p>
+{% endfor %}
 
 <br>
 

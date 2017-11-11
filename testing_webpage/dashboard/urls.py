@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^campaign/edit/(?P<pk>\d+)$', views.edit_campaign, name='edit_campaign'),
     url(r'^campaign/interview/(?P<pk>\d+)$', views.interview, name='interview'),
     url(r'^edit_intro_video$', views.edit_intro_video, name='edit_intro_video'),
+    url(r'^campaign/check_interview$', views.check_interview, name='check_interview'),
 ]
