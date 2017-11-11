@@ -156,6 +156,9 @@ def update_candidate_state(campaign, user, interview_obj, question_number):
     if question_number - 1 > 0:  # cannot ask for zero or negative questions
         previous_question = interview_obj.questions.get(order=question_number-1)
         if on_last_question(interview_obj, previous_question):
-            candidate = Candidate.objects.get(user=user, campaign=campaign)
-            candidate.state = State.objects.get(code='DIS')
-            candidate.save()
+            try:
+                candidate = Candidate.objects.get(user=user, campaign=campaign)
+                candidate.state = State.objects.get(code='DIS')
+                candidate.save()
+            except ObjectDoesNotExist:  # the object hasn't been created yet, creates it.
+                Candidate(campaign=campaign, user=user, state=State.objects.get(code='DIS')).save()
