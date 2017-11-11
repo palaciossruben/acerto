@@ -153,10 +153,18 @@
 
 			<div style="margin-top:45px;">
 
-                <form style="cursor:pointer; display:inline; margin-left:40px;" action="{{ left_button_action }}" id="left_button_form_id" method="post">
-                	{% csrf_token %}
-                    <input type="submit" class="btn btn-default" style="height: 34px; font-size: 16px; width: 210px;" value="{{ left_button_text }}">
-			    </form>
+				{% if on_interview %}
+					<form style="cursor:pointer; display:inline; margin-left:40px;" action="{{ left_button_action }}"
+						id="left_button_form_id" method="post">
+						{% csrf_token %}
+						<input type="submit" class="btn btn-default" style="height: 34px; font-size: 16px; width: 210px;" value="{{ left_button_text }}">
+					</form>
+				{% else %}
+					<form style="cursor:pointer; display:inline; margin-left:40px;" action="{{ left_button_action }}"
+						id="left_button_form_id">
+						<input type="submit" class="btn btn-default" style="height: 34px; font-size: 16px; width: 210px;" value="{{ left_button_text }}">
+					</form>
+				{% endif %}
 
 				{% if enable_interview %}
 
