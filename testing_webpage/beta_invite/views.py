@@ -7,13 +7,16 @@ from django.core.files.storage import FileSystemStorage
 from django.utils.translation import ugettext as _
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
-
 from django.shortcuts import render
-from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser, Bullet, BulletType, Test, Question, Survey, Score, Evaluation
+
+import common
 from ipware.ip import get_ip
 from beta_invite import constants as cts
 from beta_invite.util import email_sender
 from beta_invite import text_analizer
+from beta_invite import interview_module
+from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser, Bullet, BulletType, Test, Question, Survey, Score, Evaluation
+from beta_invite import test_module
 
 
 def remove_accents(text):
@@ -273,24 +276,6 @@ def update_search_dictionary_on_background():
     os.system(command)
 
 
-def get_campaign_from_request(request):
-    """Tries 2 ways to get the campaign_id, 1. on GET params, 2. on POST params.
-    If nothing works outputs the default campaign."""
-
-    campaign_id = request.GET.get('campaign_id')
-    if campaign_id is None:
-        campaign_id = request.POST.get('campaign_id', cts.DEFAULT_CAMPAIGN_ID)
-
-    try:
-        return Campaign.objects.get(pk=int(campaign_id))
-    except ObjectDoesNotExist:
-        return Campaign.objects.get(pk=cts.DEFAULT_CAMPAIGN_ID)
-
-
-def get_tests_questions_dict(tests):
-    return {test.id: [q.id for q in test.questions.all()] for test in tests}
-
-
 def post_long_form(request):
     """
     Args:
@@ -307,7 +292,7 @@ def post_long_form(request):
     country_id = request.POST.get('country')
     experience = request.POST.get('experience')
 
-    campaign = get_campaign_from_request(request)
+    campaign = common.get_campaign_from_request(request)
 
     tests = translate_tests(campaign.tests.all(), request.LANGUAGE_CODE)
 
@@ -315,7 +300,7 @@ def post_long_form(request):
               'secondary_message': _("We search millions of jobs and find the right one for you"),
               'campaign_id': campaign.id,
               'tests': tests,
-              'question_ids': get_tests_questions_dict(tests),
+              'question_ids': test_module.get_tests_questions_dict(tests),
               }
 
     if profession_id is not None and education_id is not None and country_id is not None:
@@ -459,90 +444,109 @@ def post_fast_job(request):
                                                    })
 
 
-def average_list(array):
-    return sum(array)/len(array)
-
-
 def get_test_result(request):
     """
     Args:
         request: HTTP object
     Returns: Either end process or invites to interview.
     """
-    campaign = get_campaign_from_request(request)
-    questions_dict = get_tests_questions_dict(campaign.tests.all())
+    campaign = common.get_campaign_from_request(request)
+    questions_dict = test_module.get_tests_questions_dict(campaign.tests.all())
+    user = common.get_user_from_request(request)
+    test_score_str = ''  # by default there is no score unless the test was done.
 
-    scores = []
-    cut_scores = []
-    for test_id, question_ids in questions_dict.items():
-        total = 0
-        result = 0
-        cut_scores.append(Test.objects.get(pk=test_id).cut_score)
-        for q_id in question_ids:
+    test_done = test_module.comes_from_test(request)
+    if test_done:
+        cut_scores, scores = test_module.get_scores(campaign, user.id, questions_dict, request)
 
-            question = Question.objects.get(pk=q_id)
-            answer_text = request.POST.get('test_{}_question_{}'.format(test_id, q_id))
+        test_done = (len(scores) > 0)
 
-            survey = Survey(test_id=test_id,
-                            question_id=q_id)
+        if test_done:
+            evaluation = test_module.get_evaluation(cut_scores, scores, campaign, user.id)
+            test_score_str = '({}/100)'.format(round(evaluation.final_score))
 
-            user_id = request.POST.get('user_id')
-            if user_id != '':
-                survey.user_id = int(user_id)
+    enable_interview = interview_module.has_interview(campaign)
 
-            total += 1
-            if question.type.code == 'SA':
-                if answer_text is not None:
-                    answer_id = int(answer_text)
-                    survey.answer_id = answer_id
-                    if answer_id in [q.id for q in Question.objects.get(pk=q_id).correct_answers.all()]:
-                        result += 1
-            elif question.type.code == 'OF':
-                survey.text_answer = answer_text
-                result += text_analizer.get_score(answer_text)
-            elif question.type.code == 'MA':  # TODO: implement multiple answers.
-                pass
-            elif question.type.code == 'DOB':  # TODO: implement degree of belief.
-                pass
-            elif question.type.code == 'NI':
-                number = int(answer_text)
-                survey.numeric_answer = number
-                if question.params['min_correct'] <= number <= question.params['max_correct']:
-                    result += 1
+    if not test_done or evaluation.passed:
 
-            survey.save()
+        right_button_action = interview_module.adds_campaign_and_user_to_url('interview/1', user.id, campaign.id)
 
-        test_score = text_analizer.handle_division_by_zero(result, total)*100
-
-        score = Score(test_id=test_id,
-                      value=test_score)
-        if user_id != '':
-            score.user_id = int(user_id)
-        score.save()
-
-        scores.append(test_score)
-
-    # simple average and percentage
-    final_score = average_list(scores)
-    cut_score = average_list(cut_scores)
-
-    evaluation = Evaluation(campaign=campaign,
-                            cut_score=cut_score,
-                            final_score=final_score)
-
-    evaluation.save()
-
-    if user_id != '':
-        user = User.objects.get(pk=user_id)
-        user.evaluations.add(evaluation)
-        user.save()
-
-    if evaluation.passed:
-        return render(request, cts.MEET_VIEW_PATH, {'main_message': _("Discover your true passion"),
-                                                    'secondary_message': _("We search millions of jobs and find the right one for you"),
-                                                    'campaign': campaign,
-                                                    })
-    else:  # doesn't pass.
+        return render(request, cts.INTERVIEW_VIEW_PATH, {'campaign': campaign,
+                                                         'question_video': common.get_intro_video(),
+                                                         'ziggeo_api_key': common.get_ziggeo_api_key(),
+                                                         'message1': interview_module.get_message1().format(test_score_str=test_score_str),
+                                                         'message2': interview_module.get_message2(enable_interview),
+                                                         'left_button_text': _('Schedule Interview'),
+                                                         'right_button_text': _('Record interview now!'),
+                                                         'left_button_action': cts.INTERVIEW_CALENDLY,
+                                                         'right_button_action': right_button_action,
+                                                         'enable_recording': False,
+                                                         'enable_interview': enable_interview,
+                                                         'left_button_is_back': False,
+                                                         'on_interview': False,
+                                                         })
+    else:  # doesn't pass test.
         return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover your true passion"),
                                                        'secondary_message': _("We search millions of jobs and find the right one for you"),
                                                        })
+
+
+def interview(request, pk):
+    """
+    Endpoint to get the next question.
+    Args:
+        request: HTTP
+        pk: primary key. In this case the question order.
+    Returns:
+    """
+    # change names to improve readability
+    question_number = int(pk)
+
+    campaign = common.get_campaign_from_request(request)
+
+    # TODO: assumes campaign has only one interview.
+    interview_obj = campaign.interviews.all()[0]
+
+    user = common.get_user_from_request(request)
+    user_id = user.id if user else None
+    token = request.POST.get('new_video_token')
+    interview_module.save_response(campaign, user, question_number, interview_obj, token)
+
+    left_button_action = interview_module.get_previous_url(question_number, campaign.id, user_id)
+    interview_module.update_candidate_state(campaign, user, interview_obj, question_number)
+
+    try:
+        next_question = interview_obj.questions.get(order=question_number)
+        answer_video = interview_module.fetch_current_video_answer(campaign, user, next_question)
+        next_question.translate(request.LANGUAGE_CODE)
+        enable_interview = True
+        right_button_text = interview_module.get_right_button_text(interview_obj, next_question)
+        right_button_action = interview_module.get_right_button_action(question_number, user_id, campaign.id)
+        enable_recording = True
+        question_video = next_question.video_token
+        message1 = next_question.text
+
+    except ObjectDoesNotExist:  # beyond last question
+        right_button_text = ''
+        right_button_action = ''
+        enable_interview = False
+        enable_recording = False
+        question_video = ''
+        message1 = _('Thanks for completing the interview, we will contact you soon ;)')
+        answer_video = None
+
+    return render(request, cts.INTERVIEW_VIEW_PATH, {'campaign': campaign,
+                                                     'ziggeo_api_key': common.get_ziggeo_api_key(),
+                                                     'question_video': question_video,
+                                                     'message1': message1,
+                                                     'message2': '',
+                                                     'left_button_text': _('Back'),
+                                                     'right_button_text': right_button_text,
+                                                     'right_button_action': right_button_action,
+                                                     'left_button_action': left_button_action,
+                                                     'enable_recording': enable_recording,
+                                                     'enable_interview': enable_interview,
+                                                     'left_button_is_back': True,
+                                                     'on_interview': True,
+                                                     'answer_video': answer_video,
+                                                     })

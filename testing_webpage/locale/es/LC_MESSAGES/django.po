@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-19 18:35+0000\n"
+"POT-Creation-Date: 2017-11-11 02:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,37 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: beta_invite/interview_module.py:25
+msgid "Finish Interview"
+msgstr "Termina la entrevista"
+
+#: beta_invite/interview_module.py:25
+msgid "Save and continue"
+msgstr "Grabar y continuar"
+
+#: beta_invite/interview_module.py:137
+msgid "Let's schedule an appointment or record your interview now!"
+msgstr "¡Programemos una cita o graba tu entrevista ya!"
+
+#: beta_invite/interview_module.py:139
+msgid "Let's schedule an appointment!"
+msgstr "¡Programemos una cita!"
+
+#: beta_invite/interview_module.py:143
+#, python-brace-format
+msgid "Hi, I'm Santiago, Congratulations on passing the tests{test_score_str}!"
+msgstr ""
+"Hola, soy Santiago, ¡Felicitaciones por pasar las pruebas{test_score_str}!"
+
+#: beta_invite/templates/beta_invite/applied.html:83
+msgid "Thanks for registering!"
+msgstr "¡Gracias por registrarte!"
+
+#: beta_invite/templates/beta_invite/applied.html:91
+#: business/templates/business/contact.html:111
+msgid "We will contact you soon"
+msgstr "Nos pondremos en contacto pronto"
 
 #: beta_invite/templates/beta_invite/fast_job.html:99
 #: beta_invite/templates/beta_invite/long_form.html:126
@@ -92,6 +123,7 @@ msgid "Person"
 msgstr "Persona"
 
 #: beta_invite/templates/beta_invite/home.html:89
+#: beta_invite/templates/beta_invite/interview.html:182
 msgid "or"
 msgstr "o"
 
@@ -107,6 +139,10 @@ msgstr "Suscríbete"
 #: beta_invite/templates/beta_invite/long_form.html:191
 msgid "Upload your resume"
 msgstr "Sube tu curriculum"
+
+#: beta_invite/templates/beta_invite/interview.html:210
+msgid "Or contact me at santiago@peaku.co, skype: reclutamiento@peaku.co"
+msgstr "O contactame en santiago@peaku.co, skype: reclutamiento@peaku.co"
 
 #: beta_invite/templates/beta_invite/long_form.html:113
 msgid "Perks"
@@ -138,64 +174,63 @@ msgstr "¿No quieres aplicar a esta posición?"
 msgid "Apply to another job!"
 msgstr "¡Aplica a otro trabajo!"
 
-#: beta_invite/templates/beta_invite/meet.html:99
-msgid ""
-"Hi, I'm Santiago, Congratulations on passing the tests! Let's schedule an "
-"appointment!"
-msgstr ""
-"Hola, soy Santiago, ¡Felicitaciones por pasar las pruebas! ¡Programemos una "
-"cita!"
-
-#: beta_invite/templates/beta_invite/meet.html:105
-msgid "Click here to schedule an appointment"
-msgstr "Has click aquí para agendar una cita"
-
-#: beta_invite/templates/beta_invite/meet.html:108
-msgid "Or contact me at santiago@peaku.co, skype: recutamiento@peaku.co"
-msgstr "O contactame en santiago@peaku.co, skype: reclutamiento@peaku.co"
-
-#: beta_invite/templates/beta_invite/test.html:83
-msgid "Thanks for registering!"
-msgstr "¡Gracias por registrarte!"
-
-#: beta_invite/templates/beta_invite/test.html:97
+#: beta_invite/templates/beta_invite/test.html:11
 msgid "Complete this few questions to know you better"
 msgstr "Completa estas preguntas para conocerte mejor"
 
-#: beta_invite/templates/beta_invite/test.html:103
+#: beta_invite/templates/beta_invite/test.html:17
 msgid "Test: "
 msgstr "Prueba: "
 
-#: beta_invite/templates/beta_invite/test.html:122
+#: beta_invite/templates/beta_invite/test.html:46
 msgid "Your Answer"
 msgstr "Tu Respuesta"
 
-#: beta_invite/templates/beta_invite/test.html:134
+#: beta_invite/templates/beta_invite/test.html:55
+msgid "Agree"
+msgstr ""
+
+#: beta_invite/templates/beta_invite/test.html:74
+msgid "Disagree"
+msgstr ""
+
+#: beta_invite/templates/beta_invite/test.html:93
 msgid "Send Answers!!!"
 msgstr "¡Envia las Respuestas!"
 
-#: beta_invite/templates/beta_invite/test.html:141
-#: business/templates/business/contact.html:111
-msgid "We will contact you soon"
-msgstr "Nos pondremos en contacto pronto"
-
-#: beta_invite/views.py:113 beta_invite/views.py:239 beta_invite/views.py:312
-#: beta_invite/views.py:533 beta_invite/views.py:538
+#: beta_invite/views.py:116 beta_invite/views.py:244 beta_invite/views.py:299
+#: beta_invite/views.py:489
 msgid "Discover your true passion"
 msgstr "Descubre tu verdadera pasión"
 
-#: beta_invite/views.py:114 beta_invite/views.py:313 beta_invite/views.py:388
-#: beta_invite/views.py:456 beta_invite/views.py:534 beta_invite/views.py:539
+#: beta_invite/views.py:117 beta_invite/views.py:300 beta_invite/views.py:375
+#: beta_invite/views.py:443 beta_invite/views.py:490
 msgid "We search millions of jobs and find the right one for you"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
 
-#: beta_invite/views.py:353 business/views.py:328 business/views.py:527
+#: beta_invite/views.py:340 business/views.py:328 business/views.py:527
 msgid "Welcome to PeakU"
 msgstr "Bienvenido a PeakU"
 
-#: beta_invite/views.py:387 beta_invite/views.py:455
+#: beta_invite/views.py:374 beta_invite/views.py:442
 msgid "Find a job now"
 msgstr "Encuentra trabajo ya"
+
+#: beta_invite/views.py:479
+msgid "Schedule Interview"
+msgstr "Programa una entrevista"
+
+#: beta_invite/views.py:480
+msgid "Record interview now!"
+msgstr "¡Graba tu entrevista ya!"
+
+#: beta_invite/views.py:535
+msgid "Thanks for completing the interview, we will contact you soon ;)"
+msgstr "¡Gracias por completar la entrevista, te contactaremos pronto! ;)"
+
+#: beta_invite/views.py:543
+msgid "Back"
+msgstr "Atrás"
 
 #: business/templates/business/contact.html:107
 msgid "Thanks for reaching out!"
@@ -532,6 +567,19 @@ msgstr "Ingles"
 msgid "Spanish"
 msgstr "Español"
 
+#~ msgid ""
+#~ "Hi, I'm Santiago, Congratulations on passing the tests! Let's schedule an "
+#~ "appointment!"
+#~ msgstr ""
+#~ "Hola, soy Santiago, ¡Felicitaciones por pasar las pruebas! ¡Programemos "
+#~ "una cita!"
+
+#~ msgid "Click here to schedule an appointment"
+#~ msgstr "Has click aquí para agendar una cita"
+
+#~ msgid "Or contact me at santiago@peaku.co, skype: recutamiento@peaku.co"
+#~ msgstr "O contactame en santiago@peaku.co, skype: reclutamiento@peaku.co"
+
 #~ msgid "Search Candidates"
 #~ msgstr "Busca Candidatos"
 
@@ -591,9 +639,6 @@ msgstr "Español"
 
 #~ msgid "Save on employment exchanges"
 #~ msgstr "Evita gastos en bolsas de empleo"
-
-#~ msgid ", thanks for your interest, we will contact you soon."
-#~ msgstr ", gracias por tu interés, the contactaremos pronto."
 
 #~ msgid "Start by posting a new job"
 #~ msgstr "Empieza por publicar una oferta de trabajo"

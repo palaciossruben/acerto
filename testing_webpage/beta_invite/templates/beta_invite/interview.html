@@ -28,20 +28,22 @@
 
       <!-- CSS -->
       <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/line_break_on_mobile.css' %}">
+	  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
       <!-- Font Awesome CSS -->
 	  <link rel="stylesheet" type="text/css" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
 
-      <!-- Custom styles CSS -->
-	  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-
-	      <!-- Ziggeo stuff-->
+	  <!-- Ziggeo stuff-->
       <link rel="stylesheet" href="//assets-cdn.ziggeo.com/v1-stable/ziggeo.css" />
       <script src="//assets-cdn.ziggeo.com/v1-stable/ziggeo.js"></script>
       <script>ZiggeoApi.token = "{{ziggeo_api_key}}";</script>
 
       <!-- Bootstrap -->
       <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+
+      <!--Javascript-->
+      <script type="text/javascript" src="{% static 'js/interview.js' %}"></script>
 
       <!-- Favicons -->
       <link rel="apple-touch-icon" sizes="57x57" href="{% static 'beta_invite/favicon.ico/apple-icon-57x57.png' %}">
@@ -98,22 +100,25 @@
    <!-- BEGIN WELCOME -->
     <div class="welcome-section" id="top" style="">
       <div class="title" style="margin-top:-140px;">
-        <a class="scroll logo" style="font-family:CANDARA; font-size:65px; color:black;
-         margin-bottom:-50px; margin-top: 40px">
-         <!--<img src="{% static 'beta_invite/santiago.jpg' %}" width="370px" >-->
-         <ziggeoplayer ziggeo-video='{{question_video}}'
-            ziggeo-width=320
-            ziggeo-height=240>
-         </ziggeoplayer>
 
-        </a>
+        {% if enable_interview %}
+			 <ziggeoplayer ziggeo-video='{{question_video}}'
+				ziggeo-width=320
+				ziggeo-height=240>
+			 </ziggeoplayer>
+        {% else %}
+
+        <a class="scroll logo" style="font-family:CANDARA; font-size:65px; color:black;
+         margin-bottom:-50px; margin-top: 40px"> <img src="{% static 'beta_invite/santiago.jpg' %}" width="370px" ></a>
+
+		  {% endif %}
 
           <br>
 
 		  <div class="container" style="margin-top:25px;">
 		   <span style="font-size:25px; color: black">
 				<span style=" font-weight:500;">
-					<b style="font-weight:400;">{{intro_message}}</b>
+					<b style="font-weight:400;">{{message1}}</b>
 				</span>
 				<br>
 		   </span>
@@ -122,30 +127,73 @@
 		  <div class="container" style="margin-top:5px;">
 		   <span style="color:#134984; font-size:25px;">
 				<span style=" font-weight:500;">
-					<b style="font-weight:400; text-transform: uppercase;">{% trans "Let's schedule an appointment or record your interview now!" %}</b>
+					<b style="font-weight:400; text-transform: uppercase;">{{message2}}</b>
 				</span>
 		   </span>
 
+		    <br>
+
+			{% if enable_recording %}
+				{% if answer_video %}
+					<ziggeoplayer ziggeo-video='{{answer_video}}'
+						ziggeo-width=320
+						ziggeo-height=240>
+					</ziggeoplayer >
+			    {% else %}
+			    	<ziggeorecorder ziggeo-timelimit=120
+						ziggeo-width=320
+						ziggeo-height=240
+						ziggeo-theme='modern'
+						id="myRecorder"
+						disable_snapshots="disable_snapshots">
+					</ziggeorecorder>
+			    {% endif %}
+			{% endif %}
+        	<br>
+
 			<div style="margin-top:45px;">
 
-			    {% trans "Schedule Interview" as schedule_interview %}
-                <form style="cursor:pointer; display:inline;" action="https://calendly.com/santiago-10/llamada-inicial">
-                    <input type="submit" class="btn btn-default" style="height: 34px; font-size: 16px; width: 210px;" value="{{ schedule_interview }}">
+                <form style="cursor:pointer; display:inline; margin-left:40px;" action="{{ left_button_action }}" id="left_button_form_id" method="post">
+                	{% csrf_token %}
+                    <input type="submit" class="btn btn-default" style="height: 34px; font-size: 16px; width: 210px;" value="{{ left_button_text }}">
 			    </form>
 
-                <p style="display:inline; margin-left:20px; color:black;">{% trans "or" %}</p>
+				{% if enable_interview %}
 
-                {% trans "Record interview now!" as recorded_interview %}
-                <form style="cursor:pointer; display:inline; margin-left:20px;" action="{% url 'business:logout' %}">
-					   <input type="submit" class="btn btn-success" style="height: 34px; font-size: 16px; width: 210px;" value="{{ recorded_interview }}">
-			    </form>
+					<!-- class line_break_on_mobile makes it responsive -->
+                	<br class="line_break_on_mobile">
+                	<br class="line_break_on_mobile">
+                	<p style="display:inline; margin-left:40px; color:black;">{% trans "or" %}</p>
+                	<br class="line_break_on_mobile">
+                	<br class="line_break_on_mobile">
+
+					<form id="right_button_form_id" style="cursor:pointer; display:inline; margin-left:40px;"
+						 action="{{ right_button_action }}" method="post">
+
+						{% csrf_token %}
+
+						<input type="submit" id="right_button_id" class="btn btn-success" style="height: 34px; font-size: 16px; width: 210px;" value="{{ right_button_text }}">
+					</form>
+					<script>
+
+						{% if on_interview and not answer_video %}
+							needs_to_record = true
+						{% else %}
+							needs_to_record = false
+						{% endif %}
+
+						disable_continue_button_on_interview(needs_to_record);
+					</script>
+				{% endif %}
 
 			</div>
 
-              <br>
-              <p style="font-weight:500; font-size:18px; margin-top:50px; color:black;">
-                {% trans "Or contact me at santiago@peaku.co, skype: reclutamiento@peaku.co" %}
-              </p>
+			  {% if not on_interview %}
+				  <br>
+				  <p style="font-weight:500; font-size:18px; margin-top:50px; color:black;">
+					{% trans "Or contact me at santiago@peaku.co, skype: reclutamiento@peaku.co" %}
+				  </p>
+			  {% endif %}
 
 		  </div>
 
