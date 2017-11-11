@@ -488,7 +488,10 @@ def check_interview(request):
     """
 
     candidate = Candidate.objects.get(pk=request.GET.get('candidate_id'))
-    surveys = Survey.objects.filter(user=candidate.user, campaign=candidate.campaign).all()
+    surveys = Survey.objects.filter(user=candidate.user,
+                                    campaign=candidate.campaign,
+                                    video_token__isnull=False,
+                                    interview__isnull=False).all()
 
     return render(request, cts.INTERVIEW, {'ziggeo_api_key': common.get_ziggeo_api_key(),
                                            'question_answer_tuples': get_sorted_tuples(surveys)})
