@@ -102,6 +102,12 @@
       <div class="title" style="margin-top:-140px;">
 
         {% if enable_interview %}
+
+        	<div class="container" style="margin-top:25px;">
+			  <b style="font-size:25px; color: black; font-weight:400;">{% trans "Click on the video to hear the question" %}</b>
+			  <br>
+			</div>
+
 			 <ziggeoplayer ziggeo-video='{{question_video}}'
 				ziggeo-width=320
 				ziggeo-height=240>
@@ -115,39 +121,39 @@
 
           <br>
 
-		  <div class="container" style="margin-top:25px;">
-		   <span style="font-size:25px; color: black">
-				<span style=" font-weight:500;">
-					<b style="font-weight:400;">{{message1}}</b>
-				</span>
-				<br>
-		   </span>
+		  <b style="font-size:25px; color: black; font-weight:400;">{% trans "In 2 minutes:" %}</b>
+
+		  <div class="container">
+			  <b style="font-size:25px; color: black; font-weight:400;">{{message1}}</b>
+			  <br>
 		  </div>
 
 		  <div class="container" style="margin-top:5px;">
-		   <span style="color:#134984; font-size:25px;">
-				<span style=" font-weight:500;">
-					<b style="font-weight:400; text-transform: uppercase;">{{message2}}</b>
-				</span>
-		   </span>
-
+		  	<b style="color:#134984; font-size:25px; font-weight:400; text-transform: uppercase;">{{message2}}</b>
 		    <br>
 
 			{% if enable_recording %}
-				{% if answer_video %}
-					<ziggeoplayer ziggeo-video='{{answer_video}}'
-						ziggeo-width=320
-						ziggeo-height=240>
-					</ziggeoplayer >
-			    {% else %}
-			    	<ziggeorecorder ziggeo-timelimit=120
-						ziggeo-width=320
-						ziggeo-height=240
-						ziggeo-theme='modern'
-						id="myRecorder"
-						disable_snapshots="disable_snapshots">
-					</ziggeorecorder>
-			    {% endif %}
+			    <div style="display: inline-block;">
+					{% if answer_video %}
+						<ziggeoplayer ziggeo-video='{{answer_video}}'
+							ziggeo-width=320
+							ziggeo-height=240>
+						</ziggeoplayer >
+					{% else %}
+						<ziggeorecorder ziggeo-timelimit=120
+							ziggeo-width=320
+							ziggeo-height=240
+							ziggeo-theme='modern'
+							id="myRecorder">
+						</ziggeorecorder>
+
+						<div class="container" style="margin-top:25px;">
+						  <b style="font-size:25px; color: black; font-weight:400;">{% trans "You can record the video several times" %}</b>
+						  <br>
+						</div>
+
+					{% endif %}
+			    <div>
 			{% endif %}
         	<br>
 

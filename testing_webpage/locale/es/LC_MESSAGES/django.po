@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-11 02:59+0000\n"
+"POT-Creation-Date: 2017-11-15 21:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -106,28 +106,28 @@ msgstr "Describe lo que haces."
 msgid "Sure!"
 msgstr "¡Enviar!"
 
-#: beta_invite/templates/beta_invite/home.html:69
+#: beta_invite/templates/beta_invite/home.html:70
 msgid "we connect you better"
 msgstr "Te conectamos mejor"
 
-#: beta_invite/templates/beta_invite/home.html:71
+#: beta_invite/templates/beta_invite/home.html:72
 msgid "We find the best match between employees and employer"
 msgstr "Encontramos el empleado y empleador perfecto."
 
-#: beta_invite/templates/beta_invite/home.html:77
+#: beta_invite/templates/beta_invite/home.html:78
 msgid "Who are you?"
 msgstr "¿Quién eres?"
 
-#: beta_invite/templates/beta_invite/home.html:83
+#: beta_invite/templates/beta_invite/home.html:84
 msgid "Person"
 msgstr "Persona"
 
-#: beta_invite/templates/beta_invite/home.html:89
-#: beta_invite/templates/beta_invite/interview.html:182
+#: beta_invite/templates/beta_invite/home.html:92
+#: beta_invite/templates/beta_invite/interview.html:183
 msgid "or"
 msgstr "o"
 
-#: beta_invite/templates/beta_invite/home.html:91
+#: beta_invite/templates/beta_invite/home.html:96
 msgid "Business"
 msgstr "Empresa"
 
@@ -140,7 +140,19 @@ msgstr "Suscríbete"
 msgid "Upload your resume"
 msgstr "Sube tu curriculum"
 
-#: beta_invite/templates/beta_invite/interview.html:210
+#: beta_invite/templates/beta_invite/interview.html:107
+msgid "Click on the video to hear the question"
+msgstr "Haz clic en el video para oir la pregunta"
+
+#: beta_invite/templates/beta_invite/interview.html:125
+msgid "In 2 minutes:"
+msgstr "En 2 minutos:"
+
+#: beta_invite/templates/beta_invite/interview.html:154
+msgid "You can record the video several times"
+msgstr "Puedes grabar el video varias veces"
+
+#: beta_invite/templates/beta_invite/interview.html:211
 msgid "Or contact me at santiago@peaku.co, skype: reclutamiento@peaku.co"
 msgstr "O contactame en santiago@peaku.co, skype: reclutamiento@peaku.co"
 
@@ -166,11 +178,11 @@ msgstr "Experiencia en años:"
 msgid "Authorized third parties can see this information."
 msgstr "Terceros autorizados pueden ver esta información."
 
-#: beta_invite/templates/beta_invite/long_form.html:237
+#: beta_invite/templates/beta_invite/long_form.html:246
 msgid "Don't want to apply to this position?"
 msgstr "¿No quieres aplicar a esta posición?"
 
-#: beta_invite/templates/beta_invite/long_form.html:240
+#: beta_invite/templates/beta_invite/long_form.html:249
 msgid "Apply to another job!"
 msgstr "¡Aplica a otro trabajo!"
 
@@ -199,12 +211,12 @@ msgid "Send Answers!!!"
 msgstr "¡Envia las Respuestas!"
 
 #: beta_invite/views.py:116 beta_invite/views.py:244 beta_invite/views.py:299
-#: beta_invite/views.py:489
+#: beta_invite/views.py:490
 msgid "Discover your true passion"
 msgstr "Descubre tu verdadera pasión"
 
 #: beta_invite/views.py:117 beta_invite/views.py:300 beta_invite/views.py:375
-#: beta_invite/views.py:443 beta_invite/views.py:490
+#: beta_invite/views.py:443 beta_invite/views.py:491
 msgid "We search millions of jobs and find the right one for you"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
 
@@ -216,19 +228,19 @@ msgstr "Bienvenido a PeakU"
 msgid "Find a job now"
 msgstr "Encuentra trabajo ya"
 
-#: beta_invite/views.py:479
+#: beta_invite/views.py:480
 msgid "Schedule Interview"
 msgstr "Programa una entrevista"
 
-#: beta_invite/views.py:480
+#: beta_invite/views.py:481
 msgid "Record interview now!"
 msgstr "¡Graba tu entrevista ya!"
 
-#: beta_invite/views.py:535
+#: beta_invite/views.py:536
 msgid "Thanks for completing the interview, we will contact you soon ;)"
 msgstr "¡Gracias por completar la entrevista, te contactaremos pronto! ;)"
 
-#: beta_invite/views.py:543
+#: beta_invite/views.py:544
 msgid "Back"
 msgstr "Atrás"
 
@@ -663,9 +675,6 @@ msgstr "Español"
 
 #~ msgid "hours"
 #~ msgstr "horas"
-
-#~ msgid "minutes"
-#~ msgstr "minutos"
 
 #~ msgid "seconds"
 #~ msgstr "segundos"
