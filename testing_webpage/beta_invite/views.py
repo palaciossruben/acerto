@@ -469,7 +469,8 @@ def get_test_result(request):
 
     if not test_done or evaluation.passed:
 
-        right_button_action = interview_module.adds_campaign_and_user_to_url('interview/1', user.id, campaign.id)
+        user_id = user.id if user else None
+        right_button_action = interview_module.adds_campaign_and_user_to_url('interview/1', user_id, campaign.id)
 
         return render(request, cts.INTERVIEW_VIEW_PATH, {'campaign': campaign,
                                                          'question_video': common.get_intro_video(),
