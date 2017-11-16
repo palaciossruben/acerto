@@ -26,7 +26,14 @@ function submit_form() {
 
 
 /*
-TODO: make the remove button work!
-function remove_video_from_campaign({{ q.video_token }}, {{ campaign.id }}){
+function remove_video_from_campaign(remove_video_token_str, {{ campaign.id }}){
+
+    form = document.getElementById('main_form_id');
+    remove_video_token = document.createElement('input');
+    remove_video_token.setAttribute('name', 'remove_video_token');
+    remove_video_token.setAttribute('type', 'hidden');
+    remove_video_token.setAttribute('value', recorder.get('video'));
+    form.appendChild(video_token);
+
 }
 */

@@ -79,3 +79,13 @@ def update_old_question_statements(request, interview_obj, new_question):
 
         update_text(q, text, 'text')
         update_text(q, text_es, 'text_es')
+
+
+def get_sorted_tuples(surveys):
+    """
+    Args:
+        surveys: Survey Objects.
+    Returns: (Question, Survey) tuples. Sorted by Question.order
+    """
+    question_answer_tuples = zip([s.question for s in surveys], surveys)
+    return sorted(question_answer_tuples, key=lambda my_tuple: my_tuple[0].order)
