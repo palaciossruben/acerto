@@ -368,7 +368,7 @@ msgstr "$350 mil Pesos/candidato contratado"
 
 #: business/templates/business/index.html:179
 msgid "Selection of operational personnel"
-msgstr "Selección de perconal operativo"
+msgstr "Selección de personal operativo"
 
 #: business/templates/business/index.html:181
 #: business/templates/business/index.html:193
@@ -391,7 +391,7 @@ msgstr "$500 mil Pesos/candidato contratado"
 
 #: business/templates/business/index.html:191
 msgid "Selection of qualified personnel"
-msgstr "Seleccón de personal calificado"
+msgstr "Selección de personal calificado"
 
 #: business/templates/business/index.html:196
 msgid "$500 / contracted candidate"
