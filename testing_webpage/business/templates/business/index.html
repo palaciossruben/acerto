@@ -160,6 +160,7 @@ mixpanel.init("d60ac5ae289f60c7f824d49a4d15be30");</script>
 				  </ul>
 				</div>
 
+				<!--
 				<div class="columns" onmouseover="HoverOnAgile()"
 					 onclick="Post('plan/2', {plan_name: 'Screening', csrfmiddlewaretoken: '{{ csrf_token }}'});">
 				  <ul class="price">
@@ -170,17 +171,29 @@ mixpanel.init("d60ac5ae289f60c7f824d49a4d15be30");</script>
 					<li style="height: 81px;">{% trans "-" %}</li>
 					<li class="price_value">{% trans "$200 / contracted candidate" %}</li>
 				  </ul>
+				</div>-->
+
+				<div class="columns" onmouseover="HoverOnAgile()"
+					 onclick="Post('plan/3', {plan_name: 'Selection', csrfmiddlewaretoken: '{{ csrf_token }}'});">
+				  <ul class="price">
+					<li class="header" id="agile_header">{% trans "Selection of operational personnel" %}</li>
+					<li>{% trans "Resume search engine" %}</li>
+					<li>{% trans "Additional search on social media and online campaigns" %}</li>
+					<li>{% trans "We do online tests to filter candidates" %}</li>
+					<li>{% trans "Personal Interview, soft and hard skills assessment" %}</li>
+					<li class="price_value">{% trans "$300 / contracted candidate" %}</li>
+				  </ul>
 				</div>
 
 				<div class="columns" onmouseover="HoverOnCustom()"
 					 onclick="Post('plan/3', {plan_name: 'Selection', csrfmiddlewaretoken: '{{ csrf_token }}'});">
 				  <ul class="price">
-					<li class="header" id="custom_header">{% trans "Selection" %}</li>
+					<li class="header" id="custom_header">{% trans "Selection of qualified personnel" %}</li>
 					<li>{% trans "Resume search engine" %}</li>
-					<li>{% trans "We search for specific profiles on other media" %}</li>
-					<li>{% trans "Resume Screening: We send manual filtered profiles each 24 hours" %}</li>
+					<li>{% trans "Additional search on social media and online campaigns" %}</li>
+					<li>{% trans "We do online tests to filter candidates" %}</li>
 					<li>{% trans "Personal Interview, soft and hard skills assessment" %}</li>
-					<li class="price_value">{% trans "$300 / contracted candidate" %}</li>
+					<li class="price_value">{% trans "$500 / contracted candidate" %}</li>
 				  </ul>
 				</div>
 
@@ -258,7 +271,7 @@ mixpanel.init("d60ac5ae289f60c7f824d49a4d15be30");</script>
 
 				<div>
 					<i class="fa fa-envelope"></i>
-					<p><a href="mailto:support@company.com">contacto@peaku.co</a></p>
+					<p><a href="mailto:contacto@peaku.co">contacto@peaku.co</a></p>
 				</div>
 
 			</div>

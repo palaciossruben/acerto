@@ -57,28 +57,14 @@ def update_text(question, new_text, attribute_name):
     question.save()
 
 
-def update_old_question_statements(request, interview_obj, new_question):
+def get_question(request):
     """
     Args:
-        request: HTTP object
-        interview_obj: Interview object
-        new_question: The object just created.
-    Returns: None, just updates the objects.
+        request: HTTP
+    Returns: Question object
     """
-
-    # Removes the new_question if it is not None.
-    if new_question is not None:
-        old_questions = interview_obj.questions.exclude(id=new_question.id).all()
-    else:
-        old_questions = interview_obj.questions.all()
-
-    for q in old_questions:
-
-        text = request.POST.get('{}_text'.format(q.video_token))
-        text_es = request.POST.get('{}_text_es'.format(q.video_token))
-
-        update_text(q, text, 'text')
-        update_text(q, text_es, 'text_es')
+    question_id = int(request.POST.get('question_id'))
+    return Question.objects.get(pk=question_id)
 
 
 def get_sorted_tuples(surveys):
@@ -89,3 +75,57 @@ def get_sorted_tuples(surveys):
     """
     question_answer_tuples = zip([s.question for s in surveys], surveys)
     return sorted(question_answer_tuples, key=lambda my_tuple: my_tuple[0].order)
+
+
+def create_question(request, campaign):
+    """
+    Given a new_token_id and texts, it creates a new question.
+    Args:
+        request: HTTP
+        campaign: Campaign Object
+    Returns: None, Adds a new video.
+    """
+
+    new_video_token = request.POST.get('new_video_token')
+    new_question_text = request.POST.get('new_question_text')
+    new_question_text_es = request.POST.get('new_question_text_es')
+
+    new_question = get_new_question(new_question_text, new_question_text_es, new_video_token)
+
+    # TODO: change this when a campaign has more than 1 interview.
+    interview_obj = campaign.interviews.all()[0]
+    if new_question is not None:
+        assign_order_to_question(new_question, interview_obj)
+        interview_obj.questions.add(new_question)
+        interview_obj.save()
+
+
+def update_question(request):
+    """
+    Args:
+        request: HTTP object
+    Returns: None, just updates the objects.
+    """
+
+    question = get_question(request)
+
+    text = request.POST.get('text')
+    text_es = request.POST.get('text_es')
+
+    update_text(question, text, 'text')
+    update_text(question, text_es, 'text_es')
+
+
+def delete_question(request, campaign):
+    """
+    Args:
+        request: HTTP object
+        campaign: Campaign object
+    Returns: None, just removes a question.
+    """
+
+    question = get_question(request)
+    interview_obj = campaign.interviews.all()[0]
+    interview_obj.questions.remove(question)
+    interview_obj.save()
+

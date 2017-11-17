@@ -22,36 +22,54 @@
     <div style="margin-left:30px;">
         <h1>Current Video Questions</h1>
 
-        <form action="#" method="post" id="main_form_id">
+        <!--<form action="#" method="post" id="main_form_id">
 
-            {% csrf_token %}
+            {% csrf_token %}-->
 
-            {% for q in questions %}
-                <br>
-                <br>
-                <ziggeoplayer ziggeo-video='{{q.video_token}}'
-                    ziggeo-width=320
-                    ziggeo-height=240>
-                </ziggeoplayer>
-                <br>
+        {% for q in questions %}
+            <br>
+            <br>
+            <ziggeoplayer ziggeo-video='{{q.video_token}}'
+                ziggeo-width=320
+                ziggeo-height=240>
+            </ziggeoplayer>
+            <br>
 
-                <textarea name="{{ q.video_token }}_text" cols="40" rows="5"
+            <form action="/dashboard/campaign/interview/update_interview_question" method="post" id="update_form">
+                {% csrf_token %}
+
+                <textarea name="text" cols="40" rows="5"
                     placeholder="add a question text in English!">{{ q.text }}</textarea>
                 <br>
 
-                <textarea name="{{ q.video_token }}_text_es" cols="40" rows="5"
+                <textarea name="text_es" cols="40" rows="5"
                     placeholder="add a question text in Spanish!">{{ q.text_es }}</textarea>
                 <br>
 
-                <!--TODO-->
-                <!--<input type="button" class="btn btn-danger" name="remove_from_interview" value="Delete!"
-                    onclick="remove_video_from_campaign({{ q.video_token }}, {{ campaign.id }})">-->
+                <input type="button" class="btn btn-default" name="update_question" value="Update!"
+                    onclick="this.form.submit()">
 
-                <br>
-            {% endfor %}
+                <input name="campaign_id" type="hidden" value="{{ campaign.id }}">
+                <input name="question_id" type="hidden" value="{{ q.id }}">
+            </form>
 
             <br>
+
+            <form action="/dashboard/campaign/interview/delete_interview_question" method="post" id="remove_form">
+                {% csrf_token %}
+                <input type="button" class="btn btn-danger" name="remove_from_interview" value="Delete!"
+                    onclick="this.form.submit()">
+
+                <input name="campaign_id" type="hidden" value="{{ campaign.id }}">
+                <input name="question_id" type="hidden" value="{{ q.id }}">
+            </form>
+
             <br>
+            <hr>
+        {% endfor %}
+
+        <br>
+        <br>
 
             <h3>Record new video question</h3>
             <ziggeorecorder ziggeo-timelimit=60
@@ -62,6 +80,9 @@
             </ziggeorecorder>
             <br>
 
+        <form action="/dashboard/campaign/interview/create_interview_question" method="post" id="new_question_form">
+            {% csrf_token %}
+
             <textarea name="new_question_text" cols="40" rows="5"
                     placeholder="add a question text in English!">{{ q.text }}</textarea>
             <br>
@@ -69,8 +90,10 @@
                 placeholder="add a question text in Spanish!">{{ q.text_es }}</textarea>
             <br>
 
-            <input type="button" class="btn btn-success" name="save_changes" value="Save!"
-                onclick="submit_form()">
+            <input type="button" class="btn btn-success" name="save_changes" value="Add Question!"
+                onclick="this.form.submit()">
+
+            <input name="campaign_id" type="hidden" value="{{ campaign.id }}">
         </form>
     </div>
 

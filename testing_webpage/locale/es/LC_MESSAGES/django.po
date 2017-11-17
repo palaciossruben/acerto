@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-15 21:04+0000\n"
+"POT-Creation-Date: 2017-11-17 01:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,7 +57,7 @@ msgstr "¡Aplica Ahora!"
 #: beta_invite/templates/beta_invite/fast_job.html:112
 #: beta_invite/templates/beta_invite/index.html:87
 #: beta_invite/templates/beta_invite/long_form.html:136
-#: business/templates/business/index.html:203
+#: business/templates/business/index.html:216
 #: business/templates/business/results.html:152
 #: business/templates/business/search_trade.html:194
 #: business/templates/business/signup.html:122
@@ -68,7 +68,7 @@ msgstr "Tu Nombre Completo"
 #: beta_invite/templates/beta_invite/fast_job.html:119
 #: beta_invite/templates/beta_invite/index.html:94
 #: beta_invite/templates/beta_invite/long_form.html:143
-#: business/templates/business/index.html:208
+#: business/templates/business/index.html:221
 #: business/templates/business/login.html:92
 #: business/templates/business/results.html:159
 #: business/templates/business/search_trade.html:201
@@ -101,7 +101,7 @@ msgstr "Describe lo que haces."
 #: beta_invite/templates/beta_invite/fast_job.html:160
 #: beta_invite/templates/beta_invite/index.html:113
 #: beta_invite/templates/beta_invite/long_form.html:216
-#: business/templates/business/index.html:223
+#: business/templates/business/index.html:236
 #: business/templates/business/trade_client.html:155
 msgid "Sure!"
 msgstr "¡Enviar!"
@@ -123,7 +123,7 @@ msgid "Person"
 msgstr "Persona"
 
 #: beta_invite/templates/beta_invite/home.html:92
-#: beta_invite/templates/beta_invite/interview.html:183
+#: beta_invite/templates/beta_invite/interview.html:180
 msgid "or"
 msgstr "o"
 
@@ -144,15 +144,15 @@ msgstr "Sube tu curriculum"
 msgid "Click on the video to hear the question"
 msgstr "Haz clic en el video para oir la pregunta"
 
-#: beta_invite/templates/beta_invite/interview.html:125
+#: beta_invite/templates/beta_invite/interview.html:124
 msgid "In 2 minutes:"
 msgstr "En 2 minutos:"
 
-#: beta_invite/templates/beta_invite/interview.html:154
+#: beta_invite/templates/beta_invite/interview.html:151
 msgid "You can record the video several times"
 msgstr "Puedes grabar el video varias veces"
 
-#: beta_invite/templates/beta_invite/interview.html:211
+#: beta_invite/templates/beta_invite/interview.html:208
 msgid "Or contact me at santiago@peaku.co, skype: reclutamiento@peaku.co"
 msgstr "O contactame en santiago@peaku.co, skype: reclutamiento@peaku.co"
 
@@ -335,7 +335,7 @@ msgstr "Buscador limitado de cv"
 #: business/templates/business/index.html:156
 #: business/templates/business/index.html:157
 #: business/templates/business/index.html:158
-#: business/templates/business/index.html:170
+#: business/templates/business/index.html:171
 msgid "-"
 msgstr "-"
 
@@ -343,83 +343,101 @@ msgstr "-"
 msgid "Free"
 msgstr "Gratis"
 
-#: business/templates/business/index.html:166
+#: business/templates/business/index.html:167
 msgid "Screening"
 msgstr "Screening"
 
-#: business/templates/business/index.html:167
-#: business/templates/business/index.html:179
+#: business/templates/business/index.html:168
+#: business/templates/business/index.html:180
+#: business/templates/business/index.html:192
 msgid "Resume search engine"
 msgstr "Buscador de cv"
 
-#: business/templates/business/index.html:168
-#: business/templates/business/index.html:180
+#: business/templates/business/index.html:169
 msgid "We search for specific profiles on other media"
 msgstr "Buscamos perfiles especificos en otros medios"
 
-#: business/templates/business/index.html:169
-#: business/templates/business/index.html:181
+#: business/templates/business/index.html:170
 msgid "Resume Screening: We send manual filtered profiles each 24 hours"
 msgstr ""
 "Screening de cv: Mandamos candidatos filtrados manulmente cada 24 horas"
 
-#: business/templates/business/index.html:171
+#: business/templates/business/index.html:172
 msgid "$200 / contracted candidate"
 msgstr "$350 mil Pesos/candidato contratado"
 
-#: business/templates/business/index.html:178
-msgid "Selection"
-msgstr "Selección"
+#: business/templates/business/index.html:179
+msgid "Selection of operational personnel"
+msgstr ""
+
+#: business/templates/business/index.html:181
+#: business/templates/business/index.html:193
+msgid "Additional search on social media and online campaigns"
+msgstr "Busqueda adicional en redes sociales y campañas online"
 
 #: business/templates/business/index.html:182
+#: business/templates/business/index.html:194
+msgid "We do online tests to filter candidates"
+msgstr "Hacemos pruebas online para filtrar candidatos"
+
+#: business/templates/business/index.html:183
+#: business/templates/business/index.html:195
 msgid "Personal Interview, soft and hard skills assessment"
 msgstr "Entrevista personal, evaluación de habilidades blandas y técnicas"
 
-#: business/templates/business/index.html:183
+#: business/templates/business/index.html:184
 msgid "$300 / contracted candidate"
 msgstr "$500 mil Pesos/candidato contratado"
 
-#: business/templates/business/index.html:201
+#: business/templates/business/index.html:191
+msgid "Selection of qualified personnel"
+msgstr ""
+
+#: business/templates/business/index.html:196
+msgid "$500 / contracted candidate"
+msgstr "$900 mil Pesos/candidato contratado"
+
+#: business/templates/business/index.html:214
 #: business/templates/business/trade_client.html:133
 msgid "Contact Us"
 msgstr "Contáctanos"
 
-#: business/templates/business/index.html:213
+#: business/templates/business/index.html:226
 #: business/templates/business/trade_client.html:145
 msgid "Your phone (optional)"
 msgstr "Tu teléfono (opcional)"
 
-#: business/templates/business/index.html:218
+#: business/templates/business/index.html:231
 #: business/templates/business/trade_client.html:150
 msgid "Add a message (optional)"
 msgstr "Escríbe un comentario (opcional)"
 
-#: business/templates/business/index.html:238
+#: business/templates/business/index.html:251
 #: business/templates/business/trade_client.html:170
 msgid "Home"
 msgstr "Inicio"
 
-#: business/templates/business/index.html:240
+#: business/templates/business/index.html:253
 #: business/templates/business/trade_client.html:172
 msgid "Pricing"
 msgstr "Precios"
 
-#: business/templates/business/index.html:242
+#: business/templates/business/index.html:255
 #: business/templates/business/trade_client.html:174
 msgid "About"
 msgstr "Acerca"
 
-#: business/templates/business/index.html:244
+#: business/templates/business/index.html:257
 #: business/templates/business/trade_client.html:176
 msgid "Contact"
 msgstr "Contáctanos"
 
-#: business/templates/business/index.html:269
+#: business/templates/business/index.html:282
 #: business/templates/business/trade_client.html:201
 msgid "About the company"
 msgstr "Acerca de la compañia"
 
-#: business/templates/business/index.html:270
+#: business/templates/business/index.html:283
 #: business/templates/business/trade_client.html:202
 msgid ""
 "PeakU is a technology company that will transform the recruiting industry by "
@@ -546,8 +564,12 @@ msgid "Any other information"
 msgstr "Cualquier otra información"
 
 #: business/views.py:40
-msgid "We do the entire personnel selection process for your company."
-msgstr "Realizamos todo el proceso de selección de personal para tu empresa"
+msgid ""
+"We do the entire personnel selection process for your company. Meanwhile you "
+"can start searching for candidates."
+msgstr ""
+"Realizamos todo el proceso de selección de personal para tu empresa. "
+"Mientras tanto puedes buscar candidatos."
 
 #: business/views.py:43 business/views.py:70 business/views.py:88
 #: business/views.py:242 business/views.py:558
@@ -578,6 +600,9 @@ msgstr "Ingles"
 #: testing_webpage/shared_settings.py:120
 msgid "Spanish"
 msgstr "Español"
+
+#~ msgid "Selection"
+#~ msgstr "Selección"
 
 #~ msgid ""
 #~ "Hi, I'm Santiago, Congratulations on passing the tests! Let's schedule an "
