@@ -136,16 +136,17 @@ def edit_campaign(request, pk):
 
 
 def interview(request, pk):
+    """
+    Args:
+        request: HTTP
+        pk: campaign_id
+    Returns: Updates changes to the Questions of a Interview. And renders those questions.
+    """
 
-    new_video_token = request.POST.get('new_video_token')
-    new_question_text = request.POST.get('new_question_text')
-    new_question_text_es = request.POST.get('new_question_text_es')
     interview_name = request.POST.get('interview_name')
     interview_name_es = request.POST.get('interview_name_es')
 
     campaign = Campaign.objects.get(pk=pk)
-
-    new_question = interview_module.get_new_question(new_question_text, new_question_text_es, new_video_token)
 
     # if no interview, then it creates a new one.
     if len(campaign.interviews.all()) == 0:
@@ -154,29 +155,67 @@ def interview(request, pk):
                                   name_es=interview_name_es)
         interview_obj.save()  # saves to get the id. Cannot add questions without having an id.
 
-        if new_question is not None:
-            interview_obj.questions.add(new_question)
-
-        interview_obj.save()  # saves to add the questions.
-
         campaign.interviews = [interview_obj]
         campaign.save()
 
     else:  # there is already an interview.
-
         # TODO: change this when a campaign has more than 1 interview.
         interview_obj = campaign.interviews.all()[0]
-        if new_question is not None:
-            interview_module.assign_order_to_question(new_question, interview_obj)
-            interview_obj.questions.add(new_question)
 
-        interview_obj.save()
-
-        interview_module.update_old_question_statements(request, interview_obj, new_question)
-
-    return render(request, cts.INTERVIEW_QUESTIONS, {'questions': [q for q in interview_obj.questions.order_by('order').all()],
+    return render(request, cts.INTERVIEW_QUESTIONS, {'campaign': campaign,
+                                                     'questions': [q for q in interview_obj.questions.order_by('order').all()],
                                                      'ziggeo_api_key': common.get_ziggeo_api_key()
                                                      })
+
+
+def get_redirect_url(campaign_id):
+    return redirect('/dashboard/campaign/interview/{}'.format(campaign_id))
+
+
+def create_interview_question(request):
+    """
+    Given a new_token_id and texts, it creates a new question.
+    Args:
+        request: HTTP
+    Returns: Renders the same view that it came from.
+    """
+    campaign = common.get_campaign_from_request(request)
+
+    interview_module.create_question(request, campaign)
+
+    # goes back to original page.
+    return get_redirect_url(campaign.id)
+
+
+def update_interview_question(request):
+    """
+    Updates a interview question.
+    Args:
+        request: HTTP
+    Returns: Save info and redirects back to interviews.
+    """
+
+    campaign = common.get_campaign_from_request(request)
+
+    interview_module.update_question(request)
+
+    # goes back to original page.
+    return get_redirect_url(campaign.id)
+
+
+def delete_interview_question(request):
+    """
+    Args:
+        request: HTTP
+    Returns: Delete question and redirects back to interviews.
+    """
+
+    campaign = common.get_campaign_from_request(request)
+
+    interview_module.delete_question(request, campaign)
+
+    # goes back to original page.
+    return get_redirect_url(campaign.id)
 
 
 def edit_intro_video(request):
@@ -198,7 +237,7 @@ def check_interview(request):
     """
     Args:
         request: HTTP
-    Returns: Renders the whole interview.
+    Returns: Renders the whole interview for a given candidate.
     """
 
     candidate = Candidate.objects.get(pk=request.GET.get('candidate_id'))

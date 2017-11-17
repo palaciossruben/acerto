@@ -9,31 +9,11 @@ ZiggeoApi.Events.on("system_ready", function() {
     // we can also create a global event to fire each time video was uploaded
     recorder.on("verified", function () {
 
-        form = document.getElementById('main_form_id');
-        video_token = document.createElement('input');
+        form = document.getElementById('new_question_form');
+        var video_token = document.createElement('input');
         video_token.setAttribute('name', 'new_video_token');
         video_token.setAttribute('type', 'hidden');
         video_token.setAttribute('value', recorder.get('video'));
         form.appendChild(video_token);
     });
 });
-
-
-function submit_form() {
-    form = document.getElementById('main_form_id');
-    form.submit();
-}
-
-
-/*
-function remove_video_from_campaign(remove_video_token_str, {{ campaign.id }}){
-
-    form = document.getElementById('main_form_id');
-    remove_video_token = document.createElement('input');
-    remove_video_token.setAttribute('name', 'remove_video_token');
-    remove_video_token.setAttribute('type', 'hidden');
-    remove_video_token.setAttribute('value', recorder.get('video'));
-    form.appendChild(video_token);
-
-}
-*/
