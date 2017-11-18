@@ -147,6 +147,36 @@ def update_basic_properties(request):
     return campaign_module.get_campaign_edit_url(campaign)
 
 
+# ------------------------------- CAMPAIGN TESTS -------------------------------
+
+
+def tests(request, pk):
+    """
+    Args:
+        request: HTTP
+        pk: campaign_id
+    Returns: Renders the list of tests for a given campaign
+    """
+    campaign = Campaign.objects.get(pk=pk)
+    return render(request, cts.TESTS, {'campaign': campaign,
+                                       'tests': Test.objects.all()})
+
+
+def add_test(request, pk):
+    """
+    Args:
+        request: HTTP
+        pk: campaign_id
+    Returns: adds a new test to a given campaign
+    """
+    campaign = Campaign.objects.get(pk=pk)
+    new_test_id = int(request.POST.get('new_test_id'))
+    campaign.tests.add(new_test_id)
+    campaign.save()
+
+    return redirect('/dashboard/campaign/{}/tests'.format(campaign.id))
+
+
 # ------------------------------- TESTS -------------------------------
 
 
