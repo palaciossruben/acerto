@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" types="text/css" href="{% static 'css/campaign/common.css' %}">
+
+    <title>{{ title }}</title>
+</head>
+<body>
+
+    <h1 class="my_title">{{ title }}</h1>
+
+    <form style="margin-top: 40px; margin-left:40px;" action="{{ action_url }}" method="post">
+
+        {% csrf_token %}
+
+        <br>
+        <br>
+
+        <input class="title_text_box" type="text" name="name" value="{{ campaign.name }}"
+          placeholder="Add internal campaign name in English" required="required">
+
+        <br>
+        <br>
+
+        <input class="title_text_box" type="text" name="title" value="{{ campaign.title }}"
+          placeholder="Add campaign title in English" required="required">
+
+        <br>
+        <br>
+
+        <input class="title_text_box" type="text" name="title_es" value="{{ campaign.title_es }}"
+          placeholder="Add a campaign title in Spanish" required="required">
+
+        <br>
+        <br>
+
+        <select name="country_id" required>
+
+            <!--Update-->
+            {% if campaign %}
+                {% with default_id=campaign.country.id default_name=campaign.country.name %}
+                    <option value="{{ default_id }}">{{ default_name }}</option>
+                {% endwith %}
+            {% else %} <!--New-->
+                {% with default_id="" default_name="Select Country" %}
+                    <option value="{{ default_id }}">{{ default_name }}</option>
+                {% endwith %}
+            {% endif %}
+
+            {% for country in countries%}
+                <option value={{ country.id }}>{{ country.name }}</option>
+            {% endfor %}
+        </select>
+
+        <br>
+        <br>
+
+        <textarea name="description" cols="40" rows="5"
+        placeholder="add description in English">{{ campaign.description }}</textarea>
+
+        <br>
+        <br>
+
+        <textarea name="description_es" cols="40" rows="5"
+        placeholder="add description in Spanish">{{ campaign.description_es }}</textarea>
+
+        <br>
+        <br>
+
+        <select name="profession_id" required>
+
+            <!--Update-->
+            {% if campaign %}
+                {% with default_id=campaign.profession.id default_name=campaign.profession.name %}
+                    <option value="{{ default_id }}">{{ default_name }}</option>
+                {% endwith %}
+            {% else %} <!--New-->
+                {% with default_id="" default_name="Select Profession" %}
+                    <option value="{{ default_id }}">{{ default_name }}</option>
+                {% endwith %}
+            {% endif %}
+
+          <option value="">Select Profession</option>
+          {% for profession in professions %}
+             <option value={{ profession.id }}>{{ profession.name }}</option>
+          {% endfor %}
+        </select>
+
+        <br>
+        <br>
+
+        <select name="education_id" required>
+
+            <!--Update-->
+            {% if campaign %}
+                {% with default_id=campaign.education.id default_name=campaign.education.name %}
+                    <option value="{{ default_id }}">{{ default_name }}</option>
+                {% endwith %}
+            {% else %} <!--New-->
+                {% with default_id="" default_name="Select Education" %}
+                    <option value="{{ default_level }}">{{ default_name }}</option>
+                {% endwith %}
+            {% endif %}
+
+          {% for level in education %}
+             <option value={{ level.id }}>{{ level.name }}</option>
+          {% endfor %}
+        </select>
+
+        <br>
+        <br>
+
+        <div style="margin-top:-10px;">
+            <label >Experience in years:</label>
+            <input name="experience" id="experience"
+             type="number" value="{{ campaign.experience }}" min="0" max="60" />
+        </div>
+
+        <br>
+        <br>
+
+        <input class="btn btn-success" type="submit" value="Save"
+            style="width:100px; height: 25px; font-size:15; margin-bottom:50px; line-height: 10px;">
+
+        <input name="campaign_id" type="hidden" value="{{ campaign.id }}">
+
+    </form>
+
+    <hr>
+    <br>
+    <br>
+
+    <h1>Tests</h1>
+    <!--tests = models.ManyToManyField(Test)-->
+
+</body>
+</html>

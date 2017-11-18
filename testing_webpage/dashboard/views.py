@@ -2,7 +2,7 @@
 import common
 from django.core import serializers
 from django.shortcuts import render, redirect
-from beta_invite.models import Campaign, User, Evaluation, Test, BulletType, Interview, Question, Survey
+from beta_invite.models import Campaign, User, Evaluation, Test, BulletType, Interview, Question, Survey, Bullet
 from dashboard.models import State, Candidate, Comment
 from dashboard import constants as cts
 from beta_invite.util import email_sender
@@ -20,6 +20,9 @@ def index(request):
     tests = Test.objects.all()
     return render(request, cts.MAIN_DASHBOARD, {'campaigns': campaigns,
                                                 'tests': tests})
+
+
+# ------------------------------- CAMPAIGN -------------------------------
 
 
 # TODO: use Ajax to optimize rendering. Has no graphics therefore is very low priority.
@@ -64,18 +67,87 @@ def edit_campaign_candidates(request, pk):
     # all campaigns except the current one.
     campaigns_to_move_to = Campaign.objects.exclude(pk=pk)
 
-    return render(request, cts.DASHBOARD_EDIT, {'states': states,
-                                                'campaign_id': pk,
-                                                'backlog': backlog,
-                                                'waiting_tests': waiting_tests,
-                                                'waiting_interview': waiting_interview,
-                                                'did_interview_in_standby': did_interview_in_standby,
-                                                'sent_to_client': sent_to_client,
-                                                'got_job': got_job,
-                                                'rejected': rejected,
-                                                'campaigns': campaigns_to_move_to,
-                                                'current_campaign': Campaign.objects.get(pk=pk)
-                                                })
+    return render(request, cts.EDIT_CANDIDATES, {'states': states,
+                                                 'campaign_id': pk,
+                                                 'backlog': backlog,
+                                                 'waiting_tests': waiting_tests,
+                                                 'waiting_interview': waiting_interview,
+                                                 'did_interview_in_standby': did_interview_in_standby,
+                                                 'sent_to_client': sent_to_client,
+                                                 'got_job': got_job,
+                                                 'rejected': rejected,
+                                                 'campaigns': campaigns_to_move_to,
+                                                 'current_campaign': Campaign.objects.get(pk=pk)
+                                                 })
+
+
+def new_campaign(request):
+
+    countries, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
+    bullet_types_json = serializers.serialize("json", BulletType.objects.all())
+
+    return render(request, cts.NEW_OR_EDIT_CAMPAIGN, {'countries': countries,
+                                                      'education': education,
+                                                      'professions': professions,
+                                                      'bullet_types_json': bullet_types_json,
+                                                      'action_url': '/dashboard/campaign/create',
+                                                      'title': 'New Campaign',
+                                                      })
+
+
+def create_campaign(request):
+    """
+    When you are in a new campaign and you save the model
+    Args:
+        request: HTTP
+    Returns:
+    """
+
+    # saves to create id first.
+    campaign = Campaign()
+    campaign.save()
+
+    campaign_module.update_campaign_basic_properties(campaign, request)
+    campaign_module.update_campaign_bullets(campaign, request)
+
+    # in this specific case gotta go back. Because if the user stays modifying the campaign on the 'new' template it
+    # will create additional campaigns instead of modifying the first creation.
+    return redirect('/dashboard')
+
+
+def edit_campaign(request, pk):
+    """
+    Args:
+        request: HTTP
+        pk: campaign_id
+    Returns: Renders basic properties of a campaign
+    """
+    campaign = Campaign.objects.get(pk=pk)
+    countries, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
+
+    return render(request, cts.NEW_OR_EDIT_CAMPAIGN, {'countries': countries,
+                                                      'education': education,
+                                                      'professions': professions,
+                                                      'campaign': campaign,
+                                                      'action_url': '/dashboard/campaign/update_basic_properties',
+                                                      'title': 'Update Campaign',
+                                                      })
+
+
+def update_basic_properties(request):
+    """
+    Args:
+        request: HTTP.
+    Returns: Updates just the basics of a campaign.
+    """
+    campaign = common.get_campaign_from_request(request)
+
+    campaign_module.update_campaign_basic_properties(campaign, request)
+
+    return campaign_module.get_campaign_edit_url(campaign)
+
+
+# ------------------------------- TESTS -------------------------------
 
 
 def edit_test():
@@ -88,51 +160,58 @@ def new_test(request):
     return render(request, cts.NEW_TEST, {})
 
 
-def new_campaign(request):
-
-    countries, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
-    bullet_types_json = serializers.serialize("json", BulletType.objects.all())
-
-    return render(request, cts.NEW_CAMPAIGN, {'countries': countries,
-                                              'education': education,
-                                              'professions': professions,
-                                              'bullet_types_json': bullet_types_json,
-                                              'action_url': 'create',
-                                              'title': 'New Campaign',
-                                              })
+# ------------------------------- BULLETS -------------------------------
 
 
-def create_campaign(request):
-
-    # saves to create id first.
-    campaign = Campaign()
-    campaign.save()
-
-    campaign_module.update_campaign(campaign, request)
-
-    return redirect('../')
-
-
-def edit_campaign(request, pk):
-
+def bullets(request, pk):
+    """
+    Args:
+        request: HTTP
+        pk: campaign_id
+    Returns: Renders list of all bullets.
+    """
     campaign = Campaign.objects.get(pk=pk)
 
-    if request.method == "POST":
-        campaign_module.update_campaign(campaign, request)
-
-    countries, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
     bullet_types = BulletType.objects.all()
     bullet_types_json = serializers.serialize("json", bullet_types)
 
-    return render(request, cts.NEW_CAMPAIGN, {'countries': countries,
-                                              'education': education,
-                                              'professions': professions,
-                                              'bullet_types': bullet_types,
-                                              'bullet_types_json': bullet_types_json,
-                                              'campaign': campaign,
-                                              'action_url': '#',
-                                              'title': 'Update Campaign',
-                                              })
+    return render(request, cts.BULLETS, {'bullet_types': bullet_types,
+                                         'bullet_types_json': bullet_types_json,
+                                         'campaign': campaign,
+                                         })
+
+
+def update_bullets(request):
+    """
+    Args:
+        request: HTTP.
+    Returns: Updates just the basics of a campaign.
+    """
+    campaign = common.get_campaign_from_request(request)
+
+    campaign_module.update_campaign_bullets(campaign, request)
+
+    return campaign_module.get_bullets_url(campaign)
+
+
+def delete_bullet(request):
+    """
+    Args:
+        request: HTTP
+    Returns:
+    """
+    bullet_id = int(request.POST.get('bullet_id'))
+    bullet = Bullet.objects.get(pk=bullet_id)
+
+    campaign = common.get_campaign_from_request(request)
+
+    campaign.bullets.remove(bullet)
+    campaign.save()
+
+    return campaign_module.get_bullets_url(campaign)
+
+
+# ------------------------------- INTERVIEW -------------------------------
 
 
 def interview(request, pk):
@@ -168,10 +247,6 @@ def interview(request, pk):
                                                      })
 
 
-def get_redirect_url(campaign_id):
-    return redirect('/dashboard/campaign/interview/{}'.format(campaign_id))
-
-
 def create_interview_question(request):
     """
     Given a new_token_id and texts, it creates a new question.
@@ -184,7 +259,7 @@ def create_interview_question(request):
     interview_module.create_question(request, campaign)
 
     # goes back to original page.
-    return get_redirect_url(campaign.id)
+    return interview_module.get_redirect_url(campaign.id)
 
 
 def update_interview_question(request):
@@ -200,7 +275,7 @@ def update_interview_question(request):
     interview_module.update_question(request)
 
     # goes back to original page.
-    return get_redirect_url(campaign.id)
+    return interview_module.get_redirect_url(campaign.id)
 
 
 def delete_interview_question(request):
@@ -215,7 +290,7 @@ def delete_interview_question(request):
     interview_module.delete_question(request, campaign)
 
     # goes back to original page.
-    return get_redirect_url(campaign.id)
+    return interview_module.get_redirect_url(campaign.id)
 
 
 def edit_intro_video(request):
