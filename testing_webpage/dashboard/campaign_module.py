@@ -2,6 +2,7 @@
 All Campaign editing related stuff on the dashboard, except for candidates and interviews.
 """
 import re
+from django.shortcuts import redirect
 
 from beta_invite.models import Bullet, Campaign
 
@@ -28,21 +29,41 @@ def update_bullet_attr(campaign, dict_id, key_bullet_dict, value, attribute_name
         campaign.bullets.add(b)
 
 
-def update_campaign(campaign, request):
+def update_campaign_basic_properties(campaign, request):
     """
+    Bit of meta-programming to update properties assuming a perfect match between model properties and names in the HTML
     Args:
         campaign: Campaign Object
         request: HTTP request
     Returns: None, just updates the campaign object.
     """
-    key_bullet_dict = {}
     for key, value in request.POST.items():
-
         if hasattr(Campaign, key):
             setattr(campaign, key, value)
 
+    campaign.save()
+
+
+def get_campaign_edit_url(campaign):
+    return redirect('/dashboard/campaign/edit/{}'.format(campaign.id))
+
+
+def get_bullets_url(campaign):
+    return redirect('/dashboard/campaign/{}/bullets'.format(campaign.id))
+
+
+def update_campaign_bullets(campaign, request):
+    """
+    Args:
+        campaign: Campaign Object
+        request: HTTP request
+    Returns: None, updates or creates new bullets.
+    """
+    key_bullet_dict = {}
+    for key, value in request.POST.items():
+
         # When there is a new_bullet.
-        elif 'new_bullet' in key:
+        if 'new_bullet' in key:
 
             dict_id = int(re.findall('^\d+', key)[0])
 

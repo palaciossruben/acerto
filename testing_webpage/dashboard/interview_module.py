@@ -2,6 +2,7 @@
 Helper functions related to the dashboard and interviews.
 """
 
+from django.shortcuts import redirect
 from beta_invite.models import Question
 
 
@@ -129,3 +130,6 @@ def delete_question(request, campaign):
     interview_obj.questions.remove(question)
     interview_obj.save()
 
+
+def get_redirect_url(campaign_id):
+    return redirect('/dashboard/campaign/interview/{}'.format(campaign_id))

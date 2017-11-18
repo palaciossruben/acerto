@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/campaign/common.css' %}">
+
+    <script type="text/javascript" src="{% static 'js/campaign/bullets.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/business/post_function.js' %}"></script>
+
+    <title>Campaign Bullets</title>
+</head>
+<body>
+
+    <h1 class="my_title">Bullets</h1>
+
+    <form style="margin-top: 40px; margin-left:40px;" action="/dashboard/campaign/update_bullets" method="post">
+
+        {% csrf_token %}
+
+        {% for bullet in campaign.bullets.all %}
+            {% include "dashboard/campaign/bullet.html" with bullet=bullet bullet_types=bullet_types campaign=campaign %}
+        {% endfor %}
+
+        <!-- This empty container is filled dynamically with JS, to add new bullets-->
+        <div id="bullet_container"></div>
+
+        <br>
+        <br>
+
+        <input style="margin-bottom:100px;" type="button" class="btn btn-success" name="add_bullet" value="Add Bullet!"
+          onclick="addBullet('{{ bullet_types_json | escapejs }}');">
+
+        <br>
+        <br>
+
+        <input class="btn btn-success" type="submit" value="Save"
+            style="width:100px; height: 25px; font-size:15; margin-bottom:50px; line-height: 10px;">
+
+        <input name="campaign_id" type="hidden" value="{{ campaign.id }}">
+
+    </form>
+
+</body>
+</html>
