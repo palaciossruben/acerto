@@ -16,6 +16,7 @@ urlpatterns = [
 
     # Campaign tests
     url(r'^campaign/(?P<pk>\d+)/add_test$', views.add_test),
+    url(r'^campaign/(?P<pk>\d+)/delete_test$', views.delete_test),
     url(r'^campaign/(?P<pk>\d+)/tests$', views.tests),
 
 

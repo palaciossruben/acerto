@@ -177,6 +177,21 @@ def add_test(request, pk):
     return redirect('/dashboard/campaign/{}/tests'.format(campaign.id))
 
 
+def delete_test(request, pk):
+    """
+    Args:
+        request: HTTP
+        pk: campaign_id
+    Returns: adds a new test to a given campaign
+    """
+    campaign = Campaign.objects.get(pk=pk)
+    new_test_id = int(request.POST.get('test_id'))
+    campaign.tests.remove(new_test_id)
+    campaign.save()
+
+    return redirect('/dashboard/campaign/{}/tests'.format(campaign.id))
+
+
 # ------------------------------- TESTS -------------------------------
 
 
