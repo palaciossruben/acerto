@@ -18,6 +18,18 @@
     {% for test in campaign.tests.all %}
         <li>
         {{ test.name }}
+        <br>
+        <br>
+        <form action="/dashboard/campaign/{{ campaign.id }}/delete_test" method="post">
+
+            {% csrf_token %}
+
+            <input type="button" class="btn btn-danger" value="Delete!" onclick="this.form.submit();">
+            <input name="test_id" type="hidden" value="{{ test.id }}">
+
+        </form>
+        <br>
+        <hr>
         </li>
     {% endfor %}
 
@@ -30,7 +42,7 @@
 
         <select name="new_test_id" required>
 
-          <option value="">Select Test</option>
+          <option>Select Test</option>
           {% for test in tests.all %}
              <option value={{ test.id }}>{{ test.name }}</option>
           {% endfor %}
