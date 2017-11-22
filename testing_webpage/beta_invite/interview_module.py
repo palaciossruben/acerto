@@ -136,12 +136,12 @@ def get_top_message(on_interview):
     if on_interview:
         return _("Click on the video to hear the question")
     else:
-        return _("Hi, I'm Santiago, Congratulations on passing the tests{test_score_str}!")
+        return _("Hi, I'm Santiago, Congratulations on passing the tests{test_score_str}! Click on the video.")
 
 
 def get_message0(on_interview):
     if on_interview:
-        return _("In 2 minutes:")
+        return _("In 1 minute:")
     else:
         return ''
 
