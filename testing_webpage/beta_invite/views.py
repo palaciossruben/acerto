@@ -476,7 +476,7 @@ def get_test_result(request):
                                                          'question_video': common.get_intro_video(),
                                                          'ziggeo_api_key': common.get_ziggeo_api_key(),
                                                          'top_message': interview_module.get_top_message(on_interview=False).format(test_score_str=test_score_str),
-                                                         'message0': interview_module.get_message0(False),
+                                                         'message0': interview_module.get_message0(on_interview=False),
                                                          'message1': '',
                                                          'message2': interview_module.get_message2(enable_interview),
                                                          'left_button_text': _('Schedule Interview'),
@@ -528,6 +528,7 @@ def interview(request, pk):
         enable_recording = True
         question_video = next_question.video_token
         message1 = next_question.text
+        message2 = ''
 
     except ObjectDoesNotExist:  # beyond last question
         right_button_text = ''
@@ -535,16 +536,17 @@ def interview(request, pk):
         enable_interview = False
         enable_recording = False
         question_video = ''
-        message1 = _('Thanks for completing the interview, we will contact you soon ;)')
+        message1 = ''
+        message2 = _('Thanks for completing the interview, we will contact you soon ;)')
         answer_video = None
 
     return render(request, cts.INTERVIEW_VIEW_PATH, {'campaign': campaign,
                                                      'ziggeo_api_key': common.get_ziggeo_api_key(),
                                                      'question_video': question_video,
-                                                     'top_message': interview_module.get_top_message(on_interview=True),
-                                                     'message0': interview_module.get_message0(on_interview=True),
+                                                     'top_message': interview_module.get_top_message(on_interview=enable_interview),
+                                                     'message0': interview_module.get_message0(on_interview=enable_interview),
                                                      'message1': message1,
-                                                     'message2': '',
+                                                     'message2': message2,
                                                      'left_button_text': _('Back'),
                                                      'right_button_text': right_button_text,
                                                      'right_button_action': right_button_action,
