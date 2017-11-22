@@ -201,8 +201,14 @@ def edit_test():
 
 
 def new_test(request):
-    # TODO: implement
     return render(request, cts.NEW_TEST, {})
+
+
+def save_test(request):
+
+    #Test(name=, name_es=)
+
+    return redirect('/dashboard')
 
 
 # ------------------------------- BULLETS -------------------------------

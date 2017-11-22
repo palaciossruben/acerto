@@ -132,15 +132,29 @@ def save_response(campaign, user, question_number, interview_obj, video_token):
             pass  # cannot save, if the question is not found.
 
 
+def get_top_message(on_interview):
+    if on_interview:
+        return _("Click on the video to hear the question")
+    else:
+        return _("Hi, I'm Santiago, Congratulations on passing the tests{test_score_str}!")
+
+
+def get_message0(on_interview):
+    if on_interview:
+        return _("In 2 minutes:")
+    else:
+        return ''
+
+
+def get_message1():
+    return _("Hi, I'm Santiago, Congratulations on passing the tests{test_score_str}!")
+
+
 def get_message2(enable_interview):
     if enable_interview:
         return _("Let's schedule an appointment or record your interview now!")
     else:
         return _("Let's schedule an appointment!")
-
-
-def get_message1():
-    return _("Hi, I'm Santiago, Congratulations on passing the tests{test_score_str}!")
 
 
 def update_candidate_state(campaign, user, interview_obj, question_number):

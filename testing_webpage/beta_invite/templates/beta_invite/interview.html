@@ -104,7 +104,7 @@
         {% if enable_interview %}
 
         	<div class="container" style="margin-top:25px;">
-			  <b style="font-size:25px; color: black; font-weight:400;">{% trans "Click on the video to hear the question" %}</b>
+			  <b style="font-size:25px; color: black; font-weight:400;">{{ top_message }}</b>
 			  <br>
 			</div>
 
@@ -121,16 +121,15 @@
 
           <br>
 
-		  <b style="font-size:25px; color: black; font-weight:400;">{% trans "In 2 minutes:" %}</b>
+		  <b style="font-size:25px; color: black; font-weight:400;">{{ message0 }}</b>
 
 		  <div class="container">
 			  <b style="font-size:25px; color: black; font-weight:400;">{{message1}}</b>
-			  <br>
 		  </div>
 
+		  <b style="color:#134984; font-size:25px; font-weight:400; text-transform: uppercase;">{{message2}}</b>
+
 		  <div class="container" style="margin-top:5px;">
-		  	<b style="color:#134984; font-size:25px; font-weight:400; text-transform: uppercase;">{{message2}}</b>
-		    <br>
 
 			{% if enable_recording %}
 			    <div style="display: inline-block;">
@@ -157,7 +156,7 @@
 			{% endif %}
         	<br>
 
-			<div style="margin-top:45px;">
+			<div style="margin-top:-25px;">
 
 				{% if on_interview %}
 					<form style="cursor:pointer; display:inline; margin-left:40px;" action="{{ left_button_action }}"
