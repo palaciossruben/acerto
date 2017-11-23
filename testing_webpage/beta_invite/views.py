@@ -476,7 +476,7 @@ def get_test_result(request):
                                                          'question_video': common.get_intro_video(),
                                                          'ziggeo_api_key': common.get_ziggeo_api_key(),
                                                          'top_message': interview_module.get_top_message(on_interview=False).format(test_score_str=test_score_str),
-                                                         'message0': interview_module.get_message0(False),
+                                                         'message0': interview_module.get_message0(on_interview=False),
                                                          'message1': '',
                                                          'message2': interview_module.get_message2(enable_interview),
                                                          'left_button_text': _('Schedule Interview'),
@@ -528,6 +528,7 @@ def interview(request, pk):
         enable_recording = True
         question_video = next_question.video_token
         message1 = next_question.text
+        message2 = ''
 
     except ObjectDoesNotExist:  # beyond last question
         right_button_text = ''
@@ -535,16 +536,17 @@ def interview(request, pk):
         enable_interview = False
         enable_recording = False
         question_video = ''
-        message1 = _('Thanks for completing the interview, we will contact you soon ;)')
+        message1 = ''
+        message2 = _('Thanks for completing the interview, we will contact you soon ;)')
         answer_video = None
 
     return render(request, cts.INTERVIEW_VIEW_PATH, {'campaign': campaign,
                                                      'ziggeo_api_key': common.get_ziggeo_api_key(),
                                                      'question_video': question_video,
-                                                     'top_message': interview_module.get_top_message(on_interview=True),
-                                                     'message0': interview_module.get_message0(on_interview=True),
+                                                     'top_message': interview_module.get_top_message(on_interview=enable_interview),
+                                                     'message0': interview_module.get_message0(on_interview=enable_interview),
                                                      'message1': message1,
-                                                     'message2': '',
+                                                     'message2': message2,
                                                      'left_button_text': _('Back'),
                                                      'right_button_text': right_button_text,
                                                      'right_button_action': right_button_action,
@@ -555,3 +557,36 @@ def interview(request, pk):
                                                      'on_interview': True,
                                                      'answer_video': answer_video,
                                                      })
+
+
+def add_cv(request):
+    """
+    When a user registers on a phone, there is no CV field. So the user is left with no CV on his/her profile.
+    An email is sent to the user requesting to complete his/her profile by adding the missing CV. This rendering
+    displays the missing CV interface.
+    Passes around the user_id param. Transitions from GET to POST
+    Args:
+        request: HTTP
+    Returns: Renders simple UI to add a missing CV
+    """
+    user_id = request.GET.get('user_id')
+    return render(request, cts.ADD_CV, {'user_id': user_id})
+
+
+def add_cv_changes(request):
+    """
+    Args:
+        request: HTTP
+    Returns: Adds a CV to the User profile, given that the user exists.
+    """
+
+    user_id = request.POST.get('user_id')
+
+    if user_id is not None:
+        user = User.objects.get(pk=int(user_id))
+        user.curriculum_url = save_curriculum_from_request(request, user, 'curriculum')
+        user.save()
+        return render(request, cts.SUCCESS_VIEW_PATH, {})
+
+    # if any inconsistency, then do nothing, ignore it.
+    return render(request, cts.ADD_CV, {})

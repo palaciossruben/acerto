@@ -41,11 +41,11 @@
         <br>
         <br>
 
-        <input type="button" class="btn btn-success" name="add_question" value="Add Question!"
-          onclick="this.form.submit()">
+        <!-- This empty container is filled dynamically with JS.-->
+        <div id="question_container"></div>
 
-        <!-- This empty container is filled dynamically with JS.
-        <div id="question_container"/>-->
+        <input type="button" class="btn btn-success" name="add_question" value="Add Question!"
+          onclick="addQuestion('{{ question_types_json | escapejs }}');">
 
     </form>
 

@@ -9,14 +9,6 @@
   },
   {
     "model": "beta_invite.questiontype",
-    "pk": 2,
-    "fields":{
-      "name": "multiple answer",
-      "code": "MA"
-    }
-  },
-  {
-    "model": "beta_invite.questiontype",
     "pk": 3,
     "fields":{
       "name": "open field",
