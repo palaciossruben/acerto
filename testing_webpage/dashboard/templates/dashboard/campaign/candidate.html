@@ -1,3 +1,5 @@
+{% load static %}
+
 <li>
 <input type="checkbox" name="{{ candidate.id }}_checkbox">
 <h4 style="display:inline;">{{ candidate.user.name }} ({{ candidate.user.id }}):</h4>
@@ -16,7 +18,8 @@
 
 <p> <strong>cv:</strong>
 {% if candidate.user.curriculum_url != '#' %}
-    <a href="http://peaku.co/static/{{ candidate.user.curriculum_url }}">link</a>
+    <!--<a href="http://peaku.co/static/{{ candidate.user.curriculum_url }}">link</a>-->
+    <a href="{% static candidate.user.curriculum_url %}">link</a>
 {% else %}
     not available
 {% endif %}

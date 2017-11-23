@@ -2,7 +2,7 @@
 import common
 from django.core import serializers
 from django.shortcuts import render, redirect
-from beta_invite.models import Campaign, User, Evaluation, Test, BulletType, Interview, Question, Survey, Bullet
+from beta_invite.models import Campaign, User, Evaluation, Test, BulletType, Interview, Question, Survey, Bullet, QuestionType
 from dashboard.models import State, Candidate, Comment
 from dashboard import constants as cts
 from beta_invite.util import email_sender
@@ -201,12 +201,30 @@ def edit_test():
 
 
 def new_test(request):
-    return render(request, cts.NEW_TEST, {})
+
+    question_types = QuestionType.objects.all()
+    question_types_json = serializers.serialize("json", question_types)
+
+    return render(request, cts.NEW_TEST, {'question_types': question_types,
+                                          'question_types_json': question_types_json
+                                          })
 
 
 def save_test(request):
+    """
 
-    #Test(name=, name_es=)
+    Args:
+        request: HTTP
+    Returns: redirects to dashboard after saving new test.
+    """
+
+    name = request.POST.get('name')
+    name_es = request.POST.get('name_es')
+
+    test = Test(name=name, name_es=name_es)
+
+
+    test.save()
 
     return redirect('/dashboard')
 

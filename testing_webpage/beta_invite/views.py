@@ -557,3 +557,36 @@ def interview(request, pk):
                                                      'on_interview': True,
                                                      'answer_video': answer_video,
                                                      })
+
+
+def add_cv(request):
+    """
+    When a user registers on a phone, there is no CV field. So the user is left with no CV on his/her profile.
+    An email is sent to the user requesting to complete his/her profile by adding the missing CV. This rendering
+    displays the missing CV interface.
+    Passes around the user_id param. Transitions from GET to POST
+    Args:
+        request: HTTP
+    Returns: Renders simple UI to add a missing CV
+    """
+    user_id = request.GET.get('user_id')
+    return render(request, cts.ADD_CV, {'user_id': user_id})
+
+
+def add_cv_changes(request):
+    """
+    Args:
+        request: HTTP
+    Returns: Adds a CV to the User profile, given that the user exists.
+    """
+
+    user_id = request.POST.get('user_id')
+
+    if user_id is not None:
+        user = User.objects.get(pk=int(user_id))
+        user.curriculum_url = save_curriculum_from_request(request, user, 'curriculum')
+        user.save()
+        return render(request, cts.SUCCESS_VIEW_PATH, {})
+
+    # if any inconsistency, then do nothing, ignore it.
+    return render(request, cts.ADD_CV, {})
