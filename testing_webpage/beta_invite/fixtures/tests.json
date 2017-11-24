@@ -118,5 +118,17 @@
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.test",
+    "pk": 11,
+    "fields":{
+      "name": "Business Case",
+      "name_es": "Caso de Negocio",
+      "questions": [28, 29],
+      "cut_score": 80,
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
   }
 ]
