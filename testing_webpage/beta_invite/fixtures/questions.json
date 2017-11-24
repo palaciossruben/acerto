@@ -376,5 +376,33 @@
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 28,
+    "fields":{
+      "text": "Being the director of development department, they tell you to implement these ideas. How would you prioritize them?",
+      "text_es": "Siendo el director de desarrollo, te solicitan implementar lo solicitado ¿Como priorizarias el trabajo?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 1,
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 29,
+    "fields":{
+      "text": "What proposal would you deliver with the main objective of streamlining processes?",
+      "text_es": "¿Qué propuesta entregarías con el objetivo principal de agilizar los procesos?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 2,
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
   }
 ]
