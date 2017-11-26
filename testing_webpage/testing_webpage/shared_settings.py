@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['ec2-52-38-133-146.us-west-2.compute.amazonaws.com',
 # Application definition
 
 INSTALLED_APPS = [
+    'testing_webpage',
     'beta_invite.apps.BetaInviteConfig',
     'business.apps.BusinessConfig',
     'dashboard.apps.DashboardConfig',

@@ -41,7 +41,10 @@
 }
 
 #who_am_i_div {
-    margin-left: 31.5%;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
     margin-top: 50px;
 }
 
@@ -50,12 +53,10 @@
     margin-right: 100px;
 }
 
-#user_img {
+.avatar-img {
 	width: 75px;
 	height: 75px;
 	cursor: pointer;
-	margin-left:22%;
-	/*background-color: var(--yellow);*/
 }
 
 /* Person button */
@@ -90,13 +91,6 @@
 #business {
     display: inline-block;
     margin-left: 100px;
-}
-
-#business_img {
-	width: 75px;
-	height: 75px;
-	cursor: pointer;
-	margin-left: 22%;
 }
 
 /* Business button */
@@ -180,13 +174,6 @@
 
     #background_blue_rectangle {
         height: 500px;
-    }
-}
-
-@media (max-width: 650px){
-
-    #who_am_i_div {
-        margin-left: 10%;
     }
 }
 

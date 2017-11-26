@@ -1,0 +1,16 @@
+@font-face {
+    font-family: BIG_JOHN;
+    src: url(/static/fonts/BIG_JOHN.otf);
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+	/*font-family: BIG_JOHN;*/
+	font-family: Arial;
+}
+
+/* Removes small black lines */
+a {
+	text-decoration: none;
+}
