@@ -1,4 +1,4 @@
-{% extends 'beta_invite/base.html'%}
+{% extends 'base.html'%}
 {% load i18n %}
 {% load static %}
 
@@ -18,17 +18,18 @@
         <div id="who_am_i_div">
             <a href="{% url 'beta_invite:long_form' %}">
                 <div id="user">
-                    <img id="user_img" src="{% static 'beta_invite/img/user.jpeg' %}">
+                    <img class="avatar-img" src="{% static 'beta_invite/img/user.jpeg' %}">
                     <form id="person_form">
                         {% trans "Person" as person %}
                         <input id="person_input" type="button" value="{{ person }}">
                     </form>
                 </div>
             </a>
-            <p  id="im">{% trans "I'm" %}</p>
+
+            <p id="im">{% trans "I'm" %}</p>
             <a href="{% url 'business:logout' %}">
                 <div id="business">
-                    <img id="business_img" src="{% static 'beta_invite/img/business.jpeg' %}">
+                    <img class="avatar-img" src="{% static 'beta_invite/img/business.jpeg' %}">
                     <form id="business_form">
                         {% trans "Business" as business %}
                         <input id="business_input" type="button" value="{{ business }}">

@@ -25,18 +25,17 @@
     <header id="header">
 
         <a href="/">
-            <img id="peaku_home" src="{% static 'beta_invite/img/peaku_home.svg' %}"/>
-        </a>
+            <img id="peaku_home" src="{% static 'beta_invite/img/peaku_home.svg' %}"/></a>
 
         <div id="log_and_sign_up">
-            <form id="sign_up_form">
-                {% trans "Sign Up" as sign_up %}
-                <input id="sign_up_input" type="button" value="{{ sign_up }}">
+            <form id="sign_up_form" action="{% url 'business:signup' %}">
+                {% trans "Sign Up" as signup %}
+                <input id="sign_up_input" type="submit" value="{{ signup }}">
             </form>
 
-            <form id="log_in_form">
-                {% trans "Log In" as log_in %}
-                <input id="log_in_input" type="button" value="{{ log_in }}">
+            <form id="log_in_form" action="{% url 'business:login' %}">
+                {% trans "Log In" as login %}
+                <input id="log_in_input" type="submit" value="{{ login }}">
             </form>
         </div>
 
@@ -52,15 +51,13 @@
 
             <div id="footer_phone_div">
                 <a href="tel:+57 311 6109340">
-                    <img src="{% static 'beta_invite/img/phone.svg' %}" class="footer_icon">
-                    <p id="footer_phone">+57 311 6109340</p>
+                    <img src="{% static 'beta_invite/img/phone.svg' %}" class="footer_icon"><p id="footer_phone">+57 311 6109340</p>
                 </a>
             </div>
 
             <div id="footer_email_div">
                 <a href="mailto:contacto@peaku.co">
-                    <img src="{% static 'beta_invite/img/mail.svg' %}" class="footer_icon">
-                    <p id="footer_email">contacto@peaku.co</p>
+                    <img src="{% static 'beta_invite/img/mail.svg' %}" class="footer_icon"><p id="footer_email">contacto@peaku.co</p>
                 </a>
             </div>
 
