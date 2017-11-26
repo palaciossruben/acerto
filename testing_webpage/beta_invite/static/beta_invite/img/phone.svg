@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 6</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="mobile" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="index" transform="translate(-29.000000, -1043.000000)">
+            <g id="Group-6" transform="translate(29.000000, 1043.000000)">
+                <rect id="Rectangle-4" stroke="#46E7B9" stroke-width="2" x="1" y="1" width="22" height="22"></rect>
+                <g id="ic_smartphone_black_24px" transform="translate(3.000000, 2.000000)">
+                    <polygon id="Shape" points="0 0 19 0 19 19 0 19"></polygon>
+                    <path d="M13.4583333,0.799583333 L5.54166667,0.791666667 C4.67083333,0.791666667 3.95833333,1.50416667 3.95833333,2.375 L3.95833333,16.625 C3.95833333,17.4958333 4.67083333,18.2083333 5.54166667,18.2083333 L13.4583333,18.2083333 C14.3291667,18.2083333 15.0416667,17.4958333 15.0416667,16.625 L15.0416667,2.375 C15.0416667,1.50416667 14.3291667,0.799583333 13.4583333,0.799583333 Z M13.4583333,15.0416667 L5.54166667,15.0416667 L5.54166667,3.95833333 L13.4583333,3.95833333 L13.4583333,15.0416667 Z" id="Shape" fill="#46E7B9" fill-rule="nonzero"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-22 19:06+0000\n"
+"POT-Creation-Date: 2017-11-26 00:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,6 +57,21 @@ msgstr "¡Programemos una cita o graba tu entrevista ya!"
 msgid "Let's schedule an appointment!"
 msgstr "¡Programemos una cita!"
 
+#: beta_invite/templates/beta_invite/add_cv.html:76
+#: beta_invite/templates/beta_invite/index.html:103
+#: beta_invite/templates/beta_invite/long_form.html:191
+msgid "Upload your resume"
+msgstr "Sube tu curriculum"
+
+#: beta_invite/templates/beta_invite/add_cv.html:93
+#: beta_invite/templates/beta_invite/fast_job.html:160
+#: beta_invite/templates/beta_invite/index.html:113
+#: beta_invite/templates/beta_invite/long_form.html:216
+#: business/templates/business/index.html:237
+#: business/templates/business/trade_client.html:155
+msgid "Sure!"
+msgstr "¡Enviar!"
+
 #: beta_invite/templates/beta_invite/applied.html:83
 msgid "Thanks for registering!"
 msgstr "¡Gracias por registrarte!"
@@ -65,6 +80,22 @@ msgstr "¡Gracias por registrarte!"
 #: business/templates/business/contact.html:111
 msgid "We will contact you soon"
 msgstr "Nos pondremos en contacto pronto"
+
+#: beta_invite/templates/beta_invite/base.html:33
+#: business/templates/business/login.html:67
+#: business/templates/business/login_buttons.html:17
+#: business/templates/business/search_trade.html:109
+#: business/templates/business/trade_client.html:84
+msgid "Sign Up"
+msgstr "Regístrate"
+
+#: beta_invite/templates/beta_invite/base.html:38
+#: business/templates/business/login_buttons.html:23
+#: business/templates/business/search_trade.html:115
+#: business/templates/business/signup.html:95
+#: business/templates/business/trade_client.html:90
+msgid "Log In"
+msgstr "Inicia Sesión"
 
 #: beta_invite/templates/beta_invite/fast_job.html:99
 #: beta_invite/templates/beta_invite/long_form.html:126
@@ -115,19 +146,13 @@ msgstr "Selecciona tu Oficio"
 msgid "Describe what you do."
 msgstr "Describe lo que haces."
 
-#: beta_invite/templates/beta_invite/fast_job.html:160
-#: beta_invite/templates/beta_invite/index.html:113
-#: beta_invite/templates/beta_invite/long_form.html:216
-#: business/templates/business/index.html:237
-#: business/templates/business/trade_client.html:155
-msgid "Sure!"
-msgstr "¡Enviar!"
-
 #: beta_invite/templates/beta_invite/home.html:70
+#: beta_invite/templates/beta_invite/intro.html:15
 msgid "we connect you better"
 msgstr "Te conectamos mejor"
 
 #: beta_invite/templates/beta_invite/home.html:72
+#: beta_invite/templates/beta_invite/intro.html:16
 msgid "We find the best match between employees and employer"
 msgstr "Encontramos el empleado y empleador perfecto."
 
@@ -136,6 +161,7 @@ msgid "Who are you?"
 msgstr "¿Quién eres?"
 
 #: beta_invite/templates/beta_invite/home.html:84
+#: beta_invite/templates/beta_invite/intro.html:23
 msgid "Person"
 msgstr "Persona"
 
@@ -145,17 +171,13 @@ msgid "or"
 msgstr "o"
 
 #: beta_invite/templates/beta_invite/home.html:96
+#: beta_invite/templates/beta_invite/intro.html:33
 msgid "Business"
 msgstr "Empresa"
 
 #: beta_invite/templates/beta_invite/index.html:77
 msgid "Subscribe"
 msgstr "Suscríbete"
-
-#: beta_invite/templates/beta_invite/index.html:103
-#: beta_invite/templates/beta_invite/long_form.html:191
-msgid "Upload your resume"
-msgstr "Sube tu curriculum"
 
 #: beta_invite/templates/beta_invite/interview.html:150
 msgid "You can record the video several times"
@@ -164,6 +186,23 @@ msgstr "Puedes grabar el video varias veces"
 #: beta_invite/templates/beta_invite/interview.html:207
 msgid "Or contact me at santiago@peaku.co, skype: reclutamiento@peaku.co"
 msgstr "O contactame en santiago@peaku.co, skype: reclutamiento@peaku.co"
+
+#: beta_invite/templates/beta_invite/intro.html:28
+msgid "I'm"
+msgstr "Soy"
+
+#: beta_invite/templates/beta_invite/intro.html:47
+msgid "What is PeakU?"
+msgstr "¿Qué es PeakU?"
+
+#: beta_invite/templates/beta_invite/intro.html:50
+msgid ""
+"PeakU is revolutionizing recruitment, as it saves companies a significant "
+"amount of time and money; and also improves the candidate's experience"
+msgstr ""
+"PeakU está revolucionando el reclutamiento, ya que ahorra a las empresas una "
+"cantidad significativa de tiempo y dinero; y también porque mejora la "
+"experiencia del candidato."
 
 #: beta_invite/templates/beta_invite/long_form.html:113
 msgid "Perks"
@@ -245,11 +284,11 @@ msgstr "Programa una entrevista"
 msgid "Record interview now!"
 msgstr "¡Graba tu entrevista ya!"
 
-#: beta_invite/views.py:538
+#: beta_invite/views.py:540
 msgid "Thanks for completing the interview, we will contact you soon ;)"
 msgstr "¡Gracias por completar la entrevista, te contactaremos pronto! ;)"
 
-#: beta_invite/views.py:548
+#: beta_invite/views.py:550
 msgid "Back"
 msgstr "Atrás"
 
@@ -457,13 +496,6 @@ msgstr ""
 "reclutamiento atendiendo las necesidades del cliente y automatizándolas con "
 "inteligencia artificial."
 
-#: business/templates/business/login.html:67
-#: business/templates/business/login_buttons.html:17
-#: business/templates/business/search_trade.html:109
-#: business/templates/business/trade_client.html:84
-msgid "Sign Up"
-msgstr "Regístrate"
-
 #: business/templates/business/login.html:79
 msgid "Log in to our platform"
 msgstr "Inicia sesión en nuestra plataforma"
@@ -475,13 +507,6 @@ msgstr "Digita una clave"
 #: business/templates/business/login.html:106
 msgid "Log In!"
 msgstr "¡Inicia Sesión!"
-
-#: business/templates/business/login_buttons.html:23
-#: business/templates/business/search_trade.html:115
-#: business/templates/business/signup.html:95
-#: business/templates/business/trade_client.html:90
-msgid "Log In"
-msgstr "Inicia Sesión"
 
 #: business/templates/business/offer_results.html:82
 #: business/templates/business/results.html:102

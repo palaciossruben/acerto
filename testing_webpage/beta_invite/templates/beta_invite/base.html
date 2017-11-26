@@ -1,10 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
+{% load i18n %}
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable=no">
+    <meta name="description" content="Seleccion de personal y reclutamiento para contratacion de personal">
+    <meta name="keywords" content="seleccion personal, contratacion personal, seleccion reclutamiento">
+    <meta name="author" content="Juan Pablo Isaza">
+    <meta name="google-site-verification" content="LPqesGS5MnESQN-E-LNjZWtRrZAY4rO__YDq8WFjpOs" />
+    <meta name="google-site-verification" content="tR13zEizNHyoMXQ0j8F1ImD0Xe3FdWFHUq-ksIKUscE" />
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+
+    {% block extra_head %}{% endblock %}
+
 </head>
 <body>
+    <div>
+    <header id="header">
+
+        <a href="/">
+            <img id="peaku_home" src="{% static 'beta_invite/img/peaku_home.svg' %}"/>
+        </a>
+
+        <div id="log_and_sign_up">
+            <form id="sign_up_form">
+                {% trans "Sign Up" as sign_up %}
+                <input id="sign_up_input" type="button" value="{{ sign_up }}">
+            </form>
+
+            <form id="log_in_form">
+                {% trans "Log In" as log_in %}
+                <input id="log_in_input" type="button" value="{{ log_in }}">
+            </form>
+        </div>
+
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer id="footer">
+        <div id="footer_yellow_bar">
+        </div>
+        <div id="footer_blue_bar">
+
+            <div id="footer_phone_div">
+                <a href="tel:+57 311 6109340">
+                    <img src="{% static 'beta_invite/img/phone.svg' %}" class="footer_icon">
+                    <p id="footer_phone">+57 311 6109340</p>
+                </a>
+            </div>
+
+            <div id="footer_email_div">
+                <a href="mailto:contacto@peaku.co">
+                    <img src="{% static 'beta_invite/img/mail.svg' %}" class="footer_icon">
+                    <p id="footer_email">contacto@peaku.co</p>
+                </a>
+            </div>
+
+        </div>
+
+        <div id="footer_bottom_div">
+
+            <a href="https://www.facebook.com/PeakU-Latam-1916685895214519/?ref=aymt_homepage_panel">
+                <img src="{% static 'beta_invite/img/facebook.svg' %}" class="footer_icon">
+            </a>
+            <a href="https://www.linkedin.com/company-beta/16241506/">
+                <img src="{% static 'beta_invite/img/linkedin.svg' %}" class="footer_icon">
+            </a>
+
+            <!-- TODO: missing Twitter -->
+            <img src="{% static 'beta_invite/img/twitter.svg' %}" class="footer_icon">
+            <a href="/">
+                <img src="{% static 'beta_invite/img/peaku_footer.svg' %}" id="peaku_footer">
+            </a>
+        </div>
+
+    </footer>
+    </div>
 
 </body>
 </html>

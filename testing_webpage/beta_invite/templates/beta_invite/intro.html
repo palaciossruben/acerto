@@ -1,0 +1,53 @@
+{% extends 'beta_invite/base.html'%}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}PeakU{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/intro.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    <div id="background_blue_rectangle">
+        <h1 id="main_title">{% trans "we connect you better" %}</h1>
+        <h2 id="description">{% trans "We find the best match between employees and employer" %}</h2>
+
+        <div id="who_am_i_div">
+            <a href="{% url 'beta_invite:long_form' %}">
+                <div id="user">
+                    <img id="user_img" src="{% static 'beta_invite/img/user.jpeg' %}">
+                    <form id="person_form">
+                        {% trans "Person" as person %}
+                        <input id="person_input" type="button" value="{{ person }}">
+                    </form>
+                </div>
+            </a>
+            <p  id="im">{% trans "I'm" %}</p>
+            <a href="{% url 'business:logout' %}">
+                <div id="business">
+                    <img id="business_img" src="{% static 'beta_invite/img/business.jpeg' %}">
+                    <form id="business_form">
+                        {% trans "Business" as business %}
+                        <input id="business_input" type="button" value="{{ business }}">
+                    </form>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div id="background_white_rectangle">
+
+        <img id="intro_nice_photo" src="{% static 'beta_invite/img/intro_nice_photo.jpg' %}"
+		 srcset="{% static 'beta_invite/img/intro_nice_photo@2x.jpg' %} 2x,
+					 {% static 'beta_invite/img/intro_nice_photo@3x.jpg' %} 3x">
+
+        <h2 id="what_is_peaku">
+            <p>{% trans 'What is PeakU?' %}</p>
+        </h2>
+
+        <p id="paragraph" >{% trans "PeakU is revolutionizing recruitment, as it saves companies a significant amount of time and money; and also improves the candidate's experience" %}</p>
+
+    </div>
+{% endblock %}
