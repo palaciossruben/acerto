@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 5</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="mobile" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="index" transform="translate(-28.000000, -1160.000000)">
+            <g id="Group-5" transform="translate(28.000000, 1160.000000)">
+                <rect id="Rectangle-4-Copy-2" stroke="#FFFF7C" stroke-width="2" x="1" y="1" width="28" height="28"></rect>
+                <g id="facebook" transform="translate(10.000000, 5.000000)" fill-rule="nonzero" fill="#FFFF7C">
+                    <path d="M0.00471515734,6.61662445 L2.14520799,6.61662445 L2.14520799,5.67984501 L2.14520799,4.75670931 L2.14520799,4.60208022 C2.14520799,3.71532784 2.16878377,2.35104443 2.83357381,1.50522328 C3.5360851,0.609375071 4.49788289,0 6.15747683,0 C8.85902623,0 10,0.372883514 10,0.372883514 L9.46251921,3.43335713 C9.46251921,3.43335713 8.57144878,3.18322183 7.73691308,3.18322183 C6.90237738,3.18322183 6.15747683,3.47424289 6.15747683,4.27917828 L6.15747683,4.60658265 L6.15747683,5.67979953 L6.15747683,6.61657897 L9.57568299,6.61657897 L9.33992512,9.60887935 L6.15747683,9.60887935 L6.15747683,20 L2.14049283,20 L2.14049283,9.61347274 L0,9.61347274 L0.00471515734,6.61662445 L0.00471515734,6.61662445 Z" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
