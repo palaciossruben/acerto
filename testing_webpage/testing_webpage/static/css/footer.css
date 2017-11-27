@@ -6,13 +6,13 @@
 	position: static;
 }
 
-#footer #footer_yellow_bar {
+#footer #footer-yellow-bar {
 	width: 100%;
 	height: 20px;
 	background-color: var(--yellow);
 }
 
-#footer #footer_blue_bar {
+#footer #footer-blue-bar {
 	width: 90%;
 	height: 100px;
 	background-color: var(--blue);
@@ -20,13 +20,13 @@
 }
 
 /*Phone*/
-#footer #footer_phone_div {
+#footer #footer-phone-div {
     margin-top: 28px;
     margin-left: 65%;
     height: 33px;
 }
 
-#footer #footer_phone {
+#footer #footer-phone {
 	width: 150px;
 	height: 20px;
 	margin: 0px;
@@ -39,13 +39,13 @@
 }
 
 /* email */
-#footer #footer_email_div {
+#footer #footer-email-div {
     margin-top: 0px;
     margin-left: 65%;
     height: 33px;
 }
 
-#footer #footer_email {
+#footer #footer-email {
 	width: 150px;
 	height: 33px;
 	font-size: 13px;
@@ -57,19 +57,19 @@
 	display: inline-block;
 }
 
-#footer .footer_icon {
+#footer .footer-icon {
     display: inline-block;
 }
 
 
 /*Social media and logo*/
-#footer #footer_bottom_div {
+#footer #footer-bottom-div {
     margin-top: 28px;
     margin-left: 58.7%;
     height: 50px;
 }
 
-#footer #peaku_footer {
+#footer #peaku-footer {
     margin-left: 63%;
     display: inline-block;
 }
@@ -77,12 +77,12 @@
 /* Responsive */
 @media (max-width: 1000px)
 {
-    #footer #footer_bottom_div, #footer #footer_phone_div, #footer #footer_email_div
+    #footer #footer-bottom-div, #footer #footer-phone-div, #footer #footer-email-div
     {
         margin-left: 10%;
     }
 
-    #footer #peaku_footer
+    #footer #peaku-footer
     {
         margin-left: 40%;
     }

@@ -25,17 +25,17 @@
     <header id="header">
 
         <a href="/">
-            <img id="peaku_home" src="{% static 'beta_invite/img/peaku_home.svg' %}"/></a>
+            <img id="peaku-home" src="{% static 'beta_invite/img/peaku_home.svg' %}"/></a>
 
-        <div id="log_and_sign_up">
-            <form id="sign_up_form" action="{% url 'business:signup' %}">
+        <div id="log-and-sign-up">
+            <form id="sign-up-form" action="{% url 'business:signup' %}">
                 {% trans "Sign Up" as signup %}
-                <input id="sign_up_input" type="submit" value="{{ signup }}">
+                <input id="sign-up-input" type="submit" value="{{ signup }}">
             </form>
 
-            <form id="log_in_form" action="{% url 'business:login' %}">
+            <form id="log-in-form" action="{% url 'business:login' %}">
                 {% trans "Log In" as login %}
-                <input id="log_in_input" type="submit" value="{{ login }}">
+                <input id="log-in-input" type="submit" value="{{ login }}">
             </form>
         </div>
 
@@ -45,37 +45,37 @@
     {% endblock %}
 
     <footer id="footer">
-        <div id="footer_yellow_bar">
+        <div id="footer-yellow-bar">
         </div>
-        <div id="footer_blue_bar">
+        <div id="footer-blue-bar">
 
-            <div id="footer_phone_div">
+            <div id="footer-phone-div">
                 <a href="tel:+57 311 6109340">
-                    <img src="{% static 'beta_invite/img/phone.svg' %}" class="footer_icon"><p id="footer_phone">+57 311 6109340</p>
+                    <img src="{% static 'beta_invite/img/phone.svg' %}" class="footer-icon"><p id="footer-phone">+57 311 6109340</p>
                 </a>
             </div>
 
-            <div id="footer_email_div">
+            <div id="footer-email-div">
                 <a href="mailto:contacto@peaku.co">
-                    <img src="{% static 'beta_invite/img/mail.svg' %}" class="footer_icon"><p id="footer_email">contacto@peaku.co</p>
+                    <img src="{% static 'beta_invite/img/mail.svg' %}" class="footer-icon"><p id="footer-email">contacto@peaku.co</p>
                 </a>
             </div>
 
         </div>
 
-        <div id="footer_bottom_div">
+        <div id="footer-bottom-div">
 
             <a href="https://www.facebook.com/PeakU-Latam-1916685895214519/?ref=aymt_homepage_panel">
-                <img src="{% static 'beta_invite/img/facebook.svg' %}" class="footer_icon">
+                <img src="{% static 'beta_invite/img/facebook.svg' %}" class="footer-icon">
             </a>
             <a href="https://www.linkedin.com/company-beta/16241506/">
-                <img src="{% static 'beta_invite/img/linkedin.svg' %}" class="footer_icon">
+                <img src="{% static 'beta_invite/img/linkedin.svg' %}" class="footer-icon">
             </a>
 
             <!-- TODO: missing Twitter -->
-            <img src="{% static 'beta_invite/img/twitter.svg' %}" class="footer_icon">
+            <img src="{% static 'beta_invite/img/twitter.svg' %}" class="footer-icon">
             <a href="/">
-                <img src="{% static 'beta_invite/img/peaku_footer.svg' %}" id="peaku_footer">
+                <img src="{% static 'beta_invite/img/peaku_footer.svg' %}" id="peaku-footer">
             </a>
         </div>
 

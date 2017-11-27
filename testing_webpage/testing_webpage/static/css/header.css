@@ -6,7 +6,7 @@
 }
 
 /* PeakU Home button */
-#peaku_home {
+#peaku-home {
 	width: 47px;
 	height: 40px;
 	object-fit: contain;
@@ -15,14 +15,14 @@
 	cursor: pointer;
 }
 
-#log_and_sign_up {
+#log-and-sign-up {
     float:right;
     width: 250px;
     margin-right:70px;
 }
 
 /* Log in button */
-#log_in_form {
+#log-in-form {
     display:inline-block;
     float:right;
     margin-right:2%;
@@ -30,7 +30,7 @@
     margin-top:13px;
 }
 
-#log_in_input {
+#log-in-input {
 	width: 100px;
 	height: 35px;
 	background-color: var(--blue);
@@ -47,14 +47,14 @@
 
 
 /* Sign up button */
-#sign_up_form {
+#sign-up-form {
     display:inline-block;
     float:right;
     margin-right:13px;
     margin-top:13px;
 }
 
-#sign_up_input {
+#sign-up-input {
 	width: 100px;
 	height: 35px;
 	background-color: var(--green);
@@ -73,7 +73,7 @@
 @media (max-width: 1000px)
 {
 
-    #log_and_sign_up {
+    #log-and-sign-up {
         margin-right: 5px;
     }
 }

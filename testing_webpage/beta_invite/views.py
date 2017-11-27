@@ -82,7 +82,7 @@ def index(request):
 
 def post_index(request):
     """
-    Action taken when a form is submitted, coming from index.html
+    Action taken when a form is submitted.
     Args:
         request: A request object.
 
