@@ -72,6 +72,11 @@
                             <li class="plan-bullet">{% trans "Limited resume search engine" %}</li>
                         </ul>
                         <h4 class="plan-price">{% trans "Free" %}</h4>
+
+                        <form action="{% url 'business:plan' 1 %}" method="get">
+                            {% csrf_token %}
+                            <input class="plan-more-info" type="submit" value="{% trans 'more information' %}">
+                        </form>
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -86,6 +91,10 @@
                         <h4 class="plan-price">{% trans "$199" %}</h4>
                         <p class="plan-price-comment">{% trans "per contracted candidate" %}</p>
 
+                        <form action="{% url 'business:plan' 2 %}" method="get">
+                            {% csrf_token %}
+                            <input class="plan-more-info" type="submit" value="{% trans 'more information' %}">
+                        </form>
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -100,6 +109,10 @@
                         <h4 class="plan-price">{% trans "$299" %}</h4>
                         <p class="plan-price-comment">{% trans "per contracted candidate" %}</p>
 
+                        <form action="{% url 'business:plan' 3 %}" method="get">
+                            {% csrf_token %}
+                            <input class="plan-more-info" type="submit" value="{% trans 'more information' %}">
+                        </form>
                     </div>
                 </div>
             </div>
