@@ -74,7 +74,7 @@
 .choose-bullet {
 	width: 100%;
 	height: 25px;
-	/*font-family: Bitter;*/
+	font-family: Bitter;
 	font-size: 16px;
 	line-height: 1.56;
 	text-align: left;
@@ -141,7 +141,7 @@
 
 
 .plan-bullet {
-	/*font-family: Bitter;*/
+	font-family: Bitter;
 	font-size: 13px;
 	line-height: 1.45;
 	text-align: left;
@@ -161,7 +161,7 @@
 }
 
 .plan-price-comment {
-    /*font-family: Bitter;*/
+    font-family: Bitter;
 	font-size: 12px;
 	color: var(--dark-grey);
 	text-align: center;
@@ -217,7 +217,7 @@
 	height: 121px;
 	border: none;
 
-	/*font-family: Bitter;*/
+	font-family: Bitter;
 	font-size: 16px;
 	line-height: 1.62;
     background-color: rgba(100, 138, 255, 0.15);

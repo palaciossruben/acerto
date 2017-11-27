@@ -1,4 +1,5 @@
 :root {
+    /* Colors */
     --blue: #648aff;
     --green: #46e7b9;
     --purple: #596dbd;
@@ -9,4 +10,7 @@
     --text-title-color: #5a656c;
     --light-grey: #e4e4e4;
     --dark-grey: #909da5;
+
+    /* Fonts */
+    --Bitter: Bitter;
 }

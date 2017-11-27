@@ -1,13 +1,11 @@
-@font-face {
-    font-family: BIG_JOHN;
-    src: url(/static/fonts/BIG_JOHN.otf);
-}
+@import 'fonts.css';
 
 body {
 	margin: 0px;
 	padding: 0px;
-	/*font-family: BIG_JOHN;*/
-	font-family: Arial;
+	/*font-family: "BigJohn";*/
+	font-family: NorthernBlock;
+	/*font-family: Arial;*/
 }
 
 /* Removes small black lines */
@@ -42,4 +40,3 @@ a {
 .green-box p {
     padding-top: 10px;
 }
-
