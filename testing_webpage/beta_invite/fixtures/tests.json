@@ -130,5 +130,19 @@
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.test",
+    "pk": 12,
+    "fields":{
+      "name": "Talent Aquisition (Conekta)",
+      "name_es": "Adquisicion de Talento",
+      "questions": [30, 31, 32],
+      "cut_score": 70,
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
   }
+
+
 ]
