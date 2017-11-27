@@ -19,9 +19,9 @@
             <a href="{% url 'beta_invite:long_form' %}">
                 <div id="user">
                     <img class="avatar-img" src="{% static 'beta_invite/img/user.jpeg' %}">
-                    <form id="person_form">
+                    <form id="person-form">
                         {% trans "Person" as person %}
-                        <input id="person_input" type="button" value="{{ person }}">
+                        <input id="person-input" type="button" value="{{ person }}">
                     </form>
                 </div>
             </a>
@@ -30,9 +30,9 @@
             <a href="{% url 'business:logout' %}">
                 <div id="business">
                     <img class="avatar-img" src="{% static 'beta_invite/img/business.jpeg' %}">
-                    <form id="business_form">
+                    <form id="business-form">
                         {% trans "Business" as business %}
-                        <input id="business_input" type="button" value="{{ business }}">
+                        <input id="business-input" type="button" value="{{ business }}">
                     </form>
                 </div>
             </a>
