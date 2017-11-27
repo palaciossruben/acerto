@@ -177,9 +177,15 @@
 	height: 30px;
 	background-color: var(--white);
 	border: solid 2px var(--blue);
-	margin-left: auto;
-	margin-right: auto;
+
+	/*TODO: can be done more accurate */
+	margin-right: 20%;
+	margin-left: 20%;
+	color: var(--blue);
+	margin-top: 290px;
+	position: absolute; top:0;
 }
+
 
 /* Contact Us*/
 .contact-us-container {

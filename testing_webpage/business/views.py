@@ -13,6 +13,7 @@ from ipware.ip import get_ip
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import login, authenticate
+from django.core.exceptions import ObjectDoesNotExist
 
 import business
 import beta_invite
@@ -35,15 +36,9 @@ def index(request):
     """
 
     ip = get_ip(request)
-    action_url = '/business/post'
-
-    secondary_message = _("We do the entire personnel selection process for your company. Meanwhile you can start searching for candidates.")
 
     business.models.Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
-    return render(request, cts.BUSINESS_VIEW_PATH, {'main_message': _("Discover amazing people"),
-                                                    'secondary_message': secondary_message,
-                                                    'action_url': action_url,
-                                                    })
+    return render(request, cts.BUSINESS_VIEW_PATH, {})
 
 
 def post_index(request):
@@ -292,7 +287,7 @@ def signup(request):
     plan_name = request.POST.get('plan_name')
     try:
         plan = Plan.objects.get(name=plan_name)
-    except:
+    except :
         # If no plan object found will, use a default message
         plan = Plan.objects.get(name='Default')
 
@@ -312,7 +307,7 @@ def get_plan(request):
     plan_id = request.POST.get('plan_id')
     try:
         plan = Plan.objects.get(pk=plan_id)
-    except:
+    except ObjectDoesNotExist:
         # Gets the default plan.
         plan = Plan.objects.get(pk=4)
 
