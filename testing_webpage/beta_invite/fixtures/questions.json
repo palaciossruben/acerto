@@ -413,7 +413,7 @@
       "text": "¿How many years of experience do you have in TA?",
       "text_es": "¿Cuántos años de experiencia tienes en adquisición de Talento?",
       "answers": [],
-      "type": 3,
+      "type": 5,
       "correct_answers": [],
       "order": 1,
       "params": {"min": 0,
@@ -445,7 +445,7 @@
     "pk": 32,
     "fields":{
       "text": "Describe your dream job and what would be your role.",
-      "text_es": "Describe el trabajo de tus sueños y cuál sería tu rol.",
+      "text_es": "Describe el trabajo de tus sueños.",
       "answers": [],
       "type": 3,
       "correct_answers": [],
