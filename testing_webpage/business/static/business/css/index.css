@@ -68,7 +68,7 @@
 #choose-list-container {
     width: 80%;
     margin-left: 10%;
-    list-style-image: url('/static/business/img/check_mark.png');
+    list-style-image: url('/static/business/img/check_mark_green.svg');
 }
 
 .choose-bullet {
@@ -132,7 +132,7 @@
 
 .plan-list {
     margin-top: 15px;
-    list-style-image: url('/static/business/img/check_mark.png');
+    list-style-image: url('/static/business/img/check_mark_blue.svg');
 
     width: 100%;
     margin-left: auto;
