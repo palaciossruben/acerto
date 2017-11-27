@@ -22,7 +22,7 @@
 #description {
     width: 42.6%;
 	height: 19px;
-	/*font-family: Bitter;*/
+	font-family: Bitter;
 	font-size: 16px;
 	line-height: 1.12;
 	text-align: center;
@@ -73,7 +73,7 @@
 
 #im {
 	height: 160px;
-	/*font-family: Bitter;*/
+	font-family: Bitter;
 	font-size: 13px;
 	font-weight: bold;
 	color: var(--white);
@@ -130,7 +130,7 @@
 	width: 285px;
 	height: 125px;
 	margin-left: 600px;
-	/*font-family: Bitter;*/
+	font-family: Bitter;
 	font-size: 16px;
 	line-height: 1.56;
 	text-align: left;

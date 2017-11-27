@@ -1,0 +1,10 @@
+@font-face {
+    font-family: BigJohn;
+    src: url(/static/fonts/BIG_JOHN.otf);
+    unicode-range: U+?????;
+}
+
+@font-face {
+    font-family: NorthernBlock;
+    src: url(/static/fonts/TheNorthernBlockLtdLoewHeavy.otf);
+}
