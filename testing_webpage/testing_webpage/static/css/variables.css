@@ -4,6 +4,9 @@
     --purple: #596dbd;
     --yellow: #ffff7c;
     --white: #ffffff;
-    --very_dark: #333335;
-    --black_text_color: #7b8891;
+    --very-dark: #333335;
+    --text-color: #7b8891;
+    --text-title-color: #5a656c;
+    --light-grey: #e4e4e4;
+    --dark-grey: #909da5;
 }
