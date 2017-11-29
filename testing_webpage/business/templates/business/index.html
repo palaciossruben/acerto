@@ -7,6 +7,7 @@
 
 {% block extra_head %}
     <link rel="stylesheet" type="text/css" href="{% static 'business/css/index.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'business/css/pricing.css' %}">
 {% endblock %}
 
 
@@ -31,7 +32,7 @@
         </form>
 
         <h2 class="green-box">
-            <p>{% trans 'We do the entire personnel selection process' %}</p>
+            <p>{% trans 'Hire only the best candidates' %}</p>
         </h2>
     </div>
 
@@ -43,11 +44,12 @@
                 <div class="secondary-yellow-bar"></div>
 
                 <ul id="choose-list-container">
-                    <li class="choose-bullet">{% trans "We only charge for successful hiring" %}</li>
-                    <li class="choose-bullet">{% trans "Save time reading and analyzing hundreds of resumes" %}</li>
-                    <li class="choose-bullet">{% trans "Save time personal interviews" %}</li>
-                    <li class="choose-bullet">{% trans "Experts help us choose the best candidates" %}</li>
-                    <li class="choose-bullet">{% trans "We deliver a detailed report of selected candidates" %}</li>
+                    <li class="choose-bullet">{% trans "We deliver only the best 10% of applicants" %}</li>
+                    <li class="choose-bullet">{% trans "We only deliver 100% relevant candidates" %}</li>
+                    <li class="choose-bullet">{% trans "The whole process in 10 business days" %}</li>
+                    <li class="choose-bullet">{% trans "We save you 1 week of work" %}</li>
+                    <li class="choose-bullet">{% trans "Only do worthwhile interviews" %}</li>
+                    <li class="choose-bullet">{% trans "Save on job exchanges" %}</li>
                 </ul>
 
             </div>
@@ -58,65 +60,7 @@
         </div>
     </section>
 
-    <section class="section-container">
-        <h3 class="secondary-title" >{% trans "Select the best plan for you"%}</h3>
-        <div class="secondary-yellow-bar"></div>
-
-        <div id="plans-container">
-            <div class="row"> <!-- bootstrap row class -->
-                <div class="col-sm-4">
-                    <div class="plan-column">
-                        <h4 class="title-blue">{% trans "Search Engine" %}</h4>
-                        <ul class="plan-list">
-                            <li class="plan-bullet">{% trans "Limited resume search engine" %}</li>
-                        </ul>
-                        <h4 class="plan-price">{% trans "Free" %}</h4>
-
-                        <form action="{% url 'business:plan' 1 %}" method="get">
-                            {% csrf_token %}
-                            <input class="plan-more-info" type="submit" value="{% trans 'more information' %}">
-                        </form>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="plan-column">
-                        <h4 class="title-blue">{% trans "Basic Selection" %}</h4>
-                        <ul class="plan-list">
-                            <li class="plan-bullet">{% trans "Resume search engine" %}</li>
-                            <li class="plan-bullet">{% trans "Additional search on social media and online campaigns" %}</li>
-                            <li class="plan-bullet">{% trans "We do online tests to filter candidates" %}</li>
-                            <li class="plan-bullet">{% trans "Personal Interview, soft and hard skills assessment" %}</li>
-                        </ul>
-                        <h4 class="plan-price">{% trans "$199" %}</h4>
-                        <p class="plan-price-comment">{% trans "per contracted candidate" %}</p>
-
-                        <form action="{% url 'business:plan' 2 %}" method="get">
-                            {% csrf_token %}
-                            <input class="plan-more-info" type="submit" value="{% trans 'more information' %}">
-                        </form>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="plan-column">
-                        <h4 class="title-blue">{% trans "Advanced Selection" %}</h4>
-                        <ul class="plan-list">
-                            <li class="plan-bullet">{% trans "Resume search engine" %}</li>
-                            <li class="plan-bullet">{% trans "Additional search on social media and online campaigns" %}</li>
-                            <li class="plan-bullet">{% trans "We do online tests to filter candidates" %}</li>
-                            <li class="plan-bullet">{% trans "Personal Interview, soft and hard skills assessment" %}</li>
-                        </ul>
-                        <h4 class="plan-price">{% trans "$299" %}</h4>
-                        <p class="plan-price-comment">{% trans "per contracted candidate" %}</p>
-
-                        <form action="{% url 'business:plan' 3 %}" method="get">
-                            {% csrf_token %}
-                            <input class="plan-more-info" type="submit" value="{% trans 'more information' %}">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    {% include "business/pricing.html" %}
 
     <section class="section-container">
         <div class="row"> <!-- bootstrap row class -->

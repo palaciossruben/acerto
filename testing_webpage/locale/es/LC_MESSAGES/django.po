@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-28 23:50+0000\n"
+"POT-Creation-Date: 2017-11-29 23:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,16 +58,14 @@ msgid "Let's schedule an appointment!"
 msgstr "¡Programemos una cita!"
 
 #: beta_invite/templates/beta_invite/add_cv.html:76
-#: beta_invite/templates/beta_invite/long_form.html:191
-#: beta_invite/templates/beta_invite/long_form2.html:99
+#: beta_invite/templates/beta_invite/long_form.html:99
 msgid "Upload your resume"
 msgstr "Sube tu curriculum"
 
 #: beta_invite/templates/beta_invite/add_cv.html:93
 #: beta_invite/templates/beta_invite/fast_job.html:160
-#: beta_invite/templates/beta_invite/long_form.html:216
-#: beta_invite/templates/beta_invite/long_form2.html:107
-#: business/templates/business/index.html:153
+#: beta_invite/templates/beta_invite/long_form.html:107
+#: business/templates/business/index.html:97
 #: business/templates/business/trade_client.html:155
 msgid "Sure!"
 msgstr "¡Enviar!"
@@ -82,14 +80,12 @@ msgid "We will contact you soon"
 msgstr "Nos pondremos en contacto pronto"
 
 #: beta_invite/templates/beta_invite/fast_job.html:99
-#: beta_invite/templates/beta_invite/long_form.html:126
 msgid "Apply Now!"
 msgstr "¡Aplica Ya!"
 
 #: beta_invite/templates/beta_invite/fast_job.html:112
-#: beta_invite/templates/beta_invite/long_form.html:136
-#: beta_invite/templates/beta_invite/long_form2.html:68
-#: business/templates/business/index.html:142
+#: beta_invite/templates/beta_invite/long_form.html:68
+#: business/templates/business/index.html:86
 #: business/templates/business/results.html:152
 #: business/templates/business/search_trade.html:194
 #: business/templates/business/signup.html:122
@@ -98,9 +94,8 @@ msgid "Your Full Name"
 msgstr "Tu Nombre Completo"
 
 #: beta_invite/templates/beta_invite/fast_job.html:119
-#: beta_invite/templates/beta_invite/long_form.html:143
-#: beta_invite/templates/beta_invite/long_form2.html:71
-#: business/templates/business/index.html:145
+#: beta_invite/templates/beta_invite/long_form.html:71
+#: business/templates/business/index.html:89
 #: business/templates/business/login.html:92
 #: business/templates/business/results.html:159
 #: business/templates/business/search_trade.html:201
@@ -110,8 +105,7 @@ msgid "Your email"
 msgstr "Tu correo"
 
 #: beta_invite/templates/beta_invite/fast_job.html:126
-#: beta_invite/templates/beta_invite/long_form.html:150
-#: beta_invite/templates/beta_invite/long_form2.html:74
+#: beta_invite/templates/beta_invite/long_form.html:74
 #: business/templates/business/results.html:166
 #: business/templates/business/search_trade.html:208
 #: business/templates/business/signup.html:136
@@ -119,8 +113,7 @@ msgid "Your phone"
 msgstr "Tu teléfono"
 
 #: beta_invite/templates/beta_invite/fast_job.html:135
-#: beta_invite/templates/beta_invite/long_form.html:160
-#: beta_invite/templates/beta_invite/long_form2.html:77
+#: beta_invite/templates/beta_invite/long_form.html:77
 msgid "Select Country"
 msgstr "Selecciona tu País"
 
@@ -186,49 +179,30 @@ msgstr ""
 "cantidad significativa de tiempo y dinero; y también porque mejora la "
 "experiencia del candidato."
 
-#: beta_invite/templates/beta_invite/long_form.html:113
-#: beta_invite/templates/beta_invite/long_form2.html:49
-msgid "Perks"
-msgstr "Beneficios"
-
-#: beta_invite/templates/beta_invite/long_form.html:170
-#: beta_invite/templates/beta_invite/long_form2.html:84
-msgid "Select Education"
-msgstr "Selecciona tu Educación"
-
-#: beta_invite/templates/beta_invite/long_form.html:180
-#: beta_invite/templates/beta_invite/long_form2.html:91
-msgid "Select Profession"
-msgstr "Selecciona tu Profesión"
-
-#: beta_invite/templates/beta_invite/long_form.html:202
-#: business/templates/business/post_job.html:157
-#: business/templates/business/search.html:152
-msgid "Experience in years:"
-msgstr "Experiencia en años:"
-
-#: beta_invite/templates/beta_invite/long_form.html:211
-#: beta_invite/templates/beta_invite/long_form2.html:104
-msgid "Authorized third parties can see this information."
-msgstr "Terceros autorizados pueden ver esta información."
-
-#: beta_invite/templates/beta_invite/long_form.html:246
-msgid "Don't want to apply to this position?"
-msgstr "¿No quieres aplicar a esta posición?"
-
-#: beta_invite/templates/beta_invite/long_form.html:249
-msgid "Apply to another job!"
-msgstr "¡Aplica a otro trabajo!"
-
-#: beta_invite/templates/beta_invite/long_form2.html:26
-#: beta_invite/views.py:116 beta_invite/views.py:244 beta_invite/views.py:298
-#: beta_invite/views.py:490
+#: beta_invite/templates/beta_invite/long_form.html:26 beta_invite/views.py:116
+#: beta_invite/views.py:244 beta_invite/views.py:298 beta_invite/views.py:490
 msgid "Discover your true passion"
 msgstr "Descubre tu verdadera pasión"
 
-#: beta_invite/templates/beta_invite/long_form2.html:29
+#: beta_invite/templates/beta_invite/long_form.html:29
 msgid "APPLY NOW!"
 msgstr "¡APLICA YA!"
+
+#: beta_invite/templates/beta_invite/long_form.html:49
+msgid "Perks"
+msgstr "Beneficios"
+
+#: beta_invite/templates/beta_invite/long_form.html:84
+msgid "Select Education"
+msgstr "Selecciona tu Educación"
+
+#: beta_invite/templates/beta_invite/long_form.html:91
+msgid "Select Profession"
+msgstr "Selecciona tu Profesión"
+
+#: beta_invite/templates/beta_invite/long_form.html:104
+msgid "Authorized third parties can see this information."
+msgstr "Terceros autorizados pueden ver esta información."
 
 #: beta_invite/templates/beta_invite/test.html:11
 msgid "Complete this few questions to know you better"
@@ -290,7 +264,6 @@ msgstr "¡Gracias por tu interes!"
 #: business/templates/business/home.html:66
 #: business/templates/business/login_buttons.html:5
 #: business/templates/business/offer_results.html:66
-#: business/templates/business/plan.html:108
 #: business/templates/business/post_job.html:87
 #: business/templates/business/search_trade.html:97
 #: business/templates/business/trade_client.html:72
@@ -331,119 +304,58 @@ msgstr "años"
 msgid "Add +"
 msgstr "Adiciona +"
 
-#: business/templates/business/index.html:26 business/views.py:65
+#: business/templates/business/index.html:27 business/views.py:65
 #: business/views.py:83 business/views.py:237 business/views.py:553
 msgid "Discover amazing people"
 msgstr "Descubre personas increíbles"
 
-#: business/templates/business/index.html:29
+#: business/templates/business/index.html:30
 msgid "Find a candidate"
 msgstr "Busca un candidato"
 
-#: business/templates/business/index.html:34
-msgid "We do the entire personnel selection process"
-msgstr "Todo el proceso de selección de personal"
+#: business/templates/business/index.html:35
+msgid "Hire only the best candidates"
+msgstr "Contrata solo a los mejores"
 
-#: business/templates/business/index.html:42
+#: business/templates/business/index.html:43
 msgid "Why choose us?"
 msgstr "¿Por qué elegirnos?"
 
-#: business/templates/business/index.html:46
-msgid "We only charge for successful hiring"
-msgstr "Solo cobramos por contratación exitosa"
-
 #: business/templates/business/index.html:47
-msgid "Save time reading and analyzing hundreds of resumes"
-msgstr "No tienes que leer y analizar cientos de cvs"
+msgid "We deliver only the best 10%% of applicants"
+msgstr "Entregamos el mejor 10% de los aplicantes"
 
 #: business/templates/business/index.html:48
-msgid "Save time personal interviews"
-msgstr "Ahorra tiempo en entrevistas"
+msgid "We only deliver 100%% relevant candidates"
+msgstr "Solo entregamos candidatos 100% relevantes"
 
 #: business/templates/business/index.html:49
-msgid "Experts help us choose the best candidates"
-msgstr "Expertos nos ayudan en la elección de los mejores candidatos"
+msgid "The whole process in 10 business days"
+msgstr "Todo el proceso en 10 días hábiles"
 
 #: business/templates/business/index.html:50
-msgid "We deliver a detailed report of selected candidates"
-msgstr "Entregamos un informe detallado de los candidatos seleccionados"
+msgid "We save you 1 week of work"
+msgstr "Te ahorramos 1 semana de trabajo"
 
-#: business/templates/business/index.html:62
-msgid "Select the best plan for you"
-msgstr "Selecciona el mejor plan para tí"
+#: business/templates/business/index.html:51
+msgid "Only do worthwhile interviews"
+msgstr "Solo haz entrevistas valiosas"
 
-#: business/templates/business/index.html:69
-msgid "Search Engine"
-msgstr "Buscador"
+#: business/templates/business/index.html:52
+msgid "Save on job exchanges"
+msgstr "Evita gastos en bolsas de empleo"
 
-#: business/templates/business/index.html:71
-msgid "Limited resume search engine"
-msgstr "Buscador limitado de cv"
-
-#: business/templates/business/index.html:73
-msgid "Free"
-msgstr "Gratis"
-
-#: business/templates/business/index.html:77
-#: business/templates/business/index.html:95
-#: business/templates/business/index.html:113
-#, fuzzy
-#| msgid "Any other information"
-msgid "more information"
-msgstr "Cualquier otra información"
-
-#: business/templates/business/index.html:83
-msgid "Basic Selection"
-msgstr "Selección Basica"
-
-#: business/templates/business/index.html:85
-#: business/templates/business/index.html:103
-msgid "Resume search engine"
-msgstr "Buscador de cv"
-
-#: business/templates/business/index.html:86
-#: business/templates/business/index.html:104
-msgid "Additional search on social media and online campaigns"
-msgstr "Busqueda adicional en redes sociales y campañas online"
-
-#: business/templates/business/index.html:87
-#: business/templates/business/index.html:105
-msgid "We do online tests to filter candidates"
-msgstr "Hacemos pruebas online para filtrar candidatos"
-
-#: business/templates/business/index.html:88
-#: business/templates/business/index.html:106
-msgid "Personal Interview, soft and hard skills assessment"
-msgstr "Entrevista personal, evaluación de habilidades blandas y técnicas"
-
-#: business/templates/business/index.html:90
-msgid "$199"
-msgstr "$499 mil"
-
-#: business/templates/business/index.html:91
-#: business/templates/business/index.html:109
-msgid "per contracted candidate"
-msgstr "por candidato contratado"
-
-#: business/templates/business/index.html:101
-msgid "Advanced Selection"
-msgstr "Selección Avanzada"
-
-#: business/templates/business/index.html:108
-msgid "$299"
-msgstr "$899 mil"
-
-#: business/templates/business/index.html:135
+#: business/templates/business/index.html:79
 #: business/templates/business/trade_client.html:133
 msgid "Contact Us"
 msgstr "Contáctanos"
 
-#: business/templates/business/index.html:148
+#: business/templates/business/index.html:92
 #: business/templates/business/trade_client.html:145
 msgid "Your phone (optional)"
 msgstr "Tu teléfono (opcional)"
 
-#: business/templates/business/index.html:151
+#: business/templates/business/index.html:95
 #: business/templates/business/trade_client.html:150
 msgid "Add a message (optional)"
 msgstr "Escríbe un comentario (opcional)"
@@ -500,9 +412,9 @@ msgstr "Nombre"
 msgid "Email"
 msgstr "Correo"
 
-#: business/templates/business/plan.html:128
-msgid "I am interested!"
-msgstr "¡Estoy interesado/a!"
+#: business/templates/business/plan.html:32
+msgid "I want it"
+msgstr "¡Lo quiero!"
 
 #: business/templates/business/post_job.html:102
 msgid "Welcome to PeakU!"
@@ -516,9 +428,170 @@ msgstr "Publica una nueva oferta laboral"
 msgid "Skills or any other custom information"
 msgstr "Habilidades u otros requerimientos"
 
+#: business/templates/business/post_job.html:157
+#: business/templates/business/search.html:152
+msgid "Experience in years:"
+msgstr "Experiencia en años:"
+
 #: business/templates/business/post_job.html:164
 msgid "Post!"
 msgstr "¡Publicar!"
+
+#: business/templates/business/pricing.html:5
+msgid "Select the best plan for you"
+msgstr "Selecciona el mejor plan para tí"
+
+#: business/templates/business/pricing.html:12
+msgid "Operational Staff"
+msgstr "Operativo"
+
+#: business/templates/business/pricing.html:14
+msgid "eg: call agent, driver"
+msgstr "ej: agente de call center, conductor"
+
+#: business/templates/business/pricing.html:17
+#: business/templates/business/pricing.html:49
+#: business/templates/business/pricing.html:82
+msgid "Search on social media"
+msgstr "Búsqueda en redes sociales"
+
+#: business/templates/business/pricing.html:18
+#: business/templates/business/pricing.html:50
+#: business/templates/business/pricing.html:83
+msgid "Search on PeakU Database"
+msgstr "Búsqueda en Base de Datos PeakU"
+
+#: business/templates/business/pricing.html:19
+#: business/templates/business/pricing.html:51
+#: business/templates/business/pricing.html:84
+msgid "Search on other platforms"
+msgstr "Búsqueda en otras plataformas"
+
+#: business/templates/business/pricing.html:20
+#: business/templates/business/pricing.html:52
+#: business/templates/business/pricing.html:85
+msgid "Custom technical tests"
+msgstr "Pruebas técnicas a la medida"
+
+#: business/templates/business/pricing.html:21
+#: business/templates/business/pricing.html:53
+#: business/templates/business/pricing.html:86
+msgid "Custom soft skills tests"
+msgstr "Pruebas blandas a la medida"
+
+#: business/templates/business/pricing.html:22
+msgid "Around 100 applicants"
+msgstr "100 applicantes aprox."
+
+#: business/templates/business/pricing.html:23
+#, fuzzy
+#| msgid "In 10 working days"
+msgid "In 10 business days"
+msgstr "En 10 días hábiles"
+
+#: business/templates/business/pricing.html:24
+#, fuzzy, python-format
+#| msgid "10 candidates (top 10%%)"
+msgid "10 candidates (top 10%%)"
+msgstr "10 candidatos (top 10%)"
+
+#: business/templates/business/pricing.html:26
+#: business/templates/business/pricing.html:58
+#: business/templates/business/pricing.html:91
+msgid "Extras"
+msgstr "Extras"
+
+#: business/templates/business/pricing.html:28
+msgid "Personal Interview +$60"
+msgstr "Entrevista personal +$99 mil"
+
+#: business/templates/business/pricing.html:29
+msgid "Hiring Guarantee +$120"
+msgstr "Garantía de contratación +$200 mil"
+
+#: business/templates/business/pricing.html:32
+#: business/templates/business/pricing.html:64
+#: business/templates/business/pricing.html:97
+msgid "starting"
+msgstr "desde"
+
+#: business/templates/business/pricing.html:33
+msgid "$180"
+msgstr "$299 mil + IVA"
+
+#: business/templates/business/pricing.html:37
+#: business/templates/business/pricing.html:69
+#: business/templates/business/pricing.html:102
+msgid "more information"
+msgstr "más información"
+
+#: business/templates/business/pricing.html:44
+msgid "Professional"
+msgstr "Profesional"
+
+#: business/templates/business/pricing.html:46
+msgid "eg: engineer, lawyer, accountant"
+msgstr "ej: ingeniero, abogado, contador"
+
+#: business/templates/business/pricing.html:54
+msgid "Around 50 applicants"
+msgstr "50 applicantes aprox."
+
+#: business/templates/business/pricing.html:55
+msgid "In 15 business days"
+msgstr "En 15 días hábiles"
+
+#: business/templates/business/pricing.html:56
+#, fuzzy, python-format
+#| msgid "5 candidates (top 10%%)"
+msgid "5 candidates (top 10%%)"
+msgstr "5 candidatos (top 10%)"
+
+#: business/templates/business/pricing.html:60
+msgid "Personal Interview +$214"
+msgstr "Entrevista Personal +$349 mil"
+
+#: business/templates/business/pricing.html:61
+msgid "Hiring Guarantee +$245"
+msgstr "Garantía de contratación +$399 mil"
+
+#: business/templates/business/pricing.html:65
+msgid "$240"
+msgstr "$399 mil + IVA"
+
+#: business/templates/business/pricing.html:77
+msgid "Specific"
+msgstr "Específico"
+
+#: business/templates/business/pricing.html:79
+msgid "eg: software developer in finance sector"
+msgstr "ej: desarrollador de software en finanzas"
+
+#: business/templates/business/pricing.html:87
+msgid "Around 30 applicants"
+msgstr "30 applicantes aprox."
+
+#: business/templates/business/pricing.html:88
+msgid "In 20 business days"
+msgstr "En 20 días hábiles"
+
+#: business/templates/business/pricing.html:89
+#, fuzzy, python-format
+#| msgid "3 candidates (top 10%%)"
+msgid "3 candidates (top 10%%)"
+msgstr "3 candidatos (top 10%)"
+
+#: business/templates/business/pricing.html:93
+msgid "Personal Interview (contact_us)"
+msgstr "Entrevista personal (contáctenos)"
+
+#: business/templates/business/pricing.html:94
+msgid "Hiring Guarantee (contact_us)"
+msgstr "Garantía de contratación (contáctenos)"
+
+#: business/templates/business/pricing.html:98
+msgid "$540"
+msgstr "899 mil + IVA"
 
 #: business/templates/business/results.html:145
 #: business/templates/business/search_trade.html:187
@@ -620,39 +693,66 @@ msgstr "Ingles"
 msgid "Spanish"
 msgstr "Español"
 
-#~ msgid "Send us your resume"
-#~ msgstr "Envianos tu CV"
+#~ msgid "Experts help us choose the best candidates"
+#~ msgstr "Expertos nos ayudan en la elección de los mejores candidatos"
 
-#~ msgid "Describe the position"
-#~ msgstr "Describe la posición"
+#~ msgid "We deliver a detailed report of selected candidates"
+#~ msgstr "Entregamos un informe detallado de los candidatos seleccionados"
 
-#~ msgid "-"
-#~ msgstr "-"
+#~ msgid "We do the entire personnel selection process"
+#~ msgstr "Todo el proceso de selección de personal"
 
-#~ msgid "Screening"
-#~ msgstr "Screening"
+#, fuzzy
+#~| msgid "Finish Interview"
+#~ msgid "Interviews"
+#~ msgstr "Termina la entrevista"
 
-#~ msgid "We search for specific profiles on other media"
-#~ msgstr "Buscamos perfiles especificos en otros medios"
+#~ msgid "Save time reading and analyzing hundreds of resumes"
+#~ msgstr "No tienes que leer y analizar cientos de cvs"
+
+#~ msgid "We only charge for successful hiring"
+#~ msgstr "Solo cobramos por contratación exitosa"
+
+#~ msgid "Save time personal interviews"
+#~ msgstr "Ahorra tiempo en entrevistas"
+
+#~ msgid "> $240+"
+#~ msgstr "> $399 mil + IVA"
+
+#, fuzzy
+#~| msgid "7 highly qualified candidates"
+#~ msgid "10 highly qualified candidates (~10%% of applicants)"
+#~ msgstr "7 candidatos altamente calificados"
+
+#, fuzzy
+#~| msgid "5 highly qualified candidates"
+#~ msgid "5 highly qualified candidates (~10%% of applicants)"
+#~ msgstr "5 candidatos altamente calificados"
+
+#~ msgid "3 highly qualified candidates (~10% of applicants)"
+#~ msgstr "3 candidatos altamente calificados (~10% de los applicantes)"
+
+#~ msgid "for 7 highly qualified candidates"
+#~ msgstr "por 7 candidatos altamente calificados"
+
+#~ msgid "Easy to find positions"
+#~ msgstr "Posiciones fáciles de encontrar"
+
+#~ msgid "Professional personnel"
+#~ msgstr "Personal profesional"
+
+#~ msgid "Hard to find positions"
+#~ msgstr "Posiciones difíciles de encontrar"
+
+#~ msgid "Search online"
+#~ msgstr "Buscamos en linea"
+
+#~ msgid "Advanced"
+#~ msgstr "Selección Avanzada"
 
 #~ msgid "Resume Screening: We send manual filtered profiles each 24 hours"
 #~ msgstr ""
 #~ "Screening de cv: Mandamos candidatos filtrados manulmente cada 24 horas"
-
-#~ msgid "$200 / contracted candidate"
-#~ msgstr "$350 mil Pesos/candidato contratado"
-
-#~ msgid "Selection of operational personnel"
-#~ msgstr "Selección de personal operativo"
-
-#~ msgid "$300 / contracted candidate"
-#~ msgstr "$500 mil Pesos/candidato contratado"
-
-#~ msgid "Selection of qualified personnel"
-#~ msgstr "Selección de personal calificado"
-
-#~ msgid "$500 / contracted candidate"
-#~ msgstr "$900 mil Pesos/candidato contratado"
 
 #~ msgid ""
 #~ "We do the entire personnel selection process for your company. Meanwhile "
@@ -679,9 +779,6 @@ msgstr "Español"
 
 #~ msgid "Or contact me at santiago@peaku.co, skype: recutamiento@peaku.co"
 #~ msgstr "O contactame en santiago@peaku.co, skype: reclutamiento@peaku.co"
-
-#~ msgid "Search Candidates"
-#~ msgstr "Busca Candidatos"
 
 #~ msgid ""
 #~ "You made it to the interview, congrants!!! Schedule an interview with me:"
@@ -730,9 +827,6 @@ msgstr "Español"
 
 #~ msgid "Free Trial!"
 #~ msgstr "¡Prueba Gratis!"
-
-#~ msgid "Save on employment exchanges"
-#~ msgstr "Evita gastos en bolsas de empleo"
 
 #~ msgid "Start by posting a new job"
 #~ msgstr "Empieza por publicar una oferta de trabajo"
