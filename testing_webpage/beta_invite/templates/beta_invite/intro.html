@@ -18,7 +18,7 @@
         <div id="who-am-i-div">
             <a href="{% url 'beta_invite:long_form' %}">
                 <div id="user">
-                    <img class="avatar-img" src="{% static 'beta_invite/img/user.jpeg' %}">
+                    <img class="avatar-img" src="{% static 'beta_invite/img/user.svg' %}">
                     <form id="person-form">
                         {% trans "Person" as person %}
                         <input id="person-input" type="button" value="{{ person }}">
@@ -29,7 +29,7 @@
             <p id="im">{% trans "I'm" %}</p>
             <a href="{% url 'business:logout' %}">
                 <div id="business">
-                    <img class="avatar-img" src="{% static 'beta_invite/img/business.jpeg' %}">
+                    <img class="avatar-img" src="{% static 'beta_invite/img/business.svg' %}">
                     <form id="business-form">
                         {% trans "Business" as business %}
                         <input id="business-input" type="button" value="{{ business }}">
