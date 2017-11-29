@@ -1,42 +1,15 @@
 @import 'fonts.css';
+@import 'body/form.css';
+@import 'body/body_header.css';
+@import 'body/body_content.css';
 
 body {
 	margin: 0px;
 	padding: 0px;
-	/*font-family: "BigJohn";*/
 	font-family: NorthernBlock;
-	/*font-family: Arial;*/
 }
 
 /* Removes small black lines */
 a {
 	text-decoration: none;
-}
-
-.main-title {
-	width: 71.6%;
-	height: 75px;
-	font-size: 40px;
-	line-height: 1.12;
-	text-align: center;
-	color: var(--white);
-	text-shadow: 0 2px 4px var(--very-dark);
-	text-transform: uppercase;
-}
-
-.green-box {
-    height: 47px;
-	background-color: var(--green);
-	font-size: 20px;
-	line-height: 1.5;
-	color: var(--blue);
-
-	/* use this last 2 properties together */
-	z-index: 1;
-	position:relative;
-}
-
-/*Center text vertically only*/
-.green-box p {
-    padding-top: 10px;
 }

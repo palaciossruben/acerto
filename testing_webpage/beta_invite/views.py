@@ -290,7 +290,6 @@ def post_long_form(request):
     profession_id = request.POST.get('profession')
     education_id = request.POST.get('education')
     country_id = request.POST.get('country')
-    experience = request.POST.get('experience')
 
     campaign = common.get_campaign_from_request(request)
 
@@ -315,7 +314,6 @@ def post_long_form(request):
                     profession=profession,
                     education=education,
                     country=country,
-                    experience=experience,
                     ip=ip,
                     ui_version=cts.UI_VERSION,
                     is_mobile=is_mobile,

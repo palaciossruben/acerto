@@ -1,0 +1,122 @@
+.my-form {
+    width: 80%;
+    margin-left: 10%;
+}
+
+.form-text {
+	width: 100%;
+	height: 30px;
+	margin-bottom: 5px;
+	border: none;
+	font-size: 16px;
+	background-color: rgba(100, 138, 255, 0.15);
+	color: rgba(100, 138, 255, 0.57);
+}
+
+.form-text::placeholder {
+    color: rgba(100, 138, 255, 0.57);
+}
+
+.form-text:hover {
+    background-color: var(--light-grey);
+}
+
+.form-select {
+	width: 100%;
+	height: 30px;
+	margin-bottom: 5px;
+	border: none;
+	font-size: 16px;
+	background-color: rgba(100, 138, 255, 0.15);
+	color: rgba(100, 138, 255, 0.57);
+}
+
+.form-select::placeholder {
+    color: rgba(100, 138, 255, 0.57);
+}
+
+.form-select:hover {
+    background-color: var(--light-grey);
+}
+
+.form-text-area {
+	width: 100%;
+	border: none;
+	font-family: Bitter;
+	font-size: 16px;
+	line-height: 1.62;
+    background-color: rgba(100, 138, 255, 0.15);
+	color: rgba(100, 138, 255, 0.57);
+}
+
+.form-text-area::placeholder {
+    color: rgba(100, 138, 255, 0.57);
+}
+
+.form-text-area:hover {
+    background-color: var(--light-grey);
+}
+
+/* to implement follow: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_checkbox*/
+/*.form-checkmark {
+	width: 15px;
+	height: 15px;
+	border: solid 2px var(--green);
+	display: inline-block;
+}*/
+
+.form-checkbox-text {
+	font-family: Bitter;
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 1.4;
+	text-align: left;
+	color: var(--dark-grey);
+	display: inline-block;
+}
+
+.form-submit {
+	border: solid 2px var(--green);
+	font-size: 16px;
+	line-height: 1.0;
+	text-align: center;
+	color: var(--green);
+	border-radius: 0px;
+}
+
+.form-submit:hover {
+    background-color: var(--light-grey);
+}
+
+
+/* form-inputfile */
+/* see: https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/ */
+.form-inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.form-inputfile + label {
+    width: 170px;
+    height: 40px;
+    font-size: 1em;
+    text-align: center;
+    padding-top: 5px;
+    color: var(--blue);
+    border: solid 4px var(--blue);
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.form-inputfile:focus + label,
+.form-inputfile + label:hover {
+    background-color: var(--light-grey);
+}
+
+.form-inputfile + label * {
+	pointer-events: none;
+}
