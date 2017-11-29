@@ -164,6 +164,10 @@
 	position: absolute; top:0;
 }
 
+.plan-more-info:hover {
+    background-color: var(--light-grey);
+}
+
 
 /* Contact Us*/
 #anchor-trick {
