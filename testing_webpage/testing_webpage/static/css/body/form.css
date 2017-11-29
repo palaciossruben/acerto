@@ -82,6 +82,7 @@
 	text-align: center;
 	color: var(--green);
 	border-radius: 0px;
+	background-color: var(--white);
 }
 
 .form-submit:hover {
