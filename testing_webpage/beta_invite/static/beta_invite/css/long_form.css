@@ -1,0 +1,79 @@
+/* Main */
+.main-title {
+
+	margin-left: 14.2%;
+	margin-top: 175px;
+	margin-bottom: 0px;
+
+    /* The element goes on top of the .background-people instead of below */
+	position:absolute; top:0; left:0;
+}
+
+.green-box {
+	width: 435px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -30px;
+	text-align: center;
+}
+
+
+/* Job description */
+#job-description-container {
+    margin-left: 20%;
+}
+
+.paragraph {
+    width: 100%;
+    margin-top: 40px;
+}
+
+.bullets-list {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.bullet {
+	font-family: Bitter;
+	font-size: 14px;
+	line-height: 1.56;
+	text-align: left;
+	color: var(--text-color);
+}
+
+/* Apply Form */
+.form-submit {
+	width: 100%;
+	height: 45px;
+	margin-bottom: 94px;
+}
+
+/*
+.form-checkbox {
+}
+
+.form-checkbox-text {
+
+}*/
+
+
+
+/* Responsive */
+@media (max-width: 640px){
+
+    .main-title {
+        width: 96%;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 25px;
+        margin-top: 67px;
+    }
+
+    .green-box {
+        width: 100%;
+    }
+
+    #job-description-container {
+        margin-left: 2%;
+    }
+}

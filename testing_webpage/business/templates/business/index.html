@@ -7,7 +7,6 @@
 
 {% block extra_head %}
     <link rel="stylesheet" type="text/css" href="{% static 'business/css/index.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
 {% endblock %}
 
 
@@ -17,12 +16,12 @@
         <img src="{% static 'business/img/background_people_desktop.jpg' %}"
              srcset="{% static 'business/img/background_people_desktop.jpg' %} 2x,
                      {% static 'business/img/background_people_desktop.jpg' %} 3x"
-             id="background-people">
+             class="background-people">
 
         <img src="{% static 'business/img/background_people_mobile.jpg' %}"
              srcset="{% static 'business/img/background_people_mobile.jpg' %} 2x,
                      {% static 'business/img/background_people_mobile.jpg' %} 3x"
-             id="background-people-mobile">
+             class="background-people-mobile">
 
         <h1 class="main-title">{% trans "Discover amazing people" %}</h1>
 
@@ -36,7 +35,7 @@
         </h2>
     </div>
 
-    <section class="section_container">
+    <section class="section-container">
         <div class="row"> <!-- bootstrap row class -->
             <div class="col-sm-6">
 
@@ -59,7 +58,7 @@
         </div>
     </section>
 
-    <section class="section_container">
+    <section class="section-container">
         <h3 class="secondary-title" >{% trans "Select the best plan for you"%}</h3>
         <div class="secondary-yellow-bar"></div>
 
@@ -67,7 +66,7 @@
             <div class="row"> <!-- bootstrap row class -->
                 <div class="col-sm-4">
                     <div class="plan-column">
-                        <h4 class="plan-title">{% trans "Search Engine" %}</h4>
+                        <h4 class="title-blue">{% trans "Search Engine" %}</h4>
                         <ul class="plan-list">
                             <li class="plan-bullet">{% trans "Limited resume search engine" %}</li>
                         </ul>
@@ -81,7 +80,7 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="plan-column">
-                        <h4 class="plan-title">{% trans "Basic Selection" %}</h4>
+                        <h4 class="title-blue">{% trans "Basic Selection" %}</h4>
                         <ul class="plan-list">
                             <li class="plan-bullet">{% trans "Resume search engine" %}</li>
                             <li class="plan-bullet">{% trans "Additional search on social media and online campaigns" %}</li>
@@ -99,7 +98,7 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="plan-column">
-                        <h4 class="plan-title">{% trans "Advanced Selection" %}</h4>
+                        <h4 class="title-blue">{% trans "Advanced Selection" %}</h4>
                         <ul class="plan-list">
                             <li class="plan-bullet">{% trans "Resume search engine" %}</li>
                             <li class="plan-bullet">{% trans "Additional search on social media and online campaigns" %}</li>
@@ -119,7 +118,7 @@
         </div>
     </section>
 
-    <section class="section_container">
+    <section class="section-container">
         <div class="row"> <!-- bootstrap row class -->
             <div class="col-sm-6">
                 <img class="girl" src="{% static 'business/img/coffee_girl.png' %}"
@@ -136,22 +135,22 @@
                 <h3 class="secondary-title" >{% trans "Contact Us"%}</h3>
                 <div class="secondary-yellow-bar"></div>
 
-                <form id="contact-form">
+                <form class="my-form">
                     {% csrf_token %}
 
-                    <input class="contact-field" type="text" name="name"
+                    <input class="form-text" type="text" name="name"
 				        placeholder="{% trans 'Your Full Name' %}" required="required" pattern="[A-Za-z\sÁÉÍÓÚáéíóúÑñÜü]{1,200}">
 
-                    <input class="contact-field" type="email" name="email"
+                    <input class="form-text" type="email" name="email"
                          placeholder="{% trans 'Your email' %}" required="required">
 
-                    <input class="contact-field" type="tel" name="phone"
+                    <input class="form-text" type="tel" name="phone"
                          placeholder="{% trans 'Your phone (optional)' %}">
 
-                    <textarea id="message" name="message"
+                    <textarea class="form-text-area" name="message"
                          placeholder="{% trans 'Add a message (optional)' %}"></textarea>
 
-                    <input id="contact-button" type="submit" value="{% trans 'Sure!' %}">
+                    <input class="form-submit" type="submit" value="{% trans 'Sure!' %}">
 
                 </form>
 
