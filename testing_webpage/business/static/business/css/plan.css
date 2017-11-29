@@ -1,0 +1,77 @@
+.background-people {
+    margin-bottom: 0px;
+}
+
+.main-title {
+    margin-left: -150px;
+    margin-top: -300px;
+    margin-right: auto;
+    index-z: 1;
+    position: relative;
+}
+
+#text-white-rectangle {
+	width: 510px;
+	padding-bottom: 50px;
+	margin-left: 37%;
+	margin-top: 100px;
+	background-color: var(--white);
+	border: solid 2px var(--light-grey);
+	margin-bottom: 100px;
+
+	/* use this 2 properties together */
+	z-index: 1;
+	position:relative;
+}
+
+#description-text {
+	margin-left: 15%;
+	margin-right: 15%;
+	padding-top: 50px;
+	font-family: Bitter;
+	font-size: 16px;
+	line-height: 1.56;
+	text-align: left;
+	color: var(--dark-grey);
+}
+
+.form-submit{
+	width: 283px;
+	height: 45px;
+	margin-left: 23%;
+	margin-right: 23%;
+}
+
+@media(max-width: 640px) {
+    #text-white-rectangle {
+        width: 100%;
+        margin-left: auto;
+        margin-top: auto;
+        margin-top: 0px;
+        border: none;
+    }
+
+    .form-submit {
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: 50px;
+    }
+
+    #description-text {
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: 0px;
+    }
+
+    .main-title {
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: -50px;
+
+        index-z: 1;
+        position: relative;
+    }
+}
