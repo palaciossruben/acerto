@@ -322,14 +322,10 @@ msgid "Why choose us?"
 msgstr "¿Por qué elegirnos?"
 
 #: business/templates/business/index.html:47
-#, fuzzy, python-format
-#| msgid "We deliver only the best 10%% of applicants"
 msgid "We deliver only the best 10%% of applicants"
 msgstr "Entregamos el mejor 10% de los aplicantes"
 
 #: business/templates/business/index.html:48
-#, fuzzy, python-format
-#| msgid "We only deliver 100%% relevant candidates"
 msgid "We only deliver 100%% relevant candidates"
 msgstr "Solo entregamos candidatos 100% relevantes"
 
@@ -485,17 +481,13 @@ msgstr "Pruebas blandas a la medida"
 
 #: business/templates/business/pricing.html:22
 msgid "Around 100 applicants"
-msgstr "100 applicantes aprox."
+msgstr "100 aplicantes aprox."
 
 #: business/templates/business/pricing.html:23
-#, fuzzy
-#| msgid "In 10 working days"
 msgid "In 10 business days"
 msgstr "En 10 días hábiles"
 
 #: business/templates/business/pricing.html:24
-#, fuzzy, python-format
-#| msgid "10 candidates (top 10%%)"
 msgid "10 candidates (top 10%%)"
 msgstr "10 candidatos (top 10%)"
 
@@ -539,15 +531,13 @@ msgstr "ej: ingeniero, abogado, contador"
 
 #: business/templates/business/pricing.html:54
 msgid "Around 50 applicants"
-msgstr "50 applicantes aprox."
+msgstr "50 aplicantes aprox."
 
 #: business/templates/business/pricing.html:55
 msgid "In 15 business days"
 msgstr "En 15 días hábiles"
 
 #: business/templates/business/pricing.html:56
-#, fuzzy, python-format
-#| msgid "5 candidates (top 10%%)"
 msgid "5 candidates (top 10%%)"
 msgstr "5 candidatos (top 10%)"
 
@@ -573,15 +563,13 @@ msgstr "ej: desarrollador de software en finanzas"
 
 #: business/templates/business/pricing.html:87
 msgid "Around 30 applicants"
-msgstr "30 applicantes aprox."
+msgstr "30 aplicantes aprox."
 
 #: business/templates/business/pricing.html:88
 msgid "In 20 business days"
 msgstr "En 20 días hábiles"
 
 #: business/templates/business/pricing.html:89
-#, fuzzy, python-format
-#| msgid "3 candidates (top 10%%)"
 msgid "3 candidates (top 10%%)"
 msgstr "3 candidatos (top 10%)"
 
@@ -702,9 +690,6 @@ msgstr "Español"
 
 #~ msgid "Experts help us choose the best candidates"
 #~ msgstr "Expertos nos ayudan en la elección de los mejores candidatos"
-
-#~ msgid "We deliver a detailed report of selected candidates"
-#~ msgstr "Entregamos un informe detallado de los candidatos seleccionados"
 
 #~ msgid "We do the entire personnel selection process"
 #~ msgstr "Todo el proceso de selección de personal"
