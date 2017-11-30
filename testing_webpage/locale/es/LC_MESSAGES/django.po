@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-29 23:35+0000\n"
+"POT-Creation-Date: 2017-11-30 16:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -310,8 +310,8 @@ msgid "Discover amazing people"
 msgstr "Descubre personas increíbles"
 
 #: business/templates/business/index.html:30
-msgid "Find a candidate"
-msgstr "Busca un candidato"
+msgid "Search positions (eg android developer)"
+msgstr "Busca posiciones (ej desarrollador de android)"
 
 #: business/templates/business/index.html:35
 msgid "Hire only the best candidates"
@@ -322,10 +322,14 @@ msgid "Why choose us?"
 msgstr "¿Por qué elegirnos?"
 
 #: business/templates/business/index.html:47
+#, fuzzy, python-format
+#| msgid "We deliver only the best 10%% of applicants"
 msgid "We deliver only the best 10%% of applicants"
 msgstr "Entregamos el mejor 10% de los aplicantes"
 
 #: business/templates/business/index.html:48
+#, fuzzy, python-format
+#| msgid "We only deliver 100%% relevant candidates"
 msgid "We only deliver 100%% relevant candidates"
 msgstr "Solo entregamos candidatos 100% relevantes"
 
@@ -490,6 +494,8 @@ msgid "In 10 business days"
 msgstr "En 10 días hábiles"
 
 #: business/templates/business/pricing.html:24
+#, fuzzy, python-format
+#| msgid "10 candidates (top 10%%)"
 msgid "10 candidates (top 10%%)"
 msgstr "10 candidatos (top 10%)"
 
@@ -540,6 +546,8 @@ msgid "In 15 business days"
 msgstr "En 15 días hábiles"
 
 #: business/templates/business/pricing.html:56
+#, fuzzy, python-format
+#| msgid "5 candidates (top 10%%)"
 msgid "5 candidates (top 10%%)"
 msgstr "5 candidatos (top 10%)"
 
@@ -572,6 +580,8 @@ msgid "In 20 business days"
 msgstr "En 20 días hábiles"
 
 #: business/templates/business/pricing.html:89
+#, fuzzy, python-format
+#| msgid "3 candidates (top 10%%)"
 msgid "3 candidates (top 10%%)"
 msgstr "3 candidatos (top 10%)"
 
@@ -686,6 +696,9 @@ msgstr "Ingles"
 #: testing_webpage/shared_settings.py:121
 msgid "Spanish"
 msgstr "Español"
+
+#~ msgid "Find a candidate"
+#~ msgstr "Busca un candidato"
 
 #~ msgid "Experts help us choose the best candidates"
 #~ msgstr "Expertos nos ayudan en la elección de los mejores candidatos"

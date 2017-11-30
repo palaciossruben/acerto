@@ -75,7 +75,7 @@
 	margin-right: 20%;
 	margin-left: 20%;
 	color: var(--blue);
-	margin-top: 130%;
+	margin-top: 415px;
 	position: absolute; top:0;
 }
 
@@ -98,4 +98,12 @@
 
 .starting {
     margin-top: 25px;
+}
+
+@media (max-width: 640px){
+    .pricing-column {
+        margin-top: 50px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
