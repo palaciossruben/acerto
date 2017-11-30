@@ -490,8 +490,6 @@ msgid "In 10 business days"
 msgstr "En 10 días hábiles"
 
 #: business/templates/business/pricing.html:24
-#, fuzzy, python-format
-#| msgid "10 candidates (top 10%%)"
 msgid "10 candidates (top 10%%)"
 msgstr "10 candidatos (top 10%)"
 
@@ -542,8 +540,6 @@ msgid "In 15 business days"
 msgstr "En 15 días hábiles"
 
 #: business/templates/business/pricing.html:56
-#, fuzzy, python-format
-#| msgid "5 candidates (top 10%%)"
 msgid "5 candidates (top 10%%)"
 msgstr "5 candidatos (top 10%)"
 
@@ -576,8 +572,6 @@ msgid "In 20 business days"
 msgstr "En 20 días hábiles"
 
 #: business/templates/business/pricing.html:89
-#, fuzzy, python-format
-#| msgid "3 candidates (top 10%%)"
 msgid "3 candidates (top 10%%)"
 msgstr "3 candidatos (top 10%)"
 
@@ -718,61 +712,6 @@ msgstr "Español"
 
 #~ msgid "> $240+"
 #~ msgstr "> $399 mil + IVA"
-
-#, fuzzy
-#~| msgid "7 highly qualified candidates"
-#~ msgid "10 highly qualified candidates (~10%% of applicants)"
-#~ msgstr "7 candidatos altamente calificados"
-
-#, fuzzy
-#~| msgid "5 highly qualified candidates"
-#~ msgid "5 highly qualified candidates (~10%% of applicants)"
-#~ msgstr "5 candidatos altamente calificados"
-
-#~ msgid "3 highly qualified candidates (~10% of applicants)"
-#~ msgstr "3 candidatos altamente calificados (~10% de los applicantes)"
-
-#~ msgid "for 7 highly qualified candidates"
-#~ msgstr "por 7 candidatos altamente calificados"
-
-#~ msgid "Easy to find positions"
-#~ msgstr "Posiciones fáciles de encontrar"
-
-#~ msgid "Professional personnel"
-#~ msgstr "Personal profesional"
-
-#~ msgid "Hard to find positions"
-#~ msgstr "Posiciones difíciles de encontrar"
-
-#~ msgid "Search online"
-#~ msgstr "Buscamos en linea"
-
-#~ msgid "Advanced"
-#~ msgstr "Selección Avanzada"
-
-#~ msgid "Resume Screening: We send manual filtered profiles each 24 hours"
-#~ msgstr ""
-#~ "Screening de cv: Mandamos candidatos filtrados manulmente cada 24 horas"
-
-#~ msgid ""
-#~ "We do the entire personnel selection process for your company. Meanwhile "
-#~ "you can start searching for candidates."
-#~ msgstr ""
-#~ "Realizamos todo el proceso de selección de personal para tu empresa. "
-#~ "Mientras tanto puedes buscar candidatos."
-
-#~ msgid "$900"
-#~ msgstr "$900"
-
-#~ msgid "Subscribe"
-#~ msgstr "Suscríbete"
-
-#~ msgid ""
-#~ "Hi, I'm Santiago, Congratulations on passing the tests! Let's schedule an "
-#~ "appointment!"
-#~ msgstr ""
-#~ "Hola, soy Santiago, ¡Felicitaciones por pasar las pruebas! ¡Programemos "
-#~ "una cita!"
 
 #~ msgid "Click here to schedule an appointment"
 #~ msgstr "Has click aquí para agendar una cita"
