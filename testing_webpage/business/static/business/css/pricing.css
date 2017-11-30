@@ -72,11 +72,9 @@
 	border-radius: 0px;
 
 	/*TODO: can be done more accurate */
-	margin-right: 20%;
-	margin-left: 20%;
+	margin-right: 24%;
+	margin-left: 24%;
 	color: var(--blue);
-	margin-top: 415px;
-	position: absolute; top:0;
 }
 
 .pricing-more-info:hover {
