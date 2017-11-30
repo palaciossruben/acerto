@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-30 16:59+0000\n"
+"POT-Creation-Date: 2017-11-30 22:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -126,14 +126,12 @@ msgid "Describe what you do."
 msgstr "Describe lo que haces."
 
 #: beta_invite/templates/beta_invite/home.html:70
-#: beta_invite/templates/beta_invite/intro.html:15
 msgid "we connect you better"
 msgstr "Te conectamos mejor"
 
 #: beta_invite/templates/beta_invite/home.html:72
-#: beta_invite/templates/beta_invite/intro.html:16
 msgid "We find the best match between employees and employer"
-msgstr "Encontramos el empleado y empleador perfecto."
+msgstr ""
 
 #: beta_invite/templates/beta_invite/home.html:78
 msgid "Who are you?"
@@ -162,6 +160,14 @@ msgstr "Puedes grabar el video varias veces"
 msgid "Or contact me at santiago@peaku.co, skype: reclutamiento@peaku.co"
 msgstr "O contactame en santiago@peaku.co, skype: reclutamiento@peaku.co"
 
+#: beta_invite/templates/beta_invite/intro.html:15
+msgid "Enter, Find, Start"
+msgstr "Entra, Encuentra, Empieza"
+
+#: beta_invite/templates/beta_invite/intro.html:16
+msgid "We connect people with companies, quickly and easily"
+msgstr "Conectamos personas con empresas, fácil y rápido"
+
 #: beta_invite/templates/beta_invite/intro.html:29
 msgid "I'm"
 msgstr "Soy"
@@ -171,13 +177,8 @@ msgid "What is PeakU?"
 msgstr "¿Qué es PeakU?"
 
 #: beta_invite/templates/beta_invite/intro.html:51
-msgid ""
-"PeakU is revolutionizing recruitment, as it saves companies a significant "
-"amount of time and money; and also improves the candidate's experience"
-msgstr ""
-"PeakU está revolucionando el reclutamiento, ya que ahorra a las empresas una "
-"cantidad significativa de tiempo y dinero; y también porque mejora la "
-"experiencia del candidato."
+msgid "PeakU is revolutionizing the search for candidates, recruitment and selection; We make more efficient processes for companies and we give a personal touch to the candidates to improve their experience. We align people and companies to create relationships where the end result is the creation of long-term value."
+msgstr "PeakU está revolucionando la búsqueda de candidatos, el reclutamiento y la selección; hacemos procesos más eficientes para las empresas y entregamos un toque personal a los candidatos para mejorar su experiencia. Alineamos a las personas y empresas para crear relaciones donde el resultado final sea la creación de valor a largo plazo."
 
 #: beta_invite/templates/beta_invite/long_form.html:26 beta_invite/views.py:116
 #: beta_invite/views.py:244 beta_invite/views.py:298 beta_invite/views.py:490
@@ -314,18 +315,22 @@ msgid "Search positions (eg android developer)"
 msgstr "Busca posiciones (ej desarrollador de android)"
 
 #: business/templates/business/index.html:35
-msgid "Hire only the best candidates"
-msgstr "Contrata solo a los mejores"
+msgid "Hire the best candidates"
+msgstr "Contrata a los mejores"
 
 #: business/templates/business/index.html:43
 msgid "Why choose us?"
 msgstr "¿Por qué elegirnos?"
 
 #: business/templates/business/index.html:47
+#, fuzzy, python-format
+#| msgid "We deliver only the best 10%% of applicants"
 msgid "We deliver only the best 10%% of applicants"
 msgstr "Entregamos el mejor 10% de los aplicantes"
 
 #: business/templates/business/index.html:48
+#, fuzzy, python-format
+#| msgid "We only deliver 100%% relevant candidates"
 msgid "We only deliver 100%% relevant candidates"
 msgstr "Solo entregamos candidatos 100% relevantes"
 
@@ -334,12 +339,12 @@ msgid "The whole process in 10 business days"
 msgstr "Todo el proceso en 10 días hábiles"
 
 #: business/templates/business/index.html:50
-msgid "We save you 1 week of work"
-msgstr "Te ahorramos 1 semana de trabajo"
+msgid "We accelerate your recruitment processes"
+msgstr "Aceleramos tus procesos de reclutamiento"
 
 #: business/templates/business/index.html:51
-msgid "Only do worthwhile interviews"
-msgstr "Solo haz entrevistas valiosas"
+msgid "Focus on worthwhile interviews"
+msgstr "Enfocate en entrevistas valiosas"
 
 #: business/templates/business/index.html:52
 msgid "Save on job exchanges"
@@ -488,6 +493,8 @@ msgid "In 10 business days"
 msgstr "En 10 días hábiles"
 
 #: business/templates/business/pricing.html:24
+#, fuzzy, python-format
+#| msgid "10 candidates (top 10%%)"
 msgid "10 candidates (top 10%%)"
 msgstr "10 candidatos (top 10%)"
 
@@ -538,6 +545,8 @@ msgid "In 15 business days"
 msgstr "En 15 días hábiles"
 
 #: business/templates/business/pricing.html:56
+#, fuzzy, python-format
+#| msgid "5 candidates (top 10%%)"
 msgid "5 candidates (top 10%%)"
 msgstr "5 candidatos (top 10%)"
 
@@ -570,6 +579,8 @@ msgid "In 20 business days"
 msgstr "En 20 días hábiles"
 
 #: business/templates/business/pricing.html:89
+#, fuzzy, python-format
+#| msgid "3 candidates (top 10%%)"
 msgid "3 candidates (top 10%%)"
 msgstr "3 candidatos (top 10%)"
 
@@ -684,6 +695,14 @@ msgstr "Ingles"
 #: testing_webpage/shared_settings.py:121
 msgid "Spanish"
 msgstr "Español"
+
+#~ msgid ""
+#~ "PeakU is revolutionizing recruitment, as it saves companies a significant "
+#~ "amount of time and money; and also improves the candidate's experience"
+#~ msgstr ""
+#~ "PeakU está revolucionando el reclutamiento, ya que ahorra a las empresas "
+#~ "una cantidad significativa de tiempo y dinero; y también porque mejora la "
+#~ "experiencia del candidato."
 
 #~ msgid "Find a candidate"
 #~ msgstr "Busca un candidato"
