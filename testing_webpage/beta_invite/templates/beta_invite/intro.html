@@ -12,13 +12,13 @@
 
 {% block content %}
     <div id="background-blue-rectangle">
-        <h1 class="main-title">{% trans "we connect you better" %}</h1>
-        <h2 id="description">{% trans "We find the best match between employees and employer" %}</h2>
+        <h1 class="main-title">{% trans "Enter, Find, Start" %}</h1>
+        <h2 id="description">{% trans "We connect people with companies, quickly and easily" %}</h2>
 
         <div id="who-am-i-div">
             <a href="{% url 'beta_invite:long_form' %}">
                 <div id="user">
-                    <img class="avatar-img" src="{% static 'beta_invite/img/user.svg' %}">
+                    <img class="avatar-img" src="{% static 'beta_invite/img/user.png' %}">
                     <form id="person-form">
                         {% trans "Person" as person %}
                         <input id="person-input" type="button" value="{{ person }}">
@@ -29,7 +29,7 @@
             <p id="im">{% trans "I'm" %}</p>
             <a href="{% url 'business:logout' %}">
                 <div id="business">
-                    <img class="avatar-img" src="{% static 'beta_invite/img/business.svg' %}">
+                    <img class="avatar-img" src="{% static 'beta_invite/img/business.png' %}">
                     <form id="business-form">
                         {% trans "Business" as business %}
                         <input id="business-input" type="button" value="{{ business }}">
@@ -48,7 +48,7 @@
             <p>{% trans 'What is PeakU?' %}</p>
         </h2>
 
-        <p class="paragraph" >{% trans "PeakU is revolutionizing recruitment, as it saves companies a significant amount of time and money; and also improves the candidate's experience" %}</p>
+        <p class="paragraph" >{% trans "PeakU is revolutionizing the search for candidates, recruitment and selection; We make more efficient processes for companies and we give a personal touch to the candidates to improve their experience. We align people and companies to create relationships where the end result is the creation of long-term value." %}</p>
 
     </div>
 {% endblock %}
