@@ -457,7 +457,7 @@ def get_test_result(request):
 
     test_done = test_module.comes_from_test(request)
     if test_done:
-        cut_scores, scores = test_module.get_scores(campaign, user.id, c, request)
+        cut_scores, scores = test_module.get_scores(campaign, user.id, questions_dict, request)
 
         test_done = (len(scores) > 0)
 
