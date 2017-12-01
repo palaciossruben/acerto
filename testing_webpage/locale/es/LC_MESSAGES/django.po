@@ -497,8 +497,8 @@ msgid "Around 100 applicants"
 msgstr "100 aplicantes aprox."
 
 #: business/templates/business/pricing.html:23
-msgid "In 10 business days"
-msgstr "En 10 días hábiles"
+msgid "Max. 10 business days"
+msgstr "Max. 10 días hábiles"
 
 #: business/templates/business/pricing.html:25
 #, no-python-format
@@ -548,8 +548,8 @@ msgid "Around 50 applicants"
 msgstr "50 aplicantes aprox."
 
 #: business/templates/business/pricing.html:56
-msgid "In 15 business days"
-msgstr "En 15 días hábiles"
+msgid "Max. 15 business days"
+msgstr "Max. 15 días hábiles"
 
 #: business/templates/business/pricing.html:58
 #, no-python-format
@@ -581,8 +581,8 @@ msgid "Around 30 applicants"
 msgstr "30 aplicantes aprox."
 
 #: business/templates/business/pricing.html:90
-msgid "In 20 business days"
-msgstr "En 20 días hábiles"
+msgid "Max. 20 business days"
+msgstr "Max. 20 días hábiles"
 
 #: business/templates/business/pricing.html:92
 #, no-python-format
