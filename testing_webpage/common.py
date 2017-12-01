@@ -46,7 +46,8 @@ def get_user_from_request(request):
     if user_id is None:
         user_id = request.POST.get('user_id')
 
-    if user_id is not None:
+    # different from None, '' and False
+    if user_id:
         try:
             return User.objects.get(pk=int(user_id))
         except ObjectDoesNotExist:
