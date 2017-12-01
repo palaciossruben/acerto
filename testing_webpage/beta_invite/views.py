@@ -453,23 +453,25 @@ def get_test_result(request):
     campaign = common.get_campaign_from_request(request)
     questions_dict = test_module.get_tests_questions_dict(campaign.tests.all())
     user = common.get_user_from_request(request)
+    user_id = user.id if user else None
+
     test_score_str = ''  # by default there is no score unless the test was done.
 
     test_done = test_module.comes_from_test(request)
     if test_done:
-        cut_scores, scores = test_module.get_scores(campaign, user.id, questions_dict, request)
+
+        cut_scores, scores = test_module.get_scores(campaign, user_id, questions_dict, request)
 
         test_done = (len(scores) > 0)
 
         if test_done:
-            evaluation = test_module.get_evaluation(cut_scores, scores, campaign, user.id)
+            evaluation = test_module.get_evaluation(cut_scores, scores, campaign, user_id)
             test_score_str = '({}/100)'.format(round(evaluation.final_score))
 
     enable_interview = interview_module.has_interview(campaign)
 
     if not test_done or evaluation.passed:
 
-        user_id = user.id if user else None
         right_button_action = interview_module.adds_campaign_and_user_to_url('interview/1', user_id, campaign.id)
 
         return render(request, cts.INTERVIEW_VIEW_PATH, {'campaign': campaign,
