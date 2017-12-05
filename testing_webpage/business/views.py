@@ -563,6 +563,8 @@ def translate_plan(plan_obj, language_code):
     if 'es' in language_code:
         plan_obj.explanation = plan_obj.explanation_es
         plan_obj.name = plan_obj.name_es
+        plan_obj.interview_price = plan_obj.interview_price_es
+        plan_obj.contract_warranty = plan_obj.contract_warranty_es
 
     return plan_obj
 

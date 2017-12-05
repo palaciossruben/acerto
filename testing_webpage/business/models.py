@@ -15,6 +15,13 @@ class Plan(models.Model):
     message_es = models.CharField(max_length=200, null=True)
     explanation = models.CharField(max_length=10000, null=True)
     explanation_es = models.CharField(max_length=10000, null=True)
+    time = models.IntegerField(default=10)  # number of days.
+    candidates = models.IntegerField(default=10)  # candidates: selected applicants
+    applicants = models.IntegerField(default=100)  # applicants: people that applied before any filter.
+    interview_price = models.CharField(max_length=200, null=True)
+    interview_price_es = models.CharField(max_length=200, null=True)
+    contract_warranty = models.CharField(max_length=200, null=True)
+    contract_warranty_es = models.CharField(max_length=200, null=True)
 
     def __str__(self):
         return '{0}'.format(self.name)
