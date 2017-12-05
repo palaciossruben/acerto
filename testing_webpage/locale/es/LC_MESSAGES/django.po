@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-30 23:59+0000\n"
+"POT-Creation-Date: 2017-12-05 22:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -191,7 +191,7 @@ msgstr ""
 "creación de valor a largo plazo."
 
 #: beta_invite/templates/beta_invite/long_form.html:26 beta_invite/views.py:116
-#: beta_invite/views.py:244 beta_invite/views.py:298 beta_invite/views.py:490
+#: beta_invite/views.py:246 beta_invite/views.py:300 beta_invite/views.py:494
 msgid "Discover your true passion"
 msgstr "Descubre tu verdadera pasión"
 
@@ -239,32 +239,32 @@ msgstr ""
 msgid "Send Answers!!!"
 msgstr "¡Envia las Respuestas!"
 
-#: beta_invite/views.py:117 beta_invite/views.py:299 beta_invite/views.py:373
-#: beta_invite/views.py:441 beta_invite/views.py:491
+#: beta_invite/views.py:117 beta_invite/views.py:301 beta_invite/views.py:375
+#: beta_invite/views.py:443 beta_invite/views.py:495
 msgid "We search millions of jobs and find the right one for you"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
 
-#: beta_invite/views.py:338 business/views.py:323 business/views.py:522
+#: beta_invite/views.py:340 business/views.py:323 business/views.py:522
 msgid "Welcome to PeakU"
 msgstr "Bienvenido a PeakU"
 
-#: beta_invite/views.py:372 beta_invite/views.py:440
+#: beta_invite/views.py:374 beta_invite/views.py:442
 msgid "Find a job now"
 msgstr "Encuentra trabajo ya"
 
-#: beta_invite/views.py:480
+#: beta_invite/views.py:484
 msgid "Schedule Interview"
 msgstr "Programa una entrevista"
 
-#: beta_invite/views.py:481
+#: beta_invite/views.py:485
 msgid "Record interview now!"
 msgstr "¡Graba tu entrevista ya!"
 
-#: beta_invite/views.py:538
+#: beta_invite/views.py:542
 msgid "Thanks for completing the interview, we will contact you soon ;)"
 msgstr "¡Gracias por completar la entrevista, te contactaremos pronto! ;)"
 
-#: beta_invite/views.py:548
+#: beta_invite/views.py:552
 msgid "Back"
 msgstr "Atrás"
 
@@ -429,6 +429,83 @@ msgstr "Correo"
 msgid "I want it"
 msgstr "¡Lo quiero!"
 
+#: business/templates/business/plan.html:39
+#: business/templates/business/search.html:159
+#: business/templates/business/search_trade.html:170
+#: business/templates/business/trade_client.html:114
+msgid "Search"
+msgstr "Buscador"
+
+#: business/templates/business/plan.html:40
+msgid ""
+"We search our database and well-known employment exchanges as well as social "
+"networks such as Facebook, Twitter, Linkedin. With us you can search the "
+"world's largest databases; social networks allow you to reach more than "
+"2,000,000,000,000 potential applicants, with the advantage that you can "
+"choose a specific profile, you start receiving resumes immediately and it is "
+"the only way to find certain candidates that could not be found another way."
+msgstr ""
+
+#: business/templates/business/plan.html:42
+#, fuzzy
+#| msgid "Custom technical tests"
+msgid "Custom technical and soft tests"
+msgstr "Pruebas técnicas a la medida"
+
+#: business/templates/business/plan.html:43
+msgid ""
+"At the moment of applying, we immediately do an online test to the "
+"candidates that show us who should arrive at the interview, these tests also "
+"serve for other filters such as: age, education, profession, etc."
+msgstr ""
+
+#: business/templates/business/plan.html:45
+#, python-format
+msgid "More than a %(applicants)s applicants"
+msgstr "Mas de %(applicants)s aplicantes"
+
+#: business/templates/business/plan.html:46
+#, python-format
+msgid ""
+"By increasing the number of applications, we increase the probability that "
+"you will find the person you need, in the end we recommend the top 10 "
+"percent (approx. %(candidates)s candidates)."
+msgstr ""
+"Al incrementar el número de aplicaciones, incrementamos la probabilidad de "
+"que encuentres a la persona que necesitas, al final recomendamos al mejor 10 "
+"porciento (approx. %(candidates)s candidatos)."
+
+#: business/templates/business/plan.html:48
+#, python-format
+msgid "Maximum in %(time)s business days"
+msgstr "Máximo en %(time)s días hábiles"
+
+#: business/templates/business/plan.html:49
+#, python-format
+msgid ""
+"We understand that your company never stops, that's why we make the most "
+"agile processes in the market. We guarantee our complete process in %(time)s "
+"business days, you will be able to see how the progress is going and the "
+"candidates every day."
+msgstr ""
+"Entendemos que tu empresa nunca se detiene, por eso hacemos los procesos más "
+"ágiles del mercado. Garantizamos nuestro proceso completo en %(time)s días "
+"hábiles, podrás ver cómo va el avance y los candidatos todos los días."
+
+#: business/templates/business/plan.html:51
+#, python-format
+msgid "%(candidates)s candidates (top 10 percent)"
+msgstr "%(candidates)s candidatos (top 10 porciento)"
+
+#: business/templates/business/plan.html:52
+#, python-format
+msgid ""
+"Although you will have access to all the applicants that apply, we recommend "
+"you to the best %(candidates)s; avoid hours of review of resumes and "
+"interviews of non-relevant candidates, save time, money and focus on your "
+"business."
+msgstr "Aunque tendrás acceso a todos los candidatos que apliquen, te recomendamos a los %(candidates)s mejores; evitaras horas de revisión de hojas de vida y entrevistas a candidatos no relevantes, ahorra tiempo, dinero y enfócate en tu negocio."
+
 #: business/templates/business/post_job.html:102
 msgid "Welcome to PeakU!"
 msgstr "Bienvenido a PeakU"
@@ -590,12 +667,12 @@ msgid "3 candidates (top 10%%)"
 msgstr "3 candidatos (top 10%)"
 
 #: business/templates/business/pricing.html:96
-msgid "Personal Interview (contact_us)"
-msgstr "Entrevista personal (contáctenos)"
+msgid "Personal Interview (contact us)"
+msgstr "Entrevista personal (contáctanos)"
 
 #: business/templates/business/pricing.html:97
-msgid "Hiring Guarantee (contact_us)"
-msgstr "Garantía de contratación (contáctenos)"
+msgid "Hiring Guarantee (contact us)"
+msgstr "Garantía de contratación (contáctanos)"
 
 #: business/templates/business/pricing.html:101
 msgid "$540"
@@ -631,12 +708,6 @@ msgstr "Busca Curriculums en Nuestra Base de Datos"
 #: business/templates/business/search.html:144
 msgid "Skills or any other information"
 msgstr "Habilidades u otros requerimientos"
-
-#: business/templates/business/search.html:159
-#: business/templates/business/search_trade.html:170
-#: business/templates/business/trade_client.html:114
-msgid "Search"
-msgstr "Buscador"
 
 #: business/templates/business/search_trade.html:131
 msgid "Search people"
@@ -681,7 +752,7 @@ msgid ""
 "We search millions of profiles and find the ones that best suit your business"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
 
-#: business/views.py:594
+#: business/views.py:596
 msgid ""
 "Find someone to help you with daily tasks such as cleaning your house, "
 "fixing the fridge or sending a message."
@@ -689,7 +760,7 @@ msgstr ""
 "Encuentra a alguien que te ayude con tareas diarias como limpiar tu casa, "
 "arreglar la nevera o enviar un mensaje."
 
-#: business/views.py:597
+#: business/views.py:599
 msgid "Solve everyday problems"
 msgstr "Soluciona problemas contidianos"
 

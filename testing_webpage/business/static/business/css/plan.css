@@ -42,6 +42,16 @@
 	margin-right: 23%;
 }
 
+.section-container {
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.paragraph {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
 @media(max-width: 640px) {
     #text-white-rectangle {
         width: 100%;
