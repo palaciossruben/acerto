@@ -265,6 +265,7 @@ class User(models.Model):
     campaign = models.ForeignKey(Campaign, null=True)
     phone = models.CharField(max_length=40, null=True)
     evaluations = models.ManyToManyField(Evaluation, null=True)
+    language_code = models.CharField(max_length=3, null=True)
 
     # Detects if the user is in a mobile phone when registering.
     is_mobile = models.NullBooleanField()

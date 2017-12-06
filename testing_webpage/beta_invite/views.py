@@ -319,7 +319,8 @@ def post_long_form(request):
                     ip=ip,
                     ui_version=cts.UI_VERSION,
                     is_mobile=is_mobile,
-                    campaign=campaign)
+                    campaign=campaign,
+                    language_code=request.LANGUAGE_CODE)
 
         # verify that the campaign exists.
 

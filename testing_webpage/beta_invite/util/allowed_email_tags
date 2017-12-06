@@ -1,0 +1,7 @@
+{name}:               first word of User.name
+{test_url}:           url redirecting to tests for a given user and campaign
+{cv_url}:             url redirecting to add cv for a given user
+{sender_name}:        eg Santiago
+{sender_position}:    eg CTO
+{peaku_address}:      eg Calle blah
+{campaign}:           Campaign.name
