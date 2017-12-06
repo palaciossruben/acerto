@@ -42,7 +42,7 @@
         <h3 class="title-blue">{% trans "Custom technical and soft tests" %}</h3>
         <p class="paragraph">{% trans "At the moment of applying, we immediately do an online test to the candidates that show us who should arrive at the interview, these tests also serve for other filters such as: age, education, profession, etc." %}</p>
 
-        <h3 class="title-blue">{% blocktrans with applicants=plan.applicants %}More than a {{ applicants }} applicants{% endblocktrans %}</h3>
+        <h3 class="title-blue">{% blocktrans with applicants=plan.applicants %}More than a {{ applicants }} relevant applicants{% endblocktrans %}</h3>
         <p class="paragraph">{% blocktrans with candidates=plan.candidates %}By increasing the number of applications, we increase the probability that you will find the person you need, in the end we recommend the top 10 percent (approx. {{ candidates }} candidates).{% endblocktrans %}</p>
 
         <h3 class="title-blue">{% blocktrans with time=plan.time %}Maximum in {{ time }} business days{% endblocktrans %}</h3>
