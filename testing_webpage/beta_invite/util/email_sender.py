@@ -74,8 +74,12 @@ def send_email(sender, recipients, subject, body, mail_gun_url, mailgun_api_key)
 
 
 def get_test_url(user):
-    return 'http://peaku.co/beta_invite/long_form/post?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
-                                                                                                           campaign_id=user.campaign_id)
+
+    if hasattr(user, 'campaign_id'):
+        return 'http://peaku.co/beta_invite/long_form/post?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
+                                                                                                               campaign_id=user.campaign_id)
+    else:
+        return ''
 
 
 def get_cv_url(user):
