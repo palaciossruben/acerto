@@ -82,6 +82,19 @@ def get_test_url(user):
         return ''
 
 
+def get_campaign_name(user, language_code):
+    """
+    Args:
+        user: User object.
+    Returns:
+    """
+    if user and user.campaign:
+        if language_code == 'es':
+            return user.campaign.title_es
+        else:
+            return user.campaign.title
+
+
 def get_cv_url(user):
     return 'http://peaku.co/beta_invite/long_form/add_cv?user_id={user_id}'.format(user_id=user.id)
 
@@ -110,20 +123,22 @@ def send(users, language_code, body_input, subject, with_localization=True, body
     for user in users:
 
         if body_is_filename:
-            with open(os.path.join(get_current_path(), body_input)) as fp:
+            with open(os.path.join(get_current_path(), body_input), encoding='utf-8') as fp:
                 body = fp.read().format(name=get_first_name(user.name),
                                         test_url=get_test_url(user),
                                         cv_url=get_cv_url(user),
                                         sender_name=sender_data['sender_name'],
                                         sender_position=sender_data['sender_position'],
-                                        peaku_address=sender_data['peaku_address'],)
+                                        peaku_address=sender_data['peaku_address'],
+                                        campaign=get_campaign_name(user, language_code),)
         else:
             body = body_input.format(name=get_first_name(user.name),
                                      test_url=get_test_url(user),
                                      cv_url=get_cv_url(user),
                                      sender_name=sender_data['sender_name'],
                                      sender_position=sender_data['sender_position'],
-                                     peaku_address=sender_data['peaku_address'],)
+                                     peaku_address=sender_data['peaku_address'],
+                                     campaign=get_campaign_name(user, language_code),)
 
         send_email(sender=sender_data['email'],
                    recipients=user.email,
