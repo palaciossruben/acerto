@@ -54,11 +54,15 @@
     margin-bottom: 30px;
 }
 
+.title-blue {
+    text-transform: none;
+}
+
 @media(max-width: 640px) {
     #text-white-rectangle {
-        width: 100%;
-        margin-left: auto;
-        margin-top: auto;
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
         margin-top: 0px;
         border: none;
     }
@@ -86,4 +90,10 @@
         index-z: 1;
         position: relative;
     }
+
+    #section-container-plan {
+    width: 80%;
+    margin-left: 10%;
+    margin-right:10%;
+    margin-top:0px;
 }
