@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-06 20:26+0000\n"
+"POT-Creation-Date: 2017-12-06 22:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -431,10 +431,11 @@ msgstr "¡Lo quiero!"
 
 #: business/templates/business/plan.html:39
 #: business/templates/business/search.html:159
+#: business/templates/business/search_trade.html:131
 #: business/templates/business/search_trade.html:170
 #: business/templates/business/trade_client.html:114
 msgid "Search"
-msgstr "Buscador"
+msgstr "Búsqueda"
 
 #: business/templates/business/plan.html:40
 msgid ""
@@ -470,8 +471,8 @@ msgstr ""
 
 #: business/templates/business/plan.html:45
 #, python-format
-msgid "More than a %(applicants)s applicants"
-msgstr "Mas de %(applicants)s aplicantes"
+msgid "More than a %(applicants)s relevant applicants"
+msgstr "Más de %(applicants)s aplicantes relevantes"
 
 #: business/templates/business/plan.html:46
 #, python-format
@@ -672,7 +673,7 @@ msgstr "5 candidatos (top 10%)"
 
 #: business/templates/business/pricing.html:62
 msgid "Personal Interview +$214"
-msgstr "Entrevista Personal +$349 mil"
+msgstr "Entrevista personal +$349 mil"
 
 #: business/templates/business/pricing.html:63
 msgid "Hiring Guarantee +$245"
@@ -713,7 +714,7 @@ msgstr "Garantía de contratación (contáctanos)"
 
 #: business/templates/business/pricing.html:101
 msgid "$540"
-msgstr "899 mil + IVA"
+msgstr "$899 mil + IVA"
 
 #: business/templates/business/results.html:145
 #: business/templates/business/search_trade.html:187
@@ -745,10 +746,6 @@ msgstr "Busca Curriculums en Nuestra Base de Datos"
 #: business/templates/business/search.html:144
 msgid "Skills or any other information"
 msgstr "Habilidades u otros requerimientos"
-
-#: business/templates/business/search_trade.html:131
-msgid "Search people"
-msgstr "Buscador"
 
 #: business/templates/business/search_trade.html:163
 msgid "Any other information"
