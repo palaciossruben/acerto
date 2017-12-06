@@ -50,10 +50,10 @@
       "time": 20,
       "candidates": 3,
       "applicants": 30,
-      "interview_price": "(contact us)",
-      "interview_price_es": "(contáctanos)",
-      "contract_warranty": "(contact us)",
-      "contract_warranty_es": "(contáctanos)"
+      "interview_price": "contact us",
+      "interview_price_es": "contáctanos",
+      "contract_warranty": "contact us",
+      "contract_warranty_es": "contáctanos"
     }
   },
   {

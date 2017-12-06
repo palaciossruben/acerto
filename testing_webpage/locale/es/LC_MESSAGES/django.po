@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-06 00:26+0000\n"
+"POT-Creation-Date: 2017-12-06 20:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgstr "Grabar y continuar"
 
 #: beta_invite/interview_module.py:137
 msgid "Click on the video to hear the question"
-msgstr "Haz clic en el video para oir la pregunta"
+msgstr "Haz clic en el video para escuchar la pregunta"
 
 #: beta_invite/interview_module.py:139
 #, python-brace-format
@@ -352,7 +352,7 @@ msgstr "Aceleramos tus procesos de reclutamiento"
 
 #: business/templates/business/index.html:53
 msgid "Focus on worthwhile interviews"
-msgstr "Enfocate en entrevistas valiosas"
+msgstr "Enfócate en entrevistas valiosas"
 
 #: business/templates/business/index.html:54
 msgid "Save on job exchanges"
@@ -445,10 +445,15 @@ msgid ""
 "choose a specific profile, you start receiving resumes immediately and it is "
 "the only way to find certain candidates that could not be found another way."
 msgstr ""
+"Buscamos en nuestra base de datos y bolsas de empleo conocidas además de "
+"redes sociales como Facebook, Twitter, Linkedin: Con nosotros puedes buscar "
+"en las bases de datos más grandes del mundo; las redes sociales permiten "
+"llegar a más de 2.000.000.000.000 de  potenciales aplicantes, con la ventaja "
+"que se puede escoger un perfil específico,  empiezas a recibir hojas de vida "
+"inmediatamente y es la única manera de encontrar ciertos candidatos que no "
+"se podrían encontrar de otra manera."
 
 #: business/templates/business/plan.html:42
-#, fuzzy
-#| msgid "Custom technical tests"
 msgid "Custom technical and soft tests"
 msgstr "Pruebas técnicas a la medida"
 
@@ -458,6 +463,10 @@ msgid ""
 "candidates that show us who should arrive at the interview, these tests also "
 "serve for other filters such as: age, education, profession, etc."
 msgstr ""
+"Al momento de aplicar, inmediatamente hacemos una prueba en línea a los "
+"candidatos que nos muestren quienes deberían llegar a la entrevista, estas "
+"pruebas también sirven para otros filtros como: edad, educación, profesión, "
+"etc."
 
 #: business/templates/business/plan.html:45
 #, python-format
@@ -473,7 +482,7 @@ msgid ""
 msgstr ""
 "Al incrementar el número de aplicaciones, incrementamos la probabilidad de "
 "que encuentres a la persona que necesitas, al final recomendamos al mejor 10 "
-"porciento (approx. %(candidates)s candidatos)."
+"porciento (aprox. %(candidates)s candidatos)."
 
 #: business/templates/business/plan.html:48
 #, python-format
@@ -493,9 +502,9 @@ msgstr ""
 "hábiles, podrás ver cómo va el avance y los candidatos todos los días."
 
 #: business/templates/business/plan.html:51
-
-msgid "Top %(candidates)s candidates"
-msgstr "Top %(candidates)s candidatos"
+#, python-format
+msgid "Best %(candidates)s candidates"
+msgstr "Mejores %(candidates)s candidatos"
 
 #: business/templates/business/plan.html:52
 #, python-format
@@ -509,6 +518,30 @@ msgstr ""
 "los %(candidates)s mejores; evitaras horas de revisión de hojas de vida y "
 "entrevistas a candidatos no relevantes, ahorra tiempo, dinero y enfócate en "
 "tu negocio."
+
+#: business/templates/business/plan.html:54
+#, python-format
+msgid "Virtual interview (%(price)s)"
+msgstr "Entrevista virtual (%(price)s)"
+
+#: business/templates/business/plan.html:55
+msgid ""
+"If you want we can do a virtual interview recorded of the recommended "
+"candidates so you have more information before knowing them."
+msgstr ""
+"Si deseas podemos hacer una entrevista virtual grabada de los candidatos "
+"recomendados para que tengas más información antes de conocerlos."
+
+#: business/templates/business/plan.html:57
+#, python-format
+msgid "Hiring Guarantee (%(warranty)s)"
+msgstr "Garantía de contratación (%(warranty)s)"
+
+#: business/templates/business/plan.html:58
+msgid ""
+"This product guarantees the process until you make a successful contract."
+msgstr ""
+"Este producto garantiza el proceso hasta que hagas una contratación exitosa."
 
 #: business/templates/business/post_job.html:102
 msgid "Welcome to PeakU!"
@@ -775,6 +808,9 @@ msgstr "Ingles"
 #: testing_webpage/shared_settings.py:121
 msgid "Spanish"
 msgstr "Español"
+
+#~ msgid "Hiring Guarantee + $200"
+#~ msgstr "Garantía de contratación + $200 mil"
 
 #~ msgid ""
 #~ "PeakU is revolutionizing recruitment, as it saves companies a significant "
