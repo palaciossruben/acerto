@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-05 22:26+0000\n"
+"POT-Creation-Date: 2017-12-06 00:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -493,9 +493,9 @@ msgstr ""
 "hábiles, podrás ver cómo va el avance y los candidatos todos los días."
 
 #: business/templates/business/plan.html:51
-#, python-format
-msgid "%(candidates)s candidates (top 10 percent)"
-msgstr "%(candidates)s candidatos (top 10 porciento)"
+
+msgid "Top %(candidates)s candidates"
+msgstr "Top %(candidates)s candidatos"
 
 #: business/templates/business/plan.html:52
 #, python-format
@@ -504,7 +504,11 @@ msgid ""
 "you to the best %(candidates)s; avoid hours of review of resumes and "
 "interviews of non-relevant candidates, save time, money and focus on your "
 "business."
-msgstr "Aunque tendrás acceso a todos los candidatos que apliquen, te recomendamos a los %(candidates)s mejores; evitaras horas de revisión de hojas de vida y entrevistas a candidatos no relevantes, ahorra tiempo, dinero y enfócate en tu negocio."
+msgstr ""
+"Aunque tendrás acceso a todos los candidatos que apliquen, te recomendamos a "
+"los %(candidates)s mejores; evitaras horas de revisión de hojas de vida y "
+"entrevistas a candidatos no relevantes, ahorra tiempo, dinero y enfócate en "
+"tu negocio."
 
 #: business/templates/business/post_job.html:102
 msgid "Welcome to PeakU!"
