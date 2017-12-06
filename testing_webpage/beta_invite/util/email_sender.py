@@ -20,7 +20,7 @@ def get_first_name(complete_name):
 
 def read_email_credentials():
     """Returns a json with the credentials"""
-    json_data = open(os.path.join(get_current_path(), "email_credentials.json")).read()
+    json_data = open(os.path.join(get_current_path(), "email_credentials.json"), encoding='utf-8').read()
     return json.loads(json_data)
 
 
@@ -48,7 +48,7 @@ def send_email_through_smtp(user, password, recipient, subject, body):
     server.close()
 
 
-def send_email(sender, recipients, subject, body, mail_gun_url, mailgun_api_key):
+def send_email_with_mailgun(sender, recipients, subject, body, mail_gun_url, mailgun_api_key):
     """
     Sends emails over mailgun service
     Args:
@@ -140,12 +140,12 @@ def send(users, language_code, body_input, subject, with_localization=True, body
                                      peaku_address=sender_data['peaku_address'],
                                      campaign=get_campaign_name(user, language_code),)
 
-        send_email(sender=sender_data['email'],
-                   recipients=user.email,
-                   subject=subject.format(name=get_first_name(user.name)),
-                   body=body,
-                   mail_gun_url=sender_data['mailgun_url'],
-                   mailgun_api_key=sender_data['mailgun_api_key'])
+        send_email_with_mailgun(sender=sender_data['email'],
+                                recipients=user.email,
+                                subject=subject.format(name=get_first_name(user.name)),
+                                body=body,
+                                mail_gun_url=sender_data['mailgun_url'],
+                                mailgun_api_key=sender_data['mailgun_api_key'])
 
 
 def remove_accents_in_string(element):
@@ -232,14 +232,12 @@ def send_report(language_code, body_filename, subject, recipients, users):
                                 sender_position=sender_data['sender_position'],
                                 peaku_address=sender_data['peaku_address'],)
 
-    sender_data = read_email_credentials()
-
-    send_email(sender=sender_data['email'],
-               recipients=recipients,
-               subject=subject,
-               body=body,
-               mail_gun_url=sender_data['mailgun_url'],
-               mailgun_api_key=sender_data['mailgun_api_key'])
+    send_email_with_mailgun(sender=sender_data['email'],
+                            recipients=recipients,
+                            subject=subject,
+                            body=body,
+                            mail_gun_url=sender_data['mailgun_url'],
+                            mailgun_api_key=sender_data['mailgun_api_key'])
 
 
 def send_internal(contact, language_code, body_filename, subject):
@@ -272,9 +270,9 @@ def send_internal(contact, language_code, body_filename, subject):
 
     sender_data = read_email_credentials()
 
-    send_email(sender=sender_data['email'],
-               recipients=internal_team,
-               subject=subject,
-               body=body,
-               mail_gun_url=sender_data['mailgun_url'],
-               mailgun_api_key=sender_data['mailgun_api_key'])
+    send_email_with_mailgun(sender=sender_data['email'],
+                            recipients=internal_team,
+                            subject=subject,
+                            body=body,
+                            mail_gun_url=sender_data['mailgun_url'],
+                            mailgun_api_key=sender_data['mailgun_api_key'])
