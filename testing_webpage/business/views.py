@@ -516,9 +516,9 @@ def home(request):
 def send_contact_emails(contact, language_code):
 
     try:
-        email_sender.send(user=contact,
+        email_sender.send(users=contact,
                           language_code=language_code,
-                          body_filename='business_contact_email_body',
+                          body_input='business_contact_email_body',
                           subject=_('Welcome to PeakU'))
         email_sender.send_internal(contact=contact,
                                    language_code=language_code,

@@ -81,7 +81,7 @@
                 <h3 class="secondary-title" >{% trans "Contact Us"%}</h3>
                 <div class="secondary-yellow-bar"></div>
 
-                <form class="my-form">
+                <form class="my-form" action="{% url 'business:contact_us' %}" method="post">
                     {% csrf_token %}
 
                     <input class="form-text" type="text" name="name"
