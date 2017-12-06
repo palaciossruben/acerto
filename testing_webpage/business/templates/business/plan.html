@@ -48,8 +48,15 @@
         <h3 class="title-blue">{% blocktrans with time=plan.time %}Maximum in {{ time }} business days{% endblocktrans %}</h3>
         <p class="paragraph">{% blocktrans with time=plan.time %}We understand that your company never stops, that's why we make the most agile processes in the market. We guarantee our complete process in {{ time }} business days, you will be able to see how the progress is going and the candidates every day.{% endblocktrans %}</p>
 
-        <h3 class="title-blue">{% blocktrans with candidates=plan.candidates %}Top {{ candidates }} candidates{% endblocktrans %}</h3>
+        <h3 class="title-blue">{% blocktrans with candidates=plan.candidates %}Best {{ candidates }} candidates{% endblocktrans %}</h3>
         <p class="paragraph">{% blocktrans %}Although you will have access to all the applicants that apply, we recommend you to the best {{ candidates }}; avoid hours of review of resumes and interviews of non-relevant candidates, save time, money and focus on your business.{% endblocktrans %}</p>
+
+        <h3 class="title-blue">{% blocktrans with price=plan.interview_price %}Virtual interview ({{price}}){% endblocktrans %}</h3>
+        <p class="paragraph">{% trans "If you want we can do a virtual interview recorded of the recommended candidates so you have more information before knowing them." %}</p>
+
+        <h3 class="title-blue">{% blocktrans with warranty=plan.contract_warranty %}Hiring Guarantee ({{warranty}}){% endblocktrans %}</h3>
+        <p class="paragraph">{% trans "This product guarantees the process until you make a successful contract." %}</p>
+
 
     </section>
 
