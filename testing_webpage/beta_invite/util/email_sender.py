@@ -84,15 +84,18 @@ def get_test_url(user):
 
 def get_campaign_name(user, language_code):
     """
+    For a object that has no associeted campaign it will not return the title
     Args:
-        user: User object.
-    Returns:
+        user: User or Contact object.
+    Returns: string with title
     """
-    if user and user.campaign:
+    if user and hasattr(user, 'campaign') and user.campaign:
         if language_code == 'es':
             return user.campaign.title_es
         else:
             return user.campaign.title
+
+    return ''
 
 
 def get_cv_url(user):
