@@ -77,9 +77,19 @@ def get_test_url(user):
 
     if hasattr(user, 'campaign_id'):
         return 'http://peaku.co/beta_invite/long_form/post?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
-                                                                                                               campaign_id=user.campaign_id)
+                                                                                                                campaign_id=user.campaign_id)
     else:
         return ''
+
+
+def get_video_url(user):
+
+    if hasattr(user):
+        return 'https://peaku.co/beta_invite/long_form/interview/1?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id, campaign_id=user.campaign_id)
+    else:
+        return ''
+
+
 
 
 def get_campaign_name(user, language_code):
@@ -130,6 +140,7 @@ def send(users, language_code, body_input, subject, with_localization=True, body
                 body = fp.read().format(name=get_first_name(user.name),
                                         test_url=get_test_url(user),
                                         cv_url=get_cv_url(user),
+                                        video_url=get_video_url(user),
                                         sender_name=sender_data['sender_name'],
                                         sender_position=sender_data['sender_position'],
                                         peaku_address=sender_data['peaku_address'],
@@ -138,6 +149,7 @@ def send(users, language_code, body_input, subject, with_localization=True, body
             body = body_input.format(name=get_first_name(user.name),
                                      test_url=get_test_url(user),
                                      cv_url=get_cv_url(user),
+                                     video_url=get_video_url(user),
                                      sender_name=sender_data['sender_name'],
                                      sender_position=sender_data['sender_position'],
                                      peaku_address=sender_data['peaku_address'],
