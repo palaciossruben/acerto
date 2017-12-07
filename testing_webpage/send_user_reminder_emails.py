@@ -54,5 +54,5 @@ def send_test_reminder(email_template, state):
 
 
 send_test_reminder('user_test_reminder_email_body', 'Backlog')
-send_test_reminder('', 'Waiting for Interview')
+send_test_reminder('user_interview_reminder_email_body', 'Waiting for Interview')
 
