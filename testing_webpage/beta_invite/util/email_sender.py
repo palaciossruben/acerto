@@ -84,7 +84,7 @@ def get_test_url(user):
 
 def get_campaign_name(user, language_code):
     """
-    For a object that has no associeted campaign it will not return the title
+    For a object that has no associated campaign it will not return the title
     Args:
         user: User or Contact object.
     Returns: string with title
