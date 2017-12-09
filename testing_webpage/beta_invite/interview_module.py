@@ -25,11 +25,11 @@ def get_right_button_text(interview_obj, question):
     return _('Finish Interview') if on_last_question(interview_obj, question) else _('Save and continue')
 
 
-def has_interview(campaign):
+def has_recorded_interview(campaign):
     """
     Args:
-        campaign:
-    Returns:
+        campaign: Campaign obj
+    Returns: Boolean. If it has at least a video question it can record the interview.
     """
 
     # TODO: designed with campaigns having only 1 interview.
@@ -132,11 +132,14 @@ def save_response(campaign, user, question_number, interview_obj, video_token):
             pass  # cannot save, if the question is not found.
 
 
-def get_top_message(on_interview):
+def get_top_message(on_interview, has_calendly, has_recorded_interview):
     if on_interview:
         return _("Click on the video to hear the question")
     else:
-        return _("Hi, I'm Santiago, Congratulations on passing the tests{test_score_str}! Click on the video.")
+        if has_recorded_interview and has_calendly:
+            return _("Hi, I'm Santiago, Congratulations on passing the tests{test_score_str}! Click on the video.")
+        else:  # only has a video recording option.
+            return _("Hi, I'm Santiago, Congratulations on passing the tests{test_score_str}!")
 
 
 def get_message0(on_interview):
@@ -146,15 +149,20 @@ def get_message0(on_interview):
         return ''
 
 
-def get_message1():
-    return _("Hi, I'm Santiago, Congratulations on passing the tests{test_score_str}!")
+def get_message2(has_recorded_interview, has_calendly):
+    """
+    Args:
+        has_recorded_interview: Boolean indicating if recorded interview is available
+        has_calendly: Boolean indicating if calendly appointment is available.
+    Returns: translated string message
+    """
 
-
-def get_message2(enable_interview):
-    if enable_interview:
+    if has_recorded_interview and has_calendly:
         return _("Let's schedule an appointment or record your interview now!")
-    else:
+    elif has_calendly:
         return _("Let's schedule an appointment!")
+    elif has_recorded_interview:
+        return _("Let's record your interview now!")
 
 
 def update_candidate_state(campaign, user, interview_obj, question_number):

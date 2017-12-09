@@ -469,7 +469,8 @@ def get_test_result(request):
             evaluation = test_module.get_evaluation(cut_scores, scores, campaign, user_id)
             test_score_str = '({}/100)'.format(round(evaluation.final_score))
 
-    enable_interview = interview_module.has_interview(campaign)
+    has_recorded_interview = interview_module.has_recorded_interview(campaign)
+    has_calendly = campaign.calendly
 
     if not test_done or evaluation.passed:
 
@@ -478,16 +479,19 @@ def get_test_result(request):
         return render(request, cts.INTERVIEW_VIEW_PATH, {'campaign': campaign,
                                                          'question_video': common.get_intro_video(),
                                                          'ziggeo_api_key': common.get_ziggeo_api_key(),
-                                                         'top_message': interview_module.get_top_message(on_interview=False).format(test_score_str=test_score_str),
+                                                         'top_message': interview_module.get_top_message(on_interview=False,
+                                                                                                         has_calendly=has_calendly,
+                                                                                                         has_recorded_interview=has_recorded_interview).format(test_score_str=test_score_str),
                                                          'message0': interview_module.get_message0(on_interview=False),
                                                          'message1': '',
-                                                         'message2': interview_module.get_message2(enable_interview),
+                                                         'message2': interview_module.get_message2(has_recorded_interview, has_calendly),
                                                          'left_button_text': _('Schedule Interview'),
                                                          'right_button_text': _('Record interview now!'),
                                                          'left_button_action': cts.INTERVIEW_CALENDLY,
                                                          'right_button_action': right_button_action,
                                                          'enable_recording': False,
-                                                         'enable_interview': enable_interview,
+                                                         'has_recorded_interview': has_recorded_interview,
+                                                         'has_calendly': has_calendly,
                                                          'left_button_is_back': False,
                                                          'on_interview': False,
                                                          })
@@ -509,6 +513,7 @@ def interview(request, pk):
     question_number = int(pk)
 
     campaign = common.get_campaign_from_request(request)
+    has_calendly = campaign.calendly
 
     # TODO: assumes campaign has only one interview.
     interview_obj = campaign.interviews.all()[0]
@@ -525,7 +530,7 @@ def interview(request, pk):
         next_question = interview_obj.questions.get(order=question_number)
         answer_video = interview_module.fetch_current_video_answer(campaign, user, next_question)
         next_question.translate(request.LANGUAGE_CODE)
-        enable_interview = True
+        has_recorded_interview = True
         right_button_text = interview_module.get_right_button_text(interview_obj, next_question)
         right_button_action = interview_module.get_right_button_action(question_number, user_id, campaign.id)
         enable_recording = True
@@ -536,7 +541,7 @@ def interview(request, pk):
     except ObjectDoesNotExist:  # beyond last question
         right_button_text = ''
         right_button_action = ''
-        enable_interview = False
+        has_recorded_interview = False
         enable_recording = False
         question_video = ''
         message1 = ''
@@ -546,8 +551,10 @@ def interview(request, pk):
     return render(request, cts.INTERVIEW_VIEW_PATH, {'campaign': campaign,
                                                      'ziggeo_api_key': common.get_ziggeo_api_key(),
                                                      'question_video': question_video,
-                                                     'top_message': interview_module.get_top_message(on_interview=enable_interview),
-                                                     'message0': interview_module.get_message0(on_interview=enable_interview),
+                                                     'top_message': interview_module.get_top_message(on_interview=True,
+                                                                                                     has_calendly=has_calendly,
+                                                                                                     has_recorded_interview=has_recorded_interview),
+                                                     'message0': interview_module.get_message0(on_interview=has_recorded_interview),
                                                      'message1': message1,
                                                      'message2': message2,
                                                      'left_button_text': _('Back'),
@@ -555,7 +562,8 @@ def interview(request, pk):
                                                      'right_button_action': right_button_action,
                                                      'left_button_action': left_button_action,
                                                      'enable_recording': enable_recording,
-                                                     'enable_interview': enable_interview,
+                                                     'has_recorded_interview': has_recorded_interview,
+                                                     'has_calendly': has_calendly,
                                                      'left_button_is_back': True,
                                                      'on_interview': True,
                                                      'answer_video': answer_video,

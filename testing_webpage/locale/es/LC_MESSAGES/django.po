@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-06 22:35+0000\n"
+"POT-Creation-Date: 2017-12-09 01:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,7 +30,7 @@ msgstr "Grabar y continuar"
 msgid "Click on the video to hear the question"
 msgstr "Haz clic en el video para escuchar la pregunta"
 
-#: beta_invite/interview_module.py:139
+#: beta_invite/interview_module.py:140
 #, python-brace-format
 msgid ""
 "Hi, I'm Santiago, Congratulations on passing the tests{test_score_str}! "
@@ -39,23 +39,27 @@ msgstr ""
 "Hola, soy Santiago, ¡Felicitaciones por pasar las pruebas{test_score_str}! "
 "Haz clic en el video"
 
-#: beta_invite/interview_module.py:144
-msgid "In 1 minute:"
-msgstr "En 1 minuto:"
-
-#: beta_invite/interview_module.py:150
+#: beta_invite/interview_module.py:142
 #, python-brace-format
 msgid "Hi, I'm Santiago, Congratulations on passing the tests{test_score_str}!"
 msgstr ""
 "Hola, soy Santiago, ¡Felicitaciones por pasar las pruebas{test_score_str}!"
 
-#: beta_invite/interview_module.py:155
+#: beta_invite/interview_module.py:147
+msgid "In 1 minute:"
+msgstr "En 1 minuto:"
+
+#: beta_invite/interview_module.py:165
 msgid "Let's schedule an appointment or record your interview now!"
 msgstr "¡Programemos una cita o graba tu entrevista ya!"
 
-#: beta_invite/interview_module.py:157
+#: beta_invite/interview_module.py:167
 msgid "Let's schedule an appointment!"
 msgstr "¡Programemos una cita!"
+
+#: beta_invite/interview_module.py:169
+msgid "Let's record your interview now!"
+msgstr "¡Graba tu entrevista ya!"
 
 #: beta_invite/templates/beta_invite/add_cv.html:76
 #: beta_invite/templates/beta_invite/long_form.html:99
@@ -191,7 +195,7 @@ msgstr ""
 "creación de valor a largo plazo."
 
 #: beta_invite/templates/beta_invite/long_form.html:26 beta_invite/views.py:116
-#: beta_invite/views.py:246 beta_invite/views.py:300 beta_invite/views.py:494
+#: beta_invite/views.py:246 beta_invite/views.py:300 beta_invite/views.py:497
 msgid "Discover your true passion"
 msgstr "Descubre tu verdadera pasión"
 
@@ -239,32 +243,32 @@ msgstr ""
 msgid "Send Answers!!!"
 msgstr "¡Envia las Respuestas!"
 
-#: beta_invite/views.py:117 beta_invite/views.py:301 beta_invite/views.py:375
-#: beta_invite/views.py:443 beta_invite/views.py:495
+#: beta_invite/views.py:117 beta_invite/views.py:301 beta_invite/views.py:376
+#: beta_invite/views.py:444 beta_invite/views.py:498
 msgid "We search millions of jobs and find the right one for you"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
 
-#: beta_invite/views.py:340 business/views.py:323 business/views.py:522
+#: beta_invite/views.py:341 business/views.py:323 business/views.py:522
 msgid "Welcome to PeakU"
 msgstr "Bienvenido a PeakU"
 
-#: beta_invite/views.py:374 beta_invite/views.py:442
+#: beta_invite/views.py:375 beta_invite/views.py:443
 msgid "Find a job now"
 msgstr "Encuentra trabajo ya"
 
-#: beta_invite/views.py:484
+#: beta_invite/views.py:486
 msgid "Schedule Interview"
 msgstr "Programa una entrevista"
 
-#: beta_invite/views.py:485
+#: beta_invite/views.py:487
 msgid "Record interview now!"
 msgstr "¡Graba tu entrevista ya!"
 
-#: beta_invite/views.py:542
+#: beta_invite/views.py:546
 msgid "Thanks for completing the interview, we will contact you soon ;)"
 msgstr "¡Gracias por completar la entrevista, te contactaremos pronto! ;)"
 
-#: beta_invite/views.py:552
+#: beta_invite/views.py:556
 msgid "Back"
 msgstr "Atrás"
 
@@ -377,7 +381,7 @@ msgstr "Escríbe un comentario (opcional)"
 #: business/templates/business/login_buttons.html:17
 #: business/templates/business/search_trade.html:109
 #: business/templates/business/trade_client.html:84
-#: testing_webpage/templates/base.html:34
+#: testing_webpage/templates/base.html:44
 msgid "Sign Up"
 msgstr "Regístrate"
 
@@ -397,7 +401,7 @@ msgstr "¡Inicia Sesión!"
 #: business/templates/business/search_trade.html:115
 #: business/templates/business/signup.html:95
 #: business/templates/business/trade_client.html:90
-#: testing_webpage/templates/base.html:39
+#: testing_webpage/templates/base.html:49
 msgid "Log In"
 msgstr "Inicia Sesión"
 

@@ -208,6 +208,7 @@ class Campaign(models.Model):
     bullets = models.ManyToManyField(Bullet)
     tests = models.ManyToManyField(Test)
     interviews = models.ManyToManyField(Interview)
+    calendly = models.BooleanField(default=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
