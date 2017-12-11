@@ -40,7 +40,7 @@ def translate_email_subject(user):
 
 def send_reminder(email_template, state):
     """
-    Sends a reminder to all users who have registered in between 25 to 1 hour ago, asking to complete the tests.
+    Sends a reminder to all users who have registered in between 25 to 1 hour ago
     Returns: send email like crazy
     """
 
@@ -56,4 +56,3 @@ def send_reminder(email_template, state):
 
 send_reminder('user_test_reminder_email_body', 'Backlog')
 send_reminder('user_interview_reminder_email_body', 'Waiting for Interview')
-
