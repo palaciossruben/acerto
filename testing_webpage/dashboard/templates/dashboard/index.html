@@ -1,7 +1,13 @@
 <h1>Campaigns</h1>
 <ul>
     {% for campaign in campaigns %}
+
         <li>{{ campaign.name }}
+            {% if campaign.active %}
+                Active
+            {% else %}
+                Inactive
+            {% endif %}
         <br>
         <a href="campaign/{{ campaign.id }}">Candidates</a>
         <br>
