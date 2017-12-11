@@ -168,18 +168,6 @@ def get_trade_drop_down_values(language_code):
     return countries, trades
 
 
-def translate_campaign(campaign, language_code):
-    """
-    Args:
-        campaign: Object
-        language_code: 'es', 'en' etc.
-    Returns: Inplace object translation
-    """
-    if language_code == 'es':
-        campaign.description = campaign.description_es
-        campaign.title = campaign.title_es
-
-
 def translate_bullets(bullets, lang_code):
     """
     Args:
@@ -232,7 +220,7 @@ def long_form(request):
     # If campaign_id is not found; will default to the default_campaign.
     campaign_id = request.GET.get('campaign_id', cts.DEFAULT_CAMPAIGN_ID)
     campaign = Campaign.objects.filter(pk=campaign_id).first()
-    translate_campaign(campaign, request.LANGUAGE_CODE)
+    campaign.translate(request.LANGUAGE_CODE)
 
     ip = get_ip(request)
     action_url = '/beta_invite/long_form/post'
@@ -258,7 +246,7 @@ def long_form(request):
         param_dict['campaign_id'] = int(campaign_id)
         try:
             campaign = Campaign.objects.get(pk=int(campaign_id))
-            translate_campaign(campaign, request.LANGUAGE_CODE)
+            campaign.translate(request.LANGUAGE_CODE)
             # if campaign exists send it.
             param_dict['campaign'] = campaign
         except ObjectDoesNotExist:
@@ -383,7 +371,7 @@ def fast_job(request):
         param_dict['campaign_id'] = int(campaign_id)
         try:
             campaign = Campaign.objects.get(pk=int(campaign_id))
-            translate_campaign(campaign, request.LANGUAGE_CODE)
+            campaign.translate(request.LANGUAGE_CODE)
             # if campaign exists send it.
             param_dict['campaign'] = campaign
         except ObjectDoesNotExist:
@@ -445,6 +433,15 @@ def post_fast_job(request):
                                                    })
 
 
+def send_interview_mail(email_template, user):
+    if user:
+        user.campaign.translate(user.language_code)
+        email_sender.send(users=user,
+                          language_code=user.language_code,
+                          body_input=email_template,
+                          subject=_('You can record the interview for {campaign}').format(campaign=user.campaign.title))
+
+
 def get_test_result(request):
     """
     Args:
@@ -473,6 +470,8 @@ def get_test_result(request):
     has_calendly = campaign.calendly
 
     if not test_done or evaluation.passed:
+
+        send_interview_mail('user_interview_email_body', user)
 
         right_button_action = interview_module.adds_campaign_and_user_to_url('interview/1', user_id, campaign.id)
 

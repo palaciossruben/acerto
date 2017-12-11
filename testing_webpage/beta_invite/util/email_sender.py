@@ -90,6 +90,12 @@ def get_video_url(user):
         return ''
 
 
+def get_campaign_url(user):
+
+    if hasattr(user, 'campaign_id'):
+        return 'https://peaku.co/beta_invite/long_form?campaign_id={campaign_id}'.format(campaign_id=user.campaign_id)
+    else:
+        return ''
 
 
 def get_campaign_name(user, language_code):
@@ -144,7 +150,8 @@ def send(users, language_code, body_input, subject, with_localization=True, body
                                         sender_name=sender_data['sender_name'],
                                         sender_position=sender_data['sender_position'],
                                         peaku_address=sender_data['peaku_address'],
-                                        campaign=get_campaign_name(user, language_code),)
+                                        campaign=get_campaign_name(user, language_code),
+                                        campaign_url=get_campaign_url(user))
         else:
             body = body_input.format(name=get_first_name(user.name),
                                      test_url=get_test_url(user),
@@ -153,7 +160,8 @@ def send(users, language_code, body_input, subject, with_localization=True, body
                                      sender_name=sender_data['sender_name'],
                                      sender_position=sender_data['sender_position'],
                                      peaku_address=sender_data['peaku_address'],
-                                     campaign=get_campaign_name(user, language_code),)
+                                     campaign=get_campaign_name(user, language_code),
+                                     campaign_url=get_campaign_url(user))
 
         send_email_with_mailgun(sender=sender_data['email'],
                                 recipients=user.email,
