@@ -103,6 +103,6 @@ def send_possible_job_matches():
                               subject=translate_email_job_match_subject(user))
 
 
-#send_reminder('user_test_reminder_email_body', 'Backlog', translate_email_test_subject)
-#send_reminder('user_interview_reminder_email_body', 'Waiting for Interview', translate_email_interview_subject)
-#send_possible_job_matches()
+send_reminder('user_test_reminder_email_body', 'Backlog', translate_email_test_subject)
+send_reminder('user_interview_reminder_email_body', 'Waiting for Interview', translate_email_interview_subject)
+send_possible_job_matches()
