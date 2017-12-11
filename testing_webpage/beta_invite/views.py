@@ -433,6 +433,15 @@ def post_fast_job(request):
                                                    })
 
 
+def send_interview_mail(email_template, user):
+    if user:
+        translate_campaign(user.campaign, user.language_code)
+        email_sender.send(users=user,
+                          language_code=user.language_code,
+                          body_input=email_template,
+                          subject=_('You can record the interview for {campaign}').format(campaign=user.campaign.title))
+
+
 def get_test_result(request):
     """
     Args:
@@ -461,6 +470,8 @@ def get_test_result(request):
     has_calendly = campaign.calendly
 
     if not test_done or evaluation.passed:
+
+        send_interview_mail('user_interview_email_body', user)
 
         right_button_action = interview_module.adds_campaign_and_user_to_url('interview/1', user_id, campaign.id)
 
