@@ -6,3 +6,4 @@
 {peaku_address}:      eg Calle blah
 {campaign}:           Campaign.name
 {video_url}:          url redirecting to add the video of the interview
+{campaign_url}:       the url of a campaign.

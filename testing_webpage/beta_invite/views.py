@@ -435,7 +435,7 @@ def post_fast_job(request):
 
 def send_interview_mail(email_template, user):
     if user:
-        translate_campaign(user.campaign, user.language_code)
+        user.campaign.translate(user.language_code)
         email_sender.send(users=user,
                           language_code=user.language_code,
                           body_input=email_template,

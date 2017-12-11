@@ -221,6 +221,17 @@ class Campaign(models.Model):
     class Meta:
         db_table = 'campaigns'
 
+    def translate(self, language_code):
+        """
+        Args:
+            self: Me, Myself and I
+            language_code: 'es', 'en' etc.
+        Returns: Inplace object translation
+        """
+        if language_code == 'es':
+            self.description = self.description_es
+            self.title = self.title_es
+
 
 class Evaluation(models.Model):
     """
@@ -267,7 +278,7 @@ class User(models.Model):
     campaign = models.ForeignKey(Campaign, null=True)
     phone = models.CharField(max_length=40, null=True)
     evaluations = models.ManyToManyField(Evaluation, null=True)
-    language_code = models.CharField(max_length=3, null=True)
+    language_code = models.CharField(max_length=3, default='es')
 
     # Detects if the user is in a mobile phone when registering.
     is_mobile = models.NullBooleanField()
