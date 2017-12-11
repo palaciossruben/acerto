@@ -4,7 +4,7 @@ import nltk
 
 def my_sigmoid(num_words, num_for_80_percent):
     """
-    Givers a score with a sigmoid function increasing with the number fo words.
+    Gives a score with a sigmoid function increasing with the number of words.
     Has a number of words for which the score is going to be 80%.
     Args:
         num_words: actual number of words
@@ -37,9 +37,16 @@ def get_score(text):
 
         vocabulary = vocabulary_file.read().split('\n')
 
+        # TODO: add English by un commenting this and adding the english vocabulary
+
+        #with open('subscribe/en-US.dic', 'r', encoding='UTF-8') as vocabulary_file_en:
+
+        #    vocabulary_en = vocabulary_file_en.read().split('\n')
+
         # TODO: do faster with binary search.
         for w in words:
-            if w in vocabulary:
+            # TODO: add English by un commenting this and adding the english vocabulary
+            if w in vocabulary: #or w in vocabulary_en:
                 spelling += 1
 
     spelling_score = handle_division_by_zero(spelling, len(words))
