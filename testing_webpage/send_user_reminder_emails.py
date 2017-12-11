@@ -38,7 +38,7 @@ def translate_email_subject(user):
         return 'I invite you to do the test for {campaign}'.format(campaign=user.campaign.title)
 
 
-def send_test_reminder(email_template, state):
+def send_reminder(email_template, state):
     """
     Sends a reminder to all users who have registered in between 25 to 1 hour ago, asking to complete the tests.
     Returns: send email like crazy
@@ -54,6 +54,6 @@ def send_test_reminder(email_template, state):
                           subject=translate_email_subject(user))
 
 
-send_test_reminder('user_test_reminder_email_body', 'Backlog')
-send_test_reminder('user_interview_reminder_email_body', 'Waiting for Interview')
+send_reminder('user_test_reminder_email_body', 'Backlog')
+send_reminder('user_interview_reminder_email_body', 'Waiting for Interview')
 
