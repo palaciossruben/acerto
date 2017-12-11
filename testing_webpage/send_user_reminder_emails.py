@@ -24,6 +24,7 @@ def get_recently_created_new_state_candidates(state):
     end_date = datetime.utcnow() - timedelta(hours=1)
     return Candidate.objects.filter(state__name=state, created_at__range=(start_date, end_date))
 
+
 def translate_email_subject(user):
     """
     Default will be in spanish
