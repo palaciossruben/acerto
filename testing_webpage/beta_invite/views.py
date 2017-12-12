@@ -434,7 +434,13 @@ def post_fast_job(request):
 
 
 def send_interview_mail(email_template, user):
-    if user:
+    """
+    Args:
+        email_template: name of email body, in beta_invite/util.
+        user: Object.
+    Returns: sends email.
+    """
+    if user and user.campaign.interviews:
         user.campaign.translate(user.language_code)
         email_sender.send(users=user,
                           language_code=user.language_code,
