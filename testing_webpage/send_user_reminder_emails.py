@@ -13,7 +13,7 @@ application = get_wsgi_application()
 from beta_invite.util import email_sender
 from dashboard.models import Candidate
 from business import search_module
-from beta_invite.models import Campaign
+from beta_invite.models import Campaign, EmailType, EmailSent
 
 NUMBER_OF_MATCHES = 20
 
@@ -54,7 +54,7 @@ def translate_email_interview_subject(user):
         return 'You can record the interview for {campaign}'.format(campaign=user.campaign.title)
 
 
-def translate_email_job_match_subject(user):
+def translate_email_job_match_subject(user, campaign):
     """
     Default will be in spanish
     Args:
@@ -62,12 +62,12 @@ def translate_email_job_match_subject(user):
     Returns: translated subject
     """
     if user.language_code is None or user.language_code == 'es':
-        return 'Vacantes abierta para {campaign}'.format(campaign=user.campaign.title_es)
+        return 'Vacantes abierta para {campaign}'.format(campaign=campaign.title_es)
     else:
         return 'Open position for {campaign}'.format(campaign=user.campaign.title)
 
 
-def send_reminder(email_template, state, subject_function):
+def send_reminder(email_template, state, subject_function, email_type):
     """
     Sends a reminder to all users who have registered in between 25 to 1 hour ago
     Returns: send email like crazy
@@ -77,16 +77,40 @@ def send_reminder(email_template, state, subject_function):
 
     for candidate in candidates:
         user = candidate.user
-        email_sender.send(users=user,
-                          language_code=user.language_code,
-                          body_input=email_template,
-                          subject=subject_function(user))
+
+        # do not send if there are no tests.
+        if not user.campaign.tests or state.name == 'Waiting For Interview' and not user.campaign.interviews:
+            continue
+
+        # check that emails are not sent twice:
+        if not EmailSent.objects.filter(campaign=user.campaign, user=user, email_type=email_type):
+            email_sender.send(users=user,
+                              language_code=user.language_code,
+                              body_input=email_template,
+                              subject=subject_function(user))
+
+            # Records sending email
+            EmailSent(campaign=user.campaign, user=user, email_type=email_type).save()
+            return
+
+    return
+
+
+def get_distinct_users(users):
+    """
+    Args:
+        users: Users QuerySet.
+    Returns: Only sends email ones, to a given email.
+    """
+    return users.order_by().distinct('email')
 
 
 def send_possible_job_matches():
     """
     Returns: Sends emails with all possible job matches (People who's CV match closely with a given campaign).
     """
+    email_type = EmailType.objects.get(name='job_match', sync=True)
+
     active_campaigns = Campaign.objects.filter(active=True)
 
     for campaign in active_campaigns:
@@ -96,13 +120,27 @@ def send_possible_job_matches():
         users = search_module.get_matching_users2(search_text=search_text,
                                                   word_user_path='subscribe/word_user_dictionary.p')
 
-        for user in users:
-            email_sender.send(users=user,
-                              language_code=user.language_code,
-                              body_input='user_job_match_email_body',
-                              subject=translate_email_job_match_subject(user))
+        for user in get_distinct_users(users):
+
+            # check that emails are not sent twice:
+            if not EmailSent.objects.filter(campaign=campaign, email_type=email_type, user__email=user.email):
+
+                email_sender.send(users=user,
+                                  language_code=user.language_code,
+                                  body_input='user_job_match_email_body',
+                                  subject=translate_email_job_match_subject(user, campaign),
+                                  override_dict={'campaign_url': campaign.get_url()})
+
+                # Records sending email
+                EmailSent(campaign=campaign, user=user, email_type=email_type).save()
 
 
-send_reminder('user_test_reminder_email_body', 'Backlog', translate_email_test_subject)
-send_reminder('user_interview_reminder_email_body', 'Waiting for Interview', translate_email_interview_subject)
+send_reminder(email_template='user_test_reminder_email_body',
+              state='Backlog',
+              subject_function=translate_email_test_subject,
+              email_type=EmailType.objects.get(name='job_match', sync=True))
+send_reminder(email_template='user_interview_reminder_email_body',
+              state='Waiting for Interview',
+              subject_function=translate_email_interview_subject,
+              email_type=EmailType.objects.get(name='interview', sync=True))
 send_possible_job_matches()

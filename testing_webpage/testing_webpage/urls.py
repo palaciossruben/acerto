@@ -31,7 +31,6 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     url(r'^$', views.index, name='index'),
-    url(r'^admin/', include(admin.site.urls)),
 )
 
 if settings.DEBUG:

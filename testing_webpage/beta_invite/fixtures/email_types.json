@@ -1,0 +1,42 @@
+[
+  {
+    "model": "beta_invite.emailtype",
+    "pk": 1,
+    "fields":{
+      "name": "welcome",
+      "sync": false
+    }
+  },
+  {
+    "model": "beta_invite.emailtype",
+    "pk": 2,
+    "fields":{
+      "name": "backlog",
+      "sync": true
+    }
+  },
+  {
+    "model": "beta_invite.emailtype",
+    "pk": 3,
+    "fields":{
+      "name": "interview",
+      "sync": true
+    }
+  },
+  {
+    "model": "beta_invite.emailtype",
+    "pk": 4,
+    "fields":{
+      "name": "interview",
+      "sync": false
+    }
+  },
+  {
+    "model": "beta_invite.emailtype",
+    "pk": 5,
+    "fields":{
+      "name": "job_match",
+      "sync": true
+    }
+  }
+]
