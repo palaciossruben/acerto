@@ -17,6 +17,7 @@ def index(request):
     Returns: renders main view with a list of campaigns
     """
     campaigns = Campaign.objects.all().order_by('-active')
+
     tests = Test.objects.all()
     return render(request, cts.MAIN_DASHBOARD, {'campaigns': campaigns,
                                                 'tests': tests})
