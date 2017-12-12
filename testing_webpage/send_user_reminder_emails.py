@@ -67,19 +67,19 @@ def translate_email_job_match_subject(user, campaign):
         return 'Open position for {campaign}'.format(campaign=user.campaign.title)
 
 
-def send_reminder(email_template, state, subject_function, email_type):
+def send_reminder(email_template, state_name, subject_function, email_type):
     """
     Sends a reminder to all users who have registered in between 25 to 1 hour ago
     Returns: send email like crazy
     """
 
-    candidates = get_recently_created_new_state_candidates(state)
+    candidates = get_recently_created_new_state_candidates(state_name)
 
     for candidate in candidates:
         user = candidate.user
 
         # do not send if there are no tests.
-        if not user.campaign.tests or state.name == 'Waiting For Interview' and not user.campaign.interviews:
+        if not user.campaign.tests or state_name == 'Waiting For Interview' and not user.campaign.interviews:
             continue
 
         # check that emails are not sent twice:
@@ -136,11 +136,11 @@ def send_possible_job_matches():
 
 
 send_reminder(email_template='user_test_reminder_email_body',
-              state='Backlog',
+              state_name='Backlog',
               subject_function=translate_email_test_subject,
               email_type=EmailType.objects.get(name='job_match', sync=True))
 send_reminder(email_template='user_interview_reminder_email_body',
-              state='Waiting for Interview',
+              state_name='Waiting for Interview',
               subject_function=translate_email_interview_subject,
               email_type=EmailType.objects.get(name='interview', sync=True))
 send_possible_job_matches()

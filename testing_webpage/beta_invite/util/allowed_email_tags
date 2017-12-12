@@ -1,10 +1,11 @@
-{name}:               first word of User.name
-{test_url}:           url redirecting to tests for a given user and campaign
-{cv_url}:             url redirecting to add cv for a given user
-{sender_name}:        eg Santiago
-{sender_position}:    eg CTO
-{peaku_address}:      eg Calle blah
+{name}:               First word of User.name
+{test_url}:           Url redirecting to tests for a given user and campaign
+{cv_url}:             Url redirecting to add cv for a given user
+{sender_name}:        Eg Santiago
+{sender_position}:    Eg CTO
+{peaku_address}:      Eg Calle blah
 {campaign}:           Campaign.name
 {video_url}:          url redirecting to add the video of the interview
 {campaign_url}:       the url of a campaign.
 {complete_name}:      The complete name ie: user.name
+
