@@ -224,7 +224,6 @@ def save_test(request):
 
     test = Test(name=name, name_es=name_es)
 
-
     test.save()
 
     return redirect('/dashboard')

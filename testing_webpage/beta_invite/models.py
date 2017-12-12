@@ -221,6 +221,20 @@ class Campaign(models.Model):
     class Meta:
         db_table = 'campaigns'
 
+    def translate(self, language_code):
+        """
+        Args:
+            self: Me, Myself and I
+            language_code: 'es', 'en' etc.
+        Returns: Inplace object translation
+        """
+        if language_code == 'es':
+            self.description = self.description_es
+            self.title = self.title_es
+
+    def get_url(self):
+        return 'https://peaku.co/beta_invite/long_form?campaign_id={campaign_id}'.format(campaign_id=self.id)
+
 
 class Evaluation(models.Model):
     """
@@ -267,7 +281,7 @@ class User(models.Model):
     campaign = models.ForeignKey(Campaign, null=True)
     phone = models.CharField(max_length=40, null=True)
     evaluations = models.ManyToManyField(Evaluation, null=True)
-    language_code = models.CharField(max_length=3, null=True)
+    language_code = models.CharField(max_length=3, default='es')
 
     # Detects if the user is in a mobile phone when registering.
     is_mobile = models.NullBooleanField()
@@ -361,3 +375,35 @@ class PersonalityType(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'personality_types'
+
+
+class EmailType(models.Model):
+
+    name = models.CharField(max_length=200, null=True)
+
+    # True if it has a clock (ie chron tab). False for event driven emails.
+    sync = models.NullBooleanField(null=True)
+
+    def __str__(self):
+        return 'id={0}, name={1}, sync={2}'.format(self.id, self.name, self.sync)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'email_types'
+
+
+class EmailSent(models.Model):
+
+    user = models.ForeignKey(User)
+    campaign = models.ForeignKey(Campaign)
+    email_type = models.ForeignKey(EmailType)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return 'id={0}, user={1}, campaign={2}, email_type={3}'.format(self.id, self.user, self.campaign, self.email_type)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'emails_sent'

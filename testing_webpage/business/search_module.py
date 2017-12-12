@@ -26,6 +26,18 @@ def filter_relevance_users(user_relevance_dict):
     return filtered_user_relevance_dict
 
 
+def with_lower_case_and_no_accents(search_text):
+    """
+    Args:
+        search_text: string
+    Returns: string
+    """
+    search_text = util.remove_accents(nltk.word_tokenize(search_text))
+
+    # remove capital letters
+    return [t.lower() for t in search_text]
+
+
 def get_text(request):
     """
     Args:
@@ -33,10 +45,7 @@ def get_text(request):
     Returns: List with tokenized strings, lower cased and with no accents.
     """
     search_text = request.GET.get('search_text')
-    search_text = util.remove_accents(nltk.word_tokenize(search_text))
-
-    # remove capital letters
-    return [t.lower() for t in search_text]
+    return with_lower_case_and_no_accents(search_text)
 
 
 def adds_context_based_search(tokens_dict, word_user_dictionary, filtered_user_relevance_dict):

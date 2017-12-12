@@ -154,3 +154,23 @@ def deploy():
 
             # Last step: start gunicorn as a deamon: that binds to a unix socket, from where nginx listens.
             run('PYENV_VERSION=3.5.2 gunicorn -c gunicorn_cfg.py testing_webpage.wsgi --bind=unix:/opt/peaku_co/run/gunicorn.sock')
+
+
+def dev_update():
+    """
+    Have the dev machines up to date.
+    """
+
+    python_cmd = 'python3'
+    local_cwd = '/Users/juanpabloisaza/Desktop/masteringmymind/acerto/testing_webpage'
+
+    subprocess.check_output('{} manage.py migrate'.format(python_cmd), cwd=local_cwd, shell=True)
+
+    # reload fixtures: Will overwrite tables with DB fixtures.
+    # beta_invite fixtures
+    fixtures_dirs = ['beta_invite', 'business', 'dashboard']
+    fixtures_dirs = [f + '/fixtures/*' for f in fixtures_dirs]
+
+    for f in fixtures_dirs:
+        subprocess.check_output('{python_cmd} manage.py loaddata {f}'.format(python_cmd=python_cmd,
+                                                                             f=f), cwd=local_cwd, shell=True)

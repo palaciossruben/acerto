@@ -5,4 +5,7 @@
 {sender_position}:    Eg CTO
 {peaku_address}:      Eg Calle blah
 {campaign}:           Campaign.name
-{video_url}:          Url redirecting to add the video of the interview
+{video_url}:          url redirecting to add the video of the interview
+{campaign_url}:       the url of a campaign.
+{complete_name}:      The complete name ie: user.name
+

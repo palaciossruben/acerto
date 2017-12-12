@@ -11,11 +11,14 @@ def get_current_path():
 
 def get_first_name(complete_name):
     """
-    First trims, then takes the first name.
+    First trims, then takes the first name. It ensures a capitilized format (First letter of each word is capital)
     :param complete_name: string with whatever the user name is.
     :return: first name
     """
-    return complete_name.strip().split()[0]
+    if len(complete_name) > 0:
+        return complete_name.strip().split()[0].capitalize()
+    else:
+        return ''
 
 
 def read_email_credentials():
@@ -90,6 +93,12 @@ def get_video_url(user):
         return ''
 
 
+def get_campaign_url_with_user(user):
+
+    if hasattr(user, 'campaign_id') and user.campaign_id:
+        return user.campaign.get_url()
+    else:
+        return ''
 
 
 def get_campaign_name(user, language_code):
@@ -112,7 +121,47 @@ def get_cv_url(user):
     return 'http://peaku.co/beta_invite/long_form/add_cv?user_id={user_id}'.format(user_id=user.id)
 
 
-def send(users, language_code, body_input, subject, with_localization=True, body_is_filename=True):
+def get_params(user, sender_data, language_code, override_dict):
+    """
+    Args:
+        user: Object.
+        sender_data:
+        language_code: just that.
+        override_dict: Dictionary that changes the default values.
+    Returns:
+    """
+    params = {'name': get_first_name(user.name),
+              'complete_name': user.name,
+              'test_url': get_test_url(user),
+              'cv_url': get_cv_url(user),
+              'video_url': get_video_url(user),
+              'sender_name': sender_data['sender_name'],
+              'sender_position': sender_data['sender_position'],
+              'peaku_address': sender_data['peaku_address'],
+              'campaign': get_campaign_name(user, language_code),
+              'campaign_url': get_campaign_url_with_user(user)}
+
+    for k, v in override_dict.items():
+        params[k] = v
+
+    return params
+
+
+def get_body(body_is_filename, body_input):
+    """
+    Args:
+        body_is_filename: Boolean
+        body_input: filename or text body.
+    Returns:
+    """
+    if body_is_filename:
+        with open(os.path.join(get_current_path(), body_input), encoding='utf-8') as fp:
+            return fp.read()
+    else:
+        return body_input
+
+
+def send(users, language_code, body_input, subject, with_localization=True, body_is_filename=True, override_dict={}):
     """
     Sends an email
     Args:
@@ -122,6 +171,7 @@ def send(users, language_code, body_input, subject, with_localization=True, body
         subject: string with the email subject
         with_localization: Boolean indicating whether emails are translated according to browser configuration.
         body_is_filename: Boolean indicating whether the body_input is a filename or a string with content.
+        override_dict: Dictionary where keys are fields and values to override the keyword behavior.
     Returns: Sends email
     """
 
@@ -135,30 +185,14 @@ def send(users, language_code, body_input, subject, with_localization=True, body
 
     for user in users:
 
-        if body_is_filename:
-            with open(os.path.join(get_current_path(), body_input), encoding='utf-8') as fp:
-                body = fp.read().format(name=get_first_name(user.name),
-                                        test_url=get_test_url(user),
-                                        cv_url=get_cv_url(user),
-                                        video_url=get_video_url(user),
-                                        sender_name=sender_data['sender_name'],
-                                        sender_position=sender_data['sender_position'],
-                                        peaku_address=sender_data['peaku_address'],
-                                        campaign=get_campaign_name(user, language_code),)
-        else:
-            body = body_input.format(name=get_first_name(user.name),
-                                     test_url=get_test_url(user),
-                                     cv_url=get_cv_url(user),
-                                     video_url=get_video_url(user),
-                                     sender_name=sender_data['sender_name'],
-                                     sender_position=sender_data['sender_position'],
-                                     peaku_address=sender_data['peaku_address'],
-                                     campaign=get_campaign_name(user, language_code),)
+        params = get_params(user, sender_data, language_code, override_dict)
+
+        body = get_body(body_is_filename, body_input)
 
         send_email_with_mailgun(sender=sender_data['email'],
                                 recipients=user.email,
-                                subject=subject.format(name=get_first_name(user.name)),
-                                body=body,
+                                subject=subject.format(**params),
+                                body=body.format(**params),
                                 mail_gun_url=sender_data['mailgun_url'],
                                 mailgun_api_key=sender_data['mailgun_api_key'])
 
