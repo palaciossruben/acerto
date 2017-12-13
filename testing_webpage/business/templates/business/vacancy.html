@@ -1,0 +1,35 @@
+{% extends 'base.html'%}
+
+{% block title %} VACANTES {% endblock %}
+
+{% block content %}
+    <h1>Describe la vacante</h1>
+
+    <p>Importante: La prueba gratuita aplica exclusivamente para el plan operativo.</p>
+
+    <p>¿Qué plan buscas?</p>
+
+    <input type="radio"> Operativo
+    <input type="radio"> Profesional
+    <input type="radio"> Específico
+
+    <p></p>
+
+    <p>Título de la vacante:</p>
+
+    <input type="text">
+
+    <p></p>
+
+    <p>Requerimientos de la vacante:</p>
+
+    <ul style="list-style-type:disc">
+    <li><input type="text" /></li>
+    <p></p>
+    <li><input type="text" /></li>
+    <p></p>
+    </ul>
+
+
+{% endblock %}
+

@@ -603,13 +603,14 @@ def trade_client(request):
 
 
 def start(request):
-    """
-    will render and have the same view as /beta_invite except for message customization.
-    Args:
-        request: Object
-    Returns: Save
-    """
 
     ip = get_ip(request)
 
     return render(request, cts.TABS_VIEW_PATH, {})
+
+
+def vacancy(request):
+
+    ip = get_ip(request)
+
+    return render(request, cts.VACANCY_VIEW_PATH, {})
