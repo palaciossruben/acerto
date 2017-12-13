@@ -14,6 +14,7 @@ from beta_invite.util import email_sender
 from dashboard.models import Candidate
 from business import search_module
 from beta_invite.models import Campaign, EmailType, EmailSent
+from beta_invite import constants as cts_beta_invite
 
 NUMBER_OF_MATCHES = 20
 
@@ -111,7 +112,8 @@ def send_possible_job_matches():
     """
     email_type = EmailType.objects.get(name='job_match', sync=True)
 
-    active_campaigns = Campaign.objects.filter(active=True)
+    # Active campaigns that are not the default campaign
+    active_campaigns = Campaign.objects.filter(active=True).exclude(id=cts_beta_invite.DEFAULT_CAMPAIGN_ID)
 
     for campaign in active_campaigns:
 
@@ -120,8 +122,11 @@ def send_possible_job_matches():
         users = search_module.get_matching_users2(search_text=search_text,
                                                   word_user_path='subscribe/word_user_dictionary.p')
 
-        for user in get_distinct_users(users):
+        # Top 20 distinct users.
+        users = get_distinct_users(users)
+        users = [u for u in users][:NUMBER_OF_MATCHES]
 
+        for user in users:
             # check that emails are not sent twice and not to the same campaign where the user is already registered
             if not EmailSent.objects.filter(campaign=campaign, email_type=email_type, user__email=user.email)\
                     and user.campaign != campaign:
