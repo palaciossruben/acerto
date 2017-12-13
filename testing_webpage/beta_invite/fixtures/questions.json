@@ -232,8 +232,8 @@
     "model": "beta_invite.question",
     "pk": 18,
     "fields":{
-      "text": "What does this statement asks?",
-      "text_es": "¿Qué pregunta este enunciado?",
+      "text": "What does this statement says?",
+      "text_es": "¿Qué dice el enunciado?",
       "answers": [34, 35, 36, 37],
       "type": 1,
       "correct_answers": [37],
