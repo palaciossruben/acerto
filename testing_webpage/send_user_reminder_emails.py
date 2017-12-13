@@ -14,6 +14,7 @@ from beta_invite.util import email_sender
 from dashboard.models import Candidate
 from business import search_module
 from beta_invite.models import Campaign, EmailType, EmailSent
+from beta_invite import constants as cts_beta_invite
 
 NUMBER_OF_MATCHES = 20
 
@@ -105,13 +106,31 @@ def get_distinct_users(users):
     return users.order_by().distinct('email')
 
 
+def filter_users_with_job(users):
+    """
+    Removes from list users who got a job on any campaign.
+    Args:
+        users: list of users.
+    Returns: list of users
+    """
+    excluded_users = []
+    for u in users:
+        candidate = Candidate.objects.filter(user=u)
+        for c in candidate:
+            if c.state.code == "GTJ":
+                excluded_users.append(u)
+
+    return [x for x in users if x not in excluded_users]
+
+
 def send_possible_job_matches():
     """
     Returns: Sends emails with all possible job matches (People who's CV match closely with a given campaign).
     """
     email_type = EmailType.objects.get(name='job_match', sync=True)
 
-    active_campaigns = Campaign.objects.filter(active=True)
+    # Active campaigns that are not the default campaign
+    active_campaigns = Campaign.objects.filter(active=True).exclude(id=cts_beta_invite.DEFAULT_CAMPAIGN_ID)
 
     for campaign in active_campaigns:
 
@@ -120,8 +139,12 @@ def send_possible_job_matches():
         users = search_module.get_matching_users2(search_text=search_text,
                                                   word_user_path='subscribe/word_user_dictionary.p')
 
-        for user in get_distinct_users(users):
+        # Top 20 distinct users.
+        users = get_distinct_users(users)
+        users = filter_users_with_job(users)
+        users = [u for u in users][:NUMBER_OF_MATCHES]
 
+        for user in users:
             # check that emails are not sent twice and not to the same campaign where the user is already registered
             if not EmailSent.objects.filter(campaign=campaign, email_type=email_type, user__email=user.email)\
                     and user.campaign != campaign:

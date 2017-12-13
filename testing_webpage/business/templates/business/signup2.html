@@ -1,0 +1,87 @@
+{% extends 'base.html'%}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}{% trans "PeakU - Personnel Selection" %}{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'business/css/signup.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+    <div>
+        <h1 class="title-blue">{% trans "Sign Up" %}</h1>
+    </div>
+
+    <section class="section-container">
+        <div class="row"> <!-- bootstrap row class -->
+            <div class="col-sm-6">
+
+                <h3 class="secondary-title" >{% trans "Why choose us?" %}</h3>
+                <div class="secondary-yellow-bar"></div>
+
+                <ul id="choose-list-container">
+                    {# Translators: xgettext:no-python-format #}
+                    <li class="choose-bullet">{% trans "We deliver only the best 10% of applicants" %}</li>
+                    {# Translators: xgettext:no-python-format #}
+                    <li class="choose-bullet">{% trans "We only deliver 100% relevant candidates" %}</li>
+                    <li class="choose-bullet">{% trans "The whole process in 10 business days" %}</li>
+                    <li class="choose-bullet">{% trans "We accelerate your recruitment processes" %}</li>
+                    <li class="choose-bullet">{% trans "Focus on worthwhile interviews" %}</li>
+                    <li class="choose-bullet">{% trans "Save on job exchanges" %}</li>
+                </ul>
+
+            </div>
+            <div class="col-sm-6">
+                <img class="girl" src="{% static 'business/img/people_in_table.png' %}">
+            </div>
+        </div>
+    </section>
+
+    {% include "business/pricing.html" %}
+
+    <section class="section-container">
+        <div class="row"> <!-- bootstrap row class -->
+            <div class="col-sm-6">
+                <img class="girl" src="{% static 'business/img/people_talking.jpg' %}"
+                     srcset="{% static 'business/img/people_talking.jpg' %} 2x,
+                             {% static 'business/img/people_talking.jpg' %} 3x">
+            </div>
+            <div class="col-sm-6">
+
+                <!-- TODO: FIX THIS DIRTY TRICK. IT IS USED SO THAT THE ANCHOR WORKS FOR MOBILE-->
+                <h2 id="anchor-trick">a</h2>
+
+                <!-- tag to scroll down to the contact form with url -->
+                <a name="contactForm"></a>
+
+                <h3 class="secondary-title" >{% trans "Contact Us"%}</h3>
+                <div class="secondary-yellow-bar"></div>
+
+                <form class="my-form" action="{% url 'business:contact_us' %}" method="post">
+                    {% csrf_token %}
+
+                    <input class="form-text" type="text" name="name"
+				        placeholder="{% trans 'Your Full Name' %}" required="required" pattern="[A-Za-z\sÁÉÍÓÚáéíóúÑñÜü]{1,200}">
+
+                    <input class="form-text" type="email" name="email"
+                         placeholder="{% trans 'Your email' %}" required="required">
+
+                    <input class="form-text" type="tel" name="phone"
+                         placeholder="{% trans 'Your phone (optional)' %}">
+
+                    <textarea class="form-text-area" name="message"
+                         placeholder="{% trans 'Add a message (optional)' %}"></textarea>
+
+                    <input class="form-submit" type="submit" value="{% trans 'Sure!' %}">
+
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

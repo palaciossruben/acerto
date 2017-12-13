@@ -6,31 +6,34 @@
 {% block title %}{% endblock %}
 
 {% block extra_head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'business/css/business_tab.css' %}">
-    <script type="text/javascript" src="{% static 'js/business/business_tab.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'business/css/tabs.css' %}">
+    <script type="text/javascript" src="{% static 'js/business/tabs.js' %}"></script>
 {% endblock %}
 
 {% block content %}
 
-<div class="tab">
-    <button class="tablinks" onclick="tab(event, 'London')">London</button>
-    <button class="tablinks" onclick="tab(event, 'Paris')">Paris</button>
-    <button class="tablinks" onclick="tab(event, 'Tokyo')">Tokyo</button>
-</div>
+<body>
+    <div class="tab">
+        <button class="tab-links" onclick="tab(event, 'position')">{% trans "Position" %}</button>
+        <button class="tab-links" onclick="tab(event, 'company')">{% trans "Company" %}</button>
+        <button class="tab-links" onclick="tab(event, 'start')">{% trans "Start" %}</button>
+    </div>
 
-<div id="London" class="tabcontent">
-    <h3>London</h3>
-    <p>London is the capital city of England.</p>
-</div>
+    <div id="position" class="tab-content">
+        <h3>London</h3>
+        <p>London is the capital city of England.</p>
+    </div>
 
-<div id="Paris" class="tabcontent">
-    <h3>Paris</h3>
-    <p>Paris is the capital of France.</p>
-</div>
+    <div id="company" class="tab-content">
+        <h3>Paris</h3>
+        <p>Paris is the capital of France.</p>
+    </div>
 
-<div id="Tokyo" class="tabcontent">
-    <h3>Tokyo</h3>
-    <p>Tokyo is the capital of Japan.</p>
-</div>
+    <div id="start" class="tab-content">
+        <h3>Tokyo</h3>
+        <p>Tokyo is the capital of Japan.</p>
+    </div>
+
+</body>
 
 {% endblock %}
