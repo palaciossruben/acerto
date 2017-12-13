@@ -1,8 +1,10 @@
+{% load app_filters %}
+
 <h1>Campaigns</h1>
 <ul>
     {% for campaign in campaigns %}
 
-        <li>{{ campaign.name }}
+        <li><a href="{{ campaign|get_campaign_url }}">{{ campaign.name }}</a>
             {% if campaign.active %}
                 Active
             {% else %}

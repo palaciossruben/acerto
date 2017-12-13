@@ -11,12 +11,12 @@ def get_current_path():
 
 def get_first_name(complete_name):
     """
-    First trims, then takes the first name. It ensures a capitilized format (First letter of each word is capital)
+    First trims, then takes the first name. It ensures a title format (First letter of each word is capital)
     :param complete_name: string with whatever the user name is.
     :return: first name
     """
     if len(complete_name) > 0:
-        return complete_name.strip().split()[0].capitalize()
+        return complete_name.strip().split()[0].title()
     else:
         return ''
 
@@ -131,7 +131,7 @@ def get_params(user, sender_data, language_code, override_dict):
     Returns:
     """
     params = {'name': get_first_name(user.name),
-              'complete_name': user.name,
+              'complete_name': user.name.title(),
               'test_url': get_test_url(user),
               'cv_url': get_cv_url(user),
               'video_url': get_video_url(user),
