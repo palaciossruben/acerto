@@ -2,6 +2,7 @@
 @import 'body/form.css';
 @import 'body/body_header.css';
 @import 'body/body_content.css';
+@import 'body/tab.css';
 
 body {
 	margin: 0px;
