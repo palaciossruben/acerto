@@ -1,11 +1,6 @@
-/* Runs when HTML loads */
-
-/*TODO: make it work*/
-/*var tab_links;
-tab_links = document.getElementsByClassName("tab-links");
-tab_links[0].currentTarget.className += " active";
-document.getElementById(step_name).style.display = "block";*/
-
+function activate_tab(tab_id){
+    document.getElementById(tab_id).style.display = "block";
+}
 
 function tab(tab_active, step_name) {
 
