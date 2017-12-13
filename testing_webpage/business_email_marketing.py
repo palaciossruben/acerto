@@ -18,23 +18,24 @@ def send_email_marketing():
 
         for line in lines:
 
-            first_line = line.split(',')
+            line_list = line.split(',')
 
-            mail = first_line[1].strip()
+            if len(line_list) > 2:
+                mail = line_list[1].strip()
 
-            person_name = first_line[2].strip()
+                person_name = line_list[2].strip()
 
-            user = User(name=person_name, email=mail)
+                user = User(name=person_name, email=mail)
 
-            if person_name != '':
-                subject = 'Correo para {complete_name}'
-            else:
-                subject = 'Correo para el gerente'
+                if person_name != '':
+                    subject = 'Correo para {complete_name}'
+                else:
+                    subject = 'Correo para el gerente'
 
-            email_sender.send(users=user,
-                              language_code='es',
-                              body_input='business_email_marketing_body',
-                              subject=subject)
+                email_sender.send(users=user,
+                                  language_code='es',
+                                  body_input='business_email_marketing_body',
+                                  subject=subject)
 
 
 send_email_marketing()
