@@ -9,6 +9,7 @@ from beta_invite.util import email_sender
 from business.models import User
 
 
+# TODO: only works in Spanish
 def send_email_marketing():
 
     with open('business_email_marketing.csv', encoding='UTF-8') as business_file:
