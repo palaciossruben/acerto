@@ -600,3 +600,16 @@ def trade_client(request):
                                                         'secondary_message': secondary_message,
                                                         'action_url': action_url,
                                                         })
+
+
+def start(request):
+    """
+    will render and have the same view as /beta_invite except for message customization.
+    Args:
+        request: Object
+    Returns: Save
+    """
+
+    ip = get_ip(request)
+
+    return render(request, cts.TABS_VIEW_PATH, {})
