@@ -106,6 +106,23 @@ def get_distinct_users(users):
     return users.order_by().distinct('email')
 
 
+def filter_users_with_job(users):
+    """
+    Removes from list users who got a job on any campaign.
+    Args:
+        users: list of users.
+    Returns: list of users
+    """
+    excluded_users = []
+    for u in users:
+        candidate = Candidate.objects.filter(user=u)
+        for c in candidate:
+            if c.state.code == "GTJ":
+                excluded_users.append(u)
+
+    return [x for x in users if x not in excluded_users]
+
+
 def send_possible_job_matches():
     """
     Returns: Sends emails with all possible job matches (People who's CV match closely with a given campaign).
@@ -124,6 +141,7 @@ def send_possible_job_matches():
 
         # Top 20 distinct users.
         users = get_distinct_users(users)
+        users = filter_users_with_job(users)
         users = [u for u in users][:NUMBER_OF_MATCHES]
 
         for user in users:
