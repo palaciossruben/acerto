@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^login$', auth_views.login, {'template_name': 'business/login.html'}, name='login'),
     url(r'^logout$', auth_views.logout, {'next_page': 'business:index'}, name='logout'),
     url(r'^post_job$', views.post_job, name='post_job'),
+    url(r'^start$', views.start, name='start'),
     url(r'^offer_results$', views.offer_results, name='offer_results'),
     url(r'^home$', views.home, name='home'),
 
