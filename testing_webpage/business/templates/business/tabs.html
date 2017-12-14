@@ -3,7 +3,7 @@
 {% load static %}
 
 
-{% block title %}{% endblock %}
+{% block title %}{% trans "PeakU - Personnel Selection" %}{% endblock %}
 
 {% block extra_head %}
     <link rel="stylesheet" type="text/css" href="{% static 'business/css/tabs.css' %}">
@@ -24,13 +24,11 @@
     </div>
 
     <div id="company" class="tab-content">
-        <h3>Paris</h3>
-        <p>Paris is the capital of France.</p>
+        {% include "business/vacancy.html"%}
     </div>
 
     <div id="start" class="tab-content">
-        <h3>Tokyo</h3>
-        <p>Tokyo is the capital of Japan.</p>
+        {% include "business/signup2.html"%}
     </div>
 
     <!-- After loading every element, sets the first element as active.-->

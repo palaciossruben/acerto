@@ -67,16 +67,14 @@
     margin-bottom: 20px;
 }
 
-
-/* Secondary Title */
-.secondary-title {
+/*.secondary-title {
 	width: 100%;
 	margin: 0 auto;
 	font-size: 22px;
 	line-height: 1.88;
 	text-align: center;
 	color: var(--text-title-color);
-}
+}*/
 
 .secondary-yellow-bar {
 	width: 209px;
