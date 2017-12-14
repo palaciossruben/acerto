@@ -609,3 +609,11 @@ def start(request):
     return render(request, cts.TABS_VIEW_PATH, {})
 
 
+def start_post(request):
+    """
+    Args:
+        request: HTTP
+    Returns:
+    """
+
+    return render(request, cts.TABS_VIEW_PATH, {})

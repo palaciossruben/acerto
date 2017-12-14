@@ -21,20 +21,23 @@
             <h3 class="secondary-title" >{% trans "Sign Up" %}</h3>
             <div class="secondary-yellow-bar"></div>
 
-            <form class="my-form" action="{% url 'business:contact_us' %}" method="post">
+            <form class="my-form" action="{% url 'business:start_post' %}" method="post">
                 {% csrf_token %}
 
-                <input class="form-text" type="text" name="name"
-                    placeholder="{% trans 'Your Full Name' %}" required="required" pattern="[A-Za-z\sÁÉÍÓÚáéíóúÑñÜü]{1,200}">
+				<input class="form-text" type="text" name="name"
+				  placeholder="{% trans 'Your Full Name' %}" required="required" pattern="[A-Za-z\sáéíóúÑñÜü]{1,200}">
 
-                <input class="form-text" type="email" name="email"
-                     placeholder="{% trans 'Your email' %}" required="required">
+				<input class="form-text" type="email" name="username"
+				  placeholder="{% trans 'Your email' %}" required="required">
 
-                <input class="form-text" type="tel" name="phone"
-                     placeholder="{% trans 'Your phone (optional)' %}">
+				<input class="form-text" type="tel" name="phone"
+				  placeholder="{% trans 'Your phone' %}" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
 
-                <textarea class="form-text-area" name="message"
-                     placeholder="{% trans 'Add a message (optional)' %}"></textarea>
+				<input class="form-text" type="password" name="password1"
+				  placeholder="{% trans 'Enter a password' %}" required="required">
+
+				<input class="form-text" type="password" name="password2"
+				  placeholder="{% trans 'Confirm password' %}" required="required">
 
                 <input class="form-submit" type="submit" value="{% trans 'Sure!' %}">
 
