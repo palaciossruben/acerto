@@ -32,18 +32,6 @@ function build_text_field(container, name, placeholder) {
     container.appendChild(text_input);
 }
 
-
-function add_remove_button(container){
-
-    var remove_button = document.createElement("input");
-    remove_button.type = "button";
-    remove_button.class = "btn btn-danger";
-    remove_button.value = "Delete!";
-    remove_button.onclick = "deleteBullet(" + bullet_number + ")";
-    container.appendChild(remove_button);
-}
-
-
 function build_bullet_ui(container, bullet_types) {
 
     container.appendChild(document.createElement("br"));
@@ -80,4 +68,15 @@ function addBullet(bullet_types){
 
     //adds 1 for next bullet.
     bullet_number = bullet_number + 1
+}
+
+function add_remove_button(container){
+
+    var remove_button = document.createElement("input");
+    remove_button.type = "button";
+    remove_button.class = "btn btn-danger";
+    remove_button.value = "Delete!";
+    remove_button.onclick = "deleteBullet(" + bullet_number + ")";
+    container.appendChild(remove_button);
+
 }
