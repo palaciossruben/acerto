@@ -433,14 +433,14 @@ def post_fast_job(request):
                                                    })
 
 
-def send_interview_mail(email_template, user):
+def send_interview_mail(email_template, user, campaign):
     """
     Args:
         email_template: name of email body, in beta_invite/util.
         user: Object.
     Returns: sends email.
     """
-    if user and user.campaign.interviews:
+    if user and interview_module.has_recorded_interview(campaign):
         user.campaign.translate(user.language_code)
         email_sender.send(users=user,
                           language_code=user.language_code,
@@ -477,7 +477,7 @@ def get_test_result(request):
 
     if not test_done or evaluation.passed:
 
-        send_interview_mail('user_interview_email_body', user)
+        send_interview_mail('user_interview_email_body', user, campaign)
 
         right_button_action = interview_module.adds_campaign_and_user_to_url('interview/1', user_id, campaign.id)
 
