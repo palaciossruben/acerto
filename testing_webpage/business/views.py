@@ -609,8 +609,3 @@ def start(request):
     return render(request, cts.TABS_VIEW_PATH, {})
 
 
-def vacancy(request):
-
-    ip = get_ip(request)
-
-    return render(request, cts.VACANCY_VIEW_PATH, {})
