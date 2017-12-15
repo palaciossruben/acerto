@@ -1,0 +1,32 @@
+.submit-button {
+	border: solid 2px var(--green);
+	font-size: 16px;
+	line-height: 1.0;
+	text-align: center;
+	color: var(--green);
+	border-radius: 0px;
+	background-color: var(--white);
+
+	/* Defines additional position params for a default "nice" view on a form */
+	width: 100%;
+    height: 45px;
+    margin-bottom: 94px;
+}
+
+.submit-button:hover {
+    background-color: var(--light-grey);
+}
+
+.delete-button {
+	border: solid 2px var(--red);
+	font-size: 16px;
+	line-height: 1.0;
+	text-align: center;
+	color: var(--red);
+	border-radius: 0px;
+	background-color: var(--white);
+}
+
+.delete-button:hover {
+    background-color: var(--light-grey);
+}

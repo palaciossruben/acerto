@@ -3,6 +3,7 @@
 @import 'body/body_header.css';
 @import 'body/body_content.css';
 @import 'body/tab.css';
+@import 'body/buttons.css';
 
 body {
 	margin: 0px;
