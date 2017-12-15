@@ -21,11 +21,12 @@ from business import util
 from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
-from beta_invite.models import User, Country, Education, Profession
+from beta_invite.models import User, Country, Education, Profession, Campaign, BulletType
 from business.models import Plan, Offer, Contact, Search
 from business.models import BusinessUser
 from business.custom_user_creation_form import CustomUserCreationForm
 from dashboard import campaign_module
+from dashboard import candidate_module
 
 
 def index(request):
@@ -609,7 +610,13 @@ def start(request):
     """
     Only displays initial view.
     """
-    return render(request, cts.START_VIEW_PATH, {})
+
+    requirement_bullet_id = BulletType.objects.get(name='requirement').id
+    perk_bullet_id = BulletType.objects.get(name='perk').id
+
+    return render(request, cts.START_VIEW_PATH, {'requirement_bullet_id': requirement_bullet_id,
+                                                 'perk_bullet_id': perk_bullet_id,
+                                                 })
 
 
 def start_post(request):
@@ -629,7 +636,7 @@ def start_post(request):
         business_user.campaigns.add(campaign)
         business_user.save()
 
-        return render(request, cts.DASHBOARD_VIEW_PATH, {})
+        return redirect('dashboard/{}'.format(business_user.id))
 
     else:
 
@@ -638,3 +645,36 @@ def start_post(request):
 
         # TODO: missing error message on frontend
         return render(request, cts.START_VIEW_PATH, {'error_message': error_message})
+
+
+@login_required
+def dashboard(request, pk):
+    """
+    Renders the business dashboard
+    Args:
+        request: HTTP
+        pk: BusinessUser primary key
+    """
+
+    business_user = BusinessUser.objects.get(pk=pk)
+
+    # takes first element, for now.
+    campaign = business_user.campaigns.all()[0]
+
+    backlog, waiting_tests, waiting_interview, did_interview_in_standby, sent_to_client, got_job, rejected, states = candidate_module.get_rendering_data(
+        campaign.id)
+
+    # all campaigns except the current one.
+    campaigns_to_move_to = Campaign.objects.exclude(pk=campaign.id)
+
+    return render(request, cts.DASHBOARD_VIEW_PATH, {"campaign": campaign,
+                                                     "campaigns": campaigns_to_move_to,
+                                                     'backlog': backlog,
+                                                     'states': states,
+                                                     'waiting_tests': waiting_tests,
+                                                     'waiting_interview': waiting_interview,
+                                                     'did_interview_in_standby': did_interview_in_standby,
+                                                     'sent_to_client': sent_to_client,
+                                                     'got_job': got_job,
+                                                     'rejected': rejected,
+                                                     })

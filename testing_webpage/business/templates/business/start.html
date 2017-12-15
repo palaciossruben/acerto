@@ -1,13 +1,13 @@
 {% extends 'base.html'%}
-{% load i18n %}
-{% load static %}
-
+{% load static %} <!-- Generates the absolute URL of static files-->
+{% load i18n %} <!--Django translation-->
 
 {% block title %}{% trans "PeakU - Personnel Selection" %}{% endblock %}
 
 {% block extra_head %}
     <link rel="stylesheet" type="text/css" href="{% static 'business/css/start.css' %}">
     <script type="text/javascript" src="{% static 'js/business/start.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/business/add_bullets.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -22,11 +22,11 @@
     <form class="my-form" action="{% url 'business:start_post' %}" method="post">
 
         <div id="position" class="tab-content">
-            {% include "business/vacancy.html"%}
+            {% include "business/vacancy.html" with requirement_bullet_id=requirement_bullet_id %}
         </div>
 
         <div id="company" class="tab-content">
-            {% include "business/company.html"%}
+            {% include "business/company.html" with requirement_perk_id=requirement_perk_id %}
         </div>
 
         <div id="start" class="tab-content">

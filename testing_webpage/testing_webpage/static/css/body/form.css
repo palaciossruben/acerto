@@ -75,7 +75,7 @@
 	display: inline-block;
 }
 
-.people_talking {
+.people-talking {
     width: 80%;
     margin-left: 10%;
 	object-fit: contain;
@@ -137,7 +137,7 @@
 @media (max-width: 640px){
 
     /* Defines additional position params for a default "nice" view */
-    .people_talking {
+    .people-talking {
         margin-top: 100px;
     }
 

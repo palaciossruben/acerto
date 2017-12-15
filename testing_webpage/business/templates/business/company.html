@@ -2,32 +2,35 @@
 <html lang="en">
 <head>
     {% load static %}
+    {% load i18n %} <!--Django translation-->
+
     <meta charset="UTF-8">
 
-    <script type="text/javascript" src="{% static 'js/business/company.js' %}"></script>
 </head>
 
 <body class="indent_style">
 
 <h1>Describe tu empresa</h1>
 
-<p>Introducción (cargo que se publicará a los candidatos):</p>
+<p>Introducción:</p>
 
-<input type="text">
+<input type="text" name="description_es" >
 
 <p></p>
 
-<p>Beneficios:</p>
+<p>{% trans "Perks (additional benefits of your company):" %}</p>
 
-<div id="bullet_container2"></div>
+<div id="perk_container"></div>
 
-<input style="margin-bottom:100px;" type="button" class="btn btn-success" name="add_bullet" value="Añadir"
-          onclick="addBullet2();">
+<div class="requirement-buttons">
+    <input class="submit-button" type="button" name="add_bullet" value="Añadir"
+              onclick="addBullet({{ perk_bullet_id }}, 'perk_container', '{% trans 'Perk' %}', '{% trans 'Input a perk' %}');">
 
-<input style="margin-bottom:100px;" type="button" class="btn btn-success" name="remove_bullet" value="Borrar último"
-          onclick="removeBullet2();">
+    <input class="delete-button" type="button" name="remove_bullet" value="Borrar último"
+              onclick="removeBullet('perk_container');">
+</div>
 
-<input style="..." type="button" class="btn btn-success" name="next_step" value="Siguiente paso"
+<input class="submit-button" type="button" name="next_step" value="Siguiente paso"
           onclick="next_step_tab(event, 'start')" >
 
 </body>
