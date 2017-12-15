@@ -14,9 +14,9 @@
 
 <body>
     <div class="tab">
-        <button class="tab-links active" onclick="tab(event, 'position')">{% trans "Position" %}</button>
-        <button class="tab-links" onclick="tab(event, 'company')">{% trans "Company" %}</button>
-        <button class="tab-links" onclick="tab(event, 'start')">{% trans "Start" %}</button>
+        <button id="position_button" class="tab-links active" onclick="tab(event, 'position')">{% trans "Position" %}</button>
+        <button id="company_button" class="tab-links" onclick="tab(event, 'company')" disabled >{% trans "Company" %}</button>
+        <button id="start_button" class="tab-links" onclick="tab(event, 'start')" disabled >{% trans "Start" %}</button>
     </div>
 
     <div id="position" class="tab-content">
@@ -24,7 +24,7 @@
     </div>
 
     <div id="company" class="tab-content">
-        {% include "business/vacancy.html"%}
+        {% include "business/company.html"%}
     </div>
 
     <div id="start" class="tab-content">
