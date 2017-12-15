@@ -23,8 +23,9 @@ from beta_invite.util import email_sender
 from business import constants as cts
 from beta_invite.models import User, Country, Education, Profession
 from business.models import Plan, Offer, Contact, Search
-from business.models import User as BusinessUser
+from business.models import BusinessUser
 from business.custom_user_creation_form import CustomUserCreationForm
+from dashboard import campaign_module
 
 
 def index(request):
@@ -349,19 +350,21 @@ def first_sign_in(signup_form, request):
                              password=password)
 
     # New BusinessUser pointing to the AuthUser
-    business_user = business.models.User(name=request.POST.get('name'),
-                                         email=request.POST.get('username'),
-                                         phone=request.POST.get('phone'),
-                                         ip=get_ip(request),
-                                         ui_version=cts.UI_VERSION,
-                                         plan=plan,
-                                         auth_user_id=auth_user.id)
+    business_user = business.models.BusinessUser(name=request.POST.get('name'),
+                                                 email=request.POST.get('username'),
+                                                 phone=request.POST.get('phone'),
+                                                 ip=get_ip(request),
+                                                 ui_version=cts.UI_VERSION,
+                                                 plan=plan,
+                                                 auth_user=auth_user)
 
     business_user.save()
 
     login(request, auth_user)
 
     send_signup_emails(business_user, request.LANGUAGE_CODE)
+
+    return business_user
 
 
 def post_first_job(request):
@@ -603,17 +606,35 @@ def trade_client(request):
 
 
 def start(request):
-
-    ip = get_ip(request)
-
-    return render(request, cts.TABS_VIEW_PATH, {})
+    """
+    Only displays initial view.
+    """
+    return render(request, cts.START_VIEW_PATH, {})
 
 
 def start_post(request):
     """
     Args:
-        request: HTTP
-    Returns:
+        request: HTTP post request
+    Returns: Renders form.html.
     """
 
-    return render(request, cts.TABS_VIEW_PATH, {})
+    signup_form = CustomUserCreationForm(request.POST)
+
+    if signup_form.is_valid():
+
+        business_user = first_sign_in(signup_form, request)
+
+        campaign = campaign_module.create_campaign(request)
+        business_user.campaigns.add(campaign)
+        business_user.save()
+
+        return render(request, cts.DASHBOARD_VIEW_PATH, {})
+
+    else:
+
+        # Takes first element from the errors dictionary
+        error_message = [m[0] for m in signup_form.errors.values()][0]
+
+        # TODO: missing error message on frontend
+        return render(request, cts.START_VIEW_PATH, {'error_message': error_message})

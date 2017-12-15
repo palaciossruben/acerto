@@ -104,12 +104,7 @@ def create_campaign(request):
     Returns:
     """
 
-    # saves to create id first.
-    campaign = Campaign()
-    campaign.save()
-
-    campaign_module.update_campaign_basic_properties(campaign, request)
-    campaign_module.update_campaign_bullets(campaign, request)
+    campaign_module.create_campaign(request)
 
     # in this specific case gotta go back. Because if the user stays modifying the campaign on the 'new' template it
     # will create additional campaigns instead of modifying the first creation.

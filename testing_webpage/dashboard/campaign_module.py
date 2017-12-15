@@ -95,3 +95,17 @@ def update_campaign_bullets(campaign, request):
             bullet.save()
 
     campaign.save()
+
+
+def create_campaign(request):
+    """
+    saves to create id first.
+    """
+
+    campaign = Campaign()
+    campaign.save()
+
+    update_campaign_basic_properties(campaign, request)
+    update_campaign_bullets(campaign, request)
+
+    return campaign
