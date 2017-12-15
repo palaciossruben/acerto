@@ -636,7 +636,7 @@ def start_post(request):
         business_user.campaigns.add(campaign)
         business_user.save()
 
-        return render(request, cts.DASHBOARD_VIEW_PATH, {})
+        return redirect('dashboard/{}'.format(business_user.id))
 
     else:
 
@@ -647,24 +647,34 @@ def start_post(request):
         return render(request, cts.START_VIEW_PATH, {'error_message': error_message})
 
 
-def dashboard(request):
-    campaign_id = int(request.GET.get("campaign_id"))
-    campaign = Campaign.objects.get(pk=campaign_id)
+@login_required
+def dashboard(request, pk):
+    """
+    Renders the business dashboard
+    Args:
+        request: HTTP
+        pk: BusinessUser primary key
+    """
+
+    business_user = BusinessUser.objects.get(pk=pk)
+
+    # takes first element, for now.
+    campaign = business_user.campaigns.all()[0]
 
     backlog, waiting_tests, waiting_interview, did_interview_in_standby, sent_to_client, got_job, rejected, states = candidate_module.get_rendering_data(
-        campaign_id)
+        campaign.id)
 
     # all campaigns except the current one.
-    campaigns_to_move_to = Campaign.objects.exclude(pk=campaign_id)
+    campaigns_to_move_to = Campaign.objects.exclude(pk=campaign.id)
 
     return render(request, cts.DASHBOARD_VIEW_PATH, {"campaign": campaign,
                                                      "campaigns": campaigns_to_move_to,
                                                      'backlog': backlog,
                                                      'states': states,
-                                                     #'waiting_tests': waiting_tests,
-                                                     #'waiting_interview': waiting_interview,
-                                                     #'did_interview_in_standby': did_interview_in_standby,
-                                                     #'sent_to_client': sent_to_client,
-                                                     #'got_job': got_job,
+                                                     'waiting_tests': waiting_tests,
+                                                     'waiting_interview': waiting_interview,
+                                                     'did_interview_in_standby': did_interview_in_standby,
+                                                     'sent_to_client': sent_to_client,
+                                                     'got_job': got_job,
                                                      'rejected': rejected,
                                                      })
