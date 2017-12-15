@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     {% load static %}
-    <meta charset="UTF-8">
+    {% load i18n %} <!--Django translation-->
 
-    <script type="text/javascript" src="{% static 'js/business/vacancy.js' %}"></script>
+    <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="{% static 'business/css/vacancy.css' %}">
 
 </head>
@@ -29,16 +29,16 @@
 
 <p></p>
 
-<p>Requerimientos:</p>
+<p>{% trans "Requirements (what the candidate should have):" %}</p>
 
-<div id="bullet_container"></div>
+<div id="requirement_container"></div>
 
-<div id="requirement-buttons">
+<div class="requirement-buttons">
     <input class="submit-button" type="button" name="add_bullet" value="Añadir"
-              onclick="addBullet();">
+              onclick="addBullet({{ requirement_bullet_id }}, 'requirement_container', '{% trans 'Requirement' %}', '{% trans 'Input a requirement' %}');">
 
     <input class="delete-button" type="button" name="remove_bullet" value="Borrar último"
-              onclick="removeBullet();">
+              onclick="removeBullet('requirement_container');">
 </div>
 
 <br>

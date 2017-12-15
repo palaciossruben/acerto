@@ -44,3 +44,21 @@
     width: 33.33%;
     border-radius:0;
 }
+
+/* Vacancy and company */
+.submit-button{
+    display: inline-block;
+    margin-bottom:100px;
+    width: 200px;
+    height: 50px;
+}
+
+.delete-button {
+    display: inline-block;
+    width: 200px;
+    height: 50px;
+}
+
+.requirement-buttons{
+    margin-top: 60px;
+}

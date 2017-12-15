@@ -21,7 +21,7 @@ from business import util
 from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
-from beta_invite.models import User, Country, Education, Profession, Campaign
+from beta_invite.models import User, Country, Education, Profession, Campaign, BulletType
 from business.models import Plan, Offer, Contact, Search
 from business.models import BusinessUser
 from business.custom_user_creation_form import CustomUserCreationForm
@@ -610,7 +610,13 @@ def start(request):
     """
     Only displays initial view.
     """
-    return render(request, cts.START_VIEW_PATH, {})
+
+    requirement_bullet_id = BulletType.objects.get(name='requirement').id
+    perk_bullet_id = BulletType.objects.get(name='perk').id
+
+    return render(request, cts.START_VIEW_PATH, {'requirement_bullet_id': requirement_bullet_id,
+                                                 'perk_bullet_id': perk_bullet_id,
+                                                 })
 
 
 def start_post(request):
