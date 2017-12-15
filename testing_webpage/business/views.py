@@ -21,7 +21,7 @@ from business import util
 from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
-from beta_invite.models import User, Country, Education, Profession
+from beta_invite.models import User, Country, Education, Profession, Campaign
 from business.models import Plan, Offer, Contact, Search
 from business.models import BusinessUser
 from business.custom_user_creation_form import CustomUserCreationForm
@@ -638,3 +638,10 @@ def start_post(request):
 
         # TODO: missing error message on frontend
         return render(request, cts.START_VIEW_PATH, {'error_message': error_message})
+
+
+def dashboard(request):
+    campaign_id = request.GET.get("campaign_id")
+    campaign = Campaign.objects.filter(pk=campaign_id)
+
+    return render(request, cts.DASHBOARD_VIEW_PATH, {"campaign": campaign})

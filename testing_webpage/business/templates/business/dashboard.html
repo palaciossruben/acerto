@@ -1,10 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html'%}
+{% load static %}
 
-</body>
-</html>
+{% block extra_head %}
+    <script type="text/javascript" src="{% static 'js/campaign/edit_candidate.js' %}" async></script>
+{% endblock %}
+
+{% block content %}
+
+    <h1>{{ current_campaign.name }} Dashboard</h1>
+    <ul>
+
+        <form   action="#" method="post" id="main_form_id"
+                enctype="multipart/form-data">
+
+                {% csrf_token %} <!--Protection for CSRF atack-->
+
+                <div class="row" style="margin-top:45px;">
+
+                    <div class="col-sm-4">
+
+                        <h3>Backlog</h3>
+                        <br>
+                        {% for candidate in backlog %}
+                            {% include "dashboard/campaign/candidate.html" with candidate=candidate campaigns=campaigns%}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+        </form>
+    </ul>
+
+{% endblock %}

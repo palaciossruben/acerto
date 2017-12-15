@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^start_post$', views.start_post, name='start_post'),
     url(r'^offer_results$', views.offer_results, name='offer_results'),
     url(r'^home$', views.home, name='home'),
+    url(r'^dashboard$', views.dashboard, name='dashboard'),
 
     # TODO: Worst hack ever, replace for something like: \?id=[0-9]+
     url(r'^offer_detail.*$', views.offer_detail, name='offer_detail'),
