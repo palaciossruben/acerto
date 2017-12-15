@@ -26,6 +26,7 @@ from business.models import Plan, Offer, Contact, Search
 from business.models import BusinessUser
 from business.custom_user_creation_form import CustomUserCreationForm
 from dashboard import campaign_module
+from dashboard import candidate_module
 
 
 def index(request):
@@ -641,7 +642,23 @@ def start_post(request):
 
 
 def dashboard(request):
-    campaign_id = request.GET.get("campaign_id")
-    campaign = Campaign.objects.filter(pk=campaign_id)
+    campaign_id = int(request.GET.get("campaign_id"))
+    campaign = Campaign.objects.get(pk=campaign_id)
 
-    return render(request, cts.DASHBOARD_VIEW_PATH, {"campaign": campaign})
+    backlog, waiting_tests, waiting_interview, did_interview_in_standby, sent_to_client, got_job, rejected, states = candidate_module.get_rendering_data(
+        campaign_id)
+
+    # all campaigns except the current one.
+    campaigns_to_move_to = Campaign.objects.exclude(pk=campaign_id)
+
+    return render(request, cts.DASHBOARD_VIEW_PATH, {"campaign": campaign,
+                                                     "campaigns": campaigns_to_move_to,
+                                                     'backlog': backlog,
+                                                     'states': states,
+                                                     #'waiting_tests': waiting_tests,
+                                                     #'waiting_interview': waiting_interview,
+                                                     #'did_interview_in_standby': did_interview_in_standby,
+                                                     #'sent_to_client': sent_to_client,
+                                                     #'got_job': got_job,
+                                                     'rejected': rejected,
+                                                     })
