@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+
+    <script type="text/javascript" src="{% static 'js/business/company.js' %}"></script>
+</head>
+
+<body class="indent_style">
+
+<h1>Describe tu empresa</h1>
+
+<p>Introducción (cargo que se publicará a los candidatos):</p>
+
+<input type="text">
+
+<p></p>
+
+<p>Beneficios:</p>
+
+<div id="bullet_container2"></div>
+
+<input style="margin-bottom:100px;" type="button" class="btn btn-success" name="add_bullet" value="Añadir"
+          onclick="addBullet2();">
+
+<input style="margin-bottom:100px;" type="button" class="btn btn-success" name="remove_bullet" value="Borrar último"
+          onclick="removeBullet2();">
+
+<input style="..." type="button" class="btn btn-success" name="next_step" value="Siguiente paso"
+          onclick="next_step_tab(event, 'start')" >
+
+</body>
+</html>

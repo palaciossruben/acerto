@@ -17,6 +17,19 @@ function tab(tab_active, step_name) {
         tab_links[i].className = tab_links[i].className.replace(" active", "");
     }
 
-    document.getElementById(step_name).style.display = "block";
+    //Show tab content
+    var next_content = document.getElementById(step_name)
+    next_content.style.display = "block";
+
     tab_active.currentTarget.className += " active";
+}
+
+function next_step_tab(tab_active, step_name){
+
+    tab(tab_active, step_name)
+
+    //Enable tab button and mark the tab, avoid double mark
+    var next_button = document.getElementById(step_name + "_button")
+    next_button.disabled = false;
+    next_button.className += " active";
 }

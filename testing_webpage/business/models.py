@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User as AuthUser
 from django.contrib.postgres.fields import JSONField
 
-from beta_invite.models import Country, Education, Profession
+from beta_invite.models import Country, Education, Profession, Campaign
 
 
 class Plan(models.Model):
@@ -31,7 +31,7 @@ class Plan(models.Model):
         db_table = 'plans'
 
 
-class User(models.Model):
+class BusinessUser(models.Model):
 
     email = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
@@ -39,6 +39,7 @@ class User(models.Model):
     ui_version = models.CharField(max_length=200)
     plan = models.ForeignKey(Plan, null=True, on_delete=models.SET_NULL)
     phone = models.CharField(max_length=40, null=True)
+    campaigns = models.ManyToManyField(Campaign)
 
     # Foreign key to the auth_user table. So that this table can cleanly be in charge of authentication
     auth_user = models.ForeignKey(AuthUser, null=True, on_delete=models.SET_NULL)
@@ -68,7 +69,8 @@ class Visitor(models.Model):
 
 class Offer(models.Model):
 
-    business_user = models.ForeignKey(User, null=True)
+    #business_user = models.ForeignKey(User, null=True)
+    business_user = models.IntegerField(null=True)
     country = models.ForeignKey(Country, null=True)
     profession = models.ForeignKey(Profession, null=True)
     education = models.ForeignKey(Education, null=True)
