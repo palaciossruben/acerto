@@ -2,7 +2,8 @@
 {% load static %}
 
 {% block extra_head %}
-    <script type="text/javascript" src="{% static 'js/campaign/edit_candidate.js' %}" async></script>
+<script type="text/javascript" src="{% static 'js/campaign/business_dashboard.js' %}"></script>
+
 {% endblock %}
 
 {% block content %}
@@ -17,12 +18,70 @@
 
                 <div class="row" style="margin-top:45px;">
 
-                    <div class="col-sm-4">
+                    <div class="col-xs-2" id="backlog">
 
                         <h3>Backlog</h3>
+                        <p id="quantity"></p>
                         <br>
                         {% for candidate in backlog %}
-                            {% include "dashboard/campaign/candidate.html" with candidate=candidate campaigns=campaigns%}
+                            {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns%}
+                        {% endfor %}
+                        <script> count_candidates();</script>
+                    </div>
+
+
+                    <div class="col-xs-2">
+
+                        <h3>Waiting for Tests</h3>
+
+                        <br>
+                        {% for candidate in waiting_tests %}
+                            {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns%}
+                        {% endfor %}
+                    </div>
+
+                    <div class="col-xs-2">
+
+                        <h3>Waiting for Interview</h3>
+                        <br>
+                        {% for candidate in waiting_interview %}
+                            {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns%}
+                        {% endfor %}
+                    </div>
+
+                    <div class="col-xs-2">
+
+                        <h3>Did interview in Standby</h3>
+                        <br>
+                        {% for candidate in did_interview_in_standby %}
+                            {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns%}
+                        {% endfor %}
+                    </div>
+
+                    <div class="col-xs-2">
+
+                        <h3>Sent to client</h3>
+                        <br>
+                        {% for candidate in sent_to_client %}
+                            {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns%}
+                        {% endfor %}
+                    </div>
+
+                    <div class="col-xs-1">
+
+                        <h3>Got Job</h3>
+                        <br>
+                        {% for candidate in got_job %}
+                            {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns%}
+                        {% endfor %}
+                    </div>
+
+                    <div class="col-xs-1">
+
+                        <h3>Rejected</h3>
+                        <br>
+                        {% for candidate in rejected %}
+                            {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns%}
                         {% endfor %}
                     </div>
                 </div>
@@ -35,6 +94,19 @@
                 <br>
                 <br>
                 <br>
+            <h3>Send customized mail</h3>
+
+            <input name="email_subject" style="width:32.5%">{{ candidate.comment }}</input>
+
+            <br>
+            <br>
+
+            <textarea name="email_body" cols="70" rows="20"> </textarea>
+
+            <br>
+
+            <input type="submit" name="send_mail" value="Send_email">
+
         </form>
     </ul>
 
