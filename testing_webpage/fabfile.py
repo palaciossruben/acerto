@@ -20,7 +20,7 @@ def list_dir(directory=None):
     return files
 
 
-def sync_local(sync_media=True):
+def sync_local(sync_media=False):
     """
     Synchronizes local machine with last backup from DB and media files
     Args:

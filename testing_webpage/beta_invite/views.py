@@ -8,12 +8,12 @@ from django.utils.translation import ugettext as _
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
+from datetime import datetime
 
 import common
 from ipware.ip import get_ip
 from beta_invite import constants as cts
 from beta_invite.util import email_sender
-from beta_invite import text_analizer
 from beta_invite import interview_module
 from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser, Bullet, BulletType, Test, Question, Survey, Score, Evaluation
 from beta_invite import test_module
@@ -266,11 +266,21 @@ def update_search_dictionary_on_background():
     os.system(command)
 
 
+def user_if_exists(email):
+    """
+    Args:
+        email: string
+    Returns: The most recent user if exists, else None
+    """
+    for u in User.objects.filter(email=email).order_by('-created_at'):
+        return u
+
+
 def post_long_form(request):
     """
     Args:
         request: Request object
-    Returns: Saves
+    Returns: Saves or updates the User, now it will not be creating new user objects for the same email.
     """
     # Gets information of client: such as if it is mobile.
     ua_string = request.META['HTTP_USER_AGENT']
@@ -285,12 +295,12 @@ def post_long_form(request):
 
     tests = translate_tests(campaign.tests.all(), request.LANGUAGE_CODE)
 
-    params = {'main_message': _("Discover your true passion"),
-              'secondary_message': _("We search millions of jobs and find the right one for you"),
-              'campaign_id': campaign.id,
-              'tests': tests,
-              'question_ids': test_module.get_tests_questions_dict(tests),
-              }
+    end_point_params = {'main_message': _("Discover your true passion"),
+                        'secondary_message': _("We search millions of jobs and find the right one for you"),
+                        'campaign_id': campaign.id,
+                        'tests': tests,
+                        'question_ids': test_module.get_tests_questions_dict(tests),
+                        }
 
     if profession_id is not None and education_id is not None and country_id is not None:
 
@@ -298,26 +308,34 @@ def post_long_form(request):
         education = Education.objects.get(pk=education_id)
         country = Country.objects.get(pk=country_id)
 
-        user = User(name=request.POST.get('name'),
-                    email=request.POST.get('email'),
-                    phone=request.POST.get('phone'),
-                    profession=profession,
-                    education=education,
-                    country=country,
-                    ip=ip,
-                    ui_version=cts.UI_VERSION,
-                    is_mobile=is_mobile,
-                    campaign=campaign,
-                    language_code=request.LANGUAGE_CODE)
+        user_params = {'name': request.POST.get('name'),
+                       'email': request.POST.get('email'),
+                       'phone': request.POST.get('phone'),
+                       'profession': profession,
+                       'education': education,
+                       'country': country,
+                       'ip': ip,
+                       'ui_version': cts.UI_VERSION,
+                       'is_mobile': is_mobile,
+                       'campaign': campaign,
+                       'language_code': request.LANGUAGE_CODE}
 
-        # verify that the campaign exists.
+        # TODO: update user instead of always creating a new one.
+        # Be carefukl with the campaign field.
+        #user = user_if_exists(request.POST.get('email'))
 
+        #if user:  # updates user
+        #    user.update(**user_params)
+        #    user.updated_at = datetime.utcnow()
+        #else:  # creates user
+        user = User(**user_params)
         # Saves here to get an id
         user.save()
+
         user.curriculum_url = save_curriculum_from_request(request, user, 'curriculum')
         user.save()
 
-        params['user_id'] = user.id
+        end_point_params['user_id'] = user.id
 
         #update_search_dictionary_on_background()
 
@@ -334,9 +352,9 @@ def post_long_form(request):
         # Adds the user id to the params, to be able to track answers, later on.
         user_id = request.GET.get('user_id')
         if user_id is not None:
-            params['user_id'] = int(user_id)
+            end_point_params['user_id'] = int(user_id)
 
-    return render(request, cts.SUCCESS_VIEW_PATH, params)
+    return render(request, cts.SUCCESS_VIEW_PATH, end_point_params)
 
 
 @login_required

@@ -107,7 +107,7 @@
 			  <br>
 			</div>
 
-        {% if has_recorded_interview and has_calendly %}
+        {% if has_recorded_interview and has_calendly or has_recorded_interview and enable_recording %}
 
 			 <ziggeoplayer ziggeo-video='{{question_video}}'
 				ziggeo-width=320
