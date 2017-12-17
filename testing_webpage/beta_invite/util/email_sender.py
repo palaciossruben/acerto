@@ -80,7 +80,7 @@ def get_test_url(user):
 
     if hasattr(user, 'campaign_id'):
         return 'http://peaku.co/beta_invite/long_form/post?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
-                                                                                                                campaign_id=user.campaign_id)
+                                                                                                               campaign_id=user.campaign_id)
     else:
         return ''
 
@@ -88,7 +88,8 @@ def get_test_url(user):
 def get_video_url(user):
 
     if hasattr(user, 'campaign_id'):
-        return 'https://peaku.co/beta_invite/long_form/interview/1?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id, campaign_id=user.campaign_id)
+        return 'https://peaku.co/beta_invite/long_form/interview/1?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
+                                                                                                                       campaign_id=user.campaign_id)
     else:
         return ''
 

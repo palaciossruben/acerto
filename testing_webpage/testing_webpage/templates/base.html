@@ -95,12 +95,11 @@
     </div>
 
     <!-- any incoming error_message will print as an alert.-->
-	<script>
-		var error_message = "{{error_message}}";
-		if (error_message) {
-			alert(error_message);
-		}
-	</script>
+    {% if error_message != None %}
+        <script>
+            alert({{ error_message }});
+        </script>
+    {% endif %}
 
 </body>
 </html>
