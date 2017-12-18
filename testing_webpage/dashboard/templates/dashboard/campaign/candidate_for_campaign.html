@@ -5,12 +5,11 @@
 <h4 style="display:inline;"> <a href=""> {{ candidate.user.name }} </a> </h4>
     <p> <strong>cv:</strong>
 {% if candidate.user.curriculum_url != '#' %}
-    <!--<a href="http://peaku.co/static/{{ candidate.user.curriculum_url }}">link</a>-->
     <a href="{% static candidate.user.curriculum_url %}">link</a>
 {% else %}
     not available
 {% endif %}
 <input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}" />
 </li>
-<hr>
+
 
