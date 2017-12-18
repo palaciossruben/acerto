@@ -10,28 +10,35 @@
 
 <body class="indent_style">
 
-<h1>Describe tu empresa</h1>
+    <h3 class="secondary-title">{% trans "Describe Your Company" %}</h3>
+    <div class="secondary-yellow-bar"></div>
 
-<p>Introducción:</p>
+    <div class="section-container">
+        <h4 class="title-blue-small" >{% trans "Tell us about your company in an inspiring way" %}</h4>
 
-<input type="text" name="description_es" >
+        <!--TODO: Add English compatibility-->
+        <textarea name="description_es" cols="80" rows="10"
+                  placeholder="{% trans 'Add company description' %}"></textarea>
+    </div>
 
-<p></p>
+    <div class="section-container">
+        <h3 class="title-blue-small">{% trans "Perks (Example: flexible hours)" %}</h3>
 
-<p>{% trans "Perks (additional benefits of your company):" %}</p>
+        <div id="perk_container"></div>
+    </div>
 
-<div id="perk_container"></div>
+    <div class="section-container">
+        <div class="requirement-buttons">
+            <input class="submit-button" type="button" name="add_bullet" value="Añadir"
+                      onclick="addBullet({{ perk_bullet_id }}, 'perk_container', '{% trans 'Perk' %}', '{% trans 'Input a perk' %}');">
 
-<div class="requirement-buttons">
-    <input class="submit-button" type="button" name="add_bullet" value="Añadir"
-              onclick="addBullet({{ perk_bullet_id }}, 'perk_container', '{% trans 'Perk' %}', '{% trans 'Input a perk' %}');">
+            <input class="delete-button" type="button" name="remove_bullet" value="Borrar último"
+                      onclick="removeBullet('perk_container');">
+        </div>
+    </div>
 
-    <input class="delete-button" type="button" name="remove_bullet" value="Borrar último"
-              onclick="removeBullet('perk_container');">
-</div>
-
-<input class="submit-button" type="button" name="next_step" value="Siguiente paso"
-          onclick="next_step_tab(event, 'start')" >
+    <input class="submit-button" type="button" name="next_step" value="Siguiente paso"
+              onclick="next_step_tab(event, 'start')" >
 
 </body>
 </html>
