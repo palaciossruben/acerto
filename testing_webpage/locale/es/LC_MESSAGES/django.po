@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-13 15:18+0000\n"
+"POT-Creation-Date: 2017-12-18 17:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,6 +69,7 @@ msgstr "Sube tu curriculum"
 #: beta_invite/templates/beta_invite/fast_job.html:160
 #: beta_invite/templates/beta_invite/long_form.html:107
 #: business/templates/business/index.html:99
+#: business/templates/business/signup2.html:42
 #: business/templates/business/trade_client.html:155
 msgid "Sure!"
 msgstr "¡Enviar!"
@@ -93,6 +93,7 @@ msgstr "¡Aplica Ya!"
 #: business/templates/business/results.html:152
 #: business/templates/business/search_trade.html:194
 #: business/templates/business/signup.html:122
+#: business/templates/business/signup2.html:28
 #: business/templates/business/trade_client.html:135
 msgid "Your Full Name"
 msgstr "Tu Nombre Completo"
@@ -104,6 +105,7 @@ msgstr "Tu Nombre Completo"
 #: business/templates/business/results.html:159
 #: business/templates/business/search_trade.html:201
 #: business/templates/business/signup.html:129
+#: business/templates/business/signup2.html:31
 #: business/templates/business/trade_client.html:140
 msgid "Your email"
 msgstr "Tu correo"
@@ -113,6 +115,7 @@ msgstr "Tu correo"
 #: business/templates/business/results.html:166
 #: business/templates/business/search_trade.html:208
 #: business/templates/business/signup.html:136
+#: business/templates/business/signup2.html:34
 msgid "Your phone"
 msgstr "Tu teléfono"
 
@@ -203,7 +206,7 @@ msgid "PeakU - Employment Exchange"
 msgstr "PeakU - Bolsa de Empleo"
 
 #: beta_invite/templates/beta_invite/long_form.html:26 beta_invite/views.py:116
-#: beta_invite/views.py:234 beta_invite/views.py:288 beta_invite/views.py:504
+#: beta_invite/views.py:234 beta_invite/views.py:298 beta_invite/views.py:522
 msgid "Discover your true passion"
 msgstr "Descubre tu verdadera pasión"
 
@@ -251,39 +254,63 @@ msgstr ""
 msgid "Send Answers!!!"
 msgstr "¡Envia las Respuestas!"
 
-#: beta_invite/views.py:117 beta_invite/views.py:289 beta_invite/views.py:364
-#: beta_invite/views.py:432 beta_invite/views.py:505
+#: beta_invite/views.py:117 beta_invite/views.py:299 beta_invite/views.py:382
+#: beta_invite/views.py:450 beta_invite/views.py:523
 msgid "We search millions of jobs and find the right one for you"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
 
-#: beta_invite/views.py:329 business/views.py:323 business/views.py:522
+#: beta_invite/views.py:347 business/views.py:325 business/views.py:526
 msgid "Welcome to PeakU"
 msgstr "Bienvenido a PeakU"
 
-#: beta_invite/views.py:363 beta_invite/views.py:431
+#: beta_invite/views.py:381 beta_invite/views.py:449
 msgid "Find a job now"
 msgstr "Encuentra trabajo ya"
 
-#: beta_invite/views.py:448
+#: beta_invite/views.py:466
 #, python-brace-format
 msgid "You can record the interview for {campaign}"
 msgstr "Puedes grabar la entrevista para {campaign}"
 
-#: beta_invite/views.py:493
+#: beta_invite/views.py:511
 msgid "Schedule Interview"
 msgstr "Programa una entrevista"
 
-#: beta_invite/views.py:494
+#: beta_invite/views.py:512
 msgid "Record interview now!"
 msgstr "¡Graba tu entrevista ya!"
 
-#: beta_invite/views.py:553
+#: beta_invite/views.py:571
 msgid "Thanks for completing the interview, we will contact you soon ;)"
 msgstr "¡Gracias por completar la entrevista, te contactaremos pronto! ;)"
 
-#: beta_invite/views.py:565
+#: beta_invite/views.py:583
 msgid "Back"
 msgstr "Atrás"
+
+#: business/templates/business/company.html:13
+msgid "Describe Your Company"
+msgstr "Describe tu empresa"
+
+#: business/templates/business/company.html:17
+msgid "Tell us about your company in an inspiring way"
+msgstr "Cuéntanos sobre tu compañia de forma inpiradora"
+
+#: business/templates/business/company.html:21
+msgid "Add company description"
+msgstr "Escribe una descripción de la compañia"
+
+#: business/templates/business/company.html:25
+msgid "Perks (Example: flexible hours)"
+msgstr "Beneficios (Ejemplo: horario flexible)"
+
+#: business/templates/business/company.html:33
+msgid "Perk"
+msgstr "Beneficios"
+
+#: business/templates/business/company.html:33
+msgid "Input a perk"
+msgstr "Añade un Beneficio"
 
 #: business/templates/business/contact.html:107
 msgid "Thanks for reaching out!"
@@ -333,11 +360,12 @@ msgid "Add +"
 msgstr "Adiciona +"
 
 #: business/templates/business/index.html:6
+#: business/templates/business/start.html:5
 msgid "PeakU - Personnel Selection"
 msgstr "PeakU - Selección de Personal"
 
-#: business/templates/business/index.html:27 business/views.py:65
-#: business/views.py:83 business/views.py:237 business/views.py:553
+#: business/templates/business/index.html:27 business/views.py:67
+#: business/views.py:85 business/views.py:239 business/views.py:557
 msgid "Discover amazing people"
 msgstr "Descubre personas increíbles"
 
@@ -397,6 +425,7 @@ msgstr "Escríbe un comentario (opcional)"
 #: business/templates/business/login.html:67
 #: business/templates/business/login_buttons.html:17
 #: business/templates/business/search_trade.html:109
+#: business/templates/business/signup2.html:21
 #: business/templates/business/trade_client.html:84
 #: testing_webpage/templates/base.html:44
 msgid "Sign Up"
@@ -591,6 +620,7 @@ msgid "Select the best plan for you"
 msgstr "Selecciona el mejor plan para tí"
 
 #: business/templates/business/pricing.html:12
+#: business/templates/business/vacancy.html:23
 msgid "Operational Staff"
 msgstr "Operativo"
 
@@ -672,6 +702,7 @@ msgid "more information"
 msgstr "más información"
 
 #: business/templates/business/pricing.html:45
+#: business/templates/business/vacancy.html:24
 msgid "Professional"
 msgstr "Profesional"
 
@@ -705,6 +736,7 @@ msgid "$240"
 msgstr "$399 mil + IVA"
 
 #: business/templates/business/pricing.html:79
+#: business/templates/business/vacancy.html:25
 msgid "Specific"
 msgstr "Específico"
 
@@ -745,12 +777,14 @@ msgstr "Regístrate para continuar usando la app ;)"
 #: business/templates/business/results.html:173
 #: business/templates/business/search_trade.html:215
 #: business/templates/business/signup.html:143
+#: business/templates/business/signup2.html:37
 msgid "Enter a password"
 msgstr "Digita una clave"
 
 #: business/templates/business/results.html:180
 #: business/templates/business/search_trade.html:222
 #: business/templates/business/signup.html:150
+#: business/templates/business/signup2.html:40
 msgid "Confirm password"
 msgstr "Digita una clave"
 
@@ -771,6 +805,20 @@ msgstr "Habilidades u otros requerimientos"
 #: business/templates/business/search_trade.html:163
 msgid "Any other information"
 msgstr "Cualquier otra información"
+
+#: business/templates/business/start.html:17
+msgid "Position"
+msgstr ""
+
+#: business/templates/business/start.html:18
+msgid "Company"
+msgstr ""
+
+#: business/templates/business/start.html:19
+#, fuzzy
+#| msgid "starting"
+msgid "Start"
+msgstr "desde"
 
 #: business/templates/business/trade_client.html:170
 msgid "Home"
@@ -802,12 +850,52 @@ msgstr ""
 "reclutamiento atendiendo las necesidades del cliente y automatizándolas con "
 "inteligencia artificial."
 
-#: business/views.py:66 business/views.py:84 business/views.py:238
+#: business/templates/business/vacancy.html:14
+msgid "Describe the position"
+msgstr "Describe la vacante"
+
+#: business/templates/business/vacancy.html:21
+msgid "What plan are you looking for?"
+msgstr "¿Qué plan buscas?"
+
+#: business/templates/business/vacancy.html:29
+msgid "Position Title (published to the candidates)"
+msgstr "Título de la Vacante (publicado a los candidatos)"
+
+#: business/templates/business/vacancy.html:30
+msgid "Add a title"
+msgstr "Escribe un título"
+
+#: business/templates/business/vacancy.html:35
+msgid "Requirements (what the candidate should have)"
+msgstr "Requerimientos (lo que el candidato debe tener)"
+
+#: business/templates/business/vacancy.html:40
+msgid "Add Requirement"
+msgstr "Añadir Requerimiento"
+
+#: business/templates/business/vacancy.html:41
+msgid "Requirement"
+msgstr "Requerimiento"
+
+#: business/templates/business/vacancy.html:41
+msgid "Input a Requirement"
+msgstr "Escribe un requerimiento"
+
+#: business/templates/business/vacancy.html:43
+msgid "Delete Last"
+msgstr "Borrar Ultimo"
+
+#: business/templates/business/vacancy.html:50
+msgid "Next Step"
+msgstr "Siguiente Paso"
+
+#: business/views.py:68 business/views.py:86 business/views.py:240
 msgid ""
 "We search millions of profiles and find the ones that best suit your business"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
 
-#: business/views.py:596
+#: business/views.py:600
 msgid ""
 "Find someone to help you with daily tasks such as cleaning your house, "
 "fixing the fridge or sending a message."
@@ -815,7 +903,7 @@ msgstr ""
 "Encuentra a alguien que te ayude con tareas diarias como limpiar tu casa, "
 "arreglar la nevera o enviar un mensaje."
 
-#: business/views.py:599
+#: business/views.py:603
 msgid "Solve everyday problems"
 msgstr "Soluciona problemas contidianos"
 

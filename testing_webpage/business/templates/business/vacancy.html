@@ -16,36 +16,38 @@
 
     <!--<p>Importante: La prueba gratuita aplica exclusivamente para el plan operativo.</p>-->
 
-    <h4 class="title-blue" >{% trans "What plan are you looking for?" %}</h4>
+    <div class="section-container">
 
-    <input type="radio" name="plan_id" value="1"> Operativo
-    <input type="radio" name="plan_id" value="2"> Profesional
-    <input type="radio" name="plan_id" value="3"> Específico
+        <h4 class="title-blue-small" >{% trans "What plan are you looking for?" %}</h4>
 
-    <p></p>
+        <input type="radio" name="plan_id" value="1"> {% trans "Operational Staff" %}
+        <input type="radio" name="plan_id" value="2"> {% trans "Professional" %}
+        <input type="radio" name="plan_id" value="3"> {% trans "Specific" %}
+    </div>
 
-    <p>Título (cargo que se publicará a los candidatos):</p>
+    <div class="section-container">
+        <h4 class="title-blue-small" > {% trans "Position Title (published to the candidates)" %}</h4>
+        <input id="position-title-field" type="text" name="title_es" placeholder="{% trans 'Add a title' %}" >
+    </div>
 
-    <input type="text" name="title_es">
 
-    <p></p>
+    <div class="section-container">
+        <h4 class="title-blue-small">{% trans "Requirements (what the candidate should have)" %}</h4>
 
-    <p>{% trans "Requirements (what the candidate should have):" %}</p>
+        <div id="requirement_container"></div>
 
-    <div id="requirement_container"></div>
+        <div class="requirement-buttons">
+            <input class="submit-button" type="button" name="add_bullet" value="{% trans 'Add Requirement' %}"
+                      onclick="addBullet({{ requirement_bullet_id }}, 'requirement_container', '{% trans 'Requirement' %}', '{% trans 'Input a Requirement' %}');">
 
-    <div class="requirement-buttons">
-        <input class="submit-button" type="button" name="add_bullet" value="Añadir"
-                  onclick="addBullet({{ requirement_bullet_id }}, 'requirement_container', '{% trans 'Requirement' %}', '{% trans 'Input a requirement' %}');">
-
-        <input class="delete-button" type="button" name="remove_bullet" value="Borrar último"
-                  onclick="removeBullet('requirement_container');">
+            <input class="delete-button" type="button" name="remove_bullet" value="{% trans 'Delete Last' %}"
+                      onclick="removeBullet('requirement_container');">
+        </div>
     </div>
 
     <br>
-    <br>
 
-    <input class="submit-button" type="button" name="next_step" value="Siguiente paso"
+    <input class="submit-button" type="button" name="next_step" value="{% trans 'Next Step' %}"
               onclick="next_step_tab(event, 'company')" >
 
 </body>
