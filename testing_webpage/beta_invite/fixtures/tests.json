@@ -149,8 +149,8 @@
     "fields":{
       "name": "Call Center",
       "name_es": "Call Center",
-      "questions": [33, 34, 35, 36, 37, 38],
-      "cut_score": 84,
+      "questions": [33, 34, 35, 36, 37, 38, 39],
+      "cut_score": 86,
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }

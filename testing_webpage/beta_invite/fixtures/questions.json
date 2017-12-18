@@ -526,11 +526,11 @@
     "model": "beta_invite.question",
     "pk": 37,
     "fields":{
-      "text": "How would you sell a pet life-insurance? - Write what you would tell a potential client",
-      "text_es": "¿Cómo venderías un seguro de vida para mascotas? - Escribe lo que le dirías a un cliente potencial",
-      "answers": [],
-      "type": 3,
-      "correct_answers": [],
+      "text": "Do you live in Bogotá?",
+      "text_es": "¿Vives en Bogotá?",
+      "answers": [32, 33],
+      "type": 1,
+      "correct_answers": [33],
       "order": 5,
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
@@ -540,12 +540,26 @@
     "model": "beta_invite.question",
     "pk": 38,
     "fields":{
+      "text": "How would you sell a pet life-insurance? - Write what you would tell a potential client",
+      "text_es": "¿Cómo venderías un seguro de vida para mascotas? - Escribe lo que le dirías a un cliente potencial",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 6,
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 39,
+    "fields":{
       "text": "What do you understand when they tell you that you are going to sell an intangible?",
       "text_es": "¿Qué entiendes cuando te dicen que vas a vender un producto intangible?",
       "answers": [],
       "type": 3,
       "correct_answers": [],
-      "order": 6,
+      "order": 7,
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
