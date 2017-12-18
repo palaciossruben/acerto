@@ -20,16 +20,17 @@
     padding: 14px 16px;
     transition: 0.3s;
     font-size: 17px;
+    color: var(--blue);
 }
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-    background-color: var(--light-grey)
+    background-color: var(--very-light-grey);
 }
 
 /* Create an active/current tab-link class */
 .tab button.active {
-    background-color: var(--middle-grey)
+    background-color: var(--very-light-grey);
 }
 
 /* Style the tab content */
