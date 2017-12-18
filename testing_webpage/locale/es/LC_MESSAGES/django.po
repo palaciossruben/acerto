@@ -808,17 +808,15 @@ msgstr "Cualquier otra información"
 
 #: business/templates/business/start.html:17
 msgid "Position"
-msgstr ""
+msgstr "Vacante"
 
 #: business/templates/business/start.html:18
 msgid "Company"
-msgstr ""
+msgstr "Empresa"
 
 #: business/templates/business/start.html:19
-#, fuzzy
-#| msgid "starting"
 msgid "Start"
-msgstr "desde"
+msgstr "Empezar"
 
 #: business/templates/business/trade_client.html:170
 msgid "Home"
