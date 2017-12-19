@@ -8,7 +8,7 @@
             {% if candidate.user.curriculum_url != '#' %}
                 <a href="{% static candidate.user.curriculum_url %}"> Hoja de vida</a>
                 {% else %}
-                not <available></available>
+                Sin hoja de vida
             {% endif %}
         <p>{{ candidate.user.email }}
             <br>
