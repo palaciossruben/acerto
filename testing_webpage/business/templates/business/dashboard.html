@@ -31,7 +31,8 @@ table th {
 
 {% block content %}
                     <br>
-<caption><h1 align="center"> Dashboard {{ campaign.name }}</h1></caption>
+<caption><h3 class="primary-title" align="center"> Dashboard {{ campaign.name }}</h3></caption>
+                    <div class="primary-yellow-bar"></div>
                     <br>
                     <table style="margin-left:10px;">
                         <tr>
@@ -76,7 +77,7 @@ table th {
 
                             <td>
                               <ol id="waiting_test">
-                                {% for candidate in waiting_test %}
+                                {% for candidate in waiting_tests %}
                                     {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns%}
                                 {% endfor %}
                               </ol>
@@ -94,7 +95,7 @@ table th {
 
                             <td>
                               <ol id="did_interview">
-                                {% for candidate in did_interview %}
+                                {% for candidate in did_interview_in_standby %}
                                     {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns%}
                                 {% endfor %}
                               </ol>
