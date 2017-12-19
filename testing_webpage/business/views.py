@@ -512,9 +512,10 @@ def home(request):
     Returns: displays all offers of a business
     """
 
-    offers = Offer.objects.filter(business_user_id=get_business_user(request))
-    return render(request, cts.HOME_VIEW_PATH, {'offers': offers,
-                                                })
+    #offers = Offer.objects.filter(business_user_id=get_business_user(request))
+    #return render(request, cts.HOME_VIEW_PATH, {'offers': offers,
+    #                                            })
+    return redirect('dashboard/79')
 
 
 def send_contact_emails(contact, language_code):
