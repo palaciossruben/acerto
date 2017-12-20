@@ -511,10 +511,9 @@ def home(request):
         request: HTTP request.
     Returns: displays all offers of a business
     """
+    business_user = BusinessUser.objects.get(auth_user=request.user)
 
-    offers = Offer.objects.filter(business_user_id=get_business_user(request))
-    return render(request, cts.HOME_VIEW_PATH, {'offers': offers,
-                                                })
+    return redirect('dashboard/{}'.format(business_user.id))
 
 
 def send_contact_emails(contact, language_code):
@@ -661,7 +660,7 @@ def dashboard(request, pk):
     # TODO: Make it for more than 1 campaign. For now it only takes first element.
     campaign = business_user.campaigns.all()[0]
 
-    backlog, waiting_tests, waiting_interview, did_interview_in_standby, sent_to_client, got_job, rejected, states = candidate_module.get_rendering_data(
+    backlog, waiting_tests, waiting_interview, did_interview, sent_to_client, got_job, rejected, states = candidate_module.get_rendering_data(
         campaign.id)
 
     # all campaigns except the current one.
@@ -673,7 +672,7 @@ def dashboard(request, pk):
                                                      'states': states,
                                                      'waiting_tests': waiting_tests,
                                                      'waiting_interview': waiting_interview,
-                                                     'did_interview_in_standby': did_interview_in_standby,
+                                                     'did_interview': did_interview,
                                                      'sent_to_client': sent_to_client,
                                                      'got_job': got_job,
                                                      'rejected': rejected,
