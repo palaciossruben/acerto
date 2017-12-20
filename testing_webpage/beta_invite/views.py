@@ -510,7 +510,7 @@ def get_test_result(request):
                                                          'message2': interview_module.get_message2(has_recorded_interview, has_calendly),
                                                          'left_button_text': _('Schedule Interview'),
                                                          'right_button_text': _('Record interview now!'),
-                                                         'left_button_action': cts.INTERVIEW_CALENDLY,
+                                                         'left_button_action': campaign.calendly_url,
                                                          'right_button_action': right_button_action,
                                                          'enable_recording': False,
                                                          'has_recorded_interview': has_recorded_interview,

@@ -511,9 +511,7 @@ def home(request):
         request: HTTP request.
     Returns: displays all offers of a business
     """
-
-    auth_user = request.user
-    business_user = BusinessUser.objects.get(auth_user=auth_user)
+    business_user = BusinessUser.objects.get(auth_user=request.user)
 
     return redirect('dashboard/{}'.format(business_user.id))
 

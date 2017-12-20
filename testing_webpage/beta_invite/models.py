@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.postgres.fields import JSONField
 
+from beta_invite import constants as cts
+
 
 class Visitor(models.Model):
 
@@ -210,6 +212,7 @@ class Campaign(models.Model):
     interviews = models.ManyToManyField(Interview)
     calendly = models.BooleanField(default=True)
     active = models.BooleanField(default=True)
+    calendly_url = models.CharField(max_length=200, default=cts.INTERVIEW_CALENDLY)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
