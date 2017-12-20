@@ -19,113 +19,112 @@
              <p class="column-title"> SIN PRUEBA ( <b id="quantity_backlog" ></b> ) </p>
             </th>
 
-                            <th>
-                             <p class="column-title"> PERDIERON PRUEBA ( <b id="quantity_waiting_test" ></b> ) </p>
-                            </th>
+            <th>
+             <p class="column-title"> PERDIERON PRUEBA ( <b id="quantity_waiting_test" ></b> ) </p>
+            </th>
 
-                            <th>
-                             <p class="column-title"> APROBARON PRUEBA ( <b id="quantity_waiting_interview" ></b> ) </p>
-                            </th>
+            <th>
+             <p class="column-title"> APROBARON PRUEBA ( <b id="quantity_waiting_interview" ></b> ) </p>
+            </th>
 
-                            <th>
-                             <p class="column-title"> REALIZARON <br> ENTREVISTA ( <b id="quantity_did_interview" ></b> ) </p>
-                            </th>
+            <th>
+             <p class="column-title"> REALIZARON <br> ENTREVISTA ( <b id="quantity_did_interview" ></b> ) </p>
+            </th>
 
-                            <th>
-                             <p class="column-title"> ENVIADOS ( <b id="quantity_sent_to_client" ></b> ) </p>
-                            </th>
+            <th>
+             <p class="column-title"> ENVIADOS ( <b id="quantity_sent_to_client" ></b> ) </p>
+            </th>
 
-                            <th>
-                             <p class="column-title"> CONTRATADOS ( <b id="quantity_got_job" ></b> ) </p>
-                            </th>
+            <th>
+             <p class="column-title"> CONTRATADOS ( <b id="quantity_got_job" ></b> ) </p>
+            </th>
 
-                            <th>
-                             <p class="column-title"> RECHAZADOS ( <b id="quantity_rejected" ></b> ) </p>
-                            </th>
-                        </tr>
+            <th>
+             <p class="column-title"> RECHAZADOS ( <b id="quantity_rejected" ></b> ) </p>
+            </th>
+        </tr>
 
-                        <tr valign=top>
-                            <td>
-                              <ol id="backlog">
-                                {% for candidate in backlog %}
-                                    {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
-                                {% endfor %}
-                              </ol>
-                              <script> count_candidates();</script>
-                            </td>
+        <tr valign=top>
+            <td>
+              <ol id="backlog">
+                {% for candidate in backlog %}
+                    {% include "business/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
+                {% endfor %}
+              </ol>
+            </td>
 
-                            <td>
-                              <ol id="waiting_test">
-                                {% for candidate in waiting_tests %}
-                                    {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
-                                {% endfor %}
-                              </ol>
-                              <script> count_candidates();</script>
-                            </td>
+            <td>
+              <ol id="waiting_test">
+                {% for candidate in waiting_tests %}
+                    {% include "business/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
+                {% endfor %}
+              </ol>
+            </td>
 
-                            <td>
-                              <ol id="waiting_interview">
-                                {% for candidate in waiting_interview %}
-                                    {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
-                                {% endfor %}
-                              </ol>
-                              <script> count_candidates();</script>
-                            </td>
+            <td>
+              <ol id="waiting_interview">
+                {% for candidate in waiting_interview %}
+                    {% include "business/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
+                {% endfor %}
+              </ol>
+            </td>
 
-                            <td>
-                              <ol id="did_interview">
-                                {% for candidate in did_interview_in_standby %}
-                                    {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
-                                {% endfor %}
-                              </ol>
-                              <script> count_candidates();</script>
-                            </td>
+            <td>
+              <ol id="did_interview">
+                {% for candidate in did_interview_in_standby %}
+                    {% include "business/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
+                {% endfor %}
+              </ol>
+            </td>
 
-                            <td>
-                              <ol id="sent_to_client">
-                                {% for candidate in sent_to_client %}
-                                    {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
-                                {% endfor %}
-                              </ol>
-                              <script> count_candidates();</script>
-                            </td>
+            <td>
+              <ol id="sent_to_client">
+                {% for candidate in sent_to_client %}
+                    {% include "business/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
+                {% endfor %}
+              </ol>
+            </td>
 
-                            <td>
-                              <ol id="got_job">
-                                {% for candidate in got_job %}
-                                    {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
-                                {% endfor %}
-                              </ol>
-                              <script> count_candidates();</script>
-                            </td>
+            <td>
+              <ol id="got_job">
+                {% for candidate in got_job %}
+                    {% include "business/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
+                {% endfor %}
+              </ol>
+            </td>
 
-                            <td>
-                              <ol id="rejected">
-                                {% for candidate in rejected %}
-                                    {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
-                                {% endfor %}
-                              </ol>
-                              <script> count_candidates();</script>
-                            </td>
-                        </tr>
-                    </table>
-            <div style="margin-left:150px;">
+            <td>
+              <ol id="rejected">
+                {% for candidate in rejected %}
+                    {% include "business/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
+                {% endfor %}
+              </ol>
+            </td>
+        </tr>
+    </table>
 
-            <h3>Enviar correo</h3>
+    <div id="email-box">
 
-            <input name="email_subject" style="width:20%" placeholder="Asunto">{{ candidate.comment }}</input>
+        <br>
+        <br>
 
-            <br>
-            <br>
+        <h3>Enviar correo</h3>
 
-            <textarea name="email_body" cols="41" rows="10" placeholder="Ingresa acá el cuerpo del correo"></textarea>
+        <input name="email_subject" id="email-subject" placeholder="Asunto">{{ candidate.comment }}</input>
 
-            <br>
+        <br>
+        <br>
 
-            <input type="submit" name="send_mail" value="Enviar email">
+        <textarea name="email_body" cols="41" rows="10" placeholder="Ingresa acá el cuerpo del correo"></textarea>
 
-            <br>
-            <br>
-            </div>
+        <br>
+
+        <input type="submit" name="send_mail" value="Enviar email">
+
+        <br>
+        <br>
+    </div>
+
+    <script> count_candidates();</script>
 
 {% endblock %}

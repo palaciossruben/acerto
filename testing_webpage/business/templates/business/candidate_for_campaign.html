@@ -2,19 +2,19 @@
 
 <li>
     <input type="checkbox" name="{{ candidate.id }}_checkbox">
-        <p style="display:inline;"> <strong><!--<a href="">--> {{ candidate.user.name }}</strong> <!--</a>--> </p>
+        <p style="display:inline;"><strong>{{ candidate.user.name }}</strong></p>
         <br>
 
             {% if candidate.user.curriculum_url != '#' %}
                 <a href="{% static candidate.user.curriculum_url %}"> Hoja de vida</a>
-                {% else %}
+            {% else %}
                 Sin hoja de vida
             {% endif %}
         <p>{{ candidate.user.email }}
             <br>
             {% if candidate.user.phone is None %}
                 not available
-                {% else %}
+            {% else %}
                 {{ candidate.user.phone }}
             {% endif %}
         </p>

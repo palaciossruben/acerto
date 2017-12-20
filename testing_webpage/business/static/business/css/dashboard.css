@@ -20,3 +20,12 @@ table th {
 .column_title {
     margin-top:10px;
 }
+
+/* Email */
+#email-box {
+    margin-left:150px;
+}
+
+#email-subject {
+    width: 20%;
+}
