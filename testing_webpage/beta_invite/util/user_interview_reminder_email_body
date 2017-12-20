@@ -1,4 +1,4 @@
-Hello, {name}
+Hello {name}
 
 
 Remember that you passed the technical test!
@@ -9,9 +9,9 @@ You only need one step to finish the process, click the following link:
 
 It does not matter if you have already scheduled an interview; it will help you to speed up the process.
 
-feel free to ask any questions,
+Feel free to ask any questions.
 
-Regards
+Regards,
 
 {sender_name}
 {sender_position}
