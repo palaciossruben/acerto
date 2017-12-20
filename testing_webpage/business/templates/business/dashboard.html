@@ -45,61 +45,14 @@
         </tr>
 
         <tr valign=top>
-            <td>
-              <ol id="backlog">
-                {% for candidate in backlog %}
-                    {% include "business/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
-                {% endfor %}
-              </ol>
-            </td>
 
-            <td>
-              <ol id="waiting_test">
-                {% for candidate in waiting_tests %}
-                    {% include "business/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
-                {% endfor %}
-              </ol>
-            </td>
-
-            <td>
-              <ol id="waiting_interview">
-                {% for candidate in waiting_interview %}
-                    {% include "business/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
-                {% endfor %}
-              </ol>
-            </td>
-
-            <td>
-              <ol id="did_interview">
-                {% for candidate in did_interview_in_standby %}
-                    {% include "business/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
-                {% endfor %}
-              </ol>
-            </td>
-
-            <td>
-              <ol id="sent_to_client">
-                {% for candidate in sent_to_client %}
-                    {% include "business/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
-                {% endfor %}
-              </ol>
-            </td>
-
-            <td>
-              <ol id="got_job">
-                {% for candidate in got_job %}
-                    {% include "business/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
-                {% endfor %}
-              </ol>
-            </td>
-
-            <td>
-              <ol id="rejected">
-                {% for candidate in rejected %}
-                    {% include "business/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
-                {% endfor %}
-              </ol>
-            </td>
+            {% include "business/dashboard_column.html" with candidate_list=backlog campaigns=campaigns  state_name="backlog" %}
+            {% include "business/dashboard_column.html" with candidate_list=waiting_test campaigns=campaigns  state_name="waiting_test" %}
+            {% include "business/dashboard_column.html" with candidate_list=waiting_interview campaigns=campaigns  state_name="waiting_interview" %}
+            {% include "business/dashboard_column.html" with candidate_list=did_interview campaigns=campaigns  state_name="did_interview" %}
+            {% include "business/dashboard_column.html" with candidate_list=sent_to_client campaigns=campaigns  state_name="sent_to_client" %}
+            {% include "business/dashboard_column.html" with candidate_list=got_job campaigns=campaigns  state_name="got_job" %}
+            {% include "business/dashboard_column.html" with candidate_list=rejected campaigns=campaigns  state_name="rejected" %}
         </tr>
     </table>
 
