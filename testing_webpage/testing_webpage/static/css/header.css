@@ -22,7 +22,7 @@
 }
 
 /* Log in button */
-#log-in-form {
+.log-in-form {
     display:inline-block;
     float:right;
     margin-right:2%;
@@ -30,8 +30,8 @@
     margin-top:13px;
 }
 
-#log-in-input {
-	width: 100px;
+.log-in-input {
+	width: 120px;
 	height: 35px;
 	background-color: var(--blue);
 	color: var(--green);

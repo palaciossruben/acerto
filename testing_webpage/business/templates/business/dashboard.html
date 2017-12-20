@@ -1,67 +1,46 @@
-{% extends 'base_without_registration.html'%}
+{% extends 'base.html'%}
 {% load static %}
 
 {% block title %}PeakU - Dashboard {% endblock %}
 
 {% block extra_head %}
-<script type="text/javascript" src="{% static 'js/campaign/business_dashboard.js' %}"></script>
-<style>
-
-table {
-    width:98%;
-}
-table, th, td, tr {
-    border: 1px solid black;
-}
-
-td {
-    text-align: left;
-    font-size: 12px;
-}
-
-table th {
-    background-color: var(--green);
-    color: var(--purple);
-    text-align: center;
-    width:14%;
-
-}
-</style>
+    <script type="text/javascript" src="{% static 'business/js/dashboard.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'business/css/dashboard.css' %}">
 {% endblock %}
 
 {% block content %}
-                    <br>
-<caption><h3 class="primary-title" align="center"> Dashboard {{ campaign.name }}</h3></caption>
-                    <div class="primary-yellow-bar"></div>
-                    <br>
-                    <table style="margin-left:10px;">
-                        <tr>
+    <br>
+    <caption><h3 class="secondary-title" align="center"> Dashboard {{ campaign.name }}</h3></caption>
+    <div class="secondary-yellow-bar"></div>
+    <br>
+    <table style="margin-left:10px;">
+        <tr>
+            <th>
+             <p class="column-title"> SIN PRUEBA ( <b id="quantity_backlog" ></b> ) </p>
+            </th>
+
                             <th>
-                             <p style="margin-top:10px;"> SIN PRUEBA ( <b id="quantity_backlog" ></b> ) </p>
+                             <p class="column-title"> PERDIERON PRUEBA ( <b id="quantity_waiting_test" ></b> ) </p>
                             </th>
 
                             <th>
-                             <p style="margin-top:10px;"> PERDIERON PRUEBA ( <b id="quantity_waiting_test" ></b> ) </p>
+                             <p class="column-title"> APROBARON PRUEBA ( <b id="quantity_waiting_interview" ></b> ) </p>
                             </th>
 
                             <th>
-                             <p style="margin-top:10px;"> APROBARON PRUEBA ( <b id="quantity_waiting_interview" ></b> ) </p>
+                             <p class="column-title"> REALIZARON <br> ENTREVISTA ( <b id="quantity_did_interview" ></b> ) </p>
                             </th>
 
                             <th>
-                             <p style="margin-top:10px;"> REALIZARON <br> ENTREVISTA ( <b id="quantity_did_interview" ></b> ) </p>
+                             <p class="column-title"> ENVIADOS ( <b id="quantity_sent_to_client" ></b> ) </p>
                             </th>
 
                             <th>
-                             <p style="margin-top:10px;"> ENVIADOS ( <b id="quantity_send_to_client" ></b> ) </p>
+                             <p class="column-title"> CONTRATADOS ( <b id="quantity_got_job" ></b> ) </p>
                             </th>
 
                             <th>
-                             <p style="margin-top:10px;"> CONTRATADOS ( <b id="quantity_got_job" ></b> ) </p>
-                            </th>
-
-                            <th>
-                             <p style="margin-top:10px;"> RECHAZADOS ( <b id="quantity_rejected" ></b> ) </p>
+                             <p class="column-title"> RECHAZADOS ( <b id="quantity_rejected" ></b> ) </p>
                             </th>
                         </tr>
 
@@ -69,7 +48,7 @@ table th {
                             <td>
                               <ol id="backlog">
                                 {% for candidate in backlog %}
-                                    {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns%}
+                                    {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
                                 {% endfor %}
                               </ol>
                               <script> count_candidates();</script>
@@ -78,7 +57,7 @@ table th {
                             <td>
                               <ol id="waiting_test">
                                 {% for candidate in waiting_tests %}
-                                    {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns%}
+                                    {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
                                 {% endfor %}
                               </ol>
                               <script> count_candidates();</script>
@@ -87,7 +66,7 @@ table th {
                             <td>
                               <ol id="waiting_interview">
                                 {% for candidate in waiting_interview %}
-                                    {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns%}
+                                    {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
                                 {% endfor %}
                               </ol>
                               <script> count_candidates();</script>
@@ -96,16 +75,16 @@ table th {
                             <td>
                               <ol id="did_interview">
                                 {% for candidate in did_interview_in_standby %}
-                                    {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns%}
+                                    {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
                                 {% endfor %}
                               </ol>
                               <script> count_candidates();</script>
                             </td>
 
                             <td>
-                              <ol id="send_to_client">
-                                {% for candidate in send_to_client %}
-                                    {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns%}
+                              <ol id="sent_to_client">
+                                {% for candidate in sent_to_client %}
+                                    {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
                                 {% endfor %}
                               </ol>
                               <script> count_candidates();</script>
@@ -114,7 +93,7 @@ table th {
                             <td>
                               <ol id="got_job">
                                 {% for candidate in got_job %}
-                                    {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns%}
+                                    {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
                                 {% endfor %}
                               </ol>
                               <script> count_candidates();</script>
@@ -123,7 +102,7 @@ table th {
                             <td>
                               <ol id="rejected">
                                 {% for candidate in rejected %}
-                                    {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns%}
+                                    {% include "dashboard/campaign/candidate_for_campaign.html" with candidate=candidate campaigns=campaigns %}
                                 {% endfor %}
                               </ol>
                               <script> count_candidates();</script>
