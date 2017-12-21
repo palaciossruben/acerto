@@ -4,6 +4,7 @@ Test related methods.
 import common
 from beta_invite import text_analizer
 from beta_invite.models import Question, Survey, Score, Test, Evaluation, User
+from dashboard.models import Candidate, State
 
 
 def average_list(array):
@@ -131,6 +132,27 @@ def get_scores(campaign, user_id, questions_dict, request):
     return cut_scores, scores
 
 
+def update_candidate_state(campaign, user_id, evaluation):
+    """
+    Args:
+        campaign: obj
+        user_id: int
+        evaluation: obj
+    Returns: Updates the candidate state if passes or not the test.
+    """
+    if user_id:
+
+        candidate = Candidate.objects.get(campaign=campaign, user_id=user_id)
+        candidate.evaluations.add(evaluation)
+
+        if evaluation.passed:
+            candidate.state = State.objects.get(code='WFI')
+            candidate.save()
+        else:  # Fails tests
+            candidate.state = State.objects.get(code='WFT')
+            candidate.save()
+
+
 def get_evaluation(cut_scores, scores, campaign, user_id):
     """
     simple average and percentage
@@ -150,10 +172,7 @@ def get_evaluation(cut_scores, scores, campaign, user_id):
 
     evaluation.save()
 
-    if user_id:
-        user = User.objects.get(pk=user_id)
-        user.evaluations.add(evaluation)
-        user.save()
+    update_candidate_state(campaign, user_id, evaluation)
 
     return evaluation
 

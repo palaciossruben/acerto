@@ -328,6 +328,7 @@ def post_long_form(request):
         #if user:  # updates user
         #    user.update(**user_params)
         #    user.updated_at = datetime.utcnow()
+        #    #TODO: update Candidate.
         #else:  # creates user
         user = User(**user_params)
         # Saves here to get an id
@@ -475,7 +476,7 @@ def send_interview_mail(email_template, user, campaign):
         #                  body_input=email_template,
         #                  subject=_('You can record the interview for {campaign}').format(campaign=campaign.title))
 
-        email_sender.send(candidates=user,
+        email_sender.send(users=user,
                           language_code=user.language_code,
                           body_input=email_template,
                           subject=_('You can record the interview for {campaign}').format(campaign=user.campaign.title))
