@@ -6,7 +6,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
 from beta_invite.util import email_sender
-from business.models import User
+from business.models import BusinessUser
 
 
 # TODO: only works in Spanish
@@ -25,14 +25,14 @@ def send_email_marketing():
 
                 person_name = line_list[2].strip()
 
-                user = User(name=person_name, email=mail)
+                business_user = BusinessUser(name=person_name, email=mail)
 
                 if person_name != '':
                     subject = 'Correo para {complete_name}'
                 else:
                     subject = 'Correo para el gerente'
 
-                email_sender.send(users=user,
+                email_sender.send(users=business_user,
                                   language_code='es',
                                   body_input='business_email_marketing_body',
                                   subject=subject)

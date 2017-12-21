@@ -403,11 +403,7 @@ def post_fast_job(request):
     # Saves here to get an id
     trade_user.save()
 
-    # TODO: just try it.
-    #try:
-    #    email_sender.send(user)
-    #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
-    #    pass
+    # TODO: add welcoming email
 
     return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Find a job now"),
                                                    'secondary_message': _("We search millions of jobs and find the right one for you"),
