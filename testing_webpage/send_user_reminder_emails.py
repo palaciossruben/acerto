@@ -14,9 +14,9 @@ from beta_invite import interview_module
 from beta_invite.util import email_sender
 from dashboard.models import Candidate
 from business import search_module
-from beta_invite.models import Campaign, EmailType, EmailSent
+from beta_invite.models import Campaign, EmailType
 from beta_invite import constants as cts_beta_invite
-#from testing_webpage.models import EmailSent
+from testing_webpage.models import EmailSent
 
 NUMBER_OF_MATCHES = 20
 
@@ -88,6 +88,7 @@ def send_reminder(email_template, state_name, subject_function, email_type):
 
         # check that emails are not sent twice:
         if not EmailSent.objects.filter(campaign=user.campaign, user=user, email_type=email_type):
+            #user.email = 'juan@peaku.co'
             email_sender.send(users=user,
                               language_code=user.language_code,
                               body_input=email_template,
@@ -95,7 +96,6 @@ def send_reminder(email_template, state_name, subject_function, email_type):
 
             # Records sending email
             EmailSent(campaign=user.campaign, user=user, email_type=email_type).save()
-            return
 
     return
 
