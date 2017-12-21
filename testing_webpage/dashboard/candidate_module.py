@@ -115,9 +115,9 @@ def get_rendering_data(campaign_id):
     return backlog, waiting_tests, waiting_interview, did_interview_in_standby, sent_to_client, got_job, rejected_candidates, State.objects.all()
 
 
-def get_checked_box_users(campaign_id, request):
+def get_checked_box_candidates(campaign_id, request):
     candidates = Candidate.objects.filter(campaign_id=campaign_id)
-    return [c.user for c in candidates if request.POST.get('{}_checkbox'.format(c.id))]
+    return [c for c in candidates if request.POST.get('{}_checkbox'.format(c.id))]
 
 
 # TODO: make this available on different langs. Has a hardcoded title_es
