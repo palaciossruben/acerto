@@ -295,6 +295,16 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    # TODO: Make method present on common.py a method of the class User. For this to happen Candidate class has
+    # to be moved to testing_webpage to solve circular dependency problem.
+    #def get_campaigns(self):
+    #    """
+    #    Users are unique and have multiple Candidates associated. Each one of which has 1 campaign. This method
+    #    returns all campaigns from all Candidates associated to user.
+    #    Returns: a list of campaigns where the user is a candidate.
+    #    """
+    #    return [candidate.campaign for candidate in Candidate.objects.filter(user=self)]
+
     def __str__(self):
         return '{0}, {1}'.format(self.name, self.email)
 
