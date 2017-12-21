@@ -22,7 +22,7 @@ from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
 from beta_invite.models import User, Country, Education, Profession, Campaign, BulletType
-from business.models import Plan, Offer, Contact, Search
+from business.models import Plan, Contact, Search
 from business.models import BusinessUser
 from business.custom_user_creation_form import CustomUserCreationForm
 from dashboard import campaign_module
@@ -41,32 +41,6 @@ def index(request):
 
     business.models.Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
     return render(request, cts.BUSINESS_VIEW_PATH, {})
-
-
-def post_index(request):
-    """
-    Saves model to DB
-    Args:
-        request:
-
-    Returns: Saves
-    """
-    ip = get_ip(request)
-    business_user = business.models.User(name=request.POST.get('name'),
-                                         email=request.POST.get('email'),
-                                         ip=ip,
-                                         ui_version=cts.UI_VERSION)
-    business_user.save()
-
-    # TODO: pay the monthly fee
-    #try:
-    #    email_sender.send(user, request.LANGUAGE_CODE)
-    #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
-    #    pass
-
-    return render(request, cts.POST_JOB_VIEW_PATH, {'main_message': _("Discover amazing people"),
-                                                    'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
-                                                    })
 
 
 def search(request):
@@ -246,26 +220,6 @@ def render_result(request, pk):
     return render(request, cts.RESULTS_VIEW_PATH, params)
 
 
-def offer_detail(request):
-    """
-    Args:
-        request: HTTP request.
-    Returns: renders the detailed view of a given offer
-    """
-    offer_id = request.GET.get('id', None)
-
-    if offer_id is not None:
-
-        offer = Offer.objects.get(pk=offer_id)
-        users = [User.objects.get(pk=u_id) for u_id in offer.user_ids]
-        util.translate_users(users, request.LANGUAGE_CODE)
-
-        return render(request, cts.OFFER_RESULTS_VIEW_PATH, {'users': users})
-
-    else:  # reloads home, if nothing found
-        home(request)
-
-
 def translate_message(plan, language_code):
     """
     Args:
@@ -277,26 +231,6 @@ def translate_message(plan, language_code):
         plan.message = plan.message_es
 
     return plan
-
-
-# TODO: print any error messages when trying to login.
-def signup(request):
-    """
-    Args:
-        request: HTTP post request
-    Returns: Renders form.html.
-    """
-    plan_name = request.POST.get('plan_name')
-    try:
-        plan = Plan.objects.get(name=plan_name)
-    except :
-        # If no plan object found will, use a default message
-        plan = Plan.objects.get(name='Default')
-
-    plan = translate_message(plan, request.LANGUAGE_CODE)
-
-    return render(request, cts.SIGNUP_VIEW_PATH, {'main_message': plan.message,
-                                                  'plan_id': plan.id})
 
 
 def get_plan(request):
@@ -368,35 +302,6 @@ def first_sign_in(signup_form, request):
     return business_user
 
 
-def post_first_job(request):
-    """
-    Args:
-        request: HTTP post request
-    Returns: Renders form.html.
-    """
-
-    signup_form = CustomUserCreationForm(request.POST)
-
-    if signup_form.is_valid():
-
-        first_sign_in(signup_form, request)
-        countries, education, professions = beta_invite.views.get_drop_down_values(request.LANGUAGE_CODE)
-        return render(request, cts.POST_JOB_VIEW_PATH, {'countries': countries,
-                                                        'education': education,
-                                                        'professions': professions,
-                                                        'is_new_user': True,
-                                                        })
-    else:
-
-        # Takes first element from the errors dictionary
-        error_message = [m[0] for m in signup_form.errors.values()][0]
-        plan = get_plan(request)
-
-        return render(request, cts.SIGNUP_VIEW_PATH, {'main_message': plan.message,
-                                                      'plan_id': plan.id,
-                                                      'error_message': error_message})
-
-
 def popup_signup(request):
     """
     Args:
@@ -422,24 +327,6 @@ def popup_signup(request):
             # Defensive programming: not the best, but better than an error.
             # We have lost the result_id
             return redirect('business:search')
-
-
-@login_required
-def post_job(request):
-    """
-    Creates the view for posting new job offers.
-    Args:
-        request: HTTP request object.
-    Returns: renders view.
-    """
-
-    countries, education, professions = beta_invite.views.get_drop_down_values(request.LANGUAGE_CODE)
-
-    return render(request, cts.POST_JOB_VIEW_PATH, {'countries': countries,
-                                                    'education': education,
-                                                    'professions': professions,
-                                                    'is_new_user': False,
-                                                    })
 
 
 def get_business_user(request):
@@ -479,28 +366,6 @@ def get_common_search_info(request):
     user_ids = [u.id for u in users]
 
     return profession, education, country, experience, users, user_ids
-
-
-@login_required
-def offer_results(request):
-    """
-    Will save and show the partial results of a job offer.
-    Args:
-        request: HTTP object.
-    Returns: Save and render results
-    """
-
-    profession, education, country, experience, users, user_ids = get_common_search_info(request)
-
-    Offer(business_user=get_business_user(request),
-          country=country,
-          education=education,
-          profession=profession,
-          experience=experience,
-          skills=search_module.get_text(request),
-          user_ids=user_ids, ).save()
-
-    return render(request, cts.OFFER_RESULTS_VIEW_PATH, {'users': users})
 
 
 @login_required

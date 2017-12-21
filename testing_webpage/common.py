@@ -4,6 +4,8 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from beta_invite.models import User, Campaign
 from beta_invite import constants as beta_cts
+from dashboard.models import Candidate
+
 
 INTERVIEW_INTRO_VIDEO = './interview_intro_video.txt'
 ZIGGEO_API_KEY = './ziggeo_api_key.txt'
@@ -98,3 +100,11 @@ def remove_params_from_url(url):
     query.pop('q2', None)
     u = u._replace(query=urlencode(query, True))
     return urlunparse(u)
+
+
+def get_candidate(user, campaign):
+
+    if user and campaign:
+        return Candidate.objects.get(campaign=campaign, user=user)
+    else:
+        return None
