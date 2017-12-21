@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.postgres.fields import JSONField
 
 from beta_invite import constants as cts
+#from dashboard.models import Candidate
 
 
 class Visitor(models.Model):
@@ -399,9 +400,10 @@ class EmailType(models.Model):
 
 class EmailSent(models.Model):
 
-    user = models.ForeignKey(User)
-    campaign = models.ForeignKey(Campaign)
-    email_type = models.ForeignKey(EmailType)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    campaign = models.ForeignKey(Campaign, on_delete=models.DO_NOTHING)
+    email_type = models.ForeignKey(EmailType, on_delete=models.DO_NOTHING)
+    #candidate = models.ForeignKey(Candidate, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -410,5 +412,5 @@ class EmailSent(models.Model):
         return 'id={0}, user={1}, campaign={2}, email_type={3}'.format(self.id, self.user, self.campaign, self.email_type)
 
     # adds custom table name
-    class Meta:
-        db_table = 'emails_sent'
+    #class Meta:
+    #    db_table = 'emails_sent'

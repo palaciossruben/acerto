@@ -16,6 +16,7 @@ from dashboard.models import Candidate
 from business import search_module
 from beta_invite.models import Campaign, EmailType, EmailSent
 from beta_invite import constants as cts_beta_invite
+#from testing_webpage.models import EmailSent
 
 NUMBER_OF_MATCHES = 20
 
@@ -81,8 +82,8 @@ def send_reminder(email_template, state_name, subject_function, email_type):
         user = candidate.user
 
         # Do not send if there are no tests or is on the 'WFI' and has no interviews.
-        if not user.campaign.tests or state_name == 'Waiting For Interview' \
-                and not interview_module.has_recorded_interview(user.campaign):
+        if not candidate.campaign.tests or state_name == 'Waiting For Interview' \
+                and not interview_module.has_recorded_interview(candidate.campaign):
             continue
 
         # check that emails are not sent twice:
