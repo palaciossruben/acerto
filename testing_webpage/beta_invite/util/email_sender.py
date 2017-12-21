@@ -76,42 +76,16 @@ def send_email_with_mailgun(sender, recipients, subject, body, mail_gun_url, mai
               "text": body})
 
 
-def get_test_url(user):
+def get_test_url(user, campaign):
     # TODO: change to test with candidate
-    if hasattr(user, 'campaign_id'):
-        return 'http://peaku.co/beta_invite/long_form/post?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
-                                                                                                               campaign_id=user.campaign_id)
-    else:
-        return ''
+    return 'http://peaku.co/beta_invite/long_form/post?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
+                                                                                                           campaign_id=campaign.id)
 
 
-def get_video_url(user):
+def get_video_url(user, campaign):
     # TODO: change to interview with candidate
-    if hasattr(user, 'campaign_id'):
-        return 'https://peaku.co/beta_invite/long_form/interview/1?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
-                                                                                                                       campaign_id=user.campaign.id)
-    else:
-        return ''
-
-
-# TODO: make only one method
-def get_test_url_for_candidate(user, campaign):
-    # TODO: change to test with candidate
-    if hasattr(user, 'campaign_id'):
-        return 'http://peaku.co/beta_invite/long_form/post?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
-                                                                                                               campaign_id=campaign.id)
-    else:
-        return ''
-
-
-# TODO: make only one method
-def get_video_url_for_candidate(user, campaign):
-    # TODO: change to interview with candidate
-    if hasattr(user, 'campaign_id'):
-        return 'https://peaku.co/beta_invite/long_form/interview/1?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
-                                                                                                                       campaign_id=campaign.id)
-    else:
-        return ''
+    return 'https://peaku.co/beta_invite/long_form/interview/1?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
+                                                                                                                   campaign_id=campaign.id)
 
 
 def get_campaign_url_with_user(user):
@@ -153,14 +127,16 @@ def get_params(user, sender_data, language_code, override_dict):
     """
     params = {'name': get_first_name(user.name),
               'complete_name': user.name.title(),
-              'test_url': get_test_url(user),
               'cv_url': get_cv_url(user),
-              'video_url': get_video_url(user),
               'sender_name': sender_data['sender_name'],
               'sender_position': sender_data['sender_position'],
               'peaku_address': sender_data['peaku_address'],
               'campaign': get_campaign_name(user, language_code),
               'campaign_url': get_campaign_url_with_user(user)}
+
+    if hasattr(user, 'campaign_id'):
+        params['test_url'] = get_test_url(user, user.campaign)
+        params['video_url'] = get_video_url(user, user.campaign)
 
     for k, v in override_dict.items():
         params[k] = v
@@ -179,14 +155,16 @@ def get_params_for_candidate(candidate, sender_data, language_code, override_dic
     """
     params = {'name': get_first_name(candidate.user.name),
               'complete_name': candidate.user.name.title(),
-              'test_url': get_test_url_for_candidate(candidate.user, candidate.campaign),
               'cv_url': get_cv_url(candidate.user),
-              'video_url': get_video_url_for_candidate(candidate.user, candidate.campaign),
               'sender_name': sender_data['sender_name'],
               'sender_position': sender_data['sender_position'],
               'peaku_address': sender_data['peaku_address'],
               'campaign': get_campaign_name(candidate, language_code),
               'campaign_url': get_campaign_url_with_user(candidate)}
+
+    if hasattr(candidate, 'campaign_id'):
+        params['test_url'] = get_test_url(candidate.user, candidate.campaign)
+        params['video_url'] = get_video_url(candidate.user, candidate.campaign)
 
     for k, v in override_dict.items():
         params[k] = v

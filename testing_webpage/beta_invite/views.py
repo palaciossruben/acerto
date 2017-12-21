@@ -78,7 +78,7 @@ def index(request):
     :return: renders a view.
     """
 
-    return render(request, cts.HOME_VIEW_PATH)
+    return render(request, cts.INTRO_VIEW_PATH)
 
 
 def post_index(request):
@@ -456,30 +456,20 @@ def post_fast_job(request):
                                                    })
 
 
-def send_interview_mail(email_template, user, campaign):
+def send_interview_mail(email_template, candidate):
     """
     Args:
-        campaign: Campaign Object
         email_template: name of email body, in beta_invite/util.
-        user: Object.
+        candidate: Object.
     Returns: sends email.
     """
-    if user and interview_module.has_recorded_interview(campaign):
-        user.campaign.translate(user.language_code)
-        campaign.translate(user.language_code)
+    if candidate and interview_module.has_recorded_interview(candidate.campaign):
+        candidate.campaign.translate(candidate.user.language_code)
 
-        # TODO: improve.
-        #candidate = [c for c in Candidate.objects.filter(user=user, campaign=campaign)][0]
-
-        #email_sender.send_to_candidates(candidates=candidate,
-        #                  language_code=user.language_code,
-        #                  body_input=email_template,
-        #                  subject=_('You can record the interview for {campaign}').format(campaign=campaign.title))
-
-        email_sender.send(users=user,
-                          language_code=user.language_code,
-                          body_input=email_template,
-                          subject=_('You can record the interview for {campaign}').format(campaign=user.campaign.title))
+        email_sender.send_to_candidate(candidates=candidate,
+                                       language_code=candidate.user.language_code,
+                                       body_input=email_template,
+                                       subject=_('You can record the interview for {campaign}').format(campaign=candidate.campaign.title))
 
 
 def get_test_result(request):
@@ -492,6 +482,7 @@ def get_test_result(request):
     questions_dict = test_module.get_tests_questions_dict(campaign.tests.all())
     user = common.get_user_from_request(request)
     user_id = user.id if user else None
+    candidate = common.get_candidate(user, campaign)
 
     test_score_str = ''  # by default there is no score unless the test was done.
 
@@ -511,7 +502,8 @@ def get_test_result(request):
 
     if not test_done or evaluation.passed:
 
-        send_interview_mail('user_interview_email_body', user, campaign)
+        #send_interview_mail('user_interview_email_body', user, campaign)
+        send_interview_mail('user_interview_email_body', candidate)
 
         right_button_action = interview_module.adds_campaign_and_user_to_url('interview/1', user_id, campaign.id)
 
