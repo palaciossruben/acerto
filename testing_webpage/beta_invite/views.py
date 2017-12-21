@@ -17,6 +17,7 @@ from beta_invite.util import email_sender
 from beta_invite import interview_module
 from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser, Bullet, BulletType, Test, Question, Survey, Score, Evaluation
 from beta_invite import test_module
+from dashboard.models import Candidate
 
 
 def remove_accents(text):
@@ -321,7 +322,7 @@ def post_long_form(request):
                        'language_code': request.LANGUAGE_CODE}
 
         # TODO: update user instead of always creating a new one.
-        # Be carefukl with the campaign field.
+        # Be careful with the campaign field.
         #user = user_if_exists(request.POST.get('email'))
 
         #if user:  # updates user
@@ -334,6 +335,9 @@ def post_long_form(request):
 
         user.curriculum_url = save_curriculum_from_request(request, user, 'curriculum')
         user.save()
+
+        # Starts on Backlog default state, when no evaluation has been done.
+        Candidate(campaign=campaign, user=user).save()
 
         end_point_params['user_id'] = user.id
 
@@ -454,13 +458,24 @@ def post_fast_job(request):
 def send_interview_mail(email_template, user, campaign):
     """
     Args:
+        campaign: Campaign Object
         email_template: name of email body, in beta_invite/util.
         user: Object.
     Returns: sends email.
     """
     if user and interview_module.has_recorded_interview(campaign):
         user.campaign.translate(user.language_code)
-        email_sender.send(users=user,
+        campaign.translate(user.language_code)
+
+        # TODO: improve.
+        #candidate = [c for c in Candidate.objects.filter(user=user, campaign=campaign)][0]
+
+        #email_sender.send_to_candidates(candidates=candidate,
+        #                  language_code=user.language_code,
+        #                  body_input=email_template,
+        #                  subject=_('You can record the interview for {campaign}').format(campaign=campaign.title))
+
+        email_sender.send(candidates=user,
                           language_code=user.language_code,
                           body_input=email_template,
                           subject=_('You can record the interview for {campaign}').format(campaign=user.campaign.title))
