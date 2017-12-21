@@ -81,44 +81,6 @@ def index(request):
     return render(request, cts.INTRO_VIEW_PATH)
 
 
-def post_index(request):
-    """
-    Action taken when a form is submitted.
-    Args:
-        request: A request object.
-
-    Returns: saves new User
-    """
-    # Gets information of client: such as if it is mobile
-    ua_string = request.META['HTTP_USER_AGENT']
-    user_agent = parse(ua_string)
-
-    ip = get_ip(request)
-
-    user = User(name=request.POST.get('name'),
-                email=request.POST.get('email'),
-                ip=ip,
-                ui_version=cts.UI_VERSION,
-                is_mobile=user_agent.is_mobile,)
-
-    # Saves here to get an id
-    user.save()
-    user.curriculum_url = save_curriculum_from_request(request, user, 'curriculum')
-    user.save()
-
-    update_search_dictionary_on_background()
-
-    # TODO: pay the monthly fee
-    #try:
-    #    email_sender.send(user, request.LANGUAGE_CODE)
-    #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
-    #    pass
-
-    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover your true passion"),
-                                                   'secondary_message': _("We search millions of jobs and find the right one for you"),
-                                                   })
-
-
 # TODO: Localization a las patadas
 def translate_list_of_objects(objects, language_code):
     """Assigns to field name the language specific one."""
@@ -338,20 +300,16 @@ def post_long_form(request):
         user.save()
 
         # Starts on Backlog default state, when no evaluation has been done.
-        Candidate(campaign=campaign, user=user).save()
+        candidate = Candidate(campaign=campaign, user=user)
+        candidate.save()
+
+        email_body_name = 'user_signup_email_body'
+        if is_mobile:
+            email_body_name += '_mobile'
+
+        email_sender.send_to_candidate(candidate, request.LANGUAGE_CODE, email_body_name, _('Welcome to PeakU'))
 
         end_point_params['user_id'] = user.id
-
-        #update_search_dictionary_on_background()
-
-        try:
-            email_body_name = 'user_signup_email_body'
-            if is_mobile:
-                email_body_name += '_mobile'
-
-            email_sender.send(user, request.LANGUAGE_CODE, email_body_name, _('Welcome to PeakU'))
-        except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
-            pass
 
     else:
         # Adds the user id to the params, to be able to track answers, later on.
@@ -445,11 +403,7 @@ def post_fast_job(request):
     # Saves here to get an id
     trade_user.save()
 
-    # TODO: just try it.
-    #try:
-    #    email_sender.send(user)
-    #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
-    #    pass
+    # TODO: add welcoming email
 
     return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Find a job now"),
                                                    'secondary_message': _("We search millions of jobs and find the right one for you"),
