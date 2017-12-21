@@ -300,20 +300,16 @@ def post_long_form(request):
         user.save()
 
         # Starts on Backlog default state, when no evaluation has been done.
-        Candidate(campaign=campaign, user=user).save()
+        candidate = Candidate(campaign=campaign, user=user)
+        candidate.save()
+
+        email_body_name = 'user_signup_email_body'
+        if is_mobile:
+            email_body_name += '_mobile'
+
+        email_sender.send_to_candidate(candidate, request.LANGUAGE_CODE, email_body_name, _('Welcome to PeakU'))
 
         end_point_params['user_id'] = user.id
-
-        #update_search_dictionary_on_background()
-
-        try:
-            email_body_name = 'user_signup_email_body'
-            if is_mobile:
-                email_body_name += '_mobile'
-
-            email_sender.send(user, request.LANGUAGE_CODE, email_body_name, _('Welcome to PeakU'))
-        except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
-            pass
 
     else:
         # Adds the user id to the params, to be able to track answers, later on.
