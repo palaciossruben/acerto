@@ -77,15 +77,19 @@ def send_email_with_mailgun(sender, recipients, subject, body, mail_gun_url, mai
 
 
 def get_test_url(user, campaign):
-    # TODO: change to test with candidate
-    return 'http://peaku.co/beta_invite/long_form/post?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
-                                                                                                           campaign_id=campaign.id)
+    if user and campaign:
+        return 'http://peaku.co/beta_invite/long_form/post?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
+                                                                                                               campaign_id=campaign.id)
+    else:
+        return ''
 
 
 def get_video_url(user, campaign):
-    # TODO: change to interview with candidate
-    return 'https://peaku.co/beta_invite/long_form/interview/1?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
-                                                                                                                   campaign_id=campaign.id)
+    if user and campaign:
+        return 'https://peaku.co/beta_invite/long_form/interview/1?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
+                                                                                                                       campaign_id=campaign.id)
+    else:
+        return ''
 
 
 def get_campaign_url_with_user(user):

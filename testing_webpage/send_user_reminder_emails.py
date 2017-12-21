@@ -17,6 +17,7 @@ from business import search_module
 from beta_invite.models import Campaign, EmailType
 from beta_invite import constants as cts_beta_invite
 from testing_webpage.models import EmailSent
+import common
 
 NUMBER_OF_MATCHES = 20
 
@@ -67,7 +68,7 @@ def translate_email_job_match_subject(user, campaign):
     if user.language_code is None or user.language_code == 'es':
         return 'Vacantes abierta para {campaign}'.format(campaign=campaign.title_es)
     else:
-        return 'Open position for {campaign}'.format(campaign=user.campaign.title)
+        return 'Open position for {campaign}'.format(campaign=campaign.title)
 
 
 def send_reminder(email_template, state_name, subject_function, email_type):
@@ -144,12 +145,12 @@ def send_possible_job_matches():
         # Top 20 distinct users.
         users = get_distinct_users(users)
         users = filter_users_with_job(users)
-        users = [u for u in users][:NUMBER_OF_MATCHES]
+        top_20_users = [u for u in users][:NUMBER_OF_MATCHES]
 
-        for user in users:
+        for user in top_20_users:
             # check that emails are not sent twice and not to the same campaign where the user is already registered
-            if not EmailSent.objects.filter(campaign=campaign, email_type=email_type, user__email=user.email)\
-                    and user.campaign != campaign:
+            if not EmailSent.objects.filter(campaign=campaign, email_type=email_type, user=user)\
+                    and campaign not in common.get_campaigns(user):
 
                 email_sender.send(users=user,
                                   language_code=user.language_code,
