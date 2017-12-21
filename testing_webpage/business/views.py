@@ -85,29 +85,6 @@ def search_trade(request):
                                                   })
 
 
-def user_id_sorted_iterator(user_relevance_dictionary, users, skills):
-    """
-    Args:
-        user_relevance_dictionary: Vocabulary and relevance dict.
-        users: List of User objects from previous filters.
-        skills: List of processed strings.
-    Returns: A sorted iterator that returns tuples (user_id, relevance).
-    """
-    tokens_dict = {t: user_relevance_dictionary[t] for t in skills
-                   if user_relevance_dictionary.get(t) is not None}
-
-    # Initializes all relevance to 0.
-    user_relevance_dict = OrderedDict({user.id: 0 for user in users})
-    for k, values in tokens_dict.items():
-        for value_user_id, relevance in values:
-
-            if value_user_id in user_relevance_dict.keys():
-                user_relevance_dict[value_user_id] += relevance
-
-    # Sorts by DESC relevance.
-    return reversed(sorted(user_relevance_dict.items(), key=lambda x: x[1]))
-
-
 def get_filtered_users(country_id, profession_id, experience, education_id):
     """
     Filters users given certain conditions.
@@ -128,33 +105,6 @@ def get_filtered_users(country_id, profession_id, experience, education_id):
         .filter(education__in=education_set)
 
 
-def get_matching_users(request):
-    """
-    DB matching between criteria and DB.
-    Args:
-        request: Request obj
-    Returns: List with matching Users
-    """
-
-    profession_id = request.POST.get('profession')
-    education_id = request.POST.get('education')
-
-    country_id = request.POST.get('country')
-    experience = request.POST.get('experience')
-
-    users = get_filtered_users(country_id, profession_id, experience, education_id)
-
-    # Opens word_user_dict, or returns unordered users.
-    try:
-        user_relevance_dictionary = pickle.load(open('subscribe/user_relevance_dictionary.p', 'rb'))
-    except FileNotFoundError:
-        return users  # will not filter by words.
-
-    sorted_iterator = user_id_sorted_iterator(user_relevance_dictionary, users, search_module.get_text(request))
-
-    return search_module.retrieve_sorted_users(sorted_iterator)
-
-
 def calculate_result2(request):
     """
     Args:
@@ -162,35 +112,13 @@ def calculate_result2(request):
     Returns: renders results.html view.
     """
 
-    user_ids = search_module.get_common_search_info2(request, 'subscribe/word_user_dictionary.p')
+    user_ids = search_module.get_common_search_info(request, 'subscribe/word_user_dictionary.p')
 
     search_obj = Search(ip=get_ip(request),
                         country=None,
                         education=None,
                         profession=None,
                         experience=None,
-                        skills=search_module.get_text(request),
-                        user_ids=user_ids, )
-
-    search_obj.save()
-
-    return redirect('results/{id}'.format(id=search_obj.id))
-
-
-def calculate_result(request):
-    """
-    Args:
-        request: Request object
-    Returns: renders results.html view.
-    """
-
-    profession, education, country, experience, users, user_ids = get_common_search_info(request)
-
-    search_obj = Search(ip=get_ip(request),
-                        country=country,
-                        education=education,
-                        profession=profession,
-                        experience=experience,
                         skills=search_module.get_text(request),
                         user_ids=user_ids, )
 
@@ -341,31 +269,6 @@ def get_business_user(request):
     business_user = BusinessUser.objects.get(auth_user_id=auth_user_id)
 
     return business_user
-
-
-def get_common_search_info(request):
-    """
-    Given a Request object will do all search related stuff
-    Args:
-        request: HTTP object.
-    Returns: profession, education, country, experience, users, user_ids
-    """
-
-    profession_id = request.POST.get('profession')
-    profession = Profession.objects.get(pk=profession_id)
-    education_id = request.POST.get('education')
-    education = Education.objects.get(pk=education_id)
-
-    country_id = request.POST.get('country')
-    country = Country.objects.get(pk=country_id)
-    experience = request.POST.get('experience')
-
-    users = get_matching_users(request)
-    util.translate_users(users, request.LANGUAGE_CODE)
-
-    user_ids = [u.id for u in users]
-
-    return profession, education, country, experience, users, user_ids
 
 
 @login_required

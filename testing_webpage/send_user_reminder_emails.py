@@ -138,8 +138,8 @@ def send_possible_job_matches():
 
         # TODO: this feature only supports Spanish.
         search_text = search_module.with_lower_case_and_no_accents(campaign.title_es)
-        users = search_module.get_matching_users2(search_text=search_text,
-                                                  word_user_path='subscribe/word_user_dictionary.p')
+        users = search_module.get_matching_users(search_text=search_text,
+                                                 word_user_path='subscribe/word_user_dictionary.p')
 
         # Top 20 distinct users.
         users = get_distinct_users(users)
