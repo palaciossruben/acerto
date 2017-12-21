@@ -75,7 +75,7 @@ def adds_context_based_search(tokens_dict, word_user_dictionary, filtered_user_r
         pass
 
 
-def user_id_sorted_iterator2(word_user_dictionary, users, skills):
+def user_id_sorted_iterator(word_user_dictionary, users, skills):
     """
     Args:
         word_user_dictionary: A dictionary of the form: {'word': (user_id, relevance)}
@@ -116,7 +116,7 @@ def retrieve_sorted_users(sorted_iterator):
     return User.objects.filter(pk__in=user_ids).order_by(preserved)
 
 
-def get_matching_users2(search_text, word_user_path):
+def get_matching_users(search_text, word_user_path):
     """
     DB matching between criteria and DB.
     Args:
@@ -134,14 +134,14 @@ def get_matching_users2(search_text, word_user_path):
     except FileNotFoundError:
         return users  # will not filter by words.
 
-    sorted_iterator = user_id_sorted_iterator2(word_user_dictionary, users, search_text)
+    sorted_iterator = user_id_sorted_iterator(word_user_dictionary, users, search_text)
 
     #print_sorted_iterator_on_debug(sorted_iterator)
 
     return retrieve_sorted_users(sorted_iterator)
 
 
-def get_common_search_info2(request, word_user_path):
+def get_common_search_info(request, word_user_path):
     """
     Given a Request object will do all search related stuff. Returns a maximum number of results.
     Args:
@@ -150,7 +150,7 @@ def get_common_search_info2(request, word_user_path):
     Returns: profession, education, country, experience, users, user_ids
     """
 
-    users = get_matching_users2(get_text(request), word_user_path)
+    users = get_matching_users(get_text(request), word_user_path)
     users = users[:MAX_NUM_OF_USERS]
 
     util.translate_users(users, request.LANGUAGE_CODE)
