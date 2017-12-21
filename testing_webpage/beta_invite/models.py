@@ -283,6 +283,8 @@ class User(models.Model):
     curriculum_url = models.CharField(max_length=200, default='#')
     campaign = models.ForeignKey(Campaign, null=True)
     phone = models.CharField(max_length=40, null=True)
+
+    # TODO: remove evaluations, this is deprecated. Not saving anymore.
     evaluations = models.ManyToManyField(Evaluation)
     language_code = models.CharField(max_length=3, default='es')
 
