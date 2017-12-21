@@ -92,26 +92,26 @@ def get_video_url(user, campaign):
         return ''
 
 
-def get_campaign_url_with_user(user):
+def get_campaign_url(candidate):
 
-    if hasattr(user, 'campaign_id') and user.campaign_id:
-        return user.campaign.get_url()
+    if hasattr(candidate, 'campaign_id') and candidate.campaign_id:
+        return candidate.campaign.get_url()
     else:
         return ''
 
 
-def get_campaign_name(user, language_code):
+def get_campaign_name(candidate, language_code):
     """
     For a object that has no associated campaign it will not return the title
     Args:
-        user: User or Contact object.
+        candidate: User or Contact object.
     Returns: string with title
     """
-    if user and hasattr(user, 'campaign') and user.campaign:
+    if candidate and hasattr(candidate, 'campaign') and candidate.campaign:
         if language_code == 'es':
-            return user.campaign.title_es
+            return candidate.campaign.title_es
         else:
-            return user.campaign.title
+            return candidate.campaign.title
 
     return ''
 
@@ -120,12 +120,12 @@ def get_cv_url(user):
     return 'http://peaku.co/beta_invite/long_form/add_cv?user_id={user_id}'.format(user_id=user.id)
 
 
-def get_params(user, sender_data, language_code, override_dict):
+def get_params(user, sender_data, override_dict):
     """
+    Limited version of the get_params_with_candidate(). For specific cases.
     Args:
         user: Object.
         sender_data:
-        language_code: just that.
         override_dict: Dictionary that changes the default values.
     Returns:
     """
@@ -135,12 +135,7 @@ def get_params(user, sender_data, language_code, override_dict):
               'sender_name': sender_data['sender_name'],
               'sender_position': sender_data['sender_position'],
               'peaku_address': sender_data['peaku_address'],
-              'campaign': get_campaign_name(user, language_code),
-              'campaign_url': get_campaign_url_with_user(user)}
-
-    if hasattr(user, 'campaign_id'):
-        params['test_url'] = get_test_url(user, user.campaign)
-        params['video_url'] = get_video_url(user, user.campaign)
+              }
 
     for k, v in override_dict.items():
         params[k] = v
@@ -164,7 +159,7 @@ def get_params_for_candidate(candidate, sender_data, language_code, override_dic
               'sender_position': sender_data['sender_position'],
               'peaku_address': sender_data['peaku_address'],
               'campaign': get_campaign_name(candidate, language_code),
-              'campaign_url': get_campaign_url_with_user(candidate)}
+              'campaign_url': get_campaign_url(candidate)}
 
     if hasattr(candidate, 'campaign_id'):
         params['test_url'] = get_test_url(candidate.user, candidate.campaign)
@@ -214,7 +209,7 @@ def send(users, language_code, body_input, subject, with_localization=True, body
 
     for user in users:
 
-        params = get_params(user, sender_data, language_code, override_dict)
+        params = get_params(user, sender_data, override_dict)
 
         body = get_body(body_is_filename, body_input)
 
