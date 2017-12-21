@@ -54,14 +54,14 @@ def edit_campaign_candidates(request, pk):
     # enters here when sending an email
     if request.POST.get('send_mail') is not None:
 
-        users = candidate_module.get_checked_box_users(pk, request)
+        candidates = candidate_module.get_checked_box_candidates(pk, request)
 
-        email_sender.send(users=users,
-                          language_code=request.LANGUAGE_CODE,
-                          body_input=request.POST.get('email_body'),
-                          subject=candidate_module.get_subject(request, pk),
-                          with_localization=False,
-                          body_is_filename=False)
+        email_sender.send_to_candidate(candidates=candidates,
+                                       language_code=request.LANGUAGE_CODE,
+                                       body_input=request.POST.get('email_body'),
+                                       subject=candidate_module.get_subject(request, pk),
+                                       with_localization=False,
+                                       body_is_filename=False)
 
     backlog, waiting_tests, waiting_interview, did_interview_in_standby, sent_to_client, got_job, rejected, states = candidate_module.get_rendering_data(pk)
 
