@@ -81,44 +81,6 @@ def index(request):
     return render(request, cts.INTRO_VIEW_PATH)
 
 
-def post_index(request):
-    """
-    Action taken when a form is submitted.
-    Args:
-        request: A request object.
-
-    Returns: saves new User
-    """
-    # Gets information of client: such as if it is mobile
-    ua_string = request.META['HTTP_USER_AGENT']
-    user_agent = parse(ua_string)
-
-    ip = get_ip(request)
-
-    user = User(name=request.POST.get('name'),
-                email=request.POST.get('email'),
-                ip=ip,
-                ui_version=cts.UI_VERSION,
-                is_mobile=user_agent.is_mobile,)
-
-    # Saves here to get an id
-    user.save()
-    user.curriculum_url = save_curriculum_from_request(request, user, 'curriculum')
-    user.save()
-
-    update_search_dictionary_on_background()
-
-    # TODO: pay the monthly fee
-    #try:
-    #    email_sender.send(user, request.LANGUAGE_CODE)
-    #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
-    #    pass
-
-    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover your true passion"),
-                                                   'secondary_message': _("We search millions of jobs and find the right one for you"),
-                                                   })
-
-
 # TODO: Localization a las patadas
 def translate_list_of_objects(objects, language_code):
     """Assigns to field name the language specific one."""
