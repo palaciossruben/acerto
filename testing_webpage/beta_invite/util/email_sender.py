@@ -77,7 +77,7 @@ def send_email_with_mailgun(sender, recipients, subject, body, mail_gun_url, mai
 
 
 def get_test_url(user):
-
+    # TODO: change to test with candidate
     if hasattr(user, 'campaign_id'):
         return 'http://peaku.co/beta_invite/long_form/post?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
                                                                                                                campaign_id=user.campaign_id)
@@ -86,10 +86,30 @@ def get_test_url(user):
 
 
 def get_video_url(user):
-
+    # TODO: change to interview with candidate
     if hasattr(user, 'campaign_id'):
         return 'https://peaku.co/beta_invite/long_form/interview/1?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
-                                                                                                                       campaign_id=user.campaign_id)
+                                                                                                                       campaign_id=user.campaign.id)
+    else:
+        return ''
+
+
+# TODO: make only one method
+def get_test_url_for_candidate(user, campaign):
+    # TODO: change to test with candidate
+    if hasattr(user, 'campaign_id'):
+        return 'http://peaku.co/beta_invite/long_form/post?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
+                                                                                                               campaign_id=campaign.id)
+    else:
+        return ''
+
+
+# TODO: make only one method
+def get_video_url_for_candidate(user, campaign):
+    # TODO: change to interview with candidate
+    if hasattr(user, 'campaign_id'):
+        return 'https://peaku.co/beta_invite/long_form/interview/1?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
+                                                                                                                       campaign_id=campaign.id)
     else:
         return ''
 
@@ -148,6 +168,32 @@ def get_params(user, sender_data, language_code, override_dict):
     return params
 
 
+def get_params_for_candidate(candidate, sender_data, language_code, override_dict):
+    """
+    Args:
+        candidate: Object.
+        sender_data:
+        language_code: just that.
+        override_dict: Dictionary that changes the default values.
+    Returns:
+    """
+    params = {'name': get_first_name(candidate.user.name),
+              'complete_name': candidate.user.name.title(),
+              'test_url': get_test_url_for_candidate(candidate.user, candidate.campaign),
+              'cv_url': get_cv_url(candidate.user),
+              'video_url': get_video_url_for_candidate(candidate.user, candidate.campaign),
+              'sender_name': sender_data['sender_name'],
+              'sender_position': sender_data['sender_position'],
+              'peaku_address': sender_data['peaku_address'],
+              'campaign': get_campaign_name(candidate, language_code),
+              'campaign_url': get_campaign_url_with_user(candidate)}
+
+    for k, v in override_dict.items():
+        params[k] = v
+
+    return params
+
+
 def get_body(body_is_filename, body_input):
     """
     Args:
@@ -192,6 +238,42 @@ def send(users, language_code, body_input, subject, with_localization=True, body
 
         send_email_with_mailgun(sender=sender_data['email'],
                                 recipients=user.email,
+                                subject=subject.format(**params),
+                                body=body.format(**params),
+                                mail_gun_url=sender_data['mailgun_url'],
+                                mailgun_api_key=sender_data['mailgun_api_key'])
+
+
+def send_to_candidate(candidates, language_code, body_input, subject, with_localization=True, body_is_filename=True, override_dict={}):
+    """
+    Sends an email
+    Args:
+        candidates: a Candidate object or a list of Candidates. has fields 'name', 'email' and campaign
+        language_code: eg: 'es' or 'en'
+        body_input: the filename of the body content or the body itself
+        subject: string with the email subject
+        with_localization: Boolean indicating whether emails are translated according to browser configuration.
+        body_is_filename: Boolean indicating whether the body_input is a filename or a string with content.
+        override_dict: Dictionary where keys are fields and values to override the keyword behavior.
+    Returns: Sends email
+    """
+
+    if with_localization and language_code != 'en':
+        body_input += '_{}'.format(language_code)
+
+    if type(candidates) != list:
+        candidates = [candidates]
+
+    sender_data = read_email_credentials()
+
+    for candidate in candidates:
+
+        params = get_params_for_candidate(candidate, sender_data, language_code, override_dict)
+
+        body = get_body(body_is_filename, body_input)
+
+        send_email_with_mailgun(sender=sender_data['email'],
+                                recipients=candidate.user.email,
                                 subject=subject.format(**params),
                                 body=body.format(**params),
                                 mail_gun_url=sender_data['mailgun_url'],
@@ -306,7 +388,7 @@ def send_internal(contact, language_code, body_filename, subject):
     if language_code != 'en':
         body_filename += '_{}'.format(language_code)
 
-    with open(os.path.join(get_current_path(), body_filename)) as fp:
+    with open(os.path.join(get_current_path(), body_filename), encoding='utf-8') as fp:
 
         try:
             message = contact.message
