@@ -143,6 +143,7 @@ def get_params(user, sender_data, override_dict):
     return params
 
 
+# TODO: the code is duplicated
 def get_params_for_candidate(candidate, sender_data, language_code, override_dict):
     """
     Args:
@@ -185,6 +186,7 @@ def get_body(body_is_filename, body_input):
         return body_input
 
 
+# TODO: the code is duplicated
 def send(users, language_code, body_input, subject, with_localization=True, body_is_filename=True, override_dict={}):
     """
     Sends an email
@@ -221,6 +223,7 @@ def send(users, language_code, body_input, subject, with_localization=True, body
                                 mailgun_api_key=sender_data['mailgun_api_key'])
 
 
+# TODO: the code is duplicated
 def send_to_candidate(candidates, language_code, body_input, subject, with_localization=True, body_is_filename=True, override_dict={}):
     """
     Sends an email

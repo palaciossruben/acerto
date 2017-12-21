@@ -2,7 +2,7 @@
 All functions related to candidates, dashboard stuff.
 """
 
-from beta_invite.views import save_curriculum_from_request
+from beta_invite.new_user_module import save_curriculum_from_request
 from dashboard.models import Comment, Candidate, State
 from beta_invite.models import Campaign, User
 from dashboard import constants as cts

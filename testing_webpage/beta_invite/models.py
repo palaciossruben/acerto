@@ -282,6 +282,8 @@ class User(models.Model):
     education = models.ForeignKey(Education, null=True, on_delete=models.SET_NULL)
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
     curriculum_url = models.CharField(max_length=200, default='#')
+
+    # TODO: deprecated: remove when sure there are no dependencies remaining. Not saving anymore
     campaign = models.ForeignKey(Campaign, null=True)
     phone = models.CharField(max_length=40, null=True)
 
