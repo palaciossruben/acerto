@@ -40,18 +40,20 @@
             <img id="peaku-home" src="{% static 'beta_invite/img/peaku_home.svg' %}"/></a>
 
         <div id="log-and-sign-up">
-            {% if user.is_authenticated %}
-                <form class="log-in-form" action="{% url 'business:logout' %}">
-                    <input class="log-in-input" type="submit" value="{% trans 'Log Out' %}">
-                </form>
-            {% else %}
-                <form id="sign-up-form" action="{% url 'business:start' %}">
-                    <input id="sign-up-input" type="submit" value="{% trans 'Sign Up' %}">
-                </form>
+            {% if 'business' in request.path %}
+                {% if user.is_authenticated %}
+                    <form class="log-in-form" action="{% url 'business:logout' %}">
+                        <input class="log-in-input" type="submit" value="{% trans 'Log Out' %}">
+                    </form>
+                {% else %}
+                    <form id="sign-up-form" action="{% url 'business:start' %}">
+                        <input id="sign-up-input" type="submit" value="{% trans 'Sign Up' %}">
+                    </form>
 
-                <form class="log-in-form" action="{% url 'business:login' %}">
-                    <input class="log-in-input" type="submit" value="{% trans 'Log In' %}">
-                </form>
+                    <form class="log-in-form" action="{% url 'business:login' %}">
+                        <input class="log-in-input" type="submit" value="{% trans 'Log In' %}">
+                    </form>
+                {% endif %}
             {% endif %}
         </div>
 
