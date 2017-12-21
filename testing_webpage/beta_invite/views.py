@@ -1,14 +1,9 @@
 import os
-import smtplib
-import subprocess
-import unicodedata
 from user_agents import parse
-from django.core.files.storage import FileSystemStorage
 from django.utils.translation import ugettext as _
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
-from datetime import datetime
 
 import common
 from ipware.ip import get_ip
@@ -16,58 +11,7 @@ from beta_invite import constants as cts
 from beta_invite.util import email_sender
 from beta_invite import interview_module
 from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser, Bullet, BulletType, Test, Question, Survey, Score, Evaluation
-from beta_invite import test_module
-from dashboard.models import Candidate
-
-
-def remove_accents(text):
-    return ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
-
-
-def rename_filename(filename):
-    """Removes accents, spaces and other chars to have a easier time later"""
-
-    replacement = {' ': '_', '(': '_', ')': '_'}
-
-    for my_char, replace_char in replacement.items():
-
-        if my_char in filename:
-            filename = filename.replace(my_char, replace_char)
-
-    return remove_accents(filename)
-
-
-def save_curriculum_from_request(request, user, param_name):
-    """
-    Saves file on machine resumes/* file system
-    Args:
-        request: HTTP request
-        user: Object
-        param_name: string, name of File on the request
-    Returns: file url or None if nothing is saves.
-    """
-
-    # validate correct method and has file.
-    if request.method == 'POST' and len(request.FILES) != 0 and request.FILES[param_name] is not None:
-
-        curriculum_file = request.FILES[param_name]
-        fs = FileSystemStorage()
-
-        user_id_folder = str(user.id)
-        folder = os.path.join('resumes', user_id_folder)
-
-        file_path = os.path.join(folder, rename_filename(curriculum_file.name))
-
-        fs.save(file_path, curriculum_file)
-
-        # once saved it will collect the file
-        subprocess.call('python3 manage.py collectstatic -v0 --noinput', shell=True)
-
-        # at last returns the curriculum url
-        return file_path
-
-    else:
-        return '#'
+from beta_invite import test_module, new_user_module
 
 
 def index(request):
@@ -229,16 +173,6 @@ def update_search_dictionary_on_background():
     os.system(command)
 
 
-def user_if_exists(email):
-    """
-    Args:
-        email: string
-    Returns: The most recent user if exists, else None
-    """
-    for u in User.objects.filter(email=email).order_by('-created_at'):
-        return u
-
-
 def post_long_form(request):
     """
     Args:
@@ -280,34 +214,15 @@ def post_long_form(request):
                        'ip': ip,
                        'ui_version': cts.UI_VERSION,
                        'is_mobile': is_mobile,
-                       'campaign': campaign,
                        'language_code': request.LANGUAGE_CODE}
 
         # TODO: update user instead of always creating a new one.
-        # Be careful with the campaign field.
-        #user = user_if_exists(request.POST.get('email'))
+        user = new_user_module.user_if_exists(request.POST.get('email'))
 
-        #if user:  # updates user
-        #    user.update(**user_params)
-        #    user.updated_at = datetime.utcnow()
-        #    #TODO: update Candidate.
-        #else:  # creates user
-        user = User(**user_params)
-        # Saves here to get an id
-        user.save()
-
-        user.curriculum_url = save_curriculum_from_request(request, user, 'curriculum')
-        user.save()
-
-        # Starts on Backlog default state, when no evaluation has been done.
-        candidate = Candidate(campaign=campaign, user=user)
-        candidate.save()
-
-        email_body_name = 'user_signup_email_body'
-        if is_mobile:
-            email_body_name += '_mobile'
-
-        email_sender.send_to_candidate(candidate, request.LANGUAGE_CODE, email_body_name, _('Welcome to PeakU'))
+        if user:
+            user = new_user_module.update_user(campaign, user, user_params, request)
+        else:
+            user = new_user_module.create_user(campaign, user_params, request, is_mobile)
 
         end_point_params['user_id'] = user.id
 
@@ -456,7 +371,6 @@ def get_test_result(request):
 
     if not test_done or evaluation.passed:
 
-        #send_interview_mail('user_interview_email_body', user, campaign)
         send_interview_mail('user_interview_email_body', candidate)
 
         right_button_action = interview_module.adds_campaign_and_user_to_url('interview/1', user_id, campaign.id)
@@ -580,7 +494,7 @@ def add_cv_changes(request):
 
     if user_id is not None:
         user = User.objects.get(pk=int(user_id))
-        user.curriculum_url = save_curriculum_from_request(request, user, 'curriculum')
+        user.curriculum_url = new_user_module.save_curriculum_from_request(request, user, 'curriculum')
         user.save()
         return render(request, cts.SUCCESS_VIEW_PATH, {})
 
