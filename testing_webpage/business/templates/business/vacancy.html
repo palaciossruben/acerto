@@ -12,7 +12,17 @@
 <body class="indent_style">
 
     <h3 class="secondary-title" >{% trans "Describe the position" %}</h3>
+    <iframe id="preview" align="right" width="750" height="900" src="http://127.0.0.1:8000/beta_invite/long_form?campaign_id=1" style="-webkit-transform:scale(0.5);
+    ;-moz-transform-scale(0.4);"> </iframe>
+    <script type = "text/javascript">
+    window.onload = function() {
+        setInterval(function refresh_preview() {
+            document.getElementById("#preview").src ="http://127.0.0.1:8000/beta_invite/long_form?campaign_id=1"
+        }, 90000);
+    }
+</script>
     <div class="secondary-yellow-bar"></div>
+
 
     <!--<p>Importante: La prueba gratuita aplica exclusivamente para el plan operativo.</p>-->
 
@@ -23,6 +33,7 @@
         <input type="radio" name="plan_id" value="1"> {% trans "Operational Staff" %}
         <input type="radio" name="plan_id" value="2"> {% trans "Professional" %}
         <input type="radio" name="plan_id" value="3"> {% trans "Specific" %}
+
     </div>
 
     <div class="section-container">

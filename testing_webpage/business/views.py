@@ -663,11 +663,19 @@ def dashboard(request, pk):
     backlog, waiting_tests, waiting_interview, did_interview, sent_to_client, got_job, rejected, states = candidate_module.get_rendering_data(
         campaign.id)
 
-    # all campaigns except the current one.
-    campaigns_to_move_to = Campaign.objects.exclude(pk=campaign.id)
+    # enters here when sending an email
+    if request.GET.get('send_mail') is not None:
+
+        users = get_checked_box_users(campaign.id, request)
+
+        email_sender.send(users=users,
+                          language_code='es',
+                          body_input=request.GET.get('email_body'),
+                          subject=request.GET.get('email_subject'),
+                          with_localization=False,
+                          body_is_filename=False)
 
     return render(request, cts.DASHBOARD_VIEW_PATH, {"campaign": campaign,
-                                                     "campaigns": campaigns_to_move_to,
                                                      'backlog': backlog,
                                                      'states': states,
                                                      'waiting_tests': waiting_tests,
@@ -677,3 +685,11 @@ def dashboard(request, pk):
                                                      'got_job': got_job,
                                                      'rejected': rejected,
                                                      })
+
+
+from dashboard.models import Candidate
+
+
+def get_checked_box_users(campaign_id, request):
+    candidates = Candidate.objects.filter(campaign_id=campaign_id)
+    return [c.user for c in candidates if request.GET.get('{}_checkbox'.format(c.id))]
