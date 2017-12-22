@@ -12,7 +12,6 @@
 
 /* Style the buttons inside the tab */
 .tab button {
-    background-color: inherit;
     float: left;
     border: none;
     outline: none;
@@ -20,7 +19,6 @@
     padding: 14px 16px;
     transition: 0.3s;
     font-size: 17px;
-    color: var(--blue);
 }
 
 /* Change background color of buttons on hover */
