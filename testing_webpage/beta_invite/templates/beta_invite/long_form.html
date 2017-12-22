@@ -39,6 +39,10 @@
 
                     <p class="paragraph">{{ campaign.description }}</p>
 
+                    {% if requirements %}
+                        <h4 class="title-blue" align="left">{% trans "Requirements" %}</h4>
+                    {% endif %}
+
                     <ul class="bullets-list">
                         {% for req in requirements %}
                             <li class="bullet">{{ req.name }}</li>
