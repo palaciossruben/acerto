@@ -1,0 +1,102 @@
+[
+  {
+    "model": "dashboard.state",
+    "pk": 1,
+    "fields":{
+      "name": "Backlog",
+      "code": "BL",
+      "priority":10,
+      "is_rejected": false
+    }
+  },
+  {
+    "model": "dashboard.state",
+    "pk": 2,
+    "fields":{
+      "name": "Screening rejected",
+      "code": "SR",
+      "priority":1,
+      "is_rejected": true
+    }
+  },
+  {
+    "model": "dashboard.state",
+    "pk": 3,
+    "fields":{
+      "name": "Waiting for Tests",
+      "code": "WFT",
+      "priority":3,
+      "is_rejected": false
+    }
+  },
+  {
+    "model": "dashboard.state",
+    "pk": 8,
+    "fields":{
+      "name": "Waiting for Interview",
+      "code": "WFI",
+      "priority":4,
+      "is_rejected": false
+    }
+  },
+  {
+    "model": "dashboard.state",
+    "pk": 4,
+    "fields":{
+      "name": "Rejected on Tests",
+      "code": "ROT",
+      "priority":5,
+      "is_rejected": true
+    }
+  },
+  {
+    "model": "dashboard.state",
+    "pk": 9,
+    "fields":{
+      "name": "Rejected on Interview",
+      "code": "ROI",
+      "priority":6,
+      "is_rejected": true
+    }
+  },
+  {
+    "model": "dashboard.state",
+    "pk": 5,
+    "fields":{
+      "name": "Sent to client",
+      "code": "STC",
+      "priority":8,
+      "is_rejected": false
+    }
+  },
+  {
+    "model": "dashboard.state",
+    "pk": 6,
+    "fields":{
+      "name": "Rejected by client",
+      "code": "RBC",
+      "priority":7,
+      "is_rejected": true
+    }
+  },
+  {
+    "model": "dashboard.state",
+    "pk": 7,
+    "fields":{
+      "name": "Got the job",
+      "code": "GTJ",
+      "priority":9,
+      "is_rejected": false
+    }
+  },
+  {
+    "model": "dashboard.state",
+    "pk": 10,
+    "fields":{
+      "name": "Did interview, standby",
+      "code": "DIS",
+      "priority":9,
+      "is_rejected": false
+    }
+  }
+]

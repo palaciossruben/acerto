@@ -1,0 +1,502 @@
+[
+  {
+    "model": "beta_invite.answer",
+    "pk": 1,
+    "fields":{
+      "name": "Minimum Wage ($ 737.717 COP)",
+      "name_es": "Salario mínimo ($ 737.717 COP)",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 2,
+    "fields":{
+      "name": "Between $ 737.717 COP y $ 1'300.000 COP",
+      "name_es": "Entre $ 737.717 y $ 1'300.000 de pesos",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 3,
+    "fields":{
+      "name": "Between $ 1'300.0000 COP and $ 2'000.000 COP",
+      "name_es": "Entre $ 1'300.0000 y $ 2'000.000 pesos",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 4,
+    "fields":{
+      "name": "Between $ 2'00.0000 COP and $ 3'000.000 COP",
+      "name_es": "Entre $ 2'000.000 y 3'000.000 pesos",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 5,
+    "fields":{
+      "name": "More than $ 3'000.000 COP",
+      "name_es": "Mayor a $ 3'000.000 COP",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 6,
+    "fields":{
+      "name": "Less than 3M COP",
+      "name_es": "Menos de 3M de pesos",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 7,
+    "fields":{
+      "name": "Between 3M COP and 6M COP",
+      "name_es": "Entre 3M y 6M de pesos",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 8,
+    "fields":{
+      "name": "Between 6M COP and 8M COP",
+      "name_es": "Entre 6M y 8M de pesos",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 9,
+    "fields":{
+      "name": "More than 8M COP",
+      "name_es": "Más de 8M de pesos",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 10,
+    "fields":{
+      "name": "20",
+      "name_es": "20",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 11,
+    "fields":{
+      "name": "21",
+      "name_es": "21",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 12,
+    "fields":{
+      "name": "22",
+      "name_es": "22",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 13,
+    "fields":{
+      "name": "23",
+      "name_es": "23",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 14,
+    "fields":{
+      "name": "24",
+      "name_es": "24",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 15,
+    "fields":{
+      "name": "I would tell him that one thing is the personal side of things and another thing is the professional side of things. And he should not mix both.",
+      "name_es": "Le dejaría en claro que una cosa es la relación personal y otra es la profesional. Y que ambas no deberían mezclarse",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 17,
+    "fields":{
+      "name": "I would try to understand his motives in order to propose according to his line of thought and from his perspective",
+      "name_es": "Trataría de entender cuales son sus motivos; y de acuerdo a ellos propondría soluciones",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 18,
+    "fields":{
+      "name": "I would follow the new boss instructions in order for him to change his attitude",
+      "name_es": "Seguría las instrucciones del nuevo jefe para que cambie de actitud",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 19,
+    "fields":{
+      "name": "I would align the interest of the whole team and negotiate with the new boss, according to everybody interest",
+      "name_es": "Alinearia los intereses de todo el equipo para llegar a un acuerdo con el nuevo jefe",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 20,
+    "fields":{
+      "name": "I would raise my hand and speak my discomfort and why it happens",
+      "name_es": "Levantaría la mano y diría cual es mi malestar y por que",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 21,
+    "fields":{
+      "name": "O(1)",
+      "name_es": "O(1)",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 22,
+    "fields":{
+      "name": "O(log(n))",
+      "name_es": "O(log(n))",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 23,
+    "fields":{
+      "name": "O(n)",
+      "name_es": "O(n)",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 24,
+    "fields":{
+      "name": "O(n*log(n))",
+      "name_es": "O(n*log(n))",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 25,
+    "fields":{
+      "name": "O(n^2)",
+      "name_es": "O(n^2)",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 26,
+    "fields":{
+      "name": "Try new things often",
+      "name_es": "Experimentar nuevas cosas a menudo",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 27,
+    "fields":{
+      "name": "Make a diploma with worldwide experts in your area",
+      "name_es": "Hacer un diplomado de la mano de expertos en tu area, a nivel mundial",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 28,
+    "fields":{
+      "name": "Study from the top books in the area",
+      "name_es": "Estudiar de los libros más conocidos en el area",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 29,
+    "fields":{
+      "name": "Is a general purpose programming language such as Python or C",
+      "name_es": "Es un lenguaje de programación de proposito general similar a Python o C",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 30,
+    "fields":{
+      "name": "It is a programming framework such as Ruby on Rails, Django or Node.js",
+      "name_es": "Es un framework web como Ruby on Rails, Django o Node.js",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 31,
+    "fields":{
+      "name": "It is used to communicate and retreive information from databases such as PostgreSQL",
+      "name_es": "Se usa para comunicarse y extraer información de bases de datos como PostgreSQL",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 32,
+    "fields":{
+      "name": "No",
+      "name_es": "No",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 33,
+    "fields":{
+      "name": "Si",
+      "name_es": "Si",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 34,
+    "fields":{
+      "name": "Find the first duplicate ELEMENT.",
+      "name_es": "Encontrar el primer ELEMENTO repetido.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 35,
+    "fields":{
+      "name": "Find the INDEX of the first duplicate element, additionally return -1 if there are no repeated elements.",
+      "name_es": "Encontrar el INDICE del primer elemento repetido, adicionalemente retornar -1 si no hay elementos repetidos.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 36,
+    "fields":{
+      "name": "Find the first duplicate ELEMENT, additionally return -1 if there are no duplicates.",
+      "name_es": "Encontrar el primer ELEMENTO repetido, adicionalmente retornar -1 si no hay elementos repetidos.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 37,
+    "fields":{
+      "name": "Find the first duplicate ELEMENT, return -1 if there are no duplicates. Also the values of the elements are between 1 and a.length",
+      "name_es": "Encontrar el primer ELEMENTO repetido, retornar -1 si no hay elementos repetidos. Además los valores de los elementos están entre 1 y a.length.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 38,
+    "fields":{
+      "name": "The code has a bug, because indexes cannot be negative.",
+      "name_es": "El código tiene un bug, ya que los indices negativos no están permitidos.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 39,
+    "fields":{
+      "name": "If it never finds a duplicate then it returns -1 as the problem asks.",
+      "name_es": "Si nunca encuentra un elemento duplicado retorna -1 como lo exige el problema.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 40,
+    "fields":{
+      "name": "It is similar to 'return 0' in C. There should always be a 'return' so there are no memory leaks.",
+      "name_es": "Es similar a 'return 0' en C. Siempre debe haber un 'return' para evitar leaks de memoria.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 41,
+    "fields":{
+      "name": "None of the above.",
+      "name_es": "Ninguna de las anteriores.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 42,
+    "fields":{
+      "name": "mySet stores the ELEMENTS that already passed. If it finds a duplicate element, it returns it. mySet is MORE efficient than a array.",
+      "name_es": "mySet guarda los ELEMENTOS por los que ya pasó. Si encuentra un elemento repetido, lo retorna. mySet es MAS eficiente que un arreglo.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 43,
+    "fields":{
+      "name": "mySet stores the INDICES that already passed. If it finds a duplicate element, it returns it. mySet is MORE efficient than an array.",
+      "name_es": "mySet guarda los INDICES por los que ya pasó. Si encuentra un elemento repetido, lo retorna. mySet es MAS eficiente que un arreglo.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 44,
+    "fields":{
+      "name": "mySet stores the INDICES that already passed. If it finds a duplicate element, it returns it. mySet is LESS efficient than an array.",
+      "name_es": "mySet guarda los INDICES por los que ya pasó. Si encuentra un elemento repetido, lo retorna. mySet es MENOS eficiente que un arreglo.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 45,
+    "fields":{
+      "name": "mySet stores the ELEMENTS that already passed. If it finds a duplicate element, it returns it. mySet is LESS efficient than an array.",
+      "name_es": "mySet guarda los ELEMENTOS por los que ya pasó. Si encuentra un elemento repetido, lo retorna. mySet es MENOS eficiente que un arreglo.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 46,
+    "fields":{
+      "name": "The code on the RIGHT is faster because Set() inserts elements FASTER than the array",
+      "name_es": "El código de la derecha es más veloz por que el Set() inserta elementos más RAPIDO que el arreglo.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 47,
+    "fields":{
+      "name": "The code on the LEFT is faster because Set() inserts elements SLOWER than the array",
+      "name_es": "El código de la IZQUIERDA es más veloz por que el Set() inserta elementos más LENTO que el arreglo.",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 48,
+    "fields":{
+      "name": "6",
+      "name_es": "6",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 49,
+    "fields":{
+      "name": "17",
+      "name_es": "17",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 50,
+    "fields":{
+      "name": "24",
+      "name_es": "24",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 51,
+    "fields":{
+      "name": "21",
+      "name_es": "21",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  }
+]

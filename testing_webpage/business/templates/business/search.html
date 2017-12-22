@@ -1,0 +1,255 @@
+<!DOCTYPE HTML>
+<html lang="en">
+{% load i18n %}
+{% load static %}
+
+<!-- start Mixpanel -->
+<script type="text/javascript">(function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+mixpanel.init("d60ac5ae289f60c7f824d49a4d15be30");</script>
+<!-- end Mixpanel -->
+
+<head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable=no">
+	  <meta name="description" content="find your true passion, encuentra tu verdadera pasion">
+      <meta name="keywords" content="job, trabajo, right job, trabajo perfecto">
+	  <meta name="author" content="Juan Pablo Isaza">
+	  <meta name="google-site-verification" content="LPqesGS5MnESQN-E-LNjZWtRrZAY4rO__YDq8WFjpOs" />
+	  <meta name="google-site-verification" content="tR13zEizNHyoMXQ0j8F1ImD0Xe3FdWFHUq-ksIKUscE" />
+
+      <title>PeakU</title>
+
+      <!-- ============ GOOGLE FONTS ============ -->
+      <link href='http://fonts.googleapis.com/css?family=Raleway:100,200,300,400,700,900' rel='stylesheet' type='text/css'>
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+      <link href='http://fonts.googleapis.com/css?family=Iceberg' rel='stylesheet' type='text/css'>
+	  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+	  <!-- Google Analytics -->
+	  <script type="text/javascript" src="{% static 'js/google_analytics.js' %}" async></script>
+
+      <!-- CSS -->
+      <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+
+      <!-- Font Awesome CSS -->
+	  <link rel="stylesheet" type="text/css" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+
+      <!-- Custom styles CSS -->
+	  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+      <!-- Favicons -->
+      <link rel="apple-touch-icon" sizes="57x57" href="{% static 'beta_invite/favicon.ico/apple-icon-57x57.png' %}">
+	  <link rel="apple-touch-icon" sizes="60x60" href="{% static 'beta_invite/favicon.ico/apple-icon-60x60.png' %}">
+	  <link rel="apple-touch-icon" sizes="72x72" href="{% static 'beta_invite/favicon.ico/apple-icon-72x72.png' %}">
+	  <link rel="apple-touch-icon" sizes="76x76" href="{% static 'beta_invite/favicon.ico/apple-icon-76x76.png' %}">
+	  <link rel="apple-touch-icon" sizes="114x114" href="{% static 'beta_invite/favicon.ico/apple-icon-114x114.png' %}">
+	  <link rel="apple-touch-icon" sizes="120x120" href="{% static 'beta_invite/favicon.ico/apple-icon-120x120.png' %}">
+	  <link rel="apple-touch-icon" sizes="144x144" href="{% static 'beta_invite/favicon.ico/apple-icon-144x144.png' %}">
+	  <link rel="apple-touch-icon" sizes="152x152" href="{% static 'beta_invite/favicon.ico/apple-icon-152x152.png' %}">
+	  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'beta_invite/favicon.ico/apple-icon-180x180.png' %}">
+	  <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png' %}">
+	  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'beta_invite/favicon.ico/favicon_16.ico' %}">
+	  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'beta_invite/favicon.ico/favicon_24.ico' %}">
+	  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'beta_invite/favicon.ico/favicon_32.ico' %}">
+	  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'beta_invite/favicon.ico/favicon_48.ico' %}">
+	  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'beta_invite/favicon.ico/favicon_64.ico' %}">
+	  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'beta_invite/favicon.ico/favicon_72.ico' %}">
+	  <link rel="icon" type="image/png" sizes="96x96" href="{% static 'beta_invite/favicon.ico/favicon_96.ico' %}">
+	  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'beta_invite/favicon.ico/favicon_128.ico' %}">
+	  <link rel="manifest" href="{% static 'beta_invite/favicon.ico/manifest.json' %}">
+	  <meta name="msapplication-TileColor" content="#ffffff">
+	  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+	  <meta name="theme-color" content="#ffffff">
+
+  </head>
+
+ <body background="{% static 'beta_invite/bgg.jpg' %}">
+
+ 		<script>
+			mixpanel.track("Click on Search candidates");
+		</script>
+
+        <!-- Google Code for free conversion -->
+		<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 837109052;
+		var google_conversion_language = "en";
+		var google_conversion_format = "3";
+		var google_conversion_color = "ffffff";
+		var google_conversion_label = "hvIvCIT3tHQQvIqVjwM";
+		var google_remarketing_only = false;
+		/* ]]> */
+		</script>
+		<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+		</script>
+		<noscript>
+		<div style="display:inline;">
+		<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/837109052/?label=hvIvCIT3tHQQvIqVjwM&amp;guid=ON&amp;script=0"/>
+		</div>
+		</noscript>
+
+		{% include "business/login_buttons.html"%}
+
+   <!-- BEGIN WELCOME -->
+    <div class="welcome-section" id="top" style="">
+      <div class="title" style="margin-top:-100px;">
+
+		 <div class="container" style="margin-top:5px;">
+		   <span data-sr="wait 0.5s, then enter top and move 40px over 1s" style="color:#134984; font-size:25px;">
+				<span style=" font-weight:500; color:#F8E676;">
+					<b style="font-weight:400; text-transform: uppercase;">{% trans "Search our Curriculum Database" %}</b>
+				</span>
+		   </span>
+			<div class="subscribe" style="margin-top:-25px;">
+
+			   <form id="search_form" method="post" style="text-align:center; margin-top:0px;"
+			   enctype="multipart/form-data" action="{{ action_url }}">
+
+				{% csrf_token %}
+
+				<br>
+
+			    <select style=" width: 266px; font-size: 14px; height: 44px; border:solid 1px #F8E676; background-color:white;
+			    margin-top:15px; cursor:pointer"
+			     name="country">
+				   {% for country in countries%}
+				 	 <option value={{ country.id }}>{{ country.name }}</option>
+				   {% endfor %}
+			    </select>
+
+			    <br>
+
+				  <select style=" width: 266px; font-size: 14px; height: 44px; border:solid 1px #F8E676; background-color:white;
+				  margin-top:15px; cursor:pointer"
+				   name="education">
+					  {% for level in education%}
+						 <option value={{ level.id }}>{{ level.name }}</option>
+					  {% endfor %}
+				  </select>
+
+			    <br>
+
+				<select style=" width: 266px; font-size: 14px; height: 44px; border:solid 1px #F8E676; background-color:white;
+				  margin-top:15px; cursor:pointer"
+				   name="profession">
+					  {% for profession in professions%}
+						 <option value={{ profession.id }}>{{ profession.name }}</option>
+					  {% endfor %}
+				  </select>
+
+				  <br>
+
+				  {% trans "Skills or any other information" as skills_placeholder %}
+				<input style="font-family:Raleway; padding-left: 20px; font-size: 14px; height: 40px; margin-top:20px;
+				 border:solid 1px #F8E676; background-color:white; width: 250px;" id="skills" type="text" name="skills"
+				  placeholder="{{ skills_placeholder }}" >
+
+				  <br>
+
+				  <div style="margin-top:20px;">
+					  <label style="font-size:18px;  margin-bottom:0px; color:#F8E676;">{% trans "Experience in years:" %}</label>
+					  <input style="width: 50px; font-size: 14px; height: 30px;" name="experience" id="experience"
+					   type="number" value="0" min="0" max="60" />
+				  </div>
+
+				<br>
+
+				{% trans "Search" as submit_value %}
+				<input style="height: 44px; border: solid 0px white; background:#F8E676; color:black; text-align:center;
+				 width: 81px; font-size: 16px; width: 266px; margin-bottom:40px; margin-top:35px; cursor:pointer;"
+				 type="submit" value="{{ submit_value }}" >
+
+			  </form>
+
+			</div>
+		  </div>
+		  <br/>
+		  <br/>
+
+      </div>
+
+      <!-- ARROW SCROLL-->
+      <div class="arrow">
+
+
+      </div>
+      <!-- /ARROW SCROLL -->
+      <div class="container">
+
+       </div>
+    </div>
+    <!-- END WELCOME -->
+<script type="text/javascript">
+    <!--
+    (function() {
+        var IE = /*@cc_on!@*/false;
+        if (!IE) { return; }
+        if (document.compatMode && document.compatMode == 'BackCompat') {
+            if (document.getElementById("af-form-981758079")) {
+                document.getElementById("af-form-981758079").className = 'af-form af-quirksMode';
+            }
+            if (document.getElementById("af-body-981758079")) {
+                document.getElementById("af-body-981758079").className = "af-body inline af-quirksMode";
+            }
+            if (document.getElementById("af-header-981758079")) {
+                document.getElementById("af-header-981758079").className = "af-header af-quirksMode";
+            }
+            if (document.getElementById("af-footer-981758079")) {
+                document.getElementById("af-footer-981758079").className = "af-footer af-quirksMode";
+            }
+        }
+    })();
+    -->
+</script>
+   <style>
+
+	@media (max-width: 768px) {
+		.enteremail{ width:100% !important;}
+		.logo img{ width:250px;}
+		.title{ margin-top:-80px !important;}
+		.title p{ font-size:14px !important;}
+	}
+
+	@media (max-width: 640px) {
+		.enteremail{ width:100% !important;}
+		.logo img{ width:250px;}
+		.title{ margin-top:-80px !important;}
+		.title p{ font-size:14px !important;}
+	}
+
+	@media (max-width: 480px) {
+		.enteremail{ width:100% !important;}
+		.logo img{ width:180px; margin-top:20px;}
+		.title{ margin-top:-80px !important;}
+		.title p{ font-size:14px !important;}
+		.countdown .day{width:100px !important;}
+		.countdown .hours{width:100px !important;}
+		.countdown .min{width:100px !important;}
+		.countdown .sec{width:100px !important;}
+	}
+	@media (max-width: 360px) {
+		.enteremail{ width:100% !important;}
+		.logo img{ width:180px; margin-top:20px;}
+		.title{ margin-top:-96px !important;}
+		.title p{ font-size:14px !important;}
+		.countdown .day{width:180px !important;}
+		.countdown .hours{width:180px !important;}
+		.countdown .min{width:180px !important;}
+		.countdown .sec{width:180px !important;}
+	}
+	@media (max-width: 320px) {
+		.enteremail{ width:100% !important;}
+		.logo img{ width:180px; margin-top:20px;}
+		.title{ margin-top:-96px !important;}
+		.title p{ font-size:14px !important;}
+		.countdown .day{width:150px !important;}
+		.countdown .hours{width:150px !important;}
+		.countdown .min{width:150px !important;}
+		.countdown .sec{width:150px !important;}
+	}
+   </style>
+
+</body>
+</html>

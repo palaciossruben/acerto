@@ -1,0 +1,339 @@
+--POSTGRES
+sudo service postgresql stop
+psql -d maindb -U dbadmin -p 5432 -h 192.168.1.131 
+
+
+--DB DELETION: BE CAREFUL!!!
+DROP DATABASE maindb;
+
+-- DB creation
+CREATE USER dbadmin WITH PASSWORD 'like_mago_de_oz';
+CREATE DATABASE maindb;
+GRANT ALL PRIVILEGES ON DATABASE maindb to dbadmin;
+
+
+--psql
+psql -d maindb -U dbadmin -p 5432 -h localhost
+
+-- When pushing to production:
+1. Deactivate debug mode in settings.py
+2. For now deactivate the send_email function.
+
+
+-- start virtualenv
+source ./myvenv/bin/activate
+
+
+-- run server!!!
+python3 manage.py runserver
+
+
+-- migration:
+python3 manage.py makemigrations beta_invite
+python3 manage.py sqlmigrate beta_invite 0001
+python3 manage.py migrate
+
+
+-- django interactive
+python manage.py shell
+
+
+-- make new app
+python manage.py startapp beta_invite
+
+
+-- SMTP server
+python -m smtpd -n -c DebuggingServer localhost:1025
+
+
+-- AWS EC2
+Launch instance:
+1. select ubuntu
+2. select micro instance free tier.
+3. select security group "production": access to averyone with HTTP and HTTPS. SSH access only my ip.
+4. select/create key_pair, download, have it secure.
+5. Launch
+
+
+
+---------------------- PRODUCTION ----------------------
+
+
+-- Setup EC2 instance
+sudo apt-get update
+sudo apt-get -y upgrade
+python3 -V
+sudo apt-get install -y python3-pip
+sudo apt-get install build-essential libssl-dev libffi-dev python-dev
+sudo apt install python-pip
+pip install --upgrade pip
+export LC_ALL=C
+pip3 install virtualenvwrapper
+
+5.Add these lines in ~/.bashrc
+    export WORKON_HOME=$HOME/.virtualenvs
+    source /usr/local/bin/virtualenvwrapper.sh
+
+6. Source it.
+source ~/.bashrc
+
+mkvirtualenv myenv
+workon myenv
+
+
+-- install screen
+sudo apt-get install screen
+screen -v
+
+to check for sessions of screen:
+screen -ls
+
+
+-- install psql
+sudo apt-get install postgresql-client
+
+
+-- install postgres
+sudo apt-get install postgresql postgresql-contrib
+Then create db as above, and connect with psql as above.
+
+
+--  install psycopg2
+sudo pip3 install psycopg2
+
+
+-- install django
+sudo pip3 install django
+if error on locales do:
+    export LC_ALL="en_US.UTF-8"
+    export LC_CTYPE="en_US.UTF-8"
+    sudo dpkg-reconfigure locales
+
+
+-- install ipware
+sudo pip3 install django-ipware
+
+-- Gunicorn
+pip3 install gunicorn
+
+-- to run gunicorn on background do (reload works for small projects only):
+cd acerto/testing_webpage/ && workon myenv && PYENV_VERSION=3.5.2 gunicorn -c gunicorn_cfg.py testing_webpage.wsgi
+
+--alternative
+watchmedo shell-command --patterns="*.py;*.html;*.css;*.js" --recursive --command='echo "${watch_src_path}" && kill -HUP `cat gunicorn.pid`' . &
+workon myenv && PYENV_VERSION=3.5.1 python manage.py run_gunicorn 127.0.0.1:80 --pid=gunicorn.pid
+
+
+-- TODO: to run on background should use:
+supervisord.org
+or follow tutorial:
+https://www.digitalocean.com/community/tutorials/how-to-deploy-falcon-web-applications-with-gunicorn-and-nginx-on-ubuntu-16-04
+
+—TODO: add support for www.peaku.co
+
+
+-- Installs htop
+sudo apt install htop
+
+-- execute:
+htop
+
+-- to see the running processes, get PID
+
+-- use PID for gentle kill:
+kill -TSTP [pid]
+
+-- hard kill with:
+kill -STOP [pid]
+
+-- build requirements on local, run without the virtual environment:
+PYENV_VERSION=3.5.1 pipreqs testing_webpage/
+
+
+-- To add static files do:
+1. Add this to the .conf nginx file, on the server section:
+
+location /static {
+        alias /home/ubuntu/acerto/testing_webpage/static; # your Django project's static files - amend as required
+    }
+
+2. add to settings:
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
+3. run
+python3 manage.py collectstatic -v0 --noinput
+
+4. restart nginx:
+sudo /etc/init.d/nginx restart
+
+
+-- TRANSLATION
+
+-- EASY install GNU gettext in ubuntu:
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install gettext libgettextpo-dev
+
+-- HARD install GNU gettext, by following:
+http://www.marinamele.com/taskbuster-django-tutorial/internationalization-localization-languages-time-zones
+
+-- download with:
+wget 'http://ftp.gnu.org/pub/gnu/gettext/gettext-latest.tar.gz' -O gettext.tar.gz
+
+-- unzip with:
+tar -xzvf gettext.tar.gz
+
+-- to make install add sudo:
+sudo make install
+
+
+
+-- for every day functions:
+1. python3 manage.py makemessages -l es
+2. add translations
+3. python3 manage.py compilemessages -l es
+
+
+-- Querying for traffic:
+select ip from beta_invite_visitor where cast(ip as text) NOT LIKE '190.%';
+
+
+
+-- Get users to file and download
+Copy (select name, email from beta_invite_user) To '/home/ubuntu/path/to/file.csv' With CSV DELIMITER '	';
+alter user dbadmin superuser;
+
+scp -i production_key.pem user@host:/home/ubuntu/path/to/file.csv /local/path/to/file
+
+
+-- link settings.py simlink:
+ln -s settings.{environment}.py settings.py
+
+where:
+environment = {production, development}
+
+
+-- Run Django Fixtures (Load data into database, and/or rewrite)
+python3 manage.py loaddata <my_json>.json
+
+
+-- get requirements of project with:
+PYENV_VERSION=3.5.1 pipreqs testing_webpage/ --force
+
+
+-- Additional python packages installs to read documents in multiple formats:
+sudo pip3 install PyPDF2
+sudo pip3 install pytesseract
+sudo pip3 install nltk
+
+-- For nltk download resources by
+python3 # enter python console
+>>> import nltk
+>>> nltk.download()
+select option 'd' then type 'popular'
+
+-- make sure is version 2 as version 1 is not compatible with python3
+sudo pip3 install pdfminer2
+
+-- textract had a installation issue hat to clone:
+git clone https://github.com/deanmalmgren/textract.git
+
+-- for .doc with textract
+sudo apt-get update
+sudo apt-get install antiword
+
+-- and run:
+sudo python3 setup.py install
+
+-- then install textract dependency, to decode .docx files:
+sudo pip3 install docx2txt
+
+-- THIS IS A DIFFICULT STUFF: BE VERY CAREFUL AND METHODICAL
+-- NEEDS THE LATEST LEPTONICA VERSION.
+-- INSTALL TESSERACT
+sudo apt-get update
+sudo apt-get install g++ # or clang++ (presumably)
+sudo apt-get install autoconf automake libtool
+sudo apt-get install autoconf-archive
+sudo apt-get install pkg-config
+sudo apt-get install libpng12-dev
+sudo apt-get install libjpeg8-dev
+sudo apt-get install libtiff5-dev
+sudo apt-get install zlib1g-dev
+sudo apt-get install libicu-dev
+sudo apt-get install libpango1.0-dev
+sudo apt-get install libcairo2-dev
+
+-- INSTALL LEPTONICA, from source:
+-- make sure you download the latest version, see: https://www.linux.com/blog/using-tesseract-ubuntucd ~
+cd ~
+wget http://www.leptonica.org/source/leptonica-(latest_version_here).tar.gz
+tar -zxvf leptonica-(latest_version_here).tar.gz
+cd leptonica-(latest_version_here)
+./configure
+make
+sudo checkinstall
+sudo ldconfig
+
+-- check leptonica version:
+pkg-config --modversion lept
+
+-- INSTALL TESSERACT FROM SOURCE:
+cd ~
+git clone https://github.com/tesseract-ocr/tesseract.git
+cd tesseract
+./autogen.sh
+./configure
+make
+sudo make install
+sudo ldconfig
+
+-- Finally Add file:
+cd ~
+wget https://github.com/tesseract-ocr/tessdata/raw/master/eng.traineddata
+
+-- then move to tesseract dir:
+mv eng.traineddata /usr/local/share/tessdata/eng.traineddata
+
+-- When reading files install to be able to decode accents:
+sudo pip3 install unidecode
+
+-- Advanced Libraries
+sudo pip3 install numpy
+sudo pip3 install sklearn
+sudo pip3 install scipy
+
+-- Install pdfimages image extraction, on linux, using:
+sudo apt-get install poppler-utils
+
+
+
+-- Resize Disk on AWS Ubuntu:
+1. Log to console
+2. Go to Volumes
+3. Modify Volume
+4. Check progress on machine state attribute.
+5. Check progress on volume state attribute.
+6. Once progress complete resize filesystem with (https://stackoverflow.com/questions/11014584/ec2-cant-resize-volume-after-increasing-size):
+
+    a. check partition mismatch:
+    lsblk
+
+    b. Install gsutils:
+    sudo apt install cloud-guest-utils
+
+    c. Resize partition:
+    sudo  growpart /dev/xvda 1
+
+    d. Check paritions again:
+    lsblk
+
+    e. Check before resizing:
+    df -h
+
+    f. Resize:
+    sudo resize2fs /dev/xvda1
+
+    g. Check after resizing:
+    df -h

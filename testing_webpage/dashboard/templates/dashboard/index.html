@@ -1,0 +1,47 @@
+{% load app_filters %}
+
+<h1>Campaigns</h1>
+<ul>
+    {% for campaign in campaigns %}
+
+        <li><a href="{{ campaign|get_campaign_url }}">{{ campaign.name }}</a>
+            {% if campaign.active %}
+                Active
+            {% else %}
+                Inactive
+            {% endif %}
+        <br>
+        <a href="campaign/{{ campaign.id }}">Candidates</a>
+        <br>
+        <a href="campaign/edit/{{ campaign.id }}">Edit</a>
+        <br>
+        <a href="campaign/{{ campaign.id }}/bullets">Bullets</a>
+        <br>
+        <a href="campaign/interview/{{ campaign.id }}">Interview</a>
+        <br>
+        <a href="campaign/{{ campaign.id }}/tests">Tests</a>
+        </li>
+        <br>
+    {% endfor %}
+</ul>
+
+<a href="campaign/new">New</a>
+
+<hr>
+
+<h1>Tests</h1>
+<ul>
+    {% for test in tests %}
+        <li>{{ test.name }}
+        <a href="test/{{ test.id }}">Edit</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<a href="test/new">New</a>
+
+<hr>
+
+<br>
+
+<a href="edit_intro_video">Edit interview intro video</a>

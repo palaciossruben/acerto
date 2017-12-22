@@ -1,0 +1,45 @@
+{% extends 'base.html'%}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}{% trans "PeakU - Personnel Selection" %}{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'business/css/start.css' %}">
+    <script type="text/javascript" src="{% static 'js/business/start.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+<body>
+    <div class="tab">
+        <button id="position_button" class="tab-links active" onclick="tab(event, 'position')">{% trans "Position" %}</button>
+        <button id="company_button" class="tab-links" onclick="tab(event, 'company')" disabled >{% trans "Company" %}</button>
+        <button id="start_button" class="tab-links" onclick="tab(event, 'start')" disabled >{% trans "Start" %}</button>
+    </div>
+
+    <form class="my-form" action="{% url 'business:start_post' %}" method="post">
+
+        <div id="position" class="tab-content">
+            {% include "business/vacancy.html"%}
+        </div>
+
+        <div id="company" class="tab-content">
+            {% include "business/company.html"%}
+        </div>
+
+        <div id="start" class="tab-content">
+            {% include "business/signup2.html"%}
+        </div>
+
+    </form>
+
+    <!-- After loading every element, sets the first element as active.-->
+    <script>
+        activate_tab('position');
+    </script>
+
+</body>
+
+{% endblock %}

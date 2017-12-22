@@ -1,0 +1,63 @@
+{% extends 'base.html'%}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}{{ plan.name }}{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'business/css/plan.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+    <img src="{% static 'business/img/plan_2.jpg' %}"
+         srcset="{% static 'business/img/plan_2@2x.jpg' %} 2x,
+                 {% static 'business/img/plan_2@3x.jpg' %} 3x"
+         class="background-people" >
+
+    <img src="{% static 'business/img/plan_2_mobile.jpg' %}"
+         srcset="{% static 'business/img/plan_2_mobile@2x.jpg' %} 2x,
+                 {% static 'business/img/plan_2_mobile@3x.jpg' %} 3x"
+         class="background-people-mobile" >
+
+    <h1 class="main-title" >{{ plan.name }}</h1>
+
+    <div id="text-white-rectangle">
+        <p id="description-text" >{{ plan.explanation }}</p>
+
+        <form action="{% url 'business:signup' %}" method="get" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input class="form-submit" type="submit" value="{% trans 'I want it' %}">
+        </form>
+
+    </div>
+
+    <section id="section-container-plan">
+
+        <h3 class="title-blue">{% trans "Search" %}</h3>
+        <p class="paragraph">{% trans "We search our database and well-known employment exchanges as well as social networks such as Facebook, Twitter, Linkedin. With us you can search the world's largest databases; social networks allow you to reach more than 2,000,000,000,000 potential applicants, with the advantage that you can choose a specific profile, you start receiving resumes immediately and it is the only way to find certain candidates that could not be found another way." %}</p>
+
+        <h3 class="title-blue">{% trans "Custom technical and soft tests" %}</h3>
+        <p class="paragraph">{% trans "At the moment of applying, we immediately do an online test to the candidates that show us who should arrive at the interview, these tests also serve for other filters such as: age, education, profession, etc." %}</p>
+
+        <h3 class="title-blue">{% blocktrans with applicants=plan.applicants %}More than a {{ applicants }} relevant applicants{% endblocktrans %}</h3>
+        <p class="paragraph">{% blocktrans with candidates=plan.candidates %}By increasing the number of applications, we increase the probability that you will find the person you need, in the end we recommend the top 10 percent (approx. {{ candidates }} candidates).{% endblocktrans %}</p>
+
+        <h3 class="title-blue">{% blocktrans with time=plan.time %}Maximum in {{ time }} business days{% endblocktrans %}</h3>
+        <p class="paragraph">{% blocktrans with time=plan.time %}We understand that your company never stops, that's why we make the most agile processes in the market. We guarantee our complete process in {{ time }} business days, you will be able to see how the progress is going and the candidates every day.{% endblocktrans %}</p>
+
+        <h3 class="title-blue">{% blocktrans with candidates=plan.candidates %}Best {{ candidates }} candidates{% endblocktrans %}</h3>
+        <p class="paragraph">{% blocktrans %}Although you will have access to all the applicants that apply, we recommend you to the best {{ candidates }}; avoid hours of review of resumes and interviews of non-relevant candidates, save time, money and focus on your business.{% endblocktrans %}</p>
+
+        <h3 class="title-blue">{% blocktrans with price=plan.interview_price %}Virtual interview ({{price}}){% endblocktrans %}</h3>
+        <p class="paragraph">{% trans "If you want we can do a virtual interview recorded of the recommended candidates so you have more information before knowing them." %}</p>
+
+        <h3 class="title-blue">{% blocktrans with warranty=plan.contract_warranty %}Hiring Guarantee ({{warranty}}){% endblocktrans %}</h3>
+        <p class="paragraph">{% trans "This product guarantees the process until you make a successful contract." %}</p>
+
+
+    </section>
+
+{% endblock %}

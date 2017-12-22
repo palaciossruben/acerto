@@ -1,0 +1,11 @@
+.line_break_on_mobile{
+    display: none;
+}
+
+@media (max-width: 640px)
+{
+    .line_break_on_mobile
+    {
+        display: block;
+    }
+}

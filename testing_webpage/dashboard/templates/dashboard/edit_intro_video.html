@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <title>Edit interview intro video</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+
+    <!-- Ziggeo stuff-->
+    <link rel="stylesheet" href="//assets-cdn.ziggeo.com/v1-stable/ziggeo.css" />
+    <script src="//assets-cdn.ziggeo.com/v1-stable/ziggeo.js"></script>
+    <script>ZiggeoApi.token = "{{ziggeo_api_key}}";</script>
+
+    <script type="text/javascript" src="{% static 'js/edit_intro_video.js' %}"></script>
+
+</head>
+<body>
+
+    <form action="./" method="post"
+           enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="submit" value="HOME">
+    </form>
+
+    <h2>Current intro video</h2>
+
+    {% if current_video %}
+
+        <ziggeoplayer ziggeo-video='{{current_video}}'
+            ziggeo-width=320
+            ziggeo-height=240>
+        </ziggeoplayer>
+
+    {% endif %}
+
+    <h2>Record a new intro video</h2>
+
+    <ziggeorecorder ziggeo-timelimit=60
+        ziggeo-width=320
+        ziggeo-height=240
+        ziggeo-theme='modern'
+        id="myRecorder">
+    </ziggeorecorder>
+
+    <br>
+
+    <form action="#" method="post" id="main_form_id">
+        {% csrf_token %}
+        <input type="button" class="btn btn-success" name="save_changes" value="Save!"
+            onclick="submit_form()">
+    </form>
+
+</body>
+</html>

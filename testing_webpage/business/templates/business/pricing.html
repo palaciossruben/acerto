@@ -1,0 +1,112 @@
+{% load i18n %}
+{% load static %}
+
+<section class="section-container">
+    <h3 class="secondary-title" >{% trans "Select the best plan for you"%}</h3>
+    <div class="secondary-yellow-bar"></div>
+
+    <div id="pricing-container">
+        <div class="row"> <!-- bootstrap row class -->
+            <div class="col-sm-4">
+                <div class="pricing-column">
+                    <h4 class="title-blue">{% trans "Operational Staff" %}</h4>
+
+                    <p class="pricing-comment">{% trans 'eg: call agent, driver' %}</p>
+
+                    <ul class="pricing-list">
+                        <li class="pricing-bullet">{% trans "Search on social media" %}</li>
+                        <li class="pricing-bullet">{% trans "Search on PeakU Database" %}</li>
+                        <li class="pricing-bullet">{% trans "Search on other platforms" %}</li>
+                        <li class="pricing-bullet">{% trans "Custom technical tests" %}</li>
+                        <li class="pricing-bullet">{% trans "Custom soft skills tests" %}</li>
+                        <li class="pricing-bullet">{% trans "Around 100 applicants" %}</li>
+                        <li class="pricing-bullet">{% trans "Max. 10 business days" %}</li>
+                        {# Translators: xgettext:no-python-format #}
+                        <li class="pricing-bullet bold-bullet">{% trans "10 candidates (top 10%)" %}</li>
+                    </ul>
+                    <h4 class="title-blue additional-title">{% trans "Extras" %}</h4>
+                    <ul class="pricing-list additional-list">
+                        <li class="pricing-bullet additional-bullet">{% trans "Personal Interview +$60" %}</li>
+                        <li class="pricing-bullet additional-bullet">{% trans "Hiring Guarantee +$120" %}</li>
+                    </ul>
+
+                    <p class="pricing-comment starting">{% trans "starting" %}</p>
+                    <h4 class="price">{% trans "$180" %}</h4>
+
+                    <form action="{% url 'business:plan' 1 %}" method="get">
+                        {% csrf_token %}
+                        <input class="pricing-more-info" type="submit" value="{% trans 'more information' %}">
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-4">
+
+                <div class="pricing-column">
+                    <h4 class="title-blue">{% trans "Professional" %}</h4>
+
+                    <p class="pricing-comment">{% trans 'eg: engineer, lawyer, accountant' %}</p>
+
+                    <ul class="pricing-list">
+                        <li class="pricing-bullet">{% trans "Search on social media" %}</li>
+                        <li class="pricing-bullet">{% trans "Search on PeakU Database" %}</li>
+                        <li class="pricing-bullet">{% trans "Search on other platforms" %}</li>
+                        <li class="pricing-bullet">{% trans "Custom technical tests" %}</li>
+                        <li class="pricing-bullet">{% trans "Custom soft skills tests" %}</li>
+                        <li class="pricing-bullet">{% trans "Around 50 applicants" %}</li>
+                        <li class="pricing-bullet">{% trans "Max. 15 business days" %}</li>
+                        {# Translators: xgettext:no-python-format #}
+                        <li class="pricing-bullet bold-bullet">{% trans "5 candidates (top 10%)" %}</li>
+                    </ul>
+                    <h4 class="title-blue additional-title">{% trans "Extras" %}</h4>
+                    <ul class="pricing-list additional-list">
+                        <li class="pricing-bullet additional-bullet">{% trans "Personal Interview +$214" %}</li>
+                        <li class="pricing-bullet additional-bullet">{% trans "Hiring Guarantee +$245" %}</li>
+                    </ul>
+
+                    <p class="pricing-comment starting">{% trans "starting" %}</p>
+                    <h4 class="price">{% trans "$240" %}</h4>
+
+                    <form action="{% url 'business:plan' 2 %}" method="get">
+                        {% csrf_token %}
+                        <input class="pricing-more-info" type="submit" value="{% trans 'more information' %}">
+                    </form>
+                </div>
+
+            </div>
+            <div class="col-sm-4">
+
+                <div class="pricing-column">
+                    <h4 class="title-blue">{% trans "Specific" %}</h4>
+
+                    <p class="pricing-comment">{% trans 'eg: software developer in finance sector' %}</p>
+
+                    <ul class="pricing-list">
+                        <li class="pricing-bullet">{% trans "Search on social media" %}</li>
+                        <li class="pricing-bullet">{% trans "Search on PeakU Database" %}</li>
+                        <li class="pricing-bullet">{% trans "Search on other platforms" %}</li>
+                        <li class="pricing-bullet">{% trans "Custom technical tests" %}</li>
+                        <li class="pricing-bullet">{% trans "Custom soft skills tests" %}</li>
+                        <li class="pricing-bullet">{% trans "Around 30 applicants" %}</li>
+                        <li class="pricing-bullet">{% trans "Max. 20 business days" %}</li>
+                        {# Translators: xgettext:no-python-format #}
+                        <li class="pricing-bullet bold-bullet">{% trans "3 candidates (top 10%)" %}</li>
+                    </ul>
+                    <h4 class="title-blue additional-title">{% trans "Extras" %}</h4>
+                    <ul class="pricing-list additional-list">
+                        <li class="pricing-bullet additional-bullet">{% trans "Personal Interview (contact us)" %}</li>
+                        <li class="pricing-bullet additional-bullet">{% trans "Hiring Guarantee (contact us)" %}</li>
+                    </ul>
+
+                    <p class="pricing-comment starting">{% trans "starting" %}</p>
+                    <h4 class="price">{% trans "$540" %}</h4>
+
+                    <form action="{% url 'business:plan' 3 %}" method="get">
+                        {% csrf_token %}
+                        <input class="pricing-more-info" type="submit" value="{% trans 'more information' %}">
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,99 @@
+.background-people {
+    margin-bottom: 0px;
+}
+
+.main-title {
+    margin-left: -150px;
+    margin-top: -300px;
+    margin-right: auto;
+    index-z: 1;
+    position: relative;
+}
+
+#text-white-rectangle {
+	width: 900px;
+	padding-bottom: 50px;
+	margin-left: 16%;
+	margin-top: 80px;
+	background-color: var(--white);
+	border: solid 2px var(--light-grey);
+	margin-bottom: 50px;
+
+	/* use this 2 properties together */
+	z-index: 1;
+	position:relative;
+}
+
+#description-text {
+	margin-left: 5%;
+	margin-right: 5%;
+	padding-top: 30px;
+	font-family: Bitter;
+	font-size: 16px;
+	line-height: 1.56;
+	text-align: left;
+	color: var(--dark-grey);
+}
+
+.form-submit{
+	width: 283px;
+	height: 45px;
+	margin-left: 33%;
+	margin-right: 33%;
+	margin-top:20px;
+}
+
+#section-container-plan {
+    margin-left: 200px;
+    margin-right: 100px;
+    margin-top:30px;
+}
+
+.paragraph {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.title-blue {
+    text-transform: none;
+}
+
+@media(max-width: 640px) {
+    #text-white-rectangle {
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: 0px;
+        border: none;
+    }
+
+    .form-submit {
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: 50px;
+    }
+
+    #description-text {
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: 0px;
+    }
+
+    .main-title {
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: -50px;
+
+        index-z: 1;
+        position: relative;
+    }
+
+    #section-container-plan {
+    width: 80%;
+    margin-left: 10%;
+    margin-right:10%;
+    margin-top:0px;
+}

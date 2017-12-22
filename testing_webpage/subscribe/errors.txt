@@ -1,0 +1,48 @@
+education:
+3: Difficult detection Universitario tecnico, marika!!! (detect)
+20: OCR doesnt read a year. Therefore underestimates age and then downgrades degree!!!
+21: Has operator jobs didn't ever do anything with time studied.
+30: tricks algorithm into Universitario, marika!!! (detect)
+33: Almost detected "Tecnico" OCR errors. (read)
+36: tricks algorithm into Universitario, marika!!! (detect)
+41: tricks algorithm into Universitario, marika!!! (detect)
+55: out of context "magister" on references (detect)
+
+education by type:
+detect: 5
+	1. Technitian trying to be professional: 4
+	2. out of context word: 1
+
+read: 2
+	1. can read OCR, but with bad output text: 2
+
+
+age:
+65: puts the interval of his school years from start to finish. Algorithm cannot undestand that.(detect)
+6: puts the interval of his school years from start to finish. Algorithm cannot undestand that.(detect)
+56: mentions a date that might be starting high school in a random paragraph. of by 5 years. (out of context, detect)
+53: Error reading pdf. doesn't detect date of graduation (read)
+39: puts the interval of his school years from start to finish. Algorithm cannot undestand that.(detect)
+36: puts the interval of his school years from start to finish. Algorithm cannot undestand that.(detect)
+35: puts random date in random place. Algorithm cannot undestand that.(out of context, detect)
+29: puts the interval of his school years from start to finish. Algorithm cannot undestand that.(detect)
+20: can read OCR, but with bad output text.(read)
+16: can read OCR, but with bad output text.(read)
+
+
+age by type:
+detect: 7
+	1. puts the interval of his school years from start to finish. Algorithm cannot undestand that.(detect): 5
+	2. out of context year: 2
+
+read: 3
+	1. can read OCR, but with bad output text: 2
+	2. can read PDF, but with missing data: 1
+
+
+profession
+16: OCR bad quality.
+53: investigate further
+
+
+GENERAL READING ERROR: Text on each line is missing spaces. With pypdf2, not reading with pdfminer2

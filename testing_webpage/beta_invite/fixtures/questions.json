@@ -1,0 +1,457 @@
+[
+  {
+    "model": "beta_invite.question",
+    "pk": 1,
+    "fields":{
+      "text": "What was/is your last salary?",
+      "text_es": "¿Cuál es/fue tu último salario?",
+      "answers": [1, 2, 3, 4, 5],
+      "type": 1,
+      "correct_answers": [1, 2],
+      "order": 2,
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 2,
+    "fields":{
+      "text": "In a short text How would you sell someone a salt shaker?",
+      "text_es": "En un texto corto ¿Cómo le venderías a alguién un salero?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 3,
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 3,
+    "fields":{
+      "text": "What is your expected monthly salary?",
+      "text_es": "¿Qué salario mensual esperas?",
+      "answers": [6, 7, 8, 9],
+      "type": 1,
+      "correct_answers": [6, 7, 8],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 4,
+    "fields":{
+      "text": "Which number (x) should come next in the series?   1,   1,   2,   3,   5,   8,   13,   x",
+      "text_es": "¿Qué número (x) sigue en la serie?   1,   1,   2,   3,   5,   8,   13,   x",
+      "answers": [10, 11, 12, 13, 14],
+      "type": 1,
+      "correct_answers": [11],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 5,
+    "fields":{
+      "text": "Imagine that suddenly there is a boss change on your workplace and you have to deal with a difficult person that says no to everything. How would you deal with this situation?",
+      "text_es": "Imagínate que de repente te cambian tu jefe en el trabajo y ponen a una persona difícil de tratar que dice a todo que no. ¿Qué harías para resolver esta situación?",
+      "answers": [15, 17, 18, 19, 20],
+      "type": 1,
+      "correct_answers": [17, 19],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 6,
+    "fields":{
+      "text": "What is the time-complexity of retreiving an element from a linked-list with n elements?",
+      "text_es": "¿Cuál es la complejidad de acceder a un elemento en una lista enlazadas con n elementos?",
+      "answers": [21, 22, 23, 24, 25],
+      "type": 1,
+      "correct_answers": [23],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 7,
+    "fields":{
+      "text": "Do you have experience in mobile or web design?",
+      "text_es": "¿Tienes experiencia en diseño móvil o web?",
+      "answers": [32, 33],
+      "type": 1,
+      "correct_answers": [33],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 8,
+    "fields":{
+      "text": "Tell us about a project you've completed that has made you the most proud?",
+      "text_es": "Cuentanos de un proyecto, por el cual estés muy orgulloso/a",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 9,
+    "fields":{
+      "text": "How do you work with engineers/Product Managers/other designers?",
+      "text_es": "¿Cómo trabajas con ingenieros/Product Managers/otros diseñadores?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 10,
+    "fields":{
+      "text": "What was the last time you hacked a non-computer system?",
+      "text_es": "¿Cuál fue la última vez que hackeaste un sistema no-computacional?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 11,
+    "fields":{
+      "text": "Which of the following is the best to become a better professional?",
+      "text_es": "¿Cuál de las siguientes formas es la mejor para ser mejor en tu carrera?",
+      "answers": [26, 27, 28],
+      "type": 1,
+      "correct_answers": [26],
+      "order": 2,
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 12,
+    "fields":{
+      "text": "What is SQL?",
+      "text_es": "¿Qué es SQL?",
+      "answers": [29, 30, 31],
+      "type": 1,
+      "correct_answers": [31],
+      "order": 6,
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 13,
+    "fields":{
+      "text": "PeakU is a new recruitment service that offers a high-end headhunter for the price of a stocj exchange. How would you help PeakU acquire business clients faster?",
+      "text_es": "PeakU es un nuevo servicio de reclutamiento que ofrece una experiencia de un cazatalentos al precio de una bolsa de empleo. ¿Tu cómo ayudarías a que PeakU adquiriera nuevos clientes-empresas de forma más rápida?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 4,
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 14,
+    "fields":{
+      "text": "What has been the hardest project you have done? Why it was a challenge?",
+      "text_es": "¿Cuál fue el proyecto más dificil que has hecho? ¿Por qué fue retador?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 15,
+    "fields":{
+      "text": "How to grow a business with little money?",
+      "text_es": "¿Comó haces para crecer un negocio con poco dinero?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 5,
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 16,
+    "fields":{
+      "text": "Would you be willing to learn SQL?",
+      "text_es": "¿Estarías dispuesto a aprender SQL?",
+      "answers": [32, 33],
+      "type": 1,
+      "correct_answers": [33],
+      "order": 1,
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 17,
+    "fields":{
+      "text": "Tell us something non-conventional that you have done?",
+      "text_es": "¿Cuéntanos algo no convencional que hayas hecho?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 3,
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 18,
+    "fields":{
+      "text": "What does this statement says?",
+      "text_es": "¿Qué dice el enunciado?",
+      "answers": [34, 35, 36, 37],
+      "type": 1,
+      "correct_answers": [37],
+      "image_path": "beta_invite/questions/18/first_duplicate_statement.png",
+      "order": 1,
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 19,
+    "fields":{
+      "text": "Explain to us in words: How would you solve the problem stated above?",
+      "text_es": "Explícanos en palabras: ¿Cómo solucionarias el problema anterior?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 2,
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 20,
+    "fields":{
+      "text": "This is a possible solution to the problem. Why the last line returns -1?",
+      "text_es": "Esta es una posible solución al problema. ¿Por qué la última linea retorna -1?",
+      "answers": [38, 39, 40, 41],
+      "type": 1,
+      "correct_answers": [39],
+      "order": 3,
+      "image_path": "beta_invite/questions/20/slow_array_code.png",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 21,
+    "fields":{
+      "text": "This is another possible solution. What does the data structure mySet do?",
+      "text_es": "Esta es otra posible solución ¿Qué hace la estructura de datos mySet?",
+      "answers": [42, 43, 44, 45],
+      "type": 1,
+      "correct_answers": [42],
+      "order": 4,
+      "image_path": "beta_invite/questions/21/fast_set_code.png",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 22,
+    "fields":{
+      "text": "To solve the problem, which of the 2 codes is faster?",
+      "text_es": "Para resolver el problema, ¿cuál de los 2 códigos es más veloz?",
+      "answers": [46, 47],
+      "type": 1,
+      "correct_answers": [46],
+      "order": 5,
+      "image_path": "beta_invite/questions/22/algorithms_comparison.png",
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 23,
+    "fields":{
+      "text": "You find it difficult to introduce yourself to other people?",
+      "text_es": "¿Te resulta difícil presentarte a otras personas?",
+      "answers": [],
+      "type": 4,
+      "correct_answers": [],
+      "order": 1,
+      "params": {"from": "I","to": "E"},
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 24,
+    "fields":{
+      "text": "What's your age?",
+      "text_es": "¿Cuál es tu edad?",
+      "answers": [],
+      "type": 5,
+      "correct_answers": [],
+      "order": 1,
+      "params": {"min": 0,
+                 "max": 100,
+                 "min_correct": 18,
+                 "max_correct": 25,
+                 "default":20
+                },
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 25,
+    "fields":{
+      "text": "Which number (x) should come next in the series?   4,   6,   9,   6,   14,   6,   19,   6,   x",
+      "text_es": "¿Qué número (x) sigue en la serie?   4,   6,   9,   6,   14,   6,   19,   6,   x",
+      "answers": [48, 49, 50, 51],
+      "type": 1,
+      "correct_answers": [50],
+      "order": 5,
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 26,
+    "fields":{
+      "text": "How would you define a quality product?",
+      "text_es": "¿Cómo definirias un producto de calidad?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 27,
+    "fields":{
+      "text": "How do you handle a big vital client such as Spotify, although it is a difficult client to deal with?",
+      "text_es": "¿Cómo manejas a un importante cliente como Spotify, que sin embargo es díficil de tratar?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 28,
+    "fields":{
+      "text": "Being the director of development department, they tell you to implement these ideas. How would you prioritize them?",
+      "text_es": "Siendo el director de desarrollo, te solicitan implementar lo solicitado ¿Como priorizarias el trabajo?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "image_path": "beta_invite/questions/28/business_case_statement.png",
+      "order": 1,
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 29,
+    "fields":{
+      "text": "What proposal would you deliver with the main objective of streamlining processes?",
+      "text_es": "¿Qué propuesta entregarías con el objetivo principal de agilizar los procesos?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 2,
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 30,
+    "fields":{
+      "text": "¿How many years of experience do you have in TA?",
+      "text_es": "¿Cuántos años de experiencia tienes en adquisición de Talento?",
+      "answers": [],
+      "type": 5,
+      "correct_answers": [],
+      "order": 1,
+      "params": {"min": 0,
+           "max": 100,
+           "min_correct": 2,
+           "max_correct": 100,
+           "default": 0
+          },
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 31,
+    "fields":{
+      "text": "¿Do you have experience hiring technology staff?",
+      "text_es": "¿Tienes experiencia reclutando perfiles de tecnología?",
+      "answers": [32, 33],
+      "type": 1,
+      "correct_answers": [33],
+      "order": 2,
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 32,
+    "fields":{
+      "text": "Describe your dream job and what would be your role.",
+      "text_es": "Describe el trabajo de tus sueños.",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 2,
+      "created_at": "2017-08-24 02:42:49.0957+00",
+      "updated_at": "2017-08-24 02:42:49.0957+00"
+    }
+  }
+]

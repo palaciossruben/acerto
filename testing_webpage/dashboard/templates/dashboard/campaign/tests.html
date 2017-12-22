@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/campaign/common.css' %}">
+
+    <title>Pruebas de la Campaña</title>
+</head>
+<body class="indent_style">
+
+    <h1>Pruebas</h1>
+
+    <br>
+    <br>
+
+    {% for test in campaign.tests.all %}
+        <li>
+        {{ test.name }}
+        <br>
+        <br>
+        <form action="/dashboard/campaign/{{ campaign.id }}/delete_test" method="post">
+
+            {% csrf_token %}
+
+            <input type="button" class="btn btn-danger" value="Borrar" onclick="this.form.submit();">
+            <input name="test_id" type="hidden" value="{{ test.id }}">
+
+        </form>
+        <br>
+        <hr>
+        </li>
+    {% endfor %}
+
+    <br>
+    <br>
+
+    <form action="/dashboard/campaign/{{ campaign.id }}/add_test" method="post">
+
+        {% csrf_token %}
+
+        <select name="new_test_id" required>
+
+          <option>Select Test</option>
+          {% for test in tests.all %}
+             <option value={{ test.id }}>{{ test.name }}</option>
+          {% endfor %}
+        </select>
+
+        <br>
+        <br>
+
+        <input style="margin-bottom:100px;" type="button" class="btn btn-success" value="Agregar"
+          onclick="this.form.submit();">
+
+        <input name="campaign_id" type="hidden" value="{{ campaign.id }}">
+
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+Hola, {name}
+
+
+La vacante {campaign} todavía está abierta.
+Te invito a hacer la prueba en el siguiente link:
+
+{test_url}
+
+Gracias por preferir PeakU
+
+¡Que tengas una excelente noche!
+
+{sender_name}
+{sender_position}
+{peaku_address}

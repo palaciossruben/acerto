@@ -1,0 +1,34 @@
+[
+  {
+    "model": "beta_invite.questiontype",
+    "pk": 1,
+    "fields":{
+      "name": "single answer",
+      "code": "SA"
+    }
+  },
+  {
+    "model": "beta_invite.questiontype",
+    "pk": 3,
+    "fields":{
+      "name": "open field",
+      "code": "OF"
+    }
+  },
+  {
+    "model": "beta_invite.questiontype",
+    "pk": 4,
+    "fields":{
+      "name": "degree of belief",
+      "code": "DOB"
+    }
+  },
+  {
+    "model": "beta_invite.questiontype",
+    "pk": 5,
+    "fields":{
+      "name": "Numeric Integer",
+      "code": "NI"
+    }
+  }
+]

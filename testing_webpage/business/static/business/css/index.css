@@ -1,0 +1,110 @@
+#search-input {
+	width: 50%;
+	height: 50px;
+	opacity: 0.75;
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	background-color: var(--white);
+	margin-top: 275px;
+
+	margin-left: 25%;
+	margin-right: 25%;
+	font-size: 20px;
+	color: var(--blue);
+
+	/* The element goes on top of the #background_people instead of below */
+	position:absolute; top:0; left:0;
+}
+
+#search-input::placeholder {
+	color: var(--blue);
+	opacity: 0.5;
+}
+
+.main-title {
+
+	margin-left: 14.2%;
+	margin-top: 175px;
+	margin-bottom: 0px;
+
+    /* The element goes on top of the .background-people instead of below */
+	position:absolute; top:0; left:0;
+}
+
+.green-box {
+	width: 435px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -30px;
+	text-align: center;
+}
+
+
+/* Why Choose Us? */
+#choose-list-container {
+    width: 80%;
+    margin-left: 10%;
+    list-style-image: url('/static/business/img/check_mark_green.svg');
+}
+
+.choose-bullet {
+	width: 100%;
+	height: 25px;
+	font-family: Bitter;
+	font-size: 16px;
+	line-height: 1.56;
+	text-align: left;
+	color: var(--text-color);
+}
+
+.choose-bullet:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+
+/* Contact Us*/
+#anchor-trick {
+    font-size:1px;
+    margin: auto;
+}
+
+.form-text-area {
+	height: 121px;
+}
+
+
+@media (max-width: 640px){
+
+    .main-title {
+        width: 96%;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 25px;
+        margin-top: 67px;
+    }
+
+    #search-input {
+        width: 96%;
+        margin-left: 2%;
+        margin-right: 2%;
+        font-size: 20px;
+        margin-top: 230px;
+    }
+
+    .green-box {
+        width: 100%;
+        font-size: 16px;
+        margin-top: 0px;
+    }
+
+    .plan-column {
+        margin-top: 50px;
+
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .choose-bullet{
+        font-size: 14px;
+    }
+}

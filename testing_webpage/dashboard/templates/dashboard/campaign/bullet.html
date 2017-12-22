@@ -1,0 +1,37 @@
+<br>
+<input type="text" size="100" name="{{ bullet.id }}_bullet_name" placeholder="add text in english"
+    value="{{ bullet.name }}">
+<br>
+<input type="text" size="100" name="{{ bullet.id }}_bullet_name_es" placeholder="add text in spanish"
+    value="{{ bullet.name_es }}">
+<br>
+
+<select name="{{ bullet.id }}_bullet_type" required>
+
+    <option value="{{ bullet.bullet_type.id }}">{{ bullet.bullet_type.name }}</option>
+
+    {% for bullet_type in bullet_types %}
+        <option value="{{ bullet_type.id }}">{{ bullet_type.name }}</option>
+    {% endfor %}
+</select>
+
+<br>
+<br>
+
+<input type="button" class="btn btn-danger" value="Delete!"
+       onclick="Post('../delete_bullet', {campaign_id: '{{ campaign.id }}', bullet_id: '{{ bullet.id }}', csrfmiddlewaretoken: '{{ csrf_token }}'});">
+
+<!--
+<form action="/dashboard/campaign/delete_bullet" style="margin-left:40px;" method="post">
+
+    {% csrf_token %}
+
+    <input type="button" class="btn btn-danger" value="Delete!" onclick="this.form.submit();">
+    <input name="bullet_id" type="hidden" value="{{ bullet.id }}">
+    <input name="campaign_id" type="hidden" value="{{ campaign.id }}">
+
+</form>-->
+
+<br>
+
+<hr>

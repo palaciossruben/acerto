@@ -1,0 +1,47 @@
+[
+{
+  "model": "beta_invite.education",
+  "pk": 1,
+  "fields":{
+    "name": "High School",
+    "name_es": "Secundaria",
+    "level": 0
+  }
+},
+{
+  "model": "beta_invite.education",
+  "pk": 2,
+  "fields":{
+    "name": "Technician or studying a professional degree",
+    "name_es": "Técnico/Tecnólogo o cursando grado profesional",
+    "level": 1
+  }
+},
+{
+  "model": "beta_invite.education",
+  "pk": 3,
+  "fields":{
+    "name": "Undergraduate",
+    "name_es": "Profesional",
+    "level": 2
+  }
+},
+{
+  "model": "beta_invite.education",
+  "pk": 4,
+  "fields":{
+    "name": "Master",
+    "name_es": "Maestría",
+    "level": 3
+  }
+},
+{
+  "model": "beta_invite.education",
+  "pk": 5,
+  "fields":{
+    "name": "Phd",
+    "name_es": "Doctorado",
+    "level": 4
+  }
+}
+]

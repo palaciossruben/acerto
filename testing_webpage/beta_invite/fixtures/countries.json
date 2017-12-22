@@ -1,0 +1,114 @@
+[
+  {
+    "model": "beta_invite.country",
+    "pk": 1,
+    "fields":{
+      "name": "Colombia"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 2,
+    "fields": {
+      "name": "Ecuador"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 3,
+    "fields":{
+      "name": "Perú"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 4,
+    "fields": {
+      "name": "Chile"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 5,
+    "fields": {
+      "name": "México"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 6,
+    "fields": {
+      "name": "Venezuela"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 7,
+    "fields": {
+      "name": "Bolivia"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 8,
+    "fields": {
+      "name": "Argentina"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 9,
+    "fields": {
+      "name": "Paraguay"
+    }
+  },
+    {
+    "model": "beta_invite.country",
+    "pk": 10,
+    "fields": {
+      "name": "Uruguay"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 11,
+    "fields": {
+      "name": "Panamá"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 12,
+    "fields": {
+      "name": "Honduras"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 13,
+    "fields": {
+      "name": "El Salvador"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 14,
+    "fields": {
+      "name": "Guatemala"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 15,
+    "fields": {
+      "name": "Nicaragua"
+    }
+  },
+  {
+    "model": "beta_invite.country",
+    "pk": 16,
+    "fields": {
+      "name": "Costa Rica"
+    }
+  }
+]

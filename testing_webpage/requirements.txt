@@ -1,0 +1,8 @@
+Pillow==4.1.1
+PyPDF2==1.26.0
+Django==1.11.2
+Fabric==1.13.2
+nltk==3.2.4
+pdfminer==20140328
+pytesseract==0.1.7
+textract==1.6.1

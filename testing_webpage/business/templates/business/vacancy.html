@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+
+    <script type="text/javascript" src="{% static 'js/business/vacancy.js' %}"></script>
+</head>
+
+<body class="indent_style">
+
+<h1>Describe la vacante</h1>
+
+<p>Importante: La prueba gratuita aplica exclusivamente para el plan operativo.</p>
+
+<p>¿Qué plan buscas?</p>
+
+<input type="radio" name="plan_id" value="1"> Operativo
+<input type="radio" name="plan_id" value="2"> Profesional
+<input type="radio" name="plan_id" value="3"> Específico
+
+<p></p>
+
+<p>Título (cargo que se publicará a los candidatos):</p>
+
+<input type="text" name="title_es">
+
+<p></p>
+
+<p>Requerimientos:</p>
+
+<div id="bullet_container"></div>
+
+<input style="margin-bottom:100px;" type="button" class="btn btn-success" name="add_bullet" value="Añadir"
+          onclick="addBullet();">
+
+<input style="..." type="button" class="btn btn-success" name="remove_bullet" value="Borrar último"
+          onclick="removeBullet();">
+
+<input style="..." type="button" class="btn btn-success" name="next_step" value="Siguiente paso"
+          onclick="next_step_tab(event, 'company')" >
+
+</body>
+</html>
+
+
+
+
+
+

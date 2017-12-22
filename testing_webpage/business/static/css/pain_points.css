@@ -1,0 +1,38 @@
+#pain_points {
+    width: 550px;
+    margin:auto;
+    background: rgba(0,0,0,0.4);
+    padding: 10px 20px;
+    bax-sizing:border-box;
+    margin-top: 20px;
+    border-radius: 7px;
+    margin-bottom: 50px;
+}
+
+#pain_point_title {
+    color: #fff;
+    margin: 0;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+#pain_points_list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pain_point_bullet {
+  font: 200 22px/1.5 Helvetica, Verdana, sans-serif;
+  border-bottom: 1px solid #ccc;
+}
+
+.pain_point_bullet:last-child {
+  border: none;
+}
+
+@media (max-width: 480px){
+    #pain_points{
+        width: 100%;
+    }
+}

@@ -1,0 +1,17 @@
+:root {
+    /* Colors */
+    --blue: #648aff;
+    --green: #46e7b9;
+    --purple: #596dbd;
+    --yellow: #ffff7c;
+    --white: #ffffff;
+    --very-dark: #333335;
+    --text-color: #7b8891;
+    --text-title-color: #5a656c;
+    --light-grey: #e4e4e4;
+    --dark-grey: #909da5;
+    --middle-grey: #ddd;
+
+    /* Fonts */
+    --Bitter: Bitter;
+}

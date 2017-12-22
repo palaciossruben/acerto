@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'js/test/new.js' %}"></script>
+
+    <title>Nueva Prueba</title>
+</head>
+<body>
+
+    <form style="margin-top: 40px; margin-left:40px;" action="#" method="post">
+
+        {% csrf_token %}
+
+        <h1>Nueva Prueba</h1>     -           
+        <br>
+        <br>
+
+        <input style="width: 300px;" id="name" type="text" name="name"
+          placeholder="Nombre de la prueba en inglés" required="required">
+
+        <br>
+        <br>
+
+        <input style="width: 300px;" id="name_es" type="text" name="name_es"
+          placeholder="Nombre de la prueba en español" required="required">
+
+        <br>
+        <br>
+
+        <div>
+          <label>Porcentaje de aprobación: </label>
+          <input name="cut_score" id="cut_score"
+           type="number" value="70" min="0" max="100" />
+        </div>
+
+        <br>
+        <br>
+
+        <!-- This empty container is filled dynamically with JS.-->
+        <div id="question_container"></div>
+        <input type="button" class="btn btn-success" name="add_question" value="Agregar Pregunta"
+            onclick="addQuestion()">
+        <input type="button" class="btn btn-success" name="save_test" value="Guardar"
+            onclick="submitForm()">  
+
+    </form>
+
+</body>
+</html>
