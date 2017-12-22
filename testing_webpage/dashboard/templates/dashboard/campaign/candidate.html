@@ -32,10 +32,15 @@
 <p><strong>education: </strong>{{ candidate.user.education.name }}</p>
 <p><strong>created_at: </strong>{{ candidate.user.created_at }}</p>
 
+    <!--TODO: remove this for loop, this is deprecated.-->
     {% for e in candidate.user.evaluations.all %}
         {% if candidate.campaign_id == e.campaign_id %}
             <p><strong>test (cut: {{ e.cut_score }}): </strong> {{ e.final_score }}</p>
         {% endif %}
+    {% endfor %}
+
+    {% for e in candidate.evaluations.all %}
+        <p><strong>test (cut: {{ e.cut_score }}): </strong> {{ e.final_score }}</p>
     {% endfor %}
 
 <p><strong>Salary: </strong><input type="text" name="{{ candidate.id }}_salary" value="{{ candidate.salary }}"
@@ -58,7 +63,7 @@
 <br>
 
 <textarea name="{{ candidate.id }}_comment" cols="40" rows="5"
-placeholder="add a comment!">{{ candidate.comment }}</textarea>
+placeholder="add a comment!"></textarea>
 
 <br>
 

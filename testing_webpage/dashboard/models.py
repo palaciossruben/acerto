@@ -1,6 +1,6 @@
 from django.db import models
 
-from beta_invite.models import User, Campaign
+from beta_invite.models import User, Campaign, Evaluation
 from dashboard import constants as cts
 
 
@@ -35,16 +35,18 @@ class Comment(models.Model):
 
 
 class Candidate(models.Model):
+    """
+    This model should be unique for any (user, campaign) pair. A ser can have multiple candidacies in different
+    campaigns. But no user can have more than one candidate object in the same campaign.
+    """
 
     campaign = models.ForeignKey(Campaign, null=True, on_delete=models.SET_NULL)
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     state = models.ForeignKey(State, null=True, on_delete=models.SET_NULL, default=cts.DEFAULT_STATE)
-
-    # TODO: once all comments are migrated to new table then remove comment column.
-    comment = models.CharField(max_length=10000, null=True, default='')
     removed = models.BooleanField(default=False)
     salary = models.CharField(max_length=100, default='')
     comments = models.ManyToManyField(Comment, default=[])
+    evaluations = models.ManyToManyField(Evaluation)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -86,7 +86,6 @@ def sync_local(sync_media=False):
         curs.execute("SELECT setval('business_visitor_id_seq', (SELECT max(id) from business_visitor))")
         curs.execute("SELECT setval('auth_user_id_seq', (SELECT max(id) from auth_user))")
         curs.execute("SELECT setval('searches_id_seq', (SELECT max(id) from searches))")
-        curs.execute("SELECT setval('offers_id_seq', (SELECT max(id) from offers))")
         curs.execute("SELECT setval('beta_invite_visitor_id_seq', (SELECT max(id) from visitors))")
         curs.execute("SELECT setval('beta_invite_user_id_seq', (SELECT max(id) from users))")
 
@@ -108,7 +107,12 @@ def sync_local(sync_media=False):
 
 def deploy():
 
-    # Before anything, lets create or overwrite the backup db file ;)
+    local_cwd = '/Users/juanpabloisaza/Desktop/masteringmymind/acerto/testing_webpage'
+
+    # first uploads my local changes to the repo
+    subprocess.check_output("git push origin master", cwd=local_cwd, shell=True)
+
+    # Then creates or overwrites the backup db file ;)
     run('pg_dump -U dbadmin -p 5432 -h localhost maindb > db_backup.sql')
 
     with cd(WORKING_PATH):

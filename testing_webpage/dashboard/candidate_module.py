@@ -2,7 +2,7 @@
 All functions related to candidates, dashboard stuff.
 """
 
-from beta_invite.views import save_curriculum_from_request
+from beta_invite.new_user_module import save_curriculum_from_request
 from dashboard.models import Comment, Candidate, State
 from beta_invite.models import Campaign, User
 from dashboard import constants as cts
@@ -19,9 +19,6 @@ def update_candidate(request, candidate):
 
     text = request.POST.get('{}_comment'.format(candidate.id))
     if text is not None and text != '':
-
-        # Erasing the old comment field is done for retro-compatibility purposes only.
-        candidate.comment = ''
 
         comment = Comment(text=text)
         comment.save()
@@ -57,14 +54,12 @@ def add_candidate_to_campaign(request, candidate):
     if selected_campaign_id == cts.CAMPAIGN_ID_NULL or user_in_campaign(candidate.user_id, selected_campaign_id):
         return False
     else:
-        new_candidate = Candidate(user_id=candidate.user_id,
-                                  campaign_id=selected_campaign_id,
-                                  state=candidate.state,
-                                  comment=candidate.comment)
-        user = new_candidate.user
-        user.campaign_id = selected_campaign_id
-        user.save()
-        new_candidate.save()
+        # Starts in Backlog on the new campaign.
+        # TODO: can add logic to start at a later stage, if tests are already passed.
+        Candidate(user_id=candidate.user_id,
+                  campaign_id=selected_campaign_id,
+                  state=State.objects.get(code='BL')).save()
+
         return True
 
 
@@ -96,91 +91,12 @@ def get_candidates_from_state(state_code, campaign_id):
                                     removed=False).order_by('-state__priority')
 
 
-def update_candidate_state(candidate, user):
-    """
-    Changes state if test were presented or have improved.
-    This only applies for new users that come from BL or WFT
-    Args:
-        candidate: Object
-        user: Object
-    Returns: None, just updates
-    """
-
-    if len(user.evaluations.all()) > 0 and candidate.state.code in ['BL', 'WFT']:
-
-        if has_passing_evaluation(user.evaluations.all()):
-            candidate.state = State.objects.get(code='WFI')
-            candidate.save()
-        else:  # Fails tests
-            candidate.state = State.objects.get(code='WFT')
-            candidate.save()
-
-
-def has_passing_evaluation(evaluations):
-    """
-    Tries to find a passed evaluation.
-    Args:
-        evaluations: Collection of Evaluation objects.
-    Returns: Boolean
-    """
-    for e in evaluations:
-        if e.passed:
-            return True
-
-    return False
-
-
-def fill_in_missing_candidate(campaign_id, user):
-    """
-    Creates a new candidate, depending on several factors.
-    Args:
-        campaign_id: Campaign id, int
-        user: Object
-    Returns:
-    """
-
-    # Gets any evaluations, and if passed starts on the Waiting for Interview state.
-    if len(user.evaluations.all()) > 0:
-        if has_passing_evaluation(user.evaluations.all()):
-            Candidate(campaign_id=campaign_id, user_id=user.id, state=State.objects.get(code='WFI')).save()
-        else:
-            # When fails, then we give the chance of presenting again.
-            Candidate(campaign_id=campaign_id, user_id=user.id, state=State.objects.get(code='WFT')).save()
-    else:
-        # Starts on Backlog default state, when no evaluation has been done.
-        Candidate(campaign_id=campaign_id, user_id=user.id).save()
-
-
-def fill_and_update_candidates(users, campaign_id):
-    """
-    Args:
-        users: List of object User
-        campaign_id: int id
-    Returns: None, just fills into DB missing Candidates. Every new Candidate is created on the default state or in the
-    WFI state.
-    """
-    for user in users:
-
-        candidates = Candidate.objects.filter(campaign_id=campaign_id, user_id=user.id)
-
-        # Create
-        if len(candidates) == 0:
-            fill_in_missing_candidate(campaign_id, user)
-        else:  # Update
-            candidate = candidates.first()
-            update_candidate_state(candidate, user)
-
-
 def get_rendering_data(campaign_id):
     """
     Args:
         campaign_id: Campaign primary key
     Returns: tuple with (candidates, rejected_candidates, states)
     """
-    # create missing candidates on the first try, that have not been removed previously
-    users = User.objects.filter(campaign_id=campaign_id)
-
-    fill_and_update_candidates(users, campaign_id)
 
     # TODO: recycle business search. Lot of work here: has to search according to campaign specification
     # (education, profession, etc)
@@ -199,9 +115,9 @@ def get_rendering_data(campaign_id):
     return backlog, waiting_tests, waiting_interview, did_interview_in_standby, sent_to_client, got_job, rejected_candidates, State.objects.all()
 
 
-def get_checked_box_users(campaign_id, request):
+def get_checked_box_candidates(campaign_id, request):
     candidates = Candidate.objects.filter(campaign_id=campaign_id)
-    return [c.user for c in candidates if request.POST.get('{}_checkbox'.format(c.id))]
+    return [c for c in candidates if request.POST.get('{}_checkbox'.format(c.id))]
 
 
 # TODO: make this available on different langs. Has a hardcoded title_es

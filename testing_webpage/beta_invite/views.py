@@ -1,14 +1,9 @@
 import os
-import smtplib
-import subprocess
-import unicodedata
 from user_agents import parse
-from django.core.files.storage import FileSystemStorage
 from django.utils.translation import ugettext as _
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
-from datetime import datetime
 
 import common
 from ipware.ip import get_ip
@@ -16,57 +11,7 @@ from beta_invite import constants as cts
 from beta_invite.util import email_sender
 from beta_invite import interview_module
 from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser, Bullet, BulletType, Test, Question, Survey, Score, Evaluation
-from beta_invite import test_module
-
-
-def remove_accents(text):
-    return ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
-
-
-def rename_filename(filename):
-    """Removes accents, spaces and other chars to have a easier time later"""
-
-    replacement = {' ': '_', '(': '_', ')': '_'}
-
-    for my_char, replace_char in replacement.items():
-
-        if my_char in filename:
-            filename = filename.replace(my_char, replace_char)
-
-    return remove_accents(filename)
-
-
-def save_curriculum_from_request(request, user, param_name):
-    """
-    Saves file on machine resumes/* file system
-    Args:
-        request: HTTP request
-        user: Object
-        param_name: string, name of File on the request
-    Returns: file url or None if nothing is saves.
-    """
-
-    # validate correct method and has file.
-    if request.method == 'POST' and len(request.FILES) != 0 and request.FILES[param_name] is not None:
-
-        curriculum_file = request.FILES[param_name]
-        fs = FileSystemStorage()
-
-        user_id_folder = str(user.id)
-        folder = os.path.join('resumes', user_id_folder)
-
-        file_path = os.path.join(folder, rename_filename(curriculum_file.name))
-
-        fs.save(file_path, curriculum_file)
-
-        # once saved it will collect the file
-        subprocess.call('python3 manage.py collectstatic -v0 --noinput', shell=True)
-
-        # at last returns the curriculum url
-        return file_path
-
-    else:
-        return '#'
+from beta_invite import test_module, new_user_module
 
 
 def index(request):
@@ -77,45 +22,7 @@ def index(request):
     :return: renders a view.
     """
 
-    return render(request, cts.HOME_VIEW_PATH)
-
-
-def post_index(request):
-    """
-    Action taken when a form is submitted.
-    Args:
-        request: A request object.
-
-    Returns: saves new User
-    """
-    # Gets information of client: such as if it is mobile
-    ua_string = request.META['HTTP_USER_AGENT']
-    user_agent = parse(ua_string)
-
-    ip = get_ip(request)
-
-    user = User(name=request.POST.get('name'),
-                email=request.POST.get('email'),
-                ip=ip,
-                ui_version=cts.UI_VERSION,
-                is_mobile=user_agent.is_mobile,)
-
-    # Saves here to get an id
-    user.save()
-    user.curriculum_url = save_curriculum_from_request(request, user, 'curriculum')
-    user.save()
-
-    update_search_dictionary_on_background()
-
-    # TODO: pay the monthly fee
-    #try:
-    #    email_sender.send(user, request.LANGUAGE_CODE)
-    #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
-    #    pass
-
-    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover your true passion"),
-                                                   'secondary_message': _("We search millions of jobs and find the right one for you"),
-                                                   })
+    return render(request, cts.INTRO_VIEW_PATH)
 
 
 # TODO: Localization a las patadas
@@ -266,16 +173,6 @@ def update_search_dictionary_on_background():
     os.system(command)
 
 
-def user_if_exists(email):
-    """
-    Args:
-        email: string
-    Returns: The most recent user if exists, else None
-    """
-    for u in User.objects.filter(email=email).order_by('-created_at'):
-        return u
-
-
 def post_long_form(request):
     """
     Args:
@@ -317,36 +214,17 @@ def post_long_form(request):
                        'ip': ip,
                        'ui_version': cts.UI_VERSION,
                        'is_mobile': is_mobile,
-                       'campaign': campaign,
                        'language_code': request.LANGUAGE_CODE}
 
         # TODO: update user instead of always creating a new one.
-        # Be carefukl with the campaign field.
-        #user = user_if_exists(request.POST.get('email'))
+        user = new_user_module.user_if_exists(request.POST.get('email'))
 
-        #if user:  # updates user
-        #    user.update(**user_params)
-        #    user.updated_at = datetime.utcnow()
-        #else:  # creates user
-        user = User(**user_params)
-        # Saves here to get an id
-        user.save()
-
-        user.curriculum_url = save_curriculum_from_request(request, user, 'curriculum')
-        user.save()
+        if user:
+            user = new_user_module.update_user(campaign, user, user_params, request)
+        else:
+            user = new_user_module.create_user(campaign, user_params, request, is_mobile)
 
         end_point_params['user_id'] = user.id
-
-        #update_search_dictionary_on_background()
-
-        try:
-            email_body_name = 'user_signup_email_body'
-            if is_mobile:
-                email_body_name += '_mobile'
-
-            email_sender.send(user, request.LANGUAGE_CODE, email_body_name, _('Welcome to PeakU'))
-        except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
-            pass
 
     else:
         # Adds the user id to the params, to be able to track answers, later on.
@@ -440,30 +318,27 @@ def post_fast_job(request):
     # Saves here to get an id
     trade_user.save()
 
-    # TODO: just try it.
-    #try:
-    #    email_sender.send(user)
-    #except smtplib.SMTPRecipientsRefused:  # cannot send, possibly invalid emails
-    #    pass
+    # TODO: add welcoming email
 
     return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Find a job now"),
                                                    'secondary_message': _("We search millions of jobs and find the right one for you"),
                                                    })
 
 
-def send_interview_mail(email_template, user, campaign):
+def send_interview_mail(email_template, candidate):
     """
     Args:
         email_template: name of email body, in beta_invite/util.
-        user: Object.
+        candidate: Object.
     Returns: sends email.
     """
-    if user and interview_module.has_recorded_interview(campaign):
-        user.campaign.translate(user.language_code)
-        email_sender.send(users=user,
-                          language_code=user.language_code,
-                          body_input=email_template,
-                          subject=_('You can record the interview for {campaign}').format(campaign=user.campaign.title))
+    if candidate and interview_module.has_recorded_interview(candidate.campaign):
+        candidate.campaign.translate(candidate.user.language_code)
+
+        email_sender.send_to_candidate(candidates=candidate,
+                                       language_code=candidate.user.language_code,
+                                       body_input=email_template,
+                                       subject=_('You can record the interview for {campaign}').format(campaign=candidate.campaign.title))
 
 
 def get_test_result(request):
@@ -476,6 +351,7 @@ def get_test_result(request):
     questions_dict = test_module.get_tests_questions_dict(campaign.tests.all())
     user = common.get_user_from_request(request)
     user_id = user.id if user else None
+    candidate = common.get_candidate(user, campaign)
 
     test_score_str = ''  # by default there is no score unless the test was done.
 
@@ -495,7 +371,7 @@ def get_test_result(request):
 
     if not test_done or evaluation.passed:
 
-        send_interview_mail('user_interview_email_body', user, campaign)
+        send_interview_mail('user_interview_email_body', candidate)
 
         right_button_action = interview_module.adds_campaign_and_user_to_url('interview/1', user_id, campaign.id)
 
@@ -618,7 +494,7 @@ def add_cv_changes(request):
 
     if user_id is not None:
         user = User.objects.get(pk=int(user_id))
-        user.curriculum_url = save_curriculum_from_request(request, user, 'curriculum')
+        user.curriculum_url = new_user_module.save_curriculum_from_request(request, user, 'curriculum')
         user.save()
         return render(request, cts.SUCCESS_VIEW_PATH, {})
 

@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.postgres.fields import JSONField
 
 from beta_invite import constants as cts
+#from dashboard.models import Candidate
 
 
 class Visitor(models.Model):
@@ -281,8 +282,12 @@ class User(models.Model):
     education = models.ForeignKey(Education, null=True, on_delete=models.SET_NULL)
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
     curriculum_url = models.CharField(max_length=200, default='#')
+
+    # TODO: deprecated: remove when sure there are no dependencies remaining. Not saving anymore
     campaign = models.ForeignKey(Campaign, null=True)
     phone = models.CharField(max_length=40, null=True)
+
+    # TODO: remove evaluations, this is deprecated. Not saving anymore.
     evaluations = models.ManyToManyField(Evaluation)
     language_code = models.CharField(max_length=3, default='es')
 
@@ -291,6 +296,16 @@ class User(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    # TODO: Make method present on common.py a method of the class User. For this to happen Candidate class has
+    # to be moved to testing_webpage to solve circular dependency problem.
+    #def get_campaigns(self):
+    #    """
+    #    Users are unique and have multiple Candidates associated. Each one of which has 1 campaign. This method
+    #    returns all campaigns from all Candidates associated to user.
+    #    Returns: a list of campaigns where the user is a candidate.
+    #    """
+    #    return [candidate.campaign for candidate in Candidate.objects.filter(user=self)]
 
     def __str__(self):
         return '{0}, {1}'.format(self.name, self.email)
@@ -393,20 +408,3 @@ class EmailType(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'email_types'
-
-
-class EmailSent(models.Model):
-
-    user = models.ForeignKey(User)
-    campaign = models.ForeignKey(Campaign)
-    email_type = models.ForeignKey(EmailType)
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return 'id={0}, user={1}, campaign={2}, email_type={3}'.format(self.id, self.user, self.campaign, self.email_type)
-
-    # adds custom table name
-    class Meta:
-        db_table = 'emails_sent'
