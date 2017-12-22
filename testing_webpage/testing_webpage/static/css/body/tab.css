@@ -1,9 +1,9 @@
 .tab {
-    border: solid 2px var(--green);
+    border: solid 2px var(--blue);
 	font-size: 16px;
 	line-height: 1.0;
 	text-align: center;
-	color: var(--green);
+	color: var(--blue);
 	border-radius: 0px;
 	background-color: var(--white);
 }
