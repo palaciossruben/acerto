@@ -88,7 +88,7 @@ def get_candidates_from_state(state_code, campaign_id):
     return Candidate.objects.filter(campaign_id=campaign_id,
                                     state__is_rejected=False,
                                     state=State.objects.get(code=state_code),
-                                    removed=False).order_by('-state__priority')
+                                    removed=False)
 
 
 def get_rendering_data(campaign_id):
@@ -110,7 +110,7 @@ def get_rendering_data(campaign_id):
 
     rejected_candidates = Candidate.objects.filter(campaign_id=campaign_id,
                                                    state__is_rejected=True,
-                                                   removed=False).order_by('-state__priority')
+                                                   removed=False)
 
     return backlog, waiting_tests, waiting_interview, did_interview_in_standby, sent_to_client, got_job, rejected_candidates, State.objects.all()
 

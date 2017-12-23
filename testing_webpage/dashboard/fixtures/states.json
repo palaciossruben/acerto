@@ -5,7 +5,6 @@
     "fields":{
       "name": "Backlog",
       "code": "BL",
-      "priority":10,
       "is_rejected": false
     }
   },
@@ -15,7 +14,6 @@
     "fields":{
       "name": "Screening rejected",
       "code": "SR",
-      "priority":1,
       "is_rejected": true
     }
   },
@@ -25,7 +23,6 @@
     "fields":{
       "name": "Waiting for Tests",
       "code": "WFT",
-      "priority":3,
       "is_rejected": false
     }
   },
@@ -35,7 +32,6 @@
     "fields":{
       "name": "Waiting for Interview",
       "code": "WFI",
-      "priority":4,
       "is_rejected": false
     }
   },
@@ -45,7 +41,6 @@
     "fields":{
       "name": "Rejected on Tests",
       "code": "ROT",
-      "priority":5,
       "is_rejected": true
     }
   },
@@ -55,7 +50,6 @@
     "fields":{
       "name": "Rejected on Interview",
       "code": "ROI",
-      "priority":6,
       "is_rejected": true
     }
   },
@@ -65,7 +59,6 @@
     "fields":{
       "name": "Sent to client",
       "code": "STC",
-      "priority":8,
       "is_rejected": false
     }
   },
@@ -75,7 +68,6 @@
     "fields":{
       "name": "Rejected by client",
       "code": "RBC",
-      "priority":7,
       "is_rejected": true
     }
   },
@@ -85,7 +77,6 @@
     "fields":{
       "name": "Got the job",
       "code": "GTJ",
-      "priority":9,
       "is_rejected": false
     }
   },
@@ -95,7 +86,15 @@
     "fields":{
       "name": "Did interview, standby",
       "code": "DIS",
-      "priority":9,
+      "is_rejected": false
+    }
+  },
+  {
+    "model": "dashboard.state",
+    "pk": 11,
+    "fields":{
+      "name": "Prospect",
+      "code": "P",
       "is_rejected": false
     }
   }
