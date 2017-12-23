@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.postgres.fields import JSONField
 
 from beta_invite import constants as cts
-#from dashboard.models import Candidate
+#from business import Plan
 
 
 class Visitor(models.Model):
@@ -79,7 +79,7 @@ class BulletType(models.Model):
     name = models.CharField(max_length=200)
 
     def __str__(self):
-        return '{0}, {1}'.format(self.id, self.name)
+        return '{0}, {1}'.format(self.pk, self.name)
 
     # adds custom table name
     class Meta:
@@ -93,7 +93,7 @@ class Bullet(models.Model):
     bullet_type = models.ForeignKey(BulletType, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return '{0}, {1}'.format(self.id, self.name)
+        return '{0}, {1}'.format(self.pk, self.name)
 
     # adds custom table name
     class Meta:
@@ -106,7 +106,7 @@ class QuestionType(models.Model):
     code = models.CharField(max_length=10, null=True)
 
     def __str__(self):
-        return '{0}, {1}'.format(self.id, self.name)
+        return '{0}, {1}'.format(self.pk, self.name)
 
     # adds custom table name
     class Meta:
@@ -122,7 +122,7 @@ class Answer(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return '{0}, {1}'.format(self.id, self.name)
+        return '{0}, {1}'.format(self.pk, self.name)
 
     # adds custom table name
     class Meta:
@@ -145,7 +145,7 @@ class Question(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return '{0}, {1}'.format(self.id, self.text)
+        return '{0}, {1}'.format(self.pk, self.text)
 
     # adds custom table name
     class Meta:
@@ -173,7 +173,7 @@ class Test(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return '{0}, {1}'.format(self.id, self.name)
+        return '{0}, {1}'.format(self.pk, self.name)
 
     # adds custom table name
     class Meta:
@@ -190,7 +190,7 @@ class Interview(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return '{0}, {1}'.format(self.id, self.name)
+        return '{0}, {1}'.format(self.pk, self.name)
 
     # adds custom table name
     class Meta:
@@ -215,11 +215,14 @@ class Campaign(models.Model):
     active = models.BooleanField(default=True)
     calendly_url = models.CharField(max_length=200, default=cts.INTERVIEW_CALENDLY)
 
+    # TODO: remove circular dependency
+    #plan = models.ForeignKey(Plan, null=True, on_delete=models.DO_NOTHING)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return '{0}, {1}'.format(self.id, self.name)
+        return '{0}, {1}'.format(self.pk, self.name)
 
     # adds custom table name
     class Meta:
@@ -237,7 +240,7 @@ class Campaign(models.Model):
             self.title = self.title_es
 
     def get_url(self):
-        return 'https://peaku.co/beta_invite/long_form?campaign_id={campaign_id}'.format(campaign_id=self.id)
+        return 'https://peaku.co/beta_invite/long_form?campaign_id={campaign_id}'.format(campaign_id=self.pk)
 
 
 class Evaluation(models.Model):
@@ -260,7 +263,7 @@ class Evaluation(models.Model):
         super(Evaluation, self).save(*args, **kwargs)
 
     def __str__(self):
-        return 'id={0}, cut_score={1}, value={2}, passed={3}'.format(self.id,
+        return 'id={0}, cut_score={1}, value={2}, passed={3}'.format(self.pk,
                                                                      self.cut_score,
                                                                      self.final_score,
                                                                      self.passed)
@@ -331,7 +334,7 @@ class Survey(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return '{0}, {1}, {2}, {3}'.format(self.id, self.user, self.test, self.question)
+        return '{0}, {1}, {2}, {3}'.format(self.pk, self.user, self.test, self.question)
 
     # adds custom table name
     class Meta:
@@ -374,7 +377,7 @@ class Score(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return 'id={0}, user={1}, test={2}, value={3}'.format(self.id, self.user, self.test, self.value)
+        return 'id={0}, user={1}, test={2}, value={3}'.format(self.pk, self.user, self.test, self.value)
 
     # adds custom table name
     class Meta:
@@ -388,7 +391,7 @@ class PersonalityType(models.Model):
     opposite = models.CharField(max_length=2, null=True)
 
     def __str__(self):
-        return 'id={0}, name={1}, code={2}, opposite={3}'.format(self.id, self.name, self.code, self.opposite)
+        return 'id={0}, name={1}, code={2}, opposite={3}'.format(self.pk, self.name, self.code, self.opposite)
 
     # adds custom table name
     class Meta:
@@ -403,7 +406,7 @@ class EmailType(models.Model):
     sync = models.NullBooleanField(null=True)
 
     def __str__(self):
-        return 'id={0}, name={1}, sync={2}'.format(self.id, self.name, self.sync)
+        return 'id={0}, name={1}, sync={2}'.format(self.pk, self.name, self.sync)
 
     # adds custom table name
     class Meta:

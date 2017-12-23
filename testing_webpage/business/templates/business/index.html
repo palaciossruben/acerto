@@ -26,10 +26,9 @@
 
         <h1 class="main-title">{% trans "Discover amazing people" %}</h1>
 
-        <!--<form action="{% url 'business:results' %}">
-            <input id="search-input" type="text" name="search_text" placeholder="{% trans 'Search positions (Ex android developer)' %}"
-                   required="required">
-        </form> -->
+        <form id="free-trial-form" action="{% url 'business:start' %}">
+            <input class="blue-button free-trial-button" type="submit" name="free_trial" value="{% trans 'Free Trial' %}">
+        </form>
 
         <h2 class="green-box">
             <p>{% trans 'Hire the best candidates' %}</p>

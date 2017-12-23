@@ -20,20 +20,18 @@
             document.getElementById("#preview").src ="http://127.0.0.1:8000/beta_invite/long_form?campaign_id=1"
         }, 90000);
     }
-</script>
+    </script>
     <div class="secondary-yellow-bar"></div>
-
-
-    <!--<p>Importante: La prueba gratuita aplica exclusivamente para el plan operativo.</p>-->
 
     <div class="section-container">
 
-        <h4 class="title-blue-small" >{% trans "What plan are you looking for?" %}</h4>
+        <h4 class="title-blue-small" >{% trans "What type of Personnel are you looking for?" %}</h4>
 
         <input type="radio" name="plan_id" value="1"> {% trans "Operational Staff" %}
         <input type="radio" name="plan_id" value="2"> {% trans "Professional" %}
         <input type="radio" name="plan_id" value="3"> {% trans "Specific" %}
 
+        <p class="paragraph note">{% trans "The free trial applies only to operational candidates" %}</p>
     </div>
 
     <div class="section-container">
