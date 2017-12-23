@@ -25,6 +25,7 @@ from business.custom_user_creation_form import CustomUserCreationForm
 from dashboard import campaign_module
 from dashboard import candidate_module
 from dashboard.models import Candidate
+from business import prospect_module
 
 
 def index(request):
@@ -431,8 +432,10 @@ def dashboard(request, pk):
     # TODO: Make it for more than 1 campaign. For now it only takes first element.
     campaign = business_user.campaigns.all()[0]
 
-    backlog, waiting_tests, waiting_interview, did_interview, sent_to_client, got_job, rejected, states = candidate_module.get_rendering_data(
-        campaign.id)
+    params, states = candidate_module.get_rendering_data(campaign.id)
+
+    # State Backlog and Prospect will show as one.
+    params['backlog'] = list(params['backlog']) + list(params['prospect'])
 
     # enters here when sending an email
     if request.GET.get('send_mail') is not None:
@@ -446,13 +449,7 @@ def dashboard(request, pk):
                                        with_localization=False,
                                        body_is_filename=False)
 
-    return render(request, cts.DASHBOARD_VIEW_PATH, {"campaign": campaign,
-                                                     'backlog': backlog,
-                                                     'states': states,
-                                                     'waiting_tests': waiting_tests,
-                                                     'waiting_interview': waiting_interview,
-                                                     'did_interview': did_interview,
-                                                     'sent_to_client': sent_to_client,
-                                                     'got_job': got_job,
-                                                     'rejected': rejected,
-                                                     })
+    params['campaign'] = campaign
+    params['states'] = states
+
+    return render(request, cts.DASHBOARD_VIEW_PATH, params)

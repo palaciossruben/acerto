@@ -50,8 +50,8 @@
         <tr valign=top>
 
             {% include "business/dashboard_column.html" with candidate_list=backlog campaigns=campaigns  state_name="backlog" %}
-            {% include "business/dashboard_column.html" with candidate_list=waiting_tests campaigns=campaigns  state_name="waiting_test" %}
-            {% include "business/dashboard_column.html" with candidate_list=waiting_interview campaigns=campaigns  state_name="waiting_interview" %}
+            {% include "business/dashboard_column.html" with candidate_list=waiting_for_tests campaigns=campaigns  state_name="waiting_test" %}
+            {% include "business/dashboard_column.html" with candidate_list=waiting_for_interview campaigns=campaigns  state_name="waiting_interview" %}
             {% include "business/dashboard_column.html" with candidate_list=did_interview campaigns=campaigns  state_name="did_interview" %}
             {% include "business/dashboard_column.html" with candidate_list=sent_to_client campaigns=campaigns  state_name="sent_to_client" %}
             {% include "business/dashboard_column.html" with candidate_list=got_job campaigns=campaigns  state_name="got_job" %}
