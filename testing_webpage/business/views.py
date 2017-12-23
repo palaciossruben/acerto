@@ -4,11 +4,9 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.testing_webpage.settings')
 application = get_wsgi_application()
 
-import pickle
 import smtplib
 
 from django.contrib.auth.decorators import login_required
-from collections import OrderedDict
 from ipware.ip import get_ip
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext_lazy as _
@@ -17,7 +15,6 @@ from django.core.exceptions import ObjectDoesNotExist
 
 import business
 import beta_invite
-from business import util
 from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
@@ -27,6 +24,7 @@ from business.models import BusinessUser
 from business.custom_user_creation_form import CustomUserCreationForm
 from dashboard import campaign_module
 from dashboard import candidate_module
+from dashboard.models import Candidate
 
 
 def index(request):
@@ -414,6 +412,11 @@ def start_post(request):
         return render(request, cts.START_VIEW_PATH, {'error_message': error_message})
 
 
+def get_checked_box_candidates(campaign_id, request):
+    candidates = Candidate.objects.filter(campaign_id=campaign_id)
+    return [c for c in candidates if request.GET.get('{}_checkbox'.format(c.id))]
+
+
 @login_required
 def dashboard(request, pk):
     """
@@ -434,14 +437,14 @@ def dashboard(request, pk):
     # enters here when sending an email
     if request.GET.get('send_mail') is not None:
 
-        users = get_checked_box_users(campaign.id, request)
+        candidates = get_checked_box_candidates(campaign.id, request)
 
-        email_sender.send(users=users,
-                          language_code='es',
-                          body_input=request.GET.get('email_body'),
-                          subject=request.GET.get('email_subject'),
-                          with_localization=False,
-                          body_is_filename=False)
+        email_sender.send_to_candidate(users=candidates,
+                                       language_code='es',
+                                       body_input=request.GET.get('email_body'),
+                                       subject=request.GET.get('email_subject'),
+                                       with_localization=False,
+                                       body_is_filename=False)
 
     return render(request, cts.DASHBOARD_VIEW_PATH, {"campaign": campaign,
                                                      'backlog': backlog,
@@ -453,11 +456,3 @@ def dashboard(request, pk):
                                                      'got_job': got_job,
                                                      'rejected': rejected,
                                                      })
-
-
-from dashboard.models import Candidate
-
-
-def get_checked_box_users(campaign_id, request):
-    candidates = Candidate.objects.filter(campaign_id=campaign_id)
-    return [c.user for c in candidates if request.GET.get('{}_checkbox'.format(c.id))]
