@@ -1,4 +1,4 @@
-Hello {name},
+Hello {name}
 
 I looked at your CV and we have a position that could interest you:
 
@@ -6,4 +6,8 @@ I looked at your CV and we have a position that could interest you:
 
 If it catches your attention I invite you to apply.
 
-Greetings!
+Regards!
+
+{sender_name}
+{sender_position}
+{peaku_address}

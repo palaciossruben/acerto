@@ -68,7 +68,6 @@ mixpanel.init("d60ac5ae289f60c7f824d49a4d15be30");</script>
 
   </head>
 
- <body background="{% static 'beta_invite/bgg.jpg' %}">
 
  	<script>
 		mixpanel.track("Contact");
@@ -94,20 +93,22 @@ mixpanel.init("d60ac5ae289f60c7f824d49a4d15be30");</script>
     </noscript>
 
    <!-- BEGIN WELCOME -->
-    <div class="welcome-section" id="top" style="">
+    <div class="welcome-section" id="top" style="background-color: #648aff">
       <div class="title" style="margin-top:-140px;">
         <a class="scroll logo" style="font-family:CANDARA; font-size:65px; color:black;
-         margin-bottom:-50px;"> <img src="{% static 'beta_invite/logo.png' %}" width="370px" ></a>
+         margin-bottom:-50px;"> <img src="{% static 'beta_invite/img/peaku_home.svg' %}" width="370px" ></a>
 
-		  <h1 style="font-size:35px; margin-top:10px; color:#F8E676; ">{{ main_message }}</h1>
+		  <br>
+
+		  <h1 style="font-size:35px; margin-top:10px; color:white; ">{{ main_message }}</h1>
 
 		 <div class="container" style="margin-top:5px;">
 		   <span data-sr="wait 0.5s, then enter top and move 40px over 1s" style="color:#134984; font-size:25px;">
-				<span style="font-weight:500; color:#F8E676;">
+				<span style="font-weight:500; color:white;">
 					<b style="font-weight:400; text-transform: uppercase;">{% trans "Thanks for reaching out!" %}</b>
 				</span>
 				<br>
-				<span style="font-weight:500; color:#F8E676;">
+				<span style="font-weight:500; color:white;">
 					<b style="font-weight:400; font-size:18px">{% trans "We will contact you soon" %}</b>
 				</span>
 		   </span>

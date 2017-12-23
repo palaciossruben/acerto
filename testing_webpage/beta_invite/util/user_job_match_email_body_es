@@ -1,4 +1,4 @@
-Hola {name},
+Hola {name}
 
 Estuve mirando tu perfil y tenemos una vacante que te podrían interesar:
 
@@ -6,4 +6,9 @@ Estuve mirando tu perfil y tenemos una vacante que te podrían interesar:
 
 Si te llama la atención te invito a aplicar.
 
-Saludos y quedo pendiente cualquier cosa!
+Saludos y quedo pendiente de cualquier inquietud,
+
+
+{sender_name}
+{sender_position}
+{peaku_address}
