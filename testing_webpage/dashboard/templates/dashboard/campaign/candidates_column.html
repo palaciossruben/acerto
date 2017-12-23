@@ -1,0 +1,10 @@
+<div class="col-sm-4">
+
+    <h3>{{ column_name }}</h3>
+    <br>
+
+    {% for candidate in column_candidates %}
+        {% include "dashboard/campaign/candidate.html" with candidate=candidate campaigns=campaigns%}
+    {% endfor %}
+
+</div>

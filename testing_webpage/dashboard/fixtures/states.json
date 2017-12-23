@@ -84,7 +84,7 @@
     "model": "dashboard.state",
     "pk": 10,
     "fields":{
-      "name": "Did interview, standby",
+      "name": "Did interview",
       "code": "DIS",
       "is_rejected": false
     }

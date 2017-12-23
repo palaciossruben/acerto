@@ -5,6 +5,7 @@ import re
 from django.shortcuts import redirect
 
 from beta_invite.models import Bullet, Campaign
+from business import prospect_module
 
 
 def update_bullet_attr(campaign, dict_id, key_bullet_dict, value, attribute_name):
@@ -107,5 +108,7 @@ def create_campaign(request):
 
     update_campaign_basic_properties(campaign, request)
     update_campaign_bullets(campaign, request)
+
+    prospect_module.create_prospect_users_and_send_emails(campaign)
 
     return campaign

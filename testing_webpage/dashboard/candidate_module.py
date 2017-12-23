@@ -98,21 +98,17 @@ def get_rendering_data(campaign_id):
     Returns: tuple with (candidates, rejected_candidates, states)
     """
 
-    # TODO: recycle business search. Lot of work here: has to search according to campaign specification
-    # (education, profession, etc)
-    # Orders by desc priority field on the state object.
-    backlog = get_candidates_from_state('BL', campaign_id)
-    waiting_tests = get_candidates_from_state('WFT', campaign_id)
-    waiting_interview = get_candidates_from_state('WFI', campaign_id)
-    did_interview_in_standby = get_candidates_from_state('DIS', campaign_id)
-    sent_to_client = get_candidates_from_state('STC', campaign_id)
-    got_job = get_candidates_from_state('GTJ', campaign_id)
+    states = State.objects.filter(is_rejected=False)
 
-    rejected_candidates = Candidate.objects.filter(campaign_id=campaign_id,
-                                                   state__is_rejected=True,
-                                                   removed=False)
+    candidates_dict = {}
+    for state in states:
+        candidates_dict[state.name.lower().replace(' ', '_')] = get_candidates_from_state(state.code, campaign_id)
 
-    return backlog, waiting_tests, waiting_interview, did_interview_in_standby, sent_to_client, got_job, rejected_candidates, State.objects.all()
+    candidates_dict['rejected'] = Candidate.objects.filter(campaign_id=campaign_id,
+                                                           state__is_rejected=True,
+                                                           removed=False)
+
+    return candidates_dict, State.objects.all()
 
 
 def get_checked_box_candidates(campaign_id, request):

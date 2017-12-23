@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-23 00:46+0000\n"
+"POT-Creation-Date: 2017-12-23 06:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,8 +60,8 @@ msgstr "¡Programemos una cita!"
 msgid "Let's record your interview now!"
 msgstr "¡Graba tu entrevista ya!"
 
-#: beta_invite/new_user_module.py:140 business/views.py:187
-#: business/views.py:293
+#: beta_invite/new_user_module.py:140 business/views.py:186
+#: business/views.py:292
 msgid "Welcome to PeakU"
 msgstr "Bienvenido a PeakU"
 
@@ -275,6 +275,10 @@ msgstr "¡Gracias por completar la entrevista, te contactaremos pronto! ;)"
 msgid "Back"
 msgstr "Atrás"
 
+#: business/prospect_module.py:78
+msgid "Open position for "
+msgstr "Vacante abierta para "
+
 #: business/templates/business/company.html:13
 msgid "Describe Your Company"
 msgstr "Describe tu empresa"
@@ -308,8 +312,8 @@ msgstr "¡Gracias por tu interes!"
 msgid "PeakU - Personnel Selection"
 msgstr "PeakU - Selección de Personal"
 
-#: business/templates/business/index.html:27 business/views.py:59
-#: business/views.py:141 business/views.py:324
+#: business/templates/business/index.html:27 business/views.py:58
+#: business/views.py:140 business/views.py:323
 msgid "Discover amazing people"
 msgstr "Descubre personas increíbles"
 
@@ -809,36 +813,36 @@ msgstr "Título de la Vacante (publicado a los candidatos)"
 msgid "Add a title"
 msgstr "Escribe un título"
 
-#: business/templates/business/vacancy.html:44
+#: business/templates/business/vacancy.html:43
 msgid "Requirements (what the candidate should have)"
 msgstr "Requerimientos (lo que el candidato debe tener)"
 
-#: business/templates/business/vacancy.html:49
+#: business/templates/business/vacancy.html:48
 msgid "Add Requirement"
 msgstr "Añadir Requerimiento"
 
-#: business/templates/business/vacancy.html:50
+#: business/templates/business/vacancy.html:49
 msgid "Requirement"
 msgstr "Requerimiento"
 
-#: business/templates/business/vacancy.html:50
+#: business/templates/business/vacancy.html:49
 msgid "Input a Requirement"
 msgstr "Escribe un requerimiento"
 
-#: business/templates/business/vacancy.html:52
+#: business/templates/business/vacancy.html:51
 msgid "Delete Last"
 msgstr "Borrar Ultimo"
 
-#: business/templates/business/vacancy.html:59
+#: business/templates/business/vacancy.html:58
 msgid "Next Step"
 msgstr "Siguiente Paso"
 
-#: business/views.py:60 business/views.py:142
+#: business/views.py:59 business/views.py:141
 msgid ""
 "We search millions of profiles and find the ones that best suit your business"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
 
-#: business/views.py:367
+#: business/views.py:366
 msgid ""
 "Find someone to help you with daily tasks such as cleaning your house, "
 "fixing the fridge or sending a message."
@@ -846,7 +850,7 @@ msgstr ""
 "Encuentra a alguien que te ayude con tareas diarias como limpiar tu casa, "
 "arreglar la nevera o enviar un mensaje."
 
-#: business/views.py:370
+#: business/views.py:369
 msgid "Solve everyday problems"
 msgstr "Soluciona problemas contidianos"
 

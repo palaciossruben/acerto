@@ -28,85 +28,23 @@
 
                 <div class="row" style="margin-top:45px;">
 
-                    <div class="col-sm-4">
+                    {% include "dashboard/campaign/candidates_column.html" with candidate=candidate campaigns=campaigns column_candidates=prospect column_name="Prospect" %}
+                    {% include "dashboard/campaign/candidates_column.html" with candidate=candidate campaigns=campaigns column_candidates=backlog column_name="Backlog" %}
+                    {% include "dashboard/campaign/candidates_column.html" with candidate=candidate campaigns=campaigns column_candidates=waiting_for_tests column_name="Waiting for tests" %}
 
-                        <h3>Backlog</h3>
-                        <br>
-
-                        {% for candidate in backlog %}
-                            {% include "dashboard/campaign/candidate.html" with candidate=candidate campaigns=campaigns%}
-                        {% endfor %}
-
-                    </div>
-                    <div class="col-sm-4">
-
-                        <h3>Waiting for Tests</h3>
-                        <br>
-
-                        {% for candidate in waiting_tests %}
-                            {% include "dashboard/campaign/candidate.html" with candidate=candidate campaigns=campaigns%}
-                        {% endfor %}
-
-                    </div>
-                    <div class="col-sm-4">
-
-                        <h3>Waiting for Interview</h3>
-                        <br>
-
-                        {% for candidate in waiting_interview %}
-                            {% include "dashboard/campaign/candidate.html" with candidate=candidate campaigns=campaigns %}
-                        {% endfor %}
-
-                    </div>
                 </div>
 
                 <div class="row" style="margin-top:45px;">
 
-                    <div class="col-sm-4">
+                    {% include "dashboard/campaign/candidates_column.html" with candidate=candidate campaigns=campaigns column_candidates=waiting_for_interview column_name="Waiting for Interview" %}
+                    {% include "dashboard/campaign/candidates_column.html" with candidate=candidate campaigns=campaigns column_candidates=did_interview column_name="Did Interview, in Standby" %}
+                    {% include "dashboard/campaign/candidates_column.html" with candidate=candidate campaigns=campaigns column_candidates=sent_to_client column_name="Sent To Client" %}
 
-                        <h3>Did Interview, in Standby</h3>
-                        <br>
-
-                        {% for candidate in did_interview_in_standby %}
-                            {% include "dashboard/campaign/candidate.html" with candidate=candidate campaigns=campaigns %}
-                        {% endfor %}
-
-                    </div>
-
-                    <div class="col-sm-4">
-
-                        <h3>Sent To Client</h3>
-                        <br>
-
-                        {% for candidate in sent_to_client %}
-                            {% include "dashboard/campaign/candidate.html" with candidate=candidate campaigns=campaigns %}
-                        {% endfor %}
-
-                    </div>
-
-                    <div class="col-sm-4">
-
-                        <h3>Got Job</h3>
-                        <br>
-
-                        {% for candidate in got_job %}
-                            {% include "dashboard/campaign/candidate.html" with candidate=candidate campaigns=campaigns %}
-                        {% endfor %}
-
-                    </div>
                 </div>
 
                 <div class="row" style="margin-top:45px;">
-
-                    <div class="col-sm-4">
-
-                        <h3>Rejected</h3>
-                        <br>
-
-                        {% for candidate in rejected %}
-                            {% include "dashboard/campaign/candidate.html" with candidate=candidate campaigns=campaigns %}
-                        {% endfor %}
-                    </div>
+                    {% include "dashboard/campaign/candidates_column.html" with candidate=candidate campaigns=campaigns column_candidates=got_the_job column_name="Got Job" %}
+                    {% include "dashboard/campaign/candidates_column.html" with candidate=candidate campaigns=campaigns column_candidates=rejected column_name="Rejected" %}
                 </div>
 
             <br>

@@ -63,23 +63,17 @@ def edit_campaign_candidates(request, pk):
                                        with_localization=False,
                                        body_is_filename=False)
 
-    backlog, waiting_tests, waiting_interview, did_interview_in_standby, sent_to_client, got_job, rejected, states = candidate_module.get_rendering_data(pk)
+    params, states = candidate_module.get_rendering_data(pk)
 
     # all campaigns except the current one.
     campaigns_to_move_to = Campaign.objects.exclude(pk=pk)
 
-    return render(request, cts.EDIT_CANDIDATES, {'states': states,
-                                                 'campaign_id': pk,
-                                                 'backlog': backlog,
-                                                 'waiting_tests': waiting_tests,
-                                                 'waiting_interview': waiting_interview,
-                                                 'did_interview_in_standby': did_interview_in_standby,
-                                                 'sent_to_client': sent_to_client,
-                                                 'got_job': got_job,
-                                                 'rejected': rejected,
-                                                 'campaigns': campaigns_to_move_to,
-                                                 'current_campaign': Campaign.objects.get(pk=pk)
-                                                 })
+    params['states'] = states
+    params['campaign_id'] = pk
+    params['campaigns'] = campaigns_to_move_to
+    params['current_campaign'] = Campaign.objects.get(pk=pk)
+
+    return render(request, cts.EDIT_CANDIDATES, params)
 
 
 def new_campaign(request):
