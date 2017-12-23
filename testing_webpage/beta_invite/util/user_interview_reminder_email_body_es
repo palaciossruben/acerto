@@ -1,4 +1,4 @@
-Hola, {name}
+Hola {name}
 
 
 Recuerda que aprobaste la prueba técnica!
@@ -9,9 +9,9 @@ Solo te falta un paso para terminar el proceso, haz click en el siguiente link:
 
 No importa si ya programaste una entrevista, igual te ayudará a agilizar el proceso.
 
-Estoy pendiente si tienes alguna duda,
+Estoy pendiente si tienes alguna duda.
 
-Saludos
+Saludos,
 
 {sender_name}
 {sender_position}

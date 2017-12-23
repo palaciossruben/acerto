@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-22 23:28+0000\n"
+"POT-Creation-Date: 2017-12-23 00:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,14 +66,14 @@ msgid "Welcome to PeakU"
 msgstr "Bienvenido a PeakU"
 
 #: beta_invite/templates/beta_invite/add_cv.html:76
-#: beta_invite/templates/beta_invite/long_form.html:99
+#: beta_invite/templates/beta_invite/long_form.html:103
 msgid "Upload your resume"
 msgstr "Sube tu curriculum"
 
 #: beta_invite/templates/beta_invite/add_cv.html:93
 #: beta_invite/templates/beta_invite/fast_job.html:160
-#: beta_invite/templates/beta_invite/long_form.html:107
-#: business/templates/business/index.html:99
+#: beta_invite/templates/beta_invite/long_form.html:111
+#: business/templates/business/index.html:98
 #: business/templates/business/signup.html:42
 #: business/templates/business/trade_client.html:155
 msgid "Sure!"
@@ -84,7 +84,7 @@ msgid "Thanks for registering!"
 msgstr "¡Gracias por registrarte!"
 
 #: beta_invite/templates/beta_invite/applied.html:91
-#: business/templates/business/contact.html:111
+#: business/templates/business/contact.html:112
 msgid "We will contact you soon"
 msgstr "Nos pondremos en contacto pronto"
 
@@ -93,8 +93,8 @@ msgid "Apply Now!"
 msgstr "¡Aplica Ya!"
 
 #: beta_invite/templates/beta_invite/fast_job.html:112
-#: beta_invite/templates/beta_invite/long_form.html:68
-#: business/templates/business/index.html:88
+#: beta_invite/templates/beta_invite/long_form.html:72
+#: business/templates/business/index.html:87
 #: business/templates/business/results.html:152
 #: business/templates/business/search_trade.html:194
 #: business/templates/business/signup.html:28
@@ -103,9 +103,9 @@ msgid "Your Full Name"
 msgstr "Tu Nombre Completo"
 
 #: beta_invite/templates/beta_invite/fast_job.html:119
-#: beta_invite/templates/beta_invite/long_form.html:71
-#: business/templates/business/index.html:91
-#: business/templates/business/login.html:84
+#: beta_invite/templates/beta_invite/long_form.html:75
+#: business/templates/business/index.html:90
+#: business/templates/business/login.html:36
 #: business/templates/business/results.html:159
 #: business/templates/business/search_trade.html:201
 #: business/templates/business/signup.html:31
@@ -114,7 +114,7 @@ msgid "Your email"
 msgstr "Tu correo"
 
 #: beta_invite/templates/beta_invite/fast_job.html:126
-#: beta_invite/templates/beta_invite/long_form.html:74
+#: beta_invite/templates/beta_invite/long_form.html:78
 #: business/templates/business/results.html:166
 #: business/templates/business/search_trade.html:208
 #: business/templates/business/signup.html:34
@@ -122,7 +122,7 @@ msgid "Your phone"
 msgstr "Tu teléfono"
 
 #: beta_invite/templates/beta_invite/fast_job.html:135
-#: beta_invite/templates/beta_invite/long_form.html:77
+#: beta_invite/templates/beta_invite/long_form.html:81
 msgid "Select Country"
 msgstr "Selecciona tu País"
 
@@ -201,19 +201,23 @@ msgstr "Descubre tu verdadera pasión"
 msgid "APPLY NOW!"
 msgstr "¡APLICA YA!"
 
-#: beta_invite/templates/beta_invite/long_form.html:49
+#: beta_invite/templates/beta_invite/long_form.html:43
+msgid "Requirements"
+msgstr "Requerimientos"
+
+#: beta_invite/templates/beta_invite/long_form.html:53
 msgid "Perks"
 msgstr "Beneficios"
 
-#: beta_invite/templates/beta_invite/long_form.html:84
+#: beta_invite/templates/beta_invite/long_form.html:88
 msgid "Select Education"
 msgstr "Selecciona tu Educación"
 
-#: beta_invite/templates/beta_invite/long_form.html:91
+#: beta_invite/templates/beta_invite/long_form.html:95
 msgid "Select Profession"
 msgstr "Selecciona tu Profesión"
 
-#: beta_invite/templates/beta_invite/long_form.html:104
+#: beta_invite/templates/beta_invite/long_form.html:108
 msgid "Authorized third parties can see this information."
 msgstr "Terceros autorizados pueden ver esta información."
 
@@ -277,7 +281,7 @@ msgstr "Describe tu empresa"
 
 #: business/templates/business/company.html:17
 msgid "Tell us about your company in an inspiring way"
-msgstr "Cuéntanos sobre tu compañia de forma inpiradora"
+msgstr "Cuéntanos sobre tu compañia de forma inspiradora"
 
 #: business/templates/business/company.html:21
 msgid "Add company description"
@@ -295,7 +299,7 @@ msgstr "Beneficios"
 msgid "Input a perk"
 msgstr "Añade un Beneficio"
 
-#: business/templates/business/contact.html:107
+#: business/templates/business/contact.html:108
 msgid "Thanks for reaching out!"
 msgstr "¡Gracias por tu interes!"
 
@@ -313,64 +317,64 @@ msgstr "Descubre personas increíbles"
 msgid "Free Trial"
 msgstr "¡Prueba Gratis!"
 
-#: business/templates/business/index.html:35
+#: business/templates/business/index.html:34
 msgid "Hire the best candidates"
 msgstr "Contrata a los mejores"
 
-#: business/templates/business/index.html:43
+#: business/templates/business/index.html:42
 msgid "Why choose us?"
 msgstr "¿Por qué elegirnos?"
 
-#: business/templates/business/index.html:48
+#: business/templates/business/index.html:47
 #, no-python-format
 msgid "We deliver only the best 10%% of applicants"
 msgstr "Entregamos el mejor 10% de los aplicantes"
 
-#: business/templates/business/index.html:50
+#: business/templates/business/index.html:49
 #, no-python-format
 msgid "We only deliver 100%% relevant candidates"
 msgstr "Solo entregamos candidatos 100% relevantes"
 
-#: business/templates/business/index.html:51
+#: business/templates/business/index.html:50
 msgid "The whole process in 10 business days"
 msgstr "Todo el proceso en 10 días hábiles"
 
-#: business/templates/business/index.html:52
+#: business/templates/business/index.html:51
 msgid "We accelerate your recruitment processes"
 msgstr "Aceleramos tus procesos de reclutamiento"
 
-#: business/templates/business/index.html:53
+#: business/templates/business/index.html:52
 msgid "Focus on worthwhile interviews"
 msgstr "Enfócate en entrevistas valiosas"
 
-#: business/templates/business/index.html:54
+#: business/templates/business/index.html:53
 msgid "Save on job exchanges"
 msgstr "Evita gastos en bolsas de empleo"
 
-#: business/templates/business/index.html:81
+#: business/templates/business/index.html:80
 #: business/templates/business/trade_client.html:133
 msgid "Contact Us"
 msgstr "Contáctanos"
 
-#: business/templates/business/index.html:94
+#: business/templates/business/index.html:93
 #: business/templates/business/trade_client.html:145
 msgid "Your phone (optional)"
 msgstr "Tu teléfono (opcional)"
 
-#: business/templates/business/index.html:97
+#: business/templates/business/index.html:96
 #: business/templates/business/trade_client.html:150
 msgid "Add a message (optional)"
 msgstr "Escríbe un comentario (opcional)"
 
-#: business/templates/business/login.html:71
+#: business/templates/business/login.html:24
 msgid "Log in to our platform"
 msgstr "Inicia sesión en nuestra plataforma"
 
-#: business/templates/business/login.html:91
+#: business/templates/business/login.html:43
 msgid "Enter your password"
 msgstr "Digita una clave"
 
-#: business/templates/business/login.html:98
+#: business/templates/business/login.html:50
 msgid "Log In!"
 msgstr "¡Inicia Sesión!"
 
@@ -548,12 +552,12 @@ msgstr ""
 "Este producto garantiza el proceso hasta que hagas una contratación exitosa."
 
 #: business/templates/business/pricing.html:5
-#: business/templates/business/vacancy.html:19
+#: business/templates/business/vacancy.html:28
 msgid "What type of Personnel are you looking for?"
 msgstr "¿Qué tipo de personal estás buscando?"
 
 #: business/templates/business/pricing.html:12
-#: business/templates/business/vacancy.html:21
+#: business/templates/business/vacancy.html:30
 msgid "Operational Staff"
 msgstr "Operativo"
 
@@ -635,7 +639,7 @@ msgid "more information"
 msgstr "más información"
 
 #: business/templates/business/pricing.html:45
-#: business/templates/business/vacancy.html:22
+#: business/templates/business/vacancy.html:31
 msgid "Professional"
 msgstr "Profesional"
 
@@ -669,7 +673,7 @@ msgid "$240"
 msgstr "$399 mil + IVA"
 
 #: business/templates/business/pricing.html:79
-#: business/templates/business/vacancy.html:23
+#: business/templates/business/vacancy.html:32
 msgid "Specific"
 msgstr "Específico"
 
@@ -793,39 +797,39 @@ msgstr ""
 msgid "Describe the position"
 msgstr "Describe la vacante"
 
-#: business/templates/business/vacancy.html:25
+#: business/templates/business/vacancy.html:34
 msgid "The free trial applies only to operational candidates"
 msgstr "La prueba grátis solo aplica para personal operativo."
 
-#: business/templates/business/vacancy.html:29
+#: business/templates/business/vacancy.html:38
 msgid "Position Title (published to the candidates)"
 msgstr "Título de la Vacante (publicado a los candidatos)"
 
-#: business/templates/business/vacancy.html:30
+#: business/templates/business/vacancy.html:39
 msgid "Add a title"
 msgstr "Escribe un título"
 
-#: business/templates/business/vacancy.html:35
+#: business/templates/business/vacancy.html:44
 msgid "Requirements (what the candidate should have)"
 msgstr "Requerimientos (lo que el candidato debe tener)"
 
-#: business/templates/business/vacancy.html:40
+#: business/templates/business/vacancy.html:49
 msgid "Add Requirement"
 msgstr "Añadir Requerimiento"
 
-#: business/templates/business/vacancy.html:41
+#: business/templates/business/vacancy.html:50
 msgid "Requirement"
 msgstr "Requerimiento"
 
-#: business/templates/business/vacancy.html:41
+#: business/templates/business/vacancy.html:50
 msgid "Input a Requirement"
 msgstr "Escribe un requerimiento"
 
-#: business/templates/business/vacancy.html:43
+#: business/templates/business/vacancy.html:52
 msgid "Delete Last"
 msgstr "Borrar Ultimo"
 
-#: business/templates/business/vacancy.html:50
+#: business/templates/business/vacancy.html:59
 msgid "Next Step"
 msgstr "Siguiente Paso"
 

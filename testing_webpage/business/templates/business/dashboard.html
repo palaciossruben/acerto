@@ -1,5 +1,6 @@
 {% extends 'base.html'%}
 {% load static %}
+{% load i18n %}
 
 {% block title %}PeakU - Dashboard {% endblock %}
 
@@ -13,6 +14,8 @@
     <caption><h3 class="secondary-title" align="center"> Dashboard {{ campaign.name }}</h3></caption>
     <div class="secondary-yellow-bar"></div>
     <br>
+
+    <form action="#" method="get"> {% csrf_token %}
     <table style="margin-left:10px;">
         <tr>
             <th>
@@ -73,6 +76,8 @@
         <br>
 
         <input type="submit" name="send_mail" value="Enviar email">
+
+        </form>
 
         <br>
         <br>
