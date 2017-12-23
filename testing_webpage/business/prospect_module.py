@@ -42,6 +42,19 @@ def filter_users_with_job(users):
     return [x for x in users if x not in excluded_users]
 
 
+def translate_email_job_match_subject(user, campaign):
+    """
+    Default will be in spanish
+    Args:
+        user: User object
+    Returns: translated subject
+    """
+    if user.language_code is None or user.language_code == 'es':
+        return 'Vacante abierta para {campaign}'.format(campaign=campaign.title_es)
+    else:
+        return 'Open position for {campaign}'.format(campaign=campaign.title)
+
+
 def create_prospect_users_and_send_emails(campaign):
     """
     Args:
@@ -75,7 +88,7 @@ def create_prospect_users_and_send_emails(campaign):
             email_sender.send_to_candidate(candidates=candidate,
                                            language_code=user.language_code,
                                            body_input='user_job_match_email_body',
-                                           subject=_('Open position for ') + campaign.title_es,
+                                           subject=translate_email_job_match_subject(user, campaign),
                                            override_dict={'campaign_url': campaign.get_url()})
 
             # Records sending email
