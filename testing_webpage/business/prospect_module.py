@@ -1,15 +1,11 @@
 
-from django.utils.translation import ugettext_lazy as _
-
 import common
 
 from dashboard.models import State
 from beta_invite.models import EmailType
-from testing_webpage.models import EmailSent
+from testing_webpage.models import PendingEmail
 from business import search_module
 from dashboard.models import Candidate
-from beta_invite.util import email_sender
-from testing_webpage import settings
 
 
 NUMBER_OF_MATCHES = 10
@@ -69,28 +65,21 @@ def create_prospect_users_and_send_emails(campaign):
     users = search_module.get_matching_users(search_text=search_text,
                                              word_user_path='subscribe/word_user_dictionary.p')
 
-    # Top 20 distinct users.
+    # Top distinct users.
     users = get_distinct_users(users)
     users = filter_users_with_job(users)
     top_users = [u for u in users][:NUMBER_OF_MATCHES]
 
     for user in top_users:
-        # check that emails are not sent twice and not to the same campaign where the user is already registered
-        if not EmailSent.objects.filter(campaign=campaign, user=user, email_type=email_type) \
-                and campaign not in common.get_campaigns(user):
+
+        if campaign not in common.get_campaigns(user):
 
             candidate = Candidate(campaign=campaign, user=user, state=State.objects.get(code='P'))
             candidate.save()
 
-            if settings.DEBUG:
-                candidate.user.email = 'juan@peaku.co'
-
-            email_sender.send_to_candidate(candidates=candidate,
-                                           language_code=user.language_code,
-                                           body_input='user_job_match_email_body',
-                                           subject=translate_email_job_match_subject(user, campaign),
-                                           override_dict={'campaign_url': campaign.get_url()})
-
-            # Records sending email
-            EmailSent(campaign=campaign, user=user, email_type=email_type).save()
-
+            PendingEmail.add_to_queue(candidates=candidate,
+                                      language_code=candidate.user.language_code,
+                                      body_input='user_job_match_email_body',
+                                      subject=translate_email_job_match_subject(user, campaign),
+                                      override_dict={'campaign_url': campaign.get_url()},
+                                      email_type=email_type)
