@@ -82,6 +82,12 @@ def process_question_and_get_score(campaign, question_id, request, test_id, user
 
     survey.save()
 
+    candidate = Candidate.objects.get(campaign=campaign,
+                                      user_id=user_id)
+
+    candidate.surveys.add(survey)
+    candidate.save()
+
     return score
 
 

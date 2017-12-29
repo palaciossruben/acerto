@@ -43,6 +43,19 @@
         <p><strong>test (cut: {{ e.cut_score }}): </strong> {{ e.final_score }}</p>
     {% endfor %}
 
+    {% for e in candidate.surveys.all %}
+        {{ e.question.text }}
+        {% if e.answer %}
+    <p> {{ e.answer }} </p>
+        {% endif %}
+        {% if e.numeric_answer %}
+    <p> {{ e.numeric_answer }}</p>
+        {% endif %}
+        {% if e.text_answer %}
+    <p> {{ e.text_answer }} </p>
+        {% endif %}
+    {% endfor %}
+
 <p><strong>Salary: </strong><input type="text" name="{{ candidate.id }}_salary" value="{{ candidate.salary }}"
     placeholder="add salary"></p>
 
