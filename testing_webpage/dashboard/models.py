@@ -1,6 +1,6 @@
 from django.db import models
 
-from beta_invite.models import User, Campaign, Evaluation
+from beta_invite.models import User, Campaign, Evaluation, Survey
 from dashboard import constants as cts
 
 
@@ -46,7 +46,7 @@ class Candidate(models.Model):
     salary = models.CharField(max_length=100, default='')
     comments = models.ManyToManyField(Comment, default=[])
     evaluations = models.ManyToManyField(Evaluation)
-
+    surveys = models.ManyToManyField(Survey)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

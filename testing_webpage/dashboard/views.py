@@ -2,7 +2,7 @@
 import common
 from django.core import serializers
 from django.shortcuts import render, redirect
-from beta_invite.models import Campaign, User, Evaluation, Test, BulletType, Interview, Question, Survey, Bullet, QuestionType
+from beta_invite.models import Campaign, User, Test, BulletType, Interview, Question, Survey, Bullet, QuestionType
 from dashboard.models import State, Candidate, Comment
 from dashboard import constants as cts
 from beta_invite.util import email_sender

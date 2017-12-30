@@ -10,7 +10,7 @@ from ipware.ip import get_ip
 from beta_invite import constants as cts
 from beta_invite.util import email_sender
 from beta_invite import interview_module
-from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser, Bullet, BulletType, Test, Question, Survey, Score, Evaluation
+from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser, Bullet, BulletType, Test, Question, Score, Evaluation
 from beta_invite import test_module, new_user_module
 
 
@@ -356,6 +356,7 @@ def get_test_result(request):
     test_score_str = ''  # by default there is no score unless the test was done.
 
     test_done = test_module.comes_from_test(request)
+
     if test_done:
 
         cut_scores, scores = test_module.get_scores(campaign, user_id, questions_dict, request)
