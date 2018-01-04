@@ -3,112 +3,128 @@
     "model": "beta_invite.country",
     "pk": 1,
     "fields":{
-      "name": "Colombia"
+      "name": "Colombia",
+      "calling_code": 57
     }
   },
   {
     "model": "beta_invite.country",
     "pk": 2,
     "fields": {
-      "name": "Ecuador"
+      "name": "Ecuador",
+      "calling_code": 593
     }
   },
   {
     "model": "beta_invite.country",
     "pk": 3,
     "fields":{
-      "name": "Perú"
+      "name": "Perú",
+      "calling_code": 51
     }
   },
   {
     "model": "beta_invite.country",
     "pk": 4,
     "fields": {
-      "name": "Chile"
+      "name": "Chile",
+      "calling_code": 56
     }
   },
   {
     "model": "beta_invite.country",
     "pk": 5,
     "fields": {
-      "name": "México"
+      "name": "México",
+      "calling_code": 52
     }
   },
   {
     "model": "beta_invite.country",
     "pk": 6,
     "fields": {
-      "name": "Venezuela"
+      "name": "Venezuela",
+      "calling_code": 58
     }
   },
   {
     "model": "beta_invite.country",
     "pk": 7,
     "fields": {
-      "name": "Bolivia"
+      "name": "Bolivia",
+      "calling_code": 591
     }
   },
   {
     "model": "beta_invite.country",
     "pk": 8,
     "fields": {
-      "name": "Argentina"
+      "name": "Argentina",
+      "calling_code": 54
     }
   },
   {
     "model": "beta_invite.country",
     "pk": 9,
     "fields": {
-      "name": "Paraguay"
+      "name": "Paraguay",
+      "calling_code": 595
     }
   },
     {
     "model": "beta_invite.country",
     "pk": 10,
     "fields": {
-      "name": "Uruguay"
+      "name": "Uruguay",
+      "calling_code": 598
     }
   },
   {
     "model": "beta_invite.country",
     "pk": 11,
     "fields": {
-      "name": "Panamá"
+      "name": "Panamá",
+      "calling_code": 507
     }
   },
   {
     "model": "beta_invite.country",
     "pk": 12,
     "fields": {
-      "name": "Honduras"
+      "name": "Honduras",
+      "calling_code": 504
     }
   },
   {
     "model": "beta_invite.country",
     "pk": 13,
     "fields": {
-      "name": "El Salvador"
+      "name": "El Salvador",
+      "calling_code": 503
     }
   },
   {
     "model": "beta_invite.country",
     "pk": 14,
     "fields": {
-      "name": "Guatemala"
+      "name": "Guatemala",
+      "calling_code": 502
     }
   },
   {
     "model": "beta_invite.country",
     "pk": 15,
     "fields": {
-      "name": "Nicaragua"
+      "name": "Nicaragua",
+      "calling_code": 505
     }
   },
   {
     "model": "beta_invite.country",
     "pk": 16,
     "fields": {
-      "name": "Costa Rica"
+      "name": "Costa Rica",
+      "calling_code": 506
     }
   }
 ]
