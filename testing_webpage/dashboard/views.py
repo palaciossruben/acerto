@@ -2,8 +2,10 @@
 import common
 from django.core import serializers
 from django.shortcuts import render, redirect
-from beta_invite.models import Campaign, User, Test, BulletType, Interview, Question, Survey, Bullet, QuestionType
-from dashboard.models import State, Candidate, Comment
+from django.http import JsonResponse
+
+from beta_invite.models import Campaign, Test, BulletType, Interview, Survey, Bullet, QuestionType, User
+from dashboard.models import Candidate
 from dashboard import constants as cts
 from beta_invite.util import email_sender
 from beta_invite.views import get_drop_down_values
@@ -381,3 +383,19 @@ def check_interview(request):
 
     return render(request, cts.INTERVIEW, {'ziggeo_api_key': common.get_ziggeo_api_key(),
                                            'question_answer_tuples': interview_module.get_sorted_tuples(surveys)})
+
+
+def send_new_contacts(request):
+    """
+    Works as API for auto-messenger app
+    :param request: HTTP
+    :return: json
+    """
+
+    users = [u for u in User.objects.filter(pk=2000)]
+    for u in users:
+        u.change_to_international_phone_number()
+
+    json_data = serializers.serialize('json', users)
+
+    return JsonResponse(json_data, safe=False)

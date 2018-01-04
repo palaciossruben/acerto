@@ -36,4 +36,7 @@ urlpatterns = [
     url(r'^campaign/interview/create_interview_question$', views.create_interview_question, name='create_interview_question'),
     url(r'^campaign/interview/update_interview_question$', views.update_interview_question, name='update_interview_question'),
     url(r'^campaign/interview/delete_interview_question$', views.delete_interview_question, name='delete_interview_question'),
+
+    # Auto messenger
+    url(r'^send_new_contacts$', views.send_new_contacts, name='send_new_contacts'),
 ]

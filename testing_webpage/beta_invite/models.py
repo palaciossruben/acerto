@@ -1,3 +1,4 @@
+import re
 from django.db import models
 from django.contrib.postgres.fields import JSONField
 
@@ -65,6 +66,7 @@ class Education(models.Model):
 class Country(models.Model):
 
     name = models.CharField(max_length=200)
+    calling_code = models.IntegerField(null=True)
 
     def __str__(self):
         return '{0}'.format(self.name)
@@ -312,6 +314,10 @@ class User(models.Model):
 
     def __str__(self):
         return '{0}, {1}'.format(self.name, self.email)
+
+    def change_to_international_phone_number(self):
+        if self.phone != '+' and re.search(r'^' + str(self.country.calling_code) + '.+', self.phone) is None:
+            self.phone = '+' + str(self.country.calling_code) + self.phone
 
     # adds custom table name
     class Meta:
