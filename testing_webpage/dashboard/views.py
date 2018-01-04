@@ -395,7 +395,7 @@ def send_new_contacts(request):
     users = [u for u in User.objects.filter(pk=2000)]
     for u in users:
         u.change_to_international_phone_number()
-        email_sender.remove_accents(u.name)
+        u.name = email_sender.remove_accents(u.name)
 
     json_data = serializers.serialize('json', users)
 
