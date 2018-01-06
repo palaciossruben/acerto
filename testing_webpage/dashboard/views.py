@@ -416,7 +416,7 @@ def send_messages(request):
 
     users_json = serializers.serialize('json', users)
 
-    message = 'test message'
+    message = '"test message"'
     json_data = '{"message": ' + message + ', "users":' + users_json + '}'
 
     return JsonResponse(json_data, safe=False)
