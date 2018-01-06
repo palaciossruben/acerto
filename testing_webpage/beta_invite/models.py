@@ -323,7 +323,7 @@ class User(models.Model):
             self.phone = '+' + str(self.country.calling_code) + self.phone
 
             # Adds the '+' only
-        elif re.search(r'^' + str(self.country.calling_code) + '.+', self.phone) is None:
+        elif re.search(r'^' + str(self.country.calling_code) + '.+', self.phone) is not None:
             self.phone = '+' + self.phone
 
     # adds custom table name
