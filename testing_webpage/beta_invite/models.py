@@ -318,7 +318,7 @@ class User(models.Model):
     def change_to_international_phone_number(self):
 
         # Adds the '+' and country code
-        if self.phone != '+':
+        if self.phone[0] != '+':
 
             self.phone = '+' + str(self.country.calling_code) + self.phone
 
