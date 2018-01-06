@@ -400,3 +400,23 @@ def send_new_contacts(request):
     json_data = serializers.serialize('json', users)
 
     return JsonResponse(json_data, safe=False)
+
+
+def send_messages(request):
+    """
+    Sends the messages and their respective users.
+    :param request: HTTP
+    :return: json
+    """
+
+    users = [u for u in User.objects.filter(pk=2000)]
+    for u in users:
+        u.change_to_international_phone_number()
+        u.name = email_sender.remove_accents(u.name)
+
+    users_json = serializers.serialize('json', users)
+
+    message = 'test message'
+    json_data = '{"message": ' + message + ', "users":' + users_json + '}'
+
+    return JsonResponse(json_data, safe=False)

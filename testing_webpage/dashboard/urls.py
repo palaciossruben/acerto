@@ -19,7 +19,6 @@ urlpatterns = [
     url(r'^campaign/(?P<pk>\d+)/delete_test$', views.delete_test),
     url(r'^campaign/(?P<pk>\d+)/tests$', views.tests),
 
-
     # Test
     url(r'^test/(?P<pk>\d+)$', views.edit_test, name='test_edit'),
     url(r'^test/new$', views.new_test, name='new_test'),
@@ -39,4 +38,5 @@ urlpatterns = [
 
     # Auto messenger
     url(r'^send_new_contacts$', views.send_new_contacts, name='send_new_contacts'),
+    url(r'^send_messages$', views.send_messages, name='send_messages'),
 ]
