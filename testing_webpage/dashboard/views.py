@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 
 from beta_invite.models import Campaign, Test, BulletType, Interview, Survey, Bullet, QuestionType, User
-from dashboard.models import Candidate
+from dashboard.models import Candidate, Message
 from dashboard import constants as cts
 from beta_invite.util import email_sender
 from beta_invite.views import get_drop_down_values
@@ -26,6 +26,17 @@ def index(request):
 
 
 # ------------------------------- CAMPAIGN -------------------------------
+
+
+def add_to_message_queue(candidates, text):
+    """
+    Adds objects to the message table. So later on this table will serve as a message queue.
+    :param candidates: list of candidates.
+    :param text: string
+    :return: writes on table messages to be sent.
+    """
+    for candidate in candidates:
+        Message(candidate=candidate, text=text).save()
 
 
 # TODO: use Ajax to optimize rendering. Has no graphics therefore is very low priority.
@@ -64,6 +75,10 @@ def edit_campaign_candidates(request, pk):
                                        subject=candidate_module.get_subject(request, pk),
                                        with_localization=False,
                                        body_is_filename=False)
+
+    if request.POST.get('send_message') is not None:
+        candidates = candidate_module.get_checked_box_candidates(pk, request)
+        add_to_message_queue(candidates, request.POST.get('email_body'))
 
     params, states = candidate_module.get_rendering_data(pk)
 
@@ -392,6 +407,9 @@ def send_new_contacts(request):
     :return: json
     """
 
+    #TODO: todo
+    #users = [m.candidate.user for m in Message.objects.filter(sent=True)]
+
     users = [u for u in User.objects.filter(pk__in={2043, 1929})]
     for u in users:
         u.change_to_international_phone_number()
@@ -402,6 +420,12 @@ def send_new_contacts(request):
     return JsonResponse(json_data, safe=False)
 
 
+def mark_messages_as_sent(messages):
+    for message in messages:
+        message.sent = True
+        message.save()
+
+
 def send_messages(request):
     """
     Sends the messages and their respective users.
@@ -409,14 +433,16 @@ def send_messages(request):
     :return: json
     """
 
-    users = [u for u in User.objects.filter(pk__in={2043, 1929})]
-    for u in users:
-        u.change_to_international_phone_number()
-        u.name = email_sender.remove_accents(u.name)
+    messages = [m for m in Message.objects.filter(sent=False)]
 
-    users_json = serializers.serialize('json', users)
+    sender_data = email_sender.read_email_credentials()
 
-    message = '"test message"'
-    json_data = '{"message": ' + message + ', "users":' + users_json + '}'
+    for message in messages:
+        candidate = message.candidate
+        params = email_sender.get_params_for_candidate(candidate, sender_data, candidate.user.language_code, {})
+        message.text = message.text.format(**params)
 
-    return JsonResponse(json_data, safe=False)
+    messages_json = serializers.serialize('json', messages)
+
+    mark_messages_as_sent(messages)
+    return JsonResponse(messages_json, safe=False)
