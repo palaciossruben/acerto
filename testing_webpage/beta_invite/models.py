@@ -288,6 +288,9 @@ class User(models.Model):
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
     curriculum_url = models.CharField(max_length=200, default='#')
 
+    # indicates if added to messenger
+    added = models.BooleanField(default=False)
+
     # TODO: deprecated: remove when sure there are no dependencies remaining. Not saving anymore
     campaign = models.ForeignKey(Campaign, null=True)
     phone = models.CharField(max_length=40, null=True)

@@ -400,6 +400,17 @@ def check_interview(request):
                                            'question_answer_tuples': interview_module.get_sorted_tuples(surveys)})
 
 
+def mark_as_added(users):
+    """
+    Flag added to True value.
+    :param users: collection
+    :return: none
+    """
+    for u in users:
+        u.added = True
+        u.save()
+
+
 def send_new_contacts(request):
     """
     Works as API for auto-messenger app
@@ -407,16 +418,14 @@ def send_new_contacts(request):
     :return: json
     """
 
-    #TODO: todo
-    #users = [m.candidate.user for m in Message.objects.filter(sent=True)]
-
-    users = [u for u in User.objects.filter(pk__in={2043, 1929})]
+    users = [m.candidate.user for m in Message.objects.filter(candidate__user__added=False)]
     for u in users:
         u.change_to_international_phone_number()
         u.name = email_sender.remove_accents(u.name)
 
     json_data = serializers.serialize('json', users)
 
+    mark_as_added(users)
     return JsonResponse(json_data, safe=False)
 
 
