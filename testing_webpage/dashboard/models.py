@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.signals import post_init
 
 from beta_invite.models import User, Campaign, Evaluation, Survey
 from dashboard import constants as cts
@@ -11,7 +12,7 @@ class State(models.Model):
     is_rejected = models.BooleanField(default=False)
 
     def __str__(self):
-        return '{0}, {1}'.format(self.id, self.name)
+        return '{0}, {1}'.format(self.pk, self.name)
 
     # adds custom table name
     class Meta:
@@ -26,7 +27,7 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return '{0}, {1}'.format(self.id, self.text)
+        return '{0}, {1}'.format(self.pk, self.text)
 
     # adds custom table name
     class Meta:
@@ -51,8 +52,37 @@ class Candidate(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return '{0}, {1}, {2}'.format(self.id, self.user.name, self.campaign.name)
+        return '{0}, {1}, {2}'.format(self.pk, self.user.name, self.campaign.name)
 
     # adds custom table name
     class Meta:
         db_table = 'candidates'
+
+
+class Message(models.Model):
+    """
+    This table stores messages sent later on. is a kind of queue
+    """
+
+    candidate = models.ForeignKey(Candidate, null=True, on_delete=models.SET_NULL)
+    text = models.CharField(max_length=10000, default='')
+    sent = models.BooleanField(default=False)
+    contact_name = models.CharField(max_length=200, default='')
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '{0}, {1}'.format(self.pk, self.text)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'messages'
+
+
+def message_post_init(**kwargs):
+    instance = kwargs.get('instance')
+    instance.contact_name = instance.candidate.user.name + ' ' + str(instance.candidate.user.pk)
+
+
+post_init.connect(message_post_init, Message)
