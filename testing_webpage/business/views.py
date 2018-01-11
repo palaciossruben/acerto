@@ -453,3 +453,11 @@ def dashboard(request, pk):
     params['states'] = states
 
     return render(request, cts.DASHBOARD_VIEW_PATH, params)
+
+
+def candidate_profile(request, pk):
+
+    candidate = Candidate.objects.get(pk=pk)
+
+    return render(request, cts.CANDIDATE_PROFILE_VIEW_PATH, {'candidate': candidate})
+

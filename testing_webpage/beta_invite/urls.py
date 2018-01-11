@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^long_form/interview/(?P<pk>\d+)$', views.interview, name='interview'),
     url(r'^long_form/add_cv$', views.add_cv),
     url(r'^long_form/add_cv_changes$', views.add_cv_changes),
+    url(r'^campaign_preview', views.campaign_preview, name='campaign_preview'),
 ]

@@ -7,3 +7,4 @@ INTERVIEW_VIEW_PATH = 'beta_invite/interview.html'
 DEFAULT_CAMPAIGN_ID = 5
 INTERVIEW_CALENDLY = 'https://calendly.com/santiago-10/llamada-inicial'
 ADD_CV = 'beta_invite/add_cv.html'
+CAMPAIGN_PREVIEW_VIEW_PATH = 'beta_invite/campaign_preview.html'

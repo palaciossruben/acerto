@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^start_post$', views.start_post, name='start_post'),
     url(r'^home$', views.home, name='home'),
     url(r'^dashboard/(?P<pk>\d+)$', views.dashboard, name='dashboard'),
+    url(r'^candidate_profile/(?P<pk>\d+)$', views.candidate_profile, name='candidate_profile'),
 
     # TODO: Worst hack ever, replace for something like: \?id=[0-9]+
     url(r'^contact_us$', views.contact_us, name='contact_us'),
