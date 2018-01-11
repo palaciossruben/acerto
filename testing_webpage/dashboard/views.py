@@ -2,8 +2,10 @@
 import common
 from django.core import serializers
 from django.shortcuts import render, redirect
-from beta_invite.models import Campaign, User, Test, BulletType, Interview, Question, Survey, Bullet, QuestionType
-from dashboard.models import State, Candidate, Comment
+from django.http import JsonResponse
+
+from beta_invite.models import Campaign, Test, BulletType, Interview, Survey, Bullet, QuestionType, User
+from dashboard.models import Candidate, Message
 from dashboard import constants as cts
 from beta_invite.util import email_sender
 from beta_invite.views import get_drop_down_values
@@ -24,6 +26,17 @@ def index(request):
 
 
 # ------------------------------- CAMPAIGN -------------------------------
+
+
+def add_to_message_queue(candidates, text):
+    """
+    Adds objects to the message table. So later on this table will serve as a message queue.
+    :param candidates: list of candidates.
+    :param text: string
+    :return: writes on table messages to be sent.
+    """
+    for candidate in candidates:
+        Message(candidate=candidate, text=text).save()
 
 
 # TODO: use Ajax to optimize rendering. Has no graphics therefore is very low priority.
@@ -62,6 +75,10 @@ def edit_campaign_candidates(request, pk):
                                        subject=candidate_module.get_subject(request, pk),
                                        with_localization=False,
                                        body_is_filename=False)
+
+    if request.POST.get('send_message') is not None:
+        candidates = candidate_module.get_checked_box_candidates(pk, request)
+        add_to_message_queue(candidates, request.POST.get('email_body'))
 
     params, states = candidate_module.get_rendering_data(pk)
 
@@ -381,3 +398,60 @@ def check_interview(request):
 
     return render(request, cts.INTERVIEW, {'ziggeo_api_key': common.get_ziggeo_api_key(),
                                            'question_answer_tuples': interview_module.get_sorted_tuples(surveys)})
+
+
+def mark_as_added(users):
+    """
+    Flag added to True value.
+    :param users: collection
+    :return: none
+    """
+    for u in users:
+        u.added = True
+        u.save()
+
+
+def send_new_contacts(request):
+    """
+    Works as API for auto-messenger app
+    :param request: HTTP
+    :return: json
+    """
+
+    users = {m.candidate.user for m in Message.objects.filter(candidate__user__added=False)}
+    for u in users:
+        u.change_to_international_phone_number()
+        u.name = email_sender.remove_accents(u.name)
+
+    json_data = serializers.serialize('json', users)
+
+    mark_as_added(users)
+    return JsonResponse(json_data, safe=False)
+
+
+def mark_messages_as_sent(messages):
+    for message in messages:
+        message.sent = True
+        message.save()
+
+
+def send_messages(request):
+    """
+    Sends the messages and their respective users.
+    :param request: HTTP
+    :return: json
+    """
+
+    messages = [m for m in Message.objects.filter(sent=False)]
+
+    sender_data = email_sender.read_email_credentials()
+
+    for message in messages:
+        candidate = message.candidate
+        params = email_sender.get_params_for_candidate(candidate, sender_data, candidate.user.language_code, {})
+        message.text = message.text.format(**params)
+
+    messages_json = serializers.serialize('json', messages)
+
+    mark_messages_as_sent(messages)
+    return JsonResponse(messages_json, safe=False)

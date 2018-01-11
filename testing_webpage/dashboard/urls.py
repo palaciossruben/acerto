@@ -19,7 +19,6 @@ urlpatterns = [
     url(r'^campaign/(?P<pk>\d+)/delete_test$', views.delete_test),
     url(r'^campaign/(?P<pk>\d+)/tests$', views.tests),
 
-
     # Test
     url(r'^test/(?P<pk>\d+)$', views.edit_test, name='test_edit'),
     url(r'^test/new$', views.new_test, name='new_test'),
@@ -36,4 +35,8 @@ urlpatterns = [
     url(r'^campaign/interview/create_interview_question$', views.create_interview_question, name='create_interview_question'),
     url(r'^campaign/interview/update_interview_question$', views.update_interview_question, name='update_interview_question'),
     url(r'^campaign/interview/delete_interview_question$', views.delete_interview_question, name='delete_interview_question'),
+
+    # Auto messenger
+    url(r'^send_new_contacts$', views.send_new_contacts, name='send_new_contacts'),
+    url(r'^send_messages$', views.send_messages, name='send_messages'),
 ]
