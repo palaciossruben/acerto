@@ -53,14 +53,7 @@
 }
 
 /* Vacancy and company */
-.submit-button{
-    display: inline-block;
-    margin-bottom:100px;
-    width: 170px;
-    height: 40px;
-}
-
-.delete-button {
+.my-button {
     display: inline-block;
     margin-bottom:100px;
     width: 170px;

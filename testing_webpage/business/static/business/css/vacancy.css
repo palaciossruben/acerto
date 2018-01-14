@@ -2,16 +2,41 @@
     width: 300px;
 }
 
+.my_thumbnail iframe {
+    width: 1140px;
+    height: 900px;
+}
 
-.preview {
-    width: 950px;
-    height: 750px;
-    zoom: 1.3;
-    -moz-transform: scale(0.97); /*Iframe scale, not the iframe content scale */
+.my_thumbnail {
+    position: relative;
+    -ms-zoom: 0.53;
+    -moz-transform: scale(0.53);
     -moz-transform-origin: 0 0;
-    -o-transform: scale(0.97);/*Iframe scale, not the iframe content scale */
+    -o-transform: scale(0.53);
     -o-transform-origin: 0 0;
-    -webkit-transform: scale(0.5); /*Iframe scale, not the iframe content scale */
-    -webkit-transform-origin: 0 0; /* Coordinates origin (for the transform property) */
+    -webkit-transform: scale(0.53);
+    -webkit-transform-origin: 0 0;
+}
 
+.my_thumbnail:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.thumbnail-container {
+  width: calc(1440px * 0.53);
+  height: calc(900px * 0.53);
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+}
+
+#vacancy-next-step {
+    margin-left:38%;
+    margin-top:30px;
 }

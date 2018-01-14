@@ -1,17 +1,21 @@
-function preview() {
-    var position_title = document.getElementById('position-title-field').value;
-    var my_iframes = document.getElementsByClassName('preview')
+function get_iframes(){
+    return document.getElementsByClassName('preview')
+}
 
-    my_iframes[0].contentWindow.document.getElementById("job-title").innerHTML = position_title;
+/*
+Copies text from a Source element to a target element.
+*/
+function copy_text(source, target) {
+
+    var my_iframes = get_iframes();
+    var source_text = document.getElementById(source).value;
+
+    my_iframes[0].contentWindow.document.getElementById(target).innerHTML = source_text;
     //my_iframes[1].contentWindow.document.getElementById("preview_test").innerHTML = position_title;
 }
 
-function long_form_disable() {
-
-    var my_iframes = document.getElementsByClassName('preview')
-    my_iframes[0].contentWindow.document.getElementById("name").disabled = true;
-    //my_iframes[1].contentWindow.document.getElementById("name").disable = true;
+function copy_job_title(){
+    copy_text('position-title-field', "job-title")
 }
-
 
 

@@ -22,7 +22,7 @@
                 <div class="section-container">
                     <h3 id="title" class="title-blue-small" >Título de la vacante</h3>
                     <h5 class="paragraph">Este es el primer título que verán tus aplicantes, usa un título impactante para atraer más personas.</h5>
-                    <input id="position-title-field" onchange="preview()" type="text" name="title_es" placeholder="{% trans 'Add a title' %}">
+                    <input id="position-title-field" oninput="copy_job_title()" type="text" name="title_es" placeholder="{% trans 'Add a title' %}">
                 </div>
 
                 <div class="section-container">
@@ -30,10 +30,10 @@
                     <h5 class="paragraph">Ingresa los requerimientos mínimos exigidos por tu empresa.</h5>
                     <div id="requirement_container"></div>
                     <div class="requirement-buttons">
-                        <input class="submit-button" type="button" name="add_bullet" value="{% trans 'Add Requirement' %}"
+                        <input class="blue-button my-button" type="button" name="add_bullet" value="{% trans 'Add Requirement' %}"
                         onclick="addBullet({{ requirement_bullet_id }}, 'requirement_container', '{% trans 'Requirement' %}',
                         '{% trans 'Input a Requirement' %}');">
-                        <input class="submit-button" type="button" name="remove_bullet" value="{% trans 'Delete Last' %}"
+                        <input class="delete-button my-button" type="button" name="remove_bullet" value="{% trans 'Delete Last' %}"
                         onclick="removeBullet('requirement_container');">
                     </div>
                 </div>
@@ -45,17 +45,16 @@
                 <h2 class="title-blue" style="margin-left: 38%;">Vista previa</h2>
                 <div class="secondary-yellow-bar"></div>
 
-                <iframe class="preview" src="http://127.0.0.1:8000/beta_invite/long_form"
-                frameborder="0" onload="long_form_disable()" ></iframe>
-                <input class="submit-button" type="button" name="next_step" value="{% trans 'Next Step' %}"
-                        onclick="next_step_tab(event, 'company')" style="margin-left: 50%; margin-top:590px; position:absolute; top:0; left:0;">
+                <div class="thumbnail-container">
+                    <div class="my_thumbnail">
+                        <iframe class="preview" src="{% url 'beta_invite:long_form' %}?campaign_id=1"
+                            frameborder="0"></iframe>
+                    </div>
+                </div>
+
+                <input class="submit-button-strong my-button" id="vacancy-next-step" type="button" name="next_step" value="{% trans 'Next Step' %}"
+                        onclick="next_step_tab(event, 'company')">
             </div>
         </div>
     </body>
 </html>
-
-
-
-
-
-
