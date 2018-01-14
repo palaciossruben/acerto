@@ -1,45 +1,53 @@
 {% extends 'base.html'%}
-{% load static %} <!-- Generates the absolute URL of static files-->
-{% load i18n %} <!--Django translation-->
+{% load static %}   <!-- Generates the absolute URL of static files-->
+{% load i18n %}     <!--Django translation-->
 
 {% block title %}{% trans "PeakU - Personnel Selection" %}{% endblock %}
 
 {% block extra_head %}
     <link rel="stylesheet" type="text/css" href="{% static 'business/css/start.css' %}">
     <script type="text/javascript" src="{% static 'js/business/start.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/business/start_preview.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/business/add_bullets.js' %}"></script>
 {% endblock %}
 
 {% block content %}
+    <h5 class="paragraph" align="center" style="margin-left: 10%; margin-right: 10%; margin-top: 5%">Bienvenido a la página para creación de campañas, aquí podrás ingresar la información de la vacante que deseas
+        publicar, el proceso es muy sencillo.
 
-<body>
+        Primero diligencia el título de la vacante y los requisitos, posteriormente la información de la empresa.
+        ¡Te registras y puedes empezar inmediatamente!
+
+        El proceso es muy rápido, no deberías tomar más de 15 minutos para hacerlo, tan pronto termines la vacante quedará
+        publicada y podrás ver el tablero con los aplicantes en tiempo real.
+
+        Si tienes alguna pregunta no dudes en contactarnos: contacto@peaku.co
+        </h5>
+
     <div class="tab">
-        <button id="position_button" class="tab-links active" onclick="tab(event, 'position')">{% trans "Position" %}</button>
+        <button id="vacancy_button" class="tab-links active" onclick="tab(event, 'vacancy')" >Vacante</button>
         <button id="company_button" class="tab-links" onclick="tab(event, 'company')" disabled >{% trans "Company" %}</button>
-        <button id="start_button" class="tab-links" onclick="tab(event, 'start')" disabled >{% trans "Start" %}</button>
+        <button id="start_button" class="tab-links" onclick="tab(event, 'start')" disabled >Registro</button>
     </div>
 
-    <form class="my-form" action="{% url 'business:start_post' %}" method="post">
+    <form class="content" action="{% url 'business:start_post' %}" method="post">
 
-        <div id="position" class="tab-content">
-            {% include "business/vacancy.html" with requirement_bullet_id=requirement_bullet_id %}
+        <div id="vacancy" class="tab-content">
+            {% include "business/tab_vacancy.html" with requirement_bullet_id=requirement_bullet_id %}
         </div>
 
         <div id="company" class="tab-content">
-            {% include "business/company.html" with requirement_perk_id=requirement_perk_id %}
+            {% include "business/tab_company.html" with requirement_perk_id=requirement_perk_id %}
         </div>
 
         <div id="start" class="tab-content">
-            {% include "business/signup.html"%}
+            {% include "business/tab_signup.html"%}
         </div>
-
     </form>
 
     <!-- After loading every element, sets the first element as active.-->
     <script>
-        activate_tab('position');
+        activate_tab('vacancy');
     </script>
-
-</body>
 
 {% endblock %}

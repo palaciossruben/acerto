@@ -402,7 +402,7 @@ def start_post(request):
         business_user.campaigns.add(campaign)
         business_user.save()
 
-        return redirect('dashboard/{}'.format(business_user.id))
+        return redirect('dashboard/{}'.format(business_user.id)) # This.format(business_user.id))
 
     else:
 
@@ -460,4 +460,32 @@ def candidate_profile(request, pk):
     candidate = Candidate.objects.get(pk=pk)
 
     return render(request, cts.CANDIDATE_PROFILE_VIEW_PATH, {'candidate': candidate})
+
+
+def signup(request):
+
+    return render(request, cts.SIGNUP_VIEW_PATH, {})
+
+
+def business_signup(request):
+
+    signup_form = CustomUserCreationForm(request.POST)
+
+    if signup_form.is_valid():
+
+        business_user = first_sign_in(signup_form, request)
+
+        business_user.save()
+
+        return render(request, cts.BUSINESS_SIGNUP_VIEW_PATH)
+
+    else:
+
+        # Takes first element from the errors dictionary
+        error_message = [m[0] for m in signup_form.errors.values()][0]
+
+        # TODO: missing error message on frontend
+        return render(request, cts.BUSINESS_SIGNUP_VIEW_PATH, {'error_message': error_message})
+
+
 

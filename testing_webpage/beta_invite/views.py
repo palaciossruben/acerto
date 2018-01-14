@@ -503,6 +503,3 @@ def add_cv_changes(request):
     return render(request, cts.ADD_CV, {})
 
 
-def campaign_preview(request):
-
-    return render(request, cts.CAMPAIGN_PREVIEW_VIEW_PATH)

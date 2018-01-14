@@ -35,7 +35,7 @@
             <div class="col-sm-6">
                 <div id="job-description-container">
 
-                    <h2 class="title-blue">{{ job_title }}</h2>
+                    <h2 class="title-blue" id="job-title">{{ job_title }}</h2>
 
                     <p class="paragraph">{{ campaign.description }}</p>
 
@@ -60,6 +60,7 @@
                     </ul>
                 </div>
             </div>
+
             <div class="col-sm-6">
 
                 <form class="my-form" action="{{ action_url }}" method="post" enctype="multipart/form-data">
@@ -99,7 +100,7 @@
                     </select>
 
                     {% if is_desktop %}
-                        <input type="file" name="curriculum" id="file" class="form-inputfile" required/>
+                        <input type="file" name="curriculum" id="file" class="form-inputfile" required>
                         <label for="file">{% trans "Upload your resume" %}</label>
                     {% endif %}
 
@@ -109,7 +110,6 @@
                     </label>
 
 					<input class="form-submit" type="submit" value="{% trans 'Sure!' %}">
-
                 </form>
             </div>
         </div>

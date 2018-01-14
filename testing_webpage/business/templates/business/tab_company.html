@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    {% load static %}
+    {% load i18n %} <!--Django translation-->
+    <meta charset="UTF-8">
+    </head>
+
+    <body class="indent_style">
+
+        <h3 class="secondary-title">{% trans "Describe Your Company" %}</h3>
+        <div class="secondary-yellow-bar"></div>
+        <h5>En esta sección tendrás la oportunidad de vender tu empresa a potenciales aplicantes,
+        cuéntales sobre las cosas interesantes que hace tu empresa. ¿Qué hacen diferente a las demás?,
+        ¿por qué la mayoría de empleados han decidido trabajar allí?</h5>
+
+        <div class="section-container">
+            <h4 class="title-blue-small" >{% trans "Tell us about your company in an inspiring way" %}</h4>
+            <h5>A los potenciales aplicantes les encantaría conocer más sobre tu empresa, que hacen,
+            como lo hacen y porque es un gran lugar de trabajo</h5>
+            <!--TODO: Add English compatibility-->
+            <textarea name="description_es" cols="80" rows="10" placeholder="{% trans 'Add company description' %}"></textarea>
+        </div>
+
+        <div class="section-container">
+            <h3 class="title-blue-small">{% trans "Perks (Example: flexible hours)" %}</h3>
+            <h5>¿Cuáles son los beneficios de trabajar en tu empresa? los potenciales aplicantes quieren saber más
+            sobre lo que enamora tus empleados, ejemplos: Un gran equipo de trabajo, buenos horarios, reuniones
+            sociales, fiestas, permisos, mejores salarios, entre otros.</h5>
+            <div id="perk_container"></div>
+        </div>
+
+        <div class="section-container">
+            <div class="requirement-buttons">
+                <input class="submit-button" type="button" name="add_bullet" value="Añadir"
+                onclick="addBullet({{ perk_bullet_id }}, 'perk_container', '{% trans 'Perk' %}','{% trans 'Input a perk' %}');">
+
+                <input class="delete-button" type="button" name="remove_bullet" value="Borrar último"
+                onclick="removeBullet('perk_container');">
+            </div>
+        </div>
+
+        <input class="submit-button" type="button" name="next_step" value="Siguiente paso"
+                  onclick="next_step_tab(event, 'start')" >
+    </body>
+</html>

@@ -1,0 +1,48 @@
+{% load i18n %}
+{% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'business/css/signup.css' %}">
+{% endblock %}
+
+<section class="section-container">
+
+    <div class="row"> <!-- bootstrap row class -->
+        <div class="col-sm-6">
+            <img class="people-talking" src="{% static 'business/img/people_talking.jpg' %}"
+            srcset="{% static 'business/img/people_talking.jpg' %} 2x,
+            {% static 'business/img/people_talking.jpg' %} 3x">
+        </div>
+
+        <div class="col-sm-6">
+            <!-- tag to scroll down to the contact form with url -->
+            <a name="contactForm"></a>
+
+            <h3 class="secondary-title" >{% trans "Sign Up" %}</h3>
+            <div class="secondary-yellow-bar"></div>
+            <h5 class="paragraph" align="center">¡Ya está todo listo!
+            Para terminar el proceso solo nos hace falta la información de tu empresa.</h5>
+            <br>
+            <div class="my-form">
+                {% csrf_token %}
+
+				<input class="form-text" type="text" name="name"
+				  placeholder="{% trans 'Your Full Name' %}" required="required" pattern="[A-Za-z\sáéíóúÑñÜü]{1,200}">
+
+				<input class="form-text" type="email" name="username"
+				  placeholder="{% trans 'Your email' %}" required="required">
+
+				<input class="form-text" type="tel" name="phone"
+				  placeholder="{% trans 'Your phone' %}" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
+
+				<input class="form-text" type="password" name="password1"
+				  placeholder="{% trans 'Enter a password' %}" required="required">
+
+				<input class="form-text" type="password" name="password2"
+				  placeholder="{% trans 'Confirm password' %}" required="required">
+
+                <input class="form-submit" type="submit" value="{% trans 'Sure!' %}">
+            </div>
+        </div>
+    </div>
+</section>

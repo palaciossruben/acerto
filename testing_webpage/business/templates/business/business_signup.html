@@ -1,0 +1,16 @@
+{% extends 'base.html'%}
+{% load static %}   <!-- Generates the absolute URL of static files-->
+{% load i18n %}     <!--Django translation-->
+
+{% block title %}{% trans "PeakU - Personnel Selection" %}{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'business/css/start.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'business/css/signup.css' %}">
+{% endblock %}
+
+{% block content %}
+
+{% include "business/tab_signup.html"%}
+
+{% endblock %}
