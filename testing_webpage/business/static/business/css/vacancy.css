@@ -40,3 +40,16 @@
     margin-left:38%;
     margin-top:30px;
 }
+
+
+@media(max-width: 800px) {
+    .thumbnail-container {
+        display: none;
+    }
+    #preview-title-yellow-bar {
+        display: none;
+    }
+    #preview-title {
+        display: none;
+    }
+}
