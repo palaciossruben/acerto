@@ -40,9 +40,12 @@
 
 				<input class="form-text" type="password" name="password2"
 				  placeholder="{% trans 'Confirm password' %}" required="required">
-
-                <input class="form-submit" type="submit" value="{% trans 'Sure!' %}">
             </div>
+
+            <input style="margin-top:15%;" class="submit-button-strong back" id="signup-back-step" type="button" name="back_step" value="Atrás"
+            onclick="next_step_tab(event, 'company')">
+
+            <input style="margin-top:15%;" class="submit-button-strong next" id="submit" type="submit" value="Terminar">
         </div>
     </div>
 </section>

@@ -12,49 +12,54 @@
 
         <div class="row">
             <div class="col-sm-6">
-                <h2 class="title-blue" align="center" >{% trans "Describe the position" %}</h2>
+                <h2 class="title-blue" align="center">{% trans "Describe the position" %}</h2>
                 <div class="secondary-yellow-bar"></div>
 
-                <h5 class="paragraph">En esta sección podrás ingresar toda la información de la vacante, los candidatos verán toda la información
-                que ingreses a continuación, recomendamos ingresar únicamente los requisitos fundamentales, así tendrás más
-                personas de donde elegir.</h5>
+                <h5 class="paragraph">
+                    <p>Agrega el titulo y los requisitos más importantes para tu vacante.</p>
+                    <p>Usa un título llamativo para atraer más candidatos.</p></h5>
 
-                <div class="section-container">
-                    <h3 id="title" class="title-blue-small" >Título de la vacante</h3>
+                <div style="margin-top: 50px;">
+                    <h3 id="title" class="title-blue-small">Título de la vacante</h3>
                     <h5 class="paragraph">Este es el primer título que verán tus aplicantes, usa un título impactante para atraer más personas.</h5>
                     <input id="position-title-field" oninput="copy_job_title()" type="text" name="title_es" placeholder="{% trans 'Add a title' %}">
                 </div>
 
-                <div class="section-container">
+                <div style="margin-top: 50px;">
                     <h3 class="title-blue-small">Requerimientos</h3>
                     <h5 class="paragraph">Ingresa los requerimientos mínimos exigidos por tu empresa.</h5>
+
                     <div id="requirement_container"></div>
+
                     <div class="requirement-buttons">
-                        <input class="blue-button my-button" type="button" name="add_bullet" value="{% trans 'Add Requirement' %}"
+
+                        <input class="blue-button my-button" type="button" name="add_bullet" value="+"
                         onclick="addBullet({{ requirement_bullet_id }}, 'requirement_container', '{% trans 'Requirement' %}',
                         '{% trans 'Input a Requirement' %}');">
-                        <input class="delete-button my-button" type="button" name="remove_bullet" value="{% trans 'Delete Last' %}"
+
+                        <input class="delete-button my-button" type="button" name="remove_bullet" value="-"
                         onclick="removeBullet('requirement_container');">
                     </div>
                 </div>
-
             </div>
 
-            <div class="col-sm-6">
+             <div class="col-sm-6">
 
                 <h2 class="title-blue" style="margin-left: 38%;">Vista previa</h2>
                 <div class="secondary-yellow-bar"></div>
 
                 <div class="thumbnail-container">
                     <div class="my_thumbnail">
-                        <iframe class="preview" src="{% url 'beta_invite:long_form' %}?campaign_id=1"
+                        <iframe class="preview" scrolling="no" src="{% url 'beta_invite:long_form' %}?campaign_id=5"
                             frameborder="0"></iframe>
                     </div>
                 </div>
-
-                <input class="submit-button-strong my-button" id="vacancy-next-step" type="button" name="next_step" value="{% trans 'Next Step' %}"
-                        onclick="next_step_tab(event, 'company')">
             </div>
         </div>
     </body>
+    <div class="requirement-buttons">
+                            <input class="submit-button-strong vacancy-next" id="vacancy-next-step" type="button" name="next_step" value="{% trans 'Next Step' %}"
+                            onclick="next_step_tab(event, 'company')">
+        </div>
 </html>
+
