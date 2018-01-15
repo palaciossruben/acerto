@@ -3,8 +3,8 @@
 }
 
 .my_thumbnail iframe {
-    width: 1140px;
-    height: 900px;
+    width: 1170px;
+    height: 1200px;
 }
 
 .my_thumbnail {
@@ -29,8 +29,8 @@
 }
 
 .thumbnail-container {
-  width: calc(1440px * 0.53);
-  height: calc(900px * 0.53);
+  width: calc(1600px * 0.53);
+  height: calc(1200px * 0.53);
   display: inline-block;
   overflow: hidden;
   position: relative;

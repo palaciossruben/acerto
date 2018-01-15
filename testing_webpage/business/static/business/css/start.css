@@ -56,11 +56,35 @@
 .my-button {
     display: inline-block;
     margin-bottom:100px;
+    width: 30px;
+    height: 30px;
+}
+
+.vacancy-next {
+    margin-bottom:15px;
     width: 170px;
     height: 40px;
+    margin-left:85%;
+    margin-top:15px;
+}
+
+.back {
+    width: 170px;
+    height: 40px;
+    margin-left:-102%;
+    margin-bottom: 15px;
+}
+
+.next {
+    width: 170px;
+    height: 40px;
+    margin-left:143%;
+    margin-bottom: 15px;
 }
 
 .requirement-buttons{
     margin-top: 60px;
     border-radius: 15px;
 }
+
+

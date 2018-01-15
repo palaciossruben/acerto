@@ -37,7 +37,7 @@
 
                     <h2 class="title-blue" id="job-title">{{ job_title }}</h2>
 
-                    <p class="paragraph">{{ campaign.description }}</p>
+                    <p class="paragraph" id="campaign-description">{{ campaign.description }}</p>
 
                     {% if requirements %}
                         <h4 class="title-blue" align="left">{% trans "Requirements" %}</h4>
@@ -45,7 +45,7 @@
 
                     <ul class="bullets-list">
                         {% for req in requirements %}
-                            <li class="bullet">{{ req.name }}</li>
+                            <li class="bullet" id="req-bullet">{{ req.name }}</li>
                         {% endfor %}
                     </ul>
 
@@ -54,7 +54,7 @@
                     {% endif %}
 
                     <ul class="bullets-list">
-                        {% for perk in perks%}
+                        {% for perk in perks %}
                             <li class="bullet">{{ perk.name }}</li>
                         {% endfor %}
                     </ul>
