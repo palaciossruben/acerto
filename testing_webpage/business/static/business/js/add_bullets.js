@@ -69,16 +69,6 @@ function addBulletTitle(type){
 }
 
 
-function getTitleDiv(type, iframe_doc){
-    return iframe_doc.getElementById(type + "-title-div");
-}
-
-
-function getTitleId(type){
-    return type + '-title-id';
-}
-
-
 /*
 Adds the title if missing.
 */
@@ -115,11 +105,6 @@ function removeOnPreview(iframe_container, iframe_doc){
 function removeTitle(type, iframe_doc){
     var title_div = getTitleDiv(type, iframe_doc);
     title_div.removeChild(title_div.lastChild);
-}
-
-
-function getContainerId(type) {
-    return type + '-container';
 }
 
 
