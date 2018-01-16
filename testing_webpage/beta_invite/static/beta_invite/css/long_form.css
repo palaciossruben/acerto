@@ -9,10 +9,6 @@
 	position:absolute; top:0; left:0;
 }
 
-.scale_for_iframe {
-    -webkit-transform: scale(0.7);
-}
-
 .green-box {
 	width: 435px;
 	margin-left: auto;
