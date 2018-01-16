@@ -1,7 +1,8 @@
+/*
+Displays message in case Adblock is turned on. Telling the user to turn it of before continuing.
+*/
 function TurnOffAdblockAlert(){
-    /*
-    Displays message in case Adblock is turned on. Telling the user to turn it of before continuing.
-    */
+
 
     var adBlockEnabled = false;
     var testAd = document.createElement('div');
