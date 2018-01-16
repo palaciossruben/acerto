@@ -39,21 +39,25 @@
 
                     <p class="paragraph" id="campaign-description">{{ campaign.description }}</p>
 
-                    {% if requirements %}
-                        <h4 class="title-blue" align="left">{% trans "Requirements" %}</h4>
-                    {% endif %}
+                    <div id="requirement-title-div">
+                        {% if requirements %}
+                            <h4 id="requirement-title-id" class="title-blue" align="left">{% trans "Requirements" %}</h4>
+                        {% endif %}
+                    </div>
 
-                    <ul class="bullets-list">
+                    <ul id="requirement-bullets-list" class="bullets-list">
                         {% for req in requirements %}
                             <li class="bullet" id="req-bullet">{{ req.name }}</li>
                         {% endfor %}
                     </ul>
 
-                    {% if perks %}
-                        <h4 class="title-blue" align="left">{% trans "Perks" %}</h4>
-                    {% endif %}
+                    <div id="perk-title-div">
+                        {% if perks %}
+                            <h4 class="title-blue" align="left">{% trans "Perks" %}</h4>
+                        {% endif %}
+                    </div>
 
-                    <ul class="bullets-list">
+                    <ul id="perk-bullets-list" class="bullets-list">
                         {% for perk in perks %}
                             <li class="bullet">{{ perk.name }}</li>
                         {% endfor %}
