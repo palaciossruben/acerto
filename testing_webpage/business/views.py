@@ -19,14 +19,13 @@ import beta_invite
 from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
-from beta_invite.models import User, Country, Education, Profession, Campaign, BulletType
+from beta_invite.models import User, Education, BulletType
 from business.models import Plan, Contact, Search
 from business.models import BusinessUser
 from business.custom_user_creation_form import CustomUserCreationForm
 from dashboard import campaign_module
 from dashboard import candidate_module
 from dashboard.models import Candidate
-from business import prospect_module
 
 
 def index(request):
