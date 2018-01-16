@@ -33,13 +33,14 @@
                         <p>los potenciales aplicantes quieren saber más
                         sobre lo que enamora tus empleados, ejemplos: Un gran equipo de trabajo, buenos horarios, reuniones
                         sociales, fiestas, permisos, mejores salarios, entre otros.</p></h5>
-                    <div id="perk_container"></div>
+                    <div id="perk_container">
+                        <input type="text" id="1_new_bullet_name" size="80" placeholder="{% trans 'Input a perk' %}">
+                        <br>
+                    </div>
                 </div>
 
                 <div style="margin-top: 50px;">
                     <div class="requirement-buttons">
-
-                        <input type="text" size="80" placeholder="{% trans 'Input a perk' %}">
 
                         <input class="blue-button my-button" type="button" name="add_bullet" value="+"
                         onclick="addBullet({{ perk_bullet_id }}, 'perk_container', '{% trans 'Perk' %}','{% trans 'Input a perk' %}');">
@@ -59,7 +60,7 @@
 
                 <div class="thumbnail-container">
                     <div class="my_thumbnail">
-                        <iframe class="preview" scrolling="no" src="{% url 'beta_invite:long_form' %}?campaign_id=5"
+                        <iframe class="preview" onload="long_form_disable(1)" scrolling="no" src="{% url 'beta_invite:long_form' %}?campaign_id=9"
                             frameborder="0"></iframe>
                     </div>
                 </div>
@@ -72,12 +73,11 @@
 
             <div class="col-sm-6">
 
-            <input class="submit-button-strong back" id="company-back-step" type="button" name="back_step" value="Atrás"
+                <input class="submit-button-strong back" id="company-back-step" type="button" name="back_step" value="Atrás"
                         onclick="next_step_tab(event, 'vacancy')">
 
-                        <input class="submit-button-strong next" id="company-next-step" type="button" name="next_step" value="{% trans 'Next Step' %}"
-                        onclick="next_step_tab(event, 'start')">
-
+                <input class="submit-button-strong next" id="company-next-step" type="button" name="next_step" value="{% trans 'Next Step' %}"
+                onclick="next_step_tab(event, 'start')">
             </div>
         </div>
     </body>

@@ -29,13 +29,16 @@
                     <h3 class="title-blue-small">Requerimientos</h3>
                     <h5 class="paragraph">Ingresa los requerimientos mínimos exigidos por tu empresa.</h5>
 
-                    <div id="requirement_container"></div>
+                    <div id="requirement_container">
+                        <input type="text" id="1_new_bullet_name" size="80" placeholder="{% trans 'Input a Requirement' %}">
+                        <br>
+                    </div>
 
                     <div class="requirement-buttons">
 
                         <input class="blue-button my-button" type="button" name="add_bullet" value="+"
-                        onclick="addBullet({{ requirement_bullet_id }}, 'requirement_container', '{% trans 'Requirement' %}',
-                        '{% trans 'Input a Requirement' %}');">
+                            onclick="addBullet({{ requirement_bullet_id }}, 'requirement_container', '{% trans 'Requirement' %}',
+                            '{% trans 'Input a Requirement' %}');">
 
                         <input class="delete-button my-button" type="button" name="remove_bullet" value="-"
                         onclick="removeBullet('requirement_container');">
@@ -50,16 +53,14 @@
 
                 <div class="thumbnail-container">
                     <div class="my_thumbnail">
-                        <iframe class="preview" scrolling="no" src="{% url 'beta_invite:long_form' %}?campaign_id=5"
+                        <iframe class="preview" onload="long_form_disable(0)" scrolling="no" src="{% url 'beta_invite:long_form' %}?campaign_id=9"
                             frameborder="0"></iframe>
                     </div>
                 </div>
+                <input class="submit-button-strong vacancy-next" id="vacancy-next-step" type="button" name="next_step" value="{% trans 'Next Step' %}"
+                            onclick="next_step_tab(event, 'company')">
             </div>
         </div>
     </body>
-    <div class="requirement-buttons">
-                            <input class="submit-button-strong vacancy-next" id="vacancy-next-step" type="button" name="next_step" value="{% trans 'Next Step' %}"
-                            onclick="next_step_tab(event, 'company')">
-        </div>
 </html>
 
