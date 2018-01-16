@@ -19,4 +19,9 @@ function copy_job_title(){
     copy_text('description_es', "campaign-description")
 }
 
+function long_form_disable(iframe_index) {
+
+    var my_iframes = document.getElementsByClassName('preview')
+    my_iframes[iframe_index].contentWindow.document.getElementById("name").disabled = true;
+}
 
