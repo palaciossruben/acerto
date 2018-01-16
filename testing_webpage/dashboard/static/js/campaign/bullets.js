@@ -26,7 +26,7 @@ function build_text_field(container, name, placeholder) {
 
     var text_input = document.createElement("input");
     text_input.type = "text";
-    text_input.size = "100";
+    text_input.size = "80";
     text_input.name = name;
     text_input.placeholder = placeholder;
     container.appendChild(text_input);

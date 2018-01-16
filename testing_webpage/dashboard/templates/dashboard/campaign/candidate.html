@@ -43,8 +43,10 @@
         <p><strong>test (cut: {{ e.cut_score }}): </strong> {{ e.final_score }}</p>
     {% endfor %}
 
+    <p><strong> PREGUNTAS Y RESPUESTAS DEL TEST : </strong></p>
     {% for e in candidate.surveys.all %}
-        {{ e.question.text }}
+
+    <p><strong> {{ e.question.text_es }} </strong></p>
         {% if e.answer %}
     <p> {{ e.answer }} </p>
         {% endif %}

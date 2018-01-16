@@ -2,33 +2,31 @@
 
 /* Style the tab */
 .tab {
+    margin-top:30px;
     overflow: hidden;
-    width: 800px;
+    border: 1px solid var(--middle-grey);
     margin-left: auto;
     margin-right: auto;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    width: 95%;
 }
 
 /* Style the buttons inside the tab */
 .tab button {
     float: left;
-    border: none;
+    border: 1px solid var(--middle-grey);
     outline: none;
     cursor: pointer;
     padding: 14px 16px;
     transition: 0.3s;
-    font-size: 17px;
-}
-
-/* Change background color of buttons on hover */
-.tab button:hover {
-    background-color: var(--very-light-grey);
+    font-size: 20px;
+    background-color: var(--light-grey);
+    color: var(--white)
 }
 
 /* Create an active/current tab-link class */
 .tab button.active {
-    background-color: var(--very-light-grey);
+    background-color: var(--blue);
+    color: var(--white)
 }
 
 /* Style the tab content */
@@ -36,28 +34,113 @@
     display: none;
     padding: 6px 12px;
     border-top: none;
+    border: 1px solid var(--middle-grey);
+    width: 100%;
+    margin-bottom:5%;
+
+}
+
+.content {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom:-200px;
 }
 
 .tab-links {
     display: inline-block;
     width: 33.33%;
-    border-radius:0;
 }
 
 /* Vacancy and company */
-.submit-button{
+.my-button {
     display: inline-block;
     margin-bottom:100px;
-    width: 200px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
 }
 
-.delete-button {
+.add-delete {
     display: inline-block;
-    width: 200px;
-    height: 50px;
+    margin-bottom:20px;
+    width: 30px;
+    height: 30px;
+}
+
+.back {
+    width: 140px;
+    height: 40px;
+    margin-bottom: 15px;
+}
+
+.next {
+    width: 140px;
+    height: 40px;
+    align: right;
+    margin-bottom: 15px;
+}
+
+.back-next-div{
+    width: 310px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .requirement-buttons{
-    margin-top: 60px;
+    margin-top: 30px;
+    border-radius: 15px;
+}
+
+.my_thumbnail iframe {
+    width: 1170px;
+    height: 1200px;
+}
+
+.my_thumbnail {
+    position: relative;
+    -ms-zoom: 0.53;
+    -moz-transform: scale(0.53);
+    -moz-transform-origin: 0 0;
+    -o-transform: scale(0.53);
+    -o-transform-origin: 0 0;
+    -webkit-transform: scale(0.53);
+    -webkit-transform-origin: 0 0;
+}
+
+.my_thumbnail:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.thumbnail-container {
+  width: calc(1600px * 0.53);
+  height: calc(1200px * 0.53);
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+}
+
+.preview-title {
+    margin-left: 38%;
+}
+
+.box-input {
+    width: 95%;
+}
+
+@media(max-width: 800px) {
+    .thumbnail-container {
+        display: none;
+    }
+    .preview-title-yellow-bar {
+        display: none;
+    }
+    .preview-title {
+        display: none;
+    }
 }

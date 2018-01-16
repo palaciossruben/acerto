@@ -1,10 +1,10 @@
-var bullet_number = 1;
+var bullet_number = 3;
 
 function build_text_field(div, name, placeholder) {
 
     var text_input = document.createElement("input");
     text_input.type = "text";
-    text_input.size = "100";
+    text_input.size = "80";
     text_input.name = name;
     text_input.placeholder = placeholder;
     div.appendChild(text_input);
@@ -39,7 +39,6 @@ function build_bullet_ui(container, bullet_type_id, bullet_text, add_bullet_text
 
     div.appendChild(document.createElement("br"));
 
-    div.appendChild(document.createElement("br"));
 
 }
 

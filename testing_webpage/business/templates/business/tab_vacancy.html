@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        {% load i18n %} <!--Django translation-->
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="{% static 'business/css/vacancy.css' %}">
+    </head>
+
+    <body class="indent_style">
+        <br>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <h2 class="title-blue" align="center">{% trans "Describe the position" %}</h2>
+                <div class="secondary-yellow-bar"></div>
+
+                <h5 class="paragraph">
+                    <p>Agrega el titulo y los requisitos más importantes para tu vacante.</p>
+                    <p>Usa un título llamativo para atraer más candidatos.</p></h5>
+
+                <div style="margin-top: 50px;">
+                    <h3 id="title" class="title-blue-small">Título de la vacante</h3>
+                    <h5 class="paragraph">Este es el primer título que verán tus aplicantes, usa un título impactante para atraer más personas.</h5>
+                    <input id="position-title-field" oninput="copyJobTitle()" type="text" name="title_es" placeholder="{% trans 'Add a title' %}">
+                </div>
+
+                <div style="margin-top: 50px;">
+                    <h3 class="title-blue-small">Requerimientos</h3>
+                    <h5 class="paragraph">Ingresa los requerimientos mínimos exigidos por tu empresa.</h5>
+
+                    <div id="requirement-container">
+                        <input class="box-input" type="text" name="1_new_bullet_name" id="1_requirement" size="80"
+                               placeholder="{% trans 'Input a Requirement' %}" oninput="editPreviewBullets(this.id)">
+                        <input name="1_new_bullet_type" type="hidden" value="2">
+                        <br>
+                    </div>
+
+                    <div class="requirement-buttons">
+                        <input class="blue-button my-button" type="button" name="add_bullet" value="+"
+                            onclick="addBullet('requirement', '{% trans 'Requirement' %}',
+                            '{% trans 'Input a Requirement' %}');">
+
+                        <input class="delete-button my-button" type="button" name="remove_bullet" value="-"
+                        onclick="removeBullet('requirement');">
+                    </div>
+                </div>
+            </div>
+
+             <div class="col-sm-6">
+
+                <h2 class="title-blue preview-title">Vista previa</h2>
+                <div class="secondary-yellow-bar preview-title-yellow-bar"></div>
+
+                <div class="thumbnail-container">
+                    <div class="my_thumbnail">
+                        <iframe id="vacancy_iframe" class="preview" onload="longFormDisable('vacancy_iframe')" scrolling="no" src="{% url 'beta_invite:long_form' %}?campaign_id=9"
+                            frameborder="0"></iframe>
+                    </div>
+                </div>
+                <input class="submit-button-strong vacancy-next" type="button" name="next_step" value="{% trans 'Next Step' %}"
+                       onclick="next_step_tab(event, 'company')">
+            </div>
+        </div>
+    </body>
+</html>
+

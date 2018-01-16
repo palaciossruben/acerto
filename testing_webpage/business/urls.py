@@ -12,9 +12,13 @@ urlpatterns = [
     url(r'^login$', auth_views.login, {'template_name': 'business/login.html'}, name='login'),
     url(r'^logout$', auth_views.logout, {'next_page': 'business:index'}, name='logout'),
     url(r'^start$', views.start, name='start'),
+    url(r'^signup', views.signup, name='signup'),
+    url(r'^business_signup', views.business_signup, name='business_signup'),
+    url(r'^business_applied', views.business_applied, name='business_applied'),
     url(r'^start_post$', views.start_post, name='start_post'),
     url(r'^home$', views.home, name='home'),
     url(r'^dashboard/(?P<pk>\d+)$', views.dashboard, name='dashboard'),
+    url(r'^candidate_profile/(?P<pk>\d+)$', views.candidate_profile, name='candidate_profile'),
 
     # TODO: Worst hack ever, replace for something like: \?id=[0-9]+
     url(r'^contact_us$', views.contact_us, name='contact_us'),

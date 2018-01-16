@@ -23,6 +23,10 @@
 	color: var(--text-color);
 }
 
+.paragraph-center {
+	text-align: center;
+}
+
 .secondary-title {
 	width: 100%;
 	margin: 0 auto;

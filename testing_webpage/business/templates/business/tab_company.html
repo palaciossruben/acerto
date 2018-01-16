@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    {% load static %}
+    {% load i18n %} <!--Django translation-->
+    <meta charset="UTF-8">
+    </head>
+
+    <body class="indent_style">
+        <br>
+
+        <div class="row">
+            <div class="col-sm-6">
+
+                <h2 class="title-blue" align="center">{% trans "Describe Your Company" %}</h2>
+                <div class="secondary-yellow-bar"></div>
+                <h5 class="paragraph">En esta sección tendrás la oportunidad de vender tu empresa a potenciales aplicantes,
+                cuéntales sobre las cosas interesantes que hace tu empresa. ¿Qué hacen diferente a las demás?,
+                ¿Por qué la mayoría de empleados han decidido trabajar allí?</h5>
+
+                <div style="margin-top: 50px;">
+                    <h3 id="title" class="title-blue-small">{% trans "Tell us about your company in an inspiring way" %}</h3>
+                    <h5 class="paragraph">A los potenciales aplicantes les encantaría conocer más sobre tu empresa, qué hacen,
+                    cómo lo hacen y por qué es un gran lugar de trabajo.</h5>
+                    <!--TODO: Add English compatibility-->
+                    <textarea class="box-input" name="description_es" id="description" oninput="copyCampaignDescription()" cols="80" rows="10" placeholder="{% trans 'Add company description' %}"></textarea>
+                </div>
+
+                <div style="margin-top: 50px;">
+                    <h3 class="title-blue-small">{% trans "Perks (Example: flexible hours)" %}</h3>
+                    <h5 class="paragraph">
+                        <p>¿Cuáles son los beneficios de trabajar en tu empresa?</p>
+                        <p>los potenciales aplicantes quieren saber más
+                        sobre lo que enamora a tus empleados, ejemplos: Un gran equipo de trabajo, buenos horarios, reuniones
+                        sociales, fiestas, permisos, mejores salarios, entre otros.</p></h5>
+                    <div id="perk-container">
+                        <input class="box-input" type="text" id="1_new_bullet_name_perk" size="80" placeholder="{% trans 'Input a perk' %}"
+                            oninput="editPreviewBullets(this.id)">
+                        <input name="1_new_bullet_type" type="hidden" value="1">
+                        <br>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; border-radius: 15px;">
+                    <div class="requirement-buttons">
+
+                        <input class="blue-button my-button" type="button" name="add_bullet" value="+"
+                               onclick="addBullet('perk', '{% trans 'Perk' %}','{% trans 'Input a perk' %}');">
+
+                        <input class="delete-button my-button" type="button" name="remove_bullet" value="-"
+                               onclick="removeBullet('perk');">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+
+                <h2 class="title-blue preview-title">Vista previa</h2>
+                <div class="secondary-yellow-bar preview-title-yellow-bar"></div>
+
+                <div class="thumbnail-container">
+                    <div class="my_thumbnail">
+                        <iframe id="company_iframe" class="preview" onload="longFormDisable('company_iframe')" scrolling="no" src="{% url 'beta_invite:long_form' %}?campaign_id=9"
+                            frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="back-next-div">
+            <input class="submit-button-strong back" id="company-back-step" type="button" name="back_step" value="Atrás"
+                   onclick="next_step_tab(event, 'vacancy')">
+
+            <input class="submit-button-strong next" id="company-next-step" type="button" name="next_step" value="{% trans 'Next Step' %}"
+                onclick="next_step_tab(event, 'start')">
+        </div>
+    </body>
+</html>
