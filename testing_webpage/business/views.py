@@ -1,6 +1,5 @@
 import os
 
-from asn1crypto._ffi import null
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.testing_webpage.settings')
