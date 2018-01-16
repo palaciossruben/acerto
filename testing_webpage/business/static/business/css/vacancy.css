@@ -2,39 +2,6 @@
     width: 300px;
 }
 
-.my_thumbnail iframe {
-    width: 1170px;
-    height: 1200px;
-}
-
-.my_thumbnail {
-    position: relative;
-    -ms-zoom: 0.53;
-    -moz-transform: scale(0.53);
-    -moz-transform-origin: 0 0;
-    -o-transform: scale(0.53);
-    -o-transform-origin: 0 0;
-    -webkit-transform: scale(0.53);
-    -webkit-transform-origin: 0 0;
-}
-
-.my_thumbnail:after {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-
-.thumbnail-container {
-  width: calc(1600px * 0.53);
-  height: calc(1200px * 0.53);
-  display: inline-block;
-  overflow: hidden;
-  position: relative;
-}
 
 @media(max-width: 800px) {
     .thumbnail-container {
