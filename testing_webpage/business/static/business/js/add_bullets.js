@@ -4,14 +4,25 @@ var bullet_numbers = {"perk":2, "requirement":2};
 
 function build_text_field(div, name, placeholder, type) {
 
+
     var text_input = document.createElement("input");
     text_input.type = "text";
     text_input.classList.add('box-input');
     text_input.name = name;
+    text_input.disabled = true;
     text_input.placeholder = placeholder;
     text_input.addEventListener('input', function() { editPreviewBullets(this.id); } );
     text_input.id = bullet_numbers[type] + "_" + type;
     div.appendChild(text_input);
+
+    var int_to_string = bullet_numbers[type] - 1;
+    var str1 =  '' + int_to_string;
+    var str2 = "_requirement";
+    var concat_id = str1.concat(str2);
+
+    if (document.getElementById(concat_id).value !== "") {
+    text_input.disabled = false;
+    }
 }
 
 
@@ -118,8 +129,11 @@ function removeBullet(type){
 
     // Removes in native container
     var container = document.getElementById(container_name);
+
+    if (bullet_numbers[type]>0){
     container.removeChild(container.lastChild);
-    bullet_numbers[type] = bullet_numbers[type] - 1
+
+    bullet_numbers[type] = bullet_numbers[type] - 1}
 
     // Removes on both previews.
     var iframe_docs = getIframeDocs();

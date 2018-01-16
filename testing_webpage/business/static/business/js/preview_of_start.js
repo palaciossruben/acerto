@@ -75,6 +75,7 @@ function appendElement(bullets, bullet_id) {
 
     var element = document.createElement("li");
     element.name = bullet.value;
+    element.value = bullet.value;
     element.id = bullet.id;
     bullets.appendChild(element);
 }
@@ -113,4 +114,11 @@ function editPreviewBullets(bullet_id) {
         appendElement(vacancy_bullets, bullet_id);
         appendElement(company_bullets, bullet_id);
     }
+
+    var int_to_string = bullet_num + 1;
+    var str1 =  '' + int_to_string;
+    var str2 = "_requirement";
+    var concat_id = str1.concat(str2);
+
+    document.getElementById(concat_id).disabled = false;
 }
