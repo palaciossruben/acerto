@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^start$', views.start, name='start'),
     url(r'^signup', views.signup, name='signup'),
     url(r'^business_signup', views.business_signup, name='business_signup'),
+    url(r'^business_applied', views.business_applied, name='business_applied'),
     url(r'^start_post$', views.start_post, name='start_post'),
     url(r'^home$', views.home, name='home'),
     url(r'^dashboard/(?P<pk>\d+)$', views.dashboard, name='dashboard'),

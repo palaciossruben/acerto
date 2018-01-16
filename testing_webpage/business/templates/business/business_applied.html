@@ -1,0 +1,51 @@
+{% extends 'base.html'%}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}{% trans "PeakU - Test" %}{% endblock %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+
+{% block content %}
+    <br>
+    <br>
+    <div class="title" align="center">
+
+
+        <a class="scroll logo" style="font-family:CANDARA; font-size:65px; color:black;
+         margin-bottom:50px;"> <img src="{% static 'beta_invite/logo.png' %}" width="370px" align="center"></a>
+
+        <div class="container" style="margin-top:5px;">
+            <span style="color:#134984; font-size:25px;">
+                <span style=" font-weight:500; color:#F8E676;">
+                    <b style="font-weight:400; text-transform: uppercase; font-size:30px;">{% trans "Thanks for registering!" %}</b>
+                </span>
+                <br>
+                <br>
+                <span style=" font-weight:500; color:#F8E676;">
+
+                    <b style="font-weight:400; font-size:18px">{% trans "We will contact you soon" %}</b>
+                </span>
+            </span>
+        </div>
+        <br>
+        <br>
+    </div>
+
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/5a5d24064b401e45400c1ca0/default';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+</script>
+
+{% endblock %}

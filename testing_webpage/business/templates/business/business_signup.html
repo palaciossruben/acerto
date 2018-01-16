@@ -11,6 +11,45 @@
 
 {% block content %}
 
-{% include "business/tab_signup.html"%}
+<section class="section-container">
+
+    <div class="row"> <!-- bootstrap row class -->
+        <div class="col-sm-6">
+            <img class="people-talking" src="{% static 'business/img/people_talking.jpg' %}"
+            srcset="{% static 'business/img/people_talking.jpg' %} 2x,
+            {% static 'business/img/people_talking.jpg' %} 3x">
+        </div>
+
+        <div class="col-sm-6">
+            <!-- tag to scroll down to the contact form with url -->
+            <a name="contactForm"></a>
+
+            <h3 class="secondary-title" >{% trans "Sign Up" %}</h3>
+            <div class="secondary-yellow-bar"></div>
+            <br>
+            <div class="my-form">
+                {% csrf_token %}
+
+				<input class="form-text" type="text" name="name"
+				  placeholder="{% trans 'Your Full Name' %}" pattern="[A-Za-z\sáéíóúÑñÜü]{1,200}" required>
+
+				<input class="form-text" type="email" name="username"
+				  placeholder="{% trans 'Your email' %}" required>
+
+				<input class="form-text" type="tel" name="phone"
+				  placeholder="{% trans 'Your phone' %}" pattern="[0-9\(\)\+\-\s\.extension]{7,40}" required>
+
+				<input class="form-text" type="password" name="password1"
+				  placeholder="{% trans 'Enter a password' %}" required>
+
+				<input class="form-text" type="password" name="password2"
+				  placeholder="{% trans 'Confirm password' %}" required>
+
+                <input class="form-submit" type="submit" value="{% trans 'Sure!' %}">
+            </div>
+        </div>
+    </div>
+</section>
+
 
 {% endblock %}
