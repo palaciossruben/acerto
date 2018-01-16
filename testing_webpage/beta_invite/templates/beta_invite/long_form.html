@@ -78,21 +78,21 @@
                     <input class="form-text" id="phone" type="tel" name="phone"
 				  		placeholder="{% trans 'Your phone' %}" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
 
-                    <select class="form-select" name="country" required>
+                    <select class="form-select" id="country" required>
                         <option value="">{% trans "Select Country" %}</option>
                         {% for country in countries%}
                             <option value={{ country.id }}>{{ country.name }}</option>
                         {% endfor %}
                     </select>
 
-                    <select class="form-select" name="education" required>
+                    <select class="form-select" id="education" required>
                         <option value="">{% trans "Select Education" %}</option>
                         {% for level in education%}
                             <option value={{ level.id }}>{{ level.name }}</option>
                         {% endfor %}
                     </select>
 
-                    <select class="form-select" name="profession" required>
+                    <select class="form-select" id="profession" required>
                         <option value="">{% trans "Select Profession" %}</option>
                         {% for profession in professions%}
                             <option value={{ profession.id }}>{{ profession.name }}</option>
@@ -100,16 +100,16 @@
                     </select>
 
                     {% if is_desktop %}
-                        <input type="file" name="curriculum" id="file" class="form-inputfile" required>
+                        <input type="file" id="file" class="form-inputfile" required>
                         <label for="file">{% trans "Upload your resume" %}</label>
                     {% endif %}
 
                     <label class="form-checkbox-container">
-                        <input class="form-checkbox" type="checkbox" value="" required>
+                        <input class="form-checkbox" type="checkbox" id="checkbox" value="" required>
                         <p class="form-checkbox-text">{% trans "Authorized third parties can see this information." %}</p>
                     </label>
 
-					<input class="form-submit" type="submit" value="{% trans 'Sure!' %}">
+					<input class="form-submit" type="submit" id="submit" value="{% trans 'Sure!' %}">
                 </form>
             </div>
         </div>

@@ -1,4 +1,6 @@
 import os
+
+from asn1crypto._ffi import null
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.testing_webpage.settings')
@@ -467,6 +469,11 @@ def signup(request):
     return render(request, cts.SIGNUP_VIEW_PATH, {})
 
 
+def business_applied(request):
+
+    return render(request, cts.BUSINESS_APPLIED_VIEW_PATH, {})
+
+
 def business_signup(request):
 
     signup_form = CustomUserCreationForm(request.POST)
@@ -477,7 +484,7 @@ def business_signup(request):
 
         business_user.save()
 
-        return render(request, cts.BUSINESS_SIGNUP_VIEW_PATH)
+        return render(request, cts.BUSINESS_APPLIED_VIEW_PATH)
 
     else:
 
@@ -486,6 +493,3 @@ def business_signup(request):
 
         # TODO: missing error message on frontend
         return render(request, cts.BUSINESS_SIGNUP_VIEW_PATH, {'error_message': error_message})
-
-
-

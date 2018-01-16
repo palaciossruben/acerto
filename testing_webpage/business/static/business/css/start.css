@@ -60,11 +60,19 @@
     height: 30px;
 }
 
+.add-delete {
+    display: inline-block;
+    margin-bottom:20px;
+    width: 30px;
+    height: 30px;
+}
+
+
 .vacancy-next {
     margin-bottom:15px;
     width: 170px;
     height: 40px;
-    margin-left:200%;
+    margin-left:70%;
     margin-top:15px;
 }
 

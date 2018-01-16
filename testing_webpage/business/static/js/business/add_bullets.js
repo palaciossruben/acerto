@@ -1,4 +1,4 @@
-var bullet_number = 2;
+var bullet_number = 3;
 
 function build_text_field(div, name, placeholder) {
 

@@ -29,27 +29,24 @@
                 <div style="margin-top: 50px;">
                     <h3 class="title-blue-small">{% trans "Perks (Example: flexible hours)" %}</h3>
                     <h5 class="paragraph">
-                        <p>¿Cuáles son los beneficios de trabajar en tu empresa?</p>
-                        <p>los potenciales aplicantes quieren saber más
-                        sobre lo que enamora tus empleados, ejemplos: Un gran equipo de trabajo, buenos horarios, reuniones
-                        sociales, fiestas, permisos, mejores salarios, entre otros.</p></h5>
-                    <div id="perk_container">
-                        <input type="text" id="1_new_bullet_name" size="80" placeholder="{% trans 'Input a perk' %}">
-                        <br>
-                    </div>
+                    <p>¿Cuáles son los beneficios de trabajar en tu empresa?</p>
+                    <p>los potenciales aplicantes quieren saber más
+                    sobre lo que enamora tus empleados, ejemplos: Un gran equipo de trabajo, buenos horarios, reuniones
+                    sociales, fiestas, permisos, mejores salarios, entre otros.</p></h5>
                 </div>
 
-                <div style="margin-top: 50px;">
-                    <div class="requirement-buttons">
+                <div id="perk_container">
+                        <input type="text" id="2_new_bullet_name" size="80" placeholder="{% trans 'Input a perk' %}">
+                        <br>
+                </div>
 
-                        <input class="blue-button my-button" type="button" name="add_bullet" value="+"
-                        onclick="addBullet({{ perk_bullet_id }}, 'perk_container', '{% trans 'Perk' %}','{% trans 'Input a perk' %}');">
+                <div style="margin-top: 30px; border-radius: 15px;">
 
-                        <input class="delete-button my-button" type="button" name="remove_bullet" value="-"
-                        onclick="removeBullet('perk_container');">
+                    <input class="blue-button add-delete" type="button" name="add_bullet" value="+"
+                    onclick="addBullet({{ perk_bullet_id }}, 'perk_container', '{% trans 'Perk' %}','{% trans 'Input a perk' %}');">
 
-
-                    </div>
+                    <input class="delete-button add-delete" type="button" name="remove_bullet" value="-"
+                    onclick="removeBullet('perk_container');">
                 </div>
             </div>
 
@@ -60,7 +57,7 @@
 
                 <div class="thumbnail-container">
                     <div class="my_thumbnail">
-                        <iframe class="preview" onload="long_form_disable(1)" scrolling="no" src="{% url 'beta_invite:long_form' %}?campaign_id=9"
+                        <iframe class="preview" onload="disables()" scrolling="no" src="{% url 'beta_invite:long_form' %}?campaign_id=9"
                             frameborder="0"></iframe>
                     </div>
                 </div>

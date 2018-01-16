@@ -19,9 +19,23 @@ function copy_job_title(){
     copy_text('description_es', "campaign-description")
 }
 
-function long_form_disable(iframe_index) {
+function long_form_disable(target) {
 
-    var my_iframes = document.getElementsByClassName('preview')
-    my_iframes[iframe_index].contentWindow.document.getElementById("name").disabled = true;
+    var my_iframes = get_iframes();
+
+    my_iframes[0].contentWindow.document.getElementById(target).disabled = true;
+    my_iframes[1].contentWindow.document.getElementById(target).disabled = true;
+}
+
+function disables(){
+    long_form_disable('name')
+    long_form_disable('email')
+    long_form_disable('phone')
+    long_form_disable('country')
+    long_form_disable('education')
+    long_form_disable('profession')
+    long_form_disable('file')
+    long_form_disable('checkbox')
+    long_form_disable('submit')
 }
 

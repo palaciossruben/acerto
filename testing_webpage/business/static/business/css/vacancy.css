@@ -36,12 +36,6 @@
   position: relative;
 }
 
-#vacancy-next-step {
-    margin-left:38%;
-    margin-top:30px;
-}
-
-
 @media(max-width: 800px) {
     .thumbnail-container {
         display: none;
