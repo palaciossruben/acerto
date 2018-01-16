@@ -1,5 +1,5 @@
-var bullet_number = 2;
-var bullet_types = {"perk":1, "requirement":2}
+var bullet_types = {"perk":1, "requirement":2};
+var bullet_numbers = {"perk":2, "requirement":2};
 
 
 function build_text_field(div, name, placeholder, type) {
@@ -10,12 +10,12 @@ function build_text_field(div, name, placeholder, type) {
     text_input.name = name;
     text_input.placeholder = placeholder;
     text_input.addEventListener('input', function() { editPreviewBullets(this.id); } );
-    text_input.id = bullet_number + "_" + type;
+    text_input.id = bullet_numbers[type] + "_" + type;
     div.appendChild(text_input);
 }
 
 
-function add_hidden_bullet_type(div, bullet_type_id){
+function add_hidden_bullet_type(div, bullet_type_id, bullet_number){
 
     var bullet_type = document.createElement("input");
     bullet_type.name = bullet_number + "_new_bullet_type";
@@ -34,9 +34,9 @@ function build_bullet_ui(container, type, bullet_text, add_bullet_text) {
     div.appendChild(document.createElement("br"));
     div.appendChild(document.createElement("br"));
 
-    build_text_field(div, bullet_number + "_new_bullet_name_" + type, add_bullet_text, type);
+    build_text_field(div, bullet_numbers[type] + "_new_bullet_name_" + type, add_bullet_text, type);
 
-    add_hidden_bullet_type(div, bullet_types[type]);
+    add_hidden_bullet_type(div, bullet_types[type], bullet_numbers[type]);
 
     div.appendChild(document.createElement("br"));
 }
@@ -54,7 +54,7 @@ function addBullet(type, bullet_text, add_bullet_text){
     addBulletTitle(type);
 
     //adds 1 for next bullet.
-    bullet_number = bullet_number + 1
+    bullet_numbers[type] = bullet_numbers[type] + 1
 }
 
 
@@ -119,7 +119,7 @@ function removeBullet(type){
     // Removes in native container
     var container = document.getElementById(container_name);
     container.removeChild(container.lastChild);
-    bullet_number = bullet_number - 1
+    bullet_numbers[type] = bullet_numbers[type] - 1
 
     // Removes on both previews.
     var iframe_docs = getIframeDocs();
