@@ -1,45 +1,49 @@
 {% extends 'base.html'%}
-{% load static %} <!-- Generates the absolute URL of static files-->
-{% load i18n %} <!--Django translation-->
+{% load static %}   <!-- Generates the absolute URL of static files-->
+{% load i18n %}     <!--Django translation-->
 
 {% block title %}{% trans "PeakU - Personnel Selection" %}{% endblock %}
 
 {% block extra_head %}
     <link rel="stylesheet" type="text/css" href="{% static 'business/css/start.css' %}">
-    <script type="text/javascript" src="{% static 'js/business/start.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/business/add_bullets.js' %}"></script>
+    <script type="text/javascript" src="{% static 'business/js/start.js' %}"></script>
+    <script type="text/javascript" src="{% static 'business/js/preview.js' %}"></script>
+    <script type="text/javascript" src="{% static 'business/js/add_bullets.js' %}"></script>
 {% endblock %}
 
 {% block content %}
 
-<body>
+    <h2 style="color:var(--blue); margin-left: 7%; margin-top: 3%;">Creación de campaña</h2>
+    <h5 class="paragraph" align="center" style="margin-left: 7%; margin-right: 10%;">
+        <p>Ingresa la información de la vacante y de la empresa, registrate y empieza
+         a recibir aplicantes.</p>
+        <p style="font-size: 18px;"> Todo en menos de diez minutos. ¡ Así de fácil !</p>
+    </h5>
+
     <div class="tab">
-        <button id="position_button" class="tab-links active" onclick="tab(event, 'position')">{% trans "Position" %}</button>
+        <button id="vacancy_button" class="tab-links active" onclick="tab(event, 'vacancy')" >Vacante</button>
         <button id="company_button" class="tab-links" onclick="tab(event, 'company')" disabled >{% trans "Company" %}</button>
-        <button id="start_button" class="tab-links" onclick="tab(event, 'start')" disabled >{% trans "Start" %}</button>
+        <button id="start_button" class="tab-links" onclick="tab(event, 'start')" disabled >Registro</button>
     </div>
 
-    <form class="my-form" action="{% url 'business:start_post' %}" method="post">
+    <form class="content" action="{% url 'business:start_post' %}" method="post">
 
-        <div id="position" class="tab-content">
-            {% include "business/vacancy.html" with requirement_bullet_id=requirement_bullet_id %}
+        <div id="vacancy" class="tab-content">
+            {% include "business/tab_vacancy.html" with requirement_bullet_id=requirement_bullet_id %}
         </div>
 
         <div id="company" class="tab-content">
-            {% include "business/company.html" with requirement_perk_id=requirement_perk_id %}
+            {% include "business/tab_company.html" with requirement_perk_id=requirement_perk_id %}
         </div>
 
         <div id="start" class="tab-content">
-            {% include "business/signup.html"%}
+            {% include "business/tab_signup.html"%}
         </div>
-
     </form>
 
     <!-- After loading every element, sets the first element as active.-->
     <script>
-        activate_tab('position');
+        activate_tab('vacancy');
     </script>
-
-</body>
 
 {% endblock %}
