@@ -1,3 +1,7 @@
+function get_iframes(){
+    return document.getElementsByClassName('preview')
+}
+
 function copyJobTitle(){
     copyText('position-title-field', "job-title")
 }
@@ -8,8 +12,24 @@ function copyCampaignDescription(){
 }
 
 
-function longFormDisable(iframe_id) {
-    document.getElementById(iframe_id).contentWindow.document.getElementById("name").disabled = true;
+function long_form_disable(target) {
+
+    var my_iframes = get_iframes();
+
+    my_iframes[0].contentWindow.document.getElementById(target).disabled = true;
+    my_iframes[1].contentWindow.document.getElementById(target).disabled = true;
+}
+
+function disables(){
+    long_form_disable('name')
+    long_form_disable('email')
+    long_form_disable('phone')
+    long_form_disable('country')
+    long_form_disable('education')
+    long_form_disable('profession')
+    long_form_disable('file')
+    long_form_disable('checkbox')
+    long_form_disable('submit')
 }
 
 

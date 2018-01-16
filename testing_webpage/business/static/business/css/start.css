@@ -52,7 +52,7 @@
 /* Vacancy and company */
 .my-button {
     display: inline-block;
-    margin-bottom:100px;
+    margin-bottom:30px;
     width: 30px;
     height: 30px;
 }
@@ -63,7 +63,6 @@
     width: 30px;
     height: 30px;
 }
-
 
 /* Back-next Buttons */
 .back {
