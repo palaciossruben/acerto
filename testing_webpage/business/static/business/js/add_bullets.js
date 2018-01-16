@@ -6,7 +6,7 @@ function build_text_field(div, name, placeholder, type) {
 
     var text_input = document.createElement("input");
     text_input.type = "text";
-    text_input.size = "80";
+    text_input.classList.add('box-input');
     text_input.name = name;
     text_input.placeholder = placeholder;
     text_input.addEventListener('input', function() { editPreviewBullets(this.id); } );

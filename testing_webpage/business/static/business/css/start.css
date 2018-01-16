@@ -67,27 +67,23 @@
     height: 30px;
 }
 
-
-.vacancy-next {
-    margin-bottom:15px;
-    width: 170px;
-    height: 40px;
-    margin-left:70%;
-    margin-top:15px;
-}
-
 .back {
-    width: 170px;
+    width: 140px;
     height: 40px;
-    margin-left:-102%;
     margin-bottom: 15px;
 }
 
 .next {
-    width: 170px;
+    width: 140px;
     height: 40px;
-    margin-left:143%;
+    align: right;
     margin-bottom: 15px;
+}
+
+.back-next-div{
+    width: 310px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .requirement-buttons{
@@ -127,4 +123,24 @@
   display: inline-block;
   overflow: hidden;
   position: relative;
+}
+
+.preview-title {
+    margin-left: 38%;
+}
+
+.box-input {
+    width: 95%;
+}
+
+@media(max-width: 800px) {
+    .thumbnail-container {
+        display: none;
+    }
+    .preview-title-yellow-bar {
+        display: none;
+    }
+    .preview-title {
+        display: none;
+    }
 }
