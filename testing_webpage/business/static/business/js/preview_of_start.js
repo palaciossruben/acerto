@@ -1,7 +1,3 @@
-function get_iframes(){
-    return document.getElementsByClassName('preview')
-}
-
 function copyJobTitle(){
     copyText('position-title-field', "job-title")
 }
@@ -14,10 +10,11 @@ function copyCampaignDescription(){
 
 function long_form_disable(target) {
 
-    var my_iframes = get_iframes();
+    var iframe_docs = getIframeDocs();
 
-    my_iframes[0].contentWindow.document.getElementById(target).disabled = true;
-    my_iframes[1].contentWindow.document.getElementById(target).disabled = true;
+    //getIframeDocs
+    iframe_docs[0].getElementById(target).disabled = true;
+    iframe_docs[1].getElementById(target).disabled = true;
 }
 
 function disables(){
@@ -48,8 +45,6 @@ function getListItems(list_id, type, iframe_id) {
 
     return list;
 }
-
-
 
 
 function getBulletNumber(bullet_id){
@@ -106,19 +101,14 @@ function editPreviewBullets(bullet_id) {
     var vacancy_bullets = getListItems(list_id, type, 'vacancy_iframe');
     var company_bullets = getListItems(list_id, type, 'company_iframe');
 
-    if (countItems(list_id) >= bullet_num) {
+    var iframe_doc = getIframeDocs()[0];
+    if (iframe_doc.getElementById(bullet_id)){
         // update
         copyText(bullet_id, bullet_id);
     }else{
         // create
         appendElement(vacancy_bullets, bullet_id);
         appendElement(company_bullets, bullet_id);
+        copyText(bullet_id, bullet_id);
     }
-
-    var int_to_string = bullet_num + 1;
-    var str1 =  '' + int_to_string;
-    var str2 = "_requirement";
-    var concat_id = str1.concat(str2);
-
-    document.getElementById(concat_id).disabled = false;
 }

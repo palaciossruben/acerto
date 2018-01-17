@@ -4,25 +4,14 @@ var bullet_numbers = {"perk":2, "requirement":2};
 
 function build_text_field(div, name, placeholder, type) {
 
-
     var text_input = document.createElement("input");
     text_input.type = "text";
     text_input.classList.add('box-input');
     text_input.name = name;
-    text_input.disabled = true;
     text_input.placeholder = placeholder;
     text_input.addEventListener('input', function() { editPreviewBullets(this.id); } );
-    text_input.id = bullet_numbers[type] + "_" + type;
+    text_input.id = getBulletId(bullet_numbers, type);
     div.appendChild(text_input);
-
-    var int_to_string = bullet_numbers[type] - 1;
-    var str1 =  '' + int_to_string;
-    var str2 = "_requirement";
-    var concat_id = str1.concat(str2);
-
-    if (document.getElementById(concat_id).value !== "") {
-    text_input.disabled = false;
-    }
 }
 
 
@@ -53,6 +42,17 @@ function build_bullet_ui(container, type, bullet_text, add_bullet_text) {
 }
 
 
+function addBulletOnIframes(bullet_numbers, type){
+
+    var list_id = getListId(type);
+    var bullet_id = getBulletId(bullet_numbers, type);
+    var vacancy_bullets = getListItems(list_id, type, 'vacancy_iframe');
+    var company_bullets = getListItems(list_id, type, 'company_iframe');
+
+    appendElement(vacancy_bullets, bullet_id);
+    appendElement(company_bullets, bullet_id);
+}
+
 /*
 Adds a bullet to the interface and numbers it.
 */
@@ -63,6 +63,8 @@ function addBullet(type, bullet_text, add_bullet_text){
     build_bullet_ui(container, type, bullet_text, add_bullet_text);
 
     addBulletTitle(type);
+
+    addBulletOnIframes(bullet_numbers, type);
 
     //adds 1 for next bullet.
     bullet_numbers[type] = bullet_numbers[type] + 1
@@ -131,18 +133,19 @@ function removeBullet(type){
     var container = document.getElementById(container_name);
 
     if (bullet_numbers[type]>0){
-    container.removeChild(container.lastChild);
+        container.removeChild(container.lastChild);
+        bullet_numbers[type] = bullet_numbers[type] - 1;
 
-    bullet_numbers[type] = bullet_numbers[type] - 1}
+        // Removes on both previews.
+        var iframe_docs = getIframeDocs();
+        removeOnPreview(iframe_container, iframe_docs[0]);
+        removeOnPreview(iframe_container, iframe_docs[1]);
 
-    // Removes on both previews.
-    var iframe_docs = getIframeDocs();
-    removeOnPreview(iframe_container, iframe_docs[0])
-    removeOnPreview(iframe_container, iframe_docs[1])
-
-    // Checks to remove if no elements present.
-    if(!countItems(getListId(type))){
-        removeTitle(type, iframe_docs[0]);
-        removeTitle(type, iframe_docs[1]);
+        // Checks to remove if no elements present.
+        if(!countItems(getListId(type))){
+            removeTitle(type, iframe_docs[0]);
+            removeTitle(type, iframe_docs[1]);
+        }
     }
 }
+
