@@ -4,7 +4,8 @@
     "pk": 1,
     "fields":{
       "name": "Colombia",
-      "calling_code": 57
+      "calling_code": 57,
+      "language_code": "es"
     }
   },
   {
@@ -12,7 +13,8 @@
     "pk": 2,
     "fields": {
       "name": "Ecuador",
-      "calling_code": 593
+      "calling_code": 593,
+      "language_code": "es"
     }
   },
   {
@@ -20,7 +22,8 @@
     "pk": 3,
     "fields":{
       "name": "Perú",
-      "calling_code": 51
+      "calling_code": 51,
+      "language_code": "es"
     }
   },
   {
@@ -28,7 +31,8 @@
     "pk": 4,
     "fields": {
       "name": "Chile",
-      "calling_code": 56
+      "calling_code": 56,
+      "language_code": "es"
     }
   },
   {
@@ -36,7 +40,8 @@
     "pk": 5,
     "fields": {
       "name": "México",
-      "calling_code": 52
+      "calling_code": 52,
+      "language_code": "es"
     }
   },
   {
@@ -44,7 +49,8 @@
     "pk": 6,
     "fields": {
       "name": "Venezuela",
-      "calling_code": 58
+      "calling_code": 58,
+      "language_code": "es"
     }
   },
   {
@@ -52,7 +58,8 @@
     "pk": 7,
     "fields": {
       "name": "Bolivia",
-      "calling_code": 591
+      "calling_code": 591,
+      "language_code": "es"
     }
   },
   {
@@ -60,7 +67,8 @@
     "pk": 8,
     "fields": {
       "name": "Argentina",
-      "calling_code": 54
+      "calling_code": 54,
+      "language_code": "es"
     }
   },
   {
@@ -68,7 +76,8 @@
     "pk": 9,
     "fields": {
       "name": "Paraguay",
-      "calling_code": 595
+      "calling_code": 595,
+      "language_code": "es"
     }
   },
     {
@@ -76,7 +85,8 @@
     "pk": 10,
     "fields": {
       "name": "Uruguay",
-      "calling_code": 598
+      "calling_code": 598,
+      "language_code": "es"
     }
   },
   {
@@ -84,7 +94,8 @@
     "pk": 11,
     "fields": {
       "name": "Panamá",
-      "calling_code": 507
+      "calling_code": 507,
+      "language_code": "es"
     }
   },
   {
@@ -92,7 +103,8 @@
     "pk": 12,
     "fields": {
       "name": "Honduras",
-      "calling_code": 504
+      "calling_code": 504,
+      "language_code": "es"
     }
   },
   {
@@ -100,7 +112,8 @@
     "pk": 13,
     "fields": {
       "name": "El Salvador",
-      "calling_code": 503
+      "calling_code": 503,
+      "language_code": "es"
     }
   },
   {
@@ -108,7 +121,8 @@
     "pk": 14,
     "fields": {
       "name": "Guatemala",
-      "calling_code": 502
+      "calling_code": 502,
+      "language_code": "es"
     }
   },
   {
@@ -116,7 +130,8 @@
     "pk": 15,
     "fields": {
       "name": "Nicaragua",
-      "calling_code": 505
+      "calling_code": 505,
+      "language_code": "es"
     }
   },
   {
@@ -124,7 +139,8 @@
     "pk": 16,
     "fields": {
       "name": "Costa Rica",
-      "calling_code": 506
+      "calling_code": 506,
+      "language_code": "es"
     }
   }
 ]
