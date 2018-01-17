@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'testing_webpage.middleware.ForceLangMiddleware',
 ]
 
 ROOT_URLCONF = 'testing_webpage.urls'

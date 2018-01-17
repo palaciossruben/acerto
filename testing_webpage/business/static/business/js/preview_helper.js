@@ -30,3 +30,8 @@ function copyText(source, target) {
     my_iframe_docs[0].getElementById(target).innerHTML = source_text;
     my_iframe_docs[1].getElementById(target).innerHTML = source_text;
 }
+
+
+function getBulletId(bullet_numbers, type){
+    return bullet_numbers[type] + "_" + type;
+}

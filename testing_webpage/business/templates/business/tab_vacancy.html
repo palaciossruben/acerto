@@ -37,12 +37,13 @@
                     </div>
 
                     <div class="requirement-buttons">
-                        <input class="blue-button my-button" type="button" name="add_bullet" value="+"
-                            onclick="addBullet('requirement', '{% trans 'Requirement' %}',
-                            '{% trans 'Input a Requirement' %}');">
 
                         <input class="delete-button my-button" type="button" name="remove_bullet" value="-"
                         onclick="removeBullet('requirement');">
+
+                        <input class="blue-button my-button" type="button" name="add_bullet" value="+"
+                        onclick="addBullet('requirement', '{% trans 'Requirement' %}',
+                        '{% trans 'Input a Requirement' %}');">
                     </div>
                 </div>
             </div>
@@ -54,7 +55,7 @@
 
                 <div class="thumbnail-container">
                     <div class="my_thumbnail">
-                        <iframe id="vacancy_iframe" class="preview" onload="longFormDisable('vacancy_iframe')" scrolling="no" src="{% url 'beta_invite:long_form' %}?campaign_id=9"
+                        <iframe id="vacancy_iframe" class="preview" onloadstart="disables(); " scrolling="no" src="{% url 'beta_invite:long_form' %}?campaign_id=9"
                             frameborder="0"></iframe>
                     </div>
                 </div>
