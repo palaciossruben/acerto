@@ -10,7 +10,7 @@ function build_text_field(div, name, placeholder, type) {
     text_input.name = name;
     text_input.placeholder = placeholder;
     text_input.addEventListener('input', function() { editPreviewBullets(this.id); } );
-    text_input.id = bullet_numbers[type] + "_" + type;
+    text_input.id = getBulletId(bullet_numbers, type);
     div.appendChild(text_input);
 }
 
@@ -42,6 +42,17 @@ function build_bullet_ui(container, type, bullet_text, add_bullet_text) {
 }
 
 
+function addBulletOnIframes(bullet_numbers, type){
+
+    var list_id = getListId(type);
+    var bullet_id = getBulletId(bullet_numbers, type);
+    var vacancy_bullets = getListItems(list_id, type, 'vacancy_iframe');
+    var company_bullets = getListItems(list_id, type, 'company_iframe');
+
+    appendElement(vacancy_bullets, bullet_id);
+    appendElement(company_bullets, bullet_id);
+}
+
 /*
 Adds a bullet to the interface and numbers it.
 */
@@ -52,6 +63,8 @@ function addBullet(type, bullet_text, add_bullet_text){
     build_bullet_ui(container, type, bullet_text, add_bullet_text);
 
     addBulletTitle(type);
+
+    addBulletOnIframes(bullet_numbers, type);
 
     //adds 1 for next bullet.
     bullet_numbers[type] = bullet_numbers[type] + 1
@@ -118,17 +131,21 @@ function removeBullet(type){
 
     // Removes in native container
     var container = document.getElementById(container_name);
-    container.removeChild(container.lastChild);
-    bullet_numbers[type] = bullet_numbers[type] - 1
 
-    // Removes on both previews.
-    var iframe_docs = getIframeDocs();
-    removeOnPreview(iframe_container, iframe_docs[0])
-    removeOnPreview(iframe_container, iframe_docs[1])
+    if (bullet_numbers[type]>0){
+        container.removeChild(container.lastChild);
+        bullet_numbers[type] = bullet_numbers[type] - 1;
 
-    // Checks to remove if no elements present.
-    if(!countItems(getListId(type))){
-        removeTitle(type, iframe_docs[0]);
-        removeTitle(type, iframe_docs[1]);
+        // Removes on both previews.
+        var iframe_docs = getIframeDocs();
+        removeOnPreview(iframe_container, iframe_docs[0]);
+        removeOnPreview(iframe_container, iframe_docs[1]);
+
+        // Checks to remove if no elements present.
+        if(!countItems(getListId(type))){
+            removeTitle(type, iframe_docs[0]);
+            removeTitle(type, iframe_docs[1]);
+        }
     }
 }
+
