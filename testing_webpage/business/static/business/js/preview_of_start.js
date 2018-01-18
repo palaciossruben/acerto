@@ -4,7 +4,6 @@ function copyJobTitle(){
 
 
 function copyCampaignDescription(){
-
     copyText("description", "campaign-description")
 }
 
