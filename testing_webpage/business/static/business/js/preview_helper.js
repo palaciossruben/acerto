@@ -36,3 +36,12 @@ function getBulletId(bullet_numbers, type){
     return bullet_numbers[type] + "_" + type;
 }
 
+function getBulletType(bullet_id){
+    return bullet_id.split('_').pop();
+}
+
+
+function getListId(type){
+    return type + '-bullets-list';
+}
+

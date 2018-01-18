@@ -44,15 +44,34 @@ function build_bullet_ui(container, type, bullet_text, add_bullet_text) {
 }
 
 
-function addBulletOnIframes(bullet_numbers, type){
+/*
+Adds one bullet to a given Iframe
+*/
+function addBulletOnIframeType(bullet_numbers, type, iframe){
+
+    // Adds Title if not present
+    addBulletTitle(type);
 
     var list_id = getListId(type);
     var bullet_id = getBulletId(bullet_numbers, type);
-    var vacancy_bullets = getListItems(list_id, type, 'vacancy_iframe');
-    var company_bullets = getListItems(list_id, type, 'company_iframe');
+    var bullets = getListItems(list_id, type, iframe + '_iframe');
 
-    appendElement(vacancy_bullets, bullet_id);
-    appendElement(company_bullets, bullet_id);
+    appendElement(bullets, bullet_id);
+}
+
+
+function addBulletOnIframe(bullet_numbers, iframe){
+    addBulletOnIframeType(bullet_numbers, 'requirement', iframe);
+    addBulletOnIframeType(bullet_numbers, 'perk', iframe);
+}
+
+
+/*
+Adds one bullet to both iframes
+*/
+function addBulletOnIframes(bullet_numbers, type){
+    addBulletOnIframeType(bullet_numbers, type, 'vacancy');
+    addBulletOnIframeType(bullet_numbers, type, 'company');
 }
 
 /*
@@ -63,8 +82,6 @@ function addBullet(type, bullet_text, add_bullet_text){
     var container = document.getElementById(getContainerId(type));
 
     build_bullet_ui(container, type, bullet_text, add_bullet_text);
-
-    addBulletTitle(type);
 
     addBulletOnIframes(bullet_numbers, type);
 
@@ -118,14 +135,9 @@ function removeOnPreview(iframe_container, iframe_doc){
 }
 
 
-function removeTitle(type, iframe_doc){
-    var title_div = getTitleDiv(type, iframe_doc);
-    title_div.removeChild(title_div.lastChild);
-}
-
-
 /*
-Delete a bullet to the interface
+Delete a bullet to the interface. Assumes that bullet ids are always ordered in ASC, on the table. It removes
+the last one, therefore It should ALWAYS remove the one biggest id.
 */
 function removeBullet(type){
 
@@ -144,12 +156,5 @@ function removeBullet(type){
         var iframe_docs = getIframeDocs();
         removeOnPreview(iframe_container, iframe_docs[0]);
         removeOnPreview(iframe_container, iframe_docs[1]);
-
-        // Checks to remove if no elements present.
-        if(!countItems(getListId(type))){
-            removeTitle(type, iframe_docs[0]);
-            removeTitle(type, iframe_docs[1]);
-        }
     }
 }
-
