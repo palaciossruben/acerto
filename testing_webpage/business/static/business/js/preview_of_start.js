@@ -112,8 +112,3 @@ function editPreviewBullets(bullet_id) {
         copyText(bullet_id, bullet_id);
     }
 }
-
-function generateFirstBullet(){
-    document.getElementById
-
-}
