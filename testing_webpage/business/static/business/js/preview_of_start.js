@@ -4,7 +4,8 @@ function copyJobTitle(){
 
 
 function copyCampaignDescription(){
-    copyText('description', "campaign-description")
+
+    copyText("description", "campaign-description")
 }
 
 
@@ -111,4 +112,9 @@ function editPreviewBullets(bullet_id) {
         appendElement(company_bullets, bullet_id);
         copyText(bullet_id, bullet_id);
     }
+}
+
+function generateFirstBullet(){
+    document.getElementById
+
 }

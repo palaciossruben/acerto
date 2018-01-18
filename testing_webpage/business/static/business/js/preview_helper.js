@@ -35,3 +35,4 @@ function copyText(source, target) {
 function getBulletId(bullet_numbers, type){
     return bullet_numbers[type] + "_" + type;
 }
+

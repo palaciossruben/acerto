@@ -37,7 +37,11 @@
 
                     <h2 class="title-blue" id="job-title">{{ job_title }}</h2>
 
-                    <p class="paragraph" id="campaign-description">{{ campaign.description }}</p>
+
+                        <pre style="background-color:var(--white);border:0px; word-wrap: break-word; white-space: pre-wrap;">
+                            <p class="paragraph" id="campaign-description">{{ campaign.description }}</p>
+                        </pre>
+
 
                     <div id="requirement-title-div">
                         {% if requirements %}
