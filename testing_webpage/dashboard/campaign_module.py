@@ -26,8 +26,9 @@ def update_bullet_attr(campaign, dict_id, key_bullet_dict, value, attribute_name
     else:  # creates new Bullet
         b = Bullet(**{attribute_name: value})
         b.save()
-        key_bullet_dict[dict_id] = b
-        campaign.bullets.add(b)
+        if b.name_es != "":
+            key_bullet_dict[dict_id] = b
+            campaign.bullets.add(b)
 
 
 def update_campaign_basic_properties(campaign, request):
