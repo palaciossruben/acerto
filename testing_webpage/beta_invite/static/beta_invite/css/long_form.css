@@ -48,15 +48,12 @@
 	margin-bottom: 94px;
 }
 
-/*
-.form-checkbox {
+/*#pre-preview {
+    color:var(--white);
+    border:0px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
 }
-
-.form-checkbox-text {
-
-}*/
-
-
 
 /* Responsive */
 @media (max-width: 640px){
