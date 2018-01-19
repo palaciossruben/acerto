@@ -13,6 +13,7 @@ from django.shortcuts import render, redirect
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import login, authenticate
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.forms import AuthenticationForm
 
 import business
 import beta_invite
@@ -270,17 +271,54 @@ def get_business_user(request):
     return business_user
 
 
-@login_required
+def get_first_error_message(form):
+    """
+    :param form: AuthenticationForm or UserCreationForm
+    :return: str with first error_message
+    """
+    error_messages = [m[0] for m in form.errors.values()]
+    if len(error_messages) > 0:  # Takes first element from the errors dictionary
+        error_message = error_messages[0]
+    else:
+        error_message = 'unknown error'
+    return error_message
+
+
+def simple_login_and_business_user(login_form, request):
+    """
+    :param login_form: a AuthenticationForm object
+    :param request: HTTP
+    :return: BusinessUser obj
+    """
+    username = login_form.cleaned_data.get('username')
+    password = login_form.cleaned_data.get('password')
+
+    # Creates a Authentication user
+    auth_user = authenticate(username=username,
+                             password=password)
+
+    login(request, auth_user)
+
+    return BusinessUser.objects.get(auth_user=auth_user)
+
+
 def home(request):
     """
-    Dashboard View. It displays all offers of a
+    Leads to Dashboard view.
     Args:
         request: HTTP request.
     Returns: displays all offers of a business
     """
-    business_user = BusinessUser.objects.get(auth_user=request.user)
 
-    return redirect('dashboard/{}'.format(business_user.id))
+    login_form = AuthenticationForm(data=request.POST)
+
+    if login_form.is_valid():
+
+        business_user = simple_login_and_business_user(login_form, request)
+        return redirect('dashboard/{}'.format(business_user.pk))
+    else:
+        error_message = get_first_error_message(login_form)
+        return render(request, cts.BUSINESS_LOGIN, {'error_message': error_message})
 
 
 def send_contact_emails(contact, language_code):
@@ -402,14 +440,11 @@ def start_post(request):
         business_user.campaigns.add(campaign)
         business_user.save()
 
-        return redirect('dashboard/{}'.format(business_user.id)) # This.format(business_user.id))
+        return redirect('dashboard/{}'.format(business_user.pk))
 
     else:
 
-        # Takes first element from the errors dictionary
-        error_message = [m[0] for m in signup_form.errors.values()][0]
-
-        # TODO: missing error message on frontend
+        error_message = get_first_error_message(signup_form)
         return render(request, cts.START_VIEW_PATH, {'error_message': error_message})
 
 
