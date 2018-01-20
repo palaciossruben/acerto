@@ -363,7 +363,7 @@ def send_internal(contact, language_code, body_filename, subject):
     Returns: Sends email
     """
 
-    internal_team = ['santiago@peaku.co', 'juan@peaku.co']
+    internal_team = ['santiago@peaku.co', 'juan@peaku.co', 'juan.rendon@peaku.co']
 
     if language_code != 'en':
         body_filename += '_{}'.format(language_code)
