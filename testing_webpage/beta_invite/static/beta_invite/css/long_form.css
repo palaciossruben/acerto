@@ -48,8 +48,8 @@
 	margin-bottom: 94px;
 }
 
-/*#pre-preview {
-    color:var(--white);
+#pre-preview {
+    background-color:var(--white);
     border:0px;
     word-wrap: break-word;
     white-space: pre-wrap;
