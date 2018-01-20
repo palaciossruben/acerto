@@ -1,10 +1,6 @@
-Enhorabuena!
+Felicidades!
 
-{name} se ha registrado.
+{name} se ha registrado sin campaña creada.
 
 email: {email}
-telefono: {phone}
-
-Asi es que se canta hijue.....
-
-https://www.youtube.com/watch?v=FFoTMH9_nI0
+phone: {phone}
