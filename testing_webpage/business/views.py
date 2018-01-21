@@ -477,7 +477,7 @@ def dashboard(request, pk):
 
         candidates = get_checked_box_candidates(campaign.id, request)
 
-        email_sender.send_to_candidate(users=candidates,
+        email_sender.send_to_candidate(candidates=candidates,
                                        language_code='es',
                                        body_input=request.GET.get('email_body'),
                                        subject=request.GET.get('email_subject'),
