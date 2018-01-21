@@ -1,5 +1,4 @@
 from ipware.ip import get_ip
-from django.conf import settings
 from django.utils import translation
 
 from django.contrib.gis.geoip import GeoIP
@@ -8,7 +7,6 @@ from django.contrib.gis.geoip import GeoIP
 class ForceLangMiddleware:
 
     def __init__(self, get_response):
-        pass
         self.get_response = get_response
 
     def __call__(self, request):
@@ -17,16 +15,16 @@ class ForceLangMiddleware:
 
     def process_request(self, request):
 
-        #g = GeoIP()
-        #g.country('google.com')
-
-        #ip = get_ip(request)
-
-        request.LANGUAGE_CODE = 'es'
-        request.LANG = 'es'
+        # TODO: now it is defaulting to 'es', it should work with ip's by country.
+        #language = translation.get_language_from_request(request)
+        # g = GeoIP()
+        # g.country('google.com')
+        # ip = get_ip(request)
+        language = 'es'
+        translation.activate(language)
+        request.LANGUAGE_CODE = translation.get_language()
         return request
 
-        """
-        request.LANG = getattr(settings, 'LANGUAGE_CODE', settings.LANGUAGE_CODE)
-        translation.activate(request.LANG)
-        request.LANGUAGE_CODE = request.LANG"""
+    def process_response(self, request, response):
+        translation.deactivate()
+        return response
