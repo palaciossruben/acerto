@@ -1,5 +1,6 @@
 import os
 import time
+from datetime import datetime
 import helper as h
 
 from user import User
@@ -94,7 +95,7 @@ def read_all(force=False):
             if parsed_filename not in docs or force:
                 read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename)
 
-        print('done with folder: {}'.format(folder))
+                print('new parsed folder: {}'.format(folder))
 
 
 if __name__ == "__main__":
@@ -102,4 +103,4 @@ if __name__ == "__main__":
     t0 = time.time()
     read_all(force=False)
     t1 = time.time()
-    print('DOCUMENT READER, took:' + str(t1-t0))
+    print('On {0} DOCUMENT READER, took: {1}'.format(datetime.today(), t1-t0))

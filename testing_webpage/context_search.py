@@ -8,6 +8,7 @@ This builds a relationship between words for example 'android' has the following
 import os
 import time
 import pickle
+from datetime import datetime
 from django.core.wsgi import get_wsgi_application
 from collections import OrderedDict
 
@@ -17,7 +18,7 @@ application = get_wsgi_application()
 from beta_invite.models import Country, User
 
 
-CONJUNCTIONS = {'las', 'para', 'los', 'del', 'and', 'el', 'en'}
+CONJUNCTIONS = {'las', 'para', 'los', 'del', 'and', 'el', 'en', 'de'}
 COUNTRIES = {e.name.lower() for e in Country.objects.all()}
 
 nested_names = [u.name.split() for u in User.objects.all()]
@@ -123,4 +124,4 @@ if __name__ == '__main__':
     # TODO: Get relevances with word2vec and gensim.
     compute_related_words()
     t1 = time.time()
-    print('CONTEXT SEARCH TOOK: ' + str(t1-t0))
+    print('ON {0} CONTEXT SEARCH TOOK: {1}'.format(datetime.today(), t1-t0))
