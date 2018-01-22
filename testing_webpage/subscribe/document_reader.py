@@ -48,6 +48,7 @@ def read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename):
     if text != '':
         with open(parsed_path, 'w', encoding='UTF-8') as f:
             f.write(text)
+            print('new document: {}'.format(parsed_path))
 
     return text
 
@@ -94,8 +95,6 @@ def read_all(force=False):
             # Will used saved version, to save time parsing.
             if parsed_filename not in docs or force:
                 read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename)
-
-                print('new parsed folder: {}'.format(folder))
 
 
 if __name__ == "__main__":
