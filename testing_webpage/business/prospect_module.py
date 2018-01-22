@@ -62,11 +62,9 @@ def create_prospect_users_and_send_emails(campaign):
 
     # TODO: this feature only supports Spanish.
     search_text = search_module.with_lower_case_and_no_accents(campaign.title_es)
-    users = search_module.get_matching_users(search_text=search_text,
+    users = search_module.get_matching_users(search_phrase=search_text,
                                              word_user_path='subscribe/word_user_dictionary.p')
 
-    # Top distinct users.
-    users = get_distinct_users(users)
     users = filter_users_with_job(users)
     top_users = [u for u in users][:NUMBER_OF_MATCHES]
 

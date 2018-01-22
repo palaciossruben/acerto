@@ -116,11 +116,11 @@ def retrieve_sorted_users(sorted_iterator):
     return User.objects.filter(pk__in=user_ids).order_by(preserved)
 
 
-def get_matching_users(search_text, word_user_path):
+def get_matching_users(search_phrase, word_user_path):
     """
     DB matching between criteria and DB.
     Args:
-        search_text: string with the text to search in
+        search_phrase: list of words with the text to search in.
         word_user_path: string with path to the object.
     Returns: List with matching Users
     """
@@ -134,7 +134,7 @@ def get_matching_users(search_text, word_user_path):
     except FileNotFoundError:
         return users  # will not filter by words.
 
-    sorted_iterator = user_id_sorted_iterator(word_user_dictionary, users, search_text)
+    sorted_iterator = user_id_sorted_iterator(word_user_dictionary, users, search_phrase)
 
     #print_sorted_iterator_on_debug(sorted_iterator)
 
