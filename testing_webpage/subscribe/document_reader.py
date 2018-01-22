@@ -24,7 +24,8 @@ def get_text(folder_path, doc, extension):
         elif extension == '.pdf':
             text = h.get_pdf_text(folder_path, filename)
         elif extension == '.txt':
-            text = open(filename).read()
+            text = h.get_text_from_txt_file(filename)
+
     else:
         print('Found invalid or unimplemented extension {}, will not read.'.format(extension))
 

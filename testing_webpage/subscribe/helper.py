@@ -330,3 +330,10 @@ def rename_filename(folder_path, filename):
     os.rename(os.path.join(folder_path, filename), os.path.join(folder_path, new_name))
 
     return new_name
+
+
+def get_text_from_txt_file(filename):
+    try:
+        return open(filename).read()
+    except UnicodeDecodeError:
+        return ''
