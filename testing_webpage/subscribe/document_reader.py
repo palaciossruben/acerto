@@ -46,10 +46,9 @@ def read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename):
 
     text = h.remove_accents(text)
 
-    if text != '':
-        with open(parsed_path, 'w', encoding='UTF-8') as f:
-            f.write(text)
-            print('new document: {}'.format(parsed_path))
+    with open(parsed_path, 'w', encoding='UTF-8') as f:
+        f.write(text)
+        print('new document: {}'.format(parsed_path))
 
     return text
 
