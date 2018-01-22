@@ -178,7 +178,7 @@ def get_plan(request):
     return translate_message(plan, request.LANGUAGE_CODE)
 
 
-def send_signup_emails(business_user, language_code):
+def send_signup_emails(business_user, language_code, campaign):
 
     try:
         email_sender.send(users=business_user,
@@ -187,18 +187,20 @@ def send_signup_emails(business_user, language_code):
                           subject=_('Welcome to PeakU'))
         email_sender.send_internal(contact=business_user,
                                    language_code=language_code,
-                                   body_filename='business_signup_notification_email_body',
-                                   subject='Business User acaba de registrarse!!!')
+                                   body_filename='business_start_signup_notification_email_body',
+                                   subject='Business User acaba de registrarse!!!',
+                                   campaign=campaign)
     except (smtplib.SMTPRecipientsRefused, smtplib.SMTPAuthenticationError, UnicodeEncodeError) as e:  # cannot send emails
         pass
 
 
-def first_sign_in(signup_form, request):
+def first_sign_in(signup_form, campaign, request):
     """
     This method is used to do stuff after validating signup-data. Also logs in.
     Args:
         signup_form: Form obj
         request: HTTP obj
+        campaign: campaign object
     Returns: None, first auth and sign-in, saves objects
     """
 
@@ -225,7 +227,7 @@ def first_sign_in(signup_form, request):
 
     login(request, auth_user)
 
-    send_signup_emails(business_user, request.LANGUAGE_CODE)
+    send_signup_emails(business_user, request.LANGUAGE_CODE, campaign)
 
     return business_user
 
@@ -434,9 +436,8 @@ def start_post(request):
 
     if signup_form.is_valid():
 
-        business_user = first_sign_in(signup_form, request)
-
         campaign = campaign_module.create_campaign(request)
+        business_user = first_sign_in(signup_form, campaign, request)
         business_user.campaigns.add(campaign)
         business_user.save()
 

@@ -92,6 +92,13 @@ def get_video_url(user, campaign):
         return ''
 
 
+def get_business_campaign_url(campaign):
+    if campaign:
+        return 'https://peaku.co/beta_invite/long_form?campaign_id={campaign_id}'.format(campaign_id=campaign.id)
+    else:
+        return ''
+
+
 def get_campaign_url(candidate):
 
     if hasattr(candidate, 'campaign_id') and candidate.campaign_id:
@@ -169,9 +176,7 @@ def get_params_for_candidate(candidate, sender_data, language_code, override_dic
     for k, v in override_dict.items():
         params[k] = v
 
-    return params
-
-
+    return
 def get_body(body_is_filename, body_input):
     """
     Args:
@@ -352,7 +357,7 @@ def send_report(language_code, body_filename, subject, recipients, users):
                             mailgun_api_key=sender_data['mailgun_api_key'])
 
 
-def send_internal(contact, language_code, body_filename, subject):
+def send_internal(contact, language_code, body_filename, subject, campaign):
     """
     Sends an email to the internal team.
     Args:
@@ -363,7 +368,7 @@ def send_internal(contact, language_code, body_filename, subject):
     Returns: Sends email
     """
 
-    internal_team = ['santiago@peaku.co', 'juan@peaku.co', 'juan.rendon@peaku.co']
+    internal_team = ['juan@peaku.co', 'santiago@peaku.co', 'juan.rendon@peaku.co']
 
     if language_code != 'en':
         body_filename += '_{}'.format(language_code)
@@ -378,7 +383,8 @@ def send_internal(contact, language_code, body_filename, subject):
         body = fp.read().format(name=contact.name,
                                 email=contact.email,
                                 phone=contact.phone,
-                                message=message)
+                                message=message,
+                                business_campaign_url=get_business_campaign_url(campaign))
 
     sender_data = read_email_credentials()
 
