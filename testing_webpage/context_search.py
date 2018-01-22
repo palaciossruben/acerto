@@ -8,6 +8,7 @@ This builds a relationship between words for example 'android' has the following
 import os
 import time
 import pickle
+import common
 from datetime import datetime
 from django.core.wsgi import get_wsgi_application
 from collections import OrderedDict
@@ -18,7 +19,6 @@ application = get_wsgi_application()
 from beta_invite.models import Country, User
 
 
-CONJUNCTIONS = {'las', 'para', 'los', 'del', 'and', 'el', 'en', 'de'}
 COUNTRIES = {e.name.lower() for e in Country.objects.all()}
 
 nested_names = [u.name.split() for u in User.objects.all()]
@@ -27,7 +27,7 @@ nested_names = [u.name.split() for u in User.objects.all()]
 NAMES = {item.lower() for sublist in nested_names for item in sublist}
 
 PLACES = {'cauca', 'popayan', 'pereira', }
-EXCLUDED_WORDS = CONJUNCTIONS | COUNTRIES | NAMES | PLACES
+EXCLUDED_WORDS = common.CONJUNCTIONS | COUNTRIES | NAMES | PLACES
 
 
 def sort_relevance(my_dict):

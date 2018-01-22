@@ -3,6 +3,8 @@ import pickle
 
 from django.db.models import Case, When
 from collections import OrderedDict
+
+import common
 from business import util
 from beta_invite.models import User, Country, Education, Profession
 
@@ -30,12 +32,16 @@ def with_lower_case_and_no_accents(search_text):
     """
     Args:
         search_text: string
-    Returns: string
+    Returns: array with words
     """
     search_text = util.remove_accents(nltk.word_tokenize(search_text))
 
     # remove capital letters
     return [t.lower() for t in search_text]
+
+
+def filter_conjunction_words(words):
+    return [w for w in words if w not in common.CONJUNCTIONS]
 
 
 def get_text(request):
@@ -45,7 +51,8 @@ def get_text(request):
     Returns: List with tokenized strings, lower cased and with no accents.
     """
     search_text = request.GET.get('search_text')
-    return with_lower_case_and_no_accents(search_text)
+    words = with_lower_case_and_no_accents(search_text)
+    return filter_conjunction_words(words)
 
 
 def adds_context_based_search(tokens_dict, word_user_dictionary, filtered_user_relevance_dict):
@@ -155,4 +162,3 @@ def get_common_search_info(request, word_user_path):
 
     util.translate_users(users, request.LANGUAGE_CODE)
     return [u.id for u in users]
-
