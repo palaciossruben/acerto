@@ -114,6 +114,7 @@ mixpanel.init("d60ac5ae289f60c7f824d49a4d15be30");</script>
 					<thead>
 					  <tr>
 						<th>{% trans "Name" %}</th>
+						<th>id</th>
 						<th>{% trans "Email" %}</th>
 						<th>{% trans "Education" %}</th>
 						<th>{% trans "Experience" %}</th>
@@ -124,6 +125,7 @@ mixpanel.init("d60ac5ae289f60c7f824d49a4d15be30");</script>
 						{% static user.curriculum_url as click_url %}
 						<tr style="text-align:left; cursor:pointer;" onclick="window.document.location='{{ click_url }}';">
 							<td>{{ user.name }}</td>
+                            <td>{{ user.id }}</td>
 							<td>{{ user.email }}</td>
 							<td>{{ user.education.name }}</td>
 							<td>{{ user.experience }} {% trans "years" %}</td>

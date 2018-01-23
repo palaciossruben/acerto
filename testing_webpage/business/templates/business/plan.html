@@ -28,7 +28,7 @@
         <p id="description-text" >{{ plan.explanation }}</p>
 
         <form action="{% url 'business:start' %}" method="get" enctype="multipart/form-data">
-            {% csrf_token %}
+            <!--{% csrf_token %}-->
             <input class="form-submit" type="submit" value="{% trans 'I want it' %}">
         </form>
 

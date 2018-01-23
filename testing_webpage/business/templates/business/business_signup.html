@@ -27,7 +27,7 @@
             <h3 class="secondary-title" >{% trans "Sign Up" %}</h3>
             <div class="secondary-yellow-bar"></div>
             <br>
-            <div class="my-form">
+            <form class="my-form" action="{% url 'business:business_applied' %}">
                 {% csrf_token %}
 
 				<input class="form-text" type="text" name="name"
@@ -46,7 +46,7 @@
 				  placeholder="{% trans 'Confirm password' %}" required>
 
                 <input class="form-submit" type="submit" value="{% trans 'Sure!' %}">
-            </div>
+            </form>
         </div>
     </div>
 </section>
