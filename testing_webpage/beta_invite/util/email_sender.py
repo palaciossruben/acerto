@@ -176,7 +176,9 @@ def get_params_for_candidate(candidate, sender_data, language_code, override_dic
     for k, v in override_dict.items():
         params[k] = v
 
-    return
+    return params
+
+
 def get_body(body_is_filename, body_input):
     """
     Args:
@@ -365,10 +367,11 @@ def send_internal(contact, language_code, body_filename, subject, campaign):
         language_code: eg: 'es' or 'en'
         body_filename: the filename of the body content
         subject: string with the email subject
+
     Returns: Sends email
     """
 
-    internal_team = ['juan@peaku.co', 'santiago@peaku.co', 'juan.rendon@peaku.co']
+    internal_team = ['juan.rendon@peaku.co']
 
     if language_code != 'en':
         body_filename += '_{}'.format(language_code)
