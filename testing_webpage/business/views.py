@@ -505,7 +505,6 @@ def signup_choice(request):
 
 
 def signup_business_choice_redirect(request):
-
     return render(request, cts.BUSINESS_SIGNUP_VIEW_PATH, {})
 
 
