@@ -242,7 +242,8 @@ def popup_signup(request):
     signup_form = CustomUserCreationForm(request.POST)
 
     if signup_form.is_valid():
-        first_sign_in(signup_form, request)
+        campaign = None
+        first_sign_in(signup_form, campaign, request)
         return redirect(request.POST.get('result_path'))
     else:
         error_message = [m[0] for m in signup_form.errors.values()][0]
@@ -498,14 +499,14 @@ def candidate_profile(request, pk):
     return render(request, cts.CANDIDATE_PROFILE_VIEW_PATH, {'candidate': candidate})
 
 
-def signup(request):
+def signup_choice(request):
 
-    return render(request, cts.SIGNUP_VIEW_PATH, {})
+    return render(request, cts.SIGNUP_CHOICE_VIEW_PATH, {})
 
 
-def business_applied(request):
+def signup_business_choice_redirect(request):
 
-    return render(request, cts.BUSINESS_APPLIED_VIEW_PATH, {})
+    return render(request, cts.BUSINESS_SIGNUP_VIEW_PATH, {})
 
 
 def business_signup(request):
@@ -514,7 +515,9 @@ def business_signup(request):
 
     if signup_form.is_valid():
 
-        business_user = first_sign_in(signup_form, request)
+        campaign = None
+
+        business_user = first_sign_in(signup_form, campaign, request)
 
         business_user.save()
 
@@ -527,3 +530,8 @@ def business_signup(request):
 
         # TODO: missing error message on frontend
         return render(request, cts.BUSINESS_SIGNUP_VIEW_PATH, {'error_message': error_message})
+
+
+def business_applied(request):
+
+    return render(request, cts.BUSINESS_APPLIED_VIEW_PATH, {})

@@ -34,7 +34,7 @@
                     <h4 class="price">{% trans "$180" %}</h4>
 
                     <form action="{% url 'business:plan' 1 %}" method="get">
-                        {% csrf_token %}
+
                         <input class="pricing-more-info" type="submit" value="{% trans 'more information' %}">
                     </form>
                 </div>
@@ -67,7 +67,7 @@
                     <h4 class="price">{% trans "$240" %}</h4>
 
                     <form action="{% url 'business:plan' 2 %}" method="get">
-                        {% csrf_token %}
+
                         <input class="pricing-more-info" type="submit" value="{% trans 'more information' %}">
                     </form>
                 </div>
@@ -101,7 +101,7 @@
                     <h4 class="price">{% trans "$540" %}</h4>
 
                     <form action="{% url 'business:plan' 3 %}" method="get">
-                        {% csrf_token %}
+
                         <input class="pricing-more-info" type="submit" value="{% trans 'more information' %}">
                     </form>
                 </div>
