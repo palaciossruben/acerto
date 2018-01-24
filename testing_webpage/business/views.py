@@ -180,18 +180,33 @@ def get_plan(request):
 
 def send_signup_emails(business_user, language_code, campaign):
 
-    try:
-        email_sender.send(users=business_user,
-                          language_code=language_code,
-                          body_input='business_signup_email_body',
-                          subject=_('Welcome to PeakU'))
-        email_sender.send_internal(contact=business_user,
-                                   language_code=language_code,
-                                   body_filename='business_start_signup_notification_email_body',
-                                   subject='Business User acaba de registrarse!!!',
-                                   campaign=campaign)
-    except (smtplib.SMTPRecipientsRefused, smtplib.SMTPAuthenticationError, UnicodeEncodeError) as e:  # cannot send emails
-        pass
+    if campaign is None:
+
+        try:
+            email_sender.send(users=business_user,
+                              language_code=language_code,
+                              body_input='business_signup_email_body',
+                              subject=_('Welcome to PeakU'))
+            email_sender.send_internal(contact=business_user,
+                                       language_code=language_code,
+                                       body_filename='business_signup_notification_email_body',
+                                       subject='Business User acaba de registrarse!!!',
+                                       campaign=campaign)
+        except (smtplib.SMTPRecipientsRefused, smtplib.SMTPAuthenticationError, UnicodeEncodeError) as e:
+            pass
+    else:
+        try:
+            email_sender.send(users=business_user,
+                              language_code=language_code,
+                              body_input='business_start_signup_email_body',
+                              subject=_('Welcome to PeakU'))
+            email_sender.send_internal(contact=business_user,
+                                       language_code=language_code,
+                                       body_filename='business_start_signup_notification_email_body',
+                                       subject='Business User acaba de registrarse!!!',
+                                       campaign=campaign)
+        except (smtplib.SMTPRecipientsRefused, smtplib.SMTPAuthenticationError, UnicodeEncodeError) as e:  # cannot send emails
+            pass
 
 
 def first_sign_in(signup_form, campaign, request):
@@ -203,8 +218,6 @@ def first_sign_in(signup_form, campaign, request):
         campaign: campaign object
     Returns: None, first auth and sign-in, saves objects
     """
-
-    plan = get_plan(request)
 
     signup_form.save()
     username = signup_form.cleaned_data.get('username')
@@ -220,7 +233,7 @@ def first_sign_in(signup_form, campaign, request):
                                                  phone=request.POST.get('phone'),
                                                  ip=get_ip(request),
                                                  ui_version=cts.UI_VERSION,
-                                                 plan=plan,
+                                                 plan=get_plan(request),
                                                  auth_user=auth_user)
 
     business_user.save()
@@ -321,7 +334,7 @@ def home(request):
         return redirect('dashboard/{}'.format(business_user.pk))
     else:
         error_message = get_first_error_message(login_form)
-        return render(request, cts.BUSINESS_LOGIN, {'error_message': error_message})
+        return render(request, cts.BUSINESS_LOGIN, {})
 
 
 def send_contact_emails(contact, language_code):
@@ -450,6 +463,22 @@ def start_post(request):
         return render(request, cts.START_VIEW_PATH, {'error_message': error_message})
 
 
+def business_signup(request):
+
+    signup_form = CustomUserCreationForm(request.POST)
+
+    if signup_form.is_valid():
+
+        campaign = None
+
+        first_sign_in(signup_form, campaign, request)
+
+        return render(request, cts.BUSINESS_APPLIED_VIEW_PATH)
+    else:
+
+        return render(request, cts.BUSINESS_SIGNUP_VIEW_PATH)
+
+
 def get_checked_box_candidates(campaign_id, request):
     candidates = Candidate.objects.filter(campaign_id=campaign_id)
     return [c for c in candidates if request.GET.get('{}_checkbox'.format(c.id))]
@@ -502,33 +531,6 @@ def candidate_profile(request, pk):
 def signup_choice(request):
 
     return render(request, cts.SIGNUP_CHOICE_VIEW_PATH, {})
-
-
-def signup_business_choice_redirect(request):
-    return render(request, cts.BUSINESS_SIGNUP_VIEW_PATH, {})
-
-
-def business_signup(request):
-
-    signup_form = CustomUserCreationForm(request.POST)
-
-    if signup_form.is_valid():
-
-        campaign = None
-
-        business_user = first_sign_in(signup_form, campaign, request)
-
-        business_user.save()
-
-        return render(request, cts.BUSINESS_APPLIED_VIEW_PATH)
-
-    else:
-
-        # Takes first element from the errors dictionary
-        error_message = [m[0] for m in signup_form.errors.values()][0]
-
-        # TODO: missing error message on frontend
-        return render(request, cts.BUSINESS_SIGNUP_VIEW_PATH, {'error_message': error_message})
 
 
 def business_applied(request):

@@ -215,7 +215,7 @@ class Campaign(models.Model):
     tests = models.ManyToManyField(Test)
     interviews = models.ManyToManyField(Interview)
     calendly = models.BooleanField(default=True)
-    active = models.BooleanField(default=True)
+    active = models.BooleanField(default=False)
     calendly_url = models.CharField(max_length=200, default=cts.INTERVIEW_CALENDLY)
 
     # TODO: remove circular dependency

@@ -392,8 +392,8 @@ msgid "Enter your password"
 msgstr "Digita una clave"
 
 #: .\business\templates\business\login.html:50
-msgid "Log In!"
-msgstr "¡Inicia Sesión!"
+msgid "Log In"
+msgstr "Inicia Sesión"
 
 #: .\business\templates\business\login_buttons.html:5
 #: .\business\templates\business\offer_results.html:66

@@ -33,13 +33,13 @@
     <section class="section-container">
         <div class="row"> <!-- bootstrap row class -->
             <div class="col-sm-6">
-                <div id="job-description-container">
+                <div id="job-description-container" align="center">
 
                     <h2 class="title-blue" id="job-title">{{ job_title }}</h2>
 
-                    <pre id="pre-preview">
+                    <div id="pre-preview">
                         <p class="paragraph" id="campaign-description">{{ campaign.description }}</p>
-                    </pre>
+                    </div>
 
                     <div id="requirement-title-div">
                         {% if requirements %}
