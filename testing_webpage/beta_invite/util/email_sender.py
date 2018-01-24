@@ -367,6 +367,7 @@ def send_internal(contact, language_code, body_filename, subject, campaign):
         language_code: eg: 'es' or 'en'
         body_filename: the filename of the body content
         subject: string with the email subject
+        campaign: campaign object for mail with campaign link
 
     Returns: Sends email
     """

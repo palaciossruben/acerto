@@ -7,78 +7,71 @@
     <input type="hidden" name="campaign_id" value="{{ campaign_id }}" />
     <input type="hidden" name="user_id" value="{{ user_id }}" />
 
-    <br>
-    <b style="font-weight:400; font-size:25px">{% trans "Complete this few questions to know you better" %}</b>
+    <h3>{% trans "Complete this few questions to know you better" %}</h3>
     {% for test in tests %}
 
-        <br>
-        <br>
-        <br>
         <h2>{% trans "Test: " %} {{ test.name }}</h2>
 
         <!--Orders questions according to preset ordering-->
         {% for question in test.questions.all|dictsort:"order" %}
-
-            <br>
-            <br>
             <br>
 
+            <h3>{{ question.text_es }}</h3>
             {% if question.image_path %}
                 <img src="{% static question.image_path %}">
             {% endif %}
-
-            <!--TODO: missing translation here, this is chambonada-->
-            <h3>{{ question.text_es }}</h3>
-
+            <br>
+            <br>
             <!-- TODO: implement multiple check boxes-->
             {% if question.type.code == 'SA' %}
 
                 {% get_current_language as LANGUAGE_CODE %}
 
                 {% for answer in question.answers.all %}
-                    <br>
-                    <input type="radio" name="test_{{ test.id }}_question_{{ question.id }}"
-                        style="font-size:12px;" value="{{ answer.id }}"> {{ answer.name_es }} <br>
+
+                    <input type="radio" name="test_{{ test.id }}_question_{{ question.id }}" value="{{ answer.id }}"> {{ answer.name_es }} <br>
 
                 {% endfor %}
+                <br>
             {% elif question.type.code == 'OF' %}
 
                 {% trans "Your Answer" as text_placeholder %}
-                <textarea style="font-size:15px" name="test_{{ test.id }}_question_{{ question.id }}"
+                <textarea name="test_{{ test.id }}_question_{{ question.id }}"
                     cols="60" rows="5" placeholder="{{ text_placeholder }}"></textarea>
-
+                <br>
+                <br>
             {% elif question.type.code == 'DOB' %}
 
                 <div style="width: 655px; margin: auto;">
 
-                    <div style="float: left">
+                    <div>
                         <div class="hidden-xs col-sm-3 caption left sets-answer">{% trans "Agree" %}</div>
                     </div>
 
-                    <div style="float: left; margin-left: 20px;">
+                    <div>
                         <input type="radio" name="test_{{ test.id }}_question_{{ question.id }}"
-                            style="font-size:12px; border: 0px; width: 100%; height: 3em; overflow: hidden;" value="1"> {{ answer.name_es }} <br>
+                             value="1"> {{ answer.name_es }} <br>
                     </div>
 
-                    <div style="float: left; margin-left: 20px;">
+                    <div>
                         <input type="radio" name="test_{{ test.id }}_question_{{ question.id }}"
-                            style="font-size:12px; border: 0px; width: 100%; height: 1em; overflow: hidden;" value="0"> {{ answer.name_es }} <br>
+                            value="0"> {{ answer.name_es }} <br>
                     </div>
 
-                    <div style="float: left; margin-left: 20px;">
+                    <div>
                         <input type="radio" name="test_{{ test.id }}_question_{{ question.id }}"
-                            style="font-size:12px; border: 0px; width: 100%; height: 3em;" value="-1"> {{ answer.name_es }} <br>
+                             value="-1"> {{ answer.name_es }} <br>
                     </div>
 
-                    <div style="float: left; margin-left: 20px;">
+                    <div>
                         <div class="hidden-xs col-sm-3 caption left sets-answer">{% trans "Disagree" %}</div>
                     </div>
                 </div>
 
             {% elif question.type.code == 'NI' %}
 
-                <div style="margin-top:-10px;">
-                    <input style="color:black; width: 50px; font-size: 14px; height: 30px;" name="test_{{ test.id }}_question_{{ question.id }}"
+                <div>
+                    <input name="test_{{ test.id }}_question_{{ question.id }}"
                         type="number" value="{{ question.params.default }}" min="{{ question.params.min }}" max="{{ question.params.max }}" />
                 </div>
 
@@ -91,8 +84,7 @@
     <br>
 
     {% trans "Send Answers!!!" as submit_value %}
-    <input type="submit" style="height: 44px; border: solid 0px white; background:#F8E676; color:black; text-align:center;
-width: 81px; font-size: 16px; width: 250px; margin-bottom:40px; margin-top:5px; cursor:pointer;" value="{{ submit_value }}"
+    <input type="submit" value="{{ submit_value }}"
         onclick="add_checked_values({{ questions_dict }})">
 
 </form>

@@ -334,7 +334,7 @@ def home(request):
         return redirect('dashboard/{}'.format(business_user.pk))
     else:
         error_message = get_first_error_message(login_form)
-        return render(request, cts.BUSINESS_LOGIN, {'error_message': error_message})
+        return render(request, cts.BUSINESS_LOGIN, {})
 
 
 def send_contact_emails(contact, language_code):
