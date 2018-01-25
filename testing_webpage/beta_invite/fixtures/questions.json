@@ -563,5 +563,109 @@
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 40,
+    "fields":{
+      "text": "Four of the following words are similar in some way, what are the other two?",
+      "text_es": "Cuatro de las siguientes palabras son similares de alguna forma, ¿cuáles son las otras dos?",
+      "answers": [52, 53, 54, 55, 72],
+      "type": 1,
+      "correct_answers": [55],
+      "order": 1,
+      "image_path": "beta_invite/questions/40/cognitive_test_q1.png",
+      "created_at": "2018-01-25 02:42:49.0957+00",
+      "updated_at": "2018-01-25 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 41,
+    "fields":{
+      "text": "What is the number that should be in place of the question mark?",
+      "text_es": "¿Cuál es el número que debería estar en lugar del signo de interrogación?",
+      "answers": [56, 57, 58, 59, 73],
+      "type": 1,
+      "correct_answers": [57],
+      "order": 2,
+      "image_path": "beta_invite/questions/41/cognitive_test_q2.png",
+      "created_at": "2018-01-25 02:42:49.0957+00",
+      "updated_at": "2018-01-25 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 42,
+    "fields":{
+      "text": "Which statements prove that Camila has blue tennis?",
+      "text_es": "¿Cuáles declaraciones prueban que Camila tiene tenis azules?",
+      "answers": [60, 61, 62, 63, 74],
+      "type": 1,
+      "correct_answers": [62],
+      "order": 3,
+      "image_path": "beta_invite/questions/42/cognitive_test_q3.png",
+      "created_at": "2018-01-25 02:42:49.0957+00",
+      "updated_at": "2018-01-25 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 43,
+    "fields":{
+      "text": "Which two of the following six figures should not be with the others?",
+      "text_es": "¿Cuáles dos de las siguientes seis figuras no deberían estar con las otras?",
+      "answers": [64, 65, 66, 67, 75],
+      "type": 1,
+      "correct_answers": [66],
+      "order": 4,
+      "image_path": "beta_invite/questions/43/cognitive_test_q4.png",
+      "created_at": "2018-01-25 02:42:49.0957+00",
+      "updated_at": "2018-01-25 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 44,
+    "fields":{
+      "text": "What is the symbol that should be in place of the question mark?",
+      "text_es": "¿Cuál es el símbolo que debería estar en lugar del signo de interrogación?",
+      "answers": [68, 69, 70, 71, 76],
+      "type": 1,
+      "correct_answers": [71],
+      "order": 5,
+      "image_path": "beta_invite/questions/44/cognitive_test_q5.png",
+      "created_at": "2018-01-25 02:42:49.0957+00",
+      "updated_at": "2018-01-25 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 45,
+    "fields":{
+      "text": "Currently resides or willing to move to the city of Bogotá?",
+      "text_es": "¿Actualmente reside o está dispuesto a trasladarse a la ciudad de Bogotá?",
+      "answers": [32, 33],
+      "type": 1,
+      "correct_answers": [33],
+      "order": 1,
+      "created_at": "2018-01-25 02:42:49.0957+00",
+      "updated_at": "2018-01-25 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 46,
+    "fields":{
+      "text": "Of the following technologies, in which you have experience?",
+      "text_es": "¿De las siguientes tecnologías, en cuáles tiene experiencia?: Python, PHP, CSS, Ruby, React, Javascript, SQL",
+      "answers": [77, 78, 79, 80, 81, 82],
+      "type": 1,
+      "correct_answers": [77, 79, 80],
+      "order": 2,
+      "created_at": "2018-01-25 02:42:49.0957+00",
+      "updated_at": "2018-01-25 02:42:49.0957+00"
+    }
   }
 ]
+
