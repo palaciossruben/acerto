@@ -67,13 +67,16 @@ def send_email_with_mailgun(sender, recipients, subject, body, mail_gun_url, mai
 
     # TODO: can this be removed. Can mailgun manage unicode?
 
-    return requests.post(
-        mail_gun_url,
-        auth=("api", mailgun_api_key),
-        data={"from": sender,
-              "to": recipients,
-              "subject": subject,
-              "text": body})
+    try:
+        return requests.post(
+            mail_gun_url,
+            auth=("api", mailgun_api_key),
+            data={"from": sender,
+                  "to": recipients,
+                  "subject": subject,
+                  "text": body})
+    except:  # TODO: find the right error when there is no internet connection
+        pass
 
 
 def get_test_url(user, campaign):
