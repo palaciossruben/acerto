@@ -84,21 +84,21 @@
                     <input class="form-text" id="phone" type="tel" name="phone"
 				  		placeholder="{% trans 'Your phone' %}" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
 
-                    <select class="form-select" id="country" required>
+                    <select class="form-select" id="country" name="country" required>
                         <option value="">{% trans "Select Country" %}</option>
                         {% for country in countries%}
                             <option value={{ country.id }}>{{ country.name }}</option>
                         {% endfor %}
                     </select>
 
-                    <select class="form-select" id="education" required>
+                    <select class="form-select" id="education"  name="education" required>
                         <option value="">{% trans "Select Education" %}</option>
                         {% for level in education%}
                             <option value={{ level.id }}>{{ level.name }}</option>
                         {% endfor %}
                     </select>
 
-                    <select class="form-select" id="profession" required>
+                    <select class="form-select" id="profession" name="profession" required>
                         <option value="">{% trans "Select Profession" %}</option>
                         {% for profession in professions%}
                             <option value={{ profession.id }}>{{ profession.name }}</option>
