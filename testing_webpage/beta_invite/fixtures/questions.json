@@ -657,7 +657,7 @@
     "model": "beta_invite.question",
     "pk": 46,
     "fields":{
-      "text": "Of the following technologies, in which you have experience?",
+      "text": "On a scale of 1 to 5, how much experience in React do you have?",
       "text_es": "¿En una escala de 1 a 5, qué tanta experiencia en React posees?",
       "answers": [77, 78, 79, 80, 81],
       "type": 1,
