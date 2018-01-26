@@ -753,8 +753,8 @@
     "model": "beta_invite.answer",
     "pk": 77,
     "fields":{
-      "name": "Python-React",
-      "name_es": "Python-React",
+      "name": "1",
+      "name_es": "1",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -763,8 +763,8 @@
     "model": "beta_invite.answer",
     "pk": 78,
     "fields":{
-      "name": "Python-Ruby",
-      "name_es": "Python-Ruby",
+      "name": "2",
+      "name_es": "2",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -773,8 +773,8 @@
     "model": "beta_invite.answer",
     "pk": 79,
     "fields":{
-      "name": "Python-Javascript",
-      "name_es": "Python-Javascript",
+      "name": "3",
+      "name_es": "3",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -783,8 +783,8 @@
     "model": "beta_invite.answer",
     "pk": 80,
     "fields":{
-      "name": "React-Javascript",
-      "name_es": "React-Javascript",
+      "name": "4",
+      "name_es": "4",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -793,18 +793,8 @@
     "model": "beta_invite.answer",
     "pk": 81,
     "fields":{
-      "name": "Sql-Python",
-      "name_es": "Sql-Python",
-      "created_at": "2017-08-24 02:42:49.0957+00",
-      "updated_at": "2017-08-24 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 82,
-    "fields":{
-      "name": "PHP-CSS",
-      "name_es": "PHP-CSS",
+      "name": "5",
+      "name_es": "5",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
