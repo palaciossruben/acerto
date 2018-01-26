@@ -36,6 +36,7 @@
                 <div id="job-description-container" align="center">
 
                     <h2 class="title-blue" id="job-title">{{ job_title }}</h2>
+                    <!--<h3 class="title-blue-small">{{ city }}</h3>we need add this, but only when the campaign object have the city property-->
 
                     <div id="pre-preview">
                         <p class="paragraph" id="campaign-description">{{ campaign.description }}</p>
@@ -91,7 +92,9 @@
                         {% endfor %}
                     </select>
 
+
                     <select class="form-select" id="education"  name="education" required>
+
                         <option value="">{% trans "Select Education" %}</option>
                         {% for level in education%}
                             <option value={{ level.id }}>{{ level.name }}</option>
@@ -106,7 +109,7 @@
                     </select>
 
                     {% if is_desktop %}
-                        <input type="file" id="file" class="form-inputfile" required>
+                        <input type="file" id="file" name="curriculum" class="form-inputfile" required>
                         <label for="file">{% trans "Upload your resume" %}</label>
                     {% endif %}
 

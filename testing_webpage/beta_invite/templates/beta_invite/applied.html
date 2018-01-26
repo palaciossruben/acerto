@@ -20,11 +20,11 @@
              margin-bottom:50px;"> <img src="{% static 'beta_invite/logo.png' %}" width="370px" align="center"></a>
         {% endif %}
 
-        <div class="container" style="margin-top:5px;">
-            <span>
+        <div class="container" align="center" style="margin-top:5px;">
+            <div>
                 {% if tests %}
                     <span>
-                        <h1>{% trans "Thanks for registering!" %}</h1>
+                        <h1 style="color:var(--blue)">{% trans "Thanks for registering!" %}</h1>
                     </span>
                     <br>
                     {% include "beta_invite/test.html" with tests=tests %}
@@ -35,7 +35,7 @@
                     <br>
                     <b style="font-weight:400; color:#F8E676; font-size:18px">{% trans "We will contact you soon" %}</b>
                 {% endif %}
-            </span>
+            </div>
         </div>
         <br>
         <br>
