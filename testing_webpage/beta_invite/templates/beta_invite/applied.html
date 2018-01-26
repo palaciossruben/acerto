@@ -23,6 +23,7 @@
         <div class="container" align="center" style="margin-top:5px;">
             <div>
                 {% if tests %}
+                    fbq('track', 'CompleteRegistration');
                     <span>
                         <h1 style="color:var(--blue)">{% trans "Thanks for registering!" %}</h1>
                     </span>

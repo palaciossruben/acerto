@@ -643,8 +643,8 @@
     "model": "beta_invite.question",
     "pk": 45,
     "fields":{
-      "text": "Currently resides or willing to move to the city of Bogotá?",
-      "text_es": "¿Actualmente reside o está dispuesto a trasladarse a la ciudad de Bogotá?",
+      "text": "Currently resides or would you be willing to move to the city of Bogotá?",
+      "text_es": "¿Actualmente resides o estás dispuesto a trasladarte a la ciudad de Bogotá?",
       "answers": [32, 33],
       "type": 1,
       "correct_answers": [33],
@@ -657,14 +657,70 @@
     "model": "beta_invite.question",
     "pk": 46,
     "fields":{
-      "text": "On a scale of 1 to 5, how much experience in React do you have?",
-      "text_es": "¿En una escala de 1 a 5, qué tanta experiencia en React posees?",
-      "answers": [77, 78, 79, 80, 81],
+      "text": "Do you have a basic knowledge in SQL?",
+      "text_es": "¿Tienes un conocimiento básico en SQL?",
+      "answers": [32, 33],
       "type": 1,
-      "correct_answers": [80, 81],
+      "correct_answers": [33],
+      "order": 1,
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 47,
+    "fields":{
+      "text": "Are you working in a business selling vacation plans, what strategy would you use to attract and grow in customers very fast?",
+      "text_es": "¿Estás trabajando en un negocio de venta de planes vacacionales, ¿Qué estrategia usarías para atraer y crecer en clientes muy rápido?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 4,
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 48,
+    "fields":{
+      "text": "Do you currently reside or would you be willing to move to Girardot - Cundinamarca?",
+      "text_es": "¿Actualmente resides o estarías dispuesto a trasladarte a Girardot - Cundinamarca?",
+      "answers": [32, 33],
+      "type": 1,
+      "correct_answers": [33],
+      "order": 1,
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 49,
+    "fields":{
+      "text": "How are your knowledge or experience in production?",
+      "text_es": "¿Cómo son tus conocimientos o experiencia en producción?",
+      "answers": [82, 83, 84],
+      "type": 1,
+      "correct_answers": [83, 84],
       "order": 2,
-      "created_at": "2018-01-25 02:42:49.0957+00",
-      "updated_at": "2018-01-25 02:42:49.0957+00"
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 50,
+    "fields":{
+      "text": "How are your knowledge or experience in accounting and payroll?",
+      "text_es": "¿Cómo son tus conocimientos o experiencia en contabilidad y liquidación de nómina?",
+      "answers": [82, 83, 84],
+      "type": 1,
+      "correct_answers": [83, 84],
+      "order": 2,
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
     }
   }
 ]
