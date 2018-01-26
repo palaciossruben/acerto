@@ -51,7 +51,7 @@
       gtag('config', 'UA-110863941-1');
     </script>
 
-    <script id="Facebook conversions" type="text/javascript">
+    <script id="Heat-map" type="text/javascript">
         window.smartlook||(function(d) {
         var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
         var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
@@ -59,6 +59,26 @@
         })(document);
         smartlook('init', '495c7bd6807a0ab2c17ade2e03cac13bab9f1b84');
     </script>
+
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window,document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '723083944567694');
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1"
+        src="https://www.facebook.com/tr?id=723083944567694&ev=PageView
+        &noscript=1"/>
+    </noscript>
+    <!-- End Facebook Pixel Code -->
 
     {% block extra_head %}{% endblock %}
 
