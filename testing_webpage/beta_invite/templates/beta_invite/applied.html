@@ -26,18 +26,10 @@
                     <span>
                         <h1 style="color:var(--blue)">{% trans "Thanks for registering!" %}</h1>
                     </span>
-                    <script id=type="text/javascript">
-                        window.smartlook||(function(d) {
-                        var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
-                        var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
-                        c.charset='utf-8';c.src='https://rec.smartlook.com/recorder.js';h.appendChild(c);
-                        })(document);
-                        smartlook('init', '495c7bd6807a0ab2c17ade2e03cac13bab9f1b84');
-                    </script>
                     <br>
                     {% include "beta_invite/test.html" with tests=tests %}
                 {% else %}
-                    <span id="Facebook conversions" style="font-weight:500; color:#F8E676;">
+                    <span style=" font-weight:500; color:#F8E676;">
                         <b style="font-weight:400; text-transform: uppercase; font-size:30px;">{% trans "Thanks for registering!" %}</b>
                     </span>
                     <br>
