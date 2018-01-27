@@ -123,6 +123,21 @@ def retrieve_sorted_users(sorted_iterator):
     return User.objects.filter(pk__in=user_ids).order_by(preserved)
 
 
+def remove_duplicates(users):
+    """
+    Before changes to user -> candidate, multiple users with the same email were created.
+    This removes this multiple profiles.
+    :param users: list of user Obj.
+    :return: list of user, with unique emails.
+    """
+    unique_users = []
+    for user in users:
+        if user.email not in [u.email for u in unique_users]:
+            unique_users.append(user)
+
+    return unique_users
+
+
 def get_matching_users(search_phrase, word_user_path):
     """
     DB matching between criteria and DB.
@@ -145,7 +160,8 @@ def get_matching_users(search_phrase, word_user_path):
 
     #print_sorted_iterator_on_debug(sorted_iterator)
 
-    return retrieve_sorted_users(sorted_iterator)
+    users = retrieve_sorted_users(sorted_iterator)
+    return remove_duplicates(users)
 
 
 def get_common_search_info(request, word_user_path):
