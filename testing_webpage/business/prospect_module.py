@@ -70,7 +70,8 @@ def create_prospect_users_and_send_emails(campaign):
 
     for user in top_users:
 
-        if campaign not in common.get_campaigns(user):
+        # only users who are not on the campaign will be added to the mail
+        if campaign.id not in common.get_campaign_ids(user):
 
             candidate = Candidate(campaign=campaign, user=user, state=State.objects.get(code='P'))
             candidate.save()
