@@ -26,7 +26,6 @@ def send_general_report():
 def send_campaign_report(recipients, campaign_id):
 
     campaign = Campaign.objects.get(pk=campaign_id)
-
     candidates = Candidate.objects.filter(created_at__range=[str(datetime.now() - timedelta(days=1)), str(datetime.now())],
                                           campaign=campaign)
 
