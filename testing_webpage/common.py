@@ -113,10 +113,11 @@ def get_candidate(user, campaign):
 
 # TODO: Make method present on common.py a method of the class User. For this to happen, Candidate class has
 # to be moved to testing_webpage to solve circular dependency problem.
-def get_campaign_ids(user):
+def get_all_campaign_ids(user):
     """
     Users are unique and have multiple Candidates associated. Each one of which has 1 campaign. This method
     returns all campaigns from all Candidates associated to user.
     Returns: a list of campaign_ids where the user is a candidate.
+    IMPORTANT: it gets both active or removed candidate's campaign ids.
     """
     return [candidate.campaign.id for candidate in Candidate.objects.filter(user=user)]

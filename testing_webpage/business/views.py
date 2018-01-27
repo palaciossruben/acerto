@@ -85,26 +85,6 @@ def search_trade(request):
                                                   })
 
 
-def get_filtered_users(country_id, profession_id, experience, education_id):
-    """
-    Filters users given certain conditions.
-    Args:
-        country_id: int
-        profession_id: int
-        experience: int
-        education_id: int
-    Returns:
-    """
-    # Get all education levels at or above.
-    education_level = Education.objects.get(pk=education_id)
-    education_set = Education.objects.filter(level__gte=education_level.level)
-
-    return User.objects.filter(country_id=country_id)\
-        .filter(profession_id=profession_id)\
-        .filter(experience__gte=experience)\
-        .filter(education__in=education_set)
-
-
 def calculate_result2(request):
     """
     Args:

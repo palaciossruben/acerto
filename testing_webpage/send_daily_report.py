@@ -6,43 +6,37 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
-from beta_invite.models import User, Campaign
+from beta_invite.models import Campaign
 from beta_invite.util import email_sender
-from business.views import get_filtered_users
+from dashboard.models import Candidate
 
 
 def send_general_report():
-    users = User.objects.filter(created_at__range=[str(datetime.now() - timedelta(days=1)), str(datetime.now())])
+    candidates = Candidate.objects.filter(created_at__range=[str(datetime.now() - timedelta(days=1)), str(datetime.now())])
 
     # Only send if there is something.
-    if len(users) > 0:
+    if len(candidates) > 0:
         email_sender.send_report(language_code='es',
                                  body_filename='daily_report_email_body',
                                  subject='Daily report',
                                  recipients=['juan@peaku.co', 'santiago@peaku.co'],
-                                 users=users)
+                                 candidates=candidates)
 
 
 def send_campaign_report(recipients, campaign_id):
 
     campaign = Campaign.objects.get(pk=campaign_id)
 
-    users = get_filtered_users(country_id=campaign.country_id,
-                               profession_id=campaign.profession_id,
-                               experience=campaign.experience,
-                               education_id=campaign.education_id)
-
-    # Adds a
-    users = users.filter(created_at__range=[str(datetime.now() - timedelta(days=1)), str(datetime.now())],
-                         campaign=campaign)
+    candidates = Candidate.objects.filter(created_at__range=[str(datetime.now() - timedelta(days=1)), str(datetime.now())],
+                                          campaign=campaign)
 
     # Only send if there is something.
-    if len(users) > 0:
+    if len(candidates) > 0:
         email_sender.send_report(language_code='es',
                                  body_filename='daily_report_email_body',
                                  subject='Reporte diario para {campaign_name}'.format(campaign_name=campaign.title_es),
                                  recipients=recipients,
-                                 users=users)
+                                 candidates=candidates)
 
 
 send_general_report()

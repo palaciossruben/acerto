@@ -301,17 +301,17 @@ def remove_accents(an_object):
         raise NotImplementedError
 
 
-def create_nice_resumes_message(users):
+def create_nice_resumes_message(candidates):
 
     resume_summaries = []
-    for u in users:
-        if u.curriculum_url != '#':
-            cv_url = 'http://peaku.co/static/{url}'.format(url=u.curriculum_url)
+    for c in candidates:
+        if c.user.curriculum_url != '#':
+            cv_url = 'https://peaku.co/static/{url}'.format(url=c.user.curriculum_url)
         else:
             cv_url = 'no cv available'
 
-        if u.campaign is not None:
-            campaign_name = u.campaign.name
+        if c.campaign is not None:
+            campaign_name = c.campaign.name
         else:
             campaign_name = 'unknown'
 
@@ -322,16 +322,16 @@ def create_nice_resumes_message(users):
                                 'profession: {profession}\n'
                                 'education: {education}\n'
                                 'cv: \n{cv_url}'.format(campaign_name=campaign_name,
-                                                        name=remove_accents(u.name),
-                                                        email=u.email,
-                                                        country=u.country.name,
-                                                        profession=u.profession.name,
-                                                        education=u.education.name,
+                                                        name=remove_accents(c.user.name),
+                                                        email=c.user.email,
+                                                        country=c.user.country.name,
+                                                        profession=c.user.profession.name,
+                                                        education=c.user.education.name,
                                                         cv_url=cv_url))
     return '\n\n'.join(resume_summaries)
 
 
-def send_report(language_code, body_filename, subject, recipients, users):
+def send_report(language_code, body_filename, subject, recipients, candidates):
     """
     Sends an email
     Args:
@@ -339,13 +339,14 @@ def send_report(language_code, body_filename, subject, recipients, users):
         body_filename: the filename of the body content
         subject: string with the email subject
         recipients: email send to.
+        candidates: QuerySet of candidates
     Returns: Sends email
     """
 
     if language_code != 'en':
         body_filename += '_{}'.format(language_code)
 
-    resumes = create_nice_resumes_message(users)
+    resumes = create_nice_resumes_message(candidates)
     sender_data = read_email_credentials()
 
     with open(os.path.join(get_current_path(), body_filename)) as fp:
