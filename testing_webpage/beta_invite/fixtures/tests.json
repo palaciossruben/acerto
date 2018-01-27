@@ -185,7 +185,7 @@
     "fields":{
       "name": "Fullstack developer blockchain",
       "name_es": "Desarrollador fullstack blockchain",
-      "questions": [45, 46],
+      "questions": [45, 51],
       "cut_score": 100,
       "created_at": "2018-01-25 02:42:49.0957+00",
       "updated_at": "2018-01-25 02:42:49.0957+00"
@@ -197,7 +197,7 @@
     "fields":{
       "name": "Growth hacker for Startup",
       "name_es": "Líder de crecimiento para Startup",
-      "questions": [45],
+      "questions": [45, 46],
       "cut_score": 100,
       "created_at": "2018-01-25 02:42:49.0957+00",
       "updated_at": "2018-01-25 02:42:49.0957+00"

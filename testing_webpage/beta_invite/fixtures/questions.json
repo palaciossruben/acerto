@@ -136,7 +136,7 @@
     "pk": 11,
     "fields":{
       "text": "Which of the following is the best to become a better professional?",
-      "text_es": "¿Cuál de las siguientes formas es la mejor para ser mejor en tu carrera?",
+      "text_es": "¿Cuál de las siguientes opciones crees que es la más idónea para ser mejor en tu carrera?",
       "answers": [26, 27, 28],
       "type": 1,
       "correct_answers": [26],
@@ -178,7 +178,7 @@
     "pk": 14,
     "fields":{
       "text": "What has been the hardest project you have done? Why it was a challenge?",
-      "text_es": "¿Cuál fue el proyecto más dificil que has hecho? ¿Por qué fue retador?",
+      "text_es": "¿Cuál ha sido el proyecto más dificil que has hecho? ¿Por qué fue tan retador?",
       "answers": [],
       "type": 3,
       "correct_answers": [],
@@ -718,6 +718,20 @@
       "answers": [82, 83, 84],
       "type": 1,
       "correct_answers": [83, 84],
+      "order": 2,
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 51,
+    "fields":{
+      "text": "",
+      "text_es": "¿En una escala de uno a cinco, siendo cinco la puntuación más alta, qué tanto conocimiento en React posees?",
+      "answers": [77, 78, 79, 80, 81],
+      "type": 1,
+      "correct_answers": [80, 81],
       "order": 2,
       "created_at": "2018-01-26 02:42:49.0957+00",
       "updated_at": "2018-01-26 02:42:49.0957+00"
