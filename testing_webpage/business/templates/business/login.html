@@ -49,12 +49,12 @@
 				{% trans "Log In" as submit_value %}
 				<input style="height: 44px; border: solid 2px black; background:var(--blue); color:black; text-align:center;
 				 width: 81px; font-size: 16px; width: 255px; margin-bottom:20px; margin-top:15px; cursor:pointer;" type="submit" value="{{ submit_value }}">
+				<br>
+				<!--<a style="text-align:center" href="{% url 'password_reset' %}">¿Olvidaste la contraseña?</a>-->
+				<br>
+				<br>
 			  </form>
-			  <form method="post" style="text-align:center" action="{% url 'password_reset' %}">
-				  {% csrf_token %}
-				  <input type="submit" value="¿Olvidó la contraseña?" style="height: 44px; border: none; background:var(--white); color:(--green); text-align:center;
-				 width: 81px; font-size: 16px; width: 255px; margin-bottom:40px; margin-top:15px; cursor:pointer;">
-			  </form>
+
 		  </div>
       </div>
 

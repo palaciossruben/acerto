@@ -1,6 +1,5 @@
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
-
 from business import views
 
 app_name = 'business'
@@ -28,6 +27,5 @@ urlpatterns = [
     url(r'^trade_client$', views.trade_client, name='trade_client'),
     url(r'^search_trade$', views.search_trade, name='search_trade'),
 
-    url(r'^send_reset_url', views.send_reset_url, name='send_reset_url'),
-    url(r'^password_reset/$', auth_views.password_reset, name='password_reset'),
+    url(r'^HR_dashboard_pro5$', views.provisional_dashboard, name='provisional_dashboard'),
 ]
