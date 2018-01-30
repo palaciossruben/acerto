@@ -90,7 +90,7 @@ def send_possible_job_matches():
     """
 
     # Active campaigns that are not the default campaign
-    active_campaigns = Campaign.objects.filter(active=True).exclude(id=cts_beta_invite.DEFAULT_CAMPAIGN_ID)
+    active_campaigns = Campaign.objects.filter(active=True)
 
     for campaign in active_campaigns:
         prospect_module.create_prospect_users_and_send_emails(campaign)
