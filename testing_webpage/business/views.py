@@ -502,17 +502,26 @@ def dashboard(request, pk):
 
 
 def candidate_profile(request, pk):
-
     candidate = Candidate.objects.get(pk=pk)
 
     return render(request, cts.CANDIDATE_PROFILE_VIEW_PATH, {'candidate': candidate})
 
 
 def signup_choice(request):
-
     return render(request, cts.SIGNUP_CHOICE_VIEW_PATH, {})
 
 
 def business_applied(request):
-
     return render(request, cts.BUSINESS_APPLIED_VIEW_PATH, {})
+
+
+def send_reset_url(request):
+    email = request.POST.get('email')
+    business_user = BusinessUser.objects.get(email=email)
+
+    email_sender.send(users=business_user,
+                      language_code='es',
+                      body_input='business_user_reset_email_body',
+                      subject='reset me')
+
+    return render(request, cts.PASSWORD_RESET_DONE)
