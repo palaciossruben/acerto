@@ -502,17 +502,55 @@ def dashboard(request, pk):
 
 
 def candidate_profile(request, pk):
-
     candidate = Candidate.objects.get(pk=pk)
 
     return render(request, cts.CANDIDATE_PROFILE_VIEW_PATH, {'candidate': candidate})
 
 
 def signup_choice(request):
-
     return render(request, cts.SIGNUP_CHOICE_VIEW_PATH, {})
 
 
 def business_applied(request):
-
     return render(request, cts.BUSINESS_APPLIED_VIEW_PATH, {})
+
+'''
+def send_reset_url(request):
+    email = request.POST.get('email')
+    business_user = BusinessUser.objects.get(email=email)
+
+    email_sender.send(users=business_user,
+                      language_code='es',
+                      body_input='business_user_reset_email_body',
+                      subject='reset me')
+
+    return render(request, cts.PASSWORD_RESET_DONE)
+'''
+
+
+def provisional_dashboard(request, pk=93):
+    business_user = BusinessUser.objects.get(pk=pk)
+
+    # TODO: Make it for more than 1 campaign. For now it only takes first element.
+    campaign = business_user.campaigns.all()[0]
+
+    params, states = candidate_module.get_rendering_data(campaign.id)
+
+    # State Backlog and Prospect will show as one.
+    params['backlog'] = list(params['backlog']) + list(params['prospect'])
+
+    # enters here when sending an email
+    if request.GET.get('send_mail') is not None:
+        candidates = get_checked_box_candidates(campaign.id, request)
+
+        email_sender.send_to_candidate(candidates=candidates,
+                                       language_code='es',
+                                       body_input=request.GET.get('email_body'),
+                                       subject=request.GET.get('email_subject'),
+                                       with_localization=False,
+                                       body_is_filename=False)
+
+    params['campaign'] = campaign
+    params['states'] = states
+
+    return render(request, cts.DASHBOARD_VIEW_PATH, params)

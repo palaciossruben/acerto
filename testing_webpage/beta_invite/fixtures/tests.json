@@ -197,7 +197,7 @@
     "fields":{
       "name": "Growth hacker for Startup",
       "name_es": "Líder de crecimiento para Startup",
-      "questions": [45, 46],
+      "questions": [45],
       "cut_score": 100,
       "created_at": "2018-01-25 02:42:49.0957+00",
       "updated_at": "2018-01-25 02:42:49.0957+00"
@@ -210,7 +210,7 @@
       "name": "Analysis Test",
       "name_es": "Test de análisis",
       "questions": [4, 14, 25],
-      "cut_score": 60,
+      "cut_score": 75,
       "created_at": "2018-01-26 02:42:49.0957+00",
       "updated_at": "2018-01-26 02:42:49.0957+00"
     }
@@ -222,7 +222,7 @@
       "name": "Digital Marketing",
       "name_es": "Mercadeo digital",
       "questions": [11, 15, 17, 12, 46, 47],
-      "cut_score": 60,
+      "cut_score": 75,
       "created_at": "2018-01-26 02:42:49.0957+00",
       "updated_at": "2018-01-26 02:42:49.0957+00"
     }
