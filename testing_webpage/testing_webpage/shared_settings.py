@@ -12,6 +12,17 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 from django.utils.translation import ugettext_lazy as _
+from django.db import models
+from django import forms
+
+
+class EmailForm(forms.Form):
+  firstname = forms.CharField(max_length=255)
+  lastname = forms.CharField(max_length=255)
+  email = forms.EmailField()
+  subject = forms.CharField(max_length=255)
+  botcheck = forms.CharField(max_length=5)
+  message = forms.CharField()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -177,13 +188,11 @@ LOGIN_REDIRECT_URL = 'business:home'
 # Disables this limit.
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-'''
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 25
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = False
-'''
+
+
+
+
+
+
 
 

@@ -14,7 +14,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import login, authenticate
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.forms import AuthenticationForm
-
+from django.contrib.auth.models import User as internal_user
 import business
 import beta_invite
 from business import search_module
@@ -308,7 +308,7 @@ def home(request):
 
     login_form = AuthenticationForm(data=request.POST)
 
-    if login_form.is_valid():
+    if login_form.is_valid() and request.POST.get('username') != 'g.comercialrmi2@redmilatam.com':
 
         business_user = simple_login_and_business_user(login_form, request)
         return redirect('dashboard/{}'.format(business_user.pk))
