@@ -142,7 +142,8 @@ def deploy():
             run('python3 manage.py compilemessages -l es')
 
             # stop gunicorn if it is running.
-            if os.path.join(WORKING_PATH, 'gunicorn_pid') in list_dir(WORKING_PATH):
+            o = run('[ -f {} ] && echo "Found" || echo "Not found"'.format(os.path.join(WORKING_PATH, 'gunicorn_pid')))
+            if "Found" in o:
                 run('kill $(cat gunicorn_pid)')
 
             # While down; migrate:

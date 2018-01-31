@@ -25,9 +25,11 @@ def run(command):
     print("run: {}".format(command))
     stdin, stdout, stderr = connection.exec_command(command)
     out = stdout.read()
-    print(out)
-    print("Errors")
-    print(stderr.read())
+    if out:
+        print(out)
+    err = stderr.read()
+    if err:
+        print("Errors: " + err)
 
     return str(out)
 
