@@ -32,10 +32,6 @@ def run(command):
     return str(out)
 
 
-class env:
-    cwd = 'sa'
-
-
 class cd:
 
     def __init__(self, path):

@@ -4,22 +4,10 @@ from uuid import getnode as get_mac
 
 import psycopg2 as pg
 
-# from fabric.api import run, env, prefix
-# from fabric.context_managers import cd
-from deploy.home_fabric import run, cd, prefix, env
-
-#env.use_ssh_config = True
-#env.always_use_pty = False
-
-# It needs to have last '/' to work with list_dir custom function.
-WORKING_PATH = '/home/ubuntu/acerto/testing_webpage/'
+from home_fabric import run, cd, prefix
 
 
-def list_dir(directory=None):
-    directory = directory or env.cwd
-    string = run("for i in %s*; do echo $i; done" % directory)
-    files = string.replace("\r", "").split("\n")
-    return files
+WORKING_PATH = '/home/ubuntu/acerto/testing_webpage'
 
 
 def sync_local(sync_media=False):
