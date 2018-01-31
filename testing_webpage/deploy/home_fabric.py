@@ -13,7 +13,7 @@ def get_current_path():
 
 def run(command):
 
-    global c
+    global connection
 
     if prefix_command:
         command = '{prefix} {command}'.format(prefix=prefix_command, command=command)
@@ -22,11 +22,8 @@ def run(command):
         command = 'cd {cd_path}; {command}'.format(cd_path=cd_path,
                                                    command=command)
 
-    #commands = ["cd acerto && ls", "ls"]
-
-    #for command in commands:
     print("run: {}".format(command))
-    stdin, stdout, stderr = c.exec_command(command)
+    stdin, stdout, stderr = connection.exec_command(command)
     out = stdout.read()
     print(out)
     print("Errors")
@@ -68,17 +65,17 @@ class prefix:
 
 
 def exit_handler():
-    global c
-    c.close()
+    global connection
+    connection.close()
 
 
 json_data = open(os.path.join(get_current_path(), 'deploy_credentials.json'), encoding='utf-8').read()
 credentials = json.loads(json_data)
 
 k = paramiko.RSAKey.from_private_key_file(credentials['key'])
-c = paramiko.SSHClient()
-c.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+connection = paramiko.SSHClient()
+connection.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 print("connecting")
-c.connect(hostname=credentials['host'], username=credentials['user'], pkey=k)
+connection.connect(hostname=credentials['host'], username=credentials['user'], pkey=k)
 print("connected")
 atexit.register(exit_handler)
