@@ -1,7 +1,7 @@
 from ipware.ip import get_ip
 from django.utils import translation
 
-from django.contrib.gis.geoip import GeoIP
+# from django.contrib.gis.geoip import GeoIP
 
 
 class ForceLangMiddleware:
