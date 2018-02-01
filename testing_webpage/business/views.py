@@ -308,7 +308,7 @@ def home(request):
 
     login_form = AuthenticationForm(data=request.POST)
 
-    if login_form.is_valid() and request.POST.get('username') != 'g.comercialrmi2@redmilatam.com':
+    if login_form.is_valid() and request.POST.get('username') != 'g.comercialrmi2@redmilatam.com':  # Block access
 
         business_user = simple_login_and_business_user(login_form, request)
         return redirect('dashboard/{}'.format(business_user.pk))
