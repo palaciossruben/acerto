@@ -10,6 +10,10 @@ from home_fabric import run, cd, prefix
 WORKING_PATH = '/home/ubuntu/acerto/testing_webpage'
 
 
+def my_parent_path():
+    return str(os.path.dirname(os.path.abspath(__file__)).rpartition('/')[0])
+
+
 def sync_local(sync_media=False):
     """
     Synchronizes local machine with last backup from DB and media files
@@ -30,8 +34,8 @@ def sync_local(sync_media=False):
     local_backup = '/Users/juanpabloisaza/Desktop/acerto/db_backup.sql'
 
     # MEDIA PATHS:
-    media_remote = '/home/ubuntu/acerto/testing_webpage/media/resumes'
-    media_local = '/Users/juanpabloisaza/Desktop/masteringmymind/acerto/testing_webpage/media'
+    media_remote = my_parent_path() + '/media/resumes'
+    media_local = my_parent_path() + '/media'
 
     # PSQL
     abstract_local_psql = 'psql -U {user} -p 5432 -h localhost {db_option}'
@@ -97,7 +101,7 @@ def sync_local(sync_media=False):
 
 def deploy():
 
-    local_cwd = '/Users/ASUS1/Desktop/acerto/testing_webpage'
+    local_cwd = my_parent_path()
 
     # first uploads my local changes to the repo
     subprocess.check_output("git push origin master", cwd=local_cwd, shell=True)
@@ -106,10 +110,11 @@ def deploy():
     run('pg_dump -U dbadmin -p 5432 -h localhost maindb > db_backup.sql')
 
     with cd(WORKING_PATH):
-        with prefix(". /usr/local/bin/virtualenvwrapper.sh; workon myenv"):
 
-            # download latest changes to repo.
-            run('git pull origin master')
+        # download latest changes to repo.
+        run('git pull origin master')
+
+        with prefix(". /usr/local/bin/virtualenvwrapper.sh; workon myenv"):
 
             # update the cron jobs, in case it has changed.
             run('crontab cron.txt')
@@ -157,7 +162,7 @@ def dev_update():
     """
 
     python_cmd = 'python3'
-    local_cwd = '/Users/ASUS1/Desktop/acerto/testing_webpage'
+    local_cwd = my_parent_path()
 
     subprocess.check_output('{} manage.py migrate'.format(python_cmd), cwd=local_cwd, shell=True)
 
