@@ -97,7 +97,7 @@ def sync_local(sync_media=False):
 
 def deploy():
 
-    local_cwd = '/Users/juanpabloisaza/Desktop/masteringmymind/acerto/API/testing_webpage'
+    local_cwd = '/Users/ASUS1/Desktop/acerto/testing_webpage'
 
     # first uploads my local changes to the repo
     subprocess.check_output("git push origin master", cwd=local_cwd, shell=True)
@@ -157,7 +157,7 @@ def dev_update():
     """
 
     python_cmd = 'python3'
-    local_cwd = '/Users/juanpabloisaza/Desktop/masteringmymind/acerto/API/testing_webpage'
+    local_cwd = '/Users/ASUS1/Desktop/acerto/testing_webpage'
 
     subprocess.check_output('{} manage.py migrate'.format(python_cmd), cwd=local_cwd, shell=True)
 
