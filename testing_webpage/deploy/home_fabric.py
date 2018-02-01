@@ -19,8 +19,8 @@ def run(command):
         command = '{prefix} {command}'.format(prefix=prefix_command, command=command)
 
     if cd_path:
-        command = 'cd {cd_path}; {command}'.format(cd_path=cd_path,
-                                                   command=command)
+        command = 'cd {cd_path} && {command}'.format(cd_path=cd_path,
+                                                     command=command)
 
     print("run: {}".format(command))
     stdin, stdout, stderr = connection.exec_command(command)
@@ -29,7 +29,7 @@ def run(command):
         print(out)
     err = stderr.read()
     if err:
-        print("Errors: " + err)
+        print("Errors: " + str(err))
 
     return str(out)
 

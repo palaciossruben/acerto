@@ -114,7 +114,8 @@ def deploy():
         # download latest changes to repo.
         run('git pull origin master')
 
-        with prefix(". /usr/local/bin/virtualenvwrapper.sh; workon myenv"):
+        with prefix("source /usr/local/bin/virtualenvwrapper.sh && workon myenv"):
+        #with prefix(". /usr/local/bin/virtualenvwrapper.sh && workon myenv"):
 
             # update the cron jobs, in case it has changed.
             run('crontab cron.txt')
