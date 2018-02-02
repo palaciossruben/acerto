@@ -1,13 +1,10 @@
-git pull origin master;
 workon myenv;
+git pull origin master;
 crontab cron.txt;
-sudo pip3 install pipreqs;
-PYENV_VERSION=3.5.2 pipreqs testing_webpage/../ --force;
-sudo pip3 install -r requirements.txt;
 python3 manage.py collectstatic -v0 --noinput;
 sudo /etc/init.d/nginx restart;
 python3 manage.py compilemessages -l es;
-[ -f {} ] && kill $(cat gunicorn_pid);
+[ -f gunicorn_pid ] && kill $(cat gunicorn_pid) && echo killed gunicorn_pid;
 python3 manage.py migrate;
 python3 manage.py loaddata beta_invite/fixtures/*;
 python3 manage.py loaddata business/fixtures/*;
