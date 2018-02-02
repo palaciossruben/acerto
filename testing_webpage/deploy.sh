@@ -1,0 +1,15 @@
+git pull origin master;
+workon myenv;
+crontab cron.txt;
+sudo pip3 install pipreqs;
+PYENV_VERSION=3.5.2 pipreqs testing_webpage/../ --force;
+sudo pip3 install -r requirements.txt;
+python3 manage.py collectstatic -v0 --noinput;
+sudo /etc/init.d/nginx restart;
+python3 manage.py compilemessages -l es;
+[ -f {} ] && kill $(cat gunicorn_pid);
+python3 manage.py migrate;
+python3 manage.py loaddata beta_invite/fixtures/*;
+python3 manage.py loaddata business/fixtures/*;
+python3 manage.py loaddata dashboard/fixtures/*;
+PYENV_VERSION=3.5.2 gunicorn -c gunicorn_cfg.py testing_webpage.wsgi --bind=unix:/opt/peaku_co/run/gunicorn.sock;
