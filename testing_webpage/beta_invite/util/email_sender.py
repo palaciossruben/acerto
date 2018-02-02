@@ -308,26 +308,24 @@ def create_nice_resumes_message(candidates):
         if c.user.curriculum_url != '#':
             cv_url = 'https://peaku.co/static/{url}'.format(url=c.user.curriculum_url)
         else:
-            cv_url = 'no cv available'
+            cv_url = 'Hoja de vida no disponible'
 
         if c.campaign is not None:
             campaign_name = c.campaign.name
         else:
-            campaign_name = 'unknown'
+            campaign_name = None
 
-        resume_summaries.append('campaign: {campaign_name}\n'
-                                'name: {name}\n'
-                                'email: {email}\n'
-                                'country: {country}\n'
-                                'profession: {profession}\n'
-                                'education: {education}\n'
-                                'cv: \n{cv_url}'.format(campaign_name=campaign_name,
-                                                        name=remove_accents(c.user.name),
-                                                        email=c.user.email,
-                                                        country=c.user.country.name,
-                                                        profession=c.user.profession.name,
-                                                        education=c.user.education.name,
-                                                        cv_url=cv_url))
+        resume_summaries.append('Campaña: {campaign_name}\n'
+                                'Nombre: {name}\n'
+                                'Email: {email}\n'
+                                'Hoja de vida: \n{cv_url}'.format(campaign_name=campaign_name,
+                                                                  name=remove_accents(c.user.name),
+                                                                  email=c.user.email,
+                                                                  country=c.user.country.name,
+                                                                  profession=c.user.profession.name,
+                                                                  education=c.user.education.name,
+                                                                  cv_url=cv_url))
+
     return '\n\n'.join(resume_summaries)
 
 
@@ -349,7 +347,7 @@ def send_report(language_code, body_filename, subject, recipients, candidates):
     resumes = create_nice_resumes_message(candidates)
     sender_data = read_email_credentials()
 
-    with open(os.path.join(get_current_path(), body_filename)) as fp:
+    with open(os.path.join(get_current_path(), body_filename), encoding='utf-8') as fp:
         body = fp.read().format(new_resumes=resumes,
                                 sender_name=sender_data['sender_name'],
                                 sender_position=sender_data['sender_position'],
