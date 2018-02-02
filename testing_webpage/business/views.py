@@ -514,6 +514,7 @@ def signup_choice(request):
 def business_applied(request):
     return render(request, cts.BUSINESS_APPLIED_VIEW_PATH, {})
 
+
 '''
 def send_reset_url(request):
     email = request.POST.get('email')
