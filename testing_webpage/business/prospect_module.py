@@ -61,7 +61,8 @@ def create_prospect_users_and_send_emails(campaign):
     email_type = EmailType.objects.get(name='job_match')
 
     # TODO: this feature only supports Spanish.
-    search_text = search_module.with_lower_case_and_no_accents(campaign.title_es)
+    search_text = ' '.join([campaign.title_es] + campaign.get_requirement_names())
+    search_text = search_module.with_lower_case_and_no_accents(search_text)
     users = search_module.get_matching_users(search_phrase=search_text,
                                              word_user_path='subscribe/word_user_dictionary.p')
 

@@ -85,7 +85,7 @@ def search_trade(request):
                                                   })
 
 
-def calculate_result2(request):
+def calculate_result(request):
     """
     Args:
         request: Request object
@@ -308,13 +308,14 @@ def home(request):
 
     login_form = AuthenticationForm(data=request.POST)
 
+    # TODO: generalize to set of blocked emails.
     if login_form.is_valid() and request.POST.get('username') != 'g.comercialrmi2@redmilatam.com':  # Block access
 
         business_user = simple_login_and_business_user(login_form, request)
         return redirect('dashboard/{}'.format(business_user.pk))
     else:
         error_message = get_first_error_message(login_form)
-        return render(request, cts.BUSINESS_LOGIN, {})
+        return render(request, cts.BUSINESS_LOGIN, {'error_message': error_message})
 
 
 def send_contact_emails(contact, language_code):
