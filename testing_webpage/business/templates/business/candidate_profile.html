@@ -82,22 +82,29 @@
                 {% for e in candidate.evaluations.all %}
                     <p><strong>Puntaje prueba (corte: {{ e.cut_score }}): </strong> {{ e.final_score }}</p>
                 {% endfor %}
+                {% if candidate.salary %}
+                    <p><strong>Aspiración salarial: </strong>{{ candidate.salary }}</p>
+                {% endif %}
 
+                {% for c in candidate.comments.all %}
+                    {% if candidate.comments %}
+                        <p><strong>Comentarios: </strong>{{ c.text }}</p>
+                    {% endif %}
+                {% endfor %}
                     <button class="accordion"><strong>&#9776; Ver preguntas y respuestas del test</strong></button>
                     <div class="panel">
+
+                        <br>
+                        <p><strong>Preguntas de campo abierto:</strong></p>
+                        <br>
                         {% for e in candidate.surveys.all %}
 
-                                <p><strong> {{ e.question.text_es }} </strong>
-                                {% if e.answer %}
-                                    <p> {{ e.answer.name }} </p>
-                                {% endif %}
+                                {% if e.question.type.code == "OF" %}
+                                    <p><strong> {{ e.question.text_es }} </strong>
 
-                                {% if e.numeric_answer %}
-                                    <p> {{ e.numeric_answer|floatformat:"0" }}</p>
-                                {% endif %}
-
-                                {% if e.text_answer %}
-                                    <p> {{ e.text_answer }} </p>
+                                    {% if e.text_answer %}
+                                        <p> {{ e.text_answer }} </p>
+                                    {% endif %}
                                 {% endif %}
                         {% endfor %}
                     </div>
