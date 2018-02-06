@@ -1,23 +1,17 @@
 import os
 import subprocess
+from uuid import getnode as get_mac
+
 import psycopg2 as pg
 
-from uuid import getnode as get_mac
-from fabric.api import run, env, prefix
-from fabric.context_managers import cd
-
-env.use_ssh_config = True
-env.always_use_pty = False
-
-# It needs to have last '/' to work with list_dir custom function.
-WORKING_PATH = '/home/ubuntu/acerto/testing_webpage/'
+from home_fabric import run, cd, prefix
 
 
-def list_dir(directory=None):
-    directory = directory or env.cwd
-    string = run("for i in %s*; do echo $i; done" % directory)
-    files = string.replace("\r", "").split("\n")
-    return files
+WORKING_PATH = '/home/ubuntu/acerto/testing_webpage'
+
+
+def my_parent_path():
+    return str(os.path.dirname(os.path.abspath(__file__)).rpartition('/')[0])
 
 
 def sync_local(sync_media=False):
@@ -40,8 +34,8 @@ def sync_local(sync_media=False):
     local_backup = '/Users/juanpabloisaza/Desktop/acerto/db_backup.sql'
 
     # MEDIA PATHS:
-    media_remote = '/home/ubuntu/acerto/testing_webpage/media/resumes'
-    media_local = '/Users/juanpabloisaza/Desktop/masteringmymind/acerto/testing_webpage/media'
+    media_remote = my_parent_path() + '/media/resumes'
+    media_local = my_parent_path() + '/media'
 
     # PSQL
     abstract_local_psql = 'psql -U {user} -p 5432 -h localhost {db_option}'
@@ -107,7 +101,7 @@ def sync_local(sync_media=False):
 
 def deploy():
 
-    local_cwd = '/Users/juanpabloisaza/Desktop/masteringmymind/acerto/API/testing_webpage'
+    local_cwd = my_parent_path()
 
     # first uploads my local changes to the repo
     subprocess.check_output("git push origin master", cwd=local_cwd, shell=True)
@@ -116,10 +110,11 @@ def deploy():
     run('pg_dump -U dbadmin -p 5432 -h localhost maindb > db_backup.sql')
 
     with cd(WORKING_PATH):
-        with prefix(". /usr/local/bin/virtualenvwrapper.sh; workon myenv"):
 
-            # download latest changes to repo.
-            run('git pull origin master')
+        # download latest changes to repo.
+        run('git pull origin master')
+
+        with prefix("source /usr/local/bin/virtualenvwrapper.sh && workon myenv"):
 
             # update the cron jobs, in case it has changed.
             run('crontab cron.txt')
@@ -167,7 +162,7 @@ def dev_update():
     """
 
     python_cmd = 'python3'
-    local_cwd = '/Users/juanpabloisaza/Desktop/masteringmymind/acerto/API/testing_webpage'
+    local_cwd = my_parent_path()
 
     subprocess.check_output('{} manage.py migrate'.format(python_cmd), cwd=local_cwd, shell=True)
 
@@ -179,3 +174,6 @@ def dev_update():
     for f in fixtures_dirs:
         subprocess.check_output('{python_cmd} manage.py loaddata {f}'.format(python_cmd=python_cmd,
                                                                              f=f), cwd=local_cwd, shell=True)
+
+
+deploy()

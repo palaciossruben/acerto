@@ -1,7 +1,7 @@
 import re
 from django.db import models
 from django.contrib.postgres.fields import JSONField
-
+from django.conf import settings
 from beta_invite import constants as cts
 #from business import Plan
 
@@ -243,7 +243,15 @@ class Campaign(models.Model):
             self.title = self.title_es
 
     def get_url(self):
-        return 'https://peaku.co/beta_invite/long_form?campaign_id={campaign_id}'.format(campaign_id=self.pk)
+        if settings.DEBUG:
+            return '//127.0.0.1:8000/beta_invite/long_form?campaign_id={campaign_id}'.format(campaign_id=self.pk)
+        else:
+            return 'https://peaku.co/beta_invite/long_form?campaign_id={campaign_id}'.format(campaign_id=self.pk)
+
+    def get_requirement_names(self):
+
+        # TODO: add support for english
+        return [b.name_es for b in self.bullets.all() if b.bullet_type.name == 'requirement']
 
 
 class Evaluation(models.Model):

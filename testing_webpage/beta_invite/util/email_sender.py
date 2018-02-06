@@ -51,7 +51,7 @@ def send_email_through_smtp(user, password, recipient, subject, body):
     server.close()
 
 
-def send_email_with_mailgun(sender, recipients, subject, body, mail_gun_url, mailgun_api_key):
+def send_email_with_mailgun(sender, recipients, subject, attachment, body, mail_gun_url, mailgun_api_key):
     """
     Sends emails over mailgun service
     Args:
@@ -66,8 +66,16 @@ def send_email_with_mailgun(sender, recipients, subject, body, mail_gun_url, mai
     recipients = recipients if type(recipients) is list else [recipients]
 
     # TODO: can this be removed. Can mailgun manage unicode?
-
-    try:
+    if attachment != "":
+        return requests.post(
+             mail_gun_url,
+             auth=("api", mailgun_api_key),
+             data={"from": sender,
+                   "to": recipients,
+                   "subject": subject,
+                   "text": body},
+             files=[("attachment", (attachment, open(attachment, "rb").read()))],)
+    else:
         return requests.post(
             mail_gun_url,
             auth=("api", mailgun_api_key),
@@ -75,8 +83,6 @@ def send_email_with_mailgun(sender, recipients, subject, body, mail_gun_url, mai
                   "to": recipients,
                   "subject": subject,
                   "text": body})
-    except:  # TODO: find the right error when there is no internet connection
-        pass
 
 
 def get_test_url(user, campaign):
@@ -210,6 +216,10 @@ def send(users, language_code, body_input, subject, with_localization=True, body
         override_dict: Dictionary where keys are fields and values to override the keyword behavior.
     Returns: Sends email
     """
+    if body_input == 'business_email_marketing_body':
+        attachment = "brochure_peaku_2018.pdf"
+    else:
+        attachment = ""
 
     if with_localization and language_code != 'en':
         body_input += '_{}'.format(language_code)
@@ -228,6 +238,7 @@ def send(users, language_code, body_input, subject, with_localization=True, body
         send_email_with_mailgun(sender=sender_data['email'],
                                 recipients=user.email,
                                 subject=subject.format(**params),
+                                attachment=attachment,
                                 body=body.format(**params),
                                 mail_gun_url=sender_data['mailgun_url'],
                                 mailgun_api_key=sender_data['mailgun_api_key'])
@@ -265,6 +276,7 @@ def send_to_candidate(candidates, language_code, body_input, subject, with_local
         send_email_with_mailgun(sender=sender_data['email'],
                                 recipients=candidate.user.email,
                                 subject=subject.format(**params),
+                                attachment="",
                                 body=body.format(**params),
                                 mail_gun_url=sender_data['mailgun_url'],
                                 mailgun_api_key=sender_data['mailgun_api_key'])
@@ -308,26 +320,24 @@ def create_nice_resumes_message(candidates):
         if c.user.curriculum_url != '#':
             cv_url = 'https://peaku.co/static/{url}'.format(url=c.user.curriculum_url)
         else:
-            cv_url = 'no cv available'
+            cv_url = 'Hoja de vida no disponible'
 
         if c.campaign is not None:
             campaign_name = c.campaign.name
         else:
-            campaign_name = 'unknown'
+            campaign_name = None
 
-        resume_summaries.append('campaign: {campaign_name}\n'
-                                'name: {name}\n'
-                                'email: {email}\n'
-                                'country: {country}\n'
-                                'profession: {profession}\n'
-                                'education: {education}\n'
-                                'cv: \n{cv_url}'.format(campaign_name=campaign_name,
-                                                        name=remove_accents(c.user.name),
-                                                        email=c.user.email,
-                                                        country=c.user.country.name,
-                                                        profession=c.user.profession.name,
-                                                        education=c.user.education.name,
-                                                        cv_url=cv_url))
+        resume_summaries.append('Campaña: {campaign_name}\n'
+                                'Nombre: {name}\n'
+                                'Email: {email}\n'
+                                'Hoja de vida: \n{cv_url}'.format(campaign_name=campaign_name,
+                                                                  name=remove_accents(c.user.name),
+                                                                  email=c.user.email,
+                                                                  country=c.user.country.name,
+                                                                  profession=c.user.profession.name,
+                                                                  education=c.user.education.name,
+                                                                  cv_url=cv_url))
+
     return '\n\n'.join(resume_summaries)
 
 
@@ -349,7 +359,7 @@ def send_report(language_code, body_filename, subject, recipients, candidates):
     resumes = create_nice_resumes_message(candidates)
     sender_data = read_email_credentials()
 
-    with open(os.path.join(get_current_path(), body_filename)) as fp:
+    with open(os.path.join(get_current_path(), body_filename), encoding='utf-8') as fp:
         body = fp.read().format(new_resumes=resumes,
                                 sender_name=sender_data['sender_name'],
                                 sender_position=sender_data['sender_position'],
@@ -358,6 +368,7 @@ def send_report(language_code, body_filename, subject, recipients, candidates):
     send_email_with_mailgun(sender=sender_data['email'],
                             recipients=recipients,
                             subject=subject,
+                            attachment="",
                             body=body,
                             mail_gun_url=sender_data['mailgun_url'],
                             mailgun_api_key=sender_data['mailgun_api_key'])
@@ -399,6 +410,7 @@ def send_internal(contact, language_code, body_filename, subject, campaign):
     send_email_with_mailgun(sender=sender_data['email'],
                             recipients=internal_team,
                             subject=subject,
+                            attachment="",
                             body=body,
                             mail_gun_url=sender_data['mailgun_url'],
                             mailgun_api_key=sender_data['mailgun_api_key'])

@@ -14,7 +14,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import login, authenticate
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.forms import AuthenticationForm
-
+from django.contrib.auth.models import User as internal_user
 import business
 import beta_invite
 from business import search_module
@@ -85,7 +85,7 @@ def search_trade(request):
                                                   })
 
 
-def calculate_result2(request):
+def calculate_result(request):
     """
     Args:
         request: Request object
@@ -308,13 +308,14 @@ def home(request):
 
     login_form = AuthenticationForm(data=request.POST)
 
-    if login_form.is_valid():
+    # TODO: generalize to set of blocked emails.
+    if login_form.is_valid() and request.POST.get('username') != 'g.comercialrmi2@redmilatam.com':  # Block access
 
         business_user = simple_login_and_business_user(login_form, request)
         return redirect('dashboard/{}'.format(business_user.pk))
     else:
         error_message = get_first_error_message(login_form)
-        return render(request, cts.BUSINESS_LOGIN, {})
+        return render(request, cts.BUSINESS_LOGIN, {'error_message': error_message})
 
 
 def send_contact_emails(contact, language_code):
@@ -513,6 +514,7 @@ def signup_choice(request):
 
 def business_applied(request):
     return render(request, cts.BUSINESS_APPLIED_VIEW_PATH, {})
+
 
 '''
 def send_reset_url(request):

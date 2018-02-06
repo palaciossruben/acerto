@@ -33,18 +33,18 @@
     <section class="section-container">
         <div class="row"> <!-- bootstrap row class -->
             <div class="col-sm-6">
-                <div id="job-description-container" align="center">
+                <div id="job-description-container">
 
-                    <h2 class="title-blue" id="job-title">{{ job_title }}</h2>
+                    <h2 class="title-blue" id="job-title" align="center">{{ job_title }}</h2>
                     <!--<h3 class="title-blue-small">{{ city }}</h3>we need add this, but only when the campaign object have the city property-->
 
                     <div id="pre-preview">
                         <p class="paragraph" id="campaign-description">{{ campaign.description }}</p>
                     </div>
 
-                    <div id="requirement-title-div">
+                    <div id="requirement-title-div" align="left">
                         {% if requirements %}
-                            <h4 id="requirement-title-id" class="title-blue" align="left">{% trans "Requirements" %}</h4>
+                            <h4 id="requirement-title-id" class="title-blue">{% trans "Requirements" %}</h4>
                         {% endif %}
                     </div>
 
