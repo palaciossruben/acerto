@@ -21,7 +21,7 @@ def send_general_report():
         email_sender.send_report(language_code='es',
                                  body_filename='daily_report_email_body',
                                  subject='Daily report',
-                                 recipients=['juan@peaku.co', 'santiago@peaku.co'],
+                                 recipients=['juan@peaku.co', 'santiago@peaku.co', 'juan.rendon@peaku.co'],
                                  candidates=candidates)
 
 
@@ -57,7 +57,7 @@ def business_daily_report():
                 email_sender.send_report(language_code='es',
                                          body_filename='business_daily_report_email_body',
                                          subject='Reporte diario de nuevos candidatos',
-                                         recipients=[business_user.email, 'juan.rendon@peaku.co'],
+                                         recipients=[business_user.email, 'juan@peaku.co', 'juan.rendon@peaku.co', 'santiago@peaku.co'],
                                          candidates=candidates)
 
 
@@ -65,4 +65,4 @@ def business_daily_report():
 # TODO: add pablo? 'mmedina@tappsi.co'
 send_campaign_report(['juan@peaku.co', 'santiago@peaku.co'], campaign_id=10)
 business_daily_report()
-# send_general_report()
+send_general_report()
