@@ -130,7 +130,7 @@ def long_form(request):
     campaign.translate(request.LANGUAGE_CODE)
 
     ip = get_ip(request)
-    action_url = '/beta_invite/long_form/post'
+    action_url = '/servicio_de_empleo/post'
     countries, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
 
     Visitor(ip=ip, ui_version=cts.UI_VERSION, is_mobile=not is_desktop).save()
@@ -251,7 +251,7 @@ def fast_job(request):
     is_mobile = parse(ua_string).is_mobile
 
     ip = get_ip(request)
-    action_url = '/beta_invite/fast_job/post'
+    action_url = '/fast_job/post'
     countries, trades = get_trade_drop_down_values(request.LANGUAGE_CODE)
 
     Visitor(ip=ip, ui_version=cts.UI_VERSION, is_mobile=is_mobile).save()

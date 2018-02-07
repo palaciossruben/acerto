@@ -244,9 +244,11 @@ class Campaign(models.Model):
 
     def get_url(self):
         if settings.DEBUG:
-            return '//127.0.0.1:8000/beta_invite/long_form?campaign_id={campaign_id}'.format(campaign_id=self.pk)
+            host = '//127.0.0.1:8000'
         else:
-            return 'https://peaku.co/beta_invite/long_form?campaign_id={campaign_id}'.format(campaign_id=self.pk)
+            host = 'https://peaku.co'
+
+        return host+'/servicio_de_empleo?campaign_id={campaign_id}'.format(campaign_id=self.pk)
 
     def get_requirement_names(self):
 
@@ -263,7 +265,6 @@ class Evaluation(models.Model):
     cut_score = models.FloatField()
     final_score = models.FloatField()
     passed = models.BooleanField()
-
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

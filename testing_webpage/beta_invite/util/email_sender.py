@@ -3,7 +3,12 @@ import json
 import smtplib
 import requests
 import unicodedata
+from django.conf import settings
 
+if settings.DEBUG:
+    host = '//127.0.0.1:8000'
+else:
+    host = 'http://peaku.co'
 
 def get_current_path():
     return os.path.dirname(os.path.abspath(__file__))
@@ -51,7 +56,14 @@ def send_email_through_smtp(user, password, recipient, subject, body):
     server.close()
 
 
-def send_email_with_mailgun(sender, recipients, subject, body, mail_gun_url, mailgun_api_key):
+def get_files(attachment):
+    if attachment:
+        return [("attachment", (attachment, open(attachment, "rb").read()))]
+    else:
+        return []
+
+
+def send_email_with_mailgun(sender, recipients, subject, body, mail_gun_url, mailgun_api_key, attachment=None):
     """
     Sends emails over mailgun service
     Args:
@@ -61,43 +73,41 @@ def send_email_with_mailgun(sender, recipients, subject, body, mail_gun_url, mai
         body: email body, string
         mail_gun_url: string
         mailgun_api_key: string
+        attachment: optional param for attaching content to email
     Returns: sends emails.
     """
     recipients = recipients if type(recipients) is list else [recipients]
 
-    # TODO: can this be removed. Can mailgun manage unicode?
-
-    try:
-        return requests.post(
-            mail_gun_url,
-            auth=("api", mailgun_api_key),
-            data={"from": sender,
-                  "to": recipients,
-                  "subject": subject,
-                  "text": body})
-    except:  # TODO: find the right error when there is no internet connection
-        pass
+    return requests.post(
+         mail_gun_url,
+         auth=("api", mailgun_api_key),
+         data={"from": sender,
+               "to": recipients,
+               "subject": subject,
+               "text": body},
+         files=get_files(attachment),)
 
 
 def get_test_url(user, campaign):
+
     if user and campaign:
-        return 'http://peaku.co/beta_invite/long_form/post?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
-                                                                                                               campaign_id=campaign.id)
+        return host+'/servicio_de_empleo/post?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
+                                                                                                  campaign_id=campaign.id)
     else:
         return ''
 
 
 def get_video_url(user, campaign):
     if user and campaign:
-        return 'https://peaku.co/beta_invite/long_form/interview/1?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
-                                                                                                                       campaign_id=campaign.id)
+        return host+'/servicio_de_empleo/interview/1?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
+                                                                                                         campaign_id=campaign.id)
     else:
         return ''
 
 
 def get_business_campaign_url(campaign):
     if campaign:
-        return 'https://peaku.co/beta_invite/long_form?campaign_id={campaign_id}'.format(campaign_id=campaign.id)
+        return host+'/servicio_de_empleo?campaign_id={campaign_id}'.format(campaign_id=campaign.id)
     else:
         return ''
 
@@ -127,7 +137,7 @@ def get_campaign_name(candidate, language_code):
 
 
 def get_cv_url(user):
-    return 'http://peaku.co/beta_invite/long_form/add_cv?user_id={user_id}'.format(user_id=user.id)
+    return host+'/servicio_de_empleo/add_cv?user_id={user_id}'.format(user_id=user.id)
 
 
 def get_params(user, sender_data, override_dict):
@@ -197,7 +207,8 @@ def get_body(body_is_filename, body_input):
 
 
 # TODO: the code is duplicated
-def send(users, language_code, body_input, subject, with_localization=True, body_is_filename=True, override_dict={}):
+def send(users, language_code, body_input, subject, with_localization=True, body_is_filename=True, override_dict={},
+         attachment=None):
     """
     Sends an email
     Args:
@@ -208,6 +219,7 @@ def send(users, language_code, body_input, subject, with_localization=True, body
         with_localization: Boolean indicating whether emails are translated according to browser configuration.
         body_is_filename: Boolean indicating whether the body_input is a filename or a string with content.
         override_dict: Dictionary where keys are fields and values to override the keyword behavior.
+        attachment: optional param for adding attached file.
     Returns: Sends email
     """
 
@@ -230,7 +242,8 @@ def send(users, language_code, body_input, subject, with_localization=True, body
                                 subject=subject.format(**params),
                                 body=body.format(**params),
                                 mail_gun_url=sender_data['mailgun_url'],
-                                mailgun_api_key=sender_data['mailgun_api_key'])
+                                mailgun_api_key=sender_data['mailgun_api_key'],
+                                attachment=attachment,)
 
 
 # TODO: the code is duplicated
@@ -361,7 +374,7 @@ def send_report(language_code, body_filename, subject, recipients, candidates):
                             mailgun_api_key=sender_data['mailgun_api_key'])
 
 
-def send_internal(contact, language_code, body_filename, subject, campaign):
+def send_internal(contact, language_code, body_filename, subject, campaign=None):
     """
     Sends an email to the internal team.
     Args:

@@ -23,8 +23,8 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
-    url(r'^beta_invite/', include('beta_invite.urls')),
-    url(r'^business/', include('business.urls')),
+    url(r'^', include('beta_invite.urls')),
+    url(r'^seleccion_de_personal/', include('business.urls')),
     url(r'^dashboard/', include('dashboard.urls')),
     url(r'^admin/', admin.site.urls),
     url('^', include('django.contrib.auth.urls')),
@@ -36,7 +36,7 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    url(r'^$', views.index, name='index'),
+    url(r'^staffing$', views.index, name='index'),
     url(r'^sitemap.xml$', views.sitemap, name='sitemap'),
 )
 
