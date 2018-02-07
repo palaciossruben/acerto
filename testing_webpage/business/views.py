@@ -432,8 +432,8 @@ def start_post(request):
 
     else:
 
-        error_message = get_first_error_message(signup_form)
-        return render(request, cts.START_VIEW_PATH, {'error_message': error_message})
+        # error_message = get_first_error_message(signup_form)
+        return render(request, cts.START_VIEW_PATH)  # , {'error_message': error_message})
 
 
 def business_signup(request):
