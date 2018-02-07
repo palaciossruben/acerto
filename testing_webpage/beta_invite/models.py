@@ -244,30 +244,16 @@ class Campaign(models.Model):
 
     def get_url(self):
         if settings.DEBUG:
-            return '//127.0.0.1:8000/beta_invite/long_form?campaign_id={campaign_id}'.format(campaign_id=self.pk)
+            host = '//127.0.0.1:8000'
         else:
-            return 'https://peaku.co/beta_invite/long_form?campaign_id={campaign_id}'.format(campaign_id=self.pk)
+            host = 'https://peaku.co'
+
+        return host+'/servicio_de_empleo?campaign_id={campaign_id}'.format(campaign_id=self.pk)
 
     def get_requirement_names(self):
 
         # TODO: add support for english
         return [b.name_es for b in self.bullets.all() if b.bullet_type.name == 'requirement']
-
-
-class Score(models.Model):
-
-    test = models.ForeignKey(Test)
-    value = models.FloatField()
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return 'id={0}, test={1}, value={2}'.format(self.pk, self.test, self.value)
-
-    # adds custom table name
-    class Meta:
-        db_table = 'scores'
 
 
 class Evaluation(models.Model):
@@ -279,8 +265,6 @@ class Evaluation(models.Model):
     cut_score = models.FloatField()
     final_score = models.FloatField()
     passed = models.BooleanField()
-    scores = models.ManyToManyField(Score)
-
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -407,6 +391,23 @@ class TradeUser(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'trade_users'
+
+
+class Score(models.Model):
+
+    user = models.ForeignKey(User, null=True)
+    test = models.ForeignKey(Test)
+    value = models.FloatField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return 'id={0}, user={1}, test={2}, value={3}'.format(self.pk, self.user, self.test, self.value)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'scores'
 
 
 class PersonalityType(models.Model):

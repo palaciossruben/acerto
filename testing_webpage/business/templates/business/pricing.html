@@ -33,10 +33,11 @@
                     <p class="pricing-comment starting">{% trans "starting" %}</p>
                     <h4 class="price">{% trans "$180" %}</h4>
 
-                    <form action="{% url 'business:plan' 1 %}" method="get">
-
-                        <input class="pricing-more-info" type="submit" value="{% trans 'more information' %}">
-                    </form>
+                    <a href="{% url 'business:plan' 1 %}">
+                        <form method="get">
+                            <input class="pricing-more-info" type="button" value="{% trans 'more information' %}">
+                        </form>
+                    </a>
                 </div>
             </div>
             <div class="col-sm-4">
@@ -66,12 +67,12 @@
                     <p class="pricing-comment starting">{% trans "starting" %}</p>
                     <h4 class="price">{% trans "$240" %}</h4>
 
-                    <form action="{% url 'business:plan' 2 %}" method="get">
-
-                        <input class="pricing-more-info" type="submit" value="{% trans 'more information' %}">
-                    </form>
+                    <a href="{% url 'business:plan' 2 %}">
+                        <form method="get">
+                            <input class="pricing-more-info" type="button" value="{% trans 'more information' %}">
+                        </form>
+                    </a>
                 </div>
-
             </div>
             <div class="col-sm-4">
 
@@ -100,12 +101,12 @@
                     <p class="pricing-comment starting">{% trans "starting" %}</p>
                     <h4 class="price">{% trans "$540" %}</h4>
 
-                    <form action="{% url 'business:plan' 3 %}" method="get">
-
-                        <input class="pricing-more-info" type="submit" value="{% trans 'more information' %}">
-                    </form>
+                   <a href="{% url 'business:plan' 3 %}">
+                        <form method="get">
+                            <input class="pricing-more-info" type="button" value="{% trans 'more information' %}">
+                        </form>
+                   </a>
                 </div>
-
             </div>
         </div>
     </div>
