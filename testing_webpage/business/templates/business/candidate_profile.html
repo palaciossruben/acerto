@@ -7,6 +7,9 @@
 {% block extra_head %}
     <script type="text/javascript" src="{% static 'business/js/dashboard.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'business/css/dashboard.css' %}">
+
+
+<!-- TODO: factor in seperate Css file. -->
 <style>
 .accordion {
 
@@ -93,6 +96,12 @@
                 {% endfor %}
                     <button class="accordion"><strong>&#9776; Ver preguntas y respuestas del test</strong></button>
                     <div class="panel">
+
+                        {% for evaluation in candidate.evaluation.all %}
+                            {% for score in evaluation.scores.all %}
+                                <p>{{ score.test.name }}: {{ score.value }}</p>
+                            {% endfor %}
+                        {% endfor %}
 
                         <br>
                         <p><strong>Preguntas de campo abierto:</strong></p>
