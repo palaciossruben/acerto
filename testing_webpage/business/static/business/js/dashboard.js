@@ -10,7 +10,6 @@ function count_candidates() {
     /* Counts items in all columns */
 
     states = ["backlog",
-              "waiting_test",
               "waiting_interview",
               "did_interview",
               "sent_to_client",
