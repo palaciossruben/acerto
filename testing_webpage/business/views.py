@@ -432,8 +432,8 @@ def start_post(request):
 
     else:
 
-        # error_message = get_first_error_message(signup_form)
-        return render(request, cts.START_VIEW_PATH)  # , {'error_message': error_message})
+        error_message = get_first_error_message(signup_form)
+        return render(request, cts.START_VIEW_PATH, {'error_message': error_message})
 
 
 def business_signup(request):
@@ -475,6 +475,8 @@ def dashboard(request, pk):
 
     # State Backlog and Prospect will show as one.
     params['backlog'] = list(params['backlog']) + list(params['prospect'])
+
+    params['rejected'] = list(params['rejected']) + list(params['waiting_for_tests'])
 
     # enters here when sending an email
     if request.GET.get('send_mail') is not None:
