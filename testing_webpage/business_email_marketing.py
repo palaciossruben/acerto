@@ -35,7 +35,8 @@ def send_email_marketing():
                 email_sender.send(users=business_user,
                                   language_code='es',
                                   body_input='business_email_marketing_body',
-                                  subject=subject)
+                                  subject=subject,
+                                  attachment="brochure_peaku_2018.pdf")
 
 
 send_email_marketing()
