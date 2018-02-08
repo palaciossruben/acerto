@@ -250,5 +250,29 @@
       "created_at": "2018-01-26 02:42:49.0957+00",
       "updated_at": "2018-01-26 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.test",
+    "pk": 22,
+    "fields":{
+      "name": "Patronist",
+      "name_es": "Patronista escalador",
+      "questions": [52, 53, 36],
+      "cut_score": 70,
+      "created_at": "2018-02-08 02:42:49.0957+00",
+      "updated_at": "2018-02-08 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.test",
+    "pk": 23,
+    "fields":{
+      "name": "Sewing machine operator",
+      "name_es": "Operario máquina de coser",
+      "questions": [24, 54, 55, 56, 36],
+      "cut_score": 70,
+      "created_at": "2018-02-08 02:42:49.0957+00",
+      "updated_at": "2018-02-08 02:42:49.0957+00"
+    }
   }
 ]
