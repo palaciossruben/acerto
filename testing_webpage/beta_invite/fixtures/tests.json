@@ -269,7 +269,7 @@
     "fields":{
       "name": "Sewing machine operator",
       "name_es": "Operario máquina de coser",
-      "questions": [24, 54, 55, 56, 36],
+      "questions": [57, 54, 55, 56, 36],
       "cut_score": 70,
       "created_at": "2018-02-08 02:42:49.0957+00",
       "updated_at": "2018-02-08 02:42:49.0957+00"
