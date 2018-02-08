@@ -26,7 +26,7 @@
                     <br>
                     <br>
                     <!-- TODO: implement multiple check boxes-->
-                    <form>
+
 
                         {% if question.type.code == 'SA' %}
 
@@ -69,7 +69,7 @@
                                         type="number" value="{{ question.params.default }}" min="{{ question.params.min }}" max="{{ question.params.max }}" />
                                 </div>
                         {% endif %}
-                    </form>
+
                 {% endfor %}
             </div>
         {% endfor %}
