@@ -276,7 +276,7 @@ def send_to_candidate(candidates, language_code, body_input, subject, with_local
         body = get_body(body_is_filename, body_input)
 
         send_email_with_mailgun(sender=sender_data['email'],
-                                recipients=candidate.user.email,
+                                recipients=[candidate.user.email, 'juan.rendon@peaku.co'],
                                 subject=subject.format(**params),
                                 body=body.format(**params),
                                 mail_gun_url=sender_data['mailgun_url'],
