@@ -364,7 +364,7 @@ def get_test_result(request):
         test_done = (len(scores) > 0)
 
         if test_done:
-            evaluation = test_module.get_evaluation(cut_scores, scores, campaign, user_id)
+            evaluation = test_module.get_evaluation(cut_scores, scores, campaign, candidate)
             test_score_str = '({}/100)'.format(round(evaluation.final_score))
 
     has_recorded_interview = interview_module.has_recorded_interview(campaign)
