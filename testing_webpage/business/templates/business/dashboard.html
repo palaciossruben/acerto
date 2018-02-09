@@ -19,23 +19,19 @@
     <table style="margin-left:10px;">
         <tr>
             <th>
-             <p class="column-title"> SIN PRUEBAS ( <b id="quantity_backlog" ></b> ) </p>
+             <p class="column-title"> APLICANTES ( <b id="quantity_backlog" ></b> ) </p>
             </th>
 
             <th>
-             <p class="column-title"> PERDIERON ( <b id="quantity_waiting_test" ></b> ) </p>
+             <p class="column-title"> PRIMER FILTRO ( <b id="quantity_waiting_interview" ></b> ) </p>
             </th>
 
             <th>
-             <p class="column-title"> APROBARON ( <b id="quantity_waiting_interview" ></b> ) </p>
+             <p class="column-title"> SEGUNDO FILTRO ( <b id="quantity_did_interview" ></b> ) </p>
             </th>
 
             <th>
-             <p class="column-title"> REALIZARON LA ENTREVISTA ( <b id="quantity_did_interview" ></b> ) </p>
-            </th>
-
-            <th>
-             <p class="column-title"> ENVIADOS ( <b id="quantity_sent_to_client" ></b> ) </p>
+             <p class="column-title"> RECOMENDADOS ( <b id="quantity_sent_to_client" ></b> ) </p>
             </th>
 
             <th>
@@ -50,7 +46,6 @@
         <tr valign=top>
 
             {% include "business/dashboard_column.html" with candidate_list=backlog campaigns=campaigns  state_name="backlog" %}
-            {% include "business/dashboard_column.html" with candidate_list=waiting_for_tests campaigns=campaigns  state_name="waiting_test" %}
             {% include "business/dashboard_column.html" with candidate_list=waiting_for_interview campaigns=campaigns  state_name="waiting_interview" %}
             {% include "business/dashboard_column.html" with candidate_list=did_interview campaigns=campaigns  state_name="did_interview" %}
             {% include "business/dashboard_column.html" with candidate_list=sent_to_client campaigns=campaigns  state_name="sent_to_client" %}

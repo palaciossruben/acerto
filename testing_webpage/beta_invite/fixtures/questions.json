@@ -247,8 +247,8 @@
     "model": "beta_invite.question",
     "pk": 19,
     "fields":{
-      "text": "Explain to us in words: How would you solve the problem stated above?",
-      "text_es": "Explícanos en palabras: ¿Cómo solucionarias el problema anterior?",
+      "text": "Explain to us in words: How would you find the first element repeated in an array?",
+      "text_es": "Explícanos en palabras: ¿Cómo encontrarías el primer elemento repetido en un arreglo?",
       "answers": [],
       "type": 3,
       "correct_answers": [],
@@ -727,7 +727,7 @@
     "model": "beta_invite.question",
     "pk": 51,
     "fields":{
-      "text": "",
+      "text": "On a scale of one to five, with five being the highest score, how much knowledge in React do you have?",
       "text_es": "¿En una escala de uno a cinco, siendo cinco la puntuación más alta, qué tanto conocimiento en React posees?",
       "answers": [77, 78, 79, 80, 81],
       "type": 1,
@@ -735,6 +735,102 @@
       "order": 2,
       "created_at": "2018-01-26 02:42:49.0957+00",
       "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 52,
+    "fields":{
+      "text": "Are you aware of Optitex software?",
+      "text_es": "¿Tienes conocimiento del software Optitex?",
+      "answers": [32, 33],
+      "type": 1,
+      "correct_answers": [33],
+      "order": 1,
+      "created_at": "2018-02-08 02:42:49.0957+00",
+      "updated_at": "2018-02-08 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 53,
+    "fields":{
+      "text": "In textile terms what is a pattern, what is a prototype and what are they for?",
+      "text_es": "¿En terminos textiles qué es un patrón, qué es un prototipo y para qué sirven?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 2,
+      "created_at": "2018-02-08 02:42:49.0957+00",
+      "updated_at": "2018-02-08 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 54,
+    "fields":{
+      "text": "Do you have know operate sewing machines with one, double and several needles?",
+      "text_es": "¿Sabes manejar máquinas de coser de una, doble y varias agujas?",
+      "answers": [32, 33],
+      "type": 1,
+      "correct_answers": [33],
+      "order": 2,
+      "created_at": "2018-02-08 02:42:49.0957+00",
+      "updated_at": "2018-02-08 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 55,
+    "fields": {
+      "text": "Do you have know operate embroidery machines?",
+      "text_es": "¿Sabes manejar máquinas bordadoras?",
+      "answers": [32,33],
+      "type": 1,
+      "correct_answers": [33],
+      "order": 3,
+      "created_at": "2018-02-08 02:42:49.0957+00",
+      "updated_at": "2018-02-08 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 56,
+    "fields":{
+      "text": "How many years of experience do you have in the textile industry?",
+      "text_es": "¿Cuántos años de experiencia tienes en la industria textil?",
+      "answers": [],
+      "type": 5,
+      "correct_answers": [],
+      "order": 4,
+      "params": {"min": 0,
+                 "max": 70,
+                 "min_correct": 2,
+                 "max_correct": 70,
+                 "default":1
+                },
+      "created_at": "2018-02-08 02:42:49.0957+00",
+      "updated_at": "2018-02-08 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 57,
+    "fields":{
+      "text": "What's your age?",
+      "text_es": "¿Cuál es tu edad?",
+      "answers": [],
+      "type": 5,
+      "correct_answers": [],
+      "order": 1,
+      "params": {"min": 0,
+                 "max": 90,
+                 "min_correct": 25,
+                 "max_correct": 90,
+                 "default":20
+                },
+      "created_at": "2018-02-08 02:42:49.0957+00",
+      "updated_at": "2018-02-08 02:42:49.0957+00"
     }
   }
 ]

@@ -10,85 +10,72 @@
         <h3 style="color:var(--blue)">{% trans "Complete this few questions to know you better" %}</h3>
         <br>
         <br>
-        <div align="center" >
-        {% for test in tests %}
+        <div align="center">
+            {% for test in tests %}
 
-            <h2>{% trans "Test: " %} {{ test.name }}</h2>
+                <h2>{% trans "Test: " %} {{ test.name }}</h2>
 
-            <!--Orders questions according to preset ordering-->
-            {% for question in test.questions.all|dictsort:"order" %}
-                <br>
-
-                <h3>{{ question.text_es }}</h3>
-                {% if question.image_path %}
-                    <img src="{% static question.image_path %}">
-                {% endif %}
-                <br>
-                <br>
-                <!-- TODO: implement multiple check boxes-->
-
-                {% if question.type.code == 'SA' %}
-
-                    {% get_current_language as LANGUAGE_CODE %}
-                    <div style="margin-left:130px;" align="left">
-                    {% for answer in question.answers.all %}
-
-                        <input type="radio" name="test_{{ test.id }}_question_{{ question.id }}" value="{{ answer.id }}"> {{ answer.name_es }} <br>
-
-                    {% endfor %}
+                <!--Orders questions according to preset ordering-->
+                {% for question in test.questions.all|dictsort:"order" %}
                     <br>
-                </div>
-                {% elif question.type.code == 'OF' %}
 
-                    {% trans "Your Answer" as text_placeholder %}
-                    <textarea name="test_{{ test.id }}_question_{{ question.id }}"
-                        cols="60" rows="5" placeholder="{{ text_placeholder }}"></textarea>
+                    <h3>{{ question.text_es }}</h3>
+                    {% if question.image_path %}
+                        <img src="{% static question.image_path %}">
+                    {% endif %}
                     <br>
                     <br>
-                {% elif question.type.code == 'DOB' %}
+                    <!-- TODO: implement multiple check boxes-->
 
-                    <div>
 
-                        <div>
-                            <div class="hidden-xs col-sm-3 caption left sets-answer">{% trans "Agree" %}</div>
-                        </div>
+                        {% if question.type.code == 'SA' %}
 
-                        <div>
-                            <input type="radio" name="test_{{ test.id }}_question_{{ question.id }}"
-                                 value="1"> {{ answer.name_es }} <br>
-                        </div>
+                            {% get_current_language as LANGUAGE_CODE %}
+                            <div align="center">
+                                {% for answer in question.answers.all %}
 
-                        <div>
-                            <input type="radio" name="test_{{ test.id }}_question_{{ question.id }}"
-                                value="0"> {{ answer.name_es }} <br>
-                        </div>
+                                    <input type="radio" name="test_{{ test.id }}_question_{{ question.id }}" value="{{ answer.id }}"> {{ answer.name_es }} <br>
 
-                        <div>
-                            <input type="radio" name="test_{{ test.id }}_question_{{ question.id }}"
-                                 value="-1"> {{ answer.name_es }} <br>
-                        </div>
+                                {% endfor %}
+                                <br>
+                            </div>
+                            {% elif question.type.code == 'OF' %}
 
-                        <div>
-                            <div class="hidden-xs col-sm-3 caption left sets-answer">{% trans "Disagree" %}</div>
-                        </div>
-                    </div>
+                                {% trans "Your Answer" as text_placeholder %}
+                                <textarea name="test_{{ test.id }}_question_{{ question.id }}"
+                                    cols="60" rows="5" placeholder="{{ text_placeholder }}"></textarea>
+                                <br>
+                                <br>
+                            {% elif question.type.code == 'DOB' %}
+                                <div align="center">
+                                        <div class="hidden-xs col-sm-3 caption left sets-answer">{% trans "Agree" %}</div>
 
-                {% elif question.type.code == 'NI' %}
 
-                    <div>
-                        <input name="test_{{ test.id }}_question_{{ question.id }}"
-                            type="number" value="{{ question.params.default }}" min="{{ question.params.min }}" max="{{ question.params.max }}" />
-                    </div>
-                {% endif %}
+                                        <input type="radio" name="test_{{ test.id }}_question_{{ question.id }}"
+                                             value="1"> {{ answer.name_es }} <br>
 
-            {% endfor %}
+                                        <input type="radio" name="test_{{ test.id }}_question_{{ question.id }}"
+                                            value="0"> {{ answer.name_es }} <br>
+
+                                        <input type="radio" name="test_{{ test.id }}_question_{{ question.id }}"
+                                             value="-1"> {{ answer.name_es }} <br>
+
+                                        <div class="hidden-xs col-sm-3 caption left sets-answer">{% trans "Disagree" %}</div>
+                                </div>
+                            {% elif question.type.code == 'NI' %}
+
+                                <div>
+                                    <input name="test_{{ test.id }}_question_{{ question.id }}"
+                                        type="number" value="{{ question.params.default }}" min="{{ question.params.min }}" max="{{ question.params.max }}" />
+                                </div>
+                        {% endif %}
+
+                {% endfor %}
             </div>
         {% endfor %}
-
         <br>
         <br>
         <br>
-
         {% trans "Send Answers!!!" as submit_value %}
         <input type="submit" value="{{ submit_value }}"
             onclick="add_checked_values({{ questions_dict }})">

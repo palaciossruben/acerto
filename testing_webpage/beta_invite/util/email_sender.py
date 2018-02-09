@@ -3,7 +3,12 @@ import json
 import smtplib
 import requests
 import unicodedata
+from django.conf import settings
 
+if settings.DEBUG:
+    host = '//127.0.0.1:8000'
+else:
+    host = 'http://peaku.co'
 
 def get_current_path():
     return os.path.dirname(os.path.abspath(__file__))
@@ -84,24 +89,25 @@ def send_email_with_mailgun(sender, recipients, subject, body, mail_gun_url, mai
 
 
 def get_test_url(user, campaign):
+
     if user and campaign:
-        return 'http://peaku.co/beta_invite/long_form/post?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
-                                                                                                               campaign_id=campaign.id)
+        return host+'/servicio_de_empleo/post?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
+                                                                                                  campaign_id=campaign.id)
     else:
         return ''
 
 
 def get_video_url(user, campaign):
     if user and campaign:
-        return 'https://peaku.co/beta_invite/long_form/interview/1?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
-                                                                                                                       campaign_id=campaign.id)
+        return host+'/servicio_de_empleo/interview/1?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
+                                                                                                         campaign_id=campaign.id)
     else:
         return ''
 
 
 def get_business_campaign_url(campaign):
     if campaign:
-        return 'https://peaku.co/beta_invite/long_form?campaign_id={campaign_id}'.format(campaign_id=campaign.id)
+        return host+'/servicio_de_empleo?campaign_id={campaign_id}'.format(campaign_id=campaign.id)
     else:
         return ''
 
@@ -131,7 +137,7 @@ def get_campaign_name(candidate, language_code):
 
 
 def get_cv_url(user):
-    return 'http://peaku.co/beta_invite/long_form/add_cv?user_id={user_id}'.format(user_id=user.id)
+    return host+'/servicio_de_empleo/add_cv?user_id={user_id}'.format(user_id=user.id)
 
 
 def get_params(user, sender_data, override_dict):
@@ -270,7 +276,7 @@ def send_to_candidate(candidates, language_code, body_input, subject, with_local
         body = get_body(body_is_filename, body_input)
 
         send_email_with_mailgun(sender=sender_data['email'],
-                                recipients=candidate.user.email,
+                                recipients=[candidate.user.email, 'juan.rendon@peaku.co'],
                                 subject=subject.format(**params),
                                 body=body.format(**params),
                                 mail_gun_url=sender_data['mailgun_url'],
@@ -368,7 +374,7 @@ def send_report(language_code, body_filename, subject, recipients, candidates):
                             mailgun_api_key=sender_data['mailgun_api_key'])
 
 
-def send_internal(contact, language_code, body_filename, subject, campaign):
+def send_internal(contact, language_code, body_filename, subject, campaign=None):
     """
     Sends an email to the internal team.
     Args:

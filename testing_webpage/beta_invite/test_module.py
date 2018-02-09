@@ -129,6 +129,10 @@ def get_scores(campaign, user_id, questions_dict, request):
 
         score = Score(test_id=test_id,
                       value=test_score)
+
+        if user_id:
+            score.user_id = int(user_id)
+
         score.save()
 
         scores.append(score)

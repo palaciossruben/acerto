@@ -87,36 +87,48 @@
     <div>
     <header id="header">
 
-        <a href="/">
+        <a href="/staffing">
             <img id="peaku-home" src="{% static 'beta_invite/img/peaku_home.svg' %}"/></a>
 
         <div id="log-and-sign-up">
-            {% if 'start' in request.path %}
+            {% if 'seleccion_gratis' in request.path %}
                 {% if user.is_authenticated %}
-                    <form class="log-in-form" action="{% url 'business:logout' %}">
-                        <input class="log-in-input" type="submit" value="{% trans 'Log Out' %}">
-                    </form>
+                    <a href="{% url 'business:logout' %}">
+                            <form class="log-in-form">
+                                <input class="log-in-input" type="button" name="free_trial" value="{% trans 'Log Out' %}">
+                            </form>
+                    </a>
                 {% else %}
-                    <form class="log-in-form" action="{% url 'business:login' %}">
-                        <input class="log-in-input" type="submit" value="{% trans 'Log In' %}">
-                    </form>
+                    <a href="{% url 'business:login' %}">
+                            <form class="log-in-form">
+                                <input class="log-in-input" type="button" value="{% trans 'Log In' %}">
+                            </form>
+                    </a>
                 {% endif %}
 
             {% else %}
 
-                {% if 'business' in request.path %}
+                {% if 'seleccion_de_personal' in request.path %}
                     {% if user.is_authenticated %}
-                        <form class="log-in-form" action="{% url 'business:logout' %}">
-                            <input class="log-in-input" type="submit" value="{% trans 'Log Out' %}">
-                        </form>
-                    {% else %}
-                        <form id="sign-up-form" action="{% url 'business:signup_choice' %}">
-                            <input id="sign-up-input" type="submit" value="{% trans 'Sign Up' %}">
-                        </form>
 
-                        <form class="log-in-form" action="{% url 'business:login' %}">
-                            <input class="log-in-input" type="submit" value="{% trans 'Log In' %}">
-                        </form>
+                        <a href="{% url 'business:logout' %}">
+                            <form class="log-in-form">
+                                <input class="log-in-input" type="button" name="free_trial" value="{% trans 'Log Out' %}">
+                            </form>
+                        </a>
+
+                    {% else %}
+                        <a href="{% url 'business:signup_choice' %}">
+                            <form id="sign-up-form">
+                                <input id="sign-up-input" type="button" value="{% trans 'Sign Up' %}">
+                            </form>
+                        </a>
+
+                        <a href="{% url 'business:login' %}">
+                            <form class="log-in-form">
+                                <input class="log-in-input" type="button" value="{% trans 'Log In' %}">
+                            </form>
+                        </a>
                     {% endif %}
                 {% endif %}
             {% endif %}
@@ -151,17 +163,20 @@
             <a href="https://www.facebook.com/PeakU-Latam-1916685895214519/?ref=aymt_homepage_panel">
                 <img src="{% static 'beta_invite/img/facebook.svg' %}" class="footer-icon">
             </a>
+
             <a href="https://www.linkedin.com/company-beta/16241506/">
                 <img src="{% static 'beta_invite/img/linkedin.svg' %}" class="footer-icon">
             </a>
 
             <!-- TODO: missing Twitter -->
+            <a>
             <img src="{% static 'beta_invite/img/twitter.svg' %}" class="footer-icon">
-            <a href="/">
+            </a>
+
+            <a href="/staffing">
                 <img src="{% static 'beta_invite/img/peaku_footer.svg' %}" id="peaku-footer">
             </a>
         </div>
-
     </footer>
     </div>
 

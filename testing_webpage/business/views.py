@@ -161,32 +161,24 @@ def get_plan(request):
 def send_signup_emails(business_user, language_code, campaign):
 
     if campaign is None:
-
-        try:
-            email_sender.send(users=business_user,
-                              language_code=language_code,
-                              body_input='business_signup_email_body',
-                              subject=_('Welcome to PeakU'))
-            email_sender.send_internal(contact=business_user,
-                                       language_code=language_code,
-                                       body_filename='business_signup_notification_email_body',
-                                       subject='Business User acaba de registrarse!!!',
-                                       campaign=campaign)
-        except (smtplib.SMTPRecipientsRefused, smtplib.SMTPAuthenticationError, UnicodeEncodeError) as e:
-            pass
+        body_filename = 'business_signup_notification_email_body'
+        body_input = 'business_signup_email_body'
     else:
-        try:
-            email_sender.send(users=business_user,
-                              language_code=language_code,
-                              body_input='business_start_signup_email_body',
-                              subject=_('Welcome to PeakU'))
-            email_sender.send_internal(contact=business_user,
-                                       language_code=language_code,
-                                       body_filename='business_start_signup_notification_email_body',
-                                       subject='Business User acaba de registrarse!!!',
-                                       campaign=campaign)
-        except (smtplib.SMTPRecipientsRefused, smtplib.SMTPAuthenticationError, UnicodeEncodeError) as e:  # cannot send emails
-            pass
+        body_filename = 'business_start_signup_notification_email_body'
+        body_input = 'business_start_signup_email_body'
+
+    try:
+        email_sender.send(users=business_user,
+                          language_code=language_code,
+                          body_input=body_input,
+                          subject=_('Welcome to PeakU'))
+        email_sender.send_internal(contact=business_user,
+                                   language_code=language_code,
+                                   body_filename=body_filename,
+                                   subject='Business User acaba de registrarse!!!',
+                                   campaign=campaign)
+    except (smtplib.SMTPRecipientsRefused, smtplib.SMTPAuthenticationError, UnicodeEncodeError) as e:
+        pass
 
 
 def first_sign_in(signup_form, campaign, request):
@@ -312,7 +304,7 @@ def home(request):
     if login_form.is_valid() and request.POST.get('username') != 'g.comercialrmi2@redmilatam.com':  # Block access
 
         business_user = simple_login_and_business_user(login_form, request)
-        return redirect('dashboard/{}'.format(business_user.pk))
+        return redirect('tablero_de_control/{}'.format(business_user.pk))
     else:
         error_message = get_first_error_message(login_form)
         return render(request, cts.BUSINESS_LOGIN, {'error_message': error_message})
@@ -436,7 +428,7 @@ def start_post(request):
         business_user.campaigns.add(campaign)
         business_user.save()
 
-        return redirect('dashboard/{}'.format(business_user.pk))
+        return redirect('tablero_de_control/{}'.format(business_user.pk))
 
     else:
 
@@ -483,6 +475,8 @@ def dashboard(request, pk):
 
     # State Backlog and Prospect will show as one.
     params['backlog'] = list(params['backlog']) + list(params['prospect'])
+
+    params['rejected'] = list(params['rejected']) + list(params['waiting_for_tests'])
 
     # enters here when sending an email
     if request.GET.get('send_mail') is not None:

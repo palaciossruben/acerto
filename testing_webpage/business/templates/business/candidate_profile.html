@@ -108,13 +108,6 @@
                             {% endfor %}
                         {% endfor %}
 
-                        {% for e in candidate.evaluation.all %}
-                            <p>{{ e.cut_score }}</p>
-                            {% for score in evaluation.scores.all %}
-                                <p>{{ score.test.name }}: {{ score.value }}</p>
-                            {% endfor %}
-                        {% endfor %}
-
                         <br>
                         <p><strong>Preguntas de campo abierto:</strong></p>
                         <br>

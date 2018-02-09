@@ -95,14 +95,15 @@ def send_possible_job_matches():
     for campaign in active_campaigns:
         prospect_module.create_prospect_users_and_send_emails(campaign)
 
-
-if __name__ == '__main__':
-    send_reminder(email_template='user_test_reminder_email_body',
-                  state_name='Backlog',
-                  subject_function=translate_email_test_subject,
-                  email_type=EmailType.objects.get(name='backlog', sync=True))
-    send_reminder(email_template='user_interview_reminder_email_body',
-                  state_name='Waiting for Interview',
-                  subject_function=translate_email_interview_subject,
-                  email_type=EmailType.objects.get(name='interview', sync=True))
-    send_possible_job_matches()
+        if __name__ == '__main__':
+            send_reminder(email_template='user_test_reminder_email_body',
+                          state_name='Backlog',
+                          subject_function=translate_email_test_subject,
+                          email_type=EmailType.objects.get(name='backlog', sync=True))
+            '''
+            send_reminder(email_template='user_interview_reminder_email_body',
+                          state_name='Waiting for Interview',
+                          subject_function=translate_email_interview_subject,
+                          email_type=EmailType.objects.get(name='interview', sync=True))
+            '''
+            send_possible_job_matches()

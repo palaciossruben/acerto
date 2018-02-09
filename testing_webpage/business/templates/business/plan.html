@@ -27,11 +27,11 @@
     <div id="text-white-rectangle">
         <p id="description-text" >{{ plan.explanation }}</p>
 
-        <form action="{% url 'business:start' %}" method="get" enctype="multipart/form-data">
-            <!--{% csrf_token %}-->
-            <input class="form-submit" type="submit" value="{% trans 'I want it' %}">
-        </form>
-
+        <a href="{% url 'business:start' %}">
+            <form method="get">
+                <input class="form-submit" type="button" value="{% trans 'I want it' %}">
+            </form>
+        </a>
     </div>
 
     <section id="section-container-plan">

@@ -3,7 +3,7 @@
 {% load static %}
 
 
-{% block title %}PeakU - Selección de Personal{% endblock %}
+{% block title %}{%  trans "Staff Pick - PeakU" %}{% endblock %}
 
 {% block extra_head %}
     <link rel="stylesheet" type="text/css" href="{% static 'business/css/index.css' %}">
@@ -26,10 +26,11 @@
 
         <h1 class="main-title">{% trans "Discover amazing people" %}</h1>
 
-        <form id="free-trial-form" action="{% url 'business:start' %}">
-            <input class="blue-button free-trial-button" type="submit" name="free_trial" value="{% trans 'Free Trial' %}">
-        </form>
-
+        <a href="{% url 'business:start' %}">
+            <form id="free-trial-form">
+                <input class="blue-button free-trial-button" type="button" name="free_trial" value="{% trans 'Free Trial' %}">
+            </form>
+        </a>
         <h2 class="green-box">
             <p>{% trans 'Hire the best candidates' %}</p>
         </h2>

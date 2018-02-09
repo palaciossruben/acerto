@@ -130,7 +130,7 @@ def long_form(request):
     campaign.translate(request.LANGUAGE_CODE)
 
     ip = get_ip(request)
-    action_url = '/beta_invite/long_form/post'
+    action_url = '/servicio_de_empleo/post'
     countries, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
 
     Visitor(ip=ip, ui_version=cts.UI_VERSION, is_mobile=not is_desktop).save()
@@ -251,7 +251,7 @@ def fast_job(request):
     is_mobile = parse(ua_string).is_mobile
 
     ip = get_ip(request)
-    action_url = '/beta_invite/fast_job/post'
+    action_url = '/fast_job/post'
     countries, trades = get_trade_drop_down_values(request.LANGUAGE_CODE)
 
     Visitor(ip=ip, ui_version=cts.UI_VERSION, is_mobile=is_mobile).save()
@@ -372,7 +372,7 @@ def get_test_result(request):
 
     if not test_done or evaluation.passed:
 
-        send_interview_mail('user_interview_email_body', candidate)
+        # send_interview_mail('user_interview_email_body', candidate)
 
         right_button_action = interview_module.adds_campaign_and_user_to_url('interview/1', user_id, campaign.id)
 
