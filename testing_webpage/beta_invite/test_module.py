@@ -131,53 +131,54 @@ def get_scores(campaign, user_id, questions_dict, request):
                       value=test_score)
         score.save()
 
-        scores.append(test_score)
+        scores.append(score)
 
     return cut_scores, scores
 
 
-def update_candidate_state(campaign, user_id, evaluation):
+def update_candidate_state(candidate, evaluation):
     """
     Args:
-        campaign: obj
-        user_id: int
+        candidate: obj
         evaluation: obj
     Returns: Updates the candidate state if passes or not the test.
     """
-    if user_id:
+    if candidate:
 
-        candidate = Candidate.objects.get(campaign=campaign, user_id=user_id)
         candidate.evaluations.add(evaluation)
 
         if evaluation.passed:
             candidate.state = State.objects.get(code='WFI')
-            candidate.save()
         else:  # Fails tests
             candidate.state = State.objects.get(code='WFT')
-            candidate.save()
+
+        candidate.save()
 
 
-def get_evaluation(cut_scores, scores, campaign, user_id):
+def get_evaluation(cut_scores, scores, campaign, candidate):
     """
     simple average and percentage
     Args:
         cut_scores: list of passing scores.
-        scores: current scores.
+        scores: objects with current scores.
         campaign: object
-        user_id: int
+        candidate: obj
     Returns: get Evaluation object and links it ot user.
     """
     cut_score = average_list(cut_scores)
-    final_score = average_list(scores)
+    final_score = average_list([s.value for s in scores])
 
     evaluation = Evaluation(campaign=campaign,
                             cut_score=cut_score,
-                            final_score=final_score,
-                            scores=scores)
+                            final_score=final_score)
 
+    # Saves first in order to have an id and assign the scores.
     evaluation.save()
+    if scores:
+        evaluation.scores = scores
+        evaluation.save()
 
-    update_candidate_state(campaign, user_id, evaluation)
+    update_candidate_state(candidate, evaluation)
 
     return evaluation
 
