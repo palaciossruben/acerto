@@ -372,7 +372,7 @@ def get_test_result(request):
 
     if not test_done or evaluation.passed:
 
-        send_interview_mail('user_interview_email_body', candidate)
+        # send_interview_mail('user_interview_email_body', candidate)
 
         right_button_action = interview_module.adds_campaign_and_user_to_url('interview/1', user_id, campaign.id)
 

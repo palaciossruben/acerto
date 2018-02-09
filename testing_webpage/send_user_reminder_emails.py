@@ -100,8 +100,10 @@ def send_possible_job_matches():
                           state_name='Backlog',
                           subject_function=translate_email_test_subject,
                           email_type=EmailType.objects.get(name='backlog', sync=True))
+            '''
             send_reminder(email_template='user_interview_reminder_email_body',
                           state_name='Waiting for Interview',
                           subject_function=translate_email_interview_subject,
                           email_type=EmailType.objects.get(name='interview', sync=True))
+            '''
             send_possible_job_matches()
