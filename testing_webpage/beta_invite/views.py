@@ -353,7 +353,7 @@ def get_test_result(request):
     user_id = user.id if user else None
     candidate = common.get_candidate(user, campaign)
 
-    test_score_str = ''  # by default there is no score unless the test was done.
+    # test_score_str = ''  # by default there is no score unless the test was done.
 
     test_done = test_module.comes_from_test(request)
 
@@ -361,15 +361,21 @@ def get_test_result(request):
 
         cut_scores, scores = test_module.get_scores(campaign, user_id, questions_dict, request)
 
-        test_done = (len(scores) > 0)
+        has_scores = (len(scores) > 0)
 
-        if test_done:
-            evaluation = test_module.get_evaluation(cut_scores, scores, campaign, candidate)
-            test_score_str = '({}/100)'.format(round(evaluation.final_score))
+
+        if has_scores:
+            test_module.get_evaluation(cut_scores, scores, campaign, user_id)
+
+    return render(request, cts.INTERVIEW_VIEW_PATH, {'candidate': candidate})
+
+
+    '''
+    test_score_str = '({}/100)'.format(round(evaluation.final_score))
+
 
     has_recorded_interview = interview_module.has_recorded_interview(campaign)
     has_calendly = campaign.calendly
-
     if not test_done or evaluation.passed:
 
         # send_interview_mail('user_interview_email_body', candidate)
@@ -395,10 +401,12 @@ def get_test_result(request):
                                                          'left_button_is_back': False,
                                                          'on_interview': False,
                                                          })
+                                                         
     else:  # doesn't pass test.
         return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover your true passion"),
                                                        'secondary_message': _("We search millions of jobs and find the right one for you"),
-                                                       })
+                                                       })  
+                                                       '''
 
 
 def interview(request, pk):
