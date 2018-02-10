@@ -96,18 +96,17 @@
                         <p><strong>Comentarios: </strong>{{ c.text }}</p>
                     {% endif %}
                 {% endfor %}
+
                     <button class="accordion"><strong>&#9776; Ver preguntas y respuestas del test</strong></button>
                     <div class="panel">
 
                         <br>
                         <br>
-
-                        {% for evaluation in candidate.evaluations.all %}
-                            {% for score in evaluation.scores.all %}
-                                <p><strong>{{ score.test.name }}:</strong> {{ score.value }}</p>
+                        {% for e in candidate.evaluations.all %}
+                            {% for score in e.scores.all %}
+                                <p><strong>{{ score.test.name }}: </strong>{{ score.value }}</p>
                             {% endfor %}
                         {% endfor %}
-
                         <br>
                         <p><strong>Preguntas de campo abierto:</strong></p>
                         <br>

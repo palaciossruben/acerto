@@ -10,7 +10,7 @@ from ipware.ip import get_ip
 from beta_invite import constants as cts
 from beta_invite.util import email_sender
 from beta_invite import interview_module
-from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser, Bullet, BulletType, Test, Question, Score, Evaluation
+from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser, Bullet, BulletType, Test, Question, Evaluation
 from beta_invite import test_module, new_user_module
 
 
@@ -363,9 +363,8 @@ def get_test_result(request):
 
         has_scores = (len(scores) > 0)
 
-
         if has_scores:
-            test_module.get_evaluation(cut_scores, scores, campaign, user_id)
+            test_module.get_evaluation(cut_scores, scores, campaign, candidate)
 
     return render(request, cts.INTERVIEW_VIEW_PATH, {'candidate': candidate})
 
