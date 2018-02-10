@@ -10,7 +10,7 @@ from ipware.ip import get_ip
 from beta_invite import constants as cts
 from beta_invite.util import email_sender
 from beta_invite import interview_module
-from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser, Bullet, BulletType, Test, Question, Score, Evaluation
+from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser, Bullet, BulletType, Test, Question, Evaluation
 from beta_invite import test_module, new_user_module
 
 
