@@ -257,6 +257,22 @@ class Campaign(models.Model):
         return [b.name_es for b in self.bullets.all() if b.bullet_type and b.bullet_type.name == 'requirement']
 
 
+class Score(models.Model):
+
+    test = models.ForeignKey(Test)
+    value = models.FloatField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return 'id={0}, user={1}, test={2}, value={3}'.format(self.pk, self.user, self.test, self.value)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'scores'
+
+
 class Evaluation(models.Model):
     """
     Summary of all tests results for a given user.
@@ -268,6 +284,7 @@ class Evaluation(models.Model):
     passed = models.BooleanField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    scores = models.ManyToManyField(Score)
 
     # When saving will assign the passed Boolean.
     def save(self, *args, **kwargs):
@@ -392,22 +409,6 @@ class TradeUser(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'trade_users'
-
-
-class Score(models.Model):
-
-    test = models.ForeignKey(Test)
-    value = models.FloatField()
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return 'id={0}, user={1}, test={2}, value={3}'.format(self.pk, self.user, self.test, self.value)
-
-    # adds custom table name
-    class Meta:
-        db_table = 'scores'
 
 
 class PersonalityType(models.Model):
