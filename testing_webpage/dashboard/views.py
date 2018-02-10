@@ -18,7 +18,8 @@ def index(request):
         request: HTTP
     Returns: renders main view with a list of campaigns
     """
-    campaigns = Campaign.objects.all().order_by('-active', 'name', 'title_es')
+
+    campaigns = Campaign.objects.filter(removed=False).order_by('-active', 'name', 'title_es')
 
     tests = Test.objects.all()
     return render(request, cts.MAIN_DASHBOARD, {'campaigns': campaigns,
