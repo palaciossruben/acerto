@@ -76,6 +76,7 @@
                 <p><strong>Profesión: </strong>{{ candidate.user.profession.name }}</p>
                 <p><strong>Nivel académico: </strong>{{ candidate.user.education.name }}</p>
 
+                <!-- Deprecated -->
                 {% for e in candidate.user.evaluations.all %}
                     {% if candidate.campaign_id == e.campaign_id %}
                         <p><strong>Puntaje prueba (corte: {{ e.cut_score }}): </strong> {{ e.final_score }}</p>
@@ -85,6 +86,7 @@
                 {% for e in candidate.evaluations.all %}
                     <p><strong>Puntaje prueba (corte: {{ e.cut_score }}): </strong> {{ e.final_score }}</p>
                 {% endfor %}
+
                 {% if candidate.salary %}
                     <p><strong>Aspiración salarial: </strong>{{ candidate.salary }}</p>
                 {% endif %}
@@ -96,12 +98,15 @@
                 {% endfor %}
                     <button class="accordion"><strong>&#9776; Ver preguntas y respuestas del test</strong></button>
                     <div class="panel">
-                        <!--
-                        {% for evaluation in candidate.evaluation.all %}
+
+                        <br>
+                        <br>
+
+                        {% for evaluation in candidate.evaluations.all %}
                             {% for score in evaluation.scores.all %}
-                                <p>{{ score.test.name }}: {{ score.value }}</p>
+                                <p><strong>{{ score.test.name }}:</strong> {{ score.value }}</p>
                             {% endfor %}
-                        {% endfor %}-->
+                        {% endfor %}
 
                         <br>
                         <p><strong>Preguntas de campo abierto:</strong></p>

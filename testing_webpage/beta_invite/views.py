@@ -363,6 +363,7 @@ def get_test_result(request):
 
         has_scores = (len(scores) > 0)
 
+
         if has_scores:
             test_module.get_evaluation(cut_scores, scores, campaign, user_id)
 
@@ -371,6 +372,7 @@ def get_test_result(request):
 
     '''
     test_score_str = '({}/100)'.format(round(evaluation.final_score))
+
 
     has_recorded_interview = interview_module.has_recorded_interview(campaign)
     has_calendly = campaign.calendly
