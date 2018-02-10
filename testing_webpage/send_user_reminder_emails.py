@@ -64,22 +64,22 @@ def send_reminder(email_template, state_name, subject_function, email_type):
     candidates = get_recently_created_new_state_candidates(state_name)
 
     for candidate in candidates:
+        if candidate.campaign.pk != 5:
+            #  Do not send if there are no tests or is on the 'WFI' and has no interviews.
+            if not candidate.campaign.tests or state_name == 'Waiting For Interview' \
+                    and not interview_module.has_recorded_interview(candidate.campaign):
+                continue
 
-        # Do not send if there are no tests or is on the 'WFI' and has no interviews.
-        if not candidate.campaign.tests or state_name == 'Waiting For Interview' \
-                and not interview_module.has_recorded_interview(candidate.campaign):
-            continue
+            # check that emails are not sent twice with respect to a candidate:
+            if not EmailSent.objects.filter(campaign=candidate.campaign, candidate=candidate, email_type=email_type):
 
-        # check that emails are not sent twice with respect to a candidate:
-        if not EmailSent.objects.filter(campaign=candidate.campaign, candidate=candidate, email_type=email_type):
+                email_sender.send_to_candidate(candidates=candidate,
+                                               language_code=candidate.user.language_code,
+                                               body_input=email_template,
+                                               subject=subject_function(candidate))
 
-            email_sender.send_to_candidate(candidates=candidate,
-                                           language_code=candidate.user.language_code,
-                                           body_input=email_template,
-                                           subject=subject_function(candidate))
-
-            # Records sending email
-            EmailSent(campaign=candidate.campaign, candidate=candidate, email_type=email_type).save()
+                # Records sending email
+                EmailSent(campaign=candidate.campaign, candidate=candidate, email_type=email_type).save()
 
     return
 

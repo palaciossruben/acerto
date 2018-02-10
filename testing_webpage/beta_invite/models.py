@@ -217,6 +217,7 @@ class Campaign(models.Model):
     calendly = models.BooleanField(default=True)
     active = models.BooleanField(default=False)
     calendly_url = models.CharField(max_length=200, default=cts.INTERVIEW_CALENDLY)
+    removed = models.BooleanField(default=False)
 
     # TODO: remove circular dependency
     #plan = models.ForeignKey(Plan, null=True, on_delete=models.DO_NOTHING)
