@@ -396,7 +396,6 @@ class TradeUser(models.Model):
 
 class Score(models.Model):
 
-    user = models.ForeignKey(User, null=True)
     test = models.ForeignKey(Test)
     value = models.FloatField()
 
