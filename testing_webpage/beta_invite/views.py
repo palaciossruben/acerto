@@ -363,9 +363,8 @@ def get_test_result(request):
 
         has_scores = (len(scores) > 0)
 
-
         if has_scores:
-            test_module.get_evaluation(cut_scores, scores, campaign, user_id)
+            test_module.get_evaluation(cut_scores, scores, campaign, candidate)
 
     return render(request, cts.INTERVIEW_VIEW_PATH, {'candidate': candidate})
 
