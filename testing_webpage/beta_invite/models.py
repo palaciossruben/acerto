@@ -253,7 +253,7 @@ class Campaign(models.Model):
     def get_requirement_names(self):
 
         # TODO: add support for english
-        return [b.name_es for b in self.bullets.all() if b.bullet_type.name == 'requirement']
+        return [b.name_es for b in self.bullets.all() if b.bullet_type and b.bullet_type.name == 'requirement']
 
 
 class Evaluation(models.Model):
