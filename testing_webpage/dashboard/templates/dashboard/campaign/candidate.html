@@ -61,6 +61,9 @@
 <p><strong>Salary: </strong><input type="text" name="{{ candidate.id }}_salary" value="{{ candidate.salary }}"
     placeholder="add salary"></p>
 
+    {% if candidate.match %}
+        <p><strong>Match (0 to 1): </strong>candidate.match</p>
+    {% endif %}
 
 <a href="check_interview?candidate_id={{ candidate.id }}">Interview</a>
 
