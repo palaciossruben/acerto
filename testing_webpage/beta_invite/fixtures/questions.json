@@ -832,6 +832,64 @@
       "created_at": "2018-02-08 02:42:49.0957+00",
       "updated_at": "2018-02-08 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 58,
+    "fields":{
+      "text": "If inputArray: [1, 2, 3, 0]. What value returns the algorithm?",
+      "text_es": "Si inputArray: [1, 2, 3, 0]. ¿Qué valor retorna el algoritmo?",
+      "answers": [85, 86, 87, 88],
+      "type": 1,
+      "correct_answers": [88],
+      "order": 7,
+      "image_path": "beta_invite/questions/58/adjacentelementsproduct.png",
+      "created_at": "2018-02-12 02:42:49.0957+00",
+      "updated_at": "2018-02-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 59,
+    "fields":{
+      "text": "The following algorithm has a bug. On what line is it?",
+      "text_es": "El siguiente algoritmo posee un bug. ¿En qué línea se encuentra?",
+      "answers": [89, 90, 91, 92],
+      "type": 1,
+      "correct_answers": [89],
+      "order": 8,
+      "image_path": "beta_invite/questions/59/groupingdishes.png",
+      "created_at": "2018-02-12 02:42:49.0957+00",
+      "updated_at": "2018-02-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 60,
+    "fields":{
+      "text": "How would you solve the following exercise?: Given a year, return the century it is in. The first century spans from the year 1 up to and including the year 100; the second, from the year 101 up to and including the year 200, etc.",
+      "text_es": "¿Cómo resolverías el siguiente ejercicio?: Dado un año, regrese el siglo en que se encuentra. El primer siglo abarca desde el año 1 hasta el año 100; el segundo, desde el año 101 hasta el año 200, etc.",
+      "answers": [93, 94, 95, 96],
+      "type": 1,
+      "correct_answers": [96],
+      "order": 9,
+      "created_at": "2018-02-12 02:42:49.0957+00",
+      "updated_at": "2018-02-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 61,
+    "fields":{
+      "text": "The following algorithm is used to find if a word is palindrome or not, this one has a bug. In what line or lines is it and how would you solve it?",
+      "text_es": "El siguiente algoritmo se utiliza para encontrar si una palabra es palindromo o no, éste posee un bug. ¿En qué línea o líneas se encuentra y cómo lo solucionarías?",
+      "answers": [97, 98, 99, 100],
+      "type": 1,
+      "correct_answers": [100],
+      "order": 10,
+      "image_path": "beta_invite/questions/61/palindrome.png",
+      "created_at": "2018-02-12 02:42:49.0957+00",
+      "updated_at": "2018-02-12 02:42:49.0957+00"
+    }
   }
 ]
-
