@@ -17,8 +17,8 @@
     "model": "beta_invite.question",
     "pk": 2,
     "fields":{
-      "text": "In a short text How would you sell someone a salt shaker?",
-      "text_es": "En un texto corto ¿Cómo le venderías a alguién un salero?",
+      "text": "In a short text, how would you sell someone a salt shaker?",
+      "text_es": "En un texto corto ¿cómo le venderías a alguién un salero?",
       "answers": [],
       "type": 3,
       "correct_answers": [],
@@ -71,7 +71,7 @@
     "pk": 6,
     "fields":{
       "text": "What is the time-complexity of retreiving an element from a linked-list with n elements?",
-      "text_es": "¿Cuál es la complejidad de acceder a un elemento en una lista enlazadas con n elementos?",
+      "text_es": "¿Cuál es la complejidad de acceder a un elemento en una lista enlazada con n elementos?",
       "answers": [21, 22, 23, 24, 25],
       "type": 1,
       "correct_answers": [23],
@@ -97,7 +97,7 @@
     "pk": 8,
     "fields":{
       "text": "Tell us about a project you've completed that has made you the most proud?",
-      "text_es": "Cuentanos de un proyecto, por el cual estés muy orgulloso/a",
+      "text_es": "Cuéntanos de un proyecto, por el cual estés muy orgulloso/a",
       "answers": [],
       "type": 3,
       "correct_answers": [],
@@ -177,8 +177,8 @@
     "model": "beta_invite.question",
     "pk": 14,
     "fields":{
-      "text": "What has been the hardest project you have done? Why it was a challenge?",
-      "text_es": "¿Cuál ha sido el proyecto más dificil que has hecho? ¿Por qué fue tan retador?",
+      "text": "What has been the hardest project you have done?, why it was a challenge?",
+      "text_es": "¿Cuál ha sido el proyecto más difícil que has hecho?, ¿por qué fue tan retador?",
       "answers": [],
       "type": 3,
       "correct_answers": [],
@@ -277,7 +277,7 @@
     "pk": 21,
     "fields":{
       "text": "This is another possible solution. What does the data structure mySet do?",
-      "text_es": "Esta es otra posible solución ¿Qué hace la estructura de datos mySet?",
+      "text_es": "Esta es otra posible solución. ¿Qué hace la estructura de datos mySet?",
       "answers": [42, 43, 44, 45],
       "type": 1,
       "correct_answers": [42],
@@ -356,7 +356,7 @@
     "pk": 26,
     "fields":{
       "text": "How would you define a quality product?",
-      "text_es": "¿Cómo definirias un producto de calidad?",
+      "text_es": "¿Cómo definirías un producto de calidad?",
       "answers": [],
       "type": 3,
       "correct_answers": [],
@@ -369,7 +369,7 @@
     "pk": 27,
     "fields":{
       "text": "How do you handle a big vital client such as Spotify, although it is a difficult client to deal with?",
-      "text_es": "¿Cómo manejas a un importante cliente como Spotify, que sin embargo es díficil de tratar?",
+      "text_es": "¿Cómo manejas a un importante cliente como Spotify, que sin embargo es difícil de tratar?",
       "answers": [],
       "type": 3,
       "correct_answers": [],
@@ -382,7 +382,7 @@
     "pk": 28,
     "fields":{
       "text": "Being the director of development department, they tell you to implement these ideas. How would you prioritize them?",
-      "text_es": "Siendo el director de desarrollo, te solicitan implementar lo solicitado ¿Como priorizarias el trabajo?",
+      "text_es": "Siendo el director de desarrollo, te solicitan implementar lo solicitado. ¿Como priorizarías el trabajo?",
       "answers": [],
       "type": 3,
       "correct_answers": [],
@@ -411,7 +411,7 @@
     "pk": 30,
     "fields":{
       "text": "¿How many years of experience do you have in TA?",
-      "text_es": "¿Cuántos años de experiencia tienes en adquisición de Talento?",
+      "text_es": "¿Cuántos años de experiencia tienes en adquisición de talento?",
       "answers": [],
       "type": 5,
       "correct_answers": [],
@@ -540,8 +540,8 @@
     "model": "beta_invite.question",
     "pk": 38,
     "fields":{
-      "text": "How would you sell a pet life-insurance? - Write what you would tell a potential client",
-      "text_es": "¿Cómo venderías un seguro de vida para mascotas? - Escribe lo que le dirías a un cliente potencial",
+      "text": "How would you sell a pet life-insurance?. Write what you would tell a potential client",
+      "text_es": "¿Cómo venderías un seguro de vida para mascotas?. Escribe lo que le dirías a un cliente potencial",
       "answers": [],
       "type": 3,
       "correct_answers": [],
@@ -672,7 +672,7 @@
     "pk": 47,
     "fields":{
       "text": "Are you working in a business selling vacation plans, what strategy would you use to attract and grow in customers very fast?",
-      "text_es": "¿Estás trabajando en un negocio de venta de planes vacacionales, ¿Qué estrategia usarías para atraer y crecer en clientes muy rápido?",
+      "text_es": "¿Estás trabajando en un negocio de venta de planes vacacionales, ¿qué estrategia usarías para atraer y crecer en clientes muy rápido?",
       "answers": [],
       "type": 3,
       "correct_answers": [],
