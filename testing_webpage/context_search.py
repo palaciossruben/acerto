@@ -6,16 +6,16 @@ This builds a relationship between words for example 'android' has the following
 """
 
 import os
-import time
-import pickle
-import common
-from datetime import datetime
 from django.core.wsgi import get_wsgi_application
-from collections import OrderedDict
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
+import time
+import pickle
+import common
+from datetime import datetime
+from collections import OrderedDict
 from beta_invite.models import Country, User
 
 
