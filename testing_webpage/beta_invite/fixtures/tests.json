@@ -97,18 +97,6 @@
   },
   {
     "model": "beta_invite.test",
-    "pk": 9,
-    "fields":{
-      "name": "iOS Developer",
-      "name_es": "Desarrollador iOS",
-      "questions": [3, 4, 5, 14, 25, 26],
-      "cut_score": 65,
-      "created_at": "2017-08-24 02:42:49.0957+00",
-      "updated_at": "2017-08-24 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.test",
     "pk": 10,
     "fields":{
       "name": "Business Analyst",
@@ -273,6 +261,18 @@
       "cut_score": 70,
       "created_at": "2018-02-08 02:42:49.0957+00",
       "updated_at": "2018-02-08 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.test",
+    "pk": 9,
+    "fields":{
+      "name": "Developer",
+      "name_es": "Desarrollador",
+      "questions": [18, 19, 20, 21, 22, 6, 58, 59, 60, 61],
+      "cut_score": 70,
+      "created_at": "2018-02-12 02:42:49.0957+00",
+      "updated_at": "2018-02-12 02:42:49.0957+00"
     }
   }
 ]

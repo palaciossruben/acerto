@@ -828,5 +828,165 @@
       "created_at": "2018-01-26 02:42:49.0957+00",
       "updated_at": "2018-01-26 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 85,
+    "fields":{
+      "name": "None",
+      "name_es": "None",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 86,
+    "fields":{
+      "name": "The algorithm has a bug, so it will return an error",
+      "name_es": "El algoritmo tiene un bug, por lo que retornará un error",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 87,
+    "fields":{
+      "name": "6",
+      "name_es": "6",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 88,
+    "fields":{
+      "name": "2",
+      "name_es": "2",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 89,
+    "fields":{
+      "name": "Line 9, NoneType object is not iterable",
+      "name_es": "línea 9, un objeto tipo nulo, no es iterable",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 90,
+    "fields":{
+      "name": "Line 6, we should not mix two different types of arrangements",
+      "name_es": "línea 6, no debemos mezclar dos tipo diferentes de arreglos",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 91,
+    "fields":{
+      "name": "Line 7, the ingredients array is wrong defined",
+      "name_es": "línea 7, el arreglo ingredientes está mal definido",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 92,
+    "fields":{
+      "name": "Line 14, the result array is wrong defined",
+      "name_es": "línea 14, el arreglo resultado está mal definido",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 93,
+    "fields":{
+      "name": "It would take the year and divide it by 100, the result is the century",
+      "name_es": "Tomaría el año y lo dividiría entre 100, el resultado es el siglo",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 94,
+    "fields":{
+      "name": "It would take the year and divide it by 100, to this I add a unit, the result is the century",
+      "name_es": "Tomaría el año y lo dividiría entre 100, a esto le sumo una unidad, el resultado es el siglo",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 95,
+    "fields":{
+      "name": "It would find the module 100 of the year, if it is equal to zero, then take the year and divide it by 100, to this I add a unit, the result is the century",
+      "name_es": "Hallaría el modulo 100 del año, si es igual a cero, entonces tomaría el año y lo dividiría entre 100, a esto le sumo una unidad, el resultado es el siglo",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 96,
+    "fields":{
+      "name": "On line 5, a mandatory step is missing",
+      "name_es": "Ninguno de los anteriores",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 97,
+    "fields":{
+      "name": "None of the above",
+      "name_es": "En la línea 5, falta un paso obligatorio",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 98,
+    "fields":{
+      "name": "On line 7 and 9, the returns are reversed",
+      "name_es": "En la línea 7 y 9, los return están invertidos",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 99,
+    "fields":{
+      "name": "On line 4. We are creating an array, and then it has to be traversed, so we must treat the problem with a nested for.",
+      "name_es": "En la línea 4. Estamos creando un arreglo, y luego ha de ser recorrido, debemos entonces tratar el problema con un for anidado; es decir, un doble recorrido.",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 100,
+    "fields":{
+      "name": "On line 4. The index of the list is out of range, it should be [i-1]",
+      "name_es": "En la línea 4. El índice de la lista está fuera del rango, debería ser [i-1] ",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
   }
 ]
