@@ -32,6 +32,7 @@ def process_all_candidates_match():
 
         sorted_iterator = search_module.user_id_sorted_iterator(word_user_dictionary, campaign_users, word_array)
 
+        # TODO: Missing relevance normalization
         for user_id, relevance in sorted_iterator:
 
             # Pick any candidate.
