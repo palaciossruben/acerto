@@ -92,7 +92,7 @@ def calculate_result(request):
     Returns: renders results.html view.
     """
 
-    user_ids = search_module.get_common_search_info(request, 'subscribe/word_user_dictionary.p')
+    user_ids = search_module.get_common_search_info(request)
 
     search_obj = Search(ip=get_ip(request),
                         country=None,

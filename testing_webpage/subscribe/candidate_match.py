@@ -3,35 +3,45 @@ Sends emails to users reminding them of common tasks: do the tests or do the int
 """
 
 import os
-import time
-from datetime import datetime, timedelta
 from django.core.wsgi import get_wsgi_application
 
 # Environment can use the models as if inside the Django app
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
+import time
+import pickle
+from datetime import datetime
 from dashboard.models import Candidate
+from business import search_module
 
 
-def get_recently_created_new_state_candidates(state):
-    """
-    Returns: Gets candidates which are on a new state, created in between 1 and 25 hours ago.
-    """
-    # TODO: missing boolean indicating whether the email was sent.
-    start_date = datetime.utcnow() - timedelta(hours=25)
-    end_date = datetime.utcnow() - timedelta(hours=1)
-    return Candidate.objects.filter(state__name=state, created_at__range=(start_date, end_date))
+def process_all_candidates_match():
 
+    candidates = Candidate.objects.filter(match=None)
+    campaigns = {c.campaign for c in candidates}
 
-def get_all_candidates_match():
+    for campaign in campaigns:
 
-    candidates =
+        campaign_text = campaign.get_search_text()
+        word_array = search_module.get_word_array_lower_case_and_no_accents(campaign_text)
+
+        campaign_users = {c.user for c in candidates if c.campaign.pk == campaign.pk}
+
+        word_user_dictionary = pickle.load(open('word_user_dictionary.p', 'rb'))
+
+        sorted_iterator = search_module.user_id_sorted_iterator(word_user_dictionary, campaign_users, word_array)
+
+        for user_id, relevance in sorted_iterator:
+
+            # Pick any candidate.
+            candidate = [c for c in candidates if c.user and c.user.id == user_id][0]
+            candidate.match = relevance
+            candidate.save()
 
 
 if __name__ == '__main__':
     t0 = time.time()
-    get_all_candidates_match()
+    process_all_candidates_match()
     t1 = time.time()
     print('On {0} CANDIDATE_MATCH, took: {1}'.format(datetime.today(), t1 - t0))
-

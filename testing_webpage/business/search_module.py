@@ -11,6 +11,9 @@ from beta_invite.models import User, Country, Education, Profession
 MAX_NUM_OF_USERS = 20
 
 
+WORD_USER_PATH = 'subscribe/word_user_dictionary.p'
+
+
 def filter_relevance_users(user_relevance_dict):
     """
     Filters for users who have zero relevance.
@@ -28,7 +31,7 @@ def filter_relevance_users(user_relevance_dict):
     return filtered_user_relevance_dict
 
 
-def with_lower_case_and_no_accents(search_text):
+def get_word_array_lower_case_and_no_accents(search_text):
     """
     Args:
         search_text: string
@@ -51,7 +54,7 @@ def get_text(request):
     Returns: List with tokenized strings, lower cased and with no accents.
     """
     search_text = request.GET.get('search_text')
-    words = with_lower_case_and_no_accents(search_text)
+    words = get_word_array_lower_case_and_no_accents(search_text)
     return filter_conjunction_words(words)
 
 
@@ -82,20 +85,20 @@ def adds_context_based_search(tokens_dict, word_user_dictionary, filtered_user_r
         pass
 
 
-def user_id_sorted_iterator(word_user_dictionary, users, skills):
+def user_id_sorted_iterator(word_user_dictionary, users, search_phrase):
     """
     Args:
         word_user_dictionary: A dictionary of the form: {'word': (user_id, relevance)}
         users: List of User objects from previous filters.
-        skills: List of processed strings.
+        search_phrase: List of processed strings.
     Returns: A sorted iterator that returns tuples (user_id, relevance).
     """
 
-    tokens_dict = {t: word_user_dictionary[t] for t in skills
+    tokens_dict = {t: word_user_dictionary[t] for t in search_phrase
                    if word_user_dictionary.get(t) is not None}
 
     # Initializes all relevance to 0.
-    user_relevance_dict = OrderedDict({user.id: 0 for user in users})
+    user_relevance_dict = OrderedDict({user.id: 0 for user in users if user})
     for k, values in tokens_dict.items():
         for value_user_id, relevance in values:
 
@@ -138,12 +141,11 @@ def remove_duplicates(users):
     return unique_users
 
 
-def get_matching_users(search_phrase, word_user_path):
+def get_matching_users(search_phrase):
     """
     DB matching between criteria and DB.
     Args:
         search_phrase: list of words with the text to search in.
-        word_user_path: string with path to the object.
     Returns: List with matching Users
     """
 
@@ -152,28 +154,25 @@ def get_matching_users(search_phrase, word_user_path):
     # Opens word_user_dict, or returns unordered users.
     try:
         # A dictionary of the form: {'word': (user_id, relevance)}
-        word_user_dictionary = pickle.load(open(word_user_path, 'rb'))
+        word_user_dictionary = pickle.load(open(WORD_USER_PATH, 'rb'))
     except FileNotFoundError:
         return users  # will not filter by words.
 
     sorted_iterator = user_id_sorted_iterator(word_user_dictionary, users, search_phrase)
 
-    #print_sorted_iterator_on_debug(sorted_iterator)
-
     users = retrieve_sorted_users(sorted_iterator)
     return remove_duplicates(users)
 
 
-def get_common_search_info(request, word_user_path):
+def get_common_search_info(request):
     """
     Given a Request object will do all search related stuff. Returns a maximum number of results.
     Args:
         request: HTTP object.
-        word_user_path: string with path of object
     Returns: profession, education, country, experience, users, user_ids
     """
 
-    users = get_matching_users(get_text(request), word_user_path)
+    users = get_matching_users(get_text(request))
     users = users[:MAX_NUM_OF_USERS]
 
     util.translate_users(users, request.LANGUAGE_CODE)
