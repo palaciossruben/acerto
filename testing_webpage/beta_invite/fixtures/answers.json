@@ -3,8 +3,8 @@
     "model": "beta_invite.answer",
     "pk": 1,
     "fields":{
-      "name": "Minimum Wage ($ 737.717 COP)",
-      "name_es": "Salario mínimo ($ 737.717 COP)",
+      "name": "Minimum Wage ($737. 717 COP)",
+      "name_es": "Salario mínimo ($737.717 COP)",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -13,8 +13,8 @@
     "model": "beta_invite.answer",
     "pk": 2,
     "fields":{
-      "name": "Between $ 737.717 COP y $ 1'300.000 COP",
-      "name_es": "Entre $ 737.717 y $ 1'300.000 de pesos",
+      "name": "Between $737.717 COP y $1.300.000 COP",
+      "name_es": "Entre $737.717 y $1'300.000",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -23,8 +23,8 @@
     "model": "beta_invite.answer",
     "pk": 3,
     "fields":{
-      "name": "Between $ 1'300.0000 COP and $ 2'000.000 COP",
-      "name_es": "Entre $ 1'300.0000 y $ 2'000.000 pesos",
+      "name": "Between $1.300.0000 COP and $2.000.000 COP",
+      "name_es": "Entre $1'300.0000 y $2'000.000",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -33,8 +33,8 @@
     "model": "beta_invite.answer",
     "pk": 4,
     "fields":{
-      "name": "Between $ 2'00.0000 COP and $ 3'000.000 COP",
-      "name_es": "Entre $ 2'000.000 y 3'000.000 pesos",
+      "name": "Between $2.00.0000 COP and $3.000.000 COP",
+      "name_es": "Entre $2'000.000 y $3'000.000",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -43,8 +43,8 @@
     "model": "beta_invite.answer",
     "pk": 5,
     "fields":{
-      "name": "More than $ 3'000.000 COP",
-      "name_es": "Mayor a $ 3'000.000 COP",
+      "name": "More than $3.000.000 COP",
+      "name_es": "Mayor a $3'000.000",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -154,7 +154,7 @@
     "pk": 17,
     "fields":{
       "name": "I would try to understand his motives in order to propose according to his line of thought and from his perspective",
-      "name_es": "Trataría de entender cuales son sus motivos; y de acuerdo a ellos propondría soluciones",
+      "name_es": "Trataría de entender cuáles son sus motivos; y de acuerdo a ellos propondría soluciones",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -174,7 +174,7 @@
     "pk": 19,
     "fields":{
       "name": "I would align the interest of the whole team and negotiate with the new boss, according to everybody interest",
-      "name_es": "Alinearia los intereses de todo el equipo para llegar a un acuerdo con el nuevo jefe",
+      "name_es": "Alinearía los intereses de todo el equipo para llegar a un acuerdo con el nuevo jefe",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -184,7 +184,7 @@
     "pk": 20,
     "fields":{
       "name": "I would raise my hand and speak my discomfort and why it happens",
-      "name_es": "Levantaría la mano y diría cual es mi malestar y por que",
+      "name_es": "Levantaría la mano y diría cual es mi malestar y por qué",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -274,7 +274,7 @@
     "pk": 29,
     "fields":{
       "name": "Is a general purpose programming language such as Python or C",
-      "name_es": "Es un lenguaje de programación de proposito general similar a Python o C",
+      "name_es": "Es un lenguaje de programación de propósito general similar a Python o C",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -314,7 +314,7 @@
     "pk": 33,
     "fields":{
       "name": "Si",
-      "name_es": "Si",
+      "name_es": "Sí",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -323,8 +323,8 @@
     "model": "beta_invite.answer",
     "pk": 34,
     "fields":{
-      "name": "Find the first duplicate ELEMENT.",
-      "name_es": "Encontrar el primer ELEMENTO repetido.",
+      "name": "Find the first duplicate element.",
+      "name_es": "Encontrar el primer elemento repetido.",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -333,8 +333,8 @@
     "model": "beta_invite.answer",
     "pk": 35,
     "fields":{
-      "name": "Find the INDEX of the first duplicate element, additionally return -1 if there are no repeated elements.",
-      "name_es": "Encontrar el INDICE del primer elemento repetido, adicionalemente retornar -1 si no hay elementos repetidos.",
+      "name": "Find the index of the first duplicate element, additionally return -1 if there are no repeated elements.",
+      "name_es": "Encontrar el índice del primer elemento repetido, adicionalemente retornar -1 si no hay elementos repetidos.",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -343,8 +343,8 @@
     "model": "beta_invite.answer",
     "pk": 36,
     "fields":{
-      "name": "Find the first duplicate ELEMENT, additionally return -1 if there are no duplicates.",
-      "name_es": "Encontrar el primer ELEMENTO repetido, adicionalmente retornar -1 si no hay elementos repetidos.",
+      "name": "Find the first duplicate element, additionally return -1 if there are no duplicates.",
+      "name_es": "Encontrar el primer elemento repetido, adicionalmente retornar -1 si no hay elementos repetidos.",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -353,8 +353,8 @@
     "model": "beta_invite.answer",
     "pk": 37,
     "fields":{
-      "name": "Find the first duplicate ELEMENT, return -1 if there are no duplicates. Also the values of the elements are between 1 and a.length",
-      "name_es": "Encontrar el primer ELEMENTO repetido, retornar -1 si no hay elementos repetidos. Además los valores de los elementos están entre 1 y a.length.",
+      "name": "Find the first duplicate element, return -1 if there are no duplicates. Also the values of the elements are between 1 and a.length",
+      "name_es": "Encontrar el primer elemento repetido, retornar -1 si no hay elementos repetidos. Además los valores de los elementos están entre 1 y a.length.",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -403,8 +403,8 @@
     "model": "beta_invite.answer",
     "pk": 42,
     "fields":{
-      "name": "mySet stores the ELEMENTS that already passed. If it finds a duplicate element, it returns it. mySet is MORE efficient than a array.",
-      "name_es": "mySet guarda los ELEMENTOS por los que ya pasó. Si encuentra un elemento repetido, lo retorna. mySet es MAS eficiente que un arreglo.",
+      "name": "mySet stores the elements that already passed. If it finds a duplicate element, it returns it. mySet is more efficient than a array.",
+      "name_es": "mySet guarda los elementos por los que ya pasó. Si encuentra un elemento repetido, lo retorna. mySet es más eficiente que un arreglo.",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -413,8 +413,8 @@
     "model": "beta_invite.answer",
     "pk": 43,
     "fields":{
-      "name": "mySet stores the INDICES that already passed. If it finds a duplicate element, it returns it. mySet is MORE efficient than an array.",
-      "name_es": "mySet guarda los INDICES por los que ya pasó. Si encuentra un elemento repetido, lo retorna. mySet es MAS eficiente que un arreglo.",
+      "name": "mySet stores the indices that already passed. If it finds a duplicate element, it returns it. mySet is more efficient than an array.",
+      "name_es": "mySet guarda los índices por los que ya pasó. Si encuentra un elemento repetido, lo retorna. mySet es más eficiente que un arreglo.",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -423,8 +423,8 @@
     "model": "beta_invite.answer",
     "pk": 44,
     "fields":{
-      "name": "mySet stores the INDICES that already passed. If it finds a duplicate element, it returns it. mySet is LESS efficient than an array.",
-      "name_es": "mySet guarda los INDICES por los que ya pasó. Si encuentra un elemento repetido, lo retorna. mySet es MENOS eficiente que un arreglo.",
+      "name": "mySet stores the indices that already passed. If it finds a duplicate element, it returns it. mySet is less efficient than an array.",
+      "name_es": "mySet guarda los índices por los que ya pasó. Si encuentra un elemento repetido, lo retorna. mySet es menos eficiente que un arreglo.",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -433,8 +433,8 @@
     "model": "beta_invite.answer",
     "pk": 45,
     "fields":{
-      "name": "mySet stores the ELEMENTS that already passed. If it finds a duplicate element, it returns it. mySet is LESS efficient than an array.",
-      "name_es": "mySet guarda los ELEMENTOS por los que ya pasó. Si encuentra un elemento repetido, lo retorna. mySet es MENOS eficiente que un arreglo.",
+      "name": "mySet stores the elements that already passed. If it finds a duplicate element, it returns it. mySet is less efficient than an array.",
+      "name_es": "mySet guarda los elementos por los que ya pasó. Si encuentra un elemento repetido, lo retorna. mySet es menos eficiente que un arreglo.",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -443,8 +443,8 @@
     "model": "beta_invite.answer",
     "pk": 46,
     "fields":{
-      "name": "The code on the RIGHT is faster because Set() inserts elements FASTER than the array",
-      "name_es": "El código de la derecha es más veloz por que el Set() inserta elementos más RAPIDO que el arreglo.",
+      "name": "The code on the right is faster because Set() inserts elements faster than the array",
+      "name_es": "El código de la derecha es más veloz por que el Set() inserta elementos más rápido que el arreglo.",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -453,8 +453,8 @@
     "model": "beta_invite.answer",
     "pk": 47,
     "fields":{
-      "name": "The code on the LEFT is faster because Set() inserts elements SLOWER than the array",
-      "name_es": "El código de la IZQUIERDA es más veloz por que el Set() inserta elementos más LENTO que el arreglo.",
+      "name": "The code on the left is faster because Set() inserts elements slower than the array",
+      "name_es": "El código de la izquierda es más veloz por que el Set() inserta elementos más lento que el arreglo.",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -825,6 +825,166 @@
     "fields":{
       "name": "Advanced",
       "name_es": "Avanzados",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 85,
+    "fields":{
+      "name": "None",
+      "name_es": "None",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 86,
+    "fields":{
+      "name": "The algorithm has a bug, so it will return an error",
+      "name_es": "El algoritmo tiene un bug, por lo que retornará un error",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 87,
+    "fields":{
+      "name": "6",
+      "name_es": "6",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 88,
+    "fields":{
+      "name": "2",
+      "name_es": "2",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 89,
+    "fields":{
+      "name": "Line 9, NoneType object is not iterable",
+      "name_es": "línea 9, un objeto tipo nulo, no es iterable",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 90,
+    "fields":{
+      "name": "Line 6, we should not mix two different types of arrangements",
+      "name_es": "línea 6, no debemos mezclar dos tipos diferentes de arreglos",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 91,
+    "fields":{
+      "name": "Line 7, the ingredients array is wrong defined",
+      "name_es": "línea 7, el arreglo ingredientes está mal definido",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 92,
+    "fields":{
+      "name": "Line 14, the result array is wrong defined",
+      "name_es": "línea 14, el arreglo resultado está mal definido",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 93,
+    "fields":{
+      "name": "It would take the year and divide it by 100, the result is the century",
+      "name_es": "Tomaría el año y lo dividiría entre 100, el resultado es el siglo",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 94,
+    "fields":{
+      "name": "It would take the year and divide it by 100, to this I add a unit, the result is the century",
+      "name_es": "Tomaría el año y lo dividiría entre 100, a esto le sumo una unidad, el resultado es el siglo",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 95,
+    "fields":{
+      "name": "It would find the module 100 of the year, if it is equal to zero, then take the year and divide it by 100, to this I add a unit, the result is the century",
+      "name_es": "Hallaría el modulo 100 del año, si es igual a cero, entonces tomaría el año y lo dividiría entre 100, a esto le sumo una unidad, el resultado es el siglo",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 96,
+    "fields":{
+      "name": "On line 5, a mandatory step is missing",
+      "name_es": "Ninguno de los anteriores",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 97,
+    "fields":{
+      "name": "None of the above",
+      "name_es": "En la línea 5, falta un paso obligatorio",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 98,
+    "fields":{
+      "name": "On line 7 and 9, the returns are reversed",
+      "name_es": "En la línea 7 y 9, los return están invertidos",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 99,
+    "fields":{
+      "name": "On line 4. We are creating an array, and then it has to be traversed, so we must treat the problem with a nested for.",
+      "name_es": "En la línea 4. Estamos creando un arreglo, y luego ha de ser recorrido, debemos entonces tratar el problema con un for anidado; es decir, un doble recorrido.",
+      "created_at": "2018-01-26 02:42:49.0957+00",
+      "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 100,
+    "fields":{
+      "name": "On line 4. The index of the list is out of range, it should be [i-1]",
+      "name_es": "En la línea 4. El índice de la lista está fuera del rango, debería ser [i-1] ",
       "created_at": "2018-01-26 02:42:49.0957+00",
       "updated_at": "2018-01-26 02:42:49.0957+00"
     }

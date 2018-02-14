@@ -59,22 +59,31 @@
             <h3>Send customized mail or message</h3>
 
             <input name="email_subject" style="width:32.5%"
-                value="Status de tu aplicación a {campaign_name} con PeakU">
+                value="Invitación entrevista">
 
             <br>
             <br>
 
-            <textarea name="email_body" cols="60" rows="20"
+            <textarea name="email_body" cols="100" rows="20"
                 placeholder="mail body, use tags {name}, {campaign_name} to customize" >
-{name},
+                Hola {name}
 
-write here ... {test_url}
 
-Saludos
+                Felicidades por aprobar la prueba técnica!
 
-Santiago
-santiago@peaku.co
-PeakU
+                Puedes programar tu entrevista en el siguiente link:
+
+                https://calendly.com/santiago-10/llamada-inicial
+
+                Entre más rápido hagas la entrevista más probabilidad tendrás de obtener el empleo.
+
+                No dudes en escribirme si tienes alguna duda.
+
+                Estoy pendiente,
+
+                {sender_name}
+                {sender_position}
+                {peaku_address}
             </textarea>
 
             <br>
