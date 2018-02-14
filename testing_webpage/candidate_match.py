@@ -28,7 +28,7 @@ def process_all_candidates_match():
 
         campaign_users = {c.user for c in candidates if c.campaign.pk == campaign.pk}
 
-        word_user_dictionary = pickle.load(open('word_user_dictionary.p', 'rb'))
+        word_user_dictionary = pickle.load(open(search_module.WORD_USER_PATH, 'rb'))
 
         sorted_iterator = search_module.user_id_sorted_iterator(word_user_dictionary, campaign_users, word_array)
 
