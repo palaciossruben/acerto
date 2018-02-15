@@ -48,10 +48,10 @@
 
     <p><strong> {{ e.question.text_es }} </strong></p>
         {% if e.answer %}
-    <p> {{ e.answer }} </p>
+    <p> {{ e.answer.name_es }} </p>
         {% endif %}
         {% if e.numeric_answer %}
-    <p> {{ e.numeric_answer }}</p>
+    <p> {{ e.numeric_answer|floatformat }}</p>
         {% endif %}
         {% if e.text_answer %}
     <p> {{ e.text_answer }} </p>
