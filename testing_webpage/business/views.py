@@ -475,7 +475,7 @@ def dashboard(request, pk):
 
     # State Backlog and Prospect will show as one.
     params['backlog'] = list(params['backlog']) + list(params['prospect'])
-
+    params['waiting_for_interview'] = list(params['waiting_for_interview']) + list(params['did_interview'])
     params['rejected'] = list(params['rejected']) + list(params['waiting_for_tests'])
 
     # enters here when sending an email

@@ -11,17 +11,20 @@
 
 {% block content %}
     <br>
-    <caption><h3 class="secondary-title" align="center"> Dashboard {{ campaign.name }}</h3></caption>
+    <caption><h3 class="secondary-title" align="center">
+        CAMPAÑA
+        {% if campaign.free_trial%}
+            GRATUITA
+        {% endif %}
+        {{ campaign.name|upper }}</h3></caption>
     <div class="secondary-yellow-bar"></div>
-    <br>
-    <!--
+    <p class="title" align="center" style="font-family:var(--Bitter); font-size:18px; color:var(--text-color)"> En total han aplicado <b id="total"></b> personas a tu campaña</p>
     {% if campaign.free_trial == True %}
-        <div class="title" align="center" style="font-family:var(--Bitter); font-size:18px; color:var(--text-color)">
-            <p>Esta es una prueba gratis, si deseas agregar más candidatos a tu tablero de control, por favor comunícate con nosotros</p>
-            <p>Si tienes alguna duda, puedes escribirnos a: contacto@peaku.co</p>
+        <div class="title" align="center">
+            <p style="font-family:var(--Bitter); font-size:21px; color:var(--red)"><strong>Recuerda que para esta campaña, solo podrás ver 10 candidatos relevantes al cargo</strong></p>
+            <p style="font-family:var(--Bitter); font-size:18px;color:var(--text-color)">Si tienes alguna duda, puedes escribirnos a: contacto@peaku.co</p>
         </div>
     {% endif %}
-    -->
     <br>
     <br>
     <form action="#" method="get"> {% csrf_token %}
@@ -32,11 +35,7 @@
             </th>
 
             <th>
-             <p class="column-title"> PRIMER FILTRO ( <b id="quantity_waiting_interview" ></b> ) </p>
-            </th>
-
-            <th>
-             <p class="column-title"> SEGUNDO FILTRO ( <b id="quantity_did_interview" ></b> ) </p>
+             <p class="column-title"> RELEVANTES ( <b id="quantity_waiting_interview" ></b> ) </p>
             </th>
 
             <th>
@@ -56,7 +55,6 @@
 
             {% include "business/dashboard_column.html" with candidate_list=backlog campaigns=campaigns  state_name="backlog" %}
             {% include "business/dashboard_column.html" with candidate_list=waiting_for_interview campaigns=campaigns  state_name="waiting_interview" %}
-            {% include "business/dashboard_column.html" with candidate_list=did_interview campaigns=campaigns  state_name="did_interview" %}
             {% include "business/dashboard_column.html" with candidate_list=sent_to_client campaigns=campaigns  state_name="sent_to_client" %}
             {% include "business/dashboard_column.html" with candidate_list=got_job campaigns=campaigns  state_name="got_job" %}
             {% include "business/dashboard_column.html" with candidate_list=rejected campaigns=campaigns  state_name="rejected" %}
