@@ -50,7 +50,8 @@ def business_daily_report():
             candidates = Candidate.objects.filter(
                 created_at__range=[str(timezone.now() - timedelta(days=1)), str(timezone.now())],
                 campaign=campaign,
-                removed=False)
+                removed=False,
+                state=8)
 
             # Only send if there is something.
             if len(candidates) > 0:
