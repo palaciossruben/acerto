@@ -14,31 +14,22 @@
     <h1 class="my_title">{{ title }}</h1>
 
     <form style="margin-top: 40px; margin-left:40px;" action="{{ action_url }}" method="post">
-
         {% csrf_token %}
-
         <br>
         <br>
-
         <input class="title_text_box" type="text" name="name" value="{{ campaign.name }}"
-          placeholder="Add internal campaign name in English" required="required">
-
+          placeholder="Add internal campaign name in English">
         <br>
         <br>
-
         <input class="title_text_box" type="text" name="title" value="{{ campaign.title }}"
-          placeholder="Add campaign title in English" required="required">
-
+          placeholder="Add campaign title in English">
         <br>
         <br>
-
         <input class="title_text_box" type="text" name="title_es" value="{{ campaign.title_es }}"
-          placeholder="Add a campaign title in Spanish" required="required">
-
+          placeholder="Add a campaign title in Spanish">
         <br>
         <br>
-
-        <select name="country_id" required>
+        <select name="country_id">
 
             <!--Update-->
             {% if campaign %}
@@ -55,23 +46,17 @@
                 <option value={{ country.id }}>{{ country.name }}</option>
             {% endfor %}
         </select>
-
         <br>
         <br>
-
         <textarea name="description" cols="40" rows="5"
         placeholder="add description in English">{{ campaign.description }}</textarea>
-
         <br>
         <br>
-
         <textarea name="description_es" cols="40" rows="5"
         placeholder="add description in Spanish">{{ campaign.description_es }}</textarea>
-
         <br>
         <br>
-
-        <select name="profession_id" required>
+        <select name="profession_id">
 
             <!--Update-->
             {% if campaign %}
@@ -84,16 +69,13 @@
                 {% endwith %}
             {% endif %}
 
-          <option value="">Select Profession</option>
           {% for profession in professions %}
              <option value={{ profession.id }}>{{ profession.name }}</option>
           {% endfor %}
         </select>
-
         <br>
         <br>
-
-        <select name="education_id" required>
+        <select name="education_id">
 
             <!--Update-->
             {% if campaign %}
@@ -110,20 +92,15 @@
              <option value={{ level.id }}>{{ level.name }}</option>
           {% endfor %}
         </select>
-
         <br>
         <br>
-
         <div style="margin-top:-10px;">
-            <label >Experience in years:</label>
-            <input name="experience" id="experience"
-             type="number" value="{{ campaign.experience }}" min="0" max="60" />
+            <label>Experience in years:</label>
+            <input name="experience" id="experience"type="number" value="{{ campaign.experience }}" min="0" max="60" required>
         </div>
-
         <br>
         <br>
-
-        <p>Calendly</p>
+        <p>CALENDLY?</p>
         <select name="calendly" required>
 
             <!--Update-->
@@ -138,11 +115,9 @@
             <option value="1">True</option>
             <option value="0">False</option>
         </select>
-
         <br>
         <br>
-
-        <p>active</p>
+        <p>ACTIVE?</p>
         <select name="active" required>
 
             <!--Update-->
@@ -157,17 +132,30 @@
             <option value="1">True</option>
             <option value="0">False</option>
         </select>
-
         <br>
         <br>
-
         <p>Calendly Url</p>
         <input class="title_text_box" type="text" name="calendly_url" value="{{ campaign.calendly_url }}"
                placeholder="Add calendly_url or default to Santiago's" required="required">
-
         <br>
         <br>
+        <p>FREE TRIAL?</p>
+        <select name="free_trial" required>
 
+            <!--Update-->
+            {% if campaign %}
+                {% with default=campaign.free_trial %}
+                    <option value="{{ default }}">{{ default }}</option>
+                {% endwith %}
+            {% else %} <!--New-->
+                <option value="1">True</option>
+            {% endif %}
+
+            <option value="1">True</option>
+            <option value="0">False</option>
+        </select>
+        <br>
+        <br>
         <p>REMOVE?</p>
         <select name="removed" required>
 
