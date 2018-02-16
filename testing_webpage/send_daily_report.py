@@ -51,7 +51,7 @@ def business_daily_report():
                 created_at__range=[str(timezone.now() - timedelta(days=1)), str(timezone.now())],
                 campaign=campaign,
                 removed=False,
-                state_id=8)
+                state_id__in=[8, 10])
 
             # Only send if there is something.
             if len(candidates) > 0:
@@ -62,8 +62,9 @@ def business_daily_report():
                                          candidates=candidates)
 
 
-# sends iOS candidates
-# TODO: add pablo? 'mmedina@tappsi.co'
 send_campaign_report(['juan@peaku.co', 'santiago@peaku.co'], campaign_id=10)
-business_daily_report()
 send_general_report()
+business_daily_report()
+
+
+
