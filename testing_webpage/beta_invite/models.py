@@ -200,6 +200,30 @@ class Interview(models.Model):
         db_table = 'interviews'
 
 
+class Seniority(models.Model):
+
+    name = models.CharField(max_length=200)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'seniorities'
+
+    def __str__(self):
+        return '{0}'.format(self.name)
+
+
+class JobFunctions(models.Model):
+
+    name = models.CharField(max_length=200)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'job_functions'
+
+    def __str__(self):
+        return '{0}'.format(self.name)
+
+
 class Campaign(models.Model):
 
     name = models.CharField(max_length=200)
@@ -219,6 +243,8 @@ class Campaign(models.Model):
     calendly_url = models.CharField(max_length=200, default=cts.INTERVIEW_CALENDLY)
     removed = models.BooleanField(default=False)
     free_trial = models.BooleanField(default=True)
+    seniority = models.ForeignKey(Seniority, null=True)
+    job_function = models.ForeignKey(JobFunctions, null=True)
 
     # TODO: remove circular dependency
     #plan = models.ForeignKey(Plan, null=True, on_delete=models.DO_NOTHING)

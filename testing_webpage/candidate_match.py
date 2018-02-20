@@ -17,7 +17,10 @@ from business import search_module
 
 
 def process_all_candidates_match():
-
+    """
+    Gets all matching scores.
+    :return: adds matching scores to all candidates
+    """
     candidates = Candidate.objects.filter(match=None)
     campaigns = {c.campaign for c in candidates}
 
