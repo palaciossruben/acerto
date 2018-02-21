@@ -48,7 +48,7 @@ class Candidate(models.Model):
     comments = models.ManyToManyField(Comment, default=[])
     evaluations = models.ManyToManyField(Evaluation)
     surveys = models.ManyToManyField(Survey)
-    match = models.FloatField(null=True, default=None)
+    text_match = models.FloatField(null=True, default=None)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -40,7 +40,7 @@ def process_all_candidates_match():
 
             # Pick any candidate.
             candidate = [c for c in candidates if c.user and c.user.id == user_id][0]
-            candidate.match = relevance
+            candidate.text_match = relevance
             candidate.save()
 
 
