@@ -2,4 +2,4 @@
 0 9 * * * cd /home/ubuntu/acerto/testing_webpage/subscribe/ && python3 document_reader.py >> document_parsing_log.txt && python3 search_engine.py >> document_parsing_log.txt && python3 ../context_search.py >> document_parsing_log.txt && echo SUCCESS || echo FAILED >> document_parsing_log.txt
 0 0 * * * python3 /home/ubuntu/acerto/testing_webpage/send_user_reminder_emails.py
 * * * * * python3 /home/ubuntu/acerto/testing_webpage/testing_webpage/email/consumer.py
-0 9 * * * python3 /home/ubuntu/acerto/testing_webpage/candidate_match.py
+0 9 * * * python3 /home/ubuntu/acerto/testing_webpage/get_text_match.py

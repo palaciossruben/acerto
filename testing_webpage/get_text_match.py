@@ -48,4 +48,4 @@ if __name__ == '__main__':
     t0 = time.time()
     process_all_candidates_match()
     t1 = time.time()
-    print('On {0} CANDIDATE_MATCH, took: {1}'.format(datetime.today(), t1 - t0))
+    print('On {0} GET_TEXT_MATCH, took: {1}'.format(datetime.today(), t1 - t0))
