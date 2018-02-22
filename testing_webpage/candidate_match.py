@@ -10,7 +10,7 @@ application = get_wsgi_application()
 
 import time
 import sklearn
-from sklearn.svm import SVR
+from sklearn import svm
 import statistics
 import numpy as np
 import pandas as pd
@@ -19,7 +19,7 @@ from dashboard.models import Candidate
 
 
 def get_test_score(candidate, field, f):
-    scores = [getattr(e, field) for e in candidate.evaluations.all()]
+    scores = [float(getattr(e, field)) for e in candidate.evaluations.all()]
     if len(scores):
         return f(scores)
     else:
@@ -53,8 +53,8 @@ def get_target(candidate):
         return np.nan
 
 
-def get_accuracy(features, values, model):
-    return sklearn.model_selection.cross_val_score(model, features, values, scoring='accuracy').mean()
+def get_accuracy(features, target, model):
+    return sklearn.model_selection.cross_val_score(model, features, target.astype(int), scoring='accuracy').mean()
 
 
 def get_train_test(data, train_percent):
@@ -66,13 +66,13 @@ def get_train_test(data, train_percent):
 
 def fill_missing_values(data):
 
-    data['text_match'].fillna(statistics.median(data['text_match']), inplace=True)
-    data['education'].fillna(statistics.mode(data['education']), inplace=True)
+    data['text_match'].fillna(np.nanmedian(data['text_match']), inplace=True)
+    data['education'].fillna(np.nanmedian(data['education']), inplace=True)
     #data['profession'].fillna(statistics.mode(data['profession']), inplace=True)
 
     for column in data.columns.values:
         if 'test' in column:
-            data[column].fillna(statistics.median(data[column]), inplace=True)
+            data[column].fillna(np.nanmedian(data[column]), inplace=True)
 
     return data
 
@@ -96,24 +96,18 @@ def calculate_all_candidates_match():
     data = add_test_features(data, candidates, ['passed', 'final_score'])
 
     data['target'] = [get_target(c) for c in candidates]
-    data = data[[t is not None for t in data['target']]]
-
-    #data.drop(data[data.target > 0].index, inplace=True)
+    data = data[[not pd.isnull(t) for t in data['target']]]
+    data['target'] = data['target'].apply(lambda y: int(y))
 
     train_features, train_target, test_features, test_target = get_train_test(data, 0.8)
 
     train_features = fill_missing_values(train_features)
     test_features = fill_missing_values(test_features)
 
-    model = SVR(kernel='rbf', C=1e3, gamma=0.001)
-
-    print(train_features)
-    print(train_target)
-
+    model = svm.SVC()
     model.fit(train_features, train_target)
-    # model.fit(data_tf_idf_train, train_target_values, nb_epoch=EPOCHS, batch_size=BATCH_SIZE)
 
-    # grid_search(model, train_set, train_target)
+    # TODO: grid_search(model, train_set, train_target)
 
     print('TRAIN ACCURACY: ' + str(get_accuracy(train_features, train_target, model)))
     print('TEST ACCURACY: ' + str(get_accuracy(test_features, test_target, model)))
