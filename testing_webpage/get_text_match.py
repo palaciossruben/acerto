@@ -1,5 +1,5 @@
 """
-Sends emails to users reminding them of common tasks: do the tests or do the interview, etc
+Calculates the text_match between campaign and CV to estimate compatibility.
 """
 
 import os
@@ -16,7 +16,7 @@ from dashboard.models import Candidate
 from business import search_module
 
 
-def process_all_candidates_match():
+def get_candidates_text_match():
     """
     Gets all matching scores.
     :return: adds matching scores to all candidates
@@ -46,6 +46,6 @@ def process_all_candidates_match():
 
 if __name__ == '__main__':
     t0 = time.time()
-    process_all_candidates_match()
+    get_candidates_text_match()
     t1 = time.time()
     print('On {0} GET_TEXT_MATCH, took: {1}'.format(datetime.today(), t1 - t0))

@@ -61,6 +61,16 @@ class Candidate(models.Model):
     class Meta:
         db_table = 'candidates'
 
+    def get_education_level(self):
+        if self.user and self.user.education:
+            return self.user.education.level
+        return None
+
+    def get_profession_name(self):
+        if self.user and self.user.profession:
+            return self.user.profession.name
+        return None
+
 
 class Message(models.Model):
     """
