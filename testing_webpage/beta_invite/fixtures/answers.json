@@ -943,7 +943,7 @@
     "model": "beta_invite.answer",
     "pk": 96,
     "fields":{
-      "name": "On line 5, a mandatory step is missing",
+      "name": "None of the above",
       "name_es": "Ninguno de los anteriores",
       "created_at": "2018-01-26 02:42:49.0957+00",
       "updated_at": "2018-01-26 02:42:49.0957+00"
@@ -953,7 +953,7 @@
     "model": "beta_invite.answer",
     "pk": 97,
     "fields":{
-      "name": "None of the above",
+      "name": "On line 5, a required step is missing",
       "name_es": "En la línea 5, falta un paso obligatorio",
       "created_at": "2018-01-26 02:42:49.0957+00",
       "updated_at": "2018-01-26 02:42:49.0957+00"
@@ -987,6 +987,66 @@
       "name_es": "En la línea 4. El índice de la lista está fuera del rango, debería ser [i-1] ",
       "created_at": "2018-01-26 02:42:49.0957+00",
       "updated_at": "2018-01-26 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 101,
+    "fields":{
+      "name": "Advanced",
+      "name_es": "Avanzado",
+      "created_at": "2018-02-22 02:42:49.0957+00",
+      "updated_at": "2018-02-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 102,
+    "fields":{
+      "name": "Intermediate",
+      "name_es": "Intermedio",
+      "created_at": "2018-02-22 02:42:49.0957+00",
+      "updated_at": "2018-02-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 103,
+    "fields":{
+      "name": "Basic",
+      "name_es": "Básico",
+      "created_at": "2018-02-22 02:42:49.0957+00",
+      "updated_at": "2018-02-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 104,
+    "fields":{
+      "name": "No experience",
+      "name_es": "No tengo experiencia en ventas",
+      "created_at": "2018-02-22 02:42:49.0957+00",
+      "updated_at": "2018-02-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 105,
+    "fields":{
+      "name": "Between 0 and 2 years of experience",
+      "name_es": "Entre 0 y 2 años de experiencia",
+      "created_at": "2018-02-22 02:42:49.0957+00",
+      "updated_at": "2018-02-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 106,
+    "fields":{
+      "name": "More than 2 years of experience",
+      "name_es": "Más de 2 años de experiencia",
+      "created_at": "2018-02-22 02:42:49.0957+00",
+      "updated_at": "2018-02-22 02:42:49.0957+00"
     }
   }
 ]
