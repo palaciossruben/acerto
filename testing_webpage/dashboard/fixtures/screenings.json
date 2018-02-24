@@ -1,0 +1,18 @@
+[
+  {
+    "model": "dashboard.screening",
+    "pk": 1,
+    "fields":{
+      "name": "Pass",
+      "passed": true
+    }
+  },
+  {
+    "model": "dashboard.screening",
+    "pk": 2,
+    "fields":{
+      "name": "Fail",
+      "passed": false
+    }
+  }
+]

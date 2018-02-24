@@ -2,6 +2,7 @@
 Calculates a match value with learning algorithm
 """
 import os
+
 from django.core.wsgi import get_wsgi_application
 
 # Environment can use the models as if inside the Django app
@@ -20,7 +21,7 @@ from sklearn import metrics
 from datetime import datetime
 from imblearn.over_sampling import ADASYN
 
-import common_learning
+from match import common_learning
 
 
 def balance(data):
@@ -120,10 +121,10 @@ def eval_model(model, train, test):
     print(metrics.confusion_matrix(test.target, predicted_target))
 
 
-def calculate_all_candidates_match():
+def get_model():
     """
     Calculates the match of each candidate, based on a learning algorithm.
-    :return:
+    :return: model.
     """
     data = load_data_for_learning()
 
@@ -133,11 +134,4 @@ def calculate_all_candidates_match():
 
     eval_model(model, train, test)
 
-    pickle.dump(model, open("match_model.p", "wb"))
-
-
-if __name__ == '__main__':
-    t0 = time.time()
-    calculate_all_candidates_match()
-    t1 = time.time()
-    print('On {0} CANDIDATE_MATCH, took: {1}'.format(datetime.today(), t1 - t0))
+    return model

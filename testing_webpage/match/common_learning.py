@@ -42,12 +42,15 @@ def get_target(candidate):
     :param candidate:
     :return: 1 = Very Good Match, 0 = Bad match, np.nan = unknown
     """
-    if candidate.state.code in ('GTJ', 'STC', ):  # Approved by client or by us.
-        return 1
-    elif candidate.state.code in ('ROI', 'RBC', 'SR'):  # Rejected by client or by us.
-        return 0
+    if candidate.screening is not None:
+        return int(candidate.screening.passed)
     else:
-        return np.nan
+        if candidate.state.code in ('GTJ', 'STC', ):  # Approved by client or by us.
+            return 1
+        elif candidate.state.code in ('ROI', 'RBC', 'SR'):  # Rejected by client or by us.
+            return 0
+        else:
+            return np.nan
 
 
 def load_data():

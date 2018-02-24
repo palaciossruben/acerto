@@ -43,7 +43,36 @@
         <p><strong>test (cut: {{ e.cut_score }}): </strong> {{ e.final_score }}</p>
     {% endfor %}
 
-    <p><strong> PREGUNTAS Y RESPUESTAS DEL TEST : </strong></p>
+
+    <p><strong>Salary: </strong><input type="text" name="{{ candidate.id }}_salary" value="{{ candidate.salary }}"
+    placeholder="add salary"></p>
+
+    <br>
+    <br>
+    <p><strong>Screening: </strong>
+    <select class="selectpicker" name="{{ candidate.id }}_screening_id">
+      <option value="{{ candidate.screening.id }}">{{ candidate.screening.name }}</option>
+      {% for screening in screenings %}
+         <option value="{{ screening.id }}">{{ screening.name }}</option>
+      {% endfor %}
+    </select></p>
+
+    <p><strong>Explanation: </strong><input type="text" name="{{ candidate.id }}_screening_explanation"
+                                                  value="{{ candidate.screening_explanation }}"
+    placeholder="add brief explanation"></p>
+
+    {% if candidate.text_match %}
+        <p><strong>Text Match (higher is better): </strong>{{ candidate.text_match }}</p>
+    {% endif %}
+
+    <p><strong>Forecast: {{ candidate.match }}</strong></p>
+
+    <br>
+    <br>
+
+    {% if candidate.surveys.all %}
+        <p><strong> PREGUNTAS Y RESPUESTAS DEL TEST : </strong></p>
+    {% endif %}
     {% for e in candidate.surveys.all %}
 
     <p><strong> {{ e.question.text_es }} </strong></p>
@@ -57,13 +86,6 @@
     <p> {{ e.text_answer }} </p>
         {% endif %}
     {% endfor %}
-
-<p><strong>Salary: </strong><input type="text" name="{{ candidate.id }}_salary" value="{{ candidate.salary }}"
-    placeholder="add salary"></p>
-
-    {% if candidate.text_match %}
-        <p><strong>Text Match (higher is better): </strong>{{ candidate.text_match }}</p>
-    {% endif %}
 
 <a href="check_interview?candidate_id={{ candidate.id }}">Interview</a>
 
@@ -87,7 +109,7 @@ placeholder="add a comment!"></textarea>
 
 <select class="selectpicker" name="{{ candidate.id }}_state">
       <option value="{{ candidate.state_id}}">{{ candidate.state.name }}</option>
-      {% for state in states%}
+      {% for state in states %}
          <option value="{{ state.id }}">{{ state.name }}</option>
       {% endfor %}
 </select>

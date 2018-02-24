@@ -1,7 +1,8 @@
 """
-Calculates a match value with learning algorithm
+Learns a new model and predicts forecast values.
 """
 import os
+
 from django.core.wsgi import get_wsgi_application
 
 # Environment can use the models as if inside the Django app
@@ -12,7 +13,7 @@ import time
 import pickle
 from datetime import datetime
 
-import common_learning
+from match import common_learning, learn
 
 
 def load_data_for_prediction():
@@ -34,18 +35,22 @@ def predict_and_save(data, model, candidates):
         candidate.save()
 
 
-def predict_all_matches():
+def learn_and_predict():
     """
     Predict matches ans stores them on the candidates.
     :return: None
     """
-    model = pickle.load(open("match_model.p", "rb"))
+    # TODO: load model, when getting new candidate
+    #model = pickle.load(open("match/model.p", "rb"))
+    model = learn.get_model()
+    pickle.dump(model, open("match/model.p", "wb"))
+
     data, candidates = load_data_for_prediction()
     predict_and_save(data, model, candidates)
 
 
 if __name__ == '__main__':
     t0 = time.time()
-    predict_all_matches()
+    learn_and_predict()
     t1 = time.time()
-    print('On {0} PREDICT_MATCH, took: {1}'.format(datetime.today(), t1 - t0))
+    print('On {0} LEARN AND PREDICT_MATCH, took: {1}'.format(datetime.today(), t1 - t0))
