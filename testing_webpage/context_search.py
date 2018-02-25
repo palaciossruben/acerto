@@ -56,11 +56,13 @@ def get_percent_dict(word_relevance):
 
 def get_percent_relevance(word_user_dictionary, user_ids, excluded_words):
     """
+
     Args:
         word_user_dictionary: of the form: {'word': (user_id, relevance) ...}
         user_ids: set with all the user ids.
         excluded_words: set of excluded words.
-    Returns:
+    Returns: Dict with structure:
+        d = { 'word': [('related_word', relevance), ...] }
     """
     word_relevance = dict()
     excluded_relevance = dict()
