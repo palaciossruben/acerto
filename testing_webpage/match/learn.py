@@ -1,16 +1,6 @@
 """
 Calculates a match value with learning algorithm
 """
-import os
-
-from django.core.wsgi import get_wsgi_application
-
-# Environment can use the models as if inside the Django app
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
-application = get_wsgi_application()
-
-import time
-import pickle
 import random
 from sklearn.model_selection import cross_val_score
 from sklearn import svm
@@ -18,7 +8,6 @@ import statistics
 import numpy as np
 import pandas as pd
 from sklearn import metrics
-from datetime import datetime
 from imblearn.over_sampling import ADASYN
 
 from match import common_learning
