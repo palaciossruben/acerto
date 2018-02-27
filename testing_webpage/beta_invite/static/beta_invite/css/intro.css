@@ -23,6 +23,12 @@
 	border-radius:7px;
 	margin-top:15px;
 	padding:10px 0px;
+	background: #FF7A59;
+	color:white;
+}
+
+.free-trial-button:hover {
+    background-color: var(--green);
 }
 
 .main-img-div {
