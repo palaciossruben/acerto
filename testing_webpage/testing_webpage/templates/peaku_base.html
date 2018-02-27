@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable=no">
-    <meta name="keywords" content="selección personal, contratación personal, selección reclutamiento">
+    <meta name="keywords" content="selección personal, contratación personal, selección reclutamiento, staffing, headhunter, head hunter, empresas reclutamiento">
     <meta name="author" content="Juan Pablo Isaza">
     <meta name="google-site-verification" content="LPqesGS5MnESQN-E-LNjZWtRrZAY4rO__YDq8WFjpOs" />
     <meta name="google-site-verification" content="tR13zEizNHyoMXQ0j8F1ImD0Xe3FdWFHUq-ksIKUscE" />
@@ -61,6 +61,7 @@
         })(document);
         smartlook('init', '495c7bd6807a0ab2c17ade2e03cac13bab9f1b84');
     </script>
+
     <!-- Facebook Pixel Code -->
     <script>
         !function(f,b,e,v,n,t,s)
@@ -74,22 +75,15 @@
         fbq('init', '723083944567694');
         fbq('track', 'PageView');
     </script>
-    <!-- MailerLite Universal -->
-    <script>
-        (function(m,a,i,l,e,r){ m['MailerLiteObject']=e;function f(){
-        var c={ a:arguments,q:[]};var r=this.push(c);return "number"!=typeof r?r:f.bind(c.q);}
-        f.q=f.q||[];m[e]=m[e]||f.bind(f.q);m[e].q=m[e].q||f.q;r=a.createElement(i);
-        var _=a.getElementsByTagName(i)[0];r.async=1;r.src=l+'?v'+(~~(new Date().getTime()/1000000));
-        _.parentNode.insertBefore(r,_);})(window, document, 'script', 'https://static.mailerlite.com/js/universal.js', 'ml');
-        var ml_account = ml('accounts', '1042996', 'o9s9l3m3p3', 'load');
-    </script>
-    <!-- End MailerLite Universal -->
+
     <noscript>
         <img height="1" width="1"
         src="https://www.facebook.com/tr?id=723083944567694&ev=PageView
         &noscript=1"/>
     </noscript>
+
     {% block extra_head %}{% endblock %}
+
 </head>
 <body>
     <header>
@@ -140,17 +134,31 @@
         </div>
 
         <div class="social">
-            <a href="https://www.facebook.com/PeakU-Latam-1916685895214519/?ref=aymt_homepage_panel">
+            <a href="https://www.facebook.com/PeakU-Latam-1916685895214519/?ref=aymt_homepage_panel" target="_blank">
                 <img src="{% static 'beta_invite/img/facebook.svg' %}">
             </a>
-            <a href="https://www.linkedin.com/company-beta/16241506/">
+            <a href="https://www.linkedin.com/company-beta/16241506/" target="_blank">
                 <img src="{% static 'beta_invite/img/linkedin.svg' %}">
             </a>
+            <!--
             <a>
-                <img src="{% static 'beta_invite/img/twitter.svg' %}">
-            </a>
+                <img src="{% static 'beta_invite/img/twitter.svg' %}" target="_blank">
+            </a> -->
         </div>
     </footer>
+    <!--CHAT-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/5a5d24064b401e45400c1ca0/default';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+
     <!-- any incoming error_message will print as an alert.-->
     {% if error_message != None %}
         <script>

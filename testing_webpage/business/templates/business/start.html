@@ -10,6 +10,16 @@
     <script type="text/javascript" src="{% static 'business/js/preview_of_start.js' %}"></script>
     <script type="text/javascript" src="{% static 'business/js/add_bullets.js' %}"></script>
     <script type="text/javascript" src="{% static 'business/js/preview_helper.js' %}"></script>
+
+    <!-- MailerLite Universal -->
+    <script>
+        (function(m,a,i,l,e,r){ m['MailerLiteObject']=e;function f(){
+        var c={ a:arguments,q:[]};var r=this.push(c);return "number"!=typeof r?r:f.bind(c.q);}
+        f.q=f.q||[];m[e]=m[e]||f.bind(f.q);m[e].q=m[e].q||f.q;r=a.createElement(i);
+        var _=a.getElementsByTagName(i)[0];r.async=1;r.src=l+'?v'+(~~(new Date().getTime()/1000000));
+        _.parentNode.insertBefore(r,_);})(window, document, 'script', 'https://static.mailerlite.com/js/universal.js', 'ml');
+        var ml_account = ml('accounts', '1042996', 'o9s9l3m3p3', 'load');
+    </script>
 {% endblock %}
 
 {% block content %}
@@ -44,17 +54,7 @@
 
     <!-- After loading every element, sets the first element as active.-->
     <script type="text/javascript">
-        activate_tab('vacancy');
-
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-        s1.async=true;
-        s1.src='https://embed.tawk.to/5a5d24064b401e45400c1ca0/default';
-        s1.charset='UTF-8';
-        s1.setAttribute('crossorigin','*');
-        s0.parentNode.insertBefore(s1,s0);
-        })();
+       activate_tab('vacancy');
     </script>
-
 {% endblock %}
+

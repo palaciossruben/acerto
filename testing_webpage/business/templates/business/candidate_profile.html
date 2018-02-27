@@ -14,7 +14,7 @@
 .accordion {
 
     margin-left:-5px;
-    background-color: #fefefe;
+    background-color: transparent;
     cursor: pointer;
     padding: 5px;
     width: 50%;
@@ -46,108 +46,95 @@
     <br>
     <br>
 
-    <table style="margin-left:10px;">
+    <h4 class="secondary-title" align="center">{{ candidate.user.name }}</h4>
+    <div class="secondary-yellow-bar"></div>
+    <br>
+    <br>
+    <div style="margin:0px auto; align:center; padding:0px 50px; width:90%;">
+        <p><strong>Email:</strong> {{ candidate.user.email }}</p>
+        <p><strong>Teléfono:</strong>
+        {% if candidate.user.phone is None %}
+            Sin teléfono registrado
+        {% else %}
+            {{ candidate.user.phone }}
+        {% endif %}
+        </p>
 
+        <p> <strong>Hoja de vida:</strong>
+        {% if candidate.user.curriculum_url != '#' %}
+            <a style="color:blue; font-size:17px;" href="{% static candidate.user.curriculum_url %}">link</a>
+        {% else %}
+            No disponible
+        {% endif %}
+        </p>
 
-        <tr valign=top>
+        <p><strong>Profesión: </strong>{{ candidate.user.profession.name }}</p>
+        <p><strong>Nivel académico: </strong>{{ candidate.user.education.name }}</p>
 
-                <h4 class="secondary-title" align="center">{{ candidate.user.name }}</h4>
-                <div class="secondary-yellow-bar"></div>
+        <!-- Deprecated -->
+        {% for e in candidate.user.evaluations.all %}
+            {% if candidate.campaign_id == e.campaign_id %}
+                <p><strong>Puntaje prueba (corte: {{ e.cut_score }}): </strong> {{ e.final_score }}</p>
+            {% endif %}
+        {% endfor %}
+
+        {% for e in candidate.evaluations.all %}
+            <p><strong>Puntaje prueba (corte: {{ e.cut_score }}): </strong> {{ e.final_score }}</p>
+        {% endfor %}
+
+        {% if candidate.salary %}
+            <p><strong>Aspiración salarial: </strong>{{ candidate.salary }}</p>
+        {% endif %}
+
+        {% for c in candidate.comments.all %}
+            {% if candidate.comments %}
+                <p><strong>Comentarios: </strong>{{ c.text }}</p>
+            {% endif %}
+        {% endfor %}
+
+            <button class="accordion" style="color:blue;"><strong>&#9776; Ver preguntas y respuestas del test</strong></button>
+            <div class="panel">
+
                 <br>
                 <br>
-            <div style="margin-left:500px;">
-                <p><strong>Email:</strong> {{ candidate.user.email }}</p>
-                <p><strong>Teléfono:</strong>
-                {% if candidate.user.phone is None %}
-                    Sin teléfono registrado
-                {% else %}
-                    {{ candidate.user.phone }}
-                {% endif %}
-                </p>
-
-                <p> <strong>Hoja de vida:</strong>
-                {% if candidate.user.curriculum_url != '#' %}
-                    <a href="{% static candidate.user.curriculum_url %}">link</a>
-                {% else %}
-                    No disponible
-                {% endif %}
-                </p>
-
-                <p><strong>Profesión: </strong>{{ candidate.user.profession.name }}</p>
-                <p><strong>Nivel académico: </strong>{{ candidate.user.education.name }}</p>
-
-                <!-- Deprecated -->
-                {% for e in candidate.user.evaluations.all %}
-                    {% if candidate.campaign_id == e.campaign_id %}
-                        <p><strong>Puntaje prueba (corte: {{ e.cut_score }}): </strong> {{ e.final_score }}</p>
-                    {% endif %}
-                {% endfor %}
-
                 {% for e in candidate.evaluations.all %}
-                    <p><strong>Puntaje prueba (corte: {{ e.cut_score }}): </strong> {{ e.final_score }}</p>
+                    <p><strong>PRUEBAS:</strong></p>
+                    {% for score in e.scores.all %}
+
+                        <p><strong>{{ score.test.name_es }}: </strong>{{ score.value }}</p>
+                    {% endfor %}
                 {% endfor %}
-
-                {% if candidate.salary %}
-                    <p><strong>Aspiración salarial: </strong>{{ candidate.salary }}</p>
-                {% endif %}
-
-                {% for c in candidate.comments.all %}
-                    {% if candidate.comments %}
-                        <p><strong>Comentarios: </strong>{{ c.text }}</p>
+                <br>
+                <p><strong>PREGUNTAS DE CAMPO ABIERTO:</strong></p>
+                {% for e in candidate.surveys.all %}
+                    {% if e.question.type.code == "OF" %}
+                        {% if e.question.text_es %}
+                            <p><strong> {{ e.question.text_es }} </strong>
+                            {% if e.text_answer %}
+                                <p> {{ e.text_answer }} </p>
+                            {% endif %}
+                        {% else %}
+                            Ninguna
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
-
-                    <button class="accordion"><strong>&#9776; Ver preguntas y respuestas del test</strong></button>
-                    <div class="panel">
-
-                        <br>
-                        <br>
-                        {% for e in candidate.evaluations.all %}
-                            <p><strong>PRUEBAS:</strong></p>
-                            {% for score in e.scores.all %}
-
-                                <p><strong>{{ score.test.name_es }}: </strong>{{ score.value }}</p>
-                            {% endfor %}
-                        {% endfor %}
-                        <br>
-                        <p><strong>PREGUNTAS DE CAMPO ABIERTO:</strong></p>
-                        {% for e in candidate.surveys.all %}
-                            {% if e.question.type.code == "OF" %}
-                                {% if e.question.text_es %}
-                                    <p><strong> {{ e.question.text_es }} </strong>
-                                    {% if e.text_answer %}
-                                        <p> {{ e.text_answer }} </p>
-                                    {% endif %}
-                                {% else %}
-                                    Ninguna
-                                {% endif %}
-                            {% endif %}
-
-                        {% endfor %}
-                    </div>
             </div>
+    </div>
 
-            <script>
-                var acc = document.getElementsByClassName("accordion");
-                var i;
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
 
-                for (i = 0; i < acc.length; i++) {
-                    acc[i].addEventListener("click", function() {
-                        this.classList.toggle("active");
-                        var panel = this.nextElementSibling;
-                        if (panel.style.display === "block") {
-                            panel.style.display = "none";
-                        } else {
-                            panel.style.display = "block";
-                        }
-                    });
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
                 }
-            </script>
-        </tr>
-    </table>
-
-    <br>
-    <br>
-    <br>
-
+            });
+        }
+    </script>
 {% endblock %}

@@ -7,6 +7,16 @@
 
 {% block extra_head %}
     <link rel="stylesheet" type="text/css" href="{% static 'beta_invite/css/intro.css' %}">
+
+    <!-- MailerLite Universal -->
+    <script>
+        (function(m,a,i,l,e,r){ m['MailerLiteObject']=e;function f(){
+        var c={ a:arguments,q:[]};var r=this.push(c);return "number"!=typeof r?r:f.bind(c.q);}
+        f.q=f.q||[];m[e]=m[e]||f.bind(f.q);m[e].q=m[e].q||f.q;r=a.createElement(i);
+        var _=a.getElementsByTagName(i)[0];r.async=1;r.src=l+'?v'+(~~(new Date().getTime()/1000000));
+        _.parentNode.insertBefore(r,_);})(window, document, 'script', 'https://static.mailerlite.com/js/universal.js', 'ml');
+        var ml_account = ml('accounts', '1042996', 'o9s9l3m3p3', 'load');
+    </script>
 {% endblock %}
 
 
@@ -45,40 +55,5 @@
                 <p><strong>{% trans "PeakU is revolutionizing the search for candidates, recruitment and selection; We make more efficient processes for companies and we give a personal touch to the candidates to improve their experience. We align people and companies to create relationships where the end result is the creation of long-term value." %}</strong></p>
             </article>
     </section>
-
-    <script type="text/javascript">
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-        s1.async=true;
-        s1.src='https://embed.tawk.to/5a5d24064b401e45400c1ca0/default';
-        s1.charset='UTF-8';
-        s1.setAttribute('crossorigin','*');
-        s0.parentNode.insertBefore(s1,s0);
-        })();
-    </script>
 {% endblock %}
 
-<!--
-<section id="background-blue-rectangle">
-        <h1 class="main-title">Descubre personas increíbles</h1>
-        <h2 id="introduction">{% trans "We connect people with companies, quickly and easily" %}</h2>
-        <div class="img-container">
-            <a href="{% url 'beta_invite:long_form' %}">
-                <img class="person-img" src="{% static 'beta_invite/img/person_intro.png' %}">
-            </a>
-            <a href="{% url 'business:index' %}">
-                <img class="business-img" src="{% static 'beta_invite/img/business_intro.png' %}">
-            </a>
-        </div>
-    </section>
-
-    <section id="background-white-rectangle">
-        <div>
-            <img class="intro-img" src="{% static 'beta_invite/img/intro.png' %}">
-            <p class="description">{% trans "PeakU is revolutionizing the search for candidates, recruitment and selection; We make more efficient processes for companies and we give a personal touch to the candidates to improve their experience. We align people and companies to create relationships where the end result is the creation of long-term value." %}</p>
-        </div>
-    </section>
-
-
--->
