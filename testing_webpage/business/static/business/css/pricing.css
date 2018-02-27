@@ -1,107 +1,71 @@
 /* Plans */
-#pricing-container {
-    width: 90%;
-    margin-left: 5%;
+table {
+    font-size:40px;
+    color:var(--text-color);
 }
 
-.pricing-column {
-    width: 284px;
-	padding-bottom: 40px;
-	border: solid 4px var(--light-grey);
+th, td {
+    padding:10px;
+    align:center;
+    text-align:center;
+    font-size:14px;
 }
 
-.title-blue {
-	text-align: center;
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
+th {
+    font-size:20px;
 }
 
-.pricing-list {
-    margin-top: 15px;
-    list-style-image: url('/static/business/img/check_mark_blue.svg');
-
-    width: 100%;
-    margin-left: auto;
-	margin-right: auto;
+.special-td{
+    text-align:left;
 }
 
-
-.pricing-bullet {
-	font-family: Bitter;
-	font-size: 14px;
-	line-height: 1.45;
-	text-align: left;
-	color: var(--dark-grey);
-
-	width: 100%;
-    margin-left: auto;
-	margin-right: auto;
+a {
+    font-size:14px;
 }
-
-.bold-bullet {
-    /*font-weight: bold;*/
-    color: #5a5a5a;
-}
-
 
 .price {
-	font-size: 22px;
+    font-size:20px;
 	text-align: center;
-	color: var(--green);
-	text-transform: uppercase;
+	color: var(--brochure-blue);
 }
 
-.pricing-comment {
-    font-family: Bitter;
-	font-size: 12px;
-	color: var(--dark-grey);
-	text-align: center;
-	margin-top: 10px;
-
-	width: 100%;
-    margin-left: auto;
-	margin-right: auto;
+.responsive-plans {
+    display:none;
 }
 
-.pricing-more-info {
-	width: 140px;
-	height: 30px;
-	background-color: var(--white);
-	border: solid 2px var(--blue);
-	border-radius: 0px;
+@media (max-width: 679px) and (min-width:520px){
 
-	/*TODO: can be done more accurate */
-	margin-right: 24%;
-	margin-left: 24%;
-	color: var(--blue);
-}
+    .plans th,td {
+        float:none;
+        font-size:12px;
+        padding:5px 0px;
+    }
 
-.pricing-more-info:hover {
-    background-color: var(--light-grey);
-}
+    .price {
+        font-size:10px;
+        margin-bottom:30px;
+    }
 
-/* Uses class composition (ie 2 classes on the html), on the html */
-.additional-title {
-    font-size: 17px;
-}
-
-.additional-bullet {
-    font-size: 12px;
-}
-
-.additional-list {
-    list-style-image: url('/static/business/img/check_mark_green.svg');
-}
-
-.starting {
-    margin-top: 25px;
-}
-
-@media (max-width: 640px){
-    .pricing-column {
-        margin-top: 50px;
-        margin-left: auto;
-        margin-right: auto;
+    .responsive-plans {
+        display:none;
     }
 }
+
+@media (max-width: 519px){
+    .plans{
+        display:none;
+    }
+
+    .responsive-plans{
+        display:block;
+    }
+
+    .responsive-plans th,td, a{
+        font-size:11px;
+    }
+
+    .price {
+        font-size:15px;
+    }
+}
+

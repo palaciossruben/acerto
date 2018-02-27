@@ -325,6 +325,11 @@ def send_contact_emails(contact, language_code):
         pass
 
 
+def contact_form(request):
+
+    return render(request, cts.CONTACT_FORM_VIEW_PATH)
+
+
 def contact_us(request):
     """
     Save a comment from the contact form

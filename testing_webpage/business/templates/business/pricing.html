@@ -1,12 +1,249 @@
 {% load i18n %}
 {% load static %}
 
+<table class="plans">
+        <tr>
+            <th style="width:auto;">
+             <p class="column-title"></p>
+            </th>
+
+            <th style="width:22%;">
+                <p> BÁSICO </p>
+                <a href="{% url 'business:plan' 1 %}">
+                    <form method="get">
+                        Más información
+                    </form>
+                </a>
+            </th>
+
+            <th style="width:22%;">
+                <p> PREMIUM </p>
+                <a href="{% url 'business:plan' 2 %}">
+                    <form method="get">
+                        Más información
+                    </form>
+               </a>
+            </th>
+
+            <th style="width:22%;">
+                <p> HEADHUNTER </p>
+                <a href="{% url 'business:plan' 3 %}">
+                    <form method="get">
+                        Más información
+                    </form>
+               </a>
+            </th>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Búsqueda en múltiples bases de datos</td>
+            <td>&#127761;</td>
+            <td>&#127761;</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Recomendación de candidatos (Top 10%)</td>
+            <td>&#127761;</td>
+            <td>&#127761;</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Herramientas para el seguimiento a los procesos y candidatos</td>
+            <td>&#127761;</td>
+            <td>&#127761;</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Pruebas de selección tipo Google</td>
+            <td></td>
+            <td>&#127761;</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Garantía de contratación</td>
+            <td></td>
+            <td>&#127761;</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Perfiles específicos difíciles de encontrar<br></td>
+            <td></td>
+            <td></td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"></td>
+            <td class="price"><strong>$300.000</strong></td>
+            <td class="price">$1.200.000</td>
+            <td class="price">Cotización</td>
+        </tr>
+</table>
+
+<section class="responsive-plans">
+    <table>
+        <tr>
+            <th style="width:auto;">
+             <p class="column-title">BÁSICO</p>
+            </th>
+
+            <th style="width:auto;">
+                <a href="{% url 'business:plan' 1 %}">
+                    <form method="get">
+                        Más información
+                    </form>
+                </a>
+            </th>
+        </tr>
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Búsqueda en múltiples bases de datos</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Recomendación de candidatos (Top 10%)</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Herramientas para el seguimiento a los procesos y candidatos</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Pruebas de selección tipo Google</td>
+            <td></td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Garantía de contratación</td>
+            <td></td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Perfiles específicos difíciles de encontrar<br></td>
+            <td></td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"></td>
+            <td class="price"><strong>$300.000</strong></td>
+        </tr>
+    </table>
+    <br>
+    <table>
+        <tr>
+            <th style="width:auto;">
+             <p class="column-title">PREMIUM</p>
+            </th>
+
+            <th style="width:auto;">
+                <a href="{% url 'business:plan' 1 %}">
+                    <form method="get">
+                        Más información
+                    </form>
+                </a>
+            </th>
+        </tr>
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Búsqueda en múltiples bases de datos</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Recomendación de candidatos (Top 10%)</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Herramientas para el seguimiento a los procesos y candidatos</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Pruebas de selección tipo Google</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Garantía de contratación</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Perfiles específicos difíciles de encontrar<br></td>
+            <td></td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"></td>
+            <td class="price"><strong>$1.200.000</strong></td>
+        </tr>
+    </table>
+    <br>
+    <table>
+        <tr>
+            <th style="width:auto;">
+             <p class="column-title">HEADHUNTER</p>
+            </th>
+
+            <th style="width:auto;">
+                <a href="{% url 'business:plan' 1 %}">
+                    <form method="get">
+                        Más información
+                    </form>
+                </a>
+            </th>
+        </tr>
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Búsqueda en múltiples bases de datos</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Recomendación de candidatos (Top 10%)</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Herramientas para el seguimiento a los procesos y candidatos</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Pruebas de selección tipo Google</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Garantía de contratación</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Perfiles específicos difíciles de encontrar<br></td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"></td>
+            <td class="price"><strong>Cotización</strong></td>
+        </tr>
+    </table>
+</section>
+
+<!--
 <section class="section-container">
     <h3 class="secondary-title" >{% trans "What type of Personnel are you looking for?"%}</h3>
     <div class="secondary-yellow-bar"></div>
 
     <div id="pricing-container">
-        <div class="row"> <!-- bootstrap row class -->
+        <div class="row">
             <div class="col-sm-4">
                 <div class="pricing-column">
                     <h4 class="title-blue">{% trans "Operational Staff" %}</h4>
@@ -111,3 +348,4 @@
         </div>
     </div>
 </section>
+-->

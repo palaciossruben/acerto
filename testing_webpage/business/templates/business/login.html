@@ -1,4 +1,4 @@
-{% extends 'base.html'%}
+{% extends 'peaku_base.html'%}
 {% load static %}
 {% load i18n %}
 
@@ -17,10 +17,10 @@
 <br>
 <br>
 <br>
-    <div class="welcome-section" id="top" style="">
-      <div class="title-blue" style="margin-top:-100px;">
+    <div class="welcome-section" id="top" >
+      <div style="margin-top:-100px;">
 
-		  <h1 align="center">{% trans "Log in to our platform" %}</h1>
+		  <h1 align="center" style="color:var(--brochure-blue)">{% trans "Log in to our platform" %}</h1>
 
 		 <div class="container" style="margin-top:50px;">
 
@@ -34,20 +34,20 @@
 
 				 {% trans "Your email" as email_placeholder %}
 				<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:15px;
-				 border:solid 2px var(--blue); background-color:white; width: 250px;" id="username" type="email" name="username"
+				 border:solid 2px var(--brochure-blue); background-color:white; width: 250px;" id="username" type="email" name="username"
 				  placeholder="{{ email_placeholder }}" required="required">
 
 				<br>
 
 				{% trans "Enter your password" as password1_placeholder %}
 				<input style="font-family:Raleway; padding-left: 15px; font-size: 14px; height: 40px; margin-top:15px;
-				 border:solid 2px var(--blue); background-color:white; width: 250px;" id="password" type="password" name="password"
+				 border:solid 2px var(--brochure-blue); background-color:white; width: 250px;" id="password" type="password" name="password"
 				  placeholder="{{ password1_placeholder }}" required="required">
 
 				<br>
 
 				{% trans "Log In" as submit_value %}
-				<input style="height: 44px; border: solid 2px black; background:var(--blue); color:black; text-align:center;
+				<input style="height: 44px; border:  2px black; background:var(--brochure-blue); color:white; text-align:center;
 				 width: 81px; font-size: 16px; width: 255px; margin-bottom:20px; margin-top:15px; cursor:pointer;" type="submit" value="{{ submit_value }}">
 				<br>
 				<!--<a style="text-align:center" href="{% url 'password_reset' %}">¿Olvidaste la contraseña?</a>-->

@@ -1,4 +1,4 @@
-{% extends 'base.html'%}
+{% extends 'peaku_base.html'%}
 {% load i18n %}
 {% load static %}
 
@@ -11,45 +11,40 @@
 
 
 {% block content %}
-    <div id="background-blue-rectangle">
-        <h1 class="main-title">{% trans "Enter, Find, Start" %}</h1>
-        <h2 id="description">{% trans "We connect people with companies, quickly and easily" %}</h2>
+    <section class="blue">
+        <h1 class="main-title">Descubre personas increíbles</h1>
+        <h2 class="secondary-title">{% trans "We connect people with companies, quickly and easily" %}</h2>
+        <div class="content">
 
-        <div id="who-am-i-div">
-            <a href="{% url 'beta_invite:long_form' %}">
-                <div id="user">
-                    <img class="avatar-img" src="{% static 'beta_invite/img/user.png' %}">
-                    <form id="person-form">
-                        {% trans "Person" as person %}
-                        <input id="person-input" type="button" value="{{ person }}">
-                    </form>
-                </div>
-            </a>
+            <div class="person">
+                <a href="{% url 'beta_invite:long_form' %}">
+                    <input class="blue-button free-trial-button" type="button"value="PERSONAS">
+                </a>
+            </div>
 
-            <p id="im">{% trans "I'm" %}</p>
-            <a href="{% url 'business:index' %}">
-                <div id="business">
-                    <img class="avatar-img" src="{% static 'beta_invite/img/business.png' %}">
-                    <form id="business-form">
-                        {% trans "Business" as business %}
-                        <input id="business-input" type="button" value="{{ business }}">
-                    </form>
-                </div>
-            </a>
+            <div class="main-img-div">
+                <img class="main-img" src="{% static 'beta_invite/img/selection.png' %}">
+            </div>
+
+            <div class="business">
+                <a href="{% url 'business:index' %}">
+                    <input class="blue-button free-trial-button" type="button"value="EMPRESAS">
+                </a>
+            </div>
+
         </div>
-    </div>
-    <div id="background-white-rectangle">
+    </section>
 
-        <img id="intro-nice-photo" src="{% static 'beta_invite/img/intro_nice_photo.jpg' %}"
-		 srcset="{% static 'beta_invite/img/intro_nice_photo@2x.jpg' %} 2x,
-					 {% static 'beta_invite/img/intro_nice_photo@3x.jpg' %} 3x">
-
-        <h2 class="green-box">
-            <p>{% trans 'What is PeakU?' %}</p>
-        </h2>
-
-        <p class="paragraph" >{% trans "PeakU is revolutionizing the search for candidates, recruitment and selection; We make more efficient processes for companies and we give a personal touch to the candidates to improve their experience. We align people and companies to create relationships where the end result is the creation of long-term value." %}</p>
-    </div>
+    <section class="main">
+            <div>
+                <img class="left-img" src="{% static 'beta_invite/img/intro.png' %}">
+            </div>
+            <article class="description">
+                <h2>¿Qué es PeakU?</h2>
+                <br/>
+                <p><strong>{% trans "PeakU is revolutionizing the search for candidates, recruitment and selection; We make more efficient processes for companies and we give a personal touch to the candidates to improve their experience. We align people and companies to create relationships where the end result is the creation of long-term value." %}</strong></p>
+            </article>
+    </section>
 
     <script type="text/javascript">
         var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
@@ -62,7 +57,28 @@
         s0.parentNode.insertBefore(s1,s0);
         })();
     </script>
-
 {% endblock %}
 
+<!--
+<section id="background-blue-rectangle">
+        <h1 class="main-title">Descubre personas increíbles</h1>
+        <h2 id="introduction">{% trans "We connect people with companies, quickly and easily" %}</h2>
+        <div class="img-container">
+            <a href="{% url 'beta_invite:long_form' %}">
+                <img class="person-img" src="{% static 'beta_invite/img/person_intro.png' %}">
+            </a>
+            <a href="{% url 'business:index' %}">
+                <img class="business-img" src="{% static 'beta_invite/img/business_intro.png' %}">
+            </a>
+        </div>
+    </section>
 
+    <section id="background-white-rectangle">
+        <div>
+            <img class="intro-img" src="{% static 'beta_invite/img/intro.png' %}">
+            <p class="description">{% trans "PeakU is revolutionizing the search for candidates, recruitment and selection; We make more efficient processes for companies and we give a personal touch to the candidates to improve their experience. We align people and companies to create relationships where the end result is the creation of long-term value." %}</p>
+        </div>
+    </section>
+
+
+-->
