@@ -2,6 +2,9 @@
 	width: 100%;
 	height: 100%;
 	font-size: 20px;
+	border:none;
+	border-radius:7px;
+	margin-top:15px;
 }
 
 #free-trial-form {
@@ -9,12 +12,22 @@
 	height: 50px;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: -140px;
 	margin-bottom: 94px;
-
 	/* The element goes on top of background */
 	z-index:1;
 	position:relative;
+}
+
+.description {
+    width: 48%;
+    font-size:25px;
+    float:left;
+    margin-right:50px;
+    margin-left:30px;
+}
+
+.video {
+    width: 40%;
 }
 
 #search-input::placeholder {
@@ -23,23 +36,31 @@
 }
 
 .main-title {
-
 	margin-left: 14.2%;
-	margin-top: 175px;
-	margin-bottom: 0px;
-
+	margin-top: -260px;
+	margin-bottom: 10px;
     /* The element goes on top of the .background-people instead of below */
-	position:absolute; top:0; left:0;
+	position:relative; top:0px; left:0px;
+}
+
+.main-intro {
+	margin-top: 20px;
+	margin-left: 4%;
+	margin-bottom: 20px;
+	color:white;
+	align:center;
+	text-align:center;
+    /* The element goes on top of the .background-people instead of below */
+	position:relative; top:0; left:0px;
 }
 
 .green-box {
 	width: 435px;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: -30px;
+	margin-top: -45px;
 	text-align: center;
 }
-
 
 /* Why Choose Us? */
 #choose-list-container {
@@ -48,40 +69,51 @@
     list-style-image: url('/static/business/img/check_mark_green.svg');
 }
 
-.choose-bullet {
+.choose-bullet, .special-choose-bullet {
 	width: 100%;
 	height: 25px;
 	font-family: Bitter;
 	font-size: 16px;
 	line-height: 1.56;
 	text-align: left;
+	padding:5px 0px;
 	color: var(--text-color);
 }
 
 .choose-bullet:not(:last-child) {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
+@media (min-width: 1100.1px){
 
-/* Contact Us*/
-#anchor-trick {
-    font-size:1px;
-    margin: auto;
+    .left-img {
+        width:90%;
+    }
+
+    .choose-bullet{
+        font-size: 15px;
+         margin:25px 0px;
+    }
 }
 
-.form-text-area {
-	height: 121px;
-}
+@media (max-width: 1100px){
 
-
-@media (max-width: 640px){
-
-    .main-title {
+    .main-title, .secondary-title {
         width: 96%;
         margin-left: auto;
         margin-right: auto;
         font-size: 25px;
-        margin-top: 67px;
+    }
+
+    .secondary-title {
+        margin-top: 70px;
+    }
+
+    .main-intro {
+        width: 96%;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 15px;
     }
 
     #search-input {
@@ -95,17 +127,69 @@
     .green-box {
         width: 100%;
         font-size: 16px;
-        margin-top: 0px;
     }
 
     .plan-column {
         margin-top: 50px;
-
         margin-left: auto;
         margin-right: auto;
     }
 
     .choose-bullet{
-        font-size: 14px;
+        font-size: 12px;
+         margin:25px 0px;
     }
+
+    .left-img {
+        width:100%;
+    }
+
+    .description {
+        width:95%;
+        float:none;
+    }
+
+    .video {
+        width:95%;
+        float:none;
+        padding:0px 5px;
+        margin-left:10px;
+    }
+}
+
+@media (max-width: 400px){
+    .main-title {
+        margin-top:-230px;
+    }
+}
+
+@media (max-width: 380px){
+    .main-title {
+        margin-top:-200px;
+    }
+
+    .main-intro {
+        display: none;
+    }
+}
+
+@media (max-width: 330px){
+    .main-title {
+        margin-top:-170px;
+    }
+
+    .main-intro {
+        display: none;
+    }
+
+    #free-trial-form {
+        width:200px;
+    }
+
+    .free-trial-button {
+	width: 100%;
+	height: 100%;
+	font-size: 15px;
+    }
+
 }

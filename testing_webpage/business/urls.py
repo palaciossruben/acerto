@@ -6,6 +6,7 @@ app_name = 'business'
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^contáctanos$', views.contact_form, name='contact_form'),
     url(r'^search$', views.search, name='search'),
     url(r'^results$', views.calculate_result, name='results'),
     url(r'^login$', auth_views.login, {'template_name': 'business/login.html'}, name='login'),

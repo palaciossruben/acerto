@@ -1,4 +1,4 @@
-{% extends 'base.html'%}
+{% extends 'peaku_base.html'%}
 {% load static %}
 {% load i18n %}
 
@@ -12,11 +12,12 @@
 {% block content %}
     <br>
     <caption><h3 class="secondary-title" align="center">
+        <strong>
         CAMPAÑA
         {% if campaign.free_trial%}
             GRATUITA
         {% endif %}
-        {{ campaign.name|upper }}</h3></caption>
+            {{ campaign.name|upper }}</strong></h3></caption>
     <div class="secondary-yellow-bar"></div>
     <p class="title" align="center" style="font-family:var(--Bitter); font-size:18px; color:var(--text-color)"> En total han aplicado <b id="total"></b> personas a tu campaña</p>
     {% if campaign.free_trial == True %}
