@@ -100,40 +100,6 @@
     background-color: var(--light-grey);
 }
 
-
-/* form-inputfile */
-/* see: https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/ */
-.form-inputfile {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
-}
-
-.form-inputfile + label {
-    width: 170px;
-    height: 40px;
-    font-size: 1em;
-    text-align: center;
-    padding-top: 5px;
-    color: var(--blue);
-    border: solid 4px var(--blue);
-    margin-bottom: 5px;
-    cursor: pointer;
-}
-
-.form-inputfile:focus + label,
-.form-inputfile + label:hover {
-    background-color: var(--light-grey);
-}
-
-.form-inputfile + label * {
-	pointer-events: none;
-}
-
-
 @media (max-width: 640px){
 
     /* Defines additional position params for a default "nice" view */

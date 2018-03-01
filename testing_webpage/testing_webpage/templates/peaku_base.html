@@ -93,7 +93,7 @@
             </a>
             {% if 'seleccion_de_personal' in request.path %}
                 <ul>
-                    <li class="index"><a href="{% url 'business:logout' %}">INICIO</a></li>
+                    <li class="index"><a href="{% url 'business:index' %}">INICIO</a></li>
                     <li><a href="{% url 'business:contact_form' %}">CONTACTO</a></li>
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'business:dashboard' user.id %}">CAMPAÑAS</a></li>
