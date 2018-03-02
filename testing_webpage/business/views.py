@@ -490,7 +490,10 @@ def dashboard(request, pk):
         return redirect('business:login')
 
     campaign_id = request.GET.get('campaign_id')
-    campaign = Campaign.objects.get(pk=campaign_id)
+    if campaign_id:
+        campaign = Campaign.objects.get(pk=campaign_id)
+    else:
+        campaign = business_user.campaigns.all()[0]
 
     params, states = candidate_module.get_rendering_data(campaign.id)
 

@@ -18,7 +18,7 @@ urlpatterns = [
     url(r'^seleccion_gratis_enviar$', views.start_post, name='start_post'),
     url(r'^home$', views.home, name='home'),
     url(r'^campañas/(?P<pk>\d+)$', views.business_campaigns, name='business_campaigns'),
-    url(r'^tablero_de_control/(?P<pk>\d+).*$', views.dashboard, name='dashboard'),
+    url(r'^tablero_de_control/(?P<pk>\d+)\?{0,1}.*$', views.dashboard, name='dashboard'),
     url(r'^perfil_del_candidato/(?P<pk>\d+)$', views.candidate_profile, name='candidate_profile'),
 
     # TODO: Worst hack ever, replace for something like: \?id=[0-9]+
