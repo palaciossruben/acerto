@@ -7,7 +7,7 @@ application = get_wsgi_application()
 
 import smtplib
 
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from ipware.ip import get_ip
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext_lazy as _
@@ -324,6 +324,11 @@ def send_contact_emails(contact, language_code):
         pass
 
 
+def contact_form(request):
+
+    return render(request, cts.CONTACT_FORM_VIEW_PATH)
+
+
 def contact_us(request):
     """
     Save a comment from the contact form
@@ -466,6 +471,9 @@ def dashboard(request, pk):
     """
 
     business_user = BusinessUser.objects.get(pk=pk)
+
+    if request.user.id != business_user.auth_user.id:
+        return redirect('business:login')
 
     # TODO: Make it for more than 1 campaign. For now it only takes first element.
     campaign = business_user.campaigns.all()[0]

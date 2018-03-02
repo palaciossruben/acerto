@@ -11,10 +11,10 @@
 
 .green-box {
     height: 47px;
-	background-color: var(--green);
 	font-size: 20px;
 	line-height: 1.5;
 	color: var(--blue);
+	background-color: var(--green);
 
 	/* use this last 2 properties together */
 	z-index: 1;

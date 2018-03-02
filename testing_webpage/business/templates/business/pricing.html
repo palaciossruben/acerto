@@ -1,113 +1,238 @@
 {% load i18n %}
 {% load static %}
 
-<section class="section-container">
-    <h3 class="secondary-title" >{% trans "What type of Personnel are you looking for?"%}</h3>
-    <div class="secondary-yellow-bar"></div>
+<table class="plans">
+        <tr>
+            <th style="width:auto;">
+             <p class="column-title"></p>
+            </th>
 
-    <div id="pricing-container">
-        <div class="row"> <!-- bootstrap row class -->
-            <div class="col-sm-4">
-                <div class="pricing-column">
-                    <h4 class="title-blue">{% trans "Operational Staff" %}</h4>
+            <th style="width:22%;">
+                <p> BÁSICO </p>
+                <a href="{% url 'business:plan' 1 %}">
+                    <form method="get">
+                        <input class="plan-button" type="button" value="Adquirir plan">
+                    </form>
+                </a>
+            </th>
 
-                    <p class="pricing-comment">{% trans 'eg: call agent, driver' %}</p>
+            <th style="width:22%;">
+                <p> PREMIUM </p>
+                <a href="{% url 'business:plan' 2 %}">
+                    <form method="get">
+                        <input class="plan-button" type="button" value="Adquirir plan">
+                    </form>
+               </a>
+            </th>
 
-                    <ul class="pricing-list">
-                        <li class="pricing-bullet">{% trans "Search on social media" %}</li>
-                        <li class="pricing-bullet">{% trans "Search on PeakU Database" %}</li>
-                        <li class="pricing-bullet">{% trans "Search on other platforms" %}</li>
-                        <li class="pricing-bullet">{% trans "Custom technical tests" %}</li>
-                        <li class="pricing-bullet">{% trans "Custom soft skills tests" %}</li>
-                        <li class="pricing-bullet">{% trans "Around 100 applicants" %}</li>
-                        <li class="pricing-bullet">{% trans "Max. 10 business days" %}</li>
-                        {# Translators: xgettext:no-python-format #}
-                        <li class="pricing-bullet bold-bullet">{% trans "10 candidates (top 10%)" %}</li>
-                    </ul>
-                    <h4 class="title-blue additional-title">{% trans "Extras" %}</h4>
-                    <ul class="pricing-list additional-list">
-                        <li class="pricing-bullet additional-bullet">{% trans "Personal Interview +$60" %}</li>
-                        <li class="pricing-bullet additional-bullet">{% trans "Hiring Guarantee +$120" %}</li>
-                    </ul>
+            <th style="width:22%;">
+                <p> HEADHUNTER </p>
+                <a href="{% url 'business:plan' 3 %}">
+                    <form method="get">
+                        <input class="plan-button" type="button" value="Adquirir plan">
+                    </form>
+               </a>
+            </th>
+        </tr>
 
-                    <p class="pricing-comment starting">{% trans "starting" %}</p>
-                    <h4 class="price">{% trans "$180" %}</h4>
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Búsqueda en múltiples bases de datos</td>
+            <td>&#127761;</td>
+            <td>&#127761;</td>
+            <td>&#127761;</td>
+        </tr>
 
-                    <a href="{% url 'business:plan' 1 %}">
-                        <form method="get">
-                            <input class="pricing-more-info" type="button" value="{% trans 'more information' %}">
-                        </form>
-                    </a>
-                </div>
-            </div>
-            <div class="col-sm-4">
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Recomendación de candidatos (Top 10%)</td>
+            <td>&#127761;</td>
+            <td>&#127761;</td>
+            <td>&#127761;</td>
+        </tr>
 
-                <div class="pricing-column">
-                    <h4 class="title-blue">{% trans "Professional" %}</h4>
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Herramientas para el seguimiento a los procesos y candidatos</td>
+            <td>&#127761;</td>
+            <td>&#127761;</td>
+            <td>&#127761;</td>
+        </tr>
 
-                    <p class="pricing-comment">{% trans 'eg: engineer, lawyer, accountant' %}</p>
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Pruebas de selección tipo Google</td>
+            <td></td>
+            <td>&#127761;</td>
+            <td>&#127761;</td>
+        </tr>
 
-                    <ul class="pricing-list">
-                        <li class="pricing-bullet">{% trans "Search on social media" %}</li>
-                        <li class="pricing-bullet">{% trans "Search on PeakU Database" %}</li>
-                        <li class="pricing-bullet">{% trans "Search on other platforms" %}</li>
-                        <li class="pricing-bullet">{% trans "Custom technical tests" %}</li>
-                        <li class="pricing-bullet">{% trans "Custom soft skills tests" %}</li>
-                        <li class="pricing-bullet">{% trans "Around 50 applicants" %}</li>
-                        <li class="pricing-bullet">{% trans "Max. 15 business days" %}</li>
-                        {# Translators: xgettext:no-python-format #}
-                        <li class="pricing-bullet bold-bullet">{% trans "5 candidates (top 10%)" %}</li>
-                    </ul>
-                    <h4 class="title-blue additional-title">{% trans "Extras" %}</h4>
-                    <ul class="pricing-list additional-list">
-                        <li class="pricing-bullet additional-bullet">{% trans "Personal Interview +$214" %}</li>
-                        <li class="pricing-bullet additional-bullet">{% trans "Hiring Guarantee +$245" %}</li>
-                    </ul>
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Garantía de contratación</td>
+            <td></td>
+            <td>&#127761;</td>
+            <td>&#127761;</td>
+        </tr>
 
-                    <p class="pricing-comment starting">{% trans "starting" %}</p>
-                    <h4 class="price">{% trans "$240" %}</h4>
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Perfiles específicos difíciles de encontrar<br></td>
+            <td></td>
+            <td></td>
+            <td>&#127761;</td>
+        </tr>
 
-                    <a href="{% url 'business:plan' 2 %}">
-                        <form method="get">
-                            <input class="pricing-more-info" type="button" value="{% trans 'more information' %}">
-                        </form>
-                    </a>
-                </div>
-            </div>
-            <div class="col-sm-4">
+        <tr valign=top>
+            <td class="special-td"></td>
+            <td class="price"><strong>$300.000</strong></td>
+            <td class="price"><strong>$1.200.000</strong></td>
+            <td class="price"><strong>Cotización</strong></td>
+        </tr>
+</table>
 
-                <div class="pricing-column">
-                    <h4 class="title-blue">HEAD HUNTER</h4>
+<section class="responsive-plans">
+    <table>
+        <tr>
+            <th style="width:auto;">
+             <p class="column-title">BÁSICO</p>
+            </th>
 
-                    <p class="pricing-comment">{% trans 'eg: software developer in finance sector' %}</p>
+            <th style="width:auto;">
+                <a href="{% url 'business:plan' 1 %}">
+                    <form method="get">
+                        <input class="plan-button" type="button" value="Adquirir plan">
+                    </form>
+                </a>
+            </th>
+        </tr>
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Búsqueda en múltiples bases de datos</td>
+            <td>&#127761;</td>
+        </tr>
 
-                    <ul class="pricing-list">
-                        <li class="pricing-bullet">{% trans "Search on social media" %}</li>
-                        <li class="pricing-bullet">{% trans "Search on PeakU Database" %}</li>
-                        <li class="pricing-bullet">{% trans "Search on other platforms" %}</li>
-                        <li class="pricing-bullet">{% trans "Custom technical tests" %}</li>
-                        <li class="pricing-bullet">{% trans "Custom soft skills tests" %}</li>
-                        <li class="pricing-bullet">{% trans "Around 30 applicants" %}</li>
-                        <li class="pricing-bullet">{% trans "Max. 20 business days" %}</li>
-                        {# Translators: xgettext:no-python-format #}
-                        <li class="pricing-bullet bold-bullet">{% trans "3 candidates (top 10%)" %}</li>
-                    </ul>
-                    <h4 class="title-blue additional-title">{% trans "Extras" %}</h4>
-                    <ul class="pricing-list additional-list">
-                        <li class="pricing-bullet additional-bullet">{% trans "Personal Interview (contact us)" %}</li>
-                        <li class="pricing-bullet additional-bullet">{% trans "Hiring Guarantee (contact us)" %}</li>
-                    </ul>
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Recomendación de candidatos (Top 10%)</td>
+            <td>&#127761;</td>
+        </tr>
 
-                    <p class="pricing-comment starting">{% trans "starting" %}</p>
-                    <h4 class="price">{% trans "$540" %}</h4>
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Herramientas para el seguimiento a los procesos y candidatos</td>
+            <td>&#127761;</td>
+        </tr>
 
-                   <a href="{% url 'business:plan' 3 %}">
-                        <form method="get">
-                            <input class="pricing-more-info" type="button" value="{% trans 'more information' %}">
-                        </form>
-                   </a>
-                </div>
-            </div>
-        </div>
-    </div>
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Pruebas de selección tipo Google</td>
+            <td></td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Garantía de contratación</td>
+            <td></td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Perfiles específicos difíciles de encontrar<br></td>
+            <td></td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"></td>
+            <td class="price"><strong>$300.000</strong></td>
+        </tr>
+    </table>
+    <br>
+    <table>
+        <tr>
+            <th style="width:auto;">
+             <p class="column-title">PREMIUM</p>
+            </th>
+
+            <th style="width:auto;">
+                <a href="{% url 'business:plan' 1 %}">
+                    <form method="get">
+                        <input class="plan-button" type="button" value="Adquirir plan">
+                    </form>
+                </a>
+            </th>
+        </tr>
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Búsqueda en múltiples bases de datos</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Recomendación de candidatos (Top 10%)</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Herramientas para el seguimiento a los procesos y candidatos</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Pruebas de selección tipo Google</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Garantía de contratación</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Perfiles específicos difíciles de encontrar<br></td>
+            <td></td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"></td>
+            <td class="price"><strong>$1.200.000</strong></td>
+        </tr>
+    </table>
+    <br>
+    <table>
+        <tr>
+            <th style="width:auto;">
+             <p class="column-title">HEADHUNTER</p>
+            </th>
+
+            <th style="width:auto;">
+                <a href="{% url 'business:plan' 1 %}">
+                    <form method="get">
+                        <input class="plan-button" type="button" value="Adquirir plan">
+                    </form>
+                </a>
+            </th>
+        </tr>
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Búsqueda en múltiples bases de datos</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Recomendación de candidatos (Top 10%)</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Herramientas para el seguimiento a los procesos y candidatos</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Pruebas de selección tipo Google</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Garantía de contratación</td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Perfiles específicos difíciles de encontrar<br></td>
+            <td>&#127761;</td>
+        </tr>
+
+        <tr valign=top>
+            <td class="special-td"></td>
+            <td class="price"><strong>Cotización</strong></td>
+        </tr>
+    </table>
 </section>

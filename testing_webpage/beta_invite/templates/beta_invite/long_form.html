@@ -1,4 +1,4 @@
-{% extends 'base.html'%}
+{% extends 'peaku_base.html'%}
 {% load i18n %}
 {% load static %}
 
@@ -23,7 +23,7 @@
                      {% static 'beta_invite/img/girls_mobile@3x.jpg' %} 3x"
              class="background-people-mobile">
 
-        <h1 class="main-title">{% trans "Discover your true passion" %}</h1>
+        <h1 class="main-title">{{ job_title }}</h1>
 
         <h2 class="green-box">
             <p>{% trans 'APPLY NOW!' %}</p>
@@ -35,7 +35,7 @@
             <div class="col-sm-6">
                 <div id="job-description-container">
 
-                    <h2 class="title-blue" id="job-title" align="center">{{ job_title }}</h2>
+                    <h2 class="title-blue" id="job-title" align="center">Descripción general</h2>
                     <!--<h3 class="title-blue-small">{{ city }}</h3>we need add this, but only when the campaign object have the city property-->
 
                     <div id="pre-preview">
@@ -84,7 +84,7 @@
 
                     <input class="form-text" id="phone" type="tel" name="phone"
 				  		placeholder="{% trans 'Your phone' %}" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
-
+                    <!--
                     <select class="form-select" id="country" name="country" required>
                         <option value="">{% trans "Select Country" %}</option>
                         {% for country in countries%}
@@ -107,10 +107,11 @@
                             <option value={{ profession.id }}>{{ profession.name }}</option>
                         {% endfor %}
                     </select>
+                    -->
 
                     {% if is_desktop %}
-                        <input type="file" id="file" name="curriculum" class="form-inputfile" required>
-                        <label for="file">{% trans "Upload your resume" %}</label>
+                        <input type="file" id="file" name="curriculum" class="form-inputfile" onchange="pressed()" required>
+                        <label for="file" id="fileLabel">{% trans "Upload your resume" %}</label>
                     {% endif %}
 
                     <label class="form-checkbox-container">
@@ -123,5 +124,18 @@
             </div>
         </div>
     </section>
-
+    <script>
+        window.pressed = function(){
+            var a = document.getElementById('file');
+            if(a.value == "")
+            {
+                fileLabel.innerHTML = "Choose file";
+            }
+            else
+            {
+                var theSplit = a.value.split('\\');
+                fileLabel.innerHTML = theSplit[theSplit.length-1];
+            }
+        };
+    </script>
 {% endblock %}

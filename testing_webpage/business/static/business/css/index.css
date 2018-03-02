@@ -1,45 +1,78 @@
-.free-trial-button {
-	width: 100%;
-	height: 100%;
-	font-size: 20px;
+.index-img {
+    width:100%;
+}
+
+.video {
+    width: 40%;
+}
+
+.section-container {
+    margin-top:60px;
+}
+
+.main-title {
+    margin:auto;
+	margin-top: -260px;
+	margin-bottom: 15px;
+    /* The element goes on top of the .background-people instead of below */
+	position:relative; top:0px;
+}
+
+.main-intro {
+	margin-top: 5px;
+	margin:auto;
+	color:white;
+	align:center;
+	text-align:center;
+	text-shadow: 0 2px 4px var(--very-dark);
+    /* The element goes on top of the .background-people instead of below */
+	position:relative; top:0; left:0px;
 }
 
 #free-trial-form {
-	width: 250px;
+	width: 280px;
 	height: 50px;
+	margin-top:50px;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: -140px;
-	margin-bottom: 94px;
-
 	/* The element goes on top of background */
 	z-index:1;
 	position:relative;
 }
 
-#search-input::placeholder {
-	color: var(--blue);
-	opacity: 0.5;
+.free-trial-button {
+	width: 100%;
+	height: 100%;
+	font-size: 22px;
+	border:none;
+	border-radius:7px;
+	color: white;
+	background-color: var(--green);
+	word-spacing:2px;
 }
 
-.main-title {
-
-	margin-left: 14.2%;
-	margin-top: 175px;
-	margin-bottom: 0px;
-
-    /* The element goes on top of the .background-people instead of below */
-	position:absolute; top:0; left:0;
+.plan-button {
+	width: 100%;
+	height: 100%;
+	font-size: 18px;
+	border:none;
+	border-radius:7px;
+	color: white;
+	background-color: var(--orange);
+	word-spacing:2px;
 }
 
-.green-box {
-	width: 435px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: -30px;
-	text-align: center;
+.free-trial-button:hover {
+    background: #FF7A59;
 }
 
+.description {
+    width: 48%;
+    font-size:25px;
+    float:left;
+    margin-right:50px;
+    margin-left:30px;
+}
 
 /* Why Choose Us? */
 #choose-list-container {
@@ -48,40 +81,46 @@
     list-style-image: url('/static/business/img/check_mark_green.svg');
 }
 
-.choose-bullet {
+.choose-bullet, .special-choose-bullet {
 	width: 100%;
 	height: 25px;
 	font-family: Bitter;
 	font-size: 16px;
 	line-height: 1.56;
 	text-align: left;
+	padding:5px 0px;
 	color: var(--text-color);
 }
 
 .choose-bullet:not(:last-child) {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
+/*****************************RESPONSIVE*******************************************************************/
 
-/* Contact Us*/
-#anchor-trick {
-    font-size:1px;
-    margin: auto;
+@media (min-width: 1100.1px){
+
+    .left-img {
+        width:90%;
+    }
+
+    .choose-bullet{
+        font-size: 15px;
+         margin:25px 0px;
+    }
 }
 
-.form-text-area {
-	height: 121px;
-}
+@media (max-width: 1100px){
 
-
-@media (max-width: 640px){
-
-    .main-title {
+    .secondary-title {
         width: 96%;
         margin-left: auto;
         margin-right: auto;
         font-size: 25px;
-        margin-top: 67px;
+    }
+
+    .secondary-title {
+        margin-top: 70px;
     }
 
     #search-input {
@@ -95,17 +134,206 @@
     .green-box {
         width: 100%;
         font-size: 16px;
-        margin-top: 0px;
     }
 
     .plan-column {
         margin-top: 50px;
-
         margin-left: auto;
         margin-right: auto;
     }
 
     .choose-bullet{
-        font-size: 14px;
+        font-size: 12px;
+         margin:25px 0px;
     }
+
+    .left-img {
+        width:100%;
+    }
+
+    .description {
+        width:95%;
+        float:none;
+    }
+
+    .video {
+        width:95%;
+        float:none;
+        padding:0px 5px;
+        margin-left:10px;
+    }
+}
+
+/*****************************TITLE  RESPONSIVE*******************************************************************/
+
+@media (max-width: 1240px) and (min-width: 856px){
+    .main-title {
+        margin-top:-250px;
+        font-size:33px;
+        margin-bottom:20px;
+    }
+
+    .main-intro {
+        font-size:25px;
+    }
+}
+
+@media (max-width: 855px) and (min-width: 805.5px) {
+    .main-title {
+        margin-top:-250px;
+        font-size:35px;
+        margin-bottom:30px;
+    }
+
+    .main-intro {
+        font-size:25px;
+    }
+
+    #free-trial-form {
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 805px) and (min-width: 760px) {
+    .main-title {
+        margin-top:-240px;
+        font-size:30px;
+        margin-bottom:30px;
+    }
+
+    .main-intro {
+        font-size:20px;
+    }
+
+    #free-trial-form {
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 759px) and (min-width: 701px) {
+    .main-title {
+        margin-top:-220px;
+        font-size:30px;
+        margin-bottom:30px;
+    }
+
+    .main-intro {
+        font-size:20px;
+    }
+
+    #free-trial-form {
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 700px) and (min-width: 631px) {
+    .main-title {
+        margin-top:-210px;
+        font-size:20px;
+        margin-bottom:0px;
+    }
+
+    .main-intro {
+        font-size:15px;
+    }
+
+    #free-trial-form {
+        width:200px;
+        margin-top: 30px;
+    }
+
+    .free-trial-button, .plan-button {
+        width: 100%;
+        height: 100%;
+        font-size: 15px;
+    }
+
+}
+
+@media (max-width: 630px) and (min-width: 581px) {
+    .main-title {
+        margin-top:-180px;
+        font-size:20px;
+        margin-bottom:0px;
+    }
+
+    .main-intro {
+        font-size:15px;
+    }
+
+    #free-trial-form {
+        width:200px;
+        margin-top: 30px;
+    }
+
+    .free-trial-button, .plan-button {
+        width: 100%;
+        height: 100%;
+        font-size: 15px;
+    }
+
+}
+
+
+@media (max-width: 580px) and (min-width: 551px) {
+    .main-title {
+        margin-top:-170px;
+        font-size:20px;
+        margin-bottom:0px;
+    }
+
+    .main-intro {
+        font-size:15px;
+    }
+
+    #free-trial-form {
+        width:200px;
+        margin-top: 30px;
+    }
+
+    .free-trial-button, .plan-button {
+        width: 100%;
+        height: 100%;
+        font-size: 15px;
+    }
+
+}
+
+
+
+
+
+@media (max-width: 300px){
+    .index-img {
+        height:120px;
+    }
+}
+
+@media (max-width: 550px){
+    .main-title {
+        margin-top:-90px;
+        font-size:17px;
+        line-height:22px;
+        margin-bottom:0px;
+    }
+
+    .main-intro {
+        display: none;
+    }
+
+    #free-trial-form {
+        width:200px;
+        margin-top: 0px;
+    }
+
+    .free-trial-button, .plan-button {
+        width: 100%;
+        height: 100%;
+        font-size: 15px;
+    }
+
+    .section-container {
+        margin-top:30px;
+}
+
 }
