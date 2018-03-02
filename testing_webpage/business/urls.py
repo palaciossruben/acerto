@@ -17,7 +17,8 @@ urlpatterns = [
     url(r'^business_applied$', views.business_applied, name='business_applied'),
     url(r'^seleccion_gratis_enviar$', views.start_post, name='start_post'),
     url(r'^home$', views.home, name='home'),
-    url(r'^tablero_de_control/(?P<pk>\d+)$', views.dashboard, name='dashboard'),
+    url(r'^campañas/(?P<pk>\d+)$', views.business_campaigns, name='business_campaigns'),
+    url(r'^tablero_de_control/(?P<pk>\d+).*$', views.dashboard, name='dashboard'),
     url(r'^perfil_del_candidato/(?P<pk>\d+)$', views.candidate_profile, name='candidate_profile'),
 
     # TODO: Worst hack ever, replace for something like: \?id=[0-9]+
@@ -27,6 +28,4 @@ urlpatterns = [
     url(r'^plan/(?P<pk>\d+)$', views.plan, name='plan'),
     url(r'^trade_client$', views.trade_client, name='trade_client'),
     url(r'^search_trade$', views.search_trade, name='search_trade'),
-
-    url(r'^HR_dashboard_pro5$', views.provisional_dashboard, name='provisional_dashboard'),
 ]
