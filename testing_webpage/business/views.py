@@ -14,13 +14,12 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import login, authenticate
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.models import User as internal_user
 import business
 import beta_invite
 from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
-from beta_invite.models import User, Education, BulletType
+from beta_invite.models import User, BulletType
 from business.models import Plan, Contact, Search
 from business.models import BusinessUser
 from business.custom_user_creation_form import CustomUserCreationForm
