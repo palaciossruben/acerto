@@ -947,5 +947,217 @@
       "created_at": "2018-02-22 02:42:49.0957+00",
       "updated_at": "2018-02-22 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 66,
+    "fields":{
+      "text": "What's your age?",
+      "text_es": "¿Cuál es tu edad?",
+      "answers": [],
+      "type": 5,
+      "correct_answers": [],
+      "order": 1,
+      "params": {"min": 0,
+                 "max": 100,
+                 "min_correct": 25,
+                 "max_correct": 60,
+                 "default":24
+                },
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 67,
+    "fields":{
+      "text": "¿Cuál es el número de tu documento?",
+      "text_es": "¿Cuál es el número de tu documento?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 2,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 68,
+    "fields":{
+      "text": "¿Qué modelo es tu moto?",
+      "text_es": "¿Qué modelo es tu moto?",
+      "answers": [],
+      "type": 5,
+      "correct_answers": [],
+      "order": 3,
+      "params": {"min": 1989,
+                 "max": 2019,
+                 "min_correct": 2015,
+                 "max_correct": 2019,
+                 "default":2010
+                },
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 69,
+    "fields":{
+      "text": "¿Posees toda la documentación vigente del vehículo?",
+      "text_es": "¿Posees toda la documentación vigente del vehículo?",
+      "answers": [32, 33],
+      "type": 1,
+      "correct_answers": [33],
+      "order": 4,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 70,
+    "fields":{
+      "text": "¿Tienes disponibilidad para trabajar tiempo completo?",
+      "text_es": "¿Tienes disponibilidad para trabajar tiempo completo?",
+      "answers": [32, 33],
+      "type": 1,
+      "correct_answers": [33],
+      "order": 5,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 71,
+    "fields":{
+      "text": "¿Actualmente cuentas con celular y plan de datos?",
+      "text_es": "¿Actualmente cuentas con celular y plan de datos?",
+      "answers": [32, 33],
+      "type": 1,
+      "correct_answers": [33],
+      "order": 6,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 72,
+    "fields":{
+      "text": "¿Tienes experiencia en mensajería empresarial?",
+      "text_es": "¿Tienes experiencia en mensajería empresarial?",
+      "answers": [32, 33],
+      "type": 1,
+      "correct_answers": [33],
+      "order": 7,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 73,
+    "fields":{
+      "text": "¿Tienes algún vehículo o alguna propiedad a tu nombre?",
+      "text_es": "¿Tienes algún vehículo o alguna propiedad a tu nombre?",
+      "answers": [32, 33],
+      "type": 1,
+      "correct_answers": [33],
+      "order": 8,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 74,
+    "fields":{
+      "text": "Llegas tarde donde un cliente potencial a entregar una documentación y un pedido, el cliente se niega rotundamente a recibir cualquier entrega y firmar cualquier documento, ¿qué harías?",
+      "text_es": "Llegas tarde donde un cliente potencial a entregar una documentación y un pedido, el cliente se niega rotundamente a recibir cualquier entrega y firmar cualquier documento, ¿qué harías?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 9,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 75,
+    "fields":{
+      "text": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cr 42 A Cl 1 15",
+      "text_es": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cr 42 A Cl 1 15",
+      "answers": [107, 108, 109, 110],
+      "type": 1,
+      "correct_answers": [109],
+      "order": 1,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 76,
+    "fields":{
+      "text": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cr 74 Cl 48 37",
+      "text_es": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cr 74 Cl 48 37",
+      "answers": [111, 112, 113, 114],
+      "type": 1,
+      "correct_answers": [113],
+      "order": 2,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 77,
+    "fields":{
+      "text": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cr 25 A CL 1 A Sur 45",
+      "text_es": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cr 25 A CL 1 A Sur 45",
+      "answers": [115, 116, 117, 118],
+      "type": 1,
+      "correct_answers": [118],
+      "order": 3,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 78,
+    "fields":{
+      "text": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cr 87 Cl 47 DD ",
+      "text_es": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cr 87 Cl 47 DD",
+      "answers": [119, 120, 121, 122],
+      "type": 1,
+      "correct_answers": [120],
+      "order": 4,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 79,
+    "fields":{
+      "text": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cl 91 Cr 50 D 75 ",
+      "text_es": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cl 91 Cr 50 D 75",
+      "answers": [123, 124, 125, 126],
+      "type": 1,
+      "correct_answers": [126],
+      "order": 5,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
   }
+
+
+
 ]
+
