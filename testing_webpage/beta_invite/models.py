@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.postgres.fields import JSONField
 from django.conf import settings
 from beta_invite import constants as cts
+
 #from business import Plan
 
 
@@ -270,16 +271,13 @@ class Campaign(models.Model):
             self.description = self.description_es
             self.title = self.title_es
 
-    def get_url(self):
-        if settings.DEBUG:
-            host = '//127.0.0.1:8000'
-        else:
-            host = 'https://peaku.co'
+    def get_host(self):
+        return '//127.0.0.1:8000' if settings.DEBUG else 'https://peaku.co'
 
-        return host+'/servicio_de_empleo?campaign_id={campaign_id}'.format(campaign_id=self.pk)
+    def get_url(self):
+        return self.get_host()+'/servicio_de_empleo?campaign_id={campaign_id}'.format(campaign_id=self.pk)
 
     def get_requirement_names(self):
-
         # TODO: add support for english
         return [b.name_es for b in self.bullets.all() if b.bullet_type and b.bullet_type.name == 'requirement']
 

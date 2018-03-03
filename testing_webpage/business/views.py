@@ -19,7 +19,7 @@ import beta_invite
 from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
-from beta_invite.models import User, BulletType
+from beta_invite.models import User, Education, BulletType, Campaign
 from business.models import Plan, Contact, Search
 from business.models import BusinessUser
 from business.custom_user_creation_form import CustomUserCreationForm
@@ -303,7 +303,7 @@ def home(request):
     if login_form.is_valid() and request.POST.get('username') != 'g.comercialrmi2@redmilatam.com':  # Block access
 
         business_user = simple_login_and_business_user(login_form, request)
-        return redirect('tablero_de_control/{}'.format(business_user.pk))
+        return redirect('campañas/{}'.format(business_user.pk))
     else:
         error_message = get_first_error_message(login_form)
         return render(request, cts.BUSINESS_LOGIN, {'error_message': error_message})
@@ -462,6 +462,29 @@ def get_checked_box_candidates(campaign_id, request):
 
 
 @login_required
+def business_campaigns(request, pk):
+
+    business_user = BusinessUser.objects.get(pk=pk)
+
+    if request.user.id != business_user.auth_user.id:
+        return redirect('business:login')
+
+    campaigns = business_user.campaigns.all()
+
+    return render(request, cts.BUSINESS_CAMPAIGNS_VIEW_PATH, {'campaigns': campaigns})
+
+
+def get_campaign_for_dashboard(request, business_user):
+
+    campaign_id = request.GET.get('campaign_id')
+    if campaign_id:
+        return Campaign.objects.get(pk=campaign_id)
+    # default campaign
+    else:
+        return business_user.campaigns.all()[0]
+
+
+@login_required
 def dashboard(request, pk):
     """
     Renders the business dashboard
@@ -472,11 +495,10 @@ def dashboard(request, pk):
 
     business_user = BusinessUser.objects.get(pk=pk)
 
-    if request.user.id != business_user.auth_user.id:
-        return redirect('business:login')
+    campaign = get_campaign_for_dashboard(request, business_user)
 
-    # TODO: Make it for more than 1 campaign. For now it only takes first element.
-    campaign = business_user.campaigns.all()[0]
+    if request.user.id != business_user.auth_user.id or campaign not in business_user.campaigns.all():
+        return redirect('business:login')
 
     params, states = candidate_module.get_rendering_data(campaign.id)
 
@@ -515,45 +537,3 @@ def signup_choice(request):
 
 def business_applied(request):
     return render(request, cts.BUSINESS_APPLIED_VIEW_PATH, {})
-
-
-'''
-def send_reset_url(request):
-    email = request.POST.get('email')
-    business_user = BusinessUser.objects.get(email=email)
-
-    email_sender.send(users=business_user,
-                      language_code='es',
-                      body_input='business_user_reset_email_body',
-                      subject='reset me')
-
-    return render(request, cts.PASSWORD_RESET_DONE)
-'''
-
-
-def provisional_dashboard(request, pk=93):
-    business_user = BusinessUser.objects.get(pk=pk)
-
-    # TODO: Make it for more than 1 campaign. For now it only takes first element.
-    campaign = business_user.campaigns.all()[0]
-
-    params, states = candidate_module.get_rendering_data(campaign.id)
-
-    # State Backlog and Prospect will show as one.
-    params['backlog'] = list(params['backlog']) + list(params['prospect'])
-
-    # enters here when sending an email
-    if request.GET.get('send_mail') is not None:
-        candidates = get_checked_box_candidates(campaign.id, request)
-
-        email_sender.send_to_candidate(candidates=candidates,
-                                       language_code='es',
-                                       body_input=request.GET.get('email_body'),
-                                       subject=request.GET.get('email_subject'),
-                                       with_localization=False,
-                                       body_is_filename=False)
-
-    params['campaign'] = campaign
-    params['states'] = states
-
-    return render(request, cts.DASHBOARD_VIEW_PATH, params)

@@ -1,0 +1,20 @@
+{% extends 'peaku_base.html'%}
+{% load static %}
+{% load i18n %}
+{% load app_filters %}
+
+{% block title %}PeakU - Dashboard {% endblock %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+{% block content %}
+
+    <h1>Campaigns</h1>
+    <ul>
+        {% for campaign in campaigns %}
+            <li><a href="{{ campaign|get_dashboard_campaign_url }}">{{ campaign.title_es }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
