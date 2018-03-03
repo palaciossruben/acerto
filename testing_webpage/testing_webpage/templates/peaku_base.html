@@ -96,7 +96,7 @@
                 <ul>
                     <li><a href="{% url 'business:contact_form' %}">CONTACTO</a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'business:dashboard' user|get_business_user_from_auth_user %}">CAMPAÑAS</a></li>
+                        <li><a href="{% url 'business:dashboard' user|get_business_user_id_from_auth_user %}">CAMPAÑAS</a></li>
                     {% endif %}
 
                     {% if 'seleccion_gratis' in request.path %}
