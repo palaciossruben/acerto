@@ -970,6 +970,26 @@
   },
   {
     "model": "beta_invite.question",
+    "pk": 67,
+    "fields":{
+      "text": "What's your age?",
+      "text_es": "¿Cuál es tu edad?",
+      "answers": [],
+      "type": 5,
+      "correct_answers": [],
+      "order": 1,
+      "params": {"min": 0,
+                 "max": 100,
+                 "min_correct": 30,
+                 "max_correct": 60,
+                 "default":26
+                },
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
     "pk": 68,
     "fields":{
       "text": "¿Qué modelo es tu moto?",
@@ -1141,9 +1161,20 @@
       "created_at": "2018-03-02 02:42:49.0957+00",
       "updated_at": "2018-03-02 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 80,
+    "fields":{
+      "text": "¿Actualmente cuentas con un computador y acceso a internet en tu casa?",
+      "text_es": "¿Actualmente cuentas con un computador y acceso a internet en tu casa?",
+      "answers": [32, 33],
+      "type": 1,
+      "correct_answers": [33],
+      "order": 2,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
   }
-
-
-
 ]
 
