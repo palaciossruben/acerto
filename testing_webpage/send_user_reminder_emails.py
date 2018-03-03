@@ -14,7 +14,6 @@ from beta_invite import interview_module
 from beta_invite.util import email_sender
 from dashboard.models import Candidate
 from beta_invite.models import Campaign, EmailType
-from beta_invite import constants as cts_beta_invite
 from testing_webpage.models import EmailSent
 from business import prospect_module
 

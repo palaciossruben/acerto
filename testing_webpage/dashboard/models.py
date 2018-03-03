@@ -34,6 +34,19 @@ class Comment(models.Model):
         db_table = 'comments'
 
 
+class Screening(models.Model):
+
+    name = models.CharField(max_length=200)
+    passed = models.BooleanField()
+
+    def __str__(self):
+        return '{0}, {1}, {2}'.format(self.pk, self.name, self.passed)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'screenings'
+
+
 class Candidate(models.Model):
     """
     This model should be unique for any (user, campaign) pair. A ser can have multiple candidacies in different
@@ -48,7 +61,10 @@ class Candidate(models.Model):
     comments = models.ManyToManyField(Comment, default=[])
     evaluations = models.ManyToManyField(Evaluation)
     surveys = models.ManyToManyField(Survey)
-    match = models.IntegerField(null=True, default=None)
+    text_match = models.FloatField(null=True, default=None)
+    match = models.FloatField(null=True, default=None)
+    screening = models.ForeignKey(Screening, null=True, on_delete=models.SET_NULL)
+    screening_explanation = models.CharField(max_length=200, default='')
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -59,6 +75,16 @@ class Candidate(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'candidates'
+
+    def get_education_level(self):
+        if self.user and self.user.education:
+            return self.user.education.level
+        return None
+
+    def get_profession_name(self):
+        if self.user and self.user.profession:
+            return self.user.profession.name
+        return None
 
 
 class Message(models.Model):

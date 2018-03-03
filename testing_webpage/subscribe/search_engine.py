@@ -6,9 +6,9 @@ import pickle
 from datetime import datetime
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
-from cts import *
+from subscribe import cts
 from collections import OrderedDict
-import helper as h
+from subscribe import helper as h
 
 
 def get_text_from_path(root_path, relative_path):
@@ -65,7 +65,7 @@ def get_text_stats(path, use_idf):
 
 def save_relevance_dictionary(path):
     """
-    For each word it will get a score of how desirable is to add the search criteria.
+    For each word it will get a score of how desirable it is to add the search criteria.
     This is useful for the autocomplete.
     """
 
@@ -121,7 +121,7 @@ def save_user_relevance_dictionary(path):
     """
     For each word finds the user_id relevance. This is the data structure:
     word_user_dict = {
-        'word_1': ((user_id_1, relevance_1), (user_id_2, relevance_2) ...)
+        'word_1': ((user_id_1, relevance_1), (user_id_2, relevance_2) q)
     }
     Args:
         path: The directory of the resumes
@@ -150,11 +150,11 @@ def save_user_relevance_dictionary(path):
 if __name__ == "__main__":
 
     t0 = time.time()
-    save_relevance_dictionary(RESUMES_PATH)
+    save_relevance_dictionary(cts.RESUMES_PATH)
     t1 = time.time()
     print('ON {0} RELEVANCE DICTIONARY, time: {1}'.format(datetime.today(), t1-t0))
 
     t0 = time.time()
-    save_user_relevance_dictionary(RESUMES_PATH)
+    save_user_relevance_dictionary(cts.RESUMES_PATH)
     t1 = time.time()
     print('ON {0} USER RELEVANCE DICTIONARY, time: {1}'.format(datetime.today(), t1-t0))

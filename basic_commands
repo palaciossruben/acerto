@@ -337,3 +337,7 @@ sudo apt-get install poppler-utils
 
     g. Check after resizing:
     df -h
+
+$ sudo pip3 install pandas
+$ sudo pip3 install -U imbalanced-learn
+

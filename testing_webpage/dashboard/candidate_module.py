@@ -8,6 +8,12 @@ from beta_invite.models import Campaign, User
 from dashboard import constants as cts
 
 
+def add_property(candidate, request, property_name):
+    property = request.POST.get('{0}_{1}'.format(candidate.id, property_name))
+    if property is not None and property != '':
+        setattr(candidate, property_name, property)
+
+
 def update_candidate(request, candidate):
     """
     Args:
@@ -24,9 +30,9 @@ def update_candidate(request, candidate):
         comment.save()
         candidate.comments.add(comment)
 
-    salary = request.POST.get('{}_salary'.format(candidate.id))
-    if salary is not None and salary != '':
-        candidate.salary = salary
+    add_property(candidate, request, 'salary')
+    add_property(candidate, request, 'screening_id')
+    add_property(candidate, request, 'screening_explanation')
 
     candidate.save()
 

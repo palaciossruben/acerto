@@ -201,6 +201,30 @@ class Interview(models.Model):
         db_table = 'interviews'
 
 
+class Seniority(models.Model):
+
+    name = models.CharField(max_length=200)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'seniorities'
+
+    def __str__(self):
+        return '{0}'.format(self.name)
+
+
+class JobFunctions(models.Model):
+
+    name = models.CharField(max_length=200)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'job_functions'
+
+    def __str__(self):
+        return '{0}'.format(self.name)
+
+
 class Campaign(models.Model):
 
     name = models.CharField(max_length=200)
@@ -220,6 +244,8 @@ class Campaign(models.Model):
     calendly_url = models.CharField(max_length=200, default=cts.INTERVIEW_CALENDLY)
     removed = models.BooleanField(default=False)
     free_trial = models.BooleanField(default=True)
+    seniority = models.ForeignKey(Seniority, null=True)
+    job_function = models.ForeignKey(JobFunctions, null=True)
 
     # TODO: remove circular dependency
     #plan = models.ForeignKey(Plan, null=True, on_delete=models.DO_NOTHING)
@@ -254,6 +280,9 @@ class Campaign(models.Model):
     def get_requirement_names(self):
         # TODO: add support for english
         return [b.name_es for b in self.bullets.all() if b.bullet_type and b.bullet_type.name == 'requirement']
+
+    def get_search_text(self):
+        return ' '.join([self.title_es] + self.get_requirement_names())
 
 
 class Score(models.Model):

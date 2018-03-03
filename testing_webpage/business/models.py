@@ -31,6 +31,30 @@ class Plan(models.Model):
         db_table = 'plans'
 
 
+class Industry(models.Model):
+
+    name = models.CharField(max_length=200)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'industries'
+
+    def __str__(self):
+        return '{0}'.format(self.name)
+
+
+class Company(models.Model):
+
+    name = models.CharField(max_length=200)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'companies'
+
+    def __str__(self):
+        return '{0}'.format(self.name)
+
+
 class BusinessUser(models.Model):
 
     email = models.CharField(max_length=200)
@@ -40,6 +64,8 @@ class BusinessUser(models.Model):
     plan = models.ForeignKey(Plan, null=True, on_delete=models.SET_NULL)
     phone = models.CharField(max_length=40, null=True)
     campaigns = models.ManyToManyField(Campaign)
+    company = models.ForeignKey(Company, null=True, on_delete=models.SET_NULL)
+    industry = models.ForeignKey(Industry, null=True, on_delete=models.SET_NULL)
 
     # Foreign key to the auth_user table. So that this table can cleanly be in charge of authentication
     auth_user = models.ForeignKey(AuthUser, null=True, on_delete=models.SET_NULL)

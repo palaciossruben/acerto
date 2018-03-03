@@ -4,8 +4,8 @@ from django.core import serializers
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 
-from beta_invite.models import Campaign, Test, BulletType, Interview, Survey, Bullet, QuestionType, User
-from dashboard.models import Candidate, Message
+from beta_invite.models import Campaign, Test, BulletType, Interview, Survey, Bullet, QuestionType
+from dashboard.models import Candidate, Message, Screening
 from dashboard import constants as cts
 from beta_invite.util import email_sender
 from beta_invite.views import get_drop_down_values
@@ -88,6 +88,7 @@ def edit_campaign_candidates(request, pk):
 
     params['states'] = states
     params['campaign_id'] = pk
+    params['screenings'] = [s for s in Screening.objects.all()]
     params['campaigns'] = campaigns_to_move_to
     params['current_campaign'] = Campaign.objects.get(pk=pk)
 

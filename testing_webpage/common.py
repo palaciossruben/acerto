@@ -7,7 +7,7 @@ from beta_invite import constants as beta_cts
 from dashboard.models import Candidate
 
 
-CONJUNCTIONS = {'las', 'para', 'los', 'del', 'and', 'el', 'en', 'de'}
+CONJUNCTIONS = {'las', 'para', 'los', 'del', 'and', 'el', 'en', 'de', 'the', 'for', 'with'}
 INTERVIEW_INTRO_VIDEO = './interview_intro_video.txt'
 ZIGGEO_API_KEY = './ziggeo_api_key.txt'
 

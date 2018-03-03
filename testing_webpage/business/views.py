@@ -14,7 +14,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import login, authenticate
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.models import User as internal_user
 import business
 import beta_invite
 from business import search_module
@@ -92,7 +91,7 @@ def calculate_result(request):
     Returns: renders results.html view.
     """
 
-    user_ids = search_module.get_common_search_info(request, 'subscribe/word_user_dictionary.p')
+    user_ids = search_module.get_common_search_info(request)
 
     search_obj = Search(ip=get_ip(request),
                         country=None,
