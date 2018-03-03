@@ -475,6 +475,16 @@ def business_campaigns(request, pk):
     return render(request, cts.BUSINESS_CAMPAIGNS_VIEW_PATH, {'campaigns': campaigns})
 
 
+def get_campaign_for_dashboard(request, business_user):
+
+    campaign_id = request.GET.get('campaign_id')
+    if campaign_id:
+        return Campaign.objects.get(pk=campaign_id)
+    # default campaign
+    else:
+        return business_user.campaigns.all()[0]
+
+
 @login_required
 def dashboard(request, pk):
     """
@@ -486,14 +496,10 @@ def dashboard(request, pk):
 
     business_user = BusinessUser.objects.get(pk=pk)
 
-    if request.user.id != business_user.auth_user.id:
-        return redirect('business:login')
+    campaign = get_campaign_for_dashboard(request, business_user)
 
-    campaign_id = request.GET.get('campaign_id')
-    if campaign_id:
-        campaign = Campaign.objects.get(pk=campaign_id)
-    else:
-        campaign = business_user.campaigns.all()[0]
+    if request.user.id != business_user.auth_user.id or campaign not in business_user.campaigns.all():
+        return redirect('business:login')
 
     params, states = candidate_module.get_rendering_data(campaign.id)
 
