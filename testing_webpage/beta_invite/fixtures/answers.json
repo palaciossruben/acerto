@@ -1153,8 +1153,8 @@
     "model": "beta_invite.answer",
     "pk": 117,
     "fields":{
-      "name": "Centro comercial Premium plaza",
-      "name_es": "Centro comercial Premium plaza",
+      "name": "Centro comercial Gran plaza",
+      "name_es": "Centro comercial Gran plaza",
       "created_at": "2018-03-02 02:42:49.0957+00",
       "updated_at": "2018-03-02 02:42:49.0957+00"
     }

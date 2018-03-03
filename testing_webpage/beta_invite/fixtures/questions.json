@@ -568,8 +568,8 @@
     "model": "beta_invite.question",
     "pk": 40,
     "fields":{
-      "text": "Four of the following words are similar in some way, what are the other two?",
-      "text_es": "Cuatro de las siguientes palabras son similares de alguna forma, ¿cuáles son las otras dos?",
+      "text": "Two of the following words are similar in some way, what are the other two?",
+      "text_es": "Dos de las siguientes palabras son similares de alguna forma, ¿cuáles son las otras dos?",
       "answers": [52, 53, 54, 55, 72],
       "type": 1,
       "correct_answers": [55],
@@ -964,20 +964,6 @@
                  "max_correct": 60,
                  "default":24
                 },
-      "created_at": "2018-03-02 02:42:49.0957+00",
-      "updated_at": "2018-03-02 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.question",
-    "pk": 67,
-    "fields":{
-      "text": "¿Cuál es el número de tu documento?",
-      "text_es": "¿Cuál es el número de tu documento?",
-      "answers": [],
-      "type": 3,
-      "correct_answers": [],
-      "order": 2,
       "created_at": "2018-03-02 02:42:49.0957+00",
       "updated_at": "2018-03-02 02:42:49.0957+00"
     }

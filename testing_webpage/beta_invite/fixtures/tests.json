@@ -293,7 +293,7 @@
     "fields":{
       "name": "Mensajeros motorizados",
       "name_es": "Mensajeros motorizados",
-      "questions": [66, 67, 68, 69, 70, 71, 72, 73, 74],
+      "questions": [66, 68, 69, 70, 71, 72, 73, 74],
       "cut_score": 70,
       "created_at": "2018-03-02 02:42:49.0957+00",
       "updated_at": "2018-03-02 02:42:49.0957+00"
