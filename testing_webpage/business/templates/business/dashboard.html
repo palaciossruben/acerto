@@ -17,7 +17,7 @@
         {% if campaign.free_trial%}
             GRATUITA
         {% endif %}
-            {{ campaign.name|upper }}</strong></h3></caption>
+            {{ campaign.title_es|upper }}</strong></h3></caption>
     <div class="secondary-yellow-bar"></div>
     <p class="title" align="center" style="font-family:var(--Bitter); font-size:18px; color:var(--text-color)"> En total han aplicado <b id="total"></b> personas a tu campaña</p>
     {% if campaign.free_trial == True %}
