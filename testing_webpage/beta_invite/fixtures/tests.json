@@ -310,5 +310,17 @@
       "created_at": "2018-03-02 02:42:49.0957+00",
       "updated_at": "2018-03-02 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.test",
+    "pk": 26,
+    "fields":{
+      "name": "Representante de servicio",
+      "name_es": "Representante de servicio",
+      "questions": [67, 68, 69, 70, 71, 72, 73, 74, 80],
+      "cut_score": 80,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
   }
 ]
