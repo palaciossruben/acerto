@@ -1048,5 +1048,205 @@
       "created_at": "2018-02-22 02:42:49.0957+00",
       "updated_at": "2018-02-22 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 107,
+    "fields":{
+      "name": "Parque de envigado",
+      "name_es": "Parque de envigado",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 108,
+    "fields":{
+      "name": "Mercado del río",
+      "name_es": "Mercado del río",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 109,
+    "fields":{
+      "name": "San Fernando plaza",
+      "name_es": "San Fernando plaza",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 110,
+    "fields":{
+      "name": "La aguacatala",
+      "name_es": "La aguacatala",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 111,
+    "fields":{
+      "name": "Estación Floresta del metro",
+      "name_es": "Estación Floresta del metro",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 112,
+    "fields":{
+      "name": "Universidad Nacional de Colombia",
+      "name_es": "Universidad Nacional de Colombia",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 113,
+    "fields":{
+      "name": "Sector el estadio",
+      "name_es": "Sector el estadio",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 114,
+    "fields":{
+      "name": "Parque de bello",
+      "name_es": "Parque de bello",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 115,
+    "fields":{
+      "name": "Centro comercial Premium plaza",
+      "name_es": "Centro comercial Premium plaza",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 116,
+    "fields":{
+      "name": "San Fernando plaza",
+      "name_es": "San Fernando plaza",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 117,
+    "fields":{
+      "name": "Centro comercial Premium plaza",
+      "name_es": "Centro comercial Premium plaza",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 118,
+    "fields":{
+      "name": "El tesoro parque comercial",
+      "name_es": "El tesoro parque comercial",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 119,
+    "fields":{
+      "name": "Laureles",
+      "name_es": "Laureles",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 120,
+    "fields":{
+      "name": "Estación Santa Lucía del metro",
+      "name_es": "Estación Santa Lucía del metro",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 121,
+    "fields":{
+      "name": "Barrio Manrique",
+      "name_es": "Barrio Manrique",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 122,
+    "fields":{
+      "name": "Belén las mercedez",
+      "name_es": "Belén las mercedez",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 123,
+    "fields":{
+      "name": "Prado centro",
+      "name_es": "Prado centro",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 124,
+    "fields":{
+      "name": "Universidad Eafit",
+      "name_es": "Universidad Eafit",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 125,
+    "fields":{
+      "name": "Itagui el tablón",
+      "name_es": "Itagui el tablón",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 126,
+    "fields":{
+      "name": "Aranjuez San Cayetano",
+      "name_es": "Aranjuez San Cayetano",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
   }
 ]
