@@ -313,7 +313,7 @@
   },
   {
     "model": "beta_invite.test",
-    "pk": 26,
+    "pk": 27,
     "fields":{
       "name": "Representante de servicio",
       "name_es": "Representante de servicio",
