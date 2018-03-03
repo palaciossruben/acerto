@@ -106,6 +106,7 @@ def sync_local(sync_media=False):
 
 
 def deploy():
+    """Includes a sync_local with sync_media=False"""
 
     local_cwd = '/Users/juanpabloisaza/Desktop/masteringmymind/acerto/API/testing_webpage'
 
@@ -159,6 +160,8 @@ def deploy():
 
             # Last step: start gunicorn as a deamon: that binds to a unix socket, from where nginx listens.
             run('PYENV_VERSION=3.5.2 gunicorn -c gunicorn_cfg.py testing_webpage.wsgi --bind=unix:/opt/peaku_co/run/gunicorn.sock')
+
+    sync_local(sync_media=False)
 
 
 def dev_update():
