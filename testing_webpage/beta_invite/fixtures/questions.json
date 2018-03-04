@@ -1175,6 +1175,146 @@
       "created_at": "2018-03-02 02:42:49.0957+00",
       "updated_at": "2018-03-02 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 81,
+    "fields":{
+      "text": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cr 23 Cl 65 49",
+      "text_es": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cr 23 Cl 65 49",
+      "answers": [127, 128, 129, 130],
+      "type": 1,
+      "correct_answers": [128],
+      "order": 1,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 82,
+    "fields":{
+      "text": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cl 33 B Cr 20 73",
+      "text_es": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cl 33 B Cr 20 73",
+      "answers": [131, 132, 133, 134],
+      "type": 1,
+      "correct_answers": [133],
+      "order": 2,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 83,
+    "fields":{
+      "text": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Los Cámbulos, Cr 43 Cl 65",
+      "text_es": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Los Cámbulos, Cr 43 Cl 65",
+      "answers": [135, 136, 137, 138],
+      "type": 1,
+      "correct_answers": [136],
+      "order": 3,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 84,
+    "fields":{
+      "text": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cl 23 Cr 16",
+      "text_es": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cl 23 Cr 16",
+      "answers": [139, 140, 141, 142],
+      "type": 1,
+      "correct_answers": [141],
+      "order": 4,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 85,
+    "fields":{
+      "text": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Km 2 Vía Chinchiná, Manizales - Caldas",
+      "text_es": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Km 2 Vía Chinchiná, Manizales - Caldas",
+      "answers": [143, 144, 145, 146],
+      "type": 1,
+      "correct_answers": [146],
+      "order": 5,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 86,
+    "fields":{
+      "text": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cl 76 Cr 68",
+      "text_es": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cl 76 Cr 68",
+      "answers": [147, 148, 149, 150],
+      "type": 1,
+      "correct_answers": [148],
+      "order": 1,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 87,
+    "fields":{
+      "text": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cr 42 A 3 Cl 84",
+      "text_es": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cr 42 A 3 Cl 84",
+      "answers": [151, 152, 153, 154],
+      "type": 1,
+      "correct_answers": [153],
+      "order": 2,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 88,
+    "fields":{
+      "text": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cr 46 Cl 75",
+      "text_es": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cr 46 Cl 75",
+      "answers": [155, 156, 157, 158],
+      "type": 1,
+      "correct_answers": [157],
+      "order":3,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 89,
+    "fields":{
+      "text": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cr 83 Cl 109",
+      "text_es": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cr 83 Cl 109",
+      "answers": [159, 160, 161, 162],
+      "type": 1,
+      "correct_answers": [162],
+      "order": 4,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 90,
+    "fields":{
+      "text": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cr 68 Cl 79",
+      "text_es": "¿A qué barrio o ubicación hace referencia la siguiente dirección?: Cr 68 Cl 79",
+      "answers": [163, 164, 165, 166],
+      "type": 1,
+      "correct_answers": [163],
+      "order": 5,
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
   }
 ]
 
