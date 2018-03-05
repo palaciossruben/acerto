@@ -11,12 +11,12 @@
 
 {% block content %}
 
-    <h1>Campaigns</h1>
-    <ul>
+    <h1 style="text-align:center; margin:50px 0px">Campañas</h1>
+    <ol style="margin-left:10%; margin-bottom:300px">
         {% for campaign in campaigns %}
-            <li><a href="{{ campaign|get_dashboard_campaign_url }}">{{ campaign.title_es }}</a></li>
+            <li style=""><a href="{{ campaign|get_dashboard_campaign_url }}">{{ campaign.title_es }}</a></li>
         {% endfor %}
-    </ul>
+    </ol>
 
     <form class="content" action="{% url 'business:create' %}" method="post">
         {% csrf_token %}
@@ -25,3 +25,4 @@
     </form>
 
 {% endblock %}
+
