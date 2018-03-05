@@ -19,7 +19,7 @@ import beta_invite
 from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
-from beta_invite.models import User, Education, BulletType, Campaign
+from beta_invite.models import User, BulletType, Campaign
 from business.models import Plan, Contact, Search
 from business.models import BusinessUser
 from business.custom_user_creation_form import CustomUserCreationForm
@@ -98,7 +98,7 @@ def calculate_result(request):
                         education=None,
                         profession=None,
                         experience=None,
-                        skills=search_module.get_text_from_request(request),
+                        text=search_module.get_text_from_request(request),
                         user_ids=user_ids, )
 
     search_obj.save()

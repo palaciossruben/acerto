@@ -118,14 +118,7 @@ class Search(models.Model):
     profession = models.ForeignKey(Profession, null=True)
     education = models.ForeignKey(Education, null=True)
     experience = models.IntegerField(null=True)
-    skills = JSONField(null=True)
-
-    def set_skills(self, x):
-        self.skills = json.dumps(x)
-
-    def get_skills(self):
-        return json.loads(self.skills)
-
+    text = models.CharField(max_length=10000, null=True)
     user_ids = JSONField(null=True)
 
     def set_user_ids(self, x):
