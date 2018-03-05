@@ -12,13 +12,13 @@
 {% block content %}
 
     <h1 style="text-align:center; margin:50px 0px">Campañas</h1>
-    <ol style="margin-left:10%; margin-bottom:300px">
+    <ol style="margin-left:10%">
         {% for campaign in campaigns %}
             <li style=""><a href="{{ campaign|get_dashboard_campaign_url }}">{{ campaign.title_es }}</a></li>
         {% endfor %}
     </ol>
 
-    <form class="content" action="{% url 'business:create' %}" method="post">
+    <form class="content" action="{% url 'business:create' %}" style="margin-bottom:300px" method="post">
         {% csrf_token %}
         <input class="submit-button-strong" id="create-campaign-button" type="submit" value="{% trans 'Create Campaign' %}">
         <input type="hidden" name="business_user_id" value="{{ business_user_id }}" />
