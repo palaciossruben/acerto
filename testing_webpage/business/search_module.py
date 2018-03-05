@@ -47,15 +47,24 @@ def filter_conjunction_words(words):
     return [w for w in words if w not in common.CONJUNCTIONS]
 
 
-def get_text(request):
+def clean_text_for_search(search_text):
+    """
+    Args:
+        request: a Request obj
+    Returns: List with tokenized strings, lower cased and with no accents.
+    """
+    words = get_word_array_lower_case_and_no_accents(search_text)
+    return filter_conjunction_words(words)
+
+
+def get_text_from_request(request):
     """
     Args:
         request: a Request obj
     Returns: List with tokenized strings, lower cased and with no accents.
     """
     search_text = request.GET.get('search_text')
-    words = get_word_array_lower_case_and_no_accents(search_text)
-    return filter_conjunction_words(words)
+    return clean_text_for_search(search_text)
 
 
 def adds_context_based_search(tokens_dict, word_user_dictionary, filtered_user_relevance_dict):
@@ -164,6 +173,10 @@ def get_matching_users(search_phrase):
     return remove_duplicates(users)
 
 
+def get_top_matching_users(search_text):
+    return get_matching_users(search_text)[:MAX_NUM_OF_USERS]
+
+
 def get_common_search_info(request):
     """
     Given a Request object will do all search related stuff. Returns a maximum number of results.
@@ -172,8 +185,7 @@ def get_common_search_info(request):
     Returns: profession, education, country, experience, users, user_ids
     """
 
-    users = get_matching_users(get_text(request))
-    users = users[:MAX_NUM_OF_USERS]
+    users = get_top_matching_users(get_text_from_request(request))
 
     util.translate_users(users, request.LANGUAGE_CODE)
     return [u.id for u in users]

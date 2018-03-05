@@ -85,6 +85,30 @@ def load_data_for_learning():
     return data
 
 
+class Result:
+    def __init__(self, train_accuracy, test_accuracy, my_test_accuracy, random_test_accuracy):
+        self.train_accuracy_mean, self.train_accuracy_std = train_accuracy
+        self.test_accuracy_mean, self.test_accuracy_std = test_accuracy
+        self.my_test_accuracy = my_test_accuracy
+        self.random_test_accuracy = random_test_accuracy
+        self.num_runs = 1
+
+    def average_property(self, attribute, other_result):
+        den = self.num_runs + other_result.num_runs
+        value = (getattr(other_result, attribute) * other_result.num_runs + getattr(self,
+                                                                                    attribute) * self.num_runs) / den
+        setattr(self, attribute, value)
+
+    def average(self, other_result):
+        self.average_property('train_accuracy_mean', other_result)
+        self.average_property('train_accuracy_std', other_result)
+        self.average_property('test_accuracy_mean', other_result)
+        self.average_property('test_accuracy_std', other_result)
+        self.average_property('my_test_accuracy', other_result)
+        self.average_property('random_test_accuracy', other_result)
+        self.num_runs += 1
+
+
 class DataPair:
     def __init__(self, features=None, target=None):
         self.features = features
@@ -99,15 +123,23 @@ def learn_model(train):
 
 
 def eval_model(model, train, test):
-    print('TRAIN ACCURACY: {0} (+/- {1})'.format(*get_accuracy(train.features, train.target, model)))
-    print('TEST ACCURACY: {0} (+/- {1})'.format(*get_accuracy(test.features, test.target, model)))
+    train_accuracy = get_accuracy(train.features, train.target, model)
+    print('TRAIN ACCURACY: {0} (+/- {1})'.format(*train_accuracy))
+
+    test_accuracy = get_accuracy(test.features, test.target, model)
+    print('TEST ACCURACY: {0} (+/- {1})'.format(*test_accuracy))
 
     predicted_target = model.predict(test.features)
-    print('MY TEST ACCURACY: ' + str(my_accuracy(predicted_target, test.target)))
-    print('RANDOM TEST ACCURACY: ' + str(my_accuracy([random.randint(0, 1) for _ in test.target], test.target)))
+
+    my_test_accuracy = my_accuracy(predicted_target, test.target)
+    print('MY TEST ACCURACY: ' + str(my_test_accuracy))
+
+    random_test_accuracy = my_accuracy([random.randint(0, 1) for _ in test.target], test.target)
+    print('RANDOM TEST ACCURACY: ' + str(random_test_accuracy))
 
     print('Confusion Matrix:')
     print(metrics.confusion_matrix(test.target, predicted_target))
+    return Result(train_accuracy, test_accuracy, my_test_accuracy, random_test_accuracy)
 
 
 def get_model():
@@ -121,6 +153,4 @@ def get_model():
 
     model = learn_model(train)
 
-    eval_model(model, train, test)
-
-    return model
+    return model, eval_model(model, train, test)

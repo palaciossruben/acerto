@@ -44,7 +44,7 @@ def learn_and_predict():
     """
     # TODO: load model, when getting new candidate
     #model = pickle.load(open("match/model.p", "rb"))
-    model = learn.get_model()
+    model, _ = learn.get_model()
     pickle.dump(model, open("model.p", "wb"))
 
     data, candidates = load_data_for_prediction()

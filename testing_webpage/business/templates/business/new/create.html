@@ -34,22 +34,20 @@
     <div class="tab">
         <button id="vacancy_button" class="tab-links active" onclick="tab(event, 'vacancy')" >Vacante</button>
         <button id="company_button" class="tab-links" onclick="tab(event, 'company')" disabled >{% trans "Company" %}</button>
-        <button id="start_button" class="tab-links" onclick="tab(event, 'start')" disabled >Registro</button>
     </div>
 
-    <form class="content" action="{% url 'business:start_post' %}" method="post">
+    <form class="content" action="{% url 'business:create_post' %}" method="post">
+        {% csrf_token %}
 
         <div id="vacancy" class="tab-content">
-            {% include "business/tab_vacancy.html" with requirement_bullet_id=requirement_bullet_id %}
+            {% include "business/new/tab_vacancy.html" with requirement_bullet_id=requirement_bullet_id %}
         </div>
 
         <div id="company" class="tab-content">
-            {% include "business/tab_company.html" with requirement_perk_id=requirement_perk_id %}
+            {% include "business/new/tab_company.html" with company_submit=True requirement_perk_id=requirement_perk_id %}
         </div>
 
-        <div id="start" class="tab-content">
-            {% include "business/tab_signup.html"%}
-        </div>
+        <input type="hidden" name="business_user_id" value="{{ business_user_id }}" />
     </form>
 
     <!-- After loading every element, sets the first element as active.-->
@@ -57,4 +55,3 @@
        activate_tab('vacancy');
     </script>
 {% endblock %}
-

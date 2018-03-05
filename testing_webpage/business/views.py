@@ -98,7 +98,7 @@ def calculate_result(request):
                         education=None,
                         profession=None,
                         experience=None,
-                        skills=search_module.get_text(request),
+                        skills=search_module.get_text_from_request(request),
                         user_ids=user_ids, )
 
     search_obj.save()
@@ -416,6 +416,37 @@ def start(request):
                                                  })
 
 
+def create(request):
+    """
+    Displays creation of campaign but no registration form.
+    """
+
+    requirement_bullet_id = BulletType.objects.get(name='requirement').id
+    perk_bullet_id = BulletType.objects.get(name='perk').id
+
+    return render(request, cts.CREATE_VIEW_PATH, {'requirement_bullet_id': requirement_bullet_id,
+                                                  'perk_bullet_id': perk_bullet_id,
+                                                  'business_user_id': request.POST.get('business_user_id')
+                                                  })
+
+
+def create_post(request):
+    """
+    Args:
+        request: HTTP post request
+    Returns: Renders form.html.
+    """
+
+    business_user_id = int(request.POST.get('business_user_id'))
+    business_user = BusinessUser.objects.get(pk=business_user_id)
+
+    campaign = campaign_module.create_campaign(request)
+    business_user.campaigns.add(campaign)
+    business_user.save()
+
+    return redirect('tablero_de_control/{}'.format(business_user.pk))
+
+
 def start_post(request):
     """
     Args:
@@ -471,7 +502,9 @@ def business_campaigns(request, pk):
 
     campaigns = business_user.campaigns.all()
 
-    return render(request, cts.BUSINESS_CAMPAIGNS_VIEW_PATH, {'campaigns': campaigns})
+    return render(request, cts.BUSINESS_CAMPAIGNS_VIEW_PATH, {'campaigns': campaigns,
+                                                              'business_user_id': business_user.pk
+                                                              })
 
 
 def get_campaign_for_dashboard(request, business_user):
@@ -505,7 +538,7 @@ def dashboard(request, pk):
     # State Backlog and Prospect will show as one.
     params['backlog'] = list(params['backlog']) + list(params['prospect'])
     params['waiting_for_interview'] = list(params['waiting_for_interview']) + list(params['did_interview'])
-    params['rejected'] = list(params['rejected']) + list(params['waiting_for_tests'])
+    params['rejected'] = list(params['rejected']) + list(params['failed_tests'])
 
     # enters here when sending an email
     if request.GET.get('send_mail') is not None:

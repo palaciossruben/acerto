@@ -374,15 +374,21 @@ class User(models.Model):
     def __str__(self):
         return '{0}, {1}'.format(self.name, self.email)
 
+    def get_calling_code(self):
+        if self.country is not None:
+            return str(self.country.calling_code)
+        else:  # TODO: SHOULD NEVER DEFAULT to this, Defaults to Colombia
+            return str(Country.objects.get(name='Colombia').calling_code)
+
     def change_to_international_phone_number(self):
 
         # Adds the '+' and country code
         if self.phone[0] != '+':
 
-            self.phone = '+' + str(self.country.calling_code) + self.phone
+            self.phone = '+' + self.get_calling_code() + self.phone
 
             # Adds the '+' only
-        elif re.search(r'^' + str(self.country.calling_code) + '.+', self.phone) is not None:
+        elif re.search(r'^' + self.get_calling_code() + '.+', self.phone) is not None:
             self.phone = '+' + self.phone
 
     # adds custom table name
