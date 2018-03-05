@@ -73,8 +73,12 @@
 
             <div class="middle-div"></div>
 
-            <input class="submit-button-strong next" id="company-next-step" type="button" name="next_step" value="{% trans 'Next Step' %}"
-                onclick="next_step_tab(event, 'start')">
+            {% if company_submit %}
+                <input class="submit-button-strong next" id="company-next-step" type="submit" name="next_step" value="{% trans 'Finish' %}">
+            {% else %}
+                <input class="submit-button-strong next" id="company-next-step" type="button" name="next_step" value="{% trans 'Next Step' %}"
+                    onclick="next_step_tab(event, 'start')">
+            {% endif %}
         </div>
     </body>
 </html>

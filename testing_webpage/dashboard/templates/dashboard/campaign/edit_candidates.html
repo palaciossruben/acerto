@@ -28,23 +28,23 @@
 
                 <div class="row" style="margin-top:45px;">
 
-                    {% include "dashboard/campaign/candidates_column.html" with candidate=candidate campaigns=campaigns column_candidates=prospect column_name="Prospect" %}
-                    {% include "dashboard/campaign/candidates_column.html" with candidate=candidate campaigns=campaigns column_candidates=backlog column_name="Backlog" %}
-                    {% include "dashboard/campaign/candidates_column.html" with candidate=candidate campaigns=campaigns column_candidates=waiting_for_tests column_name="Lost the test" %}
+                    {% include "dashboard/campaign/candidates_column.html" with campaigns=campaigns column_candidates=prospect column_name="Prospect" %}
+                    {% include "dashboard/campaign/candidates_column.html" with campaigns=campaigns column_candidates=backlog column_name="Backlog" %}
+                    {% include "dashboard/campaign/candidates_column.html" with campaigns=campaigns column_candidates=failed_tests column_name="Failed Tests" %}
 
                 </div>
 
                 <div class="row" style="margin-top:45px;">
 
-                    {% include "dashboard/campaign/candidates_column.html" with candidate=candidate campaigns=campaigns column_candidates=waiting_for_interview column_name="Waiting for Interview" %}
-                    {% include "dashboard/campaign/candidates_column.html" with candidate=candidate campaigns=campaigns column_candidates=did_interview column_name="Did Interview, in Standby" %}
-                    {% include "dashboard/campaign/candidates_column.html" with candidate=candidate campaigns=campaigns column_candidates=sent_to_client column_name="Sent To Client" %}
+                    {% include "dashboard/campaign/candidates_column.html" with campaigns=campaigns column_candidates=waiting_for_interview column_name="Waiting for Interview" %}
+                    {% include "dashboard/campaign/candidates_column.html" with campaigns=campaigns column_candidates=did_interview column_name="Did Interview, in Standby" %}
+                    {% include "dashboard/campaign/candidates_column.html" with campaigns=campaigns column_candidates=sent_to_client column_name="Sent To Client" %}
 
                 </div>
 
                 <div class="row" style="margin-top:45px;">
-                    {% include "dashboard/campaign/candidates_column.html" with candidate=candidate campaigns=campaigns column_candidates=got_the_job column_name="Got Job" %}
-                    {% include "dashboard/campaign/candidates_column.html" with candidate=candidate campaigns=campaigns column_candidates=rejected column_name="Rejected" %}
+                    {% include "dashboard/campaign/candidates_column.html" with campaigns=campaigns column_candidates=got_the_job column_name="Got Job" %}
+                    {% include "dashboard/campaign/candidates_column.html" with campaigns=campaigns column_candidates=rejected column_name="Rejected" %}
                 </div>
 
             <br>

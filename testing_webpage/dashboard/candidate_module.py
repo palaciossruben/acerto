@@ -61,7 +61,7 @@ def add_candidate_to_campaign(request, candidate):
         return False
     else:
         # Starts in Backlog on the new campaign.
-        # TODO: can add logic to start at a later stage, if tests are already passed.
+        # TODO: can add logic to new at a later stage, if tests are already passed.
         Candidate(user_id=candidate.user_id,
                   campaign_id=selected_campaign_id,
                   state=State.objects.get(code='BL')).save()

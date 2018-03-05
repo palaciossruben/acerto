@@ -5,7 +5,8 @@
     "fields":{
       "name": "Backlog",
       "code": "BL",
-      "is_rejected": false
+      "is_rejected": false,
+      "honey": 3
     }
   },
   {
@@ -14,16 +15,18 @@
     "fields":{
       "name": "Screening rejected",
       "code": "SR",
-      "is_rejected": true
+      "is_rejected": true,
+      "honey": 1
     }
   },
   {
     "model": "dashboard.state",
     "pk": 3,
     "fields":{
-      "name": "Waiting for Tests",
-      "code": "WFT",
-      "is_rejected": false
+      "name": "Failed Tests",
+      "code": "FT",
+      "is_rejected": false,
+      "honey": 0
     }
   },
   {
@@ -32,7 +35,8 @@
     "fields":{
       "name": "Waiting for Interview",
       "code": "WFI",
-      "is_rejected": false
+      "is_rejected": false,
+      "honey": 5
     }
   },
   {
@@ -41,7 +45,8 @@
     "fields":{
       "name": "Rejected on Tests",
       "code": "ROT",
-      "is_rejected": true
+      "is_rejected": true,
+      "honey": 2
     }
   },
   {
@@ -50,7 +55,8 @@
     "fields":{
       "name": "Rejected on Interview",
       "code": "ROI",
-      "is_rejected": true
+      "is_rejected": true,
+      "honey": 4
     }
   },
   {
@@ -59,7 +65,8 @@
     "fields":{
       "name": "Sent to client",
       "code": "STC",
-      "is_rejected": false
+      "is_rejected": false,
+      "honey": 6
     }
   },
   {
@@ -68,7 +75,8 @@
     "fields":{
       "name": "Rejected by client",
       "code": "RBC",
-      "is_rejected": true
+      "is_rejected": true,
+      "honey": 5
     }
   },
   {
@@ -77,7 +85,8 @@
     "fields":{
       "name": "Got the job",
       "code": "GTJ",
-      "is_rejected": false
+      "is_rejected": false,
+      "honey": 10
     }
   },
   {
@@ -86,7 +95,8 @@
     "fields":{
       "name": "Did interview",
       "code": "DIS",
-      "is_rejected": false
+      "is_rejected": false,
+      "honey": 5
     }
   },
   {
@@ -95,7 +105,8 @@
     "fields":{
       "name": "Prospect",
       "code": "P",
-      "is_rejected": false
+      "is_rejected": false,
+      "honey": 2
     }
   }
 ]

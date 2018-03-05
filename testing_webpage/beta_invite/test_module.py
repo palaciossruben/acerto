@@ -151,7 +151,7 @@ def update_candidate_state(candidate, evaluation):
         if evaluation.passed:
             candidate.state = State.objects.get(code='WFI')
         else:  # Fails tests
-            candidate.state = State.objects.get(code='WFT')
+            candidate.state = State.objects.get(code='FT')
 
         candidate.save()
 

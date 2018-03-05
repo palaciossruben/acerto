@@ -122,7 +122,7 @@ def get_target_data(user_ids):
     tmp_tuples = []
     for c in candidates:
         if c.state is not None and c.user_id in user_ids:
-            if c.state.code in {'SR', 'WFT', 'ROT', 'ROI', 'RBC'}:
+            if c.state.code in {'SR', 'FT', 'ROT', 'ROI', 'RBC'}:
                 tmp_tuples.append((c.user_id, 0))
             elif c.state.code in {'WFI', 'STC', 'GTJ'}:
                 tmp_tuples.append((c.user_id, 1))
