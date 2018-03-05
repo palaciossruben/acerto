@@ -187,6 +187,7 @@ def post_long_form(request):
     #profession_id = request.POST.get('profession')
     #education_id = request.POST.get('education')
     #country_id = request.POST.get('country')
+    email = request.POST.get('email')
 
     campaign = common.get_campaign_from_request(request)
 
@@ -200,37 +201,38 @@ def post_long_form(request):
                         }
 
     #if profession_id is not None and education_id is not None and country_id is not None:
+    if email:
 
-    #profession = Profession.objects.get(pk=profession_id)
-    #education = Education.objects.get(pk=education_id)
-    #country = Country.objects.get(pk=country_id)
+        #profession = Profession.objects.get(pk=profession_id)
+        #education = Education.objects.get(pk=education_id)
+        #country = Country.objects.get(pk=country_id)
 
-    user_params = {'name': request.POST.get('name'),
-                   'email': request.POST.get('email'),
-                   'phone': request.POST.get('phone'),
-                   #'profession': profession,
-                   #'education': education,
-                   #'country': country,
-                   'ip': ip,
-                   'ui_version': cts.UI_VERSION,
-                   'is_mobile': is_mobile,
-                   'language_code': request.LANGUAGE_CODE}
+        user_params = {'name': request.POST.get('name'),
+                       'email': email,
+                       'phone': request.POST.get('phone'),
+                       #'profession': profession,
+                       #'education': education,
+                       #'country': country,
+                       'ip': ip,
+                       'ui_version': cts.UI_VERSION,
+                       'is_mobile': is_mobile,
+                       'language_code': request.LANGUAGE_CODE}
 
-    # TODO: update user instead of always creating a new one.
-    user = new_user_module.user_if_exists(request.POST.get('email'))
+        # TODO: update user instead of always creating a new one.
+        user = new_user_module.user_if_exists(request.POST.get('email'))
 
-    if user:
-        user = new_user_module.update_user(campaign, user, user_params, request)
+        if user:
+            user = new_user_module.update_user(campaign, user, user_params, request)
+        else:
+            user = new_user_module.create_user(campaign, user_params, request, is_mobile)
+
+        end_point_params['user_id'] = user.id
+
     else:
-        user = new_user_module.create_user(campaign, user_params, request, is_mobile)
-
-    end_point_params['user_id'] = user.id
-
-    #else:
-    #  Adds the user id to the params, to be able to track answers, later on.
-    #    user_id = request.GET.get('user_id')
-    #    if user_id is not None:
-    #        end_point_params['user_id'] = int(user_id)
+        # Adds the user id to the params, to be able to track answers, later on.
+        user_id = request.GET.get('user_id')
+        if user_id is not None:
+            end_point_params['user_id'] = int(user_id)
 
     return render(request, cts.SUCCESS_VIEW_PATH, end_point_params)
 
