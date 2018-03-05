@@ -1248,5 +1248,405 @@
       "created_at": "2018-03-02 02:42:49.0957+00",
       "updated_at": "2018-03-02 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 127,
+    "fields":{
+      "name": "Centro comercial Fundadores",
+      "name_es": "Centro comercial Fundadores",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 128,
+    "fields":{
+      "name": "Centro comercial Cable Plaza",
+      "name_es": "Centro comercial Cable Plaza",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 129,
+    "fields":{
+      "name": "Hospital infantil Rafael Henao Toro",
+      "name_es": "Hospital infantil Rafael Henao Toro",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 130,
+    "fields":{
+      "name": "Universidad Católica de Manizales",
+      "name_es": "Universidad Católica de Manizales",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 131,
+    "fields":{
+      "name": "Parque Faneón",
+      "name_es": "Parque Faneón",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 132,
+    "fields":{
+      "name": "Barrio los Cedros",
+      "name_es": "Barrio los Cedros",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 133,
+    "fields":{
+      "name": "Centro comercial Fundadores",
+      "name_es": "Centro comercial Fundadores",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 134,
+    "fields":{
+      "name": "Plaza de toros de Manizales",
+      "name_es": "Plaza de toros de Manizales",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 135,
+    "fields":{
+      "name": "Barrio el Guamal",
+      "name_es": "Barrio el Guamal",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 136,
+    "fields":{
+      "name": "Terminal de transportes de Manizales",
+      "name_es": "Terminal de transportes de Manizales",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 137,
+    "fields":{
+      "name": "Barrio Asis",
+      "name_es": "Barrio Asis",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 138,
+    "fields":{
+      "name": "Aeropuerto la Nubia",
+      "name_es": "Aeropuerto la Nubia",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 139,
+    "fields":{
+      "name": "Polideportivo Aranjuez",
+      "name_es": "Polideportivo Aranjuez",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 140,
+    "fields":{
+      "name": "Monumento a los fundadores, barrio Chipre",
+      "name_es": "Monumento a los fundadores, barrio Chipre",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 141,
+    "fields":{
+      "name": "Plaza de mercado Galerias",
+      "name_es": "Plaza de mercado Galerias",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 142,
+    "fields":{
+      "name": "Parque del Agua",
+      "name_es": "Parque del Agua",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 143,
+    "fields":{
+      "name": "Plaza de toros de Manizales",
+      "name_es": "Plaza de toros de Manizales",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 144,
+    "fields":{
+      "name": "Villapilar",
+      "name_es": "Villapilar",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 145,
+    "fields":{
+      "name": "Barrio la Aurora",
+      "name_es": "Barrio la Aurora",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 146,
+    "fields":{
+      "name": "E.S.E. Hospital Departamental Universitario Santa Sofía de Caldas",
+      "name_es": "E.S.E. Hospital Departamental Universitario Santa Sofía de Caldas",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 147,
+    "fields":{
+      "name": "Barrio el Porvenir",
+      "name_es": "Barrio el Porvenir",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 148,
+    "fields":{
+      "name": "Zoológico de Barranquilla",
+      "name_es": "Zoológico de Barranquilla",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 149,
+    "fields":{
+      "name": "Barrio la Concepción",
+      "name_es": "Barrio la Concepción",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 150,
+    "fields":{
+      "name": "Centro comercial Buenavista",
+      "name_es": "Centro comercial Buenavista",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 151,
+    "fields":{
+      "name": "Casino Elite",
+      "name_es": "Casino Elite",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 152,
+    "fields":{
+      "name": "La campiña",
+      "name_es": "La campiña",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 153,
+    "fields":{
+      "name": "Barrio los Nogales",
+      "name_es": "Barrio los Nogales",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 154,
+    "fields":{
+      "name": "Parque Suri Salcedo",
+      "name_es": "Parque Suri Salcedo",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 155,
+    "fields":{
+      "name": "Casino Aladdin",
+      "name_es": "Casino Aladdin",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 156,
+    "fields":{
+      "name": "Barrio las delicias",
+      "name_es": "Barrio las delicias",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 157,
+    "fields":{
+      "name": "Sector el estadio",
+      "name_es": "Sector el estadio",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 158,
+    "fields":{
+      "name": "Barrio el Granadillo",
+      "name_es": "Barrio el Granadillo",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 159,
+    "fields":{
+      "name": "Bellavista",
+      "name_es": "Bellavista",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 160,
+    "fields":{
+      "name": "San Marino",
+      "name_es": "San Marino",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 161,
+    "fields":{
+      "name": "Centro comercial Villa Carolina",
+      "name_es": "Centro comercial Villa Carolina",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 162,
+    "fields":{
+      "name": "Barrio las Flores",
+      "name_es": "Barrio las Flores",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 163,
+    "fields":{
+      "name": "Batallón de Policía Militar No 2",
+      "name_es": "Batallón de Policía Militar No 2",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 164,
+    "fields":{
+      "name": "Barrio Nuevo Horizonte",
+      "name_es": "Barrio Nuevo Horizonte",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 165,
+    "fields":{
+      "name": "Catedral Metropolitana Maria Reina de Barranquilla",
+      "name_es": "Catedral Metropolitana Maria Reina de Barranquilla",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 166,
+    "fields":{
+      "name": "Sector el estadio",
+      "name_es": "Sector el estadio",
+      "created_at": "2018-03-02 02:42:49.0957+00",
+      "updated_at": "2018-03-02 02:42:49.0957+00"
+    }
   }
 ]
