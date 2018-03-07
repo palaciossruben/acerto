@@ -60,7 +60,6 @@ class BusinessUser(models.Model):
     email = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
     ip = models.GenericIPAddressField(null=True)
-    ui_version = models.CharField(max_length=200)
     plan = models.ForeignKey(Plan, null=True, on_delete=models.SET_NULL)
     phone = models.CharField(max_length=40, null=True)
     campaigns = models.ManyToManyField(Campaign)
@@ -84,7 +83,6 @@ class BusinessUser(models.Model):
 class Visitor(models.Model):
 
     ip = models.GenericIPAddressField(null=True)
-    ui_version = models.CharField(max_length=200)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

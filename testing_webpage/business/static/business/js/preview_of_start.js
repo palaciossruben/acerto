@@ -8,7 +8,7 @@ function copyCampaignDescription(){
 }
 
 
-function long_form_disable(target) {
+function preview_disable(target) {
 
     var iframe_docs = getIframeDocs();
 
@@ -18,15 +18,15 @@ function long_form_disable(target) {
 }
 
 function disables(){
-    long_form_disable('name')
-    long_form_disable('email')
-    long_form_disable('phone')
-    long_form_disable('country')
-    long_form_disable('education')
-    long_form_disable('profession')
-    long_form_disable('file')
-    long_form_disable('checkbox')
-    long_form_disable('submit')
+    preview_disable('name')
+    preview_disable('email')
+    preview_disable('phone')
+    preview_disable('country')
+    preview_disable('education')
+    preview_disable('profession')
+    preview_disable('file')
+    preview_disable('checkbox')
+    preview_disable('submit')
 }
 
 

@@ -1,4 +1,4 @@
-{% extends 'peaku_base.html'%}
+{% extends 'base.html'%}
 {% load i18n %}
 {% load static %}
 
@@ -6,7 +6,7 @@
 {% block title %}{% trans "Employment Exchange - PeakU" %}{% endblock %}
 
 {% block extra_head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'beta_invite/css/long_form.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'beta_invite/css/index.css' %}">
 {% endblock %}
 
 
@@ -70,7 +70,7 @@
 
             <div class="col-sm-6">
 
-                <form class="my-form" action="{{ action_url }}" method="post" enctype="multipart/form-data">
+                <form class="my-form" action="{% url 'beta_invite:register' %}" method="post" enctype="multipart/form-data">
 
                     {% csrf_token %}
 

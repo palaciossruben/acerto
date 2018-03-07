@@ -38,7 +38,7 @@ def index(request):
 
     ip = get_ip(request)
 
-    business.models.Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
+    business.models.Visitor(ip=ip).save()
     return render(request, cts.BUSINESS_VIEW_PATH, {})
 
 
@@ -54,7 +54,7 @@ def search(request):
     action_url = '/business/results'
     countries, education, professions = beta_invite.views.get_drop_down_values(request.LANGUAGE_CODE)
 
-    business.models.Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
+    business.models.Visitor(ip=ip).save()
     return render(request, cts.SEARCH_VIEW_PATH, {'main_message': _("Discover amazing people"),
                                                   'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
                                                   'action_url': action_url,
@@ -77,7 +77,7 @@ def search_trade(request):
     action_url = '/business/trade_results'
     countries, trades = beta_invite.views.get_trade_drop_down_values(request.LANGUAGE_CODE)
 
-    business.models.Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
+    business.models.Visitor(ip=ip).save()
     return render(request, cts.SEARCH_VIEW_PATH, {'action_url': action_url,
                                                   'countries': countries,
                                                   'trades': trades,
@@ -203,7 +203,6 @@ def first_sign_in(signup_form, campaign, request):
                                                  email=request.POST.get('username'),
                                                  phone=request.POST.get('phone'),
                                                  ip=get_ip(request),
-                                                 ui_version=cts.UI_VERSION,
                                                  plan=get_plan(request),
                                                  auth_user=auth_user)
 
@@ -396,7 +395,7 @@ def trade_client(request):
 
     secondary_message = _("Find someone to help you with daily tasks such as cleaning your house, fixing the fridge or sending a message.")
 
-    business.models.Visitor(ip=ip, ui_version=cts.UI_VERSION).save()
+    business.models.Visitor(ip=ip).save()
     return render(request, cts.TRADE_CLIENT_VIEW_PATH, {'main_message': _("Solve everyday problems"),
                                                         'secondary_message': secondary_message,
                                                         'action_url': action_url,

@@ -1,4 +1,4 @@
-{% extends 'peaku_base.html'%}
+{% extends 'base.html'%}
 {% load i18n %}
 {% load static %}
 
@@ -28,7 +28,7 @@
                         <h1 style="color:var(--blue)">{% trans "Thanks for registering!" %}</h1>
                     </span>
                     <br>
-                    {% include "beta_invite/test.html" with tests=tests %}
+                    {% include "beta_invite/tests.html" with tests=tests %}
                 {% else %}
                     <span style=" font-weight:500; color:#F8E676;">
                         <b style="font-weight:400; text-transform: uppercase; font-size:30px;">{% trans "Thanks for registering!" %}</b>

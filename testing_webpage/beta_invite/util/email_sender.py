@@ -8,7 +8,8 @@ from django.conf import settings
 if settings.DEBUG:
     host = '//127.0.0.1:8000'
 else:
-    host = 'http://peaku.co'
+    host = 'https://peaku.co'
+
 
 def get_current_path():
     return os.path.dirname(os.path.abspath(__file__))
@@ -91,8 +92,8 @@ def send_email_with_mailgun(sender, recipients, subject, body, mail_gun_url, mai
 def get_test_url(user, campaign):
 
     if user and campaign:
-        return host+'/servicio_de_empleo/post?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
-                                                                                                  campaign_id=campaign.id)
+        return host + '/servicio_de_empleo/pruebas?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
+                                                                                                       campaign_id=campaign.id)
     else:
         return ''
 

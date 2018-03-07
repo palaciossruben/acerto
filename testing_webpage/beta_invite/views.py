@@ -1,9 +1,9 @@
-import os
 from user_agents import parse
 from django.utils.translation import ugettext as _
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
+from django.http import HttpResponseBadRequest
 
 import common
 from ipware.ip import get_ip
@@ -12,17 +12,7 @@ from beta_invite.util import email_sender
 from beta_invite import interview_module
 from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, TradeUser, Bullet, BulletType, Test, Question, Evaluation
 from beta_invite import test_module, new_user_module
-
-
-def index(request):
-    """
-    This view works for both user and business versions. It is displayed on 3 different urls: peaku.co, /business,
-    /beta_invite
-    :param request: can come with args "name" and "email", if not it will load the initial page.
-    :return: renders a view.
-    """
-
-    return render(request, cts.INTRO_VIEW_PATH)
+from django.shortcuts import redirect
 
 
 # TODO: Localization a las patadas
@@ -113,33 +103,28 @@ def translate_tests(tests, lang_code):
         return tests
 
 
-def long_form(request):
+def index(request):
     """
     will render a form to input user data.
     """
 
     # Gets information of client: such as if it is mobile
-    ua_string = request.META['HTTP_USER_AGENT']
-    is_desktop = not parse(ua_string).is_mobile
+    is_desktop = not parse(request.META['HTTP_USER_AGENT']).is_mobile
 
-    # Passes campaign_id around to collect it in the POST form from this view: cts.LONG_FORM_VIEW_PATH.
-    # Also uses campaign to customize view.
     # If campaign_id is not found; will default to the default_campaign.
     campaign_id = request.GET.get('campaign_id', cts.DEFAULT_CAMPAIGN_ID)
     campaign = Campaign.objects.filter(pk=campaign_id).first()
     campaign.translate(request.LANGUAGE_CODE)
 
     ip = get_ip(request)
-    action_url = '/servicio_de_empleo/post'
     countries, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
 
-    Visitor(ip=ip, ui_version=cts.UI_VERSION, is_mobile=not is_desktop).save()
+    Visitor(ip=ip, is_mobile=not is_desktop).save()
 
     perks = campaign.bullets.filter(bullet_type__in=BulletType.objects.filter(name='perk'))
     requirements = campaign.bullets.filter(bullet_type__in=BulletType.objects.filter(name='requirement'))
 
     param_dict = {'main_message': _("Discover your true passion"),
-                  'action_url': action_url,
                   'countries': countries,
                   'education': education,
                   'professions': professions,
@@ -159,172 +144,86 @@ def long_form(request):
         except ObjectDoesNotExist:
             pass
 
-    return render(request, cts.LONG_FORM_VIEW_PATH, param_dict)
+    return render(request, cts.INDEX_VIEW_PATH, param_dict)
 
 
-def update_search_dictionary_on_background():
-    """
-    A background process is spawned to update internal search structures.
-    First it goes into the subscribe directory, then it updates the missing text extractions. Then it generates the
-    user_relevance_dictionary.p
-    Returns: None
-    """
-    command = 'cd subscribe/ && python3 document_reader.py && python3 search_engine.py &'
-    os.system(command)
-
-
-def post_long_form(request):
+def register(request):
     """
     Args:
         request: Request object
     Returns: Saves or updates the User, now it will not be creating new user objects for the same email.
     """
     # Gets information of client: such as if it is mobile.
-    ua_string = request.META['HTTP_USER_AGENT']
-    is_mobile = parse(ua_string).is_mobile
-    ip = get_ip(request)
+    is_mobile = parse(request.META['HTTP_USER_AGENT']).is_mobile
 
     #profession_id = request.POST.get('profession')
     #education_id = request.POST.get('education')
     #country_id = request.POST.get('country')
     email = request.POST.get('email')
+    name = request.POST.get('name')
+    phone = request.POST.get('phone')
 
     campaign = common.get_campaign_from_request(request)
 
     tests = translate_tests(campaign.tests.all(), request.LANGUAGE_CODE)
 
-    end_point_params = {'main_message': _("Discover your true passion"),
-                        'secondary_message': _("We search millions of jobs and find the right one for you"),
-                        'campaign_id': campaign.id,
-                        'tests': tests,
-                        'question_ids': test_module.get_tests_questions_dict(tests),
-                        }
-
     #if profession_id is not None and education_id is not None and country_id is not None:
-    if email:
+    # Validates all fields
+    if email and campaign and name and phone:
 
         #profession = Profession.objects.get(pk=profession_id)
         #education = Education.objects.get(pk=education_id)
         #country = Country.objects.get(pk=country_id)
 
-        user_params = {'name': request.POST.get('name'),
+        user_params = {'name': name,
                        'email': email,
-                       'phone': request.POST.get('phone'),
+                       'phone': phone,
                        #'profession': profession,
                        #'education': education,
                        #'country': country,
-                       'ip': ip,
-                       'ui_version': cts.UI_VERSION,
+                       'ip': get_ip(request),
                        'is_mobile': is_mobile,
                        'language_code': request.LANGUAGE_CODE}
 
         # TODO: update user instead of always creating a new one.
         user = new_user_module.user_if_exists(request.POST.get('email'))
-
         if user:
             user = new_user_module.update_user(campaign, user, user_params, request)
         else:
             user = new_user_module.create_user(campaign, user_params, request, is_mobile)
 
-        end_point_params['user_id'] = user.id
+        return redirect('/servicio_de_empleo/pruebas?campaign_id={campaign_id}&user_id={user_id}'.format(campaign_id=campaign.id,
+                                                                                                         user_id=user.id))
 
     else:
-        # Adds the user id to the params, to be able to track answers, later on.
-        user_id = request.GET.get('user_id')
-        if user_id is not None:
-            end_point_params['user_id'] = int(user_id)
+        return HttpResponseBadRequest('<h1>HTTP CODE 400: Client sent bad request with missing params</h1>')
 
-    return render(request, cts.SUCCESS_VIEW_PATH, end_point_params)
+
+def tests(request):
+    """
+    Receives either GET or POST user and campaign ids.
+    :param request: HTTP
+    :return: renders tests.
+    """
+
+    campaign = common.get_campaign_from_request(request)
+    tests = translate_tests(campaign.tests.all(), request.LANGUAGE_CODE)
+
+    end_point_params = {'campaign_id': campaign.id,
+                        'tests': tests,
+                        }
+
+    # Adds the user id to the params, to be able to track answers, later on.
+    user = common.get_user_from_request(request)
+    if user is not None:
+        end_point_params['user_id'] = int(user.id)
+
+    return render(request, cts.TESTS_VIEW_PATH, end_point_params)
 
 
 @login_required
 def home(request):
     return render(request, 'success.html')
-
-
-def fast_job(request):
-    """
-    will render
-    """
-
-    # passes campaign_id around to collect it in the POST form from this view: cts.LONG_FORM_VIEW_PATH
-    campaign_id = request.GET.get('campaign_id')
-    ua_string = request.META['HTTP_USER_AGENT']
-    is_mobile = parse(ua_string).is_mobile
-
-    ip = get_ip(request)
-    action_url = '/fast_job/post'
-    countries, trades = get_trade_drop_down_values(request.LANGUAGE_CODE)
-
-    Visitor(ip=ip, ui_version=cts.UI_VERSION, is_mobile=is_mobile).save()
-
-    param_dict = {'main_message': _("Find a job now"),
-                  'secondary_message': _("We search millions of jobs and find the right one for you"),
-                  'action_url': action_url,
-                  'countries': countries,
-                  'trades': trades,
-                  }
-
-    if campaign_id is not None:
-        param_dict['campaign_id'] = int(campaign_id)
-        try:
-            campaign = Campaign.objects.get(pk=int(campaign_id))
-            campaign.translate(request.LANGUAGE_CODE)
-            # if campaign exists send it.
-            param_dict['campaign'] = campaign
-        except ObjectDoesNotExist:
-            pass
-
-    return render(request, cts.FAST_JOB_VIEW_PATH, param_dict)
-
-
-def post_fast_job(request):
-    """
-    Args:
-        request: Request object
-    Returns: Saves
-    """
-    # Gets information of client: such as if it is mobile.
-    ua_string = request.META['HTTP_USER_AGENT']
-    user_agent = parse(ua_string)
-    ip = get_ip(request)
-
-    trade_id = request.POST.get('trade')
-    country_id = request.POST.get('country')
-
-    trade = Trade.objects.get(pk=trade_id)
-    country = Country.objects.get(pk=country_id)
-
-    # finally collects the campaign_id.
-    campaign_id = request.POST.get('campaign_id')
-
-    trade_user = TradeUser(name=request.POST.get('name'),
-                           email=request.POST.get('email'),
-                           phone=request.POST.get('phone'),
-                           country=country,
-                           trade=trade,
-                           description=request.POST.get('description'),
-                           ip=ip,
-                           ui_version=cts.UI_VERSION,
-                           is_mobile=user_agent.is_mobile)
-
-    # verify that the campaign exists.
-    if campaign_id:
-        try:
-            campaign = Campaign.objects.get(pk=int(campaign_id))
-            # under right conditions add the campaign before saving
-            trade_user.campaign = campaign
-        except ObjectDoesNotExist:
-            pass
-
-    # Saves here to get an id
-    trade_user.save()
-
-    # TODO: add welcoming email
-
-    return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Find a job now"),
-                                                   'secondary_message': _("We search millions of jobs and find the right one for you"),
-                                                   })
 
 
 def send_interview_mail(email_template, candidate):
@@ -404,7 +303,7 @@ def get_test_result(request):
                                                          })
                                                          
     else:  # doesn't pass test.
-        return render(request, cts.SUCCESS_VIEW_PATH, {'main_message': _("Discover your true passion"),
+        return render(request, cts.TESTS_VIEW_PATH, {'main_message': _("Discover your true passion"),
                                                        'secondary_message': _("We search millions of jobs and find the right one for you"),
                                                        })  
                                                        '''
@@ -506,7 +405,7 @@ def add_cv_changes(request):
         user = User.objects.get(pk=int(user_id))
         user.curriculum_url = new_user_module.save_curriculum_from_request(request, user, 'curriculum')
         user.save()
-        return render(request, cts.SUCCESS_VIEW_PATH, {})
+        return render(request, cts.TESTS_VIEW_PATH, {})
 
     # if any inconsistency, then do nothing, ignore it.
     return render(request, cts.ADD_CV, {})

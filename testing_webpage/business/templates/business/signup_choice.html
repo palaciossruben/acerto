@@ -1,4 +1,4 @@
-{% extends 'peaku_base.html'%}
+{% extends 'base.html'%}
 {% load i18n %}
 {% load static %}
 
@@ -16,7 +16,7 @@
         <h2 id="description">{% trans "We connect people with companies, quickly and easily" %}</h2>
 
         <div id="who-am-i-div">
-            <a href="{% url 'beta_invite:long_form' %}">
+            <a href="{% url 'beta_invite' %}">
                 <div id="user">
                     <img class="avatar-img" src="{% static 'beta_invite/img/user.png' %}">
                     <form id="person-form">

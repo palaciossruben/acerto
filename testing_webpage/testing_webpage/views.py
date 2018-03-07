@@ -1,14 +1,13 @@
-from beta_invite import views as beta_views
 from django.shortcuts import render
+from testing_webpage import constants as cts
 
 
 def index(request):
     """
-    will render and have the same view as /beta_invite
+    will render the intro
     """
-    return beta_views.index(request)
+    return render(request, cts.INDEX_VIEW_PATH)
 
 
 def sitemap(request):
-
     return render(request, 'testing_webpage/sitemap.xml', {}, content_type="application/xhtml+xml")

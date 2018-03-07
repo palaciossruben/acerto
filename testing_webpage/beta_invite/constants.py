@@ -1,8 +1,5 @@
-UI_VERSION = "1.1.1 - changes name placeholder to 'Your Complete Name'"
-SUCCESS_VIEW_PATH = 'beta_invite/applied.html'
-LONG_FORM_VIEW_PATH = 'beta_invite/long_form.html'
-FAST_JOB_VIEW_PATH = 'beta_invite/fast_job.html'
-INTRO_VIEW_PATH = 'beta_invite/intro.html'
+TESTS_VIEW_PATH = 'beta_invite/tests_scaffold.html'
+INDEX_VIEW_PATH = 'beta_invite/index.html'
 INTERVIEW_VIEW_PATH = 'beta_invite/interview.html'
 DEFAULT_CAMPAIGN_ID = 5
 INTERVIEW_CALENDLY = 'https://calendly.com/santiago-10/llamada-inicial'
