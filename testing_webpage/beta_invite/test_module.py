@@ -190,4 +190,4 @@ def comes_from_test(request):
         request: HTTP
     Returns: Boolean, indicating if the last url was the test. If no refrer url present then it will return false
     """
-    return '/post' in common.remove_params_from_url(request.META.get('HTTP_REFERER', ''))
+    return '/pruebas' in common.remove_params_from_url(request.META.get('HTTP_REFERER', ''))

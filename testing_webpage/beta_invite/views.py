@@ -165,7 +165,6 @@ def register(request):
 
     campaign = common.get_campaign_from_request(request)
 
-    tests = translate_tests(campaign.tests.all(), request.LANGUAGE_CODE)
 
     #if profession_id is not None and education_id is not None and country_id is not None:
     # Validates all fields
