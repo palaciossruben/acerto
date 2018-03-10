@@ -245,7 +245,7 @@ class Campaign(models.Model):
     free_trial = models.BooleanField(default=True)
     seniority = models.ForeignKey(Seniority, null=True)
     job_function = models.ForeignKey(JobFunctions, null=True)
-    has_email_in_form = models.BooleanField(default=True)
+    has_email = models.BooleanField(default=True)
 
     # TODO: remove circular dependency
     #plan = models.ForeignKey(Plan, null=True, on_delete=models.DO_NOTHING)
@@ -333,7 +333,7 @@ class Evaluation(models.Model):
 
 class User(models.Model):
 
-    email = models.CharField(max_length=200)
+    email = models.CharField(max_length=200, null=True)
     name = models.CharField(max_length=200)
     ip = models.GenericIPAddressField(null=True)
     age = models.IntegerField(null=True)

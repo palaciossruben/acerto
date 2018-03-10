@@ -234,6 +234,10 @@ def send(users, language_code, body_input, subject, with_localization=True, body
 
     for user in users:
 
+        # cannot send email
+        if user.email is None:
+            continue
+
         params = get_params(user, sender_data, override_dict)
 
         body = get_body(body_is_filename, body_input)

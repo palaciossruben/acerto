@@ -61,14 +61,20 @@ def save_curriculum_from_request(request, user, param_name):
         return '#'
 
 
-def user_if_exists(email):
+def user_if_exists(email, phone, campaign):
     """
     Args:
         email: string
     Returns: The most recent user if exists, else None
     """
-    for u in User.objects.filter(email=email).order_by('-created_at'):
-        return u
+
+    # Uses email as unique id
+    if campaign.has_email:
+        for u in User.objects.filter(email=email).order_by('-created_at'):
+            return u
+    else:  # uses phone as unique id
+        for u in User.objects.filter(phone=phone).order_by('-created_at'):
+            return u
 
 
 def candidate_if_exists(campaign, user):

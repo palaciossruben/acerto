@@ -176,11 +176,11 @@
         <br>
         <br>
         <p>HAS EMAIL IN FORM?</p>
-        <select name="has_email_in_form" required>
+        <select name="has_email" required>
 
             <!--Update-->
             {% if campaign %}
-                {% with default=campaign.has_email_in_form %}
+                {% with default=campaign.has_email %}
                     <option value="{{ default }}">{{ default }}</option>
                 {% endwith %}
             {% else %} <!--New-->

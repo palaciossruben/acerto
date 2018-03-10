@@ -169,7 +169,7 @@ def register(request):
 
     #if profession_id is not None and education_id is not None and country_id is not None:
     # Validates all fields
-    if email and campaign and name and phone:
+    if campaign and name and phone and (email or not campaign.has_email):
 
         #profession = Profession.objects.get(pk=profession_id)
         #education = Education.objects.get(pk=education_id)
@@ -186,7 +186,7 @@ def register(request):
                        'language_code': request.LANGUAGE_CODE}
 
         # TODO: update user instead of always creating a new one.
-        user = new_user_module.user_if_exists(request.POST.get('email'))
+        user = new_user_module.user_if_exists(email, phone, campaign)
         if user:
             user = new_user_module.update_user(campaign, user, user_params, request)
         else:
