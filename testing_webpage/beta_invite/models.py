@@ -245,6 +245,7 @@ class Campaign(models.Model):
     free_trial = models.BooleanField(default=True)
     seniority = models.ForeignKey(Seniority, null=True)
     job_function = models.ForeignKey(JobFunctions, null=True)
+    has_email_in_form = models.BooleanField(default=True)
 
     # TODO: remove circular dependency
     #plan = models.ForeignKey(Plan, null=True, on_delete=models.DO_NOTHING)

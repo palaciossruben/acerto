@@ -175,6 +175,23 @@
         <input name="campaign_id" type="hidden" value="{{ campaign.id }}">
         <br>
         <br>
+        <p>HAS EMAIL IN FORM?</p>
+        <select name="has_email_in_form" required>
+
+            <!--Update-->
+            {% if campaign %}
+                {% with default=campaign.has_email_in_form %}
+                    <option value="{{ default }}">{{ default }}</option>
+                {% endwith %}
+            {% else %} <!--New-->
+                <option value="1">True</option>
+            {% endif %}
+
+            <option value="1">True</option>
+            <option value="0">False</option>
+        </select>
+        <br>
+        <br>
         <input class="btn btn-success" type="submit" value="Save"
             style="width:100px; height: 25px; font-size:15; margin-bottom:50px; line-height: 10px;">
     </form>
