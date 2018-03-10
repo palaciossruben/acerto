@@ -64,6 +64,17 @@ def get_files(attachment):
         return []
 
 
+def validate_emails(emails):
+    """
+    Puts everything as list
+    Filters for different from None
+    :param emails: list of emails, or a single email.
+    :return:
+    """
+    emails = emails if type(emails) is list else [emails]
+    return [e for e in emails if e is not None]
+
+
 def send_email_with_mailgun(sender, recipients, subject, body, mail_gun_url, mailgun_api_key, attachment=None):
     """
     Sends emails over mailgun service
@@ -77,16 +88,18 @@ def send_email_with_mailgun(sender, recipients, subject, body, mail_gun_url, mai
         attachment: optional param for attaching content to email
     Returns: sends emails.
     """
-    recipients = recipients if type(recipients) is list else [recipients]
 
-    return requests.post(
-         mail_gun_url,
-         auth=("api", mailgun_api_key),
-         data={"from": sender,
-               "to": recipients,
-               "subject": subject,
-               "text": body},
-         files=get_files(attachment),)
+    recipients = validate_emails(recipients)
+
+    if len(recipients) > 0:
+        return requests.post(
+             mail_gun_url,
+             auth=("api", mailgun_api_key),
+             data={"from": sender,
+                   "to": recipients,
+                   "subject": subject,
+                   "text": body},
+             files=get_files(attachment),)
 
 
 def get_test_url(user, campaign):
@@ -233,10 +246,6 @@ def send(users, language_code, body_input, subject, with_localization=True, body
     sender_data = read_email_credentials()
 
     for user in users:
-
-        # cannot send email
-        if user.email is None:
-            continue
 
         params = get_params(user, sender_data, override_dict)
 
