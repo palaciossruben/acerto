@@ -51,7 +51,11 @@
     <br>
     <br>
     <div style="margin:0px auto; align:center; padding:0px 50px; width:90%;">
-        <p><strong>Email:</strong> {{ candidate.user.email }}</p>
+        {% if candidate.user.email %}
+            <p><strong>Email:</strong> {{ candidate.user.email }}</p>
+        {% else %}
+            <p><strong>Email:</strong>no disponible</p>
+        {% endif %}
         <p><strong>Teléfono:</strong>
         {% if candidate.user.phone is None %}
             Sin teléfono registrado

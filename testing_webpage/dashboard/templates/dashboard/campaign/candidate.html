@@ -6,8 +6,11 @@
 
 <br>
 <br>
-
-<p><strong>email:</strong> {{ candidate.user.email }}</p>
+    {% if candidate.user.email %}
+        <p><strong>email:</strong> {{ candidate.user.email }}</p>
+    {% else %}
+        <p><strong>email:</strong>not available</p>
+    {% endif %}
 <p><strong>phone:</strong>
 {% if candidate.user.phone is None %}
     not available
