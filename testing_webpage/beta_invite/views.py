@@ -10,7 +10,7 @@ from ipware.ip import get_ip
 from beta_invite import constants as cts
 from beta_invite.util import email_sender
 from beta_invite import interview_module
-from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, Trade, BulletType
+from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, BulletType
 from beta_invite import test_module, new_user_module
 from django.shortcuts import redirect
 
@@ -47,22 +47,6 @@ def get_drop_down_values(language_code):
     countries = Country.objects.all().order_by('name')
 
     return countries, education, professions
-
-
-def get_trade_drop_down_values(language_code):
-    """
-    Gets lists of drop down for trades.
-    Args:
-        language_code: 2 digit code (eg. 'es')
-    Returns: A tuple containing (Countries, Education, Professions)
-    """
-
-    trades = Trade.objects.all().order_by(get_name_field(language_code))
-    translate_list_of_objects(trades, language_code)
-
-    countries = Country.objects.all().order_by('name')
-
-    return countries, trades
 
 
 def translate_bullets(bullets, lang_code):

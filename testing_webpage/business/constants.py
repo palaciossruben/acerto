@@ -1,4 +1,3 @@
-TRADE_CLIENT_VIEW_PATH = 'business/trade_client.html'
 SEARCH_VIEW_PATH = 'business/search.html'
 RESULTS_VIEW_PATH = 'business/results.html'
 CONTACT_VIEW_PATH = 'business/contact.html'

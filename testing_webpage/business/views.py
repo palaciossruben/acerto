@@ -65,25 +65,6 @@ def search(request):
                                                   })
 
 
-def search_trade(request):
-    """
-    will render the search view.
-    Args:
-        request: Object
-    Returns: Save
-    """
-
-    ip = get_ip(request)
-    action_url = '/business/trade_results'
-    countries, trades = beta_invite.views.get_trade_drop_down_values(request.LANGUAGE_CODE)
-
-    business.models.Visitor(ip=ip).save()
-    return render(request, cts.SEARCH_VIEW_PATH, {'action_url': action_url,
-                                                  'countries': countries,
-                                                  'trades': trades,
-                                                  })
-
-
 def calculate_result(request):
     """
     Args:
@@ -380,26 +361,6 @@ def plan(request, pk):
     plan_obj = translate_plan(plan_obj, request.LANGUAGE_CODE)
 
     return render(request, cts.PLAN_VIEW_PATH, {'plan': plan_obj})
-
-
-def trade_client(request):
-    """
-    will render and have the same view as /beta_invite except for message customization.
-    Args:
-        request: Object
-    Returns: Save
-    """
-
-    ip = get_ip(request)
-    action_url = '/business/post'
-
-    secondary_message = _("Find someone to help you with daily tasks such as cleaning your house, fixing the fridge or sending a message.")
-
-    business.models.Visitor(ip=ip).save()
-    return render(request, cts.TRADE_CLIENT_VIEW_PATH, {'main_message': _("Solve everyday problems"),
-                                                        'secondary_message': secondary_message,
-                                                        'action_url': action_url,
-                                                        })
 
 
 def start(request):
