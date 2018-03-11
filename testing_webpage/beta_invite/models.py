@@ -390,6 +390,24 @@ class User(models.Model):
         elif re.search(r'^' + self.get_calling_code() + '.+', self.phone) is not None:
             self.phone = '+' + self.phone
 
+    def get_country_name(self):
+        if self.country:
+            return self.country.name
+        else:
+            return 'not available'
+
+    def get_profession_name(self):
+        if self.profession:
+            return self.profession.name
+        else:
+            return 'not available'
+
+    def get_education_name(self):
+        if self.education:
+            return self.education.name
+        else:
+            return 'not available'
+
     # adds custom table name
     class Meta:
         db_table = 'users'

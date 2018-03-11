@@ -348,9 +348,9 @@ def create_nice_resumes_message(candidates):
                                 'Hoja de vida: \n{cv_url}'.format(campaign_name=campaign_name,
                                                                   name=remove_accents(c.user.name),
                                                                   email=c.user.email,
-                                                                  country=c.user.country.name,
-                                                                  profession=c.user.profession.name,
-                                                                  education=c.user.education.name,
+                                                                  country=c.user.get_country_name(),
+                                                                  profession=c.user.get_profession_name(),
+                                                                  education=c.user.get_education_name(),
                                                                   cv_url=cv_url))
 
     return '\n\n'.join(resume_summaries)
