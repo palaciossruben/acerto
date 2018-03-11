@@ -27,12 +27,9 @@ def send_email_marketing():
 
                 business_user = BusinessUser(name=person_name, email=mail)
 
-                #if person_name != '':
-                    #subject = 'Correo para {complete_name}'
-                #else:
                 subject = 'Correo para el gerente'
 
-                email_sender.send(users=business_user,
+                email_sender.send(objects=business_user,
                                   language_code='es',
                                   body_input='business_email_marketing_body',
                                   subject=subject,

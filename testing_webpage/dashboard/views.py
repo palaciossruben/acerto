@@ -70,12 +70,12 @@ def edit_campaign_candidates(request, pk):
 
         candidates = candidate_module.get_checked_box_candidates(pk, request)
 
-        email_sender.send_to_candidate(candidates=candidates,
-                                       language_code=request.LANGUAGE_CODE,
-                                       body_input=request.POST.get('email_body'),
-                                       subject=candidate_module.get_subject(request, pk),
-                                       with_localization=False,
-                                       body_is_filename=False)
+        email_sender.send(objects=candidates,
+                          language_code=request.LANGUAGE_CODE,
+                          body_input=request.POST.get('email_body'),
+                          subject=candidate_module.get_subject(request, pk),
+                          with_localization=False,
+                          body_is_filename=False)
 
     if request.POST.get('send_message') is not None:
         candidates = candidate_module.get_checked_box_candidates(pk, request)
@@ -450,7 +450,7 @@ def send_messages(request):
 
     for message in messages:
         candidate = message.candidate
-        params = email_sender.get_params_for_candidate(candidate, sender_data, candidate.user.language_code, {})
+        params = email_sender.get_params_with_candidate(candidate, sender_data, candidate.user.language_code, {})
         message.text = message.text.format(**params)
 
     messages_json = serializers.serialize('json', messages)

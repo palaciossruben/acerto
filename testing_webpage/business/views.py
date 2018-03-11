@@ -148,7 +148,7 @@ def send_signup_emails(business_user, language_code, campaign):
         body_input = 'business_start_signup_email_body'
 
     try:
-        email_sender.send(users=business_user,
+        email_sender.send(objects=business_user,
                           language_code=language_code,
                           body_input=body_input,
                           subject=_('Welcome to PeakU'))
@@ -292,7 +292,7 @@ def home(request):
 def send_contact_emails(contact, language_code):
 
     try:
-        email_sender.send(users=contact,
+        email_sender.send(objects=contact,
                           language_code=language_code,
                           body_input='business_contact_email_body',
                           subject=_('Welcome to PeakU'))
@@ -505,12 +505,12 @@ def dashboard(request, pk):
 
         candidates = get_checked_box_candidates(campaign.id, request)
 
-        email_sender.send_to_candidate(candidates=candidates,
-                                       language_code='es',
-                                       body_input=request.GET.get('email_body'),
-                                       subject=request.GET.get('email_subject'),
-                                       with_localization=False,
-                                       body_is_filename=False)
+        email_sender.send(objects=candidates,
+                          language_code='es',
+                          body_input=request.GET.get('email_body'),
+                          subject=request.GET.get('email_subject'),
+                          with_localization=False,
+                          body_is_filename=False)
 
     params['campaign'] = campaign
     params['states'] = states

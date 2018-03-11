@@ -143,6 +143,9 @@ def create_user(campaign, user_params, request, is_mobile):
     if is_mobile:
         email_body_name += '_mobile'
 
-    email_sender.send_to_candidate(candidate, request.LANGUAGE_CODE, email_body_name, _('Welcome to PeakU'))
+    email_sender.send(objects=candidate,
+                      language_code=request.LANGUAGE_CODE,
+                      body_input=email_body_name,
+                      subject=_('Welcome to PeakU'))
 
     return user

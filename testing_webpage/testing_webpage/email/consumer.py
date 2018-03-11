@@ -37,11 +37,11 @@ def send_pending_emails():
                 if settings.DEBUG:
                     candidate.user.email = 'juan@peaku.co'
 
-                email_sender.send_to_candidate(candidates=candidate,
-                                               language_code=email.language_code,
-                                               body_input=email.body_input,
-                                               subject=email.subject,
-                                               override_dict=email.override_dict)
+                email_sender.send(objects=candidate,
+                                  language_code=email.language_code,
+                                  body_input=email.body_input,
+                                  subject=email.subject,
+                                  override_dict=email.override_dict)
 
                 email.sent = True
                 email.save()

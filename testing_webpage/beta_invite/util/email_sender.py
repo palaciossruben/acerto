@@ -1,9 +1,10 @@
 import os
 import json
-import smtplib
 import requests
 import unicodedata
 from django.conf import settings
+from dashboard.models import Candidate
+
 
 if settings.DEBUG:
     host = '//127.0.0.1:8000'
@@ -33,30 +34,6 @@ def read_email_credentials():
     return json.loads(json_data)
 
 
-def send_email_through_smtp(user, password, recipient, subject, body):
-
-    # TODO: deactivates mail temporarily
-    return
-
-    gmail_user = user
-    gmail_pwd = password
-    FROM = user
-    TO = recipient if type(recipient) is list else [recipient]
-    SUBJECT = remove_accents(str(subject))
-    TEXT = remove_accents(str(body))
-
-    # Prepare actual message
-    message = """From: %s\nTo: %s\nSubject: %s\n\n%s
-    """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
-
-    server = smtplib.SMTP("smtp.gmail.com", 587)
-    server.ehlo()
-    server.starttls()
-    server.login(gmail_user, gmail_pwd)
-    server.sendmail(FROM, TO, message)
-    server.close()
-
-
 def get_files(attachment):
     if attachment:
         return [("attachment", (attachment, open(attachment, "rb").read()))]
@@ -75,18 +52,17 @@ def validate_emails(emails):
     return [e for e in emails if e is not None]
 
 
-def send_with_mailgun(sender_data, recipients, subject, body, attachment=None):
+def send_with_mailgun(recipients, subject, body, attachment=None):
     """
     Sends emails over mailgun service
     Args:
-        sender_data: an email.
         recipients: email or lists of emails.
         subject: email subject, string
         body: email body, string
         attachment: optional param for attaching content to email
     Returns: sends emails.
     """
-
+    sender_data = read_email_credentials()
     recipients = validate_emails(recipients)
 
     if len(recipients) > 0:
@@ -195,8 +171,7 @@ def get_params_with_user(user, override_dict={}):
     return params
 
 
-# TODO: the code is duplicated
-def get_params_for_candidate(candidate, language_code, override_dict={}):
+def get_params_with_candidate(candidate, language_code, override_dict={}):
     """
     Args:
         candidate: Object.
@@ -239,13 +214,12 @@ def get_body(body_input, body_is_filename=True):
         return body_input
 
 
-# TODO: the code is duplicated
-def send(users, language_code, body_input, subject, with_localization=True, body_is_filename=True, override_dict={},
-         attachment=None):
+def send(objects, language_code, body_input, subject, with_localization=True, body_is_filename=True,
+         override_dict={}, attachment=None):
     """
     Sends an email
     Args:
-        users: Any object that has fields 'name' and 'email' or a list of users.
+        objects: a Candidate object or a list of Candidates. has fields 'name', 'email' and campaign
         language_code: eg: 'es' or 'en'
         body_input: the filename of the body content or the body itself
         subject: string with the email subject
@@ -259,57 +233,24 @@ def send(users, language_code, body_input, subject, with_localization=True, body
     if with_localization and language_code != 'en':
         body_input += '_{}'.format(language_code)
 
-    if type(users) != list:
-        users = [users]
+    if type(objects) != list:
+        objects = [objects]
 
-    sender_data = read_email_credentials()
+    for a_object in objects:
 
-    for user in users:
-
-        params = get_params_with_user(user, override_dict)
+        if isinstance(a_object, Candidate):
+            params = get_params_with_candidate(a_object, language_code, override_dict)
+            recipients = [a_object.user.email, 'juan.rendon@peaku.co']
+        else:
+            params = get_params_with_user(a_object, override_dict)
+            recipients = a_object.email
 
         body = get_body(body_input, body_is_filename=body_is_filename)
 
-        send_with_mailgun(sender_data=sender_data,
-                          recipients=user.email,
+        send_with_mailgun(recipients=recipients,
                           subject=subject.format(**params),
                           body=body.format(**params),
                           attachment=attachment)
-
-
-# TODO: the code is duplicated
-def send_to_candidate(candidates, language_code, body_input, subject, with_localization=True, body_is_filename=True, override_dict={}):
-    """
-    Sends an email
-    Args:
-        candidates: a Candidate object or a list of Candidates. has fields 'name', 'email' and campaign
-        language_code: eg: 'es' or 'en'
-        body_input: the filename of the body content or the body itself
-        subject: string with the email subject
-        with_localization: Boolean indicating whether emails are translated according to browser configuration.
-        body_is_filename: Boolean indicating whether the body_input is a filename or a string with content.
-        override_dict: Dictionary where keys are fields and values to override the keyword behavior.
-    Returns: Sends email
-    """
-
-    if with_localization and language_code != 'en':
-        body_input += '_{}'.format(language_code)
-
-    if type(candidates) != list:
-        candidates = [candidates]
-
-    sender_data = read_email_credentials()
-
-    for candidate in candidates:
-
-        params = get_params_for_candidate(candidate, language_code, override_dict)
-
-        body = get_body(body_input, body_is_filename=body_is_filename)
-
-        send_with_mailgun(sender_data=sender_data,
-                          recipients=[candidate.user.email, 'juan.rendon@peaku.co'],
-                          subject=subject.format(**params),
-                          body=body.format(**params))
 
 
 def remove_accents_in_string(element):
@@ -387,15 +328,13 @@ def send_report(language_code, body_filename, subject, recipients, candidates):
         body_filename += '_{}'.format(language_code)
 
     resumes = create_nice_resumes_message(candidates)
-    sender_data = read_email_credentials()
 
     body = get_body(body_filename)
     d = get_basic_params()
     d['new_resumes'] = resumes
     body = body.format(**d)
 
-    send_with_mailgun(sender_data=sender_data,
-                      recipients=recipients,
+    send_with_mailgun(recipients=recipients,
                       subject=subject,
                       body=body)
 
@@ -433,9 +372,6 @@ def send_internal(contact, language_code, body_filename, subject, campaign=None)
     d['business_campaign_url'] = get_business_campaign_url(campaign)
     body = body.format(**d)
 
-    sender_data = read_email_credentials()
-
-    send_with_mailgun(sender_data=sender_data,
-                      recipients=internal_team,
+    send_with_mailgun(recipients=internal_team,
                       subject=subject,
                       body=body)

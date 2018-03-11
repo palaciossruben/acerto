@@ -219,10 +219,10 @@ def send_interview_mail(email_template, candidate):
     if candidate and interview_module.has_recorded_interview(candidate.campaign):
         candidate.campaign.translate(candidate.user.language_code)
 
-        email_sender.send_to_candidate(candidates=candidate,
-                                       language_code=candidate.user.language_code,
-                                       body_input=email_template,
-                                       subject=_('You can record the interview for {campaign}').format(campaign=candidate.campaign.title))
+        email_sender.send(objects=candidate,
+                          language_code=candidate.user.language_code,
+                          body_input=email_template,
+                          subject=_('You can record the interview for {campaign}').format(campaign=candidate.campaign.title))
 
 
 def get_test_result(request):
