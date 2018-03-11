@@ -1,3 +1,5 @@
+This are the allowed tags for emails and messages:
+
 {name}:                     First word of User.name
 {test_url}:                 Url redirecting to tests for a given user and campaign
 {cv_url}:                   Url redirecting to add cv for a given user

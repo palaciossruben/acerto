@@ -11,8 +11,8 @@ else:
     host = 'https://peaku.co'
 
 
-def get_current_path():
-    return os.path.dirname(os.path.abspath(__file__))
+def get_email_path():
+    return os.path.dirname(os.path.abspath(__file__)) + '/emails'
 
 
 def get_first_name(complete_name):
@@ -29,7 +29,7 @@ def get_first_name(complete_name):
 
 def read_email_credentials():
     """Returns a json with the credentials"""
-    json_data = open(os.path.join(get_current_path(), "email_credentials.json"), encoding='utf-8').read()
+    json_data = open(os.path.join(get_email_path(), "email_credentials.json"), encoding='utf-8').read()
     return json.loads(json_data)
 
 
@@ -75,16 +75,14 @@ def validate_emails(emails):
     return [e for e in emails if e is not None]
 
 
-def send_email_with_mailgun(sender, recipients, subject, body, mail_gun_url, mailgun_api_key, attachment=None):
+def send_with_mailgun(sender_data, recipients, subject, body, attachment=None):
     """
     Sends emails over mailgun service
     Args:
-        sender: an email.
+        sender_data: an email.
         recipients: email or lists of emails.
         subject: email subject, string
         body: email body, string
-        mail_gun_url: string
-        mailgun_api_key: string
         attachment: optional param for attaching content to email
     Returns: sends emails.
     """
@@ -93,9 +91,9 @@ def send_email_with_mailgun(sender, recipients, subject, body, mail_gun_url, mai
 
     if len(recipients) > 0:
         return requests.post(
-             mail_gun_url,
-             auth=("api", mailgun_api_key),
-             data={"from": sender,
+             sender_data['mailgun_url'],
+             auth=("api", sender_data['mailgun_api_key']),
+             data={"from": sender_data['email'],
                    "to": recipients,
                    "subject": subject,
                    "text": body},
@@ -154,15 +152,35 @@ def get_cv_url(user):
     return host+'/servicio_de_empleo/add_cv?user_id={user_id}'.format(user_id=user.id)
 
 
-def get_params(user, sender_data, override_dict):
+def get_basic_params(override_dict={}):
+    """
+    Limited version of the get_params_with_candidate(). For specific cases.
+    Args:
+        override_dict: Dictionary that changes the default values.
+    Returns:
+    """
+    sender_data = read_email_credentials()
+    params = {'sender_name': sender_data['sender_name'],
+              'sender_position': sender_data['sender_position'],
+              'peaku_address': sender_data['peaku_address'],
+              }
+
+    for k, v in override_dict.items():
+        params[k] = v
+
+    return params
+
+
+def get_params_with_user(user, override_dict={}):
     """
     Limited version of the get_params_with_candidate(). For specific cases.
     Args:
         user: Object.
-        sender_data:
         override_dict: Dictionary that changes the default values.
     Returns:
     """
+
+    sender_data = read_email_credentials()
     params = {'name': get_first_name(user.name),
               'complete_name': user.name.title(),
               'cv_url': get_cv_url(user),
@@ -178,15 +196,16 @@ def get_params(user, sender_data, override_dict):
 
 
 # TODO: the code is duplicated
-def get_params_for_candidate(candidate, sender_data, language_code, override_dict):
+def get_params_for_candidate(candidate, language_code, override_dict={}):
     """
     Args:
         candidate: Object.
-        sender_data:
         language_code: just that.
         override_dict: Dictionary that changes the default values.
     Returns:
     """
+
+    sender_data = read_email_credentials()
     params = {'name': get_first_name(candidate.user.name),
               'complete_name': candidate.user.name.title(),
               'cv_url': get_cv_url(candidate.user),
@@ -206,7 +225,7 @@ def get_params_for_candidate(candidate, sender_data, language_code, override_dic
     return params
 
 
-def get_body(body_is_filename, body_input):
+def get_body(body_input, body_is_filename=True):
     """
     Args:
         body_is_filename: Boolean
@@ -214,7 +233,7 @@ def get_body(body_is_filename, body_input):
     Returns:
     """
     if body_is_filename:
-        with open(os.path.join(get_current_path(), body_input), encoding='utf-8') as fp:
+        with open(os.path.join(get_email_path(), body_input), encoding='utf-8') as fp:
             return fp.read()
     else:
         return body_input
@@ -247,17 +266,15 @@ def send(users, language_code, body_input, subject, with_localization=True, body
 
     for user in users:
 
-        params = get_params(user, sender_data, override_dict)
+        params = get_params_with_user(user, override_dict)
 
-        body = get_body(body_is_filename, body_input)
+        body = get_body(body_input, body_is_filename=body_is_filename)
 
-        send_email_with_mailgun(sender=sender_data['email'],
-                                recipients=user.email,
-                                subject=subject.format(**params),
-                                body=body.format(**params),
-                                mail_gun_url=sender_data['mailgun_url'],
-                                mailgun_api_key=sender_data['mailgun_api_key'],
-                                attachment=attachment,)
+        send_with_mailgun(sender_data=sender_data,
+                          recipients=user.email,
+                          subject=subject.format(**params),
+                          body=body.format(**params),
+                          attachment=attachment)
 
 
 # TODO: the code is duplicated
@@ -285,16 +302,14 @@ def send_to_candidate(candidates, language_code, body_input, subject, with_local
 
     for candidate in candidates:
 
-        params = get_params_for_candidate(candidate, sender_data, language_code, override_dict)
+        params = get_params_for_candidate(candidate, language_code, override_dict)
 
-        body = get_body(body_is_filename, body_input)
+        body = get_body(body_input, body_is_filename=body_is_filename)
 
-        send_email_with_mailgun(sender=sender_data['email'],
-                                recipients=[candidate.user.email, 'juan.rendon@peaku.co'],
-                                subject=subject.format(**params),
-                                body=body.format(**params),
-                                mail_gun_url=sender_data['mailgun_url'],
-                                mailgun_api_key=sender_data['mailgun_api_key'])
+        send_with_mailgun(sender_data=sender_data,
+                          recipients=[candidate.user.email, 'juan.rendon@peaku.co'],
+                          subject=subject.format(**params),
+                          body=body.format(**params))
 
 
 def remove_accents_in_string(element):
@@ -374,18 +389,15 @@ def send_report(language_code, body_filename, subject, recipients, candidates):
     resumes = create_nice_resumes_message(candidates)
     sender_data = read_email_credentials()
 
-    with open(os.path.join(get_current_path(), body_filename), encoding='utf-8') as fp:
-        body = fp.read().format(new_resumes=resumes,
-                                sender_name=sender_data['sender_name'],
-                                sender_position=sender_data['sender_position'],
-                                peaku_address=sender_data['peaku_address'],)
+    body = get_body(body_filename)
+    d = get_basic_params()
+    d['new_resumes'] = resumes
+    body = body.format(**d)
 
-    send_email_with_mailgun(sender=sender_data['email'],
-                            recipients=recipients,
-                            subject=subject,
-                            body=body,
-                            mail_gun_url=sender_data['mailgun_url'],
-                            mailgun_api_key=sender_data['mailgun_api_key'])
+    send_with_mailgun(sender_data=sender_data,
+                      recipients=recipients,
+                      subject=subject,
+                      body=body)
 
 
 def send_internal(contact, language_code, body_filename, subject, campaign=None):
@@ -406,24 +418,24 @@ def send_internal(contact, language_code, body_filename, subject, campaign=None)
     if language_code != 'en':
         body_filename += '_{}'.format(language_code)
 
-    with open(os.path.join(get_current_path(), body_filename), encoding='utf-8') as fp:
+    try:
+        message = contact.message
+    except AttributeError:  # missing field
+        message = ''
 
-        try:
-            message = contact.message
-        except AttributeError:  # missing field
-            message = ''
-
-        body = fp.read().format(name=contact.name,
-                                email=contact.email,
-                                phone=contact.phone,
-                                message=message,
-                                business_campaign_url=get_business_campaign_url(campaign))
+    body = get_body(body_filename)
+    d = get_basic_params()
+    d['message'] = message
+    d['name'] = contact.name
+    d['email'] = contact.email,
+    d['phone'] = contact.phone,
+    d['message'] = message,
+    d['business_campaign_url'] = get_business_campaign_url(campaign)
+    body = body.format(**d)
 
     sender_data = read_email_credentials()
 
-    send_email_with_mailgun(sender=sender_data['email'],
-                            recipients=internal_team,
-                            subject=subject,
-                            body=body,
-                            mail_gun_url=sender_data['mailgun_url'],
-                            mailgun_api_key=sender_data['mailgun_api_key'])
+    send_with_mailgun(sender_data=sender_data,
+                      recipients=internal_team,
+                      subject=subject,
+                      body=body)
