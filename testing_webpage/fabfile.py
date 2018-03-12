@@ -20,11 +20,13 @@ def list_dir(directory=None):
     return files
 
 
-def sync_local(sync_media=False):
+def sync_local(sync_media=False, db_update=True):
     """
     Synchronizes local machine with last backup from DB and media files
     Args:
         sync_media: Boolean indicating if the sync will be done only for the DB or the media files as well.
+        db_update: updates the db by running the pgdump command. If it is false will copy the dump to local machine,
+        but will not execute
     Returns:
     """
 
@@ -59,7 +61,7 @@ def sync_local(sync_media=False):
     # once backup is local then update DB:
 
     # Strong validation to make sure it is done on a safe computer:
-    if get_mac() in safe_machines:
+    if get_mac() in safe_machines and db_update:
 
         # DROP LOCAL DB: BE CAREFUL!!!
         drop_command = "{psql} -c \'DROP DATABASE maindb;\'".format(psql=postgres_psql)
@@ -161,7 +163,7 @@ def deploy():
             # Last step: start gunicorn as a deamon: that binds to a unix socket, from where nginx listens.
             run('PYENV_VERSION=3.5.2 gunicorn -c gunicorn_cfg.py testing_webpage.wsgi --bind=unix:/opt/peaku_co/run/gunicorn.sock')
 
-    sync_local(sync_media=False)
+    sync_local(sync_media=False, db_update=False)
 
 
 def dev_update():
