@@ -92,8 +92,10 @@
             <a href="/staffing">
                 <img class="logo" src="{% static 'testing_webpage/img/peaku_home.svg' %}" alt="">
             </a>
+
             {% if 'seleccion_de_personal' in request.path %}
                 <ul>
+                    <li class="home"><a href="/staffing">INICIO</a></li>
                     <li><a href="{% url 'business:contact_form' %}">CONTACTO</a></li>
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'business:business_campaigns' user|get_business_user_id_from_auth_user %}">CAMPAÑAS</a></li>

@@ -67,10 +67,11 @@
 
 .form-inputfile + label {
     width: 170px;
-    height: 40px;
+    height: auto;
     font-size: 1em;
     text-align: center;
     padding-top: 5px;
+    padding-bottom: 5px;
     color: var(--blue);
     border: solid 4px var(--blue);
     margin-bottom: 5px;
