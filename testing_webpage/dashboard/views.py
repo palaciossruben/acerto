@@ -431,12 +431,6 @@ def send_new_contacts(request):
     return JsonResponse(json_data, safe=False)
 
 
-def mark_messages_as_sent(messages):
-    for message in messages:
-        message.sent = True
-        message.save()
-
-
 def send_messages(request):
     """
     Sends the messages and their respective users.
@@ -444,16 +438,8 @@ def send_messages(request):
     :return: json
     """
 
-    messages = [m for m in Message.objects.filter(sent=False)]
-
-    sender_data = email_sender.read_email_credentials()
-
-    for message in messages:
-        candidate = message.candidate
-        params = email_sender.get_params_with_candidate(candidate, sender_data, candidate.user.language_code, {})
-        message.text = message.text.format(**params)
+    messages = [m.add_format_and_mark_as_sent() for m in Message.objects.filter(sent=False)]
 
     messages_json = serializers.serialize('json', messages)
 
-    mark_messages_as_sent(messages)
     return JsonResponse(messages_json, safe=False)

@@ -3,6 +3,7 @@ from django.db.models.signals import post_init
 
 from beta_invite.models import User, Campaign, Evaluation, Survey
 from dashboard import constants as cts
+from beta_invite.util import common_senders
 
 
 class State(models.Model):
@@ -107,6 +108,18 @@ class Message(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'messages'
+
+    def add_format_and_mark_as_sent(self):
+        """
+        Adds format to message and returns itself
+        :return: self
+        """
+        candidate = self.candidate
+        params = common_senders.get_params_with_candidate(candidate, candidate.user.language_code, {})
+        self.text = self.text.format(**params)
+        self.sent = True
+        self.save()
+        return self
 
 
 def message_post_init(**kwargs):

@@ -13,6 +13,7 @@ from beta_invite import interview_module
 from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, BulletType
 from beta_invite import test_module, new_user_module
 from django.shortcuts import redirect
+from beta_invite.util import messenger_sender
 
 
 # TODO: Localization a las patadas
@@ -174,6 +175,14 @@ def register(request):
             user = new_user_module.update_user(campaign, user, user_params, request)
         else:
             user = new_user_module.create_user(campaign, user_params, request, is_mobile)
+
+        # TODO: Remove 'if' when ready.
+        # Test to showcase new feature
+        from django.conf import settings  # TODO: remove import also
+        if settings.DEBUG:
+            messenger_sender.send(candidates=common.get_candidate(user, campaign),
+                                  language_code=request.LANGUAGE_CODE,
+                                  body_input='candidate_backlog')
 
         return redirect('/servicio_de_empleo/pruebas?campaign_id={campaign_id}&user_id={user_id}'.format(campaign_id=campaign.id,
                                                                                                          user_id=user.id))
