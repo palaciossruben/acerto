@@ -49,6 +49,10 @@ header nav ul li a:hover{
 .topnav .icon {
   display: none;
 }
+
+.home {
+    display:none;
+}
 /******************************RESPONSIVE HEADER NAV************************************************/
 @media screen and (max-width: 718px) {
   .topnav li:not(:first-child) {display: none;}
@@ -80,7 +84,13 @@ header nav ul li a:hover{
     display: block;
     float:left;
   }
+
+  .home {
+    display:inline-block;
+  }
 }
+
+
 /*******************************FOOTER***********************************************/
 footer {
     background: linear-gradient(to right, #8EDBCC , #92AED9);
