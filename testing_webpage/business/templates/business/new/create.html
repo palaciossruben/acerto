@@ -24,16 +24,15 @@
 
 {% block content %}
 
-    <h2 style="color:var(--brochure-blue); margin-left: 7%; margin-top: 3%;">Creación de campaña</h2>
-    <h5 class="paragraph" align="center" style="margin-left: 7%; margin-right: 10%;">
-        <p>Ingresa la información de la vacante y de la empresa, registrate y empieza
-         a recibir aplicantes.</p>
-        <p style="font-size: 18px;"> Todo en menos de diez minutos. ¡ Así de fácil !</p>
+    <h2 style="color:var(--brochure-blue); margin-left: 7%; margin-top: 3%;margin-bottom: 1%;">{% trans "CAMPAIGN CREATION" %}</h2>
+    <h5 class="paragraph" align="center" style="margin-left: 7%;">
+        <p>{% trans "Enter the information of the vacancy and the company, register and start receiving applicants" %}</p>
+        <p>{% trans "Everything in less than ten minutes. That easy !" %}</p>
     </h5>
 
     <div class="tab">
-        <button id="vacancy_button" class="tab-links active" onclick="tab(event, 'vacancy')" >Vacante</button>
-        <button id="company_button" class="tab-links" onclick="tab(event, 'company')" disabled >{% trans "Company" %}</button>
+        <button id="vacancy_button" class="tab-links active" onclick="tab(event, 'vacancy')">{% trans "JOB DETAILS" %}</button>
+        <button id="company_button" class="tab-links" onclick="tab(event, 'company')" disabled >{% trans "COMPANY DETAILS" %}</button>
     </div>
 
     <form class="content" action="{% url 'business:create_post' %}" method="post">

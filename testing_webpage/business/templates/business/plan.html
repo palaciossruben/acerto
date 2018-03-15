@@ -36,22 +36,22 @@
 
     <section id="section-container-plan">
 
-        <h3 class="title-blue">Características:</h3>
-        <p class="paragraph">Creación de vacante para tu campaña pública</p>
-        <p class="paragraph">Publicación en bolsas de empleo, redes sociales y en base de datos. Alto volumen de candidatos</p>
-        <p class="paragraph">Garantizamos candidatos relevantes</p>
-        <p class="paragraph">Selección de hojas de vida de acuerdo con requerimientos, recomendamos el top 10% de los mejores</p>
-        <p class="paragraph">Acceso al tablero de control para ver candidatos, aplicantes e información detallada de los test y sus respuestas</p>
+        <h3 class="title-blue">{% trans "Characteristics:" %}</h3>
+        <p class="paragraph">{% trans "Creation of job post for your public campaign" %}</p>
+        <p class="paragraph">{% trans "Publication in job boards, social networks and in database. High volume of candidates" %}</p>
+        <p class="paragraph">{% trans "We guarantee relevant candidates" %}</p>
+        <p class="paragraph">{% trans "Selection of resumes according to requirements, we recommend the best 10 candidates" %}</p>
+        <p class="paragraph">{% trans "Access to the control panel to see candidates, applicants and detailed information of the tests and their answers" %}</p>
 
         {% if plan.id == 2 %}
-            <p class="paragraph">Proceso de selección tipo Google</p>
-            <p class="paragraph">Continuamos con el proceso hasta lograr una contratación exitosa</p>
+            <p class="paragraph">{% trans "Google type selection process" %}</p>
+            <p class="paragraph">{% trans "We continue with the process until you achieve a successful contracting" %}</p>
         {% endif %}
 
         {% if plan.id == 3 %}
-            <p class="paragraph">Proceso de selección tipo Google</p>
-            <p class="paragraph">Encontramos perfiles difíciles rápidamente</p>
-            <p class="paragraph">Continuamos con el proceso hasta lograr una contratación exitosa</p>
+            <p class="paragraph">{% trans "Google type selection process" %}</p>
+            <p class="paragraph">{% trans "We find difficult profiles quickly" %}</p>
+            <p class="paragraph">{% trans "We continue with the process until you achieve a successful contracting" %}</p>
         {% endif %}
     </section>
 {% endblock %}

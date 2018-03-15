@@ -8,70 +8,70 @@
             </th>
 
             <th style="width:22%;">
-                <p> BÁSICO </p>
+                <p> {% trans "BASIC" %}</p>
                 <a href="{% url 'business:plan' 1 %}">
                     <form method="get">
-                        <input class="plan-button" type="button" value="Adquirir plan">
+                        <input class="plan-button" type="button" value="{% trans 'Get plan' %}">
                     </form>
                 </a>
             </th>
 
             <th style="width:22%;">
-                <p> PREMIUM </p>
+                <p> {% trans "PREMIUM" %} </p>
                 <a href="{% url 'business:plan' 2 %}">
                     <form method="get">
-                        <input class="plan-button" type="button" value="Adquirir plan">
+                        <input class="plan-button" type="button" value="{% trans 'Get plan' %}">
                     </form>
                </a>
             </th>
 
             <th style="width:22%;">
-                <p> HEADHUNTER </p>
+                <p> {% trans "HEADHUNTER" %} </p>
                 <a href="{% url 'business:plan' 3 %}">
                     <form method="get">
-                        <input class="plan-button" type="button" value="Adquirir plan">
+                        <input class="plan-button" type="button" value="{% trans 'Get plan' %}">
                     </form>
                </a>
             </th>
         </tr>
 
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Búsqueda en múltiples bases de datos</td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> {% trans "Search in multiple databases" %}</td>
             <td>&#127761;</td>
             <td>&#127761;</td>
             <td>&#127761;</td>
         </tr>
 
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Recomendación de candidatos (Top 10%)</td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg">{% trans "Recommendation of candidates (Top 10)" %}</td>
             <td>&#127761;</td>
             <td>&#127761;</td>
             <td>&#127761;</td>
         </tr>
 
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Herramientas para el seguimiento a los procesos y candidatos</td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> {% trans "Tools for monitoring processes and candidates" %}</td>
             <td>&#127761;</td>
             <td>&#127761;</td>
             <td>&#127761;</td>
         </tr>
 
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Pruebas de selección tipo Google</td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> {% trans "Google type selection tests" %}</td>
             <td></td>
             <td>&#127761;</td>
             <td>&#127761;</td>
         </tr>
 
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Garantía de contratación</td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> {% trans "Hiring guarantee" %}</td>
             <td></td>
             <td>&#127761;</td>
             <td>&#127761;</td>
         </tr>
 
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Perfiles específicos difíciles de encontrar<br></td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> {% trans "Specific profiles difficult to find" %}<br></td>
             <td></td>
             <td></td>
             <td>&#127761;</td>
@@ -79,9 +79,9 @@
 
         <tr valign=top>
             <td class="special-td"></td>
-            <td class="price"><strong>$300.000</strong></td>
-            <td class="price"><strong>$1.200.000</strong></td>
-            <td class="price"><strong>Cotización</strong></td>
+            <td class="price"><strong>{% trans "$300.000 COP" %}</strong></td>
+            <td class="price"><strong>{% trans "$1.200.000 COP" %}</strong></td>
+            <td class="price"><strong>{% trans "Quotation" %}</strong></td>
         </tr>
 </table>
 
@@ -89,150 +89,150 @@
     <table>
         <tr>
             <th style="width:auto;">
-             <p class="column-title">BÁSICO</p>
+             <p class="column-title">{% trans "BASIC" %}</p>
             </th>
 
             <th style="width:auto;">
                 <a href="{% url 'business:plan' 1 %}">
                     <form method="get">
-                        <input class="plan-button" type="button" value="Adquirir plan">
+                        <input class="plan-button" type="button" value="{% trans 'Get plan' %}">
                     </form>
                 </a>
             </th>
         </tr>
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Búsqueda en múltiples bases de datos</td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> {% trans "Search in multiple databases" %}</td>
             <td>&#127761;</td>
         </tr>
 
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Recomendación de candidatos (Top 10%)</td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> {% trans "Recommendation of candidates (Top 10)" %}</td>
             <td>&#127761;</td>
         </tr>
 
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Herramientas para el seguimiento a los procesos y candidatos</td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> % trans "Tools for monitoring processes and candidates" %}</td>
             <td>&#127761;</td>
         </tr>
 
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Pruebas de selección tipo Google</td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> {% trans "Google type selection tests" %}</td>
             <td></td>
         </tr>
 
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Garantía de contratación</td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> {% trans "Hiring guarantee" %}</td>
             <td></td>
         </tr>
 
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Perfiles específicos difíciles de encontrar<br></td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> {% trans "Specific profiles difficult to find" %}<br></td>
             <td></td>
         </tr>
 
         <tr valign=top>
             <td class="special-td"></td>
-            <td class="price"><strong>$300.000</strong></td>
+            <td class="price"><strong>{% trans "$300.000 COP" %}</strong></td>
         </tr>
     </table>
     <br>
     <table>
         <tr>
             <th style="width:auto;">
-             <p class="column-title">PREMIUM</p>
+             <p class="column-title">{% trans "PREMIUM" %}</p>
             </th>
 
             <th style="width:auto;">
                 <a href="{% url 'business:plan' 1 %}">
                     <form method="get">
-                        <input class="plan-button" type="button" value="Adquirir plan">
+                        <input class="plan-button" type="button" value="{% trans 'Get plan' %}">
                     </form>
                 </a>
             </th>
         </tr>
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Búsqueda en múltiples bases de datos</td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> {% trans "Search in multiple databases" %}</td>
             <td>&#127761;</td>
         </tr>
 
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Recomendación de candidatos (Top 10%)</td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> {% trans "Recommendation of candidates (Top 10)" %}</td>
             <td>&#127761;</td>
         </tr>
 
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Herramientas para el seguimiento a los procesos y candidatos</td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> {% trans "Tools for monitoring processes and candidates" %}</td>
             <td>&#127761;</td>
         </tr>
 
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Pruebas de selección tipo Google</td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> {% trans "Google type selection tests" %}</td>
             <td>&#127761;</td>
         </tr>
 
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Garantía de contratación</td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> {% trans "Hiring guarantee" %}</td>
             <td>&#127761;</td>
         </tr>
 
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Perfiles específicos difíciles de encontrar<br></td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> {% trans "Specific profiles difficult to find" %}<br></td>
             <td></td>
         </tr>
 
         <tr valign=top>
             <td class="special-td"></td>
-            <td class="price"><strong>$1.200.000</strong></td>
+            <td class="price"><strong>{% trans "$1.200.000 COP" %}</strong></td>
         </tr>
     </table>
     <br>
     <table>
         <tr>
             <th style="width:auto;">
-             <p class="column-title">HEADHUNTER</p>
+             <p class="column-title">{% trans "HEADHUNTER" %}</p>
             </th>
 
             <th style="width:auto;">
                 <a href="{% url 'business:plan' 1 %}">
                     <form method="get">
-                        <input class="plan-button" type="button" value="Adquirir plan">
+                        <input class="plan-button" type="button" value="{% trans 'Get plan' %}">
                     </form>
                 </a>
             </th>
         </tr>
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Búsqueda en múltiples bases de datos</td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> {% trans "Search in multiple databases" %}</td>
             <td>&#127761;</td>
         </tr>
 
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Recomendación de candidatos (Top 10%)</td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> {% trans "Recommendation of candidates (Top 10)" %}</td>
             <td>&#127761;</td>
         </tr>
 
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Herramientas para el seguimiento a los procesos y candidatos</td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> {% trans "Tools for monitoring processes and candidates" %}</td>
             <td>&#127761;</td>
         </tr>
 
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Pruebas de selección tipo Google</td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> {% trans "Google type selection tests" %}</td>
             <td>&#127761;</td>
         </tr>
 
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Garantía de contratación</td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> {% trans "Hiring guarantee" %}</td>
             <td>&#127761;</td>
         </tr>
 
         <tr valign=top>
-            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> Perfiles específicos difíciles de encontrar<br></td>
+            <td class="special-td"><img src="/static/business/img/check_mark_green.svg"> {% trans "Specific profiles difficult to find" %}<br></td>
             <td>&#127761;</td>
         </tr>
 
         <tr valign=top>
             <td class="special-td"></td>
-            <td class="price"><strong>Cotización</strong></td>
+            <td class="price"><strong>{% trans "Quotation" %}</strong></td>
         </tr>
     </table>
 </section>

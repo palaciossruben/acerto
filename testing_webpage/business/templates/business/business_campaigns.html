@@ -11,7 +11,7 @@
 
 {% block content %}
 
-    <h1 style="text-align:center; margin:50px 0px">Campañas</h1>
+    <h1 style="text-align:center; margin:50px 0px">{% trans "Campaigns" %}</h1>
     <ol style="margin-left:10%">
         {% for campaign in campaigns %}
             <li style=""><a href="{{ campaign|get_dashboard_campaign_url }}">{{ campaign.title_es }}</a></li>

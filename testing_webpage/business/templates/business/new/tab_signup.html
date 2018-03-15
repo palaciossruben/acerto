@@ -20,13 +20,12 @@
 
             <h3 class="secondary-title" >{% trans "Sign Up" %}</h3>
             <div class="secondary-yellow-bar"></div>
-            <h5 class="paragraph" align="center">¡Ya está todo listo!
-            Para terminar el proceso solo nos hace falta la información de tu empresa.</h5>
+            <h5 class="paragraph" align="center">{% trans "Everything is ready! To finish the process we only need the contact information" %}</h5>
             <br>
             <div class="my-form">
 
 				<input class="form-text" type="text" name="name"
-				  placeholder="{% trans 'Your Full Name' %}" required="required" pattern="[A-Za-z\sáéíóúÑñÜü]{1,200}">
+				  placeholder="{% trans 'Your Full Name' %}" required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
 
 				<input class="form-text" type="email" name="username"
 				  placeholder="{% trans 'Your email' %}" required="required">
@@ -44,12 +43,12 @@
     </div>
 
     <div class="back-next-div" style="margin-top: 30px">
-        <input class="submit-button-strong back" type="button" name="back_step" value="Atrás"
+        <input class="submit-button-strong back" type="button" name="back_step" value="{% trans 'Back step' %}"
                onclick="next_step_tab(event, 'company')">
 
         <div class="middle-div"></div>
 
-        <input class="submit-button-strong next" type="submit" value="Terminar">
+        <input class="submit-button-strong next" type="submit" value="{% trans 'Finish' %}">
     </div>
 
 </section>

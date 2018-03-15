@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 
 <li>
     <input type="checkbox" name="{{ candidate.id }}_checkbox">
@@ -6,9 +7,9 @@
         <br>
 
             {% if candidate.user.curriculum_url != '#' %}
-                <a href="{% static candidate.user.curriculum_url %}"> Hoja de vida</a>
+                <a href="{% static candidate.user.curriculum_url %}">{% trans "CV" %}</a>
             {% else %}
-                Sin hoja de vida
+                {% trans "Without resume" %}
             {% endif %}
             {% if candidate.user.email %}
                 <p>{{ candidate.user.email }}
@@ -17,7 +18,7 @@
             {% endif %}
             <br>
             {% if candidate.user.phone is None %}
-                not available
+                {% trans "Not available" %}
             {% else %}
                 {{ candidate.user.phone }}
             {% endif %}
