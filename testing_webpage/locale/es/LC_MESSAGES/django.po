@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-15 14:55-0500\n"
+"POT-Creation-Date: 2018-03-15 15:42-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -845,7 +845,7 @@ msgstr "Agencia de Empleo - PeakU"
 
 #: .\business\templates\business\signup_choice.html:16
 #: .\testing_webpage\templates\testing_webpage\index.html:26
-msgid "We connect people with companies, quickly and easily"
+msgid "We connect people and companies, fast and easy"
 msgstr "Conectamos personas con empresas, fácil y rápido"
 
 #: .\business\templates\business\signup_choice.html:23
@@ -904,11 +904,11 @@ msgid "Discover Amazing People"
 msgstr "Descubre Personas Increíbles"
 
 #: .\testing_webpage\templates\testing_webpage\index.html:31
-msgid "PERSONS"
+msgid "CANDIDATE"
 msgstr "PERSONAS"
 
 #: .\testing_webpage\templates\testing_webpage\index.html:41
-msgid "BUSINESS"
+msgid "EMPLOYER"
 msgstr "EMPRESAS"
 
 #: .\testing_webpage\templates\testing_webpage\index.html:53
@@ -917,17 +917,19 @@ msgstr "¿Qué es PeakU?"
 
 #: .\testing_webpage\templates\testing_webpage\index.html:55
 msgid ""
-"PeakU is revolutionizing the search for candidates, recruitment and "
-"selection; We make more efficient processes for companies and we give a "
-"personal touch to the candidates to improve their experience. We align "
-"people and companies to create relationships where the end result is the "
-"creation of long-term value."
+"PeakU is revolutionizing the job search, recruitment and selection processes."
 msgstr ""
 "PeakU está revolucionando la búsqueda de candidatos, el reclutamiento y la "
 "selección; hacemos procesos más eficientes para las empresas y entregamos un "
-"toque personal a los candidatos para mejorar su experiencia. Alineamos a las "
-"personas y empresas para crear relaciones donde el resultado final sea la "
-"creación de valor a largo plazo."
+"toque personal a los candidatos para mejorar su experiencia."
+
+#: .\testing_webpage\templates\testing_webpage\index.html:56
+msgid ""
+"PeakU provides a web platform that uses artificial intelligence to help "
+"companies and candidates have a better and more effective experience."
+msgstr ""
+"Alineamos a las personas y empresas para crear relaciones donde el resultado "
+"final sea la creación de valor a largo plazo."
 
 #~ msgid "Company"
 #~ msgstr "Empresa"
