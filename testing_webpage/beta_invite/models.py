@@ -53,6 +53,7 @@ class Country(models.Model):
     name = models.CharField(max_length=200)
     calling_code = models.IntegerField(null=True)
     language_code = models.CharField(max_length=3, default='en')
+    ISO = models.CharField(max_length=2, null=True)
 
     def __str__(self):
         return '{0}'.format(self.name)

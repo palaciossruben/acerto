@@ -5,7 +5,8 @@
     "fields":{
       "name": "Colombia",
       "calling_code": 57,
-      "language_code": "es"
+      "language_code": "es",
+      "ISO": "CO"
     }
   },
   {
@@ -14,7 +15,8 @@
     "fields": {
       "name": "Ecuador",
       "calling_code": 593,
-      "language_code": "es"
+      "language_code": "es",
+      "ISO": "EC"
     }
   },
   {
@@ -23,7 +25,8 @@
     "fields":{
       "name": "Perú",
       "calling_code": 51,
-      "language_code": "es"
+      "language_code": "es",
+      "ISO": "PE"
     }
   },
   {
@@ -32,7 +35,8 @@
     "fields": {
       "name": "Chile",
       "calling_code": 56,
-      "language_code": "es"
+      "language_code": "es",
+      "ISO": "CL"
     }
   },
   {
@@ -41,7 +45,8 @@
     "fields": {
       "name": "México",
       "calling_code": 52,
-      "language_code": "es"
+      "language_code": "es",
+      "ISO": "MX"
     }
   },
   {
@@ -50,7 +55,8 @@
     "fields": {
       "name": "Venezuela",
       "calling_code": 58,
-      "language_code": "es"
+      "language_code": "es",
+      "ISO": "VE"
     }
   },
   {
@@ -59,7 +65,8 @@
     "fields": {
       "name": "Bolivia",
       "calling_code": 591,
-      "language_code": "es"
+      "language_code": "es",
+      "ISO": "BO"
     }
   },
   {
@@ -68,7 +75,8 @@
     "fields": {
       "name": "Argentina",
       "calling_code": 54,
-      "language_code": "es"
+      "language_code": "es",
+      "ISO": "AR"
     }
   },
   {
@@ -77,7 +85,8 @@
     "fields": {
       "name": "Paraguay",
       "calling_code": 595,
-      "language_code": "es"
+      "language_code": "es",
+      "ISO": "PY"
     }
   },
     {
@@ -86,7 +95,8 @@
     "fields": {
       "name": "Uruguay",
       "calling_code": 598,
-      "language_code": "es"
+      "language_code": "es",
+      "ISO": "UY"
     }
   },
   {
@@ -95,7 +105,8 @@
     "fields": {
       "name": "Panamá",
       "calling_code": 507,
-      "language_code": "es"
+      "language_code": "es",
+      "ISO": "PA"
     }
   },
   {
@@ -104,7 +115,8 @@
     "fields": {
       "name": "Honduras",
       "calling_code": 504,
-      "language_code": "es"
+      "language_code": "es",
+      "ISO": "HN"
     }
   },
   {
@@ -113,7 +125,8 @@
     "fields": {
       "name": "El Salvador",
       "calling_code": 503,
-      "language_code": "es"
+      "language_code": "es",
+      "ISO": "SV"
     }
   },
   {
@@ -122,7 +135,8 @@
     "fields": {
       "name": "Guatemala",
       "calling_code": 502,
-      "language_code": "es"
+      "language_code": "es",
+      "ISO": "GT"
     }
   },
   {
@@ -131,7 +145,8 @@
     "fields": {
       "name": "Nicaragua",
       "calling_code": 505,
-      "language_code": "es"
+      "language_code": "es",
+      "ISO": "NI"
     }
   },
   {
@@ -140,7 +155,8 @@
     "fields": {
       "name": "Costa Rica",
       "calling_code": 506,
-      "language_code": "es"
+      "language_code": "es",
+      "ISO": "CR"
     }
   }
 ]

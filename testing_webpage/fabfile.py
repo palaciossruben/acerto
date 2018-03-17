@@ -60,42 +60,43 @@ def sync_local(sync_media=False, db_update=True):
 
     # once backup is local then update DB:
 
-    # Strong validation to make sure it is done on a safe computer:
-    if get_mac() in safe_machines and db_update:
+    if db_update:
+        # Strong validation to make sure it is done on a safe computer:
+        if get_mac() in safe_machines:
 
-        # DROP LOCAL DB: BE CAREFUL!!!
-        drop_command = "{psql} -c \'DROP DATABASE maindb;\'".format(psql=postgres_psql)
-        subprocess.call(drop_command, shell=True)
+            # DROP LOCAL DB: BE CAREFUL!!!
+            drop_command = "{psql} -c \'DROP DATABASE maindb;\'".format(psql=postgres_psql)
+            subprocess.call(drop_command, shell=True)
 
-        # CREATE EMPTY DB on localhost.
-        create_command = "{psql} -c \'CREATE DATABASE maindb;\'".format(psql=postgres_psql)
-        subprocess.call(create_command, shell=True)
+            # CREATE EMPTY DB on localhost.
+            create_command = "{psql} -c \'CREATE DATABASE maindb;\'".format(psql=postgres_psql)
+            subprocess.call(create_command, shell=True)
 
-        # Grant rights to user
-        grant_sql = "{psql} -c \'GRANT ALL PRIVILEGES ON DATABASE maindb to dbadmin;\'".format(psql=postgres_psql)
-        subprocess.call(grant_sql, shell=True)
+            # Grant rights to user
+            grant_sql = "{psql} -c \'GRANT ALL PRIVILEGES ON DATABASE maindb to dbadmin;\'".format(psql=postgres_psql)
+            subprocess.call(grant_sql, shell=True)
 
-        # Fill in with data
-        fill_sql = "{psql} -f {local_backup}".format(psql=dbadmin_psql, local_backup=local_backup)
-        subprocess.call(fill_sql, shell=True)
+            # Fill in with data
+            fill_sql = "{psql} -f {local_backup}".format(psql=dbadmin_psql, local_backup=local_backup)
+            subprocess.call(fill_sql, shell=True)
 
-        # get connected to the database
-        maindb_connection = pg.connect("dbname=maindb user=dbadmin")
-        curs = maindb_connection.cursor()
+            # get connected to the database
+            maindb_connection = pg.connect("dbname=maindb user=dbadmin")
+            curs = maindb_connection.cursor()
 
-        # Update Sequences
-        curs.execute("SELECT setval('business_user_id_seq', (SELECT max(id) from business_users))")
-        curs.execute("SELECT setval('business_visitor_id_seq', (SELECT max(id) from business_visitor))")
-        curs.execute("SELECT setval('auth_user_id_seq', (SELECT max(id) from auth_user))")
-        curs.execute("SELECT setval('searches_id_seq', (SELECT max(id) from searches))")
-        curs.execute("SELECT setval('beta_invite_visitor_id_seq', (SELECT max(id) from visitors))")
-        curs.execute("SELECT setval('beta_invite_user_id_seq', (SELECT max(id) from users))")
+            # Update Sequences
+            curs.execute("SELECT setval('business_user_id_seq', (SELECT max(id) from business_users))")
+            curs.execute("SELECT setval('business_visitor_id_seq', (SELECT max(id) from business_visitor))")
+            curs.execute("SELECT setval('auth_user_id_seq', (SELECT max(id) from auth_user))")
+            curs.execute("SELECT setval('searches_id_seq', (SELECT max(id) from searches))")
+            curs.execute("SELECT setval('beta_invite_visitor_id_seq', (SELECT max(id) from visitors))")
+            curs.execute("SELECT setval('beta_invite_user_id_seq', (SELECT max(id) from users))")
 
-        # Closes connection
-        maindb_connection.close()
+            # Closes connection
+            maindb_connection.close()
 
-    else:
-        raise Exception("WTF are you trying to do!!! Be careful not to erase production.")
+        else:
+            raise Exception("WTF are you trying to do!!! Be careful not to erase production.")
 
     if sync_media:
 
