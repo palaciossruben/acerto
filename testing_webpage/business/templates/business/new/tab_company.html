@@ -14,25 +14,20 @@
 
                 <h2 class="title-blue" align="center">{% trans "Describe Your Company" %}</h2>
                 <div class="secondary-yellow-bar"></div>
-                <h5 class="paragraph">En esta sección tendrás la oportunidad de vender tu empresa a potenciales aplicantes,
-                cuéntales sobre las cosas interesantes que hace tu empresa. ¿Qué hacen diferente a las demás?,
-                ¿Por qué la mayoría de empleados han decidido trabajar allí?</h5>
+                <h5 class="paragraph">{% trans "In this section you will have the opportunity to sell your company to potential applicants, tell them about the interesting things that your company does. What do they do differently from the others?. Why have most employees decided to work there?" %}</h5>
 
                 <div style="margin-top: 50px;">
-                    <h3 id="title" class="title-blue-small">{% trans "Tell us about your company in an inspiring way" %}</h3>
-                    <h5 class="paragraph">A los potenciales aplicantes les encantaría conocer más sobre tu empresa, qué hacen,
-                    cómo lo hacen y por qué es un gran lugar de trabajo.</h5>
+                    <h3 id="title" class="title-blue-small">{% trans "Company description" %}</h3>
+                    <h5 class="paragraph">{% trans "Potential applicants would love to know more about your company, what they do, how they do it and why it is a great place to work" %}</h5>
                     <!--TODO: Add English compatibility-->
                     <textarea class="box-input" name="description_es" id="description" oninput="copyCampaignDescription()" cols="80" rows="10" placeholder="{% trans 'Add company description' %}"></textarea>
                 </div>
 
                 <div style="margin-top: 50px;">
-                    <h3 class="title-blue-small">{% trans "Perks (Example: flexible hours)" %}</h3>
+                    <h3 class="title-blue-small">{% trans "Perks (for example: flexible hours)" %}</h3>
                     <h5 class="paragraph">
-                        <p>¿Cuáles son los beneficios de trabajar en tu empresa?</p>
-                        <p>Los potenciales aplicantes quieren saber más
-                        sobre lo que enamora a tus empleados, ejemplos: Un gran equipo de trabajo, buenos horarios, reuniones
-                        sociales, fiestas, permisos, mejores salarios, entre otros.</p></h5>
+                        <p>{% trans "What are the benefits of working in your company?" %}</p>
+                        <p>{% trans "Potential applicants want to know more about what your employees love, examples: A great work team, good schedules, social gatherings, parties, permits, better salaries, among others" %}</p></h5>
                     <div id="perk-container">
                         <input class="box-input" type="text" name="2_new_bullet_name_es" id="1_perk" size="80" placeholder="{% trans 'Input a perk' %}"
                             oninput="editPreviewBullets(this.id)">
@@ -55,12 +50,12 @@
 
             <div class="col-sm-6">
 
-                <h2 class="title-blue preview-title">Vista previa</h2>
+                <h2 class="title-blue preview-title">{% trans "Preview" %}</h2>
                 <div class="secondary-yellow-bar preview-title-yellow-bar"></div>
 
                 <div class="thumbnail-container">
                     <div class="my_thumbnail">
-                        <iframe id="company_iframe" class="preview" onload="addBulletOnIframe({'perk':1, 'requirement':1}, 'company'); disables()" scrolling="no" src="{% url 'beta_invite:index' %}?campaign_id=9"
+                        <iframe id="company_iframe" class="preview" onload="addBulletOnIframe({'perk':1, 'requirement':1}, 'company', '{% trans 'Requirement' %}', '{% trans 'Perk' %}'); disables()" scrolling="no" src="{% url 'beta_invite:index' %}?campaign_id=9"
                             frameborder="0"></iframe>
                     </div>
                 </div>
@@ -68,7 +63,7 @@
         </div>
 
         <div class="back-next-div" >
-            <input class="submit-button-strong back" type="button" name="back_step" value="Atrás"
+            <input class="submit-button-strong back" type="button" name="back_step" value="{% trans 'Back step' %}"
                    onclick="next_step_tab(event, 'vacancy')">
 
             <div class="middle-div"></div>
@@ -76,7 +71,7 @@
             {% if company_submit %}
                 <input class="submit-button-strong next" id="company-next-step" type="submit" name="next_step" value="{% trans 'Finish' %}">
             {% else %}
-                <input class="submit-button-strong next" id="company-next-step" type="button" name="next_step" value="{% trans 'Next Step' %}"
+                <input class="submit-button-strong next" id="company-next-step" type="button" name="next_step" value="{% trans 'Continue' %}"
                     onclick="next_step_tab(event, 'start')">
             {% endif %}
         </div>

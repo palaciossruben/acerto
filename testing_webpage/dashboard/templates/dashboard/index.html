@@ -10,7 +10,7 @@
 <ul>
     {% for campaign in campaigns %}
 
-        <li><a href="{{ campaign|get_campaign_url }}">{{ campaign.name }} {{ campaign.title_es }}</a>
+        <li><a href="{{ campaign|get_campaign_url }}">{{ campaign.name }} {{ campaign.title_es }} {{ campaign.created_at }}</a>
             {% if campaign.active %}
                 Active
             {% else %}

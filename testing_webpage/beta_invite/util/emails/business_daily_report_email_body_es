@@ -1,8 +1,12 @@
 Buen día
 
-Comparto la lista de nuevos candidatos en las últimas 24 horas:
+Comparto los candidatos relevantes que han aprobado las pruebas en las últimas 24 horas:
 
 {new_resumes}
+
+Puedes ver toda la información de los candidatos en el siguiente link:
+
+https://peaku.co/seleccion_de_personal/login
 
 {sender_name}
 {sender_position}

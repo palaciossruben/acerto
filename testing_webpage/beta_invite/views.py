@@ -132,6 +132,40 @@ def index(request):
     return render(request, cts.INDEX_VIEW_PATH, param_dict)
 
 
+def more_info(request):
+    # Gets information of client: such as if it is mobile
+    is_desktop = not parse(request.META['HTTP_USER_AGENT']).is_mobile
+
+    # If campaign_id is not found; will default to the default_campaign.
+    campaign_id = request.GET.get('campaign_id', cts.DEFAULT_CAMPAIGN_ID)
+    campaign = Campaign.objects.filter(pk=campaign_id).first()
+    campaign.translate(request.LANGUAGE_CODE)
+
+    ip = get_ip(request)
+    countries, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
+
+    Visitor(ip=ip, is_mobile=not is_desktop).save()
+
+    param_dict = {'main_message': _("Discover your true passion"),
+                  'countries': countries,
+                  'education': education,
+                  'professions': professions,
+                  'is_desktop': is_desktop,
+                  }
+
+    if campaign_id is not None:
+        param_dict['campaign_id'] = int(campaign_id)
+        try:
+            campaign = Campaign.objects.get(pk=int(campaign_id))
+            campaign.translate(request.LANGUAGE_CODE)
+            # if campaign exists send it.
+            param_dict['campaign'] = campaign
+        except ObjectDoesNotExist:
+            pass
+
+    return render(request, cts.MORE_INFO_VIEW_PATH, param_dict)
+
+
 def register(request):
     """
     Args:
@@ -401,3 +435,6 @@ def add_cv_changes(request):
 
     # if any inconsistency, then do nothing, ignore it.
     return render(request, cts.ADD_CV, {})
+
+
+

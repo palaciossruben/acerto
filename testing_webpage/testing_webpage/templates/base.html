@@ -92,25 +92,27 @@
             <a href="/staffing">
                 <img class="logo" src="{% static 'testing_webpage/img/peaku_home.svg' %}" alt="">
             </a>
+
             {% if 'seleccion_de_personal' in request.path %}
                 <ul>
-                    <li><a href="{% url 'business:contact_form' %}">CONTACTO</a></li>
+                    <li class="home"><a href="/staffing">{% trans "HOME" %}</a></li>
+                    <li><a href="{% url 'business:contact_form' %}">{% trans "CONTACT US" %}</a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'business:business_campaigns' user|get_business_user_id_from_auth_user %}">CAMPAÑAS</a></li>
+                        <li><a href="{% url 'business:business_campaigns' user|get_business_user_id_from_auth_user %}">{% trans "CAMPAIGNS" %}</a></li>
                     {% endif %}
 
                     {% if 'seleccion_gratis' in request.path %}
                         {% if user.is_authenticated %}
-                            <li><a href="{% url 'business:logout' %}">CERRAR SESIÓN</a></li>
+                            <li><a href="{% url 'business:logout' %}">{% trans "LOG OUT" %}</a></li>
                         {% else %}
-                            <li><a href="{% url 'business:login' %}">INICIA SESIÓN</a></li>
+                            <li><a href="{% url 'business:login' %}">{% trans "LOGIN" %}</a></li>
                         {% endif %}
                     {% else %}
                         {% if user.is_authenticated %}
-                            <li><a href="{% url 'business:logout' %}">CERRAR SESIÓN</a></li>
+                            <li><a href="{% url 'business:logout' %}">{% trans "LOG OUT" %}</a></li>
                         {% else %}
-                            <li><a href="{% url 'business:login' %}">INICIA SESIÓN</a></li>
-                            <li><a href="{% url 'business:start' %}">REGÍSTRATE</a></li>
+                            <li><a href="{% url 'business:login' %}">{% trans "LOGIN" %}</a></li>
+                            <li><a href="{% url 'business:start' %}">{% trans "SIGN UP" %}</a></li>
                         {% endif %}
                     {% endif %}
                     <li class="icon"><a href="javascript:void(0);" style="font-size:15px;"  onclick="myFunction()">&#9776;</a></li>

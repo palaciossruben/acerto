@@ -14,14 +14,13 @@
     <br>
     <div class="title" align="center" style="font-family:var(--Bitter); color:var(--text-color)">
         <p style="font-size:40px; margin-bottom:60px;margin-top:20px;">{{ candidate.user.name }},</p>
-            <p style="font-size:40px; margin-bottom:60px;margin-top:60px;">
-                ¡Felicitaciones! has realizado con éxito las pruebas</p>
+            <p style="font-size:40px; margin-bottom:60px;margin-top:60px;">{% trans "Congratulations! you have successfully performed the tests" %}</p>
 
             <div style="font-size:18px;">
-                <p>Ahora revisaremos tu hoja de vida y los resultados de las pruebas</p>
-                <p>En caso de continuar en el proceso, te contactaremos a: </p>
+                <p>{% trans "Now we will review your resume and the results of the tests" %}</p>
+                <p>{% trans "If you continue in the process, we will contact you to the mail:" %}</p>
                 <h3><strong>{{ candidate.user.phone }}</strong></h3>
-                <p>Si tienes alguna duda, puedes escribirnos a: contacto@peaku.co</p>
+                <p>{% trans "If you have any questions, you can write to: contacto@peaku.co" %}</p>
             </div>
     </div>
     <br>

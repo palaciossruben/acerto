@@ -23,13 +23,13 @@
 
 {% block content %}
     <section class="blue">
-        <h1 class="main-title">Descubre personas increíbles</h1>
-        <h2 class="secondary-title">{% trans "We connect people with companies, quickly and easily" %}</h2>
+        <h1 class="main-title">{% trans "Discover Amazing People" %}</h1>
+        <h2 class="secondary-title">{% trans "We connect people and companies, fast and easy" %}</h2>
         <div class="content">
 
             <div class="person">
                 <a href="{% url 'beta_invite:index' %}">
-                    <input class="blue-button free-trial-button" type="button" value="PERSONAS">
+                    <input class="blue-button free-trial-button" type="button" value='{% trans "CANDIDATE" %}'>
                 </a>
             </div>
 
@@ -39,7 +39,7 @@
 
             <div class="business">
                 <a href="{% url 'business:index' %}">
-                    <input class="blue-button free-trial-button" type="button" value="EMPRESAS">
+                    <input class="blue-button free-trial-button" type="button" value='{% trans "EMPLOYER" %}'>
                 </a>
             </div>
 
@@ -51,9 +51,10 @@
                 <img class="left-img" src="{% static 'beta_invite/img/intro.png' %}">
             </div>
             <article class="description">
-                <h2>¿Qué es PeakU?</h2>
+                <h2>{% trans "What is PeakU?"%}</h2>
                 <br/>
-                <p><strong>{% trans "PeakU is revolutionizing the search for candidates, recruitment and selection; We make more efficient processes for companies and we give a personal touch to the candidates to improve their experience. We align people and companies to create relationships where the end result is the creation of long-term value." %}</strong></p>
+                <p><strong>{% trans "PeakU is revolutionizing the job search, recruitment and selection processes." %}</strong></p>
+                <p><strong>{% trans "PeakU provides a web platform that uses artificial intelligence to help companies and candidates have a better and more effective experience." %}</strong></p>
             </article>
     </section>
 

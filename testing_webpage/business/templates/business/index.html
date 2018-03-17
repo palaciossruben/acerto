@@ -25,11 +25,11 @@
 
     <div>
         <img src="{% static 'beta_invite/img/index.jpg' %}" class="index-img">
-        <h1 class="main-title">Descubre personas increíbles</h1>
-        <h2 class="main-intro">Te ayudamos a encontrar y a seleccionar a la persona que necesitas rápido y fácil</h2>
+        <h1 class="main-title">{% trans "Discover amazing people" %}</h1>
+        <h2 class="main-intro">{% trans "We help you find and select the person you need fast and easy" %}</h2>
         <a href="{% url 'business:start' %}">
             <form id="free-trial-form">
-                <input class="free-trial-button" type="button" name="free_trial" value="Publicar Vacante Gratis">
+                <input class="free-trial-button" type="button" name="free_trial" value="{% trans 'Post Job for FREE' %}">
             </form>
         </a>
         <br>
@@ -42,17 +42,17 @@
             </div>
 
             <div class="col-sm-6">
-                <h3 class="secondary-title" >{% trans "Why choose us?" %}</h3>
+                <h3 class="secondary-title">{% trans "Why choose us?" %}</h3>
                 <div class="secondary-yellow-bar"></div>
                 <ul id="choose-list-container">
                     {# Translators: xgettext:no-python-format #}
-                    <li class="choose-bullet">Recibimos cientos de aplicaciones para la vacante que buscas</li>
-                    <li class="choose-bullet">Analizamos las hojas de vida por ti</li>
-                    <li class="choose-bullet">Realizamos pruebas cognitivas, de liderazgo, conocimiento relacionado al cargo y más</li>
+                    <li class="choose-bullet">{% trans "We receive hundreds of applications for the vacancy you are looking for" %}</li>
+                    <li class="choose-bullet">{% trans "We analyze the resumes for you" %}</li>
+                    <li class="choose-bullet">{% trans "We perform cognitive tests, leadership, knowledge related to the position and more" %}</li>
                     <br>
-                    <li class="choose-bullet">Facilitamos la logística para las entrevistas</li>
-                    <li class="choose-bullet">Te recomendamos los mejores candidatos para el cargo</li>
-                    <li class="choose-bullet">Evita gastos en bolsas de empleo</li>
+                    <li class="choose-bullet">{% trans "We provide the logistics for the interviews" %}</li>
+                    <li class="choose-bullet">{% trans "We recommend the best candidates for the position" %}</li>
+                    <li class="choose-bullet">{% trans "Avoid expenses in employment exchanges" %}</li>
                 </ul>
             </div>
         </div>
@@ -62,7 +62,7 @@
     <br>
     <section class="main">
         <article class="description">
-            <h3 class="secondary-title">PLANES</h3>
+            <h3 class="secondary-title">{% trans "PLANS" %}</h3>
             <div class="secondary-yellow-bar"></div>
             {% include "business/pricing.html" %}
         </article>

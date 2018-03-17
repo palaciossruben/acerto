@@ -1,5 +1,5 @@
 function copyJobTitle(){
-    copyText('position-title-field', "job-title")
+    copyText('position-title-field', "main-title")
 }
 
 
@@ -21,9 +21,6 @@ function disables(){
     preview_disable('name')
     preview_disable('email')
     preview_disable('phone')
-    preview_disable('country')
-    preview_disable('education')
-    preview_disable('profession')
     preview_disable('file')
     preview_disable('checkbox')
     preview_disable('submit')

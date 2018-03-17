@@ -12,26 +12,26 @@
 
         <div class="row">
             <div class="col-sm-6">
-                <h2 class="title-blue" align="center">{% trans "Describe the position" %}</h2>
+                <h2 class="title-blue" align="center">{% trans "Job description" %}</h2>
                 <div class="secondary-yellow-bar"></div>
 
                 <h5 class="paragraph">
-                    <p>Agrega el titulo y los requisitos más importantes para tu vacante.</p>
-                    <p>Usa un título llamativo para atraer más candidatos.</p></h5>
+                    <p>{% trans "Add the title and the most important requirements for the job" %}</p>
+                    <p>{% trans "Use a striking title to attract more candidates" %}</p></h5>
 
                 <div style="margin-top: 50px;">
-                    <h3 id="title" class="title-blue-small">Título de la vacante</h3>
-                    <h5 class="paragraph">Este es el primer título que verán tus aplicantes, usa un título impactante para atraer más personas.</h5>
-                    <input id="position-title-field" oninput="copyJobTitle()" type="text" name="title_es" placeholder="{% trans 'Add a title' %}">
+                    <h3 id="title" class="title-blue-small">{% trans "Job title" %}</h3>
+                    <h5 class="paragraph">{% trans "This is the first title that your applicants will see, use a shocking title to attract more people" %}</h5>
+                    <input id="position-title-field" oninput="copyJobTitle()" type="text" name="title_es" placeholder="{% trans 'Add the job title' %}">
                 </div>
 
                 <div style="margin-top: 50px;">
-                    <h3 class="title-blue-small">Requerimientos</h3>
-                    <h5 class="paragraph">Ingresa los requerimientos mínimos exigidos por tu empresa.</h5>
+                    <h3 class="title-blue-small">{% trans "Requirements" %}</h3>
+                    <h5 class="paragraph">{% trans "Enter the minimum requirements for the job" %}</h5>
 
                     <div id="requirement-container">
                         <input class="box-input" type="text" name="1_new_bullet_name_es" id="1_requirement" size="80"
-                               placeholder="{% trans 'Input a Requirement' %}" oninput="editPreviewBullets(this.id)">
+                               placeholder="{% trans 'Input a requirement' %}" oninput="editPreviewBullets(this.id)">
                         <input name="1_new_bullet_type" type="hidden" value="2">
                         <br>
                     </div>
@@ -50,16 +50,16 @@
 
              <div class="col-sm-6">
 
-                <h2 class="title-blue preview-title">Vista previa</h2>
+                <h2 class="title-blue preview-title">{% trans "Preview" %}</h2>
                 <div class="secondary-yellow-bar preview-title-yellow-bar"></div>
 
                 <div class="thumbnail-container">
                     <div class="my_thumbnail">
-                        <iframe id="vacancy_iframe" class="preview" onload="addBulletOnIframe({'perk':1, 'requirement':1}, 'vacancy'); disables(); " scrolling="no" src="{% url 'beta_invite:index' %}?campaign_id=9"
+                        <iframe id="vacancy_iframe" class="preview" onload="addBulletOnIframe({'perk':1, 'requirement':1}, 'vacancy', '{% trans 'Requirements' %}', '{% trans 'Perks' %}'); disables(); " scrolling="no" src="{% url 'beta_invite:index' %}?campaign_id=9"
                             frameborder="0"></iframe>
                     </div>
                 </div>
-                <input class="submit-button-strong vacancy-next" type="button" name="next_step" value="{% trans 'Next Step' %}"
+                <input class="submit-button-strong vacancy-next" type="button" name="next_step" value="{% trans 'Continue' %}"
                        onclick="next_step_tab(event, 'company')">
             </div>
         </div>
