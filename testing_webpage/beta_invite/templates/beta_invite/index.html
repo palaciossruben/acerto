@@ -23,7 +23,7 @@
                      {% static 'beta_invite/img/girls_mobile@3x.jpg' %} 3x"
              class="background-people-mobile">
 
-        <h1 class="main-title">{{ job_title }}</h1>
+        <h1 class="main-title" id="main-title">{{ job_title }}</h1>
 
         <h2 class="green-box">
             <p>{% trans 'APPLY NOW!' %}</p>
@@ -35,7 +35,7 @@
             <div class="col-sm-6">
                 <div id="job-description-container">
 
-                    <h2 class="title-blue" id="job-title" align="center">Descripción general</h2>
+                    <h2 class="title-blue" id="job-title" align="center">{% trans "GENERAL DESCRIPTION" %}</h2>
                     <!--<h3 class="title-blue-small">{{ city }}</h3>we need add this, but only when the campaign object have the city property-->
 
                     <div id="pre-preview">
@@ -77,7 +77,7 @@
                     <input type="hidden" name="campaign_id" value="{{ campaign_id }}" />
 
                     <input class="form-text" id="name" type="text" name="name"
-                           placeholder="{% trans 'Your Full Name' %}" required="required" pattern="[A-Za-z\sáéíóúÑñÜü]{1,200}">
+                           placeholder="{% trans 'Your Full Name' %}" required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
 
                     {% if campaign.has_email %}
                         <input class="form-text" id="email" type="email" name="email"
@@ -114,7 +114,6 @@
 
                     <input type="file" id="file" name="curriculum" class="form-inputfile" onchange="pressed()">
                     <label for="file" id="fileLabel">{% trans "Upload your resume" %}</label>
-
 
                     <label class="form-checkbox-container">
                         <input class="form-checkbox" type="checkbox" id="checkbox" value="" required>

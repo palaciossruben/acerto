@@ -32,7 +32,7 @@
                 {% csrf_token %}
 
                 <input class="form-text" type="text" name="name"
-                  placeholder="{% trans 'Your Full Name' %}" required="required" pattern="[A-Za-z\sáéíóúÑñÜü]{1,200}">
+                  placeholder="{% trans 'Your Full Name' %}" required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
 
                 <input class="form-text" type="email" name="username"
                   placeholder="{% trans 'Your email' %}" required="required">

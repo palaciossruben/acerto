@@ -47,10 +47,10 @@ function build_bullet_ui(container, type, bullet_text, add_bullet_text) {
 /*
 Adds one bullet to a given Iframe
 */
-function addBulletOnIframeType(bullet_numbers, type, iframe){
+function addBulletOnIframeType(bullet_numbers, type, iframe, text1, text2){
 
     // Adds Title if not present
-    addBulletTitle(type);
+    addBulletTitle(type, text1, text2);
 
     var list_id = getListId(type);
     var bullet_id = getBulletId(bullet_numbers, type);
@@ -60,18 +60,18 @@ function addBulletOnIframeType(bullet_numbers, type, iframe){
 }
 
 
-function addBulletOnIframe(bullet_numbers, iframe){
-    addBulletOnIframeType(bullet_numbers, 'requirement', iframe);
-    addBulletOnIframeType(bullet_numbers, 'perk', iframe);
+function addBulletOnIframe(bullet_numbers, iframe, text1, text2){
+    addBulletOnIframeType(bullet_numbers, 'requirement', iframe, text1, text2);
+    addBulletOnIframeType(bullet_numbers, 'perk', iframe, text1, text2);
 }
 
 
 /*
 Adds one bullet to both iframes
 */
-function addBulletOnIframes(bullet_numbers, type){
-    addBulletOnIframeType(bullet_numbers, type, 'vacancy');
-    addBulletOnIframeType(bullet_numbers, type, 'company');
+function addBulletOnIframes(bullet_numbers, type, text1, text2){
+    addBulletOnIframeType(bullet_numbers, type, 'vacancy', text1, text2);
+    addBulletOnIframeType(bullet_numbers, type, 'company', text1, text2);
 }
 
 /*
@@ -91,13 +91,13 @@ function addBullet(type, bullet_text, add_bullet_text){
 }
 
 
-function addBulletTitle(type){
+function addBulletTitle(type, text1, text2){
     var iframe_docs = getIframeDocs();
 
     // if there is no title yet.
     if (!iframe_docs[0].getElementById(getTitleId(type))) {
-        addsBulletTitleToIframe(type, iframe_docs[0]);
-        addsBulletTitleToIframe(type, iframe_docs[1]);
+        addsBulletTitleToIframe(type, iframe_docs[0], text1, text2);
+        addsBulletTitleToIframe(type, iframe_docs[1], text1, text2);
     }
 }
 
@@ -105,7 +105,7 @@ function addBulletTitle(type){
 /*
 Adds the title if missing.
 */
-function addsBulletTitleToIframe(type, iframe_doc){
+function addsBulletTitleToIframe(type, iframe_doc, text1, text2){
 
     var title_div = getTitleDiv(type, iframe_doc);
 
@@ -116,9 +116,9 @@ function addsBulletTitleToIframe(type, iframe_doc){
 
     //TODO: missing translation
     if (type == 'requirement'){
-        text = "Requerimientos";
+        text = text1;
     }else{
-        text = "Beneficios";
+        text = text2;
     }
     bullet_title.appendChild(iframe_doc.createTextNode(text));
 

@@ -13,17 +13,17 @@
     <br>
     <caption><h3 class="secondary-title" align="center">
         <strong>
-        CAMPAÑA
         {% if campaign.free_trial%}
-            GRATUITA
+            {% trans "FREE POST" %}
         {% endif %}
+            {% trans "CAMPAIGN" %}
             {{ campaign.title_es|upper }}</strong></h3></caption>
     <div class="secondary-yellow-bar"></div>
-    <p class="title" align="center" style="font-family:var(--Bitter); font-size:18px; color:var(--text-color)"> En total han aplicado <b id="total"></b> personas a tu campaña</p>
+    <p class="title" align="center" style="font-family:var(--Bitter); font-size:18px; color:var(--text-color)">{% trans "In total they have applied " %}<b id="total"></b>{% trans "people to your campaign" %}</p>
     {% if campaign.free_trial == True %}
         <div class="title" align="center">
-            <p style="font-family:var(--Bitter); font-size:21px; color:var(--red)"><strong>Recuerda que para esta campaña, solo podrás tener 5 candidatos recomendados</strong></p>
-            <p style="font-family:var(--Bitter); font-size:18px;color:var(--text-color)">Si tienes alguna duda, puedes escribirnos a: contacto@peaku.co</p>
+            <p style="font-family:var(--Bitter); font-size:21px; color:var(--red)"><strong>{% trans "Remember that for this campaign, you can only have 5 recommended candidates" %}</strong></p>
+            <p style="font-family:var(--Bitter); font-size:18px;color:var(--text-color)">{% trans "If you have any questions, you can write to: contacto@peaku.co" %}</p>
         </div>
     {% endif %}
     <br>
@@ -32,23 +32,23 @@
     <table>
         <tr>
             <th>
-             <p class="column-title"> APLICANTES ( <b id="quantity_backlog" ></b> ) </p>
+             <p class="column-title"> {% trans "APPLICANTS" %} ( <b id="quantity_backlog" ></b> ) </p>
             </th>
 
             <th>
-             <p class="column-title"> RELEVANTES ( <b id="quantity_waiting_interview" ></b> ) </p>
+             <p class="column-title"> {% trans "RELEVANT" %} ( <b id="quantity_waiting_interview" ></b> ) </p>
             </th>
 
             <th>
-             <p class="column-title"> RECOMENDADOS ( <b id="quantity_sent_to_client" ></b> ) </p>
+             <p class="column-title"> {% trans "RECOMMENDED" %} ( <b id="quantity_sent_to_client" ></b> ) </p>
             </th>
 
             <th>
-             <p class="column-title"> CONTRATADOS ( <b id="quantity_got_job" ></b> ) </p>
+             <p class="column-title"> {% trans "HIRED" %} ( <b id="quantity_got_job" ></b> ) </p>
             </th>
 
             <th>
-             <p class="column-title"> RECHAZADOS ( <b id="quantity_rejected" ></b> ) </p>
+             <p class="column-title"> {% trans "REJECTED" %} ( <b id="quantity_rejected" ></b> ) </p>
             </th>
         </tr>
 
@@ -67,18 +67,18 @@
         <br>
         <br>
 
-        <h3>Enviar correo</h3>
+        <h3>{% trans "Send e-mail" %}</h3>
 
-        <input name="email_subject" id="email-subject" placeholder="Asunto">
-
-        <br>
-        <br>
-
-        <textarea name="email_body" cols="41" rows="10" placeholder="Ingresa acá el cuerpo del correo"></textarea>
+        <input name="email_subject" id="email-subject" placeholder="{% trans 'Subject' %}">
 
         <br>
+        <br>
 
-        <input type="submit" name="send_mail" value="Enviar email">
+        <textarea name="email_body" cols="41" rows="10" placeholder="{% trans 'Enter the e-mail body here' %}"></textarea>
+
+        <br>
+
+        <input type="submit" name="send_mail" value="{% trans 'Send e-mail' %}">
 
 
 

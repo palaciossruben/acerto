@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^interview/(?P<pk>\d+)$', views.interview, name='interview'),
     url(r'^add_cv$', views.add_cv),
     url(r'^add_cv_changes$', views.add_cv_changes),
+    url(r'^info$', views.more_info, name='info'),
 ]

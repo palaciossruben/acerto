@@ -52,64 +52,64 @@
     <br>
     <div style="margin:0px auto; align:center; padding:0px 50px; width:90%;">
         {% if candidate.user.email %}
-            <p><strong>Email:</strong> {{ candidate.user.email }}</p>
+            <p><strong>{% trans "e-mail: " %}</strong> {{ candidate.user.email }}</p>
         {% else %}
-            <p><strong>Email:</strong>no disponible</p>
+            <p><strong>{% trans "e-mail: " %}</strong>{% trans "Not available" %}</p>
         {% endif %}
-        <p><strong>Teléfono:</strong>
+        <p><strong>{% trans "Phone: " %}</strong>
         {% if candidate.user.phone is None %}
-            Sin teléfono registrado
+            {% trans "Without a registered phone" %}
         {% else %}
             {{ candidate.user.phone }}
         {% endif %}
         </p>
 
-        <p> <strong>Hoja de vida:</strong>
+        <p> <strong>{% trans "CV: " %}</strong>
         {% if candidate.user.curriculum_url != '#' %}
             <a style="color:blue; font-size:17px;" href="{% static candidate.user.curriculum_url %}">link</a>
         {% else %}
-            No disponible
+            {% trans "Not available" %}
         {% endif %}
         </p>
 
-        <p><strong>Profesión: </strong>{{ candidate.user.profession.name }}</p>
-        <p><strong>Nivel académico: </strong>{{ candidate.user.education.name }}</p>
+        <p><strong>{% trans "Profession: " %}</strong>{{ candidate.user.profession.name }}</p>
+        <p><strong>{% trans "Academic level: " %}</strong>{{ candidate.user.education.name }}</p>
 
         <!-- Deprecated -->
         {% for e in candidate.user.evaluations.all %}
             {% if candidate.campaign_id == e.campaign_id %}
-                <p><strong>Puntaje prueba (corte: {{ e.cut_score }}): </strong> {{ e.final_score }}</p>
+                <p><strong>{% trans "Test score (cut: " %}{{ e.cut_score }}): </strong> {{ e.final_score }}</p>
             {% endif %}
         {% endfor %}
 
         {% for e in candidate.evaluations.all %}
-            <p><strong>Puntaje prueba (corte: {{ e.cut_score }}): </strong> {{ e.final_score }}</p>
+            <p><strong>{% trans "Test score (cut: " %}{{ e.cut_score }}): </strong> {{ e.final_score }}</p>
         {% endfor %}
 
         {% if candidate.salary %}
-            <p><strong>Aspiración salarial: </strong>{{ candidate.salary }}</p>
+            <p><strong>{% trans "Salary deduction: " %}</strong>{{ candidate.salary }}</p>
         {% endif %}
 
         {% for c in candidate.comments.all %}
             {% if candidate.comments %}
-                <p><strong>Comentarios: </strong>{{ c.text }}</p>
+                <p><strong>{% trans "Comments" %}</strong>{{ c.text }}</p>
             {% endif %}
         {% endfor %}
 
-            <button class="accordion" style="color:blue;"><strong>&#9776; Ver preguntas y respuestas del test</strong></button>
+            <button class="accordion" style="color:blue;"><strong>&#9776;{% trans "See test questions and answers" %}</strong></button>
             <div class="panel">
 
                 <br>
                 <br>
                 {% for e in candidate.evaluations.all %}
-                    <p><strong>PRUEBAS:</strong></p>
+                    <p><strong>{% trans "TESTS" %}</strong></p>
                     {% for score in e.scores.all %}
 
                         <p><strong>{{ score.test.name_es }}: </strong>{{ score.value }}</p>
                     {% endfor %}
                 {% endfor %}
                 <br>
-                <p><strong>PREGUNTAS DE CAMPO ABIERTO:</strong></p>
+                <p><strong>{% trans "OPEN FIELD QUESTIONS" %}</strong></p>
                 {% for e in candidate.surveys.all %}
                     {% if e.question.type.code == "OF" %}
                         {% if e.question.text_es %}
@@ -118,7 +118,7 @@
                                 <p> {{ e.text_answer }} </p>
                             {% endif %}
                         {% else %}
-                            Ninguna
+                            {% trans "None" %}
                         {% endif %}
                     {% endif %}
                 {% endfor %}
