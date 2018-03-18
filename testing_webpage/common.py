@@ -1,8 +1,11 @@
 from urllib.parse import urlencode, urlunparse, urlparse, parse_qsl, parse_qs
 
 from django.core.exceptions import ObjectDoesNotExist
+from ipware.ip import get_ip
+import geoip2.database
+from beta_invite.apps import ip_country_reader
 
-from beta_invite.models import User, Campaign
+from beta_invite.models import User, Campaign, Country
 from beta_invite import constants as beta_cts
 from dashboard.models import Candidate
 
@@ -121,3 +124,41 @@ def get_all_campaign_ids(user):
     IMPORTANT: it gets both active or removed candidate's campaign ids.
     """
     return [candidate.campaign.id for candidate in Candidate.objects.filter(user=user)]
+
+
+def get_country_with_request(request):
+    """
+    Returns ISO country code, given HTTP request, if address not found returns 'CO' if country not found returns None
+    :param request: HTTP
+    :return: country code or None
+    """
+
+    ip = get_ip(request)
+
+    # ip = '70.60.244.226' # US
+    # ip = '191.144.0.1' # CO
+
+    try:
+        response = ip_country_reader.country(ip)
+        iso_code = response.country.iso_code
+    except geoip2.errors.AddressNotFoundError:
+        iso_code = 'CO'  # Defaults to 'CO' if address not found
+
+    countries = Country.objects.filter(ISO=iso_code)
+    if countries:
+        return [c for c in countries][0]
+    else:  # defaults to English
+        return None
+
+
+def get_language_with_ip(request):
+    """
+    Returns language code given a HTTP request
+    :param request: HTTP
+    :return:
+    """
+    country = get_country_with_request(request)
+    if country:
+        return country.language_code
+    else:  # defaults to English
+        return 'en'
