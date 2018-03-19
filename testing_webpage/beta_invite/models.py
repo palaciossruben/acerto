@@ -63,6 +63,19 @@ class Country(models.Model):
         db_table = 'countries'
 
 
+class City(models.Model):
+
+    name = models.CharField(max_length=200)
+    country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return '{0}, {1}'.format(self.pk, self.name)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'cities'
+
+
 class BulletType(models.Model):
 
     name = models.CharField(max_length=200)
@@ -327,6 +340,7 @@ class User(models.Model):
     profession = models.ForeignKey(Profession, null=True, on_delete=models.SET_NULL)
     education = models.ForeignKey(Education, null=True, on_delete=models.SET_NULL)
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
+    city = models.ForeignKey(City, null=True, on_delete=models.SET_NULL)
     curriculum_url = models.CharField(max_length=200, default='#')
 
     # indicates if added to messenger

@@ -193,12 +193,16 @@ def register(request):
         #education = Education.objects.get(pk=education_id)
         #country = Country.objects.get(pk=country_id)
 
+        country = common.get_country_with_request(request)
+        city = common.get_city(request, country)
+
         user_params = {'name': name,
                        'email': email,
                        'phone': phone,
                        #'profession': profession,
                        #'education': education,
-                       #'country': country,
+                       'country': country,
+                       'city': city,
                        'ip': get_ip(request),
                        'is_mobile': is_mobile,
                        'language_code': request.LANGUAGE_CODE}

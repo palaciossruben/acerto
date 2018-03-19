@@ -3,9 +3,9 @@ from urllib.parse import urlencode, urlunparse, urlparse, parse_qsl, parse_qs
 from django.core.exceptions import ObjectDoesNotExist
 from ipware.ip import get_ip
 import geoip2.database
-from beta_invite.apps import ip_country_reader
+from beta_invite.apps import ip_country_reader, ip_city_reader
 
-from beta_invite.models import User, Campaign, Country
+from beta_invite.models import User, Campaign, Country, City
 from beta_invite import constants as beta_cts
 from dashboard.models import Candidate
 
@@ -128,7 +128,9 @@ def get_all_campaign_ids(user):
 
 def get_country_with_request(request):
     """
-    Returns ISO country code, given HTTP request, if address not found returns 'CO' if country not found returns None
+    Returns Country object, given HTTP request,
+    if address not found returns Colombia
+    if country not found returns None
     :param request: HTTP
     :return: country code or None
     """
@@ -151,11 +153,51 @@ def get_country_with_request(request):
         return None
 
 
+def get_city_name_with_request(request):
+    """
+    Returns Country object, given HTTP request,
+    if address not found returns Colombia
+    if country not found returns None
+    :param request: HTTP
+    :return: city or None
+    """
+
+    ip = get_ip(request)
+
+    # ip = '70.60.244.226'  # US
+    # ip = '191.144.0.1'  # CO
+
+    try:
+        response = ip_city_reader.city(ip)
+        return response.city.name
+    except geoip2.errors.AddressNotFoundError:
+        return 'not available'  # Defaults to 'not available'
+
+
+def get_city(request, country):
+    """
+    Gets the city by recalling it or adding new City object
+    :param request: HTTP
+    :param country: Country object
+    :return: City Object
+    """
+    city_name = get_city_name_with_request(request)
+
+    cities = [c for c in City.objects.filter(name=city_name, country=country)]
+    if len(cities) > 0:
+        city = cities[0]
+    else:
+        city = City(name=city_name, country=country)
+        city.save()
+
+    return city
+
+
 def get_language_with_ip(request):
     """
     Returns language code given a HTTP request
     :param request: HTTP
-    :return:
+    :return: language code
     """
     country = get_country_with_request(request)
     if country:
