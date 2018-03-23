@@ -67,6 +67,7 @@ class Candidate(models.Model):
     match = models.FloatField(null=True, default=None)
     screening = models.ForeignKey(Screening, null=True, on_delete=models.SET_NULL)
     screening_explanation = models.CharField(max_length=200, default='')
+    rating = models.IntegerField(null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
