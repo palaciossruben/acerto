@@ -1,6 +1,7 @@
 from django.conf.urls import url
 
 from . import views
+from . import stats
 
 app_name = 'dashboard'
 
@@ -39,4 +40,8 @@ urlpatterns = [
     # Auto messenger
     url(r'^send_new_contacts$', views.send_new_contacts, name='send_new_contacts'),
     url(r'^send_messages$', views.send_messages, name='send_messages'),
+
+    # stats
+    url(r'^candidates_stats$', stats.candidates_count, name='candidates_stats'),
+    url(r'^campaign_stats$', stats.campaigns_count, name='campaign_stats'),
 ]

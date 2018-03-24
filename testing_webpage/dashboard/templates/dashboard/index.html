@@ -6,6 +6,11 @@
     <input style="width:500px;" id="search-input" type="text" name="search_text" placeholder="{% trans 'Search positions (eg android developer)' %}">
 </form>
 
+
+<a href="{% url 'dashboard:candidates_stats' %}">Total candidates per month</a>
+<br>
+<a href="{% url 'dashboard:campaign_stats' %}">Total campaigns per month</a>
+
 <h1>Campaigns</h1>
 <ul>
     {% for campaign in campaigns %}
