@@ -54,6 +54,7 @@ def candidates_count(request):
     data['created_at'] = [c.created_at for c in my_candidates]
     data['month'] = data['created_at'].apply(lambda date: '{y}-{m}'.format(y=date.year,
                                                                            m=get_month_format(date.month)))
+    data.sort_values(by=['month'], inplace=True)
 
     gp = pd.groupby(data, by='month').aggregate({'id': 'count'})
     gp = pd.DataFrame(gp)
@@ -105,7 +106,7 @@ def campaigns_count(request):
     data['created_at'] = [c.created_at for c in my_campaigns]
     data['month'] = data['created_at'].apply(lambda date: '{y}-{m}'.format(y=date.year,
                                                                            m=get_month_format(date.month)))
-    data.sort(['month'], inplace=True)
+    data.sort_values(by=['month'], inplace=True)
 
     gp = pd.groupby(data, by='month').aggregate({'id': 'count'})
     gp = pd.DataFrame(gp)
