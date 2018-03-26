@@ -394,7 +394,7 @@ def create_post(request):
     """
     Args:
         request: HTTP post request
-    Returns: Renders form.html.
+    Returns: Renders form.html
     """
 
     business_user_id = int(request.POST.get('business_user_id'))

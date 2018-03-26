@@ -110,6 +110,7 @@ def create_campaign(request):
     update_campaign_basic_properties(campaign, request)
     update_campaign_bullets(campaign, request)
 
-    prospect_module.create_prospect_users_and_send_emails(campaign)
+    candidate_prospects = prospect_module.get_candidates(campaign)
+    prospect_module.send_mails(candidate_prospects)
 
     return campaign

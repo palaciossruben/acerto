@@ -12,7 +12,7 @@ import statistics
 import numpy as np
 import pandas as pd
 
-from dashboard.models import Candidate
+from dashboard.models import Candidate, State
 
 
 def get_test_score(candidate, field, f):
@@ -50,7 +50,8 @@ def get_target(candidate):
         elif candidate.state.code in ('ROI', 'RBC', 'SR'):  # Rejected by client or by us.
             return 0
         else:
-            return np.nan
+            max_honey = max({s.honey for s in State.objects.all()})
+            return candidate.state.honey/max_honey
 
 
 def load_data():

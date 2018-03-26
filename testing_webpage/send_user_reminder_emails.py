@@ -92,7 +92,8 @@ def send_possible_job_matches():
     active_campaigns = Campaign.objects.filter(active=True)
 
     for campaign in active_campaigns:
-        prospect_module.create_prospect_users_and_send_emails(campaign)
+        candidate_prospects = prospect_module.get_candidates(campaign)
+        prospect_module.send_mails(candidate_prospects)
 
 
 if __name__ == '__main__':

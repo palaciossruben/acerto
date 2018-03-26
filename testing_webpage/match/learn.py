@@ -1,13 +1,12 @@
 """
 Calculates a match value with learning algorithm
 """
-import random
 from sklearn.model_selection import cross_val_score
 from sklearn import svm
 import statistics
 import numpy as np
 import pandas as pd
-from sklearn import metrics
+from sklearn.metrics import mean_squared_error, accuracy_score, confusion_matrix
 from imblearn.over_sampling import ADASYN
 
 from match import common_learning
@@ -17,8 +16,7 @@ def balance(data):
     """
     Balances samples with ADASYN algorithm:
     http://sci2s.ugr.es/keel/pdf/algorithm/congreso/2008-He-ieee.pdf
-    :param train_features: X
-    :param train_target: y
+    :param data: the dataframe
     :return: train_features, train_target
     """
 
@@ -33,7 +31,7 @@ def balance(data):
     return data
 
 
-def prepare_train_test(data):
+def prepare_train_test(data, regression=True):
     """
     From splitting to removing Nan, routine tasks.
     :param data:
@@ -47,18 +45,15 @@ def prepare_train_test(data):
     train.features = common_learning.fill_missing_values(train.features)
     test.features = common_learning.fill_missing_values(test.features)
 
-    train = balance(train)
-    test = balance(test)
+    if not regression:
+        train = balance(train)
+        test = balance(test)
 
     return train, test
 
 
-def get_accuracy(features, target, model):
-    scores = cross_val_score(model, features, target.astype(int), scoring='accuracy').mean()
-    return scores.mean(), scores.std() * 2
-
-
 def get_train_test(data, train_percent):
+
     msk = np.random.rand(len(data)) < train_percent
     train = data[msk]
     test = data[~msk]
@@ -69,7 +64,7 @@ def my_accuracy(a, b):
     return statistics.mean([int(e1 == e2) for e1, e2 in zip(a, b)])
 
 
-def load_data_for_learning():
+def load_data_for_learning(regression=True):
     """
     Loads and prepares all data.
     :return: data DataFrame with features and target.
@@ -78,7 +73,8 @@ def load_data_for_learning():
 
     data['target'] = [common_learning.get_target(c) for c in candidates]
     data = data[[not pd.isnull(t) for t in data['target']]]
-    data['target'] = data['target'].apply(lambda y: int(y))
+    if not regression:
+        data['target'] = data['target'].apply(lambda y: 1 if y > 0.3 else 0)
 
     print('PERCENTAGE OF NULL BY COLUMN: ' + str(common_learning.get_nan_percentages(data)))
 
@@ -86,11 +82,11 @@ def load_data_for_learning():
 
 
 class Result:
-    def __init__(self, train_accuracy, test_accuracy, my_test_accuracy, random_test_accuracy):
-        self.train_accuracy_mean, self.train_accuracy_std = train_accuracy
-        self.test_accuracy_mean, self.test_accuracy_std = test_accuracy
-        self.my_test_accuracy = my_test_accuracy
-        self.random_test_accuracy = random_test_accuracy
+    def __init__(self, train_metric, test_metric, baseline_test_metric):
+        self.train_metric = train_metric
+        self.test_metric = test_metric
+        self.baseline_test_metric = baseline_test_metric
+        self.improvement = self.test_metric - self.baseline_test_metric
         self.num_runs = 1
 
     def average_property(self, attribute, other_result):
@@ -100,13 +96,20 @@ class Result:
         setattr(self, attribute, value)
 
     def average(self, other_result):
-        self.average_property('train_accuracy_mean', other_result)
-        self.average_property('train_accuracy_std', other_result)
-        self.average_property('test_accuracy_mean', other_result)
-        self.average_property('test_accuracy_std', other_result)
-        self.average_property('my_test_accuracy', other_result)
-        self.average_property('random_test_accuracy', other_result)
+        self.average_property('train_metric', other_result)
+        self.average_property('test_metric', other_result)
+        self.average_property('baseline_test_metric', other_result)
+        self.average_property('improvement', other_result)
         self.num_runs += 1
+
+    def get_nice_result(self, attr):
+        return str(round(getattr(self, attr), 3) * 100)
+
+    def print(self):
+        print('TRAIN: ' + self.get_nice_result('train_metric'))
+        print('TEST: ' + self.get_nice_result('test_metric'))
+        print('BASELINE: ' + self.get_nice_result('baseline_test_metric'))
+        print('IMPROVEMENT: ' + self.get_nice_result('improvement'))
 
 
 class DataPair:
@@ -115,42 +118,78 @@ class DataPair:
         self.target = target
 
 
-def learn_model(train):
+def learn_model(train, regression=True):
     # TODO: grid_search(model, train_set, train_target)
-    model = svm.SVC()
+
+    if regression:
+        model = svm.SVR()
+    else:
+        model = svm.SVC()
     model.fit(train.features, train.target)
     return model
 
 
-def eval_model(model, train, test):
-    train_accuracy = get_accuracy(train.features, train.target, model)
-    print('TRAIN ACCURACY: {0} (+/- {1})'.format(*train_accuracy))
-
-    test_accuracy = get_accuracy(test.features, test.target, model)
-    print('TEST ACCURACY: {0} (+/- {1})'.format(*test_accuracy))
-
-    predicted_target = model.predict(test.features)
-
-    my_test_accuracy = my_accuracy(predicted_target, test.target)
-    print('MY TEST ACCURACY: ' + str(my_test_accuracy))
-
-    random_test_accuracy = my_accuracy([random.randint(0, 1) for _ in test.target], test.target)
-    print('RANDOM TEST ACCURACY: ' + str(random_test_accuracy))
-
-    print('Confusion Matrix:')
-    print(metrics.confusion_matrix(test.target, predicted_target))
-    return Result(train_accuracy, test_accuracy, my_test_accuracy, random_test_accuracy)
+def my_mode(target):
+    """
+    Returns 1 for balanced sets (where there are excatly the same number of 1s and 0s)
+    :param target: list of 1s and 0s
+    :return: the mode
+    """
+    try:
+        return statistics.mode(target)
+    except statistics.StatisticsError:
+        return 1
 
 
-def get_model():
+def eval_model(model, train, test, regression=True):
+
+    train_prediction = model.predict(train.features)
+    test_prediction = model.predict(test.features)
+
+    """
+    metrics.explained_variance_score(y_true, y_pred)	Explained variance regression score function
+    metrics.mean_absolute_error(y_true, y_pred)	Mean absolute error regression loss
+    metrics.mean_squared_error(y_true, y_pred[, …])	Mean squared error regression loss
+    metrics.mean_squared_log_error(y_true, y_pred)	Mean squared logarithmic error regression loss
+    metrics.median_absolute_error(y_true, y_pred)	Median absolute error regression loss
+    metrics.r2_score(y_true, y_pred[, …])	R^2 (coefficient of determination) regression score function.
+    """
+
+    if regression:
+        f = mean_squared_error
+    else:
+        f = accuracy_score
+
+    train_metric = f(train_prediction, train.target)
+    test_metric = f(test_prediction, test.target)
+
+    if regression:
+        baseline_test_metric = f([statistics.mean(test.target) for _ in range(len(test.target))], test.target)
+    else:
+        baseline_test_metric = f([my_mode(test.target) for _ in test.target], test.target)
+
+    #print('TARGET-PREDICTION tuples')
+    #print([(a, b) for a, b in zip(test_prediction, test.target)])
+
+    if not regression:
+        print('Confusion Matrix:')
+        print(confusion_matrix(test.target, test_prediction))
+
+    result = Result(train_metric, test_metric, baseline_test_metric)
+    result.print()
+
+    return result
+
+
+def get_model(regression=True):
     """
     Calculates the match of each candidate, based on a learning algorithm.
     :return: model.
     """
-    data = load_data_for_learning()
+    data = load_data_for_learning(regression=regression)
 
-    train, test = prepare_train_test(data)
+    train, test = prepare_train_test(data, regression=regression)
 
-    model = learn_model(train)
+    model = learn_model(train, regression=regression)
 
-    return model, eval_model(model, train, test)
+    return model, eval_model(model, train, test, regression=regression)

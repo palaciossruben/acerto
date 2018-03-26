@@ -38,47 +38,63 @@ def filter_users_with_job(users):
     return [x for x in users if x not in excluded_users]
 
 
-def translate_email_job_match_subject(user, campaign):
+def translate_email_job_match_subject(candidate):
     """
     Default will be in spanish
     Args:
-        user: User object
+        candidate: Candidate object
     Returns: translated subject
     """
-    if user.language_code is None or user.language_code == 'es':
-        return 'Vacante abierta para {campaign}'.format(campaign=campaign.title_es)
+    if candidate.user.language_code is None or candidate.user.language_code == 'es':
+        return 'Vacante abierta para {campaign}'.format(campaign=candidate.campaign.title_es)
     else:
-        return 'Open position for {campaign}'.format(campaign=campaign.title)
+        return 'Open position for {campaign}'.format(campaign=candidate.campaign.title)
 
 
-def create_prospect_users_and_send_emails(campaign):
+def send_mails(candidate_prospects):
+    """
+    Sends email for each prospect 
+    :param candidate_prospects: List of candidates
+    :return: None
+    """
+    email_type = EmailType.objects.get(name='job_match')
+    for candidate in candidate_prospects:
+        PendingEmail.add_to_queue(candidates=candidate,
+                                  language_code=candidate.user.language_code,
+                                  body_input='user_job_match_email_body',
+                                  subject=translate_email_job_match_subject(candidate),
+                                  override_dict={'campaign_url': candidate.campaign.get_url()},
+                                  email_type=email_type)
+
+
+def get_top_users(campaign):
+    # TODO: this feature only supports Spanish.
+    search_text = campaign.get_search_text()
+    search_array = search_module.get_word_array_lower_case_and_no_accents(search_text)
+    users = search_module.get_matching_users(search_array)
+
+    top_users = [u for u in users][:NUMBER_OF_MATCHES]
+    return filter_users_with_job(top_users)
+
+
+def get_candidates(campaign):
     """
     Args:
         campaign: obj
     Returns: Creates a list of prospect users on the DB. And sends all ot them an email.
     """
 
-    email_type = EmailType.objects.get(name='job_match')
+    top_users = get_top_users(campaign)
 
-    # TODO: this feature only supports Spanish.
-    search_text = campaign.get_search_text()
-    search_array = search_module.get_word_array_lower_case_and_no_accents(search_text)
-    users = search_module.get_matching_users(search_array)
-
-    users = filter_users_with_job(users)
-    top_users = [u for u in users][:NUMBER_OF_MATCHES]
-
+    candidates = []
     for user in top_users:
 
         # only users who are not on the campaign will be added to the mail
         if campaign.id not in common.get_all_campaign_ids(user):
 
             candidate = Candidate(campaign=campaign, user=user, state=State.objects.get(code='P'))
+
+            candidates.append(candidate)
             candidate.save()
 
-            PendingEmail.add_to_queue(candidates=candidate,
-                                      language_code=candidate.user.language_code,
-                                      body_input='user_job_match_email_body',
-                                      subject=translate_email_job_match_subject(user, campaign),
-                                      override_dict={'campaign_url': campaign.get_url()},
-                                      email_type=email_type)
+    return candidates
