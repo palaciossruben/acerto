@@ -1,12 +1,11 @@
 """
 Calculates a match value with learning algorithm
 """
-from sklearn.model_selection import cross_val_score
 from sklearn import svm
 import statistics
 import numpy as np
 import pandas as pd
-from sklearn.metrics import mean_squared_error, accuracy_score, confusion_matrix
+from sklearn.metrics import mean_squared_error, accuracy_score, confusion_matrix, mean_absolute_error
 from imblearn.over_sampling import ADASYN
 
 from match import common_learning
@@ -41,9 +40,6 @@ def prepare_train_test(data, regression=True):
     train = DataPair()
     test = DataPair()
     train.features, train.target, test.features, test.target = get_train_test(data, 0.7)
-
-    train.features = common_learning.fill_missing_values(train.features)
-    test.features = common_learning.fill_missing_values(test.features)
 
     if not regression:
         train = balance(train)
@@ -82,11 +78,14 @@ def load_data_for_learning(regression=True):
 
 
 class Result:
-    def __init__(self, train_metric, test_metric, baseline_test_metric):
+    def __init__(self, train_metric, test_metric, baseline_test_metric, regression=False):
         self.train_metric = train_metric
         self.test_metric = test_metric
         self.baseline_test_metric = baseline_test_metric
-        self.improvement = self.test_metric - self.baseline_test_metric
+        if regression:
+            self.improvement = self.baseline_test_metric - self.test_metric
+        else:
+            self.improvement = self.test_metric - self.baseline_test_metric
         self.num_runs = 1
 
     def average_property(self, attribute, other_result):
@@ -106,10 +105,10 @@ class Result:
         return str(round(getattr(self, attr), 3) * 100)
 
     def print(self):
-        print('TRAIN: ' + self.get_nice_result('train_metric'))
-        print('TEST: ' + self.get_nice_result('test_metric'))
-        print('BASELINE: ' + self.get_nice_result('baseline_test_metric'))
-        print('IMPROVEMENT: ' + self.get_nice_result('improvement'))
+        print('TRAIN (%): ' + self.get_nice_result('train_metric'))
+        print('TEST (%): ' + self.get_nice_result('test_metric'))
+        print('BASELINE (%): ' + self.get_nice_result('baseline_test_metric'))
+        print('IMPROVEMENT (%): ' + self.get_nice_result('improvement'))
 
 
 class DataPair:
@@ -119,12 +118,16 @@ class DataPair:
 
 
 def learn_model(train, regression=True):
-    # TODO: grid_search(model, train_set, train_target)
 
+    # TODO: grid_search(model, train_set, train_target)
     if regression:
         model = svm.SVR()
     else:
-        model = svm.SVC()
+        model = svm.SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+                        decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+                        max_iter=-1, probability=False, random_state=None, shrinking=True,
+                        tol=0.001, verbose=False)
+
     model.fit(train.features, train.target)
     return model
 
@@ -156,7 +159,7 @@ def eval_model(model, train, test, regression=True):
     """
 
     if regression:
-        f = mean_squared_error
+        f = mean_absolute_error
     else:
         f = accuracy_score
 
@@ -168,14 +171,11 @@ def eval_model(model, train, test, regression=True):
     else:
         baseline_test_metric = f([my_mode(test.target) for _ in test.target], test.target)
 
-    #print('TARGET-PREDICTION tuples')
-    #print([(a, b) for a, b in zip(test_prediction, test.target)])
-
     if not regression:
         print('Confusion Matrix:')
         print(confusion_matrix(test.target, test_prediction))
 
-    result = Result(train_metric, test_metric, baseline_test_metric)
+    result = Result(train_metric, test_metric, baseline_test_metric, regression=regression)
     result.print()
 
     return result

@@ -25,7 +25,7 @@ def load_data_for_prediction():
     """
     data, candidates = common_learning.load_data()
     print('PERCENTAGE OF NULL BY COLUMN: ' + str(common_learning.get_nan_percentages(data)))
-    return common_learning.fill_missing_values(data), candidates
+    return data, candidates
 
 
 def predict_and_save(data, model, candidates):
@@ -54,6 +54,6 @@ def learn_and_predict(regression=True):
 if __name__ == '__main__':
     t0 = time.time()
     text_match.update()
-    learn_and_predict(regression=False)
+    learn_and_predict(regression=True)
     t1 = time.time()
     print('On {0} LEARN AND PREDICT_MATCH, took: {1}'.format(datetime.today(), t1 - t0))

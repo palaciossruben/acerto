@@ -1,15 +1,17 @@
 """Runs a good amount of simulations to estimate avg model accuracy"""
+import time
 import numpy as np
 from match import learn
 
+start_time = time.time()
 
-NUM_RUNS = 2
+NUM_RUNS = 10
 np.random.seed(1)  # Predictable randomness
 
 
 results = []
 for _ in range(NUM_RUNS):
-    _, result = learn.get_model(regression=False)
+    _, result = learn.get_model(regression=True)
     results.append(result)
 
 while len(results) > 1:
@@ -18,3 +20,5 @@ while len(results) > 1:
 
 print('\n\nSUMMARY:')
 results[0].print()
+
+print("TOTAL TIME: " + str(time.time() - start_time))

@@ -13,6 +13,7 @@ import numpy as np
 import pandas as pd
 
 from dashboard.models import Candidate, State
+from sklearn.feature_extraction import FeatureHasher
 
 
 def get_test_score(candidate, field, f):
@@ -63,12 +64,17 @@ def load_data():
 
     candidates = Candidate.objects.all()
 
+    # campaign should be treated categorically
+    data['campaign'] = [str(c.campaign.pk) for c in candidates]
     data['text_match'] = [c.text_match for c in candidates]
     data['education'] = [c.get_education_level() for c in candidates]
     data['profession'] = [c.get_profession_name() for c in candidates]
-    data = pd.get_dummies(data, columns=["profession"])
-
     data = add_test_features(data, candidates, ['passed', 'final_score'])
+
+    data = fill_missing_values(data)
+
+    data = hash_column(data, 'profession', 10)
+    data = hash_column(data, 'campaign', 20)
 
     return data, candidates
 
@@ -88,11 +94,28 @@ def get_nan_percentages(df):
 
 def fill_missing_values(data):
 
+    data['profession'].fillna(statistics.mode(data['profession']), inplace=True)
     data['text_match'].fillna(np.nanmedian(data['text_match']), inplace=True)
     data['education'].fillna(np.nanmedian(data['education']), inplace=True)
 
     for column in data.columns.values:
         if 'test' in column:
             data[column].fillna(np.nanmedian(data[column]), inplace=True)
+
+    return data
+
+
+def hash_column(data, column_name, num_features):
+    """uses the hash trick to encode many categorical values in few dimensions."""
+
+    hasher = FeatureHasher(n_features=num_features, non_negative=False, input_type='string')
+    X_new = hasher.fit_transform(data[column_name])
+    hashed_df = pd.DataFrame(X_new.toarray())
+
+    for i in range(num_features):
+        data[column_name + '_' + str(i)] = list(hashed_df[i])
+
+    # Finally, remove old column
+    data.drop(column_name, axis=1, inplace=True)
 
     return data
