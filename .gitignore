@@ -90,4 +90,8 @@ testing_webpage/testing_webpage/settings.py
 ziggeo_api_key.txt
 testing_webpage/deploy/deploy_credentials.json
 
-testing_webpage/match/model.p
+testing_webpage/match/classifier_model.p
+testing_webpage/match/defaults.p
+testing_webpage/match/hasher_campaign.p
+testing_webpage/match/hasher_profession.p
+testing_webpage/match/regression_model.p

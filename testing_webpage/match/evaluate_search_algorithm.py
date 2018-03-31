@@ -63,7 +63,7 @@ def get_score(candidates):
     search_by_position = [r/sum(search_by_position) for r in search_by_position]
 
     # get score per candidate
-    my_list = [common_learning.get_target(c) * r for r, c in zip(search_by_position, candidates)]
+    my_list = [common_learning.get_target_for_candidate(c) * r for r, c in zip(search_by_position, candidates)]
 
     if len(my_list) > 0:
         return np.nansum(np.array(my_list))

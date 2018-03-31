@@ -11,7 +11,7 @@ np.random.seed(1)  # Predictable randomness
 
 results = []
 for _ in range(NUM_RUNS):
-    _, result = learn.get_model(regression=True)
+    _, result = learn.get_model(regression=False)
     results.append(result)
 
 while len(results) > 1:

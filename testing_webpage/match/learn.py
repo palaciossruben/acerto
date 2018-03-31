@@ -5,10 +5,12 @@ from sklearn import svm
 import statistics
 import numpy as np
 import pandas as pd
-from sklearn.metrics import mean_squared_error, accuracy_score, confusion_matrix, mean_absolute_error
+from sklearn.metrics import accuracy_score, confusion_matrix, mean_absolute_error
 from imblearn.over_sampling import ADASYN
 
-from match import common_learning
+from match import common_learning, xgboost_scikit_wrapper
+
+NON_REJECTED_HONEY = 0.3  # ie better than backlog
 
 
 def balance(data):
@@ -23,7 +25,10 @@ def balance(data):
 
     # Apply the random over-sampling
     ada = ADASYN()
-    data.features, data.target = ada.fit_sample(data.features, data.target)
+    try:
+        data.features, data.target = ada.fit_sample(data.features, data.target)
+    except ValueError:  # ValueError: No samples will be generated with the provided ratio settings.
+        pass
 
     print('balanced positive weight: ' + str(np.mean(data.target)))
 
@@ -33,8 +38,9 @@ def balance(data):
 def prepare_train_test(data, regression=True):
     """
     From splitting to removing Nan, routine tasks.
-    :param data:
-    :return:
+    :param data: dataframe
+    :param regression: boolean
+    :return: train and test tuple
     """
 
     train = DataPair()
@@ -60,19 +66,29 @@ def my_accuracy(a, b):
     return statistics.mean([int(e1 == e2) for e1, e2 in zip(a, b)])
 
 
+def load_target(data, regression, candidates):
+    """
+    :param data: the X
+    :param regression: boolean
+    :param candidates: list of candidates
+    :return:
+    """
+
+    data['target'] = [common_learning.get_target_for_candidate(c) for c in candidates]
+    data = data[[not pd.isnull(t) for t in data['target']]]
+    if not regression:
+        data['target'] = data['target'].apply(lambda y: 1 if y > NON_REJECTED_HONEY else 0)
+
+    return data
+
+
 def load_data_for_learning(regression=True):
     """
     Loads and prepares all data.
     :return: data DataFrame with features and target.
     """
     data, candidates = common_learning.load_data()
-
-    data['target'] = [common_learning.get_target(c) for c in candidates]
-    data = data[[not pd.isnull(t) for t in data['target']]]
-    if not regression:
-        data['target'] = data['target'].apply(lambda y: 1 if y > 0.3 else 0)
-
-    print('PERCENTAGE OF NULL BY COLUMN: ' + str(common_learning.get_nan_percentages(data)))
+    data = load_target(data, regression, candidates)
 
     return data
 
@@ -117,16 +133,29 @@ class DataPair:
         self.target = target
 
 
-def learn_model(train, regression=True):
+def learn_model(train, regression=True, xgboost=False):
 
+    # TODO: missing xgboost; has bugs. Missing hard instalation on Linux also. Or using conda.
     # TODO: grid_search(model, train_set, train_target)
-    if regression:
-        model = svm.SVR()
+    if xgboost:
+
+        params = {
+            'max_depth': 3,  # the maximum depth of each tree
+            'eta': 0.3,  # the training step for each iteration
+            'silent': 1,  # logging mode - quiet
+            'objective': 'binary:logistic',  # error evaluation for multiclass training
+            'num_class': 2}  # the number of classes that exist in this dataset
+
+        model = xgboost_scikit_wrapper.XGBoostClassifier(num_boost_round=20, params=params)
+
     else:
-        model = svm.SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
-                        decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
-                        max_iter=-1, probability=False, random_state=None, shrinking=True,
-                        tol=0.001, verbose=False)
+        if regression:
+            model = svm.SVR()
+        else:
+            model = svm.SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+                            decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+                            max_iter=-1, probability=False, random_state=None, shrinking=True,
+                            tol=0.001, verbose=False)
 
     model.fit(train.features, train.target)
     return model

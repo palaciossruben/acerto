@@ -8,12 +8,16 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
+import pickle
 import statistics
 import numpy as np
 import pandas as pd
 
 from dashboard.models import Candidate, State
 from sklearn.feature_extraction import FeatureHasher
+
+
+DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 
 
 def get_test_score(candidate, field, f):
@@ -27,6 +31,7 @@ def get_test_score(candidate, field, f):
 def add_test_field(features, candidates, field):
     features['min_test_' + field] = [get_test_score(c, field, min) for c in candidates]
     features['median_test_' + field] = [get_test_score(c, field, statistics.median) for c in candidates]
+    features['mean_test_' + field] = [get_test_score(c, field, statistics.mean) for c in candidates]
     features['max_test_' + field] = [get_test_score(c, field, max) for c in candidates]
     return features
 
@@ -37,7 +42,7 @@ def add_test_features(features, candidates, fields):
     return features
 
 
-def get_target(candidate):
+def get_target_for_candidate(candidate):
     """
     3 possible values
     :param candidate:
@@ -55,14 +60,27 @@ def get_target(candidate):
             return candidate.state.honey/max_honey
 
 
-def load_data():
+def get_hashing_info():
     """
-    Loads and prepares all data.
-    :return: data DataFrame with features and target + candidates.
+    Add new hashing fields here.
+    :return: a hashing dict, with key=field_name, value=num_features
     """
-    data = pd.DataFrame()
+    hashing_info = dict()
+    hashing_info['profession'] = 10
+    hashing_info['campaign'] = 20
+    return hashing_info
 
-    candidates = Candidate.objects.all()
+
+def hash_columns(data):
+    hashing_info = get_hashing_info()
+    for field, num_features in hashing_info.items():
+        data = hash_column(data, field, num_features)
+
+    return data
+
+
+def load_raw_data(candidates=Candidate.objects.all()):
+    data = pd.DataFrame()
 
     # campaign should be treated categorically
     data['campaign'] = [str(c.campaign.pk) for c in candidates]
@@ -71,10 +89,17 @@ def load_data():
     data['profession'] = [c.get_profession_name() for c in candidates]
     data = add_test_features(data, candidates, ['passed', 'final_score'])
 
-    data = fill_missing_values(data)
+    return data
 
-    data = hash_column(data, 'profession', 10)
-    data = hash_column(data, 'campaign', 20)
+
+def load_data(candidates=Candidate.objects.all()):
+    """
+    Loads and prepares all data.
+    :return: data DataFrame with features and target + candidates.
+    """
+    data = load_raw_data(candidates)
+    data = fill_missing_values(data)
+    data = hash_columns(data)
 
     return data, candidates
 
@@ -92,30 +117,62 @@ def get_nan_percentages(df):
     return d
 
 
-def fill_missing_values(data):
+def calculate_defaults(data):
 
-    data['profession'].fillna(statistics.mode(data['profession']), inplace=True)
-    data['text_match'].fillna(np.nanmedian(data['text_match']), inplace=True)
-    data['education'].fillna(np.nanmedian(data['education']), inplace=True)
+    defaults = dict()
+
+    defaults['profession'] = statistics.mode(data['profession'])
+    defaults['text_match'] = np.nanmedian(data['text_match'])
+    defaults['education'] = np.nanmedian(data['education'])
 
     for column in data.columns.values:
         if 'test' in column:
-            data[column].fillna(np.nanmedian(data[column]), inplace=True)
+            defaults[column] = np.nanmedian(data[column])
+
+    return defaults
+
+
+def save_defaults(defaults):
+    pickle.dump(defaults, open(os.path.join(DIR_PATH, 'defaults.p'), "wb"))
+
+
+def load_defaults():
+    return pickle.load(open(os.path.join(DIR_PATH, 'defaults.p'), "rb"))
+
+
+def fill_missing_values(data, defaults=None):
+
+    if defaults is None:
+        defaults = calculate_defaults(data)
+
+    data['profession'].fillna(defaults['profession'], inplace=True)
+    data['text_match'].fillna(defaults['text_match'], inplace=True)
+    data['education'].fillna(defaults['education'], inplace=True)
+
+    for column in data.columns.values:
+        if 'test' in column:
+            data[column].fillna(defaults[column], inplace=True)
 
     return data
 
 
-def hash_column(data, column_name, num_features):
-    """uses the hash trick to encode many categorical values in few dimensions."""
+def get_hasher(num_features):
+    return FeatureHasher(n_features=num_features, non_negative=False, input_type='string')
 
-    hasher = FeatureHasher(n_features=num_features, non_negative=False, input_type='string')
-    X_new = hasher.fit_transform(data[column_name])
-    hashed_df = pd.DataFrame(X_new.toarray())
+
+def add_hashed_matrix_to_data(matrix, data, column_name, num_features):
+    hashed_df = pd.DataFrame(matrix.toarray())
 
     for i in range(num_features):
         data[column_name + '_' + str(i)] = list(hashed_df[i])
 
     # Finally, remove old column
     data.drop(column_name, axis=1, inplace=True)
-
     return data
+
+
+def hash_column(data, column_name, num_features):
+    """uses the hash trick to encode many categorical values in few dimensions."""
+
+    matrix = get_hasher(num_features).fit_transform(data[column_name])
+    return add_hashed_matrix_to_data(matrix, data, column_name, num_features)
