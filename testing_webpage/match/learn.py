@@ -8,7 +8,8 @@ import pandas as pd
 from sklearn.metrics import accuracy_score, confusion_matrix, mean_absolute_error
 from imblearn.over_sampling import ADASYN
 
-from match import common_learning, xgboost_scikit_wrapper
+from match import common_learning#, xgboost_scikit_wrapper
+
 
 NON_REJECTED_HONEY = 0.3  # ie better than backlog
 
@@ -146,7 +147,7 @@ def learn_model(train, regression=True, xgboost=False):
             'objective': 'binary:logistic',  # error evaluation for multiclass training
             'num_class': 2}  # the number of classes that exist in this dataset
 
-        model = xgboost_scikit_wrapper.XGBoostClassifier(num_boost_round=20, params=params)
+        #model = xgboost_scikit_wrapper.XGBoostClassifier(num_boost_round=20, params=params)
 
     else:
         if regression:
