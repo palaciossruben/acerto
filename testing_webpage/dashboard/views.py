@@ -14,6 +14,9 @@ from dashboard import interview_module, candidate_module, campaign_module
 from match import run_model
 
 
+CANDIDATE_FORECAST_LIMIT = 10
+
+
 def index(request):
     """
     Args:
@@ -43,8 +46,12 @@ def add_to_message_queue(candidates, text):
 
 
 def update_candidate_forecast():
-
+    """
+    Updates up to CANDIDATE_FORECAST_LIMIT per execution, due to time limit on production server, and possible crush.
+    :return: updates.
+    """
     candidates = [c for c in Candidate.objects.filter(Q(match_regression=None) | Q(match_classification=None))]
+    candidates = candidates[:min(len(candidates), CANDIDATE_FORECAST_LIMIT)]
     run_model.predict_match_and_save(candidates, regression=True)
     run_model.predict_match_and_save(candidates, regression=False)
 
