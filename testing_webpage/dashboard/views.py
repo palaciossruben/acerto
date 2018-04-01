@@ -3,6 +3,7 @@ import common
 from django.core import serializers
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
+from django.db.models import Q
 
 from beta_invite.models import Campaign, Test, BulletType, Interview, Survey, Bullet, QuestionType
 from dashboard.models import Candidate, Message, Screening
@@ -10,6 +11,7 @@ from dashboard import constants as cts
 from beta_invite.util import email_sender
 from beta_invite.views import get_drop_down_values
 from dashboard import interview_module, candidate_module, campaign_module
+from match import run_model
 
 
 def index(request):
@@ -38,6 +40,13 @@ def add_to_message_queue(candidates, text):
     """
     for candidate in candidates:
         Message(candidate=candidate, text=text).save()
+
+
+def update_candidate_forecast():
+
+    candidates = [c for c in Candidate.objects.filter(Q(match_regression=None) | Q(match_classification=None))]
+    run_model.predict_match_and_save(candidates, regression=True)
+    run_model.predict_match_and_save(candidates, regression=False)
 
 
 # TODO: use Ajax to optimize rendering. Has no graphics therefore is very low priority.
@@ -80,6 +89,8 @@ def edit_campaign_candidates(request, pk):
     if request.POST.get('send_message') is not None:
         candidates = candidate_module.get_checked_box_candidates(pk, request)
         add_to_message_queue(candidates, request.POST.get('email_body'))
+
+    update_candidate_forecast()
 
     params, states = candidate_module.get_rendering_data(pk)
 

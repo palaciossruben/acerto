@@ -69,7 +69,8 @@
         <p><strong>Text Match (higher is better): </strong>{{ candidate.text_match }}</p>
     {% endif %}
 
-    <p><strong>Forecast: {{ candidate.match }}</strong></p>
+    <p><strong>Forecast (Regression): {{ candidate.match_regression }}</strong></p>
+    <p><strong>Forecast (Classification): {{ candidate.match_classification }}</strong></p>
 
     <br>
     <br>

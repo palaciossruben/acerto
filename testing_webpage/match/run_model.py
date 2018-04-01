@@ -32,12 +32,16 @@ def load_data_for_prediction():
     return data, candidates
 
 
-def predict_and_save(data, model, candidates):
+def predict_and_save(data, model, candidates, regression=True):
 
     data['prediction'] = model.predict(data)
 
     for candidate, (pk, row) in zip(candidates, data.iterrows()):
-        candidate.match = row['prediction']
+        if regression:
+            candidate.match_regression = row['prediction']
+        else:
+            candidate.match_classification = int(row['prediction'])
+
         candidate.save()
 
 
@@ -64,7 +68,7 @@ def learn_and_predict(regression=True):
     model, _ = learn.get_model(regression=regression)
     save_model(regression, model)
     data, candidates = load_data_for_prediction()
-    predict_and_save(data, model, candidates)
+    predict_and_save(data, model, candidates, regression=regression)
 
 
 def predict_match(candidates, regression=True):
@@ -74,14 +78,29 @@ def predict_match(candidates, regression=True):
     :param regression: boolean
     :return: None
     """
+
     if isinstance(candidates, Candidate):
         candidates = [candidates]
+
+    if not len(candidates):
+        return [], []
 
     data = common_learning.load_raw_data(candidates)
     data = common_learning.fill_missing_values(data, defaults=common_learning.load_defaults())
     data = add_hash_fields_from_saved_hashes(data)
     model = load_model(regression=regression)
     return model.predict(data), candidates
+
+
+def predict_match_and_save(candidates, regression=True):
+    predictions, candidates = predict_match(candidates, regression=regression)
+
+    for p, c in zip(predictions, candidates):
+        if regression:
+            c.match_regression = p
+        else:
+            c.match_classification = p
+        c.save()
 
 
 def save_other_values():
@@ -126,11 +145,7 @@ if __name__ == '__main__':
     t0 = time.time()
     text_match.update()
 
-    # save a classification model first:
-    model, _ = learn.get_model(regression=False)
-    save_model(False, model)
-
-    # do complete stuff (learn, predict and save for whole DB) with regression model
+    learn_and_predict(regression=False)
     learn_and_predict(regression=True)
 
     save_other_values()

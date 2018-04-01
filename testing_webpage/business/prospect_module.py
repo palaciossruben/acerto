@@ -69,6 +69,7 @@ def send_mails(candidate_prospects):
 
 
 def get_top_users(campaign):
+
     # TODO: this feature only supports Spanish.
     search_text = campaign.get_search_text()
     search_array = search_module.get_word_array_lower_case_and_no_accents(search_text)
