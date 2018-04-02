@@ -175,23 +175,14 @@ def register(request):
     # Gets information of client: such as if it is mobile.
     is_mobile = parse(request.META['HTTP_USER_AGENT']).is_mobile
 
-    #profession_id = request.POST.get('profession')
-    #education_id = request.POST.get('education')
-    #country_id = request.POST.get('country')
     email = request.POST.get('email')
     name = request.POST.get('name')
     phone = request.POST.get('phone')
 
     campaign = common.get_campaign_from_request(request)
 
-
-    #if profession_id is not None and education_id is not None and country_id is not None:
     # Validates all fields
     if campaign and name and phone and (email or not campaign.has_email):
-
-        #profession = Profession.objects.get(pk=profession_id)
-        #education = Education.objects.get(pk=education_id)
-        #country = Country.objects.get(pk=country_id)
 
         country = common.get_country_with_request(request)
         city = common.get_city(request, country)
@@ -199,8 +190,6 @@ def register(request):
         user_params = {'name': name,
                        'email': email,
                        'phone': phone,
-                       #'profession': profession,
-                       #'education': education,
                        'country': country,
                        'city': city,
                        'ip': get_ip(request),

@@ -140,9 +140,9 @@ def create_nice_resumes_message(candidates):
                                 'Hoja de vida: \n{cv_url}'.format(campaign_name=campaign_name,
                                                                   name=remove_accents(c.user.name),
                                                                   email=c.user.email,
-                                                                  country=c.user.get_country_name(),
-                                                                  profession=c.user.get_profession_name(),
-                                                                  education=c.user.get_education_name(),
+                                                                  country=c.get_country_name(),
+                                                                  profession=c.get_profession_name(),
+                                                                  education=c.get_education_name(),
                                                                   cv_url=cv_url))
 
     return '\n\n'.join(resume_summaries)

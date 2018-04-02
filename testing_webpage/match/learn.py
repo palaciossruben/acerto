@@ -162,7 +162,7 @@ def learn_model(train, regression=True, xgboost=False):
     return model
 
 
-def my_mode(target):
+def target_mode(target):
     """
     Returns 1 for balanced sets (where there are excatly the same number of 1s and 0s)
     :param target: list of 1s and 0s
@@ -199,7 +199,7 @@ def eval_model(model, train, test, regression=True):
     if regression:
         baseline_test_metric = f([statistics.mean(test.target) for _ in range(len(test.target))], test.target)
     else:
-        baseline_test_metric = f([my_mode(test.target) for _ in test.target], test.target)
+        baseline_test_metric = f([target_mode(test.target) for _ in test.target], test.target)
 
     if not regression:
         print('Confusion Matrix:')

@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User as AuthUser
 from django.contrib.postgres.fields import JSONField
 
-from beta_invite.models import Country, Education, Profession, Campaign
+from beta_invite.models import Country, Education, Profession, Campaign, City
 
 
 class Plan(models.Model):

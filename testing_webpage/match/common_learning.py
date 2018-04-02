@@ -68,6 +68,12 @@ def get_hashing_info():
     hashing_info = dict()
     hashing_info['profession'] = 10
     hashing_info['campaign'] = 20
+    hashing_info['candidate_country'] = 10
+    hashing_info['candidate_city'] = 10
+    hashing_info['campaign_country'] = 10
+    hashing_info['campaign_city'] = 10
+    # TODO: ADD NEW FIELD HERE
+
     return hashing_info
 
 
@@ -83,11 +89,20 @@ def load_raw_data(candidates=Candidate.objects.all()):
     data = pd.DataFrame()
 
     # campaign should be treated categorically
-    data['campaign'] = [str(c.campaign.pk) for c in candidates]
-    data['text_match'] = [c.text_match for c in candidates]
+    data['campaign'] = [c.campaign_id for c in candidates]
+    data['text_match'] = [c.get_text_match() for c in candidates]
     data['education'] = [c.get_education_level() for c in candidates]
-    data['profession'] = [c.get_profession_name() for c in candidates]
+    data['profession'] = [c.get_profession_id() for c in candidates]
+    data['candidate_country'] = [c.get_country_id() for c in candidates]
+    data['candidate_city'] = [c.get_city_id() for c in candidates]
+    data['campaign_country'] = [c.get_campaign_country_id() for c in candidates]
+    data['campaign_city'] = [c.get_campaign_city_id() for c in candidates]
+    # TODO: ADD NEW FIELD HERE
+
+    # Calculated fields
     data = add_test_features(data, candidates, ['passed', 'final_score'])
+    data['country_match'] = data['candidate_country'] == data['campaign_country']
+    data['city_match'] = data['candidate_city'] == data['campaign_city']
 
     return data
 
@@ -117,13 +132,29 @@ def get_nan_percentages(df):
     return d
 
 
+def right_mode(iterable):
+    """
+    All modes suck, defines the right one, ignoring nulls
+    :return:
+    """
+    try:
+        return statistics.mode([e for e in iterable if not pd.isnull(e)])
+    except statistics.StatisticsError:  # triggered when mode performed over empty array
+        return 0
+
+
 def calculate_defaults(data):
 
     defaults = dict()
 
-    defaults['profession'] = statistics.mode(data['profession'])
+    defaults['profession'] = right_mode(data['profession'])
     defaults['text_match'] = np.nanmedian(data['text_match'])
     defaults['education'] = np.nanmedian(data['education'])
+    defaults['candidate_country'] = right_mode(data['candidate_country'])
+    defaults['candidate_city'] = right_mode(data['candidate_city'])
+    defaults['campaign_country'] = right_mode(data['campaign_country'])
+    defaults['campaign_city'] = right_mode(data['campaign_city'])
+    # TODO: ADD NEW FIELD HERE
 
     for column in data.columns.values:
         if 'test' in column:
@@ -148,16 +179,17 @@ def fill_missing_values(data, defaults=None):
     data['profession'].fillna(defaults['profession'], inplace=True)
     data['text_match'].fillna(defaults['text_match'], inplace=True)
     data['education'].fillna(defaults['education'], inplace=True)
+    data['candidate_country'].fillna(defaults['candidate_country'], inplace=True)
+    data['candidate_city'].fillna(defaults['candidate_city'], inplace=True)
+    data['campaign_country'].fillna(defaults['campaign_country'], inplace=True)
+    data['campaign_city'].fillna(defaults['campaign_city'], inplace=True)
+    # TODO: ADD NEW FIELD HERE
 
     for column in data.columns.values:
         if 'test' in column:
             data[column].fillna(defaults[column], inplace=True)
 
     return data
-
-
-def get_hasher(num_features):
-    return FeatureHasher(n_features=num_features, non_negative=False, input_type='string')
 
 
 def add_hashed_matrix_to_data(matrix, data, column_name, num_features):
@@ -171,8 +203,29 @@ def add_hashed_matrix_to_data(matrix, data, column_name, num_features):
     return data
 
 
+def make_column_hashable(data, column_name):
+    if not isinstance(data.loc[0, column_name], str):
+        data[column_name] = data[column_name].apply(lambda x: str(x))
+    return data
+
+
+def get_hashed_matrix_and_hasher(data, column_name, num_features):
+    """
+    1. If not str, convert to string
+    2. Then will hash data and return matrix
+    3. Also returns the fitted hash
+    """
+
+    data = make_column_hashable(data, column_name)
+
+    hasher = FeatureHasher(n_features=num_features, non_negative=False, input_type='string')
+    matrix = hasher.fit_transform(data[column_name])
+
+    return matrix, hasher
+
+
 def hash_column(data, column_name, num_features):
     """uses the hash trick to encode many categorical values in few dimensions."""
 
-    matrix = get_hasher(num_features).fit_transform(data[column_name])
+    matrix, _ = get_hashed_matrix_and_hasher(data, column_name, num_features)
     return add_hashed_matrix_to_data(matrix, data, column_name, num_features)

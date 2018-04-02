@@ -42,6 +42,9 @@ def predict_and_save(data, model, candidates, regression=True):
         else:
             candidate.match_classification = int(row['prediction'])
 
+        #from django.utils.encoding import smart_text
+        # Encoding prevents error when screening_explanation has special chars.
+        #candidate.screening_explanation = smart_text(candidate.screening_explanation)
         candidate.save()
 
 
@@ -127,16 +130,20 @@ def get_hasher_path(field):
 
 def save_hashers(data):
     for field, num_features in common_learning.get_hashing_info().items():
-        hasher = common_learning.get_hasher(num_features)
-        hasher.fit_transform(data[field])
+        _, hasher = common_learning.get_hashed_matrix_and_hasher(data, field, num_features)
         pickle.dump(hasher, open(get_hasher_path(field), "wb"))
+
+
+def get_matrix_from_saved_hash(data, field):
+    data = common_learning.make_column_hashable(data, field)
+    hasher = pickle.load(open(get_hasher_path(field), "rb"))
+    return hasher.transform(data[field])
 
 
 def add_hash_fields_from_saved_hashes(data):
     for field, num_features in common_learning.get_hashing_info().items():
-        hasher = pickle.load(open(get_hasher_path(field), "rb"))
-        hashed_x = hasher.transform(data[field])
-        data = common_learning.add_hashed_matrix_to_data(hashed_x, data, field, num_features)
+        matrix = get_matrix_from_saved_hash(data, field)
+        data = common_learning.add_hashed_matrix_to_data(matrix, data, field, num_features)
 
     return data
 

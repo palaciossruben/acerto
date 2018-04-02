@@ -161,8 +161,10 @@ def deploy():
             for f in fixtures_dirs:
                 run('python3 manage.py loaddata {}'.format(f))
 
-            # Last step: start gunicorn as a deamon: that binds to a unix socket, from where nginx listens.
+            # start gunicorn binded unix socket, from where nginx listens.
             run('PYENV_VERSION=3.5.2 gunicorn -c gunicorn_cfg.py testing_webpage.wsgi --bind=unix:/opt/peaku_co/run/gunicorn.sock')
+
+            run('python3 match/update_data_structures.py')
 
     sync_local(sync_media=False, db_update=False)
 

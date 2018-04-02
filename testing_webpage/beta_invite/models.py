@@ -230,6 +230,7 @@ class Campaign(models.Model):
     profession = models.ForeignKey(Profession, null=True, on_delete=models.SET_NULL)
     education = models.ForeignKey(Education, null=True, on_delete=models.SET_NULL)
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
+    city = models.ForeignKey(City, null=True, on_delete=models.SET_NULL)
     description = models.CharField(max_length=2000, null=True)
     description_es = models.CharField(max_length=2000, null=True)
     title = models.CharField(max_length=200, null=True)
@@ -389,24 +390,6 @@ class User(models.Model):
             # Adds the '+' only
         elif re.search(r'^' + self.get_calling_code() + '.+', self.phone) is not None:
             self.phone = '+' + self.phone
-
-    def get_country_name(self):
-        if self.country:
-            return self.country.name
-        else:
-            return 'not available'
-
-    def get_profession_name(self):
-        if self.profession:
-            return self.profession.name
-        else:
-            return 'not available'
-
-    def get_education_name(self):
-        if self.education:
-            return self.education.name
-        else:
-            return 'not available'
 
     # adds custom table name
     class Meta:

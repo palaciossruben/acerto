@@ -1,9 +1,11 @@
+import numpy as np
 from django.db import models
 from django.db.models.signals import post_init
 
 from beta_invite.models import User, Campaign, Evaluation, Survey
 from dashboard import constants as cts
 from beta_invite.util import common_senders
+from business.models import BusinessUser
 
 
 class State(models.Model):
@@ -80,15 +82,68 @@ class Candidate(models.Model):
     class Meta:
         db_table = 'candidates'
 
+    def get_business_user(self):
+        """
+        Given a campaign gets the business_user if it exists, else None
+        :return: business_user or None
+        """
+
+        business_users = [b for b in BusinessUser.objects.filter(campaign=self.campaign)]
+
+        if len(business_users) > 0:
+            return business_users[0]
+        else:
+            return np.nan
+
+    def get_text_match(self):
+        if self.text_match:
+            return self.text_match
+        return np.nan
+
     def get_education_level(self):
         if self.user and self.user.education:
             return self.user.education.level
-        return None
+        return np.nan
+
+    def get_profession_id(self):
+        if self.user and self.user.profession:
+            return self.user.profession_id
+        return np.nan
+
+    def get_country_id(self):
+        if self.user and self.user.country:
+            return self.user.country_id
+        return np.nan
+
+    def get_city_id(self):
+        if self.user and self.user.city:
+            return self.user.city_id
+        return np.nan
+
+    def get_campaign_country_id(self):
+        if self.campaign:
+            return self.campaign.country_id
+        return np.nan
+
+    def get_campaign_city_id(self):
+        if self.campaign:
+            return self.campaign.city_id
+        return np.nan
 
     def get_profession_name(self):
         if self.user and self.user.profession:
             return self.user.profession.name
-        return None
+        return np.nan
+
+    def get_country_name(self):
+        if self.user and self.user.country:
+            return self.user.country.name
+        return np.nan
+
+    def get_city_name(self):
+        if self.user and self.user.city:
+            return self.user.city.name
+        return np.nan
 
 
 class Message(models.Model):

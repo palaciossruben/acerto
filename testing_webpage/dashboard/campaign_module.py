@@ -4,6 +4,7 @@ All Campaign editing related stuff on the dashboard, except for candidates and i
 import re
 from django.shortcuts import redirect
 
+import common
 from beta_invite.models import Bullet, Campaign
 from business import prospect_module
 
@@ -104,7 +105,10 @@ def create_campaign(request):
     saves to create id first.
     """
 
-    campaign = Campaign()
+    country = common.get_country_with_request(request)
+    city = common.get_city(request, country)
+
+    campaign = Campaign(country=country, city=city)
     campaign.save()
 
     update_campaign_basic_properties(campaign, request)
