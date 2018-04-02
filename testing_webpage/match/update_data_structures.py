@@ -1,6 +1,6 @@
 import time
 from datetime import datetime
-from match.run_model import save_other_values
+from run_model import save_other_values
 
 
 if __name__ == '__main__':
