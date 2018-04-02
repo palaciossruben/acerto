@@ -28,7 +28,6 @@ def load_data_for_prediction():
     :return: data DataFrame with features and target.
     """
     data, candidates = common_learning.load_data()
-    print('PERCENTAGE OF NULL BY COLUMN: ' + str(common_learning.get_nan_percentages(data)))
     return data, candidates
 
 
