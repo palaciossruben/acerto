@@ -1,5 +1,6 @@
 workon myenv;
 git pull origin master;
+cd match && python3 update_data_structures.py;
 crontab cron.txt;
 python3 manage.py collectstatic -v0 --noinput;
 sudo /etc/init.d/nginx restart;
