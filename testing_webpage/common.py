@@ -169,7 +169,11 @@ def get_city_name_with_request(request):
 
     try:
         response = ip_city_reader.city(ip)
-        return response.city.name
+        name = response.city.name
+        if name:
+            return name
+        else:
+            return 'not available'  # Defaults to 'not available'
     except geoip2.errors.AddressNotFoundError:
         return 'not available'  # Defaults to 'not available'
 
