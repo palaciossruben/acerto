@@ -62,7 +62,6 @@ def search(request):
                                                   'countries': countries,
                                                   'education': education,
                                                   'professions': professions,
-                                                  'error_message': None,
                                                   })
 
 
@@ -102,9 +101,6 @@ def render_result(request, pk):
     params = {'main_message': _("Discover amazing people"),
               'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
               'users': users}
-
-    if hasattr(request, 'error_message') and request.error_message is not None:
-        params['error_message'] = request.error_message
 
     return render(request, cts.RESULTS_VIEW_PATH, params)
 
@@ -147,6 +143,15 @@ def send_signup_emails(business_user, language_code, campaign):
     else:
         body_filename = 'business_start_signup_notification_email_body'
         body_input = 'business_start_signup_email_body'
+
+    # TODO: make producer consumer work!
+    """
+    PendingEmail.add_to_queue(candidates=business_user,
+                              language_code=language_code,
+                              body_input=body_input,
+                              subject=_('Welcome to PeakU'),
+                              email_type=email_type)
+    """
 
     try:
         email_sender.send(objects=business_user,
@@ -211,8 +216,6 @@ def popup_signup(request):
         first_sign_in(signup_form, campaign, request)
         return redirect(request.POST.get('result_path'))
     else:
-        error_message = [m[0] for m in signup_form.errors.values()][0]
-        request.error_message = error_message
 
         path = request.POST.get('result_path')
         if path is not None:
@@ -374,7 +377,7 @@ def start(request):
 
     return render(request, cts.START_VIEW_PATH, {'requirement_bullet_id': requirement_bullet_id,
                                                  'perk_bullet_id': perk_bullet_id,
-                                                 })
+                                                 'error_message': ''})
 
 
 def create(request):

@@ -102,18 +102,13 @@ def index(request):
     campaign.translate(request.LANGUAGE_CODE)
 
     ip = get_ip(request)
-    countries, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
 
     Visitor(ip=ip, is_mobile=not is_desktop).save()
 
     perks = campaign.bullets.filter(bullet_type__in=BulletType.objects.filter(name='perk'))
     requirements = campaign.bullets.filter(bullet_type__in=BulletType.objects.filter(name='requirement'))
 
-    param_dict = {'main_message': _("Discover your true passion"),
-                  'countries': countries,
-                  'education': education,
-                  'professions': professions,
-                  'job_title': campaign.title,
+    param_dict = {'job_title': campaign.title,
                   'perks': translate_bullets(perks, request.LANGUAGE_CODE),
                   'requirements': translate_bullets(requirements, request.LANGUAGE_CODE),
                   'is_desktop': is_desktop,

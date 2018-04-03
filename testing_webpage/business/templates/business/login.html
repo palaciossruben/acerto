@@ -68,6 +68,14 @@
 
        </div>
     </div>
+
+    <!-- any incoming error_message will print as an alert.-->
+    <script>
+    {% if error_message %}
+        alert("{{ error_message }}");
+    {% endif %}
+    </script>
+
 {% endblock %}
 
 
