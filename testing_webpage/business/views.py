@@ -456,13 +456,13 @@ def get_checked_box_candidates(campaign_id, request):
     return [c for c in candidates if request.GET.get('{}_checkbox'.format(c.id))]
 
 
-@login_required
+#@login_required
 def business_campaigns(request, pk):
 
     business_user = BusinessUser.objects.get(pk=pk)
 
-    if request.user.id != business_user.auth_user.id:
-        return redirect('business:login')
+    #if request.user.id != business_user.auth_user.id:
+    #    return redirect('business:login')
 
     campaigns = business_user.campaigns.all()
 
