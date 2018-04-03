@@ -65,7 +65,7 @@ class Country(models.Model):
 
 class City(models.Model):
 
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, null=True)
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
