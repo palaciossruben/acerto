@@ -208,3 +208,9 @@ def get_language_with_ip(request):
         return country.language_code
     else:  # defaults to English
         return 'en'
+
+
+def update_object(instance, params):
+    for attr, value in params.items():
+        setattr(instance, attr, value)
+    instance.save()

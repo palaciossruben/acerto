@@ -17,10 +17,12 @@ class BetaInviteConfig(AppConfig):
         country_path = os.path.join(base_path, os.path.join('GeoLite2-Country_20180306', 'GeoLite2-Country.mmdb'))
         global ip_country_reader
         ip_country_reader = geoip2.database.Reader(country_path)
+
         print("done loading ip_country_reader!")
 
         print("Loading ip_city_reader...")
         city_path = os.path.join(base_path, os.path.join('GeoLite2-City_20180306', 'GeoLite2-City.mmdb'))
         global ip_city_reader
         ip_city_reader = geoip2.database.Reader(city_path)
+
         print("done loading ip_city_reader!")

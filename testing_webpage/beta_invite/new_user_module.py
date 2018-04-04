@@ -9,6 +9,7 @@ from django.utils.translation import ugettext as _
 from beta_invite.models import User
 from beta_invite.util import email_sender
 from dashboard.models import Candidate
+import common
 
 
 def remove_accents(text):
@@ -88,12 +89,6 @@ def candidate_if_exists(campaign, user):
         return c
 
 
-def update_object(instance, params):
-    for attr, value in params.items():
-        setattr(instance, attr, value)
-    instance.save()
-
-
 def update_user(campaign, user, user_params, request):
     """
     Args:
@@ -103,7 +98,7 @@ def update_user(campaign, user, user_params, request):
     Returns: None
     """
 
-    update_object(user, user_params)
+    common.update_object(user, user_params)
     user.updated_at = datetime.utcnow()
     user.save()
 

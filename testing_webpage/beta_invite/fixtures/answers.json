@@ -1648,5 +1648,405 @@
       "created_at": "2018-03-02 02:42:49.0957+00",
       "updated_at": "2018-03-02 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 167,
+    "fields":{
+      "name": "Neto Patrimonial",
+      "name_es": "Neto Patrimonial",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 168,
+    "fields":{
+      "name": "Haber",
+      "name_es": "Haber",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 169,
+    "fields":{
+      "name": "Pasivo",
+      "name_es": "Pasivo",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 170,
+    "fields":{
+      "name": "Activo",
+      "name_es": "Activo",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 171,
+    "fields":{
+      "name": "Proveedores, empresas asociadas",
+      "name_es": "Proveedores, empresas asociadas",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 172,
+    "fields":{
+      "name": "Proveedores, efectos comerciales a pagar",
+      "name_es": "Proveedores, efectos comerciales a pagar",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 173,
+    "fields":{
+      "name": "Proveedores, materiales pendientes de pago",
+      "name_es": "Proveedores, materiales pendientes de pago",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 174,
+    "fields":{
+      "name": "Personal",
+      "name_es": "Personal",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 175,
+    "fields":{
+      "name": "Hacienda pública, IVA repercutido",
+      "name_es": "Hacienda pública, IVA repercutido",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 176,
+    "fields":{
+      "name": "Hacienda pública, IVA soportado",
+      "name_es": "Hacienda pública, IVA soportado",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 177,
+    "fields":{
+      "name": "Hacienda pública, Acreedor por IVA",
+      "name_es": "Hacienda pública, Acreedor por IVA",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 178,
+    "fields":{
+      "name": "Rappels por compras",
+      "name_es": "Rappels por compras",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 179,
+    "fields":{
+      "name": "Compras de mercaderías",
+      "name_es": "Compras de mercaderías",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 180,
+    "fields":{
+      "name": "Transportes",
+      "name_es": "Transportes",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 181,
+    "fields":{
+      "name": "Seguros",
+      "name_es": "Seguros",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 182,
+    "fields":{
+      "name": "Que la primera es a corto plazo y la segunda a largo",
+      "name_es": "Que la primera es a corto plazo y la segunda a largo",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 183,
+    "fields":{
+      "name": "Que la primera es a largo plazo y la segunda a corto",
+      "name_es": "Que la primera es a largo plazo y la segunda a corto",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 184,
+    "fields":{
+      "name": "Que las cuentas a pagar son gastos y los pasivos financieros ingresos",
+      "name_es": "Que las cuentas a pagar son gastos y los pasivos financieros ingresos",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 185,
+    "fields":{
+      "name": "Todas son correctas",
+      "name_es": "Todas son correctas",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 186,
+    "fields":{
+      "name": "Compras de material",
+      "name_es": "Compras de material",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 187,
+    "fields":{
+      "name": "Ventas de material",
+      "name_es": "Ventas de material",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 188,
+    "fields":{
+      "name": "Operaciones financieras simples, préstamo americano, empréstito y leasing",
+      "name_es": "Operaciones financieras simples, préstamo americano, empréstito y leasing",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 189,
+    "fields":{
+      "name": "No está la respuesta correcta entre las anteriores.",
+      "name_es": "No está la respuesta correcta entre las anteriores.",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 190,
+    "fields":{
+      "name": "Deudas a largo plazo con entidades de crédito",
+      "name_es": "Deudas a largo plazo con entidades de crédito",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 191,
+    "fields":{
+      "name": "Proveedores",
+      "name_es": "Proveedores",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 192,
+    "fields":{
+      "name": "Ninguna de las anteriores es correcta",
+      "name_es": "Ninguna de las anteriores es correcta",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 193,
+    "fields":{
+      "name": "Capital",
+      "name_es": "Capital",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 194,
+    "fields":{
+      "name": "Los intereses efectivos / los intereses periódicos del periodo anterior",
+      "name_es": "Los intereses efectivos / los intereses periódicos del periodo anterior",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 195,
+    "fields":{
+      "name": "Los intereses periódicos / los intereses efectivos",
+      "name_es": "Los intereses periódicos / los intereses efectivos",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 196,
+    "fields":{
+      "name": "La respuesta b es falsa",
+      "name_es": "La respuesta b es falsa",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 197,
+    "fields":{
+      "name": "La a)  y la b) son correctas",
+      "name_es": "La a)  y la b) son correctas",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 198,
+    "fields":{
+      "name": "Provisión retribuciones y otras prestaciones al personal",
+      "name_es": "Provisión retribuciones y otras prestaciones al personal",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 199,
+    "fields":{
+      "name": "Provisión para otras responsabilidades",
+      "name_es": "Provisión para otras responsabilidades",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 200,
+    "fields":{
+      "name": "Provisión por encargos recibidos",
+      "name_es": "Provisión por encargos recibidos",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 201,
+    "fields":{
+      "name": "Provisión por depreciación de existencias",
+      "name_es": "Provisión por depreciación de existencias",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 202,
+    "fields":{
+      "name": "Derechos",
+      "name_es": "Derechos",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 203,
+    "fields":{
+      "name": "Obligaciones",
+      "name_es": "Obligaciones",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 204,
+    "fields":{
+      "name": "Ingresos",
+      "name_es": "Ingresos",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 205,
+    "fields":{
+      "name": "Ingresos",
+      "name_es": "Ingresos",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 206,
+    "fields":{
+      "name": "Bienes",
+      "name_es": "Bienes",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
   }
 ]
