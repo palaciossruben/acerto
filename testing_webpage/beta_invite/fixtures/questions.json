@@ -1315,6 +1315,146 @@
       "created_at": "2018-03-02 02:42:49.0957+00",
       "updated_at": "2018-03-02 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 91,
+    "fields":{
+      "text": "En primer lugar. Los elementos de pasivo se colocan en el Balance, en el:",
+      "text_es": "En primer lugar. Los elementos de pasivo se colocan en el Balance, en el:",
+      "answers": [167, 168, 169, 170],
+      "type": 1,
+      "correct_answers": [169],
+      "order": 1,
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 92,
+    "fields":{
+      "text": "Indica cuál de las siguientes cuentas de proveedores es errónea y por lo tanto no existe:",
+      "text_es": "Indica cuál de las siguientes cuentas de proveedores es errónea y por lo tanto no existe:",
+      "answers": [171, 172, 173, 174],
+      "type": 1,
+      "correct_answers": [173],
+      "order": 2,
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 93,
+    "fields":{
+      "text": "Cuál de las siguientes cuentas no es a pagar:",
+      "text_es": "Cuál de las siguientes cuentas no es a pagar:",
+      "answers": [175, 176, 177, 178],
+      "type": 1,
+      "correct_answers": [177],
+      "order": 3,
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 94,
+    "fields":{
+      "text": "Indique cuál de las siguientes cuentas de compras, supone un ingreso contable y por lo tanto también un cobro para la empresa:",
+      "text_es": "Indique cuál de las siguientes cuentas de compras, supone un ingreso contable y por lo tanto también un cobro para la empresa:",
+      "answers": [179, 180, 181, 182],
+      "type": 1,
+      "correct_answers": [179],
+      "order": 4,
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 95,
+    "fields":{
+      "text": "La diferencia fundamental entre una deuda contabilizada como cuenta a pagar y una contabilizada como pasivo financiero es:",
+      "text_es": "La diferencia fundamental entre una deuda contabilizada como cuenta a pagar y una contabilizada como pasivo financiero es:",
+      "answers": [183, 184, 185, 186],
+      "type": 1,
+      "correct_answers": [183],
+      "order": 5,
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 96,
+    "fields":{
+      "text": "Como resultado de generar pasivos financieros tenemos:",
+      "text_es": "Como resultado de generar pasivos financieros tenemos:",
+      "answers": [187, 188, 189, 190],
+      "type": 1,
+      "correct_answers": [189],
+      "order": 6,
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 97,
+    "fields":{
+      "text": "Cuál de las siguientes cuentas es de un pasivo financiero?",
+      "text_es": "¿Cuál de las siguientes cuentas es de un pasivo financiero?",
+      "answers": [191, 192, 193, 194],
+      "type": 1,
+      "correct_answers": [191],
+      "order": 7,
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 98,
+    "fields":{
+      "text": "Los intereses implícitos que se devengan en cada periodo de un préstamo americano o un empréstito, se calculan restando … de …",
+      "text_es": "Los intereses implícitos que se devengan en cada periodo de un préstamo americano o un empréstito, se calculan restando … de …",
+      "answers": [195, 196, 197, 198],
+      "type": 1,
+      "correct_answers": [196],
+      "order": 8,
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 99,
+    "fields":{
+      "text": "Cuál de las siguientes cuentas de provisiones es errónea y por lo tanto no existe?",
+      "text_es": "¿Cuál de las siguientes cuentas de provisiones es errónea y por lo tanto no existe?",
+      "answers": [199, 200, 201, 202],
+      "type": 1,
+      "correct_answers": [201],
+      "order": 9,
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 100,
+    "fields":{
+      "text": "Los elementos de pasivo representan:",
+      "text_es": "Los elementos de pasivo representan:",
+      "answers": [203, 204, 205, 206],
+      "type": 1,
+      "correct_answers": [204],
+      "order": 10,
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
   }
 ]
 
