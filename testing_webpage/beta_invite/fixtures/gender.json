@@ -1,0 +1,29 @@
+[
+  {
+    "model": "beta_invite.gender",
+    "pk": 1,
+    "fields":{
+      "name": "Male",
+      "name_es":"Hombre",
+      "sex": 1
+    }
+  },
+  {
+    "model": "beta_invite.gender",
+    "pk": 2,
+    "fields":{
+      "name": "Female",
+      "name_es":"Mujer",
+      "sex": 2
+    }
+  },
+  {
+    "model": "beta_invite.gender",
+    "pk": 3,
+    "fields":{
+      "name": "Other",
+      "name_es":"Otro",
+      "sex": 3
+    }
+  }
+]

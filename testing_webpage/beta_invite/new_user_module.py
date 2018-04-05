@@ -114,6 +114,14 @@ def update_user(campaign, user, user_params, request):
     return user
 
 
+def update_user_with_request(request, user):
+    for key, value in request.POST.items():
+        if hasattr(User, key):
+            setattr(user, key, value)
+
+    user.save()
+
+
 def create_user(campaign, user_params, request, is_mobile):
     """
     Args:

@@ -62,6 +62,24 @@ def get_user_from_request(request):
     return None
 
 
+def get_candidate_from_request(request):
+    """Tries 2 ways to get the candidate, 1. on GET params, 2. on POST params.
+    If nothing works outputs None"""
+
+    candidate_id = request.GET.get('candidate_id')
+    if candidate_id is None:
+        candidate_id = request.POST.get('candidate_id')
+
+    # different from None, '' and False
+    if candidate_id:
+        try:
+            return Candidate.objects.get(pk=int(candidate_id))
+        except ObjectDoesNotExist:
+            pass
+
+    return None
+
+
 def get_campaign_from_request(request):
     """Tries 2 ways to get the campaign_id, 1. on GET params, 2. on POST params.
     If nothing works outputs the default campaign."""

@@ -2,16 +2,31 @@
 @import url(http://fonts.googleapis.com/css?family=Montserrat);
 
 /*basic reset*/
-* {margin: 0; padding: 0;}
+* {
+    margin: 0; padding: 0;
+}
 
+body {
+    background: var(--brochure-blue);
+    /*
+    background-image: url('../img/form1.jpg');
+    background-repeat:no-repeat;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    background-size:cover;
+    background-position:center;
+    */
+}
 
 /*form styles*/
 #msform {
-	width: 400px;
-	margin: 50px auto;
+	width: 370px;
+	height:600px;
+	margin-top:30px;
+	margin-left:60%;
 	text-align: center;
 	position: relative;
-    background:red;
 }
 #msform fieldset {
 	background: white;
@@ -19,7 +34,6 @@
 	border-radius: 3px;
 	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
 	padding: 20px 30px;
-
 	box-sizing: border-box;
 	width: 80%;
 	margin: 0 10%;
@@ -28,17 +42,10 @@
 #msform fieldset:not(:first-of-type) {
 	display: none;
 }
+
 /*inputs*/
-#msform input, #msform textarea {
-	padding: 15px;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	margin-bottom: 10px;
-	width: 100%;
-	box-sizing: border-box;
-	font-family: montserrat;
-	color: #2C3E50;
-	font-size: 13px;
+#msform input, #msform textarea, #msform select {
+
 }
 /*buttons*/
 #msform .action-button {
@@ -80,7 +87,7 @@
 	color: white;
 	text-transform: uppercase;
 	font-size: 9px;
-	width: 33.33%;
+	width: 10%;
 	float: left;
 	position: relative;
 }
@@ -99,11 +106,11 @@
 /*progressbar connectors*/
 #progressbar li:after {
 	content: '';
-	width: 90%;
+	width: 60%;
 	height: 2px;
 	background: white;
 	position: absolute;
-	left: -43%;
+	left: -20%;
 	top: 9px;
 }
 #progressbar li:first-child:after {
