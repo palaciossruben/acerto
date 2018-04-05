@@ -2,6 +2,8 @@ import os
 import json
 import requests
 import unicodedata
+from multiprocessing import Process
+
 from dashboard.models import Candidate
 from beta_invite.util import common_senders
 
@@ -30,6 +32,16 @@ def validate_emails(emails):
     return [e for e in emails if e is not None]
 
 
+def mail_gun_post(sender_data, recipients, subject, body, attachment):
+    requests.post(sender_data['mailgun_url'],
+                  auth=("api", sender_data['mailgun_api_key']),
+                  data={"from": sender_data['email'],
+                        "to": recipients,
+                        "subject": subject,
+                        "text": body},
+                  files=get_files(attachment), )
+
+
 def send_with_mailgun(recipients, subject, body, attachment=None):
     """
     Sends emails over mailgun service
@@ -44,14 +56,12 @@ def send_with_mailgun(recipients, subject, body, attachment=None):
     recipients = validate_emails(recipients)
 
     if len(recipients) > 0:
-        return requests.post(
-             sender_data['mailgun_url'],
-             auth=("api", sender_data['mailgun_api_key']),
-             data={"from": sender_data['email'],
-                   "to": recipients,
-                   "subject": subject,
-                   "text": body},
-             files=get_files(attachment),)
+        mail_gun_post(sender_data, recipients, subject, body, attachment)
+
+        # TODO: make it async
+        #p = Process(target=async_mail_gun_post, args=(sender_data, recipients, subject, body, attachment))
+        #p.start()
+        #p.join()
 
 
 def send(objects, language_code, body_input, subject, with_localization=True, body_is_filename=True,

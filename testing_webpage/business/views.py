@@ -20,13 +20,13 @@ import beta_invite
 from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
-from beta_invite.models import User, BulletType, Campaign
+from beta_invite.models import User, BulletType
 from business.models import Plan, Contact, Search
 from business.models import BusinessUser
 from business.custom_user_creation_form import CustomUserCreationForm
 from dashboard import campaign_module
-from dashboard import candidate_module
 from dashboard.models import Candidate
+from business import dashboard_module
 
 
 def index(request):
@@ -62,7 +62,6 @@ def search(request):
                                                   'countries': countries,
                                                   'education': education,
                                                   'professions': professions,
-                                                  'error_message': None,
                                                   })
 
 
@@ -102,9 +101,6 @@ def render_result(request, pk):
     params = {'main_message': _("Discover amazing people"),
               'secondary_message': _("We search millions of profiles and find the ones that best suit your business"),
               'users': users}
-
-    if hasattr(request, 'error_message') and request.error_message is not None:
-        params['error_message'] = request.error_message
 
     return render(request, cts.RESULTS_VIEW_PATH, params)
 
@@ -147,6 +143,15 @@ def send_signup_emails(business_user, language_code, campaign):
     else:
         body_filename = 'business_start_signup_notification_email_body'
         body_input = 'business_start_signup_email_body'
+
+    # TODO: make producer consumer work!
+    """
+    PendingEmail.add_to_queue(candidates=business_user,
+                              language_code=language_code,
+                              body_input=body_input,
+                              subject=_('Welcome to PeakU'),
+                              email_type=email_type)
+    """
 
     try:
         email_sender.send(objects=business_user,
@@ -211,8 +216,6 @@ def popup_signup(request):
         first_sign_in(signup_form, campaign, request)
         return redirect(request.POST.get('result_path'))
     else:
-        error_message = [m[0] for m in signup_form.errors.values()][0]
-        request.error_message = error_message
 
         path = request.POST.get('result_path')
         if path is not None:
@@ -374,7 +377,7 @@ def start(request):
 
     return render(request, cts.START_VIEW_PATH, {'requirement_bullet_id': requirement_bullet_id,
                                                  'perk_bullet_id': perk_bullet_id,
-                                                 })
+                                                 'error_message': ''})
 
 
 def create(request):
@@ -448,11 +451,6 @@ def business_signup(request):
         return render(request, cts.BUSINESS_SIGNUP_VIEW_PATH)
 
 
-def get_checked_box_candidates(campaign_id, request):
-    candidates = Candidate.objects.filter(campaign_id=campaign_id)
-    return [c for c in candidates if request.GET.get('{}_checkbox'.format(c.id))]
-
-
 @login_required
 def business_campaigns(request, pk):
 
@@ -468,16 +466,6 @@ def business_campaigns(request, pk):
                                                               })
 
 
-def get_campaign_for_dashboard(request, business_user):
-
-    campaign_id = request.GET.get('campaign_id')
-    if campaign_id:
-        return Campaign.objects.get(pk=campaign_id)
-    # default campaign
-    else:
-        return business_user.campaigns.all()[0]
-
-
 @login_required
 def dashboard(request, pk):
     """
@@ -487,36 +475,14 @@ def dashboard(request, pk):
         pk: BusinessUser primary key
     """
 
-    business_user = BusinessUser.objects.get(pk=pk)
-
-    campaign = get_campaign_for_dashboard(request, business_user)
+    business_user, campaign = dashboard_module.get_business_user_and_campaign(request, pk)
 
     if request.user.id != business_user.auth_user.id or campaign not in business_user.campaigns.all():
         return redirect('business:login')
 
-    params, states = candidate_module.get_rendering_data(campaign.id)
+    dashboard_module.send_email_from_dashboard(request, campaign)
 
-    # State Backlog and Prospect will show as one.
-    params['backlog'] = list(params['backlog']) + list(params['prospect'])
-    params['waiting_for_interview'] = list(params['waiting_for_interview']) + list(params['did_interview'])
-    params['rejected'] = list(params['rejected']) + list(params['failed_tests'])
-
-    # enters here when sending an email
-    if request.GET.get('send_mail') is not None:
-
-        candidates = get_checked_box_candidates(campaign.id, request)
-
-        email_sender.send(objects=candidates,
-                          language_code='es',
-                          body_input=request.GET.get('email_body'),
-                          subject=request.GET.get('email_subject'),
-                          with_localization=False,
-                          body_is_filename=False)
-
-    params['campaign'] = campaign
-    params['states'] = states
-
-    return render(request, cts.DASHBOARD_VIEW_PATH, params)
+    return render(request, cts.DASHBOARD_VIEW_PATH, dashboard_module.get_dashboard_params(campaign))
 
 
 def candidate_profile(request, pk):

@@ -69,6 +69,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'testing_webpage.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
