@@ -1,0 +1,32 @@
+{% extends 'base.html'%}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}{% trans "PeakU - Test" %}{% endblock %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+{% block content %}
+    <br>
+    <br>
+    <div class="title" align="center" style="font-family:var(--Bitter); color:var(--text-color)">
+        <p style="font-size:40px; margin-bottom:60px;margin-top:20px;">{{ candidate.user.name }},</p>
+            <p style="font-size:40px; margin-bottom:60px;margin-top:60px;">{% trans "Congratulations! you have successfully performed the tests" %}</p>
+            <!--
+            <div style="font-size:18px;">
+                <p>Ahora solo te falta un paso para terminar, aumenta tus posibilidades dando clic aquí</p>
+                <form class="my-form" action="additional_info" method="post">
+                    {% csrf_token %}
+
+                    <input type="hidden" name="candidate_id" value="{{ candidate.pk }}" />
+
+                    <input type="submit">
+                </form>
+            </div>-->
+    </div>
+    <br>
+    <br>
+{% endblock %}

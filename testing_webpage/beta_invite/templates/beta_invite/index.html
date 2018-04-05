@@ -86,41 +86,18 @@
 
                     <input class="form-text" id="phone" type="tel" name="phone"
 				  		placeholder="{% trans 'Your phone' %}" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
-                    <!--
-                    <select class="form-select" id="country" name="country" required>
-                        <option value="">{% trans "Select Country" %}</option>
-                        {% for country in countries%}
-                            <option value={{ country.id }}>{{ country.name }}</option>
-                        {% endfor %}
-                    </select>
 
+                    <div >
+                        <input type="file" id="file" name="curriculum" class="form-inputfile" onchange="pressed()">
+                        <label for="file" id="fileLabel">{% trans "Upload your resume" %}</label>
 
-                    <select class="form-select" id="education"  name="education" required>
-
-                        <option value="">{% trans "Select Education" %}</option>
-                        {% for level in education%}
-                            <option value={{ level.id }}>{{ level.name }}</option>
-                        {% endfor %}
-                    </select>
-
-                    <select class="form-select" id="profession" name="profession" required>
-                        <option value="">{% trans "Select Profession" %}</option>
-                        {% for profession in professions%}
-                            <option value={{ profession.id }}>{{ profession.name }}</option>
-                        {% endfor %}
-                    </select>
-                    -->
-
-
-                    <input type="file" id="file" name="curriculum" class="form-inputfile" onchange="pressed()">
-                    <label for="file" id="fileLabel">{% trans "Upload your resume" %}</label>
-
-                    <label class="form-checkbox-container">
-                        <input class="form-checkbox" type="checkbox" id="checkbox" value="" required>
-                        <p class="form-checkbox-text">{% trans "Authorized third parties can see this information." %}</p>
-                    </label>
-
+                        <label class="form-checkbox-container">
+                            <input class="form-checkbox" type="checkbox" id="checkbox" value="">
+                            <p class="form-checkbox-text">{% trans "Authorized third parties can see this information." %}</p>
+                        </label>
+                    </div>
 					<input class="form-submit" type="submit" id="submit" value="{% trans 'Sure!' %}">
+                    <!--<p>¿Ya tienes una cuenta?<a href="candidate_login.html">Ingresa aquí</a></p>-->
                 </form>
             </div>
         </div>
@@ -139,4 +116,17 @@
             }
         };
     </script>
+
+<!-- This is for show and hide a tag, according the answer for any previous question
+
+        function myFunction() {
+            var x = document.getElementById("myDIV");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+</script>
+-->
 {% endblock %}

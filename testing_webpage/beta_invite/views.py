@@ -1,19 +1,21 @@
+import json
 from user_agents import parse
 from django.utils.translation import ugettext as _
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
-from django.http import HttpResponseBadRequest
+from django.http import HttpResponseBadRequest, HttpResponse
 
 import common
 from ipware.ip import get_ip
 from beta_invite import constants as cts
 from beta_invite.util import email_sender
 from beta_invite import interview_module
-from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, BulletType
+from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, BulletType, Gender
 from beta_invite import test_module, new_user_module
 from django.shortcuts import redirect
 from beta_invite.util import messenger_sender
+from dashboard.models import Candidate
 
 
 # TODO: Localization a las patadas
@@ -22,6 +24,7 @@ def translate_list_of_objects(objects, language_code):
     if 'es' in language_code:
         for o in objects:
             o.name = o.name_es
+    return objects
 
 
 def get_name_field(language_code):
@@ -132,40 +135,6 @@ def index(request):
     return render(request, cts.INDEX_VIEW_PATH, param_dict)
 
 
-def more_info(request):
-    # Gets information of client: such as if it is mobile
-    is_desktop = not parse(request.META['HTTP_USER_AGENT']).is_mobile
-
-    # If campaign_id is not found; will default to the default_campaign.
-    campaign_id = request.GET.get('campaign_id', cts.DEFAULT_CAMPAIGN_ID)
-    campaign = Campaign.objects.filter(pk=campaign_id).first()
-    campaign.translate(request.LANGUAGE_CODE)
-
-    ip = get_ip(request)
-    countries, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
-
-    Visitor(ip=ip, is_mobile=not is_desktop).save()
-
-    param_dict = {'main_message': _("Discover your true passion"),
-                  'countries': countries,
-                  'education': education,
-                  'professions': professions,
-                  'is_desktop': is_desktop,
-                  }
-
-    if campaign_id is not None:
-        param_dict['campaign_id'] = int(campaign_id)
-        try:
-            campaign = Campaign.objects.get(pk=int(campaign_id))
-            campaign.translate(request.LANGUAGE_CODE)
-            # if campaign exists send it.
-            param_dict['campaign'] = campaign
-        except ObjectDoesNotExist:
-            pass
-
-    return render(request, cts.MORE_INFO_VIEW_PATH, param_dict)
-
-
 def register(request):
     """
     Args:
@@ -204,7 +173,7 @@ def register(request):
             user = new_user_module.create_user(campaign, user_params, request, is_mobile)
 
         # TODO: Remove 'if' when ready.
-        # Test to showcase new feature
+        # Test to showcase new whatsapp feature
         from django.conf import settings  # TODO: remove import also
         if settings.DEBUG:
             messenger_sender.send(candidates=common.get_candidate(user, campaign),
@@ -219,6 +188,7 @@ def register(request):
 
 
 def tests(request):
+
     """
     Receives either GET or POST user and campaign ids.
     :param request: HTTP
@@ -286,115 +256,73 @@ def get_test_result(request):
         if has_scores:
             test_module.get_evaluation(cut_scores, scores, campaign, candidate)
 
-    return render(request, cts.INTERVIEW_VIEW_PATH, {'candidate': candidate})
+    return render(request, cts.TEST_RESULT_VIEW_PATH, {'candidate': candidate, 'campaign': campaign, 'candidate_id': candidate.pk})
 
+
+def additional_info(request):
+    candidate = common.get_candidate_from_request(request)
+    param_dict = dict()
+    countries, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
 
     '''
-    test_score_str = '({}/100)'.format(round(evaluation.final_score))
+    programs = request.POST.get('programs')
+    work_area = request.POST.get('work-area')
+    years = request.POST.get('years')
+    aspiration = request.POST.get('aspiration')
+    city = request.POST.get('city')
+    address = request.POST.get('address')
+    hood = request.POST.get('hood')
+    profile = request.POST.get('profile')
+    lenguages = request.POST.get('lenguages')
+    phone2 = request.POST.get('phone2')
+    phone3 = request.POST.get('phone3')
+    document = request.POST.get('document')
+    age = request.POST.get('age')
+    dreamjob = request.POST.get('dreamjob')
+    hobbies = request.POST.get('hobbies')
+    twitter = request.POST.get('twitter')
+    facebook = request.POST.get('facebook')
+    instagram = request.POST.get('instagram')
+    linkedin = request.POST.get('linkedin')
+    '''
+     # Dictionary parameters
+    param_dict['candidate'] = candidate
+    param_dict['genders'] = translate_list_of_objects(Gender.objects.all(), request.LANGUAGE_CODE)
+    param_dict['education'] = education
+    param_dict['professions'] = professions
+    param_dict['country'] = countries
+    '''
+    param_dict['programs'] = programs
+    param_dict['work-area'] = work_area
+    param_dict['years'] = years
+    param_dict['aspiration'] = aspiration
+    param_dict['city'] = city
+    param_dict['address'] = address
+    param_dict['hood'] = hood
+    param_dict['profile'] = profile
+    param_dict['lenguages'] = lenguages
+    param_dict['phone2'] = phone2
+    param_dict['phone3'] = phone3
+    param_dict['document'] = document
+    param_dict['age'] = age
+    param_dict['dreamjob'] = dreamjob
+    param_dict['hobbies'] = hobbies
+    param_dict['twitter'] = twitter
+    param_dict['facebook'] = facebook
+    param_dict['instagram'] = instagram
+    param_dict['linkedin'] = linkedin
+    '''
+    return render(request, cts.ADDITIONAL_INFO_VIEW_PATH, param_dict)
 
 
-    has_recorded_interview = interview_module.has_recorded_interview(campaign)
-    has_calendly = campaign.calendly
-    if not test_done or evaluation.passed:
+def save_partial_additional_info(request):
+    if request.method == 'POST':
+        candidate = common.get_candidate_from_request(request)
+        new_user_module.update_user_with_request(request, candidate.user)
 
-        # send_interview_mail('user_interview_email_body', candidate)
-
-        right_button_action = interview_module.adds_campaign_and_user_to_url('interview/1', user_id, campaign.id)
-
-        return render(request, cts.INTERVIEW_VIEW_PATH, {'campaign': campaign,
-                                                         'question_video': common.get_intro_video(),
-                                                         'ziggeo_api_key': common.get_ziggeo_api_key(),
-                                                         'top_message': interview_module.get_top_message(on_interview=False,
-                                                                                                         has_calendly=has_calendly,
-                                                                                                         has_recorded_interview=has_recorded_interview).format(test_score_str=test_score_str),
-                                                         'message0': interview_module.get_message0(on_interview=False),
-                                                         'message1': '',
-                                                         'message2': interview_module.get_message2(has_recorded_interview, has_calendly),
-                                                         'left_button_text': _('Schedule Interview'),
-                                                         'right_button_text': _('Record interview now!'),
-                                                         'left_button_action': campaign.calendly_url,
-                                                         'right_button_action': right_button_action,
-                                                         'enable_recording': False,
-                                                         'has_recorded_interview': has_recorded_interview,
-                                                         'has_calendly': has_calendly,
-                                                         'left_button_is_back': False,
-                                                         'on_interview': False,
-                                                         })
-                                                         
-    else:  # doesn't pass test.
-        return render(request, cts.TESTS_VIEW_PATH, {'main_message': _("Discover your true passion"),
-                                                       'secondary_message': _("We search millions of jobs and find the right one for you"),
-                                                       })  
-                                                       '''
-
-
-def interview(request, pk):
-    """
-    Endpoint to get the next question.
-    Args:
-        request: HTTP
-        pk: primary key. In this case the question order.
-    Returns:
-    """
-    # change names to improve readability
-    question_number = int(pk)
-
-    campaign = common.get_campaign_from_request(request)
-    has_calendly = campaign.calendly
-
-    # TODO: assumes campaign has only one interview.
-    interview_obj = campaign.interviews.all()[0]
-
-    user = common.get_user_from_request(request)
-    user_id = user.id if user else None
-    token = request.POST.get('new_video_token')
-    interview_module.save_response(campaign, user, question_number, interview_obj, token)
-
-    left_button_action = interview_module.get_previous_url(question_number, campaign.id, user_id)
-    interview_module.update_candidate_state(campaign, user, interview_obj, question_number)
-
-    try:
-        next_question = interview_obj.questions.get(order=question_number)
-        answer_video = interview_module.fetch_current_video_answer(campaign, user, next_question)
-        next_question.translate(request.LANGUAGE_CODE)
-        has_recorded_interview = True
-        right_button_text = interview_module.get_right_button_text(interview_obj, next_question)
-        right_button_action = interview_module.get_right_button_action(question_number, user_id, campaign.id)
-        enable_recording = True
-        question_video = next_question.video_token
-        message1 = next_question.text
-        message2 = ''
-
-    except ObjectDoesNotExist:  # beyond last question
-        right_button_text = ''
-        right_button_action = ''
-        has_recorded_interview = False
-        enable_recording = False
-        question_video = ''
-        message1 = ''
-        message2 = _('Thanks for completing the interview, we will contact you soon ;)')
-        answer_video = None
-
-    return render(request, cts.INTERVIEW_VIEW_PATH, {'campaign': campaign,
-                                                     'ziggeo_api_key': common.get_ziggeo_api_key(),
-                                                     'question_video': question_video,
-                                                     'top_message': interview_module.get_top_message(on_interview=True,
-                                                                                                     has_calendly=has_calendly,
-                                                                                                     has_recorded_interview=has_recorded_interview),
-                                                     'message0': interview_module.get_message0(on_interview=has_recorded_interview),
-                                                     'message1': message1,
-                                                     'message2': message2,
-                                                     'left_button_text': _('Back'),
-                                                     'right_button_text': right_button_text,
-                                                     'right_button_action': right_button_action,
-                                                     'left_button_action': left_button_action,
-                                                     'enable_recording': enable_recording,
-                                                     'has_recorded_interview': has_recorded_interview,
-                                                     'has_calendly': has_calendly,
-                                                     'left_button_is_back': True,
-                                                     'on_interview': True,
-                                                     'answer_video': answer_video,
-                                                     })
+        return HttpResponse('')
+    else:
+        return HttpResponseBadRequest('<h1>HTTP CODE 400: Client sent bad request with missing params</h1>')
 
 
 def add_cv(request):
