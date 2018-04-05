@@ -34,6 +34,20 @@ class Profession(models.Model):
         db_table = 'professions'
 
 
+class Gender(models.Model):
+
+    name = models.CharField(max_length=200)
+    name_es = models.CharField(max_length=200, null=True)
+    sex = models.IntegerField()
+
+    def __str__(self):
+        return '{0}, sex: {1}'.format(self.name, self.sex)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'genders'
+
+
 class Education(models.Model):
 
     name = models.CharField(max_length=200)
@@ -42,8 +56,8 @@ class Education(models.Model):
 
     def __str__(self):
         return '{0}, level: {1}'.format(self.name, self.level)
-
     # adds custom table name
+
     class Meta:
         db_table = 'education'
 
@@ -248,7 +262,7 @@ class Campaign(models.Model):
     has_email = models.BooleanField(default=True)
 
     # TODO: remove circular dependency
-    #plan = models.ForeignKey(Plan, null=True, on_delete=models.DO_NOTHING)
+    # plan = models.ForeignKey(Plan, null=True, on_delete=models.DO_NOTHING)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -360,6 +374,13 @@ class User(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    # new fields
+    gender = models.ForeignKey(Gender, null=True, on_delete=models.SET_NULL)
+    programs = models.CharField(max_length=250, null=True)
+
+
+
 
     # TODO: Make method present on common.py a method of the class User. For this to happen Candidate class has
     # to be moved to testing_webpage to solve circular dependency problem.
