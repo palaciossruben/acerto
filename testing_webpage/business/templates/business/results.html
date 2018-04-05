@@ -80,13 +80,6 @@ mixpanel.init("d60ac5ae289f60c7f824d49a4d15be30");</script>
 		mixpanel.track("Result displayed");
 	</script>
 
-    <!-- any incoming error_message will print as an alert.-->
-	<script>
-	    {% if error_message %}
-			alert("{{ error_message }}");
-		{% endif %}
-	</script>
-
 	{% include "business/login_buttons.html"%}
 
    <!-- BEGIN WELCOME -->

@@ -12,6 +12,8 @@ from beta_invite.util import email_sender
 from beta_invite.views import get_drop_down_values
 from dashboard import interview_module, candidate_module, campaign_module
 from match import run_model
+from business import dashboard_module
+import business
 
 
 CANDIDATE_FORECAST_LIMIT = 10
@@ -461,3 +463,19 @@ def send_messages(request):
     messages_json = serializers.serialize('json', messages)
 
     return JsonResponse(messages_json, safe=False)
+
+
+def business_dashboard(request, pk):
+    """
+    Same endpoint as the dashboard but for admin access, with no login
+    :param request: HTTP
+    :param pk: THIS IS DIFFERENT FROM BUSINESS IMPLEMENTATION, here it is the campaign_id,
+    while in production it is the business_user_id
+    :return: renders view.
+    """
+
+    campaign = Campaign.objects.get(pk=pk)
+
+    dashboard_module.send_email_from_dashboard(request, campaign)
+
+    return render(request, business.constants.DASHBOARD_VIEW_PATH, dashboard_module.get_dashboard_params(campaign))
