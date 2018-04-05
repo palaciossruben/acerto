@@ -1,3 +1,4 @@
+import os
 import nltk
 import pickle
 
@@ -6,12 +7,12 @@ from collections import OrderedDict
 
 import common
 from business import util
-from beta_invite.models import User, Country, Education, Profession
+from beta_invite.models import User
 
 MAX_NUM_OF_USERS = 20
 
 
-WORD_USER_PATH = 'subscribe/word_user_dictionary.p'
+WORD_USER_PATH = os.path.join('subscribe', 'word_user_dictionary.p')
 
 
 def filter_relevance_users(user_relevance_dict):
