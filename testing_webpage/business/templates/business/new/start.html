@@ -40,11 +40,11 @@
         {% csrf_token %}
 
         <div id="vacancy" class="tab-content">
-            {% include "business/new/tab_vacancy.html" with requirement_bullet_id=requirement_bullet_id %}
+            {% include "business/new/tab_vacancy.html" %}
         </div>
 
         <div id="company" class="tab-content">
-            {% include "business/new/tab_company.html" with company_submit=False requirement_perk_id=requirement_perk_id %}
+            {% include "business/new/tab_company.html" with company_submit=False %}
         </div>
 
         <div id="start" class="tab-content">
