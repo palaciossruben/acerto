@@ -347,7 +347,7 @@ def add_cv_changes(request):
         user = User.objects.get(pk=int(user_id))
         user.curriculum_url = new_user_module.save_curriculum_from_request(request, user, 'curriculum')
         user.save()
-        return render(request, cts.TESTS_VIEW_PATH, {})
+        return render(request, cts.TESTS_VIEW_PATH, {'tests': ''})
 
     # if any inconsistency, then do nothing, ignore it.
     return render(request, cts.ADD_CV, {})
