@@ -1,7 +1,7 @@
 
 import re
 from datetime import datetime
-from cts import *
+from subscribe.cts import *
 
 STARTING_COLLEGE_AGE = 18
 

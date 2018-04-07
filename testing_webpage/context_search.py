@@ -11,12 +11,13 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
-import time
+import sys
 import pickle
 import common
-from datetime import datetime
+
 from collections import OrderedDict
 from beta_invite.models import Country, User
+from subscribe import helper as h
 
 
 COUNTRIES = {e.name.lower() for e in Country.objects.all()}
@@ -105,7 +106,7 @@ def compute_related_words():
     """
 
     # A dictionary of the form: {'word': (user_id, relevance)}
-    word_user_dictionary = pickle.load(open('../subscribe/word_user_dictionary.p', 'rb'))
+    word_user_dictionary = pickle.load(open('subscribe/word_user_dictionary.p', 'rb'))
 
     top_related_words_dict = dict()
     for keyword, values in word_user_dictionary.items():
@@ -120,10 +121,13 @@ def compute_related_words():
     pickle.dump(top_related_words_dict, open('top_related_words_dict.p', 'wb'))
 
 
-if __name__ == '__main__':
+def run():
 
-    t0 = time.time()
+    sys.stdout = h.Unbuffered(open('context_search.log', 'a'))
+
     # TODO: Get relevances with word2vec and gensim.
     compute_related_words()
-    t1 = time.time()
-    print('ON {0} CONTEXT SEARCH TOOK: {1}'.format(datetime.today(), t1-t0))
+
+
+if __name__ == '__main__':
+    run()

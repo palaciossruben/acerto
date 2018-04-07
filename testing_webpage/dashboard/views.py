@@ -11,7 +11,7 @@ from dashboard import constants as cts
 from beta_invite.util import email_sender
 from beta_invite.views import get_drop_down_values
 from dashboard import interview_module, candidate_module, campaign_module
-from match import run_model
+from match import model
 from business import dashboard_module
 import business
 
@@ -54,8 +54,8 @@ def update_candidate_forecast():
     """
     candidates = [c for c in Candidate.objects.filter(Q(match_regression=None) | Q(match_classification=None))]
     candidates = candidates[:min(len(candidates), CANDIDATE_FORECAST_LIMIT)]
-    run_model.predict_match_and_save(candidates, regression=True)
-    run_model.predict_match_and_save(candidates, regression=False)
+    model.predict_match_and_save(candidates, regression=True)
+    model.predict_match_and_save(candidates, regression=False)
 
 
 # TODO: use Ajax to optimize rendering. Has no graphics therefore is very low priority.

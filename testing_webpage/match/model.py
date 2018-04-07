@@ -11,13 +11,11 @@ sys.path.insert(0, '/'.join(os.getcwd().split('/')[:-1]))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
-import time
 import pickle
-from datetime import datetime
 
 from match import common_learning, learn, text_match
 from dashboard.models import Candidate
-
+from subscribe import helper as h
 
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 
@@ -147,13 +145,15 @@ def add_hash_fields_from_saved_hashes(data):
     return data
 
 
-if __name__ == '__main__':
-    t0 = time.time()
-    text_match.update()
+def run():
 
+    sys.stdout = h.Unbuffered(open('model.log', 'a'))
+
+    text_match.update()
     learn_and_predict(regression=False)
     learn_and_predict(regression=True)
-
     save_other_values()
-    t1 = time.time()
-    print('On {0} LEARN AND PREDICT_MATCH, took: {1}'.format(datetime.today(), t1 - t0))
+
+
+if __name__ == '__main__':
+    run()

@@ -59,7 +59,7 @@ def send_with_mailgun(recipients, subject, body, attachment=None):
         mail_gun_post(sender_data, recipients, subject, body, attachment)
 
         # TODO: make it async
-        #p = Process(target=async_mail_gun_post, args=(sender_data, recipients, subject, body, attachment))
+        #p = Process(target=mail_gun_post, args=(sender_data, recipients, subject, body, attachment))
         #p.start()
         #p.join()
 

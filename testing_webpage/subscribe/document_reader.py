@@ -1,10 +1,9 @@
 import os
-import time
-from datetime import datetime
-import helper as h
+import sys
+from subscribe import helper as h
 
-from user import User
-from cts import *
+from subscribe.user import User
+from subscribe.cts import *
 
 
 VALID_EXTENSIONS = {'.jpg', '.jpeg', '.doc', '.docx', '.png', '.pdf', '.txt'}
@@ -27,7 +26,7 @@ def get_text(folder_path, doc, extension):
             text = h.get_text_from_txt_file(filename)
 
     else:
-        print('Found invalid or unimplemented extension {}, will not read.'.format(extension))
+        h.log('Found invalid or unimplemented extension {}, will not read.'.format(extension))
 
     return text
 
@@ -48,7 +47,7 @@ def read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename):
 
     with open(parsed_path, 'w', encoding='UTF-8') as f:
         f.write(text)
-        print('new document: {}'.format(parsed_path))
+        h.log('new document: {}'.format(parsed_path))
 
     return text
 
@@ -97,9 +96,10 @@ def read_all(force=False):
                 read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename)
 
 
-if __name__ == "__main__":
-
-    t0 = time.time()
+def run():
+    sys.stdout = h.Unbuffered(open('document_reader.log', 'a'))
     read_all(force=False)
-    t1 = time.time()
-    print('On {0} DOCUMENT READER, took: {1}'.format(datetime.today(), t1-t0))
+
+
+if __name__ == "__main__":
+    run()

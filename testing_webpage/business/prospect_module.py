@@ -6,7 +6,7 @@ from beta_invite.models import EmailType
 from testing_webpage.models import PendingEmail
 from business import search_module
 from dashboard.models import Candidate
-from match import run_model
+from match import model
 
 
 NUMBER_OF_MATCHES = 10
@@ -80,8 +80,8 @@ def get_top_users(campaign):
 
     #return top_users
 
-    prediction, candidates = run_model.predict_match([Candidate(user=u, campaign=campaign, pk=1) for u in top_users],
-                                                     regression=False)
+    prediction, candidates = model.predict_match([Candidate(user=u, campaign=campaign, pk=1) for u in top_users],
+                                                 regression=False)
 
     #return [c.user for p, c in reversed(sorted(zip(prediction, candidates), key=lambda x: x[0]))]
 

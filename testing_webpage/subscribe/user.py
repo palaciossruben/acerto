@@ -2,8 +2,8 @@ import re
 import nltk
 import operator
 
-import age_module
-from cts import *
+from subscribe import age_module
+from subscribe.cts import *
 
 COLOMBIA = 'Colombia'
 ECUADOR = 'Ecuador'

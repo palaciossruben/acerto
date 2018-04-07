@@ -1,5 +1,6 @@
 import os
 import re
+import sys
 import time
 import pickle
 
@@ -147,14 +148,21 @@ def save_user_relevance_dictionary(path):
     pickle.dump(user_relevance_dictionary, open('word_user_dictionary.p', 'wb'))
 
 
-if __name__ == "__main__":
+def run():
+    sys.stdout = h.Unbuffered(open('search_engine.log', 'a'))
 
+    h.log("STARTED RELEVANCE DICT")
     t0 = time.time()
     save_relevance_dictionary(cts.RESUMES_PATH)
     t1 = time.time()
-    print('ON {0} RELEVANCE DICTIONARY, time: {1}'.format(datetime.today(), t1-t0))
+    h.log('RELEVANCE DICTIONARY, time: {}'.format(t1 - t0))
 
+    h.log("STARTED USER RELEVANCE DICT")
     t0 = time.time()
     save_user_relevance_dictionary(cts.RESUMES_PATH)
     t1 = time.time()
-    print('ON {0} USER RELEVANCE DICTIONARY, time: {1}'.format(datetime.today(), t1-t0))
+    h.log('USER RELEVANCE DICTIONARY, time: {}'.format(t1 - t0))
+
+
+if __name__ == "__main__":
+    run()

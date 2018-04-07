@@ -11,13 +11,14 @@ import subprocess
 import unicodedata
 import pytesseract
 
+from datetime import datetime
 from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
 from shutil import copyfile
 from PIL import Image
-from cts import *
+from subscribe.cts import *
 
 
 def get_image_text(filename):
@@ -155,7 +156,7 @@ def text_has_no_data(text):
         words = nltk.word_tokenize(text)
 
         # make it faster by using my own relevance dictionary
-        with open('es-MX.dic', 'r', encoding='UTF-8') as vocabulary_file:
+        with open('subscribe/es-MX.dic', 'r', encoding='UTF-8') as vocabulary_file:
 
             dictionary_text = remove_accents(vocabulary_file.read())
             vocabulary = nltk.word_tokenize(dictionary_text)
@@ -337,3 +338,23 @@ def get_text_from_txt_file(filename):
         return open(filename).read()
     except UnicodeDecodeError:
         return ''
+
+
+class Unbuffered(object):
+    def __init__(self, stream):
+        self.stream = stream
+
+    def write(self, data):
+        self.stream.write(data)
+        self.stream.flush()
+
+    def writelines(self, datas):
+        self.stream.writelines(datas)
+        self.stream.flush()
+
+    def __getattr__(self, attr):
+        return getattr(self.stream, attr)
+
+
+def log(s):
+    print('{}: {}'.format(datetime.today(), s))

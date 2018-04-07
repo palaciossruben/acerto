@@ -82,7 +82,6 @@ class DocumentTest(unittest.TestCase):
     def test_country(self):
 
         for key, user in TEST_VALUES.items():
-            #print('checking country for key: {}'.format(key))
             self.assertEqual(RESULTS_DICT[key].country, user.country)
 
     def test_education(self):
@@ -90,10 +89,6 @@ class DocumentTest(unittest.TestCase):
         zipped_y = [(user.education, RESULTS_DICT[key].education) for key, user in TEST_VALUES.items()]
 
         y, y_prediction = zip(*zipped_y)
-
-        #results = [str(key) + str(e_y == e_y_prediction) for key, e_y, e_y_prediction in zip(TEST_VALUES.keys(), y, y_prediction)]
-        #print('tag: ' + str([key + ' ' + str(e) for key, e, r in zip(TEST_VALUES.keys(), y, results) if 'False' in r]))
-        #print('predicted: ' + str([key + ' ' + str(e) for key, e, r in zip(TEST_VALUES.keys(), y_prediction, results) if 'False' in r]))
 
         a = accuracy(y, y_prediction)
 
