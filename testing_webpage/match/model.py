@@ -153,7 +153,3 @@ def run():
     learn_and_predict(regression=False)
     learn_and_predict(regression=True)
     save_other_values()
-
-
-if __name__ == '__main__':
-    run()

@@ -77,8 +77,7 @@ def get_hashing_info():
     return hashing_info
 
 
-def hash_columns(data):
-    hashing_info = get_hashing_info()
+def hash_columns(data, hashing_info):
     for field, num_features in hashing_info.items():
         data = hash_column(data, field, num_features)
 
@@ -107,14 +106,14 @@ def load_raw_data(candidates=Candidate.objects.all()):
     return data
 
 
-def load_data(candidates=Candidate.objects.all()):
+def load_data(candidates=Candidate.objects.all(), hashing_info=get_hashing_info()):
     """
     Loads and prepares all data.
     :return: data DataFrame with features and target + candidates.
     """
     data = load_raw_data(candidates)
     data = fill_missing_values(data)
-    data = hash_columns(data)
+    data = hash_columns(data, hashing_info)
 
     return data, candidates
 
