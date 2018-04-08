@@ -7,6 +7,7 @@ from datetime import datetime
 from multiprocessing import Process
 from subscribe.document_reader import run as document_reader_run
 from subscribe.search_engine import run as search_engine_run
+from match.clustering import run as cluster_run
 from context_search import run as context_search_run
 from match.model import run as model_run
 from subscribe import helper as h
@@ -42,7 +43,8 @@ def run_watchdog(f):
         if time.time() - start > LIMIT_TIME:
             p.terminate()
             p.join()
-            print("ERROR Timeout: Process manager killed {p} after {seconds} second\n".format(p=retrieve_name(f), seconds=str(time.time() - start)))
+            print("ERROR Timeout: Process manager killed {p} after {seconds} second\n".format(p=retrieve_name(f),
+                                                                                              seconds=str(time.time() - start)))
 
         if not p.is_alive():
             h.log('{0}, took: {1}'.format(retrieve_name(f), time.time() - start))
@@ -53,6 +55,7 @@ if __name__ == '__main__':
     sys.stdout = h.Unbuffered(open('main.log', 'a'))
 
     h.log('PROCESS MANAGER STARTED')
+    #run_watchdog(cluster_run)
     run_watchdog(document_reader_run)
     run_watchdog(search_engine_run)
     run_watchdog(context_search_run)
