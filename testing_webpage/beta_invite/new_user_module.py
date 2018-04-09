@@ -144,7 +144,7 @@ def create_user(campaign, user_params, request, is_mobile):
     # Saves here to get an id
     user.save()
 
-    user.curriculum_url = save_resource_from_request(request, user, 'curriculum', 'resumes')
+    user.curriculum_url = save_resource_from_request(request, user, 'curriculum_url', 'resumes')
     user.save()
 
     # Starts on Backlog default state, when no evaluation has been done.
