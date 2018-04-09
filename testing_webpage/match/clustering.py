@@ -10,7 +10,7 @@ from dashboard.models import Candidate
 
 CANDIDATE_CLUSTER_FILENAME = 'candidate_cluster_model.p'
 #SELECTED_CLUSTERS = [1, 2, 3]
-SELECTED_CLUSTERS = [0, 2, 3]
+SELECTED_CLUSTERS = [1, 3, 4]  # TODO: dinamic approach
 
 
 # Variables selected according to current business need
@@ -91,8 +91,8 @@ def run():
 
     print(selected_clusters)
 
-    for c in predict_cluster(candidates)[0]:
-        print(c)
+    #for c in predict_cluster(candidates)[0]:
+    #    print(c)
 
     #print([(p, c) for p, c in zip(predict_cluster(candidates))])
 
