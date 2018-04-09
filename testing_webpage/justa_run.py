@@ -3,4 +3,4 @@ from match import clustering, model
 
 clustering.run()
 
-#model.run()
+model.run()
