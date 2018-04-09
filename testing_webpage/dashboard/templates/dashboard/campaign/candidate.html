@@ -29,6 +29,15 @@
 <input type="file" name="{{ candidate.id }}_curriculum" id="curriculum">
 </p>
 
+<p> <strong>photo:</strong>
+{% if candidate.user.photo_url != '#' %}
+    <!--<a href="http://peaku.co/static/{{ candidate.user.curriculum_url }}">link</a>-->
+    <a href="{% static candidate.user.photo_url %}">link</a>
+{% else %}
+    not available
+{% endif %}
+<input type="file" name="{{ candidate.id }}_photo" id="photo">
+</p>
 
 <p><strong>country: </strong>{{ candidate.user.country.name }}</p>
     <p><strong>city: </strong>{{ candidate.user.city.name }}</p>
