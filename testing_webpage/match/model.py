@@ -47,16 +47,16 @@ def predict_and_save(data, model, candidates, regression=True):
 
 def save_model(regression, model):
     if regression:
-        pickle.dump(model, open(get_path('regression_model.p'), "wb"))
+        common_learning.save_object(model, 'regression_model.p')
     else:
-        pickle.dump(model, open(get_path('classifier_model.p'), "wb"))
+        common_learning.save_object(model, 'classifier_model.p')
 
 
 def load_model(regression=True):
     if regression:
-        return pickle.load(open(get_path('regression_model.p'), "rb"))
+        return common_learning.load_object('regression_model.p')
     else:
-        return pickle.load(open(get_path('classifier_model.p'), "rb"))
+        return common_learning.load_object('classifier_model.p')
 
 
 def learn_and_predict(regression=True):
@@ -78,18 +78,8 @@ def predict_match(candidates, regression=True):
     :param regression: boolean
     :return: None
     """
-
-    if isinstance(candidates, Candidate):
-        candidates = [candidates]
-
-    if not len(candidates):
-        return [], []
-
-    data = common_learning.load_raw_data(candidates)
-    data = common_learning.fill_missing_values(data, defaults=common_learning.load_defaults())
-    data = add_hash_fields_from_saved_hashes(data)
     model = load_model(regression=regression)
-    return model.predict(data), candidates
+    return common_learning.predict_property(candidates, model)
 
 
 def predict_match_and_save(candidates, regression=True):
@@ -110,39 +100,25 @@ def save_other_values():
     """
 
     data = common_learning.load_raw_data()
-    data = common_learning.fill_missing_values(data)
+
+    # Order is key here. Defaults are calculated before fill_missing_values, as this process uses the defaults.
     defaults = common_learning.calculate_defaults(data)
     common_learning.save_defaults(defaults)
+    data = common_learning.fill_missing_values(data)
 
+    # Order is key, Hashers are calculated before hashing the data.
     save_hashers(data)
+    data = common_learning.hash_columns(data, common_learning.get_hashing_info())
 
-
-def get_path(file_name):
-    return os.path.join(DIR_PATH, file_name)
-
-
-def get_hasher_path(field):
-    return get_path("hasher_{}.p".format(field))
+    # Order is key, save scaler, then scale
+    common_learning.save_scaler(data)
+    data = common_learning.scale(data)
 
 
 def save_hashers(data):
     for field, num_features in common_learning.get_hashing_info().items():
         _, hasher = common_learning.get_hashed_matrix_and_hasher(data, field, num_features)
-        pickle.dump(hasher, open(get_hasher_path(field), "wb"))
-
-
-def get_matrix_from_saved_hash(data, field):
-    data = common_learning.make_column_hashable(data, field)
-    hasher = pickle.load(open(get_hasher_path(field), "rb"))
-    return hasher.transform(data[field])
-
-
-def add_hash_fields_from_saved_hashes(data):
-    for field, num_features in common_learning.get_hashing_info().items():
-        matrix = get_matrix_from_saved_hash(data, field)
-        data = common_learning.add_hashed_matrix_to_data(matrix, data, field, num_features)
-
-    return data
+        common_learning.save_object(hasher, common_learning.get_hasher_name(field))
 
 
 def run():
@@ -153,3 +129,7 @@ def run():
     learn_and_predict(regression=False)
     learn_and_predict(regression=True)
     save_other_values()
+
+
+if __name__ == '__main__':
+    run()

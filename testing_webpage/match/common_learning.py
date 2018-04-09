@@ -15,6 +15,7 @@ import pandas as pd
 
 from dashboard.models import Candidate, State
 from sklearn.feature_extraction import FeatureHasher
+from sklearn.preprocessing import StandardScaler
 
 
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
@@ -65,15 +66,19 @@ def get_hashing_info():
     Add new hashing fields here.
     :return: a hashing dict, with key=field_name, value=num_features
     """
+
+    # Uncomment for high complexity
     hashing_info = dict()
-    hashing_info['profession'] = 10
-    hashing_info['campaign'] = 20
-    hashing_info['candidate_country'] = 10
-    hashing_info['candidate_city'] = 10
-    hashing_info['campaign_country'] = 10
-    hashing_info['campaign_city'] = 10
+    hashing_info['campaign'] = 1  #20
+    hashing_info['candidate_country'] = 1  #10
+    hashing_info['candidate_city'] = 1  #10
+    hashing_info['campaign_country'] = 1  #10
+    hashing_info['campaign_city'] = 1  #10
+    hashing_info['profession'] = 1  #10
+    hashing_info['campaign_profession'] = 1  #10
     # TODO: ADD NEW FIELD HERE
 
+    # TODO: different hashes for the same property, eg: candidate country and campaign country
     return hashing_info
 
 
@@ -90,23 +95,45 @@ def load_raw_data(candidates=Candidate.objects.all()):
     # campaign should be treated categorically
     data['campaign'] = [c.campaign_id for c in candidates]
     data['text_match'] = [c.get_text_match() for c in candidates]
-    data['education'] = [c.get_education_level() for c in candidates]
-    data['profession'] = [c.get_profession_id() for c in candidates]
     data['candidate_country'] = [c.get_country_id() for c in candidates]
     data['candidate_city'] = [c.get_city_id() for c in candidates]
     data['campaign_country'] = [c.get_campaign_country_id() for c in candidates]
     data['campaign_city'] = [c.get_campaign_city_id() for c in candidates]
+    data['profession'] = [c.get_profession_id() for c in candidates]
+    data['campaign_profession'] = [c.get_campaign_profession_id() for c in candidates]
+    data['education'] = [c.get_education_level() for c in candidates]
+    data['campaign_education'] = [c.get_campaign_education_level() for c in candidates]
+
     # TODO: ADD NEW FIELD HERE
 
     # Calculated fields
-    data = add_test_features(data, candidates, ['passed', 'final_score'])
     data['country_match'] = data['candidate_country'] == data['campaign_country']
     data['city_match'] = data['candidate_city'] == data['campaign_city']
+    data['profession_match'] = data['campaign_profession'] == data['profession']
+    data['education_match'] = data['campaign_education'] == data['education']
+    data['min_education'] = data['campaign_education'] <= data['education']
+
+    # similar accuracy with high and low complexity:
+    # data = add_test_features(data, candidates, ['passed', 'final_score'])
+    data['median_test_passed'] = [get_test_score(c, 'passed', statistics.median) for c in candidates]
 
     return data
 
 
-def load_data(candidates=Candidate.objects.all(), hashing_info=get_hashing_info()):
+def filter_fields(data, selected_fields):
+    """
+    If selected_fields is not None then do the selection, otherwise do nothing
+    :param data:
+    :param selected_fields:
+    :return:
+    """
+    if selected_fields:
+        return data[selected_fields]
+    else:
+        return data
+
+
+def load_data(candidates=Candidate.objects.all(), hashing_info=get_hashing_info(), selected_fields=None):
     """
     Loads and prepares all data.
     :return: data DataFrame with features and target + candidates.
@@ -114,6 +141,8 @@ def load_data(candidates=Candidate.objects.all(), hashing_info=get_hashing_info(
     data = load_raw_data(candidates)
     data = fill_missing_values(data)
     data = hash_columns(data, hashing_info)
+    data = filter_fields(data, selected_fields)
+    data = scale(data)
 
     return data, candidates
 
@@ -146,13 +175,17 @@ def calculate_defaults(data):
 
     defaults = dict()
 
-    defaults['profession'] = right_mode(data['profession'])
     defaults['text_match'] = np.nanmedian(data['text_match'])
     defaults['education'] = np.nanmedian(data['education'])
     defaults['candidate_country'] = right_mode(data['candidate_country'])
     defaults['candidate_city'] = right_mode(data['candidate_city'])
     defaults['campaign_country'] = right_mode(data['campaign_country'])
     defaults['campaign_city'] = right_mode(data['campaign_city'])
+    defaults['profession'] = right_mode(data['profession'])
+    defaults['campaign_profession'] = right_mode(data['campaign_profession'])
+    defaults['education'] = np.nanmedian(data['education'])
+    defaults['campaign_education'] = np.nanmedian(data['campaign_education'])
+
     # TODO: ADD NEW FIELD HERE
 
     for column in data.columns.values:
@@ -163,11 +196,11 @@ def calculate_defaults(data):
 
 
 def save_defaults(defaults):
-    pickle.dump(defaults, open(os.path.join(DIR_PATH, 'defaults.p'), "wb"))
+    save_object(defaults, 'defaults.p')
 
 
 def load_defaults():
-    return pickle.load(open(os.path.join(DIR_PATH, 'defaults.p'), "rb"))
+    return load_object('defaults.p')
 
 
 def fill_missing_values(data, defaults=None):
@@ -175,18 +208,25 @@ def fill_missing_values(data, defaults=None):
     if defaults is None:
         defaults = calculate_defaults(data)
 
-    data['profession'].fillna(defaults['profession'], inplace=True)
     data['text_match'].fillna(defaults['text_match'], inplace=True)
     data['education'].fillna(defaults['education'], inplace=True)
     data['candidate_country'].fillna(defaults['candidate_country'], inplace=True)
     data['candidate_city'].fillna(defaults['candidate_city'], inplace=True)
     data['campaign_country'].fillna(defaults['campaign_country'], inplace=True)
     data['campaign_city'].fillna(defaults['campaign_city'], inplace=True)
+    data['profession'].fillna(defaults['profession'], inplace=True)
+    data['campaign_profession'].fillna(defaults['campaign_profession'], inplace=True)
+    data['campaign_education'].fillna(defaults['campaign_education'], inplace=True)
     # TODO: ADD NEW FIELD HERE
 
-    for column in data.columns.values:
+    for column in list(data):
         if 'test' in column:
             data[column].fillna(defaults[column], inplace=True)
+
+    """
+    for column in list(data):
+        if defaults.get(column):
+            data[column].fillna(defaults[column], inplace=True)"""
 
     return data
 
@@ -228,3 +268,89 @@ def hash_column(data, column_name, num_features):
 
     matrix, _ = get_hashed_matrix_and_hasher(data, column_name, num_features)
     return add_hashed_matrix_to_data(matrix, data, column_name, num_features)
+
+
+def get_path(file_name):
+    return os.path.join(DIR_PATH, file_name)
+
+
+def save_object(my_object, filename):
+    pickle.dump(my_object, open(get_path(filename), "wb"))
+
+
+def load_object(filename):
+    return pickle.load(open(get_path(filename), "rb"))
+
+
+def get_hasher_name(field):
+    return "hasher_{}.p".format(field)
+
+
+def get_matrix_from_saved_hash(data, field):
+    data = make_column_hashable(data, field)
+    hasher = load_object(get_hasher_name(field))
+    return hasher.transform(data[field])
+
+
+def add_hash_fields_from_saved_hashes(data):
+    for field, num_features in get_hashing_info().items():
+        matrix = get_matrix_from_saved_hash(data, field)
+        data = add_hashed_matrix_to_data(matrix, data, field, num_features)
+
+    return data
+
+
+def get_scaler(data):
+    return StandardScaler(with_std=True).fit(data)
+
+
+def save_scaler(data):
+    scaler = get_scaler(data)
+    save_object(scaler, 'scaler.p')
+
+
+def scale_data_from_saved_scaler(data):
+    scaler = load_object('scaler.p')
+    return scale(data, scaler=scaler)
+
+
+def predict_property(candidates, model, selected_fields=None):
+    """
+    Generic method to predict any property the model (second input) can do.
+    :param candidates: Can be either a list of candidates or a single candidate.
+    :param model: Any model implementing the sklearn interface.
+    :param selected_fields: optional array of fields to select from the data.
+    :return: None
+    """
+
+    if isinstance(candidates, Candidate):
+        candidates = [candidates]
+
+    if not len(candidates):
+        return [], []
+
+    data = load_raw_data(candidates)
+    data = fill_missing_values(data, defaults=load_defaults())
+    data = add_hash_fields_from_saved_hashes(data)
+    data = filter_fields(data, selected_fields)
+    data = scale_data_from_saved_scaler(data)
+
+    return model.predict(data), candidates
+
+
+def scale(data, scaler=None):
+    """
+    :param data: Dataframe
+    :param scaler: a optional scaler, if not provided will fit one.
+    :return: scaled data
+    """
+    fields = list(data)
+
+    if scaler is None:
+        scaler = get_scaler(data)
+
+    # At this point 'data' output is not a DataFrame, unfortunately
+    data = scaler.transform(data)
+
+    data = pd.DataFrame(data, columns=fields)
+    return data

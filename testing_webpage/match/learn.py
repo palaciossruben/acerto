@@ -7,8 +7,10 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import accuracy_score, confusion_matrix, mean_absolute_error
 from imblearn.over_sampling import ADASYN
+from sklearn.ensemble import RandomForestClassifier
 
-from match import common_learning#, xgboost_scikit_wrapper
+from match import common_learning
+#from match import xgboost_scikit_wrapper
 
 
 NON_REJECTED_HONEY = 0.3  # ie better than backlog
@@ -90,7 +92,6 @@ def load_data_for_learning(regression=True):
     """
     data, candidates = common_learning.load_data()
     data = load_target(data, regression, candidates)
-
     return data
 
 
@@ -144,8 +145,8 @@ def learn_model(train, regression=True, xgboost=False):
             'max_depth': 3,  # the maximum depth of each tree
             'eta': 0.3,  # the training step for each iteration
             'silent': 1,  # logging mode - quiet
-            'objective': 'binary:logistic',  # error evaluation for multiclass training
-            'num_class': 2}  # the number of classes that exist in this dataset
+            'objective': 'binary:logistic',  # error evaluation for binary training
+            'num_class': 2}  # the number of classes that exist in this data set
 
         #model = xgboost_scikit_wrapper.XGBoostClassifier(num_boost_round=20, params=params)
 
@@ -153,10 +154,11 @@ def learn_model(train, regression=True, xgboost=False):
         if regression:
             model = svm.SVR()
         else:
-            model = svm.SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
-                            decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
-                            max_iter=-1, probability=False, random_state=None, shrinking=True,
-                            tol=0.001, verbose=False)
+            #model = svm.SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+            #                decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+            #                max_iter=-1, probability=False, random_state=None, shrinking=True,
+            #                tol=0.001, verbose=False)
+            model = RandomForestClassifier(max_depth=8)
 
     model.fit(train.features, train.target)
     return model
@@ -211,6 +213,19 @@ def eval_model(model, train, test, regression=True):
     return result
 
 
+def print_feature_importance(model, data, regression):
+    """
+    It assumes the model is a RandomForest, for now
+    :param model: sklearn model
+    :param data: Dataframe
+    :param regression: Boolean
+    :return:
+    """
+    if not regression:
+        iterator = reversed(sorted(zip(list(data), model.feature_importances_), key=lambda x: x[1]))
+        print([e for e in iterator])
+
+
 def get_model(regression=True):
     """
     Calculates the match of each candidate, based on a learning algorithm.
@@ -221,5 +236,8 @@ def get_model(regression=True):
     train, test = prepare_train_test(data, regression=regression)
 
     model = learn_model(train, regression=regression)
+
+    # Used only for data exploration.
+    #print_feature_importance(model, data, regression)
 
     return model, eval_model(model, train, test, regression=regression)

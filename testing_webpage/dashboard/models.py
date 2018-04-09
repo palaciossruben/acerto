@@ -130,6 +130,16 @@ class Candidate(models.Model):
             return self.campaign.city_id
         return np.nan
 
+    def get_campaign_profession_id(self):
+        if self.campaign:
+            return self.campaign.profession_id
+        return np.nan
+
+    def get_campaign_education_level(self):
+        if self.campaign and self.campaign.education:
+            return self.campaign.education.level
+        return np.nan
+
     def get_profession_name(self):
         if self.user and self.user.profession:
             return self.user.profession.name

@@ -6,10 +6,10 @@ from beta_invite.models import EmailType
 from testing_webpage.models import PendingEmail
 from business import search_module
 from dashboard.models import Candidate
-from match import model
+from match import model, clustering
 
 
-NUMBER_OF_MATCHES = 10
+NUMBER_OF_MATCHES = 30
 
 
 # TODO: deprecated, now all users are all distinct.
@@ -68,6 +68,11 @@ def send_mails(candidate_prospects):
                                   email_type=email_type)
 
 
+def cluster_filter(candidates):
+    clusters, candidates = clustering.predict_cluster(candidates)
+    return [candidate for c, candidate in zip(clusters, candidates) if c in clustering.SELECTED_CLUSTERS]
+
+
 def get_top_users(campaign):
 
     # TODO: this feature only supports Spanish.
@@ -80,13 +85,16 @@ def get_top_users(campaign):
 
     #return top_users
 
-    prediction, candidates = model.predict_match([Candidate(user=u, campaign=campaign, pk=1) for u in top_users],
-                                                 regression=False)
+    candidates = [Candidate(user=u, campaign=campaign, pk=1) for u in top_users]
+
+    candidates = cluster_filter(candidates)
+
+    prediction, candidates = model.predict_match(candidates, regression=False)
 
     #return [c.user for p, c in reversed(sorted(zip(prediction, candidates), key=lambda x: x[0]))]
 
     # filters for predicted users.
-    return [c.user for p, c in zip(prediction, candidates) if p > 0.5]
+    return [c.user for p, c in zip(prediction, candidates) if p]
 
 
 def get_candidates(campaign):
