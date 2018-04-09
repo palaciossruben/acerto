@@ -8,7 +8,6 @@
 
 body {
     background: var(--brochure-blue);
-    /*
     background-image: url('../img/form1.jpg');
     background-repeat:no-repeat;
     -webkit-background-size:cover;
@@ -16,24 +15,25 @@ body {
     -o-background-size:cover;
     background-size:cover;
     background-position:center;
-    */
+
 }
 
 /*form styles*/
 #msform {
-	width: 370px;
+	width: 400px;
 	height:600px;
-	margin-top:30px;
-	margin-left:60%;
+	margin-top:50px;
+	margin-left:55%;
 	text-align: center;
 	position: relative;
 }
+
 #msform fieldset {
-	background: white;
+	background: rgba(255,255,255,0.94);
+	padding:15px;
 	border: 0 none;
-	border-radius: 3px;
+	border-radius: 7px;
 	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
-	padding: 20px 30px;
 	box-sizing: border-box;
 	width: 80%;
 	margin: 0 10%;
@@ -45,12 +45,21 @@ body {
 
 /*inputs*/
 #msform input, #msform textarea, #msform select {
-
+    padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: montserrat;
+	color: #2C3E50
+	font-size: 15px;
+	background: rgba(255,255,255,0.5);
 }
 /*buttons*/
 #msform .action-button {
 	width: 100px;
-	background: #27AE60;
+	background: var(--orange);
 	font-weight: bold;
 	color: white;
 	border: 0 none;
@@ -64,16 +73,23 @@ body {
 }
 /*headings*/
 .fs-title {
-	font-size: 15px;
 	text-transform: uppercase;
-	color: #2C3E50;
 	margin-bottom: 10px;
+    color: black;
+    padding:20px;
+    text-align:center;
+    font-weight:100;
+    font-size:20px;
+    border-top-left-radius:7px;
+    border-top-right-radius:7px;
 }
+
 .fs-subtitle {
 	font-weight: normal;
 	font-size: 13px;
 	color: #666;
 	margin-bottom: 20px;
+	margin-top: 8px;
 }
 /*progressbar*/
 #progressbar {
@@ -120,10 +136,35 @@ body {
 /*marking active/completed steps green*/
 /*The number of the step and the connector before it = green*/
 #progressbar li.active:before,  #progressbar li.active:after{
-	background: #27AE60;
+	background: var(--brochure-blue);
 	color: white;
 }
 
+label {
+    width: auto;
+    min-width:170px;
+    height: auto;
+    font-size: 1em;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: var(--blue);
+    border: solid 4px var(--blue);
+    margin-bottom: 5px;
+    cursor: pointer;
+    background:white;
+}
 
+.form-inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
 
+label:hover {
+    background-color: var(--light-grey);
+}
 

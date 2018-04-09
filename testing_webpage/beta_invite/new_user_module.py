@@ -29,7 +29,7 @@ def rename_filename(filename):
     return remove_accents(filename)
 
 
-def save_curriculum_from_request(request, user, param_name):
+def save_resource_from_request(request, user, param_name, folder_name):
     """
     Saves file on machine resumes/* file system
     Args:
@@ -40,13 +40,14 @@ def save_curriculum_from_request(request, user, param_name):
     """
 
     # validate correct method and has file.
-    if request.method == 'POST' and len(request.FILES) != 0 and request.FILES[param_name] is not None:
+    if request.method == 'POST' and len(request.FILES) != 0 and request.FILES.get(param_name) is not None:
 
         curriculum_file = request.FILES[param_name]
         fs = FileSystemStorage()
 
         user_id_folder = str(user.id)
-        folder = os.path.join('resumes', user_id_folder)
+
+        folder = os.path.join(folder_name, user_id_folder)
 
         file_path = os.path.join(folder, rename_filename(curriculum_file.name))
 
@@ -102,16 +103,23 @@ def update_user(campaign, user, user_params, request):
     user.updated_at = datetime.utcnow()
     user.save()
 
-    cv_path = save_curriculum_from_request(request, user, 'curriculum')
-    if cv_path != '#':
-        user.curriculum_url = cv_path
-        user.save()
+    update_resource(request, user, 'curriculum_url', 'resumes')
+    update_resource(request, user, 'photo_url', 'candidate_photo')
+    update_resource(request, user, 'brochure_url', 'candidate_brochure')
 
     candidate = candidate_if_exists(campaign, user)
     if not candidate:
         Candidate(campaign=campaign, user=user).save()
 
     return user
+
+
+def update_resource(request, user, field, folder_name):
+    path = save_resource_from_request(request, user, field, folder_name)
+
+    if path != '#':
+        setattr(user, field, path)
+        user.save()
 
 
 def update_user_with_request(request, user):
@@ -133,9 +141,10 @@ def create_user(campaign, user_params, request, is_mobile):
     """
     user = User(**user_params)
     # Saves here to get an id
+    # Saves here to get an id
     user.save()
 
-    user.curriculum_url = save_curriculum_from_request(request, user, 'curriculum')
+    user.curriculum_url = save_resource_from_request(request, user, 'curriculum', 'resumes')
     user.save()
 
     # Starts on Backlog default state, when no evaluation has been done.

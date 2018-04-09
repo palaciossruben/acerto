@@ -162,7 +162,7 @@ msgstr "PeakU - Prueba"
 
 #: .\beta_invite\templates\beta_invite\test_result.html:17
 msgid "Congratulations! you have successfully performed the tests"
-msgstr "¡Felicitaciones! has realizado con exito las pruebas"
+msgstr "¡Felicitaciones! has realizado con éxito las pruebas"
 
 #: .\beta_invite\templates\beta_invite\test_result.html:20
 msgid "Now we will review your resume and the results of the tests"

@@ -53,7 +53,7 @@ def search(request):
 
     ip = get_ip(request)
     action_url = '/business/results'
-    countries, education, professions = beta_invite.views.get_drop_down_values(request.LANGUAGE_CODE)
+    countries, cities, education, professions = beta_invite.views.get_drop_down_values(request.LANGUAGE_CODE)
 
     business.models.Visitor(ip=ip).save()
     return render(request, cts.SEARCH_VIEW_PATH, {'main_message': _("Discover amazing people"),

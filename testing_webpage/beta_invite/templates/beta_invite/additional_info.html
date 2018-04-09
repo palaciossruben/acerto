@@ -8,7 +8,16 @@
 {% endblock %}
 
 {% block content %}
+<script>
+function myFunction() {
 
+    var text = $(salary).val();
+
+    text = text.replace(/\D/g, '');
+
+     $(salary).val(text);
+}
+</script>
 <script>
     function sendPartial(param_dict) {
         general_dict = {candidate_id:{{ candidate.id }}, csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()}
@@ -22,8 +31,9 @@
 </script>
 
 <!-- multistep form -->
-<form id="msform" autocomplete="off" action="">
+<form id="msform" autocomplete="off" method="post" action="active_campaigns" enctype="multipart/form-data">
     {% csrf_token %}
+    <input type="hidden" name="candidate_id" value="{{ candidate.pk }}" />
 	<!-- progressbar -->
 	<ul id="progressbar">
 		<li class="active"></li>
@@ -52,50 +62,63 @@
 	<fieldset> <!-- three items asked -->
 		<h2 class="fs-title">Datos académicos</h2>
 		<h3 class="fs-subtitle">Tu información académica</h3>
-		<select id="education" name="education" required>
+		<select id="education" name="education_id" >
 			<option value="" disabled selected>{% trans "Select Education" %}</option>
 			{% for level in education %}
 				<option value={{ level.id }}>{{ level.name }}</option>
 			{% endfor %}
 		</select>
-		<select id="profession" name="profession" required>
+		<select id="profession" name="profession_id" >
 			<option value="" disabled selected>{% trans "Select Profession" %}</option>
 			{% for profession in professions %}
 				<option value={{ profession.id }}>{{ profession.name }}</option>
 			{% endfor %}
 		</select>
-		<textarea name="programs" id="programs" placeholder="Programas que manejas" rows="10" cols="50" maxlength="250" required></textarea>
+		<textarea name="programs_id" id="programs" placeholder="Programas que manejas" rows="6" cols="50" maxlength="250" ></textarea>
 		<input type="button" name="previous" class="previous action-button" value="Previous" />
-		<input type="button" name="next" class="next action-button" value="Next" onclick="sendPartial({'education':$('#education').val(), 'profession':$('#profession').val(), 'programs':$('#programs').val()})"/>
+		<input type="button" name="next" class="next action-button" value="Next" onclick="sendPartial({'education_id':$('#education').val(), 'profession_id':$('#profession').val(), 'programs':$('#programs').val()})"/>
 	</fieldset>
 	<fieldset> <!-- three items asked -->
 		<h2 class="fs-title">Experiencia</h2>
 		<h3 class="fs-subtitle">Breve información laboral</h3>
-		<input type="text" id="work-area" name="work-area" placeholder="Área laboral" />
-		<input type="number" id="years" min="0" max="100" name="years" placeholder="Años de experiencia" />
-		<input type="number" id="aspiration" min="0" name="aspiration" placeholder="Aspiración salarial" />
+		<select id="area" name="area_id" required>
+			<option value="" disabled selected>Selecciona tu área de trabajo</option>
+			{% for area in areas %}
+				<option value={{ area.id }}>{{ area.name }}</option>
+			{% endfor %}
+		</select>
+		<input type="number" id="experience" min="0" max="100" name="experience" placeholder="Años de experiencia" />
+        <input type="number" pattern="[0-9]{3-10}" oninput="myFunction();" name="salary" placeholder="Aspiración salarial" id="salary">
 		<input type="button" name="previous" class="previous action-button" value="Previous" />
-		<input type="button" name="next" class="next action-button" value="Next" />
+		<input type="button" name="next" class="next action-button" value="Next" onclick="sendPartial({'area_id':$('#area').val(), 'experience':$('#experience').val(), 'aspiration':$('#aspiration').val()})"/>
 	</fieldset>
 	<fieldset> <!-- four items asked -->
 		<h2 class="fs-title">Ubicación</h2>
 		<h3 class="fs-subtitle">Información de contacto adicional</h3>
-		<div class="autocomplete" style="cursor: pointer;">
-			<input type="text" placeholder="Dígita tu país de residencia" id="country" name="country" required>
-		</div>
-		<input type="text" id="city" name="city" placeholder="Ciudad" required/> <!--Cómo llenarlo con el Geolite-->
- 		<input type="text" id="address" name="address" placeholder="Dirección" required/>
+        <select id="country" name="country" >
+			<option value="" disabled selected>Selecciona tu país</option>
+			{% for country in countries %}
+				<option value={{ country.id }}>{{ country.name }}</option>
+			{% endfor %}
+		</select>
+        <select id="city" name="city" >
+			<option value="" disabled selected>Selecciona tu ciudad</option>
+			{% for city in cities %}
+				<option value={{ city.id }}>{{ city.name }}</option>
+			{% endfor %}
+		</select>
+ 		<input type="text" id="address" name="address" placeholder="Dirección" />
 		<input type="text" id="hood" name="hood" placeholder="Barrio" />
 		<input type="button" name="previous" class="previous action-button" value="Previous" />
-		<input type="button" name="next" class="next action-button" value="Next" />
+		<input type="button" name="next" class="next action-button" value="Next" onclick="sendPartial({'country_id':$('#country').val(), 'city_id':$('#city').val(), 'address':$('#address').val(), 'hood':$('#hood').val()})"/>
 	</fieldset>
 	 <fieldset> <!-- two items asked -->
 		<h2 class="fs-title">Perfil</h2>
 		<h3 class="fs-subtitle">Descríbete brevemente</h3>
-		<textarea name="profile" id="profile" placeholder="Perfil (máximo 250 caracteres)" rows="10" cols="50" maxlength="250" required></textarea>
-		<input type="text" name="languages" placeholder="Idiomas" />
+		<textarea name="profile" id="profile" placeholder="Perfil (máximo 250 caracteres)" rows="6" cols="50" maxlength="250" ></textarea>
+		<input type="text" name="languages" id="languages" placeholder="Idiomas que manejas" />
 		<input type="button" name="previous" class="previous action-button" value="Previous" />
-		<input type="button" name="next" class="next action-button" value="Next" />
+		<input type="button" name="next" class="next action-button" value="Next" onclick="sendPartial({'profile':$('#profile').val(), 'languages':$('#languages').val()})"/>
 	</fieldset>
 	<fieldset> <!-- two items asked -->
 		<h2 class="fs-title">Teléfonos adicionales</h2>
@@ -103,23 +126,23 @@
 		<input type="text" id="phone2" name="phone2" placeholder="Fijo" />
 		<input type="text" id="phone3" name="phone3" placeholder="Celular alterno" />
 		<input type="button" name="previous" class="previous action-button" value="Previous" />
-		<input type="button" name="next" class="next action-button" value="Next" />
+		<input type="button" name="next" class="next action-button" value="Next" onclick="sendPartial({'phone2':$('#phone2').val(), 'phone3':$('#phone3').val()})"/>
 	</fieldset>
 	<fieldset> <!-- two items asked -->
 		<h2 class="fs-title">Información personal</h2>
 		<h3 class="fs-subtitle"></h3>
-		<input type="number" min="0" id="document" name="document" placeholder="Cédula" required/>
-		<input type="number" min="0" max="100" id="age" name="age" placeholder="Edad" required/>
+		<input type="text" id="document" name="document" placeholder="Documento de identificación" />
+		<input type="number" min="0" max="100" id="age" name="age" placeholder="Edad" />
 		<input type="button" name="previous" class="previous action-button" value="Previous" />
-		<input type="button" name="next" class="next action-button" value="Next" />
+		<input type="button" name="next" class="next action-button" value="Next" onclick="sendPartial({'document':$('#document').val(), 'age':$('#age').val()})"/>
 	</fieldset>
 	<fieldset> <!-- two items asked -->
 		<h2 class="fs-title">Información adicional</h2>
 		<h3 class="fs-subtitle">Puede ser útil</h3>
 		<input type="text" id="dreamjob" name="dreamjob" placeholder="Empresa soñada"/>
-		<textarea name="hobbies" id="hobbies" placeholder="Hobbies" rows="10" cols="50" maxlength="250" required></textarea>
+		<textarea name="hobbies" id="hobbies" placeholder="Hobbies" rows="6" cols="50" maxlength="250" ></textarea>
 		<input type="button" name="previous" class="previous action-button" value="Previous" />
-		<input type="button" name="next" class="next action-button" value="Next" />
+		<input type="button" name="next" class="next action-button" value="Next" onclick="sendPartial({'dreamjob':$('#dreamjob').val(), 'hobbies':$('#hobbies').val()})"/>
 	</fieldset>
 	<fieldset> <!-- four items asked -->
 		<h2 class="fs-title">Redes sociales</h2>
@@ -129,13 +152,16 @@
 		<input type="text" id="instagram" name="instagram" placeholder="Instagram" />
 		<input type="text" id="linkedin" name="linkedin" placeholder="Linkedin" />
 		<input type="button" name="previous" class="previous action-button" value="Previous" />
-		<input type="button" name="next" class="next action-button" value="Next" />
+		<input type="button" name="next" class="next action-button" value="Next" onclick="sendPartial({'twitter':$('#twitter').val(), 'facebook':$('#facebook').val(), 'instagram':$('#instagram').val(), 'linkedin':$('#linkedin').val()})"/>
 	</fieldset>
 	<fieldset> <!-- two items asked -->
 		<h2 class="fs-title">Anexos</h2>
 		<h3 class="fs-subtitle">Sería bueno tener tu foto y si cuentas con un brochure</h3>
-        <input type="file" id="photo" name="photo">Foto
-        <input type="file" id="brochure" name="brochure">Brochure
+        <input type="file" id="photo" name="photo_url" class="form-inputfile">
+        <label for="photo">Sube tu foto</label>
+        <input type="file" id="brochure" name="brochure_url" class="form-inputfile">
+        <label for="brochure">Sube tu brochure</label>
+        <br>
 		<input type="button" name="previous" class="previous action-button" value="Previous" />
 		<input type="submit" name="submit" class="submit action-button" value="Submit" />
 	</fieldset>
