@@ -13,20 +13,34 @@
     <br>
     <br>
     <div class="title" align="center" style="font-family:var(--Bitter); color:var(--text-color)">
-        <p style="font-size:40px; margin-bottom:60px;margin-top:20px;">{{ candidate.user.name }},</p>
-            <p style="font-size:40px; margin-bottom:60px;margin-top:60px;">{% trans "Congratulations! you have successfully performed the tests" %}</p>
-            <!--
-            <div style="font-size:18px;">
-                <p>Ahora solo te falta un paso para terminar, aumenta tus posibilidades dando clic aquí</p>
-                <form class="my-form" action="additional_info" method="post">
-                    {% csrf_token %}
+        <p style="font-size:40px; margin-bottom:60px;margin-top:20px;">{{ name }},</p>
+        <p style="font-size:40px; margin-bottom:60px;margin-top:60px;">{% trans "Congratulations! you have successfully performed the tests" %}</p>
 
-                    <input type="hidden" name="candidate_id" value="{{ candidate.pk }}" />
+        <div style="font-size:18px;">
+            <p>Si completas el registro tendrás más posibilidades</p>
+            <br>
+            <form action="additional_info" method="post">
+                {% csrf_token %}
 
-                    <input type="submit">
-                </form>
-            </div>-->
+                <input type="hidden" name="candidate_id" value="{{ candidate.pk }}" />
+
+                <input id="submit-button" style="margin: 10px auto;" type="submit" value="¡ Aumentar posiblidades !">
+            </form>
+        </div>
     </div>
     <br>
     <br>
+    <style>
+        #submit-button{
+        width: auto;
+        background: var(--orange);
+        font-weight: bold;
+        color: white;
+        border: 0 none;
+        border-radius: 1px;
+        cursor: pointer;
+        padding: 10px 10px;
+        border-radius:4px;
+    }
+    </style>
 {% endblock %}

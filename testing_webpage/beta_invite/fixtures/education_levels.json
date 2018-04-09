@@ -4,26 +4,26 @@
   "pk": 1,
   "fields":{
     "name": "High School",
-    "name_es": "Secundaria",
-    "level": 0
+    "name_es": "Bachiller",
+    "level": 1
   }
 },
 {
   "model": "beta_invite.education",
   "pk": 2,
   "fields":{
-    "name": "Technician or studying a professional degree",
-    "name_es": "Técnico/Tecnólogo o cursando grado profesional",
-    "level": 1
+    "name": "Technical career",
+    "name_es": "Carrera técnica",
+    "level": 2
   }
 },
 {
   "model": "beta_invite.education",
   "pk": 3,
   "fields":{
-    "name": "Undergraduate",
-    "name_es": "Profesional",
-    "level": 2
+    "name": "Career",
+    "name_es": "Carrera profesional",
+    "level": 4
   }
 },
 {
@@ -32,7 +32,7 @@
   "fields":{
     "name": "Master",
     "name_es": "Maestría",
-    "level": 3
+    "level": 6
   }
 },
 {
@@ -41,7 +41,34 @@
   "fields":{
     "name": "Phd",
     "name_es": "Doctorado",
-    "level": 4
+    "level": 7
+  }
+},
+{
+  "model": "beta_invite.education",
+  "pk": 6,
+  "fields":{
+    "name": "Specialization",
+    "name_es": "Especialización",
+    "level": 5
+  }
+},
+{
+  "model": "beta_invite.education",
+  "pk": 7,
+  "fields":{
+    "name": "Technological career",
+    "name_es": "Carrera tecnológica",
+    "level": 3
+  }
+},
+{
+  "model": "beta_invite.education",
+  "pk": 8,
+  "fields":{
+    "name": "Without studies",
+    "name_es": "Sin estudios",
+    "level": 0
   }
 }
 ]

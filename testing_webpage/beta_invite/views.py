@@ -11,10 +11,11 @@ from ipware.ip import get_ip
 from beta_invite import constants as cts
 from beta_invite.util import email_sender
 from beta_invite import interview_module
-from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, BulletType, Gender
+from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, BulletType, Gender, City, Area
 from beta_invite import test_module, new_user_module
 from django.shortcuts import redirect
-from beta_invite.util import messenger_sender
+from beta_invite.util import messenger_sender, common_senders
+from beta_invite.util.email_sender import remove_accents
 from dashboard.models import Candidate
 
 
@@ -44,13 +45,13 @@ def get_drop_down_values(language_code):
 
     professions = Profession.objects.all().order_by(get_name_field(language_code))
     translate_list_of_objects(professions, language_code)
-
+    cities = City.objects.all().order_by('name')
     education = Education.objects.all().order_by('level')
     translate_list_of_objects(education, language_code)
 
     countries = Country.objects.all().order_by('name')
 
-    return countries, education, professions
+    return countries, cities, education, professions
 
 
 def translate_bullets(bullets, lang_code):
@@ -237,6 +238,7 @@ def get_test_result(request):
     user = common.get_user_from_request(request)
     user_id = user.id if user else None
     candidate = common.get_candidate(user, campaign)
+    name = common_senders.get_first_name(candidate.user.name)
 
     # test_score_str = ''  # by default there is no score unless the test was done.
 
@@ -251,66 +253,28 @@ def get_test_result(request):
         if has_scores:
             test_module.get_evaluation(cut_scores, scores, campaign, candidate)
 
-    return render(request, cts.TEST_RESULT_VIEW_PATH, {'candidate': candidate, 'campaign': campaign, 'candidate_id': candidate.pk})
+    return render(request, cts.TEST_RESULT_VIEW_PATH, {'candidate': candidate, 'campaign': campaign, 'candidate_id': candidate.pk, 'name': name})
 
 
 def additional_info(request):
     candidate = common.get_candidate_from_request(request)
     param_dict = dict()
-    countries, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
+    countries, cities, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
 
-    '''
-    programs = request.POST.get('programs')
-    work_area = request.POST.get('work-area')
-    years = request.POST.get('years')
-    aspiration = request.POST.get('aspiration')
-    city = request.POST.get('city')
-    address = request.POST.get('address')
-    hood = request.POST.get('hood')
-    profile = request.POST.get('profile')
-    lenguages = request.POST.get('lenguages')
-    phone2 = request.POST.get('phone2')
-    phone3 = request.POST.get('phone3')
-    document = request.POST.get('document')
-    age = request.POST.get('age')
-    dreamjob = request.POST.get('dreamjob')
-    hobbies = request.POST.get('hobbies')
-    twitter = request.POST.get('twitter')
-    facebook = request.POST.get('facebook')
-    instagram = request.POST.get('instagram')
-    linkedin = request.POST.get('linkedin')
-    '''
-     # Dictionary parameters
+    # Dictionary parameters
     param_dict['candidate'] = candidate
     param_dict['genders'] = translate_list_of_objects(Gender.objects.all(), request.LANGUAGE_CODE)
+    param_dict['areas'] = translate_list_of_objects(Area.objects.all(), request.LANGUAGE_CODE)
     param_dict['education'] = education
     param_dict['professions'] = professions
-    param_dict['country'] = countries
-    '''
-    param_dict['programs'] = programs
-    param_dict['work-area'] = work_area
-    param_dict['years'] = years
-    param_dict['aspiration'] = aspiration
-    param_dict['city'] = city
-    param_dict['address'] = address
-    param_dict['hood'] = hood
-    param_dict['profile'] = profile
-    param_dict['lenguages'] = lenguages
-    param_dict['phone2'] = phone2
-    param_dict['phone3'] = phone3
-    param_dict['document'] = document
-    param_dict['age'] = age
-    param_dict['dreamjob'] = dreamjob
-    param_dict['hobbies'] = hobbies
-    param_dict['twitter'] = twitter
-    param_dict['facebook'] = facebook
-    param_dict['instagram'] = instagram
-    param_dict['linkedin'] = linkedin
-    '''
+    param_dict['countries'] = countries
+    param_dict['cities'] = cities
+
     return render(request, cts.ADDITIONAL_INFO_VIEW_PATH, param_dict)
 
 
 def save_partial_additional_info(request):
+
     if request.method == 'POST':
         candidate = common.get_candidate_from_request(request)
         new_user_module.update_user_with_request(request, candidate.user)
@@ -318,6 +282,13 @@ def save_partial_additional_info(request):
         return HttpResponse('')
     else:
         return HttpResponseBadRequest('<h1>HTTP CODE 400: Client sent bad request with missing params</h1>')
+
+
+def active_campaigns(request):
+
+    candidate = common.get_candidate_from_request(request)
+    new_user_module.update_user(candidate.campaign, candidate.user, {}, request)
+    return render(request, cts.ACTIVE_CAMPAIGNS_VIEW_PATH)
 
 
 def add_cv(request):
@@ -345,12 +316,12 @@ def add_cv_changes(request):
 
     if user_id is not None:
         user = User.objects.get(pk=int(user_id))
-        user.curriculum_url = new_user_module.save_curriculum_from_request(request, user, 'curriculum')
+        user.curriculum_url = new_user_module.update_resource(request, user, 'curriculum', 'resumes')
         user.save()
         return render(request, cts.TESTS_VIEW_PATH, {'tests': ''})
 
     # if any inconsistency, then do nothing, ignore it.
-    return render(request, cts.ADD_CV, {})
+    return render(request, cts.ADD_CV, {'user_id': user_id})
 
 
 
