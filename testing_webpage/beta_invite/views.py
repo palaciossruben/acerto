@@ -316,8 +316,7 @@ def add_cv_changes(request):
 
     if user_id is not None:
         user = User.objects.get(pk=int(user_id))
-        user.curriculum_url = new_user_module.update_resource(request, user, 'curriculum_url', 'resumes')
-        user.save()
+        new_user_module.update_resource(request, user, 'curriculum_url', 'resumes')
         return render(request, cts.TESTS_VIEW_PATH, {'tests': ''})
 
     # if any inconsistency, then do nothing, ignore it.
