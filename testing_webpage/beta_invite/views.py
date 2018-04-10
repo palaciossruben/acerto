@@ -143,7 +143,11 @@ def register(request):
     email = request.POST.get('email')
     name = request.POST.get('name')
     phone = request.POST.get('phone')
-
+    politics_accepted = request.POST.get('politics')
+    if politics_accepted:
+        politics = True
+    else:
+        politics = False
     campaign = common.get_campaign_from_request(request)
 
     # Validates all fields
@@ -159,7 +163,8 @@ def register(request):
                        'city': city,
                        'ip': get_ip(request),
                        'is_mobile': is_mobile,
-                       'language_code': request.LANGUAGE_CODE}
+                       'language_code': request.LANGUAGE_CODE,
+                       'politics': politics}
 
         # TODO: update user instead of always creating a new one.
         user = new_user_module.user_if_exists(email, phone, campaign)
@@ -323,6 +328,10 @@ def add_cv_changes(request):
 
     # if any inconsistency, then do nothing, ignore it.
     return render(request, cts.ADD_CV, {'user_id': user_id})
+
+
+def security_politics(request):
+    return render(request, cts.SECURITY_POLITICS_VIEW_PATH)
 
 
 
