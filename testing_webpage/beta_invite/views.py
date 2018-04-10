@@ -322,7 +322,9 @@ def add_cv_changes(request):
     if user_id is not None:
         user = User.objects.get(pk=int(user_id))
         new_user_module.update_resource(request, user, 'curriculum_url', 'resumes')
+
         return render(request, cts.ACTIVE_CAMPAIGNS_VIEW_PATH, {})
+
 
     # if any inconsistency, then do nothing, ignore it.
     return render(request, cts.ADD_CV, {'user_id': user_id})
