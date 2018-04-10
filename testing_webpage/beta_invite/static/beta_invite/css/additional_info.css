@@ -128,8 +128,7 @@ body {
 	/*connector not needed before the first step*/
 	content: none;
 }
-/*marking active/completed steps green*/
-/*The number of the step and the connector before it = green*/
+
 #progressbar li.active:before,  #progressbar li.active:after{
 	background: var(--brochure-blue);
 	color: white;
@@ -161,7 +160,7 @@ label {
 
 label:hover {
     background-color: var(--light-grey);
-}
+    }
 
 @media (max-width: 880px) and (min-width: 720px){
 #msform {
@@ -171,18 +170,133 @@ label:hover {
 	margin-left:45%;
 	text-align: center;
 	position: relative;
-}
+    }
 }
 
-@media (max-width: 719px){
+@media (max-width: 719px)and (min-width:400px){
 #msform {
 	width: 400px;
-	height:600px;
+	height:auto;
 	margin:50px auto;
 	text-align: center;
 	position: relative;
+    }
+
+body {
+    background: white;
+    background-image: none;
+    }
+
+#progressbar li:before {
+    background:var(--brochure-green);
+    color:white;}
+
+#progressbar li:after {
+	content: '';
+	width: 60%;
+	height: 2px;
+	background: var(--brochure-green);
+	position: absolute;
+	left: -26%;
+	top: 9px;
+    }
 }
 
+@media (max-width: 399px)and (min-width:360px){
+#msform {
+	width: 350px;
+	height:auto;
+	margin:50px auto;
+	text-align: center;
+	position: relative;
+    }
 
+body {
+    background: white;
+    background-image: none;
+    }
+
+#progressbar li:before {
+    background:var(--brochure-green);
+    color:white;}
+
+#progressbar li:after {
+	content: '';
+	width: 40%;
+	height: 2px;
+	background: var(--brochure-green);
+	position: absolute;
+	left: -20%;
+	top: 9px;
+    }
 }
+
+@media (max-width: 359px)and (min-width:315px){
+#msform {
+	width: 300px;
+	height:auto;
+	margin:50px auto;
+	text-align: center;
+	position: relative;
+    }
+
+body {
+    background: white;
+    background-image: none;
+    }
+
+#progressbar li:before {
+    background:var(--brochure-green);
+    color:white;}
+
+#progressbar li:after {
+	content: '';
+	width: 40%;
+	height: 2px;
+	background: var(--brochure-green);
+	position: absolute;
+	left: -20%;
+	top: 9px;
+    }
+
+#msform input, #msform textarea, #msform select {
+    padding: 15px;
+	font-size: 13px;
+    }
+}
+
+@media (max-width: 314px){
+#msform {
+	width: 250px;
+	height:auto;
+	margin:50px auto;
+	text-align: center;
+	position: relative;
+    }
+
+body {
+    background: white;
+    background-image: none;
+    }
+
+#progressbar li:before {
+    background:var(--brochure-green);
+    color:white;}
+
+#progressbar li:after {
+	content: '';
+	width: 40%;
+	height: 2px;
+	background: var(--brochure-green);
+	position: absolute;
+	left: -15%;
+	top: 9px;
+    }
+
+#msform input, #msform textarea, #msform select {
+    padding: 15px;
+	font-size: 9px;
+    }
+}
+
 
