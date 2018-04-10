@@ -24,8 +24,7 @@
               <br>
               <br>
 
-              <form action="add_cv_changes" method="post" style="text-align:center; margin-top:0px;"
-               enctype="multipart/form-data">
+              <form action="add_cv_changes" method="post" style="text-align:center; margin-top:0px;" enctype="multipart/form-data">
 
                 {% csrf_token %}
 
@@ -42,21 +41,12 @@
                 {% trans "Sure!" as submit_value %}
                 <input style="height: 44px; border: solid 0px white; background:#F8E676; color:black; text-align:center;
                  width: 81px; font-size: 16px; width: 250px; margin-bottom:40px; margin-top:5px; cursor:pointer;" type="submit" value="{{ submit_value }}">
-
+                <br>
+                <br>
+                <br>
+                <br>
               </form>
-
 		  </div>
-
       </div>
-
-      <!-- ARROW SCROLL-->
-      <div class="arrow">
-
-
-      </div>
-      <!-- /ARROW SCROLL -->
-      <div class="container">
-
-       </div>
     </div>
 {% endblock %}
