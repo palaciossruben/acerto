@@ -363,7 +363,7 @@ class User(models.Model):
     email = models.CharField(max_length=200, null=True)
     name = models.CharField(max_length=200)
     ip = models.GenericIPAddressField(null=True)
-    age = models.IntegerField(null=True)
+    bdate = models.DateField(null=True)
     experience = models.IntegerField(null=True)
     profession = models.ForeignKey(Profession, null=True, on_delete=models.SET_NULL)
     education = models.ForeignKey(Education, null=True, on_delete=models.SET_NULL)
@@ -408,6 +408,7 @@ class User(models.Model):
     linkedin = models.CharField(max_length=250, null=True)
     photo_url = models.CharField(max_length=200, default='#')
     brochure_url = models.CharField(max_length=200, default='#')
+    politics = models.BooleanField(default=False)
 
 
     # TODO: Make method present on common.py a method of the class User. For this to happen Candidate class has

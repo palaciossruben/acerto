@@ -132,9 +132,9 @@ function myFunction() {
 		<h2 class="fs-title">Información personal</h2>
 		<h3 class="fs-subtitle"></h3>
 		<input type="text" id="document" name="document" placeholder="Documento de identificación" />
-		<input type="number" min="0" max="100" id="age" name="age" placeholder="Edad" />
+		<input type="date" min="0" min="1920-01-01" max="2400-01-01" id="bdate" name="bdate" placeholder="Fecha de nacimiento" />
 		<input type="button" name="previous" class="previous action-button" value="Previous" />
-		<input type="button" name="next" class="next action-button" value="Next" onclick="sendPartial({'document':$('#document').val(), 'age':$('#age').val()})"/>
+		<input type="button" name="next" class="next action-button" value="Next" onclick="sendPartial({'document':$('#document').val(), 'bdate':$('#bdate').val()})"/>
 	</fieldset>
 	<fieldset> <!-- two items asked -->
 		<h2 class="fs-title">Información adicional</h2>

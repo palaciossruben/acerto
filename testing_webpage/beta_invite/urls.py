@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^additional_info$', views.additional_info, name='additional_info'),
     url(r'^save_partial_additional_info$', views.save_partial_additional_info, name='save_partial_additional_info'),
     url(r'^active_campaigns', views.active_campaigns, name='active_campaigns'),
+    url(r'^security_politics', views.security_politics, name='security_politics'),
 ]
