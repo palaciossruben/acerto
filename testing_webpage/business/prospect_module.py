@@ -87,7 +87,7 @@ def get_top_users(campaign):
 
     candidates = [Candidate(user=u, campaign=campaign, pk=1) for u in top_users]
 
-    candidates = cluster_filter(candidates)
+    #candidates = cluster_filter(candidates)
 
     prediction, candidates = model.predict_match(candidates, regression=False)
 

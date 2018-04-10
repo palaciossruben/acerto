@@ -34,6 +34,19 @@ class Profession(models.Model):
         db_table = 'professions'
 
 
+class Area(models.Model):
+
+    name = models.CharField(max_length=200)
+    name_es = models.CharField(max_length=200, null=True)
+
+    def __str__(self):
+        return '{0}'.format(self.name)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'areas'
+
+
 class Gender(models.Model):
 
     name = models.CharField(max_length=200)
@@ -378,8 +391,23 @@ class User(models.Model):
     # new fields
     gender = models.ForeignKey(Gender, null=True, on_delete=models.SET_NULL)
     programs = models.CharField(max_length=250, null=True)
-
-
+    area = models.ForeignKey(Area, null=True, on_delete=models.SET_NULL)
+    aspiration = models.IntegerField(null=True)
+    address = models.CharField(max_length=100, null=True)
+    hood = models.CharField(max_length=40, null=True)
+    profile = models.CharField(max_length=250, null=True)
+    languages = models.CharField(max_length=100, null=True)
+    phone2 = models.CharField(max_length=40, null=True)
+    phone3 = models.CharField(max_length=40, null=True)
+    document = models.CharField(max_length=50, null=True)
+    dreamjob = models.CharField(max_length=50, null=True)
+    hobbies = models.CharField(max_length=250, null=True)
+    twitter = models.CharField(max_length=250, null=True)
+    facebook = models.CharField(max_length=250, null=True)
+    instagram = models.CharField(max_length=250, null=True)
+    linkedin = models.CharField(max_length=250, null=True)
+    photo_url = models.CharField(max_length=200, default='#')
+    brochure_url = models.CharField(max_length=200, default='#')
 
 
     # TODO: Make method present on common.py a method of the class User. For this to happen Candidate class has
