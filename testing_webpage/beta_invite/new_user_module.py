@@ -125,6 +125,7 @@ def update_resource(request, user, field, folder_name):
 def update_user_with_request(request, user):
     for key, value in request.POST.items():
         if hasattr(User, key):
+            value = None if value == '' else value
             setattr(user, key, value)
 
     user.save()
