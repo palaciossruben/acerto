@@ -51,7 +51,7 @@ function myFunction() {
 	<fieldset> <!-- three item asked -->
 		<h2 class="fs-title">Género</h2>
 		<h3 class="fs-subtitle">¿Eres hombre o mujer?</h3>
-		<select id="gender" name="gender_id" required>
+		<select id="gender" name="gender_id">
 			<option value="" disabled selected>Selecciona tu género</option>
 			{% for sex in genders %}
 				<option value={{ sex.id }}>{{ sex.name }}</option>
@@ -81,7 +81,7 @@ function myFunction() {
 	<fieldset> <!-- three items asked -->
 		<h2 class="fs-title">Experiencia</h2>
 		<h3 class="fs-subtitle">Breve información laboral</h3>
-		<select id="area" name="area_id" required>
+		<select id="area" name="area_id">
 			<option value="" disabled selected>Selecciona tu área de trabajo</option>
 			{% for area in areas %}
 				<option value={{ area.id }}>{{ area.name }}</option>

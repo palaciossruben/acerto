@@ -62,7 +62,7 @@ header nav ul li a:hover{
   }
 }
 
-@media screen and (max-width: 718px) {
+@media screen (max-width: 718px) {
   .topnav.responsive {position: relative;}
   .topnav.responsive .icon {
     position: absolute;
