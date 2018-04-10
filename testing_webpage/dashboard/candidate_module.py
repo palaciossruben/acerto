@@ -5,6 +5,7 @@ All functions related to candidates, dashboard stuff.
 from dashboard.models import Comment, Candidate, State
 from beta_invite.models import Campaign
 from dashboard import constants as cts
+from beta_invite import new_user_module
 
 
 def add_property(candidate, request, property_name):
@@ -12,7 +13,7 @@ def add_property(candidate, request, property_name):
     if property is not None and property != '':
         setattr(candidate, property_name, property)
 
-'''
+
 def update_candidate(request, candidate):
     """
     Args:
@@ -35,12 +36,7 @@ def update_candidate(request, candidate):
 
     candidate.save()
 
-    filename = save_curriculum_from_request(request, candidate.user, '{}_curriculum'.format(candidate.id))
-
-    if filename != '#':
-        candidate.user.curriculum_url = filename
-        candidate.user.save()
-'''
+    new_user_module.update_resource(request, candidate.user, 'curriculum_url', 'resumes')
 
 
 def add_candidate_to_campaign(request, candidate):

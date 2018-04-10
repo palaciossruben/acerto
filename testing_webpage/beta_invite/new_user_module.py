@@ -42,16 +42,16 @@ def save_resource_from_request(request, user, param_name, folder_name):
     # validate correct method and has file.
     if request.method == 'POST' and len(request.FILES) != 0 and request.FILES.get(param_name) is not None:
 
-        curriculum_file = request.FILES[param_name]
+        my_file = request.FILES[param_name]
         fs = FileSystemStorage()
 
         user_id_folder = str(user.id)
 
         folder = os.path.join(folder_name, user_id_folder)
 
-        file_path = os.path.join(folder, rename_filename(curriculum_file.name))
+        file_path = os.path.join(folder, rename_filename(my_file.name))
 
-        fs.save(file_path, curriculum_file)
+        fs.save(file_path, my_file)
 
         # once saved it will collect the file
         subprocess.call('python3 manage.py collectstatic -v0 --noinput', shell=True)
@@ -144,7 +144,7 @@ def create_user(campaign, user_params, request, is_mobile):
     # Saves here to get an id
     user.save()
 
-    user.curriculum_url = save_resource_from_request(request, user, 'curriculum_url', 'resumes')
+    update_resource(request, user, 'curriculum_url', 'resumes')
     user.save()
 
     # Starts on Backlog default state, when no evaluation has been done.
