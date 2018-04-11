@@ -31,6 +31,14 @@ def get_test_url(user, campaign):
         return ''
 
 
+def get_additional_info_url(candidate):
+
+    if candidate:
+        return host + '/servicio_de_empleo/additional_info?candidate_id={candidate_id}'.format(candidate_id=candidate.pk)
+    else:
+        return ''
+
+
 def get_video_url(user, campaign):
     if user and campaign:
         return host+'/servicio_de_empleo/interview/1?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
@@ -157,7 +165,7 @@ def get_params_with_candidate(candidate, language_code, override_dict={}):
     if hasattr(candidate, 'campaign_id'):
         params['test_url'] = get_test_url(candidate.user, candidate.campaign)
         params['video_url'] = get_video_url(candidate.user, candidate.campaign)
-
+        params['additional_info_url'] = get_additional_info_url(candidate)
     for k, v in override_dict.items():
         params[k] = v
 
