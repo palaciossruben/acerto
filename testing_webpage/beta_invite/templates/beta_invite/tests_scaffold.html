@@ -15,30 +15,30 @@
     <br>
     <div class="title" align="center">
 
-        {% if not tests %}
-            <a class="scroll logo" style="font-family:CANDARA; font-size:65px; color:black;
-             margin-bottom:50px;"> <img src="{% static 'beta_invite/logo.png' %}" width="370px" align="center"></a>
-        {% endif %}
-
         <div class="container" align="center" style="margin-top:5px;">
             <div>
-                {% if tests %}
-                    <script>fbq('track', 'CompleteRegistration');</script>
-                    <span>
-                        <h1 style="color:var(--blue)">{% trans "Thanks for registering!" %}</h1>
-                    </span>
-                    <br>
-                    {% include "beta_invite/tests.html" with tests=tests %}
-                {% else %}
-                    <span style=" font-weight:500; color:#F8E676;">
-                        <b style="font-weight:400; text-transform: uppercase; font-size:30px;">{% trans "Thanks for registering!" %}</b>
-                    </span>
-                    <br>
-                    <b style="font-weight:400; color:#F8E676; font-size:18px">{% trans "We will contact you soon" %}</b>
-                {% endif %}
+                <script>fbq('track', 'CompleteRegistration');</script>
+                <span>
+                    <h1 style="color:var(--blue)">{% trans "Thanks for registering!" %}</h1>
+                </span>
+                <br>
+                {% include "beta_invite/tests.html" with tests=tests %}
             </div>
         </div>
         <br>
         <br>
     </div>
+    <style>
+        #submit-button{
+        width: auto;
+        background: var(--orange);
+        font-weight: bold;
+        color: white;
+        border: 0 none;
+        border-radius: 1px;
+        cursor: pointer;
+        padding: 10px 10px;
+        border-radius:4px;
+    }
+    </style>
 {% endblock %}

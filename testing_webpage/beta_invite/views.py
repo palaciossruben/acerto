@@ -205,10 +205,14 @@ def tests(request):
 
     # Adds the user id to the params, to be able to track answers, later on.
     user = common.get_user_from_request(request)
+    candidate = common.get_candidate(user, campaign)
     if user is not None:
         end_point_params['user_id'] = int(user.id)
 
-    return render(request, cts.TESTS_VIEW_PATH, end_point_params)
+    if tests:
+        return render(request, cts.TESTS_VIEW_PATH, end_point_params)
+    else:
+        return redirect('/servicio_de_empleo/additional_info?candidate_id={candidate_id}'.format(candidate_id=candidate.pk))
 
 
 @login_required
@@ -324,7 +328,6 @@ def add_cv_changes(request):
         new_user_module.update_resource(request, user, 'curriculum_url', 'resumes')
 
         return render(request, cts.ACTIVE_CAMPAIGNS_VIEW_PATH, {})
-
 
     # if any inconsistency, then do nothing, ignore it.
     return render(request, cts.ADD_CV, {'user_id': user_id})

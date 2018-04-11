@@ -74,6 +74,7 @@
                     {% csrf_token %}
 
                     <input type="hidden" name="campaign_id" value="{{ campaign_id }}" />
+                    <input type="hidden" name="candidate_id" value="{{ candidate.pk }}" />
 
                     <input class="form-text" id="name" type="text" name="name"
                            placeholder="{% trans 'Your Full Name' %}" required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
