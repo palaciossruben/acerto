@@ -64,7 +64,7 @@ def business_daily_report():
 
 send_campaign_report(['juan@peaku.co', 'santiago@peaku.co'], campaign_id=10)
 send_general_report()
-# business_daily_report()
+business_daily_report()
 
 
 
