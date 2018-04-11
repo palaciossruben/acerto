@@ -145,6 +145,11 @@ class Candidate(models.Model):
             return self.user.profession.name
         return np.nan
 
+    def get_education_name(self):
+        if self.user and self.user.education:
+            return self.user.education.name
+        return np.nan
+
     def get_country_name(self):
         if self.user and self.user.country:
             return self.user.country.name
