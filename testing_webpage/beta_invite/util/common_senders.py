@@ -87,11 +87,11 @@ def get_file_path():
 
 
 def get_email_path():
-    return get_file_path() + '/emails'
+    return os.path.join(get_file_path(), 'emails')
 
 
 def get_message_path():
-    return get_file_path() + '/messages'
+    return os.path.join(get_file_path(), 'messages')
 
 
 def read_email_credentials():

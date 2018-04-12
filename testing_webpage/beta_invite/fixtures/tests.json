@@ -358,5 +358,53 @@
       "created_at": "2018-04-04 02:42:49.0957+00",
       "updated_at": "2018-04-04 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.test",
+    "pk": 31,
+    "fields":{
+      "name": "Payroll Analyst",
+      "name_es": "Analista de Nómina",
+      "questions": [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 128],
+      "cut_score": 70,
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.test",
+    "pk": 32,
+    "fields":{
+      "name": "English test",
+      "name_es": "Prueba de Inglés",
+      "questions": [112, 113, 114, 115, 116, 117, 118, 119, 120, 121],
+      "cut_score": 70,
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.test",
+    "pk": 33,
+    "fields":{
+      "name": "Oncore Services",
+      "name_es": "Oncore Services",
+      "questions": [45, 123, 124, 125, 126, 127],
+      "cut_score": 70,
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.test",
+    "pk": 34,
+    "fields":{
+      "name": "Oncore Services Open Field Question",
+      "name_es": "Oncore Services Open Field Question",
+      "questions": [122],
+      "cut_score": 0,
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
   }
 ]
