@@ -47,7 +47,7 @@
 	border:none;
 	border-radius:7px;
 	color: white;
-	background-color: var(--green);
+	background-color: var(--orange);
 	word-spacing:2px;
 }
 
@@ -63,7 +63,7 @@
 }
 
 .free-trial-button:hover {
-    background: #FF7A59;
+    background: var(--brochure-green);
 }
 
 .description {

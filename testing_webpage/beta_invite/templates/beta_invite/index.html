@@ -74,6 +74,7 @@
                     {% csrf_token %}
 
                     <input type="hidden" name="campaign_id" value="{{ campaign_id }}" />
+                    <input type="hidden" name="candidate_id" value="{{ candidate.pk }}" />
 
                     <input class="form-text" id="name" type="text" name="name"
                            placeholder="{% trans 'Your Full Name' %}" required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
@@ -90,8 +91,8 @@
                         <input type="file" id="file" name="curriculum_url" class="form-inputfile" onchange="pressed()">
                         <label for="file" id="fileLabel">{% trans "Upload your resume" %}</label>
                         <label class="form-checkbox-container">
-                            <input class="form-checkbox" type="checkbox" id="checkbox" value="">
-                            <p class="form-checkbox-text">{% trans "Authorized third parties can see this information." %}</p>
+                            <input class="form-checkbox" type="checkbox" id="politics" name="politics" required>
+                            <p class="form-checkbox-text"><a href="security_politics" target="_blank"> He leído y acepto las políticas de privacidad</a></p>
                         </label>
                     </div>
 					<input class="form-submit" type="submit" id="submit" value="{% trans 'Sure!' %}">

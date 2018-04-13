@@ -143,7 +143,11 @@ def register(request):
     email = request.POST.get('email')
     name = request.POST.get('name')
     phone = request.POST.get('phone')
-
+    politics_accepted = request.POST.get('politics')
+    if politics_accepted:
+        politics = True
+    else:
+        politics = False
     campaign = common.get_campaign_from_request(request)
 
     # Validates all fields
@@ -159,7 +163,8 @@ def register(request):
                        'city': city,
                        'ip': get_ip(request),
                        'is_mobile': is_mobile,
-                       'language_code': request.LANGUAGE_CODE}
+                       'language_code': request.LANGUAGE_CODE,
+                       'politics': politics}
 
         # TODO: update user instead of always creating a new one.
         user = new_user_module.user_if_exists(email, phone, campaign)
@@ -200,10 +205,14 @@ def tests(request):
 
     # Adds the user id to the params, to be able to track answers, later on.
     user = common.get_user_from_request(request)
+    candidate = common.get_candidate(user, campaign)
     if user is not None:
         end_point_params['user_id'] = int(user.id)
 
-    return render(request, cts.TESTS_VIEW_PATH, end_point_params)
+    if tests:
+        return render(request, cts.TESTS_VIEW_PATH, end_point_params)
+    else:
+        return redirect('/servicio_de_empleo/additional_info?candidate_id={candidate_id}'.format(candidate_id=candidate.pk))
 
 
 @login_required
@@ -317,10 +326,15 @@ def add_cv_changes(request):
     if user_id is not None:
         user = User.objects.get(pk=int(user_id))
         new_user_module.update_resource(request, user, 'curriculum_url', 'resumes')
-        return render(request, cts.TESTS_VIEW_PATH, {'tests': ''})
+
+        return render(request, cts.ACTIVE_CAMPAIGNS_VIEW_PATH, {})
 
     # if any inconsistency, then do nothing, ignore it.
     return render(request, cts.ADD_CV, {'user_id': user_id})
+
+
+def security_politics(request):
+    return render(request, cts.SECURITY_POLITICS_VIEW_PATH)
 
 
 
