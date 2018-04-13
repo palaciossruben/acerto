@@ -363,7 +363,7 @@ class User(models.Model):
     email = models.CharField(max_length=200, null=True)
     name = models.CharField(max_length=200)
     ip = models.GenericIPAddressField(null=True)
-    bdate = models.DateField(null=True)
+    birthday = models.DateField(null=True)
     experience = models.IntegerField(null=True)
     profession = models.ForeignKey(Profession, null=True, on_delete=models.SET_NULL)
     education = models.ForeignKey(Education, null=True, on_delete=models.SET_NULL)
