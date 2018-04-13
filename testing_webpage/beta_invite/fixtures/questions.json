@@ -1597,7 +1597,7 @@
     }
   },
   {
-    "model": "beta_ invite.question",
+    "model": "beta_invite.question",
     "pk": 111,
     "fields":{
       "text": "Los valores que no se pagan al liquidar la nómina y que se provisionan para pagarlos en un futuro son:",
