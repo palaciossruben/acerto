@@ -41,14 +41,13 @@ def get_score(text):
 
         # TODO: add English by un commenting this and adding the english vocabulary
 
-        #with open(os.path.join('subscribe', 'en-US.dic'), 'r', encoding='UTF-8') as vocabulary_file_en:
-
-        #    vocabulary_en = vocabulary_file_en.read().split('\n')
+        with open(os.path.join('subscribe', 'en-US.dic'), 'r', encoding='UTF-8') as vocabulary_file_en:
+            vocabulary_en = vocabulary_file_en.read().split('\n')
 
         # TODO: do faster with binary search.
         for w in words:
             # TODO: add English by un commenting this and adding the english vocabulary
-            if w in vocabulary: #or w in vocabulary_en:
+            if w in vocabulary or w in vocabulary_en:
                 spelling += 1
 
     spelling_score = handle_division_by_zero(spelling, len(words))
