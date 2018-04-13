@@ -106,7 +106,7 @@ def compute_related_words():
     """
 
     # A dictionary of the form: {'word': (user_id, relevance)}
-    word_user_dictionary = pickle.load(open('subscribe/word_user_dictionary.p', 'rb'))
+    word_user_dictionary = pickle.load(open(os.path.join('subscribe', 'word_user_dictionary.p'), 'rb'))
 
     top_related_words_dict = dict()
     for keyword, values in word_user_dictionary.items():

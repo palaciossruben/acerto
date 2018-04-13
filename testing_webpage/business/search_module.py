@@ -81,7 +81,7 @@ def adds_context_based_search(tokens_dict, word_user_dictionary, filtered_user_r
     # tries opening top_related_words_dict.p or passes by.
     try:
         # A dictionary of the form: {'word': [('related_word', relevance) ...]}
-        top_related_words = pickle.load(open('subscribe/top_related_words_dict.p', 'rb'))
+        top_related_words = pickle.load(open(os.path.join('subscribe', 'top_related_words_dict.p'), 'rb'))
 
         for t in tokens_dict.keys():
             related_words = top_related_words.get(t, [])

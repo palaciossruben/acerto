@@ -1,5 +1,7 @@
+import os
 import math
 import nltk
+
 
 
 def my_sigmoid(num_words, num_for_80_percent):
@@ -33,20 +35,19 @@ def get_score(text):
     length_score = my_sigmoid(len(words), 15)
 
     spelling = 0
-    with open('subscribe/es-MX.dic', 'r', encoding='UTF-8') as vocabulary_file:
+    with open(os.path.join('subscribe', 'es-MX.dic'), 'r', encoding='UTF-8') as vocabulary_file:
 
         vocabulary = vocabulary_file.read().split('\n')
 
         # TODO: add English by un commenting this and adding the english vocabulary
 
-        #with open('subscribe/en-US.dic', 'r', encoding='UTF-8') as vocabulary_file_en:
-
-        #    vocabulary_en = vocabulary_file_en.read().split('\n')
+        with open(os.path.join('subscribe', 'en-US.dic'), 'r', encoding='UTF-8') as vocabulary_file_en:
+            vocabulary_en = vocabulary_file_en.read().split('\n')
 
         # TODO: do faster with binary search.
         for w in words:
             # TODO: add English by un commenting this and adding the english vocabulary
-            if w in vocabulary: #or w in vocabulary_en:
+            if w in vocabulary or w in vocabulary_en:
                 spelling += 1
 
     spelling_score = handle_division_by_zero(spelling, len(words))

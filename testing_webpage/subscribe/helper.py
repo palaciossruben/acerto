@@ -156,7 +156,7 @@ def text_has_no_data(text):
         words = nltk.word_tokenize(text)
 
         # make it faster by using my own relevance dictionary
-        with open('subscribe/es-MX.dic', 'r', encoding='UTF-8') as vocabulary_file:
+        with open(os.path.join('subscribe', 'es-MX.dic'), 'r', encoding='UTF-8') as vocabulary_file:
 
             dictionary_text = remove_accents(vocabulary_file.read())
             vocabulary = nltk.word_tokenize(dictionary_text)
