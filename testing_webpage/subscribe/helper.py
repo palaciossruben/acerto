@@ -71,7 +71,7 @@ def get_word_text(filename):
         text = textract.process(filename).decode("utf-8")
     except textract.exceptions.ShellError:
         text = ''
-
+    
     # If not enough info found will try with OCR on the doc images.
     # Get text from image trick: 1. rename to zip, 2. uncompress, 3. look inside.
     if len(text) < 100:
