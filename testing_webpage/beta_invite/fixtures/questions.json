@@ -218,7 +218,7 @@
     "model": "beta_invite.question",
     "pk": 17,
     "fields":{
-      "text": "Tell us something non-conventional that you have done?",
+      "text": "Tell us something unconventional that you have done?",
       "text_es": "¿Cuéntanos algo no convencional que hayas hecho?",
       "answers": [],
       "type": 3,
@@ -1600,8 +1600,8 @@
     "model": "beta_invite.question",
     "pk": 110,
     "fields":{
-      "text": "Tell us (in english) something non-conventional that you have done in your life",
-      "text_es": "Tell us (in english) something non-conventional that you have done in your life",
+      "text": "Tell us (in english) something unconventional that you have done in your life",
+      "text_es": "Tell us (in english) something unconventional that you have done in your life",
       "answers": [],
       "type": 3,
       "correct_answers": [],
