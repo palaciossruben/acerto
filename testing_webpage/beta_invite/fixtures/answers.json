@@ -1723,6 +1723,16 @@
     "model": "beta_invite.answer",
     "pk": 174,
     "fields":{
+      "name": "Proveedores",
+      "name_es": "Proveedores",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 175,
+    "fields":{
       "name": "Personal",
       "name_es": "Personal",
       "created_at": "2018-04-04 02:42:49.0957+00",
@@ -1731,7 +1741,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 175,
+    "pk": 176,
     "fields":{
       "name": "Hacienda pública, IVA repercutido",
       "name_es": "Hacienda pública, IVA repercutido",
@@ -1741,7 +1751,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 176,
+    "pk": 177,
     "fields":{
       "name": "Hacienda pública, IVA soportado",
       "name_es": "Hacienda pública, IVA soportado",
@@ -1751,7 +1761,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 177,
+    "pk": 178,
     "fields":{
       "name": "Hacienda pública, Acreedor por IVA",
       "name_es": "Hacienda pública, Acreedor por IVA",
@@ -1761,7 +1771,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 178,
+    "pk": 179,
     "fields":{
       "name": "Rappels por compras",
       "name_es": "Rappels por compras",
@@ -1771,7 +1781,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 179,
+    "pk": 180,
     "fields":{
       "name": "Compras de mercaderías",
       "name_es": "Compras de mercaderías",
@@ -1781,7 +1791,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 180,
+    "pk": 181,
     "fields":{
       "name": "Transportes",
       "name_es": "Transportes",
@@ -1791,7 +1801,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 181,
+    "pk": 182,
     "fields":{
       "name": "Seguros",
       "name_es": "Seguros",
@@ -1801,7 +1811,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 182,
+    "pk": 183,
     "fields":{
       "name": "Que la primera es a corto plazo y la segunda a largo",
       "name_es": "Que la primera es a corto plazo y la segunda a largo",
@@ -1811,7 +1821,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 183,
+    "pk": 184,
     "fields":{
       "name": "Que la primera es a largo plazo y la segunda a corto",
       "name_es": "Que la primera es a largo plazo y la segunda a corto",
@@ -1821,7 +1831,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 184,
+    "pk": 185,
     "fields":{
       "name": "Que las cuentas a pagar son gastos y los pasivos financieros ingresos",
       "name_es": "Que las cuentas a pagar son gastos y los pasivos financieros ingresos",
@@ -1831,7 +1841,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 185,
+    "pk": 186,
     "fields":{
       "name": "Todas son correctas",
       "name_es": "Todas son correctas",
@@ -1841,7 +1851,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 186,
+    "pk": 187,
     "fields":{
       "name": "Compras de material",
       "name_es": "Compras de material",
@@ -1851,7 +1861,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 187,
+    "pk": 188,
     "fields":{
       "name": "Ventas de material",
       "name_es": "Ventas de material",
@@ -1861,7 +1871,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 188,
+    "pk": 189,
     "fields":{
       "name": "Operaciones financieras simples, préstamo americano, empréstito y leasing",
       "name_es": "Operaciones financieras simples, préstamo americano, empréstito y leasing",
@@ -1871,7 +1881,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 189,
+    "pk": 190,
     "fields":{
       "name": "No está la respuesta correcta entre las anteriores.",
       "name_es": "No está la respuesta correcta entre las anteriores.",
@@ -1881,7 +1891,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 190,
+    "pk": 191,
     "fields":{
       "name": "Deudas a largo plazo con entidades de crédito",
       "name_es": "Deudas a largo plazo con entidades de crédito",
@@ -1891,20 +1901,10 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 191,
+    "pk": 192,
     "fields":{
       "name": "Proveedores",
       "name_es": "Proveedores",
-      "created_at": "2018-04-04 02:42:49.0957+00",
-      "updated_at": "2018-04-04 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 192,
-    "fields":{
-      "name": "Ninguna de las anteriores es correcta",
-      "name_es": "Ninguna de las anteriores es correcta",
       "created_at": "2018-04-04 02:42:49.0957+00",
       "updated_at": "2018-04-04 02:42:49.0957+00"
     }
@@ -1923,6 +1923,16 @@
     "model": "beta_invite.answer",
     "pk": 194,
     "fields":{
+      "name": "Ninguna de las anteriores es correcta",
+      "name_es": "Ninguna de las anteriores es correcta",
+      "created_at": "2018-04-04 02:42:49.0957+00",
+      "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 195,
+    "fields":{
       "name": "Los intereses efectivos / los intereses periódicos del periodo anterior",
       "name_es": "Los intereses efectivos / los intereses periódicos del periodo anterior",
       "created_at": "2018-04-04 02:42:49.0957+00",
@@ -1931,7 +1941,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 195,
+    "pk": 196,
     "fields":{
       "name": "Los intereses periódicos / los intereses efectivos",
       "name_es": "Los intereses periódicos / los intereses efectivos",
@@ -1941,7 +1951,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 196,
+    "pk": 197,
     "fields":{
       "name": "La respuesta b es falsa",
       "name_es": "La respuesta b es falsa",
@@ -1951,7 +1961,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 197,
+    "pk": 198,
     "fields":{
       "name": "La a)  y la b) son correctas",
       "name_es": "La a)  y la b) son correctas",
@@ -1961,7 +1971,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 198,
+    "pk": 199,
     "fields":{
       "name": "Provisión retribuciones y otras prestaciones al personal",
       "name_es": "Provisión retribuciones y otras prestaciones al personal",
@@ -1971,7 +1981,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 199,
+    "pk": 200,
     "fields":{
       "name": "Provisión para otras responsabilidades",
       "name_es": "Provisión para otras responsabilidades",
@@ -1981,7 +1991,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 200,
+    "pk": 201,
     "fields":{
       "name": "Provisión por encargos recibidos",
       "name_es": "Provisión por encargos recibidos",
@@ -1991,7 +2001,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 201,
+    "pk": 202,
     "fields":{
       "name": "Provisión por depreciación de existencias",
       "name_es": "Provisión por depreciación de existencias",
@@ -2001,7 +2011,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 202,
+    "pk": 203,
     "fields":{
       "name": "Derechos",
       "name_es": "Derechos",
@@ -2011,20 +2021,10 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 203,
+    "pk": 204,
     "fields":{
       "name": "Obligaciones",
       "name_es": "Obligaciones",
-      "created_at": "2018-04-04 02:42:49.0957+00",
-      "updated_at": "2018-04-04 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 204,
-    "fields":{
-      "name": "Ingresos",
-      "name_es": "Ingresos",
       "created_at": "2018-04-04 02:42:49.0957+00",
       "updated_at": "2018-04-04 02:42:49.0957+00"
     }
@@ -2053,8 +2053,8 @@
     "model": "beta_invite.answer",
     "pk": 207,
     "fields":{
-      "name": "Trabajadoes independientes, trabajadores asalariados y trabajadores temporales",
-      "name_es": "Trabajadoes independientes, trabajadores asalariados y trabajadores temporales",
+      "name": "Trabajadores independientes, trabajadores asalariados y trabajadores temporales",
+      "name_es": "Trabajadores independientes, trabajadores asalariados y trabajadores temporales",
       "created_at": "2018-04-12 02:42:49.0957+00",
       "updated_at": "2018-04-12 02:42:49.0957+00"
     }
@@ -2063,28 +2063,26 @@
     "model": "beta_invite.answer",
     "pk": 208,
     "fields":{
-      "name": "Trabajadores asalariados, trabajadores por honorarios y trabajadores por obra hecha",
-      "name_es": "Trabajadores asalariados, trabajadores por honorarios y trabajadores por obra hecha",
+      "name": "Trabajadores por prestación de servicios",
+      "name_es": "Trabajadores por prestación de servicios",
       "created_at": "2018-04-12 02:42:49.0957+00",
       "updated_at": "2018-04-12 02:42:49.0957+00"
     }
-  },
-  {
+  },{
     "model": "beta_invite.answer",
     "pk": 209,
     "fields":{
-      "name": "Trabajadores por contrato a término indefinido y a término fijo",
-      "name_es": "Trabajadores por contrato a término indefinido y a término fijo",
+      "name": "Trabajadores por honorarios y trabajadores asalariados",
+      "name_es": "Trabajadores por honorarios y trabajadores asalariados",
       "created_at": "2018-04-12 02:42:49.0957+00",
       "updated_at": "2018-04-12 02:42:49.0957+00"
     }
-  },
-  {
+  },{
     "model": "beta_invite.answer",
     "pk": 210,
     "fields":{
-      "name": "Trabajadores por contrato a término indefinido, a término fijo y por obra o labor",
-      "name_es": "Trabajadores por contrato a término indefinido, a término fijo y por obra o labor",
+      "name": "Trabajadores por contrato a término indefinido, trabajadores independientes y trabajadores por honorarios",
+      "name_es": "Trabajadores por contrato a término indefinido, trabajadores independientes y trabajadores por honorarios",
       "created_at": "2018-04-12 02:42:49.0957+00",
       "updated_at": "2018-04-12 02:42:49.0957+00"
     }
@@ -2092,46 +2090,6 @@
   {
     "model": "beta_invite.answer",
     "pk": 211,
-    "fields":{
-      "name": "No se puede exceder el 50% de la totalidad del salario y si el trabajador solo devenga el mínimo legal el 30%",
-      "name_es": "No se puede exceder el 50% de la totalidad del salario y si el trabajador solo devenga el mínimo legal el 30%",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 212,
-    "fields":{
-      "name": "El 100% pero solo del salario mínimo",
-      "name_es": "El 100% pero solo del salario mínimo",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 213,
-    "fields":{
-      "name": "El 100% para hasta dos salarios mínimos, 60% para más de dos salarios mínimos",
-      "name_es": "El 100% para hasta dos salarios mínimos, 60% para más de dos salarios mínimos",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 214,
-    "fields":{
-      "name": "No se puede exceder el 80% de la totalidad del salario y si el trabajador solo devenga el mínimo legal el 30%",
-      "name_es": "No se puede exceder el 80% de la totalidad del salario y si el trabajador solo devenga el mínimo legal el 30%",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 215,
     "fields":{
       "name": "Salud, pensión y riesgos profesionales",
       "name_es": "Salud, pensión y riesgos profesionales",
@@ -2141,7 +2099,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 216,
+    "pk": 212,
     "fields":{
       "name": "Salud, pensión, intereses por cesantías y riesgos profesionales",
       "name_es": "Salud, pensión, intereses por cesantías y riesgos profesionales",
@@ -2151,7 +2109,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 217,
+    "pk": 213,
     "fields":{
       "name": "Caja de compensación, salud y pensión",
       "name_es": "Caja de compensación, salud y pensión",
@@ -2161,7 +2119,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 218,
+    "pk": 214,
     "fields":{
       "name": "Vacaciones e intereses por cesantías",
       "name_es": "Vacaciones e intereses por cesantías",
@@ -2171,7 +2129,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 219,
+    "pk": 215,
     "fields":{
       "name": "Son un descanso no remunerado a favor del trabajador después de completar un año de trabajo",
       "name_es": "Son un descanso no remunerado a favor del trabajador después de completar un año de trabajo",
@@ -2181,7 +2139,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 220,
+    "pk": 216,
     "fields":{
       "name": "Son un descanso remunerado a favor del trabajador después de completar un seis meses de trabajo",
       "name_es": "Son un descanso remunerado a favor del trabajador después de completar un seis meses de trabajo",
@@ -2191,7 +2149,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 221,
+    "pk": 217,
     "fields":{
       "name": "Son un descanso remunerado a favor del trabajador después de completar un año de trabajo",
       "name_es": "Son un descanso remunerado a favor del trabajador después de completar un año de trabajo",
@@ -2201,7 +2159,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 222,
+    "pk": 218,
     "fields":{
       "name": "Las vacaciones son un descanso que se da según la necesidad del empleado y equivale a un cálculo según su salario en un período de 51 semanas hábiles",
       "name_es": "Las vacaciones son un descanso que se da según la necesidad del empleado y equivale a un cálculo según su salario en un período de 51 semanas hábiles",
@@ -2211,87 +2169,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 223,
-    "fields":{
-      "name": "45%",
-      "name_es": "45%",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 224,
-    "fields":{
-      "name": "65%",
-      "name_es": "65%",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 225,
-    "fields":{
-      "name": "1,25%",
-      "name_es": "1,25%",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 226,
-    "fields":{
-      "name": "25%",
-      "name_es": "25%",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 227,
-    "fields":{
-      "name": "70%",
-      "name_es": "70%",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 228,
-    "fields":{
-      "name": "90%",
-      "name_es": "90%",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 229,
-    "fields":{
-      "name": "75%",
-      "name_es": "75%",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 230,
-    "fields":{
-      "name": "0,75%",
-      "name_es": "0,75%",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 231,
+    "pk": 219,
     "fields":{
       "name": "Que su salario no exceda los 2 salarios mínimos mensuales legales vigentes",
       "name_es": "Que su salario no exceda los 2 salarios mínimos mensuales legales vigentes",
@@ -2301,7 +2179,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 232,
+    "pk": 220,
     "fields":{
       "name": "Que su salario no exceda los 2.5 salarios mínimos mensuales legales vigentes",
       "name_es": "Que su salario no exceda los 2.5 salarios mínimos mensuales legales vigentes",
@@ -2311,7 +2189,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 233,
+    "pk": 221,
     "fields":{
       "name": "Que su salario no exceda los 4 salarios mínimos mensuales legales vigentes",
       "name_es": "Que su salario no exceda los 4 salarios mínimos mensuales legales vigentes",
@@ -2321,7 +2199,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 234,
+    "pk": 222,
     "fields":{
       "name": "Que su salario no exceda los 1.5 salarios mínimos mensuales legales vigentes",
       "name_es": "Que su salario no exceda los 1.5 salarios mínimos mensuales legales vigentes",
@@ -2331,7 +2209,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 235,
+    "pk": 223,
     "fields":{
       "name": "Son unos pagos que corresponden al 9% de la nómina mensual de salarios y que están obligados a pagar los empleadores en Colombia",
       "name_es": "Son unos pagos que corresponden al 9% de la nómina mensual de salarios y que están obligados a pagar los empleadores en Colombia",
@@ -2341,7 +2219,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 236,
+    "pk": 224,
     "fields":{
       "name": "Son los aportes que se deben de pagar por trabajo extra",
       "name_es": "Son los aportes que se deben de pagar por trabajo extra",
@@ -2351,7 +2229,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 237,
+    "pk": 225,
     "fields":{
       "name": "Es el total del salario mensual",
       "name_es": "Es el total del salario mensual",
@@ -2361,7 +2239,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 238,
+    "pk": 226,
     "fields":{
       "name": "Son unos pagos que corresponden al 15% de la nómina mensual de salarios y que no están obligados a pagar los empleadores en Colombia",
       "name_es": "Son unos pagos que corresponden al 15% de la nómina mensual de salarios y que no están obligados a pagar los empleadores en Colombia",
@@ -2371,577 +2249,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 239,
-    "fields":{
-      "name": "3.7",
-      "name_es": "3.7",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 240,
-    "fields":{
-      "name": "2.5",
-      "name_es": "2.5",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 241,
-    "fields":{
-      "name": "2",
-      "name_es": "2",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 242,
-    "fields":{
-      "name": "5.7",
-      "name_es": "5.7",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 243,
-    "fields":{
-      "name": "Empleado 3% en salud, 3% en pensión y el empleador 6% en arl",
-      "name_es": "Empleado 3% en salud, 3% en pensión y el empleador 6% en arl",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 244,
-    "fields":{
-      "name": "Empleado 3% en salud, 3% en pensión y el empleador 9% en todos los conceptos, excepto arl que es el 100%",
-      "name_es": "Empleado 3% en salud, 3% en pensión y el empleador 9% en todos los conceptos, excepto arl que es el 100%",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 245,
-    "fields":{
-      "name": "Empleador 8.5% en eps y el empleado el 4%, empleador 12% en afp y el empleado el 4% y el empleador el 100% en arl",
-      "name_es": "Empleador 8.5% en eps y el empleado el 4%, empleador 12% en afp y el empleado el 4% y el empleador el 100% en arl",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 246,
-    "fields":{
-      "name": "Empleado 4% en salud y 4% en pensión, empleador 96% en salud y 96% en pensión y el 60% en arl",
-      "name_es": "Empleado 4% en salud y 4% en pensión, empleador 96% en salud y 96% en pensión y el 60% en arl",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 247,
-    "fields":{
-      "name": "Prima de servicios, cesantías, intereses sobre cesantías, viáticos y primas extralegales",
-      "name_es": "Prima de servicios, cesantías, intereses sobre cesantías, viáticos y primas extralegales",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 248,
-    "fields":{
-      "name": "Prima de servicios, cesantías, intereses de cesantías y vacaciones",
-      "name_es": "Prima de servicios, cesantías, intereses de cesantías y vacaciones",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 249,
-    "fields":{
-      "name": "Cesantías, vacaciones, intereses de cesantías, viáticos y primas extralegales",
-      "name_es": "Cesantías, vacaciones, intereses de cesantías, viáticos y primas extralegales",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 250,
-    "fields":{
-      "name": "Prima de servicios, cesantías, intereses sobre cesantías, vacaciones, viáticos y primas extralegales",
-      "name_es": "Prima de servicios, cesantías, intereses sobre cesantías, vacaciones, viáticos y primas extralegales",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 251,
-    "fields":{
-      "name": "I loved going to the movies",
-      "name_es": "I loved going to the movies",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 252,
-    "fields":{
-      "name": "I have loved to go to the movies",
-      "name_es": "I have loved to go to the movies",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 253,
-    "fields":{
-      "name": "I´ve loved going to the movies",
-      "name_es": "I´ve loved going to the movies",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 254,
-    "fields":{
-      "name": "I have waited for ages",
-      "name_es": "I have waited for ages",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 255,
-    "fields":{
-      "name": "I have been waiting for ages",
-      "name_es": "I have been waiting for ages",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 256,
-    "fields":{
-      "name": "I waited for ages",
-      "name_es": "I waited for ages",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 257,
-    "fields":{
-      "name": "when he passed his driving test",
-      "name_es": "when he passed his driving test",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 258,
-    "fields":{
-      "name": "since he passed his driving test",
-      "name_es": "since he passed his driving test",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 259,
-    "fields":{
-      "name": "as he passed his driving test",
-      "name_es": "as he passed his driving test",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 260,
-    "fields":{
-      "name": "is dangerous like London",
-      "name_es": "is dangerous like London",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 261,
-    "fields":{
-      "name": "is so dangerous as London",
-      "name_es": "is so dangerous as London",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 262,
-    "fields":{
-      "name": "is as dangerous as London",
-      "name_es": "is as dangerous as London",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 263,
-    "fields":{
-      "name": "He looks just as his father",
-      "name_es": "He looks just as his father",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 264,
-    "fields":{
-      "name": "He looks just like his father",
-      "name_es": "He looks just like his father",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 265,
-    "fields":{
-      "name": "He looks just after his father",
-      "name_es": "He looks just after his father",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 266,
-    "fields":{
-      "name": "Your birthday´s next month, isn´t it?",
-      "name_es": "Your birthday´s next month, isn´t it?",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 267,
-    "fields":{
-      "name": "Your birthday will be next month, won´t it?",
-      "name_es": "Your birthday will be next month, won´t it?",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 268,
-    "fields":{
-      "name": "Your birthday is going to be next month, isn´t it?",
-      "name_es": "Your birthday is going to be next month, isn´t it?",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 269,
-    "fields":{
-      "name": "The doctor said it was nothing to worry about",
-      "name_es": "The doctor said it was nothing to worry about",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 270,
-    "fields":{
-      "name": "The doctor said its nothing. Don´t worry",
-      "name_es": "The doctor said its nothing. Don´t worry",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 271,
-    "fields":{
-      "name": "The doctor said it isn´t something to worry about",
-      "name_es": "The doctor said it isn´t something to worry about",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 272,
-    "fields":{
-      "name": "I can´t imagine why he said that",
-      "name_es": "I can´t imagine why he said that",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 273,
-    "fields":{
-      "name": "I might imagine why he said that",
-      "name_es": "I might imagine why he said that",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 274,
-    "fields":{
-      "name": "I don´t imagine why he said that",
-      "name_es": "I don´t imagine why he said that",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 275,
-    "fields":{
-      "name": "The painting sold for three thousand euros",
-      "name_es": "The painting sold for three thousand euros",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 276,
-    "fields":{
-      "name": "The painting was sold for three thousand euros",
-      "name_es": "The painting was sold for three thousand euros",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 277,
-    "fields":{
-      "name": "The painting was being sold for three thousand euros",
-      "name_es": "The painting was being sold for three thousand euros",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 278,
-    "fields":{
-      "name": "such embarrassed",
-      "name_es": "such embarrassed",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 279,
-    "fields":{
-      "name": "so embarrassed",
-      "name_es": "so embarrassed",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 280,
-    "fields":{
-      "name": "such an embarrassed",
-      "name_es": "such an embarrassed",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 281,
-    "fields":{
-      "name": "Exoneración de impuesto de pagos",
-      "name_es": "Exoneración de impuesto de pagos",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 282,
-    "fields":{
-      "name": "Exoneración de impuesto de nómina",
-      "name_es": "Exoneración de impuesto de nómina",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 283,
-    "fields":{
-      "name": "Exoneración de impuesto del cargo",
-      "name_es": "Exoneración de impuesto del cargo",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 284,
-    "fields":{
-      "name": "En voz",
-      "name_es": "En voz",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 285,
-    "fields":{
-      "name": "Factura",
-      "name_es": "Factura",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 286,
-    "fields":{
-      "name": "Ingreso",
-      "name_es": "Ingreso",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 287,
-    "fields":{
-      "name": "Inflación anual",
-      "name_es": "Inflación anual",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 288,
-    "fields":{
-      "name": "Jubilación",
-      "name_es": "Jubilación",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 289,
-    "fields":{
-      "name": "Superintendencia",
-      "name_es": "Superintendencia",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 290,
-    "fields":{
-      "name": "Seguimiento a deudores",
-      "name_es": "Seguimiento a deudores",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 291,
-    "fields":{
-      "name": "Ingresos de cartera",
-      "name_es": "Ingresos de cartera",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 292,
-    "fields":{
-      "name": "Pagos de proveedores",
-      "name_es": "Pagos de proveedores",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 293,
-    "fields":{
-      "name": "Recibo de pago empleados",
-      "name_es": "Recibo de pago empleados",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 294,
-    "fields":{
-      "name": "Día de pago",
-      "name_es": "Día de pago",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 295,
-    "fields":{
-      "name": "Cambio de cheque",
-      "name_es": "Cambio de cheque",
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.answer",
-    "pk": 296,
+    "pk": 227,
     "fields":{
       "name": "700.000",
       "name_es": "700.000",
@@ -2951,7 +2259,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 297,
+    "pk": 228,
     "fields":{
       "name": "233.334",
       "name_es": "233.334",
@@ -2961,7 +2269,7 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 298,
+    "pk": 229,
     "fields":{
       "name": "254.333",
       "name_es": "254.333",
@@ -2971,10 +2279,280 @@
   },
   {
     "model": "beta_invite.answer",
-    "pk": 299,
+    "pk": 230,
     "fields":{
       "name": "Ninguno de los anteriores",
       "name_es": "Ninguno de los anteriores",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 231,
+    "fields":{
+      "name": "He looks just as his father",
+      "name_es": "He looks just as his father",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 232,
+    "fields":{
+      "name": "He looks just like his father",
+      "name_es": "He looks just like his father",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 233,
+    "fields":{
+      "name": "He looks just after his father",
+      "name_es": "He looks just after his father",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 234,
+    "fields":{
+      "name": "I can´t imagine why he said that",
+      "name_es": "I can´t imagine why he said that",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 235,
+    "fields":{
+      "name": "I might imagine why he said that",
+      "name_es": "I might imagine why he said that",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 236,
+    "fields":{
+      "name": "I don´t imagine why he said that",
+      "name_es": "I don´t imagine why he said that",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 237,
+    "fields":{
+      "name": "The painting sold for three thousand euros",
+      "name_es": "The painting sold for three thousand euros",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 238,
+    "fields":{
+      "name": "The painting was sold for three thousand euros",
+      "name_es": "The painting was sold for three thousand euros",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 239,
+    "fields":{
+      "name": "The painting was being sold for three thousand euros",
+      "name_es": "The painting was being sold for three thousand euros",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 240,
+    "fields":{
+      "name": "such embarrassed",
+      "name_es": "such embarrassed",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 241,
+    "fields":{
+      "name": "so embarrassed",
+      "name_es": "so embarrassed",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 242,
+    "fields":{
+      "name": "such an embarrassed",
+      "name_es": "such an embarrassed",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 243,
+    "fields":{
+      "name": "Exoneración de impuesto de pagos",
+      "name_es": "Exoneración de impuesto de pagos",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 244,
+    "fields":{
+      "name": "Exoneración de impuesto de nómina",
+      "name_es": "Exoneración de impuesto de nómina",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 245,
+    "fields":{
+      "name": "Exoneración de impuesto del cargo",
+      "name_es": "Exoneración de impuesto del cargo",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 246,
+    "fields":{
+      "name": "En voz",
+      "name_es": "En voz",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 247,
+    "fields":{
+      "name": "Factura",
+      "name_es": "Factura",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 248,
+    "fields":{
+      "name": "Ingreso",
+      "name_es": "Ingreso",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 249,
+    "fields":{
+      "name": "Inflación anual",
+      "name_es": "Inflación anual",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 250,
+    "fields":{
+      "name": "Jubilación",
+      "name_es": "Jubilación",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 251,
+    "fields":{
+      "name": "Superintendencia",
+      "name_es": "Superintendencia",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 252,
+    "fields":{
+      "name": "Seguimiento a deudores",
+      "name_es": "Seguimiento a deudores",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 253,
+    "fields":{
+      "name": "Ingresos de cartera",
+      "name_es": "Ingresos de cartera",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 254,
+    "fields":{
+      "name": "Pagos de proveedores",
+      "name_es": "Pagos de proveedores",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 255,
+    "fields":{
+      "name": "Recibo de pago empleados",
+      "name_es": "Recibo de pago empleados",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 256,
+    "fields":{
+      "name": "Día de pago",
+      "name_es": "Día de pago",
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 257,
+    "fields":{
+      "name": "Cambio de cheque",
+      "name_es": "Cambio de cheque",
       "created_at": "2018-04-12 02:42:49.0957+00",
       "updated_at": "2018-04-12 02:42:49.0957+00"
     }

@@ -218,7 +218,7 @@
     "model": "beta_invite.question",
     "pk": 17,
     "fields":{
-      "text": "Tell us something non-conventional that you have done?",
+      "text": "Tell us something unconventional that you have done?",
       "text_es": "¿Cuéntanos algo no convencional que hayas hecho?",
       "answers": [],
       "type": 3,
@@ -1474,8 +1474,8 @@
     "model": "beta_invite.question",
     "pk": 102,
     "fields":{
-      "text": "¿Cuáles son los porcentajes que se pactan en el salario en especie?",
-      "text_es": "¿Cuáles son los porcentajes que se pactan en el salario en especie?",
+      "text": "¿Qué cubre la seguridad social?",
+      "text_es": "¿Qué cubre la seguridad social?",
       "answers": [211, 212, 213, 214],
       "type": 1,
       "correct_answers": [211],
@@ -1488,11 +1488,11 @@
     "model": "beta_invite.question",
     "pk": 103,
     "fields":{
-      "text": "¿Qué cubre la seguridad social?",
-      "text_es": "¿Qué cubre la seguridad social?",
+      "text": "¿Qué son las vacaciones?",
+      "text_es": "¿Qué son las vacaciones?",
       "answers": [215, 216, 217, 218],
       "type": 1,
-      "correct_answers": [215],
+      "correct_answers": [217],
       "order": 3,
       "created_at": "2018-04-12 02:42:49.0957+00",
       "updated_at": "2018-04-12 02:42:49.0957+00"
@@ -1502,11 +1502,11 @@
     "model": "beta_invite.question",
     "pk": 104,
     "fields":{
-      "text": "¿Qué son las vacaciones?",
-      "text_es": "¿Qué son las vacaciones?",
-      "answers": [219, 220 , 221, 222],
+      "text": "¿Qué condición deben de cumplir los trabajadores para que tengan derecho a auxilio de transporte?",
+      "text_es": "¿Qué condición deben de cumplir los trabajadores para que tengan derecho a auxilio de transporte?",
+      "answers": [219, 220, 221, 222],
       "type": 1,
-      "correct_answers": [221],
+      "correct_answers": [219],
       "order": 4,
       "created_at": "2018-04-12 02:42:49.0957+00",
       "updated_at": "2018-04-12 02:42:49.0957+00"
@@ -1516,11 +1516,11 @@
     "model": "beta_invite.question",
     "pk": 105,
     "fields":{
-      "text": "¿Cuáles son los porcentajes de las horas diurnas?",
-      "text_es": "¿Cuáles son los porcentajes de las horas diurnas?",
+      "text": "¿Qué son los aportes parafiscales?",
+      "text_es": "¿Qué son los aportes parafiscales?",
       "answers": [223, 224, 225, 226],
       "type": 1,
-      "correct_answers": [226],
+      "correct_answers": [223],
       "order": 5,
       "created_at": "2018-04-12 02:42:49.0957+00",
       "updated_at": "2018-04-12 02:42:49.0957+00"
@@ -1530,11 +1530,11 @@
     "model": "beta_invite.question",
     "pk": 106,
     "fields":{
-      "text": "¿Cuáles son los porcentajes de las horas nocturnas?",
-      "text_es": "¿Cuáles son los porcentajes de las horas nocturnas?",
+      "text": "Supongamos que un trabajador laboró desde el mes enero hasta el mes de abril, devengando los siguientes valores: enero 600.000, febrero 700.000, marzo 700.000 y abril 800.000. ¿Cuánto sería el valor de la prima de servicios?",
+      "text_es": "Supongamos que un trabajador laboró desde el mes de enero hasta el mes de abril, devengando los siguientes valores: enero 600.000, febrero 700.000, marzo 700.000 y abril 800.000. ¿Cuánto sería el valor de la prima de servicios?",
       "answers": [227, 228, 229, 230],
       "type": 1,
-      "correct_answers": [229],
+      "correct_answers": [228],
       "order": 6,
       "created_at": "2018-04-12 02:42:49.0957+00",
       "updated_at": "2018-04-12 02:42:49.0957+00"
@@ -1544,12 +1544,12 @@
     "model": "beta_invite.question",
     "pk": 107,
     "fields":{
-      "text": "¿Qué condición deben de cumplir los trabajadores para que tengan derecho a auxilio de transporte?",
-      "text_es": "¿Qué condición deben de cumplir los trabajadores para que tengan derecho a auxilio de transporte?",
-      "answers": [231, 232, 233, 234],
+      "text": "Choose the correct option",
+      "text_es": "Choose the correct option",
+      "answers": [231, 232, 233],
       "type": 1,
-      "correct_answers": [231],
-      "order": 7,
+      "correct_answers": [232],
+      "order": 1,
       "created_at": "2018-04-12 02:42:49.0957+00",
       "updated_at": "2018-04-12 02:42:49.0957+00"
     }
@@ -1558,12 +1558,26 @@
     "model": "beta_invite.question",
     "pk": 108,
     "fields":{
-      "text": "¿Qué son los aportes parafiscales?",
-      "text_es": "¿Qué son los aportes parafiscales?",
-      "answers": [235, 236, 237, 238],
+      "text": "Choose the correct option",
+      "text_es": "Choose the correct option",
+      "answers": [234, 235, 236],
       "type": 1,
-      "correct_answers": [235],
-      "order": 8,
+      "correct_answers": [234],
+      "order": 2,
+      "created_at": "2018-04-12 02:42:49.0957+00",
+      "updated_at": "2018-04-12 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 108,
+    "fields":{
+      "text": "Choose the correct option",
+      "text_es": "Choose the correct option",
+      "answers": [237, 238, 239],
+      "type": 1,
+      "correct_answers": [238],
+      "order": 3,
       "created_at": "2018-04-12 02:42:49.0957+00",
       "updated_at": "2018-04-12 02:42:49.0957+00"
     }
@@ -1572,12 +1586,12 @@
     "model": "beta_invite.question",
     "pk": 109,
     "fields":{
-      "text": "¿Cuánto es el porcentaje del HEDN?",
-      "text_es": "¿Cuánto es el porcentaje del HEDN?",
-      "answers": [239, 240, 241, 242],
+      "text": "I have never been…….. in all my life!",
+      "text_es": "I have never been…….. in all my life!",
+      "answers": [240, 241, 242],
       "type": 1,
-      "correct_answers": [240],
-      "order": 9,
+      "correct_answers": [241],
+      "order": 4,
       "created_at": "2018-04-12 02:42:49.0957+00",
       "updated_at": "2018-04-12 02:42:49.0957+00"
     }
@@ -1586,12 +1600,12 @@
     "model": "beta_invite.question",
     "pk": 110,
     "fields":{
-      "text": "¿Cuáles son los porcentajes que se deben de tener en cuenta en seguridad social?",
-      "text_es": "¿Cuáles son los porcentajes que se deben de tener en cuenta en seguridad social?",
-      "answers": [243, 244, 245, 246],
-      "type": 1,
-      "correct_answers": [245],
-      "order": 10,
+      "text": "Tell us (in english) something unconventional that you have done in your life",
+      "text_es": "Tell us (in english) something unconventional that you have done in your life",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 5,
       "created_at": "2018-04-12 02:42:49.0957+00",
       "updated_at": "2018-04-12 02:42:49.0957+00"
     }
@@ -1600,12 +1614,12 @@
     "model": "beta_invite.question",
     "pk": 111,
     "fields":{
-      "text": "Los valores que no se pagan al liquidar la nómina y que se provisionan para pagarlos en un futuro son:",
-      "text_es": "Los valores que no se pagan al liquidar la nómina y que se provisionan para pagarlos en un futuro son:",
-      "answers": [247, 248, 249, 250],
+      "text": "¿Qué significa 'Payroll tax exempt' en términos financieros?",
+      "text_es": "¿Qué significa 'Payroll tax exempt' en términos financieros?",
+      "answers": [243, 244, 245],
       "type": 1,
-      "correct_answers": [250],
-      "order": 11,
+      "correct_answers": [244],
+      "order": 2,
       "created_at": "2018-04-12 02:42:49.0957+00",
       "updated_at": "2018-04-12 02:42:49.0957+00"
     }
@@ -1614,12 +1628,12 @@
     "model": "beta_invite.question",
     "pk": 112,
     "fields":{
-      "text": "All my life…",
-      "text_es": "All my life…",
-      "answers": [251, 252, 253],
+      "text": "¿Qué significa 'Invoice' en términos financieros?",
+      "text_es": "¿Qué significa 'Invoice' en términos financieros?",
+      "answers": [246, 247, 248],
       "type": 1,
-      "correct_answers": [253],
-      "order": 1,
+      "correct_answers": [247],
+      "order": 3,
       "created_at": "2018-04-12 02:42:49.0957+00",
       "updated_at": "2018-04-12 02:42:49.0957+00"
     }
@@ -1628,12 +1642,12 @@
     "model": "beta_invite.question",
     "pk": 113,
     "fields":{
-      "text": "There you are!",
-      "text_es": "There you are!",
-      "answers": [254, 255, 256],
+      "text": "¿Qué significa 'Superannuation' en términos financieros?",
+      "text_es": "¿Qué significa 'Superannuation' en términos financieros?",
+      "answers": [249, 250, 251],
       "type": 1,
-      "correct_answers": [255],
-      "order": 2,
+      "correct_answers": [250],
+      "order": 4,
       "created_at": "2018-04-12 02:42:49.0957+00",
       "updated_at": "2018-04-12 02:42:49.0957+00"
     }
@@ -1642,12 +1656,12 @@
     "model": "beta_invite.question",
     "pk": 114,
     "fields":{
-      "text": "He´s had his car…",
-      "text_es": "He´s had his car…",
-      "answers": [257, 258, 259],
+      "text": "¿Qué significa 'Debtor Cahsing' en términos financieros?",
+      "text_es": "¿Qué significa 'Debtor Cahsing' en términos financieros?",
+      "answers": [252, 253, 254],
       "type": 1,
-      "correct_answers": [258],
-      "order": 3,
+      "correct_answers": [252],
+      "order": 5,
       "created_at": "2018-04-12 02:42:49.0957+00",
       "updated_at": "2018-04-12 02:42:49.0957+00"
     }
@@ -1656,197 +1670,16 @@
     "model": "beta_invite.question",
     "pk": 115,
     "fields":{
-      "text": "I don´t think Tokyo…",
-      "text_es": "I don´t think Tokyo…",
-      "answers": [260, 261, 262],
-      "type": 1,
-      "correct_answers": [262],
-      "order": 4,
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.question",
-    "pk": 116,
-    "fields":{
-      "text": "Choose the correct option",
-      "text_es": "Choose the correct option",
-      "answers": [263, 264, 265],
-      "type": 1,
-      "correct_answers": [264],
-      "order": 5,
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.question",
-    "pk": 117,
-    "fields":{
-      "text": "Choose the correct option",
-      "text_es": "Choose the correct option",
-      "answers": [266, 267, 268],
-      "type": 1,
-      "correct_answers": [266],
-      "order": 6,
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.question",
-    "pk": 118,
-    "fields":{
-      "text": "Choose the correct option",
-      "text_es": "Choose the correct option",
-      "answers": [269, 270, 271],
-      "type": 1,
-      "correct_answers": [269],
-      "order": 7,
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.question",
-    "pk": 119,
-    "fields":{
-      "text": "Choose the correct option",
-      "text_es": "Choose the correct option",
-      "answers": [272, 273, 274],
-      "type": 1,
-      "correct_answers": [272],
-      "order": 8,
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.question",
-    "pk": 120,
-    "fields":{
-      "text": "Choose the correct option",
-      "text_es": "Choose the correct option",
-      "answers": [275, 276, 277],
-      "type": 1,
-      "correct_answers": [276],
-      "order": 9,
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.question",
-    "pk": 121,
-    "fields":{
-      "text": "I have never been…….. in all my life!",
-      "text_es": "I have never been…….. in all my life!",
-      "answers": [278, 279, 280],
-      "type": 1,
-      "correct_answers": [279],
-      "order": 10,
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.question",
-    "pk": 122,
-    "fields":{
-      "text": "The payroll consists mainly of three parts. The accrual, deductions and appropriations. Please briefly describe each one (in English)",
-      "text_es": "The payroll consists mainly of three parts. The accrual, deductions and appropriations. Please briefly describe each one (in English)",
-      "answers": [],
-      "type": 3,
-      "correct_answers": [],
-      "order": 1,
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.question",
-    "pk": 123,
-    "fields":{
-      "text": "¿Qué significa 'Payroll tax exempt' en términos financieros?",
-      "text_es": "¿Qué significa 'Payroll tax exempt' en términos financieros?",
-      "answers": [281, 282, 283],
-      "type": 1,
-      "correct_answers": [282],
-      "order": 2,
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.question",
-    "pk": 124,
-    "fields":{
-      "text": "¿Qué significa 'Invoice' en términos financieros?",
-      "text_es": "¿Qué significa 'Invoice' en términos financieros?",
-      "answers": [284, 285, 286],
-      "type": 1,
-      "correct_answers": [285],
-      "order": 3,
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.question",
-    "pk": 125,
-    "fields":{
-      "text": "¿Qué significa 'Superannuation' en términos financieros?",
-      "text_es": "¿Qué significa 'Superannuation' en términos financieros?",
-      "answers": [287, 288, 289],
-      "type": 1,
-      "correct_answers": [288],
-      "order": 4,
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.question",
-    "pk": 126,
-    "fields":{
-      "text": "¿Qué significa 'Debtor Cahsing' en términos financieros?",
-      "text_es": "¿Qué significa 'Debtor Cahsing' en términos financieros?",
-      "answers": [290, 291, 292],
-      "type": 1,
-      "correct_answers": [290],
-      "order": 5,
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.question",
-    "pk": 127,
-    "fields":{
       "text": "¿Qué significa 'Payslip' en términos financieros?",
       "text_es": "¿Qué significa 'Payslip' en términos financieros?",
-      "answers": [293, 294, 295],
+      "answers": [255, 256, 257],
       "type": 1,
-      "correct_answers": [293],
+      "correct_answers": [255],
       "order": 6,
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.question",
-    "pk": 128,
-    "fields":{
-      "text": "Supongamos que un trabajador laboró desde el mes enero hasta el mes de abril, devengando los siguientes valores: enero 600.000, febrero 700.000, marzo 700.000 y abril 800.000. ¿Cuánto sería el valor de la prima de servicios?",
-      "text_es": "Supongamos que un trabajador laboró desde el mes de enero hasta el mes de abril, devengando los siguientes valores: enero 600.000, febrero 700.000, marzo 700.000 y abril 800.000. ¿Cuánto sería el valor de la prima de servicios?",
-      "answers": [296, 297, 298, 299],
-      "type": 1,
-      "correct_answers": [297],
-      "order": 12,
       "created_at": "2018-04-12 02:42:49.0957+00",
       "updated_at": "2018-04-12 02:42:49.0957+00"
     }
   }
 ]
+
 
