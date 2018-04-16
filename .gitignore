@@ -90,4 +90,4 @@ testing_webpage/testing_webpage/settings.py
 ziggeo_api_key.txt
 testing_webpage/deploy/deploy_credentials.json
 
-testing_webpage/match/*.p
+testing_webpage/match/pickle_models/*.p
