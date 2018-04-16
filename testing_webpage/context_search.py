@@ -14,6 +14,7 @@ application = get_wsgi_application()
 import sys
 import pickle
 import common
+import time
 
 from collections import OrderedDict
 from beta_invite.models import Country, User
@@ -126,7 +127,11 @@ def run():
     sys.stdout = h.Unbuffered(open('context_search.log', 'a'))
 
     # TODO: Get relevances with word2vec and gensim.
+    h.log("STARTED CONTEXT SEARCH")
+    t0 = time.time()
     compute_related_words()
+    t1 = time.time()
+    h.log('FINISHED CONTEXT SEARCH, time: {}'.format(t1 - t0))
 
 
 if __name__ == '__main__':
