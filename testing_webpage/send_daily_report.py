@@ -38,8 +38,6 @@ def send_campaign_report(recipients, campaign_id):
                                  subject='Reporte diario para {campaign_name}'.format(campaign_name=campaign.title_es),
                                  recipients=recipients,
                                  candidates=candidates)
-# b_user = BusinessUser.objects.get(pk=42)
-# campaign = Campaign.objects.get(pk=42)
 
 
 def business_daily_report():
@@ -65,6 +63,4 @@ def business_daily_report():
 send_campaign_report(['juan@peaku.co', 'santiago@peaku.co'], campaign_id=10)
 send_general_report()
 business_daily_report()
-
-
 
