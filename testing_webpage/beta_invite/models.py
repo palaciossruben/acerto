@@ -432,14 +432,15 @@ class User(models.Model):
 
     def change_to_international_phone_number(self):
 
-        # Adds the '+' and country code
-        if self.phone[0] != '+':
+        if self.phone:
+            # Adds the '+' and country code
+            if self.phone[0] != '+':
 
-            self.phone = '+' + self.get_calling_code() + self.phone
+                self.phone = '+' + self.get_calling_code() + self.phone
 
-            # Adds the '+' only
-        elif re.search(r'^' + self.get_calling_code() + '.+', self.phone) is not None:
-            self.phone = '+' + self.phone
+                # Adds the '+' only
+            elif re.search(r'^' + self.get_calling_code() + '.+', self.phone) is not None:
+                self.phone = '+' + self.phone
 
     # adds custom table name
     class Meta:
