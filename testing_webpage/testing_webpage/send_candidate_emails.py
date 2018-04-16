@@ -11,7 +11,7 @@ from dashboard.models import Candidate
 
 def send_candidates_emails():
 
-    candidates = Candidate.objects.filter(~Q(user=None), user__gender_id=None).order_by('-user_id')  # [:100]
+    candidates = Candidate.objects.filter(~Q(user=None), ~Q(user__email=None), user__gender_id=None).order_by('-user_id')[:10]
 
     candidates = [c for c in candidates]
 
