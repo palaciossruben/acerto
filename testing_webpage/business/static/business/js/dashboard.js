@@ -16,7 +16,6 @@ function count_candidates() {
     states = ["backlog",
               "waiting_interview",
               "sent_to_client",
-              "got_job",
               "rejected"]
 
     for (i = 0; i < states.length; i++)  {

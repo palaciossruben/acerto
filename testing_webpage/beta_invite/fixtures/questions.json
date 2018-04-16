@@ -1679,6 +1679,380 @@
       "created_at": "2018-04-12 02:42:49.0957+00",
       "updated_at": "2018-04-12 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 116,
+    "fields":{
+      "text": "El siguiente query fue realizado con mysql, éste posee un bug. ¿En qué línea o líneas se encuentra y por qué?",
+      "text_es": "El siguiente query fue realizado con mysql, éste posee un bug. ¿En qué línea o líneas se encuentra y por qué?",
+      "answers": [258, 259, 260, 261],
+      "type": 1,
+      "correct_answers": [261],
+      "order": 1,
+      "image_path": "beta_invite/questions/116/alias.png",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 117,
+    "fields":{
+      "text": "¿Qué está realizando la línea 6 del siguiente query?",
+      "text_es": "¿Qué está realizando la línea 6 del siguiente query?",
+      "answers": [262, 263, 264, 265],
+      "type": 1,
+      "correct_answers": [264],
+      "order": 2,
+      "image_path": "beta_invite/questions/117/line6.png",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 118,
+    "fields":{
+      "text": "¿Para qué sirve la línea 7 del siguiente query?",
+      "text_es": "¿Para qué sirve la línea 7 del siguiente query?",
+      "answers": [266, 267, 268, 269],
+      "type": 1,
+      "correct_answers": [267],
+      "order": 3,
+      "image_path": "beta_invite/questions/118/line7.png",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 119,
+    "fields":{
+      "text": "¿Cuál de las siguientes expresiones puede sustituir la línea 7 del query anterior?",
+      "text_es": "¿Cuál de las siguientes expresiones puede sustituir la línea 7 del query anterior?",
+      "answers": [270, 271, 272, 273],
+      "type": 1,
+      "correct_answers": [271],
+      "order": 4,
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 120,
+    "fields":{
+      "text": "¿Cuál o cuáles serían unas posibles soluciones para ejercicio?",
+      "text_es": "¿Cuál o cuáles serían unas posibles soluciones para ejercicio?",
+      "answers": [274, 275, 276, 277],
+      "type": 1,
+      "correct_answers": [276],
+      "order": 5,
+      "image_path": "beta_invite/questions/120/testcheck.png",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 121,
+    "fields":{
+      "text": "",
+      "text_es": "",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 6,
+      "image_path": "beta_invite/questions/121/aumento.png",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 122,
+    "fields":{
+      "text": "¿En cuál de las siguientes sentencias de SQL se emplea la cláusula SET?",
+      "text_es": "¿En cuál de las siguientes sentencias de SQL se emplea la cláusula SET?",
+      "answers": [278, 279, 280, 281],
+      "type": 1,
+      "correct_answers": [280],
+      "order": 7,
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 123,
+    "fields":{
+      "text": "¿Cuál sería la consulta para resolver el ejercicio?",
+      "text_es": "¿Cuál sería la consulta para resolver el ejercicio?",
+      "answers": [282, 283, 284, 285],
+      "type": 1,
+      "correct_answers": [284],
+      "order": 8,
+      "image_path": "beta_invite/questions/123/customer.png",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 124,
+    "fields":{
+      "text": "Selecciona la opción correcta",
+      "text_es": "Selecciona la opción correcta",
+      "answers": [286, 287, 288, 289],
+      "type": 1,
+      "correct_answers": [289],
+      "order": 9,
+      "image_path": "beta_invite/questions/124/consultasalario.png",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 125,
+    "fields":{
+      "text": "Selecciona la opción correcta",
+      "text_es": "Selecciona la opción correcta",
+      "answers": [290, 291, 292, 293],
+      "type": 1,
+      "correct_answers": [292],
+      "order": 10,
+      "image_path": "beta_invite/questions/125/permisos.png",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 126,
+    "fields":{
+      "text": "¿Cuál es la forma correcta de enlazar un código de javascript externo?",
+      "text_es": "¿Cuál es la forma correcta de enlazar un código de javascript externo?",
+      "answers": [294, 295, 296, 297],
+      "type": 1,
+      "correct_answers": [297],
+      "order": 1,
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 127,
+    "fields":{
+      "text": "¿Qué se selecciona con el siguiente selector de jQuery?: $ ('div.intro')",
+      "text_es": "Con jQuery, ¿qué selecciona?: ",
+      "answers": [298, 299, 300, 301],
+      "type": 1,
+      "correct_answers": [301],
+      "order": 2,
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 128,
+    "fields":{
+      "text": "¿Qué es la sobrecarga de métodos?",
+      "text_es": "¿Qué es la sobrecarga de métodos?",
+      "answers": [302, 303, 304, 305],
+      "type": 1,
+      "correct_answers": [303],
+      "order": 3,
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 129,
+    "fields":{
+      "text": "En programación orientada a objetos, la relación de herencia entre una clase A y la clase B (A hereda de B), se puede expresar verbalmente como:",
+      "text_es": "En programación orientada a objetos, la relación de herencia entre una clase A y la clase B (A hereda de B), se puede expresar verbalmente como:",
+      "answers": [306, 307, 308, 309],
+      "type": 1,
+      "correct_answers": [308],
+      "order": 4,
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 130,
+    "fields":{
+      "text": "¿Cuál de las siguientes opciones no es una característica de una clase abstracta?",
+      "text_es": "¿Cuál de las siguientes opciones no es una característica de una clase abstracta?",
+      "answers": [310, 311, 312, 313],
+      "type": 1,
+      "correct_answers": [312],
+      "order": 5,
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 131,
+    "fields":{
+      "text": "¿Cuáles de los siguientes métodos pueden ser un control de errores válido para una aplicación web?",
+      "text_es": "¿Cuáles de los siguientes métodos pueden ser un control de errores válido para una aplicación web?",
+      "answers": [314, 315, 316, 317],
+      "type": 1,
+      "correct_answers": [316],
+      "order": 1,
+      "created_at": "2018-04-15 02:42:49.0957+00",
+      "updated_at": "2018-04-15 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 132,
+    "fields":{
+      "text": "Seleccione la opción correcta",
+      "text_es": "Seleccione la opción correcta",
+      "answers": [318, 319, 320, 321],
+      "type": 1,
+      "correct_answers": [320],
+      "order": 2,
+      "image_path": "beta_invite/questions/132/saas.png",
+      "created_at": "2018-04-15 02:42:49.0957+00",
+      "updated_at": "2018-04-15 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 133,
+    "fields":{
+      "text": "Seleccione la opción correcta",
+      "text_es": "Seleccione la opción correcta",
+      "answers": [322, 323, 324, 325],
+      "type": 1,
+      "correct_answers": [325],
+      "order": 3,
+      "image_path": "beta_invite/questions/133/webpage.png",
+      "created_at": "2018-04-15 02:42:49.0957+00",
+      "updated_at": "2018-04-15 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 134,
+    "fields":{
+      "text": "El namespace utilizado para el uso de listas genéricas es:",
+      "text_es": "El namespace utilizado para el uso de listas genéricas es:",
+      "answers": [326, 327, 328, 329],
+      "type": 1,
+      "correct_answers": [326],
+      "order": 4,
+      "created_at": "2018-04-15 02:42:49.0957+00",
+      "updated_at": "2018-04-15 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 135,
+    "fields":{
+      "text": "¿Cuál de las siguientes estructuras no es una colección genérica?",
+      "text_es": "¿Cuál de las siguientes estructuras no es una colección genérica?",
+      "answers": [330, 331, 332, 333],
+      "type": 1,
+      "correct_answers": [333],
+      "order": 5,
+      "created_at": "2018-04-15 02:42:49.0957+00",
+      "updated_at": "2018-04-15 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 136,
+    "fields":{
+      "text": "¿Cuál es la función del método GET?",
+      "text_es": "¿Cuál es la función del método GET?",
+      "answers": [334, 335, 336, 337],
+      "type": 1,
+      "correct_answers": [334],
+      "order": 6,
+      "created_at": "2018-04-15 02:42:49.0957+00",
+      "updated_at": "2018-04-15 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 137,
+    "fields":{
+      "text": "¿Cuáles son los diferentes tipos de sintaxis que maneja un LINQ?",
+      "text_es": "Cuáles son los diferentes tipos de sintaxis que maneja un LINQ?",
+      "answers": [338, 339, 340, 341],
+      "type": 1,
+      "correct_answers": [338],
+      "order": 7,
+      "created_at": "2018-04-15 02:42:49.0957+00",
+      "updated_at": "2018-04-15 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 138,
+    "fields":{
+      "text": "Como buena practica de programación, las validaciones deben realizarse",
+      "text_es": "Como buena practica de programación, las validaciones deben realizarse",
+      "answers": [342, 343, 344, 345],
+      "type": 1,
+      "correct_answers": [344],
+      "order": 8,
+      "created_at": "2018-04-15 02:42:49.0957+00",
+      "updated_at": "2018-04-15 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 139,
+    "fields":{
+      "text": "¿Cuál es la forma de especificar el modelo con el cual va a trabajar  una vista en ASP.NET MVC?",
+      "text_es": "¿Cuál es la forma de especificar el modelo con el cual va a trabajar  una vista en ASP.NET MVC?",
+      "answers": [346, 347, 348, 349],
+      "type": 1,
+      "correct_answers": [346],
+      "order": 9,
+      "created_at": "2018-04-15 02:42:49.0957+00",
+      "updated_at": "2018-04-15 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 140,
+    "fields":{
+      "text": "¿Cuál es el atributo de html utilizado para trabajar de lado del cliente?",
+      "text_es": "¿Cuál es el atributo de html utilizado para trabajar de lado del cliente?",
+      "answers": [350, 351, 352, 353],
+      "type": 1,
+      "correct_answers": [352],
+      "order": 10,
+      "created_at": "2018-04-15 02:42:49.0957+00",
+      "updated_at": "2018-04-15 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 141,
+    "fields":{
+      "text": "¿Actualmente reside o está dispuesto a trasladarse a la ciudad de Medellín?",
+      "text_es": "¿Actualmente reside o está dispuesto a trasladarse a la ciudad de Medellín?",
+      "answers": [32, 33],
+      "type": 1,
+      "correct_answers": [33],
+      "order": 6,
+      "created_at": "2018-04-15 02:42:49.0957+00",
+      "updated_at": "2018-04-15 02:42:49.0957+00"
+    }
   }
 ]
 

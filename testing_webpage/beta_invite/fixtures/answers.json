@@ -2556,5 +2556,966 @@
       "created_at": "2018-04-12 02:42:49.0957+00",
       "updated_at": "2018-04-12 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 258,
+    "fields":{
+      "name": "Línea 4, falta declarar una variable",
+      "name_es": "Línea 4, falta declarar una variable",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 259,
+    "fields":{
+      "name": "Línea 2, falta ingresar el parámtero r",
+      "name_es": "Línea 2, falta ingresar el parámtero r",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 260,
+    "fields":{
+      "name": "El query está mal en general, el ejercicio debe realizarse con union",
+      "name_es": "El query está mal en general, el ejercicio debe realizarse con union",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 261,
+    "fields":{
+      "name": "Línea 12, toda tabla derivada tiene que tener su propio alias",
+      "name_es": "Línea 12, toda tabla derivada tiene que tener su propio alias",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 262,
+    "fields":{
+      "name": "Está asignando unas condiciones: Que la altura sea menor o igual a 170, y que al poner en mayúscula el nombre y el apellido, contengan b y gre_n respectivamente (ejemplo AMBER GREEN)",
+      "name_es": "Está asignando unas condiciones: Que la altura sea menor o igual a 170, y que al poner en mayúscula el nombre y el apellido, contengan b y gre_n respectivamente (ejemplo AMBER GREEN)",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 263,
+    "fields":{
+      "name": "Está asignando unas condiciones: Que la altura sea menor a 170, y que al poner en mayúscula el nombre y el apellido, contengan b y gre_n respectivamente (ejemplo AMBER GREEN)",
+      "name_es": "Está asignando unas condiciones: Que la altura sea menor a 170, y que al poner en mayúscula el nombre y el apellido, contengan b y gre_n respectivamente (ejemplo AMBER GREEN)",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 264,
+    "fields":{
+      "name": "Está asignando unas condiciones: Que la altura sea menor o igual a 170, que la letra inicial del nombre sea B y que el apellido contenga GRE_N (ejemplo BORIS GREEN)",
+      "name_es": "Está asignando unas condiciones: Que la altura sea menor o igual a 170, que la letra inicial del nombre sea B y que el apellido contenga GRE_N (ejemplo BORIS GREEN)",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 265,
+    "fields":{
+      "name": "Está asignando unas condiciones: Que la altura sea menor o igual a 170, que el nombre comience por B y que el apellido contenga gren (ejemplo BORIS gren)",
+      "name_es": "Está asignando unas condiciones: Que la altura sea menor o igual a 170, que el nombre comience por B y que el apellido contenga gren (ejemplo BORIS gren)",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 266,
+    "fields":{
+      "name": "Para retornar de los cinco primeros registros solo los tres primeros",
+      "name_es": "Para retornar de los cinco primeros registros solo los tres primeros",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 267,
+    "fields":{
+      "name": "Para retornar solo cinco registros pero comenzando con el cuarto del total",
+      "name_es": "Para retornar solo cinco registros pero comenzando con el cuarto del total",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 268,
+    "fields":{
+      "name": "Para retornar de los cinco primeros registros solo los tres últimos",
+      "name_es": "Para retornar de los cinco primeros registros solo los tres últimos",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 269,
+    "fields":{
+      "name": "Para retornar solo tres registros pero comenzando con el quinto total",
+      "name_es": "Para retornar solo tres registros pero comenzando con el quinto del total",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 270,
+    "fields":{
+      "name": "LIMIT 5, 4",
+      "name_es": "LIMIT 5, 4",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 271,
+    "fields":{
+      "name": "LIMIT 3, 5",
+      "name_es": "LIMIT 3, 5",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 272,
+    "fields":{
+      "name": "LIMIT 5, 3",
+      "name_es": "LIMIT 5, 3",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 273,
+    "fields":{
+      "name": "Ninguna de las anteriores",
+      "name_es": "Ninguna de las anteriores",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 274,
+    "fields":{
+      "name": "Solo A",
+      "name_es": "Solo A",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 275,
+    "fields":{
+      "name": "En realidad A, B y C",
+      "name_es": "En realidad A, B y C",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 276,
+    "fields":{
+      "name": "A y B",
+      "name_es": "A y B",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 277,
+    "fields":{
+      "name": "A y C",
+      "name_es": "A y C",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 278,
+    "fields":{
+      "name": "Delete",
+      "name_es": "Delete",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 279,
+    "fields":{
+      "name": "Drop",
+      "name_es": "Drop",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 280,
+    "fields":{
+      "name": "Update",
+      "name_es": "Update",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 281,
+    "fields":{
+      "name": "Create",
+      "name_es": "Create",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 282,
+    "fields":{
+      "name": "A",
+      "name_es": "A",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 283,
+    "fields":{
+      "name": "B",
+      "name_es": "B",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 284,
+    "fields":{
+      "name": "C",
+      "name_es": "C",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 285,
+    "fields":{
+      "name": "D",
+      "name_es": "D",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 286,
+    "fields":{
+      "name": "A",
+      "name_es": "A",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 287,
+    "fields":{
+      "name": "B",
+      "name_es": "B",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 288,
+    "fields":{
+      "name": "C",
+      "name_es": "C",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 289,
+    "fields":{
+      "name": "D",
+      "name_es": "D",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 290,
+    "fields":{
+      "name": "A",
+      "name_es": "A",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 291,
+    "fields":{
+      "name": "B",
+      "name_es": "B",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 292,
+    "fields":{
+      "name": "C",
+      "name_es": "C",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 293,
+    "fields":{
+      "name": "D",
+      "name_es": "D",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 294,
+    "fields":{
+      "name": "<script src=''ext.js''...",
+      "name_es": "<script src=''ext.js''...",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 295,
+    "fields":{
+      "name": "<script source=''ext.js''...",
+      "name_es": "<script source=''ext.js''...",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 296,
+    "fields":{
+      "name": "<external src=''ext.js''...",
+      "name_es": "<external src=''ext.js''...",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 297,
+    "fields":{
+      "name": "Ninguna de las anteriores",
+      "name_es": "Ninguna de las anteriores",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 298,
+    "fields":{
+      "name": "Todos los elementos div con id='intro'",
+      "name_es": "Todos los elementos div con id='intro'",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 299,
+    "fields":{
+      "name": "Todos los elementos con id='div.intro'",
+      "name_es": "Todos los elementos con id='div.intro'",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 300,
+    "fields":{
+      "name": "El primer elemento div con id='intro'",
+      "name_es": "El primer elemento div con id='intro'",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 301,
+    "fields":{
+      "name": "Todos los elementos con class='intro'",
+      "name_es": "Todos los elementos con class='intro'",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 302,
+    "fields":{
+      "name": "El nombramiento de más de un método con diferente identificador y con parámetros iguales",
+      "name_es": "El nombramiento de más de un método con diferente identificador y con parámetros iguales",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 303,
+    "fields":{
+      "name": "El nombramiento de más de un método con el mismo identificador y con parámetros diferentes",
+      "name_es": "El nombramiento de más de un método con el mismo identificador y con parámetros diferentes",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 304,
+    "fields":{
+      "name": "Un método que se invoca a sí mismo",
+      "name_es": "Un método que se invoca a sí mismo",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 305,
+    "fields":{
+      "name": "El nombramiento de más de un método con el mismo identificador y con los mismos parámetros",
+      "name_es": "El nombramiento de más de un método con el mismo identificador y con los mismos parámetros",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 306,
+    "fields":{
+      "name": "B es un A",
+      "name_es": "B es un A",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 307,
+    "fields":{
+      "name": "A es igual a B",
+      "name_es": "A es igual a B",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 308,
+    "fields":{
+      "name": "A es un B",
+      "name_es": "A es un B",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 309,
+    "fields":{
+      "name": "B es como A",
+      "name_es": "B es como A",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 310,
+    "fields":{
+      "name": "No puede ser instanciada",
+      "name_es": "No puede ser instanciada",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 311,
+    "fields":{
+      "name": "Tiene por lo menos un método abstracto",
+      "name_es": "Tiene por lo menos un método abstracto",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 312,
+    "fields":{
+      "name": "Si implementa una interfaz, es opcional implementar sus métodos",
+      "name_es": "Si implementa una interfaz, es opcional implementar sus métodos",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 313,
+    "fields":{
+      "name": "Combina métodos abstractos con métodos definidos",
+      "name_es": "Combina métodos abstractos con métodos definidos",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 314,
+    "fields":{
+      "name": "Iniciar ada método con begin transaction",
+      "name_es": "Iniciar ada método con begin transaction",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 315,
+    "fields":{
+      "name": "Atrapar los errores de servidor con Ajax y luego poder visualizarlos en un cuadro de texto",
+      "name_es": "Atrapar los errores de servidor con Ajax y luego poder visualizarlos en un cuadro de texto",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 316,
+    "fields":{
+      "name": "Programar el evento Application_Error del archivo de aplicación Global.asax",
+      "name_es": "Programar el evento Application_Error del archivo de aplicación Global.asax",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 317,
+    "fields":{
+      "name": "Sobreescribir el evento OnError de cada página de la aplicación",
+      "name_es": "Sobreescribir el evento OnError de cada página de la aplicación",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 318,
+    "fields":{
+      "name": "A",
+      "name_es": "A",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 319,
+    "fields":{
+      "name": "B",
+      "name_es": "B",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 320,
+    "fields":{
+      "name": "C",
+      "name_es": "C",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 321,
+    "fields":{
+      "name": "D",
+      "name_es": "D",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 322,
+    "fields":{
+      "name": "A",
+      "name_es": "A",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 323,
+    "fields":{
+      "name": "B",
+      "name_es": "B",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 324,
+    "fields":{
+      "name": "C",
+      "name_es": "C",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 325,
+    "fields":{
+      "name": "D",
+      "name_es": "D",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 326,
+    "fields":{
+      "name": "System.Collections.Generic",
+      "name_es": "System.Collections.Generic",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 327,
+    "fields":{
+      "name": "System.Generic",
+      "name_es": "System.Generic",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 328,
+    "fields":{
+      "name": "System.Io.Collections",
+      "name_es": "System.Io.Collections",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 329,
+    "fields":{
+      "name": "Ninguna de las anteriores",
+      "name_es": "Ninguna de las anteriores",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 330,
+    "fields":{
+      "name": "List<T>",
+      "name_es": "List<T>",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 331,
+    "fields":{
+      "name": "Queue<T>",
+      "name_es": "Queue<T>",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 332,
+    "fields":{
+      "name": "Stack<T>",
+      "name_es": "Stack<T>",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 333,
+    "fields":{
+      "name": "String<T>",
+      "name_es": "String<T>",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 334,
+    "fields":{
+      "name": "Solicita al servidor un objeto, un recurso o un documento",
+      "name_es": "Solicita al servidor un objeto, un recurso o un documento",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 335,
+    "fields":{
+      "name": "Envía al servidor un documento",
+      "name_es": "Envía al servidor un documento",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 336,
+    "fields":{
+      "name": "Solicita al servidor que elimine un documento",
+      "name_es": "Solicita al servidor que elimine un documento",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 337,
+    "fields":{
+      "name": "Solicita al servidor los métodos HTTP soportados",
+      "name_es": "Solicita al servidor los métodos HTTP soportados",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 338,
+    "fields":{
+      "name": "Consulta y método",
+      "name_es": "Consulta y método",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 339,
+    "fields":{
+      "name": "Método y query",
+      "name_es": "Método y query",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 340,
+    "fields":{
+      "name": "SQL",
+      "name_es": "SQL",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 341,
+    "fields":{
+      "name": "Consulta y SQL",
+      "name_es": "Consulta y SQL",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 342,
+    "fields":{
+      "name": "Del lado del cliente",
+      "name_es": "Del lado del cliente",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 343,
+    "fields":{
+      "name": "Del lado del servidor",
+      "name_es": "Del lado del servidor",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 344,
+    "fields":{
+      "name": "Tanto del lado del cliente como del servidor",
+      "name_es": "Tanto del lado del cliente como del servidor",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 345,
+    "fields":{
+      "name": "No es necesario realizar validaciones",
+      "name_es": "No es necesario realizar validaciones",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 346,
+    "fields":{
+      "name": "@model",
+      "name_es": "@model",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 347,
+    "fields":{
+      "name": "@Model",
+      "name_es": "@Model",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 348,
+    "fields":{
+      "name": "Cliente",
+      "name_es": "Cliente",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 349,
+    "fields":{
+      "name": "@modelo",
+      "name_es": "@modelo",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 350,
+    "fields":{
+      "name": "Src",
+      "name_es": "Src",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 351,
+    "fields":{
+      "name": "Name",
+      "name_es": "Name",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 352,
+    "fields":{
+      "name": "Id",
+      "name_es": "Id",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 353,
+    "fields": {
+      "name": "class",
+      "name_es": "class",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
   }
+
 ]
