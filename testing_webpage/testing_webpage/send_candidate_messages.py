@@ -1,4 +1,7 @@
 import os
+my_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(my_path)
+print(os.getcwd())
 from django.core.wsgi import get_wsgi_application
 from django.db.models import Q
 
