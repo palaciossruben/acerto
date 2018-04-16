@@ -126,9 +126,9 @@ def run():
 
     sys.stdout = h.Unbuffered(open('context_search.log', 'a'))
 
-    # TODO: Get relevances with word2vec and gensim.
     h.log("STARTED CONTEXT SEARCH")
     t0 = time.time()
+    # TODO: Get relevances with word2vec and gensim.
     compute_related_words()
     t1 = time.time()
     h.log('FINISHED CONTEXT SEARCH, time: {}'.format(t1 - t0))

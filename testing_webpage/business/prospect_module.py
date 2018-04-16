@@ -7,6 +7,7 @@ from testing_webpage.models import PendingEmail
 from business import search_module
 from dashboard.models import Candidate
 from match import model, clustering
+from match.pickle_models import pickle_handler
 
 
 NUMBER_OF_MATCHES = 30
@@ -70,7 +71,7 @@ def send_mails(candidate_prospects):
 
 def cluster_filter(candidates):
     clusters, candidates = clustering.predict_cluster(candidates)
-    return [candidate for c, candidate in zip(clusters, candidates) if c in clustering.SELECTED_CLUSTERS]
+    return [candidate for c, candidate in zip(clusters, candidates) if c in pickle_handler.load_selected_clusters()]
 
 
 def get_top_users(campaign):
@@ -90,8 +91,6 @@ def get_top_users(campaign):
     #candidates = cluster_filter(candidates)
 
     prediction, candidates = model.predict_match(candidates, regression=False)
-
-    #return [c.user for p, c in reversed(sorted(zip(prediction, candidates), key=lambda x: x[0]))]
 
     # filters for predicted users.
     return [c.user for p, c in zip(prediction, candidates) if p]

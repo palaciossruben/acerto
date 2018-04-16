@@ -20,7 +20,7 @@ def list_dir(directory=None):
     return files
 
 
-def sync_local(sync_media=False, db_update=True):
+def sync(sync_media=False, db_update=True):
     """
     Synchronizes local machine with last backup from DB and media files
     Args:
@@ -167,7 +167,7 @@ def deploy():
             # start gunicorn binded unix socket, from where nginx listens.
             run('PYENV_VERSION=3.5.2 gunicorn -c gunicorn_cfg.py testing_webpage.wsgi --bind=unix:/opt/peaku_co/run/gunicorn.sock')
 
-    sync_local(sync_media=False, db_update=False)
+    sync(sync_media=False, db_update=False)
 
 
 def dev_update():

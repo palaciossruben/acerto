@@ -1,5 +1,5 @@
 import os
-from datetime import datetime, timedelta
+from datetime import timedelta
 from django.core.wsgi import get_wsgi_application
 
 # Environment can use the models as if inside the Django app
