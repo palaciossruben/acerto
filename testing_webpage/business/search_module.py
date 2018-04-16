@@ -9,7 +9,7 @@ import common
 from business import util
 from beta_invite.models import User
 
-MAX_NUM_OF_USERS = 20
+MAX_NUM_OF_USERS = 40
 
 
 WORD_USER_PATH = os.path.join('subscribe', 'word_user_dictionary.p')
