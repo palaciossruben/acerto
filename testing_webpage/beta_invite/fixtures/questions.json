@@ -1836,7 +1836,7 @@
       "text_es": "¿Cuál es la forma correcta de enlazar un código de javascript externo?",
       "answers": [294, 295, 296, 297],
       "type": 1,
-      "correct_answers": [297],
+      "correct_answers": [294],
       "order": 1,
       "created_at": "2018-04-14 02:42:49.0957+00",
       "updated_at": "2018-04-14 02:42:49.0957+00"
