@@ -8,7 +8,6 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
-import pickle
 import statistics
 import numpy as np
 import pandas as pd
@@ -16,9 +15,7 @@ import pandas as pd
 from dashboard.models import Candidate, State
 from sklearn.feature_extraction import FeatureHasher
 from sklearn.preprocessing import StandardScaler
-
-
-DIR_PATH = os.path.dirname(os.path.realpath(__file__))
+from match.pickle_models import pickle_handler
 
 
 def get_test_score(candidate, field, f):
@@ -195,14 +192,6 @@ def calculate_defaults(data):
     return defaults
 
 
-def save_defaults(defaults):
-    save_object(defaults, 'defaults.p')
-
-
-def load_defaults():
-    return load_object('defaults.p')
-
-
 def fill_missing_values(data, defaults=None):
 
     if defaults is None:
@@ -270,25 +259,9 @@ def hash_column(data, column_name, num_features):
     return add_hashed_matrix_to_data(matrix, data, column_name, num_features)
 
 
-def get_path(file_name):
-    return os.path.join(DIR_PATH, file_name)
-
-
-def save_object(my_object, filename):
-    pickle.dump(my_object, open(get_path(filename), "wb"))
-
-
-def load_object(filename):
-    return pickle.load(open(get_path(filename), "rb"))
-
-
-def get_hasher_name(field):
-    return "hasher_{}.p".format(field)
-
-
 def get_matrix_from_saved_hash(data, field):
     data = make_column_hashable(data, field)
-    hasher = load_object(get_hasher_name(field))
+    hasher = pickle_handler.load_hasher(field)
     return hasher.transform(data[field])
 
 
@@ -304,13 +277,32 @@ def get_scaler(data):
     return StandardScaler(with_std=True).fit(data)
 
 
-def save_scaler(data):
+# SCALER
+def scale(data, scaler=None):
+    """
+    :param data: Dataframe
+    :param scaler: a optional scaler, if not provided will fit one.
+    :return: scaled data
+    """
+    fields = list(data)
+
+    if scaler is None:
+        scaler = get_scaler(data)
+
+    # At this point 'data' output is not a DataFrame, unfortunately
+    data = scaler.transform(data)
+
+    data = pd.DataFrame(data, columns=fields)
+    return data
+
+
+def get_scaler_and_save(data, fields=None):
     scaler = get_scaler(data)
-    save_object(scaler, 'scaler.p')
+    pickle_handler.save_scaler(scaler, fields)
 
 
-def scale_data_from_saved_scaler(data):
-    scaler = load_object('scaler.p')
+def scale_data_from_saved_scaler(data, fields=None):
+    scaler = pickle_handler.load_scaler(fields)
     return scale(data, scaler=scaler)
 
 
@@ -330,27 +322,9 @@ def predict_property(candidates, model, selected_fields=None):
         return [], []
 
     data = load_raw_data(candidates)
-    data = fill_missing_values(data, defaults=load_defaults())
+    data = fill_missing_values(data, defaults=pickle_handler.load_defaults())
     data = add_hash_fields_from_saved_hashes(data)
     data = filter_fields(data, selected_fields)
-    data = scale_data_from_saved_scaler(data)
+    data = scale_data_from_saved_scaler(data, fields=selected_fields)
 
     return model.predict(data), candidates
-
-
-def scale(data, scaler=None):
-    """
-    :param data: Dataframe
-    :param scaler: a optional scaler, if not provided will fit one.
-    :return: scaled data
-    """
-    fields = list(data)
-
-    if scaler is None:
-        scaler = get_scaler(data)
-
-    # At this point 'data' output is not a DataFrame, unfortunately
-    data = scaler.transform(data)
-
-    data = pd.DataFrame(data, columns=fields)
-    return data

@@ -1,16 +1,8 @@
 import statistics
 from sklearn.cluster import KMeans
-from sklearn.preprocessing import StandardScaler
-from sklearn.feature_selection import VarianceThreshold
 
 from match import common_learning
-from subscribe import helper as h
-from dashboard.models import Candidate
-
-
-CANDIDATE_CLUSTER_FILENAME = 'candidate_cluster_model.p'
-#SELECTED_CLUSTERS = [1, 2, 3]
-SELECTED_CLUSTERS = [1, 3, 4]  # TODO: dinamic approach
+from match.pickle_models import pickle_handler
 
 
 # Variables selected according to current business need
@@ -19,7 +11,7 @@ SELECTED_FIELDS = ['country_match', 'city_match', 'profession_match', 'min_educa
 
 def get_hashing_info():
     """
-    Add new hashing fields here.
+    Add new hashing fields here
     :return: a hashing dict, with key=field_name, value=num_features
     """
     hashing_info = dict()
@@ -42,8 +34,8 @@ def predict_cluster(candidates):
     :return: None
     """
 
-    cluster_model = common_learning.load_object(CANDIDATE_CLUSTER_FILENAME)
-    return common_learning.predict_property(candidates, cluster_model)#, selected_fields=SELECTED_FIELDS)
+    cluster_model = pickle_handler.load_cluster()
+    return common_learning.predict_property(candidates, cluster_model, selected_fields=SELECTED_FIELDS)
 
 
 def get_std_deviation_per_field(clusters_dict):
@@ -59,13 +51,13 @@ def run():
 
     #sys.stdout = h.Unbuffered(open('clustering.log', 'a'))
 
-    data, candidates = common_learning.load_data(hashing_info=common_learning.get_hashing_info(),)
-                                                 #selected_fields=SELECTED_FIELDS)
+    data, candidates = common_learning.load_data(hashing_info=common_learning.get_hashing_info(),
+                                                 selected_fields=SELECTED_FIELDS)
 
     fields = list(data)
 
     kmeans = KMeans(n_clusters=5, random_state=0).fit(data)
-    common_learning.save_object(kmeans, CANDIDATE_CLUSTER_FILENAME)
+    pickle_handler.save_cluster(kmeans)
 
     clusters_dict = dict()
     for cluster_num, center in enumerate(kmeans.cluster_centers_):
@@ -90,6 +82,7 @@ def run():
             selected_clusters.append(cluster_num)
 
     print(selected_clusters)
+    pickle_handler.save_selected_clusters(selected_clusters)
 
     #for c in predict_cluster(candidates)[0]:
     #    print(c)
