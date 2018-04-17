@@ -16,14 +16,17 @@ from django.utils.translation import ugettext_lazy as _
 from django import forms
 import raven
 
-sentry_credentials = open(os.path.join('testing_webpage', 'sentry.json'), 'r', encoding='utf-8').read()
+
+ABSOLUTE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+sentry_credentials = open(os.path.join(ABSOLUTE_DIR, 'sentry.json'), 'r', encoding='utf-8').read()
 sentry_json = json.loads(sentry_credentials)
 
 RAVEN_CONFIG = {
     'dsn': sentry_json['dsn'],
     # If you are using git, you can also automatically configure the
     # release based on the git info.
-    'release': raven.fetch_git_sha(os.path.abspath(os.pardir)),
+    'release': raven.fetch_git_sha(os.path.dirname(os.path.dirname(ABSOLUTE_DIR))),
 }
 
 
