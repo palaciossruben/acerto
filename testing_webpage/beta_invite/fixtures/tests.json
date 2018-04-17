@@ -270,7 +270,7 @@
       "name": "Developer",
       "name_es": "Desarrollador",
       "questions": [18, 19, 20, 21, 22, 6, 58, 59, 60, 61],
-      "cut_score": 70,
+      "cut_score": 60,
       "created_at": "2018-02-12 02:42:49.0957+00",
       "updated_at": "2018-02-12 02:42:49.0957+00"
     }
@@ -402,7 +402,7 @@
       "name": "MySQL",
       "name_es": "MySQL",
       "questions": [116, 117, 118, 119, 120, 121, 122, 123, 124, 125],
-      "cut_score": 70,
+      "cut_score": 65,
       "created_at": "2018-04-04 02:42:49.0957+00",
       "updated_at": "2018-04-04 02:42:49.0957+00"
     }
@@ -414,7 +414,7 @@
       "name": "MAKERS",
       "name_es": "MAKERS",
       "questions": [126, 127, 128, 129, 130, 141],
-      "cut_score": 70,
+      "cut_score": 65,
       "created_at": "2018-04-04 02:42:49.0957+00",
       "updated_at": "2018-04-04 02:42:49.0957+00"
     }
@@ -426,7 +426,7 @@
       "name": ".NET",
       "name_es": ".NET",
       "questions": [131, 132, 133, 134, 135, 136, 137, 138, 139, 140],
-      "cut_score": 70,
+      "cut_score": 65,
       "created_at": "2018-04-04 02:42:49.0957+00",
       "updated_at": "2018-04-04 02:42:49.0957+00"
     }
