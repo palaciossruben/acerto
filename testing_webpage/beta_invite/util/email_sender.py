@@ -86,7 +86,7 @@ def send(objects, language_code, body_input, subject, with_localization=True, bo
 
         if isinstance(a_object, Candidate):
             params = common_senders.get_params_with_candidate(a_object, language_code, override_dict)
-            recipients = [a_object.user.email, 'juan.rendon@peaku.co']
+            recipients = [a_object.user.email]  # , 'juan.rendon@peaku.co']
         else:
             params = common_senders.get_params_with_user(a_object, override_dict)
             recipients = a_object.email
