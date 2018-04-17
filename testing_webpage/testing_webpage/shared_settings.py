@@ -11,9 +11,20 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import json
 from django.utils.translation import ugettext_lazy as _
-from django.db import models
 from django import forms
+import raven
+
+sentry_credentials = open(os.path.join('testing_webpage', 'sentry.json'), 'r', encoding='utf-8').read()
+sentry_json = json.loads(sentry_credentials)
+
+RAVEN_CONFIG = {
+    'dsn': sentry_json['dsn'],
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    'release': raven.fetch_git_sha(os.path.abspath(os.pardir)),
+}
 
 
 class EmailForm(forms.Form):
@@ -53,7 +64,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'raven.contrib.django.raven_compat',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

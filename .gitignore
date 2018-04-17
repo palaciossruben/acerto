@@ -91,3 +91,4 @@ ziggeo_api_key.txt
 testing_webpage/deploy/deploy_credentials.json
 
 testing_webpage/match/pickle_models/*.p
+testing_webpage/testing_webpage/sentry.json
