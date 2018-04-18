@@ -31,6 +31,7 @@ def get_content_of_file(file_path):
         return None
 
 
+# Change for the settings.init file
 def get_ziggeo_api_key():
     return get_content_of_file(ZIGGEO_API_KEY)
 
