@@ -399,9 +399,9 @@
     "model": "beta_invite.test",
     "pk": 34,
     "fields":{
-      "name": "MySQL",
-      "name_es": "MySQL",
-      "questions": [116, 117, 118, 119, 120, 121, 122, 123, 124, 125],
+      "name": "SQL",
+      "name_es": "SQL",
+      "questions": [116, 117, 121, 122, 123, 124, 125],
       "cut_score": 65,
       "created_at": "2018-04-04 02:42:49.0957+00",
       "updated_at": "2018-04-04 02:42:49.0957+00"
@@ -429,6 +429,18 @@
       "cut_score": 65,
       "created_at": "2018-04-04 02:42:49.0957+00",
       "updated_at": "2018-04-04 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.test",
+    "pk": 37,
+    "fields":{
+      "name": "Developer 2",
+      "name_es": "Desarrollador 2",
+      "questions": [18, 19, 20, 58, 59, 60, 61, 142, 143, 144],
+      "cut_score": 60,
+      "created_at": "2018-02-12 02:42:49.0957+00",
+      "updated_at": "2018-02-12 02:42:49.0957+00"
     }
   }
 ]
