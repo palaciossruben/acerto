@@ -3516,6 +3516,126 @@
       "created_at": "2018-04-14 02:42:49.0957+00",
       "updated_at": "2018-04-14 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 354,
+    "fields": {
+      "name": "Línea 6, falta un par de corchetes []",
+      "name_es": "Línea 6, falta un par de corchetes []",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 355,
+    "fields": {
+      "name": "Línea 3, hay un error de sintaxis con el segundo operador, está mal copiado el mayor o igual",
+      "name_es": "Línea 3, hay un error de sintaxis con el segundo operador, está mal copiado el mayor o igual",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 356,
+    "fields": {
+      "name": "Hay un error de sintaxis en varias partes del código, el operador correcto es =>",
+      "name_es": "Hay un error de sintaxis en varias partes del código, el operador correcto es =>",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 357,
+    "fields": {
+      "name": "No, no hay ningún problema con este código de C#",
+      "name_es": "No, no hay ningún problema con este código de C#",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 358,
+    "fields": {
+      "name": "Expected Output Error",
+      "name_es": "Expected Output Error",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 359,
+    "fields": {
+      "name": "[3]",
+      "name_es": "[3]",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 360,
+    "fields": {
+      "name": "[3,1,2]",
+      "name_es": "[3,1,2]",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 361,
+    "fields": {
+      "name": "[1, 2, 4, 5]",
+      "name_es": "[1, 2, 4, 5]",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 362,
+    "fields": {
+      "name": "Inserta un objeto en la parte inferior de la pila",
+      "name_es": "Inserta un objeto en la parte inferior de la pila",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 363,
+    "fields": {
+      "name": "Inserta un objeto en la parte superior de la pila",
+      "name_es": "Inserta un objeto en la parte superior de la pila",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 364,
+    "fields": {
+      "name": "Inserta el valor del objeto i en la parte inferior de la cola",
+      "name_es": "Inserta el valor del objeto i en la parte inferior de la cola",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 365,
+    "fields": {
+      "name": "Inserta el valor del objeto i en la parte inferior de la cola",
+      "name_es": "Inserta el valor del objeto i en la parte superior de la cola",
+      "created_at": "2018-04-14 02:42:49.0957+00",
+      "updated_at": "2018-04-14 02:42:49.0957+00"
+    }
   }
 
 ]
