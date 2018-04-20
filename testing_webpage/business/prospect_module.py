@@ -10,7 +10,7 @@ from match import model, clustering
 from match.pickle_models import pickle_handler
 
 
-NUMBER_OF_MATCHES = 50
+NUMBER_OF_MATCHES = 60
 
 
 # TODO: deprecated, now all users are all distinct.
@@ -81,16 +81,14 @@ def get_top_users(campaign):
     search_array = search_module.get_word_array_lower_case_and_no_accents(search_text)
     users = search_module.get_matching_users(search_array)
 
+    # candidates = cluster_filter(candidates)
+    # TODO meanwhile:
+    users = [u for u in users if (u.city == campaign.city or u.country == campaign.country) and u.profession == campaign.profession]
+
     top_users = [u for u in users][:NUMBER_OF_MATCHES]
     top_users = filter_users_with_job(top_users)
 
-    #return top_users
-
     candidates = [Candidate(user=u, campaign=campaign, pk=1) for u in top_users]
-
-    #candidates = cluster_filter(candidates)
-    # TODO meanwhile:
-    candidates = [c for c in candidates if c.user.city == c.campaign.city and c.user.profession == c.campaign.profession]
 
     prediction, candidates = model.predict_match(candidates, regression=False)
 

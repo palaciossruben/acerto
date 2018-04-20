@@ -11,7 +11,7 @@ import common
 from beta_invite import constants as cts
 from beta_invite import interview_module
 from beta_invite import test_module, new_user_module
-from beta_invite.models import User, Visitor, Education, Country, Campaign, BulletType, Gender, City, Area
+from beta_invite.models import User, Visitor, Education, Country, Campaign, BulletType, Gender, City, WorkArea
 from beta_invite.util import email_sender
 from beta_invite.util import messenger_sender, common_senders
 
@@ -253,7 +253,7 @@ def additional_info(request):
     # Dictionary parameters
     param_dict['candidate'] = candidate
     param_dict['genders'] = common.translate_list_of_objects(Gender.objects.all(), request.LANGUAGE_CODE)
-    param_dict['areas'] = common.translate_list_of_objects(Area.objects.all(), request.LANGUAGE_CODE)
+    param_dict['work_areas'] = common.translate_list_of_objects(WorkArea.objects.all(), request.LANGUAGE_CODE)
     param_dict['education'] = education
     param_dict['professions'] = professions
     param_dict['countries'] = countries
