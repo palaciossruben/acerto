@@ -15,6 +15,7 @@ from django.contrib.auth import login, authenticate
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.forms import AuthenticationForm
 
+import common
 import business
 import beta_invite
 from business import search_module
@@ -377,7 +378,8 @@ def start(request):
 
     return render(request, cts.START_VIEW_PATH, {'requirement_bullet_id': requirement_bullet_id,
                                                  'perk_bullet_id': perk_bullet_id,
-                                                 'error_message': ''})
+                                                 'error_message': '',
+                                                 'professions': common.get_professions(request.LANGUAGE_CODE)})
 
 
 def create(request):

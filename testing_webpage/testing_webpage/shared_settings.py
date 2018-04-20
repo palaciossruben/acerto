@@ -186,12 +186,3 @@ LOGIN_REDIRECT_URL = 'business:home'
 
 # Disables this limit.
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
-
-
-
-
-
-
-
-
-

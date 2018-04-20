@@ -109,6 +109,7 @@ def load_raw_data(candidates=Candidate.objects.all()):
     data['profession_match'] = data['campaign_profession'] == data['profession']
     data['education_match'] = data['campaign_education'] == data['education']
     data['min_education'] = data['campaign_education'] <= data['education']
+    #data['open_field'] = [c.get_campaign_education_level() for c in candidates]
 
     # similar accuracy with high and low complexity:
     # data = add_test_features(data, candidates, ['passed', 'final_score'])

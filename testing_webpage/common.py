@@ -5,9 +5,10 @@ from ipware.ip import get_ip
 import geoip2.database
 from beta_invite.apps import ip_country_reader, ip_city_reader
 
-from beta_invite.models import User, Campaign, Country, City
+from beta_invite.models import User, Campaign, Country, City, Profession
 from beta_invite import constants as beta_cts
 from dashboard.models import Candidate
+from testing_webpage import settings
 
 
 CONJUNCTIONS = {'las', 'para', 'los', 'del', 'and', 'el', 'en', 'de', 'the', 'for', 'with'}
@@ -204,6 +205,10 @@ def get_city(request, country):
     :param country: Country object
     :return: City Object
     """
+
+    if settings.DEBUG:
+        return City.objects.get(name='Bogotá', country=country)
+
     city_name = get_city_name_with_request(request)
 
     cities = [c for c in City.objects.filter(name=city_name, country=country)]
@@ -233,3 +238,25 @@ def update_object(instance, params):
     for attr, value in params.items():
         setattr(instance, attr, value)
     instance.save()
+
+
+def get_name_field(language_code):
+    if language_code not in 'en':
+        return 'name_' + language_code
+    else:
+        return 'name'
+
+
+def get_professions(language_code):
+    professions = Profession.objects.all().order_by(get_name_field(language_code))
+    translate_list_of_objects(professions, language_code)
+    return professions
+
+
+# TODO: Localization a las patadas
+def translate_list_of_objects(objects, language_code):
+    """Assigns to field name the language specific one."""
+    if 'es' in language_code:
+        for o in objects:
+            o.name = o.name_es
+    return objects
