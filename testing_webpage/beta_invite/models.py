@@ -400,7 +400,7 @@ class User(models.Model):
     phone2 = models.CharField(max_length=40, null=True)
     phone3 = models.CharField(max_length=40, null=True)
     document = models.CharField(max_length=50, null=True)
-    dreamjob = models.CharField(max_length=50, null=True)
+    dream_job = models.CharField(max_length=50, null=True)
     hobbies = models.CharField(max_length=250, null=True)
     twitter = models.CharField(max_length=250, null=True)
     facebook = models.CharField(max_length=250, null=True)
