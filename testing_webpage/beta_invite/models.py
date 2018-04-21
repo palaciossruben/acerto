@@ -388,7 +388,6 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    # new fields
     gender = models.ForeignKey(Gender, null=True, on_delete=models.SET_NULL)
     programs = models.CharField(max_length=250, null=True)
     work_area = models.ForeignKey(WorkArea, null=True, on_delete=models.SET_NULL)

@@ -125,9 +125,6 @@ def deploy():
             # download latest changes to repo.
             run('git pull origin master')
 
-            # updates new data structures for prediction. New fields, hashes etc.
-            run('cd match && python3 update_data_structures.py')
-
             # update the cron jobs, in case it has changed.
             run('crontab cron.txt')
 
@@ -166,6 +163,9 @@ def deploy():
 
             # start gunicorn binded unix socket, from where nginx listens.
             run('PYENV_VERSION=3.5.2 gunicorn -c gunicorn_cfg.py testing_webpage.wsgi --bind=unix:/opt/peaku_co/run/gunicorn.sock')
+
+            # updates new data structures for prediction. New fields, hashes etc.
+            run('cd match && python3 update_data_structures.py')
 
     sync(sync_media=False, db_update=False)
 
