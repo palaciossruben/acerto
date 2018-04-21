@@ -146,7 +146,6 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
-#STATIC_URL = config('cloud_front_url')
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [('resumes', 'media/resumes'),

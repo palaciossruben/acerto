@@ -13,14 +13,14 @@
 {% block content %}
 
     <div>
-        <img src="{% static 'beta_invite/img/girls.jpg' %}"
-             srcset="{% static 'beta_invite/img/girls@2x.jpg' %} 2x,
-                     {% static 'beta_invite/img/girls@3x.jpg' %} 3x"
+        <img src="{{ cloud_front_url }}user/img/girls.jpg"
+             srcset="{{ cloud_front_url }}user/img/girls@2x.jpg 2x,
+                     {{ cloud_front_url }}user/img/girls@3x.jpg 3x"
              class="background-people">
 
-        <img src="{% static 'beta_invite/img/girls_mobile.jpg' %}"
-             srcset="{% static 'beta_invite/img/girls_mobile@2x.jpg' %} 2x,
-                     {% static 'beta_invite/img/girls_mobile@3x.jpg' %} 3x"
+        <img src="{{ cloud_front_url }}user/img/girls_mobile.jpg"
+             srcset="{{ cloud_front_url }}user/img/girls_mobile@2x.jpg 2x,
+                     {{ cloud_front_url }}user/img/girls_mobile@3x.jpg 3x"
              class="background-people-mobile">
 
         <h1 class="main-title" id="main-title">{{ job_title }}</h1>
