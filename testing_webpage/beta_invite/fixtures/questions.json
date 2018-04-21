@@ -2088,8 +2088,8 @@
     "model": "beta_invite.question",
     "pk": 144,
     "fields":{
-      "text": "¿Qué está realiando el método Push de la línea 89?",
-      "text_es": "¿Qué está realiando el método Push de la línea 89?",
+      "text": "¿Qué está realizando el método Push de la línea 89?",
+      "text_es": "¿Qué está realizando el método Push de la línea 89?",
       "answers": [362, 363, 364, 365],
       "type": 1,
       "correct_answers": [363],
