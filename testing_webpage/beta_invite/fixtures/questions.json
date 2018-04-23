@@ -2098,6 +2098,146 @@
       "created_at": "2018-04-15 02:42:49.0957+00",
       "updated_at": "2018-04-15 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 145,
+    "fields":{
+      "text": "¿Cómo se ejecuta un procedimiento almacenado?",
+      "text_es": "¿Cómo se ejecuta un procedimiento almacenado?",
+      "answers": [366, 367, 368, 369],
+      "type": 1,
+      "correct_answers": [368],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 146,
+    "fields":{
+      "text": "¿Cuáles son los tipos de parámetros que se pueden especificar en un cursor SQL?",
+      "text_es": "¿Cuáles son los tipos de parámetros que se pueden especificar en un cursor SQL?",
+      "answers": [370, 371, 372, 373],
+      "type": 1,
+      "correct_answers": [371],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 147,
+    "fields":{
+      "text": "Después de creado un procedimiento almacenado no es posible editarlo ya que este después de implementarlo, altera los datos",
+      "text_es": "Después de creado un procedimiento almacenado no es posible editarlo ya que este después de implementarlo, altera los datos",
+      "answers": [374, 375],
+      "type": 1,
+      "correct_answers": [375],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 148,
+    "fields":{
+      "text": "¿Cuál es el valor devuelto por la instrucción FETCH cuando no se ejecutó correctamente o la fila estaba más allá del conjunto de resultados?",
+      "text_es": "¿Cuál es el valor devuelto por la instrucción FETCH cuando no se ejecutó correctamente o la fila estaba más allá del conjunto de resultados?",
+      "answers": [376, 377, 378, 379],
+      "type": 1,
+      "correct_answers": [376],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 149,
+    "fields":{
+      "text": "¿Qué falta para que su cumpla la siguiente estructura?: CREATE PROCEDURE...",
+      "text_es": "¿Qué falta para que su cumpla la siguiente estructura?: CREATE PROCEDURE...",
+      "answers": [380, 381, 382, 383],
+      "type": 1,
+      "correct_answers": [383],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 150,
+    "fields":{
+      "text": "Los procedimientos almacenados se usan a menudo, pero no siempre, para realizar consultas SQL sobre los objetos de la base de datos de una manera abstracta, desde el punto de vista del cliente de la aplicación",
+      "text_es": "Los procedimientos almacenados se usan a menudo, pero no siempre, para realizar consultas SQL sobre los objetos de la base de datos de una manera abstracta, desde el punto de vista del cliente de la aplicación",
+      "answers": [374, 375],
+      "type": 1,
+      "correct_answers": [374],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 151,
+    "fields":{
+      "text": "¿Cuál es la estructura que se usa para leer la fila de un cursor?",
+      "text_es": "¿Cuál es la estructura que se usa para leer la fila de un cursor?",
+      "answers": [384, 385, 386, 387],
+      "type": 1,
+      "correct_answers": [386],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 152,
+    "fields":{
+      "text": "¿Esta declaración del cursor esta bien?	DECLARE cClientes CURSOR FOR	SELECT Id, Nombre, Apellido1, Apellido2, NifCif, FxNacimiento	FROM CLIENTES",
+      "text_es": "¿Esta declaración del cursor esta bien?	DECLARE cClientes CURSOR FOR	SELECT Id, Nombre, Apellido1, Apellido2, NifCif, FxNacimiento	FROM CLIENTES",
+      "answers": [374, 375],
+      "type": 1,
+      "correct_answers": [374],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 153,
+    "fields":{
+      "text": "¿Qué diferencia hay entre el comando execute y sql_executesql?",
+      "text_es": "¿Qué diferencia hay entre el comando execute y sql_executesql?",
+      "answers": [388, 389, 390, 391],
+      "type": 1,
+      "correct_answers": [388],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 154,
+    "fields":{
+      "text": "¿Para qué sirve el parámetro FORWARD_ONLY?",
+      "text_es": "¿Para qué sirve el parámetro FORWARD_ONLY?",
+      "answers": [392, 393, 394, 395],
+      "type": 1,
+      "correct_answers": [393],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
   }
 ]
 

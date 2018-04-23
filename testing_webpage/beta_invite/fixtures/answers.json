@@ -3636,6 +3636,305 @@
       "created_at": "2018-04-14 02:42:49.0957+00",
       "updated_at": "2018-04-14 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 366,
+    "fields": {
+      "name": "Execute [<nombre_procedimiento>]",
+      "name_es": "Execute [<nombre_procedimiento>]",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 367,
+    "fields": {
+      "name": "Exc <nombre_procedimiento>,\\\'@parametro1\\\',\\\'@parametro2\\\'",
+      "name_es": "Exc <nombre_procedimiento>,\\\'@parametro1\\\',\\\'@parametro2\\\'",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 368,
+    "fields": {
+      "name": "Exec <nombre_procedimiento>,\\\'parametro1\\\',\\\'parametro2\\\'",
+      "name_es": "Exec <nombre_procedimiento>,\\\'parametro1\\\',\\\'parametro2\\\'",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 369,
+    "fields": {
+      "name": "Execute <nombre_precedimiento>\\",
+      "name_es": "Execute <nombre_precedimiento>\\",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 370,
+    "fields": {
+      "name": "[Fijo-General]",
+      "name_es": "[Fijo-General]",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 371,
+    "fields": {
+      "name": "[Local-General]",
+      "name_es": "[Local-General]",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 372,
+    "fields": {
+      "name": "[Read_Only | Dynamic | Scroll]",
+      "name_es": "[Read_Only | Dynamic | Scroll]",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 373,
+    "fields": {
+      "name": "Ninguna de las anteriores",
+      "name_es": "Ninguna de las anteriores",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 374,
+    "fields": {
+      "name": "Verdadero",
+      "name_es": "Verdadero",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 375,
+    "fields": {
+      "name": "Falso",
+      "name_es": "Falso",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 376,
+    "fields": {
+      "name": "-1",
+      "name_es": "-1",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 377,
+    "fields": {
+      "name": "2",
+      "name_es": "2",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 378,
+    "fields": {
+      "name": "-2",
+      "name_es": "-2",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 379,
+    "fields": {
+      "name": "Null",
+      "name_es": "Null",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 380,
+    "fields": {
+      "name": "...<Procedure_Name, ProcedureName>",
+      "name_es": "...<Procedure_Name, ProcedureName>",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 381,
+    "fields": {
+      "name": "...<sysname, ProcedureName>",
+      "name_es": "...<sysname, ProcedureName>",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 382,
+    "fields": {
+      "name": "...<ProcedureName, sysname, Procedure_Name>",
+      "name_es": "...<ProcedureName, sysname, Procedure_Name>",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 383,
+    "fields": {
+      "name": "...<Procedure_Name, sysname, ProcedureName>",
+      "name_es": "...<Procedure_Name, sysname, ProcedureName>",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 384,
+    "fields": {
+      "name": "INTO <nombre_cursor> INTO <lista_variables>",
+      "name_es": "INTO <nombre_cursor> INTO <lista_variables>",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 385,
+    "fields": {
+      "name": "FITCH <nombre_cursor> INTRO <lista_variables>",
+      "name_es": "FITCH <nombre_cursor> INTRO <lista_variables>",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 386,
+    "fields": {
+      "name": "FETCH <nombre_cursor> INTO <lista_variables>",
+      "name_es": "FETCH <nombre_cursor> INTO <lista_variables>",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 387,
+    "fields": {
+      "name": "INTO <nombre_cursor> FETCH <lista_variables>",
+      "name_es": "INTO <nombre_cursor> FETCH <lista_variables>",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 388,
+    "fields": {
+      "name": "Permite ejecutar una cadena de caracteres y permite el uso de parametros y con el que obtendremos un mejor rendimiento de nuestras consultas",
+      "name_es": "Permite ejecutar una cadena de caracteres y permite el uso de parametros y con el que obtendremos un mejor rendimiento de nuestras consultas",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 389,
+    "fields": {
+      "name": "Ambas admiten la sustitución de valores de parámetros para cualquier parámetro especificado en la cadena Transact-SQL a ejecutar",
+      "name_es": "Ambas admiten la sustitución de valores de parámetros para cualquier parámetro especificado en la cadena Transact-SQL a ejecutar",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 390,
+    "fields": {
+      "name": "EXECTUTE es menos eficiente que el sql_executesql",
+      "name_es": "EXECTUTE es menos eficiente que el sql_executesql",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 391,
+    "fields": {
+      "name": "Ninguna de las anteriores",
+      "name_es": "Ninguna de las anteriores",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 392,
+    "fields": {
+      "name": "El cursor recorrerá filas solo por orden alfabetico",
+      "name_es": "El cursor recorrerá filas solo por orden alfabetico",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 393,
+    "fields": {
+      "name": "El cursor solo se puede desplazar de la primera a la última fila",
+      "name_es": "El cursor solo se puede desplazar de la primera a la última fila",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 394,
+    "fields": {
+      "name": "El cursor hará recorrido solo si hay mas de 5 datos",
+      "name_es": "El cursor hará recorrido solo si hay mas de 5 datos",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 395,
+    "fields": {
+      "name": "El cursor solo se puede desplazar de la ultima a la primera fila",
+      "name_es": "El cursor solo se puede desplazar de la ultima a la primera fila",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
   }
-
 ]
