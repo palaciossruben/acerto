@@ -2201,8 +2201,8 @@
     "model": "beta_invite.question",
     "pk": 152,
     "fields":{
-      "text": "¿Esta declaración del cursor esta bien?	DECLARE cClientes CURSOR FOR	SELECT Id, Nombre, Apellido1, Apellido2, NifCif, FxNacimiento	FROM CLIENTES",
-      "text_es": "¿Esta declaración del cursor esta bien?	DECLARE cClientes CURSOR FOR	SELECT Id, Nombre, Apellido1, Apellido2, NifCif, FxNacimiento	FROM CLIENTES",
+      "text": "¿Esta declaración del cursor esta bien?: 'DECLARE cClientes CURSOR FOR SELECT Id, Nombre, Apellido1, Apellido2, NifCif, FxNacimiento FROM CLIENTES'",
+      "text_es": "¿Esta declaración del cursor esta bien?: 'DECLARE cClientes CURSOR FOR SELECT Id, Nombre, Apellido1, Apellido2, NifCif, FxNacimiento FROM CLIENTES'",
       "answers": [374, 375],
       "type": 1,
       "correct_answers": [374],
