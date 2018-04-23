@@ -2238,6 +2238,286 @@
       "created_at": "2018-04-22 02:42:49.0957+00",
       "updated_at": "2018-04-22 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 155,
+    "fields":{
+      "text": "¿Cuál del siguiente especificador de acceso en C# permite que una clase oculte sus variables miembro y funciones miembro de otros objetos y funciones de clase, excepto una clase secundaria dentro de la misma aplicación?",
+      "text_es": "¿Cuál del siguiente especificador de acceso en C# permite que una clase oculte sus variables miembro y funciones miembro de otros objetos y funciones de clase, excepto una clase secundaria dentro de la misma aplicación?",
+      "answers": [396, 397, 398, 399],
+      "type": 1,
+      "correct_answers": [396],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 156,
+    "fields":{
+      "text": "¿Cuál de las siguientes opciones es correcta sobre las variables de tipo de valor en C#?",
+      "text_es": "¿Cuál de las siguientes opciones es correcta sobre las variables de tipo de valor en C#?",
+      "answers": [400, 401, 402, 403],
+      "type": 1,
+      "correct_answers": [403],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 157,
+    "fields":{
+      "text": "¿Cuál de los siguientes operadores crea un puntero a una variable en C#?",
+      "text_es": "¿Cuál de los siguientes operadores crea un puntero a una variable en C#?",
+      "answers": [404, 405, 406, 407],
+      "type": 1,
+      "correct_answers": [407],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 158,
+    "fields":{
+      "text": "¿Cuál de los siguientes convierte un tipo en un pequeño número decimal en C#?",
+      "text_es": "¿Cuál de los siguientes convierte un tipo en un pequeño número decimal en C#?",
+      "answers": [408, 409, 410, 411],
+      "type": 1,
+      "correct_answers": [410],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 159,
+    "fields":{
+      "text": "¿Las variables de tipo de valor en C# se derivan de la clase System.ValueType?",
+      "text_es": "¿Las variables de tipo de valor en C# se derivan de la clase System.ValueType?",
+      "answers": [374, 375],
+      "type": 1,
+      "correct_answers": [374],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 160,
+    "fields":{
+      "text": "¿Podemos usar palabras clave reservadas como identificadores en C#?",
+      "text_es": "¿Podemos usar palabras clave reservadas como identificadores en C#?",
+      "answers": [374, 375],
+      "type": 1,
+      "correct_answers": [375],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 161,
+    "fields":{
+      "text": "¿Cuál de las siguientes palabras clave se usa para incluir namespaces en C#?",
+      "text_es": "¿Cuál de las siguientes palabras clave se usa para incluir namespaces en C#?",
+      "answers": [412, 413, 414, 415],
+      "type": 1,
+      "correct_answers": [413],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 162,
+    "fields":{
+      "text": "¿Cuál de los siguientes es correcto con respecto a los parámetros en C#?",
+      "text_es": "¿Cuál de los siguientes es correcto con respecto a los parámetros en C#?",
+      "answers": [416, 417, 418, 419],
+      "type": 1,
+      "correct_answers": [419],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 163,
+    "fields":{
+      "text": "¿Cuál de los siguientes métodos ayuda a devolver más de un valor?",
+      "text_es": "¿Cuál de los siguientes métodos ayuda a devolver más de un valor?",
+      "answers": [420, 421, 422, 423],
+      "type": 1,
+      "correct_answers": [422],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 164,
+    "fields":{
+      "text": "¿Cuál de las siguientes opciones es correcta acerca de las convenciones de nomenclatura de variable en C#?",
+      "text_es": "¿Cuál de las siguientes opciones es correcta acerca de las convenciones de nomenclatura de variable en C#?",
+      "answers": [424, 425, 426, 427],
+      "type": 1,
+      "correct_answers": [426],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 165,
+    "fields":{
+      "text": "¿Cuál de los siguientes es verdadero con respecto al uso de las excepciones en C#?",
+      "text_es": "¿Cuál de los siguientes es verdadero con respecto al uso de las excepciones en C#?",
+      "answers": [428, 429, 430, 431],
+      "type": 1,
+      "correct_answers": [430],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 166,
+    "fields":{
+      "text": "¿Cuál de los siguientes es correcto con respecto a un constructor de clase?",
+      "text_es": "¿Cuál de los siguientes es correcto con respecto a un constructor de clase?",
+      "answers": [432, 433, 434, 435],
+      "type": 1,
+      "correct_answers": [434],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 167,
+    "fields":{
+      "text": "La sobrecarga de operadores es un tipo de polimorfismo dinámico",
+      "text_es": "La sobrecarga de operadores es un tipo de polimorfismo dinámico",
+      "answers": [374, 375],
+      "type": 1,
+      "correct_answers": [375],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 168,
+    "fields":{
+      "text": "¿Cuál de los siguientes convierte un tipo a un tipo de byte firmado en C#?",
+      "text_es": "¿Cuál de los siguientes convierte un tipo a un tipo de byte firmado en C#?",
+      "answers": [436, 437, 438, 439],
+      "type": 1,
+      "correct_answers": [437],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 169,
+    "fields":{
+      "text": "¿Cuál de los siguientes convierte un tipo a un entero de 64 bits en C#?",
+      "text_es": "¿Cuál de los siguientes convierte un tipo a un entero de 64 bits en C#?",
+      "answers": [440, 441, 442, 443],
+      "type": 1,
+      "correct_answers": [440],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 170,
+    "fields":{
+      "text": "¿Cuál de las siguientes afirmaciones es correcta con respecto a los especificadores de acceso en C#?",
+      "text_es": "¿Cuál de las siguientes afirmaciones es correcta con respecto a los especificadores de acceso en C#?",
+      "answers": [444, 445, 446, 447],
+      "type": 1,
+      "correct_answers": [446],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 171,
+    "fields":{
+      "text": "Los operadores lógicos condicionales pueden ser sobrecargados",
+      "text_es": "Los operadores lógicos condicionales pueden ser sobrecargados",
+      "answers": [374, 375],
+      "type": 1,
+      "correct_answers": [375],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 172,
+    "fields":{
+      "text": "¿Cuál de las siguientes afirmaciones es verdadera con respecto a la clase System.ApplicationException en C#?",
+      "text_es": "¿Cuál de las siguientes afirmaciones es verdadera con respecto a la clase System.ApplicationException en C#?",
+      "answers": [448, 449, 450, 451],
+      "type": 1,
+      "correct_answers": [450],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 173,
+    "fields":{
+      "text": "¿Cuál de los siguientes convierte un tipo a un tipo int sin signo en C#?",
+      "text_es": "¿Cuál de los siguientes convierte un tipo a un tipo int sin signo en C#?",
+      "answers": [452, 453, 454, 455],
+      "type": 1,
+      "correct_answers": [453],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 174,
+    "fields":{
+      "text": "C# no admite herencia múltiple",
+      "text_es": "C# no admite herencia múltiple",
+      "answers": [374, 375],
+      "type": 1,
+      "correct_answers": [374],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
   }
 ]
 
