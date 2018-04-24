@@ -55,7 +55,7 @@ def business_daily_report():
             if len(candidates) > 0:
                 email_sender.send_report(language_code='es',
                                          body_filename='business_daily_report_email_body',
-                                         subject='Reporte diario de nuevos candidatos',
+                                         subject='Reporte de candidatos relevantes',
                                          recipients=[business_user.email, 'juan@peaku.co', 'juan.rendon@peaku.co', 'santiago@peaku.co'],
                                          candidates=candidates)
 
@@ -63,4 +63,3 @@ def business_daily_report():
 send_campaign_report(['juan@peaku.co', 'santiago@peaku.co'], campaign_id=10)
 send_general_report()
 business_daily_report()
-
