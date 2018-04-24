@@ -1586,8 +1586,8 @@
     "model": "beta_invite.question",
     "pk": 109,
     "fields":{
-      "text": "I have never been…….. in all my life!",
-      "text_es": "I have never been…….. in all my life!",
+      "text": "I have never been ... in  my entire life!",
+      "text_es": "I have never been ... in  my entire life!",
       "answers": [240, 241, 242],
       "type": 1,
       "correct_answers": [241],
@@ -2517,6 +2517,139 @@
       "order": 1,
       "created_at": "2018-04-22 02:42:49.0957+00",
       "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 175,
+    "fields":{
+      "text": "¿Cuántas contrataciones has realizado en tu vida laboral?",
+      "text_es": "¿Cuántas contrataciones has realizado en tu vida laboral?",
+      "answers": [],
+      "type": 5,
+      "correct_answers": [],
+      "order": 1,
+      "params": {"min": 0,
+                 "max": 10000,
+                 "min_correct": 30,
+                 "max_correct": 10000,
+                 "default":20
+                },
+      "created_at": "2018-04-24 02:42:49.0957+00",
+      "updated_at": "2018-04-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 176,
+    "fields":{
+      "text": "Trabajas en una temporal, actualmente recibes muchas hojas de vidas de candidatos que no son muy relevantes, algunos ni siquiera aplican para la vacante. ¿Qué crees qué es lo más importante para realizar una contratación exitosa?",
+      "text_es": "Trabajas en una temporal, actualmente recibes muchas hojas de vidas de candidatos que no son muy relevantes, algunos ni siquiera aplican para la vacante. ¿Qué crees qué es lo más importante para realizar una contratación exitosa?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 1,
+      "created_at": "2018-04-24 02:42:49.0957+00",
+      "updated_at": "2018-04-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 177,
+    "fields":{
+      "text": "¿Cómo describirías tu experiencia laboral más reciente? (cuéntanos tus labores diarias y tu logro más importante)",
+      "text_es": "¿Cómo describirías tu experiencia laboral más reciente? (cuéntanos tus labores diarias y tu logro más importante)",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 1,
+      "created_at": "2018-04-24 02:42:49.0957+00",
+      "updated_at": "2018-04-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 178,
+    "fields":{
+      "text": "Quieres poder sacar al mercado tu propia línea de jabones antibacteriales en seco (gel desinfectante), ya tienes algunos clientes pero necesitas cada vez más pues la empresa está en cecimiento. ¿Cómo harías contacto con el gerente de compras del exito?",
+      "text_es": "Quieres poder sacar al mercado tu propia línea de jabones antibacteriales en seco (gel desinfectante), ya tienes algunos clientes pero necesitas cada vez más pues la empresa está en cecimiento. ¿Cómo harías contacto con el gerente de compras del exito?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 1,
+      "created_at": "2018-04-24 02:42:49.0957+00",
+      "updated_at": "2018-04-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 179,
+    "fields":{
+      "text": "Actualmente laboras en una empresa de selección de personal y eres la persona encargada de visitar a los clientes y ofrecerles el servicio. ¿Qué harías para fidelizar un cliente que estás a punto de perder?",
+      "text_es": "Actualmente laboras en una empresa de selección de personal y eres la persona encargada de visitar a los clientes y ofrecerles el servicio. ¿Qué harías para fidelizar un cliente que estás a punto de perder?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 1,
+      "created_at": "2018-04-24 02:42:49.0957+00",
+      "updated_at": "2018-04-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 180,
+    "fields":{
+      "text": "Hay una vacante para un gerente financiero. De momento solo hay diez posibles prospectos en toda la ciudad, que cumplen con el perfil y ya se encuentran laborando. ¿Qué harías para lograr la contratación?",
+      "text_es": "Hay una vacante para un gerente financiero. De momento solo hay diez posibles prospectos en toda la ciudad, que cumplen con el perfil y ya se encuentran laborando. ¿Qué harías para lograr la contratación?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 1,
+      "created_at": "2018-04-24 02:42:49.0957+00",
+      "updated_at": "2018-04-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 181,
+    "fields":{
+      "text": "Encuentras el candidato idóneo para la vacante que estás buscando, no está muy convencido de querer trabajar para la empresa de la oferta. Le explicas mejor la oferta y el candidato definitivamente se niega a aceptar. ¿Qué haces?",
+      "text_es": "Encuentras el candidato idóneo para la vacante que estás buscando, no está muy convencido de querer trabajar para la empresa de la oferta. Le explicas mejor la oferta y el candidato definitivamente se niega a aceptar. ¿Qué haces?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 1,
+      "created_at": "2018-04-24 02:42:49.0957+00",
+      "updated_at": "2018-04-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 182,
+    "fields":{
+      "text": "¿Qué metodologías usarías para diseñar una prueba de selección para un perfil con el que nunca has trabajado antes?",
+      "text_es": "¿Qué metodologías usarías para diseñar una prueba de selección para un perfil con el que nunca has trabajado antes?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 1,
+      "created_at": "2018-04-24 02:42:49.0957+00",
+      "updated_at": "2018-04-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 183,
+    "fields":{
+      "text": "Orden de prioridades",
+      "text_es": "Orden de prioridades",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 1,
+      "image_path": "beta_invite/questions/183/itinerario.png",
+      "created_at": "2018-04-24 02:42:49.0957+00",
+      "updated_at": "2018-04-24 02:42:49.0957+00"
     }
   }
 ]

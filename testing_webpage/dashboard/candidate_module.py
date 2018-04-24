@@ -60,7 +60,7 @@ def add_candidate_to_campaign(request, candidate):
         # TODO: can add logic to new at a later stage, if tests are already passed.
         Candidate(user_id=candidate.user_id,
                   campaign_id=selected_campaign_id,
-                  state=State.objects.get(code='BL')).save()
+                  state=State.objects.get(code='P')).save()
 
         return True
 
