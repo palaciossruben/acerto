@@ -162,7 +162,7 @@
       "name": "Cognitive Test",
       "name_es": "Prueba cognitiva",
       "questions": [40, 41, 42, 43, 44],
-      "cut_score": 70,
+      "cut_score": 80,
       "created_at": "2018-01-25 02:42:49.0957+00",
       "updated_at": "2018-01-25 02:42:49.0957+00"
     }
@@ -463,6 +463,18 @@
       "name_es": "C#",
       "questions": [155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174],
       "cut_score": 70,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.test",
+    "pk": 40,
+    "fields":{
+      "name": "PeakU Auxiliar Comercial",
+      "name_es": "PeakU Auxiliar Comercial",
+      "questions": [175, 176, 177, 178, 179, 180, 181, 182, 183],
+      "cut_score": 60,
       "created_at": "2018-04-22 02:42:49.0957+00",
       "updated_at": "2018-04-22 02:42:49.0957+00"
     }
