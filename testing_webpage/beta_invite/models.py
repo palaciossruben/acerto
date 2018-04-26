@@ -146,6 +146,7 @@ class Answer(models.Model):
 
     name = models.CharField(max_length=1000)
     name_es = models.CharField(max_length=1000, null=True)
+    order = models.IntegerField(null=True)  # TODO default=1?
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

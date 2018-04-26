@@ -1,10 +1,12 @@
-var question_number = 1;
+var QUESTION_NUMBER = 1;
 
+// Dictionary of the form {question_number: answer_number}
+var ANSWER_NUMBERS = {};
 
 function get_selected_type(question_types){
     /*
-     "single answer"
      "open field"
+     "single answer"
      "degree of belief"
      "Numeric Integer"
      "multiple answer"
@@ -26,8 +28,114 @@ function addQuestionTextArea(container, question_name, placeholder){
     my_text_area.name = question_name;
     my_text_area.placeholder = placeholder
     container.appendChild(my_text_area);
+}
 
-    return container
+
+function addFileInput(container, question_number){
+
+    var image_input = document.createElement("input");
+    image_input.id = "file";
+    image_input.type = "file";
+    image_input.value = "";
+    image_input.className = "form-inputfile";
+    image_input.onchange = "pressed()";
+    image_input.name = question_number + "_question_image";
+    container.appendChild(image_input);
+
+    var file_label = document.createElement("label");
+    file_label.for = "file";
+    file_label.id = "fileLabel";
+    file_label.value = "Upload image (optional)"
+    container.appendChild(file_label);
+}
+
+
+function addBr(container){container.appendChild(document.createElement("br"));}
+
+
+function addRemoveButton(container){
+    var remove_button = document.createElement("input");
+    remove_button.type = "button";
+    remove_button.className = "btn btn-danger";
+    remove_button.value = "Delete!";
+    container.appendChild(remove_button);
+}
+
+
+function buildTextField(container, name, placeholder) {
+
+    var text_input = document.createElement("input");
+    text_input.type = "text";
+    text_input.size = "80";
+    text_input.name = name;
+    text_input.placeholder = placeholder;
+    container.appendChild(text_input);
+}
+
+
+function get_answer_name(question_number, answer_number_json){
+    /*
+    Follows the <object_id>_<class_name>_<attribute_name> recursive format processed on backend
+    */
+    return question_number + '_question_' + answer_number_json[question_number] + "_answer_name", "add text in english";
+}
+
+
+function buildAnswer(answer_container, question_number) {
+
+    addBr(answer_container);
+    container.appendChild(document.createTextNode("Answer " + bullet_number));
+
+    addBr(answer_container);
+    buildTextField(answer_container, get_answer_name(question_number, ANSWER_NUMBERS), "add text in English");
+
+    addBr(answer_container);
+    buildTextField(answer_container, get_answer_name(question_number, ANSWER_NUMBERS), "add text in Spanish");
+
+    //TODO: add remove button
+    /*
+    <input class="btn btn-danger" type="button" name="remove_answer" value="Add answer"
+               onclick="removeAnswer('requirement');">
+    */
+    //add_remove_button(container);
+
+    addBr(answer_container);addBr(answer_container);
+}
+
+
+function addAnswer(question_number){
+    /*
+    Adds a answer interface and numbers it.
+    */
+
+    //Given question_number, will attach to a answer_container
+    var answer_container = document.getElementById(question_number + "_question_answer_container");
+
+    buildAnswerUi(answer_container, question_number);
+
+    //adds 1 for next bullet.
+    ANSWER_NUMBERS[question_number] = ANSWER_NUMBERS[question_number] + 1;
+}
+
+
+function addSingleAnswerCustomization(container, question_number){
+
+    var button = document.createElement("input");
+    button.type = "button";
+    button.size = "80";
+    button.name = "add_answer";
+    button.className = "btn btn-success";
+    button.placeholder = placeholder;
+    button.value = "Add answer";
+    button.onclick = "addAnswer(${question_number});";
+    container.appendChild(button);
+
+    addBr(container); addBr(container);
+
+    container.appendChild(document.createComment("This empty container is filled dynamically with JS"));
+    var answer_container = document.createElement("div");
+    answer_container.id = "${question_number}_question_answer_container"
+    container.appendChild(answer_container)
 }
 
 function addQuestion(question_types, number_of_questions){
@@ -36,7 +144,7 @@ function addQuestion(question_types, number_of_questions){
     param question_types: json with the possible types, defined in django fixture.
     param number_of_questions: The number of previous questions, its 0 for new tests.
     */
-    question_number = Math.max(question_number, number_of_questions + 1)
+    QUESTION_NUMBER = Math.max(QUESTION_NUMBER, number_of_questions + 1)
 
     var question_types = JSON.parse(question_types);
     var container = document.getElementById("question_container");
@@ -45,52 +153,32 @@ function addQuestion(question_types, number_of_questions){
 
     if (selected_type) {
 
-        //Append br and question number
-        container.appendChild(document.createElement("br"));
-        container.appendChild(document.createTextNode("Question " + question_number + " "));
+        addBr(container);
+        container.appendChild(document.createTextNode("Question " + QUESTION_NUMBER + " "));
 
-        container = addQuestionTextArea(container, question_number + "_question_text", "Question in English")
+        addQuestionTextArea(container, QUESTION_NUMBER + "_question_text", "Question in English")
 
-        container.appendChild(document.createElement("br"));
-        container.appendChild(document.createElement("br"));
+        addBr(container);addBr(container);
 
-        container = addQuestionTextArea(container, question_number + "_question_text_es", "Question in Spanish")
+        container = addQuestionTextArea(container, QUESTION_NUMBER + "_question_text_es", "Question in Spanish")
 
-        container.appendChild(document.createElement("br"));
-        container.appendChild(document.createElement("br"));
+        addBr(container);addBr(container);
 
-        var image_input = document.createElement("input");
-        image_input.id = "file";
-        image_input.type = "file";
-        image_input.value = "";
-        image_input.className = "form-inputfile";
-        image_input.onchange = "pressed()";
-        image_input.name = question_number + "_question_image";
-        container.appendChild(image_input);
+        addFileInput(container, QUESTION_NUMBER);
 
-        var file_label = document.createElement("label");
-        file_label.for = "file";
-        file_label.id = "fileLabel";
-        file_label.value = "Upload image (optional)"
-        container.appendChild(file_label);
+        addBr(container);
 
-        container.appendChild(document.createElement("br"));
+        if (selected_type.name == "single answer"){
+            addSingleAnswerCustomization(container, QUESTION_NUMBER)
+        }else if (selected_type.name == "numeric integer"){
+            // TODO: implement
+        }
 
-        var remove_button = document.createElement("input");
-        remove_button.type = "button";
-        remove_button.className = "btn btn-danger";
-        remove_button.value = "Delete!";
-        container.appendChild(remove_button);
+        addRemoveButton(container);
 
-        var question_type_input = document.createElement("input");
-        question_type_input.type = "hidden";
-        question_type_input.value = selected_type.pk;
-        question_type.name = question_number + "question_type";
-        container.appendChild(question_type_input);
+        addBr(container);
 
-        container.appendChild(document.createElement("br"));
-
-        question_number = question_number + 1;
+        QUESTION_NUMBER = QUESTION_NUMBER + 1;
 
     } else {
         alert("Specify a question type before adding a new Question")

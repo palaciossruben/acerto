@@ -1,4 +1,5 @@
 import os
+import inspect
 import subprocess
 import unicodedata
 from urllib.parse import urlencode, urlunparse, urlparse, parse_qsl, parse_qs
@@ -290,12 +291,17 @@ def get_object_attribute_name(key, my_object):
     Splits by 'object_class_name', then removes everything before it,
     then joins again to form <attribute_name>
     :param key: any string that follows the pattern mentioned above, eg: '12_question_type_id'
-    :param my_object: just an instance. eg: question of Type Question
+    :param my_object: An instance or a class eg: question of Type Question, or class Question
     :return: attribute_name, eg: type_id
     """
 
+    if inspect.isclass(my_object):
+        class_name = my_object.__name__
+    else:  # instance
+        class_name = my_object.__class__.__name__
+
     # inflection converts to snake_case
-    class_name = inflection.underscore(my_object.__class__.__name__)
+    class_name = inflection.underscore(class_name)
     class_name = '_{}_'.format(class_name)
     return class_name.join(key.split(class_name)[1:])
 
