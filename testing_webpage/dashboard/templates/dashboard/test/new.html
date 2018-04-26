@@ -6,12 +6,14 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
     <script type="text/javascript" src="{% static 'js/test/new.js' %}"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.core.min.js"></script>
 
     <title>New Test</title>
 </head>
 <body>
 
-    <form style="margin-top: 40px; margin-left:40px;" action="#" method="post">
+    <form style="margin-top: 40px; margin-left:40px;" action="save" method="post">
 
         {% csrf_token %}
 
@@ -44,8 +46,23 @@
         <!-- This empty container is filled dynamically with JS.-->
         <div id="question_container"></div>
 
+        <br>
+        <br>
+
+        <select id="question_type" name="question_type_id" >
+            <option value="" disabled selected>Select Question Type</option>
+            {% for type in question_types %}
+                <option value={{ type.id }}>{{ type.name }}</option>
+            {% endfor %}
+        </select>
+
         <input type="button" class="btn btn-success" name="add_question" value="Add Question!"
-          onclick="addQuestion('{{ question_types_json | escapejs }}');">
+          onclick="addQuestion('{{ question_types_json | escapejs }}', 0);">
+
+        <br>
+        <br>
+
+        <input type="submit" class="btn btn-success" name="save" value="Save!">
 
     </form>
 

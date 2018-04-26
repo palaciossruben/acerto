@@ -1,5 +1,9 @@
+import os
+import subprocess
+import unicodedata
 from urllib.parse import urlencode, urlunparse, urlparse, parse_qsl, parse_qs
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.files.storage import FileSystemStorage
 from ipware.ip import get_ip
 import geoip2.database
 import inflection
@@ -14,6 +18,23 @@ from testing_webpage import settings
 CONJUNCTIONS = {'las', 'para', 'los', 'del', 'and', 'el', 'en', 'de', 'the', 'for', 'with'}
 INTERVIEW_INTRO_VIDEO = './interview_intro_video.txt'
 ZIGGEO_API_KEY = './ziggeo_api_key.txt'
+
+
+def remove_accents(text):
+    return ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
+
+
+def rename_filename(filename):
+    """Removes accents, spaces and other chars to have a easier time later"""
+
+    replacement = {' ': '_', '(': '_', ')': '_'}
+
+    for my_char, replace_char in replacement.items():
+
+        if my_char in filename:
+            filename = filename.replace(my_char, replace_char)
+
+    return remove_accents(filename)
 
 
 def get_content_of_file(file_path):
@@ -275,3 +296,38 @@ def get_object_attribute_name(key, my_object):
     class_name = inflection.underscore(my_object.__class__.__name__)
     class_name = '_{}_'.format(class_name)
     return class_name.join(key.split(class_name)[1:])
+
+
+def save_resource_from_request(request, my_object, param_name, folder_name):
+    """
+    Saves file on machine resumes/* file system
+    Args:
+        request: HTTP request
+        my_object: Any saved Object with a valid id.
+        param_name: string, name of File on the request
+        folder_name: string with name of folder
+    Returns: file url or None if nothing is saves.
+    """
+
+    # validate correct method and has file.
+    if request.method == 'POST' and len(request.FILES) != 0 and request.FILES.get(param_name) is not None:
+
+        my_file = request.FILES[param_name]
+        fs = FileSystemStorage()
+
+        my_object_id_folder = str(my_object.id)
+
+        folder = os.path.join(folder_name, my_object_id_folder)
+
+        file_path = os.path.join(folder, rename_filename(my_file.name))
+
+        fs.save(file_path, my_file)
+
+        # once saved it will collect the file
+        subprocess.call('python3 manage.py collectstatic -v0 --noinput', shell=True)
+
+        # at last returns the curriculum url
+        return file_path
+
+    else:
+        return '#'

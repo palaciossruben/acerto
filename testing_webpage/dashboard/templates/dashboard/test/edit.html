@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'js/test/new.js' %}"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.core.min.js"></script>
+
+
+    <title>Edit Test</title>
+</head>
+<body>
+
+    <form style="margin-top: 40px; margin-left:40px;" action="update/{{ test.id }}" method="post">
+
+        {% csrf_token %}
+
+        <h1>New Test</h1>
+
+        <br>
+        <br>
+
+        <input style="width: 250px;" id="name" type="text" name="name"
+          placeholder="Add test name in English" required="required" value="{{ test.name }}">
+
+        <br>
+        <br>
+
+        <input style="width: 250px;" id="name_es" type="text" name="name_es"
+          placeholder="Add a test name in Spanish" required="required" value="{{ test.name_es }}">
+
+        <br>
+        <br>
+
+        <div>
+          <label>cut percentage: </label>
+          <input name="cut_score" id="cut_score"
+           type="number" value="{{ test.cut_score }}" min="0" max="100" />
+        </div>
+
+        <br>
+        <br>
+
+        {% include "dashboard/test/questions.html" with test=test %}
+
+        <!-- This empty container is filled dynamically with JS.-->
+        <div id="question_container"></div>
+
+        <br>
+        <br>
+
+        <select id="question_type" name="question_type_id" >
+            <option value="" disabled selected>Select Question Type</option>
+            {% for type in question_types %}
+                <option value={{ type.id }}>{{ type.name }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="button" class="btn btn-success" name="add_question" value="Add Question!"
+          onclick="addQuestion('{{ question_types_json | escapejs }}', {{ test.questions.all|length }});">
+
+        <br>
+        <br>
+
+        <input type="submit" class="btn btn-success" name="save" value="Save!">
+
+    </form>
+
+</body>
+</html>

@@ -1,7 +1,8 @@
 MAIN_DASHBOARD = 'dashboard/index.html'
 EDIT_CANDIDATES = 'dashboard/campaign/edit_candidates.html'
-NEW_TEST = 'dashboard/test/new_or_edit.html'
-NEW_OR_EDIT_CAMPAIGN = 'dashboard/campaign/new_or_edit.html'
+NEW_TEST = 'dashboard/test/new.html'
+EDIT_TEST = 'dashboard/test/edit.html'
+NEW_OR_EDIT_CAMPAIGN = 'dashboard/campaign/edit.html'
 INTERVIEW = 'dashboard/campaign/interview.html'
 INTERVIEW_QUESTIONS = 'dashboard/campaign/interview_questions.html'
 DEFAULT_STATE = 1

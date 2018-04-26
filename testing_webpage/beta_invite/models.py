@@ -179,6 +179,7 @@ class Question(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'questions'
+        ordering = ['order']
 
     def translate(self, lang_code):
         """
