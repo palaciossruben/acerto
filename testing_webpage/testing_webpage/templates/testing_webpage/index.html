@@ -34,7 +34,7 @@
             </div>
 
             <div class="main-img-div">
-                <img class="main-img" src="{% static 'beta_invite/img/selection.png' %}">
+                <img class="main-img" src="{{ cloud_front_url }}main/img/selection.png">
             </div>
 
             <div class="business">
@@ -47,7 +47,7 @@
 
     <section class="main">
             <div>
-                <img class="left-img" src="{% static 'beta_invite/img/intro.png' %}">
+                <img class="left-img" src="{{ cloud_front_url }}main/img/intro.png">
             </div>
             <article class="description">
                 <h2>{% trans "What is PeakU?"%}</h2>
@@ -57,28 +57,4 @@
             </article>
     </section>
 
-    <!-- TODO: finish-->
-    <script>
-        var HttpClient = function() {
-            this.get = function(aUrl, aCallback) {
-                var anHttpRequest = new XMLHttpRequest();
-                anHttpRequest.onreadystatechange = function() {
-                    if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
-                        aCallback(anHttpRequest.responseText);
-                }
-
-                anHttpRequest.open( "GET", aUrl, true );
-                anHttpRequest.send( null );
-            }
-        }
-
-        var client = new HttpClient();
-        client.get('http://some/thing?with=arguments', function(response) {
-            var formData = $("#commentForm").serializeArray();
-            formData.push({name: "url", value: window.location.pathname});
-        });
-
-    </script>
-
 {% endblock %}
-

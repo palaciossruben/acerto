@@ -1,4 +1,3 @@
-
 import common
 from django.core import serializers
 from django.shortcuts import render, redirect
@@ -10,8 +9,9 @@ from dashboard.models import Candidate, Message, Screening
 from dashboard import constants as cts
 from beta_invite.util import email_sender
 from beta_invite.views import get_drop_down_values
-from dashboard import interview_module, candidate_module, campaign_module
+from dashboard import interview_module, candidate_module, campaign_module, test_module
 from match import model
+from business import dashboard_module
 from business import dashboard_module
 import business
 
@@ -224,9 +224,33 @@ def delete_test(request, pk):
 # ------------------------------- TESTS -------------------------------
 
 
-def edit_test():
-    # TODO: implement
-    pass
+def edit_test(request, pk):
+
+    question_types = QuestionType.objects.all()
+    question_types_json = serializers.serialize("json", question_types)
+
+    return render(request, cts.EDIT_TEST, {'question_types': question_types,
+                                           'question_types_json': question_types_json,
+                                           'test': Test.objects.get(pk=pk)})
+
+
+def update_test(request, pk):
+    """
+    Args:
+        request: HTTP
+    Returns: redirects to dashboard after updating new test.
+    """
+
+    test = Test.objects.get(pk=pk)
+    test.name = request.POST.get('name')
+    test.name_es = request.POST.get('name_es')
+    test.cut_score = int(request.POST.get('cut_score'))
+    test.save()  # save first, for saving questions
+
+    test = test_module.update_test_questions(test, request)
+    test.save()
+
+    return redirect('/dashboard')
 
 
 def new_test(request):
@@ -247,11 +271,12 @@ def save_test(request):
     Returns: redirects to dashboard after saving new test.
     """
 
-    name = request.POST.get('name')
-    name_es = request.POST.get('name_es')
+    test = Test(name=request.POST.get('name'),
+                name_es=request.POST.get('name_es'),
+                cut_score=int(request.POST.get('cut_score')))
+    test.save()  # save first, for saving questions
 
-    test = Test(name=name, name_es=name_es)
-
+    test = test_module.update_test_questions(test, request)
     test.save()
 
     return redirect('/dashboard')

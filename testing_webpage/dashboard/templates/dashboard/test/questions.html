@@ -1,10 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% for question in test.questions.all %}
 
-</body>
-</html>
+    <br>
+
+    <p>Question {{ question.order }} </p>
+
+    <textarea cols="120" rows="5" name="{{ question.order }}_question_text"
+              placeholder="Question in English">{{ question.text }}</textarea>
+
+    <br>
+    <br>
+
+    <textarea cols="120" rows="5" name="{{ question.order }}_question_text_es"
+              placeholder="Question in Spanish">{{ question.text_es }}</textarea>
+
+    <br>
+    <br>
+
+    <input id="file" type="file" value="{{ question.image_path }}" class="form-inputfile" onchange="pressed()" name="{{ question.order }}_question_image">
+    <label id="fileLabel" for="file"></label>
+
+    <br>
+
+    <input type="button" class="btn btn-danger" value="Delete">
+    <!--<input type="hidden" class="btn btn-danger" value="Delete">-->
+
+    <br>
+{% endfor %}

@@ -2,8 +2,6 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
 body {
-    background: var(--brochure-blue);
-    background-image: url('../img/form1.jpg');
     background-repeat:no-repeat;
     -webkit-background-size:cover;
     -moz-background-size:cover;

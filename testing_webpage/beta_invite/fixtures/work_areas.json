@@ -1,6 +1,6 @@
 [
 {
-  "model": "beta_invite.area",
+  "model": "beta_invite.workarea",
   "pk": 1,
   "fields":{
     "name": "Administración / Oficina",
@@ -8,7 +8,7 @@
   }
 },
 {
-  "model": "beta_invite.area",
+  "model": "beta_invite.workarea",
   "pk": 2,
   "fields":{
     "name": "Almacén / Logística / Transporte",
@@ -16,7 +16,7 @@
   }
 },
 {
-  "model": "beta_invite.area",
+  "model": "beta_invite.workarea",
   "pk": 3,
   "fields":{
     "name": "Atención a clientes",
@@ -24,7 +24,7 @@
   }
 },
 {
-  "model": "beta_invite.area",
+  "model": "beta_invite.workarea",
   "pk": 4,
   "fields":{
     "name": "CallCenter / Telemercadeo",
@@ -32,7 +32,7 @@
   }
 },
 {
-  "model": "beta_invite.area",
+  "model": "beta_invite.workarea",
   "pk": 5,
   "fields":{
     "name": "Compras / Comercio Exterior",
@@ -40,7 +40,7 @@
   }
 },
 {
-  "model": "beta_invite.area",
+  "model": "beta_invite.workarea",
   "pk": 6,
   "fields":{
     "name": "Construcción y obra",
@@ -48,7 +48,7 @@
   }
 },
 {
-  "model": "beta_invite.area",
+  "model": "beta_invite.workarea",
   "pk": 7,
   "fields":{
     "name": "Contabilidad / Finanzas",
@@ -56,7 +56,7 @@
   }
 },
 {
-  "model": "beta_invite.area",
+  "model": "beta_invite.workarea",
   "pk": 8,
   "fields":{
     "name": "Dirección / Gerencia",
@@ -64,7 +64,7 @@
   }
 },
 {
-  "model": "beta_invite.area",
+  "model": "beta_invite.workarea",
   "pk": 9,
   "fields":{
     "name": "Diseño / Artes gráficas",
@@ -72,7 +72,7 @@
   }
 },
 {
-  "model": "beta_invite.area",
+  "model": "beta_invite.workarea",
   "pk": 10,
   "fields":{
     "name": "Docencia",
@@ -80,7 +80,7 @@
   }
 },
 {
-  "model": "beta_invite.area",
+  "model": "beta_invite.workarea",
   "pk": 11,
   "fields":{
     "name": "Hostelería / Turismo",
@@ -88,7 +88,7 @@
   }
 },
 {
-  "model": "beta_invite.area",
+  "model": "beta_invite.workarea",
   "pk": 12,
   "fields":{
     "name": "Informática / Telecomunicaciones",
@@ -96,7 +96,7 @@
   }
 },
 {
-  "model": "beta_invite.area",
+  "model": "beta_invite.workarea",
   "pk": 13,
   "fields":{
     "name": "Ingeniería",
@@ -104,7 +104,7 @@
   }
 },
 {
-  "model": "beta_invite.area",
+  "model": "beta_invite.workarea",
   "pk": 14,
   "fields":{
     "name": "Investigación y Calidad",
@@ -112,7 +112,7 @@
   }
 },
 {
-  "model": "beta_invite.area",
+  "model": "beta_invite.workarea",
   "pk": 15,
   "fields":{
     "name": "Legal / Asesoría",
@@ -120,7 +120,7 @@
   }
 },
 {
-  "model": "beta_invite.area",
+  "model": "beta_invite.workarea",
   "pk": 16,
   "fields":{
     "name": "Mantenimiento y Reparaciones Técnicas",
@@ -128,7 +128,7 @@
   }
 },
 {
-  "model": "beta_invite.area",
+  "model": "beta_invite.workarea",
   "pk": 17,
   "fields":{
     "name": "Medicina / Salud",
@@ -136,7 +136,7 @@
   }
 },
 {
-  "model": "beta_invite.area",
+  "model": "beta_invite.workarea",
   "pk": 18,
   "fields":{
     "name": "Mercadotecnia / Publicidad / Comunicación",
@@ -144,7 +144,7 @@
   }
 },
 {
-  "model": "beta_invite.area",
+  "model": "beta_invite.workarea",
   "pk": 19,
   "fields":{
     "name": "Producción / Operarios / Manufactura",
@@ -152,7 +152,7 @@
   }
 },
 {
-  "model": "beta_invite.area",
+  "model": "beta_invite.workarea",
   "pk": 20,
   "fields":{
     "name": "Recursos Humanos",
@@ -160,7 +160,7 @@
   }
 },
 {
-  "model": "beta_invite.area",
+  "model": "beta_invite.workarea",
   "pk": 21,
   "fields":{
     "name": "Servicios Generales, Aseo y Seguridad",
@@ -168,7 +168,7 @@
   }
 },
 {
-  "model": "beta_invite.area",
+  "model": "beta_invite.workarea",
   "pk": 22,
   "fields":{
     "name": "Ventas",

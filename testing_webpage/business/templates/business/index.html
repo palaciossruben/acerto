@@ -24,7 +24,7 @@
 {% block content %}
 
     <div>
-        <img src="{% static 'beta_invite/img/index.jpg' %}" class="index-img">
+        <img src="{{ cloud_front_url }}business/img/index.jpg" class="index-img">
         <h1 class="main-title">{% trans "Discover amazing people" %}</h1>
         <h2 class="main-intro">{% trans "We help you find and select the person you need fast and easy" %}</h2>
         <a href="{% url 'business:start' %}">
@@ -38,7 +38,7 @@
     <section class="section-container">
         <div class="row"> <!-- bootstrap row class -->
             <div class="col-sm-6">
-                <img class="left-img" src="{% static 'beta_invite/img/index_business.png' %}">
+                <img class="left-img" src="{{ cloud_front_url }}business/img/bald.png">
             </div>
 
             <div class="col-sm-6">

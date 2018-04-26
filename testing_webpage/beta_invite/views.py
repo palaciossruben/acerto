@@ -1,38 +1,19 @@
-import json
-from user_agents import parse
-from django.utils.translation import ugettext as _
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import render
 from django.http import HttpResponseBadRequest, HttpResponse
+from django.shortcuts import redirect
+from django.shortcuts import render
+from django.utils.translation import ugettext as _
+from ipware.ip import get_ip
+from user_agents import parse
 
 import common
-from ipware.ip import get_ip
 from beta_invite import constants as cts
-from beta_invite.util import email_sender
 from beta_invite import interview_module
-from beta_invite.models import User, Visitor, Profession, Education, Country, Campaign, BulletType, Gender, City, Area
 from beta_invite import test_module, new_user_module
-from django.shortcuts import redirect
+from beta_invite.models import User, Visitor, Education, Country, Campaign, BulletType, Gender, City, WorkArea
+from beta_invite.util import email_sender
 from beta_invite.util import messenger_sender, common_senders
-from beta_invite.util.email_sender import remove_accents
-from dashboard.models import Candidate
-
-
-# TODO: Localization a las patadas
-def translate_list_of_objects(objects, language_code):
-    """Assigns to field name the language specific one."""
-    if 'es' in language_code:
-        for o in objects:
-            o.name = o.name_es
-    return objects
-
-
-def get_name_field(language_code):
-    if language_code not in 'en':
-        return 'name_' + language_code
-    else:
-        return 'name'
 
 
 def get_drop_down_values(language_code):
@@ -43,11 +24,10 @@ def get_drop_down_values(language_code):
     Returns: A tuple containing (Countries, Education, Professions)
     """
 
-    professions = Profession.objects.all().order_by(get_name_field(language_code))
-    translate_list_of_objects(professions, language_code)
+    professions = common.get_professions(language_code)
     cities = City.objects.all().order_by('name')
     education = Education.objects.all().order_by('level')
-    translate_list_of_objects(education, language_code)
+    common.translate_list_of_objects(education, language_code)
 
     countries = Country.objects.all().order_by('name')
 
@@ -272,8 +252,8 @@ def additional_info(request):
 
     # Dictionary parameters
     param_dict['candidate'] = candidate
-    param_dict['genders'] = translate_list_of_objects(Gender.objects.all(), request.LANGUAGE_CODE)
-    param_dict['areas'] = translate_list_of_objects(Area.objects.all(), request.LANGUAGE_CODE)
+    param_dict['genders'] = common.translate_list_of_objects(Gender.objects.all(), request.LANGUAGE_CODE)
+    param_dict['work_areas'] = common.translate_list_of_objects(WorkArea.objects.all(), request.LANGUAGE_CODE)
     param_dict['education'] = education
     param_dict['professions'] = professions
     param_dict['countries'] = countries
@@ -323,7 +303,7 @@ def add_cv_changes(request):
 
     user_id = request.POST.get('user_id')
 
-    if user_id is not None:
+    if user_id:
         user = User.objects.get(pk=int(user_id))
         new_user_module.update_resource(request, user, 'curriculum_url', 'resumes')
 

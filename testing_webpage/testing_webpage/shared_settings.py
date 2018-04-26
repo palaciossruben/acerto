@@ -12,17 +12,8 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 from django.utils.translation import ugettext_lazy as _
-from django.db import models
-from django import forms
+from decouple import config
 
-
-class EmailForm(forms.Form):
-  firstname = forms.CharField(max_length=255)
-  lastname = forms.CharField(max_length=255)
-  email = forms.EmailField()
-  subject = forms.CharField(max_length=255)
-  botcheck = forms.CharField(max_length=5)
-  message = forms.CharField()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -32,10 +23,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ln-mvndq07lgoejq7+*x(w-d$hdbw642jp#%7@pxmmr+bw31%y'
+SECRET_KEY = config('secret_key')
 
 
-ALLOWED_HOSTS = ['ec2-52-38-133-146.us-west-2.compute.amazonaws.com',
+ALLOWED_HOSTS = [config('my_instance'),
                  '127.0.0.1',
                  'peaku.co']
 
@@ -53,7 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'raven.contrib.django.raven_compat',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -82,6 +75,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
+                'testing_webpage.context_processors.add_cloud_front_to_context',
             ],
         },
     },
@@ -95,12 +89,12 @@ WSGI_APPLICATION = 'testing_webpage.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'maindb',
-        'USER': 'dbadmin',
-        'PASSWORD': 'delmardelolvido',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'ENGINE': config('db_engine'),
+        'NAME': config('db_name'),
+        'USER': config('db_user'),
+        'PASSWORD': config('db_password'),
+        'HOST': config('db_host'),
+        'PORT': config('db_port'),
     }
 }
 
@@ -151,10 +145,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
-STATIC_URL = '/static/'
+
+STATIC_URL = "/static/"
+
 STATICFILES_DIRS = [('resumes', 'media/resumes'),
                     ('candidate_photo', 'media/candidate_photo'),
-                    ('candidate_brochure', 'media/candidate_brochure')]
+                    ('candidate_brochure', 'media/candidate_brochure'),
+                    ('questions', 'media/questions'), ]
 
 LOGGING = {
     'version': 1,
@@ -190,12 +187,3 @@ LOGIN_REDIRECT_URL = 'business:home'
 
 # Disables this limit.
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
-
-
-
-
-
-
-
-
-

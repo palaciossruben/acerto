@@ -26,6 +26,19 @@
                 </div>
 
                 <div style="margin-top: 50px;">
+                    <h3 class="title-blue-small">{% trans "Profession" %}</h3>
+                    <h5 class="paragraph">{% trans "Select the ideal profession, for this position" %}</h5>
+                    <select id="profession" name="profession_id" >
+                        <option value="" disabled selected>{% trans "Select Profession" %}</option>
+                        {% for profession in professions %}
+                            <option value={{ profession.id }}>{{ profession.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+
+
+                <div style="margin-top: 50px;">
                     <h3 class="title-blue-small">{% trans "Requirements" %}</h3>
                     <h5 class="paragraph">{% trans "Enter the minimum requirements for the job" %}</h5>
 

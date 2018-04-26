@@ -1,7 +1,7 @@
 """Has common functions of the senders"""
 import os
-import json
 from django.conf import settings
+from decouple import config
 
 
 if settings.DEBUG:
@@ -94,12 +94,6 @@ def get_message_path():
     return os.path.join(get_file_path(), 'messages')
 
 
-def read_email_credentials():
-    """Returns a json with the credentials"""
-    json_data = open(os.path.join(get_email_path(), "email_credentials.json"), encoding='utf-8').read()
-    return json.loads(json_data)
-
-
 def get_basic_params(override_dict={}):
     """
     Limited version of the get_params_with_candidate(). For specific cases.
@@ -107,10 +101,9 @@ def get_basic_params(override_dict={}):
         override_dict: Dictionary that changes the default values.
     Returns:
     """
-    sender_data = read_email_credentials()
-    params = {'sender_name': sender_data['sender_name'],
-              'sender_position': sender_data['sender_position'],
-              'peaku_address': sender_data['peaku_address'],
+    params = {'sender_name': config('sender_name'),
+              'sender_position': config('sender_position'),
+              'peaku_address': config('peaku_address'),
               }
 
     for k, v in override_dict.items():
@@ -128,13 +121,12 @@ def get_params_with_user(user, override_dict={}):
     Returns:
     """
 
-    sender_data = read_email_credentials()
     params = {'name': get_first_name(user.name),
               'complete_name': user.name.title(),
               'cv_url': get_cv_url(user),
-              'sender_name': sender_data['sender_name'],
-              'sender_position': sender_data['sender_position'],
-              'peaku_address': sender_data['peaku_address'],
+              'sender_name': config('sender_name'),
+              'sender_position': config('sender_position'),
+              'peaku_address': config('peaku_address'),
               }
 
     for k, v in override_dict.items():
@@ -152,13 +144,12 @@ def get_params_with_candidate(candidate, language_code, override_dict={}):
     Returns:
     """
 
-    sender_data = read_email_credentials()
     params = {'name': get_first_name(candidate.user.name),
               'complete_name': candidate.user.name.title(),
               'cv_url': get_cv_url(candidate.user),
-              'sender_name': sender_data['sender_name'],
-              'sender_position': sender_data['sender_position'],
-              'peaku_address': sender_data['peaku_address'],
+              'sender_name': config('sender_name'),
+              'sender_position': config('sender_position'),
+              'peaku_address': config('peaku_address'),
               'campaign': get_campaign_name(candidate, language_code),
               'campaign_url': get_campaign_url(candidate)}
 

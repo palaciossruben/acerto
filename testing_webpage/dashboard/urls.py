@@ -22,8 +22,11 @@ urlpatterns = [
     url(r'^campaign/(?P<pk>\d+)/tests$', views.tests),
 
     # Test
+    #url(r'^', include('home.urls', namespace='home')),
     url(r'^test/(?P<pk>\d+)$', views.edit_test, name='test_edit'),
     url(r'^test/new$', views.new_test, name='new_test'),
+    url(r'^test/save$', views.save_test, name='save_test'),
+    url(r'^test/update/(?P<pk>\d+)$', views.update_test, name='update_test'),
 
     # Bullets
     url(r'^campaign/(?P<pk>\d+)/bullets$', views.bullets),

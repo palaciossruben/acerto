@@ -1,17 +1,10 @@
-import os
-import json
 import requests
 import unicodedata
+from decouple import config
 from multiprocessing import Process
 
 from dashboard.models import Candidate
 from beta_invite.util import common_senders
-
-
-def read_email_credentials():
-    """Returns a json with the credentials"""
-    json_data = open(os.path.join(common_senders.get_email_path(), "email_credentials.json"), encoding='utf-8').read()
-    return json.loads(json_data)
 
 
 def get_files(attachment):
@@ -32,10 +25,10 @@ def validate_emails(emails):
     return [e for e in emails if e is not None]
 
 
-def mail_gun_post(sender_data, recipients, subject, body, attachment):
-    requests.post(sender_data['mailgun_url'],
-                  auth=("api", sender_data['mailgun_api_key']),
-                  data={"from": sender_data['email'],
+def mail_gun_post(recipients, subject, body, attachment):
+    requests.post(config('mailgun_url'),
+                  auth=("api", config('mailgun_api_key')),
+                  data={"from": config('email'),
                         "to": recipients,
                         "subject": subject,
                         "text": body},
@@ -52,11 +45,10 @@ def send_with_mailgun(recipients, subject, body, attachment=None):
         attachment: optional param for attaching content to email
     Returns: sends emails.
     """
-    sender_data = read_email_credentials()
     recipients = validate_emails(recipients)
 
     if len(recipients) > 0:
-        mail_gun_post(sender_data, recipients, subject, body, attachment)
+        mail_gun_post(recipients, subject, body, attachment)
 
         # TODO: make it async
         #p = Process(target=mail_gun_post, args=(sender_data, recipients, subject, body, attachment))

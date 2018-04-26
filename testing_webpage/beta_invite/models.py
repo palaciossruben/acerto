@@ -34,7 +34,7 @@ class Profession(models.Model):
         db_table = 'professions'
 
 
-class Area(models.Model):
+class WorkArea(models.Model):
 
     name = models.CharField(max_length=200)
     name_es = models.CharField(max_length=200, null=True)
@@ -44,7 +44,7 @@ class Area(models.Model):
 
     # adds custom table name
     class Meta:
-        db_table = 'areas'
+        db_table = 'work_areas'
 
 
 class Gender(models.Model):
@@ -179,6 +179,7 @@ class Question(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'questions'
+        ordering = ['order']
 
     def translate(self, lang_code):
         """
@@ -388,19 +389,18 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    # new fields
     gender = models.ForeignKey(Gender, null=True, on_delete=models.SET_NULL)
     programs = models.CharField(max_length=250, null=True)
-    area = models.ForeignKey(Area, null=True, on_delete=models.SET_NULL)
+    work_area = models.ForeignKey(WorkArea, null=True, on_delete=models.SET_NULL)
     aspiration = models.IntegerField(null=True)
     address = models.CharField(max_length=100, null=True)
-    hood = models.CharField(max_length=40, null=True)
+    neighborhood = models.CharField(max_length=40, null=True)
     profile = models.CharField(max_length=250, null=True)
     languages = models.CharField(max_length=100, null=True)
     phone2 = models.CharField(max_length=40, null=True)
     phone3 = models.CharField(max_length=40, null=True)
     document = models.CharField(max_length=50, null=True)
-    dreamjob = models.CharField(max_length=50, null=True)
+    dream_job = models.CharField(max_length=50, null=True)
     hobbies = models.CharField(max_length=250, null=True)
     twitter = models.CharField(max_length=250, null=True)
     facebook = models.CharField(max_length=250, null=True)
