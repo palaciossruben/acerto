@@ -38,21 +38,13 @@ def update_test_questions(test, request):
             if question:
                 question_set.add(question)
 
-                if 'type' in key:
-                    setattr(question, 'type_id', value)
+                if 'image_path' in key:
+                    value = common.save_resource_from_request(request=request,
+                                                              my_object=question,
+                                                              param_name='image_path',
+                                                              folder_name='questions')
 
-                elif re.match(r'.*question_text$', key):
-                    setattr(question, 'text', value)
-
-                elif re.match(r'.*question_text_es$', key):
-                    setattr(question, 'text_es', value)
-
-                elif 'image' in key:
-                    file_path = common.save_resource_from_request(request=request,
-                                                                  my_object=question,
-                                                                  param_name='image_path',
-                                                                  folder_name='questions')
-                    setattr(question, 'image_path', file_path)
+                setattr(question, common.get_object_attribute_name(key, question), value)
 
                 question.save()
 
