@@ -1,8 +1,8 @@
 from urllib.parse import urlencode, urlunparse, urlparse, parse_qsl, parse_qs
-
 from django.core.exceptions import ObjectDoesNotExist
 from ipware.ip import get_ip
 import geoip2.database
+import inflection
 from beta_invite.apps import ip_country_reader, ip_city_reader
 
 from beta_invite.models import User, Campaign, Country, City, Profession
@@ -260,3 +260,18 @@ def translate_list_of_objects(objects, language_code):
         for o in objects:
             o.name = o.name_es
     return objects
+
+
+def get_object_attribute_name(key, my_object):
+    """
+    A standard pattern for object-attribute naming is as follows:
+    '<obj_id>_<object_class_name>_<attribute_name>'
+    Splits by 'question', then removes everything before first 'question',
+    then joins again to form string
+    :param key: any string that follows the pattern mentioned above, eg: '12_question_type_id'
+    :param my_object: just an instance
+    :return: attribute_name, eg: type_id
+    """
+    class_name = inflection.underscore(my_object.__class__.__name__)
+    class_name = '_{}_'.format(class_name)
+    return class_name.join(key.split(class_name)[1:])
