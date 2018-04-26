@@ -1,5 +1,8 @@
+import json
 from django import template
 from business.models import BusinessUser
+from django.core.serializers import serialize
+from django.db.models.query import QuerySet
 
 register = template.Library()
 
@@ -19,3 +22,10 @@ def get_dashboard_campaign_url(campaign):
 @register.filter
 def get_business_user_id_from_auth_user(user):
     return BusinessUser.objects.get(auth_user=user).pk
+
+
+@register.filter
+def jsonify(object):
+    if isinstance(object, QuerySet):
+        return serialize('json', object)
+    return json.dumps(object)
