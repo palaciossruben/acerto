@@ -1,27 +1,23 @@
 import re
-from beta_invite import Question
+
+import common
+from beta_invite.models import Question
 
 
-def update_question_attr(test, dict_id, key_question_dict, value, attribute_name):
-    """
-    Uses meta-programing, and updates or creates new Question objects.
-    Args:
-        test: Object
-        dict_id: temporal id to distinguish between different new ids only.
-        key_question_dict: dictionary containing new stored questions to add.
-        value:
-        attribute_name: the name of the Bullet object attribute.
-    Returns: None, just update
-    """
-    if dict_id in key_question_dict.keys():  # Updates question.
-        q = key_question_dict[dict_id]
-        setattr(q, attribute_name, value)
-        q.save()
-    else:  # creates new Question
-        q = Question(**{attribute_name: value})
-        q.save()
-        key_question_dict[dict_id] = q
-        test.questions.add(q)
+def get_question(question_set, key):
+
+    try:
+        question_order = int(re.findall('^\d+', key)[0])
+    except IndexError:
+        return None  # no valid question id found
+
+    if question_order not in [q.order for q in question_set]:  # Create missing question
+        question = Question(order=question_order)
+        question.save()
+    else:
+        question = [q for q in question_set if q.order == question_order][0]
+
+    return question
 
 
 def update_test_questions(test, request):
@@ -31,39 +27,34 @@ def update_test_questions(test, request):
         request: HTTP request
     Returns: None, updates or creates new questions.
     """
-    key_question_dict = {}
+    question_set = set()
     for key, value in request.POST.items():
 
         # When there is a new_question.
-        if 'new_question' in key:
+        if 'question' in key:
 
-            dict_id = int(re.findall('^\d+', key)[0])
+            question = get_question(question_set, key)
 
-            if 'type' in key:
-                update_question_attr(test, dict_id, key_question_dict, value, 'question_type_id')
+            if question:
+                question_set.add(question)
 
-            elif re.match(r'.*question_name$', key):
-                update_question_attr(test, dict_id, key_question_dict, value, 'name')
+                if 'type' in key:
+                    setattr(question, 'type_id', value)
 
-            elif re.match(r'.*question_name_es$', key):
-                update_question_attr(test, dict_id, key_question_dict, value, 'name_es')
+                elif re.match(r'.*question_text$', key):
+                    setattr(question, 'text', value)
 
-        # updates existing questions
-        elif re.search('\d+_question', key):
+                elif re.match(r'.*question_text_es$', key):
+                    setattr(question, 'text_es', value)
 
-            # gets the question id.
-            question_pk = int(re.findall(r'\d+', key)[0])
-            question = Question.objects.get(pk=question_pk)
+                elif 'image' in key:
+                    file_path = common.save_resource_from_request(request=request,
+                                                                  my_object=question,
+                                                                  param_name='image_path',
+                                                                  folder_name='questions')
+                    setattr(question, 'image_path', file_path)
 
-            if 'type' in key:
-                question.question_type_id = value
+                question.save()
 
-            elif re.match(r'.*question_name$', key):
-                question.name = value
-
-            elif re.match(r'.*question_name_es$', key):
-                question.name_es = value
-
-            question.save()
-
-    test.save()
+    test.questions = list(question_set)
+    return test

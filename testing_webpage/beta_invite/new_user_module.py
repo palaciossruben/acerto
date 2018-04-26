@@ -1,66 +1,11 @@
-import os
-import subprocess
-import unicodedata
 from datetime import datetime
 
-from django.core.files.storage import FileSystemStorage
 from django.utils.translation import ugettext as _
 
+import common
 from beta_invite.models import User
 from beta_invite.util import email_sender
 from dashboard.models import Candidate
-import common
-
-
-def remove_accents(text):
-    return ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
-
-
-def rename_filename(filename):
-    """Removes accents, spaces and other chars to have a easier time later"""
-
-    replacement = {' ': '_', '(': '_', ')': '_'}
-
-    for my_char, replace_char in replacement.items():
-
-        if my_char in filename:
-            filename = filename.replace(my_char, replace_char)
-
-    return remove_accents(filename)
-
-
-def save_resource_from_request(request, user, param_name, folder_name):
-    """
-    Saves file on machine resumes/* file system
-    Args:
-        request: HTTP request
-        user: Object
-        param_name: string, name of File on the request
-    Returns: file url or None if nothing is saves.
-    """
-
-    # validate correct method and has file.
-    if request.method == 'POST' and len(request.FILES) != 0 and request.FILES.get(param_name) is not None:
-
-        my_file = request.FILES[param_name]
-        fs = FileSystemStorage()
-
-        user_id_folder = str(user.id)
-
-        folder = os.path.join(folder_name, user_id_folder)
-
-        file_path = os.path.join(folder, rename_filename(my_file.name))
-
-        fs.save(file_path, my_file)
-
-        # once saved it will collect the file
-        subprocess.call('python3 manage.py collectstatic -v0 --noinput', shell=True)
-
-        # at last returns the curriculum url
-        return file_path
-
-    else:
-        return '#'
 
 
 def user_if_exists(email, phone, campaign):
@@ -115,7 +60,7 @@ def update_user(campaign, user, user_params, request):
 
 
 def update_resource(request, user, field, folder_name):
-    path = save_resource_from_request(request, user, field, folder_name)
+    path = common.save_resource_from_request(request, user, field, folder_name)
 
     if path != '#':
         setattr(user, field, path)

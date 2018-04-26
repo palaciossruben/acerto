@@ -150,7 +150,8 @@ STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [('resumes', 'media/resumes'),
                     ('candidate_photo', 'media/candidate_photo'),
-                    ('candidate_brochure', 'media/candidate_brochure')]
+                    ('candidate_brochure', 'media/candidate_brochure'),
+                    ('questions', 'media/questions'), ]
 
 LOGGING = {
     'version': 1,
