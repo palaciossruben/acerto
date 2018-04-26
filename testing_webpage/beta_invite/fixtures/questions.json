@@ -252,7 +252,7 @@
       "answers": [],
       "type": 3,
       "correct_answers": [],
-      "order": 2,
+      "order": 3,
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
     }
@@ -261,12 +261,12 @@
     "model": "beta_invite.question",
     "pk": 20,
     "fields":{
-      "text": "This is a possible solution to the problem. Why the last line returns -1?",
-      "text_es": "Esta es una posible solución al problema. ¿Por qué la última linea retorna -1?",
+      "text": "This is a possible solution to the last problem. Why the last line returns -1?",
+      "text_es": "Esta es una posible solución al problema anterior. ¿Por qué la última linea retorna -1?",
       "answers": [38, 39, 40, 41],
       "type": 1,
       "correct_answers": [39],
-      "order": 3,
+      "order": 2,
       "image_path": "beta_invite/questions/20/slow_array_code.png",
       "created_at": "2017-08-24 02:42:49.0957+00",
       "updated_at": "2017-08-24 02:42:49.0957+00"
@@ -837,8 +837,8 @@
     "model": "beta_invite.question",
     "pk": 58,
     "fields":{
-      "text": "If inputArray: [1, 2, 3, 0]. What value returns the algorithm?",
-      "text_es": "Si inputArray: [1, 2, 3, 0]. ¿Qué valor retorna el algoritmo?",
+      "text": "Solve the following exercise: If inputArray: [1, 2, 3, 0]. What value returns the algorithm?",
+      "text_es": "Resuelve el siguiente ejercicio: Si inputArray: [1, 2, 3, 0]. ¿Qué valor retorna el algoritmo?",
       "answers": [85, 86, 87, 88],
       "type": 1,
       "correct_answers": [88],
@@ -1586,8 +1586,8 @@
     "model": "beta_invite.question",
     "pk": 109,
     "fields":{
-      "text": "I have never been…….. in all my life!",
-      "text_es": "I have never been…….. in all my life!",
+      "text": "I have never been ... in  my entire life!",
+      "text_es": "I have never been ... in  my entire life!",
       "answers": [240, 241, 242],
       "type": 1,
       "correct_answers": [241],
@@ -2097,6 +2097,559 @@
       "image_path": "beta_invite/questions/144/stack.png",
       "created_at": "2018-04-15 02:42:49.0957+00",
       "updated_at": "2018-04-15 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 145,
+    "fields":{
+      "text": "¿Cómo se ejecuta un procedimiento almacenado?",
+      "text_es": "¿Cómo se ejecuta un procedimiento almacenado?",
+      "answers": [366, 367, 368, 369],
+      "type": 1,
+      "correct_answers": [368],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 146,
+    "fields":{
+      "text": "¿Cuáles son los tipos de parámetros que se pueden especificar en un cursor SQL?",
+      "text_es": "¿Cuáles son los tipos de parámetros que se pueden especificar en un cursor SQL?",
+      "answers": [370, 371, 372, 373],
+      "type": 1,
+      "correct_answers": [371],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 147,
+    "fields":{
+      "text": "Después de creado un procedimiento almacenado no es posible editarlo ya que este después de implementarlo, altera los datos",
+      "text_es": "Después de creado un procedimiento almacenado no es posible editarlo ya que este después de implementarlo, altera los datos",
+      "answers": [374, 375],
+      "type": 1,
+      "correct_answers": [375],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 148,
+    "fields":{
+      "text": "¿Cuál es el valor devuelto por la instrucción FETCH cuando no se ejecutó correctamente o la fila estaba más allá del conjunto de resultados?",
+      "text_es": "¿Cuál es el valor devuelto por la instrucción FETCH cuando no se ejecutó correctamente o la fila estaba más allá del conjunto de resultados?",
+      "answers": [376, 377, 378, 379],
+      "type": 1,
+      "correct_answers": [376],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 149,
+    "fields":{
+      "text": "¿Qué falta para que su cumpla la siguiente estructura?: CREATE PROCEDURE...",
+      "text_es": "¿Qué falta para que su cumpla la siguiente estructura?: CREATE PROCEDURE...",
+      "answers": [380, 381, 382, 383],
+      "type": 1,
+      "correct_answers": [383],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 150,
+    "fields":{
+      "text": "Los procedimientos almacenados se usan a menudo, pero no siempre, para realizar consultas SQL sobre los objetos de la base de datos de una manera abstracta, desde el punto de vista del cliente de la aplicación",
+      "text_es": "Los procedimientos almacenados se usan a menudo, pero no siempre, para realizar consultas SQL sobre los objetos de la base de datos de una manera abstracta, desde el punto de vista del cliente de la aplicación",
+      "answers": [374, 375],
+      "type": 1,
+      "correct_answers": [374],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 151,
+    "fields":{
+      "text": "¿Cuál es la estructura que se usa para leer la fila de un cursor?",
+      "text_es": "¿Cuál es la estructura que se usa para leer la fila de un cursor?",
+      "answers": [384, 385, 386, 387],
+      "type": 1,
+      "correct_answers": [386],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 152,
+    "fields":{
+      "text": "¿Esta declaración del cursor esta bien?: 'DECLARE cClientes CURSOR FOR SELECT Id, Nombre, Apellido1, Apellido2, NifCif, FxNacimiento FROM CLIENTES'",
+      "text_es": "¿Esta declaración del cursor esta bien?: 'DECLARE cClientes CURSOR FOR SELECT Id, Nombre, Apellido1, Apellido2, NifCif, FxNacimiento FROM CLIENTES'",
+      "answers": [374, 375],
+      "type": 1,
+      "correct_answers": [374],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 153,
+    "fields":{
+      "text": "¿Qué diferencia hay entre el comando execute y sql_executesql?",
+      "text_es": "¿Qué diferencia hay entre el comando execute y sql_executesql?",
+      "answers": [388, 389, 390, 391],
+      "type": 1,
+      "correct_answers": [388],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 154,
+    "fields":{
+      "text": "¿Para qué sirve el parámetro FORWARD_ONLY?",
+      "text_es": "¿Para qué sirve el parámetro FORWARD_ONLY?",
+      "answers": [392, 393, 394, 395],
+      "type": 1,
+      "correct_answers": [393],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 155,
+    "fields":{
+      "text": "¿Cuál del siguiente especificador de acceso en C# permite que una clase oculte sus variables miembro y funciones miembro de otros objetos y funciones de clase, excepto una clase secundaria dentro de la misma aplicación?",
+      "text_es": "¿Cuál del siguiente especificador de acceso en C# permite que una clase oculte sus variables miembro y funciones miembro de otros objetos y funciones de clase, excepto una clase secundaria dentro de la misma aplicación?",
+      "answers": [396, 397, 398, 399],
+      "type": 1,
+      "correct_answers": [396],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 156,
+    "fields":{
+      "text": "¿Cuál de las siguientes opciones es correcta sobre las variables de tipo de valor en C#?",
+      "text_es": "¿Cuál de las siguientes opciones es correcta sobre las variables de tipo de valor en C#?",
+      "answers": [400, 401, 402, 403],
+      "type": 1,
+      "correct_answers": [403],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 157,
+    "fields":{
+      "text": "¿Cuál de los siguientes operadores crea un puntero a una variable en C#?",
+      "text_es": "¿Cuál de los siguientes operadores crea un puntero a una variable en C#?",
+      "answers": [404, 405, 406, 407],
+      "type": 1,
+      "correct_answers": [407],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 158,
+    "fields":{
+      "text": "¿Cuál de los siguientes convierte un tipo en un pequeño número decimal en C#?",
+      "text_es": "¿Cuál de los siguientes convierte un tipo en un pequeño número decimal en C#?",
+      "answers": [408, 409, 410, 411],
+      "type": 1,
+      "correct_answers": [410],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 159,
+    "fields":{
+      "text": "¿Las variables de tipo de valor en C# se derivan de la clase System.ValueType?",
+      "text_es": "¿Las variables de tipo de valor en C# se derivan de la clase System.ValueType?",
+      "answers": [374, 375],
+      "type": 1,
+      "correct_answers": [374],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 160,
+    "fields":{
+      "text": "¿Podemos usar palabras clave reservadas como identificadores en C#?",
+      "text_es": "¿Podemos usar palabras clave reservadas como identificadores en C#?",
+      "answers": [374, 375],
+      "type": 1,
+      "correct_answers": [375],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 161,
+    "fields":{
+      "text": "¿Cuál de las siguientes palabras clave se usa para incluir namespaces en C#?",
+      "text_es": "¿Cuál de las siguientes palabras clave se usa para incluir namespaces en C#?",
+      "answers": [412, 413, 414, 415],
+      "type": 1,
+      "correct_answers": [413],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 162,
+    "fields":{
+      "text": "¿Cuál de los siguientes es correcto con respecto a los parámetros en C#?",
+      "text_es": "¿Cuál de los siguientes es correcto con respecto a los parámetros en C#?",
+      "answers": [416, 417, 418, 419],
+      "type": 1,
+      "correct_answers": [419],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 163,
+    "fields":{
+      "text": "¿Cuál de los siguientes métodos ayuda a devolver más de un valor?",
+      "text_es": "¿Cuál de los siguientes métodos ayuda a devolver más de un valor?",
+      "answers": [420, 421, 422, 423],
+      "type": 1,
+      "correct_answers": [422],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 164,
+    "fields":{
+      "text": "¿Cuál de las siguientes opciones es correcta acerca de las convenciones de nomenclatura de variable en C#?",
+      "text_es": "¿Cuál de las siguientes opciones es correcta acerca de las convenciones de nomenclatura de variable en C#?",
+      "answers": [424, 425, 426, 427],
+      "type": 1,
+      "correct_answers": [426],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 165,
+    "fields":{
+      "text": "¿Cuál de los siguientes es verdadero con respecto al uso de las excepciones en C#?",
+      "text_es": "¿Cuál de los siguientes es verdadero con respecto al uso de las excepciones en C#?",
+      "answers": [428, 429, 430, 431],
+      "type": 1,
+      "correct_answers": [430],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 166,
+    "fields":{
+      "text": "¿Cuál de los siguientes es correcto con respecto a un constructor de clase?",
+      "text_es": "¿Cuál de los siguientes es correcto con respecto a un constructor de clase?",
+      "answers": [432, 433, 434, 435],
+      "type": 1,
+      "correct_answers": [434],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 167,
+    "fields":{
+      "text": "La sobrecarga de operadores es un tipo de polimorfismo dinámico",
+      "text_es": "La sobrecarga de operadores es un tipo de polimorfismo dinámico",
+      "answers": [374, 375],
+      "type": 1,
+      "correct_answers": [375],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 168,
+    "fields":{
+      "text": "¿Cuál de los siguientes convierte un tipo a un tipo de byte firmado en C#?",
+      "text_es": "¿Cuál de los siguientes convierte un tipo a un tipo de byte firmado en C#?",
+      "answers": [436, 437, 438, 439],
+      "type": 1,
+      "correct_answers": [437],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 169,
+    "fields":{
+      "text": "¿Cuál de los siguientes convierte un tipo a un entero de 64 bits en C#?",
+      "text_es": "¿Cuál de los siguientes convierte un tipo a un entero de 64 bits en C#?",
+      "answers": [440, 441, 442, 443],
+      "type": 1,
+      "correct_answers": [440],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 170,
+    "fields":{
+      "text": "¿Cuál de las siguientes afirmaciones es correcta con respecto a los especificadores de acceso en C#?",
+      "text_es": "¿Cuál de las siguientes afirmaciones es correcta con respecto a los especificadores de acceso en C#?",
+      "answers": [444, 445, 446, 447],
+      "type": 1,
+      "correct_answers": [446],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 171,
+    "fields":{
+      "text": "Los operadores lógicos condicionales pueden ser sobrecargados",
+      "text_es": "Los operadores lógicos condicionales pueden ser sobrecargados",
+      "answers": [374, 375],
+      "type": 1,
+      "correct_answers": [375],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 172,
+    "fields":{
+      "text": "¿Cuál de las siguientes afirmaciones es verdadera con respecto a la clase System.ApplicationException en C#?",
+      "text_es": "¿Cuál de las siguientes afirmaciones es verdadera con respecto a la clase System.ApplicationException en C#?",
+      "answers": [448, 449, 450, 451],
+      "type": 1,
+      "correct_answers": [450],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 173,
+    "fields":{
+      "text": "¿Cuál de los siguientes convierte un tipo a un tipo int sin signo en C#?",
+      "text_es": "¿Cuál de los siguientes convierte un tipo a un tipo int sin signo en C#?",
+      "answers": [452, 453, 454, 455],
+      "type": 1,
+      "correct_answers": [453],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 174,
+    "fields":{
+      "text": "C# no admite herencia múltiple",
+      "text_es": "C# no admite herencia múltiple",
+      "answers": [374, 375],
+      "type": 1,
+      "correct_answers": [374],
+      "order": 1,
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 175,
+    "fields":{
+      "text": "¿Cuántas contrataciones has realizado en tu vida laboral?",
+      "text_es": "¿Cuántas contrataciones has realizado en tu vida laboral?",
+      "answers": [],
+      "type": 5,
+      "correct_answers": [],
+      "order": 1,
+      "params": {"min": 0,
+                 "max": 10000,
+                 "min_correct": 30,
+                 "max_correct": 10000,
+                 "default":20
+                },
+      "created_at": "2018-04-24 02:42:49.0957+00",
+      "updated_at": "2018-04-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 176,
+    "fields":{
+      "text": "Trabajas en una temporal, actualmente recibes muchas hojas de vidas de candidatos que no son muy relevantes, algunos ni siquiera aplican para la vacante. ¿Qué crees qué es lo más importante para realizar una contratación exitosa?",
+      "text_es": "Trabajas en una temporal, actualmente recibes muchas hojas de vidas de candidatos que no son muy relevantes, algunos ni siquiera aplican para la vacante. ¿Qué crees qué es lo más importante para realizar una contratación exitosa?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 1,
+      "created_at": "2018-04-24 02:42:49.0957+00",
+      "updated_at": "2018-04-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 177,
+    "fields":{
+      "text": "¿Cómo describirías tu experiencia laboral más reciente? (cuéntanos tus labores diarias y tu logro más importante)",
+      "text_es": "¿Cómo describirías tu experiencia laboral más reciente? (cuéntanos tus labores diarias y tu logro más importante)",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 1,
+      "created_at": "2018-04-24 02:42:49.0957+00",
+      "updated_at": "2018-04-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 178,
+    "fields":{
+      "text": "Quieres poder sacar al mercado tu propia línea de jabones antibacteriales en seco (gel desinfectante), ya tienes algunos clientes pero necesitas cada vez más pues la empresa está en cecimiento. ¿Cómo harías contacto con el gerente de compras del exito?",
+      "text_es": "Quieres poder sacar al mercado tu propia línea de jabones antibacteriales en seco (gel desinfectante), ya tienes algunos clientes pero necesitas cada vez más pues la empresa está en cecimiento. ¿Cómo harías contacto con el gerente de compras del exito?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 1,
+      "created_at": "2018-04-24 02:42:49.0957+00",
+      "updated_at": "2018-04-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 179,
+    "fields":{
+      "text": "Actualmente laboras en una empresa de selección de personal y eres la persona encargada de visitar a los clientes y ofrecerles el servicio. ¿Qué harías para fidelizar un cliente que estás a punto de perder?",
+      "text_es": "Actualmente laboras en una empresa de selección de personal y eres la persona encargada de visitar a los clientes y ofrecerles el servicio. ¿Qué harías para fidelizar un cliente que estás a punto de perder?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 1,
+      "created_at": "2018-04-24 02:42:49.0957+00",
+      "updated_at": "2018-04-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 180,
+    "fields":{
+      "text": "Hay una vacante para un gerente financiero. De momento solo hay diez posibles prospectos en toda la ciudad, que cumplen con el perfil y ya se encuentran laborando. ¿Qué harías para lograr la contratación?",
+      "text_es": "Hay una vacante para un gerente financiero. De momento solo hay diez posibles prospectos en toda la ciudad, que cumplen con el perfil y ya se encuentran laborando. ¿Qué harías para lograr la contratación?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 1,
+      "created_at": "2018-04-24 02:42:49.0957+00",
+      "updated_at": "2018-04-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 181,
+    "fields":{
+      "text": "Encuentras el candidato idóneo para la vacante que estás buscando, no está muy convencido de querer trabajar para la empresa de la oferta. Le explicas mejor la oferta y el candidato definitivamente se niega a aceptar. ¿Qué haces?",
+      "text_es": "Encuentras el candidato idóneo para la vacante que estás buscando, no está muy convencido de querer trabajar para la empresa de la oferta. Le explicas mejor la oferta y el candidato definitivamente se niega a aceptar. ¿Qué haces?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 1,
+      "created_at": "2018-04-24 02:42:49.0957+00",
+      "updated_at": "2018-04-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 182,
+    "fields":{
+      "text": "¿Qué metodologías usarías para diseñar una prueba de selección para un perfil con el que nunca has trabajado antes?",
+      "text_es": "¿Qué metodologías usarías para diseñar una prueba de selección para un perfil con el que nunca has trabajado antes?",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 1,
+      "created_at": "2018-04-24 02:42:49.0957+00",
+      "updated_at": "2018-04-24 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.question",
+    "pk": 183,
+    "fields":{
+      "text": "Orden de prioridades",
+      "text_es": "Orden de prioridades",
+      "answers": [],
+      "type": 3,
+      "correct_answers": [],
+      "order": 1,
+      "image_path": "beta_invite/questions/183/itinerario.png",
+      "created_at": "2018-04-24 02:42:49.0957+00",
+      "updated_at": "2018-04-24 02:42:49.0957+00"
     }
   }
 ]

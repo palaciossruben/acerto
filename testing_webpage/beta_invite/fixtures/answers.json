@@ -2611,8 +2611,8 @@
     "model": "beta_invite.answer",
     "pk": 263,
     "fields":{
-      "name": "Está asignando unas condiciones: Que la altura sea menor a 170, y que al poner en mayúscula el nombre y el apellido, contengan b y gre_n respectivamente (ejemplo AMBER GREEN)",
-      "name_es": "Está asignando unas condiciones: Que la altura sea menor a 170, y que al poner en mayúscula el nombre y el apellido, contengan b y gre_n respectivamente (ejemplo AMBER GREEN)",
+      "name": "Está asignando unas condiciones: Que la altura sea menor a 170, y que al poner en mayúscula el nombre y el apellido, contengan B y GRE_N respectivamente (ejemplo AMBER GREEN)",
+      "name_es": "Está asignando unas condiciones: Que la altura sea menor a 170, y que al poner en mayúscula el nombre y el apellido, contengan B y GRE_N respectivamente (ejemplo AMBER GREEN)",
       "created_at": "2018-04-14 02:42:49.0957+00",
       "updated_at": "2018-04-14 02:42:49.0957+00"
     }
@@ -3121,8 +3121,8 @@
     "model": "beta_invite.answer",
     "pk": 314,
     "fields":{
-      "name": "Iniciar ada método con begin transaction",
-      "name_es": "Iniciar ada método con begin transaction",
+      "name": "Iniciar cada método con begin transaction",
+      "name_es": "Iniciar cada método con begin transaction",
       "created_at": "2018-04-14 02:42:49.0957+00",
       "updated_at": "2018-04-14 02:42:49.0957+00"
     }
@@ -3636,6 +3636,905 @@
       "created_at": "2018-04-14 02:42:49.0957+00",
       "updated_at": "2018-04-14 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 366,
+    "fields": {
+      "name": "Execute [<nombre_procedimiento>]",
+      "name_es": "Execute [<nombre_procedimiento>]",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 367,
+    "fields": {
+      "name": "Exc <nombre_procedimiento>, @parametro1, @parametro2",
+      "name_es": "Exc <nombre_procedimiento>, @parametro1, @parametro2",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 368,
+    "fields": {
+      "name": "Exec <nombre_procedimiento>, parametro1, parametro2",
+      "name_es": "Exec <nombre_procedimiento>, parametro1, parametro2",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 369,
+    "fields": {
+      "name": "Execute <nombre_precedimiento>",
+      "name_es": "Execute <nombre_precedimiento>",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 370,
+    "fields": {
+      "name": "[Fijo-General]",
+      "name_es": "[Fijo-General]",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 371,
+    "fields": {
+      "name": "[Local-General]",
+      "name_es": "[Local-General]",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 372,
+    "fields": {
+      "name": "[Read_Only | Dynamic | Scroll]",
+      "name_es": "[Read_Only | Dynamic | Scroll]",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 373,
+    "fields": {
+      "name": "Ninguna de las anteriores",
+      "name_es": "Ninguna de las anteriores",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 374,
+    "fields": {
+      "name": "Verdadero",
+      "name_es": "Verdadero",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 375,
+    "fields": {
+      "name": "Falso",
+      "name_es": "Falso",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 376,
+    "fields": {
+      "name": "-1",
+      "name_es": "-1",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 377,
+    "fields": {
+      "name": "2",
+      "name_es": "2",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 378,
+    "fields": {
+      "name": "-2",
+      "name_es": "-2",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 379,
+    "fields": {
+      "name": "Null",
+      "name_es": "Null",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 380,
+    "fields": {
+      "name": "...<Procedure_Name, ProcedureName>",
+      "name_es": "...<Procedure_Name, ProcedureName>",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 381,
+    "fields": {
+      "name": "...<sysname, ProcedureName>",
+      "name_es": "...<sysname, ProcedureName>",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 382,
+    "fields": {
+      "name": "...<ProcedureName, sysname, Procedure_Name>",
+      "name_es": "...<ProcedureName, sysname, Procedure_Name>",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 383,
+    "fields": {
+      "name": "...<Procedure_Name, sysname, ProcedureName>",
+      "name_es": "...<Procedure_Name, sysname, ProcedureName>",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 384,
+    "fields": {
+      "name": "INTO <nombre_cursor> INTO <lista_variables>",
+      "name_es": "INTO <nombre_cursor> INTO <lista_variables>",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 385,
+    "fields": {
+      "name": "FITCH <nombre_cursor> INTRO <lista_variables>",
+      "name_es": "FITCH <nombre_cursor> INTRO <lista_variables>",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 386,
+    "fields": {
+      "name": "FETCH <nombre_cursor> INTO <lista_variables>",
+      "name_es": "FETCH <nombre_cursor> INTO <lista_variables>",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 387,
+    "fields": {
+      "name": "INTO <nombre_cursor> FETCH <lista_variables>",
+      "name_es": "INTO <nombre_cursor> FETCH <lista_variables>",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 388,
+    "fields": {
+      "name": "Permite ejecutar una cadena de caracteres y permite el uso de parametros y con el que obtendremos un mejor rendimiento de nuestras consultas",
+      "name_es": "Permite ejecutar una cadena de caracteres y permite el uso de parametros y con el que obtendremos un mejor rendimiento de nuestras consultas",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 389,
+    "fields": {
+      "name": "Ambas admiten la sustitución de valores de parámetros para cualquier parámetro especificado en la cadena Transact-SQL a ejecutar",
+      "name_es": "Ambas admiten la sustitución de valores de parámetros para cualquier parámetro especificado en la cadena Transact-SQL a ejecutar",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 390,
+    "fields": {
+      "name": "EXECTUTE es menos eficiente que el sql_executesql",
+      "name_es": "EXECTUTE es menos eficiente que el sql_executesql",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 391,
+    "fields": {
+      "name": "Ninguna de las anteriores",
+      "name_es": "Ninguna de las anteriores",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 392,
+    "fields": {
+      "name": "El cursor recorrerá filas solo por orden alfabetico",
+      "name_es": "El cursor recorrerá filas solo por orden alfabetico",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 393,
+    "fields": {
+      "name": "El cursor solo se puede desplazar de la primera a la última fila",
+      "name_es": "El cursor solo se puede desplazar de la primera a la última fila",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 394,
+    "fields": {
+      "name": "El cursor hará recorrido solo si hay mas de 5 datos",
+      "name_es": "El cursor hará recorrido solo si hay mas de 5 datos",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 395,
+    "fields": {
+      "name": "El cursor solo se puede desplazar de la ultima a la primera fila",
+      "name_es": "El cursor solo se puede desplazar de la ultima a la primera fila",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 396,
+    "fields": {
+      "name": "Protected Internal",
+      "name_es": "Protected Internal",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 397,
+    "fields": {
+      "name": "Private",
+      "name_es": "Private",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 398,
+    "fields": {
+      "name": "Protected",
+      "name_es": "Protected",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 399,
+    "fields": {
+      "name": "Internal",
+      "name_es": "Internal",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 400,
+    "fields": {
+      "name": "Los tipos de valores contienen datos directamente",
+      "name_es": "Los tipos de valores contienen datos directamente",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 401,
+    "fields": {
+      "name": "int, char y float, que almacena números, alfabetos y números Ddecimales respectivamente, son tipos de valores",
+      "name_es": "int, char y float, que almacena números, alfabetos y números Ddecimales respectivamente, son tipos de valores",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 402,
+    "fields": {
+      "name": "Cuando declaras un tipo int, el sistema asigna memoria para almacenar el valor",
+      "name_es": "Cuando declaras un tipo int, el sistema asigna memoria para almacenar el valor",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 403,
+    "fields": {
+      "name": "Todas las anteriores",
+      "name_es": "Todas las anteriores",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 404,
+    "fields": {
+      "name": "sizeof",
+      "name_es": "sizeof",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 405,
+    "fields": {
+      "name": "typeof",
+      "name_es": "typeof",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 406,
+    "fields": {
+      "name": "&",
+      "name_es": "&",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 407,
+    "fields": {
+      "name": "*",
+      "name_es": "*",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 408,
+    "fields": {
+      "name": "ToInt64",
+      "name_es": "ToInt64",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 409,
+    "fields": {
+      "name": "ToSbyte",
+      "name_es": "ToSbyte",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 410,
+    "fields": {
+      "name": "ToSingle",
+      "name_es": "ToSingle",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 411,
+    "fields": {
+      "name": "ToInt32",
+      "name_es": "ToInt32",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 412,
+    "fields": {
+      "name": "Imports",
+      "name_es": "Imports",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 413,
+    "fields": {
+      "name": "using",
+      "name_es": "using",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 414,
+    "fields": {
+      "name": "exports",
+      "name_es": "exports",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 415,
+    "fields": {
+      "name": "Ninguna de las anteriores",
+      "name_es": "Ninguna de las anteriores",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 416,
+    "fields": {
+      "name": "Al usar la palabra clave param, se puede especificar un parámetro de método que toma una cantidad variable de argumentos o incluso ningún argumento",
+      "name_es": "Al usar la palabra clave param, se puede especificar un parámetro de método que toma una cantidad variable de argumentos o incluso ningún argumento",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 417,
+    "fields": {
+      "name": "No se permiten parámetros adicionales después de la palabra clave params en una declaración de método",
+      "name_es": "No se permiten parámetros adicionales después de la palabra clave params en una declaración de método",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 418,
+    "fields": {
+      "name": "Solo se permite una palabra clave params en una declaración de método",
+      "name_es": "Solo se permite una palabra clave params en una declaración de método",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 419,
+    "fields": {
+      "name": "Todas las anteriores",
+      "name_es": "Todas las anteriores",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 420,
+    "fields": {
+      "name": "Value parameters",
+      "name_es": "Value parameters",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 421,
+    "fields": {
+      "name": "Reference parameters",
+      "name_es": "Reference parameters",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 422,
+    "fields": {
+      "name": "Output parameters",
+      "name_es": "Output parameters",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 423,
+    "fields": {
+      "name": "Ninguno de los anteriores",
+      "name_es": "Ninguno de los anteriores",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 424,
+    "fields": {
+      "name": "No debería ser una palabra clave C#",
+      "name_es": "No debería ser una palabra clave C#",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 425,
+    "fields": {
+      "name": "It must not contain any embedded space or symbol such as: ? - + ! @ # % ^ & * ( ) [ ] { }",
+      "name_es": "No debe contener ningún espacio incrustado o símbolo como: ? - +! @ #% ^ & * () [] {}",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 426,
+    "fields": {
+      "name": "Las dos anteriores",
+      "name_es": "Las dos anteriores",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 427,
+    "fields": {
+      "name": "Ninguna de las anteriores",
+      "name_es": "Ninguna de las anteriores",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 428,
+    "fields": {
+      "name": "Las clases de excepción en C# se derivan principalmente directa o indirectamente de la clase System.Exception",
+      "name_es": "Las clases de excepción en C# se derivan principalmente directa o indirectamente de la clase System.Exception",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 429,
+    "fields": {
+      "name": "Las excepciones en C# están representadas por clases",
+      "name_es": "Las excepciones en C# están representadas por clases",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 430,
+    "fields": {
+      "name": "Las dos anteriores",
+      "name_es": "Las dos anteriores",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 431,
+    "fields": {
+      "name": "Ninguna de las anteriores",
+      "name_es": "Ninguna de las anteriores",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 432,
+    "fields": {
+      "name": "Un constructor de clase es una función de miembro especial de una clase que se ejecuta cada vez que creamos nuevos objetos de esa clase",
+      "name_es": "Un constructor de clase es una función de miembro especial de una clase que se ejecuta cada vez que creamos nuevos objetos de esa clase",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 433,
+    "fields": {
+      "name": "Un constructor tiene exactamente el mismo nombre que el de clase y no tiene ningún tipo de devolución",
+      "name_es": "Un constructor tiene exactamente el mismo nombre que el de clase y no tiene ningún tipo de devolución",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 434,
+    "fields": {
+      "name": "Las dos anteriores",
+      "name_es": "Las dos anteriores",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 435,
+    "fields": {
+      "name": "Ninguna de las anteriores",
+      "name_es": "Ninguna de las anteriores",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 436,
+    "fields": {
+      "name": "ToInt64",
+      "name_es": "ToInt64",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 437,
+    "fields": {
+      "name": "ToSbyte",
+      "name_es": "ToSbyte",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 438,
+    "fields": {
+      "name": "ToSingle",
+      "name_es": "ToSingle",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 439,
+    "fields": {
+      "name": "ToInt32",
+      "name_es": "ToInt32",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 440,
+    "fields": {
+      "name": "ToInt64",
+      "name_es": "ToInt64",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 441,
+    "fields": {
+      "name": "ToSbyte",
+      "name_es": "ToSbyte",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 442,
+    "fields": {
+      "name": "ToSingle",
+      "name_es": "ToSingle",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 443,
+    "fields": {
+      "name": "ToInt32",
+      "name_es": "ToInt32",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 444,
+    "fields": {
+      "name": "La encapsulación se implementa mediante el uso de especificadores de acceso",
+      "name_es": "La encapsulación se implementa mediante el uso de especificadores de acceso",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 445,
+    "fields": {
+      "name": "Un especificador de acceso define el alcance y la visibilidad de un miembro de la clase",
+      "name_es": "Un especificador de acceso define el alcance y la visibilidad de un miembro de la clase",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 446,
+    "fields": {
+      "name": "Las dos anteriores",
+      "name_es": "Las dos anteriores",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 447,
+    "fields": {
+      "name": "Ninguna de las anteriores",
+      "name_es": "Ninguna de las anteriores",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 448,
+    "fields": {
+      "name": "La clase System.ApplicationException admite excepciones generadas por programas de aplicación",
+      "name_es": "La clase System.ApplicationException admite excepciones generadas por programas de aplicación",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 449,
+    "fields": {
+      "name": "Las excepciones definidas por los programadores deberían derivarse de esta clase",
+      "name_es": "Las excepciones definidas por los programadores deberían derivarse de esta clase",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 450,
+    "fields": {
+      "name": "Las dos anteriores",
+      "name_es": "Las dos anteriores",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 451,
+    "fields": {
+      "name": "Ninguna de las anteriores",
+      "name_es": "Ninguna de las anteriores",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 452,
+    "fields": {
+      "name": "ToType",
+      "name_es": "ToType",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 453,
+    "fields": {
+      "name": "ToUInt16",
+      "name_es": "ToUInt16",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 454,
+    "fields": {
+      "name": "ToSingle",
+      "name_es": "ToSingle",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 455,
+    "fields": {
+      "name": "ToString",
+      "name_es": "ToString",
+      "created_at": "2018-04-22 02:42:49.0957+00",
+      "updated_at": "2018-04-22 02:42:49.0957+00"
+    }
   }
-
 ]
