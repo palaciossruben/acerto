@@ -57,7 +57,7 @@ function addRemoveButton(container){
     var remove_button = document.createElement("input");
     remove_button.type = "button";
     remove_button.className = "btn btn-danger";
-    remove_button.value = "Delete!";
+    remove_button.value = "Delete Question!";
     container.appendChild(remove_button);
 }
 
@@ -81,10 +81,10 @@ function get_answer_name(question_number, answer_number_json){
 }
 
 
-function buildAnswer(answer_container, question_number) {
+function buildAnswerUi(answer_container, question_number) {
 
     addBr(answer_container);
-    container.appendChild(document.createTextNode("Answer " + bullet_number));
+    answer_container.appendChild(document.createTextNode("Answer " + ANSWER_NUMBERS[question_number]));
 
     addBr(answer_container);
     buildTextField(answer_container, get_answer_name(question_number, ANSWER_NUMBERS), "add text in English");
@@ -103,39 +103,48 @@ function buildAnswer(answer_container, question_number) {
 }
 
 
-function addAnswer(question_number){
+function update_answer_numbers(question_number){
+    //adds 1 for next answer, given a question_number.
+    if (ANSWER_NUMBERS[question_number]){
+        ANSWER_NUMBERS[question_number] = ANSWER_NUMBERS[question_number] + 1;
+    }else{
+        ANSWER_NUMBERS[question_number] = 1;
+    }
+}
+
+
+function addAnswer(question_number, answer_container){
     /*
     Adds a answer interface and numbers it.
     */
 
     //Given question_number, will attach to a answer_container
-    var answer_container = document.getElementById(question_number + "_question_answer_container");
+    //var answer_container = document.getElementById(question_number + "_question_answer_container");
+
+    update_answer_numbers(question_number)
 
     buildAnswerUi(answer_container, question_number);
-
-    //adds 1 for next bullet.
-    ANSWER_NUMBERS[question_number] = ANSWER_NUMBERS[question_number] + 1;
 }
 
 
 function addSingleAnswerCustomization(container, question_number){
+
+    container.appendChild(document.createComment("This empty container is filled dynamically with JS"));
+    var answer_container = document.createElement("div");
+    answer_container.id = "${question_number}_question_answer_container";
+    container.appendChild(answer_container)
 
     var button = document.createElement("input");
     button.type = "button";
     button.size = "80";
     button.name = "add_answer";
     button.className = "btn btn-success";
-    button.placeholder = placeholder;
     button.value = "Add answer";
-    button.onclick = "addAnswer(${question_number});";
+    button.onclick = function() { addAnswer(question_number, answer_container); };
     container.appendChild(button);
 
-    addBr(container); addBr(container);
+    addBr(container);addBr(container);
 
-    container.appendChild(document.createComment("This empty container is filled dynamically with JS"));
-    var answer_container = document.createElement("div");
-    answer_container.id = "${question_number}_question_answer_container"
-    container.appendChild(answer_container)
 }
 
 function addQuestion(question_types, number_of_questions){
@@ -156,11 +165,13 @@ function addQuestion(question_types, number_of_questions){
         addBr(container);
         container.appendChild(document.createTextNode("Question " + QUESTION_NUMBER + " "));
 
+        addBr(container);addBr(container);
+
         addQuestionTextArea(container, QUESTION_NUMBER + "_question_text", "Question in English")
 
         addBr(container);addBr(container);
 
-        container = addQuestionTextArea(container, QUESTION_NUMBER + "_question_text_es", "Question in Spanish")
+        addQuestionTextArea(container, QUESTION_NUMBER + "_question_text_es", "Question in Spanish")
 
         addBr(container);addBr(container);
 
@@ -168,11 +179,14 @@ function addQuestion(question_types, number_of_questions){
 
         addBr(container);
 
-        if (selected_type.name == "single answer"){
+        if (selected_type.fields.name == "single answer"){
+
             addSingleAnswerCustomization(container, QUESTION_NUMBER)
         }else if (selected_type.name == "numeric integer"){
             // TODO: implement
         }
+
+        addBr(container);addBr(container);
 
         addRemoveButton(container);
 
