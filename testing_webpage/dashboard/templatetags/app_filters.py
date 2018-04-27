@@ -25,7 +25,7 @@ def get_business_user_id_from_auth_user(user):
 
 
 @register.filter
-def jsonify(object):
-    if isinstance(object, QuerySet):
-        return serialize('json', object)
-    return json.dumps(object)
+def jsonify(my_object):
+    if isinstance(my_object, QuerySet):
+        return serialize('json', my_object)
+    return json.dumps(my_object)
