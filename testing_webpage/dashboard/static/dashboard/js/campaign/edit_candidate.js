@@ -17,3 +17,15 @@ function send_additional_params_in_form(candidate_id, action)   {
     document.body.appendChild(form);
     form.submit();
 }
+
+
+function selectAll(master_checkbox, column_candidates){
+    /*
+    Works as a master checkbox for an entire column
+    */
+
+    for (key in column_candidates){
+        candidate = column_candidates[key]
+        $('#' + candidate.pk + '_checkbox').prop('checked', master_checkbox.checked);
+    }
+}

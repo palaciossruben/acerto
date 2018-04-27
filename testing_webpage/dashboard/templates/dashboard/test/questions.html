@@ -16,8 +16,22 @@
     <br>
     <br>
 
-    <input id="file" type="file" value="{{ question.image_path }}" class="form-inputfile" onchange="pressed()" name="{{ question.order }}_question_image">
+    <input id="file" type="file" value="{{ question.image_path }}" class="form-inputfile"
+           onchange="pressed()" name="{{ question.order }}_question_image">
     <label id="fileLabel" for="file"></label>
+
+    {% if question.type.name == 'single answer' %}
+
+        <input class="btn btn-success" type="button" name="add_answer" value="Add answer"
+               onclick="addAnswer({{ question.order }});">
+
+        <br>
+        <br>
+
+        <!-- This empty container is filled dynamically with JS.-->
+        <div id="{{ question.order }}_question_answer_container"></div>
+
+    {% endif %}
 
     <br>
 
