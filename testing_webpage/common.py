@@ -1,12 +1,13 @@
 import os
+import inspect
 import subprocess
 import unicodedata
 from urllib.parse import urlencode, urlunparse, urlparse, parse_qsl, parse_qs
-
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.files.storage import FileSystemStorage
 from ipware.ip import get_ip
 import geoip2.database
+import inflection
 from beta_invite.apps import ip_country_reader, ip_city_reader
 
 from beta_invite.models import User, Campaign, Country, City, Profession
@@ -281,6 +282,28 @@ def translate_list_of_objects(objects, language_code):
         for o in objects:
             o.name = o.name_es
     return objects
+
+
+def get_object_attribute_name(key, my_object):
+    """
+    A standard pattern for object-attribute naming is as follows:
+    '<obj_id>_<object_class_name>_<attribute_name>'
+    Splits by 'object_class_name', then removes everything before it,
+    then joins again to form <attribute_name>
+    :param key: any string that follows the pattern mentioned above, eg: '12_question_type_id'
+    :param my_object: An instance or a class eg: question of Type Question, or class Question
+    :return: attribute_name, eg: type_id
+    """
+
+    if inspect.isclass(my_object):
+        class_name = my_object.__name__
+    else:  # instance
+        class_name = my_object.__class__.__name__
+
+    # inflection converts to snake_case
+    class_name = inflection.underscore(class_name)
+    class_name = '_{}_'.format(class_name)
+    return class_name.join(key.split(class_name)[1:])
 
 
 def save_resource_from_request(request, my_object, param_name, folder_name):

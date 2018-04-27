@@ -1,5 +1,8 @@
+{% load app_filters %}
+
 <div class="col-sm-4">
 
+    <input id="column_checkbox"  type="checkbox" name="column_checkbox" onchange="selectAll(this, {{ column_candidates.all|jsonify }} );">
     <h3>{{ column_name }}</h3>
     <br>
 
