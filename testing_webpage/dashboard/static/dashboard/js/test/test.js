@@ -15,8 +15,6 @@ function get_selected_type(question_types){
     var selected_type_id = parseInt(document.getElementById("question_type").value);
     var selected_type = _.filter(question_types, {"pk": selected_type_id})[0];
 
-    console.log(selected_type);
-
     return selected_type;
 }
 
@@ -39,7 +37,7 @@ function addFileInput(container, question_number){
     image_input.value = "";
     image_input.className = "form-inputfile";
     image_input.onchange = "pressed()";
-    image_input.name = question_number + "_question_image";
+    image_input.name = get_question_name(question_number, "image_path");
     container.appendChild(image_input);
 
     var file_label = document.createElement("label");
@@ -73,11 +71,30 @@ function buildTextField(container, name, placeholder) {
 }
 
 
-function get_answer_name(question_number, answer_number_json){
+function buildCheckbox(container, name){
+
+    var checkbox_input = document.createElement("input");
+    checkbox_input.name = name;
+    checkbox_input.type = "checkbox";
+    checkbox_input.value="incorrect";
+    checkbox_input.onclick=function() { toggle_checkbox_value(this); };
+    container.appendChild(checkbox_input);
+}
+
+
+function get_answer_name(question_number, answer_number_json, suffix){
     /*
     Follows the <object_id>_<class_name>_<attribute_name> recursive format processed on backend
     */
-    return question_number + '_question_' + answer_number_json[question_number] + "_answer_name", "add text in english";
+    return get_question_name(question_number, answer_number_json[question_number] + "_answer_" + suffix);
+}
+
+
+function get_question_name(question_number, suffix){
+    /*
+    Follows the <object_id>_<class_name>_<attribute_name> recursive format processed on backend
+    */
+    return question_number + '_question_' + suffix;
 }
 
 
@@ -87,10 +104,13 @@ function buildAnswerUi(answer_container, question_number) {
     answer_container.appendChild(document.createTextNode("Answer " + ANSWER_NUMBERS[question_number]));
 
     addBr(answer_container);
-    buildTextField(answer_container, get_answer_name(question_number, ANSWER_NUMBERS), "add text in English");
+    buildCheckbox(answer_container, get_answer_name(question_number, ANSWER_NUMBERS, "is_correct"));
 
     addBr(answer_container);
-    buildTextField(answer_container, get_answer_name(question_number, ANSWER_NUMBERS), "add text in Spanish");
+    buildTextField(answer_container, get_answer_name(question_number, ANSWER_NUMBERS, "name"), "add text in English");
+
+    addBr(answer_container);
+    buildTextField(answer_container, get_answer_name(question_number, ANSWER_NUMBERS, "name_es"), "add text in Spanish");
 
     //TODO: add remove button
     /*
@@ -108,20 +128,31 @@ function update_answer_numbers(question_number){
     if (ANSWER_NUMBERS[question_number]){
         ANSWER_NUMBERS[question_number] = ANSWER_NUMBERS[question_number] + 1;
     }else{
-        ANSWER_NUMBERS[question_number] = 1;
+        var container_name = get_question_name(question_number, "answer_container");
+        var question_answer_container = document.getElementById(container_name);
+
+        if (question_answer_container){
+            ANSWER_NUMBERS[question_number] = question_answer_container.childElementCount + 1;
+        } else {
+            ANSWER_NUMBERS[question_number] = 1;
+        }
     }
 }
 
 
-function addAnswer(question_number, answer_container){
+function addAnswer(question_number){//, answer_container){
     /*
     Adds a answer interface and numbers it.
     */
 
     //Given question_number, will attach to a answer_container
-    //var answer_container = document.getElementById(question_number + "_question_answer_container");
+    var container_name = get_question_name(question_number, "answer_container");
+    var question_answer_container = document.getElementById(container_name);
 
     update_answer_numbers(question_number)
+
+    var answer_container = document.createElement("div");
+    question_answer_container.appendChild(answer_container)
 
     buildAnswerUi(answer_container, question_number);
 }
@@ -131,7 +162,7 @@ function addSingleAnswerCustomization(container, question_number){
 
     container.appendChild(document.createComment("This empty container is filled dynamically with JS"));
     var answer_container = document.createElement("div");
-    answer_container.id = "${question_number}_question_answer_container";
+    answer_container.id = get_question_name(question_number, "answer_container");
     container.appendChild(answer_container)
 
     var button = document.createElement("input");
@@ -140,11 +171,19 @@ function addSingleAnswerCustomization(container, question_number){
     button.name = "add_answer";
     button.className = "btn btn-success";
     button.value = "Add answer";
-    button.onclick = function() { addAnswer(question_number, answer_container); };
+    button.onclick = function() { addAnswer(question_number); };
     container.appendChild(button);
 
     addBr(container);addBr(container);
 
+}
+
+
+function addQuestionType(question_number, container, selected_type) {
+    var hidden_input = document.createElement("input");
+    hidden_input.name = get_question_name(question_number, "type_id");
+    hidden_input.value = selected_type.pk;
+    container.appendChild(hidden_input);
 }
 
 function addQuestion(question_types, number_of_questions){
@@ -167,11 +206,13 @@ function addQuestion(question_types, number_of_questions){
 
         addBr(container);addBr(container);
 
-        addQuestionTextArea(container, QUESTION_NUMBER + "_question_text", "Question in English")
+        var text_name = get_question_name(QUESTION_NUMBER, "text")
+        addQuestionTextArea(container, text_name, "Question in English")
 
         addBr(container);addBr(container);
 
-        addQuestionTextArea(container, QUESTION_NUMBER + "_question_text_es", "Question in Spanish")
+        var text_name_es = get_question_name(QUESTION_NUMBER, "text_es")
+        addQuestionTextArea(container, text_name_es, "Question in Spanish")
 
         addBr(container);addBr(container);
 
@@ -192,9 +233,40 @@ function addQuestion(question_types, number_of_questions){
 
         addBr(container);
 
+        addQuestionType(QUESTION_NUMBER, container, selected_type);
+
         QUESTION_NUMBER = QUESTION_NUMBER + 1;
 
     } else {
         alert("Specify a question type before adding a new Question")
     }
+}
+
+
+function toggle_checkbox_value(checkbox){
+    if (checkbox.value == "correct"){
+        checkbox.value = "incorrect"
+    }else {
+        checkbox.value = "correct"
+    }
+}
+
+
+function deleteQuestion(question_id, test_id){
+    /*
+        Sends info to backend delete question from test with ajax. This is only when question has already been saved on
+        DB
+    */
+    param_dict = {'question_id': question_id,
+                  'test_id': test_id}
+    general_dict = {csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()}
+
+    $.ajax({
+        type:'POST',
+        url:'delete_question',
+        data: Object.assign({}, general_dict, param_dict),
+        cache: false,
+        success: function(){
+            window.location.href = window.location.href;  // Reloads the UI
+        } });
 }

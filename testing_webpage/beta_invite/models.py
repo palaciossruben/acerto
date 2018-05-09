@@ -157,6 +157,7 @@ class Answer(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'answers'
+        ordering = ['pk']
 
 
 class Question(models.Model):
@@ -170,6 +171,7 @@ class Question(models.Model):
     order = models.IntegerField(default=1)
     params = JSONField(null=True)
     video_token = models.CharField(max_length=200, null=True)
+    removed = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

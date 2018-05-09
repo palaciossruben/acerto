@@ -3,15 +3,15 @@ from django.core import serializers
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.db.models import Q
+from django.http import HttpResponse
 
-from beta_invite.models import Campaign, Test, BulletType, Interview, Survey, Bullet, QuestionType
+from beta_invite.models import Campaign, Test, BulletType, Interview, Survey, Bullet, QuestionType, Question
 from dashboard.models import Candidate, Message, Screening
 from dashboard import constants as cts
 from beta_invite.util import email_sender
 from beta_invite.views import get_drop_down_values
 from dashboard import interview_module, candidate_module, campaign_module, test_module
 from match import model
-from business import dashboard_module
 from business import dashboard_module
 import business
 
@@ -224,7 +224,27 @@ def delete_test(request, pk):
 # ------------------------------- TESTS -------------------------------
 
 
+def delete_question(request):
+    question_id = int(request.POST.get('question_id'))
+    question = Question.objects.get(pk=question_id)
+
+    test_id = int(request.POST.get('test_id'))
+    test = Test.objects.get(pk=test_id)
+
+    question.removed = True
+    question.save()
+    test.questions.remove(question)
+    test.save()
+
+    return HttpResponse('')
+
+
 def edit_test(request, pk):
+    """
+    :param request: http
+    :param pk: test_id
+    :return: render
+    """
 
     question_types = QuestionType.objects.all()
     question_types_json = serializers.serialize("json", question_types)
