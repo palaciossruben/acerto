@@ -1560,20 +1560,6 @@
     "fields":{
       "text": "Choose the correct option",
       "text_es": "Choose the correct option",
-      "answers": [234, 235, 236],
-      "type": 1,
-      "correct_answers": [234],
-      "order": 2,
-      "created_at": "2018-04-12 02:42:49.0957+00",
-      "updated_at": "2018-04-12 02:42:49.0957+00"
-    }
-  },
-  {
-    "model": "beta_invite.question",
-    "pk": 108,
-    "fields":{
-      "text": "Choose the correct option",
-      "text_es": "Choose the correct option",
       "answers": [237, 238, 239],
       "type": 1,
       "correct_answers": [238],
