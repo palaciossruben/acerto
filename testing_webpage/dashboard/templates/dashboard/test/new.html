@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    <form style="margin-top: 40px; margin-left:40px;" action="save" method="post">
+    <form style="margin-top: 40px; margin-left:40px;" action="save" method="post" enctype="multipart/form-data">
 
         {% csrf_token %}
 
@@ -57,7 +57,7 @@
         </select>
 
         <input type="button" class="btn btn-success" name="add_question" value="Add Question!"
-          onclick="addQuestion('{{ question_types_json | escapejs }}', 0);">
+          onclick="addQuestion('{{ question_types_json | escapejs }}');">
 
         <br>
         <br>

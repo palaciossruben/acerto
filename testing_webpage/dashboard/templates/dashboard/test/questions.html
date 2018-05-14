@@ -1,42 +1,103 @@
+{% load static %}
+
 {% for question in test.questions.all %}
+    <div id="{{ question.order }}_question" >
 
-    <br>
+        <br>
 
-    <p>Question {{ question.order }} </p>
+        <p>Question {{ question.order }} </p>
+        {% if question.image_path %}
+            <img src="{% static question.image_path %}">
+            <br>
+            <br>
+        {% endif %}
 
-    <textarea cols="120" rows="5" name="{{ question.order }}_question_text"
-              placeholder="Question in English">{{ question.text }}</textarea>
-
-    <br>
-    <br>
-
-    <textarea cols="120" rows="5" name="{{ question.order }}_question_text_es"
-              placeholder="Question in Spanish">{{ question.text_es }}</textarea>
-
-    <br>
-    <br>
-
-    <input id="file" type="file" value="{{ question.image_path }}" class="form-inputfile"
-           onchange="pressed()" name="{{ question.order }}_question_image">
-    <label id="fileLabel" for="file"></label>
-
-    {% if question.type.name == 'single answer' %}
-
-        <input class="btn btn-success" type="button" name="add_answer" value="Add answer"
-               onclick="addAnswer({{ question.order }});">
+        <textarea cols="120" rows="5" name="{{ question.order }}_question_text"
+                  placeholder="Question in English">{{ question.text }}</textarea>
 
         <br>
         <br>
 
-        <!-- This empty container is filled dynamically with JS.-->
-        <div id="{{ question.order }}_question_answer_container"></div>
+        <textarea cols="120" rows="5" name="{{ question.order }}_question_text_es"
+                  placeholder="Question in Spanish">{{ question.text_es }}</textarea>
 
-    {% endif %}
+        <br>
+        <br>
 
-    <br>
+        <input id="file" type="file" class="form-inputfile" value="{{ question.image_path }}"
+               onchange="pressed()" name="{{ question.order }}_question_image_path">
+        <label id="fileLabel" for="file"></label>
 
-    <input type="button" class="btn btn-danger" value="Delete">
-    <!--<input type="hidden" class="btn btn-danger" value="Delete">-->
+        <br>
+        <br>
 
-    <br>
+        {% if question.type.name == 'single answer' %}
+
+            <div id="{{ question.order }}_question_answer_container">
+
+            {% for answer in question.answers.all %}
+
+                <!-- TODO: can simplify at the end -->
+                <!-- Has 2 definitions of answer_order for compatibility with old tests. Either it is answer.order
+                or it is forloop.counter, the first one that will not evaluate for false-->
+                {% with answer.order|default:forloop.counter as answer_order %}
+
+                    <div id="{{ question.order }}_question_{{ answer_order }}_answer">
+
+                        <br>
+
+                        <p>Answer {{ answer_order }} </p>
+
+                        {% if answer in question.correct_answers.all %}
+                            <input name="{{ question.order }}_question_{{ answer_order }}_answer_is_correct" type="checkbox"
+                                   value="correct" onclick="toggle_checkbox_value(this);" checked>
+                        {% else %}
+                            <input name="{{ question.order }}_question_{{ answer_order }}_answer_is_correct" type="checkbox"
+                                   value="incorrect" onclick="toggle_checkbox_value(this);">
+                        {% endif %}
+
+                        <br>
+                        <input name="{{ question.order }}_question_{{ answer_order }}_answer_name" type="text" size="80"
+                               placeholder="add text in English" value="{{ answer.name }}">
+
+                        <br>
+                        <input name="{{ question.order }}_question_{{ answer_order }}_answer_name_es" type="text" size="80"
+                               placeholder="add text in Spanish"  value="{{ answer.name_es }}">
+
+                        <br>
+                        <input class="btn btn-danger" type="button" name="delete_answer" value="Delete Answer!"
+                               onclick="deleteAnswer({{ answer.id }}, {{ question.order }} , {{ answer.order }});">
+
+                        <br>
+                        <br>
+                    </div>
+
+                {% endwith %}
+
+            {% endfor %}
+            </div>
+
+            <input class="btn btn-success" type="button" name="add_answer" value="Add answer"
+                   onclick="addAnswer({{ question.order }});">
+            <br>
+            <br>
+        {% elif question.type.name == 'numeric integer' %}
+            <div>
+                {% include "dashboard/test/param.html" with question=question name="min" title="Add smallest value that the user can choose from" %}
+                {% include "dashboard/test/param.html" with question=question name="max" title="Add biggest value that the user can choose from" %}
+                {% include "dashboard/test/param.html" with question=question name="min_correct" title="Add minimum correct value" %}
+                {% include "dashboard/test/param.html" with question=question name="max_correct" title="Add maximum correct value" %}
+                {% include "dashboard/test/param.html" with question=question name="default" title="Add the default value of the selector" %}
+            </div>
+        {% endif %}
+
+        <br>
+        <br>
+
+        <input class="btn btn-danger" type="button" name="delete_question" value="Delete Question!"
+               onclick="deleteQuestion({{ question.id }}, {{ question.order }});">
+        <br>
+        <br>
+        <hr>
+    </div>
 {% endfor %}

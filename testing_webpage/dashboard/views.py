@@ -3,15 +3,15 @@ from django.core import serializers
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.db.models import Q
+from django.http import HttpResponse
 
-from beta_invite.models import Campaign, Test, BulletType, Interview, Survey, Bullet, QuestionType
+from beta_invite.models import Campaign, Test, BulletType, Interview, Survey, Bullet, QuestionType, Question, Answer
 from dashboard.models import Candidate, Message, Screening
 from dashboard import constants as cts
 from beta_invite.util import email_sender
 from beta_invite.views import get_drop_down_values
 from dashboard import interview_module, candidate_module, campaign_module, test_module
 from match import model
-from business import dashboard_module
 from business import dashboard_module
 import business
 
@@ -224,14 +224,41 @@ def delete_test(request, pk):
 # ------------------------------- TESTS -------------------------------
 
 
+def delete_question(request):
+
+    question_id = int(request.POST.get('question_id'))
+    Question.objects.get(pk=question_id).delete()
+
+    return HttpResponse('')
+
+
+def delete_answer(request):
+
+    answer_id = int(request.POST.get('answer_id'))
+    Answer.objects.get(pk=answer_id).delete()
+
+    return HttpResponse('')
+
+
 def edit_test(request, pk):
+    """
+    :param request: http
+    :param pk: test_id
+    :return: render
+    """
 
     question_types = QuestionType.objects.all()
     question_types_json = serializers.serialize("json", question_types)
 
+    #TODO: to fix fixture inconsistencies. Can be removed later
+    test = Test.objects.get(pk=pk)
+    test.remove_question_gaps()
+    for question in test.questions.all():
+        question.remove_answer_gaps()
+
     return render(request, cts.EDIT_TEST, {'question_types': question_types,
                                            'question_types_json': question_types_json,
-                                           'test': Test.objects.get(pk=pk)})
+                                           'test': test})
 
 
 def update_test(request, pk):
@@ -250,7 +277,7 @@ def update_test(request, pk):
     test = test_module.update_test_questions(test, request)
     test.save()
 
-    return redirect('/dashboard')
+    return redirect('/dashboard/test/{}'.format(pk))
 
 
 def new_test(request):
@@ -279,7 +306,7 @@ def save_test(request):
     test = test_module.update_test_questions(test, request)
     test.save()
 
-    return redirect('/dashboard')
+    return redirect('/dashboard/test/{}'.format(test.pk))
 
 
 # ------------------------------- BULLETS -------------------------------

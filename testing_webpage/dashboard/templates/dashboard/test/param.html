@@ -1,0 +1,12 @@
+{% load app_filters %}
+
+<div>
+    <br>
+    <br>
+    <p>{{ title }}</p>
+    <br>
+    {% with question.params|dict_get:name as my_value %}
+        <input type="number" value="{{ my_value }}" min="-9999999" max="9999999"
+               name="{{ question.order }}_question_{{ name }}">
+    {% endwith %}
+</div>

@@ -157,6 +157,7 @@ class Answer(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'answers'
+        ordering = ['order']
 
 
 class Question(models.Model):
@@ -192,6 +193,16 @@ class Question(models.Model):
         if lang_code == 'es':
             self.text = self.text_es
 
+    def remove_answer_gaps(self):
+        """
+        Removes gaps in the order of answers, that can happen if some answers have been deleted.
+        Uses the fact that answers are retrieved by asc 'order' variable.
+        :return: nothing
+        """
+        for idx, a in enumerate(self.answers.all()):
+            a.order = idx + 1
+            a.save()
+
 
 class Test(models.Model):
 
@@ -205,6 +216,16 @@ class Test(models.Model):
 
     def __str__(self):
         return '{0}, {1}'.format(self.pk, self.name)
+
+    def remove_question_gaps(self):
+        """
+        Removes gaps in the order of questions, that can happen if some questions have been deleted.
+        Uses the fact that questions are retrieved by asc 'order' variable.
+        :return: nothing
+        """
+        for idx, q in enumerate(self.questions.all()):
+            q.order = idx + 1
+            q.save()
 
     # adds custom table name
     class Meta:

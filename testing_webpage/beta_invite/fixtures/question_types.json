@@ -27,7 +27,7 @@
     "model": "beta_invite.questiontype",
     "pk": 5,
     "fields":{
-      "name": "Numeric Integer",
+      "name": "numeric integer",
       "code": "NI"
     }
   }

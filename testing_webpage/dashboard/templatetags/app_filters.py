@@ -29,3 +29,8 @@ def jsonify(my_object):
     if isinstance(my_object, QuerySet):
         return serialize('json', my_object)
     return json.dumps(my_object)
+
+
+@register.filter
+def dict_get(d, key):
+    return d.get(str(key))
