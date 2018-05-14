@@ -86,9 +86,7 @@ def create_user(campaign, user_params, request, is_mobile):
     Returns: Creates a new user on the DB.
     """
     user = User(**user_params)
-    # Saves here to get an id
-    # Saves here to get an id
-    user.save()
+    user.save()  # Saves here to get an id
 
     update_resource(request, user, 'curriculum_url', 'resumes')
     user.save()

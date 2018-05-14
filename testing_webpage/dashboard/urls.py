@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^test/save$', views.save_test, name='save_test'),
     url(r'^test/update/(?P<pk>\d+)$', views.update_test, name='update_test'),
     url(r'^test/delete_question$', views.delete_question, name='delete_question'),
+    url(r'^test/delete_answer$', views.delete_answer, name='delete_answer'),
 
     # Bullets
     url(r'^campaign/(?P<pk>\d+)/bullets$', views.bullets),

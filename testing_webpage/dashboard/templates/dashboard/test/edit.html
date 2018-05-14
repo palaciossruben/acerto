@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <form style="margin-top: 40px; margin-left:40px;" action="update/{{ test.id }}" method="post">
+    <form style="margin-top: 40px; margin-left:40px;" action="update/{{ test.id }}" method="post" enctype="multipart/form-data">
 
         {% csrf_token %}
 
@@ -44,10 +44,9 @@
         <br>
         <br>
 
-        {% include "dashboard/test/questions.html" with test=test %}
-
-        <!-- This empty container is filled dynamically with JS.-->
-        <div id="question_container"></div>
+        <div id="question_container">
+            {% include "dashboard/test/questions.html" with test=test title="" name="min" %}
+        </div>
 
         <br>
         <br>
@@ -60,7 +59,7 @@
         </select>
 
         <input type="button" class="btn btn-success" name="add_question" value="Add Question!"
-          onclick="addQuestion('{{ question_types_json | escapejs }}', {{ test.questions.all|length }});">
+          onclick="addQuestion('{{ question_types_json | escapejs }}');">
 
         <br>
         <br>
