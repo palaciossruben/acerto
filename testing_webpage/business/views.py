@@ -392,7 +392,8 @@ def create(request):
 
     return render(request, cts.CREATE_VIEW_PATH, {'requirement_bullet_id': requirement_bullet_id,
                                                   'perk_bullet_id': perk_bullet_id,
-                                                  'business_user_id': request.POST.get('business_user_id')
+                                                  'business_user_id': request.POST.get('business_user_id'),
+                                                  'professions': common.get_professions(request.LANGUAGE_CODE)
                                                   })
 
 
@@ -410,7 +411,8 @@ def create_post(request):
     business_user.campaigns.add(campaign)
     business_user.save()
 
-    return redirect('tablero_de_control/{}'.format(business_user.pk))
+    return redirect('tablero_de_control/{business_pk}?campaign_id={campaign_pk}'.format(business_pk=business_user.pk,
+                                                                                        campaign_pk=campaign.pk))
 
 
 def start_post(request):

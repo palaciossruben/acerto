@@ -92,8 +92,8 @@ def get_top_users(campaign):
 
     prediction, candidates = model.predict_match(candidates, regression=False)
 
-    # filters for predicted users.
-    return [c.user for p, c in zip(prediction, candidates) if p]
+    # sorts for predicted users.
+    return [u for u, p in reversed(sorted([(c.user, p) for p, c in zip(prediction, candidates)], key=lambda t: t[1]))]
 
 
 def get_candidates(campaign):
