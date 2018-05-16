@@ -8,3 +8,8 @@
     font-family: NorthernBlock;
     src: url(/static/fonts/TheNorthernBlockLtdLoewHeavy.otf);
 }
+
+@font-face {
+    font-family: BertholdAkzidenzGroteskRegular;
+    src: url(/static/fonts/BertholdAkzidenzGroteskRegular.otf);
+}
