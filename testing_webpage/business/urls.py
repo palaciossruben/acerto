@@ -23,7 +23,7 @@ urlpatterns = [
     url(r'^campañas/(?P<pk>\d+)$', views.business_campaigns, name='business_campaigns'),
     url(r'^tablero_de_control/(?P<pk>\d+)\?{0,1}.*$', views.dashboard, name='dashboard'),
     url(r'^perfil_del_candidato/(?P<pk>\d+)$', views.candidate_profile, name='candidate_profile'),
-
+    url(r'^new_index$', views.new_index, name='new_index'),
     # TODO: Worst hack ever, replace for something like: \?id=[0-9]+
     url(r'^contact_us$', views.contact_us, name='contact_us'),
     url(r'^results/(?P<pk>\d+)$', views.render_result, name='render_result'),
