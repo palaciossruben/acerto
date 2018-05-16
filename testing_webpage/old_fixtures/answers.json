@@ -4536,5 +4536,205 @@
       "created_at": "2018-04-22 02:42:49.0957+00",
       "updated_at": "2018-04-22 02:42:49.0957+00"
     }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 456,
+    "fields": {
+      "name": "El código tiene un bug, ya que los indices negativos no están permitidos.",
+      "name_es": "El código tiene un bug, ya que los indices negativos no están permitidos.",
+      "created_at": "2018-05-11 02:42:49.0957+00",
+      "updated_at": "2018-05-11 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 457,
+    "fields": {
+      "name": "Si nunca encuentra un elemento duplicado retorna -1 como lo exige el problema. ",
+      "name_es": "Si nunca encuentra un elemento duplicado retorna -1 como lo exige el problema. ",
+      "created_at": "2018-05-11 02:42:49.0957+00",
+      "updated_at": "2018-05-11 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 458,
+    "fields": {
+      "name": "Es similar a 'return 0' en C. Siempre debe haber un 'return' para evitar leaks de memoria. ",
+      "name_es": "Es similar a 'return 0' en C. Siempre debe haber un 'return' para evitar leaks de memoria. ",
+      "created_at": "2018-05-11 02:42:49.0957+00",
+      "updated_at": "2018-05-11 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 459,
+    "fields": {
+      "name": "Ninguna de las anteriores.",
+      "name_es": "Ninguna de las anteriores.",
+      "created_at": "2018-05-11 02:42:49.0957+00",
+      "updated_at": "2018-05-11 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 460,
+    "fields": {
+      "name": "None",
+      "name_es": "None",
+      "created_at": "2018-05-11 02:42:49.0957+00",
+      "updated_at": "2018-05-11 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 461,
+    "fields": {
+      "name": "18",
+      "name_es": "18",
+      "created_at": "2018-05-11 02:42:49.0957+00",
+      "updated_at": "2018-05-11 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 462,
+    "fields": {
+      "name": "21",
+      "name_es": "21",
+      "created_at": "2018-05-11 02:42:49.0957+00",
+      "updated_at": "2018-05-11 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 463,
+    "fields": {
+      "name": "El algoritmo tiene un bug, por lo que retornará un error ",
+      "name_es": "El algoritmo tiene un bug, por lo que retornará un error ",
+      "created_at": "2018-05-11 02:42:49.0957+00",
+      "updated_at": "2018-05-11 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 464,
+    "fields": {
+      "name": "Línea 10, no se está definiendo la posición en la que se agregará el elemento",
+      "name_es": "Línea 10, no se está definiendo la posición en la que se agregará el elemento",
+      "created_at": "2018-05-11 02:42:49.0957+00",
+      "updated_at": "2018-05-11 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 465,
+    "fields": {
+      "name": "Línea 4, el arreglo está mal definido",
+      "name_es": "Línea 4, el arreglo está mal definido",
+      "created_at": "2018-05-11 02:42:49.0957+00",
+      "updated_at": "2018-05-11 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 466,
+    "fields": {
+      "name": "Línea 6 falta un ;",
+      "name_es": "Línea 6 falta un ;",
+      "created_at": "2018-05-11 02:42:49.0957+00",
+      "updated_at": "2018-05-11 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 467,
+    "fields": {
+      "name": "Llínea 17, no debemos mezclar dos tipos diferentes de arreglos ",
+      "name_es": "Llínea 17, no debemos mezclar dos tipos diferentes de arreglos ",
+      "created_at": "2018-05-11 02:42:49.0957+00",
+      "updated_at": "2018-05-11 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 468,
+    "fields": {
+      "name": "Expected Output Error",
+      "name_es": "Expected Output Error",
+      "created_at": "2018-05-11 02:42:49.0957+00",
+      "updated_at": "2018-05-11 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 469,
+    "fields": {
+      "name": "[3]",
+      "name_es": "[3]",
+      "created_at": "2018-05-11 02:42:49.0957+00",
+      "updated_at": "2018-05-11 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 470,
+    "fields": {
+      "name": "[3, 1, 2]",
+      "name_es": "[3, 1, 2]",
+      "created_at": "2018-05-11 02:42:49.0957+00",
+      "updated_at": "2018-05-11 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 471,
+    "fields": {
+      "name": "[1, 2, 4, 5]",
+      "name_es": "[1, 2, 4, 5]",
+      "created_at": "2018-05-11 02:42:49.0957+00",
+      "updated_at": "2018-05-11 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 472,
+    "fields": {
+      "name": "Línea 5, la condición es que i = j",
+      "name_es": "Línea 5, la condición es que i = j",
+      "created_at": "2018-05-11 02:42:49.0957+00",
+      "updated_at": "2018-05-11 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 473,
+    "fields": {
+      "name": "Línea 5, sobra un &",
+      "name_es": "Línea 5, sobra un &",
+      "created_at": "2018-05-11 02:42:49.0957+00",
+      "updated_at": "2018-05-11 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 474,
+    "fields": {
+      "name": "Línea 7, en la línea 5 ya se definió la desigualdad, ya estamos buscando es igualdad",
+      "name_es": "Línea 7, en la línea 5 ya se definió la desigualdad, ya estamos buscando es igualdad",
+      "created_at": "2018-05-11 02:42:49.0957+00",
+      "updated_at": "2018-05-11 02:42:49.0957+00"
+    }
+  },
+  {
+    "model": "beta_invite.answer",
+    "pk": 475,
+    "fields": {
+      "name": "En la línea 8 y 12, los return están invertidos ",
+      "name_es": "En la línea 8 y 12, los return están invertidos ",
+      "created_at": "2018-05-11 02:42:49.0957+00",
+      "updated_at": "2018-05-11 02:42:49.0957+00"
+    }
   }
 ]
