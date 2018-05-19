@@ -17,6 +17,8 @@
                 document.getElementById("hide1").style.display = "none";
                 document.getElementById("hide2").style.display = "none";
                 $("html").css("background-size", "cover");
+                $("#overlay").animate({right: '100%'});
+                $("#overlay").animate({left: ''});
 
             }
 
@@ -25,23 +27,37 @@
                 document.getElementById("hide1").style.display = "block";
                 document.getElementById("hide2").style.display = "block";
                 $("html").css("background-size", "contain");
+                $("#overlay").animate({left: '100%'});
+                $("#overlay").animate({right: ''});
             }
         </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
 		<div class="container">
 
-            <div id="overlay" onclick="off()">
-                <form id="msform" autocomplete="off" method="post" action="active_campaigns" enctype="multipart/form-data">
+            <div id="overlay">
+                <form id="msform" autocomplete="off" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <fieldset> <!-- three item asked -->
-                        Selecciona tu género
+
+                    <fieldset>
+                        <span onclick="off()" id="exitdingbat">X</span>
+
+                        <p style="color:white">Nombre del reclutador</p>
                         <input>
-                        Selecciona tu género
+
+                        <p style="color:white">Empresa</p>
                         <input>
-                        Selecciona tu género
+                        <p style="color:white">Correo</p>
                         <input>
-                        <input type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'gender_id':$('#gender').val()})"/>
+                        <p style="color:white">Teléfono</p>
+                        <input>
+                        <p style="color:white">Contraseña</p>
+                        <input>
+                        <p style="color:white">Confirmar contraseña</p>
+                        <input>
+
+                        <input type="button" name="next" class="next action-button" value="COMIENZA AHORA" onclick="sendPartial({'gender_id':$('#gender').val()})"/>
                     </fieldset>
                 </form>
             </div>
