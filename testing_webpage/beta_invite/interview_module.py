@@ -180,7 +180,7 @@ def update_candidate_state(campaign, user, interview_obj, question_number):
         if on_last_question(interview_obj, previous_question):
             try:
                 candidate = Candidate.objects.get(user=user, campaign=campaign)
-                candidate.state = State.objects.get(code='DIS')
+                candidate.state = State.objects.get(code='DI')
                 candidate.save()
             except ObjectDoesNotExist:  # the object hasn't been created yet, creates it.
-                Candidate(campaign=campaign, user=user, state=State.objects.get(code='DIS')).save()
+                Candidate(campaign=campaign, user=user, state=State.objects.get(code='DI')).save()
