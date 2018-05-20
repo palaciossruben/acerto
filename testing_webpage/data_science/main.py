@@ -20,6 +20,7 @@ import numpy as np
 from dashboard.models import Candidate
 
 
+last_technical_campaign_ids = [87, 80, 86, 76, ]
 candidates = [c for c in Candidate.objects.all() if c.state.passed_test() and c.evaluations.all()]
 
 passed_interview = [int(c.state.passed_interview()) for c in candidates]

@@ -47,7 +47,7 @@ def candidates_count(request):
 
     data_source['data'] = []
 
-    my_candidates = Candidate.objects.all()
+    my_candidates = [c for c in Candidate.objects.filter(removed=False)]
 
     data = pd.DataFrame()
     data['id'] = [c.pk for c in my_candidates]
@@ -99,7 +99,7 @@ def campaigns_count(request):
 
     data_source['data'] = []
 
-    my_campaigns = Campaign.objects.all()
+    my_campaigns = [c for c in Campaign.objects.filter(removed=False)]
 
     data = pd.DataFrame()
     data['id'] = [c.pk for c in my_campaigns]

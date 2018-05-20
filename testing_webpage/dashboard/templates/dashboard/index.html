@@ -21,18 +21,23 @@
             {% else %}
                 Inactive
             {% endif %}
-        <br>
-        <a href="campaign/{{ campaign.id }}">Candidates</a>
-        <br>
-        <a href="campaign/edit/{{ campaign.id }}">Edit</a>
-        <br>
-        <a href="campaign/{{ campaign.id }}/bullets">Bullets</a>
-        <br>
-        <a href="campaign/interview/{{ campaign.id }}">Interview</a>
-        <br>
-        <a href="business_dashboard/{{ campaign.id }}">Business Dashboard</a>
-        <br>
-        <a href="campaign/{{ campaign.id }}/tests">Tests</a>
+            <br>
+            <a href="campaign/{{ campaign.id }}">Candidates</a>
+            <br>
+            <a href="campaign/edit/{{ campaign.id }}">Edit</a>
+            <br>
+            <a href="campaign/{{ campaign.id }}/bullets">Bullets</a>
+            <br>
+            <a href="campaign/interview/{{ campaign.id }}">Interview</a>
+            <br>
+            <a href="business_dashboard/{{ campaign.id }}">Business Dashboard</a>
+            <br>
+            <a href="campaign/{{ campaign.id }}/tests">Tests</a>
+            <br>
+            <form action="campaign/delete/{{ campaign.id }}" method="post">
+                {% csrf_token %}
+                <input type="button" class="btn btn-danger" value="Delete!" onclick="this.form.submit();">
+            </form>
         </li>
         <br>
     {% endfor %}

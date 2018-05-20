@@ -15,6 +15,8 @@ urlpatterns = [
     url(r'^campaign/edit/(?P<pk>\d+)$', views.edit_campaign, name='edit_campaign'),
     url(r'^campaign/update_basic_properties$', views.update_basic_properties),
     url(r'^business_dashboard/(?P<pk>\d+)\?{0,1}.*$', views.business_dashboard, name='business_dashboard'),
+    url(r'^campaign/delete/(?P<pk>\d+)$', views.delete_campaign, name='delete_campaign'),
+
 
     # Campaign tests
     url(r'^campaign/(?P<pk>\d+)/add_test$', views.add_test),
