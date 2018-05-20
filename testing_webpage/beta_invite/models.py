@@ -117,8 +117,8 @@ class BulletType(models.Model):
 
 class Bullet(models.Model):
 
-    name = models.CharField(max_length=200)
-    name_es = models.CharField(max_length=200)
+    name = models.CharField(max_length=1000)
+    name_es = models.CharField(max_length=1000)
     bullet_type = models.ForeignKey(BulletType, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
@@ -281,8 +281,8 @@ class Campaign(models.Model):
     education = models.ForeignKey(Education, null=True, on_delete=models.SET_NULL)
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
     city = models.ForeignKey(City, null=True, on_delete=models.SET_NULL)
-    description = models.CharField(max_length=2000, null=True)
-    description_es = models.CharField(max_length=2000, null=True)
+    description = models.CharField(max_length=5000, null=True)
+    description_es = models.CharField(max_length=5000, null=True)
     title = models.CharField(max_length=200, null=True)
     title_es = models.CharField(max_length=200, null=True)
     bullets = models.ManyToManyField(Bullet)

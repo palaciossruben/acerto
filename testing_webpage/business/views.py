@@ -501,3 +501,7 @@ def signup_choice(request):
 
 def business_applied(request):
     return render(request, cts.BUSINESS_APPLIED_VIEW_PATH, {})
+
+
+def new_index(request):
+    return render(request, cts.NEW_INDEX_VIEW_PATH, {})
