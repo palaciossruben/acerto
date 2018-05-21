@@ -116,8 +116,8 @@ def deploy():
     # first uploads my local changes to the repo
     subprocess.check_output("git push origin master", cwd=local_cwd, shell=True)
 
-    # Then creates or overwrites the backup db file ;)
-    run('pg_dump -U dbadmin -p 5432 -h localhost maindb > db_backup.sql')
+    # Then overwrites the backup file and copies it to local
+    sync(sync_media=False, db_update=False)
 
     with cd(WORKING_PATH):
         with prefix(". /usr/local/bin/virtualenvwrapper.sh; workon myenv"):
@@ -166,8 +166,6 @@ def deploy():
 
             # updates new data structures for prediction. New fields, hashes etc.
             run('cd match && python3 update_data_structures.py')
-
-    sync(sync_media=False, db_update=False)
 
 
 def dev_update():

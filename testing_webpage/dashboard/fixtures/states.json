@@ -94,7 +94,7 @@
     "pk": 10,
     "fields":{
       "name": "Did interview",
-      "code": "DIS",
+      "code": "DI",
       "is_rejected": false,
       "honey": 5
     }

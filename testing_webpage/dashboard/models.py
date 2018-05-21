@@ -22,6 +22,12 @@ class State(models.Model):
     class Meta:
         db_table = 'states'
 
+    def passed_interview(self):
+        return self.code in ('STC', 'RBC', 'GTJ', 'DI')
+
+    def passed_test(self):
+        return self.passed_interview() or self.code in ('WFI', 'ROI')
+
 
 class Comment(models.Model):
 

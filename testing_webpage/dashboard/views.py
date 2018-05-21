@@ -176,6 +176,17 @@ def update_basic_properties(request):
     return campaign_module.get_campaign_edit_url(campaign)
 
 
+def delete_campaign(request, pk):
+
+    campaign = Campaign.objects.get(pk=pk)
+
+    if campaign:
+        campaign.removed = True
+        campaign.save()
+
+    return redirect('/dashboard')
+
+
 # ------------------------------- CAMPAIGN TESTS -------------------------------
 
 
