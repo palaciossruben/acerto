@@ -20,12 +20,13 @@ def list_dir(directory=None):
     return files
 
 
-def sync(sync_media=False, db_update=True):
+def sync(sync_media=False, db_update=True, copy_db_to_local=True):
     """
     Synchronizes local machine with last backup from DB and media files
     Args:
         sync_media: Boolean indicating if the sync will be done only for the DB or the media files as well.
-        db_update: updates the db by running the pgdump command. If it is false will copy the dump to local machine,
+        db_update: updates the db by running the pgdump command. needs copy_db_to_local=True for it to work
+        copy_db_to_local: copies de pg_dump file to local machine.
         but will not execute
     Returns:
     """
@@ -51,52 +52,52 @@ def sync(sync_media=False, db_update=True):
     dbadmin_psql = abstract_local_psql.format(user='dbadmin', db_option='-d maindb')
 
     # COPY db_backup file to local machine. THIS IS EXECUTED LOCALLY!!!
-    backup_command = 'scp -i production_key.pem {aws}{from_path} {to_path}'.format(aws=aws_machine,
-                                                                                   from_path=backup_remote,
-                                                                                   to_path=local_backup)
-    print('BACKUP COMMAND: ' + str(backup_command))
-    backup_out = subprocess.check_output(backup_command, cwd=local_cwd, shell=True)
-    print('BACKUP_COMMAND output: ' + str(backup_out))
+    if copy_db_to_local:
+        backup_command = 'scp -i production_key.pem {aws}{from_path} {to_path}'.format(aws=aws_machine,
+                                                                                       from_path=backup_remote,
+                                                                                       to_path=local_backup)
+        print('BACKUP COMMAND: ' + str(backup_command))
+        backup_out = subprocess.check_output(backup_command, cwd=local_cwd, shell=True)
+        print('BACKUP_COMMAND output: ' + str(backup_out))
 
-    # once backup is local then update DB:
+        # once backup is local then update DB:
+        if db_update:
+            # Strong validation to make sure it is done on a safe computer:
+            if get_mac() in safe_machines:
 
-    if db_update:
-        # Strong validation to make sure it is done on a safe computer:
-        if get_mac() in safe_machines:
+                # DROP LOCAL DB: BE CAREFUL!!!
+                drop_command = "{psql} -c \'DROP DATABASE maindb;\'".format(psql=postgres_psql)
+                subprocess.call(drop_command, shell=True)
 
-            # DROP LOCAL DB: BE CAREFUL!!!
-            drop_command = "{psql} -c \'DROP DATABASE maindb;\'".format(psql=postgres_psql)
-            subprocess.call(drop_command, shell=True)
+                # CREATE EMPTY DB on localhost.
+                create_command = "{psql} -c \'CREATE DATABASE maindb;\'".format(psql=postgres_psql)
+                subprocess.call(create_command, shell=True)
 
-            # CREATE EMPTY DB on localhost.
-            create_command = "{psql} -c \'CREATE DATABASE maindb;\'".format(psql=postgres_psql)
-            subprocess.call(create_command, shell=True)
+                # Grant rights to user
+                grant_sql = "{psql} -c \'GRANT ALL PRIVILEGES ON DATABASE maindb to dbadmin;\'".format(psql=postgres_psql)
+                subprocess.call(grant_sql, shell=True)
 
-            # Grant rights to user
-            grant_sql = "{psql} -c \'GRANT ALL PRIVILEGES ON DATABASE maindb to dbadmin;\'".format(psql=postgres_psql)
-            subprocess.call(grant_sql, shell=True)
+                # Fill in with data
+                fill_sql = "{psql} -f {local_backup}".format(psql=dbadmin_psql, local_backup=local_backup)
+                subprocess.call(fill_sql, shell=True)
 
-            # Fill in with data
-            fill_sql = "{psql} -f {local_backup}".format(psql=dbadmin_psql, local_backup=local_backup)
-            subprocess.call(fill_sql, shell=True)
+                # get connected to the database
+                maindb_connection = pg.connect("dbname=maindb user=dbadmin")
+                curs = maindb_connection.cursor()
 
-            # get connected to the database
-            maindb_connection = pg.connect("dbname=maindb user=dbadmin")
-            curs = maindb_connection.cursor()
+                # Update Sequences
+                curs.execute("SELECT setval('business_user_id_seq', (SELECT max(id) from business_users))")
+                curs.execute("SELECT setval('business_visitor_id_seq', (SELECT max(id) from business_visitor))")
+                curs.execute("SELECT setval('auth_user_id_seq', (SELECT max(id) from auth_user))")
+                curs.execute("SELECT setval('searches_id_seq', (SELECT max(id) from searches))")
+                curs.execute("SELECT setval('beta_invite_visitor_id_seq', (SELECT max(id) from visitors))")
+                curs.execute("SELECT setval('beta_invite_user_id_seq', (SELECT max(id) from users))")
 
-            # Update Sequences
-            curs.execute("SELECT setval('business_user_id_seq', (SELECT max(id) from business_users))")
-            curs.execute("SELECT setval('business_visitor_id_seq', (SELECT max(id) from business_visitor))")
-            curs.execute("SELECT setval('auth_user_id_seq', (SELECT max(id) from auth_user))")
-            curs.execute("SELECT setval('searches_id_seq', (SELECT max(id) from searches))")
-            curs.execute("SELECT setval('beta_invite_visitor_id_seq', (SELECT max(id) from visitors))")
-            curs.execute("SELECT setval('beta_invite_user_id_seq', (SELECT max(id) from users))")
+                # Closes connection
+                maindb_connection.close()
 
-            # Closes connection
-            maindb_connection.close()
-
-        else:
-            raise Exception("WTF are you trying to do!!! Be careful not to erase production.")
+            else:
+                raise Exception("WTF are you trying to do!!! Be careful not to erase production.")
 
     if sync_media:
 
@@ -117,7 +118,7 @@ def deploy():
     subprocess.check_output("git push origin master", cwd=local_cwd, shell=True)
 
     # Then overwrites the backup file and copies it to local
-    sync(sync_media=False, db_update=False)
+    sync(sync_media=False, db_update=False, copy_db_to_local=False)
 
     with cd(WORKING_PATH):
         with prefix(". /usr/local/bin/virtualenvwrapper.sh; workon myenv"):
