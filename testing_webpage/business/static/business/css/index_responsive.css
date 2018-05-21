@@ -19,19 +19,19 @@
         margin-top:-20px;
     }
 			
-	#navpersonas {
+	#candidates-button {
 		display:none;
 	}
 	
-	#navcontactanos {
+	#contact-us-button {
 		display:none;
 	}
 	
-	#navcrear {
+	#register-button {
 		display:none;
 	}
 	
-	#naviniciar {
+	#login-button {
 		display:none;
 	}
 
@@ -312,11 +312,11 @@
 	    width:90px;
 	}
 			
-	#navpersonas {
+	#candidates-button {
 		display:none;
 	}
 	
-	#navcontactanos {
+	#contact-us-button {
 		display:none;
 	}
 	
@@ -445,11 +445,11 @@
 		background-size:contain;
 	}
 			
-	#navpersonas {
+	#candidates-button {
 		display:none;
 	}
 	
-	#navcontactanos {
+	#contact-us-button {
 		display:none;
 	}
 	
