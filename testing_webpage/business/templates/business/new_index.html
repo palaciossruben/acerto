@@ -6,86 +6,19 @@
 	<head>
 		<meta charset="utf-8">
 		<title>PeakU · Servicios empresariales</title>
-		<link rel="stylesheet" type="text/css" href="{% static 'business/new_css/style.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'business/new_css/responsive.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'business/new_css/bootstrap.min.css' %}">
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="{% static 'business/css/new_index.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'business/css/index_responsive.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+		<script type="text/javascript" src="{% static 'business/js/index.js' %}"></script>
 	</head>
 	<body>
-		<script>
-			function on() {
-			    document.getElementById("overlay").style.display = "block";
-			    document.getElementById("hide1").style.display = "none";
-			    document.getElementById("hide2").style.display = "none";
-			    document.getElementById("register-form").style.display = "block";
-                $("html").css("background-size", "cover");
-                $("#option1").css("color", "white");
-                $("#option2").css("color", "white");
-                $("nav").css("margin-bottom", "40px");
-                $("#register-form").animate({"marginLeft": '60%'}, 650,"swing");
-                $("#form-image").animate({"backgroundPosition": '86%'}, 650,"swing");
-                $("html").css("overflow", "hidden");
-			}
-
-			function off() {
-			    document.getElementById("overlay").style.display = "none";
-			    document.getElementById("hide1").style.display = "block";
-			    document.getElementById("hide2").style.display = "block";
-			    document.getElementById("register-form").style.display = "none";
-                $("html").css("background-size", "contain");
-                $("#option1").css("color", "#3d4753");
-                $("#option2").css("color", "#3d4753");
-                $("nav").css("margin-bottom", "");
-                $("#register-form").animate({marginLeft: '160%'});
-                $("#form-image").animate({"backgroundPosition": '186%'}, 650,"swing");
-                $("html").css("overflow-y", "scroll");
-            }
-
-            function on2() {
-			    document.getElementById("overlay2").style.display = "block";
-			    document.getElementById("hide1").style.display = "none";
-			    document.getElementById("hide2").style.display = "none";
-			    document.getElementById("login-form").style.display = "block";
-                $("html").css("background-size", "cover");
-                $("#option1").css("color", "white");
-                $("#option2").css("color", "white");
-                $("nav").css("margin-bottom", "40px");
-                $("#login-form").animate({"marginLeft": '60%'}, 650,"swing");
-                $("#form-image2").animate({"backgroundPosition": '86%'}, 650,"swing");
-                $("html").css("overflow", "hidden");
-			}
-
-			function off2() {
-			    document.getElementById("overlay2").style.display = "none";
-			    document.getElementById("hide1").style.display = "block";
-			    document.getElementById("hide2").style.display = "block";
-			    document.getElementById("login-form").style.display = "none";
-                $("html").css("background-size", "contain");
-                $("#option1").css("color", "#3d4753");
-                $("#option2").css("color", "#3d4753");
-                $("nav").css("margin-bottom", "");
-                $("#login-form").animate({marginLeft: '160%'});
-                $("#form-image2").animate({"backgroundPosition": '186%'}, 650,"swing");
-                $("html").css("overflow-y", "scroll");
-            }
-
-            function myFunction() {
-                var x = document.getElementById("myTopnav");
-                if (x.className === "row") {
-                    x.className += " responsive";
-                }
-                else {
-                    x.className = "row";
-                }
-            }
-		</script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<div class="container">
-            <div id="contactbuttons">
-				<a href="https://api.whatsapp.com/send?phone=573116109340" target="_blank"><img src="{% static 'business/new_images/boton-whatsapp.png' %}" width="100px" id="whatsapppc">
-				<img src="{% static 'business/new_images/boton-whatsapp-tablet.png' %}" id="whatsapptablet"></a>	<br>
-				<a href="#"><img src="{% static 'business/new_images/boton-chat.png' %}" width="100px" id="chatpc">
-				<img src="{% static 'business/new_images/boton-chat-tablet.png' %}" id="chattablet"></a>
+            <div id="contact-buttons">
+				<a href="https://api.whatsapp.com/send?phone=573116109340" target="_blank"><img src="{% static 'business/new_images/boton-whatsapp.png' %}" width="100px" id="whatsapp-pc">
+				<img src="{% static 'business/new_images/boton-whatsapp-tablet.png' %}" id="whatsapp-tablet"></a>	<br>
+				<a href="#"><img src="{% static 'business/new_images/boton-chat.png' %}" width="100px" id="chat-pc">
+				<img src="{% static 'business/new_images/boton-chat-tablet.png' %}" id="chat-tablet"></a>
 			</div>
 			<!--Nav bar-->
 			<nav class="row" id="myTopnav">
@@ -404,7 +337,5 @@
 				<div class="col-1"></div>
 			</div>
 		</footer>
-		<script type="text/javascript" src="{% static 'business/new_js/jquery.min.js' %}"></script>
-		<script type="text/javascript" src="{% static 'business/new_js/bootstrap.min.js' %}"></script>
 	</body>
 </html>
