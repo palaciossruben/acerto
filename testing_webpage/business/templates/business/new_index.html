@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 {% load i18n %}
+{% load app_filters %}
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -11,301 +12,365 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 	</head>
 	<body>
-        <script>
-            function on() {
-                document.getElementById("overlay").style.display = "block";
-                document.getElementById("hide1").style.display = "none";
-                document.getElementById("hide2").style.display = "none";
+		<script>
+			function on() {
+			    document.getElementById("overlay").style.display = "block";
+			    document.getElementById("hide1").style.display = "none";
+			    document.getElementById("hide2").style.display = "none";
+			    document.getElementById("register-form").style.display = "block";
                 $("html").css("background-size", "cover");
-                $("#overlay").animate({right: '100%'});
-                $("#overlay").animate({left: ''});
+                $("#option1").css("color", "white");
+                $("#option2").css("color", "white");
+                $("nav").css("margin-bottom", "40px");
+                $("#register-form").animate({"marginLeft": '60%'}, 650,"swing");
+                $("#form-image").animate({"backgroundPosition": '86%'}, 650,"swing");
+                $("html").css("overflow", "hidden");
+			}
 
-            }
-
-            function off() {
-                document.getElementById("overlay").style.display = "none";
-                document.getElementById("hide1").style.display = "block";
-                document.getElementById("hide2").style.display = "block";
+			function off() {
+			    document.getElementById("overlay").style.display = "none";
+			    document.getElementById("hide1").style.display = "block";
+			    document.getElementById("hide2").style.display = "block";
+			    document.getElementById("register-form").style.display = "none";
                 $("html").css("background-size", "contain");
-                $("#overlay").animate({left: '100%'});
-                $("#overlay").animate({right: ''});
+                $("#option1").css("color", "#3d4753");
+                $("#option2").css("color", "#3d4753");
+                $("nav").css("margin-bottom", "");
+                $("#register-form").animate({marginLeft: '160%'});
+                $("#form-image").animate({"backgroundPosition": '186%'}, 650,"swing");
+                $("html").css("overflow-y", "scroll");
             }
-        </script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+            function on2() {
+			    document.getElementById("overlay2").style.display = "block";
+			    document.getElementById("hide1").style.display = "none";
+			    document.getElementById("hide2").style.display = "none";
+			    document.getElementById("login-form").style.display = "block";
+                $("html").css("background-size", "cover");
+                $("#option1").css("color", "white");
+                $("#option2").css("color", "white");
+                $("nav").css("margin-bottom", "40px");
+                $("#login-form").animate({"marginLeft": '60%'}, 650,"swing");
+                $("#form-image2").animate({"backgroundPosition": '86%'}, 650,"swing");
+                $("html").css("overflow", "hidden");
+			}
 
+			function off2() {
+			    document.getElementById("overlay2").style.display = "none";
+			    document.getElementById("hide1").style.display = "block";
+			    document.getElementById("hide2").style.display = "block";
+			    document.getElementById("login-form").style.display = "none";
+                $("html").css("background-size", "contain");
+                $("#option1").css("color", "#3d4753");
+                $("#option2").css("color", "#3d4753");
+                $("nav").css("margin-bottom", "");
+                $("#login-form").animate({marginLeft: '160%'});
+                $("#form-image2").animate({"backgroundPosition": '186%'}, 650,"swing");
+                $("html").css("overflow-y", "scroll");
+            }
+
+            function myFunction() {
+                var x = document.getElementById("myTopnav");
+                if (x.className === "row") {
+                    x.className += " responsive";
+                }
+                else {
+                    x.className = "row";
+                }
+            }
+		</script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<div class="container">
-
-            <div id="overlay">
-                <form id="msform" autocomplete="off" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-
-                    <fieldset>
-                        <span onclick="off()" id="exitdingbat">X</span>
-
-                        <p style="color:white">Nombre del reclutador</p>
-                        <input>
-
-                        <p style="color:white">Empresa</p>
-                        <input>
-                        <p style="color:white">Correo</p>
-                        <input>
-                        <p style="color:white">Teléfono</p>
-                        <input>
-                        <p style="color:white">Contraseña</p>
-                        <input>
-                        <p style="color:white">Confirmar contraseña</p>
-                        <input>
-
-                        <input type="button" name="next" class="next action-button" value="COMIENZA AHORA" onclick="sendPartial({'gender_id':$('#gender').val()})"/>
-                    </fieldset>
-                </form>
-            </div>
-
-			<div id="contactbuttons">
-				<a href="#"><img src="{% static 'business/new_images/boton-whatsapp.png' %}" width="100px" id="whatsapppc">
+            <div id="contactbuttons">
+				<a href="https://api.whatsapp.com/send?phone=573116109340" target="_blank"><img src="{% static 'business/new_images/boton-whatsapp.png' %}" width="100px" id="whatsapppc">
 				<img src="{% static 'business/new_images/boton-whatsapp-tablet.png' %}" id="whatsapptablet"></a>	<br>
 				<a href="#"><img src="{% static 'business/new_images/boton-chat.png' %}" width="100px" id="chatpc">
 				<img src="{% static 'business/new_images/boton-chat-tablet.png' %}" id="chattablet"></a>
 			</div>
 			<!--Nav bar-->
-			<nav class="row">
-				<div class="col-lg-2 col-md-2 col-sm-2"><a href="#"><img src="{% static 'business/new_images/logo-color.png' %}" width="110px" id="logo"></a>
+			<nav class="row" id="myTopnav">
+				<div class="col-lg-2 col-md-2 col-sm-2"><a href="/staffing"><img src="{% static 'business/new_images/logo-color.png' %}" width="110px" id="logo"></a>
 				</div>
 				<div class="col-lg-10 col-md-10 col-sm-10 push10">
 					<ul style="float:right">
-						<li id="navpersonas"><a href="#">Personas</a></li>
-						<li id="navcontactanos"><a href="#">Contáctanos</a></li>
-						<li id="navcrear"><a href="#" class="button-user" role="button" onclick="on()">Crea tu cuenta</a></li>
-						<li id="naviniciar"><a href="#" class="button-user" role="button">Inicia sesión</a></li>
-						<li id="menuicon" style="display:none;"><a href="#"><img src="{% static 'business/new_images/menuicon.png' %}"></a></li>
+						<li id="navpersonas"><a id="option1" href="{% url 'beta_invite:index' %}">Personas</a></li>
+						<li id="navcontactanos"><a id="option2" href="{% url 'business:contact_form' %}">Contáctanos</a></li>
+						<li id="navcrear"><a class="button-user" role="button" onclick="on()">Crea tu cuenta</a></li>
+						<li id="naviniciar"><a class="button-user" role="button" onclick="on2()">Inicia sesión</a></li>
+						<li id="menuicon" style="display:none;"><a href="javascript:void(0);" onclick="myFunction()"><img src="{% static 'business/new_images/menuicon.png' %}"></a></li>
 					</ul>
 				</div>
 			</nav>
 			<!--call to action-->
-			<div class="row blankbanner">
-			</div>
+            <div id="overlay">
+                <div id="form-image">
+                    <form id="register-form">
+                        <fieldset>
+                            <span id="exitDingbat" onclick="off()">X</span>
+                            <br>
+                            <br>
+                            <span>Nombre del reclutador</span>
+                            <input class="form-input"><br>
+                            <span>Empresa</span>
+                            <input class="form-input"><br>
+                            <span>Correo</span>
+                            <input class="form-input"><br>
+                            <span>Teléfono</span>
+                            <input class="form-input"><br>
+                            <span>Contraseña</span>
+                            <input class="form-input"><br>
+                            <span>Confirmar contraseña</span>
+                            <input class="form-input"><br>
+                            <br>
+                            <input type="submit" class="submit" value="COMIENZA AHORA">
+                        </fieldset>
+                        <span style="color:white;margin-left:30px;">¿Ya eres un usuario registrado? Inicia sesión <a style="color:white" href="javascript:void(0);" onclick="off() & on2()"><strong>Aquí</strong></a></span>
+                    </form>
+
+                </div>
+            </div>
+            <div id="overlay2">
+                <div id="form-image2">
+                    <form id="login-form">
+                        <fieldset>
+                            <span id="exitDingbat2" onclick="off2()">X</span>
+                            <br>
+                            <br>
+                            <span>Correo o nombre de usuario</span>
+                            <input class="form-input"><br>
+                            <span>Contraseña</span>
+                            <input class="form-input"><br>
+                            <span style="font-size:10px;"><a href="#" style="color:white">Olvidé mi contraseña</a></span>
+                            &#x007C;
+                            <span style="font-size:10px"><a href="#" style="color:white" onclick="off2() & on()">Aun no estoy registrado</a></span>
+                            <br>
+                            <br>
+                            <input type="submit" class="submit" value="ACCEDER">
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="row blankbanner"></div>
+
             <div id="hide1">
-			<div class="row" id="copyprincipal">
-
-				<div class="col-lg-5"></div>
-				<div class="col-lg-7">
-					<h1 style="color:#FFFFFF">	Publica tu oferta laboral,<br> nosotros hacemos el resto</h1>
-				</div>
-				<div class="col-lg-5"></div>
-				<div class="col-lg-7">
-					<h5 style="color:#FFFFFF">	Búsqueda, pruebas técnicas y toda la logística para encontrar los candidatos que tu empresa necesita.</h5>
-				</div>
-				<div class="col-lg-5"></div>
-				<div class="col-lg-7">
-					<a href="#" class="button-cta" role="button">PUBLICA GRATIS</a>
-				</div>
-			</div>
-
-			<!--Beneficios-->
-			<div class="row">
-				<div class="col-lg-12 blankbeneficios">
-				</div>
-				<div class="col-lg-4 col-md-4 beneficios">
-					<img src="{% static 'business/new_images/10dias.png' %}">
-					<h6 class="push20">Los mejores candidatos en 10 días hábiles</h6>
-					<br>
-					Cinco candidatos garantizados para el cargo en 10 días hábiles
-				</div>
-				<div class="col-lg-4 col-md-4 beneficios pull50">
-					<img src="{% static 'business/new_images/publicar-gratis.png' %}">
-					<h6 class="push20">Publica gratis tus vacantes de forma ilimitada</h6>
-					<br>
-					Accede a candidatos y comparte tu publicación para llegar a más personas.
-				</div>
-				<div class="col-lg-4 col-md-4 beneficios pull100">
-					<img src="{% static 'business/new_images/mejora-proceso.png' %}">
-					<h6 class="push20">Optimiza tus procesos de selección con nuestra plataforma<br></h6>
-					<br>
-					Permite que los candidatos hagan pruebas técnicas en línea, facilitamos el seguimiento de los procesos y la comunicación.
-				</div>
-				<div class="col-md-12 beneficioscel pull100">
-					<img src="{% static 'business/new_images/beneficios-cel.jpg' %}">
-					<h6 class="push20">Los mejores candidatos en 10 días hábiles<br></h6>
-					Publica ofertas gratis y optimiza procesos de selección para que encuentres al candidato que necesitas en tiempo récord.
-				</div>
-			</div>
-			<div class="row blankabout"></div>
-		</div>
-        </div>
-        <div id="hide2">
-		<!--About-->
-		<div class="container-fluid" id="valuebanner">
-			<div class="row">
-				<div class="col-lg-1 col-md-1">
-				</div>
-				<div class="col-lg-4 col-md-4" id="image4video"><a href="https://www.youtube.com/watch?v=QbNDO2ShXIs" target="_blank">
-					<img src="{% static 'business/new_images/mockup-iphone.png' %}" width="105%"></a>
-				</div>
-				<div class="col-lg-1 col-md-1">
-				</div>
-				<div class="col-lg-5 col-md-5 about">
-					<h1>ACERCA DE LA PLATAFORMA</h1>
-					<br>
-					PeakU está revolucionando la búsqueda de candidatos, el reclutamiento y la selección; hacemos procesos más eficientes para las empresas y entregamos un toque personal a los candidatos para mejorar su experiencia.Alineamos a las personas y empresas para crear relaciones donde el resultado final sea la creación de valor a largo plazo.<br>
-					<a href="#" class="button-cta" role="button" id="button-cta-about">COMIENZA AQUÍ</a>
-				</div>
-				<div class="col-lg-1 col-md-1">
-				</div>
-			</div>
-		</div>
-		<!--Plans-->
-		<div class="container">
-			<div class="blankplans"></div>
-			<div class="row">
-				<!--free-->
-				<div class="col-lg-3 col-md-6 leftipad">
-					<div class="freebg">
-						<div class="button-plans">PLAN GRATUITO</div>
-						<a href="#" class="button-buy-cel" role="button">COMENZAR</a>
-						<br>
-						<p class="price"> sin costo</p>
-						<div class="plancontainer">
-							<ul class="itemyes-light">
-								<li class="listyes-light"> Búsqueda en múltiples bases de datos	</li>
-								<li class="listno-light"> Recomendación de candidatos (Top 10)</li>
-								<li class="listno-light"> Herramientas para el seguimiento del proceso y de los candidatos</li>
-								<li class="listno-light"> Pruebas de selección tipo Google</li>
-								<li class="listno-light"> Garantía de contratación</li>
-								<li class="listno-light"> Perfiles específicos difíciles de encontrar</li>
-							</ul>
-						</div>
-						<a href="#" class="button-buy" role="button">COMENZAR</a>
+				<div class="row" id="copyprincipal">
+					<div class="col-lg-5"></div>
+					<div class="col-lg-7">
+						<h1 style="color:#FFFFFF">	Publica tu oferta laboral,<br> nosotros hacemos el resto</h1>
+					</div>
+					<div class="col-lg-5"></div>
+					<div class="col-lg-7">
+						<h5 style="color:#FFFFFF">	Búsqueda, pruebas técnicas y toda la logística para encontrar los candidatos que tu empresa necesita.</h5>
+					</div>
+					<div class="col-lg-5"></div>
+					<div class="col-lg-7">
+						<a href="#" class="button-cta" role="button">PUBLICA GRATIS</a>
 					</div>
 				</div>
-				<!--basic-->
-				<div class="col-lg-3 col-md-6">
-					<div class="basicbg pull50">
-						<div class="button-plan-top">PLAN BÁSICO</div>
-						<a href="#" class="button-buy-cel" role="button">OBTENER</a>
+				<!--Beneficios-->
+				<div class="row">
+					<div class="col-lg-12 blankbeneficios">
+					</div>
+					<div class="col-lg-4 col-md-4 beneficios">
+						<img src="{% static 'business/new_images/10dias.png' %}">
+						<h6 class="push20">Los mejores candidatos en 10 días hábiles</h6>
 						<br>
-						<p class="price">US $300/mes</p>
-						<div class="plancontainer">
-							<ul class="itemyes-light">
-								<li class="listyes-dark"> Búsqueda en múltiples bases de datos	</li>
-								<li class="listyes-dark"> Recomendación de candidatos (Top 10)</li>
-								<li class="listyes-dark"> Herramientas para el seguimiento del proceso y de los candidatos</li>
-								<li class="listno-dark"> Pruebas de selección tipo Google</li>
-								<li class="listno-dark"> Garantía de contratación</li>
-								<li class="listno-dark"> Perfiles específicos difíciles de encontrar</li>
-							</ul>
-						</div>
-						<a href="#" class="button-buy" role="button">OBTENER</a>
+						Cinco candidatos garantizados para el cargo en 10 días hábiles
+					</div>
+					<div class="col-lg-4 col-md-4 beneficios pull50">
+						<img src="{% static 'business/new_images/publicar-gratis.png' %}">
+						<h6 class="push20">Publica gratis tus vacantes de forma ilimitada</h6>
+						<br>
+						Accede a candidatos y comparte tu publicación para llegar a más personas.
+					</div>
+					<div class="col-lg-4 col-md-4 beneficios pull100">
+						<img src="{% static 'business/new_images/mejora-proceso.png' %}">
+						<h6 class="push20">Optimiza tus procesos de selección con nuestra plataforma<br></h6>
+						<br>
+						Permite que los candidatos hagan pruebas técnicas en línea, facilitamos el seguimiento de los procesos y la comunicación.
+					</div>
+					<div class="col-md-12 beneficioscel pull100">
+						<img src="{% static 'business/new_images/beneficios-cel.jpg' %}">
+						<h6 class="push20">Los mejores candidatos en 10 días hábiles<br></h6>
+						Publica ofertas gratis y optimiza procesos de selección para que encuentres al candidato que necesitas en tiempo récord.
 					</div>
 				</div>
-				<!--premium-->
-				<div class="col-lg-3 col-md-6">
-					<div class="premiumbg">
-						<div class="button-plans">PLAN PREMIUM</div>
-						<a href="#" class="button-buy-cel" role="button">OBTENER</a>
-						<br>
-						<p class="price" style="color:#FFFFFF">US $1200/mes</p>
-						<div class="plancontainer">
-							<ul class="itemyes-light">
-								<li class="listyes-dark"> Búsqueda en múltiples bases de datos	</li>
-								<li class="listyes-dark"> Recomendación de candidatos (Top 10)</li>
-								<li class="listyes-dark"> Herramientas para el seguimiento del proceso y de los candidatos</li>
-								<li class="listyes-dark"> Pruebas de selección tipo Google</li>
-								<li class="listyes-dark"> Garantía de contratación</li>
-								<li class="listno-light"> Perfiles específicos difíciles de encontrar</li>
-							</ul>
-						</div>
-						<a href="#" class="button-buy" role="button">OBTENER</a>
-					</div>
-				</div>
-				<!--headhunterc-->
-				<div class="col-lg-3 col-md-6">
-					<div class="headhunterbg">
-						<div class="button-plans">PLAN HEADHUNTER</div>
-						<a href="#" class="button-buy-cel" role="button">COTIZAR</a>
-						<br>
-						<span class="price"><span class="pricesmall">Desde</span><br>US $1500/mes<br></span>
-						<div class="plancontainer">
-							<ul class="itemyes-light">
-								<li class="listyes-light"> Búsqueda en múltiples bases de datos	</li>
-								<li class="listyes-light"> Recomendación de candidatos (Top 10)</li>
-								<li class="listyes-light"> Herramientas para el seguimiento del proceso y de los candidatos</li>
-								<li class="listyes-light"> Pruebas de selección tipo Google</li>
-								<li class="listyeslight"> Garantía de contratación</li>
-								<li class="listyes-light"> Perfiles específicos difíciles de encontrar</li>
-							</ul>
-						</div>
-						<a href="#" class="button-buy" role="button">COTIZAR</a>
-					</div>
-				</div>
-				<div class="blankplanspost"></div>
+				<div class="row blankabout"></div>
 			</div>
 		</div>
-		<div class="container-fluid">
-			<!--Reviews-->
-			<div class="row">
-				<div class="row blankreviewspic"> </div>
-				<div class="col-lg-12" style="text-align:center; z-index:-99;" >
-					<h3 class="push100" id="pushtitleiphone">Historias de éxito, de primera mano</h3>
+		<div id="hide2">
+			<!--About-->
+			<div class="container-fluid" id="valuebanner">
+				<div class="row">
+					<div class="col-lg-1 col-md-1">
+					</div>
+					<div class="col-lg-4 col-md-4" id="image4video"><a href="https://www.youtube.com/watch?v=QbNDO2ShXIs" target="_blank">
+						<img src="{% static 'business/new_images/mockup-iphone.png' %}" width="105%"></a>
+					</div>
+					<div class="col-lg-1 col-md-1">
+					</div>
+					<div class="col-lg-5 col-md-5 about">
+						<h1>ACERCA DE LA PLATAFORMA</h1>
+						<br>
+						PeakU está revolucionando la búsqueda de candidatos, el reclutamiento y la selección; hacemos procesos más eficientes para las empresas y entregamos un toque personal a los candidatos para mejorar su experiencia.Alineamos a las personas y empresas para crear relaciones donde el resultado final sea la creación de valor a largo plazo.<br>
+						<a href="#" class="button-cta" role="button" id="button-cta-about">COMIENZA AQUÍ</a>
+					</div>
+					<div class="col-lg-1 col-md-1">
+					</div>
 				</div>
-				<div class="col-lg-3 "></div>
-				<div class="col-lg-2 col-md-4 reviewsingle">
-					<br><br><img src="{% static 'business/new_images/review1.jpg' %}"><br>
-					<p class="titlereview">Antonia Chávez</p>
-					<p class="subtitlereview">CEO - Sony music</p>
-					<div class="greendash"></div>
-					<br>
-					<p class="reviewcel">“Alineamos a las personas y empresas para crear relaciones donde el resultado final sea la creación de valor a largo plazo.”</p>
-				</div>
-				<div class="col-lg-2 col-md-4 reviewsingle">
-					<br><br><img src="{% static 'business/new_images/review2.jpg' %}"><br>
-					<p class="titlereview">Andrés Jaramillo</p>
-					<p class="subtitlereview">Andrés carne de res</p>
-					<div class="greendash"></div>
-					<br>
-					<p class="reviewcel">“Alineamos a las personas y empresas para crear relaciones donde el resultado final sea la creación de valor a largo plazo.”</p>
-				</div>
-				<div class="col-lg-2 col-md-4 reviewsingle">
-					<br><br><img src="{% static 'business/new_images/review3.jpg' %}"><br>
-					<p class="titlereview">Juana Angarita</p>
-					<p class="subtitlereview">Marketing consultant</p>
-					<div class="greendash"></div>
-					<br>
-					<p class="reviewcel"> “Alineamos a las personas y empresas para crear relaciones donde el resultado final sea la creación de valor a largo plazo.”</p>
-				</div>
-				<div class="col-lg-3 col-md-3"></div>
 			</div>
-			<div class="col-lg-12" style="margin-top:-20px; padding-bottom:100px;" >
-				<center>
-					<svg height="10" width="10">
-						<circle cx="5" cy="5" r="5" fill="#dddddc" />
-					</svg>
-					<svg height="10" width="10">
-						<circle cx="5" cy="5" r="5" fill="#dddddc" />
-					</svg>
-					<svg height="10" width="10">
-						<circle cx="5" cy="5" r="5" fill="#dddddc" />
-					</svg>
-				</center>
+			<!--Plans-->
+			<div class="container">
+				<div class="blankplans"></div>
+				<div class="row">
+					<!--free-->
+					<div class="col-lg-3 col-md-6 leftipad">
+						<div class="freebg">
+							<div class="button-plans">PLAN GRATUITO</div>
+							<a href="#" class="button-buy-cel" role="button">COMENZAR</a>
+							<br>
+							<p class="price"> sin costo</p>
+							<div class="plancontainer">
+								<ul class="itemyes-light">
+									<li class="listyes-light"> Búsqueda en múltiples bases de datos	</li>
+									<li class="listno-light"> Recomendación de candidatos (Top 10)</li>
+									<li class="listno-light"> Herramientas para el seguimiento del proceso y de los candidatos</li>
+									<li class="listno-light"> Pruebas de selección tipo Google</li>
+									<li class="listno-light"> Garantía de contratación</li>
+									<li class="listno-light"> Perfiles específicos difíciles de encontrar</li>
+								</ul>
+							</div>
+							<a href="#" class="button-buy" role="button">COMENZAR</a>
+						</div>
+					</div>
+					<!--basic-->
+					<div class="col-lg-3 col-md-6">
+						<div class="basicbg pull50">
+							<div class="button-plan-top">PLAN BÁSICO</div>
+							<a href="#" class="button-buy-cel" role="button">OBTENER</a>
+							<br>
+							<p class="price">US $300/mes</p>
+							<div class="plancontainer">
+								<ul class="itemyes-light">
+									<li class="listyes-dark"> Búsqueda en múltiples bases de datos	</li>
+									<li class="listyes-dark"> Recomendación de candidatos (Top 10)</li>
+									<li class="listyes-dark"> Herramientas para el seguimiento del proceso y de los candidatos</li>
+									<li class="listno-dark"> Pruebas de selección tipo Google</li>
+									<li class="listno-dark"> Garantía de contratación</li>
+									<li class="listno-dark"> Perfiles específicos difíciles de encontrar</li>
+								</ul>
+							</div>
+							<a href="#" class="button-buy" role="button">OBTENER</a>
+						</div>
+					</div>
+					<!--premium-->
+					<div class="col-lg-3 col-md-6">
+						<div class="premiumbg">
+							<div class="button-plans">PLAN PREMIUM</div>
+							<a href="#" class="button-buy-cel" role="button">OBTENER</a>
+							<br>
+							<p class="price" style="color:#FFFFFF">US $1200/mes</p>
+							<div class="plancontainer">
+								<ul class="itemyes-light">
+									<li class="listyes-dark"> Búsqueda en múltiples bases de datos	</li>
+									<li class="listyes-dark"> Recomendación de candidatos (Top 10)</li>
+									<li class="listyes-dark"> Herramientas para el seguimiento del proceso y de los candidatos</li>
+									<li class="listyes-dark"> Pruebas de selección tipo Google</li>
+									<li class="listyes-dark"> Garantía de contratación</li>
+									<li class="listno-light"> Perfiles específicos difíciles de encontrar</li>
+								</ul>
+							</div>
+							<a href="#" class="button-buy" role="button">OBTENER</a>
+						</div>
+					</div>
+					<!--headhunterc-->
+					<div class="col-lg-3 col-md-6">
+						<div class="headhunterbg">
+							<div class="button-plans">PLAN HEADHUNTER</div>
+							<a href="#" class="button-buy-cel" role="button">COTIZAR</a>
+							<br>
+							<span class="price"><span class="pricesmall">Desde</span><br>US $1500/mes<br></span>
+							<div class="plancontainer">
+								<ul class="itemyes-light">
+									<li class="listyes-light"> Búsqueda en múltiples bases de datos	</li>
+									<li class="listyes-light"> Recomendación de candidatos (Top 10)</li>
+									<li class="listyes-light"> Herramientas para el seguimiento del proceso y de los candidatos</li>
+									<li class="listyes-light"> Pruebas de selección tipo Google</li>
+									<li class="listyeslight"> Garantía de contratación</li>
+									<li class="listyes-light"> Perfiles específicos difíciles de encontrar</li>
+								</ul>
+							</div>
+							<a href="#" class="button-buy" role="button">COTIZAR</a>
+						</div>
+					</div>
+					<div class="blankplanspost"></div>
+				</div>
 			</div>
-			<div class="row">
-				<div class="col-lg-2">
+			<div class="container-fluid">
+				<!--Reviews-->
+				<div class="row">
+					<div class="row blankreviewspic"> </div>
+					<div class="col-lg-12" style="text-align:center; z-index:-99;" >
+						<h3 class="push100" id="pushtitleiphone">Historias de éxito, de primera mano</h3>
+					</div>
+					<div class="col-lg-3 "></div>
+					<div class="col-lg-2 col-md-4 reviewsingle">
+						<br><br><img src="{% static 'business/new_images/review1.jpg' %}"><br>
+						<p class="titlereview">Antonia Chávez</p>
+						<p class="subtitlereview">CEO - Sony music</p>
+						<div class="greendash"></div>
+						<br>
+						<p class="reviewcel">“Alineamos a las personas y empresas para crear relaciones donde el resultado final sea la creación de valor a largo plazo.”</p>
+					</div>
+					<div class="col-lg-2 col-md-4 reviewsingle">
+						<br><br><img src="{% static 'business/new_images/review2.jpg' %}"><br>
+						<p class="titlereview">Andrés Jaramillo</p>
+						<p class="subtitlereview">Andrés carne de res</p>
+						<div class="greendash"></div>
+						<br>
+						<p class="reviewcel">“Alineamos a las personas y empresas para crear relaciones donde el resultado final sea la creación de valor a largo plazo.”</p>
+					</div>
+					<div class="col-lg-2 col-md-4 reviewsingle">
+						<br><br><img src="{% static 'business/new_images/review3.jpg' %}"><br>
+						<p class="titlereview">Juana Angarita</p>
+						<p class="subtitlereview">Marketing consultant</p>
+						<div class="greendash"></div>
+						<br>
+						<p class="reviewcel"> “Alineamos a las personas y empresas para crear relaciones donde el resultado final sea la creación de valor a largo plazo.”</p>
+					</div>
+					<div class="col-lg-3 col-md-3"></div>
 				</div>
-				<div class="col-lg-8" id="clientes">
-					<img src="{% static 'business/new_images/cliente-01.jpg' %}" width="24%">
-					<img src="{% static 'business/new_images/cliente-02.jpg' %}" width="24%">
-					<img src="{% static 'business/new_images/cliente-03.jpg' %}" width="24%">
-					<img src="{% static 'business/new_images/cliente-04.jpg' %}" width="24%">
-					<img src="{% static 'business/new_images/cliente-05.jpg' %}" width="24%">
-					<img src="{% static 'business/new_images/cliente-06.jpg' %}" width="24%">
-					<img src="{% static 'business/new_images/cliente-07.jpg' %}" width="24%">
-					<img src="{% static 'business/new_images/cliente-08.jpg' %}" width="24%">
+				<div class="col-lg-12" style="margin-top:-20px; padding-bottom:100px;" >
+					<center>
+						<svg height="10" width="10">
+							<circle cx="5" cy="5" r="5" fill="#dddddc" />
+						</svg>
+						<svg height="10" width="10">
+							<circle cx="5" cy="5" r="5" fill="#dddddc" />
+						</svg>
+						<svg height="10" width="10">
+							<circle cx="5" cy="5" r="5" fill="#dddddc" />
+						</svg>
+					</center>
 				</div>
-				<div class="col-lg-2">
+				<div class="row">
+					<div class="col-lg-2">
+					</div>
+					<div class="col-lg-8" id="clientes">
+						<img src="{% static 'business/new_images/cliente-01.jpg' %}" width="24%">
+						<img src="{% static 'business/new_images/cliente-02.jpg' %}" width="24%">
+						<img src="{% static 'business/new_images/cliente-03.jpg' %}" width="24%">
+						<img src="{% static 'business/new_images/cliente-04.jpg' %}" width="24%">
+						<img src="{% static 'business/new_images/cliente-05.jpg' %}" width="24%">
+						<img src="{% static 'business/new_images/cliente-06.jpg' %}" width="24%">
+						<img src="{% static 'business/new_images/cliente-07.jpg' %}" width="24%">
+						<img src="{% static 'business/new_images/cliente-08.jpg' %}" width="24%">
+					</div>
+					<div class="col-lg-2">
+					</div>
 				</div>
 			</div>
 		</div>
-        </div>
 		<!--Footer-->
 		<footer class="container-fluid">
 			<div class="row" style="padding-bottom:30px;">
@@ -313,15 +378,15 @@
 				<div class=" col-lg-3 col-md-3  navfooter" >
 					<ul style="float:left">
 						<li><a href="#">Nosotros</a></li>
-						<li><a href="#">Personas</a></li>
-						<li><a href="#">empresas</a></li>
+                        <li><a href="{% url 'business:contact_form' %}">Contáctanos</a></li>
+						<li><a href="{% url 'beta_invite:index' %}">Personas</a></li>
 					</ul>
 				</div>
 				<div class="col-lg-2 col-md-2 redesfooter" style="text-align:center">
-					<a href="http://www.instagram.com"><img src="{% static 'business/new_images/linkedin.png' %}"></a>
-					<a href="http://www.instagram.com"><img src="{% static 'business/new_images/facebook.png' %}"></a>
-					<a href="http://www.instagram.com"><img src="{% static 'business/new_images/instagram.png' %}"></a>
-					<a href="http://www.instagram.com"><img src="{% static 'business/new_images/twitter.png' %}"></a>
+					<a href="https://www.linkedin.com/company-beta/16241506/" target="_blank"><img src="{% static 'business/new_images/linkedin.png' %}"></a>
+					<a href="https://www.facebook.com/PeakU-Latam-1916685895214519/?ref=aymt_homepage_panel" target="_blank"><img src="{% static 'business/new_images/facebook.png' %}"></a>
+					<a href="#" target="_blank"><img src="{% static 'business/new_images/instagram.png' %}"></a>
+					<a href="#" target="_blank"><img src="{% static 'business/new_images/twitter.png' %}"></a>
 				</div>
 				<div class=" col-lg-1 col-md-1"></div>
 				<div class=" col-lg-2 col-md-2 navfootercontact">
@@ -334,10 +399,10 @@
 				<div class=" col-lg-2 col-md-2 "></div>
 			</div>
 			<div class="row">
-                <div class="col-1 col-md-1"></div>
-                <div class="col-10 copyright">Copyright 2016 © PeakU. Todos los derechos reservados.</div>
-                <div class="col-1"></div>
-            </div>
+				<div class="col-1 col-md-1"></div>
+				<div class="col-10 copyright">Copyright 2016 © PeakU. Todos los derechos reservados.</div>
+				<div class="col-1"></div>
+			</div>
 		</footer>
 		<script type="text/javascript" src="{% static 'business/new_js/jquery.min.js' %}"></script>
 		<script type="text/javascript" src="{% static 'business/new_js/bootstrap.min.js' %}"></script>

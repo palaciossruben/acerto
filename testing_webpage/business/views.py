@@ -505,3 +505,7 @@ def business_applied(request):
 
 def new_index(request):
     return render(request, cts.NEW_INDEX_VIEW_PATH, {})
+
+
+def new_start(request):
+    return render(request, cts.NEW_START_VIEW_PATH, {})
