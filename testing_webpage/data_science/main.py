@@ -1,8 +1,17 @@
 """
 Test hypothesis:
-1. Correlación entre puntaje prueba y probabilidad de pasar entrevista.
+1. Correlation of tests with interview:
+
+For last technical campaigns:
+correlation = 0.33
+% of people passing interview = 38%
+
+For campaigns before that:
+correlation = 0.008
+% of people passing interview = 29%
+
 2. Correlación entre puntaje y tiempo para contestar prueba.
-3. Los que contestan muy poco en los open field, así el resto de los test estén súper bien, normalmente han sido rechazados
+3. Correlation between number of words in open fields and passing the interview, despite passing test
 4. El mejor test predictivo de rendimiento es el cognitivo
 """
 
@@ -21,13 +30,11 @@ from dashboard.models import Candidate
 
 
 last_technical_campaign_ids = [87, 80, 86, 76, ]
-candidates = [c for c in Candidate.objects.all() if c.state.passed_test() and c.evaluations.all()]
+candidates = [c for c in Candidate.objects.all() if c.state.passed_test() and c.evaluations.all() and c.campaign.pk not in last_technical_campaign_ids]
 
 passed_interview = [int(c.state.passed_interview()) for c in candidates]
 test_score = [max([e.final_score for e in c.evaluations.all()]) for c in candidates]
 
-#passed_interview = np.array([0, 0, 0, 1, 1, 1])
-#test_score = [e * 10 + 100 for e in np.arange(6)]
 print(passed_interview)
 print(test_score)
 print('number of candidates: ' + str(len(candidates)))
