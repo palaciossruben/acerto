@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+{% load app_filters %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Slider Jquery</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'business/new_css/estilos.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'business/new_css/new_start.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'business/new_css/font-awesome.css' %}">
+
+	<script type="text/javascript" src="{% static 'business/new_js/jquery-3.1.0.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'business/new_js/main.js' %}"></script>
+	<script type="text/javascript" src="{% static 'business/new_js/new_start.js' %}"></script>
+</head>
+<body>
+	<div class="topright">
+		<h2>PERSONALIZA TU</h2>
+		<h2>CAMPAÑA EN 3 PASOS</h2>
+		<h4>y encuentra los mejores candidatos</h4>
+		<h4>para tu vacante</h4>
+	</div>
+	<div id="slideUp">
+
+	</div>
+	<div id="slideDownBack">
+	<div id="slideDown">
+	</div>
+	</div>
+
+
+
+	<div class="slideshow">
+		<ul class="slider">
+			<li>
+				<img src="{% static 'business/new_images/bg.jpg' %}" alt="">
+				<section class="caption">
+					<p>Administrativos</p>
+				</section>
+			</li>
+			<li>
+				<img src="{% static 'business/new_images/bg.jpg' %}" alt="">
+				<section class="caption">
+					<h1>Lorem ipsum 2</h1>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci quis ipsa, id quidem quisquam unde.</p>
+				</section>
+			</li>
+			<li>
+				<img src="{% static 'business/new_images/bg.jpg' %}" alt="">
+				<section class="caption">
+					<h1>Lorem ipsum 3</h1>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci quis ipsa, id quidem quisquam unde.</p>
+				</section>
+			</li>
+			<li>
+				<img src="{% static 'business/new_images/bg.jpg' %}" alt="">
+				<section class="caption">
+					<h1>Lorem ipsum 4</h1>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci quis ipsa, id quidem quisquam unde.</p>
+				</section>
+			</li>
+		</ul>
+
+		<ol class="pagination">
+
+		</ol>
+
+		<div class="left">
+			<span class="fa fa-chevron-left"></span>
+		</div>
+
+		<div class="right">
+			<span class="fa fa-chevron-right"></span>
+		</div>
+	</div>
+
+
+	<script>
+		$(document).ready(function() {
+		$('.keyWords').select2();
+	});
+	</script>
+
+</body>
+</html>
