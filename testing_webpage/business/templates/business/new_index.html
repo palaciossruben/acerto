@@ -17,7 +17,8 @@
 		<div class="container">
             <div id="contact-buttons">
 				<a href="https://api.whatsapp.com/send?phone=573116109340" target="_blank"><img src="{% static 'business/new_images/boton-whatsapp.png' %}" width="100px" id="whatsapp-pc">
-				<img src="{% static 'business/new_images/boton-whatsapp-tablet.png' %}" id="whatsapp-tablet"></a>	<br>
+				<img src="{% static 'business/new_images/boton-whatsapp-tablet.png' %}" id="whatsapp-tablet"></a>
+				<br>
 				<a href="#"><img src="{% static 'business/new_images/boton-chat.png' %}" width="100px" id="chat-pc">
 				<img src="{% static 'business/new_images/boton-chat-tablet.png' %}" id="chat-tablet"></a>
 			</div>
@@ -31,7 +32,6 @@
 						<li id="contact-us-button"><a id="option2" href="{% url 'business:contact_form' %}">Contáctanos</a></li>
 						<li id="register-button"><a class="button-user" role="button" onclick="on()">Crea tu cuenta</a></li>
 						<li id="login-button"><a class="button-user" role="button" onclick="on2()">Inicia sesión</a></li>
-						<li id="menuicon" style="display:none;"><a href="javascript:void(0);" onclick="myFunction()"><img src="{% static 'business/new_images/menuicon.png' %}"></a></li>
 					</ul>
 				</div>
 			</nav>
@@ -86,7 +86,7 @@
             <div class="row blankbanner"></div>
 
             <div id="hide1">
-				<div class="row" id="copyprincipal">
+				<div class="row" id="main-copy">
 					<div class="col-lg-5"></div>
 					<div class="col-lg-7">
 						<h1 style="color: white">	Publica tu oferta laboral,<br> nosotros hacemos el resto</h1>

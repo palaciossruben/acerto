@@ -44,11 +44,11 @@
 	    height:260px;
 	}
 	
-	#copyprincipal {
+	#main-copy {
 		margin-left:0px;
 	}
 		
-	#copyprincipal br{
+	#main-copy br{
 		display:none;
 	}
 		
@@ -329,7 +329,7 @@
     	height:590px;
 	}
 
-	#copyprincipal {
+	#main-copy {
 		margin-left:170px;
 	}
 
@@ -643,7 +643,7 @@
 
     }
 
-    #copyprincipal {
+    #main-copy {
         width:1500px;
     }
 
