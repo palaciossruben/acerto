@@ -2,144 +2,93 @@
 {% load static %}
 {% load i18n %}
 {% load app_filters %}
-<html>
+<html lang="en">
 	<head>
-
-		<meta charset="utf-8">
-		<title>PeakU · Servicios empresariales</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<title>PeakU - Selección de personal</title>
 		<link rel="stylesheet" type="text/css" href="{% static 'business/css/new_start.css' %}">
-
-		<link rel="stylesheet" type="text/css" href="{% static 'business/css/index_responsive.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-		<script type="text/javascript" src="{% static 'business/js/index.js' %}"></script>
-
+		<link rel="stylesheet" type="text/css" href="{% static 'business/css/slick.css' %}"/>
+		<link rel="stylesheet" type="text/css" href="{% static 'business/css/slick-theme.css' %}"/>
+		<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+		<script type="text/javascript" src="{% static 'business/new_js/main.js' %}"></script>
+		<script type="text/javascript" src="{% static 'business/new_js/new_start.js' %}"></script>
 	</head>
 	<body>
-		<div class="container">
-            <div id="contact-buttons">
-				<a href="https://api.whatsapp.com/send?phone=573116109340" target="_blank"><img src="{% static 'business/new_images/boton-whatsapp.png' %}" width="100px" id="whatsapp-pc">
-				<img src="{% static 'business/new_images/boton-whatsapp-tablet.png' %}" id="whatsapp-tablet"></a>	<br>
-				<a href="#"><img src="{% static 'business/new_images/boton-chat.png' %}" width="100px" id="chat-pc">
-				<img src="{% static 'business/new_images/boton-chat-tablet.png' %}" id="chat-tablet"></a>
+		<section class="main-section">
+			<div class="topnav" id="myTopnav">
+				<a href="/staffing" style="float:left"><img src="{% static 'business/new_images/logo-color.png' %}"  width="70px" id="logo"></a>
+				<div>
+					<a class="button-login" role="button" onclick="on2()">INICIA SESIÓN</a>
+					<a class="button-create" role="button" onclick="on()">CREA TU CUENTA</a>
+					<a href="#news" style="margin: 15px 10px;">Contactanos</a>
+					<a href="#home" style="margin: 15px 10px;">Personas</a>
+					<a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+				</div>
 			</div>
-			<!--Nav bar-->
-			<nav class="row" id="navigation-bar">
-				<div class="col-lg-2 col-md-2 col-sm-2"><a href="/staffing"><img src="{% static 'business/new_images/logo-color.png' %}" width="110px" id="logo"></a>
+			<div>
+				<div class="topright">
+					<h2>PERSONALIZA TU</h2>
+					<h2>CAMPAÑA EN 3 PASOS</h2>
+					<h4>y encuentra los mejores candidatos</h4>
+					<h4>para tu vacante</h4>
 				</div>
-				<div class="col-lg-10 col-md-10 col-sm-10 push10">
-					<ul style="float:right">
-						<li id="candidates-button"><a id="option1" href="{% url 'beta_invite:index' %}">Personas</a></li>
-						<li id="contact-us-button"><a id="option2" href="{% url 'business:contact_form' %}">Contáctanos</a></li>
-						<li id="register-button"><a class="button-user" role="button" onclick="on()">Crea tu cuenta</a></li>
-						<li id="login-button"><a class="button-user" role="button" onclick="on2()">Inicia sesión</a></li>
-					</ul>
+				<div id="slideUp">
 				</div>
-			</nav>
-			<!--call to action-->
-            <div id="overlay">
-                <div id="form-image">
-                    <form id="register-form">
-                        <fieldset>
-                            <span id="exitDingbat" onclick="off()">X</span>
-                            <br>
-                            <br>
-                            <span>Nombre del reclutador</span>
-                            <input class="form-input"><br>
-                            <span>Empresa</span>
-                            <input class="form-input"><br>
-                            <span>Correo</span>
-                            <input class="form-input"><br>
-                            <span>Teléfono</span>
-                            <input class="form-input"><br>
-                            <span>Contraseña</span>
-                            <input class="form-input"><br>
-                            <span>Confirmar contraseña</span>
-                            <input class="form-input"><br>
-                            <br>
-                            <input type="submit" class="submit" value="COMIENZA AHORA">
-                        </fieldset>
-                        <span style="color:white;margin-left:30px;">¿Ya eres un usuario registrado? Inicia sesión <a style="color:white" href="javascript:void(0);" onclick="off() & on2()"><strong>Aquí</strong></a></span>
-                    </form>
-
-                </div>
-            </div>
-            <div id="overlay2">
-                <div id="form-image2">
-                    <form id="login-form">
-                        <fieldset>
-                            <span id="exitDingbat2" onclick="off2()">X</span>
-                            <br>
-                            <br>
-                            <span>Correo o nombre de usuario</span>
-                            <input class="form-input"><br>
-                            <span>Contraseña</span>
-                            <input class="form-input"><br>
-                            <span style="font-size:10px;"><a href="#" style="color:white">Olvidé mi contraseña</a></span>
-                            <span style="font-size:10px"><a href="#" style="color:white" onclick="off2() & on()">Aun no estoy registrado</a></span>
-                            <br>
-                            <br>
-                            <input type="submit" class="submit" value="ACCEDER">
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-            <div class="row blankbanner"></div>
-
-            <div id="hide1">
-				<div class="row" id="main-copy">
-					<div class="col-lg-5"></div>
-					<div class="col-lg-7">
-						<h1 style="color: white">	PERSONALIZA TU<br> OFERTA EN 3 PASOS</h1>
-					</div>
-					<div class="col-lg-5"></div>
-					<div class="col-lg-7">
-						<h4 style="color: white">	y encuentra los mejores candidatos</h4>
-						<h4 style="color: white">para tu vacante</h4>
-					</div>
-					<div class="col-lg-5"></div>
-				</div>
-				<div class="row blankabout"></div>
-			</div>
-		</div>
-        <!--<div id="hide2"></div>
-        <div id="slideUp"></div>
-		<div id="slideDownBack">
-			<div id="slideDown"></div>
-		</div>-->
-
-		<!--Footer-->
-		<footer class="container-fluid">
-			<div class="row" style="padding-bottom:30px;">
-				<div class=" col-lg-2 col-md-2 "></div>
-				<div class=" col-lg-3 col-md-3  navfooter" >
-					<ul style="float:left">
-						<li><a href="#">Nosotros</a></li>
-                        <li><a href="{% url 'business:contact_form' %}">Contáctanos</a></li>
-						<li><a href="{% url 'beta_invite:index' %}">Personas</a></li>
-					</ul>
-				</div>
-				<div class="col-lg-2 col-md-2 redesfooter" style="text-align:center">
-					<a href="https://www.linkedin.com/company-beta/16241506/" target="_blank"><img src="{% static 'business/new_images/linkedin.png' %}"></a>
-					<a href="https://www.facebook.com/PeakU-Latam-1916685895214519/?ref=aymt_homepage_panel" target="_blank"><img src="{% static 'business/new_images/facebook.png' %}"></a>
-					<a href="#" target="_blank"><img src="{% static 'business/new_images/instagram.png' %}"></a>
-					<a href="#" target="_blank"><img src="{% static 'business/new_images/twitter.png' %}"></a>
-				</div>
-				<div class=" col-lg-1 col-md-1"></div>
-				<div class=" col-lg-2 col-md-2 navfootercontact">
-					<div style="width:20%; float:left; display:block; margin-top:10px; margin-left:-30px; "><a href="#"><img src="{% static 'business/new_images/logo-white.png' %}"></a></div>
-					<div style="width:80%; float:right; display:block; padding-left:20px">contacto@peaku.co<br>
-						+57 311 6109340<br>
-						Medellín, Colombia
+				<div id="slideDownBack">
+					<div id="slideDown">
+						<section class="regular slider" style="width:80%;margin: 0 auto;">
+							<div class="slide-0" data-background="{% static 'business/new_images/Start_BG-01.jpg' %}">
+								<img src="{% static 'business/new_images/Start-carrusel-01.jpg' %}" style="width:70%;height:70%;">
+							</div>
+							<div class="slide-1" data-background="{% static 'business/new_images/Start_BG-02.jpg' %}">
+								<img src="{% static 'business/new_images/Start-carrusel-02.jpg' %}" style="width:70%;height:70%;">
+							</div>
+							<div class="slide-2" data-background="{% static 'business/new_images/Start_BG-03.jpg' %}">
+								<img src="{% static 'business/new_images/Start-carrusel-03.jpg' %}" style="width:70%;height:70%;">
+							</div>
+							<div class="slide-3" data-background="{% static 'business/new_images/Start_BG-04.jpg' %}">
+								<img src="{% static 'business/new_images/Start-carrusel-04.jpg' %}" style="width:70%;height:70%;">
+							</div>
+							<div class="slide-4" data-background="{% static 'business/new_images/Start_BG-05.jpg' %}">
+								<img src="{% static 'business/new_images/Start-carrusel-05.jpg' %}" style="width:70%;height:70%;">
+							</div>
+							<div class="slide-5" data-background="{% static 'business/new_images/Start_BG-06.jpg' %}">
+								<img src="{% static 'business/new_images/Start-carrusel-06.jpg' %}" style="width:70%;height:70%;">
+							</div>
+							<div class="slide-6 " data-background="{% static 'business/new_images/Start_BG-07.jpg' %}">
+								<!--Imagenes grandes-->
+								<img src="{% static 'business/new_images/Start-carrusel-07.jpg' %}" style="width:70%;height:70%;"><!--Imagenes pequeñas-->
+							</div>
+						</section>
 					</div>
 				</div>
-				<div class=" col-lg-2 col-md-2 "></div>
 			</div>
-			<div class="row">
-				<div class="col-1 col-md-1"></div>
-				<div class="col-10 copyright">Copyright 2016 © PeakU. Todos los derechos reservados.</div>
-				<div class="col-1"></div>
-			</div>
-		</footer>
+		</section>
+
+		<script type="text/javascript">
+			$(".regular").slick({
+			  infinite: true,
+			  slidesToShow: 4,
+			  slidesToScroll: 1
+			});
+
+			$('.regular').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+				var background = $('.slide-' + nextSlide).data('background');
+				$("#background-image").attr('src', background);
+				});
+		</script>
+		<script>
+			function myFunction() {
+			    var x = document.getElementById("myTopnav");
+			    if (x.className === "topnav") {
+			        x.className += " responsive";
+			    } else {
+			        x.className = "topnav";
+			    }
+			}
+		</script>
 	</body>
 </html>
