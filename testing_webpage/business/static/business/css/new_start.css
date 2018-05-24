@@ -2,8 +2,20 @@
 
 * { margin: 0; padding: 0;}
 
-body{
+html {
+	height: 100%;
+}
+
+body {
     background-color:transparent !important;
+    height: 100%;
+}
+
+.main-section {
+	height: 100%;
+	background: url(http://127.0.0.1:8000/static/business/new_images/Start_BG-01.jpg);
+	background-size: cover;
+	position: relative;
 }
 
 #slideUp {
