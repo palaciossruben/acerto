@@ -1,94 +1,108 @@
+
 <!DOCTYPE html>
 {% load static %}
 {% load i18n %}
 {% load app_filters %}
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-		<title>PeakU - Selección de personal</title>
-		<link rel="stylesheet" type="text/css" href="{% static 'business/css/new_start.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'business/css/slick.css' %}"/>
-		<link rel="stylesheet" type="text/css" href="{% static 'business/css/slick-theme.css' %}"/>
-		<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-		<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-		<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-		<script type="text/javascript" src="{% static 'business/new_js/main.js' %}"></script>
-		<script type="text/javascript" src="{% static 'business/new_js/new_start.js' %}"></script>
-	</head>
-	<body>
-		<section class="main-section">
-			<div class="topnav" id="myTopnav">
-				<a href="/staffing" style="float:left"><img src="{% static 'business/new_images/logo-color.png' %}"  width="70px" id="logo"></a>
-				<div>
-					<a class="button-login" role="button" onclick="on2()">INICIA SESIÓN</a>
-					<a class="button-create" role="button" onclick="on()">CREA TU CUENTA</a>
-					<a href="#news" style="margin: 15px 10px;">Contactanos</a>
-					<a href="#home" style="margin: 15px 10px;">Personas</a>
-					<a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
-				</div>
-			</div>
-			<div>
-				<div class="topright">
-					<h2>PERSONALIZA TU</h2>
-					<h2>CAMPAÑA EN 3 PASOS</h2>
-					<h4>y encuentra los mejores candidatos</h4>
-					<h4>para tu vacante</h4>
-				</div>
-				<div id="slideUp">
-				</div>
-				<div id="slideDownBack">
-					<div id="slideDown">
-						<section class="regular slider" style="width:80%;margin: 0 auto;">
-							<div class="slide-0" data-background="{% static 'business/new_images/Start_BG-01.jpg' %}">
-								<img src="{% static 'business/new_images/Start-carrusel-01.jpg' %}" style="width:70%;height:70%;">
-							</div>
-							<div class="slide-1" data-background="{% static 'business/new_images/Start_BG-02.jpg' %}">
-								<img src="{% static 'business/new_images/Start-carrusel-02.jpg' %}" style="width:70%;height:70%;">
-							</div>
-							<div class="slide-2" data-background="{% static 'business/new_images/Start_BG-03.jpg' %}">
-								<img src="{% static 'business/new_images/Start-carrusel-03.jpg' %}" style="width:70%;height:70%;">
-							</div>
-							<div class="slide-3" data-background="{% static 'business/new_images/Start_BG-04.jpg' %}">
-								<img src="{% static 'business/new_images/Start-carrusel-04.jpg' %}" style="width:70%;height:70%;">
-							</div>
-							<div class="slide-4" data-background="{% static 'business/new_images/Start_BG-05.jpg' %}">
-								<img src="{% static 'business/new_images/Start-carrusel-05.jpg' %}" style="width:70%;height:70%;">
-							</div>
-							<div class="slide-5" data-background="{% static 'business/new_images/Start_BG-06.jpg' %}">
-								<img src="{% static 'business/new_images/Start-carrusel-06.jpg' %}" style="width:70%;height:70%;">
-							</div>
-							<div class="slide-6 " data-background="{% static 'business/new_images/Start_BG-07.jpg' %}">
-								<!--Imagenes grandes-->
-								<img src="{% static 'business/new_images/Start-carrusel-07.jpg' %}" style="width:70%;height:70%;"><!--Imagenes pequeñas-->
-							</div>
-						</section>
-					</div>
-				</div>
-			</div>
-		</section>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>PeakU - Selección de personal</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'business/css/new_start.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'business/css/slick.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'business/css/slick-theme.css' %}"/>
 
-		<script type="text/javascript">
-			$(".regular").slick({
-			  infinite: true,
-			  slidesToShow: 4,
-			  slidesToScroll: 1
-			});
 
-			$('.regular').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-				var background = $('.slide-' + nextSlide).data('background');
-				$("#background-image").attr('src', background);
-				});
-		</script>
-		<script>
-			function myFunction() {
-			    var x = document.getElementById("myTopnav");
-			    if (x.className === "topnav") {
-			        x.className += " responsive";
-			    } else {
-			        x.className = "topnav";
-			    }
-			}
-		</script>
-	</body>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+	<script type="text/javascript" src="{% static 'business/new_js/new_start.js' %}"></script>
+</head>
+
+
+<body>
+
+<section>
+
+<div class="topnav" id="myTopnav">
+  <a href="/staffing" style="float:left"><img src="{% static 'business/new_images/logo-color.png' %}"  width="70px" id="logo"></a>
+  <div>
+
+  <a class="button-login" role="button" onclick="on2()">INICIA SESIÓN</a>
+  <a class="button-create" role="button" onclick="on()">CREA TU CUENTA</a>
+  <a href="#news" style="margin: 15px 10px;">Contactanos</a>
+  <a href="#home" style="margin: 15px 10px;">Personas</a>
+
+  <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+</div>
+</div>
+
+<div>
+<img id="background-image" src="{% static 'business/new_images/Start_BG-01.jpg' %} " style="width:100%; hei object-fit:cover;">
+
+    <div class="topright">
+        <h2>PERSONALIZA TU</h2>
+        <h2>CAMPAÑA EN 3 PASOS</h2>
+        <h4>y encuentra los mejores candidatos</h4>
+        <h4>para tu vacante</h4>
+    </div>
+
+        <div id="slideUp">
+        </div>
+        <div id="slideDownBack">
+            <div id="slideDown">
+                <section class="regular slider" style="width:80%;margin: 0 auto;">
+                <div class="slide-0" data-background="{% static 'business/new_images/Start_BG-01.jpg' %}">
+                  <img src="{% static 'business/new_images/Start-carrusel-01.jpg' %}" style="width:70%;height:70%;">
+                </div>
+                <div class="slide-1" data-background="{% static 'business/new_images/Start_BG-02.jpg' %}">
+                  <img src="{% static 'business/new_images/Start-carrusel-02.jpg' %}" style="width:70%;height:70%;">
+                </div>
+                <div class="slide-2" data-background="{% static 'business/new_images/Start_BG-03.jpg' %}">
+                  <img src="{% static 'business/new_images/Start-carrusel-03.jpg' %}" style="width:70%;height:70%;">
+                </div>
+                <div class="slide-3" data-background="{% static 'business/new_images/Start_BG-04.jpg' %}">
+                  <img src="{% static 'business/new_images/Start-carrusel-04.jpg' %}" style="width:70%;height:70%;">
+                </div>
+                <div class="slide-4" data-background="{% static 'business/new_images/Start_BG-05.jpg' %}">
+                  <img src="{% static 'business/new_images/Start-carrusel-05.jpg' %}" style="width:70%;height:70%;">
+                </div>
+                <div class="slide-5" data-background="{% static 'business/new_images/Start_BG-06.jpg' %}">
+                  <img src="{% static 'business/new_images/Start-carrusel-06.jpg' %}" style="width:70%;height:70%;">
+                </div>
+                <div class="slide-6 " data-background="{% static 'business/new_images/Start_BG-07.jpg' %}"><!--Imagenes grandes-->
+                  <img src="{% static 'business/new_images/Start-carrusel-07.jpg' %}" style="width:70%;height:70%;"><!--Imagenes pequeñas-->
+                </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    </section>
+
+  <script type="text/javascript">
+      $(".regular").slick({
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 1
+      });
+
+      $('.regular').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+      	var background = $('.slide-' + nextSlide).data('background');
+      	$("#background-image").attr('src', background);
+      	});
+</script>
+
+<script>
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
+</script>
+
+
+</body>
 </html>
