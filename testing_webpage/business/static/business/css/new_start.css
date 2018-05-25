@@ -18,6 +18,18 @@ body {
 	position: relative;
 }
 
+.regular.slider {
+    z-index:2;
+    position:relative;
+}
+
+.svg-container {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  vertical-align: middle;
+  overflow: hidden;
+}
 
 
 /**************************************************SECTION INDICATOR***************************************************/
@@ -28,6 +40,8 @@ body {
     padding-left: 15px;
     list-style: none;
     line-height: 10px;
+    z-index:2;
+    position:relative;
 }
 
 .section-indicator li {
