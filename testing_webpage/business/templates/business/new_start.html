@@ -9,21 +9,21 @@
 		<title>PeakU - Selección de personal</title>
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="{% static 'business/css/new_start.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'business/css/slick.css' %}"/>
+		<link rel="stylesheet" type="text/css" href="{% static 'business/css/slick-theme.css' %}"/>
+
 		<!-- Latest jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-		<script type="text/javascript" src="{% static 'business/js/new_start.js' %}"></script>
 		<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
 		<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
-
+		<!-- Select 2 -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="{% static 'business/css/new_start.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'business/css/slick.css' %}"/>
-		<link rel="stylesheet" type="text/css" href="{% static 'business/css/slick-theme.css' %}"/>
+		<script type="text/javascript" src="{% static 'business/js/new_start.js' %}"></script>
 	</head>
 	<!----------------------------------------------SECTION 1---------------------------------------------------------->
 	<body>
@@ -97,17 +97,14 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="svg-container" style="bottom:0;position:absolute;opacity:0.99;">
+				<svg id="the-S" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1960.62 279.47">
+					<defs><style>.cls-1{fill:white;}</style></defs>
+					<path id="_Trazado_" data-name="&lt;Trazado&gt;" class="cls-1" d="M1959.36,279.47l1-277.48V0h-587a137.18,137.18,0,0,0-53.79,10.9c-3.51,1.46-6.94,3.1-10.27,4.89a137.38,137.38,0,0,0-46.81,40.08q-3.21,4.35-6.15,9a137.17,137.17,0,0,0-20.67,66.22c-.11,2.25-.18,4.51-.17,6.75,0,2.7-.09,5.35-.25,8A136.75,136.75,0,0,1,1214,211.61c-1.93,3.07-4,6.08-6.19,9a137.69,137.69,0,0,1-47.06,39.79c-3.37,1.76-6.8,3.36-10.34,4.82a137.59,137.59,0,0,1-52.9,10.54H-.29a15.14,15.14,0,0,0,0,1.91l.05,1.81H1959.36Z" transform="translate(0.31 0)"></path>
+				</svg>
+			</div>
 		</section>
-
-		<div class="svg-container" style="margin-top:-210px;opacity:0.99;">
-			<svg id="the-S" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1960.62 279.47">
-			<defs><style>.cls-1{fill:white;}</style></defs>
-			<path id="_Trazado_" data-name="&lt;Trazado&gt;" class="cls-1" d="M1959.36,279.47l1-277.48V0h-587a137.18,137.18,0,0,0-53.79,10.9c-3.51,1.46-6.94,3.1-10.27,4.89a137.38,137.38,0,0,0-46.81,40.08q-3.21,4.35-6.15,9a137.17,137.17,0,0,0-20.67,66.22c-.11,2.25-.18,4.51-.17,6.75,0,2.7-.09,5.35-.25,8A136.75,136.75,0,0,1,1214,211.61c-1.93,3.07-4,6.08-6.19,9a137.69,137.69,0,0,1-47.06,39.79c-3.37,1.76-6.8,3.36-10.34,4.82a137.59,137.59,0,0,1-52.9,10.54H-.29a15.14,15.14,0,0,0,0,1.91l.05,1.81H1959.36Z" transform="translate(0.31 0)"></path>
-			</svg>
-		</div>
-
-
-
 		<!----------------------------------------------SECTION 2------------------------------------------------------>
 		<form class="noBorderForm">
 			<section class="section-two">
@@ -143,19 +140,11 @@
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
 
-
-								<select class="js-example-basic-multiple" name="states[]" multiple="multiple">
+								<select class="js-example-basic-multiple" style="width: 100%" name="states[]" multiple="multiple">
 								  <option value="AL">Alabama</option>
-									...
+								  <option value="WY">Otra</option>
 								  <option value="WY">Wyoming</option>
 								</select>
-
-
-
-
-
-
-
 							</fieldset>
 						</div>
 						<div class="col-xs-4">
@@ -260,7 +249,7 @@
 
 		<script>
 			$(document).ready(function() {
-				$('.js-example-basic-single').select2();
+				$('.js-example-basic-multiple').select2();
 			});
 		</script>
 	</body>
