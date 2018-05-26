@@ -26,7 +26,7 @@
 	</head>
 	<!----------------------------------------------SECTION 1---------------------------------------------------------->
 	<body>
-		<section class="main-section">
+		<section class="main-section tabcontent" id="main-section">
 			<div class="topnav" id="myTopnav">
 				<a href="/staffing" style="float:left"><img src="{% static 'business/new_images/logo-color.png' %}"  width="70px" id="logo"></a>
 				<div>
@@ -89,9 +89,9 @@
 					</div>
 					<div class="col-xs-4">
 						<ul class="section-indicator">
-							<li class="active">Personaliza</li>
-							<li>Personaliza</li>
-							<li>Personaliza</li>
+							<li class="active"><div class="div-indicator tablinks" onclick="openSection(event, 'main-section')" role="button"></div>Personaliza</li>
+							<li><div class="div-indicator tablinks" onclick="openSection(event, 'section-two')" role="button"></div>Personaliza</li>
+							<li><div class="div-indicator tablinks" onclick="openSection(event, 'section-three')" role="button"></div>Personaliza</li>
 						</ul>
 					</div>
 				</div>
@@ -106,7 +106,7 @@
 		</section>
 		<!----------------------------------------------SECTION 2------------------------------------------------------>
 		<form class="noBorderForm">
-			<section class="section-two">
+			<section class="section-two tabcontent" id="section-two">
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-4">
@@ -130,16 +130,16 @@
 								<h3>Título de tu oferta laboral</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
-								<input class="form-input"><br>
+								<input class="origin-vacancy-tittle form-input"><br>
 								<h3>Cargo solicitado</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
-								<input class="form-input"><br>
+								<input class="origin-charge form-input"><br>
 								<h3>Palabras clave</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
 
-								<select class="js-example-basic-multiple" style="width: 100%" name="states[]" multiple="multiple">
+								<select class="origin-keywords js-example-basic-multiple" style="width: 100%" name="states[]" multiple="multiple">
 								  <option value="AL">Alabama</option>
 								  <option value="WY">Otra</option>
 								  <option value="WY">Wyoming</option>
@@ -161,38 +161,88 @@
 					</div>
 					<div class="row">
 						<ul class="section-indicator">
-							<li class="active">Personaliza</li>
-							<li>Personaliza</li>
-							<li>Personaliza</li>
+							<li class="active"><div class="div-indicator tablinks" onclick="openSection(event, 'main-section')" role="button"></div>Personaliza</li>
+							<li><div class="div-indicator tablinks" onclick="openSection(event, 'section-two')" role="button"></div>Personaliza</li>
+							<li><div class="div-indicator tablinks" onclick="openSection(event, 'section-three')" role="button"></div>Personaliza</li>
 						</ul>
 					</div>
 				</div>
 			</section>
 			<!----------------------------------------------SECTION 3-------------------------------------------------->
-			<section class="section-three">
+			<section class="section-three tabcontent" id="section-three">
 				<div class="container">
-					<div class="col-xs-4">
-						<br>
-						<div class="row">
-							<div class="col-xs-4"><span style="font-size:100px;">3.</span></div>
-							<div class="col-xs-8"><span>PUBLICA<br>TU OFERTA LABORAL</span></div>
+					<div class="row">
+						<div class="col-xs-4">
+							<br>
+							<div class="row">
+								<div class="col-xs-4"><span style="font-size:100px;">3.</span></div>
+								<div class="col-xs-8"><span>PUBLICA TU<br>OFERTA LABORAL</span></div>
+							</div>
 						</div>
-					</div>
-					<div class="col-xs-8">
-						<h5>Ciudad</h5>
-						<h1 class="city"></h1>
-					</div>
-
-					<div class="row">
-						<div class="col-xs-6"><br></div>
-						<div class="col-xs-6"><br></div>
+						<div class="col-xs-8"><br></div>
 					</div>
 					<div class="row">
-						<div class="col-xs-12"><br></div>
+						<div class="col-xs-2">
+							<h3 style="transform: rotate(-90deg);">RESUMEN</h3>
+							<h6 class="keywords"></h6>
+						</div>
+						<div class="col-xs-4">
+							<br>
+							<fieldset>
+								<br>
+								<br>
+								<h3>Ciudad</h3>
+								<h6 class="city"></h6><br>
+								<h3>Título de tu oferta laboral</h3>
+								<h6 class="vacancy-tittle"></h6><br>
+								<h3>Cargo solicitado</h3>
+								<h6 class="charge"></h6><br>
+								<h3>Descripción de tu oferta laboral</h3>
+								<h6 class="vacancy-description"></h6>
+							</fieldset>
+						</div>
+						<div class="col-xs-4">
+							<a class="button-cta" role="button" onclick="on()">PUBLICAR MI CAMPAÑA</a>
+						</div>
+						<div class="col-xs-2"></div>
+					</div>
+					<div class="row">
+						<ul class="section-indicator">
+							<li class="active"><div class="div-indicator tablinks" onclick="openSection(event, 'main-section')" role="button"></div>Personaliza</li>
+							<li><div class="div-indicator tablinks" onclick="openSection(event, 'section-two')" role="button"></div>Personaliza</li>
+							<li><div class="div-indicator tablinks" onclick="openSection(event, 'section-three')" role="button"></div>Personaliza</li>
+						</ul>
 					</div>
 				</div>
 			</section>
 		</form>
+		<div id="overlay">
+			<div id="form-image">
+				<form id="register-form">
+					<fieldset>
+						<span id="exitDingbat" onclick="off()">X</span>
+						<br>
+						<br>
+						<span>Nombre del reclutador</span>
+						<input class="form-input"><br>
+						<span>Empresa</span>
+						<input class="form-input"><br>
+						<span>Correo</span>
+						<input class="form-input"><br>
+						<span>Teléfono</span>
+						<input class="form-input"><br>
+						<span>Contraseña</span>
+						<input class="form-input"><br>
+						<span>Confirmar contraseña</span>
+						<input class="form-input"><br>
+						<br>
+					</fieldset>
+				</form>
+				<br>
+				<br>
+				<br>
+			</div>
+		</div>
 		<!----------------------------------------------FOOTER--------------------------------------------------------->
 		<footer class="container-fluid">
 			<div class="row" style="padding-bottom:30px;">
@@ -258,15 +308,78 @@
 		</script>
 
 		<script>
-			$('.origin-city-select').on('select2:select', function(e) {
-				var data = e.params.data;
-				$('.city').text(data.text);
+			 $('.origin-city').on('keyup', function() {
+
+				var text = $(this).val();
+			 	$('.city').text(text);
 			});
 
-			// $('.origin-city').on('keyup', function() {
-			// 	var text = $(this).val();
-			// 	$('.city').text(text);
-			// });
+			$('.origin-vacancy-tittle').on('keyup', function() {
+
+				var text = $(this).val();
+			 	$('.vacancy-tittle').text(text);
+			});
+
+			$('.origin-charge').on('keyup', function() {
+
+				var text = $(this).val();
+			 	$('.charge').text(text);
+			});
+
+			$('.origin-keywords').on('select2:select', function(e) {
+			 	var data = e.params.data;
+				$('.keywords').text(data.text);
+			 });
+
+			 $('#text-area').on('keyup', function() {
+
+				var text = $(this).val();
+			 	$('.vacancy-description').text(text);
+			});
+		</script>
+		<script>
+			function on() {
+			document.getElementById("overlay").style.display = "block";
+			document.getElementById("hide1").style.display = "none";
+			document.getElementById("hide2").style.display = "none";
+			document.getElementById("register-form").style.display = "block";
+			$("html").css("background-size", "cover");
+			$("#option1").css("color", "white");
+			$("#option2").css("color", "white");
+			$("nav").css("margin-bottom", "40px");
+			$("#register-form").animate({"marginLeft": '60%'}, 650,"swing");
+			$("#form-image").animate({"backgroundPosition": '86%'}, 650,"swing");
+			$("html").css("overflow", "hidden");
+			}
+
+			function off() {
+				document.getElementById("overlay").style.display = "none";
+				document.getElementById("hide1").style.display = "block";
+				document.getElementById("hide2").style.display = "block";
+				document.getElementById("register-form").style.display = "none";
+				$("html").css("background-size", "contain");
+				$("#option1").css("color", "#3d4753");
+				$("#option2").css("color", "#3d4753");
+				$("nav").css("margin-bottom", "");
+				$("#register-form").animate({marginLeft: '160%'});
+				$("#form-image").animate({"backgroundPosition": '186%'}, 650,"swing");
+				$("html").css("overflow-y", "scroll");
+			}
+		</script>
+		<script>
+			function openSection(evt, sectionName) {
+				var i, tabcontent, tablinks;
+				tabcontent = document.getElementsByClassName("tabcontent");
+				for (i = 0; i < tabcontent.length; i++) {
+					tabcontent[i].style.display = "none";
+				}
+				tablinks = document.getElementsByClassName("tablinks");
+				for (i = 0; i < tablinks.length; i++) {
+					tablinks[i].className = tablinks[i].className.replace(" active", "");
+				}
+				document.getElementById(sectionName).style.display = "block";
+				evt.currentTarget.className += " active";
+			}
 		</script>
 	</body>
 </html>
