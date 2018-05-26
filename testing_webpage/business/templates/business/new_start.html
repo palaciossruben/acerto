@@ -126,7 +126,7 @@
 								<br>
 								<br>
 								<h3>Ciudad</h3>
-								<input class="form-input"><br>
+								<input class="origin-city form-input"><br>
 								<h3>Título de tu oferta laboral</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
@@ -178,7 +178,10 @@
 							<div class="col-xs-8"><span>PUBLICA<br>TU OFERTA LABORAL</span></div>
 						</div>
 					</div>
-					<div class="col-xs-8"><br></div>
+					<div class="col-xs-8">
+						<h5>Ciudad</h5>
+						<h1 class="city"></h1>
+					</div>
 
 					<div class="row">
 						<div class="col-xs-6"><br></div>
@@ -252,6 +255,18 @@
 				new nicEditor({buttonList : ['bold','italic','underline','fontSize']}).panelInstance('text-area');
 				$('.nicEdit-selectTxt').text("Tamaño");
 			});
+		</script>
+
+		<script>
+			$('.origin-city-select').on('select2:select', function(e) {
+				var data = e.params.data;
+				$('.city').text(data.text);
+			});
+
+			// $('.origin-city').on('keyup', function() {
+			// 	var text = $(this).val();
+			// 	$('.city').text(text);
+			// });
 		</script>
 	</body>
 </html>
