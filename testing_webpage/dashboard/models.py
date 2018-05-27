@@ -22,11 +22,17 @@ class State(models.Model):
     class Meta:
         db_table = 'states'
 
+    def looks_good(self):
+        return self.code in ('STC', 'GTJ', 'DI')
+
     def passed_interview(self):
-        return self.code in ('STC', 'RBC', 'GTJ', 'DI')
+        return self.code in ('STC', 'GTJ', 'DI', 'RBC')
+
+    def got_the_job(self):
+        return self.code in ('GTJ')
 
     def passed_test(self):
-        return self.passed_interview() or self.code in ('WFI', 'ROI')
+        return self.looks_good() or self.code in ('WFI', 'ROI', 'RBC')
 
 
 class Comment(models.Model):
