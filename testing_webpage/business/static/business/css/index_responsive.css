@@ -210,8 +210,7 @@
     }
 	
     .navfootercontact img{
-        margin-left:320%;
-        margin-top: -100px;
+        display:none;
     }
 }
 
