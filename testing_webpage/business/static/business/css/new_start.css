@@ -13,7 +13,7 @@ body {
 
 .main-section {
 	height: 100%;
-	background: url(http://127.0.0.1:8000/static/business/new_images/Start_BG-01.jpg);
+	background: url(http://127.0.0.1:8000/static/business/new_images/Start_BG-01-min.jpg);
 	background-size: cover;
 	position: relative;
 }
@@ -44,17 +44,6 @@ body {
     margin: 15px 0px;
     cursor: pointer;
 	font-weight:600;
-}
-
-.div-indicator {
-    border-radius:50px;
-    width:15px;
-    height:1px;
-    padding: 3px;
-    background:red;
-    left: -22px;
-    position: relative;
-    transform: rotate(-45deg);
 }
 
 #overlay {
@@ -152,6 +141,25 @@ body {
 
 .section-indicator li:last-child {
     padding-bottom: 0;
+}
+
+.div-indicator {
+    border-radius:50px;
+    width:15px;
+    height:1px;
+    padding: 3px;
+    background:green;
+    left: -22px;
+    position: relative;
+    transform: rotate(-45deg);
+}
+
+.div-indicator:before {
+    background:red;
+}
+
+.div-indicator:after {
+    background:blue;
 }
 
 /**************************************************HEADER**************************************************************/

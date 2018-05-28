@@ -9,6 +9,15 @@
         background-size:contain;
     }
 
+#hide3 {
+    display:none;
+}
+
+.contact {
+    margin: 0 auto;
+    float:none;
+}
+
     h1 {
         font-size:1.75em !important;
     }
@@ -302,7 +311,12 @@
 		background: url(../new_images/bg-tablet.jpg) no-repeat top center scroll;
 		background-size:contain;
 	}
-			
+
+    .contact {
+    margin: 0 auto;
+    float:none;
+    }
+
 	h6 {
 		font-size:1em !important;
 	}
@@ -439,7 +453,13 @@
 		background: url(../new_images/bg-tablet.jpg) no-repeat top center scroll ;
 		background-size:contain;
 	}
-			
+
+
+    .contact {
+    margin: 0 auto;
+    float:none;
+    }
+
 	#candidates-button {
 		display:none;
 	}
