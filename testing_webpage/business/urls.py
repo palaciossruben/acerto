@@ -29,6 +29,5 @@ urlpatterns = [
     url(r'^popup_signup$', views.popup_signup, name='popup_signup'),
     url(r'^plan/(?P<pk>\d+)$', views.plan, name='plan'),
 
-    url(r'^new_index$', views.new_index, name='new_index'),
     url(r'^new_start$', views.new_start, name='new_start'),
 ]

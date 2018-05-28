@@ -41,7 +41,7 @@ def index(request):
     ip = get_ip(request)
 
     business.models.Visitor(ip=ip).save()
-    return render(request, cts.BUSINESS_VIEW_PATH, {})
+    return render(request, cts.INDEX_VIEW_PATH, {'error_message': ''})
 
 
 def search(request):
@@ -446,13 +446,14 @@ def business_signup(request):
     if signup_form.is_valid():
 
         campaign = None
-
+        # TODO: save the company field
         first_sign_in(signup_form, campaign, request)
 
-        return render(request, cts.BUSINESS_APPLIED_VIEW_PATH)
+        return render(request, cts.BUSINESS_CAMPAIGNS_VIEW_PATH)
     else:
 
-        return render(request, cts.BUSINESS_SIGNUP_VIEW_PATH)
+        error_message = get_first_error_message(signup_form)
+        return render(request, cts.INDEX_VIEW_PATH, {'error_message': error_message})
 
 
 @login_required
@@ -501,10 +502,6 @@ def signup_choice(request):
 
 def business_applied(request):
     return render(request, cts.BUSINESS_APPLIED_VIEW_PATH, {})
-
-
-def new_index(request):
-    return render(request, cts.NEW_INDEX_VIEW_PATH, {})
 
 
 def new_start(request):
