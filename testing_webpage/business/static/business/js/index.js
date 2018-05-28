@@ -1,5 +1,5 @@
-function on() {
-    document.getElementById("overlay").style.display = "block";
+function on_signup() {
+    document.getElementById("overlay-signup").style.display = "block";
     document.getElementById("hide1").style.display = "none";
     document.getElementById("hide2").style.display = "none";
     document.getElementById("register-form").style.display = "block";
@@ -12,8 +12,8 @@ function on() {
     $("html").css("overflow", "hidden");
 }
 
-function off() {
-    document.getElementById("overlay").style.display = "none";
+function off_signup() {
+    document.getElementById("overlay-signup").style.display = "none";
     document.getElementById("hide1").style.display = "block";
     document.getElementById("hide2").style.display = "block";
     document.getElementById("register-form").style.display = "none";
@@ -26,8 +26,8 @@ function off() {
     $("html").css("overflow-y", "scroll");
 }
 
-function on2() {
-    document.getElementById("overlay2").style.display = "block";
+function on_login() {
+    document.getElementById("overlay-login").style.display = "block";
     document.getElementById("hide1").style.display = "none";
     document.getElementById("hide2").style.display = "none";
     document.getElementById("login-form").style.display = "block";
@@ -40,8 +40,8 @@ function on2() {
     $("html").css("overflow", "hidden");
 }
 
-function off2() {
-    document.getElementById("overlay2").style.display = "none";
+function off_login() {
+    document.getElementById("overlay-login").style.display = "none";
     document.getElementById("hide1").style.display = "block";
     document.getElementById("hide2").style.display = "block";
     document.getElementById("login-form").style.display = "none";
