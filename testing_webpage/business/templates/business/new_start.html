@@ -142,7 +142,7 @@
 
 								<select class="origin-keywords js-example-basic-multiple" style="width: 100%" name="states[]" multiple="multiple">
 								  <option value="AL">Alabama</option>
-								  <option value="WY">Otra</option>
+								  <option value="O">Otra</option>
 								  <option value="WY">Wyoming</option>
 								</select>
 							</fieldset>
@@ -185,7 +185,7 @@
 					<div class="row">
 						<div class="col-xs-2">
 							<h3 style="transform: rotate(-90deg);">RESUMEN</h3>
-							<h6 class="keywords"></h6>
+							<div class="keywords"></div>
 						</div>
 						<div class="col-xs-4">
 							<br>
@@ -327,9 +327,13 @@
 			 	$('.charge').text(text);
 			});
 
-			$('.origin-keywords').on('select2:select', function(e) {
-			 	var data = e.params.data;
-				$('.keywords').text(data.text);
+			$('.origin-keywords').on('select2:select select2:unselect', function(e) {
+			 	var data = $('.origin-keywords').select2('data');
+
+			 	$('.keywords').empty();
+			 	$.each(data, function(key, value) {
+			 	   $('.keywords').append('<h6>' + value.text + '</h6>');
+			 	})
 			 });
 
 			 $('#text-area').on('keyup', function() {
