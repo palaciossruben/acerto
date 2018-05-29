@@ -106,7 +106,7 @@
 			</div>
 		</section>
 		<!----------------------------------------------SECTION 2------------------------------------------------------>
-		<form class="noBorderForm">
+		<form class="noBorderForm" action="{% url 'business:start_post' %}" method="post">
 			<section class="section-two tabcontent" id="section-two">
 				<div class="container">
 					<div class="row">
@@ -131,11 +131,11 @@
 								<h3>Título de tu oferta laboral</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
-								<input class="origin-vacancy-tittle form-input"><br>
+								<input class="origin-vacancy-tittle form-input" name="title_es" ><br>
 								<h3>Cargo solicitado</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
-								<input class="origin-charge form-input"><br>
+								<input class="origin-charge form-input" ><br>
 								<h3>Palabras clave</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
@@ -216,34 +216,41 @@
 					</div>
 				</div>
 			</section>
-			<div id="overlay">
-				<div id="form-image">
-					<form id="register-form">
-						<fieldset>
-							<span id="exitDingbat" onclick="off()">X</span>
+            <div id="overlay">
+                <div id="form-image">
+                    <div id="register-form">
+                        <fieldset>
+                            <span id="exitDingbat" onclick="off()">X</span>
+                            <br>
+                            <br>
+                            <span>Nombre</span>
+                            <input class="form-input" name="name"
+							required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
 							<br>
+                            <span>Empresa</span>
+                            <input class="form-input" name="company">
 							<br>
-							<span>Nombre del reclutador</span>
-							<input class="form-input"><br>
-							<span>Empresa</span>
-							<input class="form-input"><br>
-							<span>Correo</span>
-							<input class="form-input"><br>
-							<span>Teléfono</span>
-							<input class="form-input"><br>
-							<span>Contraseña</span>
-							<input class="form-input"><br>
-							<span>Confirmar contraseña</span>
-							<input class="form-input"><br>
+                            <span>Correo</span>
+                            <input class="form-input" type="email" name="username" required="required">
 							<br>
-						</fieldset>
-					</form>
-					<br>
-					<br>
-					<br>
-				</div>
-			</div>
-		</form>
+                            <span>Teléfono</span>
+                            <input class="form-input" type="tel" name="phone"
+								   required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
+							<br>
+                            <span>Contraseña</span>
+                            <input class="form-input" type="password" name="password1" required="required">
+							<br>
+                            <span>Confirmar contraseña</span>
+                            <input class="form-input" type="password" name="password2" required="required">
+                            <br>
+                        </fieldset>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </form>
 		<!----------------------------------------------FOOTER--------------------------------------------------------->
 		<footer class="container-fluid">
 			<div class="row" style="padding-bottom:30px;">
