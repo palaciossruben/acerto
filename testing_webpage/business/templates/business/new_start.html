@@ -131,7 +131,13 @@
 								<br>
 								<br>
 								<h3>Ciudad</h3>
-								<input class="origin-city form-input"><br>
+                                <select class="drop-down" name="city_id" >
+                                    <option value="" disabled selected>Selecciona tu ciudad</option>
+                                    {% for city in cities %}
+                                        <option value={{ city.id }}>{{ city.name }}</option>
+                                    {% endfor %}
+                                </select>
+
 								<h3>Título de tu oferta laboral</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
@@ -140,6 +146,12 @@
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
 								<input class="origin-charge form-input" name="" ><br>
+                                <select class="drop-down" name="profession_id" >
+                                    <option value="" disabled selected>Selecciona tu profesion</option>
+                                    {% for profession in professions %}
+                                        <option value={{ profession.id }}>{{ profession.name }}</option>
+                                    {% endfor %}
+                                </select>
 								<h3>Palabras clave</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
@@ -364,6 +376,8 @@
 
                     //$("#publish-campaign-button").animate({left: '250px'}, 650, "swing");
                     $("#publish-campaign-button").animate({marginTop: '370px', marginLeft: '160px', marginRight: '-160px'});
+
+                    // bring button to front
                     $("#publish-campaign-button").css('z-index', 9999);
                     $("#publish-campaign-button").css('position', 'absolute');
 
