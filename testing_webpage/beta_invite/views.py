@@ -25,11 +25,9 @@ def get_drop_down_values(language_code):
     """
 
     professions = common.get_professions(language_code)
-    cities = City.objects.all().order_by('name')
-    education = Education.objects.all().order_by('level')
-    common.translate_list_of_objects(education, language_code)
-
-    countries = Country.objects.all().order_by('name')
+    cities = common.get_cities()
+    education = common.get_education(language_code)
+    countries = common.get_countries()
 
     return countries, cities, education, professions
 

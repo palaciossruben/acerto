@@ -379,7 +379,8 @@ def start(request):
     return render(request, cts.START_VIEW_PATH, {'requirement_bullet_id': requirement_bullet_id,
                                                  'perk_bullet_id': perk_bullet_id,
                                                  'error_message': '',
-                                                 'professions': common.get_professions(request.LANGUAGE_CODE)})
+                                                 'professions': common.get_professions(request.LANGUAGE_CODE),
+                                                 'cities': common.get_cities()})
 
 
 def create(request):
@@ -502,7 +503,3 @@ def signup_choice(request):
 
 def business_applied(request):
     return render(request, cts.BUSINESS_APPLIED_VIEW_PATH, {})
-
-
-def new_start(request):
-    return render(request, cts.NEW_START_VIEW_PATH, {})
