@@ -28,6 +28,4 @@ urlpatterns = [
     url(r'^results/(?P<pk>\d+)$', views.render_result, name='render_result'),
     url(r'^popup_signup$', views.popup_signup, name='popup_signup'),
     url(r'^plan/(?P<pk>\d+)$', views.plan, name='plan'),
-
-    url(r'^new_start$', views.new_start, name='new_start'),
 ]
