@@ -1,5 +1,43 @@
 @charset "UTF-8";
 
+@font-face {
+    font-family: BigJohn;
+    src: url(/static/fonts/BIG_JOHN.otf);
+    unicode-range: U+?????;
+}
+
+@font-face {
+    font-family: NorthernBlock;
+    src: url(/static/fonts/TheNorthernBlockLtdLoewHeavy.otf);
+}
+
+@font-face {
+    font-family: BertholdAkzidenzGroteskRegular;
+    src: url(/static/fonts/BertholdAkzidenzGroteskRegular.otf);
+}
+
+@font-face {
+    font-family: BertholdAkzidenzGroteskBELight;
+    src: url(/static/fonts/BertholdAkzidenzGroteskBELight.otf);
+}
+
+@font-face {
+    font-family: BertholdAkzidenzGroteskBold;
+    src: url(/static/fonts/BertholdAkzidenzGroteskBold.otf);
+}
+
+@font-face {
+    font-family: BertholdAkzidenzGroteskItalic;
+    src: url(/static/fonts/BertholdAkzidenzGroteskItalic.otf);
+}
+
+@font-face {
+    font-family: BertholdAkzidenzGroteskSuper;
+    src: url(/static/fonts/BertholdAkzidenzGroteskSuper.otf);
+}
+
+
+
 * { margin: 0; padding: 0;}
 
 html {
@@ -21,6 +59,11 @@ body {
 .regular.slider {
     z-index:2;
     position:relative;
+}
+
+.slide-css{
+    width: 150px;
+    margin-right: 10px;
 }
 
 .svg-container {
@@ -154,20 +197,13 @@ body {
     transform: rotate(-45deg);
 }
 
-.div-indicator:before {
-    background:red;
-}
-
-.div-indicator:after {
-    background:blue;
-}
-
 /**************************************************TRIX EDITOR*********************************************************/
 
 trix-toolbar [data-trix-attribute='quote'],
 trix-toolbar [data-trix-attribute='code'],
 trix-toolbar [data-trix-attribute='href'],
 trix-toolbar [data-trix-attribute='number'],
+trix-toolbar [data-trix-attribute='heading1'],
 trix-toolbar [data-trix-action = 'decreaseNestingLevel'],
 trix-toolbar [data-trix-action ='increaseNestingLevel']
  {
@@ -197,9 +233,8 @@ trix-editor ul {
   display: block;
   color: #f2f2f2;
   text-align: center;
-  padding: 10px 0;
+  padding: 7px 0;
   text-decoration: none;
-  font-size: 15px;
 }
 
 .topnav .icon {
@@ -212,8 +247,9 @@ trix-editor ul {
     color: #f2f2f2;
     text-align: center;
     text-decoration: none;
-    font-size: 17px;
-    width:150px;
+    font-size: 12px;
+    font-family: BertholdAkzidenzGroteskBold;
+    width:160px;
     background-color: white;
 	border-radius:40px;
     border: none;

@@ -30,13 +30,13 @@
 	</head>
 	<!----------------------------------------------SECTION 1---------------------------------------------------------->
 	<body>
-		<section class="main-section tabcontent" id="main-section">
+		<section class="main-section scroll-content" id="main-section">
 			<div class="topnav" id="myTopnav">
-				<a href="/staffing" style="float:left"><img src="{% static 'business/new_images/logo-color.png' %}"  width="70px" id="logo"></a>
+				<a href="/staffing" style="float:left"><img src="{% static 'business/new_images/logo-color.png' %}" style="margin-left:30px;" width="70px" id="logo"></a>
 				<div>
 					<a class="navButton" role="button" onclick="on2()">INICIA SESIÓN</a>
 					<a class="navButton" role="button" onclick="on()">CREA TU CUENTA</a>
-					<a href="{% url 'business:contact_form' %}" style="margin: 15px 10px;">Contactanos</a>
+					<a href="{% url 'business:contact_form' %}" style="margin: 15px 10px;">Contáctanos</a>
 					<a href="{% url 'beta_invite:index' %}" style="margin: 15px 10px;">Personas</a>
 					<a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
 				</div>
@@ -66,36 +66,36 @@
 
 				<div class="row">
 					<div class="col-xs-8">
-						<section class="regular slider" style="width:100%;margin: 0 auto 10px auto;">
-							<div class="slide-0" data-background="{% static 'business/new_images/Start_BG-01-min.jpg' %}">
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-01.jpg' %}" style="width:80%;border:solid white">
+						<section class="regular slider" style="width:100%; margin: 0 auto 50px -50px;">
+							<div class="slide-0 slide-css" data-background="{% static 'business/new_images/Start_BG-01-min.jpg' %}">
+								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-01.jpg' %}" style="width:100%;border:solid white">
 							</div>
-							<div class="slide-1" data-background="{% static 'business/new_images/Start_BG-02-min.jpg' %}">
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-02.jpg' %}" style="width:80%;border:solid white">
+							<div class="slide-1 slide-css" data-background="{% static 'business/new_images/Start_BG-02-min.jpg' %}">
+								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-02.jpg' %}" style="width:100%;border:solid white">
 							</div>
-							<div class="slide-2" data-background="{% static 'business/new_images/Start_BG-03-min.jpg' %}">
-								<img class="img-rounded"src="{% static 'business/new_images/Start-carrusel-03.jpg' %}" style="width:80%;border:solid white">
+							<div class="slide-2 slide-css" data-background="{% static 'business/new_images/Start_BG-03-min.jpg' %}">
+								<img class="img-rounded"src="{% static 'business/new_images/Start-carrusel-03.jpg' %}" style="width:100%;border:solid white">
 							</div>
-							<div class="slide-3" data-background="{% static 'business/new_images/Start_BG-04-min.jpg' %}">
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-04.jpg' %}" style="width:80%;border:solid white">
+							<div class="slide-3 slide-css" data-background="{% static 'business/new_images/Start_BG-04-min.jpg' %}">
+								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-04.jpg' %}" style="width:100%;border:solid white">
 							</div>
-							<div class="slide-4" data-background="{% static 'business/new_images/Start_BG-05-min.jpg' %}">
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-05.jpg' %}" style="width:80%;border:solid white">
+							<div class="slide-4 slide-css" data-background="{% static 'business/new_images/Start_BG-05-min.jpg' %}">
+								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-05.jpg' %}" style="width:100%;border:solid white">
 							</div>
-							<div class="slide-5" data-background="{% static 'business/new_images/Start_BG-06-min.jpg' %}">
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-06.jpg' %}" style="width:80%;border:solid white">
+							<div class="slide-5 slide-css" data-background="{% static 'business/new_images/Start_BG-06-min.jpg' %}">
+								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-06.jpg' %}" style="width:100%;border:solid white">
 							</div>
-							<div class="slide-6 " data-background="{% static 'business/new_images/Start_BG-07-min.jpg' %}">
+							<div class="slide-6 slide-css" data-background="{% static 'business/new_images/Start_BG-07-min.jpg' %}">
 								<!--Imagenes grandes-->
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-07.jpg' %}" style="width:80%;border:solid white"><!--Imagenes pequeñas-->
+								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-07.jpg' %}" style="width:100%;border:solid white"><!--Imagenes pequeñas-->
 							</div>
 						</section>
 					</div>
 					<div class="col-xs-4">
 						<ul class="section-indicator">
-							<li class="active"><div class="div-indicator tablinks" onclick="openSection(event, 'main-section')" role="button"></div>Personaliza</li>
-							<li><div class="div-indicator tablinks" onclick="openSection(event, 'section-two')" role="button"></div>Personaliza</li>
-							<li><div class="div-indicator tablinks" onclick="openSection(event, 'section-three')" role="button"></div>Personaliza</li>
+							<li class="active"><div class="div-indicator tablinks"></div>Personaliza</li>
+							<li><div class="div-indicator tablinks"></div>Diligencia</li>
+							<li><div class="div-indicator tablinks"></div>Publica</li>
 						</ul>
 					</div>
 				</div>
@@ -110,13 +110,13 @@
 		</section>
 		<!----------------------------------------------SECTION 2------------------------------------------------------>
 		<form class="noBorderForm">
-			<section class="section-two tabcontent" id="section-two">
+			<section class="section-two scroll-content" id="section-two">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-4">
 							<br>
 							<div class="row">
-								<div class="col-md-4"><span style="font-size:100px;">2.</span></div>
+								<div class="col-md-4"><span style="font-size:100px;color:#CADD68;">2.</span></div>
 								<div class="col-md-8"><span>REGISTRA LOS DATOS<br>DE TU OFERTA LABORAL</span></div>
 							</div>
 						</div>
@@ -129,25 +129,25 @@
 							<fieldset>
 								<br>
 								<br>
-								<h3>Ciudad</h3>
+								<h3 style="color:#CADD68;">Ciudad</h3>
 								<input class="origin-city form-input"><br>
-								<h3>Título de tu oferta laboral</h3>
+								<h3 style="color:#CADD68;">Título de tu oferta laboral</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
 								<input class="origin-vacancy-tittle form-input"><br>
-								<h3>Cargo solicitado</h3>
+								<h3 style="color:#CADD68;">Cargo solicitado</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
 								<input class="origin-charge form-input"><br>
-								<h3>Palabras clave</h3>
+								<h3 style="color:#CADD68;">Palabras clave</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
-
-								<select class="origin-keywords js-example-basic-multiple" style="width: 100%" name="states[]" multiple="multiple">
-								  <option value="AL">Alabama</option>
-								  <option value="O">Otra</option>
-								  <option value="WY">Wyoming</option>
-								</select>
+                                <input class="origin-keywords form-input"><br>
+								<!--<select class="origin-keywords js-example-basic-multiple" style="width: 100%" name="states[]" multiple="multiple">
+                                    <option value="AL">Alabama</option>
+                                    <option value="O">Otra</option>
+                                    <option value="WY">Wyoming</option>
+								</select>-->
 							</fieldset>
 						</div>
 						<div class="col-md-4">
@@ -155,7 +155,7 @@
 							<fieldset>
 								<br>
 								<br>
-								<h3>Descripción de tu oferta laboral</h3>
+								<h3 style="color:#CADD68;">Descripción de tu oferta laboral</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
                                 <trix-editor></trix-editor>
@@ -165,21 +165,21 @@
 					</div>
 					<div class="row">
 						<ul class="section-indicator">
-							<li class="active"><div class="div-indicator tablinks" onclick="openSection(event, 'main-section')" role="button"></div>Personaliza</li>
-							<li><div class="div-indicator tablinks" onclick="openSection(event, 'section-two')" role="button"></div>Personaliza</li>
-							<li><div class="div-indicator tablinks" onclick="openSection(event, 'section-three')" role="button"></div>Personaliza</li>
+							<li class="active"><div class="div-indicator tablinks"></div>Personaliza</li>
+							<li><div class="div-indicator tablinks"></div>Diligencia</li>
+							<li><div class="div-indicator tablinks"></div>Publica</li>
 						</ul>
 					</div>
 				</div>
 			</section>
 			<!----------------------------------------------SECTION 3-------------------------------------------------->
-			<section class="section-three tabcontent" id="section-three">
+			<section class="section-three scroll-content" id="section-three">
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-4">
 							<br>
 							<div class="row">
-								<div class="col-xs-4"><span style="font-size:100px;">3.</span></div>
+								<div class="col-xs-4"><span style="font-size:100px;color:#CADD68;">3.</span></div>
 								<div class="col-xs-8"><span>PUBLICA TU<br>OFERTA LABORAL</span></div>
 							</div>
 						</div>
@@ -195,13 +195,13 @@
 							<fieldset>
 								<br>
 								<br>
-								<h3>Ciudad</h3>
+								<h3 style="color:#CADD68;">Ciudad</h3>
 								<h6 class="city"></h6><br>
-								<h3>Título de tu oferta laboral</h3>
+								<h3 style="color:#CADD68;">Título de tu oferta laboral</h3>
 								<h6 class="vacancy-tittle"></h6><br>
-								<h3>Cargo solicitado</h3>
+								<h3 style="color:#CADD68;">Cargo solicitado</h3>
 								<h6 class="charge"></h6><br>
-								<h3>Descripción de tu oferta laboral</h3>
+								<h3 style="color:#CADD68;">Descripción de tu oferta laboral</h3>
 								<h6 class="vacancy-description"></h6>
 							</fieldset>
 						</div>
@@ -212,9 +212,9 @@
 					</div>
 					<div class="row">
 						<ul class="section-indicator">
-							<li class="active"><div class="div-indicator tablinks" onclick="openSection(event, 'main-section')" role="button"></div>Personaliza</li>
-							<li><div class="div-indicator tablinks" onclick="openSection(event, 'section-two')" role="button"></div>Personaliza</li>
-							<li><div class="div-indicator tablinks" onclick="openSection(event, 'section-three')" role="button"></div>Personaliza</li>
+							<li class="active"><div class="div-indicator tablinks"></div>Personaliza</li>
+							<li><div class="div-indicator tablinks"></div>Diligencia</li>
+							<li><div class="div-indicator tablinks"></div>Publica</li>
 						</ul>
 					</div>
 				</div>
@@ -280,6 +280,7 @@
 				<div class="col-1"></div>
 			</div>
 		</footer>
+
 		<script type="text/javascript">
 			$(".regular").slick({
 				infinite: true,
@@ -292,6 +293,7 @@
 				$(".main-section").css('background', 'url(' + background + ') 0% 0% / cover')
 			});
 		</script>
+
 		<script>
 			function myFunction() {
 				var x = document.getElementById("myTopnav");
@@ -302,8 +304,6 @@
 				}
 			}
 		</script>
-
-
 
 		<script>
 			 $('.origin-city').on('keyup', function() {
@@ -339,6 +339,7 @@
 			 	$('.vacancy-description').text(text);
 			});
 		</script>
+
 		<script>
 			function on() {
 			document.getElementById("overlay").style.display = "block";
@@ -368,39 +369,23 @@
 				$("html").css("overflow-y", "scroll");
 			}
 		</script>
-		<script>
-			function openSection(evt, sectionName) {
-				var i, tabcontent, tablinks;
-				tabcontent = document.getElementsByClassName("tabcontent");
-				for (i = 0; i < tabcontent.length; i++) {
-					tabcontent[i].style.display = "none";
-				}
-				tablinks = document.getElementsByClassName("tablinks");
-				for (i = 0; i < tablinks.length; i++) {
-					tablinks[i].className = tablinks[i].className.replace(" active", "");
-				}
-				document.getElementById(sectionName).style.display = "block";
-				evt.currentTarget.className += " active";
-			}
-		</script>
+
         <script>
         $(function() {
           $.scrollify({
-            section : ".tabcontent",
+            section : ".scroll-content",
           });
         });
-      </script>
+        </script>
 
-      <script type="text/javascript">
+        <script type="text/javascript">
 
-	        document.addEventListener("trix-change", function(event) {
-			  var element = event.target
-			  var html = element.value  // "<div>This is an <strong>example</strong></div>"
+            document.addEventListener("trix-change", function(event) {
+              var element = event.target
+              var html = element.value  // "<div>This is an <strong>example</strong></div>"
 
-			  $('.vacancy-description').html(html);
-			});
-
-      </script>
-
+              $('.vacancy-description').html(html);
+            });
+        </script>
 	</body>
 </html>
