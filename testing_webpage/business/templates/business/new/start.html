@@ -30,13 +30,13 @@
 	</head>
 	<!----------------------------------------------SECTION 1---------------------------------------------------------->
 	<body>
-		<section class="main-section tabcontent" id="main-section">
+		<section class="main-section scroll-content" id="main-section">
 			<div class="topnav" id="myTopnav">
-				<a href="/staffing" style="float:left"><img src="{% static 'business/new_images/logo-color.png' %}"  width="70px" id="logo"></a>
+				<a href="/staffing" style="float:left"><img src="{% static 'business/new_images/logo-color.png' %}" style="margin-left:30px;" width="70px" id="logo"></a>
 				<div>
 					<a class="navButton" role="button" onclick="on2()">INICIA SESIÓN</a>
 					<a class="navButton" role="button" onclick="on()">CREA TU CUENTA</a>
-					<a href="{% url 'business:contact_form' %}" style="margin: 15px 10px;">Contactanos</a>
+					<a href="{% url 'business:contact_form' %}" style="margin: 15px 10px;">Contáctanos</a>
 					<a href="{% url 'beta_invite:index' %}" style="margin: 15px 10px;">Personas</a>
 					<a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
 				</div>
@@ -66,36 +66,36 @@
 
 				<div class="row">
 					<div class="col-xs-8">
-						<section class="regular slider" style="width:100%;margin: 0 auto 10px auto;">
-							<div class="slide-0" data-background="{% static 'business/new_images/Start_BG-01-min.jpg' %}">
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-01.jpg' %}" style="width:80%;border:solid white">
+						<section class="regular slider" style="width:100%; margin: 0 auto 50px -50px;">
+							<div class="slide-0 slide-css" data-background="{% static 'business/new_images/Start_BG-01-min.jpg' %}">
+								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-01.jpg' %}" style="width:100%;border:solid white">
 							</div>
-							<div class="slide-1" data-background="{% static 'business/new_images/Start_BG-02-min.jpg' %}">
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-02.jpg' %}" style="width:80%;border:solid white">
+							<div class="slide-1 slide-css" data-background="{% static 'business/new_images/Start_BG-02-min.jpg' %}">
+								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-02.jpg' %}" style="width:100%;border:solid white">
 							</div>
-							<div class="slide-2" data-background="{% static 'business/new_images/Start_BG-03-min.jpg' %}">
-								<img class="img-rounded"src="{% static 'business/new_images/Start-carrusel-03.jpg' %}" style="width:80%;border:solid white">
+							<div class="slide-2 slide-css" data-background="{% static 'business/new_images/Start_BG-03-min.jpg' %}">
+								<img class="img-rounded"src="{% static 'business/new_images/Start-carrusel-03.jpg' %}" style="width:100%;border:solid white">
 							</div>
-							<div class="slide-3" data-background="{% static 'business/new_images/Start_BG-04-min.jpg' %}">
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-04.jpg' %}" style="width:80%;border:solid white">
+							<div class="slide-3 slide-css" data-background="{% static 'business/new_images/Start_BG-04-min.jpg' %}">
+								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-04.jpg' %}" style="width:100%;border:solid white">
 							</div>
-							<div class="slide-4" data-background="{% static 'business/new_images/Start_BG-05-min.jpg' %}">
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-05.jpg' %}" style="width:80%;border:solid white">
+							<div class="slide-4 slide-css" data-background="{% static 'business/new_images/Start_BG-05-min.jpg' %}">
+								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-05.jpg' %}" style="width:100%;border:solid white">
 							</div>
-							<div class="slide-5" data-background="{% static 'business/new_images/Start_BG-06-min.jpg' %}">
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-06.jpg' %}" style="width:80%;border:solid white">
+							<div class="slide-5 slide-css" data-background="{% static 'business/new_images/Start_BG-06-min.jpg' %}">
+								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-06.jpg' %}" style="width:100%;border:solid white">
 							</div>
-							<div class="slide-6 " data-background="{% static 'business/new_images/Start_BG-07-min.jpg' %}">
+							<div class="slide-6 slide-css" data-background="{% static 'business/new_images/Start_BG-07-min.jpg' %}">
 								<!--Imagenes grandes-->
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-07.jpg' %}" style="width:80%;border:solid white"><!--Imagenes pequeñas-->
+								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-07.jpg' %}" style="width:100%;border:solid white"><!--Imagenes pequeñas-->
 							</div>
 						</section>
 					</div>
 					<div class="col-xs-4">
 						<ul class="section-indicator">
-							<li class="active"><div class="div-indicator tablinks" onclick="openSection(event, 'main-section')" role="button"></div>Personaliza</li>
-							<li><div class="div-indicator tablinks" onclick="openSection(event, 'section-two')" role="button"></div>Personaliza</li>
-							<li><div class="div-indicator tablinks" onclick="openSection(event, 'section-three')" role="button"></div>Personaliza</li>
+							<li class="active"><div class="div-indicator tablinks"></div>Personaliza</li>
+							<li><div class="div-indicator tablinks"></div>Diligencia</li>
+							<li><div class="div-indicator tablinks"></div>Publica</li>
 						</ul>
 					</div>
 				</div>
@@ -109,15 +109,16 @@
 			</div>
 		</section>
 		<!----------------------------------------------SECTION 2------------------------------------------------------>
-		<form id="big-form" class="noBorderForm" action="{% url 'business:start_post' %}" method="post">
+		<br>
+        <form id="big-form" class="noBorderForm" action="{% url 'business:start_post' %}" method="post">
             {% csrf_token %}
-			<section class="section-two tabcontent" id="section-two">
+			<section class="section-two scroll-content" id="section-two">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-4">
 							<br>
 							<div class="row">
-								<div class="col-md-4"><span style="font-size:100px;">2.</span></div>
+								<div class="col-md-4"><span style="font-size:100px;color:#CADD68;">2.</span></div>
 								<div class="col-md-8"><span>REGISTRA LOS DATOS<br>DE TU OFERTA LABORAL</span></div>
 							</div>
 						</div>
@@ -130,36 +131,33 @@
 							<fieldset>
 								<br>
 								<br>
-								<h3>Ciudad</h3>
-                                <select class="drop-down" name="city_id" >
+								<h3 style="color:#CADD68;">Ciudad</h3>
+								<select class="drop-down" name="city_id" >
                                     <option value="" disabled selected>Selecciona tu ciudad</option>
                                     {% for city in cities %}
                                         <option value={{ city.id }}>{{ city.name }}</option>
                                     {% endfor %}
                                 </select>
-
-								<h3>Título de tu oferta laboral</h3>
+								<h3 style="color:#CADD68;">Título de tu oferta laboral</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
-								<input class="origin-vacancy-tittle form-input" name="title_es" ><br>
-								<h3>Cargo solicitado</h3>
+								<input class="origin-vacancy-tittle form-input" name="title_es"><br>
+								<h3 style="color:#CADD68;">Cargo solicitado</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
-								<input class="origin-charge form-input" name="" ><br>
                                 <select class="drop-down" name="profession_id" >
                                     <option value="" disabled selected>Selecciona tu profesion</option>
                                     {% for profession in professions %}
                                         <option value={{ profession.id }}>{{ profession.name }}</option>
                                     {% endfor %}
                                 </select>
-								<h3>Palabras clave</h3>
+								<h3 style="color:#CADD68;">Palabras clave</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
-
 								<select class="origin-keywords js-example-basic-multiple" style="width: 100%" name="states[]" multiple="multiple">
-								  <option value="AL">Alabama</option>
-								  <option value="O">Otra</option>
-								  <option value="WY">Wyoming</option>
+                                    <option value="AL">Alabama</option>
+                                    <option value="O">Otra</option>
+                                    <option value="WY">Wyoming</option>
 								</select>
 							</fieldset>
 						</div>
@@ -168,7 +166,7 @@
 							<fieldset>
 								<br>
 								<br>
-								<h3>Descripción de tu oferta laboral</h3>
+								<h3 style="color:#CADD68;">Descripción de tu oferta laboral</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
                                 <trix-editor name="description_es"></trix-editor>
@@ -178,21 +176,22 @@
 					</div>
 					<div class="row">
 						<ul class="section-indicator">
-							<li class="active"><div class="div-indicator tablinks" onclick="openSection(event, 'main-section')" role="button"></div>Personaliza</li>
-							<li><div class="div-indicator tablinks" onclick="openSection(event, 'section-two')" role="button"></div>Personaliza</li>
-							<li><div class="div-indicator tablinks" onclick="openSection(event, 'section-three')" role="button"></div>Personaliza</li>
+							<li class="active"><div class="div-indicator tablinks"></div>Personaliza</li>
+							<li><div class="div-indicator tablinks"></div>Diligencia</li>
+							<li><div class="div-indicator tablinks"></div>Publica</li>
 						</ul>
 					</div>
 				</div>
 			</section>
 			<!----------------------------------------------SECTION 3-------------------------------------------------->
-			<section class="section-three tabcontent" id="section-three">
+			<br>
+            <section class="section-three scroll-content" id="section-three">
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-4">
 							<br>
 							<div class="row">
-								<div class="col-xs-4"><span style="font-size:100px;">3.</span></div>
+								<div class="col-xs-4"><span style="font-size:100px;color:#CADD68;">3.</span></div>
 								<div class="col-xs-8"><span>PUBLICA TU<br>OFERTA LABORAL</span></div>
 							</div>
 						</div>
@@ -208,13 +207,13 @@
 							<fieldset>
 								<br>
 								<br>
-								<h3>Ciudad</h3>
+								<h3 style="color:#CADD68;">Ciudad</h3>
 								<h6 class="city"></h6><br>
-								<h3>Título de tu oferta laboral</h3>
+								<h3 style="color:#CADD68;">Título de tu oferta laboral</h3>
 								<h6 class="vacancy-tittle"></h6><br>
-								<h3>Cargo solicitado</h3>
+								<h3 style="color:#CADD68;">Cargo solicitado</h3>
 								<h6 class="charge"></h6><br>
-								<h3>Descripción de tu oferta laboral</h3>
+								<h3 style="color:#CADD68;">Descripción de tu oferta laboral</h3>
 								<h6 class="vacancy-description"></h6>
 							</fieldset>
 						</div>
@@ -225,14 +224,15 @@
 					</div>
 					<div class="row">
 						<ul class="section-indicator">
-							<li class="active"><div class="div-indicator tablinks" onclick="openSection(event, 'main-section')" role="button"></div>Personaliza</li>
-							<li><div class="div-indicator tablinks" onclick="openSection(event, 'section-two')" role="button"></div>Personaliza</li>
-							<li><div class="div-indicator tablinks" onclick="openSection(event, 'section-three')" role="button"></div>Personaliza</li>
+							<li class="active"><div class="div-indicator tablinks"></div>Personaliza</li>
+							<li><div class="div-indicator tablinks"></div>Diligencia</li>
+							<li><div class="div-indicator tablinks"></div>Publica</li>
 						</ul>
 					</div>
 				</div>
 			</section>
-            <div id="overlay">
+
+			<div id="overlay">
                 <div id="form-image">
                     <div id="register-form">
                         <fieldset>
@@ -240,19 +240,15 @@
                             <br>
                             <br>
                             <span>Nombre</span>
-                            <input class="form-input" name="name"
-							required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
-							<br>
+                            <input class="form-input" name="name" required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
+ 							<br>
                             <span>Empresa</span>
                             <input class="form-input" name="company">
-							<br>
                             <span>Correo</span>
                             <input class="form-input" type="email" name="username" required="required">
-							<br>
                             <span>Teléfono</span>
-                            <input class="form-input" type="tel" name="phone"
-								   required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
-							<br>
+                            <input class="form-input" type="tel" name="phone" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
+                            <br>
                             <span>Contraseña</span>
                             <input class="form-input" type="password" name="password1" required="required">
 							<br>
@@ -300,6 +296,7 @@
 				<div class="col-1"></div>
 			</div>
 		</footer>
+
 		<script type="text/javascript">
 			$(".regular").slick({
 				infinite: true,
@@ -312,6 +309,7 @@
 				$(".main-section").css('background', 'url(' + background + ') 0% 0% / cover')
 			});
 		</script>
+
 		<script>
 			function myFunction() {
 				var x = document.getElementById("myTopnav");
@@ -322,8 +320,6 @@
 				}
 			}
 		</script>
-
-
 
 		<script>
 			 $('.origin-city').on('keyup', function() {
@@ -359,27 +355,25 @@
 			 	$('.vacancy-description').text(text);
 			});
 		</script>
+
 		<script>
 			function on() {
+			if (document.getElementById("overlay").style.display != "block") {
+                console.log("dentro del if")
+                document.getElementById("overlay").style.display = "block";
+                document.getElementById("register-form").style.display = "block";
+                $("html").css("background-size", "cover");
+                $("#option1").css("color", "white");
+                $("#option2").css("color", "white");
+                $("nav").css("margin-bottom", "40px");
+                $("#register-form").animate({"marginLeft": '60%'}, 650,"swing");
+                $("#form-image").animate({"backgroundPosition": '86%'}, 650,"swing");
+                $("html").css("overflow", "hidden");
 
-			    if (document.getElementById("overlay").style.display != "block") {
-			        console.log("dentro del if")
-                    document.getElementById("overlay").style.display = "block";
-                    document.getElementById("register-form").style.display = "block";
-                    $("html").css("background-size", "cover");
-                    $("#option1").css("color", "white");
-                    $("#option2").css("color", "white");
-                    $("nav").css("margin-bottom", "40px");
-                    $("#register-form").animate({"marginLeft": '60%'}, 650,"swing");
-                    $("#form-image").animate({"backgroundPosition": '86%'}, 650,"swing");
-                    $("html").css("overflow", "hidden");
-
-                    //$("#publish-campaign-button").animate({left: '250px'}, 650, "swing");
-                    $("#publish-campaign-button").animate({marginTop: '370px', marginLeft: '160px', marginRight: '-160px'});
-
-                    // bring button to front
-                    $("#publish-campaign-button").css('z-index', 9999);
-                    $("#publish-campaign-button").css('position', 'absolute');
+                //$("#publish-campaign-button").animate({left: '250px'}, 650, "swing");
+                $("#publish-campaign-button").animate({marginTop: '370px', marginLeft: '160px', marginRight: '-160px'});
+                $("#publish-campaign-button").css('z-index', 9999);
+                $("#publish-campaign-button").css('position', 'absolute');
 
                 } else { // enters here upon the second click
                     document.getElementById("big-form").submit();
@@ -398,39 +392,23 @@
 				$("html").css("overflow-y", "scroll");
 			}
 		</script>
-		<script>
-			function openSection(evt, sectionName) {
-				var i, tabcontent, tablinks;
-				tabcontent = document.getElementsByClassName("tabcontent");
-				for (i = 0; i < tabcontent.length; i++) {
-					tabcontent[i].style.display = "none";
-				}
-				tablinks = document.getElementsByClassName("tablinks");
-				for (i = 0; i < tablinks.length; i++) {
-					tablinks[i].className = tablinks[i].className.replace(" active", "");
-				}
-				document.getElementById(sectionName).style.display = "block";
-				evt.currentTarget.className += " active";
-			}
-		</script>
+
         <script>
         $(function() {
           $.scrollify({
-            section : ".tabcontent",
+            section : ".scroll-content",
           });
         });
-      </script>
+        </script>
 
-      <script type="text/javascript">
+        <script type="text/javascript">
 
-	        document.addEventListener("trix-change", function(event) {
-			  var element = event.target
-			  var html = element.value  // "<div>This is an <strong>example</strong></div>"
+            document.addEventListener("trix-change", function(event) {
+              var element = event.target
+              var html = element.value  // "<div>This is an <strong>example</strong></div>"
 
-			  $('.vacancy-description').html(html);
-			});
-
-      </script>
-
+              $('.vacancy-description').html(html);
+            });
+        </script>
 	</body>
 </html>
