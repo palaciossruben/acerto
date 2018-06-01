@@ -15,6 +15,11 @@
 		<link rel="stylesheet" type="text/css" href="{% static 'business/css/slick.css' %}"/>
 		<link rel="stylesheet" type="text/css" href="{% static 'business/css/slick-theme.css' %}"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/0.11.2/trix.css" />
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon.ico' %}">
+    	<link rel="apple-touch-icon" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon-16.png' %}">
+    	<link rel="apple-touch-icon" sizes="32x32" href="{% static 'testing_webpage/favicon.ico/favicon-32.png' %}">
+    	<link rel="apple-touch-icon" sizes="64x64" href="{% static 'testing_webpage/favicon.ico/favicon-64.png' %}">
+
 
 		<!-- Latest jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -31,6 +36,12 @@
 	<!----------------------------------------------SECTION 1---------------------------------------------------------->
 	<body>
 		<section class="main-section scroll-content" id="main-section">
+            <div style="background:-webkit-linear-gradient(90deg, rgba(88,89,91,0) 0%, rgba(88,89,91,1) 100%);
+                        background:-o-linear-gradient(90deg, rgba(88,89,91,0) 0%, rgba(88,89,91,1) 100%);
+                        background:-moz-linear-gradient(90deg, rgba(88,89,91,0) 0%, rgba(88,89,91,1) 100%);
+                        background:linear-gradient(90deg, rgba(88,89,91,0) 50%, rgba(88,89,91,1) 100%);">
+
+
 			<div class="topnav" id="myTopnav">
 				<a href="/staffing" style="float:left"><img src="{% static 'business/new_images/logo-color.png' %}" style="margin-left:30px;" width="70px" id="logo"></a>
 				<div>
@@ -46,7 +57,7 @@
 				<div class="row" style="height:450px; color: white;">
 					<div class="col-xs-6">
 						<div class="col-xs-2" style="top:300px;">
-							<span style="font-size:100px;">1.</span>
+							<span style="font-size: 115px;font-weight: 750; color:rgba(255, 255, 255, .5)">1<span style="font-size:100px;font-weight:50;">.</span></span>
 						</div>
 						<div class="col-xs-10" style="top:300px;">
 							<span style="font-size:20px;"><br>ESCOGE UN FONDO<br>ACORDE A TU VACANTE</span>
@@ -100,7 +111,7 @@
 					</div>
 				</div>
 			</div>
-
+            </div>
 			<div class="svg-container" style="bottom:-5px;position:absolute;opacity:0.99;">
 				<svg id="the-S" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1960.62 279.47">
 					<defs><style>.cls-1{fill:white;}</style></defs>
@@ -118,7 +129,7 @@
 						<div class="col-md-4">
 							<br>
 							<div class="row">
-								<div class="col-md-4"><span style="font-size:100px;color:#CADD68;">2.</span></div>
+								<div class="col-md-4"><span style="font-size: 115px;font-weight: 750;color:#CADD68;">2<span style="font-size:100px;font-weight:50;">.</span></span></div>
 								<div class="col-md-8"><span>REGISTRA LOS DATOS<br>DE TU OFERTA LABORAL</span></div>
 							</div>
 						</div>
@@ -132,7 +143,7 @@
 								<br>
 								<br>
 								<h3 style="color:#CADD68;">Ciudad</h3>
-								<select class="drop-down" name="city_id" >
+								<select class="drop-down" style="border-radius: 50px; padding:10px; width:60%;" name="city_id" >
                                     <option value="" disabled selected>Selecciona tu ciudad</option>
                                     {% for city in cities %}
                                         <option value={{ city.id }}>{{ city.name }}</option>
@@ -141,11 +152,11 @@
 								<h3 style="color:#CADD68;">Título de tu oferta laboral</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
-								<input class="origin-vacancy-tittle form-input" name="title_es"><br>
+								<input class="origin-vacancy-tittle form-input" style="border-radius: 50px; padding:10px; width:100%;" name="title_es"><br>
 								<h3 style="color:#CADD68;">Cargo solicitado</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
-                                <select class="drop-down" name="profession_id" >
+                                <select class="drop-down" name="profession_id" style="border-radius: 50px; padding:10px; width:100%;">
                                     <option value="" disabled selected>Selecciona tu profesion</option>
                                     {% for profession in professions %}
                                         <option value={{ profession.id }}>{{ profession.name }}</option>
@@ -154,7 +165,7 @@
 								<h3 style="color:#CADD68;">Palabras clave</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
-								<select class="origin-keywords js-example-basic-multiple" style="width: 100%" name="states[]" multiple="multiple">
+								<select class="origin-keywords js-example-basic-multiple" style="border-radius: 50px; padding:10px; width:100%;" name="states[]" multiple="multiple">
                                     <option value="AL">Alabama</option>
                                     <option value="O">Otra</option>
                                     <option value="WY">Wyoming</option>
@@ -169,7 +180,7 @@
 								<h3 style="color:#CADD68;">Descripción de tu oferta laboral</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
-                                <trix-editor name="description_es"></trix-editor>
+                                <trix-editor name="description_es" style="border-radius:20px;"></trix-editor>
 							</fieldset>
 						</div>
 						<div class="col-md-2"></div>
@@ -186,12 +197,12 @@
 			<!----------------------------------------------SECTION 3-------------------------------------------------->
 			<br>
             <section class="section-three scroll-content" id="section-three">
-				<div class="container">
+                <div class="container">
 					<div class="row">
 						<div class="col-xs-4">
 							<br>
 							<div class="row">
-								<div class="col-xs-4"><span style="font-size:100px;color:#CADD68;">3.</span></div>
+								<div class="col-xs-4"><span style="font-size: 115px;font-weight: 750;color:#CADD68;">3<span style="font-size:100px;font-weight:50;">.</span></span></div>
 								<div class="col-xs-8"><span>PUBLICA TU<br>OFERTA LABORAL</span></div>
 							</div>
 						</div>
@@ -370,8 +381,8 @@
                 $("#form-image").animate({"backgroundPosition": '86%'}, 650,"swing");
                 $("html").css("overflow", "hidden");
 
-                //$("#publish-campaign-button").animate({left: '250px'}, 650, "swing");
-                $("#publish-campaign-button").animate({marginTop: '370px', marginLeft: '160px', marginRight: '-160px'});
+                //$("#publish-campaign-button").animate({left: '250px'}, 2000, "swing");
+                $("#publish-campaign-button").animate({marginTop: '370px', marginLeft: '160px', marginRight: '-160px'}, 2000, "swing");
                 $("#publish-campaign-button").css('z-index', 9999);
                 $("#publish-campaign-button").css('position', 'absolute');
 

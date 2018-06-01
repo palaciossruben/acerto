@@ -225,7 +225,8 @@ trix-editor ul {
   background-color: transparent;
   top:0.01%;
   width:100%;
-  border-bottom: 2px groove grey;
+  border-bottom: 2px groove;
+  border-color:rgba(255, 255, 255, .5);
 }
 
 .topnav a {
@@ -305,7 +306,7 @@ footer {
 	padding:20px;
 	text-align:center;
 	font-size:0.7em;
-	border-top:groove 2px ;
+	border-top:groove 2px;
 	border-color:rgba(255, 255, 255, .1);
 }
 
