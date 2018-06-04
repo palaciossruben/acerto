@@ -2543,7 +2543,7 @@
     "model": "beta_invite.question",
     "pk": 177,
     "fields":{
-      "text": "¿Cómo describirías tu experiencia laboral más reciente? (cuéntanos tus labores diarias y tu logro más importante)",
+      "text": "How would you describe your most recent work experience? (tell us your daily tasks and your most important achievement)",
       "text_es": "¿Cómo describirías tu experiencia laboral más reciente? (cuéntanos tus labores diarias y tu logro más importante)",
       "answers": [],
       "type": 3,
