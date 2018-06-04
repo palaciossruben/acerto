@@ -11,11 +11,13 @@ application = get_wsgi_application()
 import statistics
 import numpy as np
 import pandas as pd
+from django.db.models import Q
 
 from dashboard.models import Candidate, State
 from sklearn.feature_extraction import FeatureHasher
 from sklearn.preprocessing import StandardScaler
 from match.pickle_models import pickle_handler
+import beta_invite
 
 
 def get_test_score(candidate, field, f):
@@ -86,7 +88,18 @@ def hash_columns(data, hashing_info):
     return data
 
 
-def load_raw_data(candidates=Candidate.objects.all()):
+def get_filtered_candidates():
+
+    # Excludes the default campaign
+    candidates = Candidate.objects.filter(~Q(campaign_id=beta_invite.constants.DEFAULT_CAMPAIGN_ID))
+
+    return candidates
+
+    # Only candidates with at least a evaluation (eg some tests)
+    #return [c for c in candidates if len([e for e in c.evaluations.all()]) > 0]
+
+
+def load_raw_data(candidates=get_filtered_candidates()):
     data = pd.DataFrame()
 
     # campaign should be treated categorically
@@ -131,7 +144,8 @@ def filter_fields(data, selected_fields):
         return data
 
 
-def load_data(candidates=Candidate.objects.all(), hashing_info=get_hashing_info(), selected_fields=None):
+def load_data(candidates=get_filtered_candidates(),
+              hashing_info=get_hashing_info(), selected_fields=None):
     """
     Loads and prepares all data.
     :return: data DataFrame with features and target + candidates.
