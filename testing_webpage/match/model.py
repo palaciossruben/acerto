@@ -14,6 +14,7 @@ application = get_wsgi_application()
 
 from match.pickle_models.pickle_handler import save_model, load_model
 from match import common_learning, learn, text_match, clustering
+from subscribe import helper as h
 from match.pickle_models import pickle_handler
 
 
