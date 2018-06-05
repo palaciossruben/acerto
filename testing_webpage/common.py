@@ -346,7 +346,7 @@ def save_resource_from_request(request, my_object, param_name, folder_name):
         fs.save(file_path, my_file)
 
         # once saved it will collect the file
-        subprocess.call('python3 manage.py collectstatic -v0 --noinput', shell=True)
+        # subprocess.call('python3 manage.py collectstatic -v0 --noinput', shell=True)
 
         # at last returns the curriculum url
         return file_path
