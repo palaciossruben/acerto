@@ -5,7 +5,7 @@
 @media  (max-width: 767px)
 {
 	html { 
-        background: url(../new_images/bg-cel.jpg) no-repeat top center scroll ;
+        background: url(../img/bg-cel.jpg) no-repeat top center scroll ;
         background-size:contain;
     }
 
@@ -92,7 +92,7 @@
 	    text-align:center;
 	}
 	
-    #valuebanner { background-image:url('../new_images/mockup-bg-cel.jpg');
+    #valuebanner { background-image:url('../img/mockup-bg-cel.jpg');
 	    background-repeat: no-repeat;
         background-size: cover;
 	    margin-top:0px;
@@ -256,7 +256,7 @@
 	}
 
     #valuebanner {
-        background-image:url('../new_images/mockup-bg-cel.jpg');
+        background-image:url('../img/mockup-bg-cel.jpg');
         background-repeat: no-repeat;
         background-size: cover;
         margin-top:0px;
@@ -320,7 +320,7 @@
 @media (min-width: 768px) and (max-width: 991px)
 {
 	html {
-		background: url(../new_images/bg-tablet.jpg) no-repeat top center scroll;
+		background: url(../img/bg-tablet.jpg) no-repeat top center scroll;
 		background-size:contain;
 	}
 
@@ -374,7 +374,7 @@
 	    text-align:center;
 	}
 
-	#valuebanner { background-image:url('../new_images/mockup-bg-tablet.jpg');
+	#valuebanner { background-image:url('../img/mockup-bg-tablet.jpg');
 	    background-repeat: no-repeat;
         background-size: contain;
     }
@@ -462,7 +462,7 @@
 {
 
 	html { 
-		background: url(../new_images/bg-tablet.jpg) no-repeat top center scroll ;
+		background: url(../img/bg-tablet.jpg) no-repeat top center scroll ;
 		background-size:contain;
 	}
 
@@ -493,7 +493,7 @@
 	    height:500px !important;
 	}
 
-    #valuebanner { background-image:url('../new_images/mockup-bg-tablet.jpg');
+    #valuebanner { background-image:url('../img/mockup-bg-tablet.jpg');
         background-repeat: no-repeat;
         background-size: contain;
     }
@@ -716,7 +716,7 @@
 @media (min-width: 992px) and (max-width: 1200px) and (orientation: landscape)
 {
 	html { 
-        background: url(../new_images/bg-tablet-landscape.jpg) no-repeat top center scroll ;
+        background: url(../img/bg-tablet-landscape.jpg) no-repeat top center scroll ;
         background-size:contain;
     }
 			
