@@ -11,10 +11,10 @@
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="{% static 'business/css/new_start.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'business/css/slick.css' %}"/>
 		<link rel="stylesheet" type="text/css" href="{% static 'business/css/slick-theme.css' %}"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/0.11.2/trix.css" />
+        <link rel="stylesheet" type="text/css" href="{% static 'business/css/new_start.css' %}">
         <link rel="icon" type="image/png" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon.ico' %}">
     	<link rel="apple-touch-icon" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon-16.png' %}">
     	<link rel="apple-touch-icon" sizes="32x32" href="{% static 'testing_webpage/favicon.ico/favicon-32.png' %}">
@@ -31,17 +31,13 @@
 
 		<!-- Select 2 -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-		<script type="text/javascript" src="{% static 'business/js/new_start.js' %}"></script>
+		<script type="text/javascript" src="{% static 'business/js/start.js' %}"></script>
 	</head>
 	<!----------------------------------------------SECTION 1---------------------------------------------------------->
 	<body>
 		<section class="main-section scroll-content" id="main-section">
-            <div style="background:-webkit-linear-gradient(90deg, rgba(88,89,91,0) 0%, rgba(88,89,91,1) 100%);
-                        background:-o-linear-gradient(90deg, rgba(88,89,91,0) 0%, rgba(88,89,91,1) 100%);
-                        background:-moz-linear-gradient(90deg, rgba(88,89,91,0) 0%, rgba(88,89,91,1) 100%);
-                        background:linear-gradient(90deg, rgba(88,89,91,0) 50%, rgba(88,89,91,1) 100%);">
-
-
+            <div class="gradient1">
+                <div class="gradient2">
 			<div class="topnav" id="myTopnav">
 				<a href="/staffing" style="float:left"><img src="{% static 'business/new_images/logo-color.png' %}" style="margin-left:30px;" width="70px" id="logo"></a>
 				<div>
@@ -57,18 +53,18 @@
 				<div class="row" style="height:450px; color: white;">
 					<div class="col-xs-6">
 						<div class="col-xs-2" style="top:300px;">
-							<span style="font-size: 115px;font-weight: 750; color:rgba(255, 255, 255, .5)">1<span style="font-size:100px;font-weight:50;">.</span></span>
+							<span style=" font-family : BertholdAkzidenzGroteskSuper;font-size : 115px;color : rgb(203, 221, 104, 0.5);">1<span style="font-size:50px; margin-left:-15px;">.</span></span>
 						</div>
-						<div class="col-xs-10" style="top:300px;">
-							<span style="font-size:20px;"><br>ESCOGE UN FONDO<br>ACORDE A TU VACANTE</span>
+						<div class="col-xs-10" style="top: 345px;">
+							<span style="font-family : BertholdAkzidenzGroteskSuper; font-size : 20px;color : #FFFFFF;"><br>ESCOGE UN FONDO<br>ACORDE A TU VACANTE</span>
 						</div>
 					</div>
 					<div class="col-xs-6" style="text-align:right;top:150px;">
-						<span style="font-size:40px; line-height:50px;">
+						<span style="font-family: BertholdAkzidenzGroteskSuper; font-size: 40px; color: rgb(255, 255, 255);">
 							PERSONALIZA TU<br>
 							CAMPAÑA EN 3 PASOS<br>
 						</span>
-						<span style="font-size:30px; line-height:50px;">
+						<span style="font-family : BertholdAkzidenzGroteskRegular;font-size : 32px;color : rgb(255, 255, 255);">
 							y encuentra los mejores candidatos<br>
 							para tu vacante
 						</span>
@@ -77,40 +73,47 @@
 
 				<div class="row">
 					<div class="col-xs-8">
-						<section class="regular slider" style="width:100%; margin: 0 auto 50px -50px;">
+						<section class="regular slider">
 							<div class="slide-0 slide-css" data-background="{% static 'business/new_images/Start_BG-01-min.jpg' %}">
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-01.jpg' %}" style="width:100%;border:solid white">
+								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-01.jpg' %}">
+                                <p class="slider-description">Administrativos</p>
 							</div>
 							<div class="slide-1 slide-css" data-background="{% static 'business/new_images/Start_BG-02-min.jpg' %}">
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-02.jpg' %}" style="width:100%;border:solid white">
+								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-02.jpg' %}">
+                                <p class="slider-description">Operativos</p>
 							</div>
 							<div class="slide-2 slide-css" data-background="{% static 'business/new_images/Start_BG-03-min.jpg' %}">
-								<img class="img-rounded"src="{% static 'business/new_images/Start-carrusel-03.jpg' %}" style="width:100%;border:solid white">
+								<img class="img-rounded"src="{% static 'business/new_images/Start-carrusel-03.jpg' %}">
+                                <p class="slider-description">Técnicos</p>
 							</div>
 							<div class="slide-3 slide-css" data-background="{% static 'business/new_images/Start_BG-04-min.jpg' %}">
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-04.jpg' %}" style="width:100%;border:solid white">
+								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-04.jpg' %}">
+                                <p class="slider-description">Arquitectos</p>
 							</div>
 							<div class="slide-4 slide-css" data-background="{% static 'business/new_images/Start_BG-05-min.jpg' %}">
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-05.jpg' %}" style="width:100%;border:solid white">
+								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-05.jpg' %}">
+                                <p class="slider-description">Diseñadores</p>
 							</div>
 							<div class="slide-5 slide-css" data-background="{% static 'business/new_images/Start_BG-06-min.jpg' %}">
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-06.jpg' %}" style="width:100%;border:solid white">
+								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-06.jpg' %}">
+                                <p class="slider-description">Recursos humanos</p>
 							</div>
 							<div class="slide-6 slide-css" data-background="{% static 'business/new_images/Start_BG-07-min.jpg' %}">
-								<!--Imagenes grandes-->
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-07.jpg' %}" style="width:100%;border:solid white"><!--Imagenes pequeñas-->
+								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-07.jpg' %}">
+                                <p class="slider-description">Ingenieros</p>
 							</div>
 						</section>
 					</div>
 					<div class="col-xs-4">
 						<ul class="section-indicator">
-							<li class="active"><div class="div-indicator tablinks"></div>Personaliza</li>
-							<li><div class="div-indicator tablinks"></div>Diligencia</li>
-							<li><div class="div-indicator tablinks"></div>Publica</li>
+							<li class="active"><div class="div-indicator"></div>Personaliza</li>
+							<li><div class="div-indicator"></div>Diligencia</li>
+							<li><div class="div-indicator"></div>Publica</li>
 						</ul>
 					</div>
 				</div>
 			</div>
+            </div>
             </div>
 			<div class="svg-container" style="bottom:-5px;position:absolute;opacity:0.99;">
 				<svg id="the-S" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1960.62 279.47">
@@ -180,15 +183,15 @@
 								<h3 style="color:#CADD68;">Descripción de tu oferta laboral</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
-                                <trix-editor name="description_es" style="border-radius:20px;"></trix-editor>
+                                <trix-editor name="description_es"></trix-editor>
 							</fieldset>
 						</div>
 						<div class="col-md-2"></div>
 					</div>
 					<div class="row">
 						<ul class="section-indicator">
-							<li class="active"><div class="div-indicator tablinks"></div>Personaliza</li>
-							<li><div class="div-indicator tablinks"></div>Diligencia</li>
+							<li class="active"><div class="div-indicator"></div>Personaliza</li>
+							<li class="active"><div class="div-indicator"></div>Diligencia</li>
 							<li><div class="div-indicator tablinks"></div>Publica</li>
 						</ul>
 					</div>
@@ -235,9 +238,9 @@
 					</div>
 					<div class="row">
 						<ul class="section-indicator">
-							<li class="active"><div class="div-indicator tablinks"></div>Personaliza</li>
-							<li><div class="div-indicator tablinks"></div>Diligencia</li>
-							<li><div class="div-indicator tablinks"></div>Publica</li>
+							<li class="active"><div class="div-indicator"></div>Personaliza</li>
+							<li class="active"><div class="div-indicator"></div>Diligencia</li>
+							<li class="active"><div class="div-indicator"></div>Publica</li>
 						</ul>
 					</div>
 				</div>
@@ -275,7 +278,7 @@
             </div>
         </form>
 		<!----------------------------------------------FOOTER--------------------------------------------------------->
-		<footer class="container-fluid">
+		<footer class="scroll-content container-fluid">
 			<div class="row" style="padding-bottom:30px;">
 				<div class=" col-xs-2 col-md-2 "></div>
 				<div class=" col-xs-3 col-md-3  navfooter" >
@@ -307,12 +310,14 @@
 				<div class="col-1"></div>
 			</div>
 		</footer>
-
+        <!--slider-->
 		<script type="text/javascript">
 			$(".regular").slick({
 				infinite: true,
 				slidesToShow: 4,
-				slidesToScroll: 1
+				slidesToScroll: 1,
+                focusOnSelect: true
+                // variableWidth: true (change the slides width)
 			});
 
 			$('.regular').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
@@ -320,7 +325,7 @@
 				$(".main-section").css('background', 'url(' + background + ') 0% 0% / cover')
 			});
 		</script>
-
+        <!--TopNav-->
 		<script>
 			function myFunction() {
 				var x = document.getElementById("myTopnav");
@@ -331,7 +336,7 @@
 				}
 			}
 		</script>
-
+        <!--Section 3 brief-->
 		<script>
 			 $('.origin-city').on('keyup', function() {
 
@@ -366,7 +371,7 @@
 			 	$('.vacancy-description').text(text);
 			});
 		</script>
-
+        <!--Form Transition-->
 		<script>
 			function on() {
 			if (document.getElementById("overlay").style.display != "block") {
@@ -403,7 +408,7 @@
 				$("html").css("overflow-y", "scroll");
 			}
 		</script>
-
+        <!--Scroll-->
         <script>
         $(function() {
           $.scrollify({
@@ -411,15 +416,21 @@
           });
         });
         </script>
-
+        <!--Copy text of trix-->
         <script type="text/javascript">
-
             document.addEventListener("trix-change", function(event) {
               var element = event.target
               var html = element.value  // "<div>This is an <strong>example</strong></div>"
-
               $('.vacancy-description').html(html);
+              $.scrollify.update();
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $('.js-example-basic-multiple').select2();
             });
         </script>
 	</body>
 </html>
+
