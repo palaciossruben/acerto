@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+/**************************************************FONTS***************************************************************/
+
 @font-face {
     font-family: BigJohn;
     src: url(/static/fonts/BIG_JOHN.otf);
@@ -17,7 +19,7 @@
 }
 
 @font-face {
-    font-family: BertholdAkzidenzGroteskBELight;
+    font-family: BertholdAkzidenzGroteskLight;
     src: url(/static/fonts/BertholdAkzidenzGroteskBELight.otf);
 }
 
@@ -36,9 +38,9 @@
     src: url(/static/fonts/BertholdAkzidenzGroteskSuper.otf);
 }
 
+/**************************************************GENERIC*************************************************************/
 
-
-* { margin: 0; padding: 0;}
+* { margin: 0; padding: 0; outline:0;}
 
 html {
 	height: 100%;
@@ -49,22 +51,50 @@ body {
     height: 100%;
 }
 
-.main-section {
-	height: 100%;
-	background: url(../new_images/Start_BG-01-min.jpg);
-	background-size: cover;
-	position: relative;
-}
+/**************************************************SLIDER**************************************************************/
 
 .regular.slider {
     z-index:2;
     position:relative;
+    width:100%;
+    margin: 0 auto 50px -50px;
 }
 
 .slide-css{
-    width: 150px;
     margin-right: 10px;
 }
+
+.slide-css img{
+    width:100%;
+}
+
+.slide-css img:hover{
+    border:solid white
+}
+
+.slide-css img:hover + p {
+    color : rgb(203, 221, 104);
+    text-shadow : 2px 2px 2px rgba(35, 31, 32, 0.8);
+}
+
+
+.slider-description {
+    color:white;
+    text-align:center;
+    font-family: BertholdAkzidenzGroteskRegular;
+    font-size: 20px;
+}
+
+
+
+
+/* To change slick width
+.slick-slide{
+width: 170px;
+}
+*/
+
+/**************************************************SVG*****************************************************************/
 
 .svg-container {
   display: inline-block;
@@ -72,6 +102,15 @@ body {
   width: 100%;
   vertical-align: middle;
   overflow: hidden;
+}
+
+/**************************************************MAIN SECTION********************************************************/
+
+.main-section {
+	height: 100%;
+	background: url(../new_images/Start_BG-01-min.jpg);
+	background-size: cover;
+	position: relative;
 }
 
 .button-cta {
@@ -89,6 +128,22 @@ body {
 	font-weight:600;
 }
 
+/**************************************************GRADIENTS AND TRANSITIONS*******************************************/
+
+.gradient1 {
+    background:-webkit-linear-gradient(90deg, rgba(23,32,42,0) 0%, rgba(23,32,42,1) 100%);
+    background:-o-linear-gradient(90deg, rgba(23,32,42,0) 0%, rgba(23,32,42,1) 100%);
+    background:-moz-linear-gradient(90deg, rgba(23,32,42,0) 0%, rgba(23,32,42,1) 100%);
+    background:linear-gradient(90deg, rgba(23,32,42,0) 40%, rgba(23,32,42,0.3) 50%, rgba(23,32,42,0.5) 80%, rgba(0,0,0,0.6) 90%, rgba(0,0,0,1)100%);
+}
+
+.gradient2 {
+    background:-webkit-linear-gradient(180deg, rgba(23,32,42,0) 0%, rgba(23,32,42,1) 100%);
+    background:-o-linear-gradient(180deg, rgba(23,32,42,0) 0%, rgba(23,32,42,1) 100%);
+    background:-moz-linear-gradient(180deg, rgba(23,32,42,0) 0%, rgba(23,32,42,1) 100%);
+    background:linear-gradient(180deg, rgba(23,32,42,0) 60%,  rgba(23,32,42,0.5) 80%, rgba(0,0,0,0.6) 100%);
+}
+
 #overlay {
     position:fixed;
     width: 100%;
@@ -97,11 +152,9 @@ body {
     right: 0;
     left:0;
     bottom: 0;
-    background:-webkit-linear-gradient(-49deg, rgba(158,186,82,1) 0%, rgba(126,180,104,0.9) 8%, rgba(62,174,140,0.9) 26%, rgba(25,32,41,0.5) 72%, rgba(25,32,41,0.5) 100%);
-    background:-o-linear-gradient(-49deg, rgba(158,186,82,1) 0%, rgba(126,180,104,0.9) 8%, rgba(62,174,140,0.9) 26%, rgba(25,32,41,0.5) 72%, rgba(25,32,41,0.5) 100%);
-    background:-moz-linear-gradient(-49deg, rgba(158,186,82,1) 0%, rgba(126,180,104,0.9) 8%, rgba(62,174,140,0.9) 26%, rgba(25,32,41,0.5) 72%, rgba(25,32,41,0.5) 100%);
-    background:linear-gradient(-49deg, rgba(158,186,82,1) 0%, rgba(126,180,104,0.9) 8%, rgba(62,174,140,0.9) 26%, rgba(25,32,41,0.5) 72%, rgba(25,32,41,0.5) 100%);
-}
+    display:none;
+    background:transparent;
+    }
 
 #form-image {
     background: url(../new_images/form_bg.png) no-repeat top center scroll;
@@ -154,18 +207,6 @@ body {
     margin-right: -50px;
 }
 
-#overlay {
-    display:none;
-    position:fixed;
-    width: 100%;
-    height: 90%;
-    top: 0;
-    right: 0;
-    left:0;
-    bottom: 0;
-    background:transparent;
-}
-
 /**************************************************SECTION INDICATOR***************************************************/
 
 .section-indicator {
@@ -176,26 +217,44 @@ body {
     line-height: 0px;
     z-index:2;
     position:relative;
+    margin-top: 45px;
 }
 
 .section-indicator li {
     padding-bottom: 20px;
+    font-family : Helvetica;
+    font-size : 16px;
+    color : #656665;
 }
 
 .section-indicator li:last-child {
     padding-bottom: 0;
 }
 
+.active  {
+    font-family : Helvetica Bold;
+    font-weight : bold;
+    font-size : 18px;
+    color : #656665;
+}
+
 .div-indicator {
     border-radius:50px;
-    width:15px;
+    width:16px;
     height:1px;
-    padding: 3px;
-    background:green;
-    left: -22px;
+    padding: 2.2px;
+    left: -23px;
     position: relative;
-    transform: rotate(-45deg);
+    transform: rotate(-52deg);
+    background:white;
+    border: 1.5px solid #656665;
+    top: 1.7px;
 }
+
+.active .div-indicator{
+    background: #CADD68;
+}
+
 
 /**************************************************TRIX EDITOR*********************************************************/
 
@@ -212,11 +271,14 @@ trix-toolbar [data-trix-action ='increaseNestingLevel']
 
 trix-editor {
     height: 377px;
+    border-radius:20px;
+    overflow-y:auto;
 }
 
 trix-editor ul {
     padding-left:5%;
 }
+
 
 /**************************************************HEADER**************************************************************/
 
@@ -270,6 +332,7 @@ trix-editor ul {
 footer {
     background-color:#3d4753;
     color:#FFFFFF;
+    max-height:300px;
 }
 
 .navfooter {
