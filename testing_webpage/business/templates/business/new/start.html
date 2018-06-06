@@ -14,7 +14,7 @@
 		<link rel="stylesheet" type="text/css" href="{% static 'business/css/slick.css' %}"/>
 		<link rel="stylesheet" type="text/css" href="{% static 'business/css/slick-theme.css' %}"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/0.11.2/trix.css" />
-        <link rel="stylesheet" type="text/css" href="{% static 'business/css/new_start.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'business/css/start.css' %}">
         <link rel="icon" type="image/png" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon.ico' %}">
     	<link rel="apple-touch-icon" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon-16.png' %}">
     	<link rel="apple-touch-icon" sizes="32x32" href="{% static 'testing_webpage/favicon.ico/favicon-32.png' %}">
@@ -39,7 +39,7 @@
             <div class="gradient1">
                 <div class="gradient2">
 			<div class="topnav" id="myTopnav">
-				<a href="/staffing" style="float:left"><img src="{% static 'business/new_images/logo-color.png' %}" style="margin-left:30px;" width="70px" id="logo"></a>
+				<a href="/staffing" style="float:left"><img src="{% static 'business/img/logo-color.png' %}" style="margin-left:30px;" width="70px" id="logo"></a>
 				<div>
 					<a class="navButton" role="button" onclick="on2()">INICIA SESIÓN</a>
 					<a class="navButton" role="button" onclick="on()">CREA TU CUENTA</a>
@@ -53,7 +53,7 @@
 				<div class="row" style="height:450px; color: white;">
 					<div class="col-xs-6">
 						<div class="col-xs-2" style="top:300px;">
-							<span>1<span style="font-size:50px; margin-left:-15px;">.</span></span>
+							<span class="big-number first">1<span class="first-point">.</span></span>
 						</div>
 						<div class="col-xs-10" style="top: 345px;">
 							<span style="font-family : BertholdAkzidenzGroteskSuper; font-size : 20px;color : #FFFFFF;"><br>ESCOGE UN FONDO<br>ACORDE A TU VACANTE</span>
@@ -74,32 +74,32 @@
 				<div class="row">
 					<div class="col-xs-8">
 						<section class="regular slider">
-							<div class="slide-0 slide-css" data-background="{% static 'business/new_images/Start_BG-01-min.jpg' %}">
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-01.jpg' %}">
+							<div class="slide-0 slide-css" data-background="{% static 'business/img/Start_BG-01-min.jpg' %}">
+								<img class="img-rounded" src="{% static 'business/img/Start-carrusel-01.jpg' %}">
                                 <p class="slider-description">Administrativos</p>
 							</div>
-							<div class="slide-1 slide-css" data-background="{% static 'business/new_images/Start_BG-02-min.jpg' %}">
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-02.jpg' %}">
+							<div class="slide-1 slide-css" data-background="{% static 'business/img/Start_BG-02-min.jpg' %}">
+								<img class="img-rounded" src="{% static 'business/img/Start-carrusel-02.jpg' %}">
                                 <p class="slider-description">Operativos</p>
 							</div>
-							<div class="slide-2 slide-css" data-background="{% static 'business/new_images/Start_BG-03-min.jpg' %}">
-								<img class="img-rounded"src="{% static 'business/new_images/Start-carrusel-03.jpg' %}">
+							<div class="slide-2 slide-css" data-background="{% static 'business/img/Start_BG-03-min.jpg' %}">
+								<img class="img-rounded"src="{% static 'business/img/Start-carrusel-03.jpg' %}">
                                 <p class="slider-description">Técnicos</p>
 							</div>
-							<div class="slide-3 slide-css" data-background="{% static 'business/new_images/Start_BG-04-min.jpg' %}">
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-04.jpg' %}">
+							<div class="slide-3 slide-css" data-background="{% static 'business/img/Start_BG-04-min.jpg' %}">
+								<img class="img-rounded" src="{% static 'business/img/Start-carrusel-04.jpg' %}">
                                 <p class="slider-description">Arquitectos</p>
 							</div>
-							<div class="slide-4 slide-css" data-background="{% static 'business/new_images/Start_BG-05-min.jpg' %}">
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-05.jpg' %}">
+							<div class="slide-4 slide-css" data-background="{% static 'business/img/Start_BG-05-min.jpg' %}">
+								<img class="img-rounded" src="{% static 'business/img/Start-carrusel-05.jpg' %}">
                                 <p class="slider-description">Diseñadores</p>
 							</div>
-							<div class="slide-5 slide-css" data-background="{% static 'business/new_images/Start_BG-06-min.jpg' %}">
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-06.jpg' %}">
+							<div class="slide-5 slide-css" data-background="{% static 'business/img/Start_BG-06-min.jpg' %}">
+								<img class="img-rounded" src="{% static 'business/img/Start-carrusel-06.jpg' %}">
                                 <p class="slider-description">Recursos humanos</p>
 							</div>
-							<div class="slide-6 slide-css" data-background="{% static 'business/new_images/Start_BG-07-min.jpg' %}">
-								<img class="img-rounded" src="{% static 'business/new_images/Start-carrusel-07.jpg' %}">
+							<div class="slide-6 slide-css" data-background="{% static 'business/img/Start_BG-07-min.jpg' %}">
+								<img class="img-rounded" src="{% static 'business/img/Start-carrusel-07.jpg' %}">
                                 <p class="slider-description">Ingenieros</p>
 							</div>
 						</section>
@@ -115,10 +115,10 @@
 			</div>
             </div>
             </div>
-			<div class="svg-container" style="bottom:-5px;position:absolute;opacity:0.99;">
+			<div class="svg-container">
 				<svg id="the-S" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1960.62 279.47">
 					<defs><style>.cls-1{fill:white;}</style></defs>
-					<path id="_Trazado_" data-name="&lt;Trazado&gt;" class="cls-1" d="M1970,279.47l1-277.48V0h-587a137.18,137.18,0,0,0-53.79,10.9c-3.51,1.46-6.94,3.1-10.27,4.89a137.38,137.38,0,0,0-46.81,40.08q-3.21,4.35-6.15,9a137.17,137.17,0,0,0-20.67,66.22c-.11,2.25-.18,4.51-.17,6.75,0,2.7-.09,5.35-.25,8A136.75,136.75,0,0,1,1214,211.61c-1.93,3.07-4,6.08-6.19,9a137.69,137.69,0,0,1-47.06,39.79c-3.37,1.76-6.8,3.36-10.34,4.82a137.59,137.59,0,0,1-52.9,10.54H-.29a15.14,15.14,0,0,0,0,1.91l.05,1.81H1959.36Z" transform="translate(0.31 0)"></path>
+					<path id="_Trazado_" data-name="&lt;Trazado&gt;" class="cls-1" d="M1961,280.47l1-277.48V0h-587a137.18,137.18,0,0,0-53.79,10.9c-3.51,1.46-6.94,3.1-10.27,4.89a137.38,137.38,0,0,0-46.81,40.08q-3.21,4.35-6.15,9a137.17,137.17,0,0,0-20.67,66.22c-.11,2.25-.18,4.51-.17,6.75,0,2.7-.09,5.35-.25,8A136.75,136.75,0,0,1,1214,211.61c-1.93,3.07-4,6.08-6.19,9a137.69,137.69,0,0,1-47.06,39.79c-3.37,1.76-6.8,3.36-10.34,4.82a137.59,137.59,0,0,1-52.9,10.54H-.29a15.14,15.14,0,0,0,0,1.91l.05,1.81H1959.36Z" transform="translate(0.31 0)"></path>
 				</svg>
 			</div>
 		</section>
@@ -132,8 +132,8 @@
 						<div class="col-md-4">
 							<br>
 							<div class="row">
-								<div class="col-md-4"><span style="font-size: 115px;font-weight: 750;color:#CADD68;">2<span style="font-size:100px;font-weight:50;">.</span></span></div>
-								<div class="col-md-8"><span>REGISTRA LOS DATOS<br>DE TU OFERTA LABORAL</span></div>
+								<div class="col-md-2"><span class="big-number">2<span class="point">.</span></span></div>
+								<div class="col-md-10" style="left: 40px; top:75px;"><span style="font-family : BertholdAkzidenzGroteskSuper; font-size : 20px;color : #656665;">REGISTRA LOS DATOS<br>DE TU OFERTA LABORAL</span></div>
 							</div>
 						</div>
 						<div class="col-md-8"><br></div>
@@ -141,52 +141,50 @@
 					<div class="row">
 						<div class="col-md-2"></div>
 						<div class="col-md-4">
-							<br>
 							<fieldset>
 								<br>
-								<br>
-								<h3 style="color:#CADD68;">Ciudad</h3>
-								<select class="drop-down" style="border-radius: 50px; padding:10px; width:60%;" name="city_id" >
+								<h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Ciudad</h3>
+								<select class="drop-down" style="border-radius: 50px; padding:10px; width:60%;border: 2px solid #aaa" name="city_id" >
                                     <option value="" disabled selected>Selecciona tu ciudad</option>
                                     {% for city in cities %}
                                         <option value={{ city.id }}>{{ city.name }}</option>
                                     {% endfor %}
                                 </select>
-								<h3 style="color:#CADD68;">Título de tu oferta laboral</h3>
+								<h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Título de tu oferta laboral</h3>
+								<h6 style=" font-family : Helvetica;font-size : 13px;color : #3B4754;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
+								<input class="origin-vacancy-tittle form-input" style="border-radius: 50px; padding:10px; width:100%;border: 2px solid #aaa" name="title_es"><br>
+								<h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Cargo solicitado</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
-								<input class="origin-vacancy-tittle form-input" style="border-radius: 50px; padding:10px; width:100%;" name="title_es"><br>
-								<h3 style="color:#CADD68;">Cargo solicitado</h3>
-								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
-                                <select class="drop-down" name="profession_id" style="border-radius: 50px; padding:10px; width:100%;">
+                                <select class="drop-down" name="profession_id" style="border-radius: 50px; padding:10px; width:100%;border: 2px solid #aaa">
                                     <option value="" disabled selected>Selecciona tu profesion</option>
                                     {% for profession in professions %}
                                         <option value={{ profession.id }}>{{ profession.name }}</option>
                                     {% endfor %}
                                 </select>
-								<h3 style="color:#CADD68;">Palabras clave</h3>
+								<h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Palabras clave</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
-								<select class="origin-keywords js-example-basic-multiple" style="border-radius: 50px; padding:10px; width:100%;" name="states[]" multiple="multiple">
+								<select class="origin-keywords js-example-basic-multiple" style=" padding:10px; width:100%;" name="states[]" multiple="multiple">
                                     <option value="AL">Alabama</option>
                                     <option value="O">Otra</option>
                                     <option value="WY">Wyoming</option>
 								</select>
 							</fieldset>
 						</div>
-						<div class="col-md-4">
+                        <div class="col-md-1"></div>
+						<div class="col-md-5">
 							<br>
-							<fieldset>
+							<fieldset style="width:80%;">
 								<br>
 								<br>
-								<h3 style="color:#CADD68;">Descripción de tu oferta laboral</h3>
+								<h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Descripción de tu oferta laboral</h3>
 								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
                                 <trix-editor name="description_es"></trix-editor>
 							</fieldset>
 						</div>
-						<div class="col-md-2"></div>
 					</div>
 					<div class="row">
 						<ul class="section-indicator">
@@ -205,7 +203,7 @@
 						<div class="col-xs-4">
 							<br>
 							<div class="row">
-								<div class="col-xs-4"><span style="font-size: 115px;font-weight: 750;color:#CADD68;">3<span style="font-size:100px;font-weight:50;">.</span></span></div>
+								<div class="col-xs-4"><span class="big-number">3<span class="point">.</span></span></div>
 								<div class="col-xs-8"><span>PUBLICA TU<br>OFERTA LABORAL</span></div>
 							</div>
 						</div>
@@ -278,7 +276,7 @@
             </div>
         </form>
 		<!----------------------------------------------FOOTER--------------------------------------------------------->
-		<footer class="scroll-content container-fluid">
+		<footer class="container-fluid scroll-content">
 			<div class="row" style="padding-bottom:30px;">
 				<div class=" col-xs-2 col-md-2 "></div>
 				<div class=" col-xs-3 col-md-3  navfooter" >
@@ -289,14 +287,14 @@
 					</ul>
 				</div>
 				<div class="col-xs-2 col-md-2 redesfooter" style="text-align:center">
-					<a href="https://www.linkedin.com/company-beta/16241506/" target="_blank"><img src="{% static 'business/new_images/linkedin.png' %}"></a>
-					<a href="https://www.facebook.com/PeakU-Latam-1916685895214519/?ref=aymt_homepage_panel" target="_blank"><img src="{% static 'business/new_images/facebook.png' %}"></a>
-					<a href="#" target="_blank"><img src="{% static 'business/new_images/instagram.png' %}"></a>
-					<a href="#" target="_blank"><img src="{% static 'business/new_images/twitter.png' %}"></a>
+					<a href="https://www.linkedin.com/company-beta/16241506/" target="_blank"><img src="{% static 'business/img/linkedin.png' %}"></a>
+					<a href="https://www.facebook.com/PeakU-Latam-1916685895214519/?ref=aymt_homepage_panel" target="_blank"><img src="{% static 'business/img/facebook.png' %}"></a>
+					<a href="#" target="_blank"><img src="{% static 'business/img/instagram.png' %}"></a>
+					<a href="#" target="_blank"><img src="{% static 'business/img/twitter.png' %}"></a>
 				</div>
 				<div class=" col-xs-1 col-md-1"></div>
 				<div class=" col-xs-2 col-md-2 navfootercontact">
-					<div style="width:20%; float:left; display:block; margin-top:10px; margin-left:-30px; "><a href="#"><img src="{% static 'business/new_images/logo-white.png' %}"></a></div>
+					<div style="width:20%; float:left; display:block; margin-top:10px; margin-left:-30px; "><a href="#"><img src="{% static 'business/img/logo-white.png' %}"></a></div>
 					<div style="width:80%; float:right; display:block; padding-left:20px">contacto@peaku.co<br>
 						+57 311 6109340<br>
 						Colombia
@@ -306,7 +304,7 @@
 			</div>
 			<div class="row">
 				<div class="col-1 col-md-1"></div>
-				<div class="col-10 copyright">Copyright 2016 © PeakU. Todos los derechos reservados.</div>
+				<div class="col-10 copyright">Copyright 2018 © PeakU. Todos los derechos reservados.</div>
 				<div class="col-1"></div>
 			</div>
 		</footer>
@@ -429,6 +427,25 @@
         <script>
             $(document).ready(function() {
                 $('.js-example-basic-multiple').select2();
+                $('.select2-selection').css({'border-radius':'50px','border':'2px solid #aaa','padding':'6px', 'width':'100%'});
+            });
+
+        </script>
+
+        <script>
+            $(window).scroll(function(e){
+            var $el = $('.fixedElement');
+            var isPositionFixed = ($el.css('position') == 'fixed');
+            if ($(this).scrollTop() > 2 && !isPositionFixed){
+            $('.fixedElement').css({'position': 'fixed', 'right': '6.6%', 'z-index':'100'});
+            }
+            if ($(this).scrollTop() > 2 && !isPositionFixed){
+            $('.fixedElement').css({'position': 'static', 'right': '6.6%', 'z-index':'100'});
+            }
+            if ($(this).scrollTop() < 2 && isPositionFixed)
+            {
+            $('.fixedElement').css({'position': 'static', 'right': '6.6%'});
+            }
             });
         </script>
 	</body>
