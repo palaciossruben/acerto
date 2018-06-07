@@ -275,6 +275,33 @@
                     </div>
                 </div>
             </section>
+    		<div id="overlay">
+                <div id="form-image">
+                    <div id="register-form">
+                        <fieldset>
+                            <span id="exitDingbat" onclick="off()">X</span>
+                            <br>
+                            <br>
+                            <span>Nombre</span>
+                            <input class="form-input" name="name" required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
+ 							<br>
+                            <span>Empresa</span>
+                            <input class="form-input" name="company">
+                            <span>Correo</span>
+                            <input class="form-input" type="email" name="username" required="required">
+                            <span>Teléfono</span>
+                            <input class="form-input" type="tel" name="phone" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
+                            <br>
+                            <span>Contraseña</span>
+                            <input class="form-input" type="password" name="password1" required="required">
+							<br>
+                            <span>Confirmar contraseña</span>
+                            <input class="form-input" type="password" name="password2" required="required">
+                            <br>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
         </form>
         <!----------------------------------------------FOOTER--------------------------------------------------------->
         <footer class="container-fluid">
@@ -373,6 +400,42 @@
             });
 
         </script>
+        <!--Form Transition-->
+		<script>
+            function on() {
+            if (document.getElementById("overlay").style.display != "block") {
+            console.log("dentro del if")
+            document.getElementById("overlay").style.display = "block";
+            document.getElementById("register-form").style.display = "block";
+            $("html").css("background-size", "cover");
+            $("#option1").css("color", "white");
+            $("#option2").css("color", "white");
+            $("nav").css("margin-bottom", "40px");
+            $("#register-form").animate({"marginLeft": '60%'}, 650,"swing");
+            $("#form-image").animate({"backgroundPosition": '86%'}, 650,"swing");
+            $("html").css("overflow", "hidden");
+            //$("#publish-campaign-button").animate({left: '250px'}, 2000, "swing");
+            $("#publish-campaign-button").animate({marginTop: '370px', marginLeft: '160px', marginRight: '-160px'}, 2000, "swing");
+            $("#publish-campaign-button").css('z-index', 9999);
+            $("#publish-campaign-button").css('position', 'absolute');
+            } else { // enters here upon the second click
+                document.getElementById("big-form").submit();
+            }
+            }
+
+            function off() {
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("register-form").style.display = "none";
+            $("html").css("background-size", "contain");
+            $("#option1").css("color", "#3d4753");
+            $("#option2").css("color", "#3d4753");
+            $("nav").css("margin-bottom", "");
+            $("#register-form").animate({marginLeft: '160%'});
+            $("#form-image").animate({"backgroundPosition": '186%'}, 650,"swing");
+            $("html").css("overflow-y", "scroll");
+            }
+		</script>
+
         <!--Scroll for indicator
         <script>
             $(window).scroll(function(e){
