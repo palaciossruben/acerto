@@ -100,7 +100,7 @@ width: 170px;
   vertical-align: middle;
   overflow: hidden;
   height:auto;
-  bottom:-5px;
+  bottom:-1%;
   position:absolute;
   opacity:0.99;
 }
@@ -108,14 +108,16 @@ width: 170px;
 /**************************************************SECTIONS************************************************************/
 
 .main-section {
-	height: 100%;
+	width:auto;
 	background: url(../img/Start_BG-01-min.jpg);
 	background-size: cover;
+	background-repeat: no-repeat;
 	position: relative;
 }
 
 .section-three {
-    height: 100%;
+    width:auto;
+    min-height:700px;
 	background: url(../img/start_section3.png);
 	background-size: cover;
 	position: relative;
@@ -168,7 +170,7 @@ width: 170px;
 
 
 
-/**************************************************GRADIENTS AND TRANSITIONS*******************************************/
+/**************************************************GRADIENTS AND OVERLAYS**********************************************/
 
 .gradient1 {
     background:-webkit-linear-gradient(90deg, rgba(23,32,42,0) 0%, rgba(23,32,42,1) 100%);
@@ -184,27 +186,8 @@ width: 170px;
     background:linear-gradient(180deg, rgba(23,32,42,0) 60%,  rgba(23,32,42,0.5) 80%, rgba(0,0,0,0.6) 100%);
 }
 
-#overlay {
-    position:fixed;
-    width: 100%;
-    height: 90%;
-    top: 0;
-    right: 0;
-    left:0;
-    bottom: 0;
-    display:none;
-    background:transparent;
-    }
-
-#form-image {
-    background: url(../img/form_bg.png) no-repeat top center scroll;
-			-webkit-background-size: contain;
-			-moz-background-size: contain;
-			-o-background-size: contain;
-			background-size: 580px 430px;
-			background-position: 86% 0%;
-}
-
+/**************************************************TRANSITIONS*********************************************************/
+/*
 #register-form {
     z-index:1;
     position: relative;
@@ -246,10 +229,16 @@ width: 170px;
     cursor:pointer;
     margin-right: -50px;
 }
+*/
+
+
+
 
 /**************************************************SECTION INDICATOR***************************************************/
 
-
+.section-two {
+    margin-bottom:70px;
+}
 
 .section-indicator {
     float: right;
@@ -375,7 +364,6 @@ trix-editor ul {
 footer {
     background-color:#3d4753;
     color:#FFFFFF;
-    max-height:310px;
 }
 
 .navfooter {
@@ -441,12 +429,17 @@ footer {
 /**************************************************RESPONSIVE**********************************************************/
 
 @media screen and (max-width: 600px) {
-  .topnav a:not(:first-child){
-    display: none;
-  }
-  .topnav a.icon {
+
+    .icon {
+        margin-right:20px;
+    }
+
+    .topnav a:not(:first-child){display: none;}
+    .topnav a.icon {
     float: right;
     display: block;
-  }
+    }
 }
+
+
 
