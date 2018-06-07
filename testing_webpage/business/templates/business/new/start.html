@@ -136,7 +136,16 @@
 								<div class="col-md-10" style="left: 40px; top:75px;"><span style="font-family : BertholdAkzidenzGroteskSuper; font-size : 20px;color : #656665;">REGISTRA LOS DATOS<br>DE TU OFERTA LABORAL</span></div>
 							</div>
 						</div>
-						<div class="col-md-8"><br></div>
+						<div class="col-md-8">
+                            <br>
+                            <div class="row" style="margin-right:0px;">
+                                <ul class="section-indicator">
+                                    <li class="active"><div class="div-indicator"></div>Personaliza</li>
+                                    <li class="active"><div class="div-indicator"></div>Diligencia</li>
+                                    <li><div class="div-indicator"></div>Publica</li>
+                                </ul>
+                            </div>
+                        </div>
 					</div>
 					<div class="row">
 						<div class="col-md-2"></div>
@@ -145,27 +154,24 @@
 								<br>
 								<h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Ciudad</h3>
 								<select class="drop-down" style="border-radius: 50px; padding:10px; width:60%;border: 2px solid #aaa" name="city_id" >
-                                    <option value="" disabled selected>Selecciona tu ciudad</option>
+                                    <option value="" disabled selected></option>
                                     {% for city in cities %}
                                         <option value={{ city.id }}>{{ city.name }}</option>
                                     {% endfor %}
                                 </select>
-								<h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Título de tu oferta laboral</h3>
-								<h6 style=" font-family : Helvetica;font-size : 13px;color : #3B4754;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
+								<h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Título de la oferta</h3>
+								<h6 style=" font-family : Helvetica;font-size : 13px;color : #3B4754;">Usa un título específico para que los candidatos tengan muy claro a que están aplicando</h6>
 								<input class="origin-vacancy-tittle form-input" style="border-radius: 50px; padding:10px; width:100%;border: 2px solid #aaa" name="title_es"><br>
 								<h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Cargo solicitado</h3>
-								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
-                                <select class="drop-down" name="profession_id" style="border-radius: 50px; padding:10px; width:100%;border: 2px solid #aaa">
-                                    <option value="" disabled selected>Selecciona tu profesion</option>
-                                    {% for profession in professions %}
-                                        <option value={{ profession.id }}>{{ profession.name }}</option>
+								<h6>Selecciona el área que más se adapte al perfil que estás buscando</h6>
+                                <select class="drop-down" name="work_area_id" style="border-radius: 50px; padding:10px; width:100%;border: 2px solid #aaa">
+                                    <option value="" disabled selected></option>
+                                    {% for work_area in work_areas %}
+                                        <option value={{ work_area.id }}>{{ work_area.name }}</option>
                                     {% endfor %}
                                 </select>
 								<h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Palabras clave</h3>
-								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
+								<h6>Agrega palabras clave que ayuden a los candidatos a encontrar tu oferta más facilmente</h6>
 								<select class="origin-keywords js-example-basic-multiple" style=" padding:10px; width:100%;" name="states[]" multiple="multiple">
                                     <option value="AL">Alabama</option>
                                     <option value="O">Otra</option>
@@ -180,18 +186,10 @@
 								<br>
 								<br>
 								<h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Descripción de tu oferta laboral</h3>
-								<h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-									eiusmod tempor incididunt ut labore et dolore magna aliqua</h6>
+								<h6>Explica la oferta lo mejor posible, te recomendamos ingresar el detalle de la vacante, requisitos y beneficios. Trata de usar poco texto y dar mucha información !</h6>
                                 <trix-editor name="description_es"></trix-editor>
 							</fieldset>
 						</div>
-					</div>
-					<div class="row">
-						<ul class="section-indicator">
-							<li class="active"><div class="div-indicator"></div>Personaliza</li>
-							<li class="active"><div class="div-indicator"></div>Diligencia</li>
-							<li><div class="div-indicator tablinks"></div>Publica</li>
-						</ul>
 					</div>
 				</div>
 			</section>
@@ -204,42 +202,34 @@
 							<br>
 							<div class="row">
 								<div class="col-xs-4"><span class="big-number">3<span class="point">.</span></span></div>
-								<div class="col-xs-8"><span>PUBLICA TU<br>OFERTA LABORAL</span></div>
+								<div class="col-xs-8" style="left: 40px; top:75px;"><span style="font-family : BertholdAkzidenzGroteskSuper; font-size : 20px;color : #656665;">PUBLICA TU<br>OFERTA LABORAL</span></div>
 							</div>
 						</div>
-						<div class="col-xs-8"><br></div>
+						<div class="col-xs-8"><br>
+                            <div class="row" style="margin-right:0px;">
+                                <ul class="section-indicator">
+                                    <li class="active"><div class="div-indicator"></div>Personaliza</li>
+                                    <li class="active"><div class="div-indicator"></div>Diligencia</li>
+                                    <li class="active"><div class="div-indicator tablinks"></div>Publica</li>
+                                </ul>
+                            </div>
+                        </div>
 					</div>
 					<div class="row">
-						<div class="col-xs-2">
-							<h3 style="transform: rotate(-90deg);">RESUMEN</h3>
-							<div class="keywords"></div>
-						</div>
-						<div class="col-xs-4">
-							<br>
-							<fieldset>
-								<br>
-								<br>
-								<h3 style="color:#CADD68;">Ciudad</h3>
-								<h6 class="city"></h6><br>
-								<h3 style="color:#CADD68;">Título de tu oferta laboral</h3>
-								<h6 class="vacancy-tittle"></h6><br>
-								<h3 style="color:#CADD68;">Cargo solicitado</h3>
-								<h6 class="charge"></h6><br>
-								<h3 style="color:#CADD68;">Descripción de tu oferta laboral</h3>
-								<h6 class="vacancy-description"></h6>
+						<div class="col-md-6">
+                            <div class="little-section"></div>
+                        </div>
+						<div class="col-xs-4" style="margin-top:-70px">
+                            <fieldset>
+                                <span style="font-family : BertholdAkzidenzGroteskSuper; font-size : 35px; color : #656665;  opacity : 0.2;">RESUMEN<br>DE TU CAMPAÑA</span>
+								<h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Cargo solicitado</h3>
+								<h6 class="charge" style=" font-family : Helvetica;font-size : 13px;color : #3B4754;"></h6><br>
+								<h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Descripción de tu oferta laboral</h3>
+								<h6 class="vacancy-description" style=" font-family : Helvetica;font-size : 13px;color : #3B4754;"></h6>
 							</fieldset>
-						</div>
-						<div class="col-xs-4">
 							<a id="publish-campaign-button" class="button-cta" role="button" onclick="on()">PUBLICAR MI CAMPAÑA</a>
 						</div>
 						<div class="col-xs-2"></div>
-					</div>
-					<div class="row">
-						<ul class="section-indicator">
-							<li class="active"><div class="div-indicator"></div>Personaliza</li>
-							<li class="active"><div class="div-indicator"></div>Diligencia</li>
-							<li class="active"><div class="div-indicator"></div>Publica</li>
-						</ul>
 					</div>
 				</div>
 			</section>
@@ -320,7 +310,8 @@
 
 			$('.regular').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
 				var background = $('.slide-' + nextSlide).data('background');
-				$(".main-section").css('background', 'url(' + background + ') 0% 0% / cover')
+				$(".main-section").css('background', 'url(' + background + ') 0% 0% / cover');
+				$(".little-section").css('background', 'url(' + background + ') 0% 0% / cover')
 			});
 		</script>
         <!--TopNav-->
@@ -348,26 +339,11 @@
 			 	$('.vacancy-tittle').text(text);
 			});
 
-			$('.origin-charge').on('keyup', function() {
-
-				var text = $(this).val();
+			$('.drop-down').on('change', function() {
+				var text = $(this).find('option:selected').text();
 			 	$('.charge').text(text);
 			});
 
-			$('.origin-keywords').on('select2:select select2:unselect', function(e) {
-			 	var data = $('.origin-keywords').select2('data');
-
-			 	$('.keywords').empty();
-			 	$.each(data, function(key, value) {
-			 	   $('.keywords').append('<h6>' + value.text + '</h6>');
-			 	})
-			 });
-
-			 $('#text-area').on('keyup', function() {
-
-				var text = $(this).val();
-			 	$('.vacancy-description').text(text);
-			});
 		</script>
         <!--Form Transition-->
 		<script>
@@ -436,15 +412,12 @@
             $(window).scroll(function(e){
             var $el = $('.fixedElement');
             var isPositionFixed = ($el.css('position') == 'fixed');
-            if ($(this).scrollTop() > 2 && !isPositionFixed){
-            $('.fixedElement').css({'position': 'fixed', 'right': '6.6%', 'z-index':'100'});
+            if ($(this).scrollTop() > 1 && !isPositionFixed){
+            $('.fixedElement').css({'position': 'fixed', 'right': '5%', 'z-index':'100'});
             }
-            if ($(this).scrollTop() > 2 && !isPositionFixed){
-            $('.fixedElement').css({'position': 'static', 'right': '6.6%', 'z-index':'100'});
-            }
-            if ($(this).scrollTop() < 2 && isPositionFixed)
+            if ($(this).scrollTop() < 1 && isPositionFixed)
             {
-            $('.fixedElement').css({'position': 'static', 'right': '6.6%'});
+            $('.fixedElement').css({'position': 'static', 'right': '5%'});
             }
             });
         </script>

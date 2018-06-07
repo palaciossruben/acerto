@@ -114,6 +114,24 @@ width: 170px;
 	position: relative;
 }
 
+.section-three {
+    height: 100%;
+	background: url(../img/start_section3.png);
+	background-size: cover;
+	position: relative;
+}
+
+.little-section {
+    width:80%;
+    height:auto;
+    height:250px;
+    background: url(../img/Start_BG-01-min.jpg);
+    background-size: cover;
+    position: absolute;
+    border-radius:40px;
+    margin-top:60px;
+}
+
 .button-cta {
     background-color: #ff9933;
 	border-radius:40px;
@@ -357,7 +375,7 @@ trix-editor ul {
 footer {
     background-color:#3d4753;
     color:#FFFFFF;
-    max-height:300px;
+    max-height:310px;
 }
 
 .navfooter {
