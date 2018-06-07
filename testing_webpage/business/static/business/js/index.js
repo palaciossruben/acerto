@@ -1,15 +1,15 @@
 function on_signup() {
-    document.getElementById("overlay-signup").style.display = "block";
-    document.getElementById("hide1").style.display = "none";
-    document.getElementById("hide2").style.display = "none";
-    document.getElementById("register-form").style.display = "block";
+    $("#overlay-signup").css("display", "block");
+    $("#hide1").css("display", "none");
+    $("#hide2").css("display", "none");
+    $("#register-form").css("display", "block");
     $("html").css("background-size", "cover");
     $("#option1").css("color", "white");
     $("#option2").css("color", "white");
-    $("nav").css("margin-bottom", "40px");
     $("#register-form").animate({"marginLeft": '60%'}, 650,"swing");
     $("#form-image").animate({"backgroundPosition": '86%'}, 650,"swing");
     $("html").css("overflow", "hidden");
+    $("nav").css("margin-bottom", "40px");
 }
 
 function off_signup() {
