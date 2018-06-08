@@ -21,7 +21,7 @@ import beta_invite
 from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
-from beta_invite.models import User, BulletType
+from beta_invite.models import User, BulletType, WorkArea
 from business.models import Plan, Contact, Search
 from business.models import BusinessUser
 from business.custom_user_creation_form import CustomUserCreationForm
@@ -379,7 +379,7 @@ def start(request):
     return render(request, cts.START_VIEW_PATH, {'requirement_bullet_id': requirement_bullet_id,
                                                  'perk_bullet_id': perk_bullet_id,
                                                  'error_message': '',
-                                                 'professions': common.get_professions(request.LANGUAGE_CODE),
+                                                 'work_areas': common.translate_list_of_objects(WorkArea.objects.all(), request.LANGUAGE_CODE),
                                                  'cities': common.get_cities()})
 
 
@@ -394,7 +394,7 @@ def create(request):
     return render(request, cts.CREATE_VIEW_PATH, {'requirement_bullet_id': requirement_bullet_id,
                                                   'perk_bullet_id': perk_bullet_id,
                                                   'business_user_id': request.POST.get('business_user_id'),
-                                                  'professions': common.get_professions(request.LANGUAGE_CODE)
+                                                  'work_areas': common.translate_list_of_objects(WorkArea.objects.all(), request.LANGUAGE_CODE)
                                                   })
 
 
