@@ -353,3 +353,11 @@ def save_resource_from_request(request, my_object, param_name, folder_name):
 
     else:
         return '#'
+
+
+def user_has_job(user):
+    """
+    Returns boolean indicating if user already has a job.
+    """
+    candidates = Candidate.objects.filter(user=user, state__code='GTJ')
+    return candidates.exists()

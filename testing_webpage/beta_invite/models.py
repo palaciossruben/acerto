@@ -296,6 +296,7 @@ class Campaign(models.Model):
     seniority = models.ForeignKey(Seniority, null=True)
     job_function = models.ForeignKey(JobFunctions, null=True)
     has_email = models.BooleanField(default=True)
+    work_area = models.ForeignKey(WorkArea, null=True, on_delete=models.SET_NULL)
 
     # TODO: remove circular dependency
     # plan = models.ForeignKey(Plan, null=True, on_delete=models.DO_NOTHING)

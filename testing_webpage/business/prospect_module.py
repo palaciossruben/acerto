@@ -74,26 +74,52 @@ def cluster_filter(candidates):
     return [candidate for c, candidate in zip(clusters, candidates) if c in pickle_handler.load_selected_clusters()]
 
 
+def non_null_equal(a, b):
+    if a is not None and b is not None:
+        return a == b
+    return False
+
+
+def get_desc_sorted_iterator(candidates_rank):
+    return reversed(sorted([(c, rank) for c, rank in candidates_rank], key=lambda t: t[1]))
+
+
+def rank(campaign, users):
+    """
+    Sorts according to given criteria:
+    1. city
+    2. country
+    3. work area
+    4. prediction
+    :param campaign:
+    :param users:
+    :return:
+    """
+    candidates = [Candidate(user=u, campaign=campaign, pk=1) for u in users]
+
+    candidates_rank = [(c, non_null_equal(c.user.city, c.campaign.city) +
+                           non_null_equal(c.user.country, c.campaign.country) +
+                           non_null_equal(c.user.work_area, c.campaign.work_area)) for c in candidates]
+
+    candidates_rank = [(c, rank) for c, rank in get_desc_sorted_iterator(candidates_rank)]
+
+    # Cuts top candidates because its too expensive a prediction on all candidates and a job filter too.
+    candidates_rank = candidates_rank[:NUMBER_OF_MATCHES]
+    candidates_rank = [(c, rank) for c, rank in candidates_rank if not common.user_has_job(c.user)]
+
+    prediction, candidates = model.predict_match([c for c, rank in candidates_rank], regression=False)
+    candidates_rank = [(c, rank + p) for (c, rank), p in zip(candidates_rank, prediction)]
+
+    return [c.user for c, rank in get_desc_sorted_iterator(candidates_rank)]
+
+
 def get_top_users(campaign):
 
     # TODO: this feature only supports Spanish.
     search_text = campaign.get_search_text()
     search_array = search_module.get_word_array_lower_case_and_no_accents(search_text)
     users = search_module.get_matching_users(search_array)
-
-    # candidates = cluster_filter(candidates)
-    # TODO meanwhile:
-    users = [u for u in users if (u.city == campaign.city or u.country == campaign.country) and u.profession == campaign.profession]
-
-    top_users = [u for u in users][:NUMBER_OF_MATCHES]
-    top_users = filter_users_with_job(top_users)
-
-    candidates = [Candidate(user=u, campaign=campaign, pk=1) for u in top_users]
-
-    prediction, candidates = model.predict_match(candidates, regression=False)
-
-    # sorts for predicted users.
-    return [u for u, p in reversed(sorted([(c.user, p) for p, c in zip(prediction, candidates)], key=lambda t: t[1]))]
+    return rank(campaign, users)
 
 
 def get_candidates(campaign):
