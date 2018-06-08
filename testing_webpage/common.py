@@ -229,7 +229,10 @@ def get_city(request, country):
     """
 
     if settings.DEBUG:
-        return City.objects.get(name='Bogotá', country=country)
+        try:
+            return City.objects.get(name='Bogotá', country=country)
+        except ObjectDoesNotExist:
+            pass
 
     city_name = get_city_name_with_request(request)
 
