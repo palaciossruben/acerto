@@ -93,7 +93,7 @@
                 </div>
             </div>
                     <div id="overlay-login">
-                        <div id="form-image2">
+                        <div class="form-image">
                             <form id="login-form" method="post" action="{% url 'business:home' %}" >
                                 {% csrf_token %}
                                 <fieldset>
@@ -323,7 +323,7 @@
                             </div>
                         </div>
                         <div class="col-xs-4" style="margin-top:-70px">
-                            <fieldset>
+                            <fieldset class="final-hide">
                                 <span style="font-family : BertholdAkzidenzGroteskSuper; font-size : 35px; color : #656665;  opacity : 0.2;">RESUMEN<br>DE TU OFERTA</span>
                                 <h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Cargo solicitado</h3>
                                 <h6 class="charge" style=" font-family : Helvetica;font-size : 13px;color : #3B4754;"></h6>
@@ -338,7 +338,7 @@
                 </div>
             </section>
             <div id="overlay">
-                <div class="form-image">
+                <div class="form-image final">
                     <div id="register-form">
                         <fieldset>
                             <span class="exitDingbat" onclick="off()">X</span>
@@ -472,26 +472,26 @@
             $("#option1").css("color", "white");
             $("#option2").css("color", "white");
             $("nav").css("margin-bottom", "40px");
-            $("#register-form").animate({"marginLeft": '60%'}, 650,"swing");
-            $(".form-image").animate({"backgroundPosition": '86%'}, 650,"swing");
-            //$("#publish-campaign-button").animate({left: '250px'}, 2000, "swing");
-            $("#publish-campaign-button").animate({marginTop: '370px', marginLeft: '160px', marginRight: '-160px'}, 2000, "swing");
+            $("#register-form").animate({"opacity": '1'}, 1500,"swing");
+            $("#publish-campaign-button").animate({marginTop: '60%', marginLeft: '8%'}, 2000, "swing");
             $("#publish-campaign-button").css('z-index', 9999);
             $("#publish-campaign-button").css('position', 'absolute');
+            $(".final-hide").animate({"opacity": '0'}, 1500,"swing");
+
             } else { // enters here upon the second click
                 document.getElementById("big-form").submit();
             }
             }
 
             function off() {
-            document.getElementById("overlay").style.display = "none";
-            document.getElementById("register-form").style.display = "none";
             $("html").css("background-size", "contain");
             $("#option1").css("color", "#3d4753");
             $("#option2").css("color", "#3d4753");
             $("nav").css("margin-bottom", "");
-            $("#register-form").animate({marginLeft: '160%'});
-            $(".form-image").animate({"backgroundPosition": '186%'}, 650,"swing");
+            $("#register-form").animate({"opacity": '0'}, 1500,"swing");
+            $("#publish-campaign-button").animate({marginTop: '0%', marginLeft: '0%'}, 2000, "swing");
+            $(".final-hide").animate({"opacity": '1'}, 1500,"swing");
+
             }
         </script>
         <script>
@@ -528,6 +528,7 @@
             $("#option2").css("color", "white");
             $("nav").css("margin-bottom", "40px");
             $(".only-register-form").animate({"marginLeft": '60%'}, 650,"swing");
+            $(".form-image").animate({"backgroundPosition": '86%'}, 690,"swing");
             $("html").css("overflow", "hidden");
             }
 
@@ -540,6 +541,7 @@
             $("#option2").css("color", "#3d4753");
             $("nav").css("margin-bottom", "");
             $(".only-register-form").animate({marginLeft: '160%'});
+            $(".form-image").animate({"backgroundPosition": '186%'}, 1,"swing");
             $("html").css("overflow-y", "scroll");
             }
         </script>
