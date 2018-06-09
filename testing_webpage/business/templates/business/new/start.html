@@ -37,6 +37,14 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
         <!--Our js-->
         <script type="text/javascript" src="{% static 'business/js/start.js' %}"></script>
+        <script id="Heat-map" type="text/javascript">
+        window.smartlook||(function(d) {
+        var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+        var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+        c.charset='utf-8';c.src='https://rec.smartlook.com/recorder.js';h.appendChild(c);
+        })(document);
+        smartlook('init', '495c7bd6807a0ab2c17ade2e03cac13bab9f1b84');
+        </script>
     </head>
     <!----------------------------------------------SECTION 1---------------------------------------------------------->
     <body>
@@ -171,6 +179,7 @@
                                 </section>
                             </div>
                             <div class="col-xs-4">
+                                <!--
                                 <ul class="section-indicator">
                                     <li class="active">
                                         <div class="div-indicator"></div>
@@ -184,7 +193,7 @@
                                         <div class="div-indicator"></div>
                                         Publica
                                     </li>
-                                </ul>
+                                </ul>-->
                             </div>
                         </div>
                     </div>
@@ -212,30 +221,12 @@
                                 <div class="col-md-10" style="left: 40px; top:75px;"><span style="font-family : BertholdAkzidenzGroteskSuper; font-size : 20px;color : #656665;">REGISTRA LOS DATOS<br>DE TU OFERTA LABORAL</span></div>
                             </div>
                         </div>
-                        <div class="col-md-8">
-                            <br>
-                            <div class="row" style="margin-right:0px;">
-                                <ul class="section-indicator">
-                                    <li class="active">
-                                        <div class="div-indicator"></div>
-                                        Personaliza
-                                    </li>
-                                    <li class="active">
-                                        <div class="div-indicator"></div>
-                                        Diligencia
-                                    </li>
-                                    <li>
-                                        <div class="div-indicator"></div>
-                                        Publica
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        <div class="col-md-8"></div>
                     </div>
                     <div class="row">
                         <div class="col-md-2"></div>
                         <div class="col-md-4">
-                            <fieldset>
+                            <fieldset class="section2-content">
                                 <br>
                                 <h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Ciudad</h3>
                                 <select class="origin-city" style="border-radius: 50px; padding:10px; width:60%;border: 2px solid #aaa" name="city_id" >
@@ -256,6 +247,7 @@
                                     {% endfor %}
                                 </select>
                                 <h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Rango salarial</h3>
+                                <h6>Asigna el rango salarial que estás dispuesto a ofrecer</h6>
                                 <input class="origin-salary-min form-input little" step="100000" type="number" min="0" style="border-radius: 50px; padding:10px; width:45%;display:inline;border: 2px solid #aaa" name="salary">
                                 <span style="margin: 0px 2.4%;">a</span>
                                 <input class="origin-salary-max form-input little" step="100000" type="number" min="0" style="border-radius: 50px; padding:10px; width:45%;display:inline;border: 2px solid #aaa" name="salary">
@@ -294,35 +286,18 @@
                                 <div class="col-xs-8" style="left: 40px; top:75px;"><span style="font-family : BertholdAkzidenzGroteskSuper; font-size : 20px;color : #656665;">PUBLICA TU<br>OFERTA LABORAL</span></div>
                             </div>
                         </div>
-                        <div class="col-xs-8">
-                            <br>
-                            <div class="row" style="margin-right:0px;">
-                                <ul class="section-indicator">
-                                    <li class="active">
-                                        <div class="div-indicator"></div>
-                                        Personaliza
-                                    </li>
-                                    <li class="active">
-                                        <div class="div-indicator"></div>
-                                        Diligencia
-                                    </li>
-                                    <li class="active">
-                                        <div class="div-indicator tablinks"></div>
-                                        Publica
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        <div class="col-xs-8"></div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="little-section">
+                            <div class="little-section final-hide">
                                 <h6 class="vacancy-tittle"></h6>
                                 <br>
                                 <h6 class="city"></h6>
                             </div>
+                            <a id="publish-campaign-button" class="button-cta" role="button" onclick="on()">PUBLICAR MI OFERTA</a>
                         </div>
-                        <div class="col-xs-4" style="margin-top:-70px">
+                        <div class="col-xs-4" >
                             <fieldset class="final-hide">
                                 <span style="font-family : BertholdAkzidenzGroteskSuper; font-size : 35px; color : #656665;  opacity : 0.2;">RESUMEN<br>DE TU OFERTA</span>
                                 <h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Cargo solicitado</h3>
@@ -331,12 +306,11 @@
                                 <h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Descripción de tu oferta laboral</h3>
                                 <h6 class="vacancy-description" style=" font-family : Helvetica;font-size : 13px;color : #3B4754;"></h6>
                             </fieldset>
-                            <a id="publish-campaign-button" class="button-cta" role="button" onclick="on()">PUBLICAR MI OFERTA</a>
                         </div>
                         <div class="col-xs-2"></div>
                     </div>
                 </div>
-            </section>
+
             <div id="overlay">
                 <div class="form-image final">
                     <div id="register-form">
@@ -364,6 +338,7 @@
                     </div>
                 </div>
             </div>
+            </section>
         </form>
         <!----------------------------------------------FOOTER--------------------------------------------------------->
         <footer class="container-fluid">
