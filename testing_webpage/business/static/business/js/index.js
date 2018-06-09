@@ -7,7 +7,7 @@ function on_signup() {
     $("#option1").css("color", "white");
     $("#option2").css("color", "white");
     $("#register-form").animate({"marginLeft": '60%'}, 650,"swing");
-    $("#form-image").animate({"backgroundPosition": '86%'}, 650,"swing");
+    $("#form-image").animate({"backgroundPosition": '86%'}, 690,"swing");
     $("html").css("overflow", "hidden");
     $("nav").css("margin-bottom", "40px");
 }

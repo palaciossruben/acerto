@@ -46,16 +46,79 @@
                     <div class="topnav" id="myTopnav">
                         <div>
                             <a href="/staffing" style="float:left"><img src="{% static 'business/img/logo-color.png' %}" style="margin-left:30px;" width="70px" id="logo"></a>
-                            <a class="navButton" role="button" onclick="on2()">INICIA SESIÓN</a>
-                            <a class="navButton" role="button" onclick="on()">CREA TU CUENTA</a>
+                            <a class="navButton" role="button" onclick="on_login()">INICIA SESIÓN</a>
+                            <a class="navButton" role="button" onclick="on_signup()">CREA TU CUENTA</a>
                             <a href="{% url 'business:contact_form' %}" style="margin: 15px 10px;">Contáctanos</a>
                             <a href="{% url 'beta_invite:index' %}" style="margin: 15px 10px;">Personas</a>
                             <a href="javascript:void(0);" style="font-size:25px;" class="icon" onclick="myFunction()">&#9776;</a>
                         </div>
                     </div>
+                    <div id="overlay-signup">
+                <div class="form-image">
+                    <form class="only-register-form" action="{% url 'business:business_signup' %}" method="post">
+						{% csrf_token %}
+                        <fieldset>
+                            <span class="exitDingbat" onclick="off_signup()">X</span>
+                            <br>
+                            <br>
+
+                            <span>Nombre</span>
+                            <input class="form-input" name="name"
+							required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
+							<br>
+                            <span>Empresa</span>
+                            <input class="form-input" name="company">
+							<br>
+                            <span>Correo</span>
+                            <input class="form-input" type="email" name="username" required="required">
+							<br>
+                            <span>Teléfono</span>
+                            <input class="form-input" type="tel" name="phone"
+								   required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
+							<br>
+                            <span>Contraseña</span>
+                            <input class="form-input" type="password" name="password1" required="required">
+							<br>
+                            <span>Confirmar contraseña</span>
+                            <input class="form-input" type="password" name="password2" required="required">
+                            <br>
+                            <input type="submit" class="submit" value="COMIENZA AHORA">
+                        </fieldset>
+                        <span style="color:white;margin-left:30px;">¿Ya eres un usuario registrado? Inicia sesión
+							<a style="color:white" href="javascript:void(0);" onclick="off_signup() & on_login()">
+								<strong>Aquí</strong>
+							</a>
+						</span>
+                    </form>
+                </div>
+            </div>
+                    <div id="overlay-login">
+                        <div class="form-image">
+                            <form id="login-form" method="post" action="{% url 'business:home' %}" >
+                                {% csrf_token %}
+                                <fieldset>
+                                    <span class="exitDingbat" onclick="off_login()">X</span>
+                                    <br>
+                                    <br>
+                                    <span>Correo</span>
+                                    <input name="username" class="form-input"><br>
+                                    <span>Contraseña</span>
+                                    <input name="password" class="form-input" type="password"><br>
+                                    <span style="font-size:10px;"><a href="#" style="color:white">Olvidé mi contraseña</a></span>
+                                    <span style="font-size:10px">
+                                    <a href="javascript:void(0);" style="color:white" onclick="off_login() & on_signup()">Aun no estoy registrado
+                                    </a>
+                                    </span>
+                                    <br>
+                                    <br>
+                                    <input type="submit" class="submit" value="ACCEDER">
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
                     <div class="container">
                         <div class="row" style="height:450px; color: white;">
-                            <div class="col-xs-6">
+                            <div class="col-xs-6 hidejs">
                                 <div class="col-xs-2" style="top:300px;">
                                     <span class="big-number first">1<span class="first-point">.</span></span>
                                 </div>
@@ -63,7 +126,7 @@
                                     <span style="font-family : BertholdAkzidenzGroteskSuper; font-size : 20px;color : #FFFFFF;"><br>ESCOGE UN FONDO<br>ACORDE A TU VACANTE</span>
                                 </div>
                             </div>
-                            <div class="col-xs-6" style="text-align:right;top:150px;">
+                            <div class="col-xs-6 hidejs" style="text-align:right;top:150px;">
                                 <span style="font-family: BertholdAkzidenzGroteskSuper; font-size: 40px; color: rgb(255, 255, 255);">
                                 PERSONALIZA TU<br>
                                 OFERTA EN 3 PASOS<br>
@@ -74,7 +137,7 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row hidejs">
                             <div class="col-xs-8">
                                 <section class="regular slider">
                                     <div class="slide-0 slide-css" data-background="{% static 'business/img/Start_BG-01-min.jpg' %}">
@@ -127,7 +190,7 @@
                     </div>
                 </div>
             </div>
-            <div class="svg-container">
+            <div class="svg-container hidejs">
                 <svg id="the-S" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1960.62 279.47">
                     <defs>
                         <style>.cls-1{fill:white;}</style>
@@ -137,8 +200,7 @@
             </div>
         </section>
         <!----------------------------------------------SECTION 2------------------------------------------------------>
-        <br>
-        <form id="big-form" class="noBorderForm" action="{% url 'business:start_post' %}" method="post">
+        <form id="big-form" class="noBorderForm hidejs" action="{% url 'business:start_post' %}" method="post">
             {% csrf_token %}
             <section class="section-two" id="section-two">
                 <div class="container">
@@ -194,9 +256,9 @@
                                     {% endfor %}
                                 </select>
                                 <h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Rango salarial</h3>
-                                <input class="origin-salary-min form-input little" type="number" min="0" style="border-radius: 50px; padding:10px; width:45%;display:inline;border: 2px solid #aaa" name="salary">
+                                <input class="origin-salary-min form-input little" step="100000" type="number" min="0" style="border-radius: 50px; padding:10px; width:45%;display:inline;border: 2px solid #aaa" name="salary">
                                 <span style="margin: 0px 2.4%;">a</span>
-                                <input class="origin-salary-max form-input little" type="number" min="0" style="border-radius: 50px; padding:10px; width:45%;display:inline;border: 2px solid #aaa" name="salary">
+                                <input class="origin-salary-max form-input little" step="100000" type="number" min="0" style="border-radius: 50px; padding:10px; width:45%;display:inline;border: 2px solid #aaa" name="salary">
                                 <h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Requisitos</h3>
                                 <h6>Agrega palabras clave que ayuden a distinguir los requerimientos más importantes para la oferta</h6>
                                 <select class="origin-keywords js-example-basic-multiple" style=" padding:10px; width:100%;" name="states[]" multiple="multiple">
@@ -261,7 +323,7 @@
                             </div>
                         </div>
                         <div class="col-xs-4" style="margin-top:-70px">
-                            <fieldset>
+                            <fieldset class="final-hide">
                                 <span style="font-family : BertholdAkzidenzGroteskSuper; font-size : 35px; color : #656665;  opacity : 0.2;">RESUMEN<br>DE TU OFERTA</span>
                                 <h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Cargo solicitado</h3>
                                 <h6 class="charge" style=" font-family : Helvetica;font-size : 13px;color : #3B4754;"></h6>
@@ -275,16 +337,16 @@
                     </div>
                 </div>
             </section>
-    		<div id="overlay">
-                <div id="form-image">
+            <div id="overlay">
+                <div class="form-image final">
                     <div id="register-form">
                         <fieldset>
-                            <span id="exitDingbat" onclick="off()">X</span>
+                            <span class="exitDingbat" onclick="off()">X</span>
                             <br>
                             <br>
                             <span>Nombre</span>
                             <input class="form-input" name="name" required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
- 							<br>
+                            <br>
                             <span>Empresa</span>
                             <input class="form-input" name="company">
                             <span>Correo</span>
@@ -294,7 +356,7 @@
                             <br>
                             <span>Contraseña</span>
                             <input class="form-input" type="password" name="password1" required="required">
-							<br>
+                            <br>
                             <span>Confirmar contraseña</span>
                             <input class="form-input" type="password" name="password2" required="required">
                             <br>
@@ -391,7 +453,6 @@
         </script>
         <!--Form Transition-->
         <!--Final form Transition-->
-
         <!--Select2-->
         <script>
             $(document).ready(function() {
@@ -401,7 +462,7 @@
 
         </script>
         <!--Form Transition-->
-		<script>
+        <script>
             function on() {
             if (document.getElementById("overlay").style.display != "block") {
             console.log("dentro del if")
@@ -411,45 +472,93 @@
             $("#option1").css("color", "white");
             $("#option2").css("color", "white");
             $("nav").css("margin-bottom", "40px");
-            $("#register-form").animate({"marginLeft": '60%'}, 650,"swing");
-            $("#form-image").animate({"backgroundPosition": '86%'}, 650,"swing");
-            $("html").css("overflow", "hidden");
-            //$("#publish-campaign-button").animate({left: '250px'}, 2000, "swing");
-            $("#publish-campaign-button").animate({marginTop: '370px', marginLeft: '160px', marginRight: '-160px'}, 2000, "swing");
+            $("#register-form").animate({"opacity": '1'}, 1500,"swing");
+            $("#publish-campaign-button").animate({marginTop: '60%', marginLeft: '8%'}, 2000, "swing");
             $("#publish-campaign-button").css('z-index', 9999);
             $("#publish-campaign-button").css('position', 'absolute');
+            $(".final-hide").animate({"opacity": '0'}, 1500,"swing");
+
             } else { // enters here upon the second click
                 document.getElementById("big-form").submit();
             }
             }
 
             function off() {
-            document.getElementById("overlay").style.display = "none";
-            document.getElementById("register-form").style.display = "none";
             $("html").css("background-size", "contain");
             $("#option1").css("color", "#3d4753");
             $("#option2").css("color", "#3d4753");
             $("nav").css("margin-bottom", "");
-            $("#register-form").animate({marginLeft: '160%'});
-            $("#form-image").animate({"backgroundPosition": '186%'}, 650,"swing");
+            $("#register-form").animate({"opacity": '0'}, 1500,"swing");
+            $("#publish-campaign-button").animate({marginTop: '0%', marginLeft: '0%'}, 2000, "swing");
+            $(".final-hide").animate({"opacity": '1'}, 1500,"swing");
+            document.getElementById("overlay").style.display = "none";
+            }
+        </script>
+        <script>
+            function on_login() {
+            $("#overlay-login").css("display", "block");
+            $(".hidejs").css("display", "none");
+            $("#login-form").css("display", "block");
+            $("html").css("background-size", "cover");
+            $("#option1").css("color", "white");
+            $("#option2").css("color", "white");
+            $("nav").css("margin-bottom", "40px");
+            $("#login-form").animate({"marginLeft": '60%'}, 650,"swing");
+            $("html").css("overflow", "hidden");
+            }
+
+            function off_login() {
+            $("#overlay-login").css("display", "none");
+            $(".hidejs").css("display", "block");
+            $("#login-form").css("display", "none");
+            $("html").css("background-size", "contain");
+            $("#option1").css("color", "#3d4753");
+            $("#option2").css("color", "#3d4753");
+            $("nav").css("margin-bottom", "");
+            $("#login-form").animate({marginLeft: '160%'});
             $("html").css("overflow-y", "scroll");
             }
-		</script>
 
-        <!--Scroll for indicator
-        <script>
-            $(window).scroll(function(e){
-            var $el = $('.fixedElement');
-            var isPositionFixed = ($el.css('position') == 'fixed');
-            if ($(this).scrollTop() > 1 && !isPositionFixed){
-            $('.fixedElement').css({'position': 'fixed', 'right': '5%', 'z-index':'100'});
+            function on_signup() {
+            $("#overlay-signup").css("display", "block");
+            $(".hidejs").css("display", "none");
+            $(".only-register-form").css("display", "block");
+            $("html").css("background-size", "cover");
+            $("#option1").css("color", "white");
+            $("#option2").css("color", "white");
+            $("nav").css("margin-bottom", "40px");
+            $(".only-register-form").animate({"marginLeft": '60%'}, 650,"swing");
+            $(".form-image").animate({"backgroundPosition": '86%'}, 690,"swing");
+            $("html").css("overflow", "hidden");
             }
-            if ($(this).scrollTop() < 1 && isPositionFixed)
-            {
-            $('.fixedElement').css({'position': 'static', 'right': '5%'});
+
+            function off_signup() {
+            $("#overlay-signup").css("display", "none");
+            $(".hidejs").css("display", "block");
+            $(".only-register-form").css("display", "none");
+            $("html").css("background-size", "contain");
+            $("#option1").css("color", "#3d4753");
+            $("#option2").css("color", "#3d4753");
+            $("nav").css("margin-bottom", "");
+            $(".only-register-form").animate({marginLeft: '160%'});
+            $(".form-image").animate({"backgroundPosition": '186%'}, 1,"swing");
+            $("html").css("overflow-y", "scroll");
             }
-            });
         </script>
-        -->
+        <!--Scroll for indicator
+            <script>
+                $(window).scroll(function(e){
+                var $el = $('.fixedElement');
+                var isPositionFixed = ($el.css('position') == 'fixed');
+                if ($(this).scrollTop() > 1 && !isPositionFixed){
+                $('.fixedElement').css({'position': 'fixed', 'right': '5%', 'z-index':'100'});
+                }
+                if ($(this).scrollTop() < 1 && isPositionFixed)
+                {
+                $('.fixedElement').css({'position': 'static', 'right': '5%'});
+                }
+                });
+            </script>
+            -->
     </body>
 </html>
