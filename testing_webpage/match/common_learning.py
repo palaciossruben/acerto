@@ -99,20 +99,59 @@ def get_filtered_candidates():
     #return [c for c in candidates if len([e for e in c.evaluations.all()]) > 0]
 
 
-def load_raw_data(candidates=get_filtered_candidates()):
-    data = pd.DataFrame()
+"""
+# TODO add new fields
+    gender = models.ForeignKey(Gender, null=True, on_delete=models.SET_NULL)
+    programs = models.CharField(max_length=250, null=True)
+    work_area = models.ForeignKey(WorkArea, null=True, on_delete=models.SET_NULL)
+    aspiration = models.IntegerField(null=True)
+    address = models.CharField(max_length=100, null=True)
+    neighborhood = models.CharField(max_length=40, null=True)
+    profile = models.CharField(max_length=250, null=True)
+    languages = models.CharField(max_length=100, null=True)
+    phone2 = models.CharField(max_length=40, null=True)
+    phone3 = models.CharField(max_length=40, null=True)
+    document = models.CharField(max_length=50, null=True)
+    dream_job = models.CharField(max_length=50, null=True)
+    hobbies = models.CharField(max_length=250, null=True)
+    twitter = models.CharField(max_length=250, null=True)
+    facebook = models.CharField(max_length=250, null=True)
+    instagram = models.CharField(max_length=250, null=True)
+    linkedin = models.CharField(max_length=250, null=True)
+    photo_url = models.CharField(max_length=200, default='#')
+    brochure_url = models.CharField(max_length=200, default='#')
+    politics = models.BooleanField(default=False)
+"""
 
-    # campaign should be treated categorically
-    data['campaign'] = [c.campaign_id for c in candidates]
-    data['text_match'] = [c.get_text_match() for c in candidates]
-    data['candidate_country'] = [c.get_country_id() for c in candidates]
-    data['candidate_city'] = [c.get_city_id() for c in candidates]
-    data['campaign_country'] = [c.get_campaign_country_id() for c in candidates]
-    data['campaign_city'] = [c.get_campaign_city_id() for c in candidates]
-    data['profession'] = [c.get_profession_id() for c in candidates]
-    data['campaign_profession'] = [c.get_campaign_profession_id() for c in candidates]
-    data['education'] = [c.get_education_level() for c in candidates]
-    data['campaign_education'] = [c.get_campaign_education_level() for c in candidates]
+
+def get_columns():
+    return ['campaign',
+            'text_match',
+            'candidate_country',
+            'candidate_city',
+            'campaign_country',
+            'campaign_city',
+            'profession',
+            'campaign_profession',
+            'education',
+            'campaign_education',
+            ]
+
+
+def load_raw_data(candidates=get_filtered_candidates()):
+
+    data_list = list(candidates.values_list('campaign_id',
+                                            'text_match',
+                                            'user__country_id',
+                                            'user__city_id',
+                                            'campaign__country_id',
+                                            'campaign__city__id',
+                                            'user__profession_id',
+                                            'campaign__profession_id',
+                                            'user__education__level',
+                                            'campaign__education__level',))
+
+    data = pd.DataFrame(data_list, columns=get_columns())
 
     # TODO: ADD NEW FIELD HERE
 

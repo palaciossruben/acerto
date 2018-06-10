@@ -113,15 +113,17 @@ def save_hashers(data):
         pickle_handler.save_hasher(hasher, field)
 
 
-def run():
-
-    sys.stdout = h.Unbuffered(open('model.log', 'a'))
-
+def do_your_stuff():
     text_match.update()
     learn_and_predict(regression=False)
-    learn_and_predict(regression=True)
+    #learn_and_predict(regression=True)
     save_other_values()
 
 
+def run():
+    sys.stdout = h.Unbuffered(open('model.log', 'a'))
+    do_your_stuff()
+
+
 if __name__ == '__main__':
-    run()
+    do_your_stuff()

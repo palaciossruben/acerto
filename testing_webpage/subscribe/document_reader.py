@@ -1,11 +1,16 @@
+"""
+To run do:
+python3 subscribe/document_reader.py
+"""
 import os
 import sys
 try:
     from subscribe import helper as h
+    from subscribe import cts
 except ImportError:
     import helper as h
+    import cts
 
-RESUMES_PATH = '../media/resumes'
 VALID_EXTENSIONS = {'.jpg', '.jpeg', '.doc', '.docx', '.png', '.pdf', '.txt'}
 
 
@@ -56,11 +61,11 @@ def read_all(force=False):
     """Reads all files inside the resumes folder. Files can have several different extensions.
     :param force: Boolean indicating if the Curriculums have to be read again.
     """
-    resumes_folders = os.listdir(RESUMES_PATH)
+    resumes_folders = os.listdir(cts.RESUMES_PATH)
 
     for folder in sorted(resumes_folders):
         print(folder)
-        folder_path = os.path.join(RESUMES_PATH, folder)
+        folder_path = os.path.join(cts.RESUMES_PATH, folder)
         if os.path.isdir(folder_path):
             docs = os.listdir(folder_path)
 
@@ -72,9 +77,9 @@ def read_all(force=False):
 
 
 def run():
-    #sys.stdout = h.Unbuffered(open('document_reader.log', 'a'))
+    sys.stdout = h.Unbuffered(open('document_reader.log', 'a'))
     read_all(force=False)
 
 
 if __name__ == "__main__":
-    run()
+    read_all(force=False)
