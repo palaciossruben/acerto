@@ -48,6 +48,12 @@ def get_target_for_candidate(candidate):
     :param candidate:
     :return: 1 = Very Good Match, 0 = Bad match, np.nan = unknown
     """
+    if candidate.state.code in ('GTJ', 'STC', 'WFI', 'DI',):  # Recommended and Relevant states on the pyramid
+        return 1
+    elif candidate.state.code in ('ROI', 'RBC', 'SR', 'FT', 'ROT', 'ROI', 'BL', 'P',):  # Applicants and rejected on pyramid
+        return 0
+
+    """
     if candidate.screening is not None:
         return int(candidate.screening.passed)
     else:
@@ -58,6 +64,8 @@ def get_target_for_candidate(candidate):
         else:
             max_honey = max({s.honey for s in State.objects.all()})
             return candidate.state.honey/max_honey
+    """
+
 
 
 def get_hashing_info():
@@ -75,6 +83,11 @@ def get_hashing_info():
     hashing_info['campaign_city'] = 1  #10
     hashing_info['profession'] = 1  #10
     hashing_info['campaign_profession'] = 1  #10
+    hashing_info['gender'] = 1  #10
+    hashing_info['work_area'] = 1  #10
+    hashing_info['neighborhood'] = 1  #10
+    hashing_info['languages'] = 1  #10
+    hashing_info['dream_job'] = 1  #10
     # TODO: ADD NEW FIELD HERE
 
     # TODO: different hashes for the same property, eg: candidate country and campaign country
@@ -101,14 +114,9 @@ def get_filtered_candidates():
 
 """
 # TODO add new fields
-    gender = models.ForeignKey(Gender, null=True, on_delete=models.SET_NULL)
     programs = models.CharField(max_length=250, null=True)
-    work_area = models.ForeignKey(WorkArea, null=True, on_delete=models.SET_NULL)
-    aspiration = models.IntegerField(null=True)
     address = models.CharField(max_length=100, null=True)
-    neighborhood = models.CharField(max_length=40, null=True)
     profile = models.CharField(max_length=250, null=True)
-    languages = models.CharField(max_length=100, null=True)
     phone2 = models.CharField(max_length=40, null=True)
     phone3 = models.CharField(max_length=40, null=True)
     document = models.CharField(max_length=50, null=True)
@@ -135,6 +143,13 @@ def get_columns():
             'campaign_profession',
             'education',
             'campaign_education',
+            'gender',
+            'work_area',
+            # TODO: had only None, can add later on with more data
+            #'salary',
+            'neighborhood',
+            'languages',
+            'dream_job',
             ]
 
 
@@ -149,7 +164,15 @@ def load_raw_data(candidates=get_filtered_candidates()):
                                             'user__profession_id',
                                             'campaign__profession_id',
                                             'user__education__level',
-                                            'campaign__education__level',))
+                                            'campaign__education__level',
+                                            'user__gender',
+                                            'user__work_area',
+                                            # TODO: had only None, can add later on with more data
+                                            #'user__salary',
+                                            'user__neighborhood',  # TODO: improve input
+                                            'user__languages',  # TODO: improve input
+                                            'user__dream_job',  # TODO: improve input
+                                            ))
 
     data = pd.DataFrame(data_list, columns=get_columns())
 
@@ -236,8 +259,16 @@ def calculate_defaults(data):
     defaults['campaign_profession'] = right_mode(data['campaign_profession'])
     defaults['education'] = np.nanmedian(data['education'])
     defaults['campaign_education'] = np.nanmedian(data['campaign_education'])
-
+    defaults['gender'] = right_mode(data['gender'])
+    defaults['work_area'] = right_mode(data['work_area'])
+    defaults['neighborhood'] = right_mode(data['neighborhood'])
+    defaults['languages'] = right_mode(data['languages'])
+    defaults['dream_job'] = right_mode(data['dream_job'])
     # TODO: ADD NEW FIELD HERE
+
+    # TODO: had only None, can add later on with more data
+    # print(data['salary'])
+    # defaults['salary'] = np.mean(data['salary'])
 
     for column in data.columns.values:
         if 'test' in column:
@@ -260,6 +291,13 @@ def fill_missing_values(data, defaults=None):
     data['profession'].fillna(defaults['profession'], inplace=True)
     data['campaign_profession'].fillna(defaults['campaign_profession'], inplace=True)
     data['campaign_education'].fillna(defaults['campaign_education'], inplace=True)
+    data['gender'].fillna(defaults['gender'], inplace=True)
+    data['work_area'].fillna(defaults['work_area'], inplace=True)
+#    data['salary'].fillna(defaults['salary'], inplace=True)
+    data['neighborhood'].fillna(defaults['neighborhood'], inplace=True)
+    data['languages'].fillna(defaults['languages'], inplace=True)
+    data['dream_job'].fillna(defaults['dream_job'], inplace=True)
+
     # TODO: ADD NEW FIELD HERE
 
     for column in list(data):

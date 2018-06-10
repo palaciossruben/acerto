@@ -79,6 +79,7 @@ def load_target(data, regression, candidates):
 
     data['target'] = [common_learning.get_target_for_candidate(c) for c in candidates]
     data = data[[not pd.isnull(t) for t in data['target']]]
+
     if not regression:
         data['target'] = data['target'].apply(lambda y: 1 if y > NON_REJECTED_HONEY else 0)
 
@@ -238,6 +239,6 @@ def get_model(regression=True):
     model = learn_model(train, regression=regression)
 
     # Used only for data exploration.
-    #print_feature_importance(model, data, regression)
+    print_feature_importance(model, data, regression)
 
     return model, eval_model(model, train, test, regression=regression)
