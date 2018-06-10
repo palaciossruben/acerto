@@ -18,14 +18,14 @@ from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
 from shutil import copyfile
 from PIL import Image
-from subscribe.cts import *
+#from subscribe.cts import *
 
 
 def get_image_text(filename):
     """outputs text from an image with tessarect-OCR"""
     im = Image.open(filename)
 
-    tmp_path = os.path.join(RESUMES_PATH, 'tmp.jpg')
+    tmp_path = os.path.join('media/resumes', 'tmp.jpg')
 
     try:
         im.save(tmp_path)
