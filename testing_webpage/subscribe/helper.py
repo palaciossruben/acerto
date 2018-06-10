@@ -69,7 +69,7 @@ def get_word_text(filename):
 
     try:
         text = textract.process(filename).decode("utf-8")
-    except textract.exceptions.ShellError:
+    except:  # Textract is buggy as shit, better just to pass any error.
         text = ''
     
     # If not enough info found will try with OCR on the doc images.
