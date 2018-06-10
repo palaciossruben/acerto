@@ -18,7 +18,6 @@ from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
 from shutil import copyfile
 from PIL import Image
-#from subscribe.cts import *
 
 
 def get_image_text(filename):
