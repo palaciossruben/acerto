@@ -1,8 +1,7 @@
 import os
 import sys
-from subscribe import helper as h
-
-from subscribe.cts import *
+#from subscribe import helper as h
+import helper as h
 
 RESUMES_PATH = '../media/resumes'
 VALID_EXTENSIONS = {'.jpg', '.jpeg', '.doc', '.docx', '.png', '.pdf', '.txt'}
