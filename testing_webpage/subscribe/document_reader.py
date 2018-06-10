@@ -2,7 +2,7 @@ import os
 import sys
 try:
     from subscribe import helper as h
-except ModuleNotFoundError:
+except ImportError:
     import helper as h
 
 RESUMES_PATH = '../media/resumes'
