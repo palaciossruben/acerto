@@ -116,7 +116,7 @@ def save_hashers(data):
 def do_your_stuff():
     text_match.update()
     learn_and_predict(regression=False)
-    #learn_and_predict(regression=True)
+    learn_and_predict(regression=True)
     save_other_values()
 
 
