@@ -415,7 +415,7 @@ class User(models.Model):
     gender = models.ForeignKey(Gender, null=True, on_delete=models.SET_NULL)
     programs = models.CharField(max_length=250, null=True)
     work_area = models.ForeignKey(WorkArea, null=True, on_delete=models.SET_NULL)
-    aspiration = models.IntegerField(null=True)
+    salary = models.IntegerField(null=True)
     address = models.CharField(max_length=100, null=True)
     neighborhood = models.CharField(max_length=40, null=True)
     profile = models.CharField(max_length=250, null=True)

@@ -87,7 +87,7 @@
         {% endfor %}
 
         {% if candidate.salary %}
-            <p><strong>{% trans "Salary deduction" %}: </strong>{{ candidate.user.aspiration }}</p>
+            <p><strong>{% trans "Salary deduction" %}: </strong>{{ candidate.user.salary }}</p>
         {% endif %}
 
         {% for c in candidate.comments.all %}
