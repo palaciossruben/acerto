@@ -520,20 +520,12 @@
             $("html").css("overflow-y", "scroll");
             }
         </script>
-        <!--Scroll for indicator
-            <script>
-                $(window).scroll(function(e){
-                var $el = $('.fixedElement');
-                var isPositionFixed = ($el.css('position') == 'fixed');
-                if ($(this).scrollTop() > 1 && !isPositionFixed){
-                $('.fixedElement').css({'position': 'fixed', 'right': '5%', 'z-index':'100'});
-                }
-                if ($(this).scrollTop() < 1 && isPositionFixed)
-                {
-                $('.fixedElement').css({'position': 'static', 'right': '5%'});
-                }
-                });
-            </script>
-            -->
+
+        <!-- any incoming error_message will print as an alert.-->
+        <script>
+        {% if error_message %}
+            alert("{{ error_message }}");
+        {% endif %}
+        </script>
     </body>
 </html>

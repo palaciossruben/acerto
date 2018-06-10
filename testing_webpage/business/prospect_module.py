@@ -3,7 +3,7 @@ import common
 
 from dashboard.models import State
 from beta_invite.models import EmailType
-from testing_webpage.models import PendingEmail
+from testing_webpage.models import CandidatePendingEmail
 from business import search_module
 from dashboard.models import Candidate
 from match import model, clustering
@@ -61,12 +61,12 @@ def send_mails(candidate_prospects):
     """
     email_type = EmailType.objects.get(name='job_match')
     for candidate in candidate_prospects:
-        PendingEmail.add_to_queue(candidates=candidate,
-                                  language_code=candidate.user.language_code,
-                                  body_input='user_job_match_email_body',
-                                  subject=translate_email_job_match_subject(candidate),
-                                  override_dict={'campaign_url': candidate.campaign.get_url()},
-                                  email_type=email_type)
+        CandidatePendingEmail.add_to_queue(candidates=candidate,
+                                           language_code=candidate.user.language_code,
+                                           body_input='user_job_match_email_body',
+                                           subject=translate_email_job_match_subject(candidate),
+                                           override_dict={'campaign_url': candidate.campaign.get_url()},
+                                           email_type=email_type)
 
 
 def cluster_filter(candidates):
