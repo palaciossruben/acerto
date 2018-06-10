@@ -2,10 +2,9 @@ import os
 import sys
 from subscribe import helper as h
 
-from subscribe.user import User
 from subscribe.cts import *
 
-
+RESUMES_PATH = '../media/resumes'
 VALID_EXTENSIONS = {'.jpg', '.jpeg', '.doc', '.docx', '.png', '.pdf', '.txt'}
 
 
@@ -52,39 +51,14 @@ def read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename):
     return text
 
 
-def read_and_predict(force=False):
-    """Reads all files and predicts User properties inside the resumes folder. Files can have several different extensions.
-    :param force: Boolean indicating if the Curriculums have to be read again.
-    """
-    resumes_folders = os.listdir(RESUMES_PATH)
-    final_dict = dict()
-
-    for folder in resumes_folders:
-        folder_path = os.path.join(RESUMES_PATH, folder)
-        if os.path.isdir(folder_path):
-            docs = os.listdir(folder_path)
-
-            parsed_filename = '{}.txt'.format(folder)
-            parsed_path = os.path.join(folder_path, parsed_filename)
-            # Will used saved version, to save time parsing.
-            if parsed_filename in docs and not force:
-                with open(parsed_path, 'r', encoding='UTF-8') as f:
-                    text = f.read()
-            else:
-                text = read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename)
-
-            final_dict[folder] = User(text)
-
-    return final_dict
-
-
 def read_all(force=False):
     """Reads all files inside the resumes folder. Files can have several different extensions.
     :param force: Boolean indicating if the Curriculums have to be read again.
     """
     resumes_folders = os.listdir(RESUMES_PATH)
 
-    for folder in resumes_folders:
+    for folder in sorted(resumes_folders):
+        print(folder)
         folder_path = os.path.join(RESUMES_PATH, folder)
         if os.path.isdir(folder_path):
             docs = os.listdir(folder_path)
@@ -97,7 +71,7 @@ def read_all(force=False):
 
 
 def run():
-    sys.stdout = h.Unbuffered(open('document_reader.log', 'a'))
+    #sys.stdout = h.Unbuffered(open('document_reader.log', 'a'))
     read_all(force=False)
 
 

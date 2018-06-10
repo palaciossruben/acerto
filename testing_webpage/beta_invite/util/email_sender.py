@@ -74,14 +74,14 @@ def send(objects, language_code, body_input, subject, with_localization=True, bo
 
     body_input, objects = common_senders.process_inputs(with_localization, language_code, body_input, objects)
 
-    for a_object in objects:
+    for an_object in objects:
 
-        if isinstance(a_object, Candidate):
-            params = common_senders.get_params_with_candidate(a_object, language_code, override_dict)
-            recipients = [a_object.user.email]  # , 'juan.rendon@peaku.co']
+        if isinstance(an_object, Candidate):
+            params = common_senders.get_params_with_candidate(an_object, language_code, override_dict)
+            recipients = [an_object.user.email]
         else:
-            params = common_senders.get_params_with_user(a_object, override_dict)
-            recipients = a_object.email
+            params = common_senders.get_params_with_user(an_object, override_dict)
+            recipients = an_object.email
 
         body = common_senders.get_body(body_input, body_is_filename=body_is_filename)
 
