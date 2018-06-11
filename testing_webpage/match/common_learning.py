@@ -13,11 +13,12 @@ import numpy as np
 import pandas as pd
 from django.db.models import Q
 
-from dashboard.models import Candidate, State
+from dashboard.models import Candidate
 from sklearn.feature_extraction import FeatureHasher
 from sklearn.preprocessing import StandardScaler
 from match.pickle_models import pickle_handler
 import beta_invite
+from beta_invite.models import Test
 
 
 def get_test_score(candidate, field, f):
@@ -53,20 +54,6 @@ def get_target_for_candidate(candidate):
     elif candidate.state.code in ('ROI', 'RBC', 'SR', 'FT', 'ROT', 'ROI', 'BL', 'P',):  # Applicants and rejected on pyramid
         return 0
 
-    """
-    if candidate.screening is not None:
-        return int(candidate.screening.passed)
-    else:
-        if candidate.state.code in ('GTJ', 'STC', ):  # Approved by client or by us.
-            return 1
-        elif candidate.state.code in ('ROI', 'RBC', 'SR'):  # Rejected by client or by us.
-            return 0
-        else:
-            max_honey = max({s.honey for s in State.objects.all()})
-            return candidate.state.honey/max_honey
-    """
-
-
 
 def get_hashing_info():
     """
@@ -76,18 +63,18 @@ def get_hashing_info():
 
     # Uncomment for high complexity
     hashing_info = dict()
-    hashing_info['campaign'] = 1  #20
-    hashing_info['candidate_country'] = 1  #10
-    hashing_info['candidate_city'] = 1  #10
-    hashing_info['campaign_country'] = 1  #10
-    hashing_info['campaign_city'] = 1  #10
-    hashing_info['profession'] = 1  #10
-    hashing_info['campaign_profession'] = 1  #10
-    hashing_info['gender'] = 1  #10
-    hashing_info['work_area'] = 1  #10
-    hashing_info['neighborhood'] = 1  #10
-    hashing_info['languages'] = 1  #10
-    hashing_info['dream_job'] = 1  #10
+    hashing_info['campaign'] = 5
+    hashing_info['candidate_country'] = 1
+    hashing_info['candidate_city'] = 1
+    hashing_info['campaign_country'] = 1
+    hashing_info['campaign_city'] = 1
+    hashing_info['profession'] = 1
+    hashing_info['campaign_profession'] = 3
+    hashing_info['gender'] = 1
+    hashing_info['work_area'] = 1
+    hashing_info['neighborhood'] = 1
+    hashing_info['languages'] = 1
+    hashing_info['dream_job'] = 1
     # TODO: ADD NEW FIELD HERE
 
     # TODO: different hashes for the same property, eg: candidate country and campaign country
@@ -187,8 +174,22 @@ def load_raw_data(candidates=get_filtered_candidates()):
     #data['open_field'] = [c.get_campaign_education_level() for c in candidates]
 
     # similar accuracy with high and low complexity:
-    # data = add_test_features(data, candidates, ['passed', 'final_score'])
-    data['median_test_passed'] = [get_test_score(c, 'passed', statistics.median) for c in candidates]
+    #data = add_test_features(data, candidates, ['passed', 'final_score'])
+    data['median_test_final_score'] = [get_test_score(c, 'final_score', statistics.median) for c in candidates]
+
+
+    #tests = Test.objects.all()
+
+    #for t in tests:
+    #    empty_array = np.empty((data.shape[0],))
+    #    empty_array[:] = np.nan
+    #    data[str(t.name) + 'median_final_score'] = empty_array
+
+    #for c in candidates:
+    #    for e in c.evaluations.all():
+    #        for score in e.scores.all():
+
+    #        data[str(score.test.name) + 'median_final_score'] = score.value
 
     return data
 

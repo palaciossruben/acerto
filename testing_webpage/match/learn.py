@@ -13,9 +13,6 @@ from match import common_learning
 #from match import xgboost_scikit_wrapper
 
 
-NON_REJECTED_HONEY = 0.3  # ie better than backlog
-
-
 def balance(data):
     """
     Balances samples with ADASYN algorithm:
@@ -69,10 +66,9 @@ def my_accuracy(a, b):
     return statistics.mean([int(e1 == e2) for e1, e2 in zip(a, b)])
 
 
-def load_target(data, regression, candidates):
+def load_target(data, candidates):
     """
     :param data: the X
-    :param regression: boolean
     :param candidates: list of candidates
     :return:
     """
@@ -80,19 +76,16 @@ def load_target(data, regression, candidates):
     data['target'] = [common_learning.get_target_for_candidate(c) for c in candidates]
     data = data[[not pd.isnull(t) for t in data['target']]]
 
-    if not regression:
-        data['target'] = data['target'].apply(lambda y: 1 if y > NON_REJECTED_HONEY else 0)
-
     return data
 
 
-def load_data_for_learning(regression=True):
+def load_data_for_learning():
     """
     Loads and prepares all data.
     :return: data DataFrame with features and target.
     """
     data, candidates = common_learning.load_data()
-    data = load_target(data, regression, candidates)
+    data = load_target(data, candidates)
     return data
 
 
@@ -232,7 +225,7 @@ def get_model(regression=True):
     Calculates the match of each candidate, based on a learning algorithm.
     :return: model.
     """
-    data = load_data_for_learning(regression=regression)
+    data = load_data_for_learning()
 
     train, test = prepare_train_test(data, regression=regression)
 
