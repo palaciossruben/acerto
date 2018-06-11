@@ -53,6 +53,11 @@
         <li>{{ test.name }}
         <a href="test/{{ test.id }}">Edit</a>
         </li>
+        <br>
+        <form action="test/duplicate/{{ test.id }}" method="post">
+            {% csrf_token %}
+            <input type="button" class="btn btn-success" value="Duplicate!" onclick="this.form.submit();">
+        </form>
     {% endfor %}
 </ul>
 

@@ -154,6 +154,11 @@ class Answer(models.Model):
     def __str__(self):
         return '{0}, {1}'.format(self.pk, self.name)
 
+    def duplicate(self):
+        """Duplicates answer"""
+        self.pk = None
+        self.save()
+
     # adds custom table name
     class Meta:
         db_table = 'answers'
@@ -203,6 +208,31 @@ class Question(models.Model):
             a.order = idx + 1
             a.save()
 
+    def duplicate(self):
+
+        answers = self.answers.all()
+        question_type = self.type
+        old_correct_answers = self.correct_answers.all()
+
+        # Creates new question
+        self.pk = None
+        self.save()
+
+        for a in answers:
+
+            is_correct_answer = False
+            if a in old_correct_answers:
+                is_correct_answer = True
+
+            a.duplicate()
+            self.answers.add(a)
+
+            if is_correct_answer:
+                self.correct_answers.add(a)
+
+        self.type = question_type
+        self.save()
+
 
 class Test(models.Model):
 
@@ -226,6 +256,25 @@ class Test(models.Model):
         for idx, q in enumerate(self.questions.all()):
             q.order = idx + 1
             q.save()
+
+    def duplicate_questions(self, questions):
+        """Adds Duplicated Questions"""
+
+        for q in questions:
+            q.duplicate()
+            self.questions.add(q)
+        self.save()
+
+    def duplicate(self):
+        self.name = self.name + ' (1)'
+        self.name_es = self.name_es + ' (1)'
+        questions = self.questions.all()
+
+        # Creates new test
+        self.pk = None
+        self.save()
+
+        self.duplicate_questions(questions)
 
     # adds custom table name
     class Meta:

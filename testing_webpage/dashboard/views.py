@@ -291,6 +291,19 @@ def update_test(request, pk):
     return redirect('/dashboard/test/{}'.format(pk))
 
 
+def duplicate_test(request, pk):
+    """
+    Args:
+        request: HTTP
+    Returns: redirects to dashboard after duplicating test.
+    """
+
+    test = Test.objects.get(pk=pk)
+    test.duplicate()
+
+    return redirect('/dashboard')
+
+
 def new_test(request):
 
     question_types = QuestionType.objects.all()
