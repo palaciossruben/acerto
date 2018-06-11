@@ -35,6 +35,8 @@ def get_image_text(filename):
         text = pytesseract.image_to_string(Image.open(tmp_path))#, lang='spa')
     except OSError:  # Error: image file is truncated (8 bytes not processed)
         return ''
+    except pytesseract.pytesseract.TesseractError:
+        return ''
 
     return text
 
