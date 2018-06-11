@@ -45,7 +45,7 @@ def read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename):
             # because it's easier to execute shell commands.
             d = h.rename_filename(folder_path, d)
 
-            extension = os.path.splitext(d)[1]
+            extension = os.path.splitext(d)[1].lower()
             text += get_text(folder_path, d, extension)
 
     text = h.remove_accents(text)

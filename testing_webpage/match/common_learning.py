@@ -11,13 +11,12 @@ application = get_wsgi_application()
 import statistics
 import numpy as np
 import pandas as pd
-from django.db.models import Q
 
-from dashboard.models import Candidate
+from dashboard.models import Candidate, State
 from sklearn.feature_extraction import FeatureHasher
 from sklearn.preprocessing import StandardScaler
 from match.pickle_models import pickle_handler
-import beta_invite
+import common
 from beta_invite.models import Test
 
 
@@ -45,13 +44,14 @@ def add_test_features(features, candidates, fields):
 
 def get_target_for_candidate(candidate):
     """
-    3 possible values
+    Contrast between very good and very bad candidates, where decisions have already been made explicitly
+    No ambiguous states (such as Backlog, Did Interview etc.)
     :param candidate:
     :return: 1 = Very Good Match, 0 = Bad match, np.nan = unknown
     """
-    if candidate.state.code in ('GTJ', 'STC', 'WFI', 'DI',):  # Recommended and Relevant states on the pyramid
+    if candidate.state in State.get_recomended_states() + State.get_relevant_states():
         return 1
-    elif candidate.state.code in ('ROI', 'RBC', 'SR', 'FT', 'ROT', 'ROI', 'BL', 'P',):  # Applicants and rejected on pyramid
+    elif candidate.state in State.get_rejected_states() + State.get_applicant_states():
         return 0
 
 
@@ -89,14 +89,9 @@ def hash_columns(data, hashing_info):
 
 
 def get_filtered_candidates():
-
-    # Excludes the default campaign
-    candidates = Candidate.objects.filter(~Q(campaign_id=beta_invite.constants.DEFAULT_CAMPAIGN_ID))
-
-    return candidates
-
-    # Only candidates with at least a evaluation (eg some tests)
-    #return [c for c in candidates if len([e for e in c.evaluations.all()]) > 0]
+    """Very good candidates contrasted with very bad ones"""
+    return Candidate.objects.filter(state__in=State.get_recomended_states() + State.get_rejected_states() +
+                                    State.get_relevant_states() + State.get_applicant_states())
 
 
 """
@@ -140,8 +135,17 @@ def get_columns():
             ]
 
 
+def from_list_to_query_set(candidates):
+    """Efficiency reasons... do 1 query instead of thousands, later on"""
+    return Candidate.objects.filter(pk__in=[c.pk for c in candidates])
+
+
 def load_raw_data(candidates=get_filtered_candidates()):
 
+    if isinstance(candidates, list):
+        candidates = from_list_to_query_set(candidates)
+
+    # With QuerySet it is much faster.
     data_list = list(candidates.values_list('campaign_id',
                                             'text_match',
                                             'user__country_id',
@@ -159,11 +163,16 @@ def load_raw_data(candidates=get_filtered_candidates()):
                                             'user__neighborhood',  # TODO: improve input
                                             'user__languages',  # TODO: improve input
                                             'user__dream_job',  # TODO: improve input
+
+                                            # TODO: ADD NEW FIELD HERE
                                             ))
 
     data = pd.DataFrame(data_list, columns=get_columns())
 
-    # TODO: ADD NEW FIELD HERE
+    # Pre-Processing
+    data['neighborhood'] = [common.remove_accents(n).lower() for n in data['neighborhood']]
+    data['languages'] = [common.remove_accents(n).lower() for n in data['languages']]
+    data['dream_job'] = [common.remove_accents(n).lower() for n in data['dream_job']]
 
     # Calculated fields
     data['country_match'] = data['candidate_country'] == data['campaign_country']
@@ -188,7 +197,7 @@ def load_raw_data(candidates=get_filtered_candidates()):
     #for c in candidates:
     #    for e in c.evaluations.all():
     #        for score in e.scores.all():
-
+    #            pass
     #        data[str(score.test.name) + 'median_final_score'] = score.value
 
     return data
@@ -243,7 +252,7 @@ def right_mode(iterable):
     try:
         return statistics.mode([e for e in iterable if not pd.isnull(e)])
     except statistics.StatisticsError:  # triggered when mode performed over empty array
-        return 0
+        return ''
 
 
 def calculate_defaults(data):

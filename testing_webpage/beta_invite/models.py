@@ -346,6 +346,7 @@ class Campaign(models.Model):
     job_function = models.ForeignKey(JobFunctions, null=True)
     has_email = models.BooleanField(default=True)
     work_area = models.ForeignKey(WorkArea, null=True, on_delete=models.SET_NULL)
+    operational_efficiency = models.FloatField(null=True)
 
     # TODO: remove circular dependency
     # plan = models.ForeignKey(Plan, null=True, on_delete=models.DO_NOTHING)
@@ -394,7 +395,7 @@ class Score(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return 'id={0}, user={1}, test={2}, value={3}'.format(self.pk, self.user, self.test, self.value)
+        return 'id={0}, test={1}, value={2}'.format(self.pk, self.test, self.value)
 
     # adds custom table name
     class Meta:

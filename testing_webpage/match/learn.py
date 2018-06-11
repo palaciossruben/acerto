@@ -152,7 +152,7 @@ def learn_model(train, regression=True, xgboost=False):
             #                decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
             #                max_iter=-1, probability=False, random_state=None, shrinking=True,
             #                tol=0.001, verbose=False)
-            model = RandomForestClassifier(max_depth=8)
+            model = RandomForestClassifier(max_depth=7)
 
     model.fit(train.features, train.target)
     return model
