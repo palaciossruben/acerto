@@ -17,6 +17,7 @@ from sklearn.feature_extraction import FeatureHasher
 from sklearn.preprocessing import StandardScaler
 from match.pickle_models import pickle_handler
 import common
+from beta_invite import constants
 from beta_invite.models import Test
 
 
@@ -49,9 +50,9 @@ def get_target_for_candidate(candidate):
     :param candidate:
     :return: 1 = Very Good Match, 0 = Bad match, np.nan = unknown
     """
-    if candidate.state in State.get_recomended_states() + State.get_relevant_states():
+    if candidate.state in State.get_recomended_states():
         return 1
-    elif candidate.state in State.get_rejected_states() + State.get_applicant_states():
+    elif candidate.state in State.get_rejected_states():
         return 0
 
 
@@ -90,8 +91,8 @@ def hash_columns(data, hashing_info):
 
 def get_filtered_candidates():
     """Very good candidates contrasted with very bad ones"""
-    return Candidate.objects.filter(state__in=State.get_recomended_states() + State.get_rejected_states() +
-                                    State.get_relevant_states() + State.get_applicant_states())
+    return Candidate.objects.exclude(campaign_id=constants.DEFAULT_CAMPAIGN_ID)\
+        .filter(state__in=State.get_recomended_states() + State.get_rejected_states())
 
 
 """

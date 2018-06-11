@@ -152,7 +152,7 @@ def learn_model(train, regression=True, xgboost=False):
             #                decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
             #                max_iter=-1, probability=False, random_state=None, shrinking=True,
             #                tol=0.001, verbose=False)
-            model = RandomForestClassifier(max_depth=7)
+            model = RandomForestClassifier(max_depth=5)
 
     model.fit(train.features, train.target)
     return model
@@ -160,7 +160,7 @@ def learn_model(train, regression=True, xgboost=False):
 
 def target_mode(target):
     """
-    Returns 1 for balanced sets (where there are excatly the same number of 1s and 0s)
+    Returns 1 for balanced sets (where there are exactly the same number of 1s and 0s)
     :param target: list of 1s and 0s
     :return: the mode
     """
