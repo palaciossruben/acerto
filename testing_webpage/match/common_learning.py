@@ -140,6 +140,13 @@ def from_list_to_query_set(candidates):
     return Candidate.objects.filter(pk__in=[c.pk for c in candidates])
 
 
+def lower_str(text):
+    if isinstance(text, str):
+        return text.lower()
+    else:
+        return text
+
+
 def load_raw_data(candidates=get_filtered_candidates()):
 
     if isinstance(candidates, list):
@@ -170,9 +177,9 @@ def load_raw_data(candidates=get_filtered_candidates()):
     data = pd.DataFrame(data_list, columns=get_columns())
 
     # Pre-Processing
-    data['neighborhood'] = [common.remove_accents(n).lower() for n in data['neighborhood']]
-    data['languages'] = [common.remove_accents(n).lower() for n in data['languages']]
-    data['dream_job'] = [common.remove_accents(n).lower() for n in data['dream_job']]
+    data['neighborhood'] = [lower_str(common.remove_accents(n)) for n in data['neighborhood']]
+    data['languages'] = [lower_str(common.remove_accents(n)) for n in data['languages']]
+    data['dream_job'] = [lower_str(common.remove_accents(n)) for n in data['dream_job']]
 
     # Calculated fields
     data['country_match'] = data['candidate_country'] == data['campaign_country']
