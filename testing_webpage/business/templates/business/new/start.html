@@ -53,12 +53,12 @@
                 <div class="gradient2">
                     <div class="topnav" id="myTopnav">
                         <div>
-                            <a href="/staffing" style="float:left"><img src="{% static 'business/img/logo-color.png' %}" style="margin-left:30px;" width="70px" id="logo"></a>
+                            <a href="/staffing" class="logo"><img src="{% static 'business/img/logo-color.png' %}"></a>
                             <a class="navButton" role="button" onclick="on_login()">INICIA SESIÓN</a>
                             <a class="navButton" role="button" onclick="on_signup()">CREA TU CUENTA</a>
-                            <a href="{% url 'business:contact_form' %}" style="margin: 15px 10px;">Contáctanos</a>
-                            <a href="{% url 'beta_invite:index' %}" style="margin: 15px 10px;">Personas</a>
-                            <a href="javascript:void(0);" style="font-size:25px;" class="icon" onclick="myFunction()">&#9776;</a>
+                            <a class="navText" href="{% url 'business:contact_form' %}">Contáctanos</a>
+                            <a class="navText" href="{% url 'beta_invite:index' %}">Personas</a>
+                            <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
                         </div>
                     </div>
                     <div id="overlay-signup">
@@ -251,6 +251,7 @@
                                 <input class="origin-salary-min form-input little" step="100000" type="number" min="0" style="border-radius: 50px; padding:10px; width:45%;display:inline;border: 2px solid #aaa" name="salary">
                                 <span style="margin: 0px 2.4%;">a</span>
                                 <input class="origin-salary-max form-input little" step="100000" type="number" min="0" style="border-radius: 50px; padding:10px; width:45%;display:inline;border: 2px solid #aaa" name="salary">
+                                <!--
                                 <h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Requisitos</h3>
                                 <h6>Agrega palabras clave que ayuden a distinguir los requerimientos más importantes para la oferta</h6>
                                 <select class="origin-keywords js-example-basic-multiple" style=" padding:10px; width:100%;" name="states[]" multiple="multiple">
@@ -258,6 +259,8 @@
                                     <option value="O">Otra</option>
                                     <option value="WY">Wyoming</option>
                                 </select>
+                                -->
+
                             </fieldset>
                         </div>
                         <div class="col-md-1"></div>
@@ -268,7 +271,8 @@
                                 <br>
                                 <h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Descripción de tu oferta laboral</h3>
                                 <h6>Explica la oferta lo mejor posible, te recomendamos ingresar el detalle de la vacante, requisitos y beneficios. Trata de usar poco texto y dar mucha información !</h6>
-                                <trix-editor name="description_es"></trix-editor>
+                                <trix-editor input="x"></trix-editor>
+                                <textarea type="hidden" name="description_es" class="backend-description"></textarea>
                             </fieldset>
                         </div>
                     </div>
@@ -298,7 +302,7 @@
                             <a id="publish-campaign-button" class="button-cta" role="button" onclick="on()">PUBLICAR MI OFERTA</a>
                         </div>
                         <div class="col-xs-4" >
-                            <fieldset class="final-hide">
+                            <fieldset>
                                 <span style="font-family : BertholdAkzidenzGroteskSuper; font-size : 35px; color : #656665;  opacity : 0.2;">RESUMEN<br>DE TU OFERTA</span>
                                 <h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Cargo solicitado</h3>
                                 <h6 class="charge" style=" font-family : Helvetica;font-size : 13px;color : #3B4754;"></h6>
@@ -376,11 +380,40 @@
         <!--slider-->
         <script type="text/javascript">
             $(".regular").slick({
+                dots: true,
             	infinite: true,
             	slidesToShow: 4,
             	slidesToScroll: 1,
-                         focusOnSelect: true
+                focusOnSelect: true,
                          // variableWidth: true (change the slides width)
+                responsive: [
+                {
+                  breakpoint: 1200,
+                  settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                  }
+                },
+                {
+                  breakpoint: 600,
+                  settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                  }
+                },
+                {
+                  breakpoint: 480,
+                  settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                  }
+                }
+                // You can unslick at a given breakpoint now by adding:
+                // settings: "unslick"
+                // instead of a settings object
+              ]
             });
 
             $('.regular').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
@@ -421,9 +454,10 @@
         <!--Copy text of trix-->
         <script type="text/javascript">
             document.addEventListener("trix-change", function(event) {
-              var element = event.target
-              var html = element.value  // "<div>This is an <strong>example</strong></div>"
-              $('.vacancy-description').html(html);
+                var element = event.target
+                var html = element.value
+                $('.vacancy-description').html(html);
+                $('.backend-description').text(html);
             });
         </script>
         <!--Form Transition-->
