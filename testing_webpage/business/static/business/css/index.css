@@ -9,6 +9,14 @@
     outline:0;
 }
 
+.row{
+    margin-right:0;
+    margin-left:0;
+}
+
+.conatiner{
+    margin-right:0;
+}
 
 html {
     background: url(../img/bg-min.jpg) no-repeat top center scroll;
