@@ -34,7 +34,7 @@
             <br>
             <a href="campaign/{{ campaign.id }}/tests">Tests</a>
             <br>
-            <p>operational efficiency = recommended/(recommended + relevant + rejected manually) = {% widthratio campaign.operational_efficiency 1 100 %}%</p>
+            <p>operational efficiency = recommended/(recommended + rejected manually) = {% widthratio campaign.operational_efficiency 1 100 %}%</p>
             <br>
             <form action="campaign/delete/{{ campaign.id }}" method="post">
                 {% csrf_token %}

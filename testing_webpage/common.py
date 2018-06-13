@@ -380,8 +380,7 @@ def calculate_operational_efficiency(campaign):
     This percentage should as high as possible, otherwise to much time is spent on operation (interviews, messages, etc.)
     """
     recommended_count = Candidate.objects.filter(campaign=campaign, state__in=State.get_recomended_states()).count()
-    not_that_good_count = Candidate.objects.filter(campaign=campaign, state__in=State.get_relevant_states() +
-                                                                                State.get_rejected_by_human_states()).count()
+    not_that_good_count = Candidate.objects.filter(campaign=campaign, state__in=State.get_rejected_by_human_states()).count()
     total = recommended_count + not_that_good_count
 
     if total != 0:
