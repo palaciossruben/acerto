@@ -64,7 +64,7 @@ def get_hashing_info():
 
     # Uncomment for high complexity
     hashing_info = dict()
-    hashing_info['campaign'] = 5
+    #hashing_info['campaign'] = 5
     hashing_info['candidate_country'] = 1
     hashing_info['candidate_city'] = 1
     hashing_info['campaign_country'] = 1
@@ -116,7 +116,7 @@ def get_filtered_candidates():
 
 
 def get_columns():
-    return ['campaign',
+    return [#'campaign',
             'text_match',
             'candidate_country',
             'candidate_city',
@@ -154,7 +154,7 @@ def load_raw_data(candidates=get_filtered_candidates()):
         candidates = from_list_to_query_set(candidates)
 
     # With QuerySet it is much faster.
-    data_list = list(candidates.values_list('campaign_id',
+    data_list = list(candidates.values_list(#'campaign_id',
                                             'text_match',
                                             'user__country_id',
                                             'user__city_id',
@@ -201,12 +201,29 @@ def load_raw_data(candidates=get_filtered_candidates()):
     #    empty_array = np.empty((data.shape[0],))
     #    empty_array[:] = np.nan
     #    data[str(t.name) + 'median_final_score'] = empty_array
+    """
+    all_tests = dict()
+    for c in candidates:
+        test_score_dict = dict()
+        for e in c.evaluations.all():
+            for score in e.scores.all():
+                current_value = test_score_dict.get(score.test.name)
+                if current_value:
+                    test_score_dict[score.test.name] = current_value.append(score.value)
+                else:
+                    test_score_dict[score.test.name] = [score.value]
 
-    #for c in candidates:
-    #    for e in c.evaluations.all():
-    #        for score in e.scores.all():
-    #            pass
-    #        data[str(score.test.name) + 'median_final_score'] = score.value
+        for k, v in test_score_dict.items():
+
+            value = all_tests.get(k + 'median_final_score')
+            if value:
+                all_tests[k + 'median_final_score'] = value.append(np.median(v))
+            else:
+                all_tests[k + 'median_final_score'] = [np.median(v)]
+
+    for k, v in all_tests.items():
+        data[k] = v
+    """
 
     return data
 
