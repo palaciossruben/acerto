@@ -51,6 +51,15 @@ body {
     height: 100%;
 }
 
+.row{
+    margin-right:0;
+    margin-left:0;
+}
+
+.form-label {
+    color:white;
+    margin-left:30px;
+}
 
 /**************************************************SLIDER**************************************************************/
 
@@ -434,8 +443,11 @@ trix-editor ul {
   border-color:rgba(255, 255, 255, .5);
 }
 
-.topnav a {
+.topnav a:not(:first-child){
   float: right;
+}
+
+.topnav a {
   display: block;
   color: #f2f2f2;
   text-align: center;
@@ -444,7 +456,8 @@ trix-editor ul {
 }
 
 .topnav .icon {
-  display: none;
+    display: none;
+    font-size:25px;
 }
 
 .navButton {
@@ -469,6 +482,10 @@ trix-editor ul {
     background : -ms-linear-gradient(-98deg, rgba(249, 241, 129, 1) 0%, rgba(192, 226, 125, 1) 17.36%, rgba(124, 208, 119, 1) 39.74%, rgba(71, 194, 115, 1) 60.01%, rgba(32, 184, 112, 1) 77.44%, rgba(9, 177, 111, 1) 91.35%, rgba(0, 175, 110, 1) 100%);
     background : linear-gradient(188deg, rgba(249, 241, 129, 1) 0%, rgba(192, 226, 125, 1) 17.36%, rgba(124, 208, 119, 1) 39.74%, rgba(71, 194, 115, 1) 60.01%, rgba(32, 184, 112, 1) 77.44%, rgba(9, 177, 111, 1) 91.35%, rgba(0, 175, 110, 1) 100%);
 
+}
+
+.navText {
+    margin: 15px 10px;
 }
 
 /**************************************************FOOTER**************************************************************/
@@ -537,6 +554,32 @@ footer {
 	padding-bottom:5px;
 }
 
+.logo {
+    float:left;
+}
+
+.logo img{
+    margin-left:30px;
+    width:70px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**************************************************RESPONSIVE**********************************************************/
 
 @media screen and (max-width: 600px) {
@@ -545,12 +588,24 @@ footer {
         margin-right:20px;
     }
 
-    .topnav a:not(:first-child){display: none;}
+    .topnav a:not(:first-child){
+        display: none;
+    }
+
     .topnav a.icon {
-    float: right;
-    display: block;
+        float: right;
+        display: block;
     }
 }
 
 
+@media  (max-width: 767px)
+{
+	.main-section {
+        background: url(../img/Start_BG-01-cel.png) no-repeat top center scroll ;
+        background-size:contain;
+    }
 
+
+
+}
