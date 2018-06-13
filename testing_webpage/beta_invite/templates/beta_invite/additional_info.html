@@ -70,10 +70,10 @@ function removeAnyDots() {
 					<option value={{ level.id }}>{{ level.name }}</option>
 				{% endfor %}
 			</select>
-			<select id="profession" name="profession_id" >
-				<option value="" disabled selected>{% trans "Select Profession" %}</option>
-				{% for profession in professions %}
-					<option value={{ profession.id }}>{{ profession.name }}</option>
+			<select id="work_area" name="work_area_id">
+				<option value="" disabled selected>Área de trabajo</option>
+				{% for work_area in work_areas %}
+					<option value={{ work_area.id }}>{{ work_area.name }}</option>
 				{% endfor %}
 			</select>
 			<textarea name="programs_id" id="programs" placeholder="Programas que manejas" rows="6" cols="50" maxlength="250" ></textarea>
@@ -83,10 +83,10 @@ function removeAnyDots() {
 		<fieldset> <!-- three items asked -->
 			<h2 class="fs-title">Experiencia</h2>
 			<h3 class="fs-subtitle">Breve información laboral</h3>
-			<select id="work_area" name="work_area_id">
-				<option value="" disabled selected>Área de trabajo</option>
-				{% for work_area in work_areas %}
-					<option value={{ work_area.id }}>{{ work_area.name }}</option>
+			<select id="profession" name="profession_id" >
+				<option value="" disabled selected>{% trans "Select Profession" %}</option>
+				{% for profession in professions %}
+					<option value={{ profession.id }}>{{ profession.name }}</option>
 				{% endfor %}
 			</select>
 			<input type="number" id="experience" min="0" max="100" step='1' name="experience" placeholder="Años de experiencia">
