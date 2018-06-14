@@ -38,12 +38,12 @@
         <!--Our js-->
         <script type="text/javascript" src="{% static 'business/js/start.js' %}"></script>
         <script id="Heat-map" type="text/javascript">
-        window.smartlook||(function(d) {
-        var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
-        var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
-        c.charset='utf-8';c.src='https://rec.smartlook.com/recorder.js';h.appendChild(c);
-        })(document);
-        smartlook('init', '495c7bd6807a0ab2c17ade2e03cac13bab9f1b84');
+            window.smartlook||(function(d) {
+            var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+            var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+            c.charset='utf-8';c.src='https://rec.smartlook.com/recorder.js';h.appendChild(c);
+            })(document);
+            smartlook('init', '495c7bd6807a0ab2c17ade2e03cac13bab9f1b84');
         </script>
     </head>
     <!----------------------------------------------SECTION 1---------------------------------------------------------->
@@ -54,7 +54,7 @@
                     <div class="topnav" id="myTopnav">
                         <div>
                             <a href="/staffing" class="logo"><img src="{% static 'business/img/logo-color.png' %}"></a>
-                            <a class="navButton" role="button" onclick="on_login()">INICIA SESIÓN</a>
+                            <a class="navButton regular" role="button" onclick="on_login()">INICIA SESIÓN</a>
                             <a class="navButton" role="button" onclick="on_signup()">CREA TU CUENTA</a>
                             <a class="navText" href="{% url 'business:contact_form' %}">Contáctanos</a>
                             <a class="navText" href="{% url 'beta_invite:index' %}">Personas</a>
@@ -62,44 +62,43 @@
                         </div>
                     </div>
                     <div id="overlay-signup">
-                <div class="form-image">
-                    <form class="only-register-form" action="{% url 'business:business_signup' %}" method="post">
-						{% csrf_token %}
-                        <fieldset>
-                            <span class="exitDingbat" onclick="off_signup()">X</span>
-                            <br>
-                            <br>
-
-                            <span>Nombre</span>
-                            <input class="form-input" name="name"
-							required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
-							<br>
-                            <span>Empresa</span>
-                            <input class="form-input" name="company">
-							<br>
-                            <span>Correo</span>
-                            <input class="form-input" type="email" name="username" required="required">
-							<br>
-                            <span>Teléfono</span>
-                            <input class="form-input" type="tel" name="phone"
-								   required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
-							<br>
-                            <span>Contraseña</span>
-                            <input class="form-input" type="password" name="password1" required="required">
-							<br>
-                            <span>Confirmar contraseña</span>
-                            <input class="form-input" type="password" name="password2" required="required">
-                            <br>
-                            <input type="submit" class="submit" value="COMIENZA AHORA">
-                        </fieldset>
-                        <span class="form-label">¿Ya eres un usuario registrado? Inicia sesión
-							<a style="color:white" href="javascript:void(0);" onclick="off_signup() & on_login()">
-								<strong>Aquí</strong>
-							</a>
-						</span>
-                    </form>
-                </div>
-            </div>
+                        <div class="form-image">
+                            <form class="only-register-form" action="{% url 'business:business_signup' %}" method="post">
+                                {% csrf_token %}
+                                <fieldset>
+                                    <span class="exitDingbat" onclick="off_signup()">X</span>
+                                    <br>
+                                    <br>
+                                    <span>Nombre</span>
+                                    <input class="form-input" name="name"
+                                        required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
+                                    <br>
+                                    <span>Empresa</span>
+                                    <input class="form-input" name="company">
+                                    <br>
+                                    <span>Correo</span>
+                                    <input class="form-input" type="email" name="username" required="required">
+                                    <br>
+                                    <span>Teléfono</span>
+                                    <input class="form-input" type="tel" name="phone"
+                                        required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
+                                    <br>
+                                    <span>Contraseña</span>
+                                    <input class="form-input" type="password" name="password1" required="required">
+                                    <br>
+                                    <span>Confirmar contraseña</span>
+                                    <input class="form-input" type="password" name="password2" required="required">
+                                    <br>
+                                    <input type="submit" class="submit" value="COMIENZA AHORA">
+                                </fieldset>
+                                <span class="form-label register">¿Ya eres un usuario registrado? Inicia sesión
+                                <a href="javascript:void(0);" onclick="off_signup() & on_login()">
+                                <strong>Aquí</strong>
+                                </a>
+                                </span>
+                            </form>
+                        </div>
+                    </div>
                     <div id="overlay-login">
                         <div class="form-image">
                             <form id="login-form" method="post" action="{% url 'business:home' %}" >
@@ -112,9 +111,9 @@
                                     <input name="username" class="form-input"><br>
                                     <span>Contraseña</span>
                                     <input name="password" class="form-input" type="password"><br>
-                                    <span style="font-size:10px;"><a href="#" style="color:white">Olvidé mi contraseña</a></span>
-                                    <span style="font-size:10px">
-                                    <a href="javascript:void(0);" style="color:white" onclick="off_login() & on_signup()">Aun no estoy registrado
+                                    <span class="form-label"><a href="#">Olvidé mi contraseña</a></span>
+                                    <span class="form-label">
+                                    <a href="javascript:void(0);" onclick="off_login() & on_signup()">Aun no estoy registrado
                                     </a>
                                     </span>
                                     <br>
@@ -125,77 +124,76 @@
                         </div>
                     </div>
                     <div class="container">
-                        <div class="row" style="height:450px; color: white;">
-                            <div class="col-xs-6 hidejs">
-                                <div class="col-xs-2" style="top:300px;">
+                        <div class="row first-row">
+                            <div class="col-md-4 hidejs responsive">
+                                <div class="col-md-4 number-div">
                                     <span class="big-number first">1<span class="first-point">.</span></span>
                                 </div>
-                                <div class="col-xs-10" style="top: 345px;">
-                                    <span style="font-family : BertholdAkzidenzGroteskSuper; font-size : 20px;color : #FFFFFF;"><br>ESCOGE UN FONDO<br>ACORDE A TU VACANTE</span>
+                                <div class="col-md-8 slider-text">
+                                    <span class="super"><br>ESCOGE UN FONDO<br>ACORDE A TU VACANTE</span>
                                 </div>
                             </div>
-                            <div class="col-xs-6 hidejs" style="text-align:right;top:150px;">
-                                <span style="font-family: BertholdAkzidenzGroteskSuper; font-size: 40px; color: rgb(255, 255, 255);">
+                            <div class="col-md-8 col-xs-12 .section1-description hidejs">
+                                <span class="description1">
                                 PERSONALIZA TU<br>
                                 OFERTA EN 3 PASOS<br>
                                 </span>
-                                <span style="font-family : BertholdAkzidenzGroteskRegular;font-size : 32px;color : rgb(255, 255, 255);">
+                                <span class="description2">
                                 y encuentra los mejores candidatos<br>
                                 para tu vacante
                                 </span>
                             </div>
                         </div>
                         <div class="row hidejs">
-                            <div class="col-xs-8">
+                            <div class="col-md-8 col-xs-12">
                                 <section class="regular slider">
                                     <div class="slide-0 slide-css" data-background="{% static 'business/img/Start_BG-01-min.jpg' %}">
                                         <img class="img-rounded" src="{% static 'business/img/Start-carrusel-01.jpg' %}">
-                                        <p class="slider-description">Administrativos</p>
+                                        <p>Administrativos</p>
                                     </div>
                                     <div class="slide-1 slide-css" data-background="{% static 'business/img/Start_BG-02-min.jpg' %}">
                                         <img class="img-rounded" src="{% static 'business/img/Start-carrusel-02.jpg' %}">
-                                        <p class="slider-description">Operativos</p>
+                                        <p>Operativos</p>
                                     </div>
                                     <div class="slide-2 slide-css" data-background="{% static 'business/img/Start_BG-03-min.jpg' %}">
                                         <img class="img-rounded"src="{% static 'business/img/Start-carrusel-03.jpg' %}">
-                                        <p class="slider-description">Técnicos</p>
+                                        <p>Técnicos</p>
                                     </div>
                                     <div class="slide-3 slide-css" data-background="{% static 'business/img/Start_BG-04-min.jpg' %}">
                                         <img class="img-rounded" src="{% static 'business/img/Start-carrusel-04.jpg' %}">
-                                        <p class="slider-description">Arquitectos</p>
+                                        <p>Arquitectos</p>
                                     </div>
                                     <div class="slide-4 slide-css" data-background="{% static 'business/img/Start_BG-05-min.jpg' %}">
                                         <img class="img-rounded" src="{% static 'business/img/Start-carrusel-05.jpg' %}">
-                                        <p class="slider-description">Diseñadores</p>
+                                        <p>Diseñadores</p>
                                     </div>
                                     <div class="slide-5 slide-css" data-background="{% static 'business/img/Start_BG-06-min.jpg' %}">
                                         <img class="img-rounded" src="{% static 'business/img/Start-carrusel-06.jpg' %}">
-                                        <p class="slider-description">Recursos humanos</p>
+                                        <p>Recursos humanos</p>
                                     </div>
                                     <div class="slide-6 slide-css" data-background="{% static 'business/img/Start_BG-07-min.jpg' %}">
                                         <img class="img-rounded" src="{% static 'business/img/Start-carrusel-07.jpg' %}">
-                                        <p class="slider-description">Ingenieros</p>
+                                        <p>Ingenieros</p>
                                     </div>
                                 </section>
                             </div>
-                            <div class="col-xs-4">
-
+                            <div class="col-md-4">
                                 <!--
-                                <span style="font-size:170px;margin: px 50%;color: black;position:absolute;z-index:200;">&#x02C5;</span>
-                                <ul class="section-indicator">
-                                    <li class="active">
-                                        <div class="div-indicator"></div>
-                                        Personaliza
-                                    </li>
-                                    <li>
-                                        <div class="div-indicator"></div>
-                                        Diligencia
-                                    </li>
-                                    <li>
-                                        <div class="div-indicator"></div>
-                                        Publica
-                                    </li>
-                                </ul>-->
+                                    <span class="section-indicator">&#x02C5;</span>
+                                    <ul>
+                                        <li class="active">
+                                            <div class="div-indicator"></div>
+                                            Personaliza
+                                        </li>
+                                        <li>
+                                            <div class="div-indicator"></div>
+                                            Diligencia
+                                        </li>
+                                        <li>
+                                            <div class="div-indicator"></div>
+                                            Publica
+                                        </li>
+                                    </ul>-->
                             </div>
                         </div>
                     </div>
@@ -219,8 +217,10 @@
                         <div class="col-md-4">
                             <br>
                             <div class="row">
-                                <div class="col-md-2"><span class="big-number">2<span class="point">.</span></span></div>
-                                <div class="col-md-10" style="left: 40px; top:75px;"><span style="font-family : BertholdAkzidenzGroteskSuper; font-size : 20px;color : #656665;">REGISTRA LOS DATOS<br>DE TU OFERTA LABORAL</span></div>
+                                <div class="col-md-4"><span class="big-number">2<span class="point">.</span></span></div>
+                                <div class="col-md-8 section2-description super">
+                                    <span class="super">REGISTRA LOS DATOS<br>DE TU OFERTA LABORAL</span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-8"></div>
@@ -230,52 +230,52 @@
                         <div class="col-md-4">
                             <fieldset class="section2-content">
                                 <br>
-                                <h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Ciudad</h3>
-                                <select class="origin-city" style="border-radius: 50px; padding:10px; width:60%;border: 2px solid #aaa" name="city_id" >
+                                <h3>Ciudad</h3>
+                                <select class="origin-city" name="city_id" >
                                     <option value="" disabled selected></option>
                                     {% for city in cities %}
                                     <option value={{ city.id }}>{{ city.name }}</option>
                                     {% endfor %}
                                 </select>
-                                <h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Título de la oferta</h3>
-                                <h6 style=" font-family : Helvetica;font-size : 13px;color : #3B4754;">Usa un título específico para que los candidatos tengan muy claro a que están aplicando</h6>
-                                <input class="origin-vacancy-tittle form-input" style="border-radius: 50px; padding:10px; width:100%;border: 2px solid #aaa" name="title_es"><br>
-                                <h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Cargo solicitado</h3>
+                                <h3>Título de la oferta</h3>
+                                <h6>Usa un título específico para que los candidatos tengan muy claro a que están aplicando</h6>
+                                <input class="origin-vacancy" name="title_es"><br>
+                                <h3>Cargo solicitado</h3>
                                 <h6>Selecciona el área que más se adapte al perfil que estás buscando</h6>
-                                <select class="drop-down" name="work_area_id" style="border-radius: 50px; padding:10px; width:100%;border: 2px solid #aaa">
+                                <select class="origin-workarea" name="work_area_id">
                                     <option value="" disabled selected></option>
                                     {% for work_area in work_areas %}
                                     <option value={{ work_area.id }}>{{ work_area.name }}</option>
                                     {% endfor %}
                                 </select>
-                                <h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Rango salarial</h3>
+                                <h3>Rango salarial</h3>
                                 <h6>Asigna el rango salarial que estás dispuesto a ofrecer</h6>
-                                <input class="origin-salary-min form-input little" step="100000" type="number" min="0" style="border-radius: 50px; padding:10px; width:45%;display:inline;border: 2px solid #aaa" name="salary">
-                                <span style="margin: 0px 2.4%;">a</span>
-                                <input class="origin-salary-max form-input little" step="100000" type="number" min="0" style="border-radius: 50px; padding:10px; width:45%;display:inline;border: 2px solid #aaa" name="salary">
+                                <input class="origin-salary" step="100000" type="number" min="0" name="salary">
+                                <span class="conjonction">a</span>
+                                <input class="origin-salary" step="100000" type="number" min="0" name="salary">
                                 <!--
-                                <h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Requisitos</h3>
-                                <h6>Agrega palabras clave que ayuden a distinguir los requerimientos más importantes para la oferta</h6>
-                                <select class="origin-keywords js-example-basic-multiple" style=" padding:10px; width:100%;" name="states[]" multiple="multiple">
-                                    <option value="AL">Alabama</option>
-                                    <option value="O">Otra</option>
-                                    <option value="WY">Wyoming</option>
-                                </select>
-                                -->
-
+                                    <h3>Requisitos</h3>
+                                    <h6>Agrega palabras clave que ayuden a distinguir los requerimientos más importantes para la oferta</h6>
+                                    <select class="origin-keywords js-example-basic-multiple" name="states[]" multiple="multiple">
+                                        <option value="AL">Alabama</option>
+                                        <option value="O">Otra</option>
+                                        <option value="WY">Wyoming</option>
+                                    </select>
+                                    -->
                             </fieldset>
                         </div>
                         <div class="col-md-1"></div>
                         <div class="col-md-5">
                             <br>
-                            <fieldset style="width:80%;">
+                            <fieldset class="description">
                                 <br>
                                 <br>
-                                <h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Descripción de tu oferta laboral</h3>
-                                <h6>Explica la oferta lo mejor posible, te recomendamos ingresar el detalle de la vacante, requisitos y beneficios. Trata de usar poco texto y dar mucha información !</h6>
-
+                                <h3>Descripción de tu oferta laboral</h3>
+                                <h6>Explica la oferta lo mejor posible, te recomendamos ingresar el detalle de la vacante, requisitos y beneficios.
+                                    Trata de usar poco texto y dar mucha información !
+                                </h6>
                                 <trix-editor></trix-editor>
-                                <textarea name="description_es" style="display:none;" class="backend-description"></textarea>
+                                <textarea name="description_es" class="backend-description"></textarea>
                             </fieldset>
                         </div>
                     </div>
@@ -286,93 +286,99 @@
             <section class="section-three" id="section-three">
                 <div class="container">
                     <div class="row">
-                        <div class="col-xs-4">
+                        <div class="col-md-4">
                             <br>
                             <div class="row">
-                                <div class="col-xs-4"><span class="big-number">3<span class="point">.</span></span></div>
-                                <div class="col-xs-8" style="left: 40px; top:75px;"><span style="font-family : BertholdAkzidenzGroteskSuper; font-size : 20px;color : #656665;">PUBLICA TU<br>OFERTA LABORAL</span></div>
+                                <div class="col-md-4"><span class="big-number">3<span class="point">.</span></span></div>
+                                <div class="col-md-8 section3-description">
+                                    <span class="super">PUBLICA TU<br>OFERTA LABORAL</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-xs-8"></div>
+                        <div class="col-md-8"></div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="little-section final-hide">
-                                <h6 class="vacancy-tittle"></h6>
-                                <br>
-                                <h6 class="city"></h6>
+                            <div class="gradient1">
+                                <div class="gradient2">
+                                    <div class="little-section final-hide">
+                                        <h6 class="vacancy"></h6>
+                                        <br>
+                                        <h6 class="city"></h6>
+                                    </div>
+                                </div>
                             </div>
                             <a id="publish-campaign-button" class="button-cta" role="button" onclick="on()">PUBLICAR MI OFERTA</a>
                         </div>
-                        <div class="col-xs-4" >
+                        <div class="col-md-4" >
                             <fieldset>
-                                <span style="font-family : BertholdAkzidenzGroteskSuper; font-size : 35px; color : #656665;  opacity : 0.2;">RESUMEN<br>DE TU OFERTA</span>
-                                <h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Cargo solicitado</h3>
-                                <h6 class="charge" style=" font-family : Helvetica;font-size : 13px;color : #3B4754;"></h6>
+                                <span class="resume super">RESUMEN<br>DE TU OFERTA</span>
+                                <h3>Cargo solicitado</h3>
+                                <h6 class="workarea"></h6>
                                 <br>
-                                <h3 style="font-family : Helvetica Bold;font-weight : bold;font-size : 23px;color : #656665;">Descripción de tu oferta laboral</h3>
-                                <h6 class="vacancy-description" style=" font-family : Helvetica;font-size : 13px;color : #3B4754;"></h6>
+                                <h3>Descripción de tu oferta laboral</h3>
+                                <h6 class="vacancy-description"></h6>
                             </fieldset>
                         </div>
-                        <div class="col-xs-2"></div>
+                        <div class="col-md-2"></div>
                     </div>
                 </div>
-
-            <div id="overlay">
-                <div class="form-image final">
-                    <div id="register-form">
-                        <fieldset>
-                            <span class="exitDingbat" onclick="off()">X</span>
-                            <br>
-                            <br>
-                            <span>Nombre</span>
-                            <input class="form-input" name="name" required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
-                            <br>
-                            <span>Empresa</span>
-                            <input class="form-input" name="company">
-                            <span>Correo</span>
-                            <input class="form-input" type="email" name="username" required="required">
-                            <span>Teléfono</span>
-                            <input class="form-input" type="tel" name="phone" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
-                            <br>
-                            <span>Contraseña</span>
-                            <input class="form-input" type="password" name="password1" required="required">
-                            <br>
-                            <span>Confirmar contraseña</span>
-                            <input class="form-input" type="password" name="password2" required="required">
-                            <br>
-                        </fieldset>
+                <div id="overlay">
+                    <div class="form-image final">
+                        <div id="register-form">
+                            <fieldset>
+                                <span class="exitDingbat" onclick="off()">X</span>
+                                <br>
+                                <br>
+                                <span>Nombre</span>
+                                <input class="form-input" name="name" required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
+                                <br>
+                                <span>Empresa</span>
+                                <input class="form-input" name="company">
+                                <span>Correo</span>
+                                <input class="form-input" type="email" name="username" required="required">
+                                <span>Teléfono</span>
+                                <input class="form-input" type="tel" name="phone" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
+                                <br>
+                                <span>Contraseña</span>
+                                <input class="form-input" type="password" name="password1" required="required">
+                                <br>
+                                <span>Confirmar contraseña</span>
+                                <input class="form-input" type="password" name="password2" required="required">
+                                <br>
+                            </fieldset>
+                        </div>
                     </div>
                 </div>
-            </div>
             </section>
         </form>
         <!----------------------------------------------FOOTER--------------------------------------------------------->
         <footer class="container-fluid">
-            <div class="row" style="padding-bottom:30px;">
-                <div class=" col-xs-2 col-md-2 "></div>
-                <div class=" col-xs-3 col-md-3  navfooter" >
-                    <ul style="float:left">
+            <div class="row footer-navigation">
+                <div class="col-md-2 col-md-2"></div>
+                <div class="col-md-3 col-md-3 navfooter">
+                    <ul>
                         <li><a href="#">Nosotros</a></li>
                         <li><a href="{% url 'business:contact_form' %}">Contáctanos</a></li>
                         <li><a href="{% url 'beta_invite:index' %}">Personas</a></li>
                     </ul>
                 </div>
-                <div class="col-xs-2 col-md-2 redesfooter" style="text-align:center">
+                <div class="col-md-2 col-md-2 social">
                     <a href="https://www.linkedin.com/company-beta/16241506/" target="_blank"><img src="{% static 'business/img/linkedin.png' %}"></a>
-                    <a href="https://www.facebook.com/PeakU-Latam-1916685895214519/?ref=aymt_homepage_panel" target="_blank"><img src="{% static 'business/img/facebook.png' %}"></a>
+                    <a href="https://www.facebook.com/PeakU-Latam-1916685895214519/?ref=aymt_homepage_panel" target="_blank">
+                    <img src="{% static 'business/img/facebook.png' %}"></a>
                     <a href="#" target="_blank"><img src="{% static 'business/img/instagram.png' %}"></a>
                     <a href="#" target="_blank"><img src="{% static 'business/img/twitter.png' %}"></a>
                 </div>
-                <div class=" col-xs-1 col-md-1"></div>
-                <div class=" col-xs-2 col-md-2 navfootercontact">
-                    <div style="width:20%; float:left; display:block; margin-top:10px; margin-left:-30px; "><a href="#"><img src="{% static 'business/img/logo-white.png' %}"></a></div>
-                    <div style="width:80%; float:right; display:block; padding-left:20px">contacto@peaku.co<br>
+                <div class=" col-md-1 col-md-1"></div>
+                <div class=" col-md-2 col-md-2 navfootercontact">
+                    <div class="logo-white"><a href="#"><img src="{% static 'business/img/logo-white.png' %}"></a></div>
+                    <div class="contact">contacto@peaku.co<br>
                         +57 311 6109340<br>
                         Colombia
                     </div>
                 </div>
-                <div class=" col-xs-2 col-md-2 "></div>
+                <div class=" col-md-2 col-md-2 "></div>
             </div>
             <div class="row">
                 <div class="col-1 col-md-1"></div>
@@ -442,14 +448,14 @@
              	$('.city').text(text);
             });
 
-            $('.origin-vacancy-tittle').on('keyup', function() {
+            $('.origin-vacancy').on('keyup', function() {
             	var text = $(this).val();
-             	$('.vacancy-tittle').text(text);
+             	$('.vacancy').text(text);
             });
 
-            $('.drop-down').on('change', function() {
+            $('.origin-workarea').on('change', function() {
             	var text = $(this).find('option:selected').text();
-             	$('.charge').text(text);
+             	$('.workarea').text(text);
             });
 
         </script>
