@@ -48,18 +48,16 @@
     </head>
     <!----------------------------------------------SECTION 1---------------------------------------------------------->
     <body>
-        <section class="main-section scroll-content" id="main-section">
+        <section class="main-section" id="main-section">
             <div class="gradient1">
                 <div class="gradient2">
                     <div class="topnav" id="myTopnav">
-                        <div>
-                            <a href="/staffing" class="logo"><img src="{% static 'business/img/logo-color.png' %}"></a>
-                            <a class="navButton regular" role="button" onclick="on_login()">INICIA SESIÓN</a>
-                            <a class="navButton" role="button" onclick="on_signup()">CREA TU CUENTA</a>
-                            <a class="navText" href="{% url 'business:contact_form' %}">Contáctanos</a>
-                            <a class="navText" href="{% url 'beta_invite:index' %}">Personas</a>
-                            <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
-                        </div>
+                        <a href="/staffing" class="logo"><img src="{% static 'business/img/logo-color.png' %}"></a>
+                        <a class="navButton regular" role="button" onclick="on_login()">INICIA SESIÓN</a>
+                        <a class="navButton" role="button" onclick="on_signup()">CREA TU CUENTA</a>
+                        <a class="navText" href="{% url 'business:contact_form' %}">Contáctanos</a>
+                        <a class="navText" href="{% url 'beta_invite:index' %}">Personas</a>
+                        <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
                     </div>
                     <div id="overlay-signup">
                         <div class="form-image">
@@ -425,7 +423,11 @@
             });
 
             $('.regular').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-            	var background = $('.slide-' + nextSlide).data('background');
+                if ($(window).width() < 768) {
+            	    var background = $('.slide-' + nextSlide).data('background').replace('min', 'cel');
+                }else{
+                    var background = $('.slide-' + nextSlide).data('background');
+                }
             	$(".main-section").css('background', 'url(' + background + ') 0% 0% / cover');
             	$(".little-section").css('background', 'url(' + background + ') 0% 0% / cover')
             });
@@ -433,12 +435,12 @@
         <!--TopNav-->
         <script>
             function myFunction() {
-            	var x = document.getElementById("myTopnav");
-            	if (x.className === "topnav") {
-            		x.className += " responsive";
-            	} else {
-            		x.className = "topnav";
-            	}
+                var x = document.getElementById("myTopnav");
+                if (x.className === "topnav") {
+                    x.className += " responsive";
+                } else {
+                    x.className = "topnav";
+                }
             }
         </script>
         <!--Section 3 brief-->
