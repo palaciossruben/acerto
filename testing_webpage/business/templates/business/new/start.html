@@ -424,12 +424,15 @@
 
             $('.regular').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
                 if ($(window).width() < 768) {
+                    var background = $('.slide-' + nextSlide).data('background');
+                    $(".little-section").css('background', 'url(' + background + ') 0% 0% / cover')
             	    var background = $('.slide-' + nextSlide).data('background').replace('min', 'cel');
+
                 }else{
                     var background = $('.slide-' + nextSlide).data('background');
+                    $(".little-section").css('background', 'url(' + background + ') 0% 0% / cover')
                 }
             	$(".main-section").css('background', 'url(' + background + ') 0% 0% / cover');
-            	$(".little-section").css('background', 'url(' + background + ') 0% 0% / cover')
             });
         </script>
         <!--TopNav-->
