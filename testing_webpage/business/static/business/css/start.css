@@ -765,7 +765,7 @@ footer {
 
 	.main-section {
         background: url(../img/Start_BG-01-cel.png) no-repeat top center scroll ;
-        background-size:contain;
+        background-size:cover;
     }
 
     .responsive {
@@ -773,17 +773,66 @@ footer {
     }
 
     .section1-description {
-        margin-top: 80px;
+        top: 340px;
     }
-    
+
+    .section2-description {
+        top: 67px;
+    }
+
+    .section3-description {
+        top:67px;
+    }
+
+    .section2-description span, .section3-description span{
+        font-size:13px;
+    }
+
     .description1{
         font-size:25px;
+        margin-bottom:10px;
     }
 
     .description2{
         font-size:18px;
     }
 
+    .regular.slider {
+        width: 80%;
+        margin: 30px auto 60px auto;
+    }
+
+    .slide-css {
+    margin-right: 10px;
+    }
+
+    .slick-prev, .slick-next{
+        top:40%;
+    }
+
+    .slick-prev {
+        left: -35px;
+    }
+
+    .description{
+        width:100%;
+    }
+
+    .resume {
+        display:none;
+    }
+
+    .button-cta {
+        margin-top: 30px;
+        margin-bottom: 300px;
+    }
+
+    .little-section{
+        margin-top: 100px;
+    }
+
+    .vacancy-description{
+        margin-bottom: 30px;
+    }
 
 }
-
