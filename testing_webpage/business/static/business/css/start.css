@@ -144,6 +144,10 @@ h6{
     margin: 0 auto 50px -5%;
 }
 
+.slide-1{
+    data-background= 'business/img/Start_BG-02-min.jpg';
+}
+
 .slide-css{
     margin-right: 10px;
 }
@@ -162,13 +166,13 @@ h6{
 }
 
 .slider-text{
-    top: 292px;
+    top: 320px;
 }
 
 .slider-text span{
     color:white;
     text-align:center;
-    font-size: 20px;
+    font-size: 19px;
 }
 
 .slider div p {
@@ -488,7 +492,7 @@ width: 170px;
     margin: 0px 50%;
     color: black;
     position:absolute;
-    z-index:200;
+    z-index:2;
 }
 
 .section-two {
@@ -608,11 +612,6 @@ trix-editor ul {
   text-decoration: none;
 }
 
-.topnav .icon {
-    display: none;
-    font-size:25px;
-}
-
 .navButton {
     float: right;
     display: block;
@@ -727,30 +726,18 @@ footer {
     padding-left:20px
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**************************************************RESPONSIVE**********************************************************/
 
-@media screen and (max-width: 600px) {
+.topnav .icon {
+    display: none;
+    font-size:25px;
+    margin-right: 20px;
+    float:right;
+}
 
-    .icon {
-        margin-right:20px;
-    }
+@media  (max-width: 768px){
 
-    .topnav a:not(:first-child){
+    .topnav a:not(:first-child) {
         display: none;
     }
 
@@ -758,10 +745,21 @@ footer {
         float: right;
         display: block;
     }
-}
 
+    .topnav.responsive {
+        position: relative;
+    }
 
-@media  (max-width: 768px){
+    .topnav.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .topnav.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
 
 	.main-section {
         background: url(../img/Start_BG-01-cel.png) no-repeat top center scroll ;
