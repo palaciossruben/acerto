@@ -190,7 +190,7 @@ def save_user_relevance_dictionary(path):
     user_relevance_dictionary = h.remove_accents(user_relevance_dictionary)
 
     pickle.dump(user_relevance_dictionary, open(cts.WORD_USER_PATH, 'wb'))
-    print([w for w in user_relevance_dictionary.keys()])
+    #print([w for w in user_relevance_dictionary.keys()])
 
 
 def run():
