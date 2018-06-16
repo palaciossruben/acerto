@@ -128,7 +128,7 @@ def add_position_effect(text, relevance, word):
     return relevance
 
 
-def get_common_words(text_corpus, number_of_top_words=10000):
+def get_common_words(text_corpus, number_of_top_words=20000):
     """Gets a list of the most common words"""
 
     word_frequency = dict()
@@ -145,7 +145,7 @@ def get_common_words(text_corpus, number_of_top_words=10000):
     word_frequency = [(w, f/(math.pow(appearances[w], 1.5))) for w, f in word_frequency.items()]
     word_frequency.sort(key=lambda x: x[1], reverse=True)
 
-    return [w for w, _ in word_frequency][:number_of_top_words]
+    return [w for w, _ in word_frequency][:min(number_of_top_words, len(word_frequency))]
 
 
 def save_user_relevance_dictionary(path):
