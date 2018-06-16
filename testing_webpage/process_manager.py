@@ -13,10 +13,6 @@ from match.model import run as model_run
 from subscribe import helper as h
 
 CHECKING_INTERVAL = 60  # check each minute
-LIMIT_TIME = 7200  # 1 hour
-
-#CHECKING_INTERVAL = 1  # test, remove
-#LIMIT_TIME = 10  # 1 test, remove
 
 
 def retrieve_name(var):
@@ -31,7 +27,7 @@ def retrieve_name(var):
                 return names[0]
 
 
-def run_watchdog(f):
+def run_watchdog(f, limit_hours=2.0):
     print("{}: STARTED {}".format(datetime.today(), retrieve_name(f)))
 
     start = time.time()
@@ -40,7 +36,7 @@ def run_watchdog(f):
 
     while True:  # control cycle
         time.sleep(CHECKING_INTERVAL)
-        if time.time() - start > LIMIT_TIME:
+        if time.time() - start > limit_hours * 3600:
             p.terminate()
             p.join()
             print("ERROR Timeout: Process manager killed {p} after {seconds} second\n".format(p=retrieve_name(f),
@@ -55,9 +51,9 @@ if __name__ == '__main__':
     sys.stdout = h.Unbuffered(open('main.log', 'a'))
 
     h.log('PROCESS MANAGER STARTED')
-    run_watchdog(document_reader_run)
-    run_watchdog(search_engine_run)
-    run_watchdog(context_search_run)
-    run_watchdog(model_run)
-    run_watchdog(cluster_run)
+    run_watchdog(document_reader_run, limit_hours=2)
+    run_watchdog(search_engine_run, limit_hours=3)
+    run_watchdog(context_search_run, limit_hours=3)
+    run_watchdog(model_run, limit_hours=1)
+    run_watchdog(cluster_run, limit_hours=0.1)
     h.log('PROCESS MANAGER FINISHED')
