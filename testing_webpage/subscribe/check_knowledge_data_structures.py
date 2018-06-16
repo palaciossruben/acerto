@@ -1,7 +1,10 @@
 import pickle
-from subscribe import cts as cts_subscribe
+import cts
 
-d = pickle.load(open(cts_subscribe.RELATED_WORDS_PATH, 'rb'))
+d = pickle.load(open('related_words_dict.p', 'rb'))
 
 for k, v in d.items():
-    print(str(k) + ': ' + str(v))
+    try:
+        print(str(k) + ': ' + str(v))
+    except UnicodeEncodeError:
+        pass
