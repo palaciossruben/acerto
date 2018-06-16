@@ -3,7 +3,6 @@ import math
 import nltk
 
 
-
 def my_sigmoid(num_words, num_for_80_percent):
     """
     Gives a score with a sigmoid function increasing with the number of words.
@@ -35,6 +34,7 @@ def get_score(text):
     length_score = my_sigmoid(len(words), 15)
 
     spelling = 0
+
     with open(os.path.join('subscribe', 'es-MX.dic'), 'r', encoding='UTF-8') as vocabulary_file:
 
         vocabulary = vocabulary_file.read().split('\n')
