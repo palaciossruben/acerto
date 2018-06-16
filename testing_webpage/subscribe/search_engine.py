@@ -194,7 +194,7 @@ def save_user_relevance_dictionary(path):
 
 
 def run():
-    #sys.stdout = h.Unbuffered(open('search_engine.log', 'a'))
+    sys.stdout = h.Unbuffered(open('search_engine.log', 'a'))
 
     h.log("STARTED RELEVANCE DICT")
     t0 = time.time()

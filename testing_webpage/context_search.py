@@ -6,14 +6,17 @@ This builds a relationship between words for example 'android' has the following
 """
 
 import os
+import sys
 from django.core.wsgi import get_wsgi_application
+
+
+# Environment can use the models as if inside the Django app
+print(os.getcwd())
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
-import sys
 import pickle
-import common
 import time
 
 from collections import OrderedDict
@@ -30,7 +33,7 @@ nested_names = [u.name.split() for u in User.objects.all()]
 NAMES = {item.lower() for sublist in nested_names for item in sublist}
 
 PLACES = {'cauca', 'popayan', 'pereira', }
-EXCLUDED_WORDS = common.CONJUNCTIONS | COUNTRIES | NAMES | PLACES
+EXCLUDED_WORDS = cts.CONJUNCTIONS | COUNTRIES | NAMES | PLACES
 
 
 def sort_relevance(my_dict):

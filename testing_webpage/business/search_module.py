@@ -43,7 +43,7 @@ def get_word_array_lower_case_and_no_accents(search_text):
 
 
 def filter_conjunction_words(words):
-    return [w for w in words if w not in common.CONJUNCTIONS]
+    return [w for w in words if w not in cts_subscribe.CONJUNCTIONS]
 
 
 def clean_text_for_search(search_text):

@@ -15,7 +15,6 @@ from dashboard.models import Candidate, State
 from testing_webpage import settings
 
 
-CONJUNCTIONS = {'las', 'para', 'los', 'del', 'and', 'el', 'en', 'de', 'the', 'for', 'with'}
 INTERVIEW_INTRO_VIDEO = './interview_intro_video.txt'
 ZIGGEO_API_KEY = './ziggeo_api_key.txt'
 
