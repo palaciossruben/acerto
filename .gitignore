@@ -84,7 +84,7 @@ testing_webpage/subscribe/resumes/**
 testing_webpage/subscribe/relevance_dictionary.p
 testing_webpage/subscribe/user_relevance_dictionary.p
 
-testing_webpage/subscribe/top_related_words_dict.p
+testing_webpage/subscribe/related_words_dict.p
 testing_webpage/subscribe/word_user_dictionary.p
 testing_webpage/testing_webpage/settings.py
 ziggeo_api_key.txt

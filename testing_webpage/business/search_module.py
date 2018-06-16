@@ -12,9 +12,6 @@ from beta_invite.models import User
 MAX_NUM_OF_USERS = 40
 
 
-WORD_USER_PATH = os.path.join('subscribe', 'word_user_dictionary.p')
-
-
 def filter_relevance_users(user_relevance_dict):
     """
     Filters for users who have zero relevance.
@@ -70,7 +67,7 @@ def get_text_from_request(request):
 
 def adds_context_based_search(tokens_dict, word_user_dictionary, filtered_user_relevance_dict):
     """
-    Takes the filtered_user_relevance_dicts and modifies its relevance according to the top_related_words.
+    Takes the filtered_user_relevance_dicts and modifies its relevance according to the related_words.
     Args:
         tokens_dict: List with collection of words.
         word_user_dictionary:
@@ -78,13 +75,13 @@ def adds_context_based_search(tokens_dict, word_user_dictionary, filtered_user_r
     Returns:
     """
 
-    # tries opening top_related_words_dict.p or passes by.
+    # tries opening related_words_dict.p or passes by.
     try:
         # A dictionary of the form: {'word': [('related_word', relevance) ...]}
-        top_related_words = pickle.load(open(os.path.join('subscribe', 'top_related_words_dict.p'), 'rb'))
+        related_words = pickle.load(open(common.RELATED_WORDS_PATH, 'rb'))
 
         for t in tokens_dict.keys():
-            related_words = top_related_words.get(t, [])
+            related_words = related_words.get(t, [])
             for related_word, relevance in related_words:
                 user_ids = [i for i, r in word_user_dictionary.get(related_word, [])]
                 for user_id, user_relevance in filtered_user_relevance_dict.items():
@@ -164,7 +161,7 @@ def get_matching_users(search_phrase):
     # Opens word_user_dict, or returns unordered users.
     try:
         # A dictionary of the form: {'word': (user_id, relevance)}
-        word_user_dictionary = pickle.load(open(WORD_USER_PATH, 'rb'))
+        word_user_dictionary = pickle.load(open(common.WORD_USER_PATH, 'rb'))
     except FileNotFoundError:
         return users  # will not filter by words.
 

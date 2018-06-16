@@ -311,6 +311,8 @@ def remove_accents(an_object):
         return tuple([remove_accents_in_string(e) for e in an_object])
     elif isinstance(an_object, dict):
         return {remove_accents_in_string(k): remove_accents_in_string(v) for k, v in an_object.items()}
+    elif isinstance(an_object, set):
+        return set([remove_accents_in_string(e) for e in an_object])
     else:
         raise NotImplementedError
 

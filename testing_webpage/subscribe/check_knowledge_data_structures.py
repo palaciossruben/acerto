@@ -1,19 +1,13 @@
+import os
+from django.core.wsgi import get_wsgi_application
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
+application = get_wsgi_application()
+
 import pickle
+import common
 
-"""
-d = pickle.load(open('relevance_dictionary.p', 'rb'))
-
-for k, v in d.items():
-    print(str(k) + ': ' + str(v))
-
-
-d = pickle.load(open('word_user_dictionary.p', 'rb'))
-
-for k, v in d.items():
-    print(str(k) + ': ' + str(v))
-"""
-
-d = pickle.load(open('top_related_words_dict.p', 'rb'))
+d = pickle.load(open(common.RELATED_WORDS_PATH, 'rb'))
 
 for k, v in d.items():
     print(str(k) + ': ' + str(v))

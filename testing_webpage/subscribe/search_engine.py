@@ -1,15 +1,27 @@
 import os
+from django.core.wsgi import get_wsgi_application
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
+application = get_wsgi_application()
+
 import re
 import sys
+import math
 import time
 import pickle
 
-from datetime import datetime
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
-from subscribe import cts
 from collections import OrderedDict
-from subscribe import helper as h
+
+import common
+
+try:
+    from subscribe import helper as h
+    from subscribe import cts
+except ImportError:
+    import helper as h
+    import cts
 
 
 def get_text_from_path(root_path, relative_path):
@@ -54,14 +66,14 @@ def get_text_stats(path, use_idf):
     Returns: Tuple containing Sparse Matrix with tf_idf data,  vocabulary dictionary and text_corpus (OrderedDict)
     """
     count_vectorizer = CountVectorizer()
-    text_corpus_dict = get_text_corpus(path, toy=False)
-    data_counts = count_vectorizer.fit_transform([e for e in text_corpus_dict.values()])
+    text_corpus = get_text_corpus(path, toy=False)
+    data_counts = count_vectorizer.fit_transform([e for e in text_corpus.values()])
     tf_transformer = TfidfTransformer(use_idf=use_idf).fit(data_counts)
 
     data_tf_idf = tf_transformer.transform(data_counts)
     vocabulary = count_vectorizer.vocabulary_
 
-    return data_tf_idf, vocabulary, text_corpus_dict
+    return data_tf_idf, vocabulary, text_corpus
 
 
 def save_relevance_dictionary(path):
@@ -102,7 +114,7 @@ def save_relevance_dictionary(path):
 
 def add_position_effect(text, relevance, word):
     """
-    The relevance has a n additional factor: A word near the top of the document should be more
+    The relevance has an additional factor: A word near the top of the document should be more
     important than at the bottom.
     Args:
         text: string
@@ -110,12 +122,32 @@ def add_position_effect(text, relevance, word):
         word: string
     Returns: modified relevance
     """
-
-    if len(text) > 0:
-        position_percent = (len(text) - text.lower().find(word))/len(text)
+    l = len(text)
+    if l > 0:
+        position_percent = (l - text.lower().find(word))/l
         relevance *= position_percent
 
     return relevance
+
+
+def get_common_words(text_corpus, percentage=0.4):
+    """Gets a list of the most common words"""
+
+    word_frequency = dict()
+    appearances = dict()
+    for text in text_corpus.values():
+        unique = set(text.split())
+        unique = h.remove_accents(unique)
+
+        for u in unique:
+            if len(u) > 2 and '_' not in u:
+                word_frequency[u] = word_frequency.get(u, 0) + text.count(u)
+                appearances[u] = word_frequency.get(u, 0) + 1
+
+    word_frequency = [(w, f/(math.pow(appearances[w], 1.5))) for w, f in word_frequency.items()]
+    word_frequency.sort(key=lambda x: x[1], reverse=True)
+
+    return [w for w, _ in word_frequency][:int(len(word_frequency) * percentage)]
 
 
 def save_user_relevance_dictionary(path):
@@ -131,21 +163,29 @@ def save_user_relevance_dictionary(path):
     data_tf_idf, vocabulary, text_corpus = get_text_stats(path, use_idf=True)
 
     user_relevance_dictionary = {}
+
+    common_words = get_common_words(text_corpus)
+
+    common_words = set(common_words)
     for word, num_word in vocabulary.items():
-        values = []
-        for document, user_id in enumerate(text_corpus.keys()):
 
-            relevance = data_tf_idf[document, num_word]
+        if word in common_words:
 
-            if relevance > 0:
-                relevance = add_position_effect(text_corpus[user_id], relevance, word)
-                values.append((int(user_id), relevance))
+            values = []
+            for document, user_id in enumerate(text_corpus.keys()):
+
+                relevance = data_tf_idf[document, num_word]
+
+                if relevance > 0:
+                    relevance = add_position_effect(text_corpus[user_id], relevance, word)
+                    values.append((int(user_id), relevance))
 
             user_relevance_dictionary[word] = tuple(values)
 
     user_relevance_dictionary = h.remove_accents(user_relevance_dictionary)
 
-    pickle.dump(user_relevance_dictionary, open('word_user_dictionary.p', 'wb'))
+    pickle.dump(user_relevance_dictionary, open(common.WORD_USER_PATH, 'wb'))
+    print([w for w in user_relevance_dictionary.keys()])
 
 
 def run():
