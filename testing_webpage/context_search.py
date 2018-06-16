@@ -128,7 +128,7 @@ def compute_related_words():
 
 def run():
 
-    #sys.stdout = h.Unbuffered(open('context_search.log', 'a'))
+    sys.stdout = h.Unbuffered(open('context_search.log', 'a'))
 
     h.log("STARTED CONTEXT SEARCH")
     t0 = time.time()
