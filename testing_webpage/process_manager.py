@@ -55,5 +55,5 @@ if __name__ == '__main__':
     run_watchdog(search_engine_run, limit_hours=3)
     run_watchdog(context_search_run, limit_hours=3)
     run_watchdog(model_run, limit_hours=1)
-    run_watchdog(cluster_run, limit_hours=0.1)
+    #run_watchdog(cluster_run, limit_hours=0.1)
     h.log('PROCESS MANAGER FINISHED')

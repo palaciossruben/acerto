@@ -20,6 +20,7 @@ INTERVIEW_INTRO_VIDEO = './interview_intro_video.txt'
 ZIGGEO_API_KEY = './ziggeo_api_key.txt'
 WORD_USER_PATH = os.path.join('subscribe', 'word_user_dictionary.p')
 RELATED_WORDS_PATH = os.path.join('subscribe', 'related_words_dict.p')
+RELEVANCE_DICTIONARY = os.path.join('subscribe', 'relevance_dictionary.p')
 
 
 def remove_accents(text):

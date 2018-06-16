@@ -9,6 +9,7 @@ import sys
 import math
 import time
 import pickle
+import itertools
 
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
@@ -84,32 +85,37 @@ def save_relevance_dictionary(path):
 
     data_tf_idf, vocabulary, text_corpus = get_text_stats(path, use_idf=False)
 
+    common_words = get_common_words(text_corpus)
+
     scores = []
-    for word_str, word_num_code in vocabulary.items():
+    common_words = set(common_words)
+    for word, word_num_code in vocabulary.items():
 
-        corpus_length = len(text_corpus)
+        if word in common_words:
 
-        # short words will have 0 score.
-        if corpus_length == 0 or len(word_str) < 4:
-            score = 0
-        else:
+            corpus_length = len(text_corpus)
 
-            col = data_tf_idf.getcol(word_num_code)
+            # short words will have 0 score.
+            if corpus_length == 0 or len(word) < 4:
+                score = 0
+            else:
 
-            height = col.shape[0]
-            sqr = col.copy()  # take a copy of the col
-            sqr.data **= 2  # square the data, i.e. just the non-zero data
+                col = data_tf_idf.getcol(word_num_code)
 
-            mean = col.mean()
-            variance = sqr.sum()/height - mean**2
+                height = col.shape[0]
+                sqr = col.copy()  # take a copy of the col
+                sqr.data **= 2  # square the data, i.e. just the non-zero data
 
-            score = mean + variance
+                mean = col.mean()
+                variance = sqr.sum()/height - mean**2
 
-        scores.append((word_str, score))
+                score = mean + variance
+
+            scores.append((word, score))
 
     scores.sort(key=lambda x: x[1])
 
-    pickle.dump({k: v for k, v in scores}, open('relevance_dictionary.p', 'wb'))
+    pickle.dump({k: v for k, v in scores}, open(common.RELEVANCE_DICTIONARY, 'wb'))
 
 
 def add_position_effect(text, relevance, word):
@@ -130,7 +136,7 @@ def add_position_effect(text, relevance, word):
     return relevance
 
 
-def get_common_words(text_corpus, percentage=0.4):
+def get_common_words(text_corpus, number_of_top_words=10000):
     """Gets a list of the most common words"""
 
     word_frequency = dict()
@@ -147,7 +153,7 @@ def get_common_words(text_corpus, percentage=0.4):
     word_frequency = [(w, f/(math.pow(appearances[w], 1.5))) for w, f in word_frequency.items()]
     word_frequency.sort(key=lambda x: x[1], reverse=True)
 
-    return [w for w, _ in word_frequency][:int(len(word_frequency) * percentage)]
+    return [w for w, _ in word_frequency][:number_of_top_words]
 
 
 def save_user_relevance_dictionary(path):
@@ -171,13 +177,20 @@ def save_user_relevance_dictionary(path):
 
         if word in common_words:
 
+            #column = data_tf_idf.getcol(num_word)
+            #column_coo = column.tocoo()
+            #for i, j, v in itertools.izip(cx.row, cx.col, cx.data):
+            #    print(i, j, v)
+
             values = []
-            for document, user_id in enumerate(text_corpus.keys()):
+            for document, (user_id, text) in enumerate(text_corpus.items()):
+
+                #print(str(document) + ', ' + str(user_id))
 
                 relevance = data_tf_idf[document, num_word]
 
                 if relevance > 0:
-                    relevance = add_position_effect(text_corpus[user_id], relevance, word)
+                    relevance = add_position_effect(text, relevance, word)
                     values.append((int(user_id), relevance))
 
             user_relevance_dictionary[word] = tuple(values)
