@@ -8,6 +8,7 @@ from collections import OrderedDict
 import common
 from business import util
 from beta_invite.models import User
+from subscribe import cts as cts_subscribe
 
 MAX_NUM_OF_USERS = 40
 
@@ -78,7 +79,7 @@ def adds_context_based_search(tokens_dict, word_user_dictionary, filtered_user_r
     # tries opening related_words_dict.p or passes by.
     try:
         # A dictionary of the form: {'word': [('related_word', relevance) ...]}
-        related_words = pickle.load(open(common.RELATED_WORDS_PATH, 'rb'))
+        related_words = pickle.load(open(cts_subscribe.RELATED_WORDS_PATH, 'rb'))
 
         for t in tokens_dict.keys():
             related_words = related_words.get(t, [])
@@ -161,7 +162,7 @@ def get_matching_users(search_phrase):
     # Opens word_user_dict, or returns unordered users.
     try:
         # A dictionary of the form: {'word': (user_id, relevance)}
-        word_user_dictionary = pickle.load(open(common.WORD_USER_PATH, 'rb'))
+        word_user_dictionary = pickle.load(open(cts_subscribe.WORD_USER_PATH, 'rb'))
     except FileNotFoundError:
         return users  # will not filter by words.
 

@@ -1,21 +1,13 @@
 import os
-from django.core.wsgi import get_wsgi_application
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
-application = get_wsgi_application()
-
 import re
 import sys
 import math
 import time
 import pickle
-import itertools
 
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
 from collections import OrderedDict
-
-import common
 
 try:
     from subscribe import helper as h
@@ -115,7 +107,7 @@ def save_relevance_dictionary(path):
 
     scores.sort(key=lambda x: x[1])
 
-    pickle.dump({k: v for k, v in scores}, open(common.RELEVANCE_DICTIONARY, 'wb'))
+    pickle.dump({k: v for k, v in scores}, open(cts.RELEVANCE_DICTIONARY, 'wb'))
 
 
 def add_position_effect(text, relevance, word):
@@ -197,12 +189,12 @@ def save_user_relevance_dictionary(path):
 
     user_relevance_dictionary = h.remove_accents(user_relevance_dictionary)
 
-    pickle.dump(user_relevance_dictionary, open(common.WORD_USER_PATH, 'wb'))
+    pickle.dump(user_relevance_dictionary, open(cts.WORD_USER_PATH, 'wb'))
     print([w for w in user_relevance_dictionary.keys()])
 
 
 def run():
-    sys.stdout = h.Unbuffered(open('search_engine.log', 'a'))
+    #sys.stdout = h.Unbuffered(open('search_engine.log', 'a'))
 
     h.log("STARTED RELEVANCE DICT")
     t0 = time.time()

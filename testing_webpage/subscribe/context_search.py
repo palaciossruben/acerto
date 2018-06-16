@@ -19,6 +19,7 @@ import time
 from collections import OrderedDict
 from beta_invite.models import Country, User
 from subscribe import helper as h
+from subscribe import cts
 
 
 COUNTRIES = {e.name.lower() for e in Country.objects.all()}
@@ -107,7 +108,7 @@ def compute_related_words():
     """
 
     # A dictionary of the form: {'word': (user_id, relevance)}
-    word_user_dictionary = pickle.load(open(common.WORD_USER_PATH, 'rb'))
+    word_user_dictionary = pickle.load(open(cts.WORD_USER_PATH, 'rb'))
 
     related_words_dict = dict()
     for keyword, values in word_user_dictionary.items():
@@ -119,7 +120,7 @@ def compute_related_words():
 
             related_words_dict[keyword] = sorted_final
 
-    pickle.dump(related_words_dict, open(common.RELATED_WORDS_PATH, 'wb'))
+    pickle.dump(related_words_dict, open(cts.RELATED_WORDS_PATH, 'wb'))
 
 
 def run():

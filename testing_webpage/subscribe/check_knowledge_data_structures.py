@@ -1,13 +1,7 @@
-import os
-from django.core.wsgi import get_wsgi_application
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
-application = get_wsgi_application()
-
 import pickle
-import common
+from subscribe import cts as cts_subscribe
 
-d = pickle.load(open(common.RELATED_WORDS_PATH, 'rb'))
+d = pickle.load(open(cts_subscribe.RELATED_WORDS_PATH, 'rb'))
 
 for k, v in d.items():
     print(str(k) + ': ' + str(v))
