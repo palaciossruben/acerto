@@ -310,10 +310,6 @@ msgid "people to your campaign"
 msgstr "personas a tu campaña"
 
 #: .\business\templates\business\dashboard.html:25
-#, fuzzy
-#| msgid ""
-#| "Remember that for this campaign, you can only have 10 candidates "
-#| "immediately"
 msgid "Remember that for this campaign, you can only have 10 candidates"
 msgstr ""
 "Recuerda que para esta campaña, solo podrás ver de inmediato máximo 10 "
