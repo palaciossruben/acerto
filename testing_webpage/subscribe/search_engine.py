@@ -1,6 +1,7 @@
 import os
 import re
 import sys
+import nltk
 import math
 import time
 import pickle
@@ -15,6 +16,18 @@ try:
 except ImportError:
     import helper as h
     import cts
+
+
+def get_word_array_lower_case_and_no_accents(search_text):
+    """
+    Args:
+        search_text: string
+    Returns: array with words
+    """
+    search_text = h.remove_accents(nltk.word_tokenize(search_text))
+
+    # remove capital letters
+    return [t.lower() for t in search_text]
 
 
 def get_text_from_path(root_path, relative_path):
@@ -128,13 +141,27 @@ def add_position_effect(text, relevance, word):
     return relevance
 
 
+def print_common_words_percentiles(word_frequency):
+
+    print('UNIQUE WORDS ORDERED BY FREQUENCY')
+    print('number of unique words: ' + str(len(word_frequency)))
+
+    for percentile in range(10):
+        percentile /= 10
+        from_index = int(len(word_frequency) * percentile)
+        to_index = int(from_index + 10)
+        print('percentile {percentile}%: {words}'.format(percentile=percentile,
+                                                         words=' '.join([w for w, _ in word_frequency][from_index:to_index])
+                                                         ))
+
+
 def get_common_words(text_corpus, number_of_top_words=20000):
     """Gets a list of the most common words"""
 
     word_frequency = dict()
     appearances = dict()
     for text in text_corpus.values():
-        unique = set(text.split())
+        unique = set(get_word_array_lower_case_and_no_accents(text))
         unique = h.remove_accents(unique)
 
         for u in unique:
@@ -144,6 +171,8 @@ def get_common_words(text_corpus, number_of_top_words=20000):
 
     word_frequency = [(w, f/(math.pow(appearances[w], 1.5))) for w, f in word_frequency.items()]
     word_frequency.sort(key=lambda x: x[1], reverse=True)
+
+    print_common_words_percentiles(word_frequency)
 
     return [w for w, _ in word_frequency][:min(number_of_top_words, len(word_frequency))]
 
