@@ -141,18 +141,18 @@ def add_position_effect(text, relevance, word):
     return relevance
 
 
-def print_common_words_percentiles(word_frequency):
+def print_common_words_percentiles(words):
 
     print('UNIQUE WORDS ORDERED BY FREQUENCY')
-    print('number of unique words: ' + str(len(word_frequency)))
+    print('number of unique words: ' + str(len(words)))
 
     for percentile in range(10):
         percentile /= 10
-        from_index = int(len(word_frequency) * percentile)
+        from_index = int(len(words) * percentile)
         to_index = int(from_index + 10)
         try:
             print('percentile {percentile}%: {words}'.format(percentile=percentile,
-                                                             words=' '.join([w for w, _ in word_frequency][from_index:to_index])
+                                                             words=' '.join(words[from_index:to_index])
                                                              ))
         except UnicodeEncodeError:
             pass
@@ -170,14 +170,17 @@ def get_common_words(text_corpus, number_of_top_words=20000):
         for u in unique:
             if len(u) > 2 and '_' not in u:
                 word_frequency[u] = word_frequency.get(u, 0) + text.count(u)
-                appearances[u] = word_frequency.get(u, 0) + 1
+                #appearances[u] = word_frequency.get(u, 0) + 1
 
-    word_frequency = [(w, f/(math.pow(appearances[w], 1.5))) for w, f in word_frequency.items()]
+    #word_frequency = [(w, f/(math.pow(appearances[w], 1.5))) for w, f in word_frequency.items()]
+    word_frequency = [(w, f) for w, f in word_frequency.items()]
     word_frequency.sort(key=lambda x: x[1], reverse=True)
 
-    print_common_words_percentiles(word_frequency)
+    words = [w for w, _ in word_frequency]
+    words = [w for w in words if w not in cts.CONJUNCTIONS]
 
-    return [w for w, _ in word_frequency][:min(number_of_top_words, len(word_frequency))]
+    print_common_words_percentiles(words)
+    return words[:min(number_of_top_words, len(word_frequency))]
 
 
 def save_user_relevance_dictionary(path):
