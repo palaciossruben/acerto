@@ -326,9 +326,9 @@ msgstr "personas a tu campaña"
 
 #: business/templates/business/dashboard.html:25
 msgid ""
-"Remember that for this campaign, you can only have 5 recommended candidates"
+"Remember that for this campaign, you can only have 10 candidates"
 msgstr ""
-"Recuerda que para esta campaña, solo podrás ver 5 candidatos recomendados"
+"Recuerda que para esta campaña, solo podrás ver 10 candidatos"
 
 #: business/templates/business/dashboard.html:26
 msgid "If you have any questions, you can write to: contacto@peaku.co"
