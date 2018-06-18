@@ -162,7 +162,6 @@ def get_common_words(text_corpus, number_of_top_words=20000):
     """Gets a list of the most common words"""
 
     word_frequency = dict()
-    appearances = dict()
     for text in text_corpus.values():
         unique = set(get_word_array_lower_case_and_no_accents(text))
         unique = h.remove_accents(unique)
@@ -170,9 +169,7 @@ def get_common_words(text_corpus, number_of_top_words=20000):
         for u in unique:
             if len(u) > 2 and '_' not in u:
                 word_frequency[u] = word_frequency.get(u, 0) + text.count(u)
-                #appearances[u] = word_frequency.get(u, 0) + 1
 
-    #word_frequency = [(w, f/(math.pow(appearances[w], 1.5))) for w, f in word_frequency.items()]
     word_frequency = [(w, f) for w, f in word_frequency.items()]
     word_frequency.sort(key=lambda x: x[1], reverse=True)
 
