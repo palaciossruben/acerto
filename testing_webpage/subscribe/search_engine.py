@@ -150,9 +150,12 @@ def print_common_words_percentiles(word_frequency):
         percentile /= 10
         from_index = int(len(word_frequency) * percentile)
         to_index = int(from_index + 10)
-        print('percentile {percentile}%: {words}'.format(percentile=percentile,
-                                                         words=' '.join([w for w, _ in word_frequency][from_index:to_index])
-                                                         ))
+        try:
+            print('percentile {percentile}%: {words}'.format(percentile=percentile,
+                                                             words=' '.join([w for w, _ in word_frequency][from_index:to_index])
+                                                             ))
+        except UnicodeEncodeError:
+            pass
 
 
 def get_common_words(text_corpus, number_of_top_words=20000):
