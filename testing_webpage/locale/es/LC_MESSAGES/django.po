@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-18 14:08-0500\n"
+"POT-Creation-Date: 2018-06-18 14:24-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -310,8 +310,14 @@ msgid "people to your campaign"
 msgstr "personas a tu campaña"
 
 #: .\business\templates\business\dashboard.html:25
+#, fuzzy
+#| msgid ""
+#| "Remember that for this campaign, you can only have 10 candidates "
+#| "immediately"
 msgid "Remember that for this campaign, you can only have 10 candidates"
-msgstr "Recuerda que para esta campaña, solo podrás ver 10 candidatos"
+msgstr ""
+"Recuerda que para esta campaña, solo podrás ver de inmediato máximo 10 "
+"candidatos"
 
 #: .\business\templates\business\dashboard.html:26
 msgid "If you have any questions, you can write to: contacto@peaku.co"
