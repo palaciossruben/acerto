@@ -37,6 +37,7 @@ def update_candidate(request, candidate):
     candidate.save()
 
     new_user_module.update_resource(request, candidate.user, 'curriculum_url', 'resumes')
+    new_user_module.update_resource(request, candidate.user, 'photo_url', 'candidate_photo')
 
 
 def add_candidate_to_campaign(request, candidate):
