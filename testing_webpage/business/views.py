@@ -440,7 +440,10 @@ def start_post(request):
     else:
 
         error_message = get_first_error_message(signup_form)
-        return render(request, cts.START_VIEW_PATH, {'error_message': error_message})
+        return render(request, cts.START_VIEW_PATH, {'error_message': error_message,
+                                                     'work_areas': common.translate_list_of_objects(
+                                                         WorkArea.objects.all(), request.LANGUAGE_CODE),
+                                                     'cities': common.get_cities()})
 
 
 def business_signup(request):

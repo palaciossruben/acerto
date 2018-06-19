@@ -107,9 +107,6 @@ def rank(campaign, users):
     candidates_rank = candidates_rank[:NUMBER_OF_MATCHES]
     candidates_rank = [(c, rank) for c, rank in candidates_rank if not common.user_has_job(c.user)]
 
-    prediction, candidates = model.predict_match([c for c, rank in candidates_rank], regression=False)
-    candidates_rank = [(c, rank + p) for (c, rank), p in zip(candidates_rank, prediction)]
-
     return [c.user for c, rank in get_desc_sorted_iterator(candidates_rank)]
 
 
@@ -119,6 +116,7 @@ def get_top_users(campaign):
     search_text = campaign.get_search_text()
     search_array = search_module.get_word_array_lower_case_and_no_accents(search_text)
     users = search_module.get_matching_users(search_array)
+
     return rank(campaign, users)
 
 

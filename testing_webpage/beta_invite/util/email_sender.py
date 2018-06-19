@@ -26,13 +26,16 @@ def validate_emails(emails):
 
 
 def mail_gun_post(recipients, subject, body, attachment):
-    requests.post(config('mailgun_url'),
-                  auth=("api", config('mailgun_api_key')),
-                  data={"from": config('email'),
-                        "to": recipients,
-                        "subject": subject,
-                        "text": body},
-                  files=get_files(attachment), )
+    try:
+        requests.post(config('mailgun_url'),
+                      auth=("api", config('mailgun_api_key')),
+                      data={"from": config('email'),
+                            "to": recipients,
+                            "subject": subject,
+                            "text": body},
+                      files=get_files(attachment), )
+    except ConnectionError:
+        pass
 
 
 def send_with_mailgun(recipients, subject, body, attachment=None):
