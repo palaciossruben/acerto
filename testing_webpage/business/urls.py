@@ -6,13 +6,15 @@ app_name = 'business'
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^seleccion_gratis$', views.start, name='start'),
+    url(r'^resumen$', views.summary, name='summary'),
+
     url(r'^contáctanos$', views.contact_form, name='contact_form'),
     url(r'^search$', views.search, name='search'),
     url(r'^results$', views.calculate_result, name='results'),
     url(r'^login$', auth_views.login, {'template_name': 'business/login.html', 'extra_context': {'error_message': ''}},
         name='login'),
     url(r'^logout$', auth_views.logout, {'next_page': 'business:index'}, name='logout'),
-    url(r'^seleccion_gratis$', views.start, name='start'),
     url(r'^crear$', views.create, name='create'),  # old start
     url(r'^signup_choice$', views.signup_choice, name='signup_choice'),
     url(r'^business_signup$', views.business_signup, name='business_signup'),

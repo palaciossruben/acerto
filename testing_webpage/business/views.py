@@ -509,3 +509,7 @@ def signup_choice(request):
 
 def business_applied(request):
     return render(request, cts.BUSINESS_APPLIED_VIEW_PATH, {})
+
+
+def summary(request):
+    return render(request, cts.SUMMARY_VIEW_PATH, {})
