@@ -18,7 +18,7 @@
         {% endfor %}
     </ol>
 
-    <form class="content" action="{% url 'business:create' %}" style="margin-bottom:300px" method="post">
+    <form class="content" action="{% url 'business:start' %}" style="margin-bottom:300px" method="post">
         {% csrf_token %}
         <input class="submit-button-strong" id="create-campaign-button" type="submit" value="{% trans 'Create Campaign' %}">
         <input type="hidden" name="business_user_id" value="{{ business_user_id }}" />
