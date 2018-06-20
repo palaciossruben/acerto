@@ -207,7 +207,12 @@
             </div>
         </section>
         <!----------------------------------------------SECTION 2------------------------------------------------------>
+        {% if user.is_authenticated %}
+        <form id="big-form" class="noBorderForm hidejs" action="{% url 'business:create_post' %}" method="post">
+            <input type="hidden" name="business_user_id" value="{{ business_user_id }}" />
+            {% else %}
         <form id="big-form" class="noBorderForm hidejs" action="{% url 'business:start_post' %}" method="post">
+            {% endif %}
             {% csrf_token %}
             <section class="section-two" id="section-two">
                 <div class="container">
@@ -306,7 +311,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a id="publish-campaign-button" class="button-cta" role="button" onclick="on()">PUBLICAR MI OFERTA</a>
+                            <a id="publish-campaign-button" class="button-cta" role="button" onclick="on({{user.is_authenticated|yesno:'true,false'}})">PUBLICAR MI OFERTA</a>
                         </div>
                         <div class="col-md-4" >
                             <fieldset>
@@ -321,6 +326,7 @@
                         <div class="col-md-2"></div>
                     </div>
                 </div>
+                {% if not user.is_authenticated %}
                 <div id="overlay">
                     <div class="form-image final">
                         <div id="register-form">
@@ -348,8 +354,8 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
             </section>
-            <input type="hidden" name="business_user_id" value="{{ business_user_id }}" />
         </form>
         <!----------------------------------------------FOOTER--------------------------------------------------------->
         <footer class="container-fluid">
@@ -486,25 +492,26 @@
         </script>
         <!--Form Transition-->
         <script>
-            function on() {
-            if (document.getElementById("overlay").style.display != "block") {
-            console.log("dentro del if")
-            document.getElementById("overlay").style.display = "block";
-            document.getElementById("register-form").style.display = "block";
-            $("html").css("background-size", "cover");
-            $("#option1").css("color", "white");
-            $("#option2").css("color", "white");
-            $("nav").css("margin-bottom", "40px");
-            $("#register-form").animate({"opacity": '1'}, 1500,"swing");
-            $("#publish-campaign-button").animate({marginTop: '60%', marginLeft: '8%'}, 2000, "swing");
-            $("#publish-campaign-button").css('z-index', 9999);
-            $("#publish-campaign-button").css('position', 'absolute');
-            $(".final-hide").animate({"opacity": '0'}, 1500,"swing");
+            function on(is_user_logged) {
+            if (is_user_logged) {
+                document.getElementById("big-form").submit();
 
             } else { // enters here upon the second click
-                document.getElementById("big-form").submit();
-            }
-            }
+                if (document.getElementById("overlay").style.display != "block") {
+                    document.getElementById("overlay").style.display = "block";
+                    document.getElementById("register-form").style.display = "block";
+                    $("html").css("background-size", "cover");
+                    $("#option1").css("color", "white");
+                    $("#option2").css("color", "white");
+                    $("nav").css("margin-bottom", "40px");
+                    $("#register-form").animate({"opacity": '1'}, 1500,"swing");
+                    $("#publish-campaign-button").animate({marginTop: '60%', marginLeft: '8%'}, 2000, "swing");
+                    $("#publish-campaign-button").css('z-index', 9999);
+                    $("#publish-campaign-button").css('position', 'absolute');
+                    $(".final-hide").animate({"opacity": '0'}, 1500,"swing");
+                }
+                    else {document.getElementById("big-form").submit();}
+            }}
 
             function off() {
             $("html").css("background-size", "contain");
@@ -568,20 +575,5 @@
             $("html").css("overflow-y", "scroll");
             }
         </script>
-        <!--Scroll for indicator
-            <script>
-                $(window).scroll(function(e){
-                var $el = $('.fixedElement');
-                var isPositionFixed = ($el.css('position') == 'fixed');
-                if ($(this).scrollTop() > 1 && !isPositionFixed){
-                $('.fixedElement').css({'position': 'fixed', 'right': '5%', 'z-index':'100'});
-                }
-                if ($(this).scrollTop() < 1 && isPositionFixed)
-                {
-                $('.fixedElement').css({'position': 'static', 'right': '5%'});
-                }
-                });
-            </script>
-            -->
     </body>
 </html>

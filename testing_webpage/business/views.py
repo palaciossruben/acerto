@@ -383,6 +383,7 @@ def start(request):
                                                  'cities': common.get_cities()})
 
 
+@login_required
 def create(request):
     """
     Displays creation of campaign but no registration form.
@@ -397,7 +398,7 @@ def create(request):
                                                   'work_areas': common.translate_list_of_objects(WorkArea.objects.all(), request.LANGUAGE_CODE)
                                                   })
 
-
+@login_required
 def create_post(request):
     """
     Args:
@@ -405,8 +406,7 @@ def create_post(request):
     Returns: Renders form.html
     """
 
-    business_user_id = int(request.POST.get('business_user_id'))
-    business_user = BusinessUser.objects.get(pk=business_user_id)
+    business_user = BusinessUser.objects.get(auth_user=request.user)
 
     campaign = campaign_module.create_campaign(request)
     business_user.campaigns.add(campaign)
