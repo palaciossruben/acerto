@@ -10,7 +10,7 @@ from match import model, clustering
 from match.pickle_models import pickle_handler
 
 
-NUMBER_OF_MATCHES = 60
+MAX_MATCHES = 60
 
 
 # TODO: deprecated, now all users are all distinct.
@@ -103,8 +103,95 @@ def rank(campaign, users):
 
     candidates_rank = [(c, rank) for c, rank in get_desc_sorted_iterator(candidates_rank)]
 
-    # Cuts top candidates because its too expensive a prediction on all candidates and a job filter too.
-    candidates_rank = candidates_rank[:NUMBER_OF_MATCHES]
+    # Cuts top candidates because its too expensive a job filter.
+    candidates_rank = candidates_rank[:MAX_MATCHES]
+    candidates_rank = [(c, rank) for c, rank in candidates_rank if not common.user_has_job(c.user)]
+
+    return [c.user for c, rank in get_desc_sorted_iterator(candidates_rank)]
+
+
+def enough_info(candidate):
+    """
+    Needs a minimum of information in order to take it into account.
+    :param candidate: Object Candidate
+    :return:
+    """
+    if candidate.user and (candidate.user.work_area
+                           or candidate.user.profession
+                           or candidate.user.campaign.work_area
+                           or candidate.user.campaign.profession):
+        return False
+    return True
+
+
+def get_weight_with_business_rules(candidate, campaign):
+
+    # Gives 0 weight, the lowest weight that can be shown
+    if campaign.work_area is None:
+        return 0
+
+    if non_null_equal(candidate.user.work_area, campaign.work_area):
+        return 8
+
+    if non_null_equal(candidate.user.work_area.type, campaign.work_area.type):
+        return 7
+
+    if non_null_equal(candidate.user.profession, campaign.profession):
+        return 6
+
+    if non_null_equal(candidate.user.profession.type, campaign.profession.type):
+        return 5
+
+    if non_null_equal(candidate.campaign.work_area, campaign.work_area):
+        return 4
+
+    if non_null_equal(candidate.campaign.work_area.type, campaign.work_area.type):
+        return 3
+
+    if non_null_equal(candidate.campaign.profession, campaign.profession):
+        return 2
+
+    if non_null_equal(candidate.campaign.profession.type, campaign.profession.type):
+        return 1
+
+    # if non of the above it will filter the stuff
+    return -1000
+
+
+def get_weight(candidate, campaign):
+    """
+    Negative weights indicate filtering.
+    :param candidate: Candidate
+    :param campaign:
+    :return:
+    """
+
+    if not enough_info(candidate):
+        return -1
+
+    w = get_weight_with_business_rules(candidate, campaign)
+
+    if non_null_equal(candidate.user.city, candidate.campaign.city):
+        w += 4
+
+    if non_null_equal(candidate.user.country, candidate.campaign.country):
+        w += 2
+
+    return w
+
+
+def rank2(campaign, users):
+    """
+    1. Create and Cut top candidates because its too expensive.
+    2. get weights
+    3. filter negative weights
+    4. filter candidates with job
+    5. sort candidates, desc
+    """
+
+    candidates = [Candidate(user=u, campaign=campaign, pk=1) for u in users][:MAX_MATCHES]
+    candidates_rank = [(c, get_weight(c, campaign)) for c in candidates]
+    candidates_rank = [(c, r) for c, r in candidates_rank if r >= 0]
     candidates_rank = [(c, rank) for c, rank in candidates_rank if not common.user_has_job(c.user)]
 
     return [c.user for c, rank in get_desc_sorted_iterator(candidates_rank)]
@@ -117,7 +204,9 @@ def get_top_users(campaign):
     search_array = search_module.get_word_array_lower_case_and_no_accents(search_text)
     users = search_module.get_matching_users(search_array)
 
-    return rank(campaign, users)
+    return rank2(campaign, users)
+
+    #return rank(campaign, users)
 
 
 def get_candidates(campaign):

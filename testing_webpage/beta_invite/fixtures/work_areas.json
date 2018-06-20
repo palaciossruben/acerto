@@ -4,7 +4,8 @@
   "pk": 1,
   "fields":{
     "name": "Administración / Oficina",
-    "name_es": "Administración / Oficina"
+    "name_es": "Administración / Oficina",
+    "type_id": 1
   }
 },
 {
@@ -12,7 +13,8 @@
   "pk": 2,
   "fields":{
     "name": "Almacén / Logística / Transporte",
-    "name_es": "Almacén / Logística / Transporte"
+    "name_es": "Almacén / Logística / Transporte",
+    "type_id": 2
   }
 },
 {
@@ -20,7 +22,8 @@
   "pk": 3,
   "fields":{
     "name": "Atención a clientes",
-    "name_es": "Atención a clientes"
+    "name_es": "Atención a clientes",
+    "type_id": 3
   }
 },
 {
@@ -28,7 +31,8 @@
   "pk": 4,
   "fields":{
     "name": "CallCenter / Telemercadeo",
-    "name_es": "CallCenter / Telemercadeo"
+    "name_es": "CallCenter / Telemercadeo",
+    "type_id": 3
   }
 },
 {
@@ -36,7 +40,8 @@
   "pk": 5,
   "fields":{
     "name": "Compras / Comercio Exterior",
-    "name_es": "Compras / Comercio Exterior"
+    "name_es": "Compras / Comercio Exterior",
+    "type_id": 1
   }
 },
 {
@@ -44,7 +49,8 @@
   "pk": 6,
   "fields":{
     "name": "Construcción y obra",
-    "name_es": "Construcción y obra"
+    "name_es": "Construcción y obra",
+    "type_id": 4
   }
 },
 {
@@ -52,7 +58,8 @@
   "pk": 7,
   "fields":{
     "name": "Contabilidad / Finanzas",
-    "name_es": "Contabilidad / Finanzas"
+    "name_es": "Contabilidad / Finanzas",
+    "type_id": 1
   }
 },
 {
@@ -60,7 +67,8 @@
   "pk": 8,
   "fields":{
     "name": "Dirección / Gerencia",
-    "name_es": "Dirección / Gerencia"
+    "name_es": "Dirección / Gerencia",
+    "type_id": 1
   }
 },
 {
@@ -68,7 +76,8 @@
   "pk": 9,
   "fields":{
     "name": "Diseño / Artes gráficas",
-    "name_es": "Diseño / Artes gráficas"
+    "name_es": "Diseño / Artes gráficas",
+    "type_id": 5
   }
 },
 {
@@ -76,7 +85,8 @@
   "pk": 10,
   "fields":{
     "name": "Docencia",
-    "name_es": "Docencia"
+    "name_es": "Docencia",
+    "type_id": 6
   }
 },
 {
@@ -84,7 +94,8 @@
   "pk": 11,
   "fields":{
     "name": "Hotelería / Turismo",
-    "name_es": "Hotelería / Turismo"
+    "name_es": "Hotelería / Turismo",
+    "type_id": 1
   }
 },
 {
@@ -92,7 +103,8 @@
   "pk": 12,
   "fields":{
     "name": "Informática / Telecomunicaciones",
-    "name_es": "Informática / Telecomunicaciones"
+    "name_es": "Informática / Telecomunicaciones",
+    "type_id": 7
   }
 },
 {
@@ -100,7 +112,8 @@
   "pk": 13,
   "fields":{
     "name": "Ingeniería",
-    "name_es": "Ingeniería"
+    "name_es": "Ingeniería",
+    "type_id": 7
   }
 },
 {
@@ -108,7 +121,8 @@
   "pk": 14,
   "fields":{
     "name": "Investigación y Calidad",
-    "name_es": "Investigación y Calidad"
+    "name_es": "Investigación y Calidad",
+    "type_id": 7
   }
 },
 {
@@ -116,7 +130,8 @@
   "pk": 15,
   "fields":{
     "name": "Legal / Asesoría",
-    "name_es": "Legal / Asesoría"
+    "name_es": "Legal / Asesoría",
+    "type_id": 8
   }
 },
 {
@@ -124,7 +139,8 @@
   "pk": 16,
   "fields":{
     "name": "Mantenimiento y Reparaciones Técnicas",
-    "name_es": "Mantenimiento y Reparaciones Técnicas"
+    "name_es": "Mantenimiento y Reparaciones Técnicas",
+    "type_id": 11
   }
 },
 {
@@ -132,7 +148,8 @@
   "pk": 17,
   "fields":{
     "name": "Medicina / Salud",
-    "name_es": "Medicina / Salud"
+    "name_es": "Medicina / Salud",
+    "type_id": 9
   }
 },
 {
@@ -140,7 +157,8 @@
   "pk": 18,
   "fields":{
     "name": "Mercadotecnia / Publicidad / Comunicación",
-    "name_es": "Mercadotecnia / Publicidad / Comunicación"
+    "name_es": "Mercadotecnia / Publicidad / Comunicación",
+    "type_id": 10
   }
 },
 {
@@ -148,7 +166,8 @@
   "pk": 19,
   "fields":{
     "name": "Producción / Operarios / Manufactura",
-    "name_es": "Producción / Operarios / Manufactura"
+    "name_es": "Producción / Operarios / Manufactura",
+    "type_id": 11
   }
 },
 {
@@ -156,7 +175,8 @@
   "pk": 20,
   "fields":{
     "name": "Recursos Humanos",
-    "name_es": "Recursos Humanos"
+    "name_es": "Recursos Humanos",
+    "type_id": 12
   }
 },
 {
@@ -164,7 +184,8 @@
   "pk": 21,
   "fields":{
     "name": "Servicios Generales, Aseo y Seguridad",
-    "name_es": "Servicios Generales, Aseo y Seguridad"
+    "name_es": "Servicios Generales, Aseo y Seguridad",
+    "type_id": 13
   }
 },
 {
@@ -172,7 +193,8 @@
   "pk": 22,
   "fields":{
     "name": "Ventas",
-    "name_es": "Ventas"
+    "name_es": "Ventas",
+    "type_id": 3
   }
 }
 ]

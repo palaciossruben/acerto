@@ -21,7 +21,7 @@ class Visitor(models.Model):
         db_table = 'visitors'
 
 
-class Profession(models.Model):
+class ProfessionType(models.Model):
 
     name = models.CharField(max_length=200)
     name_es = models.CharField(max_length=200, null=True)
@@ -31,13 +31,43 @@ class Profession(models.Model):
 
     # adds custom table name
     class Meta:
+        db_table = 'profession_types'
+
+
+class Profession(models.Model):
+
+    name = models.CharField(max_length=200)
+    name_es = models.CharField(max_length=200, null=True)
+    type = models.ForeignKey(ProfessionType, null=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return '{0}'.format(self.name)
+
+    # adds custom table name
+    class Meta:
         db_table = 'professions'
+
+
+class WorkAreaType(models.Model):
+    """
+    Groups similar workAreas
+    """
+    name = models.CharField(max_length=200)
+    name_es = models.CharField(max_length=200, null=True)
+
+    def __str__(self):
+        return '{0}'.format(self.name)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'work_area_types'
 
 
 class WorkArea(models.Model):
 
     name = models.CharField(max_length=200)
     name_es = models.CharField(max_length=200, null=True)
+    type = models.ForeignKey(WorkAreaType, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return '{0}'.format(self.name)
