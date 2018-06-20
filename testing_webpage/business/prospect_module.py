@@ -126,8 +126,8 @@ def enough_info(candidate):
 
 def get_weight_with_business_rules(candidate, campaign):
 
-    if not enough_info(candidate):
-        return -1000
+    #if not enough_info(candidate):
+    #    return -1000
 
     # Gives 0 weight, the lowest weight that can be shown
     if campaign.work_area is None:
@@ -162,7 +162,7 @@ def get_weight_with_business_rules(candidate, campaign):
         return 1
 
     # if non of the above it will filter the stuff
-    return -1000
+    return 0
 
 
 def get_weight(candidate, campaign):
