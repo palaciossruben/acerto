@@ -28,6 +28,9 @@ def index(request):
 
     campaigns = Campaign.objects.filter(removed=False).order_by('-active', 'name', 'title_es')
 
+    for campaign in campaigns:
+        common.calculate_operational_efficiency(campaign)
+
     tests = Test.objects.all()
     return render(request, cts.MAIN_DASHBOARD, {'campaigns': campaigns,
                                                 'tests': tests})
@@ -54,7 +57,6 @@ def update_candidate_forecast():
     """
     candidates = [c for c in Candidate.objects.filter(Q(match_regression=None) | Q(match_classification=None))]
     candidates = candidates[:min(len(candidates), CANDIDATE_FORECAST_LIMIT)]
-    model.predict_match_and_save(candidates, regression=True)
     model.predict_match_and_save(candidates, regression=False)
 
 
@@ -289,6 +291,19 @@ def update_test(request, pk):
     test.save()
 
     return redirect('/dashboard/test/{}'.format(pk))
+
+
+def duplicate_test(request, pk):
+    """
+    Args:
+        request: HTTP
+    Returns: redirects to dashboard after duplicating test.
+    """
+
+    test = Test.objects.get(pk=pk)
+    test.duplicate()
+
+    return redirect('/dashboard')
 
 
 def new_test(request):

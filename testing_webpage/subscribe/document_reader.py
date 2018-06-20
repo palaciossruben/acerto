@@ -1,10 +1,15 @@
+"""
+To run do:
+python3 subscribe/document_reader.py
+"""
 import os
 import sys
-from subscribe import helper as h
-
-from subscribe.user import User
-from subscribe.cts import *
-
+try:
+    from subscribe import helper as h
+    from subscribe import cts
+except ImportError:
+    import helper as h
+    import cts
 
 VALID_EXTENSIONS = {'.jpg', '.jpeg', '.doc', '.docx', '.png', '.pdf', '.txt'}
 
@@ -40,7 +45,7 @@ def read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename):
             # because it's easier to execute shell commands.
             d = h.rename_filename(folder_path, d)
 
-            extension = os.path.splitext(d)[1]
+            extension = os.path.splitext(d)[1].lower()
             text += get_text(folder_path, d, extension)
 
     text = h.remove_accents(text)
@@ -52,40 +57,15 @@ def read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename):
     return text
 
 
-def read_and_predict(force=False):
-    """Reads all files and predicts User properties inside the resumes folder. Files can have several different extensions.
-    :param force: Boolean indicating if the Curriculums have to be read again.
-    """
-    resumes_folders = os.listdir(RESUMES_PATH)
-    final_dict = dict()
-
-    for folder in resumes_folders:
-        folder_path = os.path.join(RESUMES_PATH, folder)
-        if os.path.isdir(folder_path):
-            docs = os.listdir(folder_path)
-
-            parsed_filename = '{}.txt'.format(folder)
-            parsed_path = os.path.join(folder_path, parsed_filename)
-            # Will used saved version, to save time parsing.
-            if parsed_filename in docs and not force:
-                with open(parsed_path, 'r', encoding='UTF-8') as f:
-                    text = f.read()
-            else:
-                text = read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename)
-
-            final_dict[folder] = User(text)
-
-    return final_dict
-
-
 def read_all(force=False):
     """Reads all files inside the resumes folder. Files can have several different extensions.
     :param force: Boolean indicating if the Curriculums have to be read again.
     """
-    resumes_folders = os.listdir(RESUMES_PATH)
+    resumes_folders = os.listdir(cts.RESUMES_PATH)
 
-    for folder in resumes_folders:
-        folder_path = os.path.join(RESUMES_PATH, folder)
+    for folder in sorted(resumes_folders):
+        print(folder)
+        folder_path = os.path.join(cts.RESUMES_PATH, folder)
         if os.path.isdir(folder_path):
             docs = os.listdir(folder_path)
 
@@ -102,4 +82,4 @@ def run():
 
 
 if __name__ == "__main__":
-    run()
+    read_all(force=False)

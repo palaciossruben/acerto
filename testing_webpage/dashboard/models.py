@@ -34,6 +34,26 @@ class State(models.Model):
     def passed_test(self):
         return self.looks_good() or self.code in ('WFI', 'ROI', 'RBC')
 
+    @staticmethod
+    def get_relevant_states():
+        return [s for s in State.objects.filter(code__in=['WFI', 'DI'])]
+
+    @staticmethod
+    def get_recomended_states():
+        return [s for s in State.objects.filter(code__in=['GTJ', 'STC'])]
+
+    @staticmethod
+    def get_applicant_states():
+        return [s for s in State.objects.filter(code__in=['P', 'BL'])]
+
+    @staticmethod
+    def get_rejected_states():
+        return [s for s in State.objects.filter(code__in=['ROI', 'RBC', 'SR', 'FT', 'ROT', ])]
+
+    @staticmethod
+    def get_rejected_by_human_states():
+        return [s for s in State.objects.filter(code__in=['ROI', 'RBC', 'SR', ])]
+
 
 class Comment(models.Model):
 

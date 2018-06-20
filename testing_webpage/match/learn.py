@@ -13,9 +13,6 @@ from match import common_learning
 #from match import xgboost_scikit_wrapper
 
 
-NON_REJECTED_HONEY = 0.3  # ie better than backlog
-
-
 def balance(data):
     """
     Balances samples with ADASYN algorithm:
@@ -69,29 +66,26 @@ def my_accuracy(a, b):
     return statistics.mean([int(e1 == e2) for e1, e2 in zip(a, b)])
 
 
-def load_target(data, regression, candidates):
+def load_target(data, candidates):
     """
     :param data: the X
-    :param regression: boolean
     :param candidates: list of candidates
     :return:
     """
 
     data['target'] = [common_learning.get_target_for_candidate(c) for c in candidates]
     data = data[[not pd.isnull(t) for t in data['target']]]
-    if not regression:
-        data['target'] = data['target'].apply(lambda y: 1 if y > NON_REJECTED_HONEY else 0)
 
     return data
 
 
-def load_data_for_learning(regression=True):
+def load_data_for_learning():
     """
     Loads and prepares all data.
     :return: data DataFrame with features and target.
     """
     data, candidates = common_learning.load_data()
-    data = load_target(data, regression, candidates)
+    data = load_target(data, candidates)
     return data
 
 
@@ -158,7 +152,7 @@ def learn_model(train, regression=True, xgboost=False):
             #                decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
             #                max_iter=-1, probability=False, random_state=None, shrinking=True,
             #                tol=0.001, verbose=False)
-            model = RandomForestClassifier(max_depth=8)
+            model = RandomForestClassifier(max_depth=5)
 
     model.fit(train.features, train.target)
     return model
@@ -166,7 +160,7 @@ def learn_model(train, regression=True, xgboost=False):
 
 def target_mode(target):
     """
-    Returns 1 for balanced sets (where there are excatly the same number of 1s and 0s)
+    Returns 1 for balanced sets (where there are exactly the same number of 1s and 0s)
     :param target: list of 1s and 0s
     :return: the mode
     """
@@ -231,13 +225,13 @@ def get_model(regression=True):
     Calculates the match of each candidate, based on a learning algorithm.
     :return: model.
     """
-    data = load_data_for_learning(regression=regression)
+    data = load_data_for_learning()
 
     train, test = prepare_train_test(data, regression=regression)
 
     model = learn_model(train, regression=regression)
 
     # Used only for data exploration.
-    #print_feature_importance(model, data, regression)
+    print_feature_importance(model, data, regression)
 
     return model, eval_model(model, train, test, regression=regression)

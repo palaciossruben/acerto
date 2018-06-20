@@ -21,13 +21,14 @@ import beta_invite
 from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
-from beta_invite.models import User, BulletType, WorkArea
+from beta_invite.models import User, BulletType, WorkArea, EmailType
 from business.models import Plan, Contact, Search
 from business.models import BusinessUser
 from business.custom_user_creation_form import CustomUserCreationForm
 from dashboard import campaign_module
 from dashboard.models import Candidate
 from business import dashboard_module
+from testing_webpage.models import BusinessUserPendingEmail
 
 
 def index(request):
@@ -155,10 +156,12 @@ def send_signup_emails(business_user, language_code, campaign):
     """
 
     try:
-        email_sender.send(objects=business_user,
-                          language_code=language_code,
-                          body_input=body_input,
-                          subject=_('Welcome to PeakU'))
+
+        BusinessUserPendingEmail.add_to_queue(business_users=business_user,
+                                              language_code=language_code,
+                                              body_input=body_input,
+                                              subject=_('Welcome to PeakU'),
+                                              email_type=EmailType.objects.get(name='business welcome'))
         email_sender.send_internal(contact=business_user,
                                    language_code=language_code,
                                    body_filename=body_filename,
@@ -437,7 +440,10 @@ def start_post(request):
     else:
 
         error_message = get_first_error_message(signup_form)
-        return render(request, cts.START_VIEW_PATH, {'error_message': error_message})
+        return render(request, cts.START_VIEW_PATH, {'error_message': error_message,
+                                                     'work_areas': common.translate_list_of_objects(
+                                                         WorkArea.objects.all(), request.LANGUAGE_CODE),
+                                                     'cities': common.get_cities()})
 
 
 def business_signup(request):

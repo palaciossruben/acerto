@@ -1,24 +1,28 @@
 """
-Builds a dictionary(top_related_words_dict.p) of the form: {'word':[('related_word', relevance) ...]}
+Builds a dictionary(related_words_dict.p) of the form: {'word':[('related_word', relevance) ...]}
 The list only contains the top 10 more closely connected words.
 This builds a relationship between words for example 'android' has the following connections:
 [('aplicaciones', 0.0059724685930693444), ('web', 0.0048486894726525584), ('software', 0.0039564690292684512), ...
 """
 
 import os
+import sys
 from django.core.wsgi import get_wsgi_application
+
+
+# Environment can use the models as if inside the Django app
+print(os.getcwd())
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
-import sys
 import pickle
-import common
 import time
 
 from collections import OrderedDict
 from beta_invite.models import Country, User
 from subscribe import helper as h
+from subscribe import cts
 
 
 COUNTRIES = {e.name.lower() for e in Country.objects.all()}
@@ -29,7 +33,7 @@ nested_names = [u.name.split() for u in User.objects.all()]
 NAMES = {item.lower() for sublist in nested_names for item in sublist}
 
 PLACES = {'cauca', 'popayan', 'pereira', }
-EXCLUDED_WORDS = common.CONJUNCTIONS | COUNTRIES | NAMES | PLACES
+EXCLUDED_WORDS = cts.CONJUNCTIONS | COUNTRIES | NAMES | PLACES
 
 
 def sort_relevance(my_dict):
@@ -89,7 +93,7 @@ def get_percent_relevance(word_user_dictionary, user_ids, excluded_words):
     return subtracted_dict
 
 
-def get_top_related_words(word_user_dictionary, user_ids, excluded_words):
+def get_related_words(word_user_dictionary, user_ids, excluded_words):
     """
     Args:
         word_user_dictionary: of the form: {'word': (user_id, relevance) ...}
@@ -103,23 +107,23 @@ def get_top_related_words(word_user_dictionary, user_ids, excluded_words):
 
 def compute_related_words():
     """
-    Returns: None, stores top_related_words_dict.p dictionary of the form: {'word': ('related_word', relevance) ...}
+    Returns: None, stores related_words_dict.p dictionary of the form: {'word': ('related_word', relevance) ...}
     """
 
     # A dictionary of the form: {'word': (user_id, relevance)}
-    word_user_dictionary = pickle.load(open(os.path.join('subscribe', 'word_user_dictionary.p'), 'rb'))
+    word_user_dictionary = pickle.load(open(cts.WORD_USER_PATH, 'rb'))
 
-    top_related_words_dict = dict()
+    related_words_dict = dict()
     for keyword, values in word_user_dictionary.items():
 
         if keyword not in EXCLUDED_WORDS:
             user_ids = {i for (i, r) in values}
 
-            sorted_final = get_top_related_words(word_user_dictionary, user_ids, EXCLUDED_WORDS | {keyword})
+            sorted_final = get_related_words(word_user_dictionary, user_ids, EXCLUDED_WORDS | {keyword})
 
-            top_related_words_dict[keyword] = sorted_final
+            related_words_dict[keyword] = sorted_final
 
-    pickle.dump(top_related_words_dict, open('top_related_words_dict.p', 'wb'))
+    pickle.dump(related_words_dict, open(cts.RELATED_WORDS_PATH, 'wb'))
 
 
 def run():

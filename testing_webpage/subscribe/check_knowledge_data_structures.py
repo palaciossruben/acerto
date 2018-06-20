@@ -1,19 +1,10 @@
 import pickle
+import cts
 
-"""
-d = pickle.load(open('relevance_dictionary.p', 'rb'))
-
-for k, v in d.items():
-    print(str(k) + ': ' + str(v))
-
-
-d = pickle.load(open('word_user_dictionary.p', 'rb'))
+d = pickle.load(open('related_words_dict.p', 'rb'))
 
 for k, v in d.items():
-    print(str(k) + ': ' + str(v))
-"""
-
-d = pickle.load(open('top_related_words_dict.p', 'rb'))
-
-for k, v in d.items():
-    print(str(k) + ': ' + str(v))
+    try:
+        print(str(k) + ': ' + str(v))
+    except UnicodeEncodeError:
+        pass
