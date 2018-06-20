@@ -110,24 +110,7 @@ def rank(campaign, users):
     return [c.user for c, rank in get_desc_sorted_iterator(candidates_rank)]
 
 
-def enough_info(candidate):
-    """
-    Needs a minimum of information in order to take it into account.
-    :param candidate: Object Candidate
-    :return:
-    """
-    if candidate.user and candidate.campaign and (candidate.user.work_area
-                                                  or candidate.user.profession
-                                                  or candidate.campaign.work_area
-                                                  or candidate.campaign.profession):
-        return False
-    return True
-
-
 def get_weight_with_business_rules(candidate, campaign):
-
-    #if not enough_info(candidate):
-    #    return -1000
 
     # Gives 0 weight, the lowest weight that can be shown
     if campaign.work_area is None:
@@ -208,7 +191,7 @@ def get_top_users(campaign):
     search_array = search_module.get_word_array_lower_case_and_no_accents(search_text)
     users = search_module.get_matching_users(search_array)
 
-    return rank2(campaign, users)
+    return rank(campaign, users)
 
 
 def get_candidates(campaign):
