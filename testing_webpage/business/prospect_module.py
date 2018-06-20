@@ -116,42 +116,49 @@ def enough_info(candidate):
     :param candidate: Object Candidate
     :return:
     """
-    if candidate.user and (candidate.user.work_area
-                           or candidate.user.profession
-                           or candidate.user.campaign.work_area
-                           or candidate.user.campaign.profession):
+    if candidate.user and candidate.campaign and (candidate.user.work_area
+                                                  or candidate.user.profession
+                                                  or candidate.campaign.work_area
+                                                  or candidate.campaign.profession):
         return False
     return True
 
 
 def get_weight_with_business_rules(candidate, campaign):
 
+    if not enough_info(candidate):
+        return -1000
+
     # Gives 0 weight, the lowest weight that can be shown
     if campaign.work_area is None:
         return 0
 
-    if non_null_equal(candidate.user.work_area, campaign.work_area):
+    if candidate.user and non_null_equal(candidate.user.work_area, campaign.work_area):
         return 8
 
-    if non_null_equal(candidate.user.work_area.type, campaign.work_area.type):
+    if candidate.user and candidate.user.work_area and campaign.work_area\
+            and non_null_equal(candidate.user.work_area.type, campaign.work_area.type):
         return 7
 
-    if non_null_equal(candidate.user.profession, campaign.profession):
+    if candidate.user and non_null_equal(candidate.user.profession, campaign.profession):
         return 6
 
-    if non_null_equal(candidate.user.profession.type, campaign.profession.type):
+    if candidate.user and candidate.user.profession and campaign.profession\
+            and non_null_equal(candidate.user.profession.type, campaign.profession.type):
         return 5
 
-    if non_null_equal(candidate.campaign.work_area, campaign.work_area):
+    if candidate.campaign and non_null_equal(candidate.campaign.work_area, campaign.work_area):
         return 4
 
-    if non_null_equal(candidate.campaign.work_area.type, campaign.work_area.type):
+    if candidate.campaign and candidate.campaign.work_area and campaign.work_area\
+            and non_null_equal(candidate.campaign.work_area.type, campaign.work_area.type):
         return 3
 
-    if non_null_equal(candidate.campaign.profession, campaign.profession):
+    if candidate.campaign and non_null_equal(candidate.campaign.profession, campaign.profession):
         return 2
 
-    if non_null_equal(candidate.campaign.profession.type, campaign.profession.type):
+    if candidate.campaign and candidate.campaign.profession and campaign.profession\
+            and non_null_equal(candidate.campaign.profession.type, campaign.profession.type):
         return 1
 
     # if non of the above it will filter the stuff
@@ -165,9 +172,6 @@ def get_weight(candidate, campaign):
     :param campaign:
     :return:
     """
-
-    if not enough_info(candidate):
-        return -1
 
     w = get_weight_with_business_rules(candidate, campaign)
 
