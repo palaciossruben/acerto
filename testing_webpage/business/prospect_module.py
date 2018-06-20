@@ -206,8 +206,6 @@ def get_top_users(campaign):
 
     return rank2(campaign, users)
 
-    #return rank(campaign, users)
-
 
 def get_candidates(campaign):
     """
