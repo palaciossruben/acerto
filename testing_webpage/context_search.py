@@ -11,8 +11,6 @@ from django.core.wsgi import get_wsgi_application
 
 
 # Environment can use the models as if inside the Django app
-print(os.getcwd())
-
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 

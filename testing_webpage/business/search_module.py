@@ -49,7 +49,7 @@ def filter_conjunction_words(words):
 def clean_text_for_search(search_text):
     """
     Args:
-        request: a Request obj
+        search_text: str
     Returns: List with tokenized strings, lower cased and with no accents.
     """
     words = get_word_array_lower_case_and_no_accents(search_text)

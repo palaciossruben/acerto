@@ -1,5 +1,4 @@
 import pickle
-import cts
 
 d = pickle.load(open('related_words_dict.p', 'rb'))
 
