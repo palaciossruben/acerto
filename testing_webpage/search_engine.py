@@ -16,17 +16,17 @@ from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
 from collections import OrderedDict
 
-try:
-    from subscribe import helper as h
-    from subscribe import cts
-    from beta_invite.models import User
-except ImportError:
-    import helper as h
-    import cts
-    from ..beta_invite.models import User
+#try:
+from subscribe import helper as h
+from subscribe import cts
+from beta_invite.models import User
+#except ImportError:
+#    import helper as h
+#    import cts
+#    from beta_invite.models import User
 
 
-MAX_USERS_TO_UPDATE = 1000
+MAX_USERS_TO_UPDATE = 200
 
 
 def get_word_array_lower_case_and_no_accents(search_text):
@@ -271,7 +271,7 @@ def save_user_relevance_dictionary(path):
 
 
 def run():
-    sys.stdout = h.Unbuffered(open('search_engine.log', 'a'))
+    #sys.stdout = h.Unbuffered(open('search_engine.log', 'a'))
 
     h.log("STARTED RELEVANCE DICT")
     t0 = time.time()
