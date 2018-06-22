@@ -1,10 +1,16 @@
 import os
+from django.core.wsgi import get_wsgi_application
+
+# Environment can use the models as if inside the Django app
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
+application = get_wsgi_application()
+
 import re
 import sys
 import nltk
-import math
 import time
 import pickle
+import datetime
 
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
@@ -13,9 +19,14 @@ from collections import OrderedDict
 try:
     from subscribe import helper as h
     from subscribe import cts
+    from beta_invite.models import User
 except ImportError:
     import helper as h
     import cts
+    from ..beta_invite.models import User
+
+
+MAX_USERS_TO_UPDATE = 1000
 
 
 def get_word_array_lower_case_and_no_accents(search_text):
@@ -151,7 +162,7 @@ def print_common_words_percentiles(words):
         from_index = int(len(words) * percentile)
         to_index = int(from_index + 10)
         try:
-            print('percentile {percentile}%: {words}'.format(percentile=percentile,
+            print('percentile {percentile}%: {words}'.format(percentile=percentile*100,
                                                              words=' '.join(words[from_index:to_index])
                                                              ))
         except UnicodeEncodeError:
@@ -180,6 +191,42 @@ def get_common_words(text_corpus, number_of_top_words=20000):
     return words[:min(number_of_top_words, len(word_frequency))]
 
 
+def empty_max(my_list):
+    """
+    Specially designed for ids
+    :param my_list:
+    :return:
+    """
+    if len(my_list) == 0:
+        return 0
+    else:
+        return max(my_list)
+
+
+def get_user_ids_to_update():
+
+    try:
+        last_update = pickle.load(open(cts.SEARCH_ENGINE_DATE, 'rb'))
+    except FileNotFoundError:
+        last_update = datetime.date(1943, 3, 13)  # very old date
+
+    print('starts in date: ' + str(last_update))
+
+    users = sorted([u for u in User.objects.filter(updated_at__gt=last_update)], key=lambda u: u.updated_at)
+
+    # Filter for limit number of users
+    users = users[:min(len(users), MAX_USERS_TO_UPDATE)]
+
+    try:
+        new_date = max([u.updated_at for u in users])
+        print('ends in date: ' + str(new_date))
+        pickle.dump(new_date, open(cts.SEARCH_ENGINE_DATE, 'wb'))
+    except ValueError:
+        pass
+
+    return {u.id for u in users}
+
+
 def save_user_relevance_dictionary(path):
     """
     For each word finds the user_id relevance. This is the data structure:
@@ -192,37 +239,35 @@ def save_user_relevance_dictionary(path):
     """
     data_tf_idf, vocabulary, text_corpus = get_text_stats(path, use_idf=True)
 
-    user_relevance_dictionary = {}
+    try:
+        user_relevance_dictionary = pickle.load(open(cts.WORD_USER_PATH, 'rb'))
+    except FileNotFoundError:
+        user_relevance_dictionary = {}
 
     common_words = get_common_words(text_corpus)
+    user_ids_to_update = get_user_ids_to_update()
 
     common_words = set(common_words)
     for word, num_word in vocabulary.items():
 
         if word in common_words:
 
-            #column = data_tf_idf.getcol(num_word)
-            #column_coo = column.tocoo()
-            #for i, j, v in itertools.izip(cx.row, cx.col, cx.data):
-            #    print(i, j, v)
-
-            values = []
+            values = list(user_relevance_dictionary.get(word, []))
             for document, (user_id, text) in enumerate(text_corpus.items()):
 
-                #print(str(document) + ', ' + str(user_id))
+                if user_id in user_ids_to_update:
 
-                relevance = data_tf_idf[document, num_word]
+                    relevance = data_tf_idf[document, num_word]
 
-                if relevance > 0:
-                    relevance = add_position_effect(text, relevance, word)
-                    values.append((int(user_id), relevance))
+                    if relevance > 0:
+                        relevance = add_position_effect(text, relevance, word)
+                        values.append((int(user_id), relevance))
 
             user_relevance_dictionary[word] = tuple(values)
 
     user_relevance_dictionary = h.remove_accents(user_relevance_dictionary)
 
     pickle.dump(user_relevance_dictionary, open(cts.WORD_USER_PATH, 'wb'))
-    #print([w for w in user_relevance_dictionary.keys()])
 
 
 def run():
