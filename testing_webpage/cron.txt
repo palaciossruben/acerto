@@ -1,5 +1,5 @@
 0 0 * * * python3 /home/ubuntu/acerto/testing_webpage/send_user_reminder_emails.py
 * * * * * python3 /home/ubuntu/acerto/testing_webpage/testing_webpage/email/consumer.py
-0 7 * * * cd /home/ubuntu/acerto/testing_webpage && python3 process_manager.py
+0 3 * * * cd /home/ubuntu/acerto/testing_webpage && python3 process_manager.py
 0 12 * * * python3 /home/ubuntu/acerto/testing_webpage/send_daily_report.py
 0 * * * * python3 /home/ubuntu/acerto/testing_webpage/manage.py collectstatic -v0 --noinput
