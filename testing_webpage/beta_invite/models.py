@@ -264,12 +264,26 @@ class Question(models.Model):
         self.save()
 
 
+class TestType(models.Model):
+
+    name = models.CharField(max_length=200)
+    name_es = models.CharField(max_length=200, null=True)
+
+    def __str__(self):
+        return '{0}, {1}'.format(self.pk, self.name)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'test_types'
+
+
 class Test(models.Model):
 
     name = models.CharField(max_length=200)
     name_es = models.CharField(max_length=200, null=True)
     questions = models.ManyToManyField(Question)
     cut_score = models.IntegerField(default=70)
+    type = models.ForeignKey(TestType, default=None, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

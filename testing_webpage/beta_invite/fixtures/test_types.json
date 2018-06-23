@@ -1,0 +1,34 @@
+[
+  {
+    "model": "beta_invite.testtype",
+    "pk": 1,
+    "fields":{
+      "name": "cognitive",
+      "name_es":"cognitivo"
+    }
+  },
+  {
+    "model": "beta_invite.testtype",
+    "pk": 2,
+    "fields":{
+      "name": "technical",
+      "name_es":"técnico"
+    }
+  },
+  {
+    "model": "beta_invite.testtype",
+    "pk": 3,
+    "fields":{
+      "name": "requirements",
+      "name_es":"requisitos"
+    }
+  },
+  {
+    "model": "beta_invite.testtype",
+    "pk": 4,
+    "fields":{
+      "name": "soft skills",
+      "name_es":"habilidades blandas"
+    }
+  }
+]
