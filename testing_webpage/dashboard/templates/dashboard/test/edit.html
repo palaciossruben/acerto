@@ -23,6 +23,16 @@
         <br>
         <br>
 
+        <select id="test_type" name="test_type_id" required="required">
+            <option value="{{ test.type.id }}" disabled selected>{{ test.type.name }}</option>
+            {% for type in test_types %}
+                <option value={{ type.id }}>{{ type.name }}</option>
+            {% endfor %}
+        </select>
+
+        <br>
+        <br>
+
         <input style="width: 250px;" id="name" type="text" name="name"
           placeholder="Add test name in English" required="required" value="{{ test.name }}">
 
