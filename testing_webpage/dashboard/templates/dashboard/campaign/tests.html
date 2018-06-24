@@ -43,7 +43,7 @@
         <select name="new_test_id" required>
 
           <option>Select Test</option>
-          {% for test in tests.all %}
+          {% for test in tests %}
              <option value={{ test.id }}>{{ test.name }}</option>
           {% endfor %}
         </select>

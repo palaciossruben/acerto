@@ -31,9 +31,8 @@ def index(request):
     for campaign in campaigns:
         common.calculate_operational_efficiency(campaign)
 
-    tests = Test.objects.all()
     return render(request, cts.MAIN_DASHBOARD, {'campaigns': campaigns,
-                                                'tests': tests})
+                                                'tests': Test.get_all()})
 
 
 # ------------------------------- CAMPAIGN -------------------------------
@@ -200,8 +199,9 @@ def tests(request, pk):
     Returns: Renders the list of tests for a given campaign
     """
     campaign = Campaign.objects.get(pk=pk)
+
     return render(request, cts.TESTS, {'campaign': campaign,
-                                       'tests': Test.objects.all()})
+                                       'tests': Test.get_all()})
 
 
 def add_test(request, pk):
