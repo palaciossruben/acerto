@@ -207,8 +207,8 @@ class BusinessState(models.Model):
     name = models.CharField(max_length=200)
     name_es = models.CharField(max_length=200)
     states = models.ManyToManyField(State)
-    evaluation = models.ForeignKey(Evaluation)
-    candidates = models.ManyToManyField(Candidate)
+    #evaluation = models.ForeignKey(Evaluation)
+    #candidates = models.ManyToManyField(Candidate)
 
     def __str__(self):
         return '{0}, {1}'.format(self.pk, self.name)

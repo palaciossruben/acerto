@@ -1,6 +1,6 @@
 [
   {
-    "model": "dashboard.business_state",
+    "model": "dashboard.businessstate",
     "pk": 1,
     "fields":{
       "name": "Rejected",
@@ -9,7 +9,7 @@
     }
   },
   {
-    "model": "dashboard.business_state",
+    "model": "dashboard.businessstate",
     "pk": 2,
     "fields":{
       "name": "Applicants",
@@ -18,7 +18,7 @@
     }
   },
   {
-    "model": "dashboard.business_state",
+    "model": "dashboard.businessstate",
     "pk": 3,
     "fields":{
       "name": "Relevant",
@@ -27,7 +27,7 @@
     }
   },
   {
-    "model": "dashboard.business_state",
+    "model": "dashboard.businessstate",
     "pk": 4,
     "fields":{
       "name": "Recommended",
