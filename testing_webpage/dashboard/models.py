@@ -1,8 +1,9 @@
+import statistics
 import numpy as np
 from django.db import models
 from django.db.models.signals import post_init
 
-from beta_invite.models import User, Campaign, Evaluation, Survey
+from beta_invite.models import User, Campaign, Evaluation, Survey, EvaluationSummary
 from dashboard import constants as cts
 from beta_invite.util import common_senders
 from business.models import BusinessUser
@@ -13,7 +14,6 @@ class State(models.Model):
     name = models.CharField(max_length=200)
     code = models.CharField(max_length=10, default='BL')
     is_rejected = models.BooleanField(default=False)
-    honey = models.IntegerField(default=0)
 
     def __str__(self):
         return '{0}, {1}'.format(self.pk, self.name)
@@ -29,7 +29,7 @@ class State(models.Model):
         return self.code in ('STC', 'GTJ', 'DI', 'RBC')
 
     def got_the_job(self):
-        return self.code in ('GTJ')
+        return self.code in 'GTJ'
 
     def passed_test(self):
         return self.looks_good() or self.code in ('WFI', 'ROI', 'RBC')
@@ -39,7 +39,7 @@ class State(models.Model):
         return [s for s in State.objects.filter(code__in=['WFI', 'DI'])]
 
     @staticmethod
-    def get_recomended_states():
+    def get_recommended_states():
         return [s for s in State.objects.filter(code__in=['GTJ', 'STC'])]
 
     @staticmethod
@@ -96,6 +96,7 @@ class Candidate(models.Model):
     salary = models.CharField(max_length=100, default='')
     comments = models.ManyToManyField(Comment, default=[])
     evaluations = models.ManyToManyField(Evaluation)
+    evaluation_summary = models.ForeignKey(EvaluationSummary, null=True)
     surveys = models.ManyToManyField(Survey)
     text_match = models.FloatField(null=True, default=None)
     match_regression = models.FloatField(null=True, default=None)
@@ -126,6 +127,14 @@ class Candidate(models.Model):
             return business_users[0]
         else:
             return np.nan
+
+    def get_average_final_score(self):
+        evaluations = self.evaluations.all()
+
+        if evaluations:
+            return statistics.mean([e.final_score for e in evaluations])
+        else:
+            return 0
 
     def get_text_match(self):
         if self.text_match:
@@ -191,6 +200,22 @@ class Candidate(models.Model):
         if self.user and self.user.city:
             return self.user.city.name
         return np.nan
+
+
+class BusinessState(models.Model):
+
+    name = models.CharField(max_length=200)
+    name_es = models.CharField(max_length=200)
+    states = models.ManyToManyField(State)
+    evaluation = models.ForeignKey(Evaluation)
+    candidates = models.ManyToManyField(Candidate)
+
+    def __str__(self):
+        return '{0}, {1}'.format(self.pk, self.name)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'business_states'
 
 
 class Message(models.Model):

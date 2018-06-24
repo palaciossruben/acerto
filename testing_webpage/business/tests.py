@@ -8,7 +8,6 @@ application = get_wsgi_application()
 from django.test import TestCase
 from business.models import Campaign
 from business import search_module
-from dashboard.models import State
 import common
 
 
@@ -37,27 +36,6 @@ class YourTestClass(TestCase):
     def tearDown(self):
         pass
 
-    def get_search_score(self, candidates):
-        """This is a percentage of the maximum possible score"""
-        # TODO: state.honey should be based on a markov chain with probabilities jumping across states
-        # according to data.
-        max_score = max({s.honey for s in State.objects.all()}) * len(candidates)
-        return sum([c.state.honey*p for c, p in zip(candidates, SEARCH_BY_POSITION)])/max_score
-
-    def get_score_from_dummy_campaign(self):
-        """Uses a single made up campaign as a dev tool"""
-
-        # Arbitrary campaign to test and analyze in detail
-        # iOS Dev: 16
-        # Growth Hacker: 13
-        campaign = Campaign.objects.get(pk=16)
-
-        search_text = search_module.clean_text_for_search(campaign.get_search_text())
-        users = search_module.get_top_matching_users(search_text)
-        candidates = [common.get_candidate(user, campaign) for user in users]
-
-        return self.get_search_score(candidates)
-
     def get_score(self):
         campaigns = Campaign.objects.all()
 
@@ -65,7 +43,6 @@ class YourTestClass(TestCase):
             search_text = search_module.clean_text_for_search(campaign.get_search_text())
             users = search_module.get_top_matching_users(search_text)
             candidates = [common.get_candidate(user, campaign) for user in users]
-
 
         return 3
 

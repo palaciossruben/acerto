@@ -20,11 +20,11 @@ def get_dashboard_params(campaign):
     params, states = candidate_module.get_rendering_data(campaign.id)
 
     # State Backlog and Prospect will show as one.
-    params['backlog'] = list(params['backlog']) + list(params['prospect'])
-    params['waiting_for_interview'] = list(params['waiting_for_interview']) + list(params['did_interview'])
-    params['rejected'] = list(params['rejected']) + list(params['failed_tests'])
+    params['backlog'] += params['prospect']
+    params['waiting_for_interview'] += params['did_interview']
+    params['rejected'] += params['failed_tests']
+    params['sent_to_client'] += params['got_the_job']
     params['campaign'] = campaign
-    params['states'] = states
 
     return params
 

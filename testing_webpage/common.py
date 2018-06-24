@@ -373,12 +373,29 @@ def user_has_job(user):
     return candidates.exists()
 
 
+def get_recommended_candidates(campaign):
+    return Candidate.objects.filter(campaign=campaign, state__in=State.get_recommended_states())
+
+
+def get_relevant_candidates(campaign):
+    return Candidate.objects.filter(campaign=campaign, state__in=State.get_relevant_states())
+
+
+def get_application_candidates(campaign):
+    return Candidate.objects.filter(campaign=campaign, state__in=State.get_relevant_states())
+
+
+def get_rejected_candidates(campaign):
+    return Candidate.objects.filter(campaign=campaign, state__in=State.get_rejected_states())
+
+
 def calculate_operational_efficiency(campaign):
     """
     Important KPI answering how difficult is to find a good candidate on late stages of process
-    This percentage should as high as possible, otherwise to much time is spent on operation (interviews, messages, etc.)
+    This percentage should as high as possible,
+    otherwise to much time is spent on operation (interviews, messages, etc.)
     """
-    recommended_count = Candidate.objects.filter(campaign=campaign, state__in=State.get_recomended_states()).count()
+    recommended_count = get_recommended_candidates(campaign).count()
     not_that_good_count = Candidate.objects.filter(campaign=campaign, state__in=State.get_rejected_by_human_states()).count()
     total = recommended_count + not_that_good_count
 

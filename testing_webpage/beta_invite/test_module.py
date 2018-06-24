@@ -3,7 +3,7 @@ Test related methods.
 """
 import common
 from beta_invite import text_analizer
-from beta_invite.models import Question, Survey, Score, Test, Evaluation, TestType
+from beta_invite.models import Question, Survey, Score, Evaluation, EvaluationSummary
 from dashboard.models import Candidate, State
 
 
@@ -121,9 +121,7 @@ def get_scores(campaign, user_id, questions_dict, request):
 
         test_score = get_test_score(campaign, question_ids, user_id, test_id, request)
 
-        score = Score(test_id=test_id,
-                      value=test_score)
-
+        score = Score(test_id=test_id, value=test_score)
         score.save()
 
         scores.append(score)
@@ -141,6 +139,7 @@ def update_candidate_state(candidate, evaluation):
     if candidate:
 
         candidate.evaluations.add(evaluation)
+        candidate.evaluation_summary = EvaluationSummary.create(candidate.evaluations.all())
 
         if evaluation.passed:
             candidate.state = State.objects.get(code='WFI')
@@ -150,17 +149,16 @@ def update_candidate_state(candidate, evaluation):
         candidate.save()
 
 
-def get_evaluation(scores, campaign, candidate):
+def get_evaluation(scores, candidate):
     """
     simple average and percentage
     Args:
         scores: objects with current scores.
-        campaign: object
         candidate: obj
     Returns: get Evaluation object and links it ot user.
     """
 
-    evaluation = Evaluation.create(campaign=campaign, scores=scores)
+    evaluation = Evaluation.create(scores=scores)
 
     update_candidate_state(candidate, evaluation)
 
@@ -171,6 +169,6 @@ def comes_from_test(request):
     """
     Args:
         request: HTTP
-    Returns: Boolean, indicating if the last url was the test. If no refrer url present then it will return false
+    Returns: Boolean, indicating if the last url was the test. If no url present then it will return false
     """
     return '/pruebas' in common.remove_params_from_url(request.META.get('HTTP_REFERER', ''))

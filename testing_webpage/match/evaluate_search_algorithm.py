@@ -16,7 +16,7 @@ from django.db.models import Q
 from beta_invite.models import Campaign
 from business import prospect_module
 from match import common_learning
-from dashboard.models import Candidate
+from dashboard.models import Candidate, State
 
 
 # distribution by position of clicks on google search results:
@@ -36,12 +36,17 @@ SEARCH_BY_POSITION = [
 ]
 
 
-#def get_search_score(candidates):
-#    """This is a percentage of the maximum possible score"""
-    # TODO: state.honey should be based on a markov chain with probabilities jumping across states
-    # according to data.
-#    max_score = max({s.honey for s in State.objects.all()}) * len(candidates)
-#    return sum([c.state.honey*p for c, p in zip(candidates, SEARCH_BY_POSITION)])/max_score
+def get_search_target_for_candidate(candidate):
+    """
+    Contrast between very good and very bad candidates, where decisions have already been made explicitly
+    No ambiguous states (such as Backlog, Did Interview etc.)
+    :param candidate:
+    :return: 1 = Very Good Match, 0 = Bad match, np.nan = unknown
+    """
+    if candidate.state in State.get_recommended_states() + State.get_relevant_states():
+        return 1
+    else:
+        return 0
 
 
 def get_score(candidates):
@@ -63,7 +68,7 @@ def get_score(candidates):
     search_by_position = [r/sum(search_by_position) for r in search_by_position]
 
     # get score per candidate
-    my_list = [common_learning.get_target_for_candidate(c) * r for r, c in zip(search_by_position, candidates)]
+    my_list = [get_search_target_for_candidate(c) * r for r, c in zip(search_by_position, candidates)]
 
     if len(my_list) > 0:
         return np.nansum(np.array(my_list))

@@ -235,7 +235,7 @@ def get_test_result(request):
 
         scores = test_module.get_scores(campaign, user_id, questions_dict, request)
         if len(scores) > 0:
-            test_module.get_evaluation(scores, campaign, candidate)
+            test_module.get_evaluation(scores, candidate)
 
     return render(request, cts.TEST_RESULT_VIEW_PATH, {'candidate': candidate,
                                                        'campaign': campaign,

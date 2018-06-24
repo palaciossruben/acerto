@@ -1,0 +1,38 @@
+[
+  {
+    "model": "dashboard.business_state",
+    "pk": 1,
+    "fields":{
+      "name": "Rejected",
+      "name_es": "Rechazados",
+      "states": [2, 3, 4, 6, 9]
+    }
+  },
+  {
+    "model": "dashboard.business_state",
+    "pk": 2,
+    "fields":{
+      "name": "Applicants",
+      "name_es": "Aplicantes",
+      "states": [1, 11]
+    }
+  },
+  {
+    "model": "dashboard.business_state",
+    "pk": 3,
+    "fields":{
+      "name": "Relevant",
+      "name_es": "Relevantes",
+      "states": [8, 10]
+    }
+  },
+  {
+    "model": "dashboard.business_state",
+    "pk": 4,
+    "fields":{
+      "name": "Recommended",
+      "name_es": "Recomendados",
+      "states": [5, 7]
+    }
+  }
+]

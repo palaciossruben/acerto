@@ -50,7 +50,7 @@ def get_target_for_candidate(candidate):
     :param candidate:
     :return: 1 = Very Good Match, 0 = Bad match, np.nan = unknown
     """
-    if candidate.state in State.get_recomended_states():
+    if candidate.state in State.get_recommended_states():
         return 1
     elif candidate.state in State.get_rejected_states():
         return 0
@@ -92,7 +92,7 @@ def hash_columns(data, hashing_info):
 def get_filtered_candidates():
     """Very good candidates contrasted with very bad ones"""
     return Candidate.objects.exclude(campaign_id=constants.DEFAULT_CAMPAIGN_ID)\
-        .filter(state__in=State.get_recomended_states() + State.get_rejected_states())
+        .filter(state__in=State.get_recommended_states() + State.get_rejected_states())
 
 
 """

@@ -242,10 +242,13 @@ def save_user_relevance_dictionary(path):
     try:
         user_relevance_dictionary = pickle.load(open(cts.WORD_USER_PATH, 'rb'))
     except FileNotFoundError:
+        print('FileNotFoundError')
+        print('current working directory: ' + str(os.getcwd()))
         user_relevance_dictionary = {}
 
     common_words = get_common_words(text_corpus)
     user_ids_to_update = get_user_ids_to_update()
+    print('user_ids_to_update are: ' + str(user_ids_to_update))
 
     common_words = set(common_words)
     for word, num_word in vocabulary.items():

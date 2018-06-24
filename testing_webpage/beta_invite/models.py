@@ -451,12 +451,24 @@ class Score(models.Model):
         db_table = 'scores'
 
 
+def average_list(my_list):
+    """
+    Average, if no elements outputs None
+    :param my_list:
+    :return:
+    """
+    my_list = [e for e in my_list if e is not None]
+    if len(my_list) > 0:
+        return sum(my_list) / len(my_list)
+    else:
+        return None
+
+
 class Evaluation(models.Model):
     """
     Summary of all tests results for a given user.
     """
 
-    campaign = models.ForeignKey(Campaign)
     cut_score = models.FloatField(null=True)
     final_score = models.FloatField(null=True)
     passed = models.NullBooleanField(null=True)
@@ -471,7 +483,7 @@ class Evaluation(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     @classmethod
-    def create(cls, campaign, scores):
+    def create(cls, scores):
         """
         Instead of:
         evaluation = Evaluation(...)
@@ -482,12 +494,11 @@ class Evaluation(models.Model):
         https://stackoverflow.com/questions/843580/writing-a-init-function-to-be-used-in-django-model
         And
         https://stackoverflow.com/questions/20569910/how-to-initialize-an-empty-object-with-foreignkey-in-django
-        :param campaign: Campaign obj
         :param scores: List of scores objects
         :return:
         """
 
-        evaluation = cls(campaign=campaign)
+        evaluation = cls()
 
         # Saves first in order to have an id and assign the scores.
         evaluation.save()
@@ -501,21 +512,9 @@ class Evaluation(models.Model):
                                                                      self.final_score,
                                                                      self.passed)
 
-    @staticmethod
-    def average_list(my_list):
-        """
-        Average, if no elements outputs None
-        :param my_list:
-        :return:
-        """
-        if len(my_list) > 0:
-            return sum(my_list) / len(my_list)
-        else:
-            return None
-
     def get_score_for_test_type(self, type_name):
         test_type = TestType.objects.get(name=type_name)
-        return Evaluation.average_list([s.value for s in self.scores.all() if s.test.type == test_type])
+        return average_list([s.value for s in self.scores.all() if s.test.type == test_type])
 
     def update_scores(self, scores):
 
@@ -523,9 +522,10 @@ class Evaluation(models.Model):
 
         if self.scores:
 
-            self.cut_score = Evaluation.average_list([s.test.cut_score for s in self.scores.all()])
-            self.final_score = Evaluation.average_list([s.value for s in self.scores.all()])
-            self.passed = self.final_score >= self.cut_score
+            self.cut_score = average_list([s.test.cut_score for s in self.scores.all()])
+            self.final_score = average_list([s.value for s in self.scores.all()])
+            if self.final_score is not None and self.cut_score is not None:
+                self.passed = self.final_score >= self.cut_score
 
             self.cognitive_score = self.get_score_for_test_type('cognitive')
             self.technical_score = self.get_score_for_test_type('technical')
@@ -538,6 +538,85 @@ class Evaluation(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'evaluations'
+
+
+class EvaluationSummary(models.Model):
+    """
+    Summary of all evaluations or other EvaluationSummaries.
+    """
+
+    cut_score = models.FloatField(null=True)
+    final_score = models.FloatField(null=True)
+
+    cognitive_score = models.FloatField(null=True)
+    technical_score = models.FloatField(null=True)
+    requirements_score = models.FloatField(null=True)
+    soft_skills_score = models.FloatField(null=True)
+
+    evaluations = models.ManyToManyField(Evaluation)
+    evaluation_summaries = models.ManyToManyField("self", symmetrical=False)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    @classmethod
+    def create(cls, evaluations):
+        """
+        Instead of:
+        evaluation = Evaluation(...)
+        do
+        evaluation = Evaluation.create(...)
+
+        This is a convenience method to save Foreign keys with out having a mess outside see:
+        https://stackoverflow.com/questions/843580/writing-a-init-function-to-be-used-in-django-model
+        And
+        https://stackoverflow.com/questions/20569910/how-to-initialize-an-empty-object-with-foreignkey-in-django
+        :param evaluations: List of evaluation objects
+        :return:
+        """
+
+        evaluation_summary = cls()
+
+        # Saves first in order to have an id and assign the scores.
+        evaluation_summary.save()
+        evaluation_summary.update_evaluations(evaluations)
+
+        return evaluation_summary
+
+    def __str__(self):
+        return 'id={0}, cut_score={1}, value={2}'.format(self.pk,
+                                                         self.cut_score,
+                                                         self.final_score)
+
+    def update_evaluations(self, evaluations):
+        """
+        :param evaluations: can be Evaluation or EvaluationSummary objects
+        :return: None
+        """
+
+        if self.evaluations:
+
+            if isinstance(evaluations[0], Evaluation):
+                self.evaluations = evaluations
+            elif isinstance(evaluations[0], EvaluationSummary):
+                self.evaluation_summaries = evaluations
+            else:
+                raise NotImplementedError
+
+            self.cut_score = average_list([e.cut_score for e in evaluations])
+            self.final_score = average_list([e.final_score for e in evaluations])
+
+            self.cognitive_score = average_list([e.cognitive_score for e in evaluations])
+            self.technical_score = average_list([e.technical_score for e in evaluations])
+            self.requirements_score = average_list([e.requirements_score for e in evaluations])
+            self.soft_skills_score = average_list([e.soft_skills_score for e in evaluations])
+            # TODO: add any new score here
+
+        self.save()
+
+    # adds custom table name
+    class Meta:
+        db_table = 'summary_evaluations'
 
 
 class User(models.Model):
