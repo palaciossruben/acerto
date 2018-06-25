@@ -23,7 +23,7 @@
         <br>
 
         <select id="test_type" name="test_type_id" required="required">
-            <option value="" disabled selected>Select Test Type</option>
+            <option value="" >Select Test Type</option>
             {% for type in test_types %}
                 <option value={{ type.id }}>{{ type.name }}</option>
             {% endfor %}
