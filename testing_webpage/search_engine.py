@@ -187,7 +187,7 @@ def get_common_words(text_corpus, number_of_top_words=20000):
     words = [w for w, _ in word_frequency]
     words = [w for w in words if w not in cts.CONJUNCTIONS]
 
-    print_common_words_percentiles(words)
+    #print_common_words_percentiles(words)
     return words[:min(number_of_top_words, len(word_frequency))]
 
 
