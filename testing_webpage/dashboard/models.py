@@ -3,7 +3,7 @@ import numpy as np
 from django.db import models
 from django.db.models.signals import post_init
 
-from beta_invite.models import User, Campaign, Evaluation, Survey, EvaluationSummary
+from beta_invite.models import User, Campaign, Evaluation, Survey, EvaluationSummary, Score
 from dashboard import constants as cts
 from beta_invite.util import common_senders
 from business.models import BusinessUser
@@ -104,6 +104,7 @@ class Candidate(models.Model):
     screening = models.ForeignKey(Screening, null=True, on_delete=models.SET_NULL)
     screening_explanation = models.CharField(max_length=200, default='')
     rating = models.IntegerField(null=True)
+    mean_scores = models.ManyToManyField(Score, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -114,6 +115,28 @@ class Candidate(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'candidates'
+
+    def update_mean_test_scores(self):
+        """
+        Gets a mean value for each test taken.
+        :return:
+        """
+
+        mean_scores_dict = dict()
+        for e in self.evaluations.all():
+            for s in e.scores.all():
+                values = mean_scores_dict.get(s.test_id, [])
+                values.append(s.value)
+                mean_scores_dict[s.test_id] = values
+
+        mean_scores = []
+        for test_id, values in mean_scores_dict.items():
+            new_score = Score(test_id=test_id, value=statistics.mean(values))
+            new_score.save()
+            mean_scores.append(new_score)
+
+        self.mean_scores = mean_scores
+        self.save()
 
     def get_evaluation_summary(self):
         """

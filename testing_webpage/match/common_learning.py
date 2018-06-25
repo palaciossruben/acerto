@@ -117,6 +117,7 @@ def get_filtered_candidates():
 
 def get_columns():
     return [#'campaign',
+            #'id',
             'text_match',
             'candidate_country',
             'candidate_city',
@@ -148,6 +149,10 @@ def lower_str(text):
         return text
 
 
+def get_test_column_name(test):
+    return str(test.id) + '_' + common.remove_accents(test.name).lower()
+
+
 def load_raw_data(candidates=get_filtered_candidates()):
 
     if isinstance(candidates, list):
@@ -155,6 +160,7 @@ def load_raw_data(candidates=get_filtered_candidates()):
 
     # With QuerySet it is much faster.
     data_list = list(candidates.values_list(#'campaign_id',
+                                            #'id',  # only to trace the candidate
                                             'text_match',
                                             'user__country_id',
                                             'user__city_id',
@@ -194,35 +200,32 @@ def load_raw_data(candidates=get_filtered_candidates()):
     #data = add_test_features(data, candidates, ['passed', 'final_score'])
     data['median_test_final_score'] = [get_test_score(c, 'final_score', statistics.median) for c in candidates]
 
-
-    #tests = Test.objects.all()
-
-    #for t in tests:
-    #    empty_array = np.empty((data.shape[0],))
-    #    empty_array[:] = np.nan
-    #    data[str(t.name) + 'median_final_score'] = empty_array
+    # Dirty code: INDIVIDUAL TESTS
+    # TODO: currently not giving any significant improvement
     """
-    all_tests = dict()
-    for c in candidates:
-        test_score_dict = dict()
-        for e in c.evaluations.all():
-            for score in e.scores.all():
-                current_value = test_score_dict.get(score.test.name)
-                if current_value:
-                    test_score_dict[score.test.name] = current_value.append(score.value)
-                else:
-                    test_score_dict[score.test.name] = [score.value]
+    test_columns = set()
+    for c in candidates.all():
+        c.update_mean_test_scores()
+        test_columns |= {get_test_column_name(s.test) for s in c.mean_scores.all()}
 
-        for k, v in test_score_dict.items():
+    # Fill columns with nan first
+    for column in test_columns:
+        data[column] = np.nan
 
-            value = all_tests.get(k + 'median_final_score')
-            if value:
-                all_tests[k + 'median_final_score'] = value.append(np.median(v))
-            else:
-                all_tests[k + 'median_final_score'] = [np.median(v)]
+    data.set_index('id', inplace=True)
+    for c in candidates.all():
+        for s in c.mean_scores.all():
+            data.loc[c.id, get_test_column_name(s.test)] = s.value
+    data.reset_index(inplace=True)
+    data.drop('id', inplace=True, axis=1)
 
-    for k, v in all_tests.items():
-        data[k] = v
+    for column in test_columns:
+        data[column].fillna(np.nanmedian(data[column]), inplace=True)
+
+    for column in test_columns:
+        if statistics.stdev(list(data[column])) < 3:
+            data.drop(column, inplace=True, axis=1)
+            print('dropped column: ' + column)
     """
 
     return data
