@@ -9,7 +9,7 @@ import geoip2.database
 import inflection
 from beta_invite.apps import ip_country_reader, ip_city_reader
 
-from beta_invite.models import User, Campaign, Country, City, Profession, Education
+from beta_invite.models import User, Campaign, Country, City, Profession, Education, EvaluationSummary
 from beta_invite import constants as beta_cts
 from dashboard.models import Candidate, State
 from testing_webpage import settings
@@ -387,6 +387,21 @@ def get_application_candidates(campaign):
 
 def get_rejected_candidates(campaign):
     return Candidate.objects.filter(campaign=campaign, state__in=State.get_rejected_states())
+
+
+def calculate_evaluation_summaries(campaign):
+    """
+    Gets all candidates for each BusinessState and calculates the average scores. If the candidate is missing its
+    calculation it will also try doing that internally.
+    """
+    campaign.recommended_evaluation = EvaluationSummary.create([c.get_evaluation_summary()
+                                                                for c in get_recommended_candidates(campaign)])
+    campaign.relevant_evaluation = EvaluationSummary.create([c.get_evaluation_summary()
+                                                             for c in get_relevant_candidates(campaign)])
+    campaign.applicant_evaluation = EvaluationSummary.create([c.get_evaluation_summary()
+                                                              for c in get_application_candidates(campaign)])
+    campaign.rejected_evaluation = EvaluationSummary.create([c.get_evaluation_summary()
+                                                             for c in get_rejected_candidates(campaign)])
 
 
 def calculate_operational_efficiency(campaign):

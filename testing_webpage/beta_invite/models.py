@@ -1,4 +1,5 @@
 import re
+
 from django.db import models
 from django.contrib.postgres.fields import JSONField
 from django.conf import settings
@@ -330,111 +331,6 @@ class Test(models.Model):
         db_table = 'tests'
 
 
-class Interview(models.Model):
-
-    name = models.CharField(max_length=200, null=True)
-    name_es = models.CharField(max_length=200, null=True)
-    questions = models.ManyToManyField(Question)
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return '{0}, {1}'.format(self.pk, self.name)
-
-    # adds custom table name
-    class Meta:
-        db_table = 'interviews'
-
-
-class Seniority(models.Model):
-
-    name = models.CharField(max_length=200)
-
-    # adds custom table name
-    class Meta:
-        db_table = 'seniorities'
-
-    def __str__(self):
-        return '{0}'.format(self.name)
-
-
-class JobFunctions(models.Model):
-
-    name = models.CharField(max_length=200)
-
-    # adds custom table name
-    class Meta:
-        db_table = 'job_functions'
-
-    def __str__(self):
-        return '{0}'.format(self.name)
-
-
-class Campaign(models.Model):
-
-    name = models.CharField(max_length=200)
-    experience = models.IntegerField(null=True)
-    profession = models.ForeignKey(Profession, null=True, on_delete=models.SET_NULL)
-    education = models.ForeignKey(Education, null=True, on_delete=models.SET_NULL)
-    country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
-    city = models.ForeignKey(City, null=True, on_delete=models.SET_NULL)
-    description = models.CharField(max_length=5000, null=True)
-    description_es = models.CharField(max_length=5000, null=True)
-    title = models.CharField(max_length=200, null=True)
-    title_es = models.CharField(max_length=200, null=True)
-    bullets = models.ManyToManyField(Bullet)
-    tests = models.ManyToManyField(Test)
-    interviews = models.ManyToManyField(Interview)
-    calendly = models.BooleanField(default=True)
-    active = models.BooleanField(default=False)
-    calendly_url = models.CharField(max_length=200, default=cts.INTERVIEW_CALENDLY)
-    removed = models.BooleanField(default=False)
-    free_trial = models.BooleanField(default=True)
-    seniority = models.ForeignKey(Seniority, null=True)
-    job_function = models.ForeignKey(JobFunctions, null=True)
-    has_email = models.BooleanField(default=True)
-    work_area = models.ForeignKey(WorkArea, null=True, on_delete=models.SET_NULL)
-    operational_efficiency = models.FloatField(null=True)
-
-    # TODO: remove circular dependency
-    # plan = models.ForeignKey(Plan, null=True, on_delete=models.DO_NOTHING)
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return '{0}, {1}'.format(self.pk, self.name)
-
-    # adds custom table name
-    class Meta:
-        db_table = 'campaigns'
-
-    def translate(self, language_code):
-        """
-        Args:
-            self: Me, Myself and I
-            language_code: 'es', 'en' etc.
-        Returns: Inplace object translation
-        """
-        if language_code == 'es':
-            self.description = self.description_es
-            self.title = self.title_es
-
-    def get_host(self):
-        return '//127.0.0.1:8000' if settings.DEBUG else 'https://peaku.co'
-
-    def get_url(self):
-        return self.get_host()+'/servicio_de_empleo?campaign_id={campaign_id}'.format(campaign_id=self.pk)
-
-    def get_requirement_names(self):
-        # TODO: add support for english
-        return [b.name_es for b in self.bullets.all() if b.bullet_type and b.bullet_type.name == 'requirement']
-
-    def get_search_text(self):
-        return ' '.join([self.title_es] + self.get_requirement_names())
-
-
 class Score(models.Model):
 
     test = models.ForeignKey(Test)
@@ -449,19 +345,6 @@ class Score(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'scores'
-
-
-def average_list(my_list):
-    """
-    Average, if no elements outputs None
-    :param my_list:
-    :return:
-    """
-    my_list = [e for e in my_list if e is not None]
-    if len(my_list) > 0:
-        return sum(my_list) / len(my_list)
-    else:
-        return None
 
 
 class Evaluation(models.Model):
@@ -594,7 +477,7 @@ class EvaluationSummary(models.Model):
         :return: None
         """
 
-        if self.evaluations:
+        if len(evaluations) > 0:
 
             if isinstance(evaluations[0], Evaluation):
                 self.evaluations = evaluations
@@ -617,6 +500,132 @@ class EvaluationSummary(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'summary_evaluations'
+
+
+class Interview(models.Model):
+
+    name = models.CharField(max_length=200, null=True)
+    name_es = models.CharField(max_length=200, null=True)
+    questions = models.ManyToManyField(Question)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '{0}, {1}'.format(self.pk, self.name)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'interviews'
+
+
+class Seniority(models.Model):
+
+    name = models.CharField(max_length=200)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'seniorities'
+
+    def __str__(self):
+        return '{0}'.format(self.name)
+
+
+class JobFunctions(models.Model):
+
+    name = models.CharField(max_length=200)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'job_functions'
+
+    def __str__(self):
+        return '{0}'.format(self.name)
+
+
+class Campaign(models.Model):
+
+    name = models.CharField(max_length=200)
+    experience = models.IntegerField(null=True)
+    profession = models.ForeignKey(Profession, null=True, on_delete=models.SET_NULL)
+    education = models.ForeignKey(Education, null=True, on_delete=models.SET_NULL)
+    country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
+    city = models.ForeignKey(City, null=True, on_delete=models.SET_NULL)
+    description = models.CharField(max_length=5000, null=True)
+    description_es = models.CharField(max_length=5000, null=True)
+    title = models.CharField(max_length=200, null=True)
+    title_es = models.CharField(max_length=200, null=True)
+    bullets = models.ManyToManyField(Bullet)
+    tests = models.ManyToManyField(Test)
+    interviews = models.ManyToManyField(Interview)
+    calendly = models.BooleanField(default=True)
+    active = models.BooleanField(default=False)
+    calendly_url = models.CharField(max_length=200, default=cts.INTERVIEW_CALENDLY)
+    removed = models.BooleanField(default=False)
+    free_trial = models.BooleanField(default=True)
+    seniority = models.ForeignKey(Seniority, null=True)
+    job_function = models.ForeignKey(JobFunctions, null=True)
+    has_email = models.BooleanField(default=True)
+    work_area = models.ForeignKey(WorkArea, null=True, on_delete=models.SET_NULL)
+    operational_efficiency = models.FloatField(null=True)
+
+    recommended_evaluation = models.ForeignKey(EvaluationSummary, null=True, related_name='recommended_evaluation')
+    relevant_evaluation = models.ForeignKey(EvaluationSummary, null=True, related_name='relevant_evaluation')
+    applicant_evaluation = models.ForeignKey(EvaluationSummary, null=True, related_name='applicant_evaluation')
+    rejected_evaluation = models.ForeignKey(EvaluationSummary, null=True, related_name='rejected_evaluation')
+
+    # TODO: remove circular dependency
+    # plan = models.ForeignKey(Plan, null=True, on_delete=models.DO_NOTHING)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '{0}, {1}'.format(self.pk, self.name)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'campaigns'
+
+    def translate(self, language_code):
+        """
+        Args:
+            self: Me, Myself and I
+            language_code: 'es', 'en' etc.
+        Returns: Inplace object translation
+        """
+        if language_code == 'es':
+            self.description = self.description_es
+            self.title = self.title_es
+
+    def get_host(self):
+        return '//127.0.0.1:8000' if settings.DEBUG else 'https://peaku.co'
+
+    def get_url(self):
+        return self.get_host()+'/servicio_de_empleo?campaign_id={campaign_id}'.format(campaign_id=self.pk)
+
+    def get_requirement_names(self):
+        # TODO: add support for english
+        return [b.name_es for b in self.bullets.all() if b.bullet_type and b.bullet_type.name == 'requirement']
+
+    def get_search_text(self):
+        return ' '.join([self.title_es] + self.get_requirement_names())
+
+
+
+
+
+def average_list(my_list):
+    """
+    Average, if no elements outputs None
+    :param my_list:
+    :return:
+    """
+    my_list = [e for e in my_list if e is not None]
+    if len(my_list) > 0:
+        return sum(my_list) / len(my_list)
+    else:
+        return None
 
 
 class User(models.Model):

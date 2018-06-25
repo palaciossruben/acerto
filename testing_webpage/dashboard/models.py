@@ -115,6 +115,17 @@ class Candidate(models.Model):
     class Meta:
         db_table = 'candidates'
 
+    def get_evaluation_summary(self):
+        """
+        Retrieve summary or try calculating it.
+        :return:
+        """
+        if self.evaluation_summary:
+            return self.evaluation_summary
+        else:
+            self.evaluation_summary = EvaluationSummary.create(self.evaluations.all())
+            return self.evaluation_summary
+
     def get_business_user(self):
         """
         Given a campaign gets the business_user if it exists, else None
@@ -207,8 +218,6 @@ class BusinessState(models.Model):
     name = models.CharField(max_length=200)
     name_es = models.CharField(max_length=200)
     states = models.ManyToManyField(State)
-    #evaluation = models.ForeignKey(Evaluation)
-    #candidates = models.ManyToManyField(Candidate)
 
     def __str__(self):
         return '{0}, {1}'.format(self.pk, self.name)
