@@ -51,9 +51,9 @@ if __name__ == '__main__':
     sys.stdout = h.Unbuffered(open('main.log', 'a'))
 
     h.log('PROCESS MANAGER STARTED')
-    run_watchdog(document_reader_run, limit_hours=2)
+    #run_watchdog(document_reader_run, limit_hours=2)
     run_watchdog(search_engine_run, limit_hours=3)
-    run_watchdog(context_search_run, limit_hours=3)
-    run_watchdog(model_run, limit_hours=1)
+    #run_watchdog(context_search_run, limit_hours=3)
+    #run_watchdog(model_run, limit_hours=1)
     #run_watchdog(cluster_run, limit_hours=0.1)
     h.log('PROCESS MANAGER FINISHED')

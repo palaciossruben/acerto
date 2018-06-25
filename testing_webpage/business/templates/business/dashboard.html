@@ -50,9 +50,9 @@
 
         <tr valign=top>
 
-            {% include "business/dashboard_column.html" with candidate_list=backlog state_name="backlog" %}
-            {% include "business/dashboard_column.html" with candidate_list=waiting_for_interview state_name="waiting_interview" %}
-            {% include "business/dashboard_column.html" with candidate_list=sent_to_client state_name="sent_to_client" %}
+            {% include "business/dashboard_column.html" with candidate_list=applicants state_name="backlog" %}
+            {% include "business/dashboard_column.html" with candidate_list=relevant state_name="waiting_interview" %}
+            {% include "business/dashboard_column.html" with candidate_list=recommended state_name="sent_to_client" %}
             {% include "business/dashboard_column.html" with candidate_list=rejected state_name="rejected" %}
         </tr>
     </table>
