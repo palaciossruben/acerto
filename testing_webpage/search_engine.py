@@ -210,11 +210,18 @@ def get_user_ids_to_update():
     except FileNotFoundError:
         last_update = datetime.date(1943, 3, 13)  # very old date
 
+    try:
+        document_reader_updated_at = pickle.load(open(cts.LAST_USER_UPDATED_AT, 'rb'))
+    except FileNotFoundError:
+        document_reader_updated_at = datetime.date(1943, 3, 13)  # very old date
+
     print('starts in date: ' + str(last_update))
 
-    users = sorted([u for u in User.objects.filter(updated_at__gt=last_update)], key=lambda u: u.updated_at)
+    # Sorts by updated at users between to updated_at intervals. The last update done and the most recent document read
+    users = [u for u in User.objects.filter(updated_at__gt=last_update,
+                                            updated_at__lt=document_reader_updated_at).order_by('updated_at')]
 
-    # Filter for limit number of users
+    # Filter to limit number of users and reduce computation time
     users = users[:min(len(users), MAX_USERS_TO_UPDATE)]
 
     try:
@@ -242,7 +249,7 @@ def save_user_relevance_dictionary(path):
     try:
         user_relevance_dictionary = pickle.load(open(cts.WORD_USER_PATH, 'rb'))
     except FileNotFoundError:
-        print('FileNotFoundError')
+        print('FileNotFoundError: user_relevance_dictionary.p')
         print('current working directory: ' + str(os.getcwd()))
         user_relevance_dictionary = {}
 

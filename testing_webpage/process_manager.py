@@ -6,11 +6,11 @@ import time
 from datetime import datetime
 from multiprocessing import Process
 
+from document_reader import run as document_reader_run
+from search_engine import run as search_engine_run
 from context_search import run as context_search_run
 from match.model import run as model_run
-from search_engine import run as search_engine_run
 from subscribe import helper as h
-from subscribe.document_reader import run as document_reader_run
 
 CHECKING_INTERVAL = 60  # check each minute
 
@@ -51,9 +51,9 @@ if __name__ == '__main__':
     sys.stdout = h.Unbuffered(open('main.log', 'a'))
 
     h.log('PROCESS MANAGER STARTED')
-    #run_watchdog(document_reader_run, limit_hours=2)
+    run_watchdog(document_reader_run, limit_hours=2)
     run_watchdog(search_engine_run, limit_hours=3)
-    #run_watchdog(context_search_run, limit_hours=3)
-    #run_watchdog(model_run, limit_hours=1)
+    run_watchdog(context_search_run, limit_hours=3)
+    run_watchdog(model_run, limit_hours=1)
     #run_watchdog(cluster_run, limit_hours=0.1)
     h.log('PROCESS MANAGER FINISHED')

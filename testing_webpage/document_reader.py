@@ -4,12 +4,22 @@ python3 subscribe/document_reader.py
 """
 import os
 import sys
-try:
-    from subscribe import helper as h
-    from subscribe import cts
-except ImportError:
-    import helper as h
-    import cts
+from django.core.wsgi import get_wsgi_application
+
+
+# Environment can use the models as if inside the Django app
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
+application = get_wsgi_application()
+
+import pickle
+
+#try:
+from subscribe import helper as h
+from subscribe import cts
+from beta_invite.models import User
+#except ImportError:
+#    import helper as h
+#    import cts
 
 VALID_EXTENSIONS = {'.jpg', '.jpeg', '.doc', '.docx', '.png', '.pdf', '.txt'}
 
@@ -57,23 +67,33 @@ def read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename):
     return text
 
 
+def write_last_updated_at(user):
+    """Up until this id all users have been inspected at least once"""
+    pickle.dump(user.updated_at, open(cts.LAST_USER_UPDATED_AT, 'wb'))
+
+
 def read_all(force=False):
     """Reads all files inside the resumes folder. Files can have several different extensions.
-    :param force: Boolean indicating if the Curriculums have to be read again.
+    :param force: Boolean indicating if the Curriculum have to be read again.
     """
-    resumes_folders = os.listdir(cts.RESUMES_PATH)
+    folders = os.listdir(cts.RESUMES_PATH)
 
-    for folder in sorted(resumes_folders):
-        print(folder)
-        folder_path = os.path.join(cts.RESUMES_PATH, folder)
-        if os.path.isdir(folder_path):
-            docs = os.listdir(folder_path)
+    users = [u for u in User.objects.all().order_by('updated_at')]
 
-            parsed_filename = '{}.txt'.format(folder)
-            parsed_path = os.path.join(folder_path, parsed_filename)
-            # Will used saved version, to save time parsing.
-            if parsed_filename not in docs or force:
-                read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename)
+    for user in users:
+        folder = str(user.id)
+        if folder in folders:
+            print(folder)
+            folder_path = os.path.join(cts.RESUMES_PATH, folder)
+            if os.path.isdir(folder_path):
+                docs = os.listdir(folder_path)
+
+                parsed_filename = '{}.txt'.format(folder)
+                parsed_path = os.path.join(folder_path, parsed_filename)
+                # Will used saved version, to save time parsing.
+                if parsed_filename not in docs or force:
+                    read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename)
+                    write_last_updated_at(user)
 
 
 def run():
