@@ -218,8 +218,8 @@ def get_user_ids_to_update():
     print('starts in date: ' + str(last_update))
 
     # Sorts by updated at users between to updated_at intervals. The last update done and the most recent document read
-    users = [u for u in User.objects.filter(updated_at__gt=last_update,
-                                            updated_at__lt=document_reader_updated_at).order_by('updated_at')]
+    users = User.objects.filter(updated_at__gt=last_update,
+                                updated_at__lt=document_reader_updated_at).order_by('updated_at').all()
 
     # Filter to limit number of users and reduce computation time
     users = users[:min(len(users), MAX_USERS_TO_UPDATE)]
@@ -283,11 +283,11 @@ def save_user_relevance_dictionary(path):
 def run():
     #sys.stdout = h.Unbuffered(open('search_engine.log', 'a'))
 
-    h.log("STARTED RELEVANCE DICT")
-    t0 = time.time()
-    save_relevance_dictionary(cts.RESUMES_PATH)
-    t1 = time.time()
-    h.log('RELEVANCE DICTIONARY, time: {}'.format(t1 - t0))
+    #h.log("STARTED RELEVANCE DICT")
+    #t0 = time.time()
+    #save_relevance_dictionary(cts.RESUMES_PATH)
+    #t1 = time.time()
+    #h.log('RELEVANCE DICTIONARY, time: {}'.format(t1 - t0))
 
     h.log("STARTED USER RELEVANCE DICT")
     t0 = time.time()
