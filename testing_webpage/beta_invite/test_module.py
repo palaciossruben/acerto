@@ -3,12 +3,8 @@ Test related methods.
 """
 import common
 from beta_invite import text_analizer
-from beta_invite.models import Question, Survey, Score, Test, Evaluation, User
+from beta_invite.models import Question, Survey, Score, Evaluation, EvaluationSummary
 from dashboard.models import Candidate, State
-
-
-def average_list(array):
-    return sum(array)/len(array)
 
 
 def get_tests_questions_dict(tests):
@@ -121,20 +117,16 @@ def get_scores(campaign, user_id, questions_dict, request):
     Returns: tuple: cut_scores, scores
     """
     scores = []
-    cut_scores = []
     for test_id, question_ids in questions_dict.items():
-        cut_scores.append(Test.objects.get(pk=test_id).cut_score)
 
         test_score = get_test_score(campaign, question_ids, user_id, test_id, request)
 
-        score = Score(test_id=test_id,
-                      value=test_score)
-
+        score = Score(test_id=test_id, value=test_score)
         score.save()
 
         scores.append(score)
 
-    return cut_scores, scores
+    return scores
 
 
 def update_candidate_state(candidate, evaluation):
@@ -147,6 +139,7 @@ def update_candidate_state(candidate, evaluation):
     if candidate:
 
         candidate.evaluations.add(evaluation)
+        candidate.evaluation_summary = EvaluationSummary.create(candidate.evaluations.all())
 
         if evaluation.passed:
             candidate.state = State.objects.get(code='WFI')
@@ -156,28 +149,16 @@ def update_candidate_state(candidate, evaluation):
         candidate.save()
 
 
-def get_evaluation(cut_scores, scores, campaign, candidate):
+def get_evaluation(scores, candidate):
     """
     simple average and percentage
     Args:
-        cut_scores: list of passing scores.
         scores: objects with current scores.
-        campaign: object
         candidate: obj
     Returns: get Evaluation object and links it ot user.
     """
-    cut_score = average_list(cut_scores)
-    final_score = average_list([s.value for s in scores])
 
-    evaluation = Evaluation(campaign=campaign,
-                            cut_score=cut_score,
-                            final_score=final_score)
-
-    # Saves first in order to have an id and assign the scores.
-    evaluation.save()
-    if scores:
-        evaluation.scores = scores
-        evaluation.save()
+    evaluation = Evaluation.create(scores=scores)
 
     update_candidate_state(candidate, evaluation)
 
@@ -188,6 +169,6 @@ def comes_from_test(request):
     """
     Args:
         request: HTTP
-    Returns: Boolean, indicating if the last url was the test. If no refrer url present then it will return false
+    Returns: Boolean, indicating if the last url was the test. If no url present then it will return false
     """
     return '/pruebas' in common.remove_params_from_url(request.META.get('HTTP_REFERER', ''))

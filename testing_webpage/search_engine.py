@@ -1,21 +1,32 @@
 import os
+from django.core.wsgi import get_wsgi_application
+
+# Environment can use the models as if inside the Django app
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
+application = get_wsgi_application()
+
 import re
 import sys
 import nltk
-import math
 import time
 import pickle
+import datetime
 
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
 from collections import OrderedDict
 
-try:
-    from subscribe import helper as h
-    from subscribe import cts
-except ImportError:
-    import helper as h
-    import cts
+#try:
+from subscribe import helper as h
+from subscribe import cts
+from beta_invite.models import User
+#except ImportError:
+#    import helper as h
+#    import cts
+#    from beta_invite.models import User
+
+
+MAX_USERS_TO_UPDATE = 500
 
 
 def get_word_array_lower_case_and_no_accents(search_text):
@@ -24,7 +35,7 @@ def get_word_array_lower_case_and_no_accents(search_text):
         search_text: string
     Returns: array with words
     """
-    search_text = h.remove_accents(nltk.word_tokenize(search_text))
+    search_text = h.remove_accents_and_non_ascii(nltk.word_tokenize(search_text))
 
     # remove capital letters
     return [t.lower() for t in search_text]
@@ -151,7 +162,7 @@ def print_common_words_percentiles(words):
         from_index = int(len(words) * percentile)
         to_index = int(from_index + 10)
         try:
-            print('percentile {percentile}%: {words}'.format(percentile=percentile,
+            print('percentile {percentile}%: {words}'.format(percentile=percentile*100,
                                                              words=' '.join(words[from_index:to_index])
                                                              ))
         except UnicodeEncodeError:
@@ -164,7 +175,7 @@ def get_common_words(text_corpus, number_of_top_words=20000):
     word_frequency = dict()
     for text in text_corpus.values():
         unique = set(get_word_array_lower_case_and_no_accents(text))
-        unique = h.remove_accents(unique)
+        unique = h.remove_accents_and_non_ascii(unique)
 
         for u in unique:
             if len(u) > 2 and '_' not in u:
@@ -176,8 +187,51 @@ def get_common_words(text_corpus, number_of_top_words=20000):
     words = [w for w, _ in word_frequency]
     words = [w for w in words if w not in cts.CONJUNCTIONS]
 
-    print_common_words_percentiles(words)
+    #print_common_words_percentiles(words)
     return words[:min(number_of_top_words, len(word_frequency))]
+
+
+def empty_max(my_list):
+    """
+    Specially designed for ids
+    :param my_list:
+    :return:
+    """
+    if len(my_list) == 0:
+        return 0
+    else:
+        return max(my_list)
+
+
+def get_user_ids_to_update():
+
+    try:
+        last_update = pickle.load(open(cts.SEARCH_ENGINE_DATE, 'rb'))
+    except FileNotFoundError:
+        last_update = datetime.date(1943, 3, 13)  # very old date
+
+    try:
+        document_reader_updated_at = pickle.load(open(cts.LAST_USER_UPDATED_AT, 'rb'))
+    except FileNotFoundError:
+        document_reader_updated_at = datetime.date(1943, 3, 13)  # very old date
+
+    print('starts in date: ' + str(last_update))
+
+    # Sorts by updated at users between to updated_at intervals. The last update done and the most recent document read
+    users = User.objects.filter(updated_at__gt=last_update,
+                                updated_at__lt=document_reader_updated_at).order_by('updated_at').all()
+
+    # Filter to limit number of users and reduce computation time
+    users = users[:min(len(users), MAX_USERS_TO_UPDATE)]
+
+    try:
+        new_date = max([u.updated_at for u in users])
+        print('ends in date: ' + str(new_date))
+        pickle.dump(new_date, open(cts.SEARCH_ENGINE_DATE, 'wb'))
+    except ValueError:
+        pass
+
+    return {u.id for u in users}
 
 
 def save_user_relevance_dictionary(path):
@@ -192,47 +246,48 @@ def save_user_relevance_dictionary(path):
     """
     data_tf_idf, vocabulary, text_corpus = get_text_stats(path, use_idf=True)
 
-    user_relevance_dictionary = {}
+    try:
+        user_relevance_dictionary = pickle.load(open(cts.WORD_USER_PATH, 'rb'))
+    except FileNotFoundError:
+        print('FileNotFoundError: user_relevance_dictionary.p')
+        print('current working directory: ' + str(os.getcwd()))
+        user_relevance_dictionary = {}
 
     common_words = get_common_words(text_corpus)
+    user_ids_to_update = get_user_ids_to_update()
+    print('user_ids_to_update are: ' + str(user_ids_to_update))
 
     common_words = set(common_words)
     for word, num_word in vocabulary.items():
 
         if word in common_words:
 
-            #column = data_tf_idf.getcol(num_word)
-            #column_coo = column.tocoo()
-            #for i, j, v in itertools.izip(cx.row, cx.col, cx.data):
-            #    print(i, j, v)
-
-            values = []
+            values = list(user_relevance_dictionary.get(word, []))
             for document, (user_id, text) in enumerate(text_corpus.items()):
 
-                #print(str(document) + ', ' + str(user_id))
+                if user_id in user_ids_to_update:
 
-                relevance = data_tf_idf[document, num_word]
+                    relevance = data_tf_idf[document, num_word]
 
-                if relevance > 0:
-                    relevance = add_position_effect(text, relevance, word)
-                    values.append((int(user_id), relevance))
+                    if relevance > 0:
+                        relevance = add_position_effect(text, relevance, word)
+                        values.append((int(user_id), relevance))
 
             user_relevance_dictionary[word] = tuple(values)
 
-    user_relevance_dictionary = h.remove_accents(user_relevance_dictionary)
+    user_relevance_dictionary = h.remove_accents_and_non_ascii(user_relevance_dictionary)
 
     pickle.dump(user_relevance_dictionary, open(cts.WORD_USER_PATH, 'wb'))
-    #print([w for w in user_relevance_dictionary.keys()])
 
 
 def run():
-    sys.stdout = h.Unbuffered(open('search_engine.log', 'a'))
+    #sys.stdout = h.Unbuffered(open('search_engine.log', 'a'))
 
-    h.log("STARTED RELEVANCE DICT")
-    t0 = time.time()
-    save_relevance_dictionary(cts.RESUMES_PATH)
-    t1 = time.time()
-    h.log('RELEVANCE DICTIONARY, time: {}'.format(t1 - t0))
+    #h.log("STARTED RELEVANCE DICT")
+    #t0 = time.time()
+    #save_relevance_dictionary(cts.RESUMES_PATH)
+    #t1 = time.time()
+    #h.log('RELEVANCE DICTIONARY, time: {}'.format(t1 - t0))
 
     h.log("STARTED USER RELEVANCE DICT")
     t0 = time.time()

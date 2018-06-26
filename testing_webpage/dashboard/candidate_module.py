@@ -2,6 +2,8 @@
 All functions related to candidates, dashboard stuff.
 """
 
+import statistics
+
 from dashboard.models import Comment, Candidate, State
 from beta_invite.models import Campaign
 from dashboard import constants as cts
@@ -88,10 +90,13 @@ def remove_candidate(candidate):
 
 
 def get_candidates_from_state(state_code, campaign_id):
-    return Candidate.objects.filter(campaign_id=campaign_id,
-                                    state__is_rejected=False,
-                                    state=State.objects.get(code=state_code),
-                                    removed=False)
+    candidates = Candidate.objects.filter(campaign_id=campaign_id,
+                                          state__is_rejected=False,
+                                          state=State.objects.get(code=state_code),
+                                          removed=False)
+
+    return [c for c in reversed(sorted(candidates,
+                                       key=lambda c: c.get_average_final_score()))]
 
 
 def get_rendering_data(campaign_id):
@@ -107,9 +112,12 @@ def get_rendering_data(campaign_id):
     for state in states:
         candidates_dict[state.name.lower().replace(' ', '_')] = get_candidates_from_state(state.code, campaign_id)
 
-    candidates_dict['rejected'] = Candidate.objects.filter(campaign_id=campaign_id,
-                                                           state__is_rejected=True,
-                                                           removed=False)
+    rejected_candidates = Candidate.objects.filter(campaign_id=campaign_id,
+                                                   state__is_rejected=True,
+                                                   removed=False)
+
+    candidates_dict['rejected'] = [c for c in reversed(sorted(rejected_candidates,
+                                                              key=lambda c: c.get_average_final_score()))]
 
     return candidates_dict, State.objects.all()
 

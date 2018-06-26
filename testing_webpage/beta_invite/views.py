@@ -233,14 +233,14 @@ def get_test_result(request):
 
     if test_done:
 
-        cut_scores, scores = test_module.get_scores(campaign, user_id, questions_dict, request)
+        scores = test_module.get_scores(campaign, user_id, questions_dict, request)
+        if len(scores) > 0:
+            test_module.get_evaluation(scores, candidate)
 
-        has_scores = (len(scores) > 0)
-
-        if has_scores:
-            test_module.get_evaluation(cut_scores, scores, campaign, candidate)
-
-    return render(request, cts.TEST_RESULT_VIEW_PATH, {'candidate': candidate, 'campaign': campaign, 'candidate_id': candidate.pk, 'name': name})
+    return render(request, cts.TEST_RESULT_VIEW_PATH, {'candidate': candidate,
+                                                       'campaign': campaign,
+                                                       'candidate_id': candidate.pk,
+                                                       'name': name})
 
 
 def additional_info(request):

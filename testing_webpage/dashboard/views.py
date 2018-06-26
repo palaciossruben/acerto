@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.db.models import Q
 from django.http import HttpResponse
 
-from beta_invite.models import Campaign, Test, BulletType, Interview, Survey, Bullet, QuestionType, Question, Answer
+from beta_invite.models import Campaign, Test, TestType, BulletType, Interview, Survey, Bullet, QuestionType, Question, Answer
 from dashboard.models import Candidate, Message, Screening
 from dashboard import constants as cts
 from beta_invite.util import email_sender
@@ -31,9 +31,8 @@ def index(request):
     for campaign in campaigns:
         common.calculate_operational_efficiency(campaign)
 
-    tests = Test.objects.all()
     return render(request, cts.MAIN_DASHBOARD, {'campaigns': campaigns,
-                                                'tests': tests})
+                                                'tests': Test.get_all()})
 
 
 # ------------------------------- CAMPAIGN -------------------------------
@@ -200,8 +199,9 @@ def tests(request, pk):
     Returns: Renders the list of tests for a given campaign
     """
     campaign = Campaign.objects.get(pk=pk)
+
     return render(request, cts.TESTS, {'campaign': campaign,
-                                       'tests': Test.objects.all()})
+                                       'tests': Test.get_all()})
 
 
 def add_test(request, pk):
@@ -260,6 +260,7 @@ def edit_test(request, pk):
     :return: render
     """
 
+    test_types = TestType.objects.all()
     question_types = QuestionType.objects.all()
     question_types_json = serializers.serialize("json", question_types)
 
@@ -269,7 +270,8 @@ def edit_test(request, pk):
     for question in test.questions.all():
         question.remove_answer_gaps()
 
-    return render(request, cts.EDIT_TEST, {'question_types': question_types,
+    return render(request, cts.EDIT_TEST, {'test_types': test_types,
+                                           'question_types': question_types,
                                            'question_types_json': question_types_json,
                                            'test': test})
 
@@ -282,6 +284,7 @@ def update_test(request, pk):
     """
 
     test = Test.objects.get(pk=pk)
+    test.type_id = int(request.POST.get('test_type_id'))
     test.name = request.POST.get('name')
     test.name_es = request.POST.get('name_es')
     test.cut_score = int(request.POST.get('cut_score'))
@@ -307,24 +310,32 @@ def duplicate_test(request, pk):
 
 
 def new_test(request):
+    """
+    Called to display a new test form
+    :param request:
+    :return:
+    """
 
+    test_types = TestType.objects.all()
     question_types = QuestionType.objects.all()
     question_types_json = serializers.serialize("json", question_types)
 
-    return render(request, cts.NEW_TEST, {'question_types': question_types,
+    return render(request, cts.NEW_TEST, {'test_types': test_types,
+                                          'question_types': question_types,
                                           'question_types_json': question_types_json
                                           })
 
 
 def save_test(request):
     """
-
+    Saves a new test
     Args:
         request: HTTP
     Returns: redirects to dashboard after saving new test.
     """
 
-    test = Test(name=request.POST.get('name'),
+    test = Test(type_id=int(request.POST.get('test_type_id')),
+                name=request.POST.get('name'),
                 name_es=request.POST.get('name_es'),
                 cut_score=int(request.POST.get('cut_score')))
     test.save()  # save first, for saving questions

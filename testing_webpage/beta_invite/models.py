@@ -1,4 +1,5 @@
 import re
+
 from django.db import models
 from django.contrib.postgres.fields import JSONField
 from django.conf import settings
@@ -21,7 +22,7 @@ class Visitor(models.Model):
         db_table = 'visitors'
 
 
-class Profession(models.Model):
+class ProfessionType(models.Model):
 
     name = models.CharField(max_length=200)
     name_es = models.CharField(max_length=200, null=True)
@@ -31,13 +32,43 @@ class Profession(models.Model):
 
     # adds custom table name
     class Meta:
+        db_table = 'profession_types'
+
+
+class Profession(models.Model):
+
+    name = models.CharField(max_length=200)
+    name_es = models.CharField(max_length=200, null=True)
+    type = models.ForeignKey(ProfessionType, null=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return '{0}'.format(self.name)
+
+    # adds custom table name
+    class Meta:
         db_table = 'professions'
+
+
+class WorkAreaType(models.Model):
+    """
+    Groups similar workAreas
+    """
+    name = models.CharField(max_length=200)
+    name_es = models.CharField(max_length=200, null=True)
+
+    def __str__(self):
+        return '{0}'.format(self.name)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'work_area_types'
 
 
 class WorkArea(models.Model):
 
     name = models.CharField(max_length=200)
     name_es = models.CharField(max_length=200, null=True)
+    type = models.ForeignKey(WorkAreaType, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return '{0}'.format(self.name)
@@ -234,12 +265,26 @@ class Question(models.Model):
         self.save()
 
 
+class TestType(models.Model):
+
+    name = models.CharField(max_length=200)
+    name_es = models.CharField(max_length=200, null=True)
+
+    def __str__(self):
+        return '{0}, {1}'.format(self.pk, self.name)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'test_types'
+
+
 class Test(models.Model):
 
     name = models.CharField(max_length=200)
     name_es = models.CharField(max_length=200, null=True)
     questions = models.ManyToManyField(Question)
     cut_score = models.IntegerField(default=70)
+    type = models.ForeignKey(TestType, default=None, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -276,9 +321,187 @@ class Test(models.Model):
 
         self.duplicate_questions(questions)
 
+    @classmethod
+    def get_all(cls):
+        """sort in alphabetical order"""
+        return sorted(cls.objects.all(), key=lambda test: test.name)
+
     # adds custom table name
     class Meta:
         db_table = 'tests'
+
+
+class Score(models.Model):
+
+    test = models.ForeignKey(Test)
+    value = models.FloatField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return 'id={0}, test={1}, value={2}'.format(self.pk, self.test, self.value)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'scores'
+
+
+class Evaluation(models.Model):
+    """
+    Summary of all tests results for a given user.
+    """
+
+    cut_score = models.FloatField(null=True)
+    final_score = models.FloatField(null=True)
+    passed = models.NullBooleanField(null=True)
+    scores = models.ManyToManyField(Score)
+
+    cognitive_score = models.FloatField(null=True)
+    technical_score = models.FloatField(null=True)
+    requirements_score = models.FloatField(null=True)
+    soft_skills_score = models.FloatField(null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    @classmethod
+    def create(cls, scores):
+        """
+        Instead of:
+        evaluation = Evaluation(...)
+        do
+        evaluation = Evaluation.create(...)
+
+        This is a convenience method to save Foreign keys with out having a mess outside see:
+        https://stackoverflow.com/questions/843580/writing-a-init-function-to-be-used-in-django-model
+        And
+        https://stackoverflow.com/questions/20569910/how-to-initialize-an-empty-object-with-foreignkey-in-django
+        :param scores: List of scores objects
+        :return:
+        """
+
+        evaluation = cls()
+
+        # Saves first in order to have an id and assign the scores.
+        evaluation.save()
+        evaluation.update_scores(scores)
+
+        return evaluation
+
+    def __str__(self):
+        return 'id={0}, cut_score={1}, value={2}, passed={3}'.format(self.pk,
+                                                                     self.cut_score,
+                                                                     self.final_score,
+                                                                     self.passed)
+
+    def get_score_for_test_type(self, type_name):
+        test_type = TestType.objects.get(name=type_name)
+        return average_list([s.value for s in self.scores.all() if s.test.type == test_type])
+
+    def update_scores(self, scores):
+
+        self.scores = scores
+
+        if self.scores:
+
+            self.cut_score = average_list([s.test.cut_score for s in self.scores.all()])
+            self.final_score = average_list([s.value for s in self.scores.all()])
+
+            # This is a default simple rule. Can be overridden by ML
+            if self.final_score is not None and self.cut_score is not None:
+                self.passed = self.final_score >= self.cut_score
+
+            self.cognitive_score = self.get_score_for_test_type('cognitive')
+            self.technical_score = self.get_score_for_test_type('technical')
+            self.requirements_score = self.get_score_for_test_type('requirements')
+            self.soft_skills_score = self.get_score_for_test_type('soft skills')
+            # TODO: add any new score here
+
+        self.save()
+
+    # adds custom table name
+    class Meta:
+        db_table = 'evaluations'
+
+
+class EvaluationSummary(models.Model):
+    """
+    Summary of all evaluations or other EvaluationSummaries.
+    """
+
+    cut_score = models.FloatField(null=True)
+    final_score = models.FloatField(null=True)
+
+    cognitive_score = models.FloatField(null=True)
+    technical_score = models.FloatField(null=True)
+    requirements_score = models.FloatField(null=True)
+    soft_skills_score = models.FloatField(null=True)
+
+    evaluations = models.ManyToManyField(Evaluation)
+    evaluation_summaries = models.ManyToManyField("self", symmetrical=False)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    @classmethod
+    def create(cls, evaluations):
+        """
+        Instead of:
+        evaluation = Evaluation(...)
+        do
+        evaluation = Evaluation.create(...)
+
+        This is a convenience method to save Foreign keys with out having a mess outside see:
+        https://stackoverflow.com/questions/843580/writing-a-init-function-to-be-used-in-django-model
+        And
+        https://stackoverflow.com/questions/20569910/how-to-initialize-an-empty-object-with-foreignkey-in-django
+        :param evaluations: List of evaluation objects
+        :return:
+        """
+
+        evaluation_summary = cls()
+
+        # Saves first in order to have an id and assign the scores.
+        evaluation_summary.save()
+        evaluation_summary.update_evaluations(evaluations)
+
+        return evaluation_summary
+
+    def __str__(self):
+        return 'id={0}, cut_score={1}, value={2}'.format(self.pk,
+                                                         self.cut_score,
+                                                         self.final_score)
+
+    def update_evaluations(self, evaluations):
+        """
+        :param evaluations: can be Evaluation or EvaluationSummary objects
+        :return: None
+        """
+
+        if len(evaluations) > 0:
+
+            if isinstance(evaluations[0], Evaluation):
+                self.evaluations = evaluations
+            elif isinstance(evaluations[0], EvaluationSummary):
+                self.evaluation_summaries = evaluations
+            else:
+                raise NotImplementedError
+
+            self.cut_score = average_list([e.cut_score for e in evaluations])
+            self.final_score = average_list([e.final_score for e in evaluations])
+
+            self.cognitive_score = average_list([e.cognitive_score for e in evaluations])
+            self.technical_score = average_list([e.technical_score for e in evaluations])
+            self.requirements_score = average_list([e.requirements_score for e in evaluations])
+            self.soft_skills_score = average_list([e.soft_skills_score for e in evaluations])
+            # TODO: add any new score here
+
+        self.save()
+
+    # adds custom table name
+    class Meta:
+        db_table = 'summary_evaluations'
 
 
 class Interview(models.Model):
@@ -348,6 +571,11 @@ class Campaign(models.Model):
     work_area = models.ForeignKey(WorkArea, null=True, on_delete=models.SET_NULL)
     operational_efficiency = models.FloatField(null=True)
 
+    recommended_evaluation = models.ForeignKey(EvaluationSummary, null=True, related_name='recommended_evaluation')
+    relevant_evaluation = models.ForeignKey(EvaluationSummary, null=True, related_name='relevant_evaluation')
+    applicant_evaluation = models.ForeignKey(EvaluationSummary, null=True, related_name='applicant_evaluation')
+    rejected_evaluation = models.ForeignKey(EvaluationSummary, null=True, related_name='rejected_evaluation')
+
     # TODO: remove circular dependency
     # plan = models.ForeignKey(Plan, null=True, on_delete=models.DO_NOTHING)
 
@@ -386,50 +614,20 @@ class Campaign(models.Model):
         return ' '.join([self.title_es] + self.get_requirement_names())
 
 
-class Score(models.Model):
-
-    test = models.ForeignKey(Test)
-    value = models.FloatField()
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return 'id={0}, test={1}, value={2}'.format(self.pk, self.test, self.value)
-
-    # adds custom table name
-    class Meta:
-        db_table = 'scores'
 
 
-class Evaluation(models.Model):
+
+def average_list(my_list):
     """
-    Summary of all tests results for a given user.
+    Average, if no elements outputs None
+    :param my_list:
+    :return:
     """
-
-    campaign = models.ForeignKey(Campaign)
-    cut_score = models.FloatField()
-    final_score = models.FloatField()
-    passed = models.BooleanField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    scores = models.ManyToManyField(Score)
-
-    # When saving will assign the passed Boolean.
-    def save(self, *args, **kwargs):
-        if self.passed is None:
-            self.passed = (self.final_score >= self.cut_score)
-        super(Evaluation, self).save(*args, **kwargs)
-
-    def __str__(self):
-        return 'id={0}, cut_score={1}, value={2}, passed={3}'.format(self.pk,
-                                                                     self.cut_score,
-                                                                     self.final_score,
-                                                                     self.passed)
-
-    # adds custom table name
-    class Meta:
-        db_table = 'evaluations'
+    my_list = [e for e in my_list if e is not None]
+    if len(my_list) > 0:
+        return sum(my_list) / len(my_list)
+    else:
+        return None
 
 
 class User(models.Model):
@@ -444,6 +642,7 @@ class User(models.Model):
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
     city = models.ForeignKey(City, null=True, on_delete=models.SET_NULL)
     curriculum_url = models.CharField(max_length=200, default='#')
+    curriculum_text = models.TextField(default='')
 
     # indicates if added to messenger
     added = models.BooleanField(default=False)
@@ -459,9 +658,7 @@ class User(models.Model):
     # Detects if the user is in a mobile phone when registering.
     is_mobile = models.NullBooleanField()
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
+    # Additional info
     gender = models.ForeignKey(Gender, null=True, on_delete=models.SET_NULL)
     programs = models.CharField(max_length=250, null=True)
     work_area = models.ForeignKey(WorkArea, null=True, on_delete=models.SET_NULL)
@@ -483,6 +680,8 @@ class User(models.Model):
     brochure_url = models.CharField(max_length=200, default='#')
     politics = models.BooleanField(default=False)
 
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     # TODO: Make method present on common.py a method of the class User. For this to happen Candidate class has
     # to be moved to testing_webpage to solve circular dependency problem.

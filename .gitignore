@@ -93,3 +93,7 @@ testing_webpage/deploy/deploy_credentials.json
 testing_webpage/match/pickle_models/*.p
 testing_webpage/testing_webpage/sentry.json
 testing_webpage/testing_webpage/settings.ini
+testing_webpage/subscribe/search_engine_date.p
+testing_webpage/subscribe/last_user_id.p
+testing_webpage/subscribe/last_user_updated_at.p
+

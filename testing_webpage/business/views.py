@@ -401,6 +401,7 @@ def create(request):
                                                   'work_areas': common.translate_list_of_objects(WorkArea.objects.all(), request.LANGUAGE_CODE)
                                                   })
 
+
 @login_required
 def create_post(request):
     """
@@ -499,7 +500,6 @@ def dashboard(request, pk):
 
 def candidate_profile(request, pk):
     candidate = Candidate.objects.get(pk=pk)
-
     return render(request, cts.CANDIDATE_PROFILE_VIEW_PATH, {'candidate': candidate})
 
 

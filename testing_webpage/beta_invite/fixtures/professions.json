@@ -182,5 +182,13 @@
     "name": "Sales Professional",
     "name_es": "Profesional en ventas"
   }
+},
+  {
+  "model": "beta_invite.profession",
+  "pk": 24,
+  "fields": {
+    "name": "Industrial Engineer",
+    "name_es": "Ingeniero/a Industrial"
+  }
 }
 ]

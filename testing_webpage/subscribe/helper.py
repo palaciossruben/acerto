@@ -22,13 +22,12 @@ from PIL import Image
 
 def get_image_text(filename):
     """outputs text from an image with tessarect-OCR"""
-    im = Image.open(filename)
-
-    tmp_path = os.path.join('media/resumes', 'tmp.jpg')
 
     try:
+        im = Image.open(filename)
+        tmp_path = os.path.join('media/resumes', 'tmp.jpg')
         im.save(tmp_path)
-    except IOError:
+    except OSError:  # OSError: cannot identify image file ...
         return ''
 
     try:
@@ -37,6 +36,8 @@ def get_image_text(filename):
         return ''
     except pytesseract.pytesseract.TesseractError:
         return ''
+
+    # TODO: add spell check/correction
 
     return text
 
@@ -57,9 +58,9 @@ def get_text_from_pdf_images(folder_path, pdf_path):
     subprocess.run(command, shell=True)
 
     text = ''
-    # only reads up to 10 images: usually when there are many, they have no content and take too much time.
+    # only reads up to 2 images: usually when there are many, they have no content and take too much time.
     images = os.listdir(images_path)
-    for image in images[:min(10, len(images))]:
+    for image in images[:min(2, len(images))]:
         text += get_image_text(os.path.join(images_path, image))
 
     return text
@@ -67,7 +68,7 @@ def get_text_from_pdf_images(folder_path, pdf_path):
 
 def get_word_text(filename):
     """outputs text from .docx document"""
-
+    print('word .doc')
     try:
         text = textract.process(filename).decode("utf-8")
     except:  # Textract is buggy as shit, better just to pass any error.
@@ -76,6 +77,7 @@ def get_word_text(filename):
     # If not enough info found will try with OCR on the doc images.
     # Get text from image trick: 1. rename to zip, 2. uncompress, 3. look inside.
     if len(text) < 100:
+        print('did ocr to .doc')
         zip_folder = os.path.splitext(filename)[0]
         zip_filename = zip_folder + '.zip'
         copyfile(filename, zip_filename)
@@ -159,7 +161,7 @@ def text_has_no_data(text):
         # make it faster by using my own relevance dictionary
         with open(os.path.join('subscribe', 'es-MX.dic'), 'r', encoding='UTF-8') as vocabulary_file:
 
-            dictionary_text = remove_accents(vocabulary_file.read())
+            dictionary_text = remove_accents_and_non_ascii(vocabulary_file.read())
             vocabulary = nltk.word_tokenize(dictionary_text)
 
             for w in words:
@@ -261,42 +263,54 @@ def get_text_with_relevance_index(folder_path, filename, relevance_dictionary):
     pypdf_index = get_relevance_index(pypdf_text, relevance_dictionary)
     ocr_index = get_relevance_index(ocr_text, relevance_dictionary)
 
+    print('relevances are, miner: {} pypdf: {} ocr: {}'.format(pdf_miner_index, pypdf_index, ocr_index))
+
     if max(pdf_miner_index, pypdf_index, ocr_index) == pdf_miner_index:
         text = pdf_miner_text
         text += get_text_from_pdf_images(folder_path, filename)
+        print('wins miner')
     elif max(pypdf_index, ocr_index) == pypdf_index:
         text = pypdf_text
         text += get_text_from_pdf_images(folder_path, filename)
+        print('wins pypdf')
     else:
         text = ocr_text
+        print('wins ocr')
 
     return text
 
 
 def get_pdf_text(folder_path, filename):
     """Tries different libraries"""
+    print('on a .pdf')
 
     # Opens word_user_dict, or returns unordered users.
     try:
-        relevance_dictionary = pickle.load(open('relevance_dictionary.p', 'rb'))
+        relevance_dictionary = pickle.load(open('subscribe/relevance_dictionary.p', 'rb'))
         return get_text_with_relevance_index(folder_path, filename, relevance_dictionary)
     except FileNotFoundError:
+        print('traditional strategy')
         return get_text_with_traditional_strategy(folder_path, filename)
 
 
 def remove_accents_in_string(element):
     """
+    Removes accents and non-ascii chars
     Args:
         element: anything.
     Returns: Cleans accents only for strings.
     """
     if isinstance(element, str):
-        return ''.join(c for c in unicodedata.normalize('NFD', element) if unicodedata.category(c) != 'Mn')
+        text = ''.join(c for c in unicodedata.normalize('NFD', element) if unicodedata.category(c) != 'Mn')
+        # removes non ascii chars
+        text = ''.join([i if ord(i) < 128 else '' for i in text])
+
+        return text.replace('\x00', '')  # remove NULL char
     else:
         return element
 
 
-def remove_accents(an_object):
+def remove_accents_and_non_ascii(an_object):
     """
     Several different objects can be cleaned.
     Args:

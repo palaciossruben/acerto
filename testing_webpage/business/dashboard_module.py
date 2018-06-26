@@ -3,6 +3,7 @@ from business.models import BusinessUser
 from beta_invite.models import Campaign
 from beta_invite.util import email_sender
 from dashboard.models import Candidate
+import common
 
 
 def get_campaign_for_dashboard(request, business_user):
@@ -17,14 +18,17 @@ def get_campaign_for_dashboard(request, business_user):
 
 def get_dashboard_params(campaign):
 
+    # TODO: refactor candidates here for new dashboard
     params, states = candidate_module.get_rendering_data(campaign.id)
 
     # State Backlog and Prospect will show as one.
-    params['backlog'] = list(params['backlog']) + list(params['prospect'])
-    params['waiting_for_interview'] = list(params['waiting_for_interview']) + list(params['did_interview'])
-    params['rejected'] = list(params['rejected']) + list(params['failed_tests'])
+    params['applicants'] = params['backlog'] + params['prospect']
+    params['relevant'] = params['waiting_for_interview'] + params['did_interview']
+    params['rejected'] += params['failed_tests']
+    params['recommended'] = params['sent_to_client'] + params['got_the_job']
+
+    common.calculate_evaluation_summaries(campaign)
     params['campaign'] = campaign
-    params['states'] = states
 
     return params
 

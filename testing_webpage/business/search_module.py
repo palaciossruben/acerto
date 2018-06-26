@@ -49,7 +49,7 @@ def filter_conjunction_words(words):
 def clean_text_for_search(search_text):
     """
     Args:
-        request: a Request obj
+        search_text: str
     Returns: List with tokenized strings, lower cased and with no accents.
     """
     words = get_word_array_lower_case_and_no_accents(search_text)
@@ -79,10 +79,10 @@ def adds_context_based_search(tokens_dict, word_user_dictionary, filtered_user_r
     # tries opening related_words_dict.p or passes by.
     try:
         # A dictionary of the form: {'word': [('related_word', relevance) ...]}
-        related_words = pickle.load(open(cts_subscribe.RELATED_WORDS_PATH, 'rb'))
+        related_words_dict = pickle.load(open(cts_subscribe.RELATED_WORDS_PATH, 'rb'))
 
         for t in tokens_dict.keys():
-            related_words = related_words.get(t, [])
+            related_words = related_words_dict.get(t, [])
             for related_word, relevance in related_words:
                 user_ids = [i for i, r in word_user_dictionary.get(related_word, [])]
                 for user_id, user_relevance in filtered_user_relevance_dict.items():

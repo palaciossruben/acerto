@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 
-import time
-import sys
 import inspect
+import sys
+import time
 from datetime import datetime
 from multiprocessing import Process
-from subscribe.document_reader import run as document_reader_run
-from subscribe.search_engine import run as search_engine_run
-from match.clustering import run as cluster_run
+
+from document_reader import run as document_reader_run
+from search_engine import run as search_engine_run
 from context_search import run as context_search_run
 from match.model import run as model_run
 from subscribe import helper as h

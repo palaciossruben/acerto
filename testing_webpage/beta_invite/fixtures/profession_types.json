@@ -1,0 +1,98 @@
+[
+{
+  "model": "beta_invite.professiontype",
+  "pk": 1,
+  "fields":{
+    "name": "Architecture / Design / Art",
+    "name_es": "Arquitectura / Diseño / Arte"
+  }
+},
+{
+  "model": "beta_invite.professiontype",
+  "pk": 2,
+  "fields":{
+    "name": "Engineer",
+    "name_es": "Ingeniero/a"
+  }
+},
+{
+  "model": "beta_invite.professiontype",
+  "pk": 3,
+  "fields":{
+    "name": "Skilled Trade",
+    "name_es": "Oficio Calificado"
+  }
+},
+{
+  "model": "beta_invite.professiontype",
+  "pk": 4,
+  "fields":{
+    "name": "Business Administration / Economics",
+    "name_es": "Administración / Economía"
+  }
+},
+{
+  "model": "beta_invite.professiontype",
+  "pk": 5,
+  "fields":{
+    "name": "Scientist",
+    "name_es": "Científico/a"
+  }
+},
+{
+  "model": "beta_invite.professiontype",
+  "pk": 6,
+  "fields":{
+    "name": "Marketing / Communicator / Journalism",
+    "name_es": "Marketing / Communicación / Periodismo"
+  }
+},
+{
+  "model": "beta_invite.professiontype",
+  "pk": 7,
+  "fields":{
+    "name": "Social Sciences",
+    "name_es": "Ciencias Sociales"
+  }
+},
+{
+  "model": "beta_invite.professiontype",
+  "pk": 8,
+  "fields":{
+    "name": "Health Sciences & Psychology",
+    "name_es": "Ciencias de la Salud & Psychología"
+  }
+},
+{
+  "model": "beta_invite.professiontype",
+  "pk": 9,
+  "fields":{
+    "name": "Lawyer / Political Scientist",
+    "name_es": "Derecho / Ciencias Políticas"
+  }
+},
+{
+  "model": "beta_invite.professiontype",
+  "pk": 10,
+  "fields": {
+    "name": "Various Trades",
+    "name_es": "Oficios Varios"
+  }
+},
+{
+  "model": "beta_invite.professiontype",
+  "pk": 11,
+  "fields": {
+    "name": "Other, not specified",
+    "name_es": "Otra, Sin Especificar"
+  }
+},
+{
+  "model": "beta_invite.professiontype",
+  "pk": 12,
+  "fields": {
+    "name": "Sales Professional",
+    "name_es": "Profesional en ventas"
+  }
+}
+]
