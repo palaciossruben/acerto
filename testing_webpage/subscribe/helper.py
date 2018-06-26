@@ -22,29 +22,25 @@ from PIL import Image
 
 def get_image_text(filename):
     """outputs text from an image with tessarect-OCR"""
+
     try:
-
         im = Image.open(filename)
-
         tmp_path = os.path.join('media/resumes', 'tmp.jpg')
-
-        try:
-            im.save(tmp_path)
-        except IOError:
-            return ''
-
-        try:
-            text = pytesseract.image_to_string(Image.open(tmp_path))#, lang='spa')
-        except OSError:  # Error: image file is truncated (8 bytes not processed)
-            return ''
-        except pytesseract.pytesseract.TesseractError:
-            return ''
-
-        # TODO: add spell check/correction
-
-        return text
+        im.save(tmp_path)
     except OSError:  # OSError: cannot identify image file ...
         return ''
+
+    try:
+        text = pytesseract.image_to_string(Image.open(tmp_path))#, lang='spa')
+    except OSError:  # Error: image file is truncated (8 bytes not processed)
+        return ''
+    except pytesseract.pytesseract.TesseractError:
+        return ''
+
+    # TODO: add spell check/correction
+
+    return text
+
 
 
 def get_text_from_pdf_images(folder_path, pdf_path):
