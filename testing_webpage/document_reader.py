@@ -12,14 +12,13 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
 import pickle
+from nltk.stem.snowball import SnowballStemmer
+import nltk
 
-#try:
 from subscribe import helper as h
 from subscribe import cts
 from beta_invite.models import User
-#except ImportError:
-#    import helper as h
-#    import cts
+
 
 VALID_EXTENSIONS = {'.jpg', '.jpeg', '.doc', '.docx', '.png', '.pdf', '.txt'}
 
@@ -46,11 +45,25 @@ def get_text(folder_path, doc, extension):
     return text
 
 
+def multilingual_stemmer(text):
+    """
+    This code uses nltk to stem words in multiple langs
+    :param text:
+    :return:
+    """
+    eng_stemmer = SnowballStemmer("english", ignore_stopwords=True)
+    spa_stemmer = SnowballStemmer("spanish", ignore_stopwords=True)
+    # TODO add new lang here
+
+    return ' '.join([spa_stemmer.stem(eng_stemmer.stem(w)) for w in nltk.word_tokenize(text)])
+
+
 def read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename):
     """Will iterate over all documents from a User and extract all text, then write and return it."""
     text = ''
     for d in docs:
         if d != '.DS_Store' and d != parsed_filename:
+
             # renames any file that has spaces for one with no spaces.
             # because it's easier to execute shell commands.
             d = h.rename_filename(folder_path, d)
@@ -58,7 +71,10 @@ def read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename):
             extension = os.path.splitext(d)[1].lower()
             text += get_text(folder_path, d, extension)
 
-    text = h.remove_accents(text)
+    text = h.remove_accents_and_non_ascii(text).lower()
+
+    # TODO: Activate stemming: adding only the roots of words
+    #text = multilingual_stemmer(text)
 
     with open(parsed_path, 'w', encoding='UTF-8') as f:
         f.write(text)
@@ -90,10 +106,17 @@ def read_all(force=False):
 
                 parsed_filename = '{}.txt'.format(folder)
                 parsed_path = os.path.join(folder_path, parsed_filename)
+
                 # Will used saved version, to save time parsing.
                 if parsed_filename not in docs or force:
-                    read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename)
+                    text = read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename)
                     write_last_updated_at(user)
+                else:
+                    with open(parsed_path, 'r', encoding='UTF-8') as f:
+                        text = f.read()
+
+                user.curriculum_text = text
+                user.save()
 
 
 def run():

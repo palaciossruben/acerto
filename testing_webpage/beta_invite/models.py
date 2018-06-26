@@ -407,6 +407,8 @@ class Evaluation(models.Model):
 
             self.cut_score = average_list([s.test.cut_score for s in self.scores.all()])
             self.final_score = average_list([s.value for s in self.scores.all()])
+
+            # This is a default simple rule. Can be overridden by ML
             if self.final_score is not None and self.cut_score is not None:
                 self.passed = self.final_score >= self.cut_score
 
@@ -640,6 +642,7 @@ class User(models.Model):
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
     city = models.ForeignKey(City, null=True, on_delete=models.SET_NULL)
     curriculum_url = models.CharField(max_length=200, default='#')
+    curriculum_text = models.CharField(max_length=100000, default='')
 
     # indicates if added to messenger
     added = models.BooleanField(default=False)
@@ -655,9 +658,7 @@ class User(models.Model):
     # Detects if the user is in a mobile phone when registering.
     is_mobile = models.NullBooleanField()
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
+    # Additional info
     gender = models.ForeignKey(Gender, null=True, on_delete=models.SET_NULL)
     programs = models.CharField(max_length=250, null=True)
     work_area = models.ForeignKey(WorkArea, null=True, on_delete=models.SET_NULL)
@@ -679,6 +680,8 @@ class User(models.Model):
     brochure_url = models.CharField(max_length=200, default='#')
     politics = models.BooleanField(default=False)
 
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     # TODO: Make method present on common.py a method of the class User. For this to happen Candidate class has
     # to be moved to testing_webpage to solve circular dependency problem.

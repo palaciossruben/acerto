@@ -35,7 +35,7 @@ def get_word_array_lower_case_and_no_accents(search_text):
         search_text: string
     Returns: array with words
     """
-    search_text = h.remove_accents(nltk.word_tokenize(search_text))
+    search_text = h.remove_accents_and_non_ascii(nltk.word_tokenize(search_text))
 
     # remove capital letters
     return [t.lower() for t in search_text]
@@ -175,7 +175,7 @@ def get_common_words(text_corpus, number_of_top_words=20000):
     word_frequency = dict()
     for text in text_corpus.values():
         unique = set(get_word_array_lower_case_and_no_accents(text))
-        unique = h.remove_accents(unique)
+        unique = h.remove_accents_and_non_ascii(unique)
 
         for u in unique:
             if len(u) > 2 and '_' not in u:
@@ -275,7 +275,7 @@ def save_user_relevance_dictionary(path):
 
             user_relevance_dictionary[word] = tuple(values)
 
-    user_relevance_dictionary = h.remove_accents(user_relevance_dictionary)
+    user_relevance_dictionary = h.remove_accents_and_non_ascii(user_relevance_dictionary)
 
     pickle.dump(user_relevance_dictionary, open(cts.WORD_USER_PATH, 'wb'))
 
