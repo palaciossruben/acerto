@@ -8,17 +8,29 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
-from testing_webpage.models import PendingEmail, EmailSent
+from testing_webpage.models import CandidatePendingEmail, CandidateEmailSent, BusinessUserEmailSent,\
+    BusinessUserPendingEmail
 from beta_invite.util import email_sender
 from testing_webpage import settings
+from dashboard.models import Candidate
+from business.models import BusinessUser
 
 
 # The maximum number of mails that sends at once.
 MAX_NUMBER_OF_MAILS = 20
+TEST_EMAIL = 'juan@peaku.co'
 
 
 def take_oldest_unsent_emails():
-    return PendingEmail.objects.filter(sent=False).order_by('created_at')[:MAX_NUMBER_OF_MAILS]
+    return [e for e in BusinessUserPendingEmail.objects.filter(sent=False).order_by('created_at')] +\
+           [e for e in CandidatePendingEmail.objects.filter(sent=False).order_by('created_at')]
+
+
+def send_condition(an_object, email):
+    return isinstance(an_object, Candidate) and \
+           not CandidateEmailSent.objects.filter(candidate=an_object, email_type=email.email_type) or \
+           isinstance(an_object, BusinessUser) and \
+           not BusinessUserEmailSent.objects.filter(business_user=an_object, email_type=email.email_type)
 
 
 def send_pending_emails():
@@ -26,18 +38,25 @@ def send_pending_emails():
     Returns: Sends
     """
 
-    pending = take_oldest_unsent_emails()
+    pending = take_oldest_unsent_emails()[:MAX_NUMBER_OF_MAILS]
 
     for email in pending:
+        if isinstance(email, CandidatePendingEmail):
+            objects = email.candidates.all()
+        else:
+            objects = email.business_users.all()
 
-        for candidate in email.candidates.all():
+        for an_object in objects:
 
-            if not EmailSent.objects.filter(candidate=candidate, email_type=email.email_type):
+            if send_condition(an_object, email):
 
                 if settings.DEBUG:
-                    candidate.user.email = 'juan@peaku.co'
+                    if isinstance(an_object, Candidate):
+                        an_object.user.email = TEST_EMAIL
+                    else:
+                        an_object.email = TEST_EMAIL
 
-                email_sender.send(objects=candidate,
+                email_sender.send(objects=an_object,
                                   language_code=email.language_code,
                                   body_input=email.body_input,
                                   subject=email.subject,
@@ -47,7 +66,10 @@ def send_pending_emails():
                 email.save()
 
                 # Records sending email
-                EmailSent(candidate=candidate, email_type=email.email_type).save()
+                if isinstance(an_object, Candidate):
+                    CandidateEmailSent(candidate=an_object, email_type=email.email_type).save()
+                else:
+                    BusinessUserEmailSent(business_user=an_object, email_type=email.email_type).save()
 
 
 if __name__ == '__main__':

@@ -3,7 +3,7 @@ import common
 
 from dashboard.models import State
 from beta_invite.models import EmailType
-from testing_webpage.models import PendingEmail
+from testing_webpage.models import CandidatePendingEmail
 from business import search_module
 from dashboard.models import Candidate
 from match import model, clustering
@@ -61,17 +61,53 @@ def send_mails(candidate_prospects):
     """
     email_type = EmailType.objects.get(name='job_match')
     for candidate in candidate_prospects:
-        PendingEmail.add_to_queue(candidates=candidate,
-                                  language_code=candidate.user.language_code,
-                                  body_input='user_job_match_email_body',
-                                  subject=translate_email_job_match_subject(candidate),
-                                  override_dict={'campaign_url': candidate.campaign.get_url()},
-                                  email_type=email_type)
+        CandidatePendingEmail.add_to_queue(candidates=candidate,
+                                           language_code=candidate.user.language_code,
+                                           body_input='user_job_match_email_body',
+                                           subject=translate_email_job_match_subject(candidate),
+                                           override_dict={'campaign_url': candidate.campaign.get_url()},
+                                           email_type=email_type)
 
 
 def cluster_filter(candidates):
     clusters, candidates = clustering.predict_cluster(candidates)
     return [candidate for c, candidate in zip(clusters, candidates) if c in pickle_handler.load_selected_clusters()]
+
+
+def non_null_equal(a, b):
+    if a is not None and b is not None:
+        return a == b
+    return False
+
+
+def get_desc_sorted_iterator(candidates_rank):
+    return reversed(sorted([(c, rank) for c, rank in candidates_rank], key=lambda t: t[1]))
+
+
+def rank(campaign, users):
+    """
+    Sorts according to given criteria:
+    1. city
+    2. country
+    3. work area
+    4. prediction
+    :param campaign:
+    :param users:
+    :return:
+    """
+    candidates = [Candidate(user=u, campaign=campaign, pk=1) for u in users]
+
+    candidates_rank = [(c, non_null_equal(c.user.city, c.campaign.city) +
+                           non_null_equal(c.user.country, c.campaign.country) +
+                           non_null_equal(c.user.work_area, c.campaign.work_area)) for c in candidates]
+
+    candidates_rank = [(c, rank) for c, rank in get_desc_sorted_iterator(candidates_rank)]
+
+    # Cuts top candidates because its too expensive a prediction on all candidates and a job filter too.
+    candidates_rank = candidates_rank[:NUMBER_OF_MATCHES]
+    candidates_rank = [(c, rank) for c, rank in candidates_rank if not common.user_has_job(c.user)]
+
+    return [c.user for c, rank in get_desc_sorted_iterator(candidates_rank)]
 
 
 def get_top_users(campaign):
@@ -81,19 +117,7 @@ def get_top_users(campaign):
     search_array = search_module.get_word_array_lower_case_and_no_accents(search_text)
     users = search_module.get_matching_users(search_array)
 
-    # candidates = cluster_filter(candidates)
-    # TODO meanwhile:
-    users = [u for u in users if (u.city == campaign.city or u.country == campaign.country) and u.profession == campaign.profession]
-
-    top_users = [u for u in users][:NUMBER_OF_MATCHES]
-    top_users = filter_users_with_job(top_users)
-
-    candidates = [Candidate(user=u, campaign=campaign, pk=1) for u in top_users]
-
-    prediction, candidates = model.predict_match(candidates, regression=False)
-
-    # sorts for predicted users.
-    return [u for u, p in reversed(sorted([(c.user, p) for p, c in zip(prediction, candidates)], key=lambda t: t[1]))]
+    return rank(campaign, users)
 
 
 def get_candidates(campaign):

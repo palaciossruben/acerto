@@ -4,8 +4,10 @@ Calculates the text_match between campaign and CV to estimate compatibility.
 
 import os
 import pickle
+
 from dashboard.models import Candidate
 from business import search_module
+from subscribe import cts as cts_subscribe
 
 
 def update(force_update=False):
@@ -30,9 +32,9 @@ def update(force_update=False):
 
         # TODO: hack
         try:
-            word_user_dictionary = pickle.load(open(search_module.WORD_USER_PATH, 'rb'))
+            word_user_dictionary = pickle.load(open(cts_subscribe.WORD_USER_PATH, 'rb'))
         except FileNotFoundError:
-            word_user_dictionary = pickle.load(open(os.path.join('..', search_module.WORD_USER_PATH), 'rb'))
+            word_user_dictionary = pickle.load(open(os.path.join('..', cts_subscribe.WORD_USER_PATH), 'rb'))
 
         sorted_iterator = search_module.user_id_sorted_iterator(word_user_dictionary, campaign_users, word_array)
 

@@ -38,5 +38,13 @@
       "name": "job_match",
       "sync": true
     }
+  },
+  {
+    "model": "beta_invite.emailtype",
+    "pk": 6,
+    "fields":{
+      "name": "business welcome",
+      "sync": false
+    }
   }
 ]

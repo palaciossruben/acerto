@@ -1,6 +1,5 @@
 import os
 import inspect
-import subprocess
 import unicodedata
 from urllib.parse import urlencode, urlunparse, urlparse, parse_qsl, parse_qs
 from django.core.exceptions import ObjectDoesNotExist
@@ -12,17 +11,19 @@ from beta_invite.apps import ip_country_reader, ip_city_reader
 
 from beta_invite.models import User, Campaign, Country, City, Profession, Education
 from beta_invite import constants as beta_cts
-from dashboard.models import Candidate
+from dashboard.models import Candidate, State
 from testing_webpage import settings
 
 
-CONJUNCTIONS = {'las', 'para', 'los', 'del', 'and', 'el', 'en', 'de', 'the', 'for', 'with'}
 INTERVIEW_INTRO_VIDEO = './interview_intro_video.txt'
 ZIGGEO_API_KEY = './ziggeo_api_key.txt'
 
 
 def remove_accents(text):
-    return ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
+    if isinstance(text, str):
+        return ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
+    else:
+        return text
 
 
 def rename_filename(filename):
@@ -155,6 +156,12 @@ def get_candidate(user, campaign):
     else:
         return None
 
+
+def get_candidates_from_campaign(campaign):
+    if campaign:
+        return [c for c in Candidate.objects.filter(campaign=campaign)]
+    else:
+        return []
 
 # TODO: Make method present on common.py a method of the class User. For this to happen, Candidate class has
 # to be moved to testing_webpage to solve circular dependency problem.
@@ -356,3 +363,27 @@ def save_resource_from_request(request, my_object, param_name, folder_name):
 
     else:
         return '#'
+
+
+def user_has_job(user):
+    """
+    Returns boolean indicating if user already has a job.
+    """
+    candidates = Candidate.objects.filter(user=user, state__code='GTJ')
+    return candidates.exists()
+
+
+def calculate_operational_efficiency(campaign):
+    """
+    Important KPI answering how difficult is to find a good candidate on late stages of process
+    This percentage should as high as possible, otherwise to much time is spent on operation (interviews, messages, etc.)
+    """
+    recommended_count = Candidate.objects.filter(campaign=campaign, state__in=State.get_recomended_states()).count()
+    not_that_good_count = Candidate.objects.filter(campaign=campaign, state__in=State.get_rejected_by_human_states()).count()
+    total = recommended_count + not_that_good_count
+
+    if total != 0:
+        campaign.operational_efficiency = recommended_count / total
+    else:
+        campaign.operational_efficiency = None
+    campaign.save()

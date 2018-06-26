@@ -219,7 +219,7 @@ python3 manage.py loaddata <my_json>.json
 
 
 -- get requirements of project with:
-PYENV_VERSION=3.5.1 pipreqs testing_webpage/ --force
+PYENV_VERSION=3.5.1 pipreqs --force --encoding=utf-8 .
 
 
 -- Additional python packages installs to read documents in multiple formats:

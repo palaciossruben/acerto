@@ -18,14 +18,13 @@ from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
 from shutil import copyfile
 from PIL import Image
-from subscribe.cts import *
 
 
 def get_image_text(filename):
     """outputs text from an image with tessarect-OCR"""
     im = Image.open(filename)
 
-    tmp_path = os.path.join(RESUMES_PATH, 'tmp.jpg')
+    tmp_path = os.path.join('media/resumes', 'tmp.jpg')
 
     try:
         im.save(tmp_path)
@@ -35,6 +34,8 @@ def get_image_text(filename):
     try:
         text = pytesseract.image_to_string(Image.open(tmp_path))#, lang='spa')
     except OSError:  # Error: image file is truncated (8 bytes not processed)
+        return ''
+    except pytesseract.pytesseract.TesseractError:
         return ''
 
     return text
@@ -69,7 +70,7 @@ def get_word_text(filename):
 
     try:
         text = textract.process(filename).decode("utf-8")
-    except textract.exceptions.ShellError:
+    except:  # Textract is buggy as shit, better just to pass any error.
         text = ''
     
     # If not enough info found will try with OCR on the doc images.
@@ -310,6 +311,8 @@ def remove_accents(an_object):
         return tuple([remove_accents_in_string(e) for e in an_object])
     elif isinstance(an_object, dict):
         return {remove_accents_in_string(k): remove_accents_in_string(v) for k, v in an_object.items()}
+    elif isinstance(an_object, set):
+        return set([remove_accents_in_string(e) for e in an_object])
     else:
         raise NotImplementedError
 

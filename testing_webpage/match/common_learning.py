@@ -16,6 +16,9 @@ from dashboard.models import Candidate, State
 from sklearn.feature_extraction import FeatureHasher
 from sklearn.preprocessing import StandardScaler
 from match.pickle_models import pickle_handler
+import common
+from beta_invite import constants
+from beta_invite.models import Test
 
 
 def get_test_score(candidate, field, f):
@@ -42,20 +45,15 @@ def add_test_features(features, candidates, fields):
 
 def get_target_for_candidate(candidate):
     """
-    3 possible values
+    Contrast between very good and very bad candidates, where decisions have already been made explicitly
+    No ambiguous states (such as Backlog, Did Interview etc.)
     :param candidate:
     :return: 1 = Very Good Match, 0 = Bad match, np.nan = unknown
     """
-    if candidate.screening is not None:
-        return int(candidate.screening.passed)
-    else:
-        if candidate.state.code in ('GTJ', 'STC', ):  # Approved by client or by us.
-            return 1
-        elif candidate.state.code in ('ROI', 'RBC', 'SR'):  # Rejected by client or by us.
-            return 0
-        else:
-            max_honey = max({s.honey for s in State.objects.all()})
-            return candidate.state.honey/max_honey
+    if candidate.state in State.get_recomended_states():
+        return 1
+    elif candidate.state in State.get_rejected_states():
+        return 0
 
 
 def get_hashing_info():
@@ -66,13 +64,18 @@ def get_hashing_info():
 
     # Uncomment for high complexity
     hashing_info = dict()
-    hashing_info['campaign'] = 1  #20
-    hashing_info['candidate_country'] = 1  #10
-    hashing_info['candidate_city'] = 1  #10
-    hashing_info['campaign_country'] = 1  #10
-    hashing_info['campaign_city'] = 1  #10
-    hashing_info['profession'] = 1  #10
-    hashing_info['campaign_profession'] = 1  #10
+    #hashing_info['campaign'] = 5
+    hashing_info['candidate_country'] = 1
+    hashing_info['candidate_city'] = 1
+    hashing_info['campaign_country'] = 1
+    hashing_info['campaign_city'] = 1
+    hashing_info['profession'] = 1
+    hashing_info['campaign_profession'] = 3
+    hashing_info['gender'] = 1
+    hashing_info['work_area'] = 1
+    hashing_info['neighborhood'] = 1
+    hashing_info['languages'] = 1
+    hashing_info['dream_job'] = 1
     # TODO: ADD NEW FIELD HERE
 
     # TODO: different hashes for the same property, eg: candidate country and campaign country
@@ -86,22 +89,98 @@ def hash_columns(data, hashing_info):
     return data
 
 
-def load_raw_data(candidates=Candidate.objects.all()):
-    data = pd.DataFrame()
+def get_filtered_candidates():
+    """Very good candidates contrasted with very bad ones"""
+    return Candidate.objects.exclude(campaign_id=constants.DEFAULT_CAMPAIGN_ID)\
+        .filter(state__in=State.get_recomended_states() + State.get_rejected_states())
 
-    # campaign should be treated categorically
-    data['campaign'] = [c.campaign_id for c in candidates]
-    data['text_match'] = [c.get_text_match() for c in candidates]
-    data['candidate_country'] = [c.get_country_id() for c in candidates]
-    data['candidate_city'] = [c.get_city_id() for c in candidates]
-    data['campaign_country'] = [c.get_campaign_country_id() for c in candidates]
-    data['campaign_city'] = [c.get_campaign_city_id() for c in candidates]
-    data['profession'] = [c.get_profession_id() for c in candidates]
-    data['campaign_profession'] = [c.get_campaign_profession_id() for c in candidates]
-    data['education'] = [c.get_education_level() for c in candidates]
-    data['campaign_education'] = [c.get_campaign_education_level() for c in candidates]
 
-    # TODO: ADD NEW FIELD HERE
+"""
+# TODO add new fields
+    programs = models.CharField(max_length=250, null=True)
+    address = models.CharField(max_length=100, null=True)
+    profile = models.CharField(max_length=250, null=True)
+    phone2 = models.CharField(max_length=40, null=True)
+    phone3 = models.CharField(max_length=40, null=True)
+    document = models.CharField(max_length=50, null=True)
+    dream_job = models.CharField(max_length=50, null=True)
+    hobbies = models.CharField(max_length=250, null=True)
+    twitter = models.CharField(max_length=250, null=True)
+    facebook = models.CharField(max_length=250, null=True)
+    instagram = models.CharField(max_length=250, null=True)
+    linkedin = models.CharField(max_length=250, null=True)
+    photo_url = models.CharField(max_length=200, default='#')
+    brochure_url = models.CharField(max_length=200, default='#')
+    politics = models.BooleanField(default=False)
+"""
+
+
+def get_columns():
+    return [#'campaign',
+            'text_match',
+            'candidate_country',
+            'candidate_city',
+            'campaign_country',
+            'campaign_city',
+            'profession',
+            'campaign_profession',
+            'education',
+            'campaign_education',
+            'gender',
+            'work_area',
+            # TODO: had only None, can add later on with more data
+            #'salary',
+            'neighborhood',
+            'languages',
+            'dream_job',
+            ]
+
+
+def from_list_to_query_set(candidates):
+    """Efficiency reasons... do 1 query instead of thousands, later on"""
+    return Candidate.objects.filter(pk__in=[c.pk for c in candidates])
+
+
+def lower_str(text):
+    if isinstance(text, str):
+        return text.lower()
+    else:
+        return text
+
+
+def load_raw_data(candidates=get_filtered_candidates()):
+
+    if isinstance(candidates, list):
+        candidates = from_list_to_query_set(candidates)
+
+    # With QuerySet it is much faster.
+    data_list = list(candidates.values_list(#'campaign_id',
+                                            'text_match',
+                                            'user__country_id',
+                                            'user__city_id',
+                                            'campaign__country_id',
+                                            'campaign__city__id',
+                                            'user__profession_id',
+                                            'campaign__profession_id',
+                                            'user__education__level',
+                                            'campaign__education__level',
+                                            'user__gender',
+                                            'user__work_area',
+                                            # TODO: had only None, can add later on with more data
+                                            #'user__salary',
+                                            'user__neighborhood',  # TODO: improve input
+                                            'user__languages',  # TODO: improve input
+                                            'user__dream_job',  # TODO: improve input
+
+                                            # TODO: ADD NEW FIELD HERE
+                                            ))
+
+    data = pd.DataFrame(data_list, columns=get_columns())
+
+    # Pre-Processing
+    data['neighborhood'] = [lower_str(common.remove_accents(n)) for n in data['neighborhood']]
+    data['languages'] = [lower_str(common.remove_accents(n)) for n in data['languages']]
+    data['dream_job'] = [lower_str(common.remove_accents(n)) for n in data['dream_job']]
 
     # Calculated fields
     data['country_match'] = data['candidate_country'] == data['campaign_country']
@@ -112,8 +191,39 @@ def load_raw_data(candidates=Candidate.objects.all()):
     #data['open_field'] = [c.get_campaign_education_level() for c in candidates]
 
     # similar accuracy with high and low complexity:
-    # data = add_test_features(data, candidates, ['passed', 'final_score'])
-    data['median_test_passed'] = [get_test_score(c, 'passed', statistics.median) for c in candidates]
+    #data = add_test_features(data, candidates, ['passed', 'final_score'])
+    data['median_test_final_score'] = [get_test_score(c, 'final_score', statistics.median) for c in candidates]
+
+
+    #tests = Test.objects.all()
+
+    #for t in tests:
+    #    empty_array = np.empty((data.shape[0],))
+    #    empty_array[:] = np.nan
+    #    data[str(t.name) + 'median_final_score'] = empty_array
+    """
+    all_tests = dict()
+    for c in candidates:
+        test_score_dict = dict()
+        for e in c.evaluations.all():
+            for score in e.scores.all():
+                current_value = test_score_dict.get(score.test.name)
+                if current_value:
+                    test_score_dict[score.test.name] = current_value.append(score.value)
+                else:
+                    test_score_dict[score.test.name] = [score.value]
+
+        for k, v in test_score_dict.items():
+
+            value = all_tests.get(k + 'median_final_score')
+            if value:
+                all_tests[k + 'median_final_score'] = value.append(np.median(v))
+            else:
+                all_tests[k + 'median_final_score'] = [np.median(v)]
+
+    for k, v in all_tests.items():
+        data[k] = v
+    """
 
     return data
 
@@ -131,7 +241,8 @@ def filter_fields(data, selected_fields):
         return data
 
 
-def load_data(candidates=Candidate.objects.all(), hashing_info=get_hashing_info(), selected_fields=None):
+def load_data(candidates=get_filtered_candidates(),
+              hashing_info=get_hashing_info(), selected_fields=None):
     """
     Loads and prepares all data.
     :return: data DataFrame with features and target + candidates.
@@ -166,7 +277,7 @@ def right_mode(iterable):
     try:
         return statistics.mode([e for e in iterable if not pd.isnull(e)])
     except statistics.StatisticsError:  # triggered when mode performed over empty array
-        return 0
+        return ''
 
 
 def calculate_defaults(data):
@@ -183,8 +294,16 @@ def calculate_defaults(data):
     defaults['campaign_profession'] = right_mode(data['campaign_profession'])
     defaults['education'] = np.nanmedian(data['education'])
     defaults['campaign_education'] = np.nanmedian(data['campaign_education'])
-
+    defaults['gender'] = right_mode(data['gender'])
+    defaults['work_area'] = right_mode(data['work_area'])
+    defaults['neighborhood'] = right_mode(data['neighborhood'])
+    defaults['languages'] = right_mode(data['languages'])
+    defaults['dream_job'] = right_mode(data['dream_job'])
     # TODO: ADD NEW FIELD HERE
+
+    # TODO: had only None, can add later on with more data
+    # print(data['salary'])
+    # defaults['salary'] = np.mean(data['salary'])
 
     for column in data.columns.values:
         if 'test' in column:
@@ -207,6 +326,13 @@ def fill_missing_values(data, defaults=None):
     data['profession'].fillna(defaults['profession'], inplace=True)
     data['campaign_profession'].fillna(defaults['campaign_profession'], inplace=True)
     data['campaign_education'].fillna(defaults['campaign_education'], inplace=True)
+    data['gender'].fillna(defaults['gender'], inplace=True)
+    data['work_area'].fillna(defaults['work_area'], inplace=True)
+#    data['salary'].fillna(defaults['salary'], inplace=True)
+    data['neighborhood'].fillna(defaults['neighborhood'], inplace=True)
+    data['languages'].fillna(defaults['languages'], inplace=True)
+    data['dream_job'].fillna(defaults['dream_job'], inplace=True)
+
     # TODO: ADD NEW FIELD HERE
 
     for column in list(data):

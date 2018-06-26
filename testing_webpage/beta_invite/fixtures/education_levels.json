@@ -12,8 +12,8 @@
   "model": "beta_invite.education",
   "pk": 2,
   "fields":{
-    "name": "Technical career",
-    "name_es": "Carrera técnica",
+    "name": "Technician",
+    "name_es": "Técnico/Tecnologo",
     "level": 2
   }
 },
@@ -21,8 +21,8 @@
   "model": "beta_invite.education",
   "pk": 3,
   "fields":{
-    "name": "Career",
-    "name_es": "Carrera profesional",
+    "name": "Undergraduate",
+    "name_es": "Profesional",
     "level": 4
   }
 },
