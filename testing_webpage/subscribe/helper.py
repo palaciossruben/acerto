@@ -42,7 +42,6 @@ def get_image_text(filename):
     return text
 
 
-
 def get_text_from_pdf_images(folder_path, pdf_path):
     """For this solution to work, first install poppler with apt-get or homebrew respectively."""
 
@@ -304,7 +303,9 @@ def remove_accents_in_string(element):
     if isinstance(element, str):
         text = ''.join(c for c in unicodedata.normalize('NFD', element) if unicodedata.category(c) != 'Mn')
         # removes non ascii chars
-        return ''.join([i if ord(i) < 128 else '' for i in text])
+        text = ''.join([i if ord(i) < 128 else '' for i in text])
+
+        return text.replace('\x00', '')  # remove NULL char
     else:
         return element
 

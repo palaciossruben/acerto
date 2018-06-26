@@ -115,7 +115,7 @@ def read_all(force=False):
                     with open(parsed_path, 'r', encoding='UTF-8') as f:
                         text = f.read()
 
-                user.curriculum_text = text
+                user.curriculum_text = text.replace('\x00', '')
                 user.save()
 
 

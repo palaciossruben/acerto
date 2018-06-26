@@ -642,7 +642,7 @@ class User(models.Model):
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
     city = models.ForeignKey(City, null=True, on_delete=models.SET_NULL)
     curriculum_url = models.CharField(max_length=200, default='#')
-    curriculum_text = models.CharField(max_length=100000, default='')
+    curriculum_text = models.TextField(default='')
 
     # indicates if added to messenger
     added = models.BooleanField(default=False)
