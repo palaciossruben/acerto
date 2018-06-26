@@ -50,12 +50,6 @@
     font-family: BertholdAkzidenzGroteskRegular;
 }
 
-.recommended{
-    width: 100%;
-    height: 167px;
-    margin-top: 3%;
-}
-
 .quantity {
     font-size: 80px;
     color: #666666;
@@ -250,7 +244,6 @@ body {
     position:absolute;
     z-index:200;
     margin-top:8%;
-    text-align: center;
 }
 
 .campaign{
@@ -264,6 +257,7 @@ body {
     width: 70%;
     margin-left:25%;
     box-shadow: 0px 8px 5px rgba(0,0,0,0.1);
+    text-align: center;
 }
 
 .div2{
@@ -327,7 +321,7 @@ body {
 }
 
 .status-name{
-    color:#666666;
+    color:#b5ce53;
     font-size:27px;
     margin-bottom: 0;
 }
@@ -347,7 +341,6 @@ body {
 }
 
 .status-circle{
-    background-color:red;
     height:90px;
     width:90px;
     margin:0 auto;
@@ -356,6 +349,22 @@ body {
     margin-bottom:20px;
     background: url(../img/avatar1.png) no-repeat top center scroll ;
     background-size:cover;
+}
+
+.recommended{
+    height:170px;
+    width:70%;
+    margin:0 auto;
+    border-top-right-radius:10px;
+    border-bottom-right-radius:10px;
+    margin-top:10px;
+    margin-bottom:0px;
+    margin-right:20px;
+    background: url(../img/4pruebas.png) no-repeat top center scroll ;
+    background-size:cover;
+    position:absolute;
+    right:0;
+    top:0;
 }
 /**************************************************FOOTER**************************************************************/
 footer {
@@ -473,15 +482,6 @@ footer {
     .sidenav {
         display:none;
     }
-
-    .recommended {
-    width: 250px;
-    height: 170px;
-    margin-top: -39%;
-    margin-left: 117px;
-    display: inline;
-    position: absolute;
-}
 
 }
 
