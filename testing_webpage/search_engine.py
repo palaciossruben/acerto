@@ -15,6 +15,7 @@ import datetime
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
 from collections import OrderedDict
+from django.db.models import Q
 
 #try:
 from subscribe import helper as h
@@ -49,23 +50,12 @@ def get_text_from_path(root_path, relative_path):
         return ''
 
 
-def get_text_corpus(path, toy=False):
+def get_text_corpus():
     """
-    Args:
-        path: RESUMES_PATH
-        toy: Boolean indicating whether should take the real data or a toy example.
-    Returns: OrderedDict with the
+    Returns: OrderedDict with {user_id: text}
     """
-    if not toy:
-        text_dict = [(int(os.path.basename(relative_path)), get_text_from_path(path, relative_path))
-                     for relative_path in os.listdir(path) if os.path.isdir(os.path.join(path, relative_path))]
-        text_dict = OrderedDict(text_dict)
-    else:
-        # Small data set to understand algorithms
-        text_dict = OrderedDict([(1, 'common juan pedro'),
-                                 (2, 'common camilo'),
-                                 (3, 'common alberto high high high high'),
-                                 (4, '')])
+    text_dict = [(u.id, u.curriculum_text) for u in User.objects.filter(~Q(curriculum_text=None)).all()]
+    text_dict = OrderedDict(text_dict)
 
     # filter any numbers:
     for user_id, text in text_dict.items():
@@ -75,15 +65,13 @@ def get_text_corpus(path, toy=False):
     return text_dict
 
 
-def get_text_stats(path, use_idf):
+def get_text_stats(use_idf):
     """
     Gets tf_idf transformed data and the vocabulary
-    Args:
-        path: The directory of the resumes
     Returns: Tuple containing Sparse Matrix with tf_idf data,  vocabulary dictionary and text_corpus (OrderedDict)
     """
     count_vectorizer = CountVectorizer()
-    text_corpus = get_text_corpus(path, toy=False)
+    text_corpus = get_text_corpus()
     data_counts = count_vectorizer.fit_transform([e for e in text_corpus.values()])
     tf_transformer = TfidfTransformer(use_idf=use_idf).fit(data_counts)
 
@@ -93,13 +81,13 @@ def get_text_stats(path, use_idf):
     return data_tf_idf, vocabulary, text_corpus
 
 
-def save_relevance_dictionary(path):
+def save_relevance_dictionary():
     """
     For each word it will get a score of how desirable it is to add the search criteria.
     This is useful for the autocomplete.
     """
 
-    data_tf_idf, vocabulary, text_corpus = get_text_stats(path, use_idf=False)
+    data_tf_idf, vocabulary, text_corpus = get_text_stats(use_idf=False)
 
     common_words = get_common_words(text_corpus)
 
@@ -187,7 +175,7 @@ def get_common_words(text_corpus, number_of_top_words=20000):
     words = [w for w, _ in word_frequency]
     words = [w for w in words if w not in cts.CONJUNCTIONS]
 
-    #print_common_words_percentiles(words)
+    print_common_words_percentiles(words)
     return words[:min(number_of_top_words, len(word_frequency))]
 
 
@@ -234,17 +222,15 @@ def get_user_ids_to_update():
     return {u.id for u in users}
 
 
-def save_user_relevance_dictionary(path):
+def save_user_relevance_dictionary():
     """
     For each word finds the user_id relevance. This is the data structure:
     word_user_dict = {
-        'word_1': ((user_id_1, relevance_1), (user_id_2, relevance_2) q)
+        'word_1': ((user_id_1, relevance_1), (user_id_2, relevance_2))
     }
-    Args:
-        path: The directory of the resumes
     Returns: Saves file with dictionary
     """
-    data_tf_idf, vocabulary, text_corpus = get_text_stats(path, use_idf=True)
+    data_tf_idf, vocabulary, text_corpus = get_text_stats(use_idf=True)
 
     try:
         user_relevance_dictionary = pickle.load(open(cts.WORD_USER_PATH, 'rb'))
@@ -281,17 +267,17 @@ def save_user_relevance_dictionary(path):
 
 
 def run():
-    #sys.stdout = h.Unbuffered(open('search_engine.log', 'a'))
+    sys.stdout = h.Unbuffered(open('search_engine.log', 'a'))
 
-    #h.log("STARTED RELEVANCE DICT")
-    #t0 = time.time()
-    #save_relevance_dictionary(cts.RESUMES_PATH)
-    #t1 = time.time()
-    #h.log('RELEVANCE DICTIONARY, time: {}'.format(t1 - t0))
+    h.log("STARTED RELEVANCE DICT")
+    t0 = time.time()
+    save_relevance_dictionary()
+    t1 = time.time()
+    h.log('RELEVANCE DICTIONARY, time: {}'.format(t1 - t0))
 
     h.log("STARTED USER RELEVANCE DICT")
     t0 = time.time()
-    save_user_relevance_dictionary(cts.RESUMES_PATH)
+    save_user_relevance_dictionary()
     t1 = time.time()
     h.log('USER RELEVANCE DICTIONARY, time: {}'.format(t1 - t0))
 

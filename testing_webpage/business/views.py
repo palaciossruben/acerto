@@ -378,12 +378,14 @@ def start(request):
 
     requirement_bullet_id = BulletType.objects.get(name='requirement').id
     perk_bullet_id = BulletType.objects.get(name='perk').id
+    city = common.get_city(request)
 
     return render(request, cts.START_VIEW_PATH, {'requirement_bullet_id': requirement_bullet_id,
                                                  'perk_bullet_id': perk_bullet_id,
                                                  'error_message': '',
                                                  'work_areas': common.translate_list_of_objects(WorkArea.objects.all(), request.LANGUAGE_CODE),
-                                                 'cities': common.get_cities()})
+                                                 'cities': common.get_cities(),
+                                                 'default_city': city})
 
 
 @login_required

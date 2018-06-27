@@ -9,7 +9,7 @@ import geoip2.database
 import inflection
 from beta_invite.apps import ip_country_reader, ip_city_reader
 
-from beta_invite.models import User, Campaign, Country, City, Profession, Education, EvaluationSummary
+from beta_invite.models import User, Campaign, Country, City, Profession, Education, EvaluationSummary, WorkArea, Gender
 from beta_invite import constants as beta_cts
 from dashboard.models import Candidate, State
 from testing_webpage import settings
@@ -227,13 +227,14 @@ def get_city_name_with_request(request):
         return 'not available'  # Defaults to 'not available'
 
 
-def get_city(request, country):
+def get_city(request):
     """
     Gets the city by recalling it or adding new City object
     :param request: HTTP
-    :param country: Country object
     :return: City Object
     """
+
+    country = get_country_with_request(request)
 
     if settings.DEBUG:
         try:
@@ -285,6 +286,12 @@ def get_professions(language_code):
     return professions
 
 
+def get_work_areas(language_code):
+    work_areas = WorkArea.objects.all().order_by(get_name_field(language_code))
+    translate_list_of_objects(work_areas, language_code)
+    return work_areas
+
+
 def get_cities():
     return City.objects.all().order_by('name')
 
@@ -297,6 +304,10 @@ def get_education(language_code):
 
 def get_countries():
     return Country.objects.all().order_by('name')
+
+
+def get_genders(language_code):
+    return translate_list_of_objects(Gender.objects.all(), language_code)
 
 
 # TODO: Localization a las patadas

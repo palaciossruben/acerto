@@ -18,18 +18,18 @@
         <br>
         <br>
         <input class="title_text_box" type="text" name="name" value="{{ campaign.name }}"
-          placeholder="Add internal campaign name in English">
+          placeholder="Add internal campaign name in English" required>
         <br>
         <br>
         <input class="title_text_box" type="text" name="title" value="{{ campaign.title }}"
-          placeholder="Add campaign title in English">
+          placeholder="Add campaign title in English" required>
         <br>
         <br>
         <input class="title_text_box" type="text" name="title_es" value="{{ campaign.title_es }}"
-          placeholder="Add a campaign title in Spanish">
+          placeholder="Add a campaign title in Spanish" required>
         <br>
         <br>
-        <select name="country_id">
+        <select name="country_id" required>
 
             <!--Update-->
             {% if campaign %}
@@ -48,6 +48,21 @@
         </select>
         <br>
         <br>
+        <select name="city_id" required>
+
+            <!--Update-->
+            {% if campaign %}
+                <option value="{{ campaign.city.id }}">{{ campaign.city.name }}</option>
+            {% else %} <!--New-->
+                <option value="">Select City</option>
+            {% endif %}
+
+            {% for city in cities %}
+                <option value={{ city.id }}>{{ city.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <br>
         <textarea name="description" cols="40" rows="5"
         placeholder="add description in English">{{ campaign.description }}</textarea>
         <br>
@@ -56,17 +71,13 @@
         placeholder="add description in Spanish">{{ campaign.description_es }}</textarea>
         <br>
         <br>
-        <select name="profession_id">
+        <select name="profession_id" required>
 
             <!--Update-->
-            {% if campaign %}
-                {% with default_id=campaign.profession.id default_name=campaign.profession.name %}
-                    <option value="{{ default_id }}">{{ default_name }}</option>
-                {% endwith %}
+            {% if campaign and campaign.profession %}
+                <option value="{{ campaign.profession.id }}">{{ campaign.profession.name }}</option>
             {% else %} <!--New-->
-                {% with default_id="" default_name="Select Profession" %}
-                    <option value="{{ default_id }}">{{ default_name }}</option>
-                {% endwith %}
+                <option value="">Select Profession</option>
             {% endif %}
 
           {% for profession in professions %}
@@ -75,17 +86,27 @@
         </select>
         <br>
         <br>
-        <select name="education_id">
+        <select name="work_area_id" required>
+
+            {% if campaign and campaign.work_area %} <!--Update-->
+                <option value="{{ campaign.work_area.id }}">{{ campaign.work_area.name }}</option>
+            {% else %} <!--New-->
+                <option value="">Select Work Area</option>
+            {% endif %}
+
+          {% for work_area in work_areas %}
+             <option value={{ work_area.id }}>{{ work_area.name }}</option>
+          {% endfor %}
+        </select>
+        <br>
+        <br>
+        <select name="education_id" required>
 
             <!--Update-->
-            {% if campaign %}
-                {% with default_id=campaign.education.id default_name=campaign.education.name %}
-                    <option value="{{ default_id }}">{{ default_name }}</option>
-                {% endwith %}
+            {% if campaign and campaign.education %}
+                <option value="{{ campaign.education.id }}">{{ campaign.education.name }}</option>
             {% else %} <!--New-->
-                {% with default_id="" default_name="Select Education" %}
-                    <option value="{{ default_level }}">{{ default_name }}</option>
-                {% endwith %}
+                <option value="">Select Education</option>
             {% endif %}
 
           {% for level in education %}
@@ -136,7 +157,7 @@
         <br>
         <p>Calendly Url</p>
         <input class="title_text_box" type="text" name="calendly_url" value="{{ campaign.calendly_url }}"
-               placeholder="Add calendly_url or default to Santiago's" required="required">
+               placeholder="Add calendly_url or default to Santiago's" required>
         <br>
         <br>
         <p>FREE TRIAL?</p>

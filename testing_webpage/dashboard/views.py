@@ -118,7 +118,7 @@ def edit_campaign_candidates(request, pk):
 
 def new_campaign(request):
 
-    countries, cities, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
+    countries, cities, education, professions, work_areas, genders = get_drop_down_values(request.LANGUAGE_CODE)
     bullet_types_json = serializers.serialize("json", BulletType.objects.all())
 
     return render(request, cts.NEW_OR_EDIT_CAMPAIGN, {'countries': countries,
@@ -153,11 +153,13 @@ def edit_campaign(request, pk):
     Returns: Renders basic properties of a campaign
     """
     campaign = Campaign.objects.get(pk=pk)
-    countries, cities, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
+    countries, cities, education, professions, work_areas, genders = get_drop_down_values(request.LANGUAGE_CODE)
 
     return render(request, cts.NEW_OR_EDIT_CAMPAIGN, {'countries': countries,
+                                                      'cities': cities,
                                                       'education': education,
                                                       'professions': professions,
+                                                      'work_areas': work_areas,
                                                       'campaign': campaign,
                                                       'action_url': '/dashboard/campaign/update_basic_properties',
                                                       'title': 'Update Campaign',

@@ -24,12 +24,16 @@ def get_drop_down_values(language_code):
     Returns: A tuple containing (Countries, Education, Professions)
     """
 
-    professions = common.get_professions(language_code)
-    cities = common.get_cities()
-    education = common.get_education(language_code)
     countries = common.get_countries()
+    cities = common.get_cities()
 
-    return countries, cities, education, professions
+    professions = common.get_professions(language_code)
+    work_areas = common.get_work_areas(language_code)
+    education = common.get_education(language_code)
+    genders = common.get_genders(language_code)
+    # TODO: add new drop down here
+
+    return countries, cities, education, professions, work_areas, genders
 
 
 def translate_bullets(bullets, lang_code):
@@ -132,7 +136,7 @@ def register(request):
     if campaign and name and phone and (email or not campaign.has_email):
 
         country = common.get_country_with_request(request)
-        city = common.get_city(request, country)
+        city = common.get_city(request)
 
         user_params = {'name': name,
                        'email': email,
@@ -246,12 +250,12 @@ def get_test_result(request):
 def additional_info(request):
     candidate = common.get_candidate_from_request(request)
     param_dict = dict()
-    countries, cities, education, professions = get_drop_down_values(request.LANGUAGE_CODE)
+    countries, cities, education, professions, work_areas, genders = get_drop_down_values(request.LANGUAGE_CODE)
 
     # Dictionary parameters
     param_dict['candidate'] = candidate
-    param_dict['genders'] = common.translate_list_of_objects(Gender.objects.all(), request.LANGUAGE_CODE)
-    param_dict['work_areas'] = common.translate_list_of_objects(WorkArea.objects.all(), request.LANGUAGE_CODE)
+    param_dict['genders'] = genders
+    param_dict['work_areas'] = work_areas
     param_dict['education'] = education
     param_dict['professions'] = professions
     param_dict['countries'] = countries

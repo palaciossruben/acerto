@@ -235,27 +235,27 @@
                                 <br>
                                 <h3>Ciudad</h3>
                                 <select class="origin-city" name="city_id" >
-                                    <option value="" disabled selected></option>
+                                    <option value="{{ default_city.id }}" disabled selected>{{ default_city.name }}</option>
                                     {% for city in cities %}
                                     <option value={{ city.id }}>{{ city.name }}</option>
                                     {% endfor %}
                                 </select>
                                 <h3>Título de la oferta</h3>
                                 <h6>Usa un título específico para que los candidatos tengan muy claro a que están aplicando</h6>
-                                <input class="origin-vacancy" name="title_es"><br>
+                                <input class="origin-vacancy" name="title_es" placeholder="Selecciona un título"><br>
                                 <h3>Cargo solicitado</h3>
                                 <h6>Selecciona el área que más se adapte al perfil que estás buscando</h6>
                                 <select class="origin-workarea" name="work_area_id">
-                                    <option value="" disabled selected></option>
+                                    <option value="" disabled selected>Selecciona un area de trabajo</option>
                                     {% for work_area in work_areas %}
                                     <option value={{ work_area.id }}>{{ work_area.name }}</option>
                                     {% endfor %}
                                 </select>
                                 <h3>Rango salarial</h3>
                                 <h6>Asigna el rango salarial que estás dispuesto a ofrecer</h6>
-                                <input class="origin-salary" step="100000" type="number" min="0" name="salary">
+                                <input class="origin-salary" step="100000" type="number" min="0" name="salary" value="1000000">
                                 <span class="conjonction">a</span>
-                                <input class="origin-salary" step="100000" type="number" min="0" name="salary">
+                                <input class="origin-salary" step="100000" type="number" min="0" name="salary" value="2000000">
                                 <!--
                                     <h3>Requisitos</h3>
                                     <h6>Agrega palabras clave que ayuden a distinguir los requerimientos más importantes para la oferta</h6>

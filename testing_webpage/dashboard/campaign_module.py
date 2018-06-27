@@ -106,7 +106,7 @@ def create_campaign(request):
     """
 
     country = common.get_country_with_request(request)
-    city = common.get_city(request, country)
+    city = common.get_city(request)
 
     campaign = Campaign(country=country, city=city)
     campaign.save()
