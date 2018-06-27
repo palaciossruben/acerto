@@ -614,10 +614,6 @@ trix-editor ul {
 
 .navButton {
     float: right;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    text-decoration: none;
     font-size: 12px;
     width:160px;
     background-color: white;
