@@ -104,7 +104,7 @@ class Candidate(models.Model):
     screening = models.ForeignKey(Screening, null=True, on_delete=models.SET_NULL)
     screening_explanation = models.CharField(max_length=200, default='')
     rating = models.IntegerField(null=True)
-    mean_scores = models.ManyToManyField(Score, null=True)
+    mean_scores = models.ManyToManyField(Score)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
