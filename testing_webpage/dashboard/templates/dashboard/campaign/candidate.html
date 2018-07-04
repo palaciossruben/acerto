@@ -2,10 +2,11 @@
 
 <li>
 <input id="{{ candidate.id }}_checkbox"  type="checkbox" name="{{ candidate.id }}_checkbox">
-<button class="accordion"><h4 style="display:inline;">{{ candidate.user.name }} ({{ candidate.user.id }}):</h4></button>
+
+<!--<button class="accordion"></button>
 <div class="panel">
-
-
+-->
+<h4 style="display:inline;">{{ candidate.user.name }} ({{ candidate.user.id }}):</h4>
 
 <br>
 <br>
@@ -122,7 +123,7 @@
 placeholder="add a comment!"></textarea>
 
 <br>
-</div>
+<!--</div>-->
 <select class="selectpicker" name="{{ candidate.id }}_state">
       <option value="{{ candidate.state_id}}">{{ candidate.state.name }}</option>
       {% for state in states %}
