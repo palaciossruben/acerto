@@ -12,7 +12,9 @@ from dashboard.models import Candidate
 
 def send_candidates_messages():
 
-    candidates = Candidate.objects.filter(~Q(user=None), ~Q(user__phone=None), user__gender_id=None).order_by('-user_id')  # [:100]
+    candidates = Candidate.objects.filter(~Q(user=None),
+                                          ~Q(user__phone=None),
+                                          user__gender_id=None).order_by('-user_id')  # [:100]
 
     candidates = [c for c in candidates]
 

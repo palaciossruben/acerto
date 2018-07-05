@@ -100,7 +100,7 @@ def edit_campaign_candidates(request, pk):
         candidates = candidate_module.get_checked_box_candidates(pk, request)
         add_to_message_queue(candidates, request.POST.get('email_body'))
 
-    update_candidate_forecast()
+    #update_candidate_forecast()
 
     params, states = candidate_module.get_rendering_data(pk)
 
@@ -549,10 +549,15 @@ def send_messages(request):
     :return: json
     """
 
+    import json
+
     messages = [m.add_format_and_mark_as_sent() for m in Message.objects.filter(sent=False)]
 
-    messages_json = serializers.serialize('json', messages)
+    #messages_json = serializers.serialize('json', messages)
 
+    #messages_json = json.dumps(messages).decode('unicode-escape').encode('utf8')
+
+    messages_json = json.dumps(list(messages), ensure_ascii=False, default=str)
     return JsonResponse(messages_json, safe=False)
 
 
