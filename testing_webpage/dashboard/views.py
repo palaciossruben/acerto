@@ -549,15 +549,10 @@ def send_messages(request):
     :return: json
     """
 
-    import json
-
     messages = [m.add_format_and_mark_as_sent() for m in Message.objects.filter(sent=False)]
 
-    #messages_json = serializers.serialize('json', messages)
+    messages_json = serializers.serialize('json', messages)
 
-    #messages_json = json.dumps(messages).decode('unicode-escape').encode('utf8')
-
-    messages_json = json.dumps(list(messages), ensure_ascii=False, default=str)
     return JsonResponse(messages_json, safe=False)
 
 
