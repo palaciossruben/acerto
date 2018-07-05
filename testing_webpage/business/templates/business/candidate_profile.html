@@ -90,7 +90,7 @@
             {% if candidate.user.salary <= candidate.salary %}
                 <p><strong>{% trans "Salary deduction" %}: </strong>{{ candidate.user.salary }}</p>
             {% else %}
-                <strong>Salary: </strong><p type="text" name="{{ candidate.id }}_salary" value="{{ candidate.salary }}"></p>
+                <p type="text" name="{{ candidate.id }}_salary"><strong>Salary: </strong>{{ candidate.salary }}</p>
             {% endif %}
         {% endif %}
 
