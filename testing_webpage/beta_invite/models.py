@@ -286,7 +286,9 @@ class Test(models.Model):
     questions = models.ManyToManyField(Question)
     cut_score = models.IntegerField(default=70)
     type = models.ForeignKey(TestType, default=None, null=True)
-    feedback_url = models.CharField(max_length=200, null=True)
+    feedback_url = models.CharField(max_length=200,
+                                    default='',
+                                    null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
