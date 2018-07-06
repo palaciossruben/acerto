@@ -2,7 +2,6 @@
 import os
 from django.conf import settings
 from decouple import config
-import common
 
 
 if settings.DEBUG:
