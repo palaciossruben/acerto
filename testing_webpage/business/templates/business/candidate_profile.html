@@ -94,8 +94,6 @@
             {% endif %}
         {% endif %}
 
-
-
         {% for c in candidate.comments.all %}
             {% if candidate.comments %}
                 <p><strong>{% trans "Comments" %}: </strong>{{ c.text }}</p>

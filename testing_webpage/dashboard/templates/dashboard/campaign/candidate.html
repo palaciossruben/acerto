@@ -92,7 +92,7 @@
     {% endif %}
     {% for e in candidate.surveys.all %}
 
-    <p><strong> {{ e.question.text_es }} </strong></p>
+    <p>{{ e.question.pk }}<strong> {{ e.question.text_es }} </strong></p>
         {% if e.answer %}
     <p> {{ e.answer.name_es }} </p>
         {% endif %}
