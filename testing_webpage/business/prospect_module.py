@@ -10,7 +10,7 @@ from match import model, clustering
 from match.pickle_models import pickle_handler
 
 
-MAX_MATCHES = 60
+MAX_MATCHES = 40
 
 
 # TODO: deprecated, now all users are all distinct.
