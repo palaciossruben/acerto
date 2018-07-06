@@ -1,6 +1,7 @@
 import os
 import inspect
 import unicodedata
+from django.conf import settings
 from urllib.parse import urlencode, urlunparse, urlparse, parse_qsl, parse_qs
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.files.storage import FileSystemStorage
@@ -17,6 +18,12 @@ from testing_webpage import settings
 
 INTERVIEW_INTRO_VIDEO = './interview_intro_video.txt'
 ZIGGEO_API_KEY = './ziggeo_api_key.txt'
+
+
+if settings.DEBUG:
+    HOST = '//127.0.0.1:8000'
+else:
+    HOST = 'https://peaku.co'
 
 
 def remove_accents(text):
@@ -430,3 +437,4 @@ def calculate_operational_efficiency(campaign):
     else:
         campaign.operational_efficiency = None
     campaign.save()
+

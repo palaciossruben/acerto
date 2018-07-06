@@ -2,12 +2,13 @@
 import os
 from django.conf import settings
 from decouple import config
+import common
 
 
 if settings.DEBUG:
-    host = '//127.0.0.1:8000'
+    HOST = '//127.0.0.1:8000'
 else:
-    host = 'https://peaku.co'
+    HOST = 'https://peaku.co'
 
 
 def get_first_name(complete_name):
@@ -25,7 +26,7 @@ def get_first_name(complete_name):
 def get_test_url(user, campaign):
 
     if user and campaign:
-        return host + '/servicio_de_empleo/pruebas?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
+        return HOST + '/servicio_de_empleo/pruebas?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
                                                                                                        campaign_id=campaign.id)
     else:
         return ''
@@ -34,22 +35,22 @@ def get_test_url(user, campaign):
 def get_additional_info_url(candidate):
 
     if candidate:
-        return host + '/servicio_de_empleo/additional_info?candidate_id={candidate_id}'.format(candidate_id=candidate.pk)
+        return HOST + '/servicio_de_empleo/additional_info?candidate_id={candidate_id}'.format(candidate_id=candidate.pk)
     else:
         return ''
 
 
 def get_video_url(user, campaign):
     if user and campaign:
-        return host+'/servicio_de_empleo/interview/1?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
-                                                                                                         campaign_id=campaign.id)
+        return HOST + '/servicio_de_empleo/interview/1?campaign_id={campaign_id}&user_id={user_id}'.format(user_id=user.id,
+                                                                                                           campaign_id=campaign.id)
     else:
         return ''
 
 
 def get_business_campaign_url(campaign):
     if campaign:
-        return host+'/servicio_de_empleo?campaign_id={campaign_id}'.format(campaign_id=campaign.id)
+        return HOST + '/servicio_de_empleo?campaign_id={campaign_id}'.format(campaign_id=campaign.id)
     else:
         return ''
 
@@ -79,7 +80,7 @@ def get_campaign_name(candidate, language_code):
 
 
 def get_cv_url(user):
-    return host+'/servicio_de_empleo/add_cv?user_id={user_id}'.format(user_id=user.id)
+    return HOST + '/servicio_de_empleo/add_cv?user_id={user_id}'.format(user_id=user.id)
 
 
 def get_file_path():

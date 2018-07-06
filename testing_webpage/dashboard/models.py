@@ -3,7 +3,7 @@ import numpy as np
 from django.db import models
 from django.db.models.signals import post_init
 
-from beta_invite.models import User, Campaign, Evaluation, Survey, EvaluationSummary, Score
+from beta_invite.models import User, Campaign, Evaluation, Survey, EvaluationSummary, Score, Test
 from dashboard import constants as cts
 from beta_invite.util import common_senders
 from business.models import BusinessUser
@@ -131,7 +131,7 @@ class Candidate(models.Model):
 
         mean_scores = []
         for test_id, values in mean_scores_dict.items():
-            new_score = Score(test_id=test_id, value=statistics.mean(values))
+            new_score = Score.create(test=Test.objects.get(pk=test_id), value=statistics.mean(values))
             new_score.save()
             mean_scores.append(new_score)
 

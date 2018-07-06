@@ -233,18 +233,20 @@ def get_test_result(request):
 
     # test_score_str = ''  # by default there is no score unless the test was done.
 
+    failed_scores = []
     test_done = test_module.comes_from_test(request)
-
     if test_done:
 
         scores = test_module.get_scores(campaign, user_id, questions_dict, request)
         if len(scores) > 0:
-            test_module.get_evaluation(scores, candidate)
+            evaluation = test_module.get_evaluation(scores, candidate)
+            failed_scores = [s for s in evaluation.scores.all() if not s.passed and s.test.feedback_url]
 
     return render(request, cts.TEST_RESULT_VIEW_PATH, {'candidate': candidate,
                                                        'campaign': campaign,
                                                        'candidate_id': candidate.pk,
-                                                       'name': name})
+                                                       'name': name,
+                                                       'failed_scores_with_feedback': failed_scores})
 
 
 def additional_info(request):

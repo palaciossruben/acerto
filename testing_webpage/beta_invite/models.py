@@ -286,6 +286,7 @@ class Test(models.Model):
     questions = models.ManyToManyField(Question)
     cut_score = models.IntegerField(default=70)
     type = models.ForeignKey(TestType, default=None, null=True)
+    feedback_url = models.CharField(max_length=200, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -336,9 +337,34 @@ class Score(models.Model):
 
     test = models.ForeignKey(Test)
     value = models.FloatField()
+    passed = models.NullBooleanField(null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    @classmethod
+    def create(cls, test, value):
+        """
+        Instead of:
+        score = Score(...)
+        do
+        score = Score.create(...)
+
+        This is a convenience method to calculate self.passing upon creation:
+        https://stackoverflow.com/questions/843580/writing-a-init-function-to-be-used-in-django-model
+        And
+        https://stackoverflow.com/questions/20569910/how-to-initialize-an-empty-object-with-foreignkey-in-django
+        :return:
+        """
+
+        score = cls(value=value, test=test)
+
+        if score.value and score.test:
+            score.passed = score.value >= score.test.cut_score
+
+        score.save()
+
+        return score
 
     def __str__(self):
         return 'id={0}, test={1}, value={2}'.format(self.pk, self.test, self.value)

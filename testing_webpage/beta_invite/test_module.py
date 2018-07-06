@@ -3,8 +3,9 @@ Test related methods.
 """
 import common
 from beta_invite import text_analizer
-from beta_invite.models import Question, Survey, Score, Evaluation, EvaluationSummary
+from beta_invite.models import Question, Survey, Score, Evaluation, EvaluationSummary, Test
 from dashboard.models import Candidate, State
+from match import model
 
 
 def get_tests_questions_dict(tests):
@@ -121,7 +122,7 @@ def get_scores(campaign, user_id, questions_dict, request):
 
         test_score = get_test_score(campaign, question_ids, user_id, test_id, request)
 
-        score = Score(test_id=test_id, value=test_score)
+        score = Score.create(test=Test.objects.get(pk=test_id), value=test_score)
         score.save()
 
         scores.append(score)
@@ -140,6 +141,12 @@ def update_candidate_state(candidate, evaluation):
 
         candidate.evaluations.add(evaluation)
         candidate.evaluation_summary = EvaluationSummary.create(candidate.evaluations.all())
+
+        #TODO: this is not the right place to do this, it should be a overnight clock, after the CV is scanned. And the
+        # guy had a chance of inputting addicional info
+        # overrides the passed property with ML
+        #evaluation.passed = model.predict_match_and_save([candidate], regression=False)
+        #evaluation.save()
 
         if evaluation.passed:
             candidate.state = State.objects.get(code='WFI')

@@ -266,7 +266,7 @@ def edit_test(request, pk):
     question_types = QuestionType.objects.all()
     question_types_json = serializers.serialize("json", question_types)
 
-    #TODO: to fix fixture inconsistencies. Can be removed later
+    # TODO: to fix fixture inconsistencies. Can be removed later
     test = Test.objects.get(pk=pk)
     test.remove_question_gaps()
     for question in test.questions.all():
@@ -290,6 +290,7 @@ def update_test(request, pk):
     test.name = request.POST.get('name')
     test.name_es = request.POST.get('name_es')
     test.cut_score = int(request.POST.get('cut_score'))
+    test.feedback_url = request.POST.get('feedback_url')
     test.save()  # save first, for saving questions
 
     test = test_module.update_test_questions(test, request)
@@ -339,7 +340,8 @@ def save_test(request):
     test = Test(type_id=int(request.POST.get('test_type_id')),
                 name=request.POST.get('name'),
                 name_es=request.POST.get('name_es'),
-                cut_score=int(request.POST.get('cut_score')))
+                cut_score=int(request.POST.get('cut_score')),
+                feedback_url=request.POST.get('feedback_url'))
     test.save()  # save first, for saving questions
 
     test = test_module.update_test_questions(test, request)
@@ -531,7 +533,9 @@ def send_new_contacts(request):
     :return: json
     """
 
-    users = {m.candidate.user for m in Message.objects.filter(~Q(candidate__user__phone=None), sent=False)}
+    users = {m.candidate.user for m in Message.objects.filter(~Q(candidate__user__phone=None),
+                                                              sent=False,
+                                                              user__added=False)}
     for u in users:
         u.change_to_international_phone_number()
         u.name = email_sender.remove_accents(u.name)
