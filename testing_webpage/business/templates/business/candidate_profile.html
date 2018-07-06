@@ -86,9 +86,15 @@
             <p><strong>{% trans "Test score (cut: " %}{{ e.cut_score }}): </strong> {{ e.final_score }}</p>
         {% endfor %}
 
-        {% if candidate.salary %}
-            <p><strong>{% trans "Salary deduction" %}: </strong>{{ candidate.user.salary }}</p>
+        {% if candidate.user.salary or candidate.salary %}
+            {% if candidate.user.salary <= candidate.salary %}
+                <p><strong>{% trans "Salary deduction" %}: </strong>{{ candidate.user.salary }}</p>
+            {% else %}
+                <p type="text" name="{{ candidate.id }}_salary"><strong>Salary: </strong>{{ candidate.salary }}</p>
+            {% endif %}
         {% endif %}
+
+
 
         {% for c in candidate.comments.all %}
             {% if candidate.comments %}
