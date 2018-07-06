@@ -535,7 +535,7 @@ def send_new_contacts(request):
 
     users = {m.candidate.user for m in Message.objects.filter(~Q(candidate__user__phone=None),
                                                               sent=False,
-                                                              user__added=False)}
+                                                              candidate__user__added=False)}
     for u in users:
         u.change_to_international_phone_number()
         u.name = email_sender.remove_accents(u.name)
