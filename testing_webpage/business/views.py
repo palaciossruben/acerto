@@ -21,7 +21,7 @@ import beta_invite
 from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
-from beta_invite.models import User, BulletType, WorkArea, EmailType
+from beta_invite.models import User, BulletType, WorkArea, EmailType, Campaign
 from business.models import Plan, Contact, Search
 from business.models import BusinessUser
 from business.custom_user_creation_form import CustomUserCreationForm
@@ -513,5 +513,8 @@ def business_applied(request):
     return render(request, cts.BUSINESS_APPLIED_VIEW_PATH, {})
 
 
+@login_required
 def summary(request):
-    return render(request, cts.SUMMARY_VIEW_PATH, {})
+
+    return render(request, cts.SUMMARY_VIEW_PATH, {'business_user': get_business_user(request),
+                                                   'campaign': Campaign.objects.get(pk=5)})

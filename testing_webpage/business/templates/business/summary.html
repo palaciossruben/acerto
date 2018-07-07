@@ -68,11 +68,16 @@
                 <div class="col-xs-12 col-lg-6">
                     <div class="state div1">
                         <div class="circle avatar1"></div>
-                        <a href="#" style="text-decoration:none;">
-                        <p class="status-name bold">VER RECOMENDADOS</p>
-                        <div class="line"></div>
-                        <p class="status-description">Sugerencias de candidatos que son tu mejor opción de contratación y han superado todos los filtros</p>
-                        </a>
+                        <!--<a href="#" style="text-decoration:none;">-->
+
+                        <form action="{% url 'business:dashboard' business_user.pk %}" method="get">
+                            <input id="recommended_name_paragraph" type="submit" hidden="true"/>
+                            <label for="recommended_name_paragraph" class="status-name bold">VER RECOMENDADOS</label>
+                            <div class="line"></div>
+                            <input id="recommended_description_paragraph" type="submit" hidden="true" />
+                            <label for="recommended_description_paragraph" class="status-description">Sugerencias de candidatos que son tu mejor opción de contratación y han superado todos los filtros</label>
+                        </form>
+
                     </div>
                 </div>
                 <div class="col-xs-12 col-lg-6">
