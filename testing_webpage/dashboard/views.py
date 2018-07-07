@@ -291,6 +291,8 @@ def update_test(request, pk):
     test.name_es = request.POST.get('name_es')
     test.cut_score = int(request.POST.get('cut_score'))
     test.feedback_url = request.POST.get('feedback_url')
+    test.excluding = bool(request.POST.get('excluding'))
+
     test.save()  # save first, for saving questions
 
     test = test_module.update_test_questions(test, request)
@@ -336,12 +338,12 @@ def save_test(request):
         request: HTTP
     Returns: redirects to dashboard after saving new test.
     """
-
     test = Test(type_id=int(request.POST.get('test_type_id')),
                 name=request.POST.get('name'),
                 name_es=request.POST.get('name_es'),
                 cut_score=int(request.POST.get('cut_score')),
-                feedback_url=request.POST.get('feedback_url'))
+                feedback_url=request.POST.get('feedback_url'),
+                excluding=bool(request.POST.get('excluding')))
     test.save()  # save first, for saving questions
 
     test = test_module.update_test_questions(test, request)

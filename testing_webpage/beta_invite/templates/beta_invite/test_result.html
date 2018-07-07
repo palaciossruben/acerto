@@ -16,7 +16,7 @@
         <p style="font-size:40px; margin-bottom:60px;margin-top:20px;">{{ name }},</p>
 
         {% if failed_scores_with_feedback|length > 0 %}
-            <p style="font-size:40px; margin-bottom:60px;margin-top:60px;">Bien hecho!, sin embargo aun puedes mejorar</p>
+            <p style="font-size:40px; margin-bottom:60px;margin-top:60px;">¡Bien hecho! Sin embargo aun puedes mejorar</p>
 
             <div style="font-size:18px;">
                 <p>Te recomendamos Revisar este material y realizar de nuevo las pruebas</p>
@@ -24,7 +24,7 @@
                 <br>
                 <ul>
                     {% for score in failed_scores_with_feedback %}
-            		    <li>Apoyo para: <a href="{{ score.test.feedback_url }}">{{ score.test.name_es }}</a></li>
+            		    <li>Apoyo en: <a href="{{ score.test.feedback_url }}">{{ score.test.name_es }}</a></li>
                     {% endfor %}
                 </ul>
                 <br>

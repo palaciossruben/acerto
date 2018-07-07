@@ -289,6 +289,7 @@ class Test(models.Model):
     feedback_url = models.CharField(max_length=200,
                                     default='',
                                     null=True)
+    excluding = models.BooleanField(default=False)  # if didn't passed the test, then rejects candidate
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -428,6 +429,10 @@ class Evaluation(models.Model):
         test_type = TestType.objects.get(name=type_name)
         return average_list([s.value for s in self.scores.all() if s.test.type == test_type])
 
+    def passed_all_excluding_tests(self):
+        return all([s.value >= s.test.cut_score
+                    for s in self.scores.filter(test__excluding=True)])
+
     def update_scores(self, scores):
 
         self.scores = scores
@@ -439,7 +444,7 @@ class Evaluation(models.Model):
 
             # This is a default simple rule. Can be overridden by ML
             if self.final_score is not None and self.cut_score is not None:
-                self.passed = self.final_score >= self.cut_score
+                self.passed = self.final_score >= self.cut_score and self.passed_all_excluding_tests()
 
             self.cognitive_score = self.get_score_for_test_type('cognitive')
             self.technical_score = self.get_score_for_test_type('technical')
