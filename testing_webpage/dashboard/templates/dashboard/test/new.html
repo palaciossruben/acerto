@@ -22,7 +22,7 @@
         <br>
         <br>
 
-        <select id="test_type" name="test_type_id" required="required">
+        <select id="test_type" name="test_type_id" required>
             <option value="" >Select Test Type</option>
             {% for type in test_types %}
                 <option value={{ type.id }}>{{ type.name }}</option>
@@ -33,13 +33,13 @@
         <br>
 
         <input style="width: 250px;" id="name" type="text" name="name"
-          placeholder="Add test name in English" required="required">
+          placeholder="Add test name in English" required>
 
         <br>
         <br>
 
         <input style="width: 250px;" id="name_es" type="text" name="name_es"
-          placeholder="Add a test name in Spanish" required="required">
+          placeholder="Add a test name in Spanish" required>
 
         <br>
         <br>
