@@ -237,7 +237,7 @@
                                 <select class="origin-city" name="city_id" >
                                     <option value="{{ default_city.id }}" disabled selected>{{ default_city.name }}</option>
                                     {% for city in cities %}
-                                    <option value={{ city.id }}>{{ city.name }}</option>
+                                        <option value="{{ city.id }}">{{ city.name }}</option>
                                     {% endfor %}
                                 </select>
                                 <h3>Título de la oferta</h3>
@@ -248,7 +248,7 @@
                                 <select class="origin-workarea" name="work_area_id">
                                     <option value="" disabled selected>Selecciona un area de trabajo</option>
                                     {% for work_area in work_areas %}
-                                    <option value={{ work_area.id }}>{{ work_area.name }}</option>
+                                        <option value="{{ work_area.id }}">{{ work_area.name }}</option>
                                     {% endfor %}
                                 </select>
                                 <h3>Rango salarial</h3>

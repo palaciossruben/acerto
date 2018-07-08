@@ -98,6 +98,7 @@ def index(request):
                   'perks': translate_bullets(perks, request.LANGUAGE_CODE),
                   'requirements': translate_bullets(requirements, request.LANGUAGE_CODE),
                   'is_desktop': is_desktop,
+                  'work_areas': common.get_work_areas(request.LANGUAGE_CODE),
                   }
 
     if campaign_id is not None:
@@ -125,6 +126,8 @@ def register(request):
     email = request.POST.get('email')
     name = request.POST.get('name')
     phone = request.POST.get('phone')
+    work_area_id = request.POST.get('work_area_id')
+
     politics_accepted = request.POST.get('politics')
     if politics_accepted:
         politics = True
@@ -141,6 +144,7 @@ def register(request):
         user_params = {'name': name,
                        'email': email,
                        'phone': phone,
+                       'work_area_id': work_area_id,
                        'country': country,
                        'city': city,
                        'ip': get_ip(request),
@@ -231,18 +235,13 @@ def get_test_result(request):
     candidate = common.get_candidate(user, campaign)
     name = common_senders.get_first_name(candidate.user.name)
 
-    # test_score_str = ''  # by default there is no score unless the test was done.
+    scores = test_module.get_scores(campaign, user_id, questions_dict, request)
+    evaluation = test_module.get_evaluation(scores, candidate)
+    failed_scores = [s for s in evaluation.scores.all() if not s.passed and s.test.feedback_url]
+    if evaluation.passed or len(failed_scores) == 0:
+        return redirect('/servicio_de_empleo/additional_info?candidate_id={candidate_id}'.format(candidate_id=candidate.pk))
 
-    failed_scores = []
-    test_done = test_module.comes_from_test(request)
-    if test_done:
-
-        scores = test_module.get_scores(campaign, user_id, questions_dict, request)
-        if len(scores) > 0:
-            evaluation = test_module.get_evaluation(scores, candidate)
-            failed_scores = [s for s in evaluation.scores.all() if not s.passed and s.test.feedback_url]
-
-    return render(request, cts.TEST_RESULT_VIEW_PATH, {'candidate': candidate,
+    return render(request, cts.FAILED_TEST_VIEW_PATH, {'candidate': candidate,
                                                        'campaign': campaign,
                                                        'candidate_id': candidate.pk,
                                                        'name': name,

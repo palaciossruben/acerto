@@ -115,7 +115,7 @@ mixpanel.init("d60ac5ae289f60c7f824d49a4d15be30");</script>
 			    margin-top:15px; cursor:pointer"
 			     name="country">
 				   {% for country in countries%}
-				 	 <option value={{ country.id }}>{{ country.name }}</option>
+				 	 <option value="{{ country.id }}">{{ country.name }}</option>
 				   {% endfor %}
 			    </select>
 
@@ -125,7 +125,7 @@ mixpanel.init("d60ac5ae289f60c7f824d49a4d15be30");</script>
 				  margin-top:15px; cursor:pointer"
 				   name="education">
 					  {% for level in education%}
-						 <option value={{ level.id }}>{{ level.name }}</option>
+						 <option value="{{ level.id }}">{{ level.name }}</option>
 					  {% endfor %}
 				  </select>
 
@@ -135,7 +135,7 @@ mixpanel.init("d60ac5ae289f60c7f824d49a4d15be30");</script>
 				  margin-top:15px; cursor:pointer"
 				   name="profession">
 					  {% for profession in professions%}
-						 <option value={{ profession.id }}>{{ profession.name }}</option>
+						 <option value="{{ profession.id }}">{{ profession.name }}</option>
 					  {% endfor %}
 				  </select>
 

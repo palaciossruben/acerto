@@ -87,8 +87,18 @@
 
                     <input class="form-text" id="phone" type="tel" name="phone"
 				  		placeholder="{% trans 'Your phone' %}" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
-                    
-                    <div >
+
+                    <select name="work_area_id" required>
+                        <option value="" selected disabled>{% trans 'Your work area' %}</option>
+                        {% for work_area in work_areas %}
+                            <option value="{{ work_area.id }}">{{ work_area.name }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <br>
+                    <br>
+
+                    <div>
                         <input type="file" id="file" name="curriculum_url" class="form-inputfile" onchange="pressed()">
                         <label for="file" id="fileLabel">{% trans "Upload your resume" %}</label>
                         <label class="form-checkbox-container">

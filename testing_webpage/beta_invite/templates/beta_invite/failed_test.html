@@ -1,0 +1,53 @@
+{% extends 'base.html'%}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}{% trans "PeakU - Test" %}{% endblock %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+{% block content %}
+    <br>
+    <br>
+    <div class="title" align="center" style="font-family:var(--Bitter); color:var(--text-color)">
+        <p style="font-size:40px; margin-bottom:60px;margin-top:20px;">{{ name }},</p>
+
+        <p style="font-size:40px; margin-bottom:60px;margin-top:60px;">¡Bien hecho! Sin embargo aun puedes mejorar</p>
+
+        <div style="font-size:18px;">
+            <p>Te recomendamos Revisar este material y realizar de nuevo las pruebas</p>
+            <br>
+            <br>
+            <ul>
+                {% for score in failed_scores_with_feedback %}
+                    <li>Apoyo en: <a href="{{ score.test.feedback_url }}">{{ score.test.name_es }}</a></li>
+                {% endfor %}
+            </ul>
+            <br>
+            <br>
+            <form action="pruebas">
+                <input type="hidden" name="user_id" value="{{ candidate.user.pk }}" />
+                <input type="hidden" name="campaign_id" value="{{ candidate.campaign.pk }}" />
+                <input id="submit-button" style="margin: 10px auto;" type="submit" value="¡ Repetir Pruebas !">
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
+    <style>
+        #submit-button{
+        width: auto;
+        background: var(--orange);
+        font-weight: bold;
+        color: white;
+        border: 0 none;
+        border-radius: 1px;
+        cursor: pointer;
+        padding: 10px 10px;
+        border-radius:4px;
+    }
+    </style>
+{% endblock %}

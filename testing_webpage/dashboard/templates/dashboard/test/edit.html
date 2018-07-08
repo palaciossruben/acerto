@@ -26,7 +26,7 @@
         <select id="test_type" name="test_type_id" required>
             <option value="{{ test.type.id }}" >{{ test.type.name }}</option>
             {% for type in test_types %}
-                <option value={{ type.id }}>{{ type.name }}</option>
+                <option value="{{ type.id }}">{{ type.name }}</option>
             {% endfor %}
         </select>
 
@@ -45,8 +45,13 @@
         <br>
         <br>
 
-        <input style="width: 250px;" id="feedback_url" type="text" name="feedback_url"
-          placeholder="Add a feedback url" value="{{ test.feedback_url }}">
+        {% if test.feedback_url %}
+            <input style="width: 250px;" id="feedback_url" type="text" name="feedback_url"
+              placeholder="Add a feedback url" value="{{ test.feedback_url }}">
+        {% else %}
+            <input style="width: 250px;" id="feedback_url" type="text" name="feedback_url"
+              placeholder="Add a feedback url" value="">
+        {% endif %}
 
         <br>
         <br>
@@ -81,7 +86,7 @@
         <select id="question_type" name="question_type_id" >
             <option value="" disabled selected>Select Question Type</option>
             {% for type in question_types %}
-                <option value={{ type.id }}>{{ type.name }}</option>
+                <option value="{{ type.id }}">{{ type.name }}</option>
             {% endfor %}
         </select>
 

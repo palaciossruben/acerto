@@ -31,7 +31,7 @@
                     <select id="profession" name="profession_id" >
                         <option value="" disabled selected>{% trans "Select Profession" %}</option>
                         {% for profession in professions %}
-                            <option value={{ profession.id }}>{{ profession.name }}</option>
+                            <option value="{{ profession.id }}">{{ profession.name }}</option>
                         {% endfor %}
                     </select>
                 </div>

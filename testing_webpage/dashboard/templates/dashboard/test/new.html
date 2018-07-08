@@ -25,7 +25,7 @@
         <select id="test_type" name="test_type_id" required>
             <option value="" >Select Test Type</option>
             {% for type in test_types %}
-                <option value={{ type.id }}>{{ type.name }}</option>
+                <option value="{{ type.id }}">{{ type.name }}</option>
             {% endfor %}
         </select>
 
@@ -74,7 +74,7 @@
         <select id="question_type" name="question_type_id" >
             <option value="" disabled selected>Select Question Type</option>
             {% for type in question_types %}
-                <option value={{ type.id }}>{{ type.name }}</option>
+                <option value="{{ type.id }}">{{ type.name }}</option>
             {% endfor %}
         </select>
 

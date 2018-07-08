@@ -170,12 +170,3 @@ def get_evaluation(scores, candidate):
     update_candidate_state(candidate, evaluation)
 
     return evaluation
-
-
-def comes_from_test(request):
-    """
-    Args:
-        request: HTTP
-    Returns: Boolean, indicating if the last url was the test. If no url present then it will return false
-    """
-    return '/pruebas' in common.remove_params_from_url(request.META.get('HTTP_REFERER', ''))
