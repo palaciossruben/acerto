@@ -531,12 +531,19 @@ def mark_as_added(users):
 def send_new_contacts(request):
     """
      Works as API for auto-messenger app
+     If there is a problem adding contacts on the app possible solution is:
+
+     1. Uncomment line 542 [:50] part, this will limit number of candidates added and publish API
+     2. Run app to add those 50 contacts
+     2. Run bot and send messages from those 50 candidates
+     3. Run the app again, add another 50
+     4. Repeat until no more messages are sent.
     :param request: HTTP
     :return: json
     """
 
-    users = {m.candidate.user for m in Message.objects.filter(~Q(candidate__user__phone=None),
-                                                              sent=False)}
+    users = [m.candidate.user for m in Message.objects.filter(~Q(candidate__user__phone=None),
+                                                              sent=False)]  #[:50]
     for u in users:
         u.change_to_international_phone_number()
         u.name = email_sender.remove_accents(u.name)
