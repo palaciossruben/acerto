@@ -32,3 +32,5 @@ def jsonify(my_object):
 @register.filter
 def dict_get(d, key):
     return d.get(str(key))
+
+
