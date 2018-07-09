@@ -530,7 +530,7 @@ def mark_as_added(users):
 
 def send_new_contacts(request):
     """
-    Works as API for auto-messenger app
+     Works as API for auto-messenger app
     :param request: HTTP
     :return: json
     """
