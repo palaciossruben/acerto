@@ -555,7 +555,8 @@ def send_messages(request):
     :return: json
     """
 
-    messages = [m.add_format_and_mark_as_sent() for m in Message.objects.filter(sent=False)]
+    messages = [m.add_format_and_mark_as_sent() for m in Message.objects.filter(sent=False,
+                                                                                candidate__user__added=True)]
 
     messages_json = serializers.serialize('json', messages)
 
