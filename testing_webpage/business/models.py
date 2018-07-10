@@ -65,7 +65,7 @@ class BusinessUser(models.Model):
     campaigns = models.ManyToManyField(Campaign)
     company = models.ForeignKey(Company, null=True, on_delete=models.SET_NULL)
     industry = models.ForeignKey(Industry, null=True, on_delete=models.SET_NULL)
-
+    additional_email = models.CharField(max_length=200, null=True)
     # Foreign key to the auth_user table. So that this table can cleanly be in charge of authentication
     auth_user = models.ForeignKey(AuthUser, null=True, on_delete=models.SET_NULL)
 

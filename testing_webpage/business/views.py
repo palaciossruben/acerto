@@ -514,7 +514,13 @@ def business_applied(request):
 
 
 @login_required
-def summary(request):
+def summary(request, pk):
+    business_user, campaign = dashboard_module.get_business_user_and_campaign(request, pk)
 
-    return render(request, cts.SUMMARY_VIEW_PATH, {'business_user': get_business_user(request),
-                                                   'campaign': Campaign.objects.get(pk=5)})
+    if request.user.id != business_user.auth_user.id or campaign not in business_user.campaigns.all():
+        return redirect('business:login')
+
+    dashboard_module.send_email_from_dashboard(request, campaign)
+
+    return render(request, cts.SUMMARY_VIEW_PATH, {})
+
