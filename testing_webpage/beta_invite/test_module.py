@@ -1,11 +1,9 @@
 """
 Test related methods.
 """
-import common
 from beta_invite import text_analizer
 from beta_invite.models import Question, Survey, Score, Evaluation, EvaluationSummary, Test
 from dashboard.models import Candidate, State
-from match import model
 
 
 def get_tests_questions_dict(tests):
@@ -17,7 +15,7 @@ def get_tests_questions_dict(tests):
     return {test.id: [q.id for q in test.questions.all()] for test in tests}
 
 
-def get_score_and_updates_survey(question, answer_text, survey, question_id):
+def update_survey(question, answer_text, survey, question_id):
     """
     Manages the logic for different kinds of questions. And for each question decides to give points to result or not.
     Args:
@@ -28,17 +26,21 @@ def get_score_and_updates_survey(question, answer_text, survey, question_id):
     Returns: updates result and survey Object
     """
     if answer_text is None:
-        return 0
+        survey.score = 0
+        survey.save()
+        return
 
     if question.type.code == 'SA':
         answer_id = int(answer_text)
         survey.answer_id = answer_id
         if answer_id in [q.id for q in Question.objects.get(pk=question_id).correct_answers.all()]:
-            return 1
+            survey.score = 1
+        else:
+            survey.score = 0
 
     elif question.type.code == 'OF':
         survey.text_answer = answer_text
-        return text_analizer.get_score(answer_text)
+        survey.score = text_analizer.get_score(answer_text)
 
     elif question.type.code == 'MA':  # TODO: implement multiple answers.
         pass
@@ -50,9 +52,11 @@ def get_score_and_updates_survey(question, answer_text, survey, question_id):
         number = int(answer_text)
         survey.numeric_answer = number
         if question.params['min_correct'] <= number <= question.params['max_correct']:
-            return 1
+            survey.score = 1
+        else:
+            survey.score = 0
 
-    return 0  # failed the question.
+    survey.save()
 
 
 def process_question_and_get_score(campaign, question_id, request, test_id, user_id):
@@ -68,16 +72,12 @@ def process_question_and_get_score(campaign, question_id, request, test_id, user
     question = Question.objects.get(pk=question_id)
     answer_text = request.POST.get('test_{}_question_{}'.format(test_id, question_id))
 
-    survey = Survey(campaign=campaign,
-                    test_id=test_id,
-                    question_id=question_id)
+    survey = Survey.create(campaign=campaign,
+                           test_id=test_id,
+                           question_id=question_id,
+                           user_id=user_id)
 
-    if user_id:
-        survey.user_id = int(user_id)
-
-    score = get_score_and_updates_survey(question, answer_text, survey, question_id)
-
-    survey.save()
+    update_survey(question, answer_text, survey, question_id)
 
     candidate = Candidate.objects.get(campaign=campaign,
                                       user_id=user_id)
@@ -85,7 +85,7 @@ def process_question_and_get_score(campaign, question_id, request, test_id, user
     candidate.surveys.add(survey)
     candidate.save()
 
-    return score
+    return survey.score
 
 
 def get_test_score(campaign, question_ids, user_id, test_id, request):
@@ -122,7 +122,8 @@ def get_scores(campaign, user_id, questions_dict, request):
 
         test_score = get_test_score(campaign, question_ids, user_id, test_id, request)
 
-        score = Score.create(test=Test.objects.get(pk=test_id), value=test_score)
+        score = Score.create(test=Test.objects.get(pk=test_id),
+                             value=test_score)
         score.save()
 
         scores.append(score)
@@ -166,7 +167,69 @@ def get_evaluation(scores, candidate):
     """
 
     evaluation = Evaluation.create(scores=scores)
+    update_scores(evaluation, scores, candidate)
 
     update_candidate_state(candidate, evaluation)
 
     return evaluation
+
+
+def get_candidate_from_evaluation(evaluation):
+    return Candidate.objects.get(evaluations__contains=evaluation)
+
+
+def average_list(my_list):
+    """
+    Average, if no elements outputs None
+    :param my_list:
+    :return:
+    """
+    my_list = [e for e in my_list if e is not None]
+    if len(my_list) > 0:
+        return sum(my_list) / len(my_list)
+    else:
+        return None
+
+
+def passed_all_excluding_tests(self):
+    return all([s.passed for s in self.scores.filter(test__excluding=True)])
+
+
+def passed_all_excluding_questions(evaluation, candidate):
+
+    for score in evaluation.scores.all():
+        excluding_questions = score.test.questions.filter(excluding=True)
+
+        for question in excluding_questions:
+            survey = Survey.get_last_try(candidate.campaign,
+                                         score.test,
+                                         question,
+                                         candidate.user)
+            if survey.score == 0:  # Failed Question
+                return False
+
+    return True
+
+
+def update_scores(evaluation, scores, candidate):
+
+    evaluation.scores = scores
+
+    if evaluation.scores:
+
+        evaluation.cut_score = average_list([s.test.cut_score for s in evaluation.scores.all()])
+        evaluation.final_score = average_list([s.value for s in evaluation.scores.all()])
+
+        # This is a default simple rule. Can be overridden by ML
+        if evaluation.final_score is not None and evaluation.cut_score is not None:
+            evaluation.passed = evaluation.final_score >= evaluation.cut_score and \
+                                passed_all_excluding_tests(evaluation) and \
+                                passed_all_excluding_questions(evaluation, candidate)
+
+        evaluation.cognitive_score = evaluation.get_score_for_test_type('cognitive')
+        evaluation.technical_score = evaluation.get_score_for_test_type('technical')
+        evaluation.requirements_score = evaluation.get_score_for_test_type('requirements')
+        evaluation.soft_skills_score = evaluation.get_score_for_test_type('soft skills')
+        # TODO: add any new score here
+
+    evaluation.save()

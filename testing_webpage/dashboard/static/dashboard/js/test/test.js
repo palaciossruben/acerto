@@ -88,7 +88,7 @@ function buildCheckbox(container, name){
     var checkbox_input = document.createElement("input");
     checkbox_input.name = name;
     checkbox_input.type = "checkbox";
-    checkbox_input.value="incorrect";
+    checkbox_input.value = "off";
     checkbox_input.onclick = function() { toggle_checkbox_value(this); };
     container.appendChild(checkbox_input);
 }
@@ -295,6 +295,11 @@ function addQuestion(question_types){
         addBr(question_container);
         question_container.appendChild(document.createTextNode("Question " + QUESTION_NUMBER + " "));
 
+        addBr(question_container);
+
+        question_container.appendChild(document.createTextNode("Excluding?"));
+        buildCheckbox(question_container, get_question_name(QUESTION_NUMBER, "excluding"));
+
         addBr(question_container);addBr(question_container);
 
         var text_name = get_question_name(QUESTION_NUMBER, "text")
@@ -335,11 +340,11 @@ function addQuestion(question_types){
 
 
 function toggle_checkbox_value(checkbox){
-    if (checkbox.value == "correct"){
-        checkbox.value = "incorrect"
+    if (checkbox.value == "on"){
+        checkbox.value = "off"
         checkbox.checked = false;
     }else {
-        checkbox.value = "correct"
+        checkbox.value = "on"
         checkbox.checked = true;
     }
 }

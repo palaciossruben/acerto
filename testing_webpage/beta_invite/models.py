@@ -412,10 +412,11 @@ class Evaluation(models.Model):
         """
 
         evaluation = cls()
+        evaluation.save()
+        evaluation.scores = scores
 
         # Saves first in order to have an id and assign the scores.
         evaluation.save()
-        evaluation.update_scores(scores)
 
         return evaluation
 
@@ -428,31 +429,6 @@ class Evaluation(models.Model):
     def get_score_for_test_type(self, type_name):
         test_type = TestType.objects.get(name=type_name)
         return average_list([s.value for s in self.scores.all() if s.test.type == test_type])
-
-    def passed_all_excluding_tests(self):
-        return all([s.value >= s.test.cut_score
-                    for s in self.scores.filter(test__excluding=True)])
-
-    def update_scores(self, scores):
-
-        self.scores = scores
-
-        if self.scores:
-
-            self.cut_score = average_list([s.test.cut_score for s in self.scores.all()])
-            self.final_score = average_list([s.value for s in self.scores.all()])
-
-            # This is a default simple rule. Can be overridden by ML
-            if self.final_score is not None and self.cut_score is not None:
-                self.passed = self.final_score >= self.cut_score and self.passed_all_excluding_tests()
-
-            self.cognitive_score = self.get_score_for_test_type('cognitive')
-            self.technical_score = self.get_score_for_test_type('technical')
-            self.requirements_score = self.get_score_for_test_type('requirements')
-            self.soft_skills_score = self.get_score_for_test_type('soft skills')
-            # TODO: add any new score here
-
-        self.save()
 
     # adds custom table name
     class Meta:
@@ -648,9 +624,6 @@ class Campaign(models.Model):
         return ' '.join([self.title_es] + self.get_requirement_names())
 
 
-
-
-
 def average_list(my_list):
     """
     Average, if no elements outputs None
@@ -764,9 +737,45 @@ class Survey(models.Model):
     numeric_answer = models.FloatField(null=True)
     interview = models.ForeignKey(Interview, null=True)
     video_token = models.CharField(max_length=200, null=True)
+    score = models.FloatField(null=True)
+    try_number = models.IntegerField(default=1)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    @staticmethod
+    def get_last_try(campaign, test, question, user):
+        return [s for s in Survey.objects.filter(campaign=campaign,
+                                                 test=test,
+                                                 question=question,
+                                                 user=user).order_by('-try_number')][0]
+
+    @classmethod
+    def create(cls, campaign, test_id, question_id, user_id):
+        """
+        Instead of:
+        s = Survey(...)
+        do
+        s = Survey.create(...)
+
+        see:
+        https://stackoverflow.com/questions/843580/writing-a-init-function-to-be-used-in-django-model
+        And
+        https://stackoverflow.com/questions/20569910/how-to-initialize-an-empty-object-with-foreignkey-in-django
+        :return:
+        """
+
+        survey = cls(campaign=campaign, test_id=test_id, question_id=question_id)
+        if user_id:
+            survey.user_id = int(user_id)
+            survey.try_number = Survey.get_last_try(survey.campaign,
+                                                    survey.test,
+                                                    survey.question,
+                                                    survey.user).try_number + 1
+
+        survey.save()
+
+        return survey
 
     def __str__(self):
         return '{0}, {1}, {2}, {3}'.format(self.pk, self.user, self.test, self.question)

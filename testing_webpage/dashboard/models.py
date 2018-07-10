@@ -131,7 +131,8 @@ class Candidate(models.Model):
 
         mean_scores = []
         for test_id, values in mean_scores_dict.items():
-            new_score = Score.create(test=Test.objects.get(pk=test_id), value=statistics.mean(values))
+            new_score = Score.create(test=Test.objects.get(pk=test_id),
+                                     value=statistics.mean(values),)
             new_score.save()
             mean_scores.append(new_score)
 

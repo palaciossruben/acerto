@@ -6,6 +6,20 @@
         <br>
 
         <p>Question {{ question.order }} </p>
+
+        <br>
+        <br>
+
+        <p>Excluding?</p>
+        {% if question.excluding %}
+            <input name="{{ question.order }}_question_excluding" type="checkbox" checked>
+        {% else %}
+            <input name="{{ question.order }}_question_excluding" type="checkbox">
+        {% endif %}
+
+        <br>
+        <br>
+
         {% if question.image_path %}
             <img src="{% static question.image_path %}">
             <br>

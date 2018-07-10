@@ -62,7 +62,7 @@ def update_test_questions(test, request):
 
     for key, value in request.POST.items():
 
-        # When there is an attribute with a a question and its not the image
+        # When there is an attribute with a question and its not the image
         if 'question' in key and 'image_path' not in key:
 
             question = get_question(question_answer_dict, test, key)
@@ -78,7 +78,11 @@ def update_test_questions(test, request):
 
                 question_attribute_name = common.get_object_attribute_name(key, question)
                 if question_attribute_name in question.__class__.__dict__:  # Attribute is part of the class
-                    setattr(question, question_attribute_name, value)
+
+                    if 'excluding' in question_attribute_name and value == 'on':
+                        pass  # this attribute is updated later on.
+                    else:
+                        setattr(question, question_attribute_name, value)
                 else:  # if not, it might be an answer
 
                     answer_attribute_name = common.get_object_attribute_name(question_attribute_name, Answer)
@@ -127,6 +131,11 @@ def update_test_questions(test, request):
         if image_path != '#':
             setattr(question, 'image_path', image_path)
             question.save()
+
+    # determine all excluding questions
+    for q in test.questions.all():
+        q.excluding = bool(request.POST.get(str(q.order) + '_question_excluding'))
+        q.save()
 
     test.remove_question_gaps()
 
