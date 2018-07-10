@@ -34,7 +34,9 @@ def get_score(text):
     length_score = my_sigmoid(len(words), 15)
 
     spelling = 0
-
+    my_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    os.chdir(my_path)
+    print(os.getcwd())
     with open(os.path.join('subscribe', 'es-MX.dic'), 'r', encoding='UTF-8') as vocabulary_file:
 
         vocabulary = vocabulary_file.read().split('\n')

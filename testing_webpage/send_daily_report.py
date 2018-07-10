@@ -56,7 +56,7 @@ def business_daily_report():
                 email_sender.send_report(language_code='es',
                                          body_filename='business_daily_report_email_body',
                                          subject='Reporte de candidatos relevantes',
-                                         recipients=[business_user.email, 'juan@peaku.co', 'juan.rendon@peaku.co', 'santiago@peaku.co', 'daniela@peaku.co'],
+                                         recipients=[business_user.email, business_user.additional_email, 'juan.rendon@peaku.co', 'juan@peaku.co',  'santiago@peaku.co', 'daniela@peaku.co'],
                                          candidates=candidates)
 
 
