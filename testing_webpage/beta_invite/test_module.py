@@ -205,7 +205,7 @@ def passed_all_excluding_questions(evaluation, candidate):
                                          score.test,
                                          question,
                                          candidate.user)
-            if survey.score == 0:  # Failed Question
+            if survey and survey.score == 0:  # Failed Question
                 return False
 
     return True

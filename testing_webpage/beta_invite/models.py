@@ -745,10 +745,15 @@ class Survey(models.Model):
 
     @staticmethod
     def get_last_try(campaign, test, question, user):
-        return [s for s in Survey.objects.filter(campaign=campaign,
-                                                 test=test,
-                                                 question=question,
-                                                 user=user).order_by('-try_number')][0]
+        surveys = [s for s in Survey.objects.filter(campaign=campaign,
+                                                    test=test,
+                                                    question=question,
+                                                    user=user).order_by('-try_number')]
+
+        if len(surveys) > 0:
+            return surveys[0]
+        else:
+            return None
 
     @classmethod
     def create(cls, campaign, test_id, question_id, user_id):
@@ -768,10 +773,14 @@ class Survey(models.Model):
         survey = cls(campaign=campaign, test_id=test_id, question_id=question_id)
         if user_id:
             survey.user_id = int(user_id)
-            survey.try_number = Survey.get_last_try(survey.campaign,
-                                                    survey.test,
-                                                    survey.question,
-                                                    survey.user).try_number + 1
+            last_survey = Survey.get_last_try(survey.campaign,
+                                              survey.test,
+                                              survey.question,
+                                              survey.user)
+            if last_survey:
+                survey.try_number = last_survey.try_number + 1
+            else:
+                survey.try_number = 1
 
         survey.save()
 
