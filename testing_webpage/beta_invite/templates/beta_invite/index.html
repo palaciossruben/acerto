@@ -13,6 +13,7 @@
 {% block content %}
 
     <div>
+        <!--
         <img src="{{ cloud_front_url }}user/img/girls.jpg"
              srcset="{{ cloud_front_url }}user/img/girls@2x.jpg 2x,
                      {{ cloud_front_url }}user/img/girls@3x.jpg 3x"
@@ -21,13 +22,9 @@
         <img src="{{ cloud_front_url }}user/img/girls_mobile.jpg"
              srcset="{{ cloud_front_url }}user/img/girls_mobile@2x.jpg 2x,
                      {{ cloud_front_url }}user/img/girls_mobile@3x.jpg 3x"
-             class="background-people-mobile">
+             class="background-people-mobile">-->
 
         <h1 class="main-title" id="main-title">{{ job_title }}</h1>
-
-        <h2 class="green-box">
-            <p>{% trans 'APPLY NOW!' %}</p>
-        </h2>
     </div>
 
     <section class="section-container">
@@ -87,7 +84,7 @@
                     <input class="form-text" id="phone" type="tel" name="phone"
 				  		placeholder="{% trans 'Your phone' %}" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
 
-                    <select name="work_area_id" required>
+                    <select class="form-text" name="work_area_id" required>
                         <option value="" selected disabled>{% trans 'Your work area' %}</option>
                         {% for work_area in work_areas %}
                             <option value="{{ work_area.id }}">{{ work_area.name }}</option>

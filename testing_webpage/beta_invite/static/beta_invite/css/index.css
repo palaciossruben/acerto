@@ -1,22 +1,9 @@
 /* Main */
 .main-title {
-
-	margin-left: 14.2%;
-	margin-top: 175px;
-	margin-bottom: 0px;
-
-    /* The element goes on top of the .background-people instead of below */
-	position:absolute; top:0; left:0;
+    margin:0 auto;
+	margin-top: 7%;
+	color: #7b8891;
 }
-
-.green-box {
-	width: 435px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: -30px;
-	text-align: center;
-}
-
 
 /* Job description */
 #job-description-container {
@@ -93,17 +80,11 @@
 
 @media (max-width: 640px){
 
-    .main-title {
-        width: 96%;
-        margin-left: auto;
-        margin-right: auto;
-        font-size: 25px;
-        margin-top: 67px;
+    .section-container{
+        margin-top: 60px;
     }
 
-    .green-box {
-        width: 100%;
-    }
+
 
     #job-description-container {
         margin-left: 2%;

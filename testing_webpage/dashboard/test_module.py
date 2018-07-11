@@ -96,7 +96,7 @@ def update_test_questions(test, request):
                         setattr(answer, answer_attribute_name, value)
                         answer.save()
 
-                    elif 'is_correct' in answer_attribute_name and value == 'correct':
+                    elif 'is_correct' in answer_attribute_name and value == 'on':
                         correct_answers_dict[question].add(answer)
                     else:  # its not part of answers, then it will go into the question params.
 
