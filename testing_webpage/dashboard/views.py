@@ -1,3 +1,4 @@
+import json
 import common
 from django.core import serializers
 from django.shortcuts import render, redirect
@@ -542,15 +543,18 @@ def send_new_contacts(request):
     :return: json
     """
 
-    users = [m.candidate.user for m in Message.objects.filter(~Q(candidate__user__phone=None),
-                                                              sent=False)]  #[:50]
+    users = {m.candidate.user for m in Message.objects.filter(~Q(candidate__user__phone=None),
+                                                              sent=False)}  #[:50]
     for u in users:
         u.change_to_international_phone_number()
         u.name = email_sender.remove_accents(u.name)
 
-    json_data = serializers.serialize('json', users)
+    #json_data = serializers.serialize('json', users)
 
     mark_as_added(users)
+
+    json_data = json.dumps([{'pk': u.pk, 'fields': {'phone': u.phone, 'name': u.name}} for u in users])
+
     return JsonResponse(json_data, safe=False)
 
 
