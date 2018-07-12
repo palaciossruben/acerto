@@ -553,7 +553,7 @@ def send_new_contacts(request):
 
     mark_as_added(users)
 
-    json_data = json.dumps([{'pk': u.pk, 'fields': {'phone': u.phone, 'name': u.name}} for u in users])
+    json_data = json.dumps([{'pk': u.pk, 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}} for u in users])
 
     return JsonResponse(json_data, safe=False)
 
