@@ -14,7 +14,7 @@
     <h1 style="text-align:center; margin:50px 0px">{% trans "Campaigns" %}</h1>
     <ol style="margin-left:10%">
         {% for campaign in campaigns %}
-            <li style=""><a href="{{ campaign|get_dashboard_campaign_url }}">{{ campaign.title_es }}</a></li>
+            <li style=""><a href="/seleccion_de_personal/resumen/{{ business_user_id }}?campaign_id={{ campaign.pk }}">{{ campaign.title_es }}</a></li>
         {% endfor %}
     </ol>
 

@@ -2,6 +2,10 @@
 
 /**************************************************FONTS***************************************************************/
 
+* {
+    box-sizing:border-box;
+}
+
 @font-face {
     font-family: BigJohn;
     src: url(/static/fonts/BIG_JOHN.otf);
@@ -51,9 +55,9 @@
 }
 
 .quantity {
-    font-size: 80px;
+    font-size: 70px;
     color: #666666;
-    margin-left: 35px;
+    margin-left: 40px;
 }
 
 .primary {
@@ -269,6 +273,7 @@ body {
    width: 100%;
    margin-left:25%;
    box-shadow: 0px 8px 5px rgba(0,0,0,0.1);
+   text-align: center;
 }
 
 .div4{
@@ -278,14 +283,15 @@ body {
 }
 
 .div5{
-   width: 100%;
+   width: 125%;
    margin-left:25%;
    box-shadow: 0px 8px 5px rgba(0,0,0,0.1);
+   text-align: center;
 }
 
 .div6{
-   width: 65%;
-   margin-left: 30%;
+   width: 40%;
+   margin-left: 55%;
    box-shadow: 0px 8px 5px rgba(0,0,0,0.1);
 }
 
@@ -340,14 +346,27 @@ body {
     margin-bottom: 0;
 }
 
-.status-circle{
+.circle{
     height:90px;
     width:90px;
     margin:0 auto;
     border-radius:100%;
     margin-top:-30px;
     margin-bottom:20px;
+}
+
+.avatar1 {
     background: url(../img/avatar1.png) no-repeat top center scroll ;
+    background-size:cover;
+}
+
+.avatar2 {
+    background: url(../img/avatar2.png) no-repeat top center scroll ;
+    background-size:cover;
+}
+
+.avatar3 {
+    background: url(../img/avatar3.png) no-repeat top center scroll ;
     background-size:cover;
 }
 
@@ -355,12 +374,61 @@ body {
     height:170px;
     width:70%;
     margin:0 auto;
-    border-top-right-radius:10px;
-    border-bottom-right-radius:10px;
+    border-top-right-radius:25px;
+    border-bottom-right-radius:25px;
     margin-top:10px;
     margin-bottom:0px;
     margin-right:20px;
-    background: url(../img/4pruebas.png) no-repeat top center scroll ;
+    background: url(../img/avatar4.png) no-repeat top center scroll ;
+    background-size:cover;
+    position:absolute;
+    right:0;
+    top:0;
+}
+
+/*
+.test1 {
+    border-radius:100%;
+    background:rgba(238, 235, 52, 1);
+    height:70px;
+    width:70px;
+    margin-left:0;
+    margin-top:0;
+    position:relative;
+    z-index:2;
+}
+
+.fill1{
+    border-radius:100%;
+    background:rgba(238, 235, 52, 0.7);
+    height:50px;
+    width:50px;
+    position:relative;
+    z-index:3;
+}
+*/
+.relevant{
+    height:170px;
+    width:60%;
+    margin:0 auto;
+    border-top-right-radius:25px;
+    border-bottom-right-radius:25px;
+    margin-top:10px;
+    margin-bottom:0px;
+    margin-right:20px;
+    background: url(../img/avatar5.png) no-repeat top center scroll ;
+    background-size:cover;
+    position:absolute;
+    right:0;
+    top:0;
+}
+
+.applicant{
+    height:100%;
+    width:100%;
+    margin:0 auto;
+    border-radius:25px;
+    background: url(../img/avatar6.png) no-repeat top center scroll ;
     background-size:cover;
     position:absolute;
     right:0;
