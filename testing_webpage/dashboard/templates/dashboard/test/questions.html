@@ -64,10 +64,10 @@
 
                         {% if answer in question.correct_answers.all %}
                             <input name="{{ question.order }}_question_{{ answer_order }}_answer_is_correct" type="checkbox"
-                                   value="correct" onclick="toggle_checkbox_value(this);" checked>
+                                   value="on" onclick="toggle_checkbox_value(this);" checked>
                         {% else %}
                             <input name="{{ question.order }}_question_{{ answer_order }}_answer_is_correct" type="checkbox"
-                                   value="incorrect" onclick="toggle_checkbox_value(this);">
+                                   value="off" onclick="toggle_checkbox_value(this);">
                         {% endif %}
 
                         <br>
