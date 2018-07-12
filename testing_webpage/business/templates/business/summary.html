@@ -68,16 +68,12 @@
                 <div class="col-xs-12 col-lg-6">
                     <div class="state div1">
                         <div class="circle avatar1"></div>
-                        <!--<a href="#" style="text-decoration:none;">-->
-
-                        <form action="{% url 'business:dashboard' business_user.pk %}" method="get">
-                            <input id="recommended_name_paragraph" type="submit" hidden="true"/>
-                            <label for="recommended_name_paragraph" class="status-name bold">VER RECOMENDADOS</label>
+                        <input name="campaign_id" type="hidden" value="{{ campaign.id }}">
+                        <a href="{{ campaign|get_dashboard_campaign_url }}" style="text-decoration:none;">
+                            <p class="status-name bold">VER RECOMENDADOS</p>
                             <div class="line"></div>
-                            <input id="recommended_description_paragraph" type="submit" hidden="true" />
-                            <label for="recommended_description_paragraph" class="status-description">Sugerencias de candidatos que son tu mejor opción de contratación y han superado todos los filtros</label>
-                        </form>
-
+                            <p class="status-description">Sugerencias de candidatos que son tu mejor opción de contratación y han superado todos los filtros</p>
+                        </a>
                     </div>
                 </div>
                 <div class="col-xs-12 col-lg-6">

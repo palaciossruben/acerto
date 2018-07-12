@@ -7,7 +7,7 @@ app_name = 'business'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^seleccion_gratis$', views.start, name='start'),
-    url(r'^resumen$', views.summary, name='summary'),
+    url(r'^resumen/(?P<pk>\d+)$', views.summary, name='summary'),
 
     url(r'^contáctanos$', views.contact_form, name='contact_form'),
     url(r'^search$', views.search, name='search'),

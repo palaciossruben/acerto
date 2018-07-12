@@ -418,7 +418,7 @@ def create_post(request):
     business_user.campaigns.add(campaign)
     business_user.save()
 
-    return redirect('tablero_de_control/{business_pk}?campaign_id={campaign_pk}'.format(business_pk=business_user.pk,
+    return redirect('resumen/{business_pk}?campaign_id={campaign_pk}'.format(business_pk=business_user.pk,
                                                                                         campaign_pk=campaign.pk))
 
 
@@ -438,7 +438,8 @@ def start_post(request):
         business_user.campaigns.add(campaign)
         business_user.save()
 
-        return redirect('tablero_de_control/{}'.format(business_user.pk))
+        return redirect('resumen/{business_pk}?campaign_id={campaign_pk}'.format(business_pk=business_user.pk,
+                                                                                 campaign_pk=campaign.pk))
 
     else:
 
@@ -515,12 +516,14 @@ def business_applied(request):
 
 @login_required
 def summary(request, pk):
-    business_user, campaign = dashboard_module.get_business_user_and_campaign(request, pk)
+    business_user = get_business_user(request)
+    campaign = Campaign.objects.get(pk=request.GET.get('campaign_id'))
+
+    # campaign = Campaign.objects.get(pk=1)
 
     if request.user.id != business_user.auth_user.id or campaign not in business_user.campaigns.all():
         return redirect('business:login')
 
-    dashboard_module.send_email_from_dashboard(request, campaign)
-
-    return render(request, cts.SUMMARY_VIEW_PATH, {})
+    return render(request, cts.SUMMARY_VIEW_PATH, {'business_user': business_user,
+                                                   'campaign': campaign})
 
