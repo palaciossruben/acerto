@@ -69,7 +69,8 @@
                     <div class="state div1">
                         <div class="circle avatar1"></div>
                         <input name="campaign_id" type="hidden" value="{{ campaign.id }}">
-                        <a href="{{ campaign|get_dashboard_campaign_url }}" style="text-decoration:none;">
+                        <!--<a href="{{ campaign|get_dashboard_campaign_url }}" style="text-decoration:none;">-->
+                        <a href="{% url 'business:dashboard' business_user_id=business_user.pk campaign_id=campaign.id state_name='recommended' %}" style="text-decoration:none;">
                             <p class="status-name bold">VER RECOMENDADOS</p>
                             <div class="line"></div>
                             <p class="status-description">Sugerencias de candidatos que son tu mejor opción de contratación y han superado todos los filtros</p>
@@ -102,22 +103,24 @@
             </div>
             <div class="row five">
                 <div class="col-lg-6 col-xs-12">
-                    <div class="state div3">
-                        <div class="circle avatar2"></div>
-                        <p class="status-name bold">RELEVANTES</p>
-                        <div class="line"></div>
-                        <p class="status-description">Candidatos que aprobaron pruebas iniciales y requerimientos específicos para tu campaña</p>
-                    </div>
+                    <a href="{% url 'business:dashboard' business_user_id=business_user.pk campaign_id=campaign.id state_name='relevant' %}">
+                        <div class="state div3">
+                            <div class="circle avatar2"></div>
+                            <p class="status-name bold">RELEVANTES</p>
+                            <div class="line"></div>
+                            <p class="status-description">Candidatos que aprobaron pruebas iniciales y requerimientos específicos para tu campaña</p>
+                        </div>
+                    </a>
                 </div>
                 <div class="col-lg-6 col-xs-12">
-                    <div class="state div4">
-                        <div class="row">
-                            <span class="quantity bold">12</span><br>
-                            <span class="primary bold">PERFILES</span><br>
-                            <span class="secondary regular">SELECCIONADOS</span>
-                            <span class="relevant"></span>
+                        <div class="state div4">
+                            <div class="row">
+                                <span class="quantity bold">12</span><br>
+                                <span class="primary bold">PERFILES</span><br>
+                                <span class="secondary regular">SELECCIONADOS</span>
+                                <span class="relevant"></span>
+                            </div>
                         </div>
-                    </div>
                 </div>
             </div>
             <div class="row six">

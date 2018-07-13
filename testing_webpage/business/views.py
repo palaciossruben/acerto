@@ -483,22 +483,28 @@ def business_campaigns(request, pk):
 
 
 @login_required
-def dashboard(request, pk):
+def dashboard(request, business_user_id, campaign_id, state_name):
     """
     Renders the business dashboard
     Args:
         request: HTTP
-        pk: BusinessUser primary key
+        business_user_id: BusinessUser primary key
+        campaign_id: Campaign pk
+        state_name: name str
     """
 
-    business_user, campaign = dashboard_module.get_business_user_and_campaign(request, pk)
+    business_user, campaign = dashboard_module.get_business_user_and_campaign(request, business_user_id)
 
     if request.user.id != business_user.auth_user.id or campaign not in business_user.campaigns.all():
         return redirect('business:login')
 
     dashboard_module.send_email_from_dashboard(request, campaign)
 
-    return render(request, cts.DASHBOARD_VIEW_PATH, dashboard_module.get_dashboard_params(campaign))
+    all_params = dashboard_module.get_dashboard_params(campaign)
+
+    return render(request, cts.DASHBOARD_VIEW_PATH, {'candidates': all_params[state_name],
+                                                     'campaign': campaign,
+                                                     'state_name': state_name})
 
 
 def candidate_profile(request, pk):
@@ -515,11 +521,9 @@ def business_applied(request):
 
 
 @login_required
-def summary(request, pk):
+def summary(request, campaign_id):
     business_user = get_business_user(request)
-    campaign = Campaign.objects.get(pk=request.GET.get('campaign_id'))
-
-    # campaign = Campaign.objects.get(pk=1)
+    campaign = Campaign.objects.get(pk=campaign_id)
 
     if request.user.id != business_user.auth_user.id or campaign not in business_user.campaigns.all():
         return redirect('business:login')
