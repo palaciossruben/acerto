@@ -62,8 +62,8 @@ def get_text_corpus():
 
 def get_text_stats(use_idf):
     """
-    term frecuency: contar frecuencia
-    idf: inverse docu frequency:
+    tf (term frequency): counting terms (words)
+    idf (inverse document frequency): rare words give more insights than common words on all documents
     Gets tf_idf transformed data and the vocabulary
     Returns: Tuple containing Sparse Matrix with tf_idf data,  vocabulary dictionary and text_corpus (OrderedDict)
     """
