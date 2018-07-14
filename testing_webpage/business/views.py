@@ -468,9 +468,9 @@ def business_signup(request):
 
 
 @login_required
-def business_campaigns(request, pk):
+def business_campaigns(request, business_user_id):
 
-    business_user = BusinessUser.objects.get(pk=pk)
+    business_user = BusinessUser.objects.get(pk=business_user_id)
 
     if request.user.id != business_user.auth_user.id:
         return redirect('business:login')
@@ -532,10 +532,15 @@ def summary(request, campaign_id):
 
     all_params = dashboard_module.get_dashboard_params(campaign)
 
+    num_applicants = len(all_params['applicants'])
+    num_relevant = len(all_params['relevant'])
+    num_recommended = len(all_params['recommended'])
+    num_rejected = len(all_params['rejected'])
+
     return render(request, cts.SUMMARY_VIEW_PATH, {'business_user': business_user,
                                                    'campaign': campaign,
-                                                   'num_applicants': len(all_params['applicants']),
-                                                   'num_relevant': len(all_params['relevant']),
-                                                   'num_recommended': len(all_params['recommended']),
-                                                   'num_rejected': len(all_params['rejected']),
-                                                   })
+                                                   'num_applicants': num_applicants,
+                                                   'num_relevant': num_relevant,
+                                                   'num_recommended': num_recommended,
+                                                   'num_rejected': num_rejected,
+                                                   'total_candidates': num_applicants + num_recommended + num_rejected + num_relevant})

@@ -25,10 +25,10 @@
     <body>
         <div class="topnav" id="myTopnav">
             <a href="/staffing" class="logo"><img src="{% static 'business/img/logo-color-negro.png' %}"></a>
-            <a href="#home">Cerrar sesión</a>
+            <a href="{% url 'business:logout' %}">{% trans "LOG OUT" %}</a>
             <a class="navButton" style="font-size: 15px;width:170px;color: white;border-radius:40px;margin-top: 30px;padding:5px 16px;background:#F47B20;"
-               role="button" onclick="on_signup()">+  CREAR OFERTA</a>
-            <a href="#contact">Mis campañas</a>
+               role="button" href="{% url 'business:start' %}">+  CREAR OFERTA</a>
+            <a href="{% url 'business:business_campaigns' business_user_id=business_user.pk %}">Mis campañas</a>
             <a href="#about">Ayuda</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
             <i class="fa fa-bars"></i>
@@ -56,8 +56,8 @@
                         <div class="col-lg-3 col-xs-12"></div>
                         <div class="col-lg-9 col-xs-12 gradient2">
                             <p class="date regular">Fecha de publicación: 1 de enero de 2018</p><br>
-                            <p class="status bold">ESTADO: ACTIVA</p><br>
-                            <p class="total regular">TOTAL DE APLICANTES: 19</p>
+                            <p class="status bold">ESTADO: {{ campaign.active }}</p><br>
+                            <p class="total regular">TOTAL DE APLICANTES: {{ total_candidates }}</p>
                         </div>
                     </div>
                 </div>
@@ -65,54 +65,52 @@
         </div>
         <div class="container">
             <div class="row four">
-                <div class="col-xs-12 col-lg-6">
-                    <div class="state div1">
-                        <div class="circle avatar1"></div>
-                        <input name="campaign_id" type="hidden" value="{{ campaign.id }}">
-                        <!--<a href="{{ campaign|get_dashboard_campaign_url }}" style="text-decoration:none;">-->
-                        <a href="{% url 'business:dashboard' business_user_id=business_user.pk campaign_id=campaign.id state_name='recommended' %}" style="text-decoration:none;">
-                            <p class="status-name bold">VER RECOMENDADOS</p>
+                <a href="{% url 'business:dashboard' business_user_id=business_user.pk campaign_id=campaign.id state_name='recommended' %}">
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="state div1">
+                            <div class="circle avatar1"></div>
+                            <input name="campaign_id" type="hidden" value="{{ campaign.id }}">
+                            <p class="status-name bold">RECOMENDADOS</p>
                             <div class="line"></div>
                             <p class="status-description">Sugerencias de candidatos que son tu mejor opción de contratación y han superado todos los filtros</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-lg-6">
-                    <div class="state div2">
-                        <div class="row">
-                            <span class="quantity bold">{{ num_applicants }}</span><br>
-                            <span class="primary bold">PERFILES</span><br>
-                            <span class="secondary regular">SELECCIONADOS</span>
-                            <span class="recommended">
-                                <div class="test1">
-                                    <div class="fill1"></div>
-                                </div>
-                                <div class="test2">
-                                    <div class="fill2"></div>
-                                </div>
-                                <div class="test3">
-                                    <div class="fill3"></div>
-                                </div>
-                                <div class="test4">
-                                    <div class="fill4"></div>
-                                </div>
-                            </span>
                         </div>
                     </div>
-                </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="state div2">
+                            <div class="row">
+                                <span class="quantity bold">{{ num_applicants }}</span><br>
+                                <span class="primary bold">PERFILES</span><br>
+                                <span class="secondary regular">SELECCIONADOS</span>
+                                <span class="recommended">
+                                    <div class="test1">
+                                        <div class="fill1"></div>
+                                    </div>
+                                    <div class="test2">
+                                        <div class="fill2"></div>
+                                    </div>
+                                    <div class="test3">
+                                        <div class="fill3"></div>
+                                    </div>
+                                    <div class="test4">
+                                        <div class="fill4"></div>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
             <div class="row five">
-                <div class="col-lg-6 col-xs-12">
-                    <a href="{% url 'business:dashboard' business_user_id=business_user.pk campaign_id=campaign.id state_name='relevant' %}">
+                <a href="{% url 'business:dashboard' business_user_id=business_user.pk campaign_id=campaign.id state_name='relevant' %}">
+                    <div class="col-lg-6 col-xs-12">
                         <div class="state div3">
                             <div class="circle avatar2"></div>
                             <p class="status-name bold">RELEVANTES</p>
                             <div class="line"></div>
                             <p class="status-description">Candidatos que aprobaron pruebas iniciales y requerimientos específicos para tu campaña</p>
                         </div>
-                    </a>
-                </div>
-                <div class="col-lg-6 col-xs-12">
+                    </div>
+                    <div class="col-lg-6 col-xs-12">
                         <div class="state div4">
                             <div class="row">
                                 <span class="quantity bold">{{ num_relevant }}</span><br>
@@ -121,27 +119,30 @@
                                 <span class="relevant"></span>
                             </div>
                         </div>
-                </div>
+                    </div>
+                </a>
             </div>
             <div class="row six">
-                <div class="col-lg-6 col-xs-12">
-                    <div class="state div5">
-                        <div class="circle avatar3"></div>
-                        <p class="status-name bold">APLICANTES</p>
-                        <div class="line"></div>
-                        <p class="status-description">Total de candidatos que han aplicado a tu oferta laboral (incluye los candidatos no aprobados)</p>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xs-12">
-                    <div class="state div6">
-                        <div class="row">
-                            <span class="quantity bold">{{ num_applicants }}</span><br>
-                            <span class="primary bold"></span><br>
-                            <span class="secondary regular"></span>
-                            <span class="applicant"></span>
+                <a href="{% url 'business:dashboard' business_user_id=business_user.pk campaign_id=campaign.id state_name='applicants' %}">
+                    <div class="col-lg-6 col-xs-12">
+                        <div class="state div5">
+                            <div class="circle avatar3"></div>
+                            <p class="status-name bold">APLICANTES</p>
+                            <div class="line"></div>
+                            <p class="status-description">Total de candidatos que han aplicado a tu oferta laboral (incluye los candidatos no aprobados)</p>
                         </div>
                     </div>
-                </div>
+                    <div class="col-lg-6 col-xs-12">
+                        <div class="state div6">
+                            <div class="row">
+                                <span class="quantity bold">{{ num_applicants }}</span><br>
+                                <span class="primary bold"></span><br>
+                                <span class="secondary regular"></span>
+                                <span class="applicant"></span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
         <!----------------------------------------------FOOTER--------------------------------------------------------->
