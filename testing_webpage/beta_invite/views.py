@@ -99,7 +99,8 @@ def index(request):
                   'requirements': translate_bullets(requirements, request.LANGUAGE_CODE),
                   'is_desktop': is_desktop,
                   'work_areas': common.get_work_areas(request.LANGUAGE_CODE),
-                  }
+                  'cities': common.get_cities(),
+                  'default_city': common.get_city(request)}
 
     if campaign_id is not None:
         param_dict['campaign_id'] = int(campaign_id)
@@ -127,6 +128,7 @@ def register(request):
     name = request.POST.get('name')
     phone = request.POST.get('phone')
     work_area_id = request.POST.get('work_area_id')
+    city_id = request.POST.get('city_id')
 
     politics_accepted = request.POST.get('politics')
     if politics_accepted:
@@ -139,14 +141,13 @@ def register(request):
     if campaign and name and phone and (email or not campaign.has_email):
 
         country = common.get_country_with_request(request)
-        city = common.get_city(request)
 
         user_params = {'name': name,
                        'email': email,
                        'phone': phone,
                        'work_area_id': work_area_id,
                        'country': country,
-                       'city': city,
+                       'city': City.objects.get(pk=city_id),
                        'ip': get_ip(request),
                        'is_mobile': is_mobile,
                        'language_code': request.LANGUAGE_CODE,
