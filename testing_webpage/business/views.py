@@ -493,11 +493,13 @@ def dashboard(request, business_user_id, campaign_id, state_name):
         state_name: name str
     """
 
-    business_user, campaign = dashboard_module.get_business_user_and_campaign(request, business_user_id)
+    business_user = BusinessUser.objects.get(pk=business_user_id)
+    campaign = Campaign.objects.get(pk=campaign_id)
 
     if request.user.id != business_user.auth_user.id or campaign not in business_user.campaigns.all():
         return redirect('business:login')
 
+    # TODO: remove?
     dashboard_module.send_email_from_dashboard(request, campaign)
 
     all_params = dashboard_module.get_dashboard_params(campaign)
@@ -528,6 +530,12 @@ def summary(request, campaign_id):
     if request.user.id != business_user.auth_user.id or campaign not in business_user.campaigns.all():
         return redirect('business:login')
 
-    return render(request, cts.SUMMARY_VIEW_PATH, {'business_user': business_user,
-                                                   'campaign': campaign})
+    all_params = dashboard_module.get_dashboard_params(campaign)
 
+    return render(request, cts.SUMMARY_VIEW_PATH, {'business_user': business_user,
+                                                   'campaign': campaign,
+                                                   'num_applicants': len(all_params['applicants']),
+                                                   'num_relevant': len(all_params['relevant']),
+                                                   'num_recommended': len(all_params['recommended']),
+                                                   'num_rejected': len(all_params['rejected']),
+                                                   })
