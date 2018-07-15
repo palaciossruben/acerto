@@ -418,7 +418,7 @@ def create_post(request):
     business_user.campaigns.add(campaign)
     business_user.save()
 
-    return redirect('resumen/{business_pk}?campaign_id={campaign_pk}'.format(business_pk=business_user.pk,
+    return redirect('tablero_de_control/{business_pk}?campaign_id={campaign_pk}'.format(business_pk=business_user.pk,
                                                                                         campaign_pk=campaign.pk))
 
 
@@ -438,8 +438,10 @@ def start_post(request):
         business_user.campaigns.add(campaign)
         business_user.save()
 
-        return redirect('resumen/{business_pk}?campaign_id={campaign_pk}'.format(business_pk=business_user.pk,
-                                                                                 campaign_pk=campaign.pk))
+        #return redirect('resumen/{business_pk}?campaign_id={campaign_pk}'.format(business_pk=business_user.pk,
+        #                                                                         campaign_pk=campaign.pk))
+        return redirect('tablero_de_control/{business_pk}?campaign_id={campaign_pk}'.format(business_pk=business_user.pk,
+                                                                                            campaign_pk=campaign.pk))
 
     else:
 

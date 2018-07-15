@@ -235,7 +235,7 @@
                                 <br>
                                 <h3>Ciudad</h3>
                                 <select class="origin-city" name="city_id" >
-                                    <option value="{{ default_city.id }}" disabled selected>{{ default_city.name }}</option>
+                                    <option value="{{ default_city.id }}">{{ default_city.name }}</option>
                                     {% for city in cities %}
                                         <option value="{{ city.id }}">{{ city.name }}</option>
                                     {% endfor %}
@@ -245,7 +245,7 @@
                                 <input class="origin-vacancy" name="title_es" placeholder="Selecciona un título"><br>
                                 <h3>Cargo solicitado</h3>
                                 <h6>Selecciona el área que más se adapte al perfil que estás buscando</h6>
-                                <select class="origin-workarea" name="work_area_id">
+                                <select class="origin-workarea" name="work_area_id" required>
                                     <option value="" disabled selected>Selecciona un area de trabajo</option>
                                     {% for work_area in work_areas %}
                                         <option value="{{ work_area.id }}">{{ work_area.name }}</option>
