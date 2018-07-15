@@ -85,7 +85,7 @@
 				  		placeholder="{% trans 'Your phone' %}" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
 
                     <select class="form-text" name="city_id" >
-                        <option value="{{ default_city.id }}" disabled selected>{{ default_city.name }}</option>
+                        <option value="{{ default_city.id }}">{{ default_city.name }}</option>
                         {% for city in cities %}
                             <option value="{{ city.id }}">{{ city.name }}</option>
                         {% endfor %}
