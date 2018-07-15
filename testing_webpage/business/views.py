@@ -418,8 +418,7 @@ def create_post(request):
     business_user.campaigns.add(campaign)
     business_user.save()
 
-    return redirect('tablero_de_control/{business_pk}?campaign_id={campaign_pk}'.format(business_pk=business_user.pk,
-                                                                                        campaign_pk=campaign.pk))
+    return redirect('resumen/{campaign_pk}'.format(campaign_pk=campaign.pk))
 
 
 def start_post(request):
@@ -438,17 +437,14 @@ def start_post(request):
         business_user.campaigns.add(campaign)
         business_user.save()
 
-        #return redirect('resumen/{business_pk}?campaign_id={campaign_pk}'.format(business_pk=business_user.pk,
-        #                                                                         campaign_pk=campaign.pk))
-        return redirect('tablero_de_control/{business_pk}?campaign_id={campaign_pk}'.format(business_pk=business_user.pk,
-                                                                                            campaign_pk=campaign.pk))
+        return redirect('resumen/{campaign_pk}'.format(campaign_pk=campaign.pk))
 
     else:
 
         error_message = get_first_error_message(signup_form)
         return render(request, cts.START_VIEW_PATH, {'error_message': error_message,
                                                      'work_areas': common.translate_list_of_objects(
-                                                         WorkArea.objects.all(), request.LANGUAGE_CODE),
+                                                      WorkArea.objects.all(), request.LANGUAGE_CODE),
                                                      'cities': common.get_cities()})
 
 
@@ -508,7 +504,13 @@ def dashboard(request, business_user_id, campaign_id, state_name):
 
     return render(request, cts.DASHBOARD_VIEW_PATH, {'candidates': all_params[state_name],
                                                      'campaign': campaign,
-                                                     'state_name': state_name})
+                                                     'state_name': state_name,
+                                                     # TODO: remove 4 list of candidates when second view is ready
+                                                     'applicants': all_params['applicants'],
+                                                     'relevant': all_params['relevant'],
+                                                     'rejected': all_params['rejected'],
+                                                     'recommended': all_params['recommended']
+                                                     })
 
 
 def candidate_profile(request, pk):
