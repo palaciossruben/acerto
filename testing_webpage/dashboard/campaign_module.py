@@ -5,7 +5,7 @@ import re
 from django.shortcuts import redirect
 
 import common
-from beta_invite.models import Bullet, Campaign
+from beta_invite.models import Bullet, Campaign, City
 from business import prospect_module
 
 
@@ -106,7 +106,12 @@ def create_campaign(request):
     """
 
     country = common.get_country_with_request(request)
-    city = common.get_city(request)
+
+    city_id = request.POST.get('city_id')
+    if city_id:
+        city = City.objects.get(pk=city_id)
+    else:
+        city = common.get_city(request)
 
     campaign = Campaign(country=country, city=city)
     campaign.save()

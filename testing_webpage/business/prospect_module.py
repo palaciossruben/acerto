@@ -184,6 +184,26 @@ def rank2(campaign, users):
     return [c.user for c, rank in get_desc_sorted_iterator(candidates_rank)]
 
 
+def simple_filter(campaign, users):
+    """
+    Filters by:
+    1. city
+    2. work area
+    3. not having job
+    :param campaign: a Campaign object
+    :param users: list of User objects
+    :return: list of candidates
+    """
+    candidates = [Candidate(user=u, campaign=campaign, pk=1) for u in users]
+
+    candidates = [c for c in candidates if non_null_equal(c.user.city, c.campaign.city) and
+                  non_null_equal(c.user.work_area, c.campaign.work_area)]
+
+    # Cuts top candidates because its too expensive a job filter.
+    candidates = candidates[:MAX_MATCHES]
+    return [c.user for c in candidates if not common.user_has_job(c.user)]
+
+
 def get_top_users(campaign):
 
     # TODO: this feature only supports Spanish.
@@ -191,7 +211,7 @@ def get_top_users(campaign):
     search_array = search_module.get_word_array_lower_case_and_no_accents(search_text)
     users = search_module.get_matching_users(search_array)
 
-    return rank(campaign, users)
+    return simple_filter(campaign, users)
 
 
 def get_candidates(campaign):
