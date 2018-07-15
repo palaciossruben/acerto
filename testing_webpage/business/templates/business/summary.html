@@ -55,13 +55,13 @@
                     <div class="row three">
                         <div class="col-lg-3 col-xs-12"></div>
                         <div class="col-lg-9 col-xs-12 gradient2">
-                            <p class="date regular">Fecha de publicación: {{ campaign.created_at }}</p><br>
+                            <p class="date regular">FECHA DE PUBLICACIÓN: {{ campaign.created_at }}</p><br>
                             {% if campaign.active %}
                                 <p class="status bold">ESTADO: activa</p><br>
                             {% else %}
                                 <p class="status bold">ESTADO: inactiva</p><br>
                             {% endif %}
-                            <p class="total regular">TOTAL DE APLICANTES: {{ total_candidates }}</p>
+                            <p class="total regular">TOTAL APLICANTES: {{ total_candidates }}</p>
                         </div>
                     </div>
                 </div>
