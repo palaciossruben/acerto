@@ -17,14 +17,9 @@ from sklearn.feature_extraction.text import CountVectorizer
 from collections import OrderedDict
 from django.db.models import Q
 
-#try:
 from subscribe import helper as h
 from subscribe import cts
 from beta_invite.models import User
-#except ImportError:
-#    import helper as h
-#    import cts
-#    from beta_invite.models import User
 
 
 MAX_USERS_TO_UPDATE = 500
@@ -67,6 +62,8 @@ def get_text_corpus():
 
 def get_text_stats(use_idf):
     """
+    tf (term frequency): counting terms (words)
+    idf (inverse document frequency): rare words give more insights than common words on all documents
     Gets tf_idf transformed data and the vocabulary
     Returns: Tuple containing Sparse Matrix with tf_idf data,  vocabulary dictionary and text_corpus (OrderedDict)
     """
