@@ -34,14 +34,14 @@
             <i class="fa fa-bars"></i>
             </a>
         </div>
-
+        <!--
         <div class="sidenav">
             <a href="#"><span class="arrow">&#xFE64;<br><span class="arrow-text">Mis ofertas</span></span></a>
             <a href="#"><span class="plus">&#x002B;<br><span class="plus-text">Nueva oferta</span></span></a>
             <a href="#"><span class="setup">&#x2699;<br><span class="setup-text">Configuración</span></span></a>
             <div class="blur">
             </div>
-        </div>
+        </div>-->
 
         <div class="background">
             <div class="gradient1">
@@ -84,20 +84,12 @@
                                 <span class="quantity bold">{{ num_recommended }}</span><br>
                                 <span class="primary bold">PERFILES</span><br>
                                 <span class="secondary regular">SELECCIONADOS</span>
-                                <span class="recommended">
-                                    <div class="test1">
-                                        <div class="fill1"></div>
-                                    </div>
-                                    <div class="test2">
-                                        <div class="fill2"></div>
-                                    </div>
-                                    <div class="test3">
-                                        <div class="fill3"></div>
-                                    </div>
-                                    <div class="test4">
-                                        <div class="fill4"></div>
-                                    </div>
-                                </span>
+                                <div class="recommended">
+                                    <div class="fill cognitive-test">85%</div>
+                                    <div class="fill requirement-test">0%</div>
+                                    <div class="fill technical-test">100%</div>
+                                    <div class="fill fit-test">1%</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -132,15 +124,14 @@
                             <div class="circle avatar3"></div>
                             <p class="status-name bold">APLICANTES</p>
                             <div class="line"></div>
-                            <p class="status-description">Total de candidatos que han aplicado a tu oferta laboral (incluye los candidatos no aprobados)</p>
+                            <p class="status-description">Candidatos que no han realizado las pruebas y candidatos que no aprobaron las pruebas</p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-xs-12">
                         <div class="state div6">
                             <div class="row">
-                                <span class="quantity bold">{{ num_applicants }}</span><br>
-                                <span class="primary bold"></span><br>
-                                <span class="secondary regular"></span>
+                                <span class="quantity2 bold">{{ num_applicants }}</span><br>
+                                <span class="applicant-text bold">PERFILES INSCRITOS</span><br>
                                 <span class="applicant"></span>
                             </div>
                         </div>
