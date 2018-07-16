@@ -291,7 +291,15 @@ def home(request):
     if login_form.is_valid() and request.POST.get('username') != 'g.comercialrmi2@redmilatam.com':  # Block access
 
         business_user = simple_login_and_business_user(login_form, request)
-        return redirect('campañas/{}'.format(business_user.pk))
+
+        # TODO: hack to show investors a good campaing, without an ugly interface
+        if 115 in [c.pk for c in business_user.campaigns]:
+            return redirect('resumen/115')
+        elif 76 in [c.pk for c in business_user.campaigns]:
+            return redirect('resumen/76')
+        else:
+            return redirect('campañas/{}'.format(business_user.pk))
+
     else:
         error_message = get_first_error_message(login_form)
         return render(request, cts.BUSINESS_LOGIN, {'error_message': error_message})
