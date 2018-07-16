@@ -553,7 +553,7 @@ def summary(request, campaign_id):
 
     return render(request, cts.SUMMARY_VIEW_PATH, {'business_user': business_user,
                                                    'campaign': campaign,
-                                                   'num_applicants': num_applicants,
+                                                   'num_applicants': num_applicants + num_rejected,
                                                    'num_relevant': num_relevant,
                                                    'num_recommended': num_recommended,
                                                    'num_rejected': num_rejected,
