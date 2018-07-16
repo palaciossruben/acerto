@@ -68,10 +68,7 @@
         </div>
         <div class="container">
 
-{% include "business/dashboard_column.html" with candidate_list=applicants state_name='applicants' %}
-            {% include "business/dashboard_column.html" with candidate_list=relevant state_name='relevant' %}
-            {% include "business/dashboard_column.html" with candidate_list=recommended state_name='recommended' %}
-            {% include "business/dashboard_column.html" with candidate_list=rejected state_name='rejected' %}
+{% include "business/dashboard_column.html" with candidate_list=applicants state_name='state' %}
         </div>
         <!----------------------------------------------FOOTER--------------------------------------------------------->
         <footer class="container-fluid">
