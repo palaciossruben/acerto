@@ -22,7 +22,7 @@ from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
 from beta_invite.models import User, BulletType, WorkArea, EmailType, Campaign
-from business.models import Plan, Contact, Search
+from business.models import Plan, Contact, Search, KeyWord
 from business.models import BusinessUser
 from business.custom_user_creation_form import CustomUserCreationForm
 from dashboard import campaign_module
@@ -385,7 +385,8 @@ def start(request):
                                                  'error_message': '',
                                                  'work_areas': common.translate_list_of_objects(WorkArea.objects.all(), request.LANGUAGE_CODE),
                                                  'cities': common.get_cities(),
-                                                 'default_city': city})
+                                                 'default_city': city,
+                                                 'keywords': sorted(KeyWord.objects.all(), key=lambda key: key.name)})
 
 
 @login_required

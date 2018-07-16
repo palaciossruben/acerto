@@ -134,3 +134,19 @@ class Search(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'searches'
+
+
+class KeyWord(models.Model):
+
+    name = models.CharField(max_length=20)
+    frequency = models.IntegerField(default=1)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return 'name: {0}, frequency: {1}'.format(self.name, self.frequency)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'keywords'
