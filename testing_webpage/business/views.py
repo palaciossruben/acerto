@@ -293,9 +293,9 @@ def home(request):
         business_user = simple_login_and_business_user(login_form, request)
 
         # TODO: hack to show investors a good campaing, without an ugly interface
-        if 115 in [c.pk for c in business_user.campaigns]:
+        if 115 in [c.pk for c in business_user.campaigns.all()]:
             return redirect('resumen/115')
-        elif 76 in [c.pk for c in business_user.campaigns]:
+        elif 76 in [c.pk for c in business_user.campaigns.all()]:
             return redirect('resumen/76')
         else:
             return redirect('campañas/{}'.format(business_user.pk))
