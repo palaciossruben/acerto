@@ -510,7 +510,8 @@ def dashboard(request, business_user_id, campaign_id, state_name):
                                                      'applicants': all_params['applicants'],
                                                      'relevant': all_params['relevant'],
                                                      'rejected': all_params['rejected'],
-                                                     'recommended': all_params['recommended']
+                                                     'recommended': all_params['recommended'],
+                                                     'business_user': business_user
                                                      })
 
 
