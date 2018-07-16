@@ -29,15 +29,14 @@
             <a class="navButton" style="font-size: 15px;width:170px;color: white;border-radius:40px;margin-top: 30px;padding:5px 16px;background:#F47B20;"
                role="button" href="{% url 'business:start' %}">+  CREAR OFERTA</a>
             <a href="{% url 'business:business_campaigns' business_user_id=business_user.pk %}">Mis campañas</a>
-            <a href="#about">Ayuda</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
             <i class="fa fa-bars"></i>
             </a>
         </div>
 
         <div class="sidenav">
-            <a href="#"><span class="arrow">&#xFE64;<br><span class="arrow-text">Mis ofertas</span></span></a>
-            <a href="#"><span class="plus">&#x002B;<br><span class="plus-text">Nueva oferta</span></span></a>
+            <a href="{% url 'business:business_campaigns' business_user_id=business_user.pk %}"><span class="arrow">&#xFE64;<br><span class="arrow-text">Mis ofertas</span></span></a>
+            <a href="{% url 'business:start' %}"><span class="plus">&#x002B;<br><span class="plus-text">Nueva oferta</span></span></a>
             <a href="#"><span class="setup">&#x2699;<br><span class="setup-text">Configuración</span></span></a>
             <div class="blur">
             </div>
