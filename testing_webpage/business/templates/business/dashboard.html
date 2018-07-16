@@ -1,84 +1,131 @@
-{% extends 'base.html'%}
+<!DOCTYPE html>
 {% load static %}
 {% load i18n %}
-
-{% block title %}PeakU - Dashboard {% endblock %}
-
-{% block extra_head %}
-    <script type="text/javascript" src="{% static 'business/js/dashboard.js' %}"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'business/css/dashboard.css' %}">
-{% endblock %}
-
-{% block content %}
-    <br>
-    <caption><h3 class="secondary-title" align="center">
-        <strong>
-        {% if campaign.free_trial%}
-            {% trans "FREE POST" %}
-        {% endif %}
-            {% trans "CAMPAIGN" %}
-            {{ campaign.title_es|upper }}</strong></h3></caption>
-    <div class="secondary-yellow-bar"></div>
-    <p class="title" align="center" style="font-family:var(--Bitter); font-size:18px; color:var(--text-color)">{% trans "In total they have applied " %}<b id="total"></b> {% trans "people to your campaign" %}</p>
-    <!--{% if campaign.free_trial == True %}
-        <div class="title" align="center">
-            <p style="font-family:var(--Bitter); font-size:21px; color:var(--red)"><strong>{% trans "Remember that for this campaign, you can only have 10 candidates" %}</strong></p>
-            <p style="font-family:var(--Bitter); font-size:18px;color:var(--text-color)">{% trans "If you have any questions, you can write to: contacto@peaku.co" %}</p>
+{% load app_filters %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <title>PeakU - Tablero de control</title>
+        <!--Favicon-->
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon.ico' %}">
+        <link rel="apple-touch-icon" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon-16.png' %}">
+        <link rel="apple-touch-icon" sizes="32x32" href="{% static 'testing_webpage/favicon.ico/favicon-32.png' %}">
+        <link rel="apple-touch-icon" sizes="64x64" href="{% static 'testing_webpage/favicon.ico/favicon-64.png' %}">
+        <!--Latest compiled and minified bootstrap CSS-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!--Our Css-->
+        <link rel="stylesheet" type="text/css" href="{% static 'business/css/summary.css' %}">
+        <!-- Latest jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Latest compiled Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="topnav" id="myTopnav">
+            <a href="/staffing" class="logo"><img src="{% static 'business/img/logo-color-negro.png' %}"></a>
+            <a href="{% url 'business:logout' %}">{% trans "LOG OUT" %}</a>
+            <a class="navButton" style="font-size: 15px;width:170px;color: white;border-radius:40px;margin-top: 30px;padding:5px 16px;background:#F47B20;"
+               role="button" href="{% url 'business:start' %}">+  CREAR OFERTA</a>
+            <a href="{% url 'business:business_campaigns' business_user_id=business_user.pk %}">Mis campañas</a>
+            <a href="#about">Ayuda</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+            </a>
         </div>
-    {% endif %}-->
-    <br>
-    <br>
-    <form action="#" method="get"> {% csrf_token %}
-    <table>
-        <tr>
-            <th>
-             <p class="column-title"> {% trans "APPLICANTS" %} ( <b id="quantity_backlog" ></b> ) </p>
-            </th>
 
-            <th>
-             <p class="column-title"> {% trans "RELEVANT" %} ( <b id="quantity_waiting_interview" ></b> ) </p>
-            </th>
+        <div class="sidenav">
+            <a href="#"><span class="arrow">&#xFE64;<br><span class="arrow-text">Mis ofertas</span></span></a>
+            <a href="#"><span class="plus">&#x002B;<br><span class="plus-text">Nueva oferta</span></span></a>
+            <a href="#"><span class="setup">&#x2699;<br><span class="setup-text">Configuración</span></span></a>
+            <div class="blur">
+            </div>
+        </div>
 
-            <th>
-             <p class="column-title"> {% trans "RECOMMENDED" %} ( <b id="quantity_sent_to_client" ></b> ) </p>
-            </th>
+        <div class="background">
+            <div class="gradient1">
+                <div class="container">
+                    <div class="row one"></div>
+                    <div class="row two">
+                        <div class="col-lg-5"></div>
+                        <div class="col-lg-7 campaign bold">{{ campaign.title_es }}</div>
+                    </div>
+                    <div class="row three">
+                        <div class="col-lg-3 col-xs-12"></div>
+                        <div class="col-lg-9 col-xs-12 gradient2">
+                            <p class="date regular">FECHA DE PUBLICACIÓN: {{ campaign.created_at }}</p><br>
+                            {% if campaign.active %}
+                                <p class="status bold">ESTADO: activa</p><br>
+                            {% else %}
+                                <p class="status bold">ESTADO: inactiva</p><br>
+                            {% endif %}
+                            <p class="total regular">TOTAL APLICANTES: {{ total_candidates }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
 
-            <th>
-             <p class="column-title"> {% trans "REJECTED" %} ( <b id="quantity_rejected" ></b> ) </p>
-            </th>
-        </tr>
+{% include "business/dashboard_column.html" with candidate_list=applicants state_name='state' %}
+        </div>
+        <!----------------------------------------------FOOTER--------------------------------------------------------->
+        <footer class="container-fluid">
+            <div class="row footer-navigation">
+                <div class="col-md-2 col-md-2"></div>
+                <div class="col-md-3 col-md-3 navfooter">
+                    <ul>
+                        <li><a href="#">Nosotros</a></li>
+                        <li><a href="{% url 'business:contact_form' %}">Contáctanos</a></li>
+                        <li><a href="{% url 'beta_invite:index' %}">Personas</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 col-md-2 social">
+                    <a href="https://www.linkedin.com/company-beta/16241506/" target="_blank"><img src="{% static 'business/img/linkedin.png' %}"></a>
+                    <a href="https://www.facebook.com/PeakU-Latam-1916685895214519/?ref=aymt_homepage_panel" target="_blank">
+                    <img src="{% static 'business/img/facebook.png' %}"></a>
+                    <a href="#" target="_blank"><img src="{% static 'business/img/instagram.png' %}"></a>
+                    <a href="#" target="_blank"><img src="{% static 'business/img/twitter.png' %}"></a>
+                </div>
+                <div class=" col-md-1 col-md-1"></div>
+                <div class=" col-md-2 col-md-2 navfootercontact">
+                    <div class="logo-white"><a href="#"><img src="{% static 'business/img/logo-white.png' %}"></a></div>
+                    <div class="contact">contacto@peaku.co<br>
+                        +57 311 6109340<br>
+                        Colombia
+                    </div>
+                </div>
+                <div class=" col-md-2 col-md-2 "></div>
+            </div>
+            <div class="row">
+                <div class="col-1 col-md-1"></div>
+                <div class="col-10 copyright">Copyright 2018 © PeakU. Todos los derechos reservados.</div>
+                <div class="col-1"></div>
+            </div>
+        </footer>
+        <script>
+            function myFunction() {
+                var x = document.getElementById("myTopnav");
+                if (x.className === "topnav") {
+                    x.className += " responsive";
+                } else {
+                    x.className = "topnav";
+                }
+            }
+        </script>
+        <script>
+            $(document).scroll(function() {
+                if($(window).scrollTop() >= 0.1){
+                    $(".sidenav").css("margin-top","0px");
+                    $(".blur").css("margin-top","0px");
 
-        <tr valign=top>
+                }else if($(window).scrollTop() < 0.1){
+                    $(".sidenav").css("margin-top","84px");
+                    $(".blur").css("margin-top","84px");
+                }
+            });
+        </script>
+    </body>
+</html>
 
-            {% include "business/dashboard_column.html" with candidate_list=applicants state_name='applicants' %}
-            {% include "business/dashboard_column.html" with candidate_list=relevant state_name='relevant' %}
-            {% include "business/dashboard_column.html" with candidate_list=recommended state_name='recommended' %}
-            {% include "business/dashboard_column.html" with candidate_list=rejected state_name='rejected' %}
-
-        </tr>
-    </table>
-
-    <div id="email-box">
-
-        <br>
-        <br>
-
-        <h3>{% trans "Send e-mail" %}</h3>
-
-        <input name="email_subject" id="email-subject" placeholder="{% trans 'Subject' %}">
-
-        <br>
-        <br>
-
-        <textarea name="email_body" cols="41" rows="10" placeholder="{% trans 'Enter the e-mail body here' %}"></textarea>
-
-        <br>
-
-        <input type="submit" name="send_mail" value="{% trans 'Send e-mail' %}">
-        <br>
-        <br>
-    </div>
-    </form>
-    <script> count_candidates();</script>
-
-{% endblock %}
