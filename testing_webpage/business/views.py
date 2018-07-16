@@ -474,7 +474,7 @@ def business_campaigns(request, business_user_id):
     if request.user.id != business_user.auth_user.id:
         return redirect('business:login')
 
-    campaigns = business_user.campaigns.all()
+    campaigns = business_user.campaigns.all()  
 
     return render(request, cts.BUSINESS_CAMPAIGNS_VIEW_PATH, {'campaigns': campaigns,
                                                               'business_user_id': business_user.pk
@@ -510,7 +510,8 @@ def dashboard(request, business_user_id, campaign_id, state_name):
                                                      'applicants': all_params['applicants'],
                                                      'relevant': all_params['relevant'],
                                                      'rejected': all_params['rejected'],
-                                                     'recommended': all_params['recommended']
+                                                     'recommended': all_params['recommended'],
+                                                     'business_user': business_user
                                                      })
 
 
