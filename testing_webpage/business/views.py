@@ -519,7 +519,6 @@ def dashboard(request, business_user_id, campaign_id, state_name):
                                                      # TODO: remove 4 list of candidates when second view is ready
                                                      'applicants': all_params['applicants'],
                                                      'relevant': all_params['relevant'],
-                                                     'rejected': all_params['rejected'],
                                                      'recommended': all_params['recommended'],
                                                      'business_user': business_user
                                                      })
@@ -551,12 +550,10 @@ def summary(request, campaign_id):
     num_applicants = len(all_params['applicants'])
     num_relevant = len(all_params['relevant'])
     num_recommended = len(all_params['recommended'])
-    num_rejected = len(all_params['rejected'])
 
     return render(request, cts.SUMMARY_VIEW_PATH, {'business_user': business_user,
                                                    'campaign': campaign,
-                                                   'num_applicants': num_applicants + num_rejected,
+                                                   'num_applicants': num_applicants,
                                                    'num_relevant': num_relevant,
                                                    'num_recommended': num_recommended,
-                                                   'num_rejected': num_rejected,
-                                                   'total_candidates': num_applicants + num_recommended + num_rejected + num_relevant})
+                                                   'total_candidates': num_applicants + num_recommended + num_relevant})
