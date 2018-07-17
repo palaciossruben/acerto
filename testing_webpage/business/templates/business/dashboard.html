@@ -43,7 +43,7 @@
             </div>
         </div>-->
 
-        <div class="background" style="margin-bottom:100px;">
+        <div class="background">
             <div class="gradient1">
                 <div class="container">
                     <div class="row one"></div>
@@ -64,24 +64,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="row big-div">
-                    <div class="row">
-                        <div class="col-lg-2">
-                            <div class="circle avatar1"></div>
-                        </div>
-                        <div class="col-lg-5">
-                            <p class="status-name bold">{{ business_state.name }}</p>
-                            <div class="line2">
-                            <p class="status-description">{{ business_state.description }}</p>
-                            </div>
-                            <div class="col-lg-5"></div>
-                         </div>
-                    </div>
-                    <div class="candidate-div">
-                        {% include "business/dashboard_column.html" with candidate_list=candidates state_name=business_state.name %}
-                    </div>
-                </div>
             </div>
+        </div>
+
+        <div class="row big-div">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="circle avatar1"></div>
+                </div>
+                <div class="col-lg-5">
+                    <p class="status-name bold">{{ business_state.name }}</p>
+                    <div class="line2">
+                    <p class="status-description">{{ business_state.description }}</p>
+                    </div>
+                    <div class="col-lg-5"></div>
+                 </div>
+            </div>
+            {% include "business/dashboard_column.html" with candidate_list=candidates state_name=business_state.name %}
         </div>
         <!----------------------------------------------FOOTER--------------------------------------------------------->
         <footer class="container-fluid">
@@ -132,7 +131,6 @@
                 if($(window).scrollTop() >= 0.1){
                     $(".sidenav").css("margin-top","0px");
                     $(".blur").css("margin-top","0px");
-
                 }else if($(window).scrollTop() < 0.1){
                     $(".sidenav").css("margin-top","84px");
                     $(".blur").css("margin-top","84px");
