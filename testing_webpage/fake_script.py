@@ -14,7 +14,14 @@ from beta_invite.models import Campaign, EvaluationSummary
 
 makers = Campaign.objects.get(pk=76)
 
+print(makers.recommended_evaluation.cognitive_score)
+print(makers.recommended_evaluation.technical_score)
+print(makers.recommended_evaluation.requirements_score)
 
+print(makers)
+print(makers.recommended_evaluation)
+
+"""
 recommended_evaluation = EvaluationSummary()
 relevant_evaluation = EvaluationSummary()
 applicant_evaluation = EvaluationSummary()
@@ -43,3 +50,6 @@ makers.relevant_evaluation = relevant_evaluation
 makers.applicant_evaluation = applicant_evaluation
 
 makers.save()
+"""
+
+

@@ -479,9 +479,9 @@ class EvaluationSummary(models.Model):
         return evaluation_summary
 
     def __str__(self):
-        return 'id={0}, cut_score={1}, value={2}'.format(self.pk,
-                                                         self.cut_score,
-                                                         self.final_score)
+        return 'id={0}, cut_score={1}, cognitive_score={2}'.format(self.pk,
+                                                                   self.cut_score,
+                                                                   self.cognitive_score)
 
     def update_evaluations(self, evaluations):
         """

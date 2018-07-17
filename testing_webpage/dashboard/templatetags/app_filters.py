@@ -19,6 +19,7 @@ def get_dashboard_campaign_url(campaign):
         return campaign.get_host()+'/seleccion_de_personal/candidatos/{user_id}?campaign_id={campaign_id}'.format(user_id=user.id, campaign_id=campaign.pk)
 '''
 
+
 @register.filter
 def get_business_user_id_from_auth_user(user):
     return BusinessUser.objects.get(auth_user=user).pk
@@ -34,6 +35,10 @@ def dict_get(d, key):
     return d.get(str(key))
 
 
-
-
-
+# TODO: change
+@register.filter
+def print_score(campaign):
+    if campaign.recommended_evaluation is not None and campaign.recommended_evaluation.cognitive_score:
+        return str(round(campaign.recommended_evaluation.cognitive_score*100)) + '%'
+    else:
+        return ''
