@@ -3,36 +3,33 @@
     "model": "dashboard.businessstate",
     "pk": 1,
     "fields":{
-      "name": "Rejected",
-      "name_es": "Rechazados",
-      "states": [2, 3, 4, 6, 9]
+      "name": "applicants",
+      "name_es": "aplicantes",
+      "states": [1, 2, 3, 4, 6, 9, 11],
+      "description":"Candidates that haven't done the tests or failed",
+      "description_es":"Candidatos que no han realizado las pruebas o no las aprobaron"
     }
   },
   {
     "model": "dashboard.businessstate",
     "pk": 2,
     "fields":{
-      "name": "Applicants",
-      "name_es": "Aplicantes",
-      "states": [1, 11]
+      "name": "relevant",
+      "name_es": "relevantes",
+      "states": [8, 10],
+      "description":"Candidates that passed initial testing and specific requirements",
+      "description_es":"Candidatos que aprobaron pruebas iniciales y requerimientos específicos para tu campaña"
     }
   },
   {
     "model": "dashboard.businessstate",
     "pk": 3,
     "fields":{
-      "name": "Relevant",
-      "name_es": "Relevantes",
-      "states": [8, 10]
-    }
-  },
-  {
-    "model": "dashboard.businessstate",
-    "pk": 4,
-    "fields":{
-      "name": "Recommended",
-      "name_es": "Recomendados",
-      "states": [5, 7]
+      "name": "recommended",
+      "name_es": "recomendados",
+      "states": [5, 7],
+      "description":"Your best option candidates; have passed all filters",
+      "description_es":"Candidatos que son tu mejor opción de contratación ya que han superado todos los filtros"
     }
   }
 ]

@@ -242,6 +242,13 @@ class BusinessState(models.Model):
     name = models.CharField(max_length=200)
     name_es = models.CharField(max_length=200)
     states = models.ManyToManyField(State)
+    description = models.CharField(max_length=200, null=True)
+    description_es = models.CharField(max_length=200, null=True)
+
+    def translate(self, lang_code):
+        if lang_code == 'es':
+            self.name = self.name_es
+            self.description = self.description_es
 
     def __str__(self):
         return '{0}, {1}'.format(self.pk, self.name)

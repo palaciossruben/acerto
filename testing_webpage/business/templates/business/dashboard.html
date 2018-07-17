@@ -70,15 +70,15 @@
                             <div class="circle avatar1"></div>
                         </div>
                         <div class="col-lg-5">
-                            <p class="status-name bold">RECOMENDADOS</p>
+                            <p class="status-name bold">{{ business_state.name }}</p>
                             <div class="line2">
-                            <p class="status-description">Sugerencias de candidatos que son tu mejor opción de contratación y han superado todos los filtros</p>
+                            <p class="status-description">{{ business_state.description }}</p>
                             </div>
                             <div class="col-lg-5"></div>
                          </div>
                     </div>
                     <div class="candidate-div">
-                        {% include "business/dashboard_column.html" with candidate_list=candidates state_name=state_name %}
+                        {% include "business/dashboard_column.html" with candidate_list=candidates state_name=business_state.name %}
                     </div>
                 </div>
             </div>

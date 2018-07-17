@@ -26,7 +26,7 @@ from business.models import Plan, Contact, Search, KeyWord
 from business.models import BusinessUser
 from business.custom_user_creation_form import CustomUserCreationForm
 from dashboard import campaign_module
-from dashboard.models import Candidate
+from dashboard.models import Candidate, BusinessState
 from business import dashboard_module
 from testing_webpage.models import BusinessUserPendingEmail
 
@@ -502,6 +502,8 @@ def dashboard(request, business_user_id, campaign_id, state_name):
 
     business_user = BusinessUser.objects.get(pk=business_user_id)
     campaign = Campaign.objects.get(pk=campaign_id)
+    business_state = BusinessState.objects.get(name=state_name)
+    business_state.translate(request.LANGUAGE_CODE)
 
     if request.user.id != business_user.auth_user.id or campaign not in business_user.campaigns.all():
         return redirect('business:login')
@@ -513,7 +515,7 @@ def dashboard(request, business_user_id, campaign_id, state_name):
 
     return render(request, cts.DASHBOARD_VIEW_PATH, {'candidates': all_params[state_name],
                                                      'campaign': campaign,
-                                                     'state_name': state_name,
+                                                     'business_state': business_state,
                                                      # TODO: remove 4 list of candidates when second view is ready
                                                      'applicants': all_params['applicants'],
                                                      'relevant': all_params['relevant'],
