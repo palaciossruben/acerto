@@ -43,7 +43,7 @@
             </div>
         </div>-->
 
-        <div class="background" style="margin-bottom:100px;">
+        <div class="background">
             <div class="gradient1">
                 <div class="container">
                     <div class="row one"></div>
@@ -64,23 +64,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="row big-div">
-                    <div class="row">
-                        <div class="col-lg-2">
-                            <div class="circle avatar1"></div>
-                        </div>
-                        <div class="col-lg-5">
-                            <p class="status-name bold">RECOMENDADOS</p>
-                            <div class="line2">
-                            <p class="status-description">Sugerencias de candidatos que son tu mejor opción de contratación y han superado todos los filtros</p>
-                            </div>
-                            <div class="col-lg-5"></div>
-                         </div>
-                    </div>
-                    <div class="candidate-div">
-                        {% include "business/dashboard_column.html" with candidate_list=candidates state_name=state_name %}
-                    </div>
+            </div>
+        </div>
+
+        <div class="row big-div">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="circle avatar1"></div>
                 </div>
+                <div class="col-lg-5">
+                    <p class="status-name bold">RECOMENDADOS</p>
+                    <div class="line2">
+                    <p class="status-description">Sugerencias de candidatos que son tu mejor opción de contratación y han superado todos los filtros</p>
+                    </div>
+                    <div class="col-lg-5"></div>
+                 </div>
+            </div>
+            <div class="candidate-div">
+                {% include "business/dashboard_column.html" with candidate_list=candidates state_name=state_name %}
             </div>
         </div>
         <!----------------------------------------------FOOTER--------------------------------------------------------->
