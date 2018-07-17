@@ -1,12 +1,12 @@
 {% load static %}
 
-<td>
 
-        <ol id="{{ state_name }}">
-        {% for candidate in candidate_list %}
-            {% include "business/candidate_for_campaign.html" with candidate=candidate %}
-        {% endfor %}
-        </ol>
+<div id="{{ state_name }}">
+{% for candidate in candidate_list %}
+    <div class="candidate-div">
+        {% include "business/candidate_for_campaign.html" with candidate=candidate %}
+    </div>
+{% endfor %}
+</div>
 
-</td>
 
