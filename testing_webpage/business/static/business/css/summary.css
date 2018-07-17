@@ -188,7 +188,7 @@ body {
 .background{
     background: url(../img/Start_BG-01-min.jpg) no-repeat top center scroll ;
     background-size:cover;
-    height:800px;
+    min-height:800px;
 }
 
 .gradient1 {
@@ -258,6 +258,26 @@ body {
     font-size: 38px;
     text-shadow: 7px 5px 3px rgba(0,0,0,0.5);
     text-align: right;
+}
+
+.big-div{
+    width: 80%;
+    margin:0 auto;
+    box-shadow: 0px 8px 5px rgba(0,0,0,0.1);
+    border-radius:25px;
+    background-color:white;
+    position:relative;
+    z-index:200;
+    margin-top: 50px;
+    padding:40px;
+}
+
+.candidate-div{
+    width: 100%;
+    border-radius:25px;
+    border: 4px groove;
+    border-color:rgba(255, 255, 255, .5);
+    margin: 0 auto;
 }
 
 .div1{
@@ -341,7 +361,13 @@ body {
     background-color: #666666;
     width: 90%;
     margin: 0 auto;
+}
 
+.line2{
+    height: 2px;
+    background-color: #666666;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .status-description{
