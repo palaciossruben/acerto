@@ -493,13 +493,14 @@ body {
     border-color:rgba(238, 235, 52, 1);*/
 }
 
-.fill2{
-    margin-left: 20px;
-    padding-left: 14px;
+.fill3{
+    margin-top:40px;
 }
 
-.fill3{
-    margin-top: 115px;
+.text-label{
+    color: white;
+    position:absolute;
+    top:10px;
 }
 
 /**************************************************FOOTER**************************************************************/
