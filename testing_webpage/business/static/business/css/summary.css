@@ -484,8 +484,8 @@ body {
     padding-top: 15px;
     color: white;
 
-    background: linear-gradient(to top, rgba(238, 235, 52, 0.7) 85%, transparent 85%);
-    border-color:rgba(238, 235, 52, 1);
+    /*background: linear-gradient(to top, rgba(238, 235, 52, 0.7) 85%, transparent 85%);
+    border-color:rgba(238, 235, 52, 1);*/
 }
 
 
