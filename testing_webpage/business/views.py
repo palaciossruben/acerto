@@ -562,5 +562,4 @@ def summary(request, campaign_id):
                                                    'campaign': campaign,
                                                    'num_applicants': num_applicants,
                                                    'num_relevant': num_relevant,
-                                                   'num_recommended': num_recommended,
-                                                   'total_candidates': num_applicants + num_recommended + num_relevant})
+                                                   'num_recommended': num_recommended})
