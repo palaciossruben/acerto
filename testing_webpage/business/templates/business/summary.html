@@ -33,14 +33,14 @@
             <i class="fa fa-bars"></i>
             </a>
         </div>
-
+        <!--
         <div class="sidenav">
             <a href="{% url 'business:business_campaigns' business_user_id=business_user.pk %}"><span class="arrow">&#xFE64;<br><span class="arrow-text">Mis ofertas</span></span></a>
             <a href="{% url 'business:start' %}"><span class="plus">&#x002B;<br><span class="plus-text">Nueva oferta</span></span></a>
-            <!--<a href="#"><span class="setup">&#x2699;<br><span class="setup-text">Configuración</span></span></a>-->
+            <!--<a href="#"><span class="setup">&#x2699;<br><span class="setup-text">Configuración</span></span></a>
             <div class="blur">
             </div>
-        </div>
+        </div>-->
 
         <div class="background">
             <div class="gradient1">
@@ -84,18 +84,20 @@
                                 <span class="primary bold">PERFILES</span><br>
                                 <span class="secondary regular">SELECCIONADOS</span>
                                 <div class="recommended">
-                                    <div class="fill cognitive-test" style="background: linear-gradient(to top, rgba(100, 235, 52, 0.7) 85%, transparent 85%); border-color:green;">
-                                        85%
-                                    </div>
-                                    <div class="fill requirement-test" style="background: linear-gradient(to top, rgba(100, 235, 52, 0.7) 92%, transparent 85%); border-color:green;">
-                                        92%
-                                    </div>
-                                    <div class="fill technical-test" style="background: linear-gradient(to top, rgba(100, 235, 52, 0.7) 91%, transparent 85%); border-color:green;">
-                                        91%
-                                    </div>
-                                    <div class="fill fit-test" style="background: linear-gradient(to top, rgba(100, 235, 52, 0.7) 86%, transparent 85%); border-color:green;">
-                                        86%
-                                    </div>
+                                    {% if business_user.pk == 76 %}
+                                        <div class="fill cognitive-test" style="background: linear-gradient(to top, rgba(100, 235, 52, 0.7) 85%, transparent 85%); border-color:green;">
+                                            85%
+                                        </div>
+                                        <div class="fill requirement-test" style="background: linear-gradient(to top, rgba(100, 235, 52, 0.7) 92%, transparent 92%); border-color:green;">
+                                            92%
+                                        </div>
+                                        <div class="fill technical-test" style="background: linear-gradient(to top, rgba(100, 235, 52, 0.7) 91%, transparent 91%); border-color:green;">
+                                            91%
+                                        </div>
+                                        <div class="fill fit-test" style="background: linear-gradient(to top, rgba(100, 235, 52, 0.7) 86%, transparent 86%); border-color:green;">
+                                            86%
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -119,8 +121,10 @@
                                 <span class="primary bold">PERFILES</span><br>
                                 <span class="secondary regular">SELECCIONADOS</span>
                                 <span class="relevant">
-                                    <div class="fill cognitive-test" style="background: linear-gradient(to top, rgba(238, 235, 52, 0.7) 65%, transparent 85%); border-color:yellow;">65%</div>
-                                    <div class="fill requirement-test" style="background: linear-gradient(to top, rgba(238, 235, 52, 0.7) 72%, transparent 85%); border-color:yellow;">72%</div>
+                                    {% if business_user.pk == 76 %}
+                                        <div class="fill cognitive-test" style="background: linear-gradient(to top, rgba(238, 235, 52, 0.7) 65%, transparent 65%); border-color:yellow;">65%</div>
+                                        <div class="fill requirement-test" style="background: linear-gradient(to top, rgba(238, 235, 52, 0.7) 72%, transparent 72%); border-color:yellow;">72%</div>
+                                    {% endif %}
                                 </span>
                             </div>
                         </div>
@@ -143,7 +147,9 @@
                                 <span class="quantity2 bold">{{ num_applicants }}</span><br>
                                 <span class="applicant-text bold">PERFILES INSCRITOS</span><br>
                                 <span class="applicant">
-                                    <div class="fill cognitive-test" style="margin-top: 100px; background: linear-gradient(to top, rgba(255, 0, 0, 0.7) 45%, transparent 85%); border-color:red;">45%</div>
+                                    {% if business_user.pk == 76 %}
+                                        <div class="fill cognitive-test" style="margin-top: 100px; background: linear-gradient(to top, rgba(255, 0, 0, 0.7) 45%, transparent 45%); border-color:red;">45%</div>
+                                    {% endif %}
                                 </span>
                             </div>
                         </div>

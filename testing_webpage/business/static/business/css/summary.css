@@ -355,6 +355,10 @@ body {
     position: absolute;
 }
 
+.total, .status {
+    text-transform: uppercase;
+}
+
 .status-name{
     color:#b5ce53;
     font-size:27px;
@@ -489,6 +493,14 @@ body {
     border-color:rgba(238, 235, 52, 1);*/
 }
 
+.fill2{
+    margin-left: 20px;
+    padding-left: 14px;
+}
+
+.fill3{
+    margin-top: 115px;
+}
 
 /**************************************************FOOTER**************************************************************/
 footer {
