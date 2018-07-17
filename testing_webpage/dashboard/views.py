@@ -14,6 +14,7 @@ from beta_invite.views import get_drop_down_values
 from dashboard import interview_module, candidate_module, campaign_module, test_module
 from match import model
 from business import dashboard_module
+from business.models import BusinessUser
 import business
 
 
@@ -586,5 +587,9 @@ def business_dashboard(request, pk):
     campaign = Campaign.objects.get(pk=pk)
 
     dashboard_module.send_email_from_dashboard(request, campaign)
+
+    query = BusinessUser.objects.filter(campaigns__contains=campaign)
+    user = [id for id in query.all()[0]]
+    business_user_id = user.id
 
     return render(request, business.constants.DASHBOARD_VIEW_PATH, dashboard_module.get_dashboard_params(campaign))
