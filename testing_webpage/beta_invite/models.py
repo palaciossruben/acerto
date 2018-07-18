@@ -370,7 +370,7 @@ class Score(models.Model):
         return score
 
     def __str__(self):
-        return 'id={0}, test={1}, value={2}'.format(self.pk, self.test, self.value)
+        return 'id={0}, test={1}, value={2}'.format(self.pk, self.test.pk, self.value)
 
     # adds custom table name
     class Meta:

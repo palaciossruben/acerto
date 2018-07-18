@@ -420,6 +420,7 @@ def calculate_evaluation_summaries(campaign):
                                                               for c in get_application_candidates(campaign)])
     campaign.rejected_evaluation = EvaluationSummary.create([c.get_evaluation_summary()
                                                              for c in get_rejected_candidates(campaign)])
+    campaign.save()
 
 
 def calculate_operational_efficiency(campaign):

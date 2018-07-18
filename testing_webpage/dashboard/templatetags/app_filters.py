@@ -35,10 +35,17 @@ def dict_get(d, key):
     return d.get(str(key))
 
 
-# TODO: change
 @register.filter
-def print_score(campaign):
-    if campaign.recommended_evaluation is not None and campaign.recommended_evaluation.cognitive_score:
-        return str(round(campaign.recommended_evaluation.cognitive_score*100)) + '%'
+def print_score(score):
+    if score is not None:
+        return str(round(score)) + '%'
     else:
         return ''
+
+
+@register.filter
+def int_rounding(score):
+    if score is not None:
+        return round(score)
+    else:
+        return 0

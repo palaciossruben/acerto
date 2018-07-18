@@ -17,6 +17,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <!--Our Css-->
         <link rel="stylesheet" type="text/css" href="{% static 'business/css/summary.css' %}">
+        <!--Our JS-->
+        <script src="{% static 'business/js/summary.js' %}"></script>
         <!-- Latest jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <!-- Latest compiled Bootstrap JavaScript -->
@@ -84,9 +86,11 @@
                                 <span class="primary bold">PERFILES</span><br>
                                 <span class="secondary regular">SELECCIONADOS</span>
                                 <div class="recommended">
-                                    <div class="fill cognitive-test" style="background: linear-gradient(to top, rgba(100, 235, 52, 0.7) 85%, transparent 85%); border-color:green;">
-                                        85%
-                                    </div>
+                                    {% if campaign.relevant_evaluation.cognitive_score %}
+                                        <div id="recommended-cognitive-id" class="fill cognitive-test">
+                                            {{ campaign.relevant_evaluation.cognitive_score|print_score }}
+                                        </div>
+                                    {% endif %}
                                     <div class="fill requirement-test" style="background: linear-gradient(to top, rgba(100, 235, 52, 0.7) 92%, transparent 85%); border-color:green;">
                                         92%
                                     </div>
@@ -206,6 +210,12 @@
                     $(".blur").css("margin-top","84px");
                 }
             });
+        </script>
+        <script>
+           $(document).ready(function() {
+               set_circle_color({{ campaign.relevant_evaluation.cognitive_score|int_rounding }}, "recommended-cognitive-id");
+               set_circle_color({{ campaign.relevant_evaluation.technical_score|int_rounding }}, "recommended-technical-id");
+           });
         </script>
     </body>
 </html>

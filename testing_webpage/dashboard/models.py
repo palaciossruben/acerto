@@ -148,6 +148,7 @@ class Candidate(models.Model):
             return self.evaluation_summary
         else:
             self.evaluation_summary = EvaluationSummary.create(self.evaluations.all())
+            self.save()
             return self.evaluation_summary
 
     def get_business_user(self):
