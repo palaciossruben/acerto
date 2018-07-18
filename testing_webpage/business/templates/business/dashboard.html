@@ -60,7 +60,13 @@
                             {% else %}
                                 <p class="status bold">ESTADO: inactiva</p><br>
                             {% endif %}
-                            <p class="total regular">TOTAL APLICANTES: {{ total_candidates }}</p>
+                            {% if business_state.name == 'relevantes' %}
+                                <p class="total regular">TOTAL {{ business_state.name }}: {{ total_relevant }}</p>
+                            {% elif business_state.name == 'recomendados' %}
+                                <p class="total regular">TOTAL {{ business_state.name }}: {{ total_recommended }}</p>
+                            {% else %}
+                                <p class="total regular">TOTAL {{ business_state.name }}: {{ total_applicants }}</p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

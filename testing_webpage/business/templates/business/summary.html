@@ -35,14 +35,14 @@
             <i class="fa fa-bars"></i>
             </a>
         </div>
-
+        <!--
         <div class="sidenav">
             <a href="{% url 'business:business_campaigns' business_user_id=business_user.pk %}"><span class="arrow">&#xFE64;<br><span class="arrow-text">Mis ofertas</span></span></a>
             <a href="{% url 'business:start' %}"><span class="plus">&#x002B;<br><span class="plus-text">Nueva oferta</span></span></a>
-            <!--<a href="#"><span class="setup">&#x2699;<br><span class="setup-text">Configuración</span></span></a>-->
+            <!--<a href="#"><span class="setup">&#x2699;<br><span class="setup-text">Configuración</span></span></a>
             <div class="blur">
             </div>
-        </div>
+        </div>-->
 
         <div class="background">
             <div class="gradient1">
@@ -61,7 +61,7 @@
                             {% else %}
                                 <p class="status bold">ESTADO: inactiva</p><br>
                             {% endif %}
-                            <p class="total regular">TOTAL APLICANTES: {{ total_candidates }}</p>
+                            <p class="total regular">TOTAL APLICANTES: {{ num_applicants }}</p>
                         </div>
                     </div>
                 </div>
@@ -86,20 +86,31 @@
                                 <span class="primary bold">PERFILES</span><br>
                                 <span class="secondary regular">SELECCIONADOS</span>
                                 <div class="recommended">
-                                    {% if campaign.relevant_evaluation.cognitive_score %}
-                                        <div id="recommended-cognitive-id" class="fill cognitive-test">
-                                            {{ campaign.relevant_evaluation.cognitive_score|print_score }}
+
+                                    {% if campaign.pk == 76 %}
+                                        <div class="row">
+                                            <div class="col-lg-3"><div class="text-label label1">Prueba cognitiva</div></div>
+                                            <div class="col-lg-3"><div class="text-label label2">Prueba técnica</div></div>
+                                            <div class="col-lg-3"><div class="text-label label3">Prueba de requisitos</div></div>
+                                            <div class="col-lg-3"><div class="text-label label4">Prueba fit cultural</div></div>
+                                        </div>
+                                        <div class="row">
+                                            {% if campaign.relevant_evaluation.cognitive_score %}
+                                                <div id="recommended-cognitive-id" class="fill cognitive-test">
+                                                    {{ campaign.relevant_evaluation.cognitive_score|print_score }}
+                                                </div>
+                                            {% endif %}
+                                            <div class="fill requirement-test" style="background: linear-gradient(to top, rgba(100, 235, 52, 0.7) 92%, transparent 92%); border-color:green;">
+                                                92%
+                                            </div>
+                                            <div class="fill technical-test" style="background: linear-gradient(to top, rgba(100, 235, 52, 0.7) 91%, transparent 91%); border-color:green;">
+                                                91%
+                                            </div>
+                                            <div class="fill fit-test" style="background: linear-gradient(to top, rgba(100, 235, 52, 0.7) 86%, transparent 86%); border-color:green;">
+                                                86%
+                                            </div>
                                         </div>
                                     {% endif %}
-                                    <div class="fill requirement-test" style="background: linear-gradient(to top, rgba(100, 235, 52, 0.7) 92%, transparent 85%); border-color:green;">
-                                        92%
-                                    </div>
-                                    <div class="fill technical-test" style="background: linear-gradient(to top, rgba(100, 235, 52, 0.7) 91%, transparent 85%); border-color:green;">
-                                        91%
-                                    </div>
-                                    <div class="fill fit-test" style="background: linear-gradient(to top, rgba(100, 235, 52, 0.7) 86%, transparent 85%); border-color:green;">
-                                        86%
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +124,7 @@
                             <div class="circle avatar2"></div>
                             <p class="status-name bold">RELEVANTES</p>
                             <div class="line"></div>
-                            <p class="status-description">Candidatos que aprobaron pruebas iniciales y requerimientos específicos para tu campaña</p>
+                            <p class="status-description">Todos los candidatos que aprobaron pruebas iniciales y requerimientos específicos para tu campaña</p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-xs-12">
@@ -123,8 +134,16 @@
                                 <span class="primary bold">PERFILES</span><br>
                                 <span class="secondary regular">SELECCIONADOS</span>
                                 <span class="relevant">
-                                    <div class="fill cognitive-test" style="background: linear-gradient(to top, rgba(238, 235, 52, 0.7) 65%, transparent 85%); border-color:yellow;">65%</div>
-                                    <div class="fill requirement-test" style="background: linear-gradient(to top, rgba(238, 235, 52, 0.7) 72%, transparent 85%); border-color:yellow;">72%</div>
+                                    {% if campaign.pk == 76 %}
+                                        <div class="row">
+                                            <div class="col-lg-6"><div class="text-label label5">Prueba cognitiva</div></div>
+                                            <div class="col-lg-6"><div class="text-label label6">Prueba técnica</div></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="fill cognitive-test" style="background: linear-gradient(to top, rgba(238, 235, 52, 0.7) 65%, transparent 65%); border-color:yellow;">65%</div>
+                                            <div class="fill requirement-test" style="background: linear-gradient(to top, rgba(238, 235, 52, 0.7) 72%, transparent 72%); border-color:yellow;">72%</div>
+                                        </div>
+                                    {% endif %}
                                 </span>
                             </div>
                         </div>
@@ -138,7 +157,7 @@
                             <div class="circle avatar3"></div>
                             <p class="status-name bold">APLICANTES</p>
                             <div class="line"></div>
-                            <p class="status-description">Candidatos que no han realizado las pruebas o no las aprobaron</p>
+                            <p class="status-description">Total de candidatos que aplicaron a tu campaña</p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-xs-12">
@@ -147,7 +166,14 @@
                                 <span class="quantity2 bold">{{ num_applicants }}</span><br>
                                 <span class="applicant-text bold">PERFILES INSCRITOS</span><br>
                                 <span class="applicant">
-                                    <div class="fill cognitive-test" style="margin-top: 100px; background: linear-gradient(to top, rgba(255, 0, 0, 0.7) 45%, transparent 85%); border-color:red;">45%</div>
+                                    {% if campaign.pk == 76 %}
+                                        <div class="row">
+                                            <div class="col-lg-12"><div class="text-label label7">Prueba cognitiva</div></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="fill fill3 cognitive-test" style="margin-top: 100px; background: linear-gradient(to top, rgba(255, 0, 0, 0.7) 45%, transparent 45%); border-color:red;">45%</div>
+                                        </div>
+                                    {% endif %}
                                 </span>
                             </div>
                         </div>

@@ -232,7 +232,7 @@ body {
 }
 
 .quantity2 {
-    font-size: 50px;
+    font-size: 37px;
     color: white;
 }
 
@@ -353,6 +353,10 @@ body {
     font-size: 20px;
     right: 25px;
     position: absolute;
+}
+
+.total, .status {
+    text-transform: uppercase;
 }
 
 .status-name{
@@ -489,6 +493,36 @@ body {
     border-color:rgba(238, 235, 52, 1);*/
 }
 
+.fill3{
+    margin-top:40px;
+}
+
+.text-label{
+    color: white;
+    position:absolute;
+    top:10px;
+}
+
+.label2{
+    margin-right: 11px;
+}
+
+.label3{
+    margin-right: 10px;
+}
+
+.label4{
+    margin-right: 14px;
+}
+
+.label6{
+    margin-right: 37px;
+}
+
+.label7{
+    margin-top: 65px;
+    margin-left: 45px;
+}
 
 /**************************************************FOOTER**************************************************************/
 footer {

@@ -513,6 +513,10 @@ def dashboard(request, business_user_id, campaign_id, state_name):
 
     all_params = dashboard_module.get_dashboard_params(campaign)
 
+    num_applicants = len(all_params['applicants'])
+    num_relevant = len(all_params['relevant'])
+    num_recommended = len(all_params['recommended'])
+
     return render(request, cts.DASHBOARD_VIEW_PATH, {'candidates': all_params[state_name],
                                                      'campaign': campaign,
                                                      'business_state': business_state,
@@ -520,7 +524,10 @@ def dashboard(request, business_user_id, campaign_id, state_name):
                                                      'applicants': all_params['applicants'],
                                                      'relevant': all_params['relevant'],
                                                      'recommended': all_params['recommended'],
-                                                     'business_user': business_user
+                                                     'business_user': business_user,
+                                                     'total_applicants': num_applicants,
+                                                     'total_recommended': num_recommended,
+                                                     'total_relevant': num_relevant
                                                      })
 
 
@@ -555,5 +562,4 @@ def summary(request, campaign_id):
                                                    'campaign': campaign,
                                                    'num_applicants': num_applicants,
                                                    'num_relevant': num_relevant,
-                                                   'num_recommended': num_recommended,
-                                                   'total_candidates': num_applicants + num_recommended + num_relevant})
+                                                   'num_recommended': num_recommended})
