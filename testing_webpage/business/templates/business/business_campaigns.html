@@ -17,6 +17,11 @@
             <li style="">
                 <a href="{% url 'business:summary' campaign_id=campaign.pk %}">
                     {{ campaign.title_es }}
+                    {% if campaign.active == False %}
+                        Inactiva
+                    {% else %}
+                        Activa
+                    {% endif %}
                 </a>
             </li>
         {% endfor %}
