@@ -400,7 +400,7 @@ def get_relevant_candidates(campaign):
 
 
 def get_application_candidates(campaign):
-    return Candidate.objects.filter(campaign=campaign, state__in=State.get_relevant_states())
+    return Candidate.objects.filter(campaign=campaign, state__in=State.get_applicant_states())
 
 
 def get_rejected_candidates(campaign):

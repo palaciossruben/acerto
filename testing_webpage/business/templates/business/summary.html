@@ -87,28 +87,46 @@
                                 <span class="secondary regular">SELECCIONADOS</span>
                                 <div class="recommended">
 
-                                    {% if campaign.pk == 76 %}
+                                    {% if campaign.pk == 146 %}
                                         <div class="row">
-                                            <div class="col-lg-3"><div class="text-label label1">Prueba cognitiva</div></div>
-                                            <div class="col-lg-3"><div class="text-label label2">Prueba técnica</div></div>
-                                            <div class="col-lg-3"><div class="text-label label3">Prueba de requisitos</div></div>
-                                            <div class="col-lg-3"><div class="text-label label4">Prueba fit cultural</div></div>
+                                            {% if campaign.recommended_evaluation.cognitive_score %}
+                                                <div class="col-lg-3"><div class="text-label label1">Prueba cognitiva</div></div>
+                                            {% endif %}
+                                            {% if campaign.recommended_evaluation.technical_score %}
+                                                <div class="col-lg-3"><div class="text-label label2">Prueba técnica</div></div>
+                                            {% endif %}
+                                            {% if campaign.recommended_evaluation.requirements_score %}
+                                                <div class="col-lg-3"><div class="text-label label3">Prueba de requisitos</div></div>
+                                            {% endif %}
+                                            {% if campaign.recommended_evaluation.soft_skills_score %}
+                                                <div class="col-lg-3"><div class="text-label label4">Prueba fit cultural</div></div>
+                                            {% endif %}
                                         </div>
                                         <div class="row">
-                                            {% if campaign.relevant_evaluation.cognitive_score %}
-                                                <div id="recommended-cognitive-id" class="fill cognitive-test">
-                                                    {{ campaign.relevant_evaluation.cognitive_score|print_score }}
+
+                                            {% if campaign.recommended_evaluation.cognitive_score >= 0 %}
+                                                <div id="recommended-cognitive-id" class="fill">
+                                                    {{ campaign.recommended_evaluation.cognitive_score|print_score }}
                                                 </div>
                                             {% endif %}
-                                            <div class="fill requirement-test" style="background: linear-gradient(to top, rgba(100, 235, 52, 0.7) 92%, transparent 92%); border-color:green;">
-                                                92%
-                                            </div>
-                                            <div class="fill technical-test" style="background: linear-gradient(to top, rgba(100, 235, 52, 0.7) 91%, transparent 91%); border-color:green;">
-                                                91%
-                                            </div>
-                                            <div class="fill fit-test" style="background: linear-gradient(to top, rgba(100, 235, 52, 0.7) 86%, transparent 86%); border-color:green;">
-                                                86%
-                                            </div>
+
+                                            {% if campaign.recommended_evaluation.technical_score >= 0 %}
+                                                <div id="recommended-technical-id" class="fill">
+                                                    {{ campaign.recommended_evaluation.technical_score|print_score }}
+                                                </div>
+                                            {% endif %}
+
+                                            {% if campaign.recommended_evaluation.requirements_score >= 0 %}
+                                                <div id="recommended-requirement-id" class="fill">
+                                                    {{ campaign.recommended_evaluation.requirements_score|print_score }}
+                                                </div>
+                                            {% endif %}
+
+                                            {% if campaign.recommended_evaluation.soft_skills_score >= 0 %}
+                                                <div id="recommended-soft-id" class="fill">
+                                                    {{ campaign.recommended_evaluation.soft_skills_score|print_score }}
+                                                </div>
+                                            {% endif %}
                                         </div>
                                     {% endif %}
                                 </div>
@@ -132,16 +150,29 @@
                             <div class="row">
                                 <span class="quantity bold">{{ num_relevant }}</span><br>
                                 <span class="primary bold">PERFILES</span><br>
-                                <span class="secondary regular">SELECCIONADOS</span>
+                                <span class="secondary regular">PRESELECCIONADOS</span>
                                 <span class="relevant">
-                                    {% if campaign.pk == 76 %}
+                                    {% if campaign.pk == 146 %}
                                         <div class="row">
-                                            <div class="col-lg-6"><div class="text-label label5">Prueba cognitiva</div></div>
-                                            <div class="col-lg-6"><div class="text-label label6">Prueba técnica</div></div>
+                                            {% if campaign.relevant_evaluation.cognitive_score >= 0 %}
+                                                <div class="col-lg-6"><div class="text-label label5">Prueba cognitiva</div></div>
+                                            {% endif %}
+                                            {% if campaign.relevant_evaluation.technical_score >= 0 %}
+                                                <div class="col-lg-6"><div class="text-label label6">Prueba técnica</div></div>
+                                            {% endif %}
                                         </div>
                                         <div class="row">
-                                            <div class="fill cognitive-test" style="background: linear-gradient(to top, rgba(238, 235, 52, 0.7) 65%, transparent 65%); border-color:yellow;">65%</div>
-                                            <div class="fill requirement-test" style="background: linear-gradient(to top, rgba(238, 235, 52, 0.7) 72%, transparent 72%); border-color:yellow;">72%</div>
+                                            {% if campaign.relevant_evaluation.cognitive_score >= 0 %}
+                                                <div id="relevant-cognitive-id" class="fill">
+                                                    {{ campaign.relevant_evaluation.cognitive_score|print_score }}
+                                                </div>
+                                            {% endif %}
+
+                                            {% if campaign.relevant_evaluation.technical_score >= 0 %}
+                                                <div id="relevant-technical-id" class="fill">
+                                                    {{ campaign.relevant_evaluation.technical_score|print_score }}
+                                                </div>
+                                            {% endif %}
                                         </div>
                                     {% endif %}
                                 </span>
@@ -166,12 +197,18 @@
                                 <span class="quantity2 bold">{{ num_applicants }}</span><br>
                                 <span class="applicant-text bold">PERFILES INSCRITOS</span><br>
                                 <span class="applicant">
-                                    {% if campaign.pk == 76 %}
+                                    {% if campaign.pk == 146 %}
+                                        {% if campaign.applicant_evaluation.cognitive_score >= 0 %}
+                                            <div class="row">
+                                                <div class="col-lg-12"><div class="text-label label7">Prueba cognitiva</div></div>
+                                            </div>
+                                        {% endif %}
                                         <div class="row">
-                                            <div class="col-lg-12"><div class="text-label label7">Prueba cognitiva</div></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="fill fill3 cognitive-test" style="margin-top: 100px; background: linear-gradient(to top, rgba(255, 0, 0, 0.7) 45%, transparent 45%); border-color:red;">45%</div>
+                                            {% if campaign.applicant_evaluation.cognitive_score >= 0 %}
+                                                <div id="applicant-cognitive-id" class="fill fill3">
+                                                    {{ campaign.applicant_evaluation.cognitive_score|print_score }}
+                                                </div>
+                                            {% endif %}
                                         </div>
                                     {% endif %}
                                 </span>
@@ -239,8 +276,13 @@
         </script>
         <script>
            $(document).ready(function() {
-               set_circle_color({{ campaign.relevant_evaluation.cognitive_score|int_rounding }}, "recommended-cognitive-id");
-               set_circle_color({{ campaign.relevant_evaluation.technical_score|int_rounding }}, "recommended-technical-id");
+               set_circle_color({{ campaign.recommended_evaluation.cognitive_score|int_rounding }}, "recommended-cognitive-id");
+               set_circle_color({{ campaign.recommended_evaluation.technical_score|int_rounding }}, "recommended-technical-id");
+               set_circle_color({{ campaign.recommended_evaluation.requirements_score|int_rounding }}, "recommended-requirement-id");
+               set_circle_color({{ campaign.recommended_evaluation.soft_skills_score|int_rounding }}, "recommended-soft-id");
+               set_circle_color({{ campaign.relevant_evaluation.technical_score|int_rounding }}, "relevant-cognitive-id");
+               set_circle_color({{ campaign.relevant_evaluation.cognitive_score|int_rounding }}, "relevant-technical-id");
+               set_circle_color({{ campaign.applicant_evaluation.cognitive_score|int_rounding }}, "applicant-cognitive-id");
            });
         </script>
     </body>
