@@ -28,28 +28,10 @@
   },
   {
     "model": "dashboard.state",
-    "pk": 8,
-    "fields":{
-      "name": "Waiting for Interview",
-      "code": "WFI",
-      "is_rejected": false
-    }
-  },
-  {
-    "model": "dashboard.state",
     "pk": 4,
     "fields":{
       "name": "Rejected on Tests",
       "code": "ROT",
-      "is_rejected": true
-    }
-  },
-  {
-    "model": "dashboard.state",
-    "pk": 9,
-    "fields":{
-      "name": "Rejected on Interview",
-      "code": "ROI",
       "is_rejected": true
     }
   },
@@ -78,6 +60,24 @@
       "name": "Got the job",
       "code": "GTJ",
       "is_rejected": false
+    }
+  },
+  {
+    "model": "dashboard.state",
+    "pk": 8,
+    "fields":{
+      "name": "Waiting for Interview",
+      "code": "WFI",
+      "is_rejected": false
+    }
+  },
+  {
+    "model": "dashboard.state",
+    "pk": 9,
+    "fields":{
+      "name": "Rejected on Interview",
+      "code": "ROI",
+      "is_rejected": true
     }
   },
   {

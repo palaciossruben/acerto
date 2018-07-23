@@ -664,7 +664,7 @@ footer {
 .woman-working {
     background: url(../img/woman_working.png) no-repeat top center scroll ;
     background-size:contain;
-    height:400px;
+    height:300px;
 }
 
 .section2{
@@ -686,12 +686,9 @@ h2, h3, h4, h5 {
     font-size:19px;
 }
 
-.description2{
-    margin-left: 40px;
-}
 
 .description3{
-    margin-right: 40px;
+    padding-left: 60px;
 }
 
 h2{

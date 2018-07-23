@@ -489,48 +489,6 @@ def business_campaigns(request, business_user_id):
                                                               })
 
 
-@login_required
-def dashboard(request, business_user_id, campaign_id, state_name):
-    """
-    Renders the business dashboard
-    Args:
-        request: HTTP
-        business_user_id: BusinessUser primary key
-        campaign_id: Campaign pk
-        state_name: name str
-    """
-
-    business_user = BusinessUser.objects.get(pk=business_user_id)
-    campaign = Campaign.objects.get(pk=campaign_id)
-    business_state = BusinessState.objects.get(name=state_name)
-    business_state.translate(request.LANGUAGE_CODE)
-
-    if common.access_for_users(request, campaign, business_user):
-        return redirect('business:login')
-
-    # TODO: remove?
-    dashboard_module.send_email_from_dashboard(request, campaign)
-    common.calculate_evaluation_summaries(campaign)
-    applicants = common.get_application_candidates(campaign)
-    relevant = common.get_relevant_candidates(campaign)
-    recommended = common.get_recommended_candidates(campaign)
-
-    return render(request, cts.DASHBOARD_VIEW_PATH, {'candidates': {'applicants': applicants,
-                                                                    'relevant': relevant,
-                                                                    'recommended': recommended}[state_name],
-                                                     'campaign': campaign,
-                                                     'business_state': business_state,
-                                                     # TODO: remove 4 list of candidates when second view is ready
-                                                     'applicants': applicants,
-                                                     'relevant': relevant,
-                                                     'recommended': recommended,
-                                                     'business_user': business_user,
-                                                     'total_applicants': len(applicants),
-                                                     'total_recommended': len(recommended),
-                                                     'total_relevant': len(relevant)
-                                                     })
-
-
 def candidate_profile(request, pk):
     candidate = Candidate.objects.get(pk=pk)
     return render(request, cts.CANDIDATE_PROFILE_VIEW_PATH, {'candidate': candidate})
@@ -561,3 +519,41 @@ def summary(request, campaign_id):
                                                    'num_recommended': len(common.get_recommended_candidates(campaign))})
 
 
+@login_required
+def dashboard(request, business_user_id, campaign_id, state_name):
+    """
+    Renders the business dashboard
+    Args:
+        request: HTTP
+        business_user_id: BusinessUser primary key
+        campaign_id: Campaign pk
+        state_name: name str
+    """
+
+    business_user = BusinessUser.objects.get(pk=business_user_id)
+    campaign = Campaign.objects.get(pk=campaign_id)
+    business_state = BusinessState.objects.get(name=state_name)
+    business_state.translate(request.LANGUAGE_CODE)
+
+    if common.access_for_users(request, campaign, business_user):
+        return redirect('business:login')
+
+    dashboard_module.send_email_from_dashboard(request, campaign)
+    common.calculate_evaluation_summaries(campaign)
+    applicants = common.get_application_candidates(campaign)
+    relevant = common.get_relevant_candidates(campaign)
+    recommended = common.get_recommended_candidates(campaign)
+
+    return render(request, cts.DASHBOARD_VIEW_PATH, {'candidates': {'applicants': applicants,
+                                                                    'relevant': relevant,
+                                                                    'recommended': recommended}[state_name],
+                                                     'campaign': campaign,
+                                                     'business_state': business_state,
+                                                     'applicants': applicants,
+                                                     'relevant': relevant,
+                                                     'recommended': recommended,
+                                                     'business_user': business_user,
+                                                     'total_applicants': len(applicants),
+                                                     'total_recommended': len(recommended),
+                                                     'total_relevant': len(relevant)
+                                                     })
