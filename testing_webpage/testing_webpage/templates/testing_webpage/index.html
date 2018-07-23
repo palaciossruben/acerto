@@ -49,92 +49,24 @@
 
 	</head>
 	<body>
+		<!--Top Nav bar-->
 
-		<!--Nav bar-->
-		<nav class="row" style="margin-right: 0px; margin-left: 0px;" id="myTopnav">
-			<div class="col-lg-2 col-md-2 col-sm-2"><a href="/staffing"><img id="logo" src="{% static 'business/img/logo-color.png' %}" width="110px"></a>
-			</div>
-			<div class="col-lg-10 col-md-10 col-sm-10 push10">
-				<ul style="float:right">
-					<li id="companies-button"><a id="option1" href="{% url 'business:index' %}">Portal Empresas</a></li>
-					<li id="contact-us-button"><a id="option2" href="{% url 'business:contact_form' %}">Contáctanos</a></li>
-					<li id="register-button"><a href="{% url 'beta_invite:index' %}" class="button-user" role="button">Crea tu cuenta</a></li>
-					<!--<li id="login-button"><a href="{% url 'beta_invite:index' %}" class="button-user" role="button">Inicia sesión</a></li>-->
-				</ul>
-			</div>
-		</nav>
-		<!--call to action-->
-		<div id="overlay-signup">
-			<div id="form-image">
-				<form id="register-form" action="{% url 'business:business_signup' %}" method="post">
-					{% csrf_token %}
-					<fieldset>
-						<span class="exitDingbat" onclick="off_signup()">X</span>
-						<br>
-						<br>
-
-						<span>Nombre</span>
-						<input class="form-input" name="name"
-						required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
-						<br>
-						<span>Empresa</span>
-						<input class="form-input" name="company">
-						<br>
-						<span>Correo</span>
-						<input class="form-input" type="email" name="username" required="required">
-						<br>
-						<span>Teléfono</span>
-						<input class="form-input" type="tel" name="phone"
-							   required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
-						<br>
-						<span>Contraseña</span>
-						<input class="form-input" type="password" name="password1" required="required">
-						<br>
-						<span>Confirmar contraseña</span>
-						<input class="form-input" type="password" name="password2" required="required">
-						<br>
-						<input type="submit" class="submit" value="COMIENZA AHORA">
-					</fieldset>
-					<span style="color:white;margin-left:30px; s">¿Ya eres un usuario registrado? Inicia sesión
-						<a style="color:white" href="javascript:void(0);" onclick="off_signup() & on_login()">
-							<strong>Aquí</strong>
-						</a>
-					</span>
-				</form>
-			</div>
+		<div class="topnav" id="myTopnav">
+			<a href="/staffing"><img id="logo" src="{% static 'business/img/logo-color.png' %}" width="110px"></a>
+			<a class="navButton regular" role="button" href="{% url 'business:index' %}">PORTAL EMPRESAS</a>
+			<a class="navButton" role="button" href="{% url 'beta_invite:index' %}">CREA TU CUENTA</a>
+			<a class="navText" href="{% url 'business:contact_form' %}">Contáctanos</a>
+			<a class="navText" href="{% url 'beta_invite:index' %}">Personas</a>
+			<a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
 		</div>
-		<div id="overlay-login">
-			<div id="form-image2">
 
-				<form id="login-form" method="post" action="{% url 'business:home' %}" >
-					{% csrf_token %}
-					<fieldset>
-						<span class="exitDingbat" onclick="off_login()">X</span>
-						<br>
-						<br>
-						<span>Correo</span>
-						<input name="username" class="form-input"><br>
-						<span>Contraseña</span>
-						<input name="password" class="form-input" type="password"><br>
-						<span style="font-size:10px;"><a href="#" style="color:white">Olvidé mi contraseña</a></span>
-						<span style="font-size:10px">
-							<a href="javascript:void(0);" style="color:white" onclick="off_login() & on_signup()">Aun no estoy registrado
-							</a>
-						</span>
-						<br>
-						<br>
-						<input type="submit" class="submit" value="ACCEDER">
-					</fieldset>
-				</form>
-			</div>
-		</div>
 		<div class="row blankbanner" style="margin-right: 0px;margin-left: 0px;"></div>
 
-		<div id="hide1" style="text-align: center;">
+		<div class="section1" style="text-align: center;">
 			<div class="row" style="color: white; text-align: center;" id="main-copy">
 				<h1 id="main-copy-title">Tu empleo ideal</h1>
 				<p id="main-copy-big-title">TE ESPERA</p>
-				<h4>Déjanos tu correo, nosotros hacemos el resto.</h4>
+				<span class="first-description">Déjanos tu correo, nosotros hacemos el resto.</span>
 				<form action="{% url 'beta_invite:index' %}">
 					<button class="button-cta" role="button">Aplica</button>
 				</form>
@@ -142,29 +74,32 @@
 			<div class="row blankabout responsive-no" style="margin-right: 0px;margin-left: 0px;"></div>
 			<div class="row blankabout" style="margin-right: 0px;margin-left: 0px;"></div>
 		</div>
-		<div id="hide2">
-			<!--About-->
-			<div class="container-fluid" id="valuebanner">
-				<div class="row" style="margin-right: 0px;margin-left: 0px;">
-					<div class="col-lg-1 col-md-1">
-					</div>
-					<div class="col-lg-4 col-md-4" id="image4video"><a href="https://www.youtube.com/watch?v=QbNDO2ShXIs" target="_blank">
-						<img src="{% static 'business/img/mockup-iphone.png' %}" width="105%"></a>
-					</div>
-					<div class="col-lg-1 col-md-1">
-					</div>
-					<div class="col-lg-5 col-md-5 about">
-						<h1>Trabaja con las empresas más importantes del mundo</h1>
-						<br>
-						Con PeakU aplicas 1 vez y tienes acceso a una infinidad de vacantes en múltiples empresas y múltiples roles<br>
-						<a href="{% url 'beta_invite:index' %}" class="button-cta" role="button" id="button-cta-about">COMIENZA AQUÍ</a>
-					</div>
-					<div class="col-lg-1 col-md-1">
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--Footer-->
+
+        <div class="row section2">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-4 col-xs-6 woman-working"></div>
+            <div class="col-lg-4 col-xs-6 description2">
+                <h5>En PeakU te ayudamos a encontrar compañias que se ajustan a tu perfil, experiencia y salario. Somos una empresade selección de personal, no una temporal</h5>
+                <h4>Puedes aplicar a todas nuestras ofertas fácilmente y sin costo</h4>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+
+
+        <div class="row section3">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-4 col-xs-6 description3">
+                <h3>Trabaja con las empresas más importantes</h3>
+                <h2>del mundo</h2>
+                <br>
+                <br>
+                <h5>Con PeakU aplicas unas sola vez y tienes acceso a una infinidad de vacantes de múltiples empresas y múltiples roles</h5>
+            </div>
+            <div class="col-lg-4 col-xs-6 working-people"></div>
+            <div class="col-lg-2"></div>
+        </div>
+
+		<!----------------------------------------------FOOTER--------------------------------------------------------->
 		<footer class="container-fluid">
 			<div class="row" style="padding-bottom:30px;margin-right: 0px;margin-left: 0px;">
 				<div class=" col-lg-2 col-md-2 "></div>
@@ -201,5 +136,15 @@
 				<div class="col-1"></div>
 			</div>
 		</footer>
+        <script>
+            function myFunction() {
+                var x = document.getElementById("myTopnav");
+                if (x.className === "topnav") {
+                    x.className += " responsive";
+                } else {
+                    x.className = "topnav";
+                }
+            }
+        </script>
 	</body>
 </html>
