@@ -193,7 +193,7 @@
     }
 
     #companies-button {
-        display: none;
+        margin-top: -40px;
     }
 
 	#contact-us-button {
