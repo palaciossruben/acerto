@@ -1,60 +1,205 @@
-{% extends 'base.html'%}
-{% load i18n %}
+<!DOCTYPE html>
 {% load static %}
+{% load i18n %}
+{% load app_filters %}
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<title>{%  trans "Employment Agency - PeakU" %}</title>
 
 
-{% block title %}{%  trans "Employment Agency - PeakU" %}{% endblock %}
-
-{% block extra_head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'testing_webpage/css/index.css' %}">
-
-    <!-- MailerLite Universal -->
-    <script>
-        (function(m,a,i,l,e,r){ m['MailerLiteObject']=e;function f(){
-        var c={ a:arguments,q:[]};var r=this.push(c);return "number"!=typeof r?r:f.bind(c.q);}
-        f.q=f.q||[];m[e]=m[e]||f.bind(f.q);m[e].q=m[e].q||f.q;r=a.createElement(i);
-        var _=a.getElementsByTagName(i)[0];r.async=1;r.src=l+'?v'+(~~(new Date().getTime()/1000000));
-        _.parentNode.insertBefore(r,_);})(window, document, 'script', 'https://static.mailerlite.com/js/universal.js', 'ml');
-        var ml_account = ml('accounts', '1042996', 'o9s9l3m3p3', 'load');
-    </script>
-
-{% endblock %}
+		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'testing_webpage/css/index.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'testing_webpage/css/index_responsive.css' %}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script type="text/javascript" src="{% static 'business/js/index.js' %}"></script>
 
 
-{% block content %}
-    <section class="blue">
-        <h1 class="main-title">{% trans "Discover Amazing People" %}</h1>
-        <h2 class="secondary-title">{% trans "We connect people and companies, fast and easy" %}</h2>
-        <div class="content">
+		<link rel="icon" type="image/png" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon.ico' %}">
+    	<link rel="apple-touch-icon" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon-16.png' %}">
+    	<link rel="apple-touch-icon" sizes="32x32" href="{% static 'testing_webpage/favicon.ico/favicon-32.png' %}">
+    	<link rel="apple-touch-icon" sizes="64x64" href="{% static 'testing_webpage/favicon.ico/favicon-64.png' %}">
 
-            <div class="person">
-                <a href="{% url 'beta_invite:index' %}">
-                    <input class="blue-button free-trial-button" type="button" value='{% trans "CANDIDATE" %}'>
-                </a>
-            </div>
+		<!-- any incoming error_message will print as an alert.-->
+		<script>
+		{% if error_message %}
+			alert("{{ error_message }}");
+		{% endif %}
+		</script>
 
-            <div class="main-img-div">
-                <img class="main-img" src="{{ cloud_front_url }}main/img/selection.png">
-            </div>
+        <script id="Heat-map" type="text/javascript">
+        window.smartlook||(function(d) {
+        var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+        var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+        c.charset='utf-8';c.src='https://rec.smartlook.com/recorder.js';h.appendChild(c);
+        })(document);
+        smartlook('init', '495c7bd6807a0ab2c17ade2e03cac13bab9f1b84');
+        </script>
 
-            <div class="business">
-                <a href="{% url 'business:index' %}">
-                    <input class="blue-button free-trial-button" type="button" value='{% trans "EMPLOYER" %}'>
-                </a>
-            </div>
-        </div>
-    </section>
+		<!-- MailerLite Universal -->
+		<script>
+			(function(m,a,i,l,e,r){ m['MailerLiteObject']=e;function f(){
+			var c={ a:arguments,q:[]};var r=this.push(c);return "number"!=typeof r?r:f.bind(c.q);}
+			f.q=f.q||[];m[e]=m[e]||f.bind(f.q);m[e].q=m[e].q||f.q;r=a.createElement(i);
+			var _=a.getElementsByTagName(i)[0];r.async=1;r.src=l+'?v'+(~~(new Date().getTime()/1000000));
+			_.parentNode.insertBefore(r,_);})(window, document, 'script', 'https://static.mailerlite.com/js/universal.js', 'ml');
+			var ml_account = ml('accounts', '1042996', 'o9s9l3m3p3', 'load');
+		</script>
 
-    <section class="main">
-            <div>
-                <img class="left-img" src="{{ cloud_front_url }}main/img/intro.png">
-            </div>
-            <article class="description">
-                <h2>{% trans "What is PeakU?"%}</h2>
-                <br/>
-                <p><strong>{% trans "PeakU is revolutionizing the job search, recruitment and selection processes." %}</strong></p>
-                <p><strong>{% trans "PeakU provides a web platform that uses artificial intelligence to help companies and candidates have a better and more effective experience." %}</strong></p>
-            </article>
-    </section>
+	</head>
+	<body>
 
-{% endblock %}
+		<!--Nav bar-->
+		<nav class="row" style="margin-right: 0px; margin-left: 0px;" id="myTopnav">
+			<div class="col-lg-2 col-md-2 col-sm-2"><a href="/staffing"><img id="logo" src="{% static 'business/img/logo-color.png' %}" width="110px"></a>
+			</div>
+			<div class="col-lg-10 col-md-10 col-sm-10 push10">
+				<ul style="float:right">
+					<li id="companies-button"><a id="option1" href="{% url 'business:index' %}">Empresas</a></li>
+					<li id="contact-us-button"><a id="option2" href="{% url 'business:contact_form' %}">Contáctanos</a></li>
+					<li id="register-button"><a href="{% url 'beta_invite:index' %}" class="button-user" role="button">Crea tu cuenta</a></li>
+					<!--<li id="login-button"><a href="{% url 'beta_invite:index' %}" class="button-user" role="button">Inicia sesión</a></li>-->
+				</ul>
+			</div>
+		</nav>
+		<!--call to action-->
+		<div id="overlay-signup">
+			<div id="form-image">
+				<form id="register-form" action="{% url 'business:business_signup' %}" method="post">
+					{% csrf_token %}
+					<fieldset>
+						<span class="exitDingbat" onclick="off_signup()">X</span>
+						<br>
+						<br>
+
+						<span>Nombre</span>
+						<input class="form-input" name="name"
+						required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
+						<br>
+						<span>Empresa</span>
+						<input class="form-input" name="company">
+						<br>
+						<span>Correo</span>
+						<input class="form-input" type="email" name="username" required="required">
+						<br>
+						<span>Teléfono</span>
+						<input class="form-input" type="tel" name="phone"
+							   required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
+						<br>
+						<span>Contraseña</span>
+						<input class="form-input" type="password" name="password1" required="required">
+						<br>
+						<span>Confirmar contraseña</span>
+						<input class="form-input" type="password" name="password2" required="required">
+						<br>
+						<input type="submit" class="submit" value="COMIENZA AHORA">
+					</fieldset>
+					<span style="color:white;margin-left:30px; s">¿Ya eres un usuario registrado? Inicia sesión
+						<a style="color:white" href="javascript:void(0);" onclick="off_signup() & on_login()">
+							<strong>Aquí</strong>
+						</a>
+					</span>
+				</form>
+			</div>
+		</div>
+		<div id="overlay-login">
+			<div id="form-image2">
+
+				<form id="login-form" method="post" action="{% url 'business:home' %}" >
+					{% csrf_token %}
+					<fieldset>
+						<span class="exitDingbat" onclick="off_login()">X</span>
+						<br>
+						<br>
+						<span>Correo</span>
+						<input name="username" class="form-input"><br>
+						<span>Contraseña</span>
+						<input name="password" class="form-input" type="password"><br>
+						<span style="font-size:10px;"><a href="#" style="color:white">Olvidé mi contraseña</a></span>
+						<span style="font-size:10px">
+							<a href="javascript:void(0);" style="color:white" onclick="off_login() & on_signup()">Aun no estoy registrado
+							</a>
+						</span>
+						<br>
+						<br>
+						<input type="submit" class="submit" value="ACCEDER">
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		<div class="row blankbanner" style="margin-right: 0px;margin-left: 0px;"></div>
+
+		<div id="hide1" style="text-align: center;">
+			<div class="row" style="color: white; text-align: center;" id="main-copy">
+				<h1 id="main-copy-title">Tu empleo ideal</h1>
+				<p style="font-size: 500%; font-weight: bold;">TE ESPERA</p>
+				<h4>Déjanos tu correo, nosotros hacemos el resto.</h4>
+				<form action="{% url 'beta_invite:index' %}">
+					<button class="button-cta" role="button">Aplica</button>
+				</form>
+			</div>
+			<div class="row blankabout responsive-no" style="margin-right: 0px;margin-left: 0px;"></div>
+			<div class="row blankabout" style="margin-right: 0px;margin-left: 0px;"></div>
+		</div>
+		<div id="hide2">
+			<!--About-->
+			<div class="container-fluid" id="valuebanner">
+				<div class="row" style="margin-right: 0px;margin-left: 0px;">
+					<div class="col-lg-1 col-md-1">
+					</div>
+					<div class="col-lg-4 col-md-4" id="image4video"><a href="https://www.youtube.com/watch?v=QbNDO2ShXIs" target="_blank">
+						<img src="{% static 'business/img/mockup-iphone.png' %}" width="105%"></a>
+					</div>
+					<div class="col-lg-1 col-md-1">
+					</div>
+					<div class="col-lg-5 col-md-5 about">
+						<h1>Trabaja con las empresas más importantes del mundo</h1>
+						<br>
+						Con PeakU aplicas 1 vez y tienes acceso a una infinidad de vacantes en múltiples empresas y múltiples roles<br>
+						<a href="{% url 'beta_invite:index' %}" class="button-cta" role="button" id="button-cta-about">COMIENZA AQUÍ</a>
+					</div>
+					<div class="col-lg-1 col-md-1">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--Footer-->
+		<footer class="container-fluid">
+			<div class="row" style="padding-bottom:30px;margin-right: 0px;margin-left: 0px;">
+				<div class=" col-lg-2 col-md-2 "></div>
+				<div class=" col-lg-3 col-md-3  navfooter" >
+					<ul style="float:left">
+						<li><a href="#">Nosotros</a></li>
+                        <li><a href="{% url 'business:contact_form' %}">Contáctanos</a></li>
+						<li><a href="{% url 'beta_invite:index' %}">Personas</a></li>
+					</ul>
+				</div>
+				<div class="col-lg-2 col-md-2 redesfooter" style="text-align:center">
+					<a href="https://www.linkedin.com/company-beta/16241506/" target="_blank"><img src="{% static 'business/img/linkedin.png' %}"></a>
+					<a href="https://www.facebook.com/PeakU-Latam-1916685895214519/?ref=aymt_homepage_panel" target="_blank"><img src="{% static 'business/img/facebook.png' %}"></a>
+					<a href="https://www.instagram.com/peaku_latam/" target="_blank"><img src="{% static 'business/img/instagram.png' %}"></a>
+					<a href="#" target="_blank"><img src="{% static 'business/img/twitter.png' %}"></a>
+				</div>
+				<div class=" col-lg-1 col-md-1"></div>
+				<div class=" col-lg-2 col-md-2 navfootercontact">
+					<div style="width:20%; float:left; display:block; margin-top:10px; margin-left:-30px; ">
+						<a href="#">
+							<img src="{% static 'business/img/logo-white.png' %}">
+						</a>
+					</div>
+					<div class="contact">contacto@peaku.co<br>
+						+57 311 6109340<br>
+						Colombia
+					</div>
+				</div>
+				<div class=" col-lg-2 col-md-2 "></div>
+			</div>
+			<div class="row" style="margin-right: 0px;margin-left: 0px;">
+				<div class="col-1 col-md-1"></div>
+				<div class="col-10 copyright">Copyright 2018 © PeakU. Todos los derechos reservados.</div>
+				<div class="col-1"></div>
+			</div>
+		</footer>
+	</body>
+</html>
