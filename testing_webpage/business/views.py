@@ -505,29 +505,29 @@ def dashboard(request, business_user_id, campaign_id, state_name):
     business_state = BusinessState.objects.get(name=state_name)
     business_state.translate(request.LANGUAGE_CODE)
 
-    if request.user.id != business_user.auth_user.id or campaign not in business_user.campaigns.all():
+    if common.access_for_users(request, campaign, business_user):
         return redirect('business:login')
 
     # TODO: remove?
     dashboard_module.send_email_from_dashboard(request, campaign)
 
-    all_params = dashboard_module.get_dashboard_params(campaign)
+    applicants = common.get_application_candidates(campaign)
+    relevant = common.get_relevant_candidates(campaign)
+    recommended = common.get_recommended_candidates(campaign)
 
-    num_applicants = len(all_params['applicants'])
-    num_relevant = len(all_params['relevant'])
-    num_recommended = len(all_params['recommended'])
-
-    return render(request, cts.DASHBOARD_VIEW_PATH, {'candidates': all_params[state_name],
+    return render(request, cts.DASHBOARD_VIEW_PATH, {'candidates': {'applicants': applicants,
+                                                                    'relevant': relevant,
+                                                                    'recommended': recommended}[state_name],
                                                      'campaign': campaign,
                                                      'business_state': business_state,
                                                      # TODO: remove 4 list of candidates when second view is ready
-                                                     'applicants': all_params['applicants'],
-                                                     'relevant': all_params['relevant'],
-                                                     'recommended': all_params['recommended'],
+                                                     'applicants': applicants,
+                                                     'relevant': relevant,
+                                                     'recommended': recommended,
                                                      'business_user': business_user,
-                                                     'total_applicants': num_applicants,
-                                                     'total_recommended': num_recommended,
-                                                     'total_relevant': num_relevant
+                                                     'total_applicants': len(applicants),
+                                                     'total_recommended': len(recommended),
+                                                     'total_relevant': len(relevant)
                                                      })
 
 
@@ -549,17 +549,13 @@ def summary(request, campaign_id):
     business_user = get_business_user(request)
     campaign = Campaign.objects.get(pk=campaign_id)
 
-    if request.user.id != business_user.auth_user.id or campaign not in business_user.campaigns.all():
-        return redirect('business:login')
-
-    all_params = dashboard_module.get_dashboard_params(campaign)
-
-    num_applicants = len(all_params['applicants'])
-    num_relevant = len(all_params['relevant'])
-    num_recommended = len(all_params['recommended'])
+    if common.access_for_users(request, campaign, business_user):
+            return redirect('business:login')
 
     return render(request, cts.SUMMARY_VIEW_PATH, {'business_user': business_user,
                                                    'campaign': campaign,
-                                                   'num_applicants': num_applicants,
-                                                   'num_relevant': num_relevant,
-                                                   'num_recommended': num_recommended})
+                                                   'num_applicants': len(common.get_application_candidates(campaign)),
+                                                   'num_relevant': len(common.get_relevant_candidates(campaign)),
+                                                   'num_recommended': len(common.get_recommended_candidates(campaign))})
+
+

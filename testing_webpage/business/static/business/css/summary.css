@@ -457,25 +457,6 @@ body {
 }
 /***********************************************TEST CIRCLES***********************************************************/
 
-:root {
-    /* Colors:
-    The conditions will be assigned with the right and left limits (previous right limit), except the first case; example:
-
-    <= 50 then color = # dd5133
-    > 50 && <= 59 then color = xxxxx ... */
-
-    50: #dd5133;
-    59: #e8903d;
-    69: #eea540;
-    74: #f7c645;
-    79: #fbd447;
-    84: #ffe649;
-    89: #e0e159;
-    94: #accb54;
-    99: #48ab58;
-    100: #4ab4a6;
-}
-
 .fill{
     border-radius:100%;
     height:70px;
