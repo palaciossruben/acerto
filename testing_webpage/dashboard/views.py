@@ -573,23 +573,3 @@ def send_messages(request):
     messages_json = serializers.serialize('json', messages)
 
     return JsonResponse(messages_json, safe=False)
-
-
-def business_dashboard(request, pk):
-    """
-    Same endpoint as the dashboard but for admin access, with no login
-    :param request: HTTP
-    :param pk: THIS IS DIFFERENT FROM BUSINESS IMPLEMENTATION, here it is the campaign_id,
-    while in production it is the business_user_id
-    :return: renders view.
-    """
-
-    campaign = Campaign.objects.get(pk=pk)
-
-    dashboard_module.send_email_from_dashboard(request, campaign)
-
-    query = BusinessUser.objects.filter(campaigns__contains=campaign)
-    user = [id for id in query.all()[0]]
-    business_user_id = user.id
-
-    return render(request, business.constants.DASHBOARD_VIEW_PATH, dashboard_module.get_dashboard_params(campaign))

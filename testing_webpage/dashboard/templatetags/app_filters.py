@@ -44,7 +44,7 @@ def print_score(score):
 
 @register.filter
 def int_rounding(score):
-    if score is not None:
+    if score is not None and isinstance(score, float):
         return round(score)
     else:
         return 0

@@ -16,22 +16,6 @@ def get_campaign_for_dashboard(request, business_user):
         return business_user.campaigns.all()[0]
 
 
-def get_dashboard_params(campaign):
-
-    # TODO: refactor candidates here for new dashboard
-    params, states = candidate_module.get_rendering_data(campaign.id)
-
-    # State Backlog and Prospect will show as one.
-    params['applicants'] = params['backlog'] + params['prospect'] + params['rejected'] + params['failed_tests'] + params['waiting_for_interview'] + params['did_interview'] + params['sent_to_client'] + params['got_the_job']
-    params['relevant'] = params['waiting_for_interview'] + params['did_interview'] + params['sent_to_client'] + params['got_the_job']
-    params['recommended'] = params['sent_to_client'] + params['got_the_job']
-
-    common.calculate_evaluation_summaries(campaign)
-    params['campaign'] = campaign
-
-    return params
-
-
 def get_business_user_and_campaign(request, pk):
     business_user = BusinessUser.objects.get(pk=pk)
     campaign = get_campaign_for_dashboard(request, business_user)

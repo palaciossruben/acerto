@@ -439,3 +439,8 @@ def calculate_operational_efficiency(campaign):
         campaign.operational_efficiency = None
     campaign.save()
 
+
+def access_for_users(request, campaign, business_user):
+
+    return request.user.username != 'admin@peaku.co' and (request.user.id != business_user.auth_user.id or campaign
+                                                          not in business_user.campaigns.all())
