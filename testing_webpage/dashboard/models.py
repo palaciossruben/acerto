@@ -34,6 +34,8 @@ class State(models.Model):
     def passed_test(self):
         return self.looks_good() or self.code in ('WFI', 'ROI', 'RBC')
 
+    # IMPORTANT: These states must speak perfectly with business_states.json, must be homologous
+
     @staticmethod
     def get_recommended_states():
         return [s for s in State.objects.filter(code__in=['GTJ', 'STC'])]

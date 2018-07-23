@@ -16,7 +16,7 @@
     "fields":{
       "name": "relevant",
       "name_es": "relevantes",
-      "states": [8, 10],
+      "states": [5, 7, 8, 10],
       "description":"Candidates that passed initial testing and specific requirements",
       "description_es":"Candidatos que aprobaron pruebas iniciales y requerimientos específicos para tu campaña"
     }
