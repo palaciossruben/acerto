@@ -40,11 +40,11 @@ class State(models.Model):
 
     @staticmethod
     def get_relevant_states():
-        return [s for s in State.objects.filter(code__in=['WFI', 'DI', 'GTJ', 'STC', 'ROI'])]
+        return [s for s in State.objects.filter(code__in=['WFI', 'DI', 'GTJ', 'STC'])]
 
     @staticmethod
-    def get_applicant_states(): # all the campaigns candidates
-        return [s for s in State.objects.filter(code__in=['P', 'BL', 'RBC', 'ROT', 'FT', 'SR'])]
+    def get_applicant_states(): 
+        return [s for s in State.objects.filter(code__in=['P', 'BL', 'RBC', 'SR', 'FT', 'ROT', 'ROI'])]
 
     @staticmethod
     def get_rejected_states():

@@ -26,7 +26,8 @@ function set_circle_color(score, id_string){
     if (score === null){
     }else{
         var me = document.getElementById(id_string);
-        if(me){
+        if(me == null){
+        }else{
             me.style["border-color"] = color + '1)';
             me.style["background"] = 'linear-gradient(to top,' + color + '0.7)' + score + '%, transparent ' + score + '% )';
         }

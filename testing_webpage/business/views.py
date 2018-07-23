@@ -510,7 +510,7 @@ def dashboard(request, business_user_id, campaign_id, state_name):
 
     # TODO: remove?
     dashboard_module.send_email_from_dashboard(request, campaign)
-
+    common.calculate_evaluation_summaries(campaign)
     applicants = common.get_application_candidates(campaign)
     relevant = common.get_relevant_candidates(campaign)
     recommended = common.get_recommended_candidates(campaign)
@@ -548,6 +548,7 @@ def business_applied(request):
 def summary(request, campaign_id):
     business_user = get_business_user(request)
     campaign = Campaign.objects.get(pk=campaign_id)
+    common.calculate_evaluation_summaries(campaign)
 
     if common.access_for_users(request, campaign, business_user):
             return redirect('business:login')
