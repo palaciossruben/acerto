@@ -19,7 +19,7 @@
 
     #main-copy {
         margin-left: 0px;
-        margin-top:-250px;
+        margin-top:-210px;
     }
 
     #main-copy-title {
@@ -203,6 +203,10 @@
     #main-copy-big-title {
         font-size: 400%;
     }
+
+    #myTopnav {
+        margin-top: 40px;
+    }
 }
 
 
@@ -274,6 +278,10 @@
     .navfooter {
         font-size:12px;
         margin-left:14%;
+    }
+
+    #main-copy-big-title {
+        font-size: 400%;
     }
 }
 
