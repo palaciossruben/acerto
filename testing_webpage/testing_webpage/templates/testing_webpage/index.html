@@ -50,30 +50,16 @@
 	</head>
 	<body>
 
-		<!--to business navigation-->
-
-		<!--
-		<div class="mask">
-			<div class="blur-background">
-
-			</div>
-		</div>-->
-
-		<!--<div style="width: 100%; height: 40px; overflow-y:hidden; position: relative;">
-			<a href="{% url 'business:index' %}" style="margin-left: 88%; color: white; position: absolute; top: 50%; margin-top: -10px; height:20px; line-height: 20px; ">Acceso a Empresas ->  </a>
-		</div>-->
-		<div style="width: 100%; height: 40px; overflow-y:hidden;">
-			<a href="{% url 'business:index' %}" style="float:right; margin-top: 10px; color: white; margin-right: 10px;">Acceso a Empresas -></a>
-		</div>
-
 		<!--Nav bar-->
 		<nav class="row" style="margin-right: 0px; margin-left: 0px;" id="myTopnav">
-			<div class="col-lg-2 col-md-2 col-sm-2"><a href="/staffing"><img src="{% static 'business/img/logo-color.png' %}" width="110px" id="logo"></a>
+			<div class="col-lg-2 col-md-2 col-sm-2"><a href="/staffing"><img id="logo" src="{% static 'business/img/logo-color.png' %}" width="110px"></a>
 			</div>
 			<div class="col-lg-10 col-md-10 col-sm-10 push10">
 				<ul style="float:right">
-					<li id="register-button"><a class="button-user" role="button" onclick="on_signup()">Crea tu cuenta</a></li>
-					<li id="login-button"><a class="button-user" role="button" onclick="on_login()">Inicia sesión</a></li>
+					<li id="companies-button"><a id="option1" href="{% url 'business:index' %}">Empresas</a></li>
+					<li id="contact-us-button"><a id="option2" href="{% url 'business:contact_form' %}">Contáctanos</a></li>
+					<li id="register-button"><a href="{% url 'beta_invite:index' %}" class="button-user" role="button">Crea tu cuenta</a></li>
+					<!--<li id="login-button"><a href="{% url 'beta_invite:index' %}" class="button-user" role="button">Inicia sesión</a></li>-->
 				</ul>
 			</div>
 		</nav>
@@ -145,15 +131,13 @@
 		<div class="row blankbanner" style="margin-right: 0px;margin-left: 0px;"></div>
 
 		<div id="hide1" style="text-align: center;">
-			<div class="row" style="text-align: center;" id="main-copy">
-				<div style="margin: auto">
-					<h1 style="color: white">Tu empleo ideal</h1>
-					<p style="color: white; font-size: 500%; font-weight: bold;">TE ESPERA</p>
-					<h5 style="color: white; margin: auto">Déjanos tu correo, nosotros hacemos el resto.</h5>
-					<form action="{% url 'beta_invite:index' %}">
-						<button class="button-cta" role="button">Aplica</button>
-					</form>
-				</div>
+			<div class="row" style="color: white; text-align: center;" id="main-copy">
+				<h1 id="main-copy-title">Tu empleo ideal</h1>
+				<p style="font-size: 500%; font-weight: bold;">TE ESPERA</p>
+				<h4>Déjanos tu correo, nosotros hacemos el resto.</h4>
+				<form action="{% url 'beta_invite:index' %}">
+					<button class="button-cta" role="button">Aplica</button>
+				</form>
 			</div>
 			<div class="row blankabout responsive-no" style="margin-right: 0px;margin-left: 0px;"></div>
 			<div class="row blankabout" style="margin-right: 0px;margin-left: 0px;"></div>

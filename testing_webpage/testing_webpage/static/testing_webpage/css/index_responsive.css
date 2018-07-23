@@ -13,27 +13,17 @@
         display:none;
     }
 
-    #hide1 {
-        margin-top:50px;
-    }
-
-    #main-copy {
-        margin-top:50px;
-    }
-
     .responsive-no{
         display:none;
     }
 
-    .blankbeneficios{
-        margin-top:-25px;
-        position: relative;
-        padding-top: 0%; /* Height proportional to width, so coooool  */
-    }
-
     #main-copy {
         margin-left: 0px;
-        margin-top:-550px;
+        margin-top:-250px;
+    }
+
+    #main-copy-title {
+        margin-top:-300px;
     }
 
     .contact {
@@ -50,14 +40,6 @@
         margin-left:20px;
         margin-top:-20px;
     }
-			
-	#candidates-button {
-		display:none;
-	}
-	
-	#contact-us-button {
-		display:none;
-	}
 	
 	#register-button {
 		display:none;
@@ -65,11 +47,6 @@
 	
 	#login-button {
 		display:none;
-	}
-
-	#menuicon {
-		display:block !important;
-		margin-top:-60px;
 	}
 		
 	.blankbanner {
@@ -84,18 +61,6 @@
 		
 	#main-copy br{
 		display:none;
-	}
-
-    .beneficios img {
-		width:74px;
-	}
-
-    .beneficios {
-	    display:none;
-	}
-	
-    .beneficioscel {
-	    text-align:center;
 	}
 	
     #valuebanner { background-image:url('../img/mockup-bg-cel.jpg');
@@ -226,6 +191,14 @@
     .navfootercontact img{
         display:none;
     }
+
+    #companies-button {
+        display: none;
+    }
+
+	#contact-us-button {
+        display: none;
+    }
 }
 
 
@@ -242,10 +215,6 @@
 	
 	.blankbanner {
 	    height:210px;
-	}
-
-	.blankbeneficios {
-	    height:300px !important;
 	}
 
     #valuebanner {
@@ -325,38 +294,9 @@
     #logo {
 	    width:90px;
 	}
-			
-	#candidates-button {
-		display:none;
-	}
-	
-	#contact-us-button {
-		display:none;
-	}
-	
-	#menuicon {
-		display:block !important;
-		margin-top:-3px;
-	}
 		
 	.blankbanner {
     	height:590px;
-	}
-
-	.blankbeneficios {
-	    height:800px !important;
-	}
-
-    .beneficios img {
-		width:74px;
-	}
-
-    .beneficios {
-	    display:none;
-	}
-
-    .beneficioscel {
-	    text-align:center;
 	}
 
 	#valuebanner { background-image:url('../img/mockup-bg-tablet.jpg');
@@ -436,30 +376,9 @@
 	}
 
     .contact {
-    margin: 0 auto;
-    float:none;
+        margin: 0 auto;
+        float:none;
     }
-
-	#candidates-button {
-		display:none;
-	}
-	
-	#contact-us-button {
-		display:none;
-	}
-	
-	#menuicon {
-		display:block !important;
-		margin-top:-3px;
-	}
-
-	.beneficioscel {
-	    display:none;
-	}
-
-	.blankbeneficios {
-	    height:500px !important;
-	}
 
     #valuebanner { background-image:url('../img/mockup-bg-tablet.jpg');
         background-repeat: no-repeat;
@@ -516,6 +435,15 @@
         margin-right:5%;
         min-width:220px;
 	}
+
+    #main-copy {
+        margin-left: 0px;
+        margin-top:320px;
+    }
+
+    #main-copy-title {
+        margin-top:-300px;
+    }
 }
 
 
@@ -537,10 +465,6 @@
 
     .about h1 {
         font-size:1.9em !important;
-    }
-
-    .beneficioscel {
-        display:none;
     }
 
     .button-buy-cel {
@@ -574,16 +498,8 @@
 	    height:600px;
 	}
 	
-    .blankbeneficios {
-	    height:300px;
-	}
-	
     .about {
 		margin-top:200px;
-	}
-		
-    .beneficioscel {
-	    display:none;
 	}
 	
     .button-buy-cel {
@@ -615,14 +531,6 @@
 
 	.blankbanner {
 	    height:700px;
-	}
-	
-	.blankbeneficios {
-	    height:500px;
-	}
-	
-    .beneficioscel {
-	    display:none;
 	}
 	
     .about {
@@ -673,9 +581,5 @@
 
     .blankbanner {
         height:330px;
-    }
-
-    .beneficioscel {
-        display:none;
     }
 }

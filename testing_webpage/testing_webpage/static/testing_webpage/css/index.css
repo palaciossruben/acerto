@@ -12,7 +12,7 @@
 .row{
     margin-right:0;
     margin-left:0;
-    margin-top:28px;
+    margin-top:68px;
 }
 
 .conatiner{
@@ -450,19 +450,6 @@ footer {
 	color:#c9d86a;
 	text-decoration:none;
 }
-	
-#contact-buttons {
-	position:fixed;
-	margin-top:77vh;
-	margin-left:100%;
-	left:-100px;
-	z-index:100;
-	float:right;
-}
-	
-#contact-buttons img {
-	padding-bottom:5px;
-}
 
 /**********************************************************************************************/
 
@@ -608,22 +595,4 @@ footer {
     width:80%;
     display:block;
     padding-left:20px
-}
-
-
-.mask {
-	width: 100%;
-	height: 40px;
-	z-index:10;
-    overflow:hidden;
-}
-
-
-.blur-background {
-    width:100%;
-    height:100%;
-    background: url(../img/relaxed_guy.jpeg) no-repeat top center scroll;
-    z-index:1;
-    -webkit-filter:blur(2px);
-	filter: blur(2px);
 }
