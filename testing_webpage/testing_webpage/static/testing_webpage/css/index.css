@@ -596,3 +596,8 @@ footer {
     display:block;
     padding-left:20px
 }
+
+#main-copy-big-title {
+    font-size: 500%;
+    font-weight: bold;
+}

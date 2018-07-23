@@ -23,7 +23,7 @@
     }
 
     #main-copy-title {
-        margin-top:-300px;
+        margin-top:-330px;
     }
 
     .contact {
@@ -199,6 +199,10 @@
 	#contact-us-button {
         display: none;
     }
+
+    #main-copy-big-title {
+        font-size: 400%;
+    }
 }
 
 
@@ -363,6 +367,10 @@
     .navfootercontact img{
         width:40px;
         margin-left:30px;
+    }
+
+    #main-copy-big-title {
+        font-size: 400%;
     }
 }
 
