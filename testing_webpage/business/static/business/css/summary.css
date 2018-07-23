@@ -232,6 +232,12 @@ body {
 }
 
 .quantity2 {
+    font-size: 70px;
+    color: #666666;
+    margin-left: 20px;
+}
+
+.quantity3 {
     font-size: 37px;
     color: white;
 }
@@ -246,6 +252,10 @@ body {
     font-size: 11.24px;
     color: #666666;
     margin-left: 11px;
+}
+
+.pre {
+    font-size: 10px;
 }
 
 .applicant-text {
