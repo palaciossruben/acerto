@@ -103,7 +103,6 @@
                                             {% endif %}
                                         </div>
                                         <div class="row">
-
                                             {% if campaign.recommended_evaluation.cognitive_score >= 0 %}
                                                 <div id="recommended-cognitive-id" class="fill">
                                                     {{ campaign.recommended_evaluation.cognitive_score|print_score }}
@@ -280,8 +279,8 @@
                set_circle_color({{ campaign.recommended_evaluation.technical_score|int_rounding }}, "recommended-technical-id");
                set_circle_color({{ campaign.recommended_evaluation.requirements_score|int_rounding }}, "recommended-requirement-id");
                set_circle_color({{ campaign.recommended_evaluation.soft_skills_score|int_rounding }}, "recommended-soft-id");
-               set_circle_color({{ campaign.relevant_evaluation.technical_score|int_rounding }}, "relevant-cognitive-id");
-               set_circle_color({{ campaign.relevant_evaluation.cognitive_score|int_rounding }}, "relevant-technical-id");
+               set_circle_color({{ campaign.relevant_evaluation.technical_score|int_rounding }}, "relevant-technical-id");
+               set_circle_color({{ campaign.relevant_evaluation.cognitive_score|int_rounding }}, "relevant-cognitive-id");
                set_circle_color({{ campaign.applicant_evaluation.cognitive_score|int_rounding }}, "applicant-cognitive-id");
            });
         </script>
