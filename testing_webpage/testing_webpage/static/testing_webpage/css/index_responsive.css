@@ -13,13 +13,34 @@
         display:none;
     }
 
+    .space{
+        display:none;
+    }
+
+    .first-description{
+        text-shadow: 2px 1px 1px rgba(0,0,0,0.7);
+        font-size: 17px;
+    }
+
+    .description2{
+        margin-bottom: 50px;
+    }
+
+    h4{
+        font-size:22px;
+    }
+
+    h5{
+        font-size:16px;
+    }
+
     #main-copy {
         margin-left: 0px;
         margin-top:-210px;
     }
 
     #main-copy-title {
-        margin-top:-330px;
+        margin-top:-220px;
     }
 
     .button-user{
@@ -29,6 +50,7 @@
     .contact {
         margin: 0 auto;
         float:none;
+        padding-left: 40px;
     }
 
     #myTopnav {
@@ -42,7 +64,7 @@
     #logo {
         width:80px;
         margin-left:20px;
-        margin-top:-20px;
+        margin-top:-35px;
     }
 	
 	#register-button {
@@ -198,13 +220,57 @@
     }
 
     #main-copy-big-title {
-        font-size: 400%;
+        font-size: 200%;
+    }
+
+    .conectors {
+        background: url(../img/conectors_cel.png) no-repeat top center scroll;
+        background-size:cover;
+        height:590px;
+        margin-bottom:100px;
+        margin-top:50px;
+    }
+
+    .woman-working{
+        display:none;
+    }
+
+    .description3{
+        padding-left: 20px;
+    }
+
+    .play-div{
+        text-align: left;
+        margin-top: -60px;
+    }
+
+    .play-button {
+        width: 60px;
+        margin-right: 10px;
+        margin-left: 0;
+        margin-top: 0;
+    }
+
+    .h2{
+        font-size: 70px;
+    }
+
+    .h3{
+        font-size: 30px;
+    }
+
+    .h5{
+        font-size: 20px;
+    }
+
+    .last-description{
+        margin-bottom:50px;
     }
 
 }
 
 
-/* Small phones */
+/****************************************Small phones******************************************************************/
 @media  (max-width: 320px) 
 {
 	h1 {
@@ -267,7 +333,7 @@
     }
 
     #main-copy-big-title {
-        font-size: 400%;
+        font-size: 200%;
     }
 }
 
@@ -368,6 +434,22 @@
     }
 }
 
+/* iPads and tablets landscape */
+@media (min-width: 992px) and (max-width: 1200px) and (orientation: landscape)
+{
+	html {
+        background: url(../img/relaxed_guy_tablet.jpeg) no-repeat top center scroll ;
+        background-size:contain;
+    }
+
+    #logo {
+        width:90px;
+    }
+
+    .blankbanner {
+        height:330px;
+    }
+}
 
 @media (min-width: 992px) and (max-width: 1200px)
 {
@@ -567,22 +649,3 @@
 	    min-width:220px;
 	}
 }
-
-
-/* iPads and tablets landscape */
-@media (min-width: 992px) and (max-width: 1200px) and (orientation: landscape)
-{
-	html { 
-        background: url(../img/relaxed_guy_tablet.jpeg) no-repeat top center scroll ;
-        background-size:contain;
-    }
-			
-    #logo {
-        width:90px;
-    }
-
-    .blankbanner {
-        height:330px;
-    }
-}
-
