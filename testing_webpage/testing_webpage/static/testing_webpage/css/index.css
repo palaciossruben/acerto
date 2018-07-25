@@ -1,12 +1,58 @@
 @charset "UTF-8";
 /* CSS Document */
 
+/* This code fix the white right space problem (ghost css elements) */
+html,body
+{
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+}
+
+/****************************************FONTS*************************************************************************/
+@font-face {
+    font-family: BigJohn;
+    src: url(/static/fonts/BIG_JOHN.otf);
+    unicode-range: U+?????;
+}
+
+@font-face {
+    font-family: NorthernBlock;
+    src: url(/static/fonts/TheNorthernBlockLtdLoewHeavy.otf);
+}
+
+@font-face {
+    font-family: BertholdAkzidenzGroteskRegular;
+    src: url(/static/fonts/BertholdAkzidenzGroteskRegular.otf);
+}
+
+@font-face {
+    font-family: BertholdAkzidenzGroteskLight;
+    src: url(/static/fonts/BertholdAkzidenzGroteskBELight.otf);
+}
+
+@font-face {
+    font-family: BertholdAkzidenzGroteskBold;
+    src: url(/static/fonts/BertholdAkzidenzGroteskBold.otf);
+}
+
+@font-face {
+    font-family: BertholdAkzidenzGroteskItalic;
+    src: url(/static/fonts/BertholdAkzidenzGroteskItalic.otf);
+}
+
+@font-face {
+    font-family: BertholdAkzidenzGroteskSuper;
+    src: url(/static/fonts/BertholdAkzidenzGroteskSuper.otf);
+}
 
 /* General  */
 * {
     margin: 0;
     padding: 0;
     outline:0;
+    box-sizing: border-box;
 }
 
 .row{
@@ -30,7 +76,8 @@ html {
 body{
     background-color:transparent !important;
 }
-/*overflow:hidden;}
+
+
 
 	
 /* Headings */
@@ -75,11 +122,22 @@ h6 {
 
 #logo {
     float: left;
-    margin-left:80px;
-    margin-top:0px;
-    width: 110px;
+    margin-left:115px;
+    margin-top:25px;
+    width: 100px;
 }
-		
+
+.conectors{
+    background: url(../img/conectors.png) no-repeat top center scroll;
+    background-size:contain;
+    height:300px;
+    margin-bottom:100px;
+}
+
+.space{
+    margin-top: 0px;
+}
+
 .blankbanner {
 	height:400px;
 }
@@ -107,7 +165,7 @@ h6 {
 		
 /* buttons */
 .button-user {
-    width:150px;
+    width:155px;
     background-color: white;
 	border-radius:40px;
     border: none;
@@ -663,8 +721,11 @@ footer {
 }
 
 .section2{
-    margin-bottom:120px;
     margin-top: 20px;
+}
+
+.conectors-row{
+    margin-top:0;
 }
 
 .working-people{
@@ -674,6 +735,24 @@ footer {
 }
 h2, h3, h4, h5 {
     color:#3d4753;
+}
+
+.play-div{
+    text-align: center;
+}
+
+
+.video{
+    font-family : BertholdAkzidenzGroteskSuper;
+    font-size : 20px;
+    color : #3B4754;
+}
+
+.play-button{
+    width: 60px;
+    margin-right: 10px;
+    margin-left: 200px;
+    margin-top: -30px;
 }
 
 .first-description{
@@ -691,7 +770,7 @@ h2{
 }
 
 h3{
-    font-size:30px;
+    font-size:45px;
 }
 
 h4{
@@ -700,9 +779,4 @@ h4{
 
 h5{
     font-size:20px;
-}
-
-navigation {
-    margin-right: 0px;
-    margin-left: 0px;
 }
