@@ -608,3 +608,10 @@ footer {
     display:block;
     padding-left:20px
 }
+
+#logo {
+    float: left;
+    margin-left:80px;
+    margin-top:0px;
+    width: 110px;
+}
