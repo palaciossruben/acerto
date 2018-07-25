@@ -51,12 +51,17 @@
 	<body>
 		<!--Top Nav bar-->
 
-		<div class="topnav" id="myTopnav">
-			<a href="/staffing"><img id="logo" src="{% static 'business/img/logo-color.png' %}" width="110px"></a>
-			<a class="navButton regular" role="button" href="{% url 'business:index' %}">PORTAL EMPRESAS</a>
-			<a class="navButton" role="button" href="{% url 'beta_invite:index' %}">CREA TU CUENTA</a>
-			<a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
-		</div>
+		<nav class="row" style="margin-right: 0px; margin-left: 0px;" id="myTopnav">
+			<div class="col-lg-2 col-md-2 col-sm-2"><a href="/staffing"><img id="logo" src="{% static 'business/img/logo-color.png' %}" width="110px"></a>
+			</div>
+			<div class="col-lg-10 col-md-10 col-sm-10 push10">
+				<ul style="float:right">
+					<li id="companies-button"><a id="option1" href="{% url 'business:index' %}" class="button-user" role="button">Portal Empresas</a></li>
+					<li id="register-button"><a href="{% url 'beta_invite:index' %}" class="button-user" role="button">Crea tu cuenta</a></li>
+					<!--<li id="login-button"><a href="{% url 'beta_invite:index' %}" class="button-user" role="button">Inicia sesión</a></li>-->
+				</ul>
+			</div>
+		</nav>
 
 		<div class="row blankbanner" style="margin-right: 0px;margin-left: 0px;"></div>
 

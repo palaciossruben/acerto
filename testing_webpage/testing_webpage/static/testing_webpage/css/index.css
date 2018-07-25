@@ -75,10 +75,9 @@ h6 {
 
 #logo {
     float: left;
-    margin-left:120px;
-    margin-top:80px;
+    margin-left:115px;
+    margin-top:25px;
     width: 100px;
-    padding:10px;
 }
 		
 .blankbanner {
@@ -108,7 +107,7 @@ h6 {
 		
 /* buttons */
 .button-user {
-    width:150px;
+    width:155px;
     background-color: white;
 	border-radius:40px;
     border: none;
