@@ -1,145 +1,336 @@
-{% extends 'base.html'%}
-{% load i18n %}
+<!DOCTYPE html>
 {% load static %}
-
-
-{% block title %}{% trans "Employment Exchange - PeakU" %}{% endblock %}
-
-{% block extra_head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'beta_invite/css/index.css' %}">
-{% endblock %}
-
-
-{% block content %}
-
-    <div>
-        <!--
-        <img src="{{ cloud_front_url }}user/img/girls.jpg"
-             srcset="{{ cloud_front_url }}user/img/girls@2x.jpg 2x,
-                     {{ cloud_front_url }}user/img/girls@3x.jpg 3x"
-             class="background-people">
-
-        <img src="{{ cloud_front_url }}user/img/girls_mobile.jpg"
-             srcset="{{ cloud_front_url }}user/img/girls_mobile@2x.jpg 2x,
-                     {{ cloud_front_url }}user/img/girls_mobile@3x.jpg 3x"
-             class="background-people-mobile">-->
-
-        <h1 class="main-title" id="main-title">{{ job_title }}</h1>
-    </div>
-
-    <section class="section-container">
-        <div class="row"> <!-- bootstrap row class -->
-            <div class="col-sm-6">
-                <div id="job-description-container">
-
-                    <h2 class="title-blue" id="job-title" align="center">{% trans "GENERAL DESCRIPTION" %}</h2>
-
-                    <div id="pre-preview">
-                        <span class="paragraph" id="campaign-description">{% autoescape off %}{{ campaign.description }}{% endautoescape %}</span>
-                    </div>
-
-                    <div id="requirement-title-div" align="left">
-                        {% if requirements %}
-                            <h4 id="requirement-title-id" class="title-blue">{% trans "Requirements" %}</h4>
-                        {% endif %}
-                    </div>
-
-                    <ul id="requirement-bullets-list" class="bullets-list">
-                        {% for req in requirements %}
-                            <li class="bullet" id="req-bullet">{{ req.name }}</li>
-                        {% endfor %}
-                    </ul>
-
-                    <div id="perk-title-div">
-                        {% if perks %}
-                            <h4 class="title-blue" align="left">{% trans "Perks" %}</h4>
-                        {% endif %}
-                    </div>
-
-                    <ul id="perk-bullets-list" class="bullets-list">
-                        {% for perk in perks %}
-                            <li class="bullet">{{ perk.name }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
+{% load i18n %}
+{% load app_filters %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <title>PeakU - Selección de personal</title>
+        <!--Latest compiled and minified bootstrap CSS-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!--Our Css-->
+        <link rel="stylesheet" type="text/css" href="{% static 'beta_invite/css/index.css' %}">
+        <!--Favicon-->
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon.ico' %}">
+        <link rel="apple-touch-icon" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon-16.png' %}">
+        <link rel="apple-touch-icon" sizes="32x32" href="{% static 'testing_webpage/favicon.ico/favicon-32.png' %}">
+        <link rel="apple-touch-icon" sizes="64x64" href="{% static 'testing_webpage/favicon.ico/favicon-64.png' %}">
+        <!-- Latest jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Latest compiled Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!--Our js-->
+        <script type="text/javascript" src="{% static 'beta_invite/js/index.js' %}"></script>
+        <script id="Heat-map" type="text/javascript">
+            window.smartlook||(function(d) {
+            var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+            var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+            c.charset='utf-8';c.src='https://rec.smartlook.com/recorder.js';h.appendChild(c);
+            })(document);
+            smartlook('init', '495c7bd6807a0ab2c17ade2e03cac13bab9f1b84');
+        </script>
+    </head>
+    <!----------------------------------------------SECTION 1---------------------------------------------------------->
+    <body>
+        <section class="main-section" id="main-section">
+            <div class="topnav" id="myTopnav">
+                <a href="/staffing" class="logo"><img src="{% static 'business/img/logo-color.png' %}"></a>
+                <!--<a class="navButton regular" role="button" onclick="on_login()">INICIA SESIÓN</a>-->
+                <a class="navButton" role="button" onclick="on_signup()">CREA TU CUENTA</a>
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
             </div>
+            <h1 class="main-title">{{ job_title }}</h1>
+        </section>
 
-            <div class="col-sm-6">
+        <div class="row">
+            <h2 class="descriptions">{% trans "GENERAL DESCRIPTION" %}</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 description-text">
+                <span>{% autoescape off %}{{ campaign.description }}{% endautoescape %}</span>
+            </div>
+            <div class="col-ls-4 email-column">
+                <h2 class="tests">Pruebas:</h2>
+                {% if campaign.tests %}
+                    {% for test in campaign.tests.all %}
+                        <p>{{ test.name_es }}</p>
+                    {% endfor %}
+                {% endif %}
+                <input class="email-input" placeholder="micorreo@ejemplo.com" onfocus="this.placeholder=''"
+                    onblur="this.placeholder = 'micorreo@ejemplo.com'">
+                <input class="apply" type="button" onclick="on_signup()" value="APLICAR">
+            </div>
+        </div>
+        <div class="row">
+            {% if perks %}
+                <h2 class="descriptions">{% trans "Perks" %}</h2>
+            {% endif %}
+        </div>
+        <div class="row">
+            <ul class="description-text">
+                {% for perk in perks %}
+                    <li class="bullet">{{ perk.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="row">
+            {% if requirements %}
+                <h2 class="descriptions">{% trans "Requirements" %}</h2>
+            {% endif %}
+        </div>
+        <div class="row final-row">
+            <ul class="description-text">
+                {% for req in requirements %}
+                    <li class="bullet">{{ req.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
 
-                <form class="my-form" action="{% url 'beta_invite:register' %}" method="post" enctype="multipart/form-data">
-
+        <div id="overlay-signup">
+            <div class="form-image">
+                <form class="only-register-form" action="{% url 'beta_invite:register' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-
-                    <input type="hidden" name="campaign_id" value="{{ campaign_id }}" />
-                    <input type="hidden" name="candidate_id" value="{{ candidate.pk }}" />
+                    <fieldset>
+                    <span class="exitDingbat" onclick="off_signup()">X</span>
+                    <br>
+                    <br>
+                    <input type="hidden" name="campaign_id" value="{{ campaign_id }}"/>
+                    <input type="hidden" name="candidate_id" value="{{ candidate.pk }}"/>
 
                     <input class="form-text" id="name" type="text" name="name"
-                           placeholder="{% trans 'Your Full Name' %}" required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
+                    placeholder="{% trans 'Your Full Name' %}" required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
 
                     {% if campaign.has_email %}
-                        <input class="form-text" id="email" type="email" name="email"
-                               placeholder="{% trans 'Your email' %}" required="required">
+                    <input class="form-text" id="email" type="email" name="email"
+                    placeholder="{% trans 'Your email' %}" required="required">
                     {% endif %}
 
                     <input class="form-text" id="phone" type="tel" name="phone"
-				  		placeholder="{% trans 'Your phone' %}" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
+                    placeholder="{% trans 'Your phone' %}" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
 
                     <select class="form-text" name="city_id" >
-                        <option value="{{ default_city.id }}">{{ default_city.name }}</option>
-                        {% for city in cities %}
-                            <option value="{{ city.id }}">{{ city.name }}</option>
-                        {% endfor %}
+                    <option value="{{ default_city.id }}">{{ default_city.name }}</option>
+                    {% for city in cities %}
+                    <option value="{{ city.id }}">{{ city.name }}</option>
+                    {% endfor %}
                     </select>
 
                     <select class="form-text" name="work_area_id" required>
-                        <option value="" selected disabled>{% trans 'Your work area' %}</option>
-                        {% for work_area in work_areas %}
-                            <option value="{{ work_area.id }}">{{ work_area.name }}</option>
-                        {% endfor %}
+                    <option value="" selected disabled>{% trans 'Your work area' %}</option>
+                    {% for work_area in work_areas %}
+                    <option value="{{ work_area.id }}">{{ work_area.name }}</option>
+                    {% endfor %}
                     </select>
 
                     <br>
                     <br>
 
                     <div>
-                        <input type="file" id="file" name="curriculum_url" class="form-inputfile" onchange="pressed()">
-                        <label for="file" id="fileLabel">{% trans "Upload your resume" %}</label>
-                        <label class="form-checkbox-container">
-                            <input class="form-checkbox" type="checkbox" id="politics" name="politics" required>
-                            <p class="form-checkbox-text"><a href="security_politics" target="_blank"> He leído y acepto las políticas de privacidad</a></p>
-                        </label>
+                    <input type="file" id="file" name="curriculum_url" class="form-inputfile" onchange="pressed()">
+                    <label for="file" id="fileLabel">{% trans "Upload your resume" %}</label>
+                    <label class="form-checkbox-container">
+                    <input class="form-checkbox" type="checkbox" id="politics" name="politics" required>
+                    <p class="form-checkbox-text"><a href="security_politics" target="_blank"> He leído y acepto las políticas de privacidad</a></p>
+                    </label>
                     </div>
-					<input class="form-submit" type="submit" id="submit" value="{% trans 'Sure!' %}">
-                    <!--<p>¿Ya tienes una cuenta?<a href="candidate_login.html">Ingresa aquí</a></p>-->
+                    <input class="form-submit" type="submit" id="submit" value="{% trans 'Sure!' %}">
+                    </fieldset>
+                    <span class="form-label register">¿Ya eres un usuario registrado? Inicia sesión
+                    <a href="javascript:void(0);" onclick="off_signup() & on_login()">
+                    <strong>Aquí</strong>
+                    </a>
+                    </span>
                 </form>
             </div>
         </div>
-    </section>
-    <script>
-        window.pressed = function(){
-            var a = document.getElementById('file');
-            if(a.value == "")
-            {
-                fileLabel.innerHTML = "Choose file";
-            }
-            else
-            {
-                var theSplit = a.value.split('\\');
-                fileLabel.innerHTML = theSplit[theSplit.length-1];
-            }
-        };
-    </script>
 
-<!-- This is to show or hide a tag, according the answer for any previous question
 
-        function myFunction() {
-            var x = document.getElementById("myDIV");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
+
+
+        <!--
+        <div id="overlay-login">
+            <div class="form-image">
+                <form id="login-form" method="post" action="{% url 'business:home' %}" >
+                    {% csrf_token %}
+                    <fieldset>
+                        <span class="exitDingbat" onclick="off_login()">X</span>
+                        <br>
+                        <br>
+                        <span>Correo</span>
+                        <input name="username" class="form-input"><br>
+                        <span>Contraseña</span>
+                        <input name="password" class="form-input" type="password"><br>
+                        <span class="form-label"><a href="#">Olvidé mi contraseña</a></span>
+                        <span class="form-label">
+                        <a href="javascript:void(0);" onclick="off_login() & on_signup()">Aun no estoy registrado
+                        </a>
+                        </span>
+                        <br>
+                        <br>
+                        <input type="submit" class="submit" value="ACCEDER">
+                    </fieldset>
+                </form>
+            </div>
+        </div>-->
+
+        <!----------------------------------------------FOOTER--------------------------------------------------------->
+        <footer class="container-fluid">
+            <div class="row footer-navigation">
+                <div class="col-md-2 col-md-2"></div>
+                <div class="col-md-3 col-md-3 navfooter">
+                    <ul>
+                        <li><a href="#">Nosotros</a></li>
+                        <li><a href="{% url 'business:contact_form' %}">Contáctanos</a></li>
+                        <li><a href="{% url 'beta_invite:index' %}">Personas</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 col-md-2 social">
+                    <a href="https://www.linkedin.com/company-beta/16241506/" target="_blank"><img src="{% static 'business/img/linkedin.png' %}"></a>
+                    <a href="https://www.facebook.com/PeakU-Latam-1916685895214519/?ref=aymt_homepage_panel" target="_blank">
+                    <img src="{% static 'business/img/facebook.png' %}"></a>
+                    <a href="#" target="_blank"><img src="{% static 'business/img/instagram.png' %}"></a>
+                    <a href="#" target="_blank"><img src="{% static 'business/img/twitter.png' %}"></a>
+                </div>
+                <div class=" col-md-1 col-md-1"></div>
+                <div class=" col-md-2 col-md-2 navfootercontact">
+                    <div class="logo-white"><a href="#"><img src="{% static 'business/img/logo-white.png' %}"></a></div>
+                    <div class="contact">contacto@peaku.co<br>
+                        +57 311 6109340<br>
+                        Colombia
+                    </div>
+                </div>
+                <div class=" col-md-2 col-md-2 "></div>
+            </div>
+            <div class="row">
+                <div class="col-1 col-md-1"></div>
+                <div class="col-10 copyright">Copyright 2018 © PeakU. Todos los derechos reservados.</div>
+                <div class="col-1"></div>
+            </div>
+        </footer>
+        <!--TopNav-->
+        <script>
+            function myFunction() {
+                var x = document.getElementById("myTopnav");
+                if (x.className === "topnav") {
+                    x.className += " responsive";
+                } else {
+                    x.className = "topnav";
+                }
             }
-        }
-</script>
--->
-{% endblock %}
+        </script>
+        <script>
+           $(document).ready(function() {
+               set_background("{{ campaign.image }}", "main-section")
+           });
+        </script>
+
+
+        <script>
+            window.pressed = function(){
+                var a = document.getElementById('file');
+                if(a.value == "")
+                {
+                    fileLabel.innerHTML = "Choose file";
+                }
+                else
+                {
+                    var theSplit = a.value.split('\\');
+                    fileLabel.innerHTML = theSplit[theSplit.length-1];
+                }
+            };
+        </script>
+        <!--Form Transition-->
+        <script>
+            function on(is_user_logged) {
+            if (is_user_logged) {
+                document.getElementById("big-form").submit();
+
+            } else { // enters here upon the second click
+                if (document.getElementById("overlay").style.display != "block") {
+                    document.getElementById("overlay").style.display = "block";
+                    document.getElementById("register-form").style.display = "block";
+                    $("html").css("background-size", "cover");
+                    $("#option1").css("color", "white");
+                    $("#option2").css("color", "white");
+                    $("nav").css("margin-bottom", "40px");
+                    $("#register-form").animate({"opacity": '1'}, 1500,"swing");
+                    $("#publish-campaign-button").animate({marginTop: '60%', marginLeft: '8%'}, 2000, "swing");
+                    $("#publish-campaign-button").css('z-index', 9999);
+                    $("#publish-campaign-button").css('position', 'absolute');
+                    $(".final-hide").animate({"opacity": '0'}, 1500,"swing");
+                }
+                    else {document.getElementById("big-form").submit();}
+            }}
+
+            function off() {
+            $("html").css("background-size", "contain");
+            $("#option1").css("color", "#3d4753");
+            $("#option2").css("color", "#3d4753");
+            $("nav").css("margin-bottom", "");
+            $("#register-form").animate({"opacity": '0'}, 1500,"swing");
+            $("#publish-campaign-button").animate({marginTop: '0%', marginLeft: '0%'}, 2000, "swing");
+            $(".final-hide").animate({"opacity": '1'}, 1500,"swing");
+            document.getElementById("overlay").style.display = "none";
+            }
+        </script>
+
+        <script>
+            function on_login() {
+            $("#overlay-login").css("display", "block");
+            $(".hidejs").css("display", "none");
+            $("#login-form").css("display", "block");
+            $("html").css("background-size", "cover");
+            $("#option1").css("color", "white");
+            $("#option2").css("color", "white");
+            $("nav").css("margin-bottom", "40px");
+            $("#login-form").animate({"marginLeft": '60%'}, 650,"swing");
+            $("html").css("overflow", "hidden");
+            }
+
+            function off_login() {
+            $("#overlay-login").css("display", "none");
+            $(".hidejs").css("display", "block");
+            $("#login-form").css("display", "none");
+            $("html").css("background-size", "contain");
+            $("#option1").css("color", "#3d4753");
+            $("#option2").css("color", "#3d4753");
+            $("nav").css("margin-bottom", "");
+            $("#login-form").animate({marginLeft: '160%'});
+            $("html").css("overflow-y", "scroll");
+            }
+
+            function on_signup() {
+            $("#overlay-signup").css("display", "block");
+            $(".hidejs").css("display", "none");
+            $(".only-register-form").css("display", "block");
+            $("html").css("background-size", "cover");
+            $("#option1").css("color", "white");
+            $("#option2").css("color", "white");
+            $("nav").css("margin-bottom", "40px");
+            $(".only-register-form").animate({"marginLeft": '60%'}, 650,"swing");
+            $(".form-image").animate({"backgroundPosition": '86%'}, 690,"swing");
+            $("html").css("overflow", "hidden");
+            }
+
+            function off_signup() {
+            $("#overlay-signup").css("display", "none");
+            $(".hidejs").css("display", "block");
+            $(".only-register-form").css("display", "none");
+            $("html").css("background-size", "contain");
+            $("#option1").css("color", "#3d4753");
+            $("#option2").css("color", "#3d4753");
+            $("nav").css("margin-bottom", "");
+            $(".only-register-form").animate({marginLeft: '160%'});
+            $(".form-image").animate({"backgroundPosition": '186%'}, 1,"swing");
+            $("html").css("overflow-y", "scroll");
+            }
+        </script>
+        <!-- any incoming error_message will print as an alert.-->
+        <script>
+            {% if error_message %}
+                alert("{{ error_message }}");
+            {% endif %}
+        </script>
+    </body>
+</html>

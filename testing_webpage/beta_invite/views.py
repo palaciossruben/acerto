@@ -94,13 +94,18 @@ def index(request):
     perks = campaign.bullets.filter(bullet_type__in=BulletType.objects.filter(name='perk'))
     requirements = campaign.bullets.filter(bullet_type__in=BulletType.objects.filter(name='requirement'))
 
+    if campaign.image is None:
+        campaign.image = "default"
+        campaign.save()
+
     param_dict = {'job_title': campaign.title,
                   'perks': translate_bullets(perks, request.LANGUAGE_CODE),
                   'requirements': translate_bullets(requirements, request.LANGUAGE_CODE),
                   'is_desktop': is_desktop,
                   'work_areas': common.get_work_areas(request.LANGUAGE_CODE),
                   'cities': common.get_cities(),
-                  'default_city': common.get_city(request)}
+                  'default_city': common.get_city(request),
+                  'image': campaign.image}
 
     if campaign_id is not None:
         param_dict['campaign_id'] = int(campaign_id)
