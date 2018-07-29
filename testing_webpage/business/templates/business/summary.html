@@ -98,7 +98,10 @@
                                             {% if campaign.recommended_evaluation.requirements_score %}
                                                 <div class="col-lg-3"><div class="text-label label3">Prueba de requisitos</div></div>
                                             {% endif %}
-                                            {% if campaign.recommended_evaluation.soft_skills_score %}
+                                            {% if campaign.recommended_evaluation.motivation_score %}
+                                                <div class="col-lg-3"><div class="text-label label4">Prueba motivación</div></div>
+                                            {% endif %}
+                                            {% if campaign.recommended_evaluation.cultural_fit_score %}
                                                 <div class="col-lg-3"><div class="text-label label4">Prueba fit cultural</div></div>
                                             {% endif %}
                                         </div>
@@ -121,9 +124,15 @@
                                                 </div>
                                             {% endif %}
 
-                                            {% if campaign.recommended_evaluation.soft_skills_score >= 0 %}
+                                            {% if campaign.recommended_evaluation.motivation_score >= 0 %}
                                                 <div id="recommended-soft-id" class="fill">
-                                                    {{ campaign.recommended_evaluation.soft_skills_score|print_score }}
+                                                    {{ campaign.recommended_evaluation.motivation_score|print_score }}
+                                                </div>
+                                            {% endif %}
+
+                                            {% if campaign.recommended_evaluation.motivation_score >= 0 %}
+                                                <div id="recommended-cultural-id" class="fill">
+                                                    {{ campaign.recommended_evaluation.cultural_fit_score|print_score }}
                                                 </div>
                                             {% endif %}
                                         </div>
@@ -187,7 +196,7 @@
                             <div class="circle avatar3"></div>
                             <p class="status-name bold">INSCRITOS</p>
                             <div class="line"></div>
-                            <p class="status-description">Total de candidatos que no han realizado las pruebas y candidatos que han sido descartados por alguno de los filtros</p>
+                            <p class="status-description">Otros candidatos que no han realizado las pruebas y candidatos que han sido descartados por alguno de los filtros</p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-xs-12">
@@ -278,10 +287,17 @@
                set_circle_color({{ campaign.recommended_evaluation.cognitive_score|int_rounding }}, "recommended-cognitive-id");
                set_circle_color({{ campaign.recommended_evaluation.technical_score|int_rounding }}, "recommended-technical-id");
                set_circle_color({{ campaign.recommended_evaluation.requirements_score|int_rounding }}, "recommended-requirement-id");
-               set_circle_color({{ campaign.recommended_evaluation.soft_skills_score|int_rounding }}, "recommended-soft-id");
+               set_circle_color({{ campaign.recommended_evaluation.motivation_score|int_rounding }}, "recommended-motivation-id");
+               set_circle_color({{ campaign.recommended_evaluation.cultural_fit_score|int_rounding }}, "recommended-cultural-id");
+               /* TODO: add score here */
+
                set_circle_color({{ campaign.relevant_evaluation.technical_score|int_rounding }}, "relevant-technical-id");
                set_circle_color({{ campaign.relevant_evaluation.cognitive_score|int_rounding }}, "relevant-cognitive-id");
+               /* TODO: add score here */
+
                set_circle_color({{ campaign.applicant_evaluation.cognitive_score|int_rounding }}, "applicant-cognitive-id");
+               /* TODO: add score here */
+
            });
         </script>
     </body>

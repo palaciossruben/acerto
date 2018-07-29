@@ -67,6 +67,18 @@
 
     <br>
     <br>
+
+    <p><strong>Motivation: </strong>
+    <input style="width:200px" type="number" min="0" max="100" step='1' name="{{ candidate.id }}_motivation"
+           placeholder="Add % of motivation" value="{{ candidate.print_motivation_score }}">
+
+    <br>
+    <p><strong>Cultural Fit: </strong>
+    <input style="width:200px" type="number" min="0" max="100" step='1' name="{{ candidate.id }}_cultural_fit"
+           placeholder="Add % of motivation" value="{{ candidate.print_cultural_fit_score }}">
+
+    <br>
+    <br>
     <p><strong>Screening: </strong>
     <select class="selectpicker" name="{{ candidate.id }}_screening_id">
       <option value="{{ candidate.screening.id }}">{{ candidate.screening.name }}</option>
@@ -124,7 +136,6 @@
 placeholder="add a comment!"></textarea>
 
 <br>
-<!--</div>-->
 <select class="selectpicker" name="{{ candidate.id }}_state">
       <option value="{{ candidate.state_id}}">{{ candidate.state.name }}</option>
       {% for state in states %}

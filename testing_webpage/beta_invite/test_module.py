@@ -229,7 +229,8 @@ def update_scores(evaluation, scores, candidate):
         evaluation.cognitive_score = evaluation.get_score_for_test_type('cognitive')
         evaluation.technical_score = evaluation.get_score_for_test_type('technical')
         evaluation.requirements_score = evaluation.get_score_for_test_type('requirements')
-        evaluation.soft_skills_score = evaluation.get_score_for_test_type('soft skills')
+        evaluation.motivation_score = evaluation.get_score_for_test_type('motivation')
+        evaluation.cultural_fit_score = evaluation.get_score_for_test_type('cultural fit')
         # TODO: add any new score here
 
     evaluation.save()

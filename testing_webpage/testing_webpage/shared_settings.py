@@ -14,6 +14,9 @@ import os
 from django.utils.translation import ugettext_lazy as _
 from decouple import config
 
+# Do not remove this line. This will execute conf.py to have AWS S3
+#from testing_webpage.aws.conf import *
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -45,6 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'raven.contrib.django.raven_compat',
+    'compressor',
+    #'storages',
 ]
 
 
@@ -147,6 +152,15 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 STATIC_URL = "/static/"
+
+# compressor stuff
+COMPRESS_OFFLINE = True
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+    'compressor.finders.CompressorFinder',
+)
 
 STATICFILES_DIRS = [('resumes', 'media/resumes'),
                     ('candidate_photo', 'media/candidate_photo'),

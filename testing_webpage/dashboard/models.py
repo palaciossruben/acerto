@@ -118,6 +118,27 @@ class Candidate(models.Model):
     class Meta:
         db_table = 'candidates'
 
+    def get_last_evaluation(self):
+        try:
+            return self.evaluations.latest('created_at')
+        except IndexError:
+            return None
+
+    def print_attribute(self, attribute):
+
+        last_evaluation = self.get_last_evaluation()
+
+        if last_evaluation and getattr(last_evaluation, attribute):
+            return int(getattr(last_evaluation, attribute))
+        else:
+            return ''
+
+    def print_cultural_fit_score(self):
+        return self.print_attribute('cultural_fit_score')
+
+    def print_motivation_score(self):
+        return self.print_attribute('motivation_score')
+
     def update_mean_test_scores(self):
         """
         Gets a mean value for each test taken.

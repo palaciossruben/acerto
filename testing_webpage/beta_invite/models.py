@@ -1,4 +1,5 @@
 import re
+from datetime import datetime
 
 from django.db import models
 from django.contrib.postgres.fields import JSONField
@@ -369,6 +370,20 @@ class Score(models.Model):
 
         return score
 
+    def update(self, value):
+        """
+        Convenience method to update a value from a test
+        :param value: the new score
+        :return: None
+        """
+        self.updated_at = datetime.today()
+        self.value = value
+
+        if self.value and self.test:
+            self.passed = self.value >= self.test.cut_score
+
+        self.save()
+
     def __str__(self):
         return 'id={0}, test={1}, value={2}'.format(self.pk, self.test.pk, self.value)
 
@@ -390,7 +405,9 @@ class Evaluation(models.Model):
     cognitive_score = models.FloatField(null=True)
     technical_score = models.FloatField(null=True)
     requirements_score = models.FloatField(null=True)
-    soft_skills_score = models.FloatField(null=True)
+    motivation_score = models.FloatField(null=True)
+    cultural_fit_score = models.FloatField(null=True)
+    # TODO: add new score here
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -446,7 +463,9 @@ class EvaluationSummary(models.Model):
     cognitive_score = models.FloatField(null=True)
     technical_score = models.FloatField(null=True)
     requirements_score = models.FloatField(null=True)
-    soft_skills_score = models.FloatField(null=True)
+    motivation_score = models.FloatField(null=True)
+    cultural_fit_score = models.FloatField(null=True)
+    # TODO: add new score here
 
     evaluations = models.ManyToManyField(Evaluation)
     evaluation_summaries = models.ManyToManyField("self", symmetrical=False)
@@ -504,7 +523,8 @@ class EvaluationSummary(models.Model):
             self.cognitive_score = average_list([e.cognitive_score for e in evaluations])
             self.technical_score = average_list([e.technical_score for e in evaluations])
             self.requirements_score = average_list([e.requirements_score for e in evaluations])
-            self.soft_skills_score = average_list([e.soft_skills_score for e in evaluations])
+            self.motivation_score = average_list([e.motivation_score for e in evaluations])
+            self.cultural_fit_score = average_list([e.cultural_fit_score for e in evaluations])
             # TODO: add any new score here
 
         self.save()

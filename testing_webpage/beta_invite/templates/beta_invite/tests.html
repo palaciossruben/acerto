@@ -13,7 +13,9 @@
         <div align="center">
             {% for test in tests %}
 
-                <h2>{% trans "Test: " %} {{ test.name }}</h2>
+                {% if test.questions.all|length > 0 %}
+                    <h2>{% trans "Test: " %} {{ test.name }}</h2>
+                {% endif %}
 
                 <!--Orders questions according to preset ordering-->
                 {% for question in test.questions.all|dictsort:"order" %}

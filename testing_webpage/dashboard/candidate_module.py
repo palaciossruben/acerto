@@ -2,18 +2,101 @@
 All functions related to candidates, dashboard stuff.
 """
 
-import statistics
-
 from dashboard.models import Comment, Candidate, State
-from beta_invite.models import Campaign
+from beta_invite.models import Campaign, EvaluationSummary
 from dashboard import constants as cts
 from beta_invite import new_user_module
+from beta_invite.models import Test, Score
+from beta_invite import test_module
 
 
 def add_property(candidate, request, property_name):
     property = request.POST.get('{0}_{1}'.format(candidate.id, property_name))
     if property is not None and property != '':
         setattr(candidate, property_name, property)
+
+
+def update_test_value(evaluation, scores, value, test):
+
+    if value is None:
+        return
+
+    value = float(value)
+
+    update_flag = False
+    for score in scores:
+        if test == score.test:
+            update_flag = True
+            score.update(value=value)
+            score.save()
+
+    if not update_flag:
+        score = Score(test=test, value=value)
+        score.save()
+        evaluation.scores.add(score)
+
+    evaluation.save()
+
+
+def updates_or_creates_score(evaluation, cultural_value, motivation_value):
+    """
+    **** Updates both Scores and Candidate objects. ****
+    :param evaluation: obj
+    :param cultural_value: float 0-100
+    :param motivation_value: float 0-100
+    :return: none
+    """
+    dummy_motivation_test = Test.objects.get(name='dummy motivation test')
+    dummy_cultural_test = Test.objects.get(name='dummy cultural fit test')
+    scores = evaluation.scores.all()
+
+    update_test_value(evaluation, scores, motivation_value, dummy_motivation_test)
+    update_test_value(evaluation, scores, cultural_value, dummy_cultural_test)
+
+
+def change_candidate_state(candidate, evaluation):
+
+    if evaluation.passed:
+        candidate.state = State.objects.get(code='WFI')
+    else:  # Fails tests
+        candidate.state = State.objects.get(code='FT')
+    candidate.save()
+
+
+def update_candidate_with_tests(candidate, motivation_value, cultural_value):
+    """
+    Updates latest evaluation with scores of cultural fit and motivation
+    :param candidate:
+    :param motivation_value:
+    :param cultural_value:
+    :return:
+    """
+    candidate_evaluations = candidate.evaluations.all()
+
+    if len(candidate_evaluations) > 0 and (motivation_value or cultural_value):
+
+        if motivation_value:
+            motivation_value = float(motivation_value)
+
+        if cultural_value:
+            cultural_value = float(cultural_value)
+
+        evaluation = candidate.get_last_evaluation()
+
+        # only updates if there is a change.
+        if evaluation.motivation_score != motivation_value or evaluation.cultural_fit_score != cultural_value:
+
+            updates_or_creates_score(evaluation,
+                                     motivation_value=motivation_value,
+                                     cultural_value=cultural_value)
+            test_module.update_scores(evaluation, evaluation.scores.all(), candidate)
+
+            if candidate.evaluation_summary:
+                candidate.evaluation_summary.update_evaluations(candidate_evaluations)
+            else:
+                candidate.evaluation_summary = EvaluationSummary.create(candidate.evaluations.all())
+
+            change_candidate_state(candidate, evaluation)
 
 
 def update_candidate(request, candidate):
@@ -35,6 +118,10 @@ def update_candidate(request, candidate):
     add_property(candidate, request, 'salary')
     add_property(candidate, request, 'screening_id')
     add_property(candidate, request, 'screening_explanation')
+
+    motivation_value = request.POST.get('{0}_{1}'.format(candidate.id, 'motivation'))
+    cultural_value = request.POST.get('{0}_{1}'.format(candidate.id, 'cultural_fit'))
+    update_candidate_with_tests(candidate, motivation_value, cultural_value)
 
     candidate.save()
 

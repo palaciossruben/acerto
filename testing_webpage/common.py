@@ -18,7 +18,7 @@ from testing_webpage import settings
 
 INTERVIEW_INTRO_VIDEO = './interview_intro_video.txt'
 ZIGGEO_API_KEY = './ziggeo_api_key.txt'
-
+ADMIN_USER_EMAIL = 'admin@peaku.co'
 
 if settings.DEBUG:
     HOST = '//127.0.0.1:8000'
@@ -441,6 +441,5 @@ def calculate_operational_efficiency(campaign):
 
 
 def access_for_users(request, campaign, business_user):
-
-    return request.user.username != 'admin@peaku.co' and (request.user.id != business_user.auth_user.id or campaign
+    return request.user.username != ADMIN_USER_EMAIL and (request.user.id != business_user.auth_user.id or campaign
                                                           not in business_user.campaigns.all())

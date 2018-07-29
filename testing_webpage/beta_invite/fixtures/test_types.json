@@ -27,8 +27,16 @@
     "model": "beta_invite.testtype",
     "pk": 4,
     "fields":{
-      "name": "soft skills",
-      "name_es":"habilidades blandas"
+      "name": "motivation",
+      "name_es":"motivación"
+    }
+  },
+  {
+    "model": "beta_invite.testtype",
+    "pk": 5,
+    "fields":{
+      "name": "cultural fit",
+      "name_es":"fit cultural"
     }
   }
 ]
