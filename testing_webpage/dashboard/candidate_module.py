@@ -56,6 +56,10 @@ def updates_or_creates_score(evaluation, cultural_value, motivation_value):
 
 def change_candidate_state(candidate, evaluation):
 
+    # don't downgrade someone that is passing
+    if evaluation.passed and candidate.state in [State.objects.get(code='STC'), State.objects.get(code='GTJ')]:
+        return
+
     if evaluation.passed:
         candidate.state = State.objects.get(code='WFI')
     else:  # Fails tests
@@ -92,7 +96,7 @@ def update_candidate_with_tests(candidate, motivation_value, cultural_value):
             test_module.update_scores(evaluation, evaluation.scores.all(), candidate)
 
             if candidate.evaluation_summary:
-                candidate.evaluation_summary.update_evaluations(candidate_evaluations)
+                candidate.evaluation_summary.update_evaluations(candidate.evaluations.all())
             else:
                 candidate.evaluation_summary = EvaluationSummary.create(candidate.evaluations.all())
 
