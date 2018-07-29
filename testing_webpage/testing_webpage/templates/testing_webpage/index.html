@@ -55,25 +55,17 @@
 	</head>
 	<body>
 
-		<!--Nav bar-->
-		<nav class="row" id="navigation">
-			<div class="col-lg-2 col-md-2 col-sm-2"><a href="/staffing"><img src="{% static 'business/img/logo-color.png' %}" width="110px" id="logo"></a>
+		<nav class="row" style="margin-right: 0px; margin-left: 0px;" id="myTopnav">
+			<div class="col-lg-2 col-md-2 col-sm-2"><a href="/staffing"><img id="logo" src="{% static 'business/img/logo-color.png' %}" width="110px"></a>
 			</div>
 			<div class="col-lg-10 col-md-10 col-sm-10 push10">
 				<ul style="float:right">
-					<li id="login-button"><a class="button-user" role="button" href="{% url 'business:index' %}">Empresas</a></li>
-					<li id="register-button"><a class="button-user" role="button" href="{% url 'beta_invite:index' %}">Crea tu cuenta</a></li>
+					<li id="companies-button"><a id="option1" href="{% url 'business:index' %}" class="button-user" role="button">Portal Empresas</a></li>
+					<li id="register-button"><a href="{% url 'beta_invite:index' %}" class="button-user" role="button">Crea tu cuenta</a></li>
+					<!--<li id="login-button"><a href="{% url 'beta_invite:index' %}" class="button-user" role="button">Inicia sesión</a></li>-->
 				</ul>
 			</div>
 		</nav>
-
-		<!--
-		<div class="topnav" id="myTopnav">
-			<a href="/staffing"><img id="logo" src="{% static 'business/img/logo-color.png' %}" width="110px"></a>
-			<a class="navButton regular" role="button" href="{% url 'business:index' %}">PORTAL EMPRESAS</a>
-			<a class="navButton" role="button" href="{% url 'beta_invite:index' %}">CREA TU CUENTA</a>
-			<a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
-		</div>-->
 
 		<div class="row blankbanner" style="margin-right: 0px;margin-left: 0px;"></div>
 
@@ -87,7 +79,7 @@
 				</form>
 			</div>
 			<div class="row blankabout responsive-no" style="margin-right: 0px;margin-left: 0px;"></div>
-			<div class="row blankabout" style="margin-right: 0px;margin-left: 0px;"></div>
+			<div class="row blankabout space" style="margin-right: 0px;margin-left: 0px;"></div>
 		</div>
 
         <div class="row section2">
@@ -98,16 +90,25 @@
             </div>
         </div>
 
+		<div class="row conectors-row">
+            <div class="col-lg-12 col-md-12 col-xs-12 conectors">
+				<div class="play-div">
+					<a href="https://www.youtube.com/watch?v=QbNDO2ShXIs" target="_blank">
+						<img class="play-button" src="{% static 'testing_webpage/img/play_button.png' %}">
+						<span class="video">VER VIDEO</span>
+					</a>
+				</div>
+			</div>
+        </div>
 
         <div class="row section3">
-            <div class="col-lg-6 col-md-6 col-xs-12 description3">
+			<div class="col-lg-push-6 col-md-6 col-xs-12 working-people"></div>
+            <div class="col-lg-pull-6 col-md-6 col-xs-12 description3">
                 <h3>Trabaja con las empresas más importantes</h3>
                 <h2>del mundo</h2>
                 <br>
-                <br>
-                <h5>Con PeakU aplicas unas sola vez y tienes acceso a una infinidad de vacantes de múltiples empresas y múltiples roles</h5>
+                <h5 class="last-description">Con PeakU aplicas unas sola vez y tienes acceso a una infinidad de vacantes de múltiples empresas y múltiples roles</h5>
             </div>
-            <div class="col-lg-6 col-md-6 col-xs-12 working-people"></div>
         </div>
 
 		<!----------------------------------------------FOOTER--------------------------------------------------------->
@@ -115,7 +116,7 @@
 			<div class="row" style="padding-bottom:30px;margin-right: 0px;margin-left: 0px;">
 				<div class=" col-lg-2 col-md-2 "></div>
 				<div class=" col-lg-3 col-md-3  navfooter" >
-					<ul style="float:left">
+					<ul style="float:left;    margin-left: -18px;">
 						<li><a href="#">Nosotros</a></li>
                         <li><a href="{% url 'business:contact_form' %}">Contáctanos</a></li>
 						<li><a href="{% url 'beta_invite:index' %}">Personas</a></li>
