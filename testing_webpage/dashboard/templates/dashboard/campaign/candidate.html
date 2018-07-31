@@ -164,7 +164,7 @@ placeholder="add a comment!"></textarea>
 <select class="selectpicker" name="{{ candidate.id }}_selected_campaign" >
   <option value="0">Select Campaign</option>
   {% for campaign in campaigns%}
-     <option value="{{ campaign.id }}">{{ campaign.name }}</option>
+     <option value="{{ campaign.id }}">{{ campaign.name }}/{{ campaign.title_es }}</option>
   {% endfor %}
 </select>
 
