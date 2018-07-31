@@ -3,12 +3,9 @@ import os
 
 def file_len(fname):
     i = 0
-    #try:
     with open(fname, 'r', errors='replace') as f:
         for _ in f:
             i += 1
-    #except UnicodeDecodeError:
-    #    pass
 
     print('{}: {}'.format(fname, i))
     return i
