@@ -53,8 +53,8 @@
                 <div class="gradient2">
                     <div class="topnav" id="myTopnav">
                         <a href="/staffing" class="logo"><img src="{% static 'business/img/logo-color.png' %}"></a>
-                        <a class="navButton regular" role="button" onclick="on_login()">INICIA SESIÓN</a>
-                        <a class="navButton" role="button" onclick="on_signup()">CREA TU CUENTA</a>
+                        <a class="navButton regular" role="button" onclick="off_signup() & on_login()">INICIA SESIÓN</a>
+                        <a class="navButton" role="button" onclick="off_login() & on_signup()">CREA TU CUENTA</a>
                         <a class="navText" href="{% url 'business:contact_form' %}">Contáctanos</a>
                         <a class="navText" href="{% url 'beta_invite:index' %}">Personas</a>
                         <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
@@ -123,7 +123,7 @@
                     </div>
                     <div class="container">
                         <div class="row first-row">
-                            <div class="col-md-4 hidejs responsive">
+                            <div class="col-md-4 hidejs hide-responsive">
                                 <div class="col-md-4 number-div">
                                     <span class="big-number first">1<span class="first-point">.</span></span>
                                 </div>

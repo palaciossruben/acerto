@@ -11,8 +11,6 @@ function set_background(image_name, id_string){
     }else{
         var url = 'url(../static/beta_invite/img/' + image_name;
         me.style["background-image"] = url;
-        me.style["background-size"] = "contain";
-        me.style["background-repeat"] = "no-repeat";
         console.log(url);
     }
 }

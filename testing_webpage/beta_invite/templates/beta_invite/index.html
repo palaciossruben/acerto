@@ -38,7 +38,6 @@
                 <a href="/staffing" class="logo"><img src="{% static 'business/img/logo-color.png' %}"></a>
                 <!--<a class="navButton regular" role="button" onclick="on_login()">INICIA SESIÓN</a>-->
                 <a class="navButton" role="button" onclick="on_signup()">CREA TU CUENTA</a>
-                <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
             </div>
             <h1 class="main-title">{{ job_title }}</h1>
         </section>
@@ -47,10 +46,11 @@
             <h2 class="descriptions">{% trans "GENERAL DESCRIPTION" %}</h2>
         </div>
         <div class="row">
-            <div class="col-lg-8 description-text">
+            <div class="col-lg-8 description-text main-description">
                 <span>{% autoescape off %}{{ campaign.description }}{% endautoescape %}</span>
             </div>
             <div class="col-ls-4 email-column">
+
                 <h2 class="tests">Pruebas:</h2>
                 {% if campaign.tests %}
                     {% for test in campaign.tests.all %}
@@ -98,32 +98,33 @@
                     <input type="hidden" name="campaign_id" value="{{ campaign_id }}"/>
                     <input type="hidden" name="candidate_id" value="{{ candidate.pk }}"/>
 
-                    <input class="form-text" id="name" type="text" name="name"
-                    placeholder="{% trans 'Your Full Name' %}" required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
+                    <span>{% trans 'Your Full Name' %}</span>
+                    <input class="form-input" id="name" type="text" name="name" required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
 
                     {% if campaign.has_email %}
-                    <input class="form-text" id="email" type="email" name="email"
-                    placeholder="{% trans 'Your email' %}" required="required">
+                    <span>{% trans 'Your email' %}</span>
+                    <input class="form-input" id="email" type="email" name="email" required="required">
                     {% endif %}
 
-                    <input class="form-text" id="phone" type="tel" name="phone"
-                    placeholder="{% trans 'Your phone' %}" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
+                    <span>{% trans 'Your phone' %}</span>
+                    <input class="form-input" id="phone" type="tel" name="phone" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
 
-                    <select class="form-text" name="city_id" >
+                    <span>Ciudad de residencia</span>
+                    <select class="form-input white" name="city_id" >
                     <option value="{{ default_city.id }}">{{ default_city.name }}</option>
                     {% for city in cities %}
                     <option value="{{ city.id }}">{{ city.name }}</option>
                     {% endfor %}
                     </select>
 
-                    <select class="form-text" name="work_area_id" required>
-                    <option value="" selected disabled>{% trans 'Your work area' %}</option>
+                    <span>Área de trabajo</span>
+                    <select class="form-input white" name="work_area_id" required>
+                    <option value="" selected disabled></option>
                     {% for work_area in work_areas %}
                     <option value="{{ work_area.id }}">{{ work_area.name }}</option>
                     {% endfor %}
                     </select>
 
-                    <br>
                     <br>
 
                     <div>
@@ -131,23 +132,19 @@
                     <label for="file" id="fileLabel">{% trans "Upload your resume" %}</label>
                     <label class="form-checkbox-container">
                     <input class="form-checkbox" type="checkbox" id="politics" name="politics" required>
-                    <p class="form-checkbox-text"><a href="security_politics" target="_blank"> He leído y acepto las políticas de privacidad</a></p>
+                    <a href="security_politics" target="_blank"> He leído y acepto las políticas de privacidad</a>
                     </label>
                     </div>
-                    <input class="form-submit" type="submit" id="submit" value="{% trans 'Sure!' %}">
+                    <input class="submit" type="submit" id="submit" value="{% trans 'Sure!' %}">
                     </fieldset>
-                    <span class="form-label register">¿Ya eres un usuario registrado? Inicia sesión
+                    <!--<span class="form-label register">¿Ya eres un usuario registrado? Inicia sesión
                     <a href="javascript:void(0);" onclick="off_signup() & on_login()">
                     <strong>Aquí</strong>
-                    </a>
+                    </a>-->
                     </span>
                 </form>
             </div>
         </div>
-
-
-
-
         <!--
         <div id="overlay-login">
             <div class="form-image">
@@ -231,7 +228,7 @@
                 var a = document.getElementById('file');
                 if(a.value == "")
                 {
-                    fileLabel.innerHTML = "Choose file";
+                    fileLabel.innerHTML = "Selecciona un archivo";
                 }
                 else
                 {
@@ -240,49 +237,12 @@
                 }
             };
         </script>
-        <!--Form Transition-->
-        <script>
-            function on(is_user_logged) {
-            if (is_user_logged) {
-                document.getElementById("big-form").submit();
-
-            } else { // enters here upon the second click
-                if (document.getElementById("overlay").style.display != "block") {
-                    document.getElementById("overlay").style.display = "block";
-                    document.getElementById("register-form").style.display = "block";
-                    $("html").css("background-size", "cover");
-                    $("#option1").css("color", "white");
-                    $("#option2").css("color", "white");
-                    $("nav").css("margin-bottom", "40px");
-                    $("#register-form").animate({"opacity": '1'}, 1500,"swing");
-                    $("#publish-campaign-button").animate({marginTop: '60%', marginLeft: '8%'}, 2000, "swing");
-                    $("#publish-campaign-button").css('z-index', 9999);
-                    $("#publish-campaign-button").css('position', 'absolute');
-                    $(".final-hide").animate({"opacity": '0'}, 1500,"swing");
-                }
-                    else {document.getElementById("big-form").submit();}
-            }}
-
-            function off() {
-            $("html").css("background-size", "contain");
-            $("#option1").css("color", "#3d4753");
-            $("#option2").css("color", "#3d4753");
-            $("nav").css("margin-bottom", "");
-            $("#register-form").animate({"opacity": '0'}, 1500,"swing");
-            $("#publish-campaign-button").animate({marginTop: '0%', marginLeft: '0%'}, 2000, "swing");
-            $(".final-hide").animate({"opacity": '1'}, 1500,"swing");
-            document.getElementById("overlay").style.display = "none";
-            }
-        </script>
 
         <script>
             function on_login() {
             $("#overlay-login").css("display", "block");
-            $(".hidejs").css("display", "none");
             $("#login-form").css("display", "block");
             $("html").css("background-size", "cover");
-            $("#option1").css("color", "white");
-            $("#option2").css("color", "white");
             $("nav").css("margin-bottom", "40px");
             $("#login-form").animate({"marginLeft": '60%'}, 650,"swing");
             $("html").css("overflow", "hidden");
@@ -290,11 +250,7 @@
 
             function off_login() {
             $("#overlay-login").css("display", "none");
-            $(".hidejs").css("display", "block");
             $("#login-form").css("display", "none");
-            $("html").css("background-size", "contain");
-            $("#option1").css("color", "#3d4753");
-            $("#option2").css("color", "#3d4753");
             $("nav").css("margin-bottom", "");
             $("#login-form").animate({marginLeft: '160%'});
             $("html").css("overflow-y", "scroll");
@@ -302,24 +258,24 @@
 
             function on_signup() {
             $("#overlay-signup").css("display", "block");
-            $(".hidejs").css("display", "none");
             $(".only-register-form").css("display", "block");
             $("html").css("background-size", "cover");
-            $("#option1").css("color", "white");
-            $("#option2").css("color", "white");
             $("nav").css("margin-bottom", "40px");
-            $(".only-register-form").animate({"marginLeft": '60%'}, 650,"swing");
+
+            if ($(window).width() < 769) {
+                $(".only-register-form").animate({"marginLeft": '20%'}, 650,"swing");
+            }
+            else {
+                $(".only-register-form").animate({"marginLeft": '60%'}, 650,"swing");
+            }
             $(".form-image").animate({"backgroundPosition": '86%'}, 690,"swing");
             $("html").css("overflow", "hidden");
             }
 
+
             function off_signup() {
             $("#overlay-signup").css("display", "none");
-            $(".hidejs").css("display", "block");
             $(".only-register-form").css("display", "none");
-            $("html").css("background-size", "contain");
-            $("#option1").css("color", "#3d4753");
-            $("#option2").css("color", "#3d4753");
             $("nav").css("margin-bottom", "");
             $(".only-register-form").animate({marginLeft: '160%'});
             $(".form-image").animate({"backgroundPosition": '186%'}, 1,"swing");

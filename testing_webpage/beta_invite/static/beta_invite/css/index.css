@@ -102,6 +102,10 @@ body {
     padding: 0;
 }
 
+.main-description{
+    min-height: 140px;
+}
+
 .email-column{
     text-align: center;
 }
@@ -112,17 +116,6 @@ body {
     background: gainsboro;
     border: none;
     text-align: center;
-}
-
-.apply{
-    display: block;
-    margin: 0 auto;
-    background: orange;
-    border-radius: 20px;
-    padding: 6px 20px;
-    margin-top: 20px;
-    color: white;
-    border: none;
 }
 
 .bullet{
@@ -143,7 +136,9 @@ body {
 
 }
 
-
+#file{
+    display:none;
+}
 
 
 
@@ -172,21 +167,31 @@ body {
 
 .submit {
     width:142px;
-    background-color: #ffffff;
+    background: orange;
 	border-radius:40px;
     border: none;
-    color: #3d4753;
+    color: white;
     padding: 5px 25px;
     text-align: center;
     text-decoration: none;
-	font-size:11px;
+	font-size:18px;
     display: inline-block;
     cursor: pointer;
     margin-left:20px;
     margin-top:0;
-    margin-bottom:30px;
+    margin-bottom:10px;
 }
 
+.apply{
+    display: block;
+    margin: 0 auto;
+    background: orange;
+    border-radius: 20px;
+    padding: 6px 20px;
+    margin-top: 20px;
+    color: white;
+    border: none;
+}
 /**************************************************GRADIENTS AND OVERLAYS**********************************************/
 
 .gradient1 {
@@ -254,6 +259,7 @@ body {
 
 #overlay-signup {
     display:none;
+    z-index:5;
     position:absolute;
     width: 100%;
     height: 100%;
@@ -317,7 +323,25 @@ body {
     display:none;
 }
 
+.description{
+    width:80%;
+}
 
+#fileLabel{
+    color:black;
+    background: white;
+    border-radius: 10px;
+    padding: 5px 20px;
+    cursor: pointer;
+}
+
+.form-checkbox-container a{
+    color:white;
+}
+
+.form-checkbox-container a:hover{
+    text-decoration:none;
+}
 
 .form-input {
     margin-top:1px;
@@ -331,6 +355,22 @@ body {
     color:black;
 }
 
+@-webkit-keyframes autofill {
+    to {
+        color: black;
+        background: white;
+    }
+}
+
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+.white{
+    background: white;
+}
+
 .exitDingbat {
     color:white;
     float:right;
@@ -339,7 +379,28 @@ body {
     margin-right: -50px;
 }
 
+.form-label {
+    color:white;
+}
+
+.register {
+    margin-left:30px;
+}
+
+.form-label a{
+    color:white;
+}
+
 /**************************************************HEADER**************************************************************/
+
+.logo {
+    float:left;
+}
+
+.logo img{
+    margin-left:30px;
+    width:70px;
+}
 
 .topnav {
   overflow: hidden;
@@ -380,11 +441,6 @@ body {
     background : linear-gradient(188deg, rgba(249, 241, 129, 1) 0%, rgba(192, 226, 125, 1) 17.36%, rgba(124, 208, 119, 1) 39.74%, rgba(71, 194, 115, 1) 60.01%, rgba(32, 184, 112, 1) 77.44%, rgba(9, 177, 111, 1) 91.35%, rgba(0, 175, 110, 1) 100%);
 
 }
-
-.navText {
-    margin: 15px 10px;
-}
-
 /**************************************************FOOTER**************************************************************/
 footer {
     background-color:#3d4753;
@@ -443,68 +499,32 @@ footer {
 	text-decoration:none;
 }
 
-#contact-buttons {
-	position:fixed;
-	margin-top:77vh;
-	margin-left:100%;
-	left:-100px;
-	z-index:100;
-	float:right;
-}
-
-#contact-buttons img {
-	padding-bottom:5px;
-}
-
-.logo {
-    float:left;
-}
-
-.logo img{
-    margin-left:30px;
-    width:70px;
-}
-
 .contact{
     width:80%;
     float:right;
     display:block;
     padding-left:20px
 }
-
 /**************************************************RESPONSIVE**********************************************************/
 
-.topnav .icon {
-    display: none;
-    font-size:25px;
-    margin-right: 20px;
-    float:right;
-}
-
 @media  (max-width: 768px){
-
-    .topnav a:not(:first-child) {
-        display: none;
+    .main-section {
+	    background: url(../img/cel-Start_BG-01-min.jpg);
+	    background-size: cover;
     }
 
-    .topnav a.icon {
-        float: right;
-        display: block;
+    .main-title{
+        float: left;
+        margin-right: 80px;
+        margin-top: 270px;
     }
 
-    .topnav.responsive {
-        position: relative;
+    .email-column {
+        display:none;
     }
 
-    .topnav.responsive .icon {
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-    .topnav.responsive a {
-        float: none;
-        display: block;
-        text-align: left;
+    .descriptions, .description-text{
+        margin-left:20px;
     }
 }
 
