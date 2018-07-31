@@ -14,7 +14,6 @@ def file_len(fname):
 def count_lines(my_path):
     count = 0
     content = os.listdir(my_path)
-    #print(content)
 
     for c in content:
         element_path = os.path.join(my_path, c)
