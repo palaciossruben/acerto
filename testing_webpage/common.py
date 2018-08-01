@@ -159,7 +159,10 @@ def remove_params_from_url(url):
 def get_candidate(user, campaign):
 
     if user and campaign:
-        return Candidate.objects.get(campaign=campaign, user=user)
+        try:
+            return Candidate.objects.get(campaign=campaign, user=user)
+        except ObjectDoesNotExist:
+            return None
     else:
         return None
 
