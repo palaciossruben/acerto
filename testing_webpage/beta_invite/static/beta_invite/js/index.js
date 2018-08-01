@@ -2,7 +2,7 @@ function set_background(image_name, id_string){
 
     image_name = image_name.replace("&#39;","");
     if (image_name == 'default'){
-        image_name = "Start_BG-01-min.jpg);"
+        image_name = "Start_BG-07-min.jpg)"
     }
 
     if ($(window).width() < 768) {
