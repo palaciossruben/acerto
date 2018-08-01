@@ -239,7 +239,6 @@
             $("html").css("background-size", "cover");
             $("nav").css("margin-bottom", "40px");
             $("#login-form").animate({"marginLeft": '60%'}, 650,"swing");
-            $("html").css("overflow", "hidden");
             }
 
             function off_login() {
@@ -247,7 +246,6 @@
             $("#login-form").css("display", "none");
             $("nav").css("margin-bottom", "");
             $("#login-form").animate({marginLeft: '160%'});
-            $("html").css("overflow-y", "scroll");
             }
 
             function on_signup() {
@@ -257,13 +255,13 @@
             $("nav").css("margin-bottom", "40px");
 
             if ($(window).width() < 769) {
-                $(".only-register-form").animate({"marginLeft": '20%'}, 650,"swing");
+                $(".only-register-form").animate({"marginLeft": 'auto'}, 650,"swing");
+                $(".only-register-form").css("margin", "100px auto");
             }
             else {
                 $(".only-register-form").animate({"marginLeft": '60%'}, 650,"swing");
             }
             $(".form-image").animate({"backgroundPosition": '86%'}, 690,"swing");
-            $("html").css("overflow", "hidden");
             }
 
 
@@ -273,7 +271,6 @@
             $("nav").css("margin-bottom", "");
             $(".only-register-form").animate({marginLeft: '160%'});
             $(".form-image").animate({"backgroundPosition": '186%'}, 1,"swing");
-            $("html").css("overflow-y", "scroll");
             }
         </script>
         <!-- any incoming error_message will print as an alert.-->
