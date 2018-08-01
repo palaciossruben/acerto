@@ -515,16 +515,25 @@ footer {
 
     .main-title{
         float: left;
-        margin-right: 80px;
-        margin-top: 270px;
-    }
-
-    .email-column {
-        display:none;
+        margin-bottom: 30px;
+        position:absolute;
+        bottom:0;
     }
 
     .descriptions, .description-text{
         margin-left:20px;
+    }
+
+    .logo-white {
+        margin-left: 35px;
+    }
+
+    .contact{
+        width: auto;
+    }
+
+    .navfooter{
+        margin-left: 16px;
     }
 }
 

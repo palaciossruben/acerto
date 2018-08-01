@@ -50,15 +50,6 @@
                 <span>{% autoescape off %}{{ campaign.description }}{% endautoescape %}</span>
             </div>
             <div class="col-ls-4 email-column">
-
-                <h2 class="tests">Pruebas:</h2>
-                {% if campaign.tests %}
-                    {% for test in campaign.tests.all %}
-                        <p>{{ test.name_es }}</p>
-                    {% endfor %}
-                {% endif %}
-                <input class="email-input" placeholder="micorreo@ejemplo.com" onfocus="this.placeholder=''"
-                    onblur="this.placeholder = 'micorreo@ejemplo.com'">
                 <input class="apply" type="button" onclick="on_signup()" value="APLICAR">
             </div>
         </div>
