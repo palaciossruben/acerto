@@ -222,7 +222,7 @@
     .conectors {
         background: url(../img/conectors_cel.png) no-repeat top center scroll;
         background-size:cover;
-        height:590px;
+        min-height:680px;
         margin-bottom:100px;
         margin-top:50px;
     }
