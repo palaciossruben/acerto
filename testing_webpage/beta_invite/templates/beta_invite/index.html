@@ -215,7 +215,11 @@
                set_background("{{ campaign.image }}", "main-section")
            });
         </script>
-
+        <script>
+            $( window ).resize(function() {
+                set_background("{{ campaign.image }}", "main-section")
+            });
+        </script>
 
         <script>
             window.pressed = function(){

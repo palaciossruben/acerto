@@ -71,7 +71,6 @@ body {
 
 .main-section {
 	width:auto;
-	background: url(../img/Start_BG-01-min.jpg);
 	background-size: contain;
 	background-repeat: no-repeat;
 	position: relative;
@@ -513,7 +512,6 @@ footer {
 
 @media  (max-width: 768px){
     .main-section {
-	    background: url(../img/cel-Start_BG-01-min.jpg);
 	    background-size: cover;
     }
 
