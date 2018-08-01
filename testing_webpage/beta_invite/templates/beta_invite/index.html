@@ -43,6 +43,9 @@
         </section>
 
         <div class="row">
+            <div class="col-ls-4 email-column">
+                <input class="apply hide1" type="button" onclick="on_signup()" value="APLICAR">
+            </div>
             <h2 class="descriptions">{% trans "GENERAL DESCRIPTION" %}</h2>
         </div>
         <div class="row">
@@ -50,7 +53,7 @@
                 <span>{% autoescape off %}{{ campaign.description }}{% endautoescape %}</span>
             </div>
             <div class="col-ls-4 email-column">
-                <input class="apply" type="button" onclick="on_signup()" value="APLICAR">
+                <input class="apply hide2" type="button" onclick="on_signup()" value="APLICAR">
             </div>
         </div>
         <div class="row">

@@ -391,6 +391,10 @@ input:-webkit-autofill {
     color:white;
 }
 
+.hide1{
+        display:none;
+    }
+
 /**************************************************HEADER**************************************************************/
 
 .logo {
@@ -534,6 +538,14 @@ footer {
 
     .navfooter{
         margin-left: 16px;
+    }
+
+    .hide1{
+        display:block;
+    }
+
+    .hide2{
+        display:none;
     }
 }
 
