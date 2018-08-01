@@ -137,7 +137,7 @@ h6{
 
 /**************************************************SLIDER**************************************************************/
 
-.regular.slider {
+.regular, .slider {
     z-index:2;
     position:relative;
     width:100%;
@@ -600,6 +600,13 @@ trix-editor ul {
   border-color:rgba(255, 255, 255, .5);
 }
 
+.topnav .icon {
+    display: none;
+    font-size:25px;
+    margin-right: 20px;
+    float:right;
+}
+
 .topnav a:not(:first-child){
   float: right;
 }
@@ -610,6 +617,7 @@ trix-editor ul {
   text-align: center;
   padding: 7px 0;
   text-decoration: none;
+  position: relative;
 }
 
 .navButton {
@@ -724,45 +732,36 @@ footer {
 
 /**************************************************RESPONSIVE**********************************************************/
 
-.topnav .icon {
-    display: none;
-    font-size:25px;
-    margin-right: 20px;
-    float:right;
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child) {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
 }
 
 @media  (max-width: 768px){
-
-    .topnav a:not(:first-child) {
-        display: none;
-    }
-
-    .topnav a.icon {
-        float: right;
-        display: block;
-    }
-
-    .topnav.responsive {
-        position: relative;
-    }
-
-    .topnav.responsive .icon {
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-    .topnav.responsive a {
-        float: none;
-        display: block;
-        text-align: left;
-    }
 
 	.main-section {
         background: url(../img/Start_BG-01-cel.jpg) no-repeat top center scroll ;
         background-size:cover;
     }
 
-    .responsive {
+    .hide-responsive {
         display:none;
     }
 
@@ -791,7 +790,7 @@ footer {
         font-size:18px;
     }
 
-    .regular.slider {
+    .regular, .slider {
         width: 80%;
         margin: 30px auto 60px auto;
     }
