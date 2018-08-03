@@ -14,6 +14,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import login, authenticate
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.forms import AuthenticationForm
+from django.utils import formats
 
 import common
 import business
@@ -511,12 +512,15 @@ def summary(request, campaign_id):
     if common.access_for_users(request, campaign, business_user):
             return redirect('business:login')
 
+    created_at = formats.date_format(campaign.created_at, "DATE_FORMAT")
+
     return render(request, cts.SUMMARY_VIEW_PATH, {'business_user': business_user,
                                                    'campaign': campaign,
                                                    'num_total': len(common.get_application_candidates(campaign))+len(common.get_relevant_candidates(campaign)),
                                                    'num_applicants': len(common.get_application_candidates(campaign)),
                                                    'num_relevant': len(common.get_relevant_candidates(campaign)),
-                                                   'num_recommended': len(common.get_recommended_candidates(campaign))})
+                                                   'num_recommended': len(common.get_recommended_candidates(campaign)),
+                                                   'created_at': created_at})
 
 
 @login_required
