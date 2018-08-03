@@ -18,11 +18,10 @@ def add_property(candidate, request, property_name):
 
 def update_test_value(evaluation, scores, value, test):
 
-    if value is None:
+    if value is None or value == "":
         return
 
     value = float(value)
-
     update_flag = False
     for score in scores:
         if test == score.test:
