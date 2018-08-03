@@ -1,16 +1,21 @@
 @charset "UTF-8";
 
-* {
-    box-sizing:border-box;
+/**************************************************GENERIC*************************************************************/
+
+* { margin: 0; padding: 0; outline:0; box-sizing:border-box;}
+
+html {
+	height: 100%;
 }
 
 body {
-    background : #F6F6F6;
+    background : #F6F6F6;;
+    height: 100%;
 }
 
-.row {
-    margin-right: 0px;
-    margin-left: 0px;
+.row{
+    margin-right:0;
+    margin-left:0;
 }
 /**************************************************FONTS***************************************************************/
 @font-face {
@@ -65,12 +70,9 @@ body {
 
 .topnav {
     overflow: hidden;
-    top:0.01%;
     width:100%;
     border-bottom: 2px groove;
     border-color:rgba(255, 255, 255, .5);
-    z-index:100;
-    position:absolute;
     background-color: white;
 }
 
@@ -187,14 +189,13 @@ body {
 
 .background{
     background: url(../img/Start_BG-01-min.jpg) no-repeat top center scroll ;
-    background-size:cover;
-    height:800px;
+    background-size:contain;
 }
 
 .gradient1 {
-    background:-webkit-linear-gradient(180deg, rgba(246,246,246,0) 0%, rgba(246,246,246,1) 100%);
-    background:-o-linear-gradient(180deg, rgba(246,246,246,0) 0%, rgba(246,246,246,1) 100%);
-    background:-moz-linear-gradient(180deg, rgba(246,246,246,0) 0%, rgba(246,246,246,1) 100%);
+    background:-webkit-linear-gradient(180deg, rgba(246,246,246,0) 30%, rgba(246,246,246,1) 100%);
+    background:-o-linear-gradient(180deg, rgba(246,246,246,0) 30%, rgba(246,246,246,1) 100%);
+    background:-moz-linear-gradient(180deg, rgba(246,246,246,0) 30%, rgba(246,246,246,1) 100%);
     background:linear-gradient(180deg, rgba(246,246,246,0) 30%, rgba(246,246,246,1) 100%);
     position:relative;
     z-index:1;
@@ -207,12 +208,12 @@ body {
     background:-moz-linear-gradient(90deg, rgba(0,184,162,0) 0%, rgba(0,184,162,1) 100%);
     background:linear-gradient(90deg, rgba(0,184,162,0) 0%, rgba(0,184,162,1) 100%);
     z-index: 4;
-    height: 100%;
-    height: 130px;
+    z-index: 4;
     right: 0px;
-    position: absolute;
     line-height: 35px;
     padding: 15px;
+    text-align:right;
+    margin-top: 6%;
 }
 /**********************************************************************************************************************/
 
@@ -268,6 +269,12 @@ body {
     font-size: 38px;
     text-shadow: 7px 5px 3px rgba(0,0,0,0.5);
     text-align: right;
+    margin-top:15%;
+    margin-right: 5%;
+}
+
+.plan-type{
+    height:70px;
 }
 
 .big-div{
@@ -334,35 +341,10 @@ body {
    text-align:center;
 }
 
-.one{
-    height:250px;
-}
-
-.two{
-    min-height:200px;
-}
-
-.three{
-    min-height:130px;
-}
-
-.four, .five, .six{
-    min-height:250px;
-}
-
-.four {
-    margin-top: -230px;
-}
-
-.six {
-    margin-bottom:50px;
-}
-
 .date, .total, .status{
     color: #ffffff;
     font-size: 20px;
-    right: 25px;
-    position: absolute;
+    margin-bottom:3px;
 }
 
 .total, .status {
@@ -473,46 +455,31 @@ body {
     width:70px;
     position:relative;
     z-index:3;
-    margin: 60px 5px;
+    margin: 15px 5px;
     border-style: solid;
     border-width: 8px;
     display: inline-block;
     padding-top: 15px;
     color: white;
-
     /*background: linear-gradient(to top, rgba(238, 235, 52, 0.7) 85%, transparent 85%);
     border-color:rgba(238, 235, 52, 1);*/
 }
 
-.fill3{
-    margin-top:105px;
-}
-
-.text-label{
+.test-name{
+    position: relative;
+    z-index: 3;
+    display: inline-block;
     color: white;
-    position:absolute;
-    top:10px;
+    width: 76px;
+    margin: 10px auto 0 auto;
 }
 
-.label2{
-    margin-right: 11px;
+.final-row{
+    margin-bottom:100px;
 }
 
-.label3{
-    margin-right: 10px;
-}
-
-.label4{
-    margin-right: 14px;
-}
-
-.label6{
-    margin-right: 37px;
-}
-
-.label7{
-    margin-top: 65px;
-    margin-left: 45px;
+.final-fill, .final-test-name{
+    margin:0;
 }
 
 /**************************************************FOOTER**************************************************************/
@@ -531,6 +498,10 @@ footer {
 	color:#FFFFFF;
 }
 
+.navfooter ul div{
+        text-align: center;
+}
+
 .social {
 	margin-top:50px;
 	text-align:center
@@ -540,7 +511,6 @@ footer {
 	padding:0px 10px 0px 10px !important;
 	list-style-type: none;
 	display:inline-block;
-	float:left;
 }
 
 .navfooter ul li a{
@@ -639,4 +609,36 @@ footer {
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
+}
+
+@media screen and (max-width: 768px) {
+    .background{
+        background: url(../img/cel-Start_BG-01-min.jpg) no-repeat top center scroll ;
+        background-size:contain;
+    }
+
+    .div1, .div2, .div3, .div4, .div5, .div6{
+        margin-left:0;
+        width: 100%;
+    }
+
+    .position{
+        relative;
+    }
+
+    .date{
+        font-size: 12px;
+    }
+
+    .campaign{
+        text-align: left;
+        margin-top: 60%;
+        margin-right: 0;
+    }
+
+    .gradient2{
+        margin-top:0;
+    }
+
+
 }
