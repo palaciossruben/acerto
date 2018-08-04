@@ -25,34 +25,6 @@ import common
 from dashboard.models import State
 from beta_invite.models import Test, Survey, Question
 from match import learn
-from match.pickle_models.pickle_handler import save_model, load_model
-from match import common_learning, learn, text_match, clustering
-from match.pickle_models import pickle_handler
-
-"""
-user = models.ForeignKey(User, null=True)
-campaign = models.ForeignKey(Campaign, null=True)
-test = models.ForeignKey(Test, null=True)
-question = models.ForeignKey(Question)
-answer = models.ForeignKey(Answer, null=True, on_delete=models.SET_NULL)
-text_answer = models.CharField(max_length=10000, null=True)
-numeric_answer = models.FloatField(null=True)
-interview = models.ForeignKey(Interview, null=True)
-video_token = models.CharField(max_length=200, null=True)
-score = models.FloatField(null=True)
-try_number = models.IntegerField(default=1)
-
-created_at = models.DateTimeField(auto_now_add=True)
-updated_at = models.DateTimeField(auto_now=True)
-"""
-
-"""
-candidates = {key: value}
-where:
-    key = candidate
-    value = {question: passed}
-        where: passed = 1 if survey.score > survey.test.cut_score else 0
-"""
 
 
 def new_balance(data):
@@ -80,43 +52,46 @@ def new_balance(data):
     return learn.DataPair(features=new_df, target=list(target))
 
 
-candidates = dict()
-cognitive_test = Test.objects.get(name='Cognitive Test')
-surveys = Survey.objects.filter(test=cognitive_test)
-question_ids = [q.id for q in cognitive_test.questions.all()]
+def get_questions_and_candidates():
 
-for survey in surveys:
+    cognitive_test = Test.objects.get(name='Cognitive Test')
+    surveys = Survey.objects.filter(test=cognitive_test)
+    questions = cognitive_test.questions.all()
 
-    if survey.score is not None and survey.test.cut_score:
-        candidate = common.get_candidate(survey.user, survey.campaign)
+    candidates = dict()
+    for survey in surveys:
 
-        if candidate:
-            #print(survey.score)
-            #print(survey.test.cut_score/100)
-            passed = 1 if survey.score > survey.test.cut_score/100 else 0
+        if survey.score is not None and survey.test.cut_score:
+            candidate = common.get_candidate(survey.user, survey.campaign)
 
-            if candidates.get(candidate) is None:
-                candidates[candidate] = dict()
+            if candidate:
+                passed = 1 if survey.score > survey.test.cut_score/100 else 0
 
-            candidates[candidate][survey.question] = passed
+                if candidates.get(candidate) is None:
+                    candidates[candidate] = dict()
 
-#print(candidates)
+                candidates[candidate][survey.question] = passed
 
-df = pd.DataFrame(columns=question_ids + ['passed'], index=[c.id for c in candidates.keys()])
+    return questions, candidates
 
 
-#total_trivial = 0
-#total_baseline = 0
+questions, candidates = get_questions_and_candidates()
+
+df = pd.DataFrame(columns=[q.id for q in questions] + ['passed'],
+                  index=[c.id for c in candidates.keys()])
+
+
+total_base = 0
+right_base = 0
 for candidate, values in candidates.items():
 
     if candidate.state in State.get_rejected_states() + State.get_recommended_states():
         end_state_passes = 1 if candidate.state in State.get_recommended_states() else 0
         df.loc[candidate.id, 'passed'] = end_state_passes
-        #df.loc[candidate.id, 'passed'] = 1 if candidate.state in State.get_relevant_states() else 0
-        trivial = int(sum(values.values()) > 4)
+        trivial_rule = int(sum(values.values()) > 4)
 
-        #total_trivial += trivial == end_state_passes
-        #total_baseline += 0 == end_state_passes
+        total_base += 1
+        right_base += trivial_rule == end_state_passes
 
         for question, passed in values.items():
             df.loc[candidate.id, question.id] = passed
@@ -128,19 +103,15 @@ print(df)
 
 data = learn.DataPair(target=df['passed'])
 
-#y = list(df['passed'])
 df.drop('passed', axis=1, inplace=True)
 
 data.features = df
 data = new_balance(data)
 
-total_trivial = 0
-total_baseline = 0
+#total_trivial = 0
 for y, (idx, row) in zip(data.target, data.features.iterrows()):
     trivial_rule = row[40] + row[41] + row[42] + row[43] + row[44] > 4
-    total_trivial += trivial_rule == y
-
-print(data.target)
+    #total_trivial += trivial_rule == y
 
 importance = pd.DataFrame(columns=list(df))
 cross_val_scores_array = []
@@ -153,7 +124,7 @@ for seed in range(20):
     model = RandomForestClassifier(max_depth=4, n_estimators=10)
     parameters = {'max_depth': (2, 4, 8, 16), 'n_estimators': [5, 10, 20, 40, 80]}
 
-    grid_model = GridSearchCV(model, parameters, n_jobs=1)  # scoring=['accuracy'], refit=False
+    grid_model = GridSearchCV(model, parameters, n_jobs=1)
     grid_model.fit(X_train, y_train)
 
     print('optimal params: ' + str(grid_model.best_params_))
@@ -168,34 +139,19 @@ for seed in range(20):
     p = model.feature_importances_
     importance = importance.append({col: value for col, value in zip(list(df), p)}, ignore_index=True)
 
-#tmp = list(cross_val_scores['trial 1'])
-#print(tmp)
-#import statistics
-#import numpy as np
-#print('avg accuracy: ' + np.mean(list(cross_val_scores['trial 1'])))
-
 print('importance avg: ' + str(importance.mean()))
 print('importance std: ' + str(importance.std()))
-#print([q for q in Question.objects.filter(pk__in=question_ids)])
 
 print('Confusion Matrix:')
 test_prediction = model.predict(X_test)
 print(confusion_matrix(y_test, test_prediction))
 
-baseline_accuracy = total_baseline / data.features.shape[0]
-trivial_accuracy = total_trivial / data.features.shape[0]
+#trivial_accuracy = total_base / data.features.shape[0]
+trivial_accuracy = right_base / total_base
 
-print('baseline accuracy: ' + str(baseline_accuracy))
 print('trivial accuracy: ' + str(trivial_accuracy))
 
 cross_val = statistics.mean(cross_val_scores_array)
-print('delta (cross_val - baseline): ' + str(cross_val - baseline_accuracy))
 print('delta (cross_val - trivial): ' + str(cross_val - trivial_accuracy))
 print('avg cross val: ' + str(cross_val))
 print('std cross val: ' + str(statistics.stdev(cross_val_scores_array)))
-
-
-#def do_trivial(row):
-#    return row[40]+row[41]+row[42]+row[43]+row[44] > 4
-
-#trivial = df.apply(do_trivial, axis=1)
