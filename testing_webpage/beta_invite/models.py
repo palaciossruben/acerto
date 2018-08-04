@@ -267,6 +267,9 @@ class Question(models.Model):
         self.type = question_type
         self.save()
 
+    def get_importance(self):
+        return '{}%'.format(round(self.importance*100))
+
 
 class TestType(models.Model):
 

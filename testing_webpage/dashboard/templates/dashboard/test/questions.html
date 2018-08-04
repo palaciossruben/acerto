@@ -5,7 +5,10 @@
 
         <br>
 
-        <p>Question {{ question.order }} </p>
+        <h3>Question {{ question.order }}</h3>
+        {% if question.importance %}
+            <p>Importance = {{ question.get_importance }}</p>
+        {% endif %}
 
         <br>
         <br>

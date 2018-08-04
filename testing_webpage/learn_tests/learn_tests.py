@@ -23,8 +23,11 @@ from imblearn.over_sampling import ADASYN
 
 import common
 from dashboard.models import State
-from beta_invite.models import Test, Survey, Question
+from beta_invite.models import Test, Survey
 from match import learn
+
+
+NUMBER_OF_TRIALS = 20
 
 
 def new_balance(data):
@@ -42,7 +45,7 @@ def new_balance(data):
     try:
         features, target = ada.fit_sample(data.features, data.target)
     except ValueError:  # ValueError: No samples will be generated with the provided ratio settings.
-        pass
+        return None
 
     print('balanced positive weight: ' + str(np.mean(target)))
 
@@ -52,11 +55,10 @@ def new_balance(data):
     return learn.DataPair(features=new_df, target=list(target))
 
 
-def get_questions_and_candidates():
+def get_questions_and_candidates(test):
 
-    cognitive_test = Test.objects.get(name='Cognitive Test')
-    surveys = Survey.objects.filter(test=cognitive_test)
-    questions = cognitive_test.questions.all()
+    surveys = Survey.objects.filter(test=test)
+    questions = test.questions.all()
 
     candidates = dict()
     for survey in surveys:
@@ -75,83 +77,109 @@ def get_questions_and_candidates():
     return questions, candidates
 
 
-questions, candidates = get_questions_and_candidates()
+def update_importance(test):
+    questions, candidates = get_questions_and_candidates(test)
+    df = pd.DataFrame(columns=[q.id for q in questions] + ['passed'],
+                      index=[c.id for c in candidates.keys()])
 
-df = pd.DataFrame(columns=[q.id for q in questions] + ['passed'],
-                  index=[c.id for c in candidates.keys()])
+    # only process worthwhile tests
+    if len(candidates) < 20:
+        return
+
+    print('processing test: {}'.format(test))
+
+    #total_trivial = 0
+    #right_trivial = 0
+    for candidate, values in candidates.items():
+
+        if candidate.state in State.get_rejected_states() + State.get_recommended_states():
+            end_state_passes = 1 if candidate.state in State.get_recommended_states() else 0
+            df.loc[candidate.id, 'passed'] = end_state_passes
+            #print(test.cut_score/100)
+            #print(int(sum(values.values())))
+            #print(test.cut_score/100 * len(questions))
+            trivial_rule = int(sum(values.values()) >= test.cut_score/100 * len(questions))
+
+            #total_trivial += 1
+            #right_trivial += trivial_rule == end_state_passes
+
+            for question, passed in values.items():
+                df.loc[candidate.id, question.id] = passed
+
+    df.dropna(axis=0, inplace=True)
+
+    data = learn.DataPair(target=df['passed'])
+    df.drop('passed', axis=1, inplace=True)
+    data.features = df
+
+    data = new_balance(data)
+    if data is None:  # could'nt do the re-balance will exit.
+        return
+
+    # TODO: measure trivial solution after rebalancing
+    """
+    total_trivial = 0
+    right_trivial = 0
+    for candidate, values in candidates.items():
+
+        if candidate.state in State.get_rejected_states() + State.get_recommended_states():
+            end_state_passes = 1 if candidate.state in State.get_recommended_states() else 0
+            trivial_rule = int(sum(values.values()) > test.cut_score * len(questions))
+
+            total_trivial += 1
+            right_trivial += trivial_rule == end_state_passes
+    """
+
+    importance = pd.DataFrame(columns=list(df))
+    cross_val_scores_array = []
+    for seed in range(NUMBER_OF_TRIALS):
+
+        X_train, X_test, y_train, y_test = train_test_split(data.features, list(data.target),
+                                                            test_size=0.3,
+                                                            random_state=seed)
+
+        parameters = {'max_depth': (2, 4, 8, 16), 'n_estimators': [5, 10, 20, 40, 80]}
+
+        grid_model = GridSearchCV(RandomForestClassifier(), parameters, n_jobs=1)
+        grid_model.fit(X_train, y_train)
+
+        print('optimal params: ' + str(grid_model.best_params_))
+
+        model = RandomForestClassifier(max_depth=grid_model.best_params_['max_depth'],
+                                       n_estimators=grid_model.best_params_['n_estimators'])
+        model.fit(X_train, y_train)
+
+        c = statistics.mean([float(e) for e in cross_val_score(model, X_test, y_test, scoring='accuracy')])
+        cross_val_scores_array.append(c)
+
+        p = model.feature_importances_
+        importance = importance.append({col: value for col, value in zip(list(df), p)}, ignore_index=True)
+
+    mean_importance = importance.mean()
+    for q in questions:
+        q.importance = mean_importance.loc[q.id]
+        q.save()
+
+    print('importance avg: ' + str(mean_importance))
+    print('importance std: ' + str(importance.std()))
+
+    print('Confusion Matrix:')
+    test_prediction = model.predict(X_test)
+    print(confusion_matrix(y_test, test_prediction))
+
+    # TODO: missing trivial
+    #trivial_accuracy = right_trivial / total_trivial
+    #print('trivial accuracy: ' + str(trivial_accuracy))
+    print('trivial accuracy: TODO')
+
+    cross_val = statistics.mean(cross_val_scores_array)
+    #print('delta (cross_val - trivial): ' + str(cross_val - trivial_accuracy))
+    print('delta (cross_val - trivial): TODO')
+    print('avg cross val: ' + str(cross_val))
+    print('std cross val: ' + str(statistics.stdev(cross_val_scores_array)))
 
 
-total_base = 0
-right_base = 0
-for candidate, values in candidates.items():
-
-    if candidate.state in State.get_rejected_states() + State.get_recommended_states():
-        end_state_passes = 1 if candidate.state in State.get_recommended_states() else 0
-        df.loc[candidate.id, 'passed'] = end_state_passes
-        trivial_rule = int(sum(values.values()) > 4)
-
-        total_base += 1
-        right_base += trivial_rule == end_state_passes
-
-        for question, passed in values.items():
-            df.loc[candidate.id, question.id] = passed
-
-df.dropna(axis=0, inplace=True)
-
-print(df)
-
-
-data = learn.DataPair(target=df['passed'])
-
-df.drop('passed', axis=1, inplace=True)
-
-data.features = df
-data = new_balance(data)
-
-#total_trivial = 0
-for y, (idx, row) in zip(data.target, data.features.iterrows()):
-    trivial_rule = row[40] + row[41] + row[42] + row[43] + row[44] > 4
-    #total_trivial += trivial_rule == y
-
-importance = pd.DataFrame(columns=list(df))
-cross_val_scores_array = []
-for seed in range(20):
-
-    X_train, X_test, y_train, y_test = train_test_split(data.features, list(data.target),
-                                                        test_size=0.3,
-                                                        random_state=seed)
-
-    model = RandomForestClassifier(max_depth=4, n_estimators=10)
-    parameters = {'max_depth': (2, 4, 8, 16), 'n_estimators': [5, 10, 20, 40, 80]}
-
-    grid_model = GridSearchCV(model, parameters, n_jobs=1)
-    grid_model.fit(X_train, y_train)
-
-    print('optimal params: ' + str(grid_model.best_params_))
-
-    model = RandomForestClassifier(max_depth=grid_model.best_params_['max_depth'],
-                                   n_estimators=grid_model.best_params_['n_estimators'])
-    model.fit(X_train, y_train)
-
-    c = statistics.mean([float(e) for e in cross_val_score(model, X_test, y_test, scoring='accuracy')])
-    cross_val_scores_array.append(c)
-
-    p = model.feature_importances_
-    importance = importance.append({col: value for col, value in zip(list(df), p)}, ignore_index=True)
-
-print('importance avg: ' + str(importance.mean()))
-print('importance std: ' + str(importance.std()))
-
-print('Confusion Matrix:')
-test_prediction = model.predict(X_test)
-print(confusion_matrix(y_test, test_prediction))
-
-#trivial_accuracy = total_base / data.features.shape[0]
-trivial_accuracy = right_base / total_base
-
-print('trivial accuracy: ' + str(trivial_accuracy))
-
-cross_val = statistics.mean(cross_val_scores_array)
-print('delta (cross_val - trivial): ' + str(cross_val - trivial_accuracy))
-print('avg cross val: ' + str(cross_val))
-print('std cross val: ' + str(statistics.stdev(cross_val_scores_array)))
+if __name__ == '__main__':
+    for test in Test.objects.all():
+        #if 'Basic Accounting Test' in test.name:
+        update_importance(test)
