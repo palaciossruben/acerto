@@ -86,7 +86,11 @@ def update_importance(test):
     if len(candidates) < 20:
         return
 
-    print('processing test: {}'.format(test))
+    try:
+        print('processing test: {}'.format(test))
+    except:
+        pass
+    print('processing test: {}'.format(test).encode('utf-8'))
 
     #total_trivial = 0
     #right_trivial = 0
