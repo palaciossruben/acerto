@@ -18,11 +18,10 @@ def add_property(candidate, request, property_name):
 
 def update_test_value(evaluation, scores, value, test):
 
-    if value is None:
+    if value is None or value == "":
         return
 
     value = float(value)
-
     update_flag = False
     for score in scores:
         if test == score.test:
@@ -46,8 +45,8 @@ def updates_or_creates_score(evaluation, cultural_value, motivation_value):
     :param motivation_value: float 0-100
     :return: none
     """
-    dummy_motivation_test = Test.objects.get(name='dummy motivation test')
-    dummy_cultural_test = Test.objects.get(name='dummy cultural fit test')
+    dummy_motivation_test = Test.objects.get(name='motivation test')
+    dummy_cultural_test = Test.objects.get(name='cultural fit test')
     scores = evaluation.scores.all()
 
     update_test_value(evaluation, scores, motivation_value, dummy_motivation_test)

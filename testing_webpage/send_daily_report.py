@@ -49,13 +49,13 @@ def business_daily_report():
                 created_at__range=[str(timezone.now() - timedelta(days=1)), str(timezone.now())],
                 campaign=campaign,
                 removed=False,
-                state_id__in=[8, 10])
+                state_id__in=[5])
 
             # Only send if there is something.
             if len(candidates) > 0:
                 email_sender.send_report(language_code='es',
                                          body_filename='business_daily_report_email_body',
-                                         subject='Reporte de candidatos relevantes',
+                                         subject='Reporte de candidatos recomendados',
                                          recipients=[business_user.email, business_user.additional_email, 'juan.rendon@peaku.co', 'juan@peaku.co',  'santiago@peaku.co', 'daniela@peaku.co'],
                                          candidates=candidates)
 

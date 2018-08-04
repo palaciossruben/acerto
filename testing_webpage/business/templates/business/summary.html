@@ -29,80 +29,86 @@
             <a href="/staffing" class="logo"><img src="{% static 'business/img/logo-color-negro.png' %}"></a>
             <a href="{% url 'business:logout' %}">{% trans "LOG OUT" %}</a>
             <a class="navButton" style="font-size: 15px;width:170px;color: white;border-radius:40px;margin-top: 30px;padding:5px 16px;background:#F47B20;"
-               role="button" href="{% url 'business:start' %}">+  CREAR OFERTA</a>
+                role="button" href="{% url 'business:start' %}">+  CREAR OFERTA</a>
             <a href="{% url 'business:business_campaigns' business_user_id=business_user.pk %}">Mis campañas</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
             <i class="fa fa-bars"></i>
             </a>
         </div>
         <!--
-        <div class="sidenav">
-            <a href="{% url 'business:business_campaigns' business_user_id=business_user.pk %}"><span class="arrow">&#xFE64;<br><span class="arrow-text">Mis ofertas</span></span></a>
-            <a href="{% url 'business:start' %}"><span class="plus">&#x002B;<br><span class="plus-text">Nueva oferta</span></span></a>
-            <!--<a href="#"><span class="setup">&#x2699;<br><span class="setup-text">Configuración</span></span></a>
-            <div class="blur">
-            </div>
-        </div>-->
-
+            <div class="sidenav">
+                <a href="{% url 'business:business_campaigns' business_user_id=business_user.pk %}"><span class="arrow">&#xFE64;<br><span class="arrow-text">Mis ofertas</span></span></a>
+                <a href="{% url 'business:start' %}"><span class="plus">&#x002B;<br><span class="plus-text">Nueva oferta</span></span></a>
+                <!--<a href="#"><span class="setup">&#x2699;<br><span class="setup-text">Configuración</span></span></a>
+                <div class="blur">
+                </div>
+            </div>-->
         <div class="background">
             <div class="gradient1">
-                <div class="container">
-                    <div class="row one"></div>
-                    <div class="row two">
-                        <div class="col-lg-5"></div>
-                        <div class="col-lg-7 campaign bold">{{ campaign.title_es }}</div>
-                    </div>
-                    <div class="row three">
-                        <div class="col-lg-3 col-xs-12"></div>
-                        <div class="col-lg-9 col-xs-12 gradient2">
-                            <p class="date regular">FECHA DE PUBLICACIÓN: {{ campaign.created_at }}</p><br>
-                            {% if campaign.active %}
-                                <p class="status bold">ESTADO: activa</p><br>
-                            {% else %}
-                                <p class="status bold">ESTADO: inactiva</p><br>
-                            {% endif %}
-                            <p class="total regular">TOTAL APLICANTES: {{ num_total }}</p>
-                        </div>
+                <div class="row bold">
+                    <div class="campaign">{{ campaign.title_es }}</div>
+                </div>
+                <div class="row plan-type"></div>
+                <div class="row">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-8 col-xs-12 gradient2">
+                        <p class="date regular">FECHA DE PUBLICACIÓN: {{ created_at }}</p>
+                        {% if campaign.active %}
+                        <p class="status bold">ESTADO: activa</p>
+                        {% else %}
+                        <p class="status bold">ESTADO: inactiva</p>
+                        {% endif %}
+                        <p class="total regular">TOTAL APLICANTES: {{ num_total }}</p>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row four">
-                <a href="{% url 'business:dashboard' business_user_id=business_user.pk campaign_id=campaign.id state_name='recommended' %}">
-                    <div class="col-xs-12 col-lg-6">
-                        <div class="state div1">
-                            <div class="circle avatar1"></div>
-                            <input name="campaign_id" type="hidden" value="{{ campaign.id }}">
-                            <p class="status-name bold">RECOMENDADOS</p>
-                            <div class="line"></div>
-                            <p class="status-description">Sugerencias de candidatos que son tu mejor opción de contratación y han superado todos los filtros</p>
+                <div class="row">
+                    <a href="{% url 'business:dashboard' business_user_id=business_user.pk campaign_id=campaign.id state_name='recommended' %}">
+                        <div class="col-xs-12 col-lg-6">
+                            <div class="state div1">
+                                <div class="circle avatar1"></div>
+                                <input name="campaign_id" type="hidden" value="{{ campaign.id }}">
+                                <p class="status-name bold">RECOMENDADOS</p>
+                                <div class="line"></div>
+                                <p class="status-description">Sugerencias de candidatos que son tu mejor opción de contratación y han superado todos los filtros</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <div class="state div2">
-                            <div class="row">
-                                <span class="quantity bold">{{ num_recommended }}</span><br>
-                                <span class="primary bold">PERFILES</span><br>
-                                <span class="secondary regular">SELECCIONADOS</span>
-                                <div class="recommended">
-
-                                    {% if campaign.pk == 146 %}
+                        <div class="col-xs-12 col-lg-6">
+                            <!--Firsts mobile design-->
+                            <div class="state div2">
+                                <div class="row">
+                                    <span class="quantity bold">{{ num_recommended }}</span><br>
+                                    <span class="primary bold">PERFILES</span><br>
+                                    <span class="secondary regular">SELECCIONADOS</span>
+                                    <div class="recommended">
                                         <div class="row">
                                             {% if campaign.recommended_evaluation.cognitive_score %}
-                                                <div class="col-lg-3"><div class="text-label label1">Prueba cognitiva</div></div>
+                                                <div class="test-name">
+                                                    Prueba cognitiva
+                                                </div>
                                             {% endif %}
+
                                             {% if campaign.recommended_evaluation.technical_score %}
-                                                <div class="col-lg-3"><div class="text-label label2">Prueba técnica</div></div>
+                                                <div class="test-name">
+                                                    Prueba técnica
+                                                </div>
                                             {% endif %}
+
                                             {% if campaign.recommended_evaluation.requirements_score %}
-                                                <div class="col-lg-3"><div class="text-label label3">Prueba de requisitos</div></div>
+                                                <div class="test-name">
+                                                    Prueba de requisitos
+                                                </div>
                                             {% endif %}
+
                                             {% if campaign.recommended_evaluation.motivation_score %}
-                                                <div class="col-lg-3"><div class="text-label label4">Prueba motivación</div></div>
+                                                <div class="test-name">
+                                                    Prueba motivación
+                                                </div>
                                             {% endif %}
+
                                             {% if campaign.recommended_evaluation.cultural_fit_score %}
-                                                <div class="col-lg-3"><div class="text-label label4">Prueba fit cultural</div></div>
+                                                <div class="test-name">
+                                                    Prueba fit cultural
+                                                </div>
                                             {% endif %}
                                         </div>
                                         <div class="row">
@@ -125,106 +131,105 @@
                                             {% endif %}
 
                                             {% if campaign.recommended_evaluation.motivation_score >= 0 %}
-                                                <div id="recommended-soft-id" class="fill">
+                                                <div id="recommended-motivation-id" class="fill">
                                                     {{ campaign.recommended_evaluation.motivation_score|print_score }}
                                                 </div>
                                             {% endif %}
 
-                                            {% if campaign.recommended_evaluation.motivation_score >= 0 %}
+                                            {% if campaign.recommended_evaluation.cultural_fit_score >= 0 %}
                                                 <div id="recommended-cultural-id" class="fill">
                                                     {{ campaign.recommended_evaluation.cultural_fit_score|print_score }}
                                                 </div>
                                             {% endif %}
                                         </div>
-                                    {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
-            <div class="row five">
-                <a href="{% url 'business:dashboard' business_user_id=business_user.pk campaign_id=campaign.id state_name='relevant' %}">
-                    <div class="col-lg-6 col-xs-12">
-                        <div class="state div3">
-                            <div class="circle avatar2"></div>
-                            <p class="status-name bold">RELEVANTES</p>
-                            <div class="line"></div>
-                            <p class="status-description">Todos los candidatos que aprobaron pruebas iniciales y requerimientos específicos para tu campaña</p>
-                        </div>
+        </div>
+        <div class="row">
+            <a href="{% url 'business:dashboard' business_user_id=business_user.pk campaign_id=campaign.id state_name='relevant' %}">
+                <div class="col-lg-6 col-xs-12">
+                    <div class="state div3">
+                        <div class="circle avatar2"></div>
+                        <p class="status-name bold">RELEVANTES</p>
+                        <div class="line"></div>
+                        <p class="status-description">Todos los candidatos que aprobaron pruebas iniciales y requerimientos específicos para tu campaña</p>
                     </div>
-                    <div class="col-lg-6 col-xs-12">
-                        <div class="state div4">
-                            <div class="row">
-                                <span class="quantity2 bold">{{ num_relevant }}</span><br>
-                                <span class="primary bold">PERFILES</span><br>
-                                <span class="secondary pre regular">PRESELECCIONADOS</span>
-                                <span class="relevant">
-                                    {% if campaign.pk == 146 %}
-                                        <div class="row">
-                                            {% if campaign.relevant_evaluation.cognitive_score >= 0 %}
-                                                <div class="col-lg-6"><div class="text-label label5">Prueba cognitiva</div></div>
-                                            {% endif %}
-                                            {% if campaign.relevant_evaluation.technical_score >= 0 %}
-                                                <div class="col-lg-6"><div class="text-label label6">Prueba técnica</div></div>
-                                            {% endif %}
-                                        </div>
-                                        <div class="row">
-                                            {% if campaign.relevant_evaluation.cognitive_score >= 0 %}
-                                                <div id="relevant-cognitive-id" class="fill">
-                                                    {{ campaign.relevant_evaluation.cognitive_score|print_score }}
-                                                </div>
-                                            {% endif %}
+                </div>
+                <div class="col-lg-6 col-xs-12">
+                    <div class="state div4">
+                        <div class="row">
+                            <span class="quantity2 bold">{{ num_relevant }}</span><br>
+                            <span class="primary bold">PERFILES</span><br>
+                            <span class="secondary pre regular">PRESELECCIONADOS</span>
+                            <span class="relevant">
+                                <div class="row">
+                                    {% if campaign.relevant_evaluation.cognitive_score >= 0 %}
+                                        <div class="test-name">Prueba cognitiva</div>
+                                    {% endif %}
 
-                                            {% if campaign.relevant_evaluation.technical_score >= 0 %}
-                                                <div id="relevant-technical-id" class="fill">
-                                                    {{ campaign.relevant_evaluation.technical_score|print_score }}
-                                                </div>
-                                            {% endif %}
+                                    {% if campaign.relevant_evaluation.technical_score >= 0 %}
+                                        <div class="test-name">Prueba técnica</div>
+                                    {% endif %}
+                                </div>
+                                <div class="row">
+                                    {% if campaign.relevant_evaluation.cognitive_score >= 0 %}
+                                        <div id="relevant-cognitive-id" class="fill">
+                                            {{ campaign.relevant_evaluation.cognitive_score|print_score }}
                                         </div>
                                     {% endif %}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="row six">
-                <a href="{% url 'business:dashboard' business_user_id=business_user.pk campaign_id=campaign.id state_name='applicants' %}">
-                    <div class="col-lg-6 col-xs-12">
-                        <div class="state div5">
-                            <div class="circle avatar3"></div>
-                            <p class="status-name bold">INSCRITOS</p>
-                            <div class="line"></div>
-                            <p class="status-description">Otros candidatos que no han realizado las pruebas y candidatos que han sido descartados por alguno de los filtros</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-xs-12">
-                        <div class="state div6">
-                            <div class="row">
-                                <span class="quantity3 bold">{{ num_applicants }}</span><br>
-                                <span class="applicant-text bold">PERFILES ADICIONALES</span><br>
-                                <span class="applicant">
-                                    {% if campaign.pk == 146 %}
-                                        {% if campaign.applicant_evaluation.cognitive_score >= 0 %}
-                                            <div class="row">
-                                                <div class="col-lg-12"><div class="text-label label7">Prueba cognitiva</div></div>
-                                            </div>
-                                        {% endif %}
-                                        <div class="row">
-                                            {% if campaign.applicant_evaluation.cognitive_score >= 0 %}
-                                                <div id="applicant-cognitive-id" class="fill fill3">
-                                                    {{ campaign.applicant_evaluation.cognitive_score|print_score }}
-                                                </div>
-                                            {% endif %}
+
+                                    {% if campaign.relevant_evaluation.technical_score >= 0 %}
+                                        <div id="relevant-technical-id" class="fill">
+                                            {{ campaign.relevant_evaluation.technical_score|print_score }}
                                         </div>
                                     {% endif %}
-                                </span>
-                            </div>
+                                </div>
+                            </span>
                         </div>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
+        </div>
+        <div class="row final-row">
+            <a href="{% url 'business:dashboard' business_user_id=business_user.pk campaign_id=campaign.id state_name='applicants' %}">
+                <div class="col-lg-6 col-xs-12">
+                    <div class="state div5">
+                        <div class="circle avatar3"></div>
+                        <p class="status-name bold">INSCRITOS</p>
+                        <div class="line"></div>
+                        <p class="status-description">Otros candidatos que no han realizado las pruebas y candidatos que han sido descartados por alguno de los filtros</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-xs-12">
+                    <div class="state div6">
+                        <div class="row">
+                            <span class="quantity3 bold">{{ num_applicants }}</span><br>
+                            <span class="applicant-text bold">PERFILES ADICIONALES</span><br>
+                            <span class="applicant"></span>
+                        </div>
+                                {% if campaign.applicant_evaluation.cognitive_score >= 0 %}
+                                    <div class="row">
+                                        <div class="test-name final-test-name">Prueba cognitiva</div>
+                                    </div>
+                                {% endif %}
+
+                                <div class="row">
+                                    {% if campaign.applicant_evaluation.cognitive_score >= 0 %}
+                                        <div id="applicant-cognitive-id" class="fill final-fill">
+                                            {{ campaign.applicant_evaluation.cognitive_score|print_score }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </a>
         </div>
         <!----------------------------------------------FOOTER--------------------------------------------------------->
         <footer class="container-fluid">
@@ -232,9 +237,11 @@
                 <div class="col-md-2 col-md-2"></div>
                 <div class="col-md-3 col-md-3 navfooter">
                     <ul>
-                        <li><a href="#">Nosotros</a></li>
-                        <li><a href="{% url 'business:contact_form' %}">Contáctanos</a></li>
-                        <li><a href="{% url 'beta_invite:index' %}">Personas</a></li>
+                        <div>
+                            <li><a href="#">Nosotros</a></li>
+                            <li><a href="{% url 'business:contact_form' %}">Contáctanos</a></li>
+                            <li><a href="{% url 'beta_invite:index' %}">Personas</a></li>
+                        </div>
                     </ul>
                 </div>
                 <div class="col-md-2 col-md-2 social">
@@ -244,8 +251,8 @@
                     <a href="#" target="_blank"><img src="{% static 'business/img/instagram.png' %}"></a>
                     <a href="#" target="_blank"><img src="{% static 'business/img/twitter.png' %}"></a>
                 </div>
-                <div class=" col-md-1 col-md-1"></div>
-                <div class=" col-md-2 col-md-2 navfootercontact">
+                <div class="col-md-1"></div>
+                <div class="col-md-2 col-xs-12 navfootercontact">
                     <div class="logo-white"><a href="#"><img src="{% static 'business/img/logo-white.png' %}"></a></div>
                     <div class="contact">contacto@peaku.co<br>
                         +57 311 6109340<br>
@@ -283,22 +290,18 @@
             });
         </script>
         <script>
-           $(document).ready(function() {
-               set_circle_color({{ campaign.recommended_evaluation.cognitive_score|int_rounding }}, "recommended-cognitive-id");
-               set_circle_color({{ campaign.recommended_evaluation.technical_score|int_rounding }}, "recommended-technical-id");
-               set_circle_color({{ campaign.recommended_evaluation.requirements_score|int_rounding }}, "recommended-requirement-id");
-               set_circle_color({{ campaign.recommended_evaluation.motivation_score|int_rounding }}, "recommended-motivation-id");
-               set_circle_color({{ campaign.recommended_evaluation.cultural_fit_score|int_rounding }}, "recommended-cultural-id");
-               /* TODO: add score here */
+            $(document).ready(function() {
+                set_circle_color({{ campaign.recommended_evaluation.cognitive_score|int_rounding }}, "recommended-cognitive-id");
+                set_circle_color({{ campaign.recommended_evaluation.technical_score|int_rounding }}, "recommended-technical-id");
+                set_circle_color({{ campaign.recommended_evaluation.requirements_score|int_rounding }}, "recommended-requirement-id");
+                set_circle_color({{ campaign.recommended_evaluation.motivation_score|int_rounding }}, "recommended-motivation-id");
+                set_circle_color({{ campaign.recommended_evaluation.cultural_fit_score|int_rounding }}, "recommended-cultural-id");
 
-               set_circle_color({{ campaign.relevant_evaluation.technical_score|int_rounding }}, "relevant-technical-id");
-               set_circle_color({{ campaign.relevant_evaluation.cognitive_score|int_rounding }}, "relevant-cognitive-id");
-               /* TODO: add score here */
+                set_circle_color({{ campaign.relevant_evaluation.technical_score|int_rounding }}, "relevant-technical-id");
+                set_circle_color({{ campaign.relevant_evaluation.cognitive_score|int_rounding }}, "relevant-cognitive-id");
 
-               set_circle_color({{ campaign.applicant_evaluation.cognitive_score|int_rounding }}, "applicant-cognitive-id");
-               /* TODO: add score here */
-
-           });
+                set_circle_color({{ campaign.applicant_evaluation.cognitive_score|int_rounding }}, "applicant-cognitive-id");
+            });
         </script>
     </body>
 </html>
