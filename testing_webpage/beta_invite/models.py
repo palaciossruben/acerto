@@ -209,6 +209,7 @@ class Question(models.Model):
     params = JSONField(null=True)
     video_token = models.CharField(max_length=200, null=True)
     excluding = models.BooleanField(default=False)  # if wrong answer then fails tests
+    importance = models.FloatField(default=None, null=True)  # coming from RandomForrest
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
