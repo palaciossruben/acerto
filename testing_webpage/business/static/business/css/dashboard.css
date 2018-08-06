@@ -117,9 +117,7 @@ body {
     background:-moz-linear-gradient(90deg, rgba(0,184,162,0) 0%, rgba(0,184,162,1) 100%);
     background:linear-gradient(90deg, rgba(0,184,162,0) 0%, rgba(0,184,162,1) 100%);
     z-index: 4;
-    z-index: 4;
     right: 0px;
-    line-height: 35px;
     padding: 15px;
     text-align:right;
     margin-top: 6%;
@@ -179,7 +177,7 @@ body {
     text-shadow: 7px 5px 3px rgba(0,0,0,0.5);
     text-align: right;
     margin-top:15%;
-    margin-right: 5%;
+    margin-right: 15px;
 }
 
 .plan-type{

@@ -108,7 +108,11 @@
                 {% for e in candidate.evaluations.all %}
                     <p><strong>{% trans "TESTS" %}</strong></p>
                     {% for score in e.scores.all %}
-                        <p><strong>{{ score.test.name_es }}: </strong>{{ score.value }}</p>
+                        {% if score.test.type.pk == 3 %}
+                            <p><strong>Requisitos: </strong>{{ score.value }}</p>
+                        {% else %}
+                            <p><strong>{{ score.test.name_es }}: </strong>{{ score.value }}</p>
+                        {% endif %}
                     {% endfor %}
                 {% endfor %}
                 <br>

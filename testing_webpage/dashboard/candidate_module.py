@@ -45,8 +45,8 @@ def updates_or_creates_score(evaluation, cultural_value, motivation_value):
     :param motivation_value: float 0-100
     :return: none
     """
-    dummy_motivation_test = Test.objects.get(name='motivation test')
-    dummy_cultural_test = Test.objects.get(name='cultural fit test')
+    dummy_motivation_test = Test.objects.get(name='Motivation')
+    dummy_cultural_test = Test.objects.get(name='Cultural fit')
     scores = evaluation.scores.all()
 
     update_test_value(evaluation, scores, motivation_value, dummy_motivation_test)
