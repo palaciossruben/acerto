@@ -526,6 +526,11 @@ footer {
 	margin-top:40px;
 	color:#FFFFFF;
 	line-height:20px;
+	text-align:center;
+}
+
+.contact{
+    text-align: left;
 }
 
 .copyright {
@@ -567,14 +572,7 @@ footer {
     width:70px;
 }
 
-.contact{
-    width:80%;
-    float:right;
-    display:block;
-    padding-left: 30px;
-    margin-top: -50px;
 
-}
 
 /**************************************************RESPONSIVE**********************************************************/
 

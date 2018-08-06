@@ -47,8 +47,7 @@
             <div class="gradient1">
                     <div class="row one"></div>
                     <div class="row two">
-                        <div class="col-lg-5"></div>
-                        <div class="col-lg-7 campaign bold">{{ campaign.title_es }}</div>
+                        <div class="col-lg-12 campaign bold">{{ campaign.title_es }}</div>
                     </div>
                     <div class="row three">
                         <div class="col-lg-3 col-xs-12"></div>
@@ -81,7 +80,9 @@
                     <div class="line2">
                     <p class="status-description">{{ business_state.description }}</p>
                     </div>
-                    <div class="col-lg-5"></div>
+                    <div class="col-lg-5">
+
+                    </div>
                  </div>
             </div>
             {% include "business/dashboard_column.html" with candidate_list=candidates state_name=business_state.name %}
@@ -107,7 +108,7 @@
                 <div class=" col-md-1 col-md-1"></div>
                 <div class=" col-md-2 col-md-2 navfootercontact">
                     <div class="logo-white"><a href="#"><img src="{% static 'business/img/logo-white.png' %}"></a></div>
-                    <div class="contact">contacto@peaku.co<br>
+                    contacto@peaku.co<br>
                         +57 311 6109340<br>
                         Colombia
                     </div>
