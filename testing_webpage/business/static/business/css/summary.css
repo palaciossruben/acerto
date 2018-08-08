@@ -216,26 +216,22 @@ body {
     margin-top: 6%;
 }
 /**********************************************************************************************************************/
-
 .state{
     border-radius:25px;
-    height:190px;
+    height:200px;
     background-color:white;
     position:relative;
     z-index:200;
     margin-top:8%;
 }
 
-.quantity {
-    font-size: 70px;
-    color: #666666;
-    margin-left: 40px;
+.state-info{
+   color: #666666;
+   text-align:center;
 }
 
-.quantity2 {
+.quantity {
     font-size: 70px;
-    color: #666666;
-    margin-left: 20px;
 }
 
 .quantity3 {
@@ -245,18 +241,10 @@ body {
 
 .primary {
     font-size: 20px;
-    color: #666666;
-    margin-left: 10px;
 }
 
 .secondary {
     font-size: 11.24px;
-    color: #666666;
-    margin-left: 11px;
-}
-
-.pre {
-    font-size: 10px;
 }
 
 .applicant-text {
@@ -277,31 +265,6 @@ body {
     height:70px;
 }
 
-.big-div{
-    width: 80%;
-    margin:0 auto;
-    box-shadow: 0px 8px 5px rgba(0,0,0,0.1);
-    border-radius:25px;
-    background-color:white;
-    position:relative;
-    z-index:200;
-    margin-top: -150px;
-    padding:40px;
-    margin-bottom: 100px;
-
-}
-
-.candidate-div{
-    width: 100%;
-    margin: 0 auto;
-    border-radius:25px;
-    border-style:solid;
-    border-width:3px;
-    border-color: #F1F1EB;
-    padding:10px;
-    margin-bottom:20px;
-}
-
 .div1{
     width: 70%;
     margin-left:25%;
@@ -310,7 +273,6 @@ body {
 }
 
 .div2{
-    width:95%;
     box-shadow: 0px 8px 5px rgba(0,0,0,0.1);
 }
 
@@ -360,21 +322,14 @@ body {
 .line{
     height: 2px;
     background-color: #666666;
-    width: 90%;
-    margin: 0 auto;
-}
-
-.line2{
-    height: 2px;
-    background-color: #666666;
     width: 100%;
     margin: 0 auto;
+    margin-bottom:10px;
 }
 
 .status-description{
     color:#666666;
     font-size:15px;
-    margin-bottom: 0;
 }
 
 .circle{
@@ -383,6 +338,7 @@ body {
     margin:0 auto;
     border-radius:100%;
     margin-bottom:15px;
+    float:unset;
 }
 
 .avatar1 {
@@ -402,13 +358,12 @@ body {
 
 .recommended{
     height:170px;
-    width:70%;
     margin:0 auto;
     border-top-right-radius:25px;
     border-bottom-right-radius:25px;
     margin-top:10px;
     margin-bottom:0px;
-    margin-right:20px;
+    margin-right:15px;
     background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(../img/avatar4.png) no-repeat top center scroll ;
     background-size:cover;
     position:absolute;
@@ -418,14 +373,14 @@ body {
 }
 
 .relevant{
-    height:170px;
+    height:180px;
     width:60%;
     margin:0 auto;
     border-top-right-radius:25px;
     border-bottom-right-radius:25px;
     margin-top:10px;
     margin-bottom:0px;
-    margin-right:20px;
+    margin-right:15px;
     background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(../img/avatar5.png) no-repeat top center scroll ;
     background-size:cover;
     position:absolute;
@@ -444,25 +399,27 @@ body {
     position:absolute;
     right:0;
     top:0;
-    position: absolute;
     z-index:-1;
+    text-align: center;
 }
 /***********************************************TEST CIRCLES***********************************************************/
 
 .fill{
     border-radius:100%;
-    height:60px;
-    width:60px;
+    width:70px;
+    height:70px;
     position:relative;
     z-index:3;
     margin: 15px 5px;
     border-style: solid;
     border-width: 8px;
     display: inline-block;
-    padding-top: 15px;
+    padding-top: 7%;
     color: white;
-    /*background: linear-gradient(to top, rgba(238, 235, 52, 0.7) 85%, transparent 85%);
-    border-color:rgba(238, 235, 52, 1);*/
+}
+
+.five-fills{
+    padding-top: 4%;
 }
 
 .test-name{
@@ -471,15 +428,30 @@ body {
     display: inline-block;
     color: white;
     width: 76px;
-    margin: 10px auto 0 auto;
+    margin: 10px auto 0 0px;
+    vertical-align: top;
+}
+
+.final-test-name{
+    position: relative;
+    z-index: 3;
+    display: inline-block;
+    color: white;
+    width: 76px;
+    margin: 70px auto 0 0px;
+    vertical-align: top;
 }
 
 .final-row{
     margin-bottom:100px;
 }
 
-.final-fill, .final-test-name{
+.final-fill{
     margin:0;
+}
+
+.responsive-show{
+    display:none;
 }
 
 /**************************************************FOOTER**************************************************************/
@@ -618,10 +590,19 @@ footer {
     .div1, .div2, .div3, .div4, .div5, .div6{
         margin-left:0;
         width: 100%;
+        text-align:left;
+        box-shadow: unset;
     }
 
-    .position{
-        relative;
+    .div1,.div3,.div5{
+        border-bottom-left-radius:0;
+        border-bottom-right-radius:0;
+        max-height:160px;
+    }
+
+    .div2,.div4,.div6{
+        border-top-left-radius:0;
+        border-top-right-radius:0;
     }
 
     .date{
@@ -638,5 +619,170 @@ footer {
         margin-top:0;
     }
 
+    .circle{
+        margin-top:20px;
+        margin-left:25px;
+        float:left;
+    }
 
+    .status-name{
+        color: #b5ce53;
+        font-size: 20px;
+        margin-top: 10px;
+        text-align:left;
+    }
+
+    .web{
+        display:none;
+    }
+
+    .gradient2{
+        margin-bottom: 30px;
+    }
+
+    .state{
+        margin-top: -5px;
+        height:180px;
+    }
+
+    .responsive-row{
+        width: 98%;
+        border-radius: 25px;
+        border-style: solid;
+        border-width: 4px;
+        border-color: #F1F1EB;
+        padding: 0;
+        margin: 20px auto;
+    }
+
+    .responsive-column{
+        padding:0;
+    }
+
+    .recommended{
+        width: 100%;
+        height: auto;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border-top-right-radius: 0;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-right: 0px;
+        position: relative;
+        text-align: center;
+        min-height: 145px;
+    }
+
+    .fill{
+        width: 62px;
+        height: 62px;
+        margin:0;
+        margin-top: 15px;
+        margin-bottom: 25px;
+        border-style: solid;
+        border-width: 8px;
+    }
+
+    .responsive-hide{
+        display:none;
+    }
+
+    .responsive-show{
+        display:block;
+    }
+
+    .right{
+        float: right;
+    }
+
+    .center{
+        text-align:center;
+    }
+
+    .relevant{
+        margin: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 20px;
+        position: absolute;
+        bottom: 0;
+        top:unset;
+    }
+
+    .small{
+        width: 59px;
+        margin: 10px auto 0 0;
+        font-size: 10px;
+    }
+
+    .applicant{
+        width:60%;
+        background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(../img/avatar5.png) no-repeat top center scroll ;
+        background-size:cover;
+        border-radius:0;
+        border-bottom-right-radius: 20px;
+    }
+
+    .applicant-text{
+        color: #666666;
+        text-align:center;
+        font-size:20px;
+    }
+
+    .quantity3{
+        color: #666666;
+        font-size: 70px;
+    }
+
+    .final-test-name{
+        margin: 10px auto 0 0px;
+    }
+
+    .campaign{
+        font-size: 20px;
+        text-shadow: 3px -1px 1px rgba(0,0,0,0.4);
+        margin-left:9px;
+    }
+}
+
+@media screen and (max-width: 389px) {
+    .fill{
+        width: 52px;
+        height: 52px;
+    }
+
+    .circle{
+        margin-left: 10px;
+    }
+
+    .test-name{
+        width: 60px;
+        font-size: 14px;
+    }
+
+    .small{
+        width: 52px;
+        font-size: 9px;
+    }
+
+   .applicant-text {
+        font-size: 14px;
+    }
+
+    .quantity,.quantity3{
+        font-size: 60px;
+    }
+
+    .primary{
+        font-size: 17px;
+    }
+
+    .secondary{
+        font-size: 9px;
+    }
+
+    .campaign{
+        font-size: 20px;
+        text-shadow: 3px -1px 1px rgba(0,0,0,0.4);
+        margin-left:9px;
+    }
 }

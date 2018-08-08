@@ -520,6 +520,9 @@ footer {
         margin-bottom: 30px;
         position:absolute;
         bottom:0;
+        font-size: 20px;
+        text-shadow: 3px -1px 1px rgba(0,0,0,0.4);
+        margin-left:9px;
     }
 
     .descriptions, .description-text{
