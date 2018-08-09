@@ -4,11 +4,9 @@ pandas
 imbalanced_learn
 nltk
 pytesseract
-textract
-Django
+Django==1.11.2
 geoip2
 scipy
-pdfminer2
 requests
 paramiko
 psycopg2
@@ -19,8 +17,6 @@ django_ipware
 raven
 Pillow
 PyPDF2
-Fabric
 imblearn
-pdfminer
 django-picklefield
 scikit_learn
