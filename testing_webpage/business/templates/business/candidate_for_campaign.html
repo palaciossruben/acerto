@@ -36,9 +36,9 @@
         <div class="col-lg-4 profile">
             <p>{{ candidate.user.profile }}</p>
         </div>
-    {% elif candidate.user.document %}
+    {% elif candidate.user.get_short_curriculum %}
         <div class="col-lg-4 profile">
-            <p class="no-profile">{{ candidate.user.document }}</p>
+            <p class="no-profile">{{ candidate.user.get_short_curriculum }}</p>
         </div>
     {% else %}
         <div class="col-lg-4 profile">

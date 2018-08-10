@@ -729,6 +729,11 @@ class User(models.Model):
         else:  # TODO: SHOULD NEVER DEFAULT to this, Defaults to Colombia
             return str(Country.objects.get(name='Colombia').calling_code)
 
+    def get_short_curriculum(self):
+        short_curriculum = self.curriculum_text.replace("\n", "")
+        short_curriculum = re.sub(' +', ' ', short_curriculum)
+        return short_curriculum[:min(250, len(short_curriculum))]
+
     def change_to_international_phone_number(self):
 
         if self.phone:
