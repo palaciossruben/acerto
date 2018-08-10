@@ -1,151 +1,267 @@
-{% extends 'base.html'%}
+<!DOCTYPE html>
 {% load static %}
 {% load i18n %}
+{% load app_filters %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <title>PeakU - Tablero de control</title>
+        <!--Favicon-->
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon.ico' %}">
+        <link rel="apple-touch-icon" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon-16.png' %}">
+        <link rel="apple-touch-icon" sizes="32x32" href="{% static 'testing_webpage/favicon.ico/favicon-32.png' %}">
+        <link rel="apple-touch-icon" sizes="64x64" href="{% static 'testing_webpage/favicon.ico/favicon-64.png' %}">
+        <!--Latest compiled and minified bootstrap CSS-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!--Our Css-->
+        <link rel="stylesheet" type="text/css" href="{% static 'business/css/candidate_profile.css' %}">
+        <!-- Latest jQuery library -->
 
-{% block title %}PeakU - Dashboard {% endblock %}
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
-{% block extra_head %}
-    <script type="text/javascript" src="{% static 'business/js/dashboard.js' %}"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'business/css/dashboard.css' %}">
-
-
-<!-- TODO: factor in seperate Css file. -->
-<style>
-.accordion {
-
-    margin-left:-5px;
-    background-color: transparent;
-    cursor: pointer;
-    padding: 5px;
-    width: 50%;
-    border: none;
-    text-align: left;
-    outline: none;
-    transition: 0.4s;
-}
-
-.active{
-    background-color: white;
-}
-
-.accordion:hover {
-    background-color: white;
-}
-
-.panel {
-    padding: 0 18px;
-    display: none;
-    background-color: white;
-}
-
-</style>
-{% endblock %}
-
-{% block content %}
-    <br>
-    <br>
-    <br>
-
-    <h4 class="secondary-title" align="center">{{ candidate.user.name }}</h4>
-    <div class="secondary-yellow-bar"></div>
-    <br>
-    <br>
-    <div style="margin:0px auto; align:center; padding:0px 50px; width:90%;">
-        {% if candidate.user.email %}
-            <p><strong>{% trans "e-mail" %}: </strong> {{ candidate.user.email }}</p>
-        {% else %}
-            <p><strong>{% trans "e-mail" %}: </strong>{% trans "Not available" %}</p>
-        {% endif %}
-        <p><strong>{% trans "Phone" %}: </strong>
-        {% if candidate.user.phone is None %}
-            {% trans "Without a registered phone" %}
-        {% else %}
-            {{ candidate.user.phone }}
-        {% endif %}
-        </p>
-
-        <p> <strong>{% trans "CV" %}: </strong>
-        {% if candidate.user.curriculum_url != '#' %}
-            <a style="color:blue; font-size:17px;" href="{% static candidate.user.curriculum_url %}">link</a>
-        {% else %}
-            {% trans "Not available" %}
-        {% endif %}
-        </p>
-
-        <p><strong>{% trans "Profession" %}: </strong>{{ candidate.user.profession.name }}</p>
-        <p><strong>{% trans "Academic level" %}: </strong>{{ candidate.user.education.name }}</p>
-
-        <!-- Deprecated -->
-        {% for e in candidate.user.evaluations.all %}
-            {% if candidate.campaign_id == e.campaign_id %}
-                <p><strong>{% trans "Test score (cut: " %}{{ e.cut_score }}): </strong> {{ e.final_score }}</p>
-            {% endif %}
-        {% endfor %}
-
-        {% for e in candidate.evaluations.all %}
-            <p><strong>{% trans "Test score (cut: " %}{{ e.cut_score }}): </strong> {{ e.final_score }}</p>
-        {% endfor %}
-
-        {% if candidate.user.salary or candidate.salary %}
-            {% if candidate.user.salary <= candidate.salary %}
-                <p><strong>{% trans "Salary deduction" %}: </strong>{{ candidate.user.salary }}</p>
-            {% else %}
-                <p type="text" name="{{ candidate.id }}_salary"><strong>Salary: </strong>{{ candidate.salary }}</p>
-            {% endif %}
-        {% endif %}
-
-        {% for c in candidate.comments.all %}
-            {% if candidate.comments %}
-                <p><strong>{% trans "Comments" %}: </strong>{{ c.text }}</p>
-            {% endif %}
-        {% endfor %}
-
-            <button class="accordion" style="color:blue;"><strong>&#9776;{% trans "See test questions and answers" %}</strong></button>
-            <div class="panel">
-
-                <br>
-                <br>
-                {% for e in candidate.evaluations.all %}
-                    <p><strong>{% trans "TESTS" %}</strong></p>
-                    {% for score in e.scores.all %}
-                        {% if score.test.type.pk == 3 %}
-                            <p><strong>Requisitos: </strong>{{ score.value }}</p>
-                        {% else %}
-                            <p><strong>{{ score.test.name_es }}: </strong>{{ score.value }}</p>
-                        {% endif %}
-                    {% endfor %}
-                {% endfor %}
-                <br>
-                <p><strong>{% trans "OPEN FIELD QUESTIONS" %}</strong></p>
-                {% for e in candidate.surveys.all %}
-                    {% if e.question.type.code == "OF" %}
-                        {% if e.question.text_es %}
-                            <p><strong> {{ e.question.text_es }} </strong>
-                            {% if e.text_answer %}
-                                <p> {{ e.text_answer }} </p>
-                            {% endif %}
-                        {% else %}
-                            <p></p>
-                        {% endif %}
+        <!-- Latest compiled Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!--Our JS-->
+        <script src="{% static 'business/js/summary.js' %}"></script>
+    </head>
+    <body>
+        <div class="topnav" id="myTopnav">
+            <a href="/staffing" class="logo"><img src="{% static 'business/img/logo-color-negro.png' %}"></a>
+            <a href="{% url 'business:logout' %}">{% trans "LOG OUT" %}</a>
+            <a class="navButton" style="font-size: 15px;width:170px;color: white;border-radius:40px;margin-top: 30px;padding:5px 16px;background:#F47B20;"
+                role="button" href="{% url 'business:start' %}">+  CREAR OFERTA</a>
+            <a href="{% url 'business:business_campaigns' business_user_id=business_user.pk %}">Mis campañas</a>
+            <a href="#about">Ayuda</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+            </a>
+        </div>
+        <div class="big-div">
+            <div class="row">
+                <div class="col-lg-5 col-xs-12">
+                    {% if candidate.user.photo_url != '#' %}
+                    <div class="candidate-circle" style="background-image: url({% static candidate.user.photo_url %});"></div>
+                    {% elif candidate.user.gender.sex == 2 %}
+                    <div class="candidate-circle female-avatar"></div>
+                    {% else %}
+                    <div class="candidate-circle male-avatar"></div>
                     {% endif %}
-                {% endfor %}
+                </div>
+                <div class="col-lg-7 col-xs-12">
+                    <p><strong>{{ candidate.user.name }}</strong></p>
+                    {% if candidate.user.profession.name_es %}
+                    <p>{{ candidate.user.profession.name_es }}</p>
+                    {% endif %}
+                    {% if candidate.user.city.name and candidate.user.city.name != "not available" %}
+                    <p style="font-size:10px;">{{ candidate.user.city.name }}, {{ candidate.user.country.name }}</p>
+                    {% endif %}
+                    {% if candidate.user.work_area.name_es %}
+                    <p>{{ candidate.user.work_area.name_es }}</p>
+                    {% endif %}
+                </div>
             </div>
-    </div>
 
-    <script>
-        var acc = document.getElementsByClassName("accordion");
-        var i;
+            <div class="row">
+                <div class="col-lg-5 col-xs-12">
+                    {% if candidate.user.curriculum_url != '#' %}
+                        <a class="curriculum" href="{% static candidate.user.curriculum_url %}" target="_blank">
+                            <p><strong>&#x2193; Descargar hoja de vida</strong></p>
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="col-lg-7 col-xs-12">
+                    <div class="row condoms-row">
+                        {% if candidate.evaluation_summary.cognitive_score %}
+                            <div class="test-name">
+                                Capacidad cognitiva
+                                {% if candidate.evaluation_summary.cognitive_score >= 0 %}
+                                    <div id="{{ candidate.pk }}-recommended-cognitive-id" class="fill">
+                                        {{ candidate.evaluation_summary.cognitive_score|print_score }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
 
-        for (i = 0; i < acc.length; i++) {
-            acc[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var panel = this.nextElementSibling;
-                if (panel.style.display === "block") {
-                    panel.style.display = "none";
-                } else {
-                    panel.style.display = "block";
-                }
+                        {% if candidate.evaluation_summary.technical_score %}
+                        <div class="test-name">
+                            Conocimiento técnico
+                            {% if candidate.evaluation_summary.technical_score >= 0 %}
+                                <div id="{{ candidate.pk }}-recommended-technical-id" class="fill">
+                                    {{ candidate.evaluation_summary.technical_score|print_score }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+                        {% if candidate.evaluation_summary.requirements_score %}
+                        <div class="test-name">
+                            Requisitos
+                            {% if candidate.evaluation_summary.requirements_score >= 0 %}
+                                <div id="{{ candidate.pk }}-recommended-requirement-id" class="fill">
+                                    {{ candidate.evaluation_summary.requirements_score|print_score }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+                        {% if candidate.evaluation_summary.motivation_score %}
+                        <div class="test-name">
+                            Motivación
+                            {% if candidate.evaluation_summary.motivation_score >= 0 %}
+                                <div id="{{ candidate.pk }}-recommended-motivation-id" class="fill">
+                                    {{ candidate.evaluation_summary.motivation_score|print_score }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+                        {% if candidate.evaluation_summary.cultural_fit_score %}
+                        <div class="test-name">
+                            Fit cultural
+                            {% if candidate.evaluation_summary.cultural_fit_score >= 0 %}
+                                <div id="{{ candidate.pk }}-recommended-cultural-id" class="fill">
+                                    {{ candidate.evaluation_summary.cultural_fit_score|print_score }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row profile-row">
+                <div class="col-lg-5 col-xs-12"></div>
+                <div class="col-lg-7 col-xs-12">
+                    {% if candidate.user.profile %}
+                        <div class="profile">
+                            <p>{{ candidate.user.profile }}</p>
+                        </div>
+                        {% elif candidate.user.document %}
+                        <div class="profile">
+                            <p class="no-profile">{{ candidate.user.document }}</p>
+                        </div>
+                        {% else %}
+                        <div class="profile">
+                            <p class="no-profile">Candidato sin perfil</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row another-info-section">
+                <div class="col-lg-5 col-xs-12 contact-data">
+                    <strong class="accordion">Ver datos de contacto 	&#x25BE;</strong>
+                    <div class="panel">
+                        <p>{{ candidate.user.phone }}</p>
+                        <p>{{ candidate.user.email }}</p>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-xs-12 contact-data">
+                    <strong class="accordion no-style">Ver información adicional 	&#x25BE;</strong>
+                    <div class="panel">
+                        <div class="col-lg-6 col-xs-6">
+                            <p>{{ candidate.user.salary }}</p>
+                            <p>{{ candidate.user.birthday }}</p>
+                            <p>{{ candidate.user.languages }}</p>
+                        </div>
+                        <div class="col-lg-6 col-xs-6">
+                            <p>{{ candidate.user.gender }}</p>
+                            <p>{{ candidate.user.dream_job }}</p>
+                            <p>{{ candidate.user.hobbies }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-5 col-xs-12"></div>
+                <div class="col-lg-7 col-xs-12 comments-section">
+                    <p class="comments-tittle">Comentarios acerca del aspirante</p>
+                    <div class="line"></div>
+                    <textarea id="comments" name="comments" class="comments-area" placeholder="Escribe tu opinión aquí"></textarea>
+                    <input type="button" onclick="" class="comment-button" value="COMENTAR"/>
+
+                    <div class="comments-block">
+                        {% for c in candidate.comments.all %}
+                            <p><strong>{{ c.created_at }}</strong></p>
+                            <p>{{ c.text }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}"/>
+        </div>
+        <!----------------------------------------------FOOTER--------------------------------------------------------->
+        <footer class="container-fluid">
+            <div class="row footer-navigation">
+                <div class="col-md-2 col-md-2"></div>
+                <div class="col-md-3 col-md-3 navfooter">
+                    <ul>
+                        <li><a href="#">Nosotros</a></li>
+                        <li><a href="{% url 'business:contact_form' %}">Contáctanos</a></li>
+                        <li><a href="{% url 'beta_invite:index' %}">Personas</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 col-md-2 social">
+                    <a href="https://www.linkedin.com/company-beta/16241506/" target="_blank"><img src="{% static 'business/img/linkedin.png' %}"></a>
+                    <a href="https://www.facebook.com/PeakU-Latam-1916685895214519/?ref=aymt_homepage_panel" target="_blank">
+                    <img src="{% static 'business/img/facebook.png' %}"></a>
+                    <a href="#" target="_blank"><img src="{% static 'business/img/instagram.png' %}"></a>
+                    <a href="#" target="_blank"><img src="{% static 'business/img/twitter.png' %}"></a>
+                </div>
+                <div class=" col-md-1 col-md-1"></div>
+                <div class=" col-md-2 col-md-2 navfootercontact">
+                    <div class="logo-white"><a href="#"><img src="{% static 'business/img/logo-white.png' %}"></a></div>
+                    contacto@peaku.co<br>
+                    +57 311 6109340<br>
+                    Colombia
+                </div>
+            </div>
+            <div class=" col-md-2 col-md-2 "></div>
+            </div>
+            <div class="row">
+                <div class="col-1 col-md-1"></div>
+                <div class="col-10 copyright">Copyright 2018 © PeakU. Todos los derechos reservados.</div>
+                <div class="col-1"></div>
+            </div>
+        </footer>
+        <script>
+            $(document).ready(function() {
+                set_circle_color({{ candidate.evaluation_summary.cognitive_score|int_rounding }}, "{{ candidate.pk }}-recommended-cognitive-id");
+                set_circle_color({{ candidate.evaluation_summary.technical_score|int_rounding }}, "{{ candidate.pk }}-recommended-technical-id");
+                set_circle_color({{ candidate.evaluation_summary.requirements_score|int_rounding }}, "{{ candidate.pk }}-recommended-requirement-id");
+                set_circle_color({{ candidate.evaluation_summary.motivation_score|int_rounding }}, "{{ candidate.pk }}-recommended-motivation-id");
+                set_circle_color({{ candidate.evaluation_summary.cultural_fit_score|int_rounding }}, "{{ candidate.pk }}-recommended-cultural-id");
             });
-        }
-    </script>
-{% endblock %}
+        </script>
+        <script>
+            function myFunction() {
+                var x = document.getElementById("myTopnav");
+                if (x.className === "topnav") {
+                    x.className += " responsive";
+                } else {
+                    x.className = "topnav";
+                }
+            }
+        </script>
+        <script>
+            var acc = document.getElementsByClassName("accordion");
+            var i;
+
+            for (i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var panel = this.nextElementSibling;
+                    if (panel.style.display === "block") {
+                        panel.style.display = "none";
+                    } else {
+                        panel.style.display = "block";
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>

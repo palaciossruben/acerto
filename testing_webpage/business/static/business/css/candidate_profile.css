@@ -122,7 +122,39 @@ body {
     text-align:right;
     margin-top: 6%;
 }
+/********************************************Accordion******************************************************************/
+.accordion {
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+.no-style{
+   padding: 0px;
+}
+
+.panel {
+    display: none;
+    background-color: white;
+    overflow: hidden;
+    text-align:left;
+}
+
 /**********************************************************************************************************************/
+
+.curriculum{
+    text-align:center;
+}
+
+.curriculum:hover{
+    text-decoration:none;
+}
 
 .state{
     border-radius:25px;
@@ -185,7 +217,7 @@ body {
 }
 
 .big-div{
-    width: 92%;
+    width: 85%;
     margin:0 auto;
     box-shadow: 0px 8px 5px rgba(0,0,0,0.1);
     border-radius:25px;
@@ -193,8 +225,8 @@ body {
     position:relative;
     z-index:200;
     margin-top: 50px;
-    padding:40px;
-    margin-bottom: 100px;
+    padding:70px 30px;
+    margin-bottom: 20px;
 
 }
 
@@ -273,11 +305,57 @@ body {
     text-align: center;
 }
 
+.another-info-section{
+    margin-top:30px;
+}
+
+.contact-data{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.comments-section{
+    text-align:left;
+}
+
+.comments-block{
+    text-align:left;
+}
+
+.comments-tittle{
+    margin-top:30px;
+}
+
+.comments-area{
+    margin-top:30px;
+    width:80%;
+    height: 150px;
+    border-radius:20px;
+    overflow:auto;
+    border: 2px solid #aaa;
+    resize: none;
+    padding:15px;
+}
+
+/* ask to jp, better scrollbar???
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}*/
+
 .line{
     height: 2px;
     background-color: #666666;
-    width: 100%;
-    margin: 0 auto;
+    width: 60%;
 }
 
 .line2{
@@ -293,17 +371,12 @@ body {
     margin-bottom: 0;
 }
 
-.circle{
-    height:90px;
-    width:90px;
+.candidate-circle{
+    height:150px;
+    width:150px;
     margin:0 auto;
     border-radius:100%;
     margin-bottom:15px;
-}
-
-.candidate-circle{
-    height:80px;
-    width:80px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -322,14 +395,15 @@ body {
     display:none;
 }
 
-.email-button{
+.comment-button{
     font-size: 12px;
-    width: 200px;
+    width: 150px;
     color: white;
     border-radius: 40px;
     padding: 10px 19px;
     background: #F47B20;
     margin-top: 10px;
+    margin-bottom: 30px;
     text-align: center;
 }
 
@@ -349,7 +423,7 @@ body {
 }
 
 .profile{
-    width:37%;
+    width:80%;
 }
 
 .female-avatar{
@@ -425,19 +499,24 @@ body {
     z-index:-1;
 }
 /***********************************************TEST CIRCLES***********************************************************/
+.condoms-row{
+    text-align: left;
+}
 
 .fill{
-    border-radius:100%;
-    height:70px;
-    width:70px;
-    position:relative;
-    z-index:3;
-    margin: 15px 5px;
+    border-radius: 100%;
+    height: 70px;
+    width: 70px;
+    position: relative;
+    z-index: 3;
+    margin: 10px auto;
     border-style: solid;
     border-width: 8px;
     display: inline-block;
-    padding-top: 15px;
+    padding-top: 20px;
     color: black;
+    font-size: 12px;
+    text-align: center;
     /*background: linear-gradient(to top, rgba(238, 235, 52, 0.7) 85%, transparent 85%);
     border-color:rgba(238, 235, 52, 1);*/
 }
@@ -449,18 +528,9 @@ body {
     color: black;
     width: 80px;
     margin: 10px auto;
-}
-
-.small{
-    position: relative;
-    z-index: 3;
-    display: inline-block;
-    color: black;
-    width: 55px;
-    margin: 10px auto;
-    font-size: 9px;
+    font-size: 12px;
     vertical-align: bottom;
-    text-align:center;
+    text-align: center;
 }
 
 .final-row{
@@ -471,20 +541,9 @@ body {
     margin:0;
 }
 
-.small-fill{
-    border-radius: 100%;
-    height: 55px;
-    width: 55px;
-    position: relative;
-    z-index: 3;
-    margin: 10px 2px;
-    border-style: solid;
-    border-width: 8px;
-    display: inline-block;
-    padding-top: 11px;
-    color: black;
-    font-size: 12px;
-    text-align: center;
+.profile-row{
+    margin-bottom:20px;
+    margin-top:20px;
 }
 /**************************************************FOOTER**************************************************************/
 footer {
@@ -627,6 +686,10 @@ footer {
         width: 100%;
     }
 
+    .condoms-row{
+        text-align: center;
+    }
+
     .position{
         relative;
     }
@@ -645,27 +708,24 @@ footer {
         margin-top:0;
     }
 
+    .profile {
+        width: 100%;
+    }
+
     .logo-white{
         margin-bottom:20px;
     }
 
-    .separator-div,.line{
+    .line{
         display:none;
     }
 
-    .big-div{
-        padding: 40px 0;
-    }
-
-    .internal-div{
-        padding: 10px;
-    }
-
-    .profile{
+    .comments-area {
         width:100%;
     }
 
-    .condoms-row{
-        text-align: center;
+    .comments-section{
+        text-align:center;
     }
+
 }

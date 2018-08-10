@@ -15,6 +15,7 @@ from django.contrib.auth import login, authenticate
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils import formats
+from django.http import HttpResponseBadRequest, HttpResponse
 
 import common
 import business
@@ -22,6 +23,7 @@ import beta_invite
 from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
+from beta_invite import new_user_module
 from beta_invite.models import User, BulletType, WorkArea, EmailType, Campaign
 from business.models import Plan, Contact, Search, KeyWord
 from business.models import BusinessUser
@@ -491,8 +493,11 @@ def business_campaigns(request, business_user_id):
 
 
 def candidate_profile(request, pk):
+
     candidate = Candidate.objects.get(pk=pk)
-    return render(request, cts.CANDIDATE_PROFILE_VIEW_PATH, {'candidate': candidate})
+    business_user = get_business_user(request)
+    return render(request, cts.CANDIDATE_PROFILE_VIEW_PATH, {'candidate': candidate,
+                                                             'business_user': business_user})
 
 
 def signup_choice(request):
@@ -548,6 +553,13 @@ def dashboard(request, business_user_id, campaign_id, state_name):
     relevant = common.get_relevant_candidates(campaign)
     recommended = common.get_recommended_candidates(campaign)
 
+    if business_state.name == 'applicant':
+        campaign_evaluation = campaign.applicant_evaluation
+    elif business_state.name == 'relevant':
+        campaign_evaluation = campaign.relevant_evaluation
+    else:
+        campaign_evaluation = campaign.recommended_evaluation
+
     return render(request, cts.DASHBOARD_VIEW_PATH, {'candidates': {'applicants': applicants,
                                                                     'relevant': relevant,
                                                                     'recommended': recommended}[state_name],
@@ -559,5 +571,6 @@ def dashboard(request, business_user_id, campaign_id, state_name):
                                                      'business_user': business_user,
                                                      'total_applicants': len(applicants),
                                                      'total_recommended': len(recommended),
-                                                     'total_relevant': len(relevant)
+                                                     'total_relevant': len(relevant),
+                                                     'campaign_evaluation': campaign_evaluation
                                                      })
