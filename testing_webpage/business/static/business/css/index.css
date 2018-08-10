@@ -14,9 +14,6 @@
     margin-left:0;
 }
 
-.conatiner{
-    margin-right:0;
-}
 
 html {
     background: url(../img/bg-min.jpg) no-repeat top center scroll;
@@ -29,9 +26,7 @@ html {
 body{
     background-color:transparent !important;
 }
-/*overflow:hidden;}
 
-	
 /* Headings */
 h1 {
     font-size:2.1em !important;
@@ -400,39 +395,39 @@ circle:hover {
 }
 	
 
-/* Footer */	
+/* Footer */
 footer {
     background-color:#3d4753;
     color:#FFFFFF;
 }
-		
+
 .navfooter {
 	margin-top:55px;
 	color:#FFFFFF;
 }
-	
+
 .redesfooter {
 	margin-top:50px;
 }
-	
+
 .navfooter ul li {
 	padding:0px 10px 0px 10px !important;
 }
-	
+
 .navfooter ul li a{
 	color:white;
 }
-	
+
 .navfooter ul li a:hover{
 	color:#c9d86a;
 }
-	
+
 .navfootercontact {
 	margin-top:40px;
 	color:#FFFFFF;
 	line-height:20px;
 }
-	
+
 .copyright {
 	padding:20px;
 	text-align:center;
@@ -440,7 +435,7 @@ footer {
 	border-top:groove 2px ;
 	border-color:rgba(255, 255, 255, .1);
 }
-	
+
 .copyright a{
 	color:white;
 }
@@ -449,7 +444,7 @@ footer {
 	color:#c9d86a;
 	text-decoration:none;
 }
-	
+
 #contact-buttons {
 	position:fixed;
 	margin-top:77vh;
@@ -458,7 +453,7 @@ footer {
 	z-index:100;
 	float:right;
 }
-	
+
 #contact-buttons img {
 	padding-bottom:5px;
 }
@@ -614,4 +609,737 @@ footer {
     margin-left:80px;
     margin-top:0px;
     width: 110px;
+}
+
+@charset "utf-8";
+
+
+/* Portrait phones */
+@media  (max-width: 767px)
+{
+	html {
+        background: url(../img/bg-cel.jpg) no-repeat top center scroll ;
+        background-size:contain;
+    }
+
+    #hide3 {
+        display:none;
+    }
+
+    .responsive-no{
+        display:none;
+    }
+
+    .blankbeneficios{
+        margin-top:-25px;
+        position: relative;
+        padding-top: 0%; /* Height proportional to width, so coooool  */
+    }
+
+    #main-copy {
+        margin-left: 0px;
+        margin-top:-280px;
+    }
+
+    .contact {
+        margin: 0 auto;
+        float:none;
+    }
+
+    h1 {
+        font-size:1.75em !important;
+    }
+
+    #logo {
+        width:80px;
+        margin-left:20px;
+        margin-top:-20px;
+    }
+
+	#candidates-button {
+		display:none;
+	}
+
+	#contact-us-button {
+		display:none;
+	}
+
+	#register-button {
+		display:none;
+	}
+
+	#login-button {
+		display:none;
+	}
+
+	#menuicon {
+		display:block !important;
+		margin-top:-60px;
+	}
+
+	.blankbanner {
+	    height:260px;
+	}
+
+	#main-copy {
+		margin-left:0px;
+	    position: relative;
+        padding-top: 75%; /* Height proportional to width, so coooool */
+	}
+
+	#main-copy br{
+		display:none;
+	}
+
+    .beneficios img {
+		width:74px;
+	}
+
+    .beneficios {
+	    display:none;
+	}
+
+    .beneficioscel {
+	    text-align:center;
+	}
+
+    #valuebanner { background-image:url('../img/mockup-bg-cel.jpg');
+	    background-repeat: no-repeat;
+        background-size: cover;
+	    margin-top:0px;
+	    height:750px;
+	}
+
+    #image4video img{
+		margin-left:-65px !important;
+		width:120%;
+	}
+
+    .about {
+		margin-top:20px;
+		text-align:center;
+		font-size:12px;
+		min-width:100%;
+	}
+
+    #button-cta-about {
+	    display:none;
+	}
+
+    .about br {
+	    display: none;
+	}
+
+    .about h1{
+		text-align:center;
+		font-size:1.8em !important;
+	}
+
+    .blankplans {
+	    height:120px;
+	}
+
+    .button-plans {
+	    font-size:20px;
+	}
+
+    .button-plan-top {
+	    font-size:20px;
+    }
+
+    .plancontainer {
+	    font-size:13.5px;
+	    height: 235px;
+	    width: 86%;
+	    margin-left:7%;
+	}
+
+    .button-buy {
+	    display:none;
+	}
+
+    .freebg {
+		margin-top:0px;
+		margin-left:6.5%;
+		width:80%;
+		height:400px;
+		z-index:99;
+	}
+
+    .basicbg {
+		margin-top:460px;
+		margin-left:6.5%;
+		width:80%;
+		height:450px;
+		z-index:100;
+	}
+
+    .premiumbg {
+		margin-top:950px;
+		margin-left:6.5%;
+		width:80%;
+		height:430px;
+		z-index:99;
+	}
+
+
+    .headhunterbg {
+		margin-top:1440px;
+		margin-left:6.5%;
+		width:80%;
+		height:420px;
+		z-index:97;
+	}
+
+    #pushtitleiphone {
+	    margin-top:1500px !important;
+	    margin-left:50px;
+	}
+
+	.blankreviewspic {
+	    height:1550px;
+	}
+
+    .reviewcel {
+	    width:80%;
+	    margin-left:10%;
+	}
+
+    #clientes img {
+	    width:49%;
+	}
+
+    #whatsapp-pc {
+	    display:none;
+	}
+
+    #chat-pc {
+	    display:none;
+	}
+
+    #chat-tablet {
+	    display:none;
+	}
+
+    #contact-buttons {
+	    left:-46px;
+	    margin-top:82vh;
+	}
+
+    .navfooter {width:100%;
+        margin-left:14%;
+        margin-top:20px;
+    }
+
+    .redesfooter {
+	    margin-top:140px;
+	}
+
+    .navfootercontact {
+        text-align:center;
+        margin-left:-12%;
+        margin-top:-110px;
+    }
+
+    .navfootercontact img{
+        display:none;
+    }
+}
+
+
+/* Small phones */
+@media  (max-width: 320px)
+{
+	h1 {
+	    font-size:1.5em !important;
+	}
+
+	h5 {
+	    font-size:1em !important;
+	}
+
+	.blankbanner {
+	    height:210px;
+	}
+
+	.blankbeneficios {
+	    height:300px !important;
+	}
+
+    #valuebanner {
+        background-image:url('../img/mockup-bg-cel.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-top:0px;
+        height:670px;
+    }
+
+    #image4video img{
+        margin-left:-50px !important;
+        width:120%;
+    }
+
+    .plancontainer {
+        font-size:13.5px;
+        height: 275px;
+        width: 86%;
+        margin-left:7%;
+    }
+
+    .freebg, .basicbg, .premiumbg, .headhunterbg {
+        height:450px;
+    }
+
+    .basicbg {
+        margin-top:570px;
+    }
+
+    .premiumbg {
+        margin-top:1060px;
+    }
+
+    .headhunterbg {
+        margin-top:1590px;
+    }
+
+    #pushtitleiphone {
+        margin-top:1800px !important;
+        margin-left:50px;
+    }
+
+    .blankreviewspic {
+        height:1840px;
+    }
+
+    #contact-buttons {
+        margin-top:76vh;
+    }
+
+    .navfootercontact img{
+        margin-left:185px;
+        margin-top: -100px;
+    }
+
+    .navfooter {
+        font-size:12px;
+        margin-left:14%;
+    }
+}
+
+
+/* iPads y tablets portrait */
+@media (min-width: 768px) and (max-width: 991px)
+{
+	html {
+		background: url(../img/bg-tablet.jpg) no-repeat top center scroll;
+		background-size:contain;
+	}
+
+    .contact {
+    margin: 0 auto;
+    float:none;
+    }
+
+	h6 {
+		font-size:1em !important;
+	}
+
+    #logo {
+	    width:90px;
+	}
+
+	#candidates-button {
+		display:none;
+	}
+
+	#contact-us-button {
+		display:none;
+	}
+
+	#menuicon {
+		display:block !important;
+		margin-top:-3px;
+	}
+
+	.blankbanner {
+    	height:590px;
+	}
+
+	#main-copy {
+		margin-left:170px;
+	}
+
+	.blankbeneficios {
+	    height:800px !important;
+	}
+
+    .beneficios img {
+		width:74px;
+	}
+
+    .beneficios {
+	    display:none;
+	}
+
+    .beneficioscel {
+	    text-align:center;
+	}
+
+	#valuebanner { background-image:url('../img/mockup-bg-tablet.jpg');
+	    background-repeat: no-repeat;
+        background-size: contain;
+    }
+
+    #image4video img{
+		width:150%;
+		margin-left:-100px;
+	}
+
+    .about {
+		margin-top:110px;
+		text-align:justify;
+		margin-left:-60px;
+		font-size:12px;
+		min-width:390px;
+	}
+
+    .about h1{
+		text-align:left;
+		font-size:1.8em !important;
+		min-width:390px;
+		line-height:0px;
+	}
+
+    .plancontainer {
+	    height:210px;
+	}
+
+    .freebg, .basicbg, .premiumbg, .headhunterbg{
+		margin-left:2%;
+		width:320px;
+		height:380px;
+		position:relative;
+		margin-bottom:50px !important;
+	}
+
+    .basicbg {
+        margin-top:0px;
+	}
+
+    .button-buy-cel {
+		display:none;
+	}
+
+    .navfooter { margin-left:-11%;
+        font-size:14px;
+        min-width:300px;
+    }
+
+    .redesfooter {
+        min-width:170px;
+        margin-left:-2%;
+	}
+
+    .navfootercontact {
+        min-width:210px;
+        margin-left:-7%;
+        font-size:14px;
+	}
+
+    .navfootercontact img{
+        width:40px;
+        margin-left:30px;
+    }
+
+	#contact-buttons {
+	    margin-top:83vh;
+	}
+
+	#whatsapp-pc {
+	    display:none;
+	}
+
+	#chat-pc {
+	    display:none;
+	}
+
+	#contact-buttons {
+	    left:-46px;
+	}
+}
+
+
+@media (min-width: 992px) and (max-width: 1200px)
+{
+
+	html {
+		background: url(../img/bg-tablet.jpg) no-repeat top center scroll ;
+		background-size:contain;
+	}
+
+
+    .contact {
+    margin: 0 auto;
+    float:none;
+    }
+
+	#candidates-button {
+		display:none;
+	}
+
+	#contact-us-button {
+		display:none;
+	}
+
+	#menuicon {
+		display:block !important;
+		margin-top:-3px;
+	}
+
+	.beneficioscel {
+	    display:none;
+	}
+
+	.blankbeneficios {
+	    height:500px !important;
+	}
+
+    #valuebanner { background-image:url('../img/mockup-bg-tablet.jpg');
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+
+    #image4video img{
+		width:140%;
+		margin-left:-100px;
+	}
+
+    .about {
+		margin-top:110px;
+		text-align:justify;
+		margin-left:-60px;
+		font-size:14px;
+		min-width:470px;
+	}
+
+    .about h1{
+        font-size:1.6em !important;
+	}
+
+    .freebg, .basicbg, .premiumbg, .headhunterbg{
+		margin-left:-11% !important;
+	}
+
+    .button-buy-cel {
+        display:none;
+	}
+
+    .reviewsingle {
+        min-width:398px;
+        margin-left:-190px;
+        margin-right:40px;
+	}
+
+    .reviewcel {
+        width:60%;
+	    margin-left:20%;
+	}
+
+    #pushtitleiphone {
+        margin-left:65px !important;
+	}
+
+    .navfooter {
+        margin-left:-8%;
+        margin-right: 8%;
+        min-width:300px;
+	}
+
+    .navfootercontact {
+        margin-right:5%;
+        min-width:220px;
+	}
+
+    #whatsapp-pc {
+        display:none;
+    }
+
+    #chat-pc {
+        display:none;
+    }
+
+    #contact-buttons {
+        left:-46px;
+	}
+}
+
+
+@media (min-width: 1201px)
+{
+	.blankbanner {
+	    height:400px;
+	}
+
+	#main-copy {
+        margin-left: 170px;
+        margin-top: -120px;
+    }
+
+    .about {
+            margin-top:110px;
+            text-align:left;
+    }
+
+    .about h1 {
+        font-size:1.9em !important;
+    }
+
+    .beneficioscel {
+        display:none;
+    }
+
+    .button-buy-cel {
+            display:none;
+    }
+
+    #whatsapp-tablet {
+        display:none;
+    }
+
+    #chat-tablet {
+        display:none;
+    }
+}
+
+
+/* Big Desktop */
+@media (min-width: 1600px)
+{
+
+	h1 {font-size:2.4em !important;
+        font-weight:700 !important;
+    }
+
+    h5 {
+        font-size:1.3em !important;
+        font-weight:700 !important;
+    }
+
+    #main-copy {
+        margin-left: 170px;
+        margin-top: -120px;
+    }
+
+	.blankbanner {
+	    height:600px;
+	}
+
+    .blankbeneficios {
+	    height:300px;
+	}
+
+    .about {
+		margin-top:200px;
+	}
+
+    .beneficioscel {
+	    display:none;
+	}
+
+    .button-buy-cel {
+		display:none;
+	}
+
+    #whatsapp-tablet {
+        display:none;
+    }
+
+    #chat-tablet {
+        display:none;
+    }
+}
+
+
+@media (min-width: 1951px)
+{
+
+	h1 {
+	    font-size:3.4em !important;
+        font-weight:700 !important;
+    }
+
+    h5 {
+        font-size:1.7em !important;
+        font-weight:700 !important;
+    }
+
+	.blankbanner {
+	    height:700px;
+	}
+
+	.blankbeneficios {
+	    height:500px;
+	}
+
+    .beneficioscel {
+	    display:none;
+	}
+
+    .about {
+		margin-top:200px;
+	}
+
+    .button-cta {
+      font-size: 28px;
+      font-weight:700;
+
+    }
+
+    #main-copy {
+        width:1500px;
+    }
+
+    .about {
+        font-size:1.4em;
+        margin-top:250px;
+    }
+
+	.button-buy-cel {
+		display:none;
+	}
+
+    #whatsapp-tablet {
+        display:none;
+    }
+
+    #chat-tablet {
+        display:none;
+    }
+
+	.navfootercontact {
+	    margin-left:5%;
+	    min-width:220px;
+	}
+}
+
+
+/* iPads and tablets landscape */
+@media (min-width: 992px) and (max-width: 1200px) and (orientation: landscape)
+{
+	html {
+        background: url(../img/bg-tablet-landscape.jpg) no-repeat top center scroll ;
+        background-size:contain;
+    }
+
+    #logo {
+        width:90px;
+    }
+
+    .blankbanner {
+        height:330px;
+    }
+
+    .beneficioscel {
+        display:none;
+    }
 }

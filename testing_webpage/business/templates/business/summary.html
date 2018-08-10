@@ -67,13 +67,11 @@
                             <div class="state div1">
                                 <div class="col-xs-6 col-lg-12 circle avatar1"></div>
                                 <input name="campaign_id" type="hidden" value="{{ campaign.id }}">
-
                                 <div class="col-lg-12 responsive-hide">
                                     <p class="status-name bold">RECOMENDADOS</p>
                                     <div class="line"></div>
                                     <p class="status-description">Sugerencias de candidatos que son tu mejor opción de contratación y han superado todos los filtros</p>
                                 </div>
-
                                 <div class="col-xs-6 state-info right responsive-show">
                                     <span class="quantity bold">{{ num_recommended }}</span><br>
                                     <span class="primary bold">PERFILES</span><br>
@@ -88,76 +86,67 @@
                                     <span class="primary bold">PERFILES</span><br>
                                     <span class="secondary regular">SELECCIONADOS</span>
                                 </div>
-
                                 <div class="col-xs-12 responsive-show">
                                     <p class="status-name center bold">RECOMENDADOS</p>
                                     <div class="line"></div>
                                     <p class="status-description">Sugerencias de candidatos que son tu mejor opción de contratación y han superado todos los filtros</p>
                                 </div>
-                                    <div class="col-lg-9 col-xs-12 recommended">
-                                        <div class="row">
-                                            {% if campaign.recommended_evaluation.cognitive_score %}
-                                                <div class="test-name small">
-                                                    Capacidad cognitiva
-                                                </div>
-                                            {% endif %}
-
-                                            {% if campaign.recommended_evaluation.technical_score %}
-                                                <div class="test-name small">
-                                                    Conocimiento técnico
-                                                </div>
-                                            {% endif %}
-
-                                            {% if campaign.recommended_evaluation.requirements_score %}
-                                                <div class="test-name small">
-                                                    Requisitos
-                                                </div>
-                                            {% endif %}
-
-                                            {% if campaign.recommended_evaluation.motivation_score %}
-                                                <div class="test-name small">
-                                                    Motivación
-                                                </div>
-                                            {% endif %}
-
-                                            {% if campaign.recommended_evaluation.cultural_fit_score %}
-                                                <div class="test-name small">
-                                                    Fit cultural
-                                                </div>
-                                            {% endif %}
+                                <div class="col-lg-9 col-xs-12 recommended">
+                                    <div class="row">
+                                        {% if campaign.recommended_evaluation.cognitive_score %}
+                                        <div class="test-name small">
+                                            Capacidad cognitiva
                                         </div>
-                                        <div class="row">
-                                            {% if campaign.recommended_evaluation.cognitive_score >= 0 %}
-                                                <div id="recommended-cognitive-id" class="fill five-fills">
-                                                    {{ campaign.recommended_evaluation.cognitive_score|print_score }}
-                                                </div>
-                                            {% endif %}
-
-                                            {% if campaign.recommended_evaluation.technical_score >= 0 %}
-                                                <div id="recommended-technical-id" class="fill five-fills">
-                                                    {{ campaign.recommended_evaluation.technical_score|print_score }}
-                                                </div>
-                                            {% endif %}
-
-                                            {% if campaign.recommended_evaluation.requirements_score >= 0 %}
-                                                <div id="recommended-requirement-id" class="fill five-fills">
-                                                    {{ campaign.recommended_evaluation.requirements_score|print_score }}
-                                                </div>
-                                            {% endif %}
-
-                                            {% if campaign.recommended_evaluation.motivation_score >= 0 %}
-                                                <div id="recommended-motivation-id" class="fill five-fills">
-                                                    {{ campaign.recommended_evaluation.motivation_score|print_score }}
-                                                </div>
-                                            {% endif %}
-
-                                            {% if campaign.recommended_evaluation.cultural_fit_score >= 0 %}
-                                                <div id="recommended-cultural-id" class="fill five-fills">
-                                                    {{ campaign.recommended_evaluation.cultural_fit_score|print_score }}
-                                                </div>
-                                            {% endif %}
+                                        {% endif %}
+                                        {% if campaign.recommended_evaluation.technical_score %}
+                                        <div class="test-name small">
+                                            Conocimiento técnico
                                         </div>
+                                        {% endif %}
+                                        {% if campaign.recommended_evaluation.requirements_score %}
+                                        <div class="test-name small">
+                                            Requisitos
+                                        </div>
+                                        {% endif %}
+                                        {% if campaign.recommended_evaluation.motivation_score %}
+                                        <div class="test-name small">
+                                            Motivación
+                                        </div>
+                                        {% endif %}
+                                        {% if campaign.recommended_evaluation.cultural_fit_score %}
+                                        <div class="test-name small">
+                                            Fit cultural
+                                        </div>
+                                        {% endif %}
                                     </div>
+                                    <div class="row">
+                                        {% if campaign.recommended_evaluation.cognitive_score >= 0 %}
+                                        <div id="recommended-cognitive-id" class="fill five-fills">
+                                            {{ campaign.recommended_evaluation.cognitive_score|print_score }}
+                                        </div>
+                                        {% endif %}
+                                        {% if campaign.recommended_evaluation.technical_score >= 0 %}
+                                        <div id="recommended-technical-id" class="fill five-fills">
+                                            {{ campaign.recommended_evaluation.technical_score|print_score }}
+                                        </div>
+                                        {% endif %}
+                                        {% if campaign.recommended_evaluation.requirements_score >= 0 %}
+                                        <div id="recommended-requirement-id" class="fill five-fills">
+                                            {{ campaign.recommended_evaluation.requirements_score|print_score }}
+                                        </div>
+                                        {% endif %}
+                                        {% if campaign.recommended_evaluation.motivation_score >= 0 %}
+                                        <div id="recommended-motivation-id" class="fill five-fills">
+                                            {{ campaign.recommended_evaluation.motivation_score|print_score }}
+                                        </div>
+                                        {% endif %}
+                                        {% if campaign.recommended_evaluation.cultural_fit_score >= 0 %}
+                                        <div id="recommended-cultural-id" class="fill five-fills">
+                                            {{ campaign.recommended_evaluation.cultural_fit_score|print_score }}
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </a>
@@ -170,9 +159,9 @@
                     <div class="state div3">
                         <div class="col-xs-4 circle avatar2"></div>
                         <div class="col-xs-8 col-lg-12">
-                        <p class="status-name bold">RELEVANTES</p>
-                        <div class="line"></div>
-                        <p class="status-description">Todos los candidatos que aprobaron pruebas iniciales y requerimientos específicos para tu campaña</p>
+                            <p class="status-name bold">RELEVANTES</p>
+                            <div class="line"></div>
+                            <p class="status-description">Todos los candidatos que aprobaron pruebas iniciales y requerimientos específicos para tu campaña</p>
                         </div>
                     </div>
                 </div>
@@ -187,24 +176,22 @@
                             <div class="col-lg-8 col-xs-8 relevant">
                                 <div class="row">
                                     {% if campaign.relevant_evaluation.cognitive_score >= 0 %}
-                                        <div class="test-name">Prueba cognitiva</div>
+                                    <div class="test-name">Prueba cognitiva</div>
                                     {% endif %}
-
                                     {% if campaign.relevant_evaluation.technical_score >= 0 %}
-                                        <div class="test-name">Prueba técnica</div>
+                                    <div class="test-name">Prueba técnica</div>
                                     {% endif %}
                                 </div>
                                 <div class="row">
                                     {% if campaign.relevant_evaluation.cognitive_score >= 0 %}
-                                        <div id="relevant-cognitive-id" class="fill">
-                                            {{ campaign.relevant_evaluation.cognitive_score|print_score }}
-                                        </div>
+                                    <div id="relevant-cognitive-id" class="fill">
+                                        {{ campaign.relevant_evaluation.cognitive_score|print_score }}
+                                    </div>
                                     {% endif %}
-
                                     {% if campaign.relevant_evaluation.technical_score >= 0 %}
-                                        <div id="relevant-technical-id" class="fill">
-                                            {{ campaign.relevant_evaluation.technical_score|print_score }}
-                                        </div>
+                                    <div id="relevant-technical-id" class="fill">
+                                        {{ campaign.relevant_evaluation.technical_score|print_score }}
+                                    </div>
                                     {% endif %}
                                 </div>
                             </div>
@@ -219,9 +206,9 @@
                     <div class="state div5">
                         <div class="col-xs-4 circle avatar3"></div>
                         <div class="col-xs-8 col-lg-12">
-                        <p class="status-name bold">INSCRITOS</p>
-                        <div class="line"></div>
-                        <p class="status-description">Otros candidatos que no han realizado las pruebas y candidatos que han sido descartados por alguno de los filtros</p>
+                            <p class="status-name bold">INSCRITOS</p>
+                            <div class="line"></div>
+                            <p class="status-description">Otros candidatos que no han realizado las pruebas y candidatos que han sido descartados por alguno de los filtros</p>
                         </div>
                     </div>
                 </div>
@@ -235,14 +222,14 @@
                             <div class="col-lg-12 col-xs-8 applicant">
                                 <div class="row">
                                     {% if campaign.applicant_evaluation.cognitive_score >= 0 %}
-                                        <div class="final-test-name">Prueba cognitiva</div>
+                                    <div class="final-test-name">Prueba cognitiva</div>
                                     {% endif %}
                                 </div>
                                 <div class="row">
                                     {% if campaign.applicant_evaluation.cognitive_score >= 0 %}
-                                        <div id="applicant-cognitive-id" class="fill">
-                                            {{ campaign.applicant_evaluation.cognitive_score|print_score }}
-                                        </div>
+                                    <div id="applicant-cognitive-id" class="fill">
+                                        {{ campaign.applicant_evaluation.cognitive_score|print_score }}
+                                    </div>
                                     {% endif %}
                                 </div>
                             </div>
@@ -272,12 +259,11 @@
                     <a href="#" target="_blank"><img src="{% static 'business/img/twitter.png' %}"></a>
                 </div>
                 <div class="col-md-1"></div>
-                <div class="col-md-4 col-xs-12 navfootercontact">
-                    <div class="col-lg-6 col-xs-6 logo-white"><a href="#"><img src="{% static 'business/img/logo-white.png' %}"></a></div>
-                    <div class="col-lg-6 col-xs-6 contact">contacto@peaku.co<br>
-                        +57 311 6109340<br>
-                        Colombia
-                    </div>
+                <div class=" col-md-2 col-md-2 navfootercontact">
+                    <div class="logo-white"><a href="#"><img src="{% static 'business/img/logo-white.png' %}"></a></div>
+                    contacto@peaku.co<br>
+                    +57 311 6109340<br>
+                    Colombia
                 </div>
             </div>
             <div class="row">

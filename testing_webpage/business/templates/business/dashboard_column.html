@@ -1,12 +1,13 @@
 {% load static %}
 
-
-<div id="{{ state_name }}">
+<div class="line"></div>
+<div id="{{ state_name }}" class="internal-div">
 {% for candidate in candidate_list %}
     <div class="candidate-div">
         {% include "business/candidate_for_campaign.html" with candidate=candidate %}
     </div>
 {% endfor %}
 </div>
+
 
 

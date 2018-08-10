@@ -21,13 +21,15 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <!-- Latest compiled Bootstrap JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!--Our JS-->
+        <script src="{% static 'business/js/summary.js' %}"></script>
     </head>
     <body>
         <div class="topnav" id="myTopnav">
             <a href="/staffing" class="logo"><img src="{% static 'business/img/logo-color-negro.png' %}"></a>
             <a href="{% url 'business:logout' %}">{% trans "LOG OUT" %}</a>
             <a class="navButton" style="font-size: 15px;width:170px;color: white;border-radius:40px;margin-top: 30px;padding:5px 16px;background:#F47B20;"
-               role="button" href="{% url 'business:start' %}">+  CREAR OFERTA</a>
+                role="button" href="{% url 'business:start' %}">+  CREAR OFERTA</a>
             <a href="{% url 'business:business_campaigns' business_user_id=business_user.pk %}">Mis campañas</a>
             <a href="#about">Ayuda</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -35,55 +37,117 @@
             </a>
         </div>
         <!--
-        <div class="sidenav">
-            <a href="#"><span class="arrow">&#xFE64;<br><span class="arrow-text">Mis ofertas</span></span></a>
-            <a href="#"><span class="plus">&#x002B;<br><span class="plus-text">Nueva oferta</span></span></a>
-            <a href="#"><span class="setup">&#x2699;<br><span class="setup-text">Configuración</span></span></a>
-            <div class="blur">
-            </div>
-        </div>-->
-
+            <div class="sidenav">
+                <a href="#"><span class="arrow">&#xFE64;<br><span class="arrow-text">Mis ofertas</span></span></a>
+                <a href="#"><span class="plus">&#x002B;<br><span class="plus-text">Nueva oferta</span></span></a>
+                <a href="#"><span class="setup">&#x2699;<br><span class="setup-text">Configuración</span></span></a>
+                <div class="blur">
+                </div>
+            </div>-->
         <div class="background">
             <div class="gradient1">
-                    <div class="row one"></div>
-                    <div class="row two">
-                        <div class="col-lg-12 campaign bold">{{ campaign.title_es }}</div>
+                <div class="row one"></div>
+                <div class="row two">
+                    <div class="col-lg-12 campaign bold">{{ campaign.title_es }}</div>
+                </div>
+                <div class="row three">
+                    <div class="col-lg-3 col-xs-12"></div>
+                    <div class="col-lg-9 col-xs-12 gradient2">
+                        <p class="date regular">FECHA DE PUBLICACIÓN: {{ campaign.created_at }}</p>
+                        <br>
+                        {% if campaign.active %}
+                        <p class="status bold">ESTADO: activa</p>
+                        <br>
+                        {% else %}
+                        <p class="status bold">ESTADO: inactiva</p>
+                        <br>
+                        {% endif %}
+                        {% if business_state.name == 'relevantes' %}
+                        <p class="total regular">TOTAL {{ business_state.name }}: {{ total_relevant }}</p>
+                        {% elif business_state.name == 'recomendados' %}
+                        <p class="total regular">TOTAL {{ business_state.name }}: {{ total_recommended }}</p>
+                        {% else %}
+                        <p class="total regular">TOTAL {{ business_state.name }}: {{ total_applicants }}</p>
+                        {% endif %}
                     </div>
-                    <div class="row three">
-                        <div class="col-lg-3 col-xs-12"></div>
-                        <div class="col-lg-9 col-xs-12 gradient2">
-                            <p class="date regular">FECHA DE PUBLICACIÓN: {{ campaign.created_at }}</p><br>
-                            {% if campaign.active %}
-                                <p class="status bold">ESTADO: activa</p><br>
-                            {% else %}
-                                <p class="status bold">ESTADO: inactiva</p><br>
-                            {% endif %}
-                            {% if business_state.name == 'relevantes' %}
-                                <p class="total regular">TOTAL {{ business_state.name }}: {{ total_relevant }}</p>
-                            {% elif business_state.name == 'recomendados' %}
-                                <p class="total regular">TOTAL {{ business_state.name }}: {{ total_recommended }}</p>
-                            {% else %}
-                                <p class="total regular">TOTAL {{ business_state.name }}: {{ total_applicants }}</p>
-                            {% endif %}
-                        </div>
-                    </div>
+                </div>
             </div>
         </div>
-
         <div class="row big-div">
             <div class="row">
                 <div class="col-lg-2">
+                    {% if business_state.name == 'relevant' %}
+                    <div class="circle avatar2"></div>
+                    {% elif business_state.name == 'recommended' %}
                     <div class="circle avatar1"></div>
+                    {% else %}
+                    <div class="circle avatar3"></div>
+                    {% endif %}
                 </div>
-                <div class="col-lg-5">
+                <div class="col-lg-4 col-xs-9">
                     <p class="status-name bold">{{ business_state.name }}</p>
-                    <div class="line2">
+                    <div class="line2"></div>
                     <p class="status-description">{{ business_state.description }}</p>
-                    </div>
-                    <div class="col-lg-5">
+                    <div class="email-button" role="button" onclick="">ENVIAR CORREO MASIVO</div>
+                </div>
+                <div class="col-lg-6 col-xs-12 general-circles">
+                    <div class="row">
+                            {% if campaign_evaluation.cognitive_score %}
+                            <div class="test-name">
+                                Capacidad cognitiva
+                                {% if campaign_evaluation.cognitive_score >= 0 %}
+                            <div id="cognitive-id" class="fill five-fills">
+                                {{ campaign_evaluation.cognitive_score|print_score }}
+                            </div>
+                            {% endif %}
+                            </div>
+                            {% endif %}
 
+                            {% if campaign_evaluation.technical_score %}
+                            <div class="test-name">
+                                Conocimiento técnico
+                                {% if campaign_evaluation.technical_score >= 0 %}
+                            <div id="technical-id" class="fill five-fills">
+                                {{ campaign_evaluation.technical_score|print_score }}
+                            </div>
+                            {% endif %}
+                            </div>
+                            {% endif %}
+
+                            {% if campaign_evaluation.requirements_score %}
+                            <div class="test-name">
+                                Requisitos
+                                {% if campaign_evaluation.requirements_score >= 0 %}
+                            <div id="requirement-id" class="fill five-fills">
+                                {{ campaign_evaluation.requirements_score|print_score }}
+                            </div>
+                            {% endif %}
+                            </div>
+                            {% endif %}
+
+                            {% if campaign_evaluation.motivation_score %}
+                            <div class="test-name">
+                                Motivación
+                                {% if campaign_evaluation.motivation_score >= 0 %}
+                            <div id="motivation-id" class="fill five-fills">
+                                {{ campaign_evaluation.motivation_score|print_score }}
+                            </div>
+                            {% endif %}
+                            </div>
+                            {% endif %}
+
+                            {% if campaign_evaluation.cultural_fit_score %}
+                            <div class="test-name">
+                                Fit cultural
+                                {% if campaign_evaluation.cultural_fit_score >= 0 %}
+                            <div id="cultural-id" class="fill five-fills">
+                                {{ campaign_evaluation.cultural_fit_score|print_score }}
+                            </div>
+                            {% endif %}
+                            </div>
+                            {% endif %}
                     </div>
-                 </div>
+                </div>
             </div>
             {% include "business/dashboard_column.html" with candidate_list=candidates state_name=business_state.name %}
         </div>
@@ -109,11 +173,11 @@
                 <div class=" col-md-2 col-md-2 navfootercontact">
                     <div class="logo-white"><a href="#"><img src="{% static 'business/img/logo-white.png' %}"></a></div>
                     contacto@peaku.co<br>
-                        +57 311 6109340<br>
-                        Colombia
-                    </div>
+                    +57 311 6109340<br>
+                    Colombia
                 </div>
-                <div class=" col-md-2 col-md-2 "></div>
+            </div>
+            <div class=" col-md-2 col-md-2 "></div>
             </div>
             <div class="row">
                 <div class="col-1 col-md-1"></div>
@@ -136,10 +200,20 @@
                 if($(window).scrollTop() >= 0.1){
                     $(".sidenav").css("margin-top","0px");
                     $(".blur").css("margin-top","0px");
+
                 }else if($(window).scrollTop() < 0.1){
                     $(".sidenav").css("margin-top","84px");
                     $(".blur").css("margin-top","84px");
                 }
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                set_circle_color({{ campaign_evaluation.cognitive_score|int_rounding }}, "cognitive-id");
+                set_circle_color({{ campaign_evaluation.technical_score|int_rounding }}, "technical-id");
+                set_circle_color({{ campaign_evaluation.requirements_score|int_rounding }}, "requirement-id");
+                set_circle_color({{ campaign_evaluation.motivation_score|int_rounding }}, "motivation-id");
+                set_circle_color({{ campaign_evaluation.cultural_fit_score|int_rounding }}, "cultural-id");
             });
         </script>
     </body>

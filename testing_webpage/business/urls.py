@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^campañas/(?P<business_user_id>\d+)$', views.business_campaigns, name='business_campaigns'),
     url(r'^tablero_de_control/(?P<business_user_id>\d+)/(?P<campaign_id>\d+)/(?P<state_name>.*)/$', views.dashboard, name='dashboard'),
     url(r'^perfil_del_candidato/(?P<pk>\d+)$', views.candidate_profile, name='candidate_profile'),
+
     # TODO: Worst hack ever, replace for something like: \?id=[0-9]+
     url(r'^contact_us$', views.contact_us, name='contact_us'),
     url(r'^results/(?P<pk>\d+)$', views.render_result, name='render_result'),

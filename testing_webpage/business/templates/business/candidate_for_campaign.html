@@ -1,30 +1,119 @@
 {% load static %}
 {% load i18n %}
+{% load app_filters %}
 
-
-<input type="checkbox" name="{{ candidate.id }}_checkbox">
-<p style="display:inline; font-size:15px;"><a href="/seleccion_de_personal/perfil_del_candidato/{{ candidate.id }}"><strong>{{ candidate.user.name }}</strong></a></p>
-    <br>
-
-        {% if candidate.user.curriculum_url != '#' %}
-            <a href="{% static candidate.user.curriculum_url %}">{% trans "CV" %}</a>
+<div class="row">
+    <div class="email-checkbox">
+        <input type="checkbox" name="{{ candidate.id }}_checkbox">
+    </div>
+    <div class="col-lg-1 col-xs-6 candidate-avatar-column">
+        {% if candidate.user.photo_url != '#' %}
+        <div class="circle candidate-circle" style="background-image: url({% static candidate.user.photo_url %});"></div>
+        {% elif candidate.user.gender.sex == 2 %}
+        <div class="circle candidate-circle female-avatar"></div>
         {% else %}
-            {% trans "Without resume" %}
+        <div class="circle candidate-circle male-avatar"></div>
         {% endif %}
-        {% if candidate.user.email %}
-            <p>{{ candidate.user.email }}
-        {% else %}
-            <p>
+    </div>
+    <div class="col-lg-2 col-xs-12">
+        <p><a href="/seleccion_de_personal/perfil_del_candidato/{{ candidate.id }}"><strong>{{ candidate.user.name }}</strong></a></p>
+        {% if candidate.user.profession.name_es %}
+            <p>{{ candidate.user.profession.name_es }}</p>
         {% endif %}
-        <br>
-        {% if candidate.user.phone is None %}
-            {% trans "Not available" %}
-        {% else %}
-            {{ candidate.user.phone }}
-        {% endif %}
-            </p>
-        <!--{{ candidate.state.name }}-->
-<input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}" />
 
+        {% if candidate.user.city.name and candidate.user.city.name != "not available" %}
+            <p style="font-size:10px;">{{ candidate.user.city.name }}, {{ candidate.user.country.name }}</p>
+        {% endif %}
+
+        {% if candidate.user.work_area.name_es %}
+            <p>{{ candidate.user.work_area.name_es }}</p>
+        {% endif %}
+    </div>
+    <div class="col-lg-1 separator-div">
+        <div class="separator"></div>
+    </div>
+    {% if candidate.user.profile %}
+        <div class="col-lg-4 profile">
+            <p>{{ candidate.user.profile }}</p>
+        </div>
+    {% elif candidate.user.document %}
+        <div class="col-lg-4 profile">
+            <p class="no-profile">{{ candidate.user.document }}</p>
+        </div>
+    {% else %}
+        <div class="col-lg-4 profile">
+            <p class="no-profile">Candidato sin perfil</p>
+        </div>
+    {% endif %}
+    <div class="col-lg-4 condoms-row">
+        <div class="row">
+            {% if candidate.evaluation_summary.cognitive_score %}
+            <div class="test-name small">
+                Capacidad cognitiva
+                {% if candidate.evaluation_summary.cognitive_score >= 0 %}
+            <div id="{{ candidate.pk }}-recommended-cognitive-id" class="fill small-fill">
+                {{ candidate.evaluation_summary.cognitive_score|print_score }}
+            </div>
+            {% endif %}
+            </div>
+            {% endif %}
+
+            {% if candidate.evaluation_summary.technical_score %}
+            <div class="test-name small">
+                Conocimiento técnico
+                {% if candidate.evaluation_summary.technical_score >= 0 %}
+            <div id="{{ candidate.pk }}-recommended-technical-id" class="fill small-fill">
+                {{ candidate.evaluation_summary.technical_score|print_score }}
+            </div>
+            {% endif %}
+            </div>
+            {% endif %}
+
+            {% if candidate.evaluation_summary.requirements_score %}
+            <div class="test-name small">
+                Requisitos
+                {% if candidate.evaluation_summary.requirements_score >= 0 %}
+            <div id="{{ candidate.pk }}-recommended-requirement-id" class="fill small-fill">
+                {{ candidate.evaluation_summary.requirements_score|print_score }}
+            </div>
+            {% endif %}
+            </div>
+            {% endif %}
+
+            {% if candidate.evaluation_summary.motivation_score %}
+            <div class="test-name small">
+                Motivación
+                {% if candidate.evaluation_summary.motivation_score >= 0 %}
+            <div id="{{ candidate.pk }}-recommended-motivation-id" class="fill small-fill">
+                {{ candidate.evaluation_summary.motivation_score|print_score }}
+            </div>
+            {% endif %}
+            </div>
+            {% endif %}
+
+            {% if candidate.evaluation_summary.cultural_fit_score %}
+            <div class="test-name small">
+                Fit cultural
+                {% if candidate.evaluation_summary.cultural_fit_score >= 0 %}
+            <div id="{{ candidate.pk }}-recommended-cultural-id" class="fill small-fill">
+                {{ candidate.evaluation_summary.cultural_fit_score|print_score }}
+            </div>
+            {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}"/>
+
+<script>
+    $(document).ready(function() {
+        set_circle_color({{ candidate.evaluation_summary.cognitive_score|int_rounding }}, "{{ candidate.pk }}-recommended-cognitive-id");
+        set_circle_color({{ candidate.evaluation_summary.technical_score|int_rounding }}, "{{ candidate.pk }}-recommended-technical-id");
+        set_circle_color({{ candidate.evaluation_summary.requirements_score|int_rounding }}, "{{ candidate.pk }}-recommended-requirement-id");
+        set_circle_color({{ candidate.evaluation_summary.motivation_score|int_rounding }}, "{{ candidate.pk }}-recommended-motivation-id");
+        set_circle_color({{ candidate.evaluation_summary.cultural_fit_score|int_rounding }}, "{{ candidate.pk }}-recommended-cultural-id");
+    });
+</script>
 
 
