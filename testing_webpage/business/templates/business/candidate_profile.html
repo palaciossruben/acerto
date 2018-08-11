@@ -135,15 +135,15 @@
                 <div class="col-lg-5 col-xs-12"></div>
                 <div class="col-lg-7 col-xs-12">
                     {% if candidate.user.profile %}
-                        <div class="profile">
+                        <div class="col-lg-4 profile">
                             <p>{{ candidate.user.profile }}</p>
                         </div>
-                        {% elif candidate.user.document %}
-                        <div class="profile">
-                            <p class="no-profile">{{ candidate.user.document }}</p>
+                    {% elif candidate.user.get_short_curriculum %}
+                        <div class="col-lg-4 profile">
+                            <p class="no-profile">{{ candidate.user.get_short_curriculum }}</p>
                         </div>
-                        {% else %}
-                        <div class="profile">
+                    {% else %}
+                        <div class="col-lg-4 profile">
                             <p class="no-profile">Candidato sin perfil</p>
                         </div>
                     {% endif %}
