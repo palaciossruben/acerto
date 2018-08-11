@@ -733,10 +733,35 @@ class User(models.Model):
         else:  # TODO: SHOULD NEVER DEFAULT to this, Defaults to Colombia
             return str(Country.objects.get(name='Colombia').calling_code)
 
+    @staticmethod
+    def get_short_curriculum_index(short_curriculum):
+        """
+        Search for first paragraph
+        :param short_curriculum: str
+        :return: int
+        """
+        short_curriculum = short_curriculum.lower()
+
+        try:
+            search_word = 'perfil profesional'
+            return short_curriculum.index(search_word) + len(search_word)
+        except ValueError:
+            try:
+                search_word = 'perfil laboral'
+                return short_curriculum.index(search_word) + len(search_word)
+            except ValueError:
+                try:
+                    search_word = 'perfil'
+                    return short_curriculum.index(search_word) + len(search_word)
+                except ValueError:
+                    return 0
+
     def get_short_curriculum(self):
         short_curriculum = self.curriculum_text.replace("\n", "")
         short_curriculum = re.sub(' +', ' ', short_curriculum)
-        return short_curriculum[:min(250, len(short_curriculum))]
+        start_idx = User.get_short_curriculum_index(short_curriculum)
+
+        return short_curriculum[start_idx:start_idx + min(250, len(short_curriculum))] + '...'
 
     def change_to_international_phone_number(self):
 
