@@ -754,14 +754,17 @@ class User(models.Model):
                     search_word = 'perfil'
                     return short_curriculum.index(search_word) + len(search_word)
                 except ValueError:
-                    return 0
+                    return None
 
     def get_short_curriculum(self):
         short_curriculum = self.curriculum_text.replace("\n", "")
         short_curriculum = re.sub(' +', ' ', short_curriculum)
         start_idx = User.get_short_curriculum_index(short_curriculum)
 
-        return short_curriculum[start_idx:start_idx + min(250, len(short_curriculum))] + '...'
+        if start_idx is not None:
+            return short_curriculum[start_idx:start_idx + min(250, len(short_curriculum))] + '...'
+        else:
+            return None
 
     def change_to_international_phone_number(self):
 
