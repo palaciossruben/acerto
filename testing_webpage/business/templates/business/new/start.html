@@ -53,8 +53,14 @@
                 <div class="gradient2">
                     <div class="topnav" id="myTopnav">
                         <a href="/staffing" class="logo"><img src="{% static 'business/img/logo-color.png' %}"></a>
-                        <a class="navButton regular" role="button" onclick="off_signup() & on_login()">INICIA SESIÓN</a>
-                        <a class="navButton" role="button" onclick="off_login() & on_signup()">CREA TU CUENTA</a>
+                        {% if user.is_authenticated %}
+                            <a class="navButton" role="button" href="{% url 'business:logout' %}">CERRAR SESIÓN</a>
+                        {% else %}
+                            <a class="navButton regular" role="button" onclick="off_signup() & on_login()">INICIA SESIÓN</a>
+                            {% if not 'seleccion_gratis' in request.path %}
+                                <a class="navButton" role="button" onclick="off_login() & on_signup()">CREA TU CUENTA</a>
+                            {% endif %}
+                        {% endif %}
                         <a class="navText" href="{% url 'business:contact_form' %}">Contáctanos</a>
                         <a class="navText" href="{% url 'beta_invite:index' %}">Personas</a>
                         <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
