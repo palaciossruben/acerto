@@ -95,9 +95,8 @@ body {
 
 .description-text{
     text-align:left;
-    margin-left: 80px;
+    padding-left: 80px;
     margin-bottom: 20px;
-    padding: 0;
 }
 
 .main-description{
