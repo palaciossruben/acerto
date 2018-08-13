@@ -43,11 +43,7 @@
 <input type="file" name="photo_url" id="photo">
 </p>
 
-<p><strong>country: </strong>{{ candidate.user.country.name }}</p>
     <p><strong>city: </strong>{{ candidate.user.city.name }}</p>
-    <p><strong>work_area: </strong>{{ candidate.user.work_area.name }}</p>
-<p><strong>profession: </strong>{{ candidate.user.profession.name }}</p>
-<p><strong>education: </strong>{{ candidate.user.education.name }}</p>
 <p><strong>created_at: </strong>{{ candidate.user.created_at }}</p>
 
     <!--TODO: remove this for loop, this is deprecated.-->
@@ -59,6 +55,17 @@
 
     {% for e in candidate.evaluations.all %}
         <p><strong>test (cut: {{ e.cut_score }}): </strong> {{ e.final_score }}</p>
+    {% endfor %}
+
+    {% for e in candidate.evaluations.all %}
+        <p><strong>Pruebas:</strong></p>
+        {% for score in e.scores.all %}
+            {% if score.test.type.pk == 3 %}
+                <p><strong>Requisitos: </strong>{{ score.value }}</p>
+            {% else %}
+                <p><strong>{{ score.test.name_es }}: </strong>{{ score.value }}</p>
+            {% endif %}
+        {% endfor %}
     {% endfor %}
 
 
