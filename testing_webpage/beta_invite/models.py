@@ -199,8 +199,8 @@ class Answer(models.Model):
 
 class Question(models.Model):
 
-    text = models.CharField(max_length=1000, null=True)
-    text_es = models.CharField(max_length=1000, null=True)
+    text = models.CharField(max_length=1500, null=True)
+    text_es = models.CharField(max_length=1500, null=True)
     answers = models.ManyToManyField(Answer)
     type = models.ForeignKey(QuestionType, null=True, on_delete=models.SET_NULL)
     correct_answers = models.ManyToManyField(Answer, related_name='correct_answers')
