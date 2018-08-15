@@ -1,0 +1,56 @@
+.topnav-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    float:right
+}
+
+.topnav-list li {
+    display:block;
+    width:auto;
+    position:relative;
+    float:left;
+    padding:0px 20px 0px 20px;
+}
+
+.navButton {
+    width:170px;
+    background-color: white;
+	border-radius:40px;
+    border: none;
+    color: #3d4753;
+    padding: 5px 25px;
+    text-align: center;
+    text-decoration: none;
+	font-size:14px;
+    display: inline-block;
+    margin: 15px 10px;
+    cursor: pointer;
+    z-index:1;
+}
+
+.navText {
+    margin: 15px 10px;
+    text-shadow: 2px 1px 1px rgba(0,0,0,0.5);
+    font-size:17px;
+}
+
+nav {
+    margin-top:70px;
+    font-size:15px;
+}
+
+nav a {
+    color:#3d4753;
+}
+
+nav a:hover {
+    color:#495663;
+}
+
+
+@media (max-width: 767px){
+    .topnav .icon {
+        display: block;
+    }
+}

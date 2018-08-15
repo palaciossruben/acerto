@@ -1,99 +1,8 @@
-@charset "UTF-8";
-
-/**************************************************GENERIC*************************************************************/
-
-* { margin: 0; padding: 0; outline:0; box-sizing:border-box;}
-
-html {
-	height: 100%;
-}
-
 body {
-    background : #F6F6F6;;
-    height: 100%;
+    background : #F6F6F6;
 }
 
-.row{
-    margin-right:0;
-    margin-left:0;
-}
-/**************************************************FONTS***************************************************************/
-@font-face {
-    font-family: BigJohn;
-    src: url(/static/fonts/BIG_JOHN.otf);
-    unicode-range: U+?????;
-}
 
-@font-face {
-    font-family: NorthernBlock;
-    src: url(/static/fonts/TheNorthernBlockLtdLoewHeavy.otf);
-}
-
-@font-face {
-    font-family: BertholdAkzidenzGroteskRegular;
-    src: url(/static/fonts/BertholdAkzidenzGroteskRegular.otf);
-}
-
-@font-face {
-    font-family: BertholdAkzidenzGroteskLight;
-    src: url(/static/fonts/BertholdAkzidenzGroteskBELight.otf);
-}
-
-@font-face {
-    font-family: BertholdAkzidenzGroteskBold;
-    src: url(/static/fonts/BertholdAkzidenzGroteskBold.otf);
-}
-
-@font-face {
-    font-family: BertholdAkzidenzGroteskItalic;
-    src: url(/static/fonts/BertholdAkzidenzGroteskItalic.otf);
-}
-
-@font-face {
-    font-family: BertholdAkzidenzGroteskSuper;
-    src: url(/static/fonts/BertholdAkzidenzGroteskSuper.otf);
-}
-
-.super{
-    font-family: BertholdAkzidenzGroteskSuper;
-}
-
-.bold{
-    font-family: BertholdAkzidenzGroteskBold;
-}
-
-.regular{
-    font-family: BertholdAkzidenzGroteskRegular;
-}
-
-/***********************************************TOP NAV****************************************************************/
-
-.topnav {
-    overflow: hidden;
-    width:100%;
-    border-bottom: 2px groove;
-    border-color:rgba(255, 255, 255, .5);
-    background-color: white;
-}
-
-.topnav a {
-    float: left;
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-}
-
-.topnav a:not(:first-child) {
-    float: right;
-    margin-top: 20px;
-}
-
-.topnav .icon {
-    display: none;
-}
 /*******************************************SIDE NAV*******************************************************************/
 .sidenav {
     height: 800px;
@@ -453,100 +362,7 @@ body {
 .responsive-show{
     display:none;
 }
-
-/**************************************************FOOTER**************************************************************/
-footer {
-    background-color:#3d4753;
-    color:#FFFFFF;
-    position:relative;
-    z-index:100;
-}
-.footer-navigation{
-    padding-bottom:30px;
-}
-
-.navfooter {
-	margin-top:55px;
-	color:#FFFFFF;
-}
-
-.navfooter ul div{
-    text-align: center;
-}
-
-.social {
-	margin-top:50px;
-	text-align:center
-}
-
-.navfooter ul li {
-	padding:0px 10px 0px 10px !important;
-	list-style-type: none;
-	display:inline-block;
-}
-
-.navfooter ul li a{
-	color:white;
-}
-
-.navfooter ul li a:hover{
-	color:#c9d86a;
-	text-decoration:none;
-}
-
-.navfootercontact {
-	margin-top:40px;
-	color:#FFFFFF;
-	line-height:20px;
-	text-align:center;
-}
-
-.contact{
-    text-align: left;
-}
-
-.copyright {
-	padding:20px;
-	text-align:center;
-	font-size:0.7em;
-	border-top:groove 2px;
-	border-color:rgba(255, 255, 255, .1);
-}
-
-.copyright a{
-	color:white;
-}
-
-.copyright a:hover{
-	color:#c9d86a;
-	text-decoration:none;
-}
-
-#contact-buttons {
-	position:fixed;
-	margin-top:77vh;
-	margin-left:100%;
-	left:-100px;
-	z-index:100;
-	float:right;
-}
-
-#contact-buttons img {
-	padding-bottom:5px;
-}
-
-.logo {
-    float:left;
-}
-
-.logo img{
-    margin-left:30px;
-    width:70px;
-}
-
-
-
-/**************************************************RESPONSIVE**********************************************************/
+/************************************RESPONSIVE TOPNAV*****************************************************************/
 
 @media screen and (max-width: 768px) {
     .topnav a:not(:first-child), .navButton {
@@ -580,7 +396,7 @@ footer {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
 }
-
+/***************************************ALL RESPONSIVE*****************************************************************/
 @media screen and (max-width: 768px) {
     .background{
         background: url(../img/cel-Start_BG-01-min.jpg) no-repeat top center scroll ;
@@ -741,10 +557,6 @@ footer {
         font-size: 20px;
         text-shadow: 3px -1px 1px rgba(0,0,0,0.4);
         margin-left:9px;
-    }
-
-    .logo-white{
-        margin-bottom:20px;
     }
 }
 

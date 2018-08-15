@@ -1,166 +1,59 @@
-<!DOCTYPE html>
+{% extends 'no_header_base.html'%}
 {% load static %}
 {% load i18n %}
 {% load app_filters %}
 {% load compress %}
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <meta name="description"  content="En PeakU te ayudamos a encontrar el empleo que buscas en compañias que se ajustan a tu perfil, experiencia y salario. Somos una empresa que trabaja en selección de personal, no una temporal." />
-        <meta name="keywords" content="computrabajo, servicio de empleo, empleo, empleos, trabajos, trabaja con nosotros, buscador de empleo, bolsa de empleo, agencia de empleo, buscador de empleo" />
-
-        <title>{%  trans "Employment Agency - PeakU" %}</title>
-		<!--Latest compiled and minified bootstrap CSS-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="{% static 'testing_webpage/css/index.css' %}">
-        <!--Favicon-->
-        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon.ico' %}">
-    	<link rel="apple-touch-icon" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon-16.png' %}">
-    	<link rel="apple-touch-icon" sizes="32x32" href="{% static 'testing_webpage/favicon.ico/favicon-32.png' %}">
-    	<link rel="apple-touch-icon" sizes="64x64" href="{% static 'testing_webpage/favicon.ico/favicon-64.png' %}">
-        <!-- Latest compiled Bootstrap JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <!-- Latest jQuery library -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <!--Our js-->
-		<script type="text/javascript" src="{% static 'business/js/index.js' %}"></script>
-		<!--Any incoming error_message will print as an alert-->
-		<script>
-		{% if error_message %}
-			alert("{{ error_message }}");
-		{% endif %}
-		</script>
-        <script>
-            function myFunction() {
-                var x = document.getElementById("myTopnav");
-                if (x.className === "topnav") {
-                    x.className += " responsive";
-                } else {
-                    x.className = "topnav";
-                }
-            }
-        </script>
-		<!-- smartlook for record the users interactions  -->
-        <script id="Heat-map" type="text/javascript">
-        window.smartlook||(function(d) {
-        var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
-        var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
-        c.charset='utf-8';c.src='https://rec.smartlook.com/recorder.js';h.appendChild(c);
-        })(document);
-        smartlook('init', '495c7bd6807a0ab2c17ade2e03cac13bab9f1b84');
-        </script>
-		<!-- Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110863941-1"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
-		  gtag('config', 'UA-110863941-1');
-		</script>
-        <!--Tawk chat-->
-        {% if 'seleccion_de_personal' in request.path %}
-            <script type="text/javascript">
-                var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-                (function(){
-                var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-                s1.async=true;
-                s1.src='https://embed.tawk.to/5a5d24064b401e45400c1ca0/default';
-                s1.charset='UTF-8';
-                s1.setAttribute('crossorigin','*');
-                s0.parentNode.insertBefore(s1,s0);
-                })();
-            </script>
-        {% endif %}
-	</head>
-	<body>
-        <header>
-            <nav class="row" style="margin-right: 0px; margin-left: 0px;" id="myTopnav">
-                <div class="col-lg-2 col-md-2 col-sm-2"><a href="/staffing"><img id="logo" src="{% static 'business/img/logo-color.png' %}" width="110px"></a>
-                </div>
-                <div class="col-lg-10 col-md-10 col-sm-10 push10">
-                    <ul style="float:right">
-                        <li id="companies-button"><a id="option1" href="{% url 'business:index' %}" class="button-user" role="button">Portal Empresas</a></li>
-                        <li id="register-button"><a href="{% url 'beta_invite:index' %}" class="button-user" role="button">Crea tu cuenta</a></li>
-                        <!--<li id="login-button"><a href="{% url 'beta_invite:index' %}" class="button-user" role="button">Inicia sesión</a></li>-->
-                    </ul>
-                </div>
-            </nav>
-        </header>
-		<div class="row blankbanner" style="margin-right: 0px;margin-left: 0px;"></div>
-		<div class="section1" style="text-align: center;">
-			<div class="row" style="color: white; text-align: center;" id="main-copy">
-				<h1 id="main-copy-title">Tu empleo ideal</h1>
-				<p id="main-copy-big-title">TE ESPERA</p>
-				<span class="first-description">Déjanos tu correo, nosotros hacemos el resto.</span>
-				<form action="{% url 'beta_invite:index' %}">
-					<button class="button-cta" role="button">Aplica</button>
-				</form>
-			</div>
-			<div class="row blankabout responsive-no" style="margin-right: 0px;margin-left: 0px;"></div>
-			<div class="row blankabout space" style="margin-right: 0px;margin-left: 0px;"></div>
-		</div>
+{% block title %}Agencia de empleo y trabajo{% endblock %}
+{% block extra_meta %}
+    <meta name="description"  content="En PeakU te ayudamos a encontrar el empleo que buscas en compañias que se ajustan a tu perfil, experiencia y salario. Somos una empresa que trabaja en selección de personal, no una temporal." />
+    <meta name="keywords" content="computrabajo, servicio de empleo, empleo, empleos, trabajos, trabaja con nosotros, buscador de empleo, bolsa de empleo, agencia de empleo, buscador de empleo" />
+{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'testing_webpage/css/index.css' %}">
+{% endblock %}
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'business/js/index.js' %}"></script>
+{% endblock %}
+{% block content %}
+    <div class="fix-content-space">
+        <div class="row blankbanner"></div>
+        <div class="section1">
+            <div class="row" id="main-copy">
+                <h1 id="main-copy-title">Tu empleo ideal</h1>
+                <p id="main-copy-big-title">TE ESPERA</p>
+                <span class="first-description">Déjanos tu correo, nosotros hacemos el resto.</span>
+                <form action="{% url 'beta_invite:index' %}">
+                    <button class="button-cta" role="button">Aplicar</button>
+                </form>
+            </div>
+            <div class="row blankabout responsive-no"></div>
+            <div class="blankabout no-space"></div>
+        </div>
         <div class="row section2">
             <div class="col-lg-6 col-md-6 col-xs-12 woman-working"></div>
             <div class="col-lg-6 col-md-6 col-xs-12 description2">
-                <h5>En PeakU te ayudamos a encontrar compañias que se ajustan a tu perfil, experiencia y salario. Somos una empresade selección de personal, no una temporal</h5>
-                <h4>Puedes aplicar a todas nuestras ofertas fácilmente y sin costo</h4>
+                <h5>En PeakU te ayudamos a encontrar el empleo que buscas en compañías que se ajustan a tu perfil, experiencia y salario. Somos una empresa que trabaja en selección de personal, no una temporal.</h5>
+                <h4>Puedes aplicar a todas nuestras ofertas de trabajo fácilmente y sin costo.</h4>
             </div>
         </div>
-		<div class="row conectors-row">
+        <div class="row conectors-row">
             <div class="col-lg-12 col-md-12 col-xs-12 conectors">
-				<div class="play-div">
-					<a href="https://www.youtube.com/watch?v=QbNDO2ShXIs" target="_blank">
-						<img class="play-button" src="{% static 'testing_webpage/img/play_button.png' %}">
-						<span class="video">VER VIDEO</span>
-					</a>
-				</div>
-			</div>
+                <div class="play-div">
+                    <a href="https://www.youtube.com/watch?v=QbNDO2ShXIs" target="_blank">
+                        <img class="play-button" src="{% static 'testing_webpage/img/play_button.png' %}">
+                        <span class="video">VER VIDEO</span>
+                    </a>
+                </div>
+            </div>
         </div>
         <div class="row section3">
-			<div class="col-lg-push-6 col-md-6 col-xs-12 working-people"></div>
+            <div class="col-lg-push-6 col-md-6 col-xs-12 working-people"></div>
             <div class="col-lg-pull-6 col-md-6 col-xs-12 description3">
                 <h3>Trabaja con las empresas más importantes</h3>
                 <h2>del mundo</h2>
                 <br>
-                <h5 class="last-description">Con PeakU aplicas unas sola vez y tienes acceso a una infinidad de vacantes de múltiples empresas y múltiples roles</h5>
+                <h5 class="last-description">Con PeakU aplicas una sola vez y tienes acceso a una infinidad de vacantes de empleo de múltiples empresas y múltiples roles</h5>
             </div>
         </div>
-		<footer class="container-fluid">
-			<div class="row" style="padding-bottom:30px;margin-right: 0px;margin-left: 0px;">
-				<div class=" col-lg-2 col-md-2 "></div>
-				<div class=" col-lg-3 col-md-3  navfooter" >
-					<ul style="float:left;    margin-left: -18px;">
-						<li><a href="#">Nosotros</a></li>
-                        <li><a href="{% url 'business:contact_form' %}">Contáctanos</a></li>
-						<li><a href="{% url 'beta_invite:index' %}">Personas</a></li>
-					</ul>
-				</div>
-				<div class="col-lg-2 col-md-2 redesfooter" style="text-align:center">
-					<a href="https://www.linkedin.com/company-beta/16241506/" target="_blank"><img src="{% static 'business/img/linkedin.png' %}"></a>
-					<a href="https://www.facebook.com/PeakU-Latam-1916685895214519/?ref=aymt_homepage_panel" target="_blank"><img src="{% static 'business/img/facebook.png' %}"></a>
-					<a href="https://www.instagram.com/peaku_latam/" target="_blank"><img src="{% static 'business/img/instagram.png' %}"></a>
-					<a href="#" target="_blank"><img src="{% static 'business/img/twitter.png' %}"></a>
-				</div>
-				<div class=" col-lg-1 col-md-1"></div>
-				<div class=" col-lg-2 col-md-2 navfootercontact">
-					<div style="width:20%; float:left; display:block; margin-top:10px; margin-left:-30px; ">
-						<a href="#">
-							<img src="{% static 'business/img/logo-white.png' %}">
-						</a>
-					</div>
-					<div class="contact">contacto@peaku.co<br>
-						+57 311 6109340<br>
-						Colombia
-					</div>
-				</div>
-				<div class=" col-lg-2 col-md-2 "></div>
-			</div>
-			<div class="row" style="margin-right: 0px;margin-left: 0px;">
-				<div class="col-1 col-md-1"></div>
-				<div class="col-10 copyright">Copyright 2018 © PeakU. Todos los derechos reservados.</div>
-				<div class="col-1"></div>
-			</div>
-		</footer>
-	</body>
-</html>
+    </div>
+{% endblock %}

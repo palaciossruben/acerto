@@ -1,11 +1,11 @@
-{% extends 'base.html'%}
-{% load static %}
+{% extends 'no_header_base.html'%}
 {% load i18n %}
+{% load static %}
 {% load app_filters %}
+{% load compress %}
+{% block title %}PeakU - Dashboard{% endblock %}
 
-{% block title %}PeakU - Dashboard {% endblock %}
-
-{% block extra_head %}
+{% block extra_css %}
     <link rel="stylesheet" type="text/css" href="{% static 'business/css/business_campaigns.css' %}">
 {% endblock %}
 

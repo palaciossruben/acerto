@@ -4,63 +4,62 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
 
 <url>
   <loc>https://peaku.co/</loc>
-  <lastmod>2018-02-07T23:01:39+00:00</lastmod>
+  <lastmod>2018-08-13T22:31:42+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://peaku.co/servicio_de_empleo</loc>
-  <lastmod>2018-02-07T23:01:39+00:00</lastmod>
+  <loc>https://peaku.co/en/staffing</loc>
+  <lastmod>2018-08-13T22:31:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://peaku.co/seleccion_de_personal/</loc>
-  <lastmod>2018-02-07T23:01:39+00:00</lastmod>
+  <lastmod>2018-08-13T22:31:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://peaku.co/seleccion_de_personal/signup_choice</loc>
-  <lastmod>2018-02-07T23:01:39+00:00</lastmod>
-  <priority>0.64</priority>
+  <loc>https://peaku.co/servicio_de_empleo/</loc>
+  <lastmod>2018-08-13T22:31:42+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://peaku.co/seleccion_de_personal/login</loc>
-  <lastmod>2018-02-07T23:01:39+00:00</lastmod>
-  <priority>0.64</priority>
+  <loc>https://peaku.co/seleccion_de_personal/cont%C3%A1ctanos</loc>
+  <lastmod>2018-08-13T22:31:42+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
   <loc>https://peaku.co/seleccion_de_personal/seleccion_gratis</loc>
-  <lastmod>2018-02-07T23:01:39+00:00</lastmod>
+  <lastmod>2018-08-13T22:31:42+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://peaku.co/seleccion_de_personal/plan/1</loc>
-  <lastmod>2018-02-07T23:01:39+00:00</lastmod>
+  <lastmod>2018-08-13T22:31:42+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://peaku.co/seleccion_de_personal/plan/2</loc>
-  <lastmod>2018-02-07T23:01:39+00:00</lastmod>
+  <lastmod>2018-08-13T22:31:42+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://peaku.co/seleccion_de_personal/plan/3</loc>
-  <lastmod>2018-02-07T23:01:39+00:00</lastmod>
+  <lastmod>2018-08-13T22:31:42+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://peaku.co/seleccion_de_personal/business_signup</loc>
-  <lastmod>2018-02-07T23:01:39+00:00</lastmod>
-  <priority>0.51</priority>
+  <loc>https://peaku.co/servicio_de_empleo/security_politics</loc>
+  <lastmod>2018-08-13T22:31:42+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://peaku.co/servicio_de_empleo?campaign_id=9</loc>
-  <lastmod>2018-02-07T23:01:39+00:00</lastmod>
-  <priority>0.51</priority>
+  <loc>https://peaku.co/seleccion_de_personal/login</loc>
+  <lastmod>2018-08-13T22:31:42+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 
 
