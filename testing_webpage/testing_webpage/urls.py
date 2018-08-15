@@ -33,6 +33,7 @@ urlpatterns = [
 urlpatterns += i18n_patterns(
     url(r'^staffing$', views.index, name='index'),
     url(r'^sitemap.xml$', views.sitemap, name='sitemap'),
+    url(r'^BingSiteAuth.xml$', views.BingSiteAuth, name='BingSiteAuth')
 )
 
 if settings.DEBUG:

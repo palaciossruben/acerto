@@ -11,3 +11,7 @@ def index(request):
 
 def sitemap(request):
     return render(request, 'testing_webpage/sitemap.xml', {}, content_type="application/xhtml+xml")
+
+
+def BingSiteAuth(request):
+    return render(request, 'testing_webpage/BingSiteAuth.xml', {}, content_type="application/xhtml+xml")
