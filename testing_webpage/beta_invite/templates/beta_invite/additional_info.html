@@ -1,10 +1,15 @@
-{% extends 'base.html'%}
-{% load i18n %}
+{% extends 'white_header_base.html'%}
 {% load static %}
-
-{% block extra_head %}
-<link rel="stylesheet" type="text/css" href="{% static 'beta_invite/css/additional_info.css' %}">
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+{% load i18n %}
+{% load app_filters %}
+{% load compress %}
+{% block title %}Selección, contratación y reclutamiento de personal{% endblock %}
+{% block extra_meta %}
+    <meta name="description"  content="En PeakU te ayudamos a encontrar el empleo que buscas en compañias que se ajustan a tu perfil, experiencia y salario. Somos una empresa que trabaja en selección de personal, no una temporal." />
+    <meta name="keywords" content="computrabajo, servicio de empleo, empleo, empleos, trabajos, trabaja con nosotros, buscador de empleo, bolsa de empleo, agencia de empleo" />
+{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'beta_invite/css/additional_info.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -30,7 +35,7 @@ function removeAnyDots() {
     }
 </script>
 
-<body background="{{ cloud_front_url }}user/img/form1.jpg">
+
 
 	<!-- multistep form -->
 	<form id="msform" autocomplete="off" method="post" action="active_campaigns" enctype="multipart/form-data">
@@ -168,11 +173,9 @@ function removeAnyDots() {
 			<input type="submit" name="submit" class="submit action-button" value="¡ Enviar !" />
 		</fieldset>
 	</form>
-</body>
-
-<script type="text/javascript" src="{% static 'beta_invite/js/additional_info.js' %}"></script>
 <script type="text/javascript" src="{% static 'beta_invite/js/jquery.js' %}"></script>
-<script type="text/javascript" src="{% static 'beta_invite/js/jquery_easing_plugin.js' %}"></script>
+    <script type="text/javascript" src="{% static 'beta_invite/js/jquery_easing_plugin.js' %}"></script>
+    <script type="text/javascript" src="{% static 'beta_invite/js/additional_info.js' %}"></script>
 
 {% endblock %}
 
