@@ -2,13 +2,13 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
 body {
+    background-image:url(https://peakubucket1.s3.us-east-2.amazonaws.com/user/img/form1.jpg);
     background-repeat:no-repeat;
     -webkit-background-size:cover;
     -moz-background-size:cover;
     -o-background-size:cover;
     background-size:cover;
     background-position:center;
-
 }
 
 /*form styles*/
