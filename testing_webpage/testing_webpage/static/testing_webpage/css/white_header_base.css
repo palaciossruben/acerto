@@ -2,16 +2,6 @@ body {
     background : #F6F6F6;
 }
 
-.navButton{
-    font-size: 15px;
-    width:170px;
-    color: white;
-    border-radius:40px;
-    margin-top: 30px;
-    padding:5px 16px;
-    background:#F47B20;
-}
-
 .topnav {
     overflow: hidden;
     width:100%;
