@@ -29,7 +29,9 @@ def send_campaign_report(recipients, campaign_id):
 
     campaign = Campaign.objects.get(pk=campaign_id)
     candidates = Candidate.objects.filter(created_at__range=[str(timezone.now() - timedelta(days=1)), str(timezone.now())],
-                                          campaign=campaign)
+                                          campaign=campaign,
+                                          state_id__in=[1, 8]
+                                          )
 
     # Only send if there is something.
     if len(candidates) > 0:

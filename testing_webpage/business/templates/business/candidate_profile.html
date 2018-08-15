@@ -144,7 +144,7 @@
                         </div>
                     {% else %}
                         <div class="col-lg-4 profile">
-                            <p class="no-profile">Candidato sin perfil</p>
+                            <p class="no-profile">Sin descripción</p>
                         </div>
                     {% endif %}
                 </div>
@@ -154,22 +154,38 @@
                 <div class="col-lg-5 col-xs-12 contact-data">
                     <strong class="accordion">Ver datos de contacto 	&#x25BE;</strong>
                     <div class="panel">
-                        <p>{{ candidate.user.phone }}</p>
-                        <p>{{ candidate.user.email }}</p>
+                        {% if candidate.user.phone %}
+                            <p>{{ candidate.user.phone }}</p>
+                        {% endif %}
+                        {% if candidate.user.email %}
+                            <p>{{ candidate.user.email }}</p>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="col-lg-7 col-xs-12 contact-data">
                     <strong class="accordion no-style">Ver información adicional 	&#x25BE;</strong>
                     <div class="panel">
                         <div class="col-lg-6 col-xs-6">
-                            <p>Aspiración salarial: {{ candidate.user.salary }}</p>
-                            <p>Fecha de cumpleaños: {{ candidate.user.birthday }}</p>
-                            <p>Idiomas: {{ candidate.user.languages }}</p>
+                            {% if candidate.user.salary %}
+                                <p>Aspiración salarial: {{ candidate.user.salary }}</p>
+                            {% endif %}
+                            {% if candidate.user.birthday %}
+                                <p>Fecha de cumpleaños: {{ candidate.user.birthday }}</p>
+                            {% endif %}
+                            {% if candidate.user.languages %}
+                                <p>Idiomas: {{ candidate.user.languages }}</p>
+                            {% endif %}
                         </div>
                         <div class="col-lg-6 col-xs-6">
-                            <p>Género: {{ candidate.user.gender }}</p>
-                            <p>Empresa soñada: {{ candidate.user.dream_job }}</p>
-                            <p>Hobbies: {{ candidate.user.hobbies }}</p>
+                            {% if candidate.user.gender %}
+                                <p>Género: {{ candidate.user.gender }}</p>
+                            {% endif %}
+                            {% if candidate.user.dream_job %}
+                                <p>Empresa soñada: {{ candidate.user.dream_job }}</p>
+                            {% endif %}
+                            {% if candidate.user.hobbies %}
+                                <p>Hobbies: {{ candidate.user.hobbies }}</p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
