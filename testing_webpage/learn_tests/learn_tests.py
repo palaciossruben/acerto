@@ -134,7 +134,8 @@ def update_importance(test):
     data.features = df
 
     data = new_balance(data)
-    if data is None:  # couldn't do the re-balance will exit.
+    if data is None:
+        print("couldn't do the re-balance will exit.")
         return
 
     # TODO: measure trivial solution after rebalancing
