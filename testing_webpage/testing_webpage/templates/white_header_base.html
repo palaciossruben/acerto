@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+{% load i18n %}
+{% load static %}
+{% load app_filters %}
+{% load compress %}
+{% block header_base_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'testing_webpage/css/white_header_base.css' %}">
+{% endblock %}
+{% block header %}
+    <div class="topnav" id="myTopnav">
+        <a href="/staffing" class="logo"><img src="{% static 'business/img/logo-color-negro.png' %}"></a>
+        <a href="{% url 'business:logout' %}">{% trans "LOG OUT" %}</a>
+        <a class="navButton" style="font-size: 15px;width:170px;color: white;border-radius:40px;margin-top: 30px;padding:5px 16px;background:#F47B20;" role="button" href="{% url 'business:start' %}">+  CREAR OFERTA</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+    </div>
+{% endblock %}
+
+

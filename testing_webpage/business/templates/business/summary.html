@@ -1,38 +1,20 @@
-<!DOCTYPE html>
+{% extends 'white_header_base.html'%}
 {% load static %}
 {% load i18n %}
 {% load app_filters %}
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <title>PeakU - Tablero de control</title>
-        <!--Favicon-->
-        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon.ico' %}">
-        <link rel="apple-touch-icon" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon-16.png' %}">
-        <link rel="apple-touch-icon" sizes="32x32" href="{% static 'testing_webpage/favicon.ico/favicon-32.png' %}">
-        <link rel="apple-touch-icon" sizes="64x64" href="{% static 'testing_webpage/favicon.ico/favicon-64.png' %}">
-        <!--Latest compiled and minified bootstrap CSS-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <!--Our Css-->
-        <link rel="stylesheet" type="text/css" href="{% static 'business/css/summary.css' %}">
-        <!--Our JS-->
-        <script src="{% static 'business/js/summary.js' %}"></script>
-        <!-- Latest jQuery library -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <!-- Latest compiled Bootstrap JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </head>
-    <body>
-        <div class="topnav" id="myTopnav">
-            <a href="/staffing" class="logo"><img src="{% static 'business/img/logo-color-negro.png' %}"></a>
-            <a href="{% url 'business:logout' %}">{% trans "LOG OUT" %}</a>
-            <a class="navButton" style="font-size: 15px;width:170px;color: white;border-radius:40px;margin-top: 30px;padding:5px 16px;background:#F47B20;"
-                role="button" href="{% url 'business:start' %}">+  CREAR OFERTA</a>
-            <a href="{% url 'business:business_campaigns' business_user_id=business_user.pk %}">Mis campañas</a>
-            <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
-        </div>
+{% load compress %}
+{% block title %}Selección, contratación y reclutamiento de personal{% endblock %}
+{% block extra_meta %}
+    <meta name="description"  content="Publica y comparte ofertas laborales, realiza pruebas relacionadas al cargo y selecciona al mejor personal. Podrás buscar, filtrar y comunícarte fácilmente con los candidatos en todas las etapas del proceso." />
+    <meta name="keywords" content="cazatalentos, selección de personal, reclutamiento personal, contratacion personal, selección personal, agencias, reclutamiento, reclutamiento empleados, busqueda personal, preselección personal, headhunter, agencia empleo" />
+{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'business/css/summary.css' %}">
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'business/js/summary.js' %}"></script>
+{% endblock %}
+{% block content %}
         <!--
             <div class="sidenav">
                 <a href="{% url 'business:business_campaigns' business_user_id=business_user.pk %}"><span class="arrow">&#xFE64;<br><span class="arrow-text">Mis ofertas</span></span></a>
@@ -236,40 +218,7 @@
                 </div>
             </a>
         </div>
-        <!----------------------------------------------FOOTER--------------------------------------------------------->
-        <footer class="container-fluid">
-            <div class="row footer-navigation">
-                <div class="col-md-2 col-md-2"></div>
-                <div class="col-md-3 col-md-3 navfooter">
-                    <ul>
-                        <div>
-                            <li><a href="#">Nosotros</a></li>
-                            <li><a href="{% url 'business:contact_form' %}">Contáctanos</a></li>
-                            <li><a href="{% url 'beta_invite:index' %}">Personas</a></li>
-                        </div>
-                    </ul>
-                </div>
-                <div class="col-md-2 col-md-2 social">
-                    <a href="https://www.linkedin.com/company-beta/16241506/" target="_blank"><img src="{% static 'business/img/linkedin.png' %}"></a>
-                    <a href="https://www.facebook.com/PeakU-Latam-1916685895214519/?ref=aymt_homepage_panel" target="_blank">
-                    <img src="{% static 'business/img/facebook.png' %}"></a>
-                    <a href="#" target="_blank"><img src="{% static 'business/img/instagram.png' %}"></a>
-                    <a href="#" target="_blank"><img src="{% static 'business/img/twitter.png' %}"></a>
-                </div>
-                <div class="col-md-1"></div>
-                <div class=" col-md-2 col-md-2 navfootercontact">
-                    <div class="logo-white"><a href="#"><img src="{% static 'business/img/logo-white.png' %}"></a></div>
-                    contacto@peaku.co<br>
-                    +57 311 6109340<br>
-                    Colombia
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-1 col-md-1"></div>
-                <div class="col-10 copyright">Copyright 2018 © PeakU. Todos los derechos reservados.</div>
-                <div class="col-1"></div>
-            </div>
-        </footer>
+
         <script>
             function myFunction() {
                 var x = document.getElementById("myTopnav");
@@ -306,5 +255,4 @@
                 set_circle_color({{ campaign.applicant_evaluation.cognitive_score|int_rounding }}, "applicant-cognitive-id");
             });
         </script>
-    </body>
-</html>
+{% endblock %}
