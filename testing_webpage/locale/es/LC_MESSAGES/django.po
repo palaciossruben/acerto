@@ -716,11 +716,6 @@ msgstr "Experiencia en años:"
 msgid "Search"
 msgstr "Búsqueda"
 
-#: business/templates/business/signup_choice.html:6
-#: testing_webpage/templates/testing_webpage/index.html:6
-msgid "Employment Agency - PeakU"
-msgstr "Agencia de Empleo - PeakU"
-
 #: business/templates/business/signup_choice.html:15
 #: testing_webpage/templates/base.html:122
 msgid "SIGN UP"

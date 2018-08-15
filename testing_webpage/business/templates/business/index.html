@@ -1,405 +1,321 @@
-<!DOCTYPE html>
+{% extends 'no_header_base.html'%}
 {% load static %}
 {% load i18n %}
 {% load app_filters %}
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-		<title>PeakU · Servicios empresariales</title>
-
-		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'business/css/index.css' %}">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script type="text/javascript" src="{% static 'business/js/index.js' %}"></script>
-
-
-		<link rel="icon" type="image/png" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon.ico' %}">
-    	<link rel="apple-touch-icon" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon-16.png' %}">
-    	<link rel="apple-touch-icon" sizes="32x32" href="{% static 'testing_webpage/favicon.ico/favicon-32.png' %}">
-    	<link rel="apple-touch-icon" sizes="64x64" href="{% static 'testing_webpage/favicon.ico/favicon-64.png' %}">
-
-		<!-- any incoming error_message will print as an alert.-->
-		<script>
-		{% if error_message %}
-			alert("{{ error_message }}");
-		{% endif %}
-		</script>
-
-        <script id="Heat-map" type="text/javascript">
-        window.smartlook||(function(d) {
-        var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
-        var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
-        c.charset='utf-8';c.src='https://rec.smartlook.com/recorder.js';h.appendChild(c);
-        })(document);
-        smartlook('init', '495c7bd6807a0ab2c17ade2e03cac13bab9f1b84');
-        </script>
-	</head>
-	<body>
-            <div id="contact-buttons">
-				<a href="https://api.whatsapp.com/send?phone=573116109340" target="_blank"><img src="{% static 'business/img/boton-whatsapp.png' %}" width="100px" id="whatsapp-pc">
-				<img src="{% static 'business/img/boton-whatsapp-tablet.png' %}" id="whatsapp-tablet"></a>
-				<br>
-				<a href="#"><img src="{% static 'business/img/boton-chat.png' %}" width="100px" id="chat-pc">
-				<img src="{% static 'business/img/boton-chat-tablet.png' %}" id="chat-tablet"></a>
-			</div>
-			<!--Nav bar-->
-			<nav class="row" style="margin-right: 0px; margin-left: 0px;" id="myTopnav">
-				<div class="col-lg-2 col-md-2 col-sm-2"><a href="/staffing"><img src="{% static 'business/img/logo-color.png' %}" width="110px" id="logo"></a>
-				</div>
-				<div class="col-lg-10 col-md-10 col-sm-10 push10">
-					<ul style="float:right">
-						<li id="candidates-button"><a id="option1" href="{% url 'index' %}">Personas</a></li>
-						<li id="contact-us-button"><a id="option2" href="{% url 'business:contact_form' %}">Contáctanos</a></li>
-                        {% if user.is_authenticated %}
-                            <li><a class="button-user logout" role="button" href="{% url 'business:logout' %}">Cerrar sesión</a></li>
-                        {% else %}
-                            <li id="login-button"><a class="button-user" role="button" onclick="on_login()">Inicia sesión</a></li>
-                            {% if not 'seleccion_gratis' in request.path %}
-                                <li id="register-button"><a class="button-user" role="button" onclick="on_signup()">Crea tu cuenta</a></li>
-                            {% endif %}
-                        {% endif %}
-					</ul>
-				</div>
-			</nav>
-			<!--call to action-->
-            <div id="overlay-signup">
-                <div id="form-image">
-                    <form id="register-form" action="{% url 'business:business_signup' %}" method="post">
-						{% csrf_token %}
-                        <fieldset>
-                            <span class="exitDingbat" onclick="off_signup()">X</span>
-                            <br>
-                            <br>
-
-                            <span>Nombre</span>
-                            <input class="form-input" name="name"
-							required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
-							<br>
-                            <span>Empresa</span>
-                            <input class="form-input" name="company">
-							<br>
-                            <span>Correo</span>
-                            <input class="form-input" type="email" name="username" required="required">
-							<br>
-                            <span>Teléfono</span>
-                            <input class="form-input" type="tel" name="phone"
-								   required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
-							<br>
-                            <span>Contraseña</span>
-                            <input class="form-input" type="password" name="password1" required="required">
-							<br>
-                            <span>Confirmar contraseña</span>
-                            <input class="form-input" type="password" name="password2" required="required">
-                            <br>
-                            <input type="submit" class="submit" value="COMIENZA AHORA">
-                        </fieldset>
-                        <span style="color:white;margin-left:30px; s">¿Ya eres un usuario registrado? Inicia sesión
-							<a style="color:white" href="javascript:void(0);" onclick="off_signup() & on_login()">
-								<strong>Aquí</strong>
-							</a>
-						</span>
-                    </form>
+{% load compress %}
+{% block title %}Selección, contratación y reclutamiento de personal{% endblock %}
+{% block extra_meta %}
+    <meta name="description"  content="Publica y comparte ofertas laborales, realiza pruebas relacionadas al cargo y selecciona al mejor personal. Podrás buscar, filtrar y comunícarte fácilmente con los candidatos en todas las etapas del proceso." />
+    <meta name="keywords" content="cazatalentos, selección de personal, reclutamiento personal, contratacion personal, selección personal, agencias, reclutamiento, reclutamiento empleados, busqueda personal, preselección personal, headhunter, agencia empleo" />
+{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'business/css/index.css' %}">
+{% endblock %}
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'business/js/index.js' %}"></script>
+{% endblock %}
+{% block content %}
+<div id="contact-buttons">
+    <a href="https://api.whatsapp.com/send?phone=573116109340" target="_blank"><img src="{% static 'business/img/boton-whatsapp.png' %}" width="100px" id="whatsapp-pc">
+    <img src="{% static 'business/img/boton-whatsapp-tablet.png' %}" id="whatsapp-tablet"></a>
+    <br>
+    <a href="#"><img src="{% static 'business/img/boton-chat.png' %}" width="100px" id="chat-pc">
+    <img src="{% static 'business/img/boton-chat-tablet.png' %}" id="chat-tablet"></a>
+</div>
+<!--call to action-->
+<div id="overlay-signup">
+    <div id="form-image">
+        <form id="register-form" action="{% url 'business:business_signup' %}" method="post">
+            {% csrf_token %}
+            <fieldset>
+                <span class="exitDingbat" onclick="off_signup()">X</span>
+                <br>
+                <br>
+                <span>Nombre</span>
+                <input class="form-input" name="name"
+                    required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
+                <br>
+                <span>Empresa</span>
+                <input class="form-input" name="company">
+                <br>
+                <span>Correo</span>
+                <input class="form-input" type="email" name="username" required="required">
+                <br>
+                <span>Teléfono</span>
+                <input class="form-input" type="tel" name="phone"
+                    required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
+                <br>
+                <span>Contraseña</span>
+                <input class="form-input" type="password" name="password1" required="required">
+                <br>
+                <span>Confirmar contraseña</span>
+                <input class="form-input" type="password" name="password2" required="required">
+                <br>
+                <input type="submit" class="submit" value="COMIENZA AHORA">
+            </fieldset>
+            <span style="color:white;margin-left:30px; s">¿Ya eres un usuario registrado? Inicia sesión
+            <a style="color:white" href="javascript:void(0);" onclick="off_signup() & on_login()">
+            <strong>Aquí</strong>
+            </a>
+            </span>
+        </form>
+    </div>
+</div>
+<div id="overlay-login">
+    <div id="form-image2">
+        <form id="login-form" method="post" action="{% url 'business:home' %}" >
+            {% csrf_token %}
+            <fieldset>
+                <span class="exitDingbat" onclick="off_login()">X</span>
+                <br>
+                <br>
+                <span>Correo</span>
+                <input name="username" class="form-input"><br>
+                <span>Contraseña</span>
+                <input name="password" class="form-input" type="password"><br>
+                <span style="font-size:10px;"><a href="#" style="color:white">Olvidé mi contraseña</a></span>
+                <span style="font-size:10px">
+                <a href="javascript:void(0);" style="color:white" onclick="off_login() & on_signup()">Aun no estoy registrado
+                </a>
+                </span>
+                <br>
+                <br>
+                <input type="submit" class="submit" value="ACCEDER">
+            </fieldset>
+        </form>
+    </div>
+</div>
+<div class="row blankbanner" style="margin-right: 0px;margin-left: 0px;"></div>
+<div id="hide1">
+    <div class="row" style="margin-right: 0px;" id="main-copy">
+        <div class="col-lg-5"></div>
+        <div class="col-lg-7">
+            <h1 style="color: white">	Publica tu oferta laboral y agiliza<br> el proceso de selección de personal</h1>
+        </div>
+        <div class="col-lg-5"></div>
+        <div class="col-lg-7">
+            <h5 style="color: white">	Podrás hacer búsquedas, pruebas técnicas y contarás la logística para encontrar los candidatos que tu empresa necesita.</h5>
+        </div>
+        <div class="col-lg-5"></div>
+        <div class="col-lg-7">
+            <form action="{% url 'business:start' %}">
+                <button class="button-cta" role="button">PUBLICA GRATIS</button>
+            </form>
+        </div>
+    </div>
+    <div class="row blankabout responsive-no" style="margin-right: 0px;margin-left: 0px;"></div>
+    <!--Beneficios-->
+    <div class="row" style="margin-right: 0px;margin-left: 0px;">
+        <div class="col-lg-12 blankbeneficios">
+        </div>
+        <div class="col-lg-4 col-md-4 beneficios">
+            <img src="{% static 'business/img/10dias.png' %}">
+            <h6 class="push20">Los mejores candidatos en 10 días hábiles</h6>
+            <br>
+            Cinco candidatos garantizados para el cargo en 10 días hábiles.
+        </div>
+        <div class="col-lg-4 col-md-4 beneficios pull50">
+            <img src="{% static 'business/img/publicar-gratis.png' %}">
+            <h6 class="push20">Publica gratis tus vacantes de forma ilimitada</h6>
+            <br>
+            Accede a candidatos y comparte tu publicación para llegar a más personas.
+        </div>
+        <div class="col-lg-4 col-md-4 beneficios pull100">
+            <img src="{% static 'business/img/mejora-proceso.png' %}">
+            <h6 class="push20">Optimiza tus procesos de selección con nuestra plataforma<br></h6>
+            <br>
+            Permite que los candidatos hagan pruebas técnicas en línea, facilitamos el seguimiento de los procesos y la comunicación.
+        </div>
+        <div class="col-md-12 beneficioscel pull100">
+            <img src="{% static 'business/img/beneficios-cel.jpg' %}">
+            <h6 class="push20">Los mejores candidatos en 10 días hábiles<br></h6>
+            Publica ofertas gratis y optimiza procesos de selección para que encuentres al candidato que necesitas en tiempo récord.
+        </div>
+    </div>
+    <div class="row blankabout" style="margin-right: 0px;margin-left: 0px;"></div>
+</div>
+<div id="hide2">
+    <!--About-->
+    <div class="container-fluid" id="valuebanner">
+        <div class="row" style="margin-right: 0px;margin-left: 0px;">
+            <div class="col-lg-1 col-md-1">
+            </div>
+            <div class="col-lg-4 col-md-4" id="image4video"><a href="https://www.youtube.com/watch?v=QbNDO2ShXIs" target="_blank">
+                <img src="{% static 'business/img/mockup-iphone.png' %}" width="105%"></a>
+            </div>
+            <div class="col-lg-1 col-md-1">
+            </div>
+            <div class="col-lg-5 col-md-5 about">
+                <h1>ACERCA DE LA PLATAFORMA</h1>
+                <br>
+                Publica y comparte ofertas laborales, realiza pruebas relacionadas al cargo y selecciona al mejor personal. Podrás buscar, filtrar y comunicarte fácilmente con los candidatos en todas las etapas del proceso.<br>
+                <a href="{% url 'business:start' %}" class="button-cta" role="button" id="button-cta-about">COMIENZA AQUÍ</a>
+            </div>
+            <div class="col-lg-1 col-md-1">
+            </div>
+        </div>
+    </div>
+    <!--Plans-->
+    <div class="container">
+        <div class="blankplans"></div>
+        <div class="row" style="margin-right: 0px;margin-left: 0px;">
+            <!--free-->
+            <div class="col-lg-3 col-md-6 leftipad">
+                <div class="freebg">
+                    <div class="button-plans">PLAN GRATUITO</div>
+                    <a href="#" class="button-buy-cel" role="button">COMENZAR</a>
+                    <br>
+                    <p class="price">Gratis</p>
+                    <div class="plancontainer">
+                        <ul class="itemyes-light">
+                            <li class="listyes-light"> Acceso ilimitado a la plataforma </li>
+                            <li class="listyes-light"> Creación ilimitada de vacantes </li>
+                            <li class="listno-light"> Publicación de vacantes en redes sociales</li>
+                            <li class="listno-light"> Comunicación masiva por email y Whatsapp</li>
+                            <li class="listno-light"> Pruebas técnicas y psicológicas</li>
+                            <li class="listno-light"> Entrevista virtual</li>
+                            <li class="listno-light"> Recomendación de 5 candidatos</li>
+                            <li class="listno-light"> Proceso para candidatos especializados o gerenciales</li>
+                        </ul>
+                    </div>
+                    <a href="{% url 'business:plan' 1 %}" class="button-buy" role="button">COMENZAR</a>
                 </div>
             </div>
-            <div id="overlay-login">
-                <div id="form-image2">
-
-                    <form id="login-form" method="post" action="{% url 'business:home' %}" >
-						{% csrf_token %}
-                        <fieldset>
-                            <span class="exitDingbat" onclick="off_login()">X</span>
-                            <br>
-                            <br>
-                            <span>Correo</span>
-                            <input name="username" class="form-input"><br>
-                            <span>Contraseña</span>
-                            <input name="password" class="form-input" type="password"><br>
-                            <span style="font-size:10px;"><a href="#" style="color:white">Olvidé mi contraseña</a></span>
-                            <span style="font-size:10px">
-								<a href="javascript:void(0);" style="color:white" onclick="off_login() & on_signup()">Aun no estoy registrado
-								</a>
-							</span>
-                            <br>
-                            <br>
-                            <input type="submit" class="submit" value="ACCEDER">
-                        </fieldset>
-                    </form>
+            <!--basic-->
+            <div class="col-lg-3 col-md-6">
+                <div class="basicbg pull50">
+                    <div class="button-plan-top">PLAN BÁSICO</div>
+                    <a href="#" class="button-buy-cel" role="button">OBTENER</a>
+                    <br>
+                    <p class="price">$675 mil COP + IVA</p>
+                    <div class="plancontainer">
+                        <ul class="itemyes-light">
+                            <li class="listyes-dark"> Acceso ilimitado a la plataforma </li>
+                            <li class="listyes-dark"> Creación ilimitada de vacantes </li>
+                            <li class="listyes-dark"> Publicación de vacantes en redes sociales</li>
+                            <li class="listyes-dark"> Comunicación masiva por email y Whatsapp</li>
+                            <li class="listyes-dark"> Pruebas técnicas y psicológicas</li>
+                            <li class="listyes-dark"> Entrevista virtual</li>
+                            <li class="listyes-dark"> Recomendación de 5 candidatos</li>
+                            <li class="listyes-dark"> Salarios: Desde el mínimo hasta 2.5M COP</li>
+                            <li class="listno-dark"> Proceso para candidatos especializados o gerenciales</li>
+                        </ul>
+                    </div>
+                    <a href="{% url 'business:plan' 1 %}" class="button-buy" role="button">OBTENER</a>
                 </div>
             </div>
-            <div class="row blankbanner" style="margin-right: 0px;margin-left: 0px;"></div>
-
-            <div id="hide1">
-				<div class="row" style="margin-right: 0px;" id="main-copy">
-					<div class="col-lg-5"></div>
-					<div class="col-lg-7">
-						<h1 style="color: white">	Publica tu oferta laboral,<br> nosotros hacemos el resto</h1>
-					</div>
-					<div class="col-lg-5"></div>
-					<div class="col-lg-7">
-						<h5 style="color: white">	Búsqueda, pruebas técnicas y toda la logística para encontrar los candidatos que tu empresa necesita.</h5>
-					</div>
-					<div class="col-lg-5"></div>
-					<div class="col-lg-7">
-						<form action="{% url 'business:start' %}">
-							<button class="button-cta" role="button">PUBLICA GRATIS</button>
-						</form>
-					</div>
-				</div>
-				<div class="row blankabout responsive-no" style="margin-right: 0px;margin-left: 0px;"></div>
-				<!--Beneficios-->
-				<div class="row" style="margin-right: 0px;margin-left: 0px;">
-					<div class="col-lg-12 blankbeneficios">
-					</div>
-					<div class="col-lg-4 col-md-4 beneficios">
-						<img src="{% static 'business/img/10dias.png' %}">
-						<h6 class="push20">Los mejores candidatos en 10 días hábiles</h6>
-						<br>
-						Cinco candidatos garantizados para el cargo en 10 días hábiles.
-					</div>
-					<div class="col-lg-4 col-md-4 beneficios pull50">
-						<img src="{% static 'business/img/publicar-gratis.png' %}">
-						<h6 class="push20">Publica gratis tus vacantes de forma ilimitada</h6>
-						<br>
-						Accede a candidatos y comparte tu publicación para llegar a más personas.
-					</div>
-					<div class="col-lg-4 col-md-4 beneficios pull100">
-						<img src="{% static 'business/img/mejora-proceso.png' %}">
-						<h6 class="push20">Optimiza tus procesos de selección con nuestra plataforma<br></h6>
-						<br>
-						Permite que los candidatos hagan pruebas técnicas en línea, facilitamos el seguimiento de los procesos y la comunicación.
-					</div>
-					<div class="col-md-12 beneficioscel pull100">
-						<img src="{% static 'business/img/beneficios-cel.jpg' %}">
-						<h6 class="push20">Los mejores candidatos en 10 días hábiles<br></h6>
-						Publica ofertas gratis y optimiza procesos de selección para que encuentres al candidato que necesitas en tiempo récord.
-					</div>
-				</div>
-				<div class="row blankabout" style="margin-right: 0px;margin-left: 0px;"></div>
-			</div>
-		<div id="hide2">
-			<!--About-->
-			<div class="container-fluid" id="valuebanner">
-				<div class="row" style="margin-right: 0px;margin-left: 0px;">
-					<div class="col-lg-1 col-md-1">
-					</div>
-					<div class="col-lg-4 col-md-4" id="image4video"><a href="https://www.youtube.com/watch?v=QbNDO2ShXIs" target="_blank">
-						<img src="{% static 'business/img/mockup-iphone.png' %}" width="105%"></a>
-					</div>
-					<div class="col-lg-1 col-md-1">
-					</div>
-					<div class="col-lg-5 col-md-5 about">
-						<h1>ACERCA DE LA PLATAFORMA</h1>
-						<br>
-						Publica y comparte ofertas laborales, realiza pruebas relacionadas al cargo y encuentra a los mejores. Busca, filtra y comunícate fácilmente con los candidatos en todas las etapas del proceso.<br>
-						<a href="{% url 'business:start' %}" class="button-cta" role="button" id="button-cta-about">COMIENZA AQUÍ</a>
-					</div>
-					<div class="col-lg-1 col-md-1">
-					</div>
-				</div>
-			</div>
-			<!--Plans-->
-			<div class="container">
-				<div class="blankplans"></div>
-				<div class="row" style="margin-right: 0px;margin-left: 0px;">
-					<!--free-->
-					<div class="col-lg-3 col-md-6 leftipad">
-						<div class="freebg">
-							<div class="button-plans">PLAN GRATUITO</div>
-							<a href="#" class="button-buy-cel" role="button">COMENZAR</a>
-							<br>
-							<p class="price">Gratis</p>
-							<div class="plancontainer">
-								<ul class="itemyes-light">
-									<li class="listyes-light"> Acceso ilimitado a la plataforma </li>
-									<li class="listyes-light"> Creación ilimitada de vacantes </li>
-									<li class="listno-light"> Publicación de vacantes en redes sociales</li>
-									<li class="listno-light"> Comunicación masiva por email y Whatsapp</li>
-									<li class="listno-light"> Pruebas técnicas y psicológicas</li>
-									<li class="listno-light"> Entrevista virtual</li>
-									<li class="listno-light"> Recomendación de 5 candidatos</li>
-									<li class="listno-light"> Proceso para candidatos especializados o gerenciales</li>
-								</ul>
-							</div>
-							<a href="{% url 'business:plan' 1 %}" class="button-buy" role="button">COMENZAR</a>
-						</div>
-					</div>
-					<!--basic-->
-					<div class="col-lg-3 col-md-6">
-						<div class="basicbg pull50">
-							<div class="button-plan-top">PLAN BÁSICO</div>
-							<a href="#" class="button-buy-cel" role="button">OBTENER</a>
-							<br>
-							<p class="price">$675 mil COP + IVA</p>
-							<div class="plancontainer">
-								<ul class="itemyes-light">
-									<li class="listyes-dark"> Acceso ilimitado a la plataforma </li>
-									<li class="listyes-dark"> Creación ilimitada de vacantes </li>
-									<li class="listyes-dark"> Publicación de vacantes en redes sociales</li>
-									<li class="listyes-dark"> Comunicación masiva por email y Whatsapp</li>
-									<li class="listyes-dark"> Pruebas técnicas y psicológicas</li>
-									<li class="listyes-dark"> Entrevista virtual</li>
-									<li class="listyes-dark"> Recomendación de 5 candidatos</li>
-									<li class="listyes-dark"> Salarios: Desde el mínimo hasta 2.5M COP</li>
-									<li class="listno-dark"> Proceso para candidatos especializados o gerenciales</li>
-								</ul>
-							</div>
-							<a href="{% url 'business:plan' 1 %}" class="button-buy" role="button">OBTENER</a>
-						</div>
-					</div>
-					<!--premium-->
-					<div class="col-lg-3 col-md-6">
-						<div class="premiumbg">
-							<div class="button-plans">PLAN PREMIUM</div>
-							<a href="#" class="button-buy-cel" role="button">OBTENER</a>
-							<br>
-							<p class="price" style="color: white">$1.2M COP + IVA</p>
-							<div class="plancontainer">
-								<ul class="itemyes-light">
-									<li class="listyes-dark"> Acceso ilimitado a la plataforma </li>
-									<li class="listyes-dark"> Creación ilimitada de vacantes </li>
-									<li class="listyes-dark"> Publicación de vacantes en redes sociales</li>
-									<li class="listyes-dark"> Comunicación masiva por email y Whatsapp</li>
-									<li class="listyes-dark"> Pruebas técnicas y psicológicas</li>
-									<li class="listyes-dark"> Entrevista virtual</li>
-									<li class="listyes-dark"> Recomendación de 5 candidatos</li>
-									<li class="listyes-dark"> Salarios: Desde 2.5M hasta 7M COP</li>
-									<li class="listno-dark"> Proceso para candidatos especializados o gerenciales</li>
-								</ul>
-							</div>
-							<a href="{% url 'business:plan' 2 %}" class="button-buy" role="button">OBTENER</a>
-						</div>
-					</div>
-					<!--headhunterc-->
-					<div class="col-lg-3 col-md-6">
-						<div class="headhunterbg">
-							<div class="button-plans">PLAN HEADHUNTER</div>
-							<a href="#" class="button-buy-cel" role="button">COTIZAR</a>
-							<br>
-							<span class="price"><span class="pricesmall">Desde</span><br>$2.9M COP + IVA<br></span>
-							<div class="plancontainer">
-								<ul class="itemyes-light">
-									<li class="listyes-light"> Acceso ilimitado a la plataforma </li>
-									<li class="listyes-light"> Creación ilimitada de vacantes </li>
-									<li class="listyes-light"> Publicación de vacantes en redes sociales</li>
-									<li class="listyes-light"> Comunicación masiva por email y Whatsapp</li>
-									<li class="listyes-light"> Pruebas técnicas y psicológicas</li>
-									<li class="listyes-light"> Entrevista virtual</li>
-									<li class="listyes-light"> Recomendación de 5 candidatos</li>
-									<li class="listyes-light"> Salarios: Mayores a 7M COP</li>
-									<li class="listyes-light"> Proceso para candidatos especializados o gerenciales</li>
-								</ul>
-							</div>
-							<a href="{% url 'business:plan' 3 %}" class="button-buy" role="button">COTIZAR</a>
-						</div>
-					</div>
-					<div class="blankplanspost"></div>
-				</div>
-			</div>
-			<div class="container-fluid">
-				<!--Reviews-->
-				<div class="row" style="margin-right: 0px;margin-left: 0px;">
-					<div id="hide3" class="row blankreviewspic" style="margin-right: 0px;margin-left: 0px;"> </div>
-					<div class="col-lg-12" style="text-align:center; z-index:-99;" >
-						<h3 class="push100" id="pushtitleiphone">Historias de éxito, de primera mano</h3>
-					</div>
-					<div class="col-lg-3 "></div>
-
-					<div class="col-lg-2 col-md-4 reviewsingle">
-						<br><br><img src="{% static 'business/img/testimonios-01.png' %}"><br>
-						<p class="titlereview">Cedric Motte</p>
-						<p class="subtitlereview">Certi Taxi</p>
-						<div class="greendash"></div>
-						<br>
-						<p class="reviewcel">“Analizaron muy bien nuestras necesidades y nos propusieron las personas indicadas”</p>
-					</div>
-
-					<div class="col-lg-2 col-md-4 reviewsingle">
-						<br><br><img src="{% static 'business/img/testimonios-02.png' %}"><br>
-						<p class="titlereview">Adriana González</p>
-						<p class="subtitlereview">Dilifast</p>
-						<div class="greendash"></div>
-						<br>
-						<p class="reviewcel">“Sentí una gran calidad en el servicio; PeakU nos ayudo a obtener muy buenos resultados a nivel nacional”</p>
-					</div>
-
-                    <div class="col-lg-2 col-md-4 reviewsingle">
-						<br><br><img src="{% static 'business/img/testimonios-03.png' %}"><br>
-						<p class="titlereview">Juan Delgado</p>
-						<p class="subtitlereview">Smartenit Inc.</p>
-						<div class="greendash"></div>
-						<br>
-						<p class="reviewcel">“Nos ayudaron a encontrar candidatos adecuados un 100% más rápido de lo habitual”</p>
-					</div>
-				</div>
-				<div class="col-lg-12" style="margin-top:10px; padding-bottom:100px;" >
-					<center>
-						<svg height="10" width="10">
-                            <circle cx="5" cy="5" r="5" fill="#dddddc"></circle>
-						</svg>
-						<svg height="10" width="10">
-							<circle cx="5" cy="5" r="5" fill="#dddddc"></circle>
-						</svg>
-						<svg height="10" width="10">
-							<circle cx="5" cy="5" r="5" fill="#dddddc"></circle>
-						</svg>
-					</center>
-				</div>
-				<!-- Companies -->
-				<div class="row" style="margin-right: 0px;margin-left: 0px;">
-					<div class="col-lg-2">
-					</div>
-					<div class="col-lg-8" id="clientes">
-						<img src="{% static 'business/img/cliente-01.jpg' %}" width="24%">
-						<img src="{% static 'business/img/cliente-02.jpg' %}" width="24%">
-						<img src="{% static 'business/img/cliente-03.jpg' %}" width="24%">
-						<img src="{% static 'business/img/cliente-04.jpg' %}" width="24%">
-						<img src="{% static 'business/img/cliente-05.jpg' %}" width="24%">
-						<img src="{% static 'business/img/cliente-06.jpg' %}" width="24%">
-						<img src="{% static 'business/img/cliente-07.jpg' %}" width="24%">
-						<img src="{% static 'business/img/cliente-08.jpg' %}" width="24%">
-					</div>
-					<div class="col-lg-2">
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--Footer-->
-		<footer class="container-fluid">
-			<div class="row" style="padding-bottom:30px;margin-right: 0px;margin-left: 0px;">
-				<div class=" col-lg-2 col-md-2 "></div>
-				<div class=" col-lg-3 col-md-3  navfooter" >
-					<ul style="float:left">
-						<li><a href="#">Nosotros</a></li>
-                        <li><a href="{% url 'business:contact_form' %}">Contáctanos</a></li>
-						<li><a href="{% url 'beta_invite:index' %}">Personas</a></li>
-					</ul>
-				</div>
-				<div class="col-lg-2 col-md-2 redesfooter" style="text-align:center">
-					<a href="https://www.linkedin.com/company-beta/16241506/" target="_blank"><img src="{% static 'business/img/linkedin.png' %}"></a>
-					<a href="https://www.facebook.com/PeakU-Latam-1916685895214519/?ref=aymt_homepage_panel" target="_blank"><img src="{% static 'business/img/facebook.png' %}"></a>
-					<a href="https://www.instagram.com/peaku_latam/" target="_blank"><img src="{% static 'business/img/instagram.png' %}"></a>
-					<a href="#" target="_blank"><img src="{% static 'business/img/twitter.png' %}"></a>
-				</div>
-				<div class=" col-lg-1 col-md-1"></div>
-				<div class=" col-lg-2 col-md-2 navfootercontact">
-					<div style="width:20%; float:left; display:block; margin-top:10px; margin-left:-30px; ">
-						<a href="#">
-							<img src="{% static 'business/img/logo-white.png' %}">
-						</a>
-					</div>
-					<div class="contact">contacto@peaku.co<br>
-						+57 311 6109340<br>
-						Colombia
-					</div>
-				</div>
-				<div class=" col-lg-2 col-md-2 "></div>
-			</div>
-			<div class="row" style="margin-right: 0px;margin-left: 0px;">
-				<div class="col-1 col-md-1"></div>
-				<div class="col-10 copyright">Copyright 2018 © PeakU. Todos los derechos reservados.</div>
-				<div class="col-1"></div>
-			</div>
-		</footer>
-	</body>
-</html>
+            <!--premium-->
+            <div class="col-lg-3 col-md-6">
+                <div class="premiumbg">
+                    <div class="button-plans">PLAN PREMIUM</div>
+                    <a href="#" class="button-buy-cel" role="button">OBTENER</a>
+                    <br>
+                    <p class="price" style="color: white">$1.2M COP + IVA</p>
+                    <div class="plancontainer">
+                        <ul class="itemyes-light">
+                            <li class="listyes-dark"> Acceso ilimitado a la plataforma </li>
+                            <li class="listyes-dark"> Creación ilimitada de vacantes </li>
+                            <li class="listyes-dark"> Publicación de vacantes en redes sociales</li>
+                            <li class="listyes-dark"> Comunicación masiva por email y Whatsapp</li>
+                            <li class="listyes-dark"> Pruebas técnicas y psicológicas</li>
+                            <li class="listyes-dark"> Entrevista virtual</li>
+                            <li class="listyes-dark"> Recomendación de 5 candidatos</li>
+                            <li class="listyes-dark"> Salarios: Desde 2.5M hasta 7M COP</li>
+                            <li class="listno-dark"> Proceso para candidatos especializados o gerenciales</li>
+                        </ul>
+                    </div>
+                    <a href="{% url 'business:plan' 2 %}" class="button-buy" role="button">OBTENER</a>
+                </div>
+            </div>
+            <!--headhunterc-->
+            <div class="col-lg-3 col-md-6">
+                <div class="headhunterbg">
+                    <div class="button-plans">PLAN HEADHUNTER</div>
+                    <a href="#" class="button-buy-cel" role="button">COTIZAR</a>
+                    <br>
+                    <span class="price"><span class="pricesmall">Desde</span><br>$2.9M COP + IVA<br></span>
+                    <div class="plancontainer">
+                        <ul class="itemyes-light">
+                            <li class="listyes-light"> Acceso ilimitado a la plataforma </li>
+                            <li class="listyes-light"> Creación ilimitada de vacantes </li>
+                            <li class="listyes-light"> Publicación de vacantes en redes sociales</li>
+                            <li class="listyes-light"> Comunicación masiva por email y Whatsapp</li>
+                            <li class="listyes-light"> Pruebas técnicas y psicológicas</li>
+                            <li class="listyes-light"> Entrevista virtual</li>
+                            <li class="listyes-light"> Recomendación de 5 candidatos</li>
+                            <li class="listyes-light"> Salarios: Mayores a 7M COP</li>
+                            <li class="listyes-light"> Proceso para candidatos especializados o gerenciales</li>
+                        </ul>
+                    </div>
+                    <a href="{% url 'business:plan' 3 %}" class="button-buy" role="button">COTIZAR</a>
+                </div>
+            </div>
+            <div class="blankplanspost"></div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <!--Reviews-->
+        <div class="row" style="margin-right: 0px;margin-left: 0px;">
+            <div id="hide3" class="row blankreviewspic" style="margin-right: 0px;margin-left: 0px;"> </div>
+            <div class="col-lg-12" style="text-align:center; z-index:-99;" >
+                <h3 class="push100" id="pushtitleiphone">Historias de éxito, de primera mano</h3>
+            </div>
+            <div class="col-lg-3 "></div>
+            <div class="col-lg-2 col-md-4 reviewsingle">
+                <br><br><img src="{% static 'business/img/testimonios-01.png' %}"><br>
+                <p class="titlereview">Cedric Motte</p>
+                <p class="subtitlereview">Certi Taxi</p>
+                <div class="greendash"></div>
+                <br>
+                <p class="reviewcel">“Analizaron muy bien nuestras necesidades y nos propusieron las personas indicadas”</p>
+            </div>
+            <div class="col-lg-2 col-md-4 reviewsingle">
+                <br><br><img src="{% static 'business/img/testimonios-02.png' %}"><br>
+                <p class="titlereview">Adriana González</p>
+                <p class="subtitlereview">Dilifast</p>
+                <div class="greendash"></div>
+                <br>
+                <p class="reviewcel">“Sentí una gran calidad en el servicio; PeakU nos ayudo a obtener muy buenos resultados a nivel nacional”</p>
+            </div>
+            <div class="col-lg-2 col-md-4 reviewsingle">
+                <br><br><img src="{% static 'business/img/testimonios-03.png' %}"><br>
+                <p class="titlereview">Juan Delgado</p>
+                <p class="subtitlereview">Smartenit Inc.</p>
+                <div class="greendash"></div>
+                <br>
+                <p class="reviewcel">“Nos ayudaron a encontrar candidatos adecuados un 100% más rápido de lo habitual”</p>
+            </div>
+        </div>
+        <div class="col-lg-12" style="margin-top:10px; padding-bottom:100px;" >
+            <center>
+                <svg height="10" width="10">
+                    <circle cx="5" cy="5" r="5" fill="#dddddc"></circle>
+                </svg>
+                <svg height="10" width="10">
+                    <circle cx="5" cy="5" r="5" fill="#dddddc"></circle>
+                </svg>
+                <svg height="10" width="10">
+                    <circle cx="5" cy="5" r="5" fill="#dddddc"></circle>
+                </svg>
+            </center>
+        </div>
+        <!-- Companies -->
+        <div class="row" style="margin-right: 0px;margin-left: 0px;">
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-8" id="clientes">
+                <img src="{% static 'business/img/cliente-01.jpg' %}" width="24%">
+                <img src="{% static 'business/img/cliente-02.jpg' %}" width="24%">
+                <img src="{% static 'business/img/cliente-03.jpg' %}" width="24%">
+                <img src="{% static 'business/img/cliente-04.jpg' %}" width="24%">
+                <img src="{% static 'business/img/cliente-05.jpg' %}" width="24%">
+                <img src="{% static 'business/img/cliente-06.jpg' %}" width="24%">
+                <img src="{% static 'business/img/cliente-07.jpg' %}" width="24%">
+                <img src="{% static 'business/img/cliente-08.jpg' %}" width="24%">
+            </div>
+            <div class="col-lg-2">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
