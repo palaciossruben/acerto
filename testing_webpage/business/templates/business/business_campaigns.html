@@ -1,16 +1,18 @@
-{% extends 'no_header_base.html'%}
-{% load i18n %}
+{% extends 'white_header_base.html'%}
 {% load static %}
+{% load i18n %}
 {% load app_filters %}
 {% load compress %}
-{% block title %}PeakU - Dashboard{% endblock %}
-
+{% block title %}Selección, contratación y reclutamiento de personal{% endblock %}
+{% block extra_meta %}
+    <meta name="description"  content="Publica y comparte ofertas laborales, realiza pruebas relacionadas al cargo y selecciona al mejor personal. Podrás buscar, filtrar y comunícarte fácilmente con los candidatos en todas las etapas del proceso." />
+    <meta name="keywords" content="cazatalentos, selección de personal, reclutamiento personal, contratacion personal, selección personal, agencias, reclutamiento, reclutamiento empleados, busqueda personal, preselección personal, headhunter, agencia empleo" />
+{% endblock %}
 {% block extra_css %}
     <link rel="stylesheet" type="text/css" href="{% static 'business/css/business_campaigns.css' %}">
 {% endblock %}
 
 {% block content %}
-
     <h1 style="text-align:center; margin:50px 0px">{% trans "Campaigns" %}</h1>
     <ol style="margin-left:10%">
         {% for campaign in campaigns %}
