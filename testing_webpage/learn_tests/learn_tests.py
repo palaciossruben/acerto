@@ -28,6 +28,8 @@ from match import learn
 
 
 NUMBER_OF_TRIALS = 20
+MIN_NUMBER_OF_CANDIDATES = 20
+PARAMS = {'max_depth': (2, 4, 8, 16), 'n_estimators': [5, 10, 20, 40, 80]}
 
 
 def new_balance(data):
@@ -50,12 +52,28 @@ def new_balance(data):
     print('balanced positive weight: ' + str(np.mean(target)))
 
     new_df = pd.DataFrame(features, columns=list(data.features))
-                                    #index=data.features.index.values)
 
     return learn.DataPair(features=new_df, target=list(target))
 
 
+def get_passing_score(survey):
+    """
+    1 if above the cutting score. This function works both for {0,1} answers or for open answers
+    :param survey: obj
+    :return: {0,1}
+    """
+    return 1 if survey.score > survey.test.cut_score / 100 else 0
+
+
 def get_questions_and_candidates(test):
+    """
+    Gets the questions of a tests and a candidates dictionary of the form:
+
+    :param test: obj
+    :return: tuple: (questions, candidates) where:
+    questions = current questions on the Test. Any question removed from it is excluded (TODO: check this)
+    candidates = {candidate1: {question1: 0, question2: 1, ...}, candidate2: {...}}
+    """
 
     surveys = Survey.objects.filter(test=test)
     questions = test.questions.all()
@@ -67,29 +85,28 @@ def get_questions_and_candidates(test):
             candidate = common.get_candidate(survey.user, survey.campaign)
 
             if candidate:
-                passed = 1 if survey.score > survey.test.cut_score/100 else 0
-
                 if candidates.get(candidate) is None:
                     candidates[candidate] = dict()
 
-                candidates[candidate][survey.question] = passed
+                candidates[candidate][survey.question] = get_passing_score(survey)
 
     return questions, candidates
 
 
 def update_importance(test):
+    """
+    Updates the importance and other statistics for each question of the test
+    :param test: obj
+    :return: None
+    """
     questions, candidates = get_questions_and_candidates(test)
     df = pd.DataFrame(columns=[q.id for q in questions] + ['passed'],
                       index=[c.id for c in candidates.keys()])
 
     # only process worthwhile tests
-    if len(candidates) < 20:
+    if len(candidates) < MIN_NUMBER_OF_CANDIDATES:
         return
 
-    try:
-        print('processing test: {}'.format(test))
-    except:
-        pass
     print('processing test: {}'.format(test).encode('utf-8'))
 
     #total_trivial = 0
@@ -117,7 +134,7 @@ def update_importance(test):
     data.features = df
 
     data = new_balance(data)
-    if data is None:  # could'nt do the re-balance will exit.
+    if data is None:  # couldn't do the re-balance will exit.
         return
 
     # TODO: measure trivial solution after rebalancing
@@ -142,26 +159,27 @@ def update_importance(test):
                                                             test_size=0.3,
                                                             random_state=seed)
 
-        parameters = {'max_depth': (2, 4, 8, 16), 'n_estimators': [5, 10, 20, 40, 80]}
-
-        grid_model = GridSearchCV(RandomForestClassifier(), parameters, n_jobs=1)
+        grid_model = GridSearchCV(RandomForestClassifier(random_state=seed), PARAMS, n_jobs=1)
         grid_model.fit(X_train, y_train)
 
         print('optimal params: ' + str(grid_model.best_params_))
 
         model = RandomForestClassifier(max_depth=grid_model.best_params_['max_depth'],
-                                       n_estimators=grid_model.best_params_['n_estimators'])
+                                       n_estimators=grid_model.best_params_['n_estimators'],
+                                       random_state=seed)
         model.fit(X_train, y_train)
 
-        c = statistics.mean([float(e) for e in cross_val_score(model, X_test, y_test, scoring='accuracy')])
+        c = statistics.mean(float(e) for e in cross_val_score(model, X_test, y_test, scoring='accuracy'))
         cross_val_scores_array.append(c)
 
         p = model.feature_importances_
-        importance = importance.append({col: value for col, value in zip(list(df), p)}, ignore_index=True)
+        importance = importance.append({col: value for col, value in zip(list(X_train), p)}, ignore_index=True)
 
     mean_importance = importance.mean()
     for q in questions:
         q.importance = mean_importance.loc[q.id]
+        q.valid_answer_count = len(data.target)
+        q.difficulty = 1 - data.target.mean()
         q.save()
 
     print('importance avg: ' + str(mean_importance))
@@ -185,5 +203,8 @@ def update_importance(test):
 
 if __name__ == '__main__':
     for test in Test.objects.all():
-        #if 'Basic Accounting Test' in test.name:
+
+        # TODO: remove test condition
+        #if 'Basic Accounting Test' == test.name:
         update_importance(test)
+        #    break

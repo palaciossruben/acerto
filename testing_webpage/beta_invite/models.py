@@ -210,6 +210,8 @@ class Question(models.Model):
     video_token = models.CharField(max_length=200, null=True)
     excluding = models.BooleanField(default=False)  # if wrong answer then fails tests
     importance = models.FloatField(default=None, null=True)  # coming from RandomForrest
+    valid_answer_count = models.IntegerField(default=None, null=True)
+    difficulty = models.FloatField(default=None, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -269,6 +271,9 @@ class Question(models.Model):
 
     def get_importance(self):
         return '{}%'.format(round(self.importance*100))
+
+    def get_difficulty(self):
+        return '{}%'.format(round(self.difficulty*100))
 
 
 class TestType(models.Model):

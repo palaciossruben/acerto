@@ -9,6 +9,12 @@
         {% if question.importance %}
             <p>Importance = {{ question.get_importance }}</p>
         {% endif %}
+        {% if question.valid_answer_count %}
+            <p>Answer Count = {{ question.valid_answer_count }}</p>
+        {% endif %}
+        {% if question.difficulty %}
+            <p>Difficulty = {{ question.get_difficulty }}</p>
+        {% endif %}
 
         <br>
         <br>
