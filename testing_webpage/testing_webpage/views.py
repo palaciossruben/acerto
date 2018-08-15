@@ -15,3 +15,7 @@ def sitemap(request):
 
 def BingSiteAuth(request):
     return render(request, 'testing_webpage/BingSiteAuth.xml', {}, content_type="application/xhtml+xml")
+
+
+def robots(request):
+    return render(request, 'testing_webpage/robots.txt', {}, content_type="application/xhtml+txt")
