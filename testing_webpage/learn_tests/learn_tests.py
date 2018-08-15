@@ -180,7 +180,7 @@ def update_importance(test):
     for q in questions:
         q.importance = mean_importance.loc[q.id]
         q.valid_answer_count = len(data.target)
-        q.difficulty = 1 - statistics.mean(data.target)
+        q.difficulty = 1 - statistics.mean(data.features[q.id])
         q.save()
 
     print('importance avg: ' + str(mean_importance))
