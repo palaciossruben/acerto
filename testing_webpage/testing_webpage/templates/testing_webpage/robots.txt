@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 Disallow: /cgi-bin/
-Sitemap: https://peaku.co/sitemap.xml
+Sitemap: https://peaku.co/es/sitemap.xml

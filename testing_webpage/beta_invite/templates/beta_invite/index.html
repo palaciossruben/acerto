@@ -1,287 +1,215 @@
-<!DOCTYPE html>
+{% extends 'transparent_header_base.html'%}
 {% load static %}
 {% load i18n %}
 {% load app_filters %}
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <title>PeakU - Selección de personal</title>
-        <!--Latest compiled and minified bootstrap CSS-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <!--Our Css-->
-        <link rel="stylesheet" type="text/css" href="{% static 'beta_invite/css/index.css' %}">
-        <!--Favicon-->
-        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon.ico' %}">
-        <link rel="apple-touch-icon" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon-16.png' %}">
-        <link rel="apple-touch-icon" sizes="32x32" href="{% static 'testing_webpage/favicon.ico/favicon-32.png' %}">
-        <link rel="apple-touch-icon" sizes="64x64" href="{% static 'testing_webpage/favicon.ico/favicon-64.png' %}">
-        <!-- Latest jQuery library -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <!-- Latest compiled Bootstrap JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <!--Our js-->
-        <script type="text/javascript" src="{% static 'beta_invite/js/index.js' %}"></script>
-        <script id="Heat-map" type="text/javascript">
-            window.smartlook||(function(d) {
-            var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
-            var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
-            c.charset='utf-8';c.src='https://rec.smartlook.com/recorder.js';h.appendChild(c);
-            })(document);
-            smartlook('init', '495c7bd6807a0ab2c17ade2e03cac13bab9f1b84');
-        </script>
-    </head>
+{% load compress %}
+{% block title %}Agencia de empleo y trabajo{% endblock %}
+{% block extra_meta %}
+    <meta name="description"  content="En PeakU te ayudamos a encontrar el empleo que buscas en compañias que se ajustan a tu perfil, experiencia y salario. Somos una empresa que trabaja en selección de personal, no una temporal." />
+    <meta name="keywords" content="computrabajo, servicio de empleo, empleo, empleos, trabajos, trabaja con nosotros, buscador de empleo, bolsa de empleo, agencia de empleo" />
+{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'beta_invite/css/index.css' %}">
+{% endblock %}
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'beta_invite/js/index.js' %}"></script>
+{% endblock %}
+{% block content %}
     <!----------------------------------------------SECTION 1---------------------------------------------------------->
-    <body>
-        <section class="main-section" id="main-section">
-            <div class="topnav" id="myTopnav">
-                <a href="/staffing" class="logo"><img src="{% static 'business/img/logo-color.png' %}"></a>
-                <!--<a class="navButton regular" role="button" onclick="on_login()">INICIA SESIÓN</a>-->
-                <a class="navButton" role="button" onclick="on_signup()">CREA TU CUENTA</a>
-            </div>
-            <h1 class="col-lg-4 main-title">{{ job_title }}</h1>
-        </section>
+    <div class="row">
+        <div class="col-lg-4 email-column">
+            <input class="apply hide1" type="button" onclick="on_signup()" value="APLICAR">
+        </div>
+        <h2 class="descriptions">{% trans "GENERAL DESCRIPTION" %}</h2>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 description-text main-description">
+            <span>{% autoescape off %}{{ campaign.description }}{% endautoescape %}</span>
+        </div>
+        <div class="col-lg-4 email-column">
+            <input class="apply hide2" type="button" onclick="on_signup()" value="APLICAR">
+        </div>
+    </div>
+    <div class="row">
+        {% if perks %}
+            <h2 class="descriptions">{% trans "Perks" %}</h2>
+        {% endif %}
+    </div>
+    <div class="row">
+        <ul class="description-text">
+            {% for perk in perks %}
+                <li class="bullet">{{ perk.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="row">
+        {% if requirements %}
+            <h2 class="descriptions">{% trans "Requirements" %}</h2>
+        {% endif %}
+    </div>
+    <div class="row final-row">
+        <ul class="description-text">
+            {% for req in requirements %}
+                <li class="bullet">{{ req.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 
-        <div class="row">
-            <div class="col-lg-4 email-column">
-                <input class="apply hide1" type="button" onclick="on_signup()" value="APLICAR">
-            </div>
-            <h2 class="descriptions">{% trans "GENERAL DESCRIPTION" %}</h2>
-        </div>
-        <div class="row">
-            <div class="col-lg-8 description-text main-description">
-                <span>{% autoescape off %}{{ campaign.description }}{% endautoescape %}</span>
-            </div>
-            <div class="col-lg-4 email-column">
-                <input class="apply hide2" type="button" onclick="on_signup()" value="APLICAR">
-            </div>
-        </div>
-        <div class="row">
-            {% if perks %}
-                <h2 class="descriptions">{% trans "Perks" %}</h2>
-            {% endif %}
-        </div>
-        <div class="row">
-            <ul class="description-text">
-                {% for perk in perks %}
-                    <li class="bullet">{{ perk.name }}</li>
+    <div id="overlay-signup">
+        <div class="form-image">
+            <form class="only-register-form" action="{% url 'beta_invite:register' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset>
+                <span class="exitDingbat" onclick="off_signup()">X</span>
+                <br>
+                <br>
+                <input type="hidden" name="campaign_id" value="{{ campaign_id }}"/>
+                <input type="hidden" name="candidate_id" value="{{ candidate.pk }}"/>
+
+                <span>{% trans 'Your Full Name' %}</span>
+                <input class="form-input" id="name" type="text" name="name" required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
+
+                {% if campaign.has_email %}
+                <span>{% trans 'Your email' %}</span>
+                <input class="form-input" id="email" type="email" name="email" required="required">
+                {% endif %}
+
+                <span>{% trans 'Your phone' %}</span>
+                <input class="form-input" id="phone" type="tel" name="phone" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
+
+                <span>Ciudad de residencia</span>
+                <select class="form-input white" name="city_id" >
+                <option value="{{ default_city.id }}">{{ default_city.name }}</option>
+                {% for city in cities %}
+                <option value="{{ city.id }}">{{ city.name }}</option>
                 {% endfor %}
-            </ul>
-        </div>
-        <div class="row">
-            {% if requirements %}
-                <h2 class="descriptions">{% trans "Requirements" %}</h2>
-            {% endif %}
-        </div>
-        <div class="row final-row">
-            <ul class="description-text">
-                {% for req in requirements %}
-                    <li class="bullet">{{ req.name }}</li>
+                </select>
+
+                <span>Área de trabajo</span>
+                <select class="form-input white" name="work_area_id" required>
+                <option value="" selected disabled></option>
+                {% for work_area in work_areas %}
+                <option value="{{ work_area.id }}">{{ work_area.name }}</option>
                 {% endfor %}
-            </ul>
+                </select>
+
+                <br>
+
+                <div>
+                <input type="file" id="file" name="curriculum_url" class="form-inputfile" onchange="pressed()">
+                <label for="file" id="fileLabel">{% trans "Upload your resume" %}</label>
+                <label class="form-checkbox-container">
+                <input class="form-checkbox" type="checkbox" id="politics" name="politics" required>
+                <a href="security_politics" target="_blank"> He leído y acepto las políticas de privacidad</a>
+                </label>
+                </div>
+                <input class="submit" type="submit" id="submit" value="{% trans 'Sure!' %}">
+                </fieldset>
+                <!--<span class="form-label register">¿Ya eres un usuario registrado? Inicia sesión
+                <a href="javascript:void(0);" onclick="off_signup() & on_login()">
+                <strong>Aquí</strong>
+                </a>-->
+                </span>
+            </form>
         </div>
-
-        <div id="overlay-signup">
-            <div class="form-image">
-                <form class="only-register-form" action="{% url 'beta_invite:register' %}" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <fieldset>
-                    <span class="exitDingbat" onclick="off_signup()">X</span>
+    </div>
+    <!--
+    <div id="overlay-login">
+        <div class="form-image">
+            <form id="login-form" method="post" action="{% url 'business:home' %}" >
+                {% csrf_token %}
+                <fieldset>
+                    <span class="exitDingbat" onclick="off_login()">X</span>
                     <br>
                     <br>
-                    <input type="hidden" name="campaign_id" value="{{ campaign_id }}"/>
-                    <input type="hidden" name="candidate_id" value="{{ candidate.pk }}"/>
-
-                    <span>{% trans 'Your Full Name' %}</span>
-                    <input class="form-input" id="name" type="text" name="name" required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
-
-                    {% if campaign.has_email %}
-                    <span>{% trans 'Your email' %}</span>
-                    <input class="form-input" id="email" type="email" name="email" required="required">
-                    {% endif %}
-
-                    <span>{% trans 'Your phone' %}</span>
-                    <input class="form-input" id="phone" type="tel" name="phone" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
-
-                    <span>Ciudad de residencia</span>
-                    <select class="form-input white" name="city_id" >
-                    <option value="{{ default_city.id }}">{{ default_city.name }}</option>
-                    {% for city in cities %}
-                    <option value="{{ city.id }}">{{ city.name }}</option>
-                    {% endfor %}
-                    </select>
-
-                    <span>Área de trabajo</span>
-                    <select class="form-input white" name="work_area_id" required>
-                    <option value="" selected disabled></option>
-                    {% for work_area in work_areas %}
-                    <option value="{{ work_area.id }}">{{ work_area.name }}</option>
-                    {% endfor %}
-                    </select>
-
-                    <br>
-
-                    <div>
-                    <input type="file" id="file" name="curriculum_url" class="form-inputfile" onchange="pressed()">
-                    <label for="file" id="fileLabel">{% trans "Upload your resume" %}</label>
-                    <label class="form-checkbox-container">
-                    <input class="form-checkbox" type="checkbox" id="politics" name="politics" required>
-                    <a href="security_politics" target="_blank"> He leído y acepto las políticas de privacidad</a>
-                    </label>
-                    </div>
-                    <input class="submit" type="submit" id="submit" value="{% trans 'Sure!' %}">
-                    </fieldset>
-                    <!--<span class="form-label register">¿Ya eres un usuario registrado? Inicia sesión
-                    <a href="javascript:void(0);" onclick="off_signup() & on_login()">
-                    <strong>Aquí</strong>
-                    </a>-->
+                    <span>Correo</span>
+                    <input name="username" class="form-input"><br>
+                    <span>Contraseña</span>
+                    <input name="password" class="form-input" type="password"><br>
+                    <span class="form-label"><a href="#">Olvidé mi contraseña</a></span>
+                    <span class="form-label">
+                    <a href="javascript:void(0);" onclick="off_login() & on_signup()">Aun no estoy registrado
+                    </a>
                     </span>
-                </form>
-            </div>
+                    <br>
+                    <br>
+                    <input type="submit" class="submit" value="ACCEDER">
+                </fieldset>
+            </form>
         </div>
-        <!--
-        <div id="overlay-login">
-            <div class="form-image">
-                <form id="login-form" method="post" action="{% url 'business:home' %}" >
-                    {% csrf_token %}
-                    <fieldset>
-                        <span class="exitDingbat" onclick="off_login()">X</span>
-                        <br>
-                        <br>
-                        <span>Correo</span>
-                        <input name="username" class="form-input"><br>
-                        <span>Contraseña</span>
-                        <input name="password" class="form-input" type="password"><br>
-                        <span class="form-label"><a href="#">Olvidé mi contraseña</a></span>
-                        <span class="form-label">
-                        <a href="javascript:void(0);" onclick="off_login() & on_signup()">Aun no estoy registrado
-                        </a>
-                        </span>
-                        <br>
-                        <br>
-                        <input type="submit" class="submit" value="ACCEDER">
-                    </fieldset>
-                </form>
-            </div>
-        </div>-->
+    </div>-->
 
-        <!----------------------------------------------FOOTER--------------------------------------------------------->
-        <footer class="container-fluid">
-            <div class="row footer-navigation">
-                <div class="col-md-2 col-md-2"></div>
-                <div class="col-md-3 col-md-3 navfooter">
-                    <ul>
-                        <li><a href="#">Nosotros</a></li>
-                        <li><a href="{% url 'business:contact_form' %}">Contáctanos</a></li>
-                        <li><a href="{% url 'beta_invite:index' %}">Personas</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2 col-md-2 social">
-                    <a href="https://www.linkedin.com/company-beta/16241506/" target="_blank"><img src="{% static 'business/img/linkedin.png' %}"></a>
-                    <a href="https://www.facebook.com/PeakU-Latam-1916685895214519/?ref=aymt_homepage_panel" target="_blank">
-                    <img src="{% static 'business/img/facebook.png' %}"></a>
-                    <a href="#" target="_blank"><img src="{% static 'business/img/instagram.png' %}"></a>
-                    <a href="#" target="_blank"><img src="{% static 'business/img/twitter.png' %}"></a>
-                </div>
-                <div class=" col-md-1 col-md-1"></div>
-                <div class=" col-md-2 col-md-2 navfootercontact">
-                    <div class="logo-white"><a href="#"><img src="{% static 'business/img/logo-white.png' %}"></a></div>
-                    <div class="contact">contacto@peaku.co<br>
-                        +57 311 6109340<br>
-                        Colombia
-                    </div>
-                </div>
-                <div class=" col-md-2 col-md-2 "></div>
-            </div>
-            <div class="row">
-                <div class="col-1 col-md-1"></div>
-                <div class="col-10 copyright">Copyright 2018 © PeakU. Todos los derechos reservados.</div>
-                <div class="col-1"></div>
-            </div>
-        </footer>
-        <!--TopNav-->
-        <script>
-            function myFunction() {
-                var x = document.getElementById("myTopnav");
-                if (x.className === "topnav") {
-                    x.className += " responsive";
-                } else {
-                    x.className = "topnav";
-                }
+    <script>
+       $(document).ready(function() {
+           set_background("{{ campaign.image }}", "main-section")
+       });
+    </script>
+    <script>
+        $( window ).resize(function() {
+            set_background("{{ campaign.image }}", "main-section")
+        });
+    </script>
+
+    <script>
+        window.pressed = function(){
+            var a = document.getElementById('file');
+            if(a.value == "")
+            {
+                fileLabel.innerHTML = "Selecciona un archivo";
             }
-        </script>
-        <script>
-           $(document).ready(function() {
-               set_background("{{ campaign.image }}", "main-section")
-           });
-        </script>
-        <script>
-            $( window ).resize(function() {
-                set_background("{{ campaign.image }}", "main-section")
-            });
-        </script>
-
-        <script>
-            window.pressed = function(){
-                var a = document.getElementById('file');
-                if(a.value == "")
-                {
-                    fileLabel.innerHTML = "Selecciona un archivo";
-                }
-                else
-                {
-                    var theSplit = a.value.split('\\');
-                    fileLabel.innerHTML = theSplit[theSplit.length-1];
-                }
-            };
-        </script>
-
-        <script>
-            function on_login() {
-            $("#overlay-login").css("display", "block");
-            $("#login-form").css("display", "block");
-            $("html").css("background-size", "cover");
-            $("nav").css("margin-bottom", "40px");
-            $("#login-form").animate({"marginLeft": '60%'}, 650,"swing");
+            else
+            {
+                var theSplit = a.value.split('\\');
+                fileLabel.innerHTML = theSplit[theSplit.length-1];
             }
+        };
+    </script>
 
-            function off_login() {
-            $("#overlay-login").css("display", "none");
-            $("#login-form").css("display", "none");
-            $("nav").css("margin-bottom", "");
-            $("#login-form").animate({marginLeft: '160%'});
-            }
+    <script>
+        function on_login() {
+        $("#overlay-login").css("display", "block");
+        $("#login-form").css("display", "block");
+        $("html").css("background-size", "cover");
+        $("nav").css("margin-bottom", "40px");
+        $("#login-form").animate({"marginLeft": '60%'}, 650,"swing");
+        }
 
-            function on_signup() {
-            $("#overlay-signup").css("display", "block");
-            $(".only-register-form").css("display", "block");
-            $("html").css("background-size", "cover");
-            $("nav").css("margin-bottom", "40px");
+        function off_login() {
+        $("#overlay-login").css("display", "none");
+        $("#login-form").css("display", "none");
+        $("nav").css("margin-bottom", "");
+        $("#login-form").animate({marginLeft: '160%'});
+        }
 
-            if ($(window).width() < 769) {
-                $(".only-register-form").animate({"marginLeft": 'auto'}, 650,"swing");
-                $(".only-register-form").css("margin", "100px auto");
-            }
-            else {
-                $(".only-register-form").animate({"marginLeft": '60%'}, 650,"swing");
-            }
-            $(".form-image").animate({"backgroundPosition": '86%'}, 690,"swing");
-            }
+        function on_signup() {
+        $("#overlay-signup").css("display", "block");
+        $(".only-register-form").css("display", "block");
+        $("html").css("background-size", "cover");
+        $("nav").css("margin-bottom", "40px");
+
+        if ($(window).width() < 769) {
+            $(".only-register-form").animate({"marginLeft": 'auto'}, 650,"swing");
+            $(".only-register-form").css("margin", "100px auto");
+        }
+        else {
+            $(".only-register-form").animate({"marginLeft": '60%'}, 650,"swing");
+        }
+        $(".form-image").animate({"backgroundPosition": '86%'}, 690,"swing");
+        }
 
 
-            function off_signup() {
-            $("#overlay-signup").css("display", "none");
-            $(".only-register-form").css("display", "none");
-            $("nav").css("margin-bottom", "");
-            $(".only-register-form").animate({marginLeft: '160%'});
-            $(".form-image").animate({"backgroundPosition": '186%'}, 1,"swing");
-            }
-        </script>
-        <!-- any incoming error_message will print as an alert.-->
-        <script>
-            {% if error_message %}
-                alert("{{ error_message }}");
-            {% endif %}
-        </script>
-    </body>
-</html>
+        function off_signup() {
+        $("#overlay-signup").css("display", "none");
+        $(".only-register-form").css("display", "none");
+        $("nav").css("margin-bottom", "");
+        $(".only-register-form").animate({marginLeft: '160%'});
+        $(".form-image").animate({"backgroundPosition": '186%'}, 1,"swing");
+        }
+    </script>
+    <!-- any incoming error_message will print as an alert.-->
+    <script>
+        {% if error_message %}
+            alert("{{ error_message }}");
+        {% endif %}
+    </script>
+{% endblock %}

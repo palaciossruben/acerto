@@ -21,9 +21,6 @@ urlpatterns = [
     url(r'^perfil_del_candidato/(?P<pk>\d+)$', views.candidate_profile, name='candidate_profile'),
     # CONTACT
 
-
-
-
     url(r'^contáctanos$', views.contact_form, name='contact_form'),
     url(r'^contact_us$', views.contact_us, name='contact_us'),
 

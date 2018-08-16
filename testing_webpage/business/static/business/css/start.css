@@ -1,56 +1,3 @@
-@charset "UTF-8";
-
-/**************************************************FONTS***************************************************************/
-
-@font-face {
-    font-family: BigJohn;
-    src: url(/static/fonts/BIG_JOHN.otf);
-    unicode-range: U+?????;
-}
-
-@font-face {
-    font-family: NorthernBlock;
-    src: url(/static/fonts/TheNorthernBlockLtdLoewHeavy.otf);
-}
-
-@font-face {
-    font-family: BertholdAkzidenzGroteskRegular;
-    src: url(/static/fonts/BertholdAkzidenzGroteskRegular.otf);
-}
-
-@font-face {
-    font-family: BertholdAkzidenzGroteskLight;
-    src: url(/static/fonts/BertholdAkzidenzGroteskBELight.otf);
-}
-
-@font-face {
-    font-family: BertholdAkzidenzGroteskBold;
-    src: url(/static/fonts/BertholdAkzidenzGroteskBold.otf);
-}
-
-@font-face {
-    font-family: BertholdAkzidenzGroteskItalic;
-    src: url(/static/fonts/BertholdAkzidenzGroteskItalic.otf);
-}
-
-@font-face {
-    font-family: BertholdAkzidenzGroteskSuper;
-    src: url(/static/fonts/BertholdAkzidenzGroteskSuper.otf);
-}
-
-/**************************************************GENERIC*************************************************************/
-
-* { margin: 0; padding: 0; outline:0;}
-
-html {
-	height: 100%;
-}
-
-body {
-    background-color:transparent !important;
-    height: 100%;
-}
-
 h3{
     font-family: Helvetica;
     font-weight: bold;
@@ -192,14 +139,6 @@ h6{
 
 .regular{
     font-family: BertholdAkzidenzGroteskRegular;
-}
-
-.logo-white{
-    width:20%;
-    float:left;
-    display:block;
-    margin-top:10px;
-    margin-left:-30px;
 }
 
 /* To change slick width
@@ -643,64 +582,6 @@ trix-editor ul {
     margin: 15px 10px;
 }
 
-/**************************************************FOOTER**************************************************************/
-footer {
-    background-color:#3d4753;
-    color:#FFFFFF;
-}
-.footer-navigation{
-    padding-bottom:30px;
-}
-
-.navfooter {
-	margin-top:55px;
-	color:#FFFFFF;
-}
-
-.social {
-	margin-top:50px;
-	text-align:center
-}
-
-.navfooter ul li {
-	padding:0px 10px 0px 10px !important;
-	list-style-type: none;
-	display:inline-block;
-	float:left;
-}
-
-.navfooter ul li a{
-	color:white;
-}
-
-.navfooter ul li a:hover{
-	color:#c9d86a;
-	text-decoration:none;
-}
-
-.navfootercontact {
-	margin-top:40px;
-	color:#FFFFFF;
-	line-height:20px;
-}
-
-.copyright {
-	padding:20px;
-	text-align:center;
-	font-size:0.7em;
-	border-top:groove 2px;
-	border-color:rgba(255, 255, 255, .1);
-}
-
-.copyright a{
-	color:white;
-}
-
-.copyright a:hover{
-	color:#c9d86a;
-	text-decoration:none;
-}
-
 #contact-buttons {
 	position:fixed;
 	margin-top:77vh;
@@ -712,15 +593,6 @@ footer {
 
 #contact-buttons img {
 	padding-bottom:5px;
-}
-
-.logo {
-    float:left;
-}
-
-.logo img{
-    margin-left:30px;
-    width:70px;
 }
 
 .contact{
