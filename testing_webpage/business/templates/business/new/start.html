@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+{% extends 'base.html'%}
 {% load static %}
 {% load i18n %}
 {% load app_filters %}
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <title>PeakU - Selección de personal</title>
-        <!--Latest compiled and minified bootstrap CSS-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+{% load compress %}
+{% block title %}Selección, contratación y reclutamiento de personal{% endblock %}
+{% block extra_meta %}
+    <meta name="description"  content="Publica y comparte ofertas laborales, realiza pruebas relacionadas al cargo y selecciona al mejor personal. Podrás buscar, filtrar y comunícarte fácilmente con los candidatos en todas las etapas del proceso." />
+    <meta name="keywords" content="cazatalentos, selección de personal, reclutamiento personal, contratacion personal, selección personal, agencias, reclutamiento, reclutamiento empleados, busqueda personal, preselección personal, headhunter, agencia empleo" />
+{% endblock %}
+{% block extra_css %}
         <!--Select2-->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
         <!--Slider-->
@@ -18,15 +18,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/0.11.2/trix.css" />
         <!--Our Css-->
         <link rel="stylesheet" type="text/css" href="{% static 'business/css/start.css' %}">
-        <!--Favicon-->
-        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon.ico' %}">
-        <link rel="apple-touch-icon" sizes="16x16" href="{% static 'testing_webpage/favicon.ico/favicon-16.png' %}">
-        <link rel="apple-touch-icon" sizes="32x32" href="{% static 'testing_webpage/favicon.ico/favicon-32.png' %}">
-        <link rel="apple-touch-icon" sizes="64x64" href="{% static 'testing_webpage/favicon.ico/favicon-64.png' %}">
-        <!-- Latest jQuery library -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <!-- Latest compiled Bootstrap JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% endblock %}
+{% block extra_js %}
         <!--Scroll-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/1.0.19/jquery.scrollify.js"></script>
         <!--Slider-->
@@ -37,18 +30,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
         <!--Our js-->
         <script type="text/javascript" src="{% static 'business/js/start.js' %}"></script>
-        <script id="Heat-map" type="text/javascript">
-            window.smartlook||(function(d) {
-            var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
-            var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
-            c.charset='utf-8';c.src='https://rec.smartlook.com/recorder.js';h.appendChild(c);
-            })(document);
-            smartlook('init', '495c7bd6807a0ab2c17ade2e03cac13bab9f1b84');
-        </script>
-    </head>
-    <!----------------------------------------------SECTION 1---------------------------------------------------------->
-    <body>
-        <section class="main-section" id="main-section">
+{% endblock %}
+{% block content %}
+<section class="main-section" id="main-section">
             <div class="gradient1">
                 <div class="gradient2">
                     <div class="topnav" id="myTopnav">
@@ -362,40 +346,6 @@
                 {% endif %}
             </section>
         </form>
-        <!----------------------------------------------FOOTER--------------------------------------------------------->
-        <footer class="container-fluid">
-            <div class="row footer-navigation">
-                <div class="col-md-2 col-md-2"></div>
-                <div class="col-md-3 col-md-3 navfooter">
-                    <ul>
-                        <li><a href="#">Nosotros</a></li>
-                        <li><a href="{% url 'business:contact_form' %}">Contáctanos</a></li>
-                        <li><a href="{% url 'beta_invite:index' %}">Personas</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2 col-md-2 social">
-                    <a href="https://www.linkedin.com/company-beta/16241506/" target="_blank"><img src="{% static 'business/img/linkedin.png' %}"></a>
-                    <a href="https://www.facebook.com/PeakU-Latam-1916685895214519/?ref=aymt_homepage_panel" target="_blank">
-                    <img src="{% static 'business/img/facebook.png' %}"></a>
-                    <a href="#" target="_blank"><img src="{% static 'business/img/instagram.png' %}"></a>
-                    <a href="#" target="_blank"><img src="{% static 'business/img/twitter.png' %}"></a>
-                </div>
-                <div class=" col-md-1 col-md-1"></div>
-                <div class=" col-md-2 col-md-2 navfootercontact">
-                    <div class="logo-white"><a href="#"><img src="{% static 'business/img/logo-white.png' %}"></a></div>
-                    <div class="contact">contacto@peaku.co<br>
-                        +57 311 6109340<br>
-                        Colombia
-                    </div>
-                </div>
-                <div class=" col-md-2 col-md-2 "></div>
-            </div>
-            <div class="row">
-                <div class="col-1 col-md-1"></div>
-                <div class="col-10 copyright">Copyright 2018 © PeakU. Todos los derechos reservados.</div>
-                <div class="col-1"></div>
-            </div>
-        </footer>
         <!--slider-->
         <script type="text/javascript">
             $(".regular").slick({
@@ -596,5 +546,4 @@
                 alert("{{ error_message }}");
             {% endif %}
         </script>
-    </body>
-</html>
+{% endblock %}

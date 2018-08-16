@@ -2,10 +2,14 @@ INDEX_VIEW_PATH = 'business/index.html'
 START_VIEW_PATH = 'business/new/start.html'
 SUMMARY_VIEW_PATH = 'business/summary.html'
 
+
+
 SEARCH_VIEW_PATH = 'business/search.html'
 RESULTS_VIEW_PATH = 'business/results.html'
 CONTACT_VIEW_PATH = 'business/contact.html'
+
 CONTACT_FORM_VIEW_PATH = 'business/contact_form.html'
+
 PLAN_VIEW_PATH = 'business/plan.html'
 DASHBOARD_VIEW_PATH = 'business/dashboard.html'
 CANDIDATE_PROFILE_VIEW_PATH = 'business/candidate_profile.html'
