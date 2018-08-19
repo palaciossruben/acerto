@@ -18,7 +18,7 @@ from business.models import BusinessUser
 import business
 
 
-CANDIDATE_FORECAST_LIMIT = 10
+CANDIDATE_FORECAST_LIMIT = 20
 
 
 def index(request):
@@ -51,24 +51,25 @@ def add_to_message_queue(candidates, text):
         Message(candidate=candidate, text=text).save()
 
 
-def update_candidate_forecast():
+def update_candidate_forecast(campaign):
     """
     Updates up to CANDIDATE_FORECAST_LIMIT per execution, due to time limit on production server, and possible crash.
     :return: updates.
     """
-    candidates = [c for c in Candidate.objects.filter(Q(match_classification=None))]
+    candidates = Candidate.objects.filter(Q(match_classification=None) & Q(campaign=campaign)).all()
     candidates = candidates[:min(len(candidates), CANDIDATE_FORECAST_LIMIT)]
     model.predict_match_and_save(candidates)
 
 
 # TODO: use Ajax to optimize rendering. Has no graphics therefore is very low priority.
-def edit_campaign_candidates(request, pk):
+def edit_campaign_candidates(request, campaign_id):
     """
     Args:
         request: HTTP
-        pk: campaign primary key
+        campaign_id: campaign primary key
     Returns: This controls the candidates dashboard
     """
+    campaign = Campaign.objects.get(pk=campaign_id)
 
     action = request.POST.get('action')
     candidate_id = request.POST.get('candidate_id')
@@ -89,31 +90,31 @@ def edit_campaign_candidates(request, pk):
     # enters here when sending an email
     if request.POST.get('send_mail') is not None:
 
-        candidates = candidate_module.get_checked_box_candidates(pk, request)
+        candidates = candidate_module.get_checked_box_candidates(campaign_id, request)
 
         email_sender.send(objects=candidates,
                           language_code=request.LANGUAGE_CODE,
                           body_input=request.POST.get('email_body'),
-                          subject=candidate_module.get_subject(request, pk),
+                          subject=candidate_module.get_subject(request, campaign_id),
                           with_localization=False,
                           body_is_filename=False)
 
     if request.POST.get('send_message') is not None:
-        candidates = candidate_module.get_checked_box_candidates(pk, request)
+        candidates = candidate_module.get_checked_box_candidates(campaign_id, request)
         add_to_message_queue(candidates, request.POST.get('email_body'))
 
-    #update_candidate_forecast()
+    update_candidate_forecast(campaign)
 
-    params, states = candidate_module.get_rendering_data(pk)
+    params, states = candidate_module.get_rendering_data(campaign_id)
 
     # all campaigns except the current one.
-    campaigns_to_move_to = Campaign.objects.exclude(pk=pk)
+    campaigns_to_move_to = Campaign.objects.exclude(pk=campaign_id)
 
     params['states'] = states
-    params['campaign_id'] = pk
+    params['campaign_id'] = campaign_id
     params['screenings'] = [s for s in Screening.objects.all()]
     params['campaigns'] = campaigns_to_move_to
-    params['current_campaign'] = Campaign.objects.get(pk=pk)
+    params['current_campaign'] = Campaign.objects.get(pk=campaign_id)
 
     return render(request, cts.EDIT_CANDIDATES, params)
 

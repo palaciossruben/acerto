@@ -102,7 +102,11 @@
         <p><strong>Text Match (higher is better): </strong>{{ candidate.text_match }}</p>
     {% endif %}
 
-    <p><strong>Forecast (Classification): {{ candidate.match_classification }}</strong></p>
+    {% if candidate.match_classification %}
+        <p><strong>Forecast: Passes</strong></p>
+    {% else %}
+        <p><strong>Forecast: Fails</strong></p>
+    {% endif %}
 
     <br>
     <br>
@@ -168,7 +172,7 @@ placeholder="add a comment!"></textarea>
 <br>
 <p style="display: inline;"><strong>to</strong></p>
 
-<select class="selectpicker" name="{{ candidate.id }}_selected_campaign" >
+<select class="selectpicker" name="{{ candidate.id }}_selected_campaign" style="width: 140px">
   <option value="0">Select Campaign</option>
   {% for campaign in campaigns%}
      <option value="{{ campaign.id }}">{{ campaign.name }}/{{ campaign.title_es }}</option>

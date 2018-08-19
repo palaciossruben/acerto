@@ -85,19 +85,20 @@ def save_other_values():
     defaults = common_learning.calculate_defaults(data)
     pickle_handler.save_defaults(defaults)
     data = common_learning.fill_missing_values(data)
+    data = common_learning.add_synthetic_fields(data)
 
     # Order is key, Hashers are calculated before hashing the data.
     save_hashers(data)
     data = common_learning.hash_columns(data, common_learning.get_hashing_info())
 
     # Order is key, save scaler, then scale
-    common_learning.get_scaler_and_save(data)
-    data = common_learning.scale(data)
+    #common_learning.get_scaler_and_save(data)
+    #data = common_learning.scale(data)
 
     # Order is key: 1. filter for SELECTED_FIELDS 2. save scaler, 3. then scale
-    clustering_data = common_learning.filter_fields(data, clustering.SELECTED_FIELDS)
-    common_learning.get_scaler_and_save(clustering_data, fields=clustering.SELECTED_FIELDS)
-    clustering_data = common_learning.scale(clustering_data)
+    #clustering_data = common_learning.filter_fields(data, clustering.SELECTED_FIELDS)
+    #common_learning.get_scaler_and_save(clustering_data, fields=clustering.SELECTED_FIELDS)
+    #clustering_data = common_learning.scale(clustering_data)
 
 
 def save_hashers(data):

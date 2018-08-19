@@ -118,7 +118,7 @@ def get_filtered_candidates():
 def get_columns():
     return [#'campaign',
             #'id',
-            'text_match',
+            #'text_match',
             'candidate_country',
             'candidate_city',
             'campaign_country',
@@ -153,6 +153,18 @@ def get_test_column_name(test):
     return str(test.id) + '_' + common.remove_accents(test.name).lower()
 
 
+def add_synthetic_fields(data):
+    """Calculated fields"""
+
+    data['country_match'] = data['candidate_country'] == data['campaign_country']
+    data['city_match'] = data['candidate_city'] == data['campaign_city']
+    data['profession_match'] = data['campaign_profession'] == data['profession']
+    data['education_match'] = data['campaign_education'] == data['education']
+    data['min_education'] = data['campaign_education'] <= data['education']
+
+    return data
+
+
 def load_raw_data(candidates=get_filtered_candidates()):
 
     if isinstance(candidates, list):
@@ -161,7 +173,7 @@ def load_raw_data(candidates=get_filtered_candidates()):
     # With QuerySet it is much faster.
     data_list = list(candidates.values_list(#'campaign_id',
                                             #'id',  # only to trace the candidate
-                                            'text_match',
+                                            #'text_match',
                                             'user__country_id',
                                             'user__city_id',
                                             'campaign__country_id',
@@ -187,14 +199,6 @@ def load_raw_data(candidates=get_filtered_candidates()):
     data['neighborhood'] = [lower_str(common.remove_accents(n)) for n in data['neighborhood']]
     data['languages'] = [lower_str(common.remove_accents(n)) for n in data['languages']]
     data['dream_job'] = [lower_str(common.remove_accents(n)) for n in data['dream_job']]
-
-    # Calculated fields
-    data['country_match'] = data['candidate_country'] == data['campaign_country']
-    data['city_match'] = data['candidate_city'] == data['campaign_city']
-    data['profession_match'] = data['campaign_profession'] == data['profession']
-    data['education_match'] = data['campaign_education'] == data['education']
-    data['min_education'] = data['campaign_education'] <= data['education']
-    #data['open_field'] = [c.get_campaign_education_level() for c in candidates]
 
     # similar accuracy with high and low complexity:
     #data = add_test_features(data, candidates, ['passed', 'final_score'])
@@ -252,9 +256,10 @@ def load_data(candidates=get_filtered_candidates(),
     """
     data = load_raw_data(candidates)
     data = fill_missing_values(data)
+    data = add_synthetic_fields(data)
     data = hash_columns(data, hashing_info)
     data = filter_fields(data, selected_fields)
-    data = scale(data)
+    #data = scale(data)
 
     return data, candidates
 
@@ -287,7 +292,7 @@ def calculate_defaults(data):
 
     defaults = dict()
 
-    defaults['text_match'] = np.nanmedian(data['text_match'])
+    #defaults['text_match'] = np.nanmedian(data['text_match'])
     defaults['education'] = np.nanmedian(data['education'])
     defaults['candidate_country'] = right_mode(data['candidate_country'])
     defaults['candidate_city'] = right_mode(data['candidate_city'])
@@ -320,7 +325,7 @@ def fill_missing_values(data, defaults=None):
     if defaults is None:
         defaults = calculate_defaults(data)
 
-    data['text_match'].fillna(defaults['text_match'], inplace=True)
+    #data['text_match'].fillna(defaults['text_match'], inplace=True)
     data['education'].fillna(defaults['education'], inplace=True)
     data['candidate_country'].fillna(defaults['candidate_country'], inplace=True)
     data['candidate_city'].fillna(defaults['candidate_city'], inplace=True)
@@ -453,8 +458,9 @@ def predict_property(candidates, model, selected_fields=None):
 
     data = load_raw_data(candidates)
     data = fill_missing_values(data, defaults=pickle_handler.load_defaults())
+    data = add_synthetic_fields(data)
     data = add_hash_fields_from_saved_hashes(data)
     data = filter_fields(data, selected_fields)
-    data = scale_data_from_saved_scaler(data, fields=selected_fields)
+    #data = scale_data_from_saved_scaler(data, fields=selected_fields)
 
     return model.predict(data), candidates
