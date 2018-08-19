@@ -53,12 +53,12 @@ def add_to_message_queue(candidates, text):
 
 def update_candidate_forecast():
     """
-    Updates up to CANDIDATE_FORECAST_LIMIT per execution, due to time limit on production server, and possible crush.
+    Updates up to CANDIDATE_FORECAST_LIMIT per execution, due to time limit on production server, and possible crash.
     :return: updates.
     """
-    candidates = [c for c in Candidate.objects.filter(Q(match_regression=None) | Q(match_classification=None))]
+    candidates = [c for c in Candidate.objects.filter(Q(match_classification=None))]
     candidates = candidates[:min(len(candidates), CANDIDATE_FORECAST_LIMIT)]
-    model.predict_match_and_save(candidates, regression=False)
+    model.predict_match_and_save(candidates)
 
 
 # TODO: use Ajax to optimize rendering. Has no graphics therefore is very low priority.

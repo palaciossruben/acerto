@@ -7,9 +7,7 @@ import pickle
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 CANDIDATE_CLUSTER = 'candidate_cluster_model.p'
 DEFAULTS = 'defaults.p'
-REGRESSION_MODEL = 'regression_model.p'
 CLASSIFIER = 'classifier.p'
-REGRESSION = 'regression.p'
 HASHER = 'hasher_{}.p'
 SCALER = 'scaler.p'
 SCALER_FIELDS = 'scaler_{}.p'
@@ -93,15 +91,9 @@ def save_hasher(hasher, field):
 
 # MODEL
 
-def save_model(regression, model):
-    if regression:
-        save_object(model, REGRESSION)
-    else:
-        save_object(model, CLASSIFIER)
+def save_model(model):
+    save_object(model, CLASSIFIER)
 
 
-def load_model(regression=True):
-    if regression:
-        return load_object(REGRESSION)
-    else:
-        return load_object(CLASSIFIER)
+def load_model():
+    return load_object(CLASSIFIER)

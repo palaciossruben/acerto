@@ -30,15 +30,12 @@ def load_data_for_prediction():
     return data, candidates
 
 
-def predict_and_save(data, model, candidates, regression=True):
+def predict_and_save(data, model, candidates):
 
     data['prediction'] = model.predict(data)
 
     for candidate, (pk, row) in zip(candidates, data.iterrows()):
-        if regression:
-            candidate.match_regression = row['prediction']
-        else:
-            candidate.match_classification = int(row['prediction'])
+        candidate.match_classification = int(row['prediction'])
 
         #from django.utils.encoding import smart_text
         # Encoding prevents error when screening_explanation has special chars.
@@ -46,37 +43,33 @@ def predict_and_save(data, model, candidates, regression=True):
         candidate.save()
 
 
-def learn_and_predict(regression=True):
+def learn_and_predict():
     """
     Predict matches and stores them on the candidates.
     :return: None
     """
 
-    model, _ = learn.get_model(regression=regression)
-    save_model(regression, model)
+    model, _ = learn.get_model()
+    save_model(model)
     data, candidates = load_data_for_prediction()
-    predict_and_save(data, model, candidates, regression=regression)
+    predict_and_save(data, model, candidates)
 
 
-def predict_match(candidates, regression=True):
+def predict_match(candidates):
     """
     Given candidates predict their match.
     :param candidates: Can be either a list of candidates or a single candidate.
-    :param regression: boolean
     :return: None
     """
-    model = load_model(regression=regression)
+    model = load_model()
     return common_learning.predict_property(candidates, model)
 
 
-def predict_match_and_save(candidates, regression=True):
-    predictions, candidates = predict_match(candidates, regression=regression)
+def predict_match_and_save(candidates):
+    predictions, candidates = predict_match(candidates)
 
     for p, c in zip(predictions, candidates):
-        if regression:
-            c.match_regression = p
-        else:
-            c.match_classification = p
+        c.match_classification = p
         c.save()
 
 
@@ -115,8 +108,7 @@ def save_hashers(data):
 
 def do_your_stuff():
     text_match.update()
-    learn_and_predict(regression=False)
-    #learn_and_predict(regression=True)
+    learn_and_predict()
     save_other_values()
 
 

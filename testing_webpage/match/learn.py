@@ -12,6 +12,9 @@ from sklearn.ensemble import RandomForestClassifier
 from match import common_learning
 #from match import xgboost_scikit_wrapper
 
+# make reproducible results
+np.random.seed(seed=0)
+
 
 def balance(data):
     """
@@ -35,11 +38,10 @@ def balance(data):
     return data
 
 
-def prepare_train_test(data, regression=True):
+def prepare_train_test(data):
     """
     From splitting to removing Nan, routine tasks.
     :param data: dataframe
-    :param regression: boolean
     :return: train and test tuple
     """
 
@@ -47,11 +49,7 @@ def prepare_train_test(data, regression=True):
     test = DataPair()
     train.features, train.target, test.features, test.target = get_train_test(data, 0.7)
 
-    if not regression:
-        train = balance(train)
-        test = balance(test)
-
-    return train, test
+    return balance(train), balance(test)
 
 
 def get_train_test(data, train_percent):
@@ -90,14 +88,11 @@ def load_data_for_learning():
 
 
 class Result:
-    def __init__(self, train_metric, test_metric, baseline_test_metric, regression=False):
+    def __init__(self, train_metric, test_metric, baseline_test_metric):
         self.train_metric = train_metric
         self.test_metric = test_metric
         self.baseline_test_metric = baseline_test_metric
-        if regression:
-            self.improvement = self.baseline_test_metric - self.test_metric
-        else:
-            self.improvement = self.test_metric - self.baseline_test_metric
+        self.improvement = self.test_metric - self.baseline_test_metric
         self.num_runs = 1
 
     def average_property(self, attribute, other_result):
@@ -129,7 +124,7 @@ class DataPair:
         self.target = target
 
 
-def learn_model(train, regression=True, xgboost=False):
+def learn_model(train, xgboost=False):
 
     # TODO: missing xgboost; has bugs. Missing hard instalation on Linux also. Or using conda.
     # TODO: grid_search(model, train_set, train_target)
@@ -145,14 +140,7 @@ def learn_model(train, regression=True, xgboost=False):
         #model = xgboost_scikit_wrapper.XGBoostClassifier(num_boost_round=20, params=params)
 
     else:
-        if regression:
-            model = svm.SVR()
-        else:
-            #model = svm.SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
-            #                decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
-            #                max_iter=-1, probability=False, random_state=None, shrinking=True,
-            #                tol=0.001, verbose=False)
-            model = RandomForestClassifier(max_depth=9)
+        model = RandomForestClassifier(max_depth=9, random_state=0)
 
     model.fit(train.features, train.target)
     return model
@@ -170,68 +158,50 @@ def target_mode(target):
         return 1
 
 
-def eval_model(model, train, test, regression=True):
+def eval_model(model, train, test):
 
     train_prediction = model.predict(train.features)
     test_prediction = model.predict(test.features)
 
-    """
-    metrics.explained_variance_score(y_true, y_pred)	Explained variance regression score function
-    metrics.mean_absolute_error(y_true, y_pred)	Mean absolute error regression loss
-    metrics.mean_squared_error(y_true, y_pred[, …])	Mean squared error regression loss
-    metrics.mean_squared_log_error(y_true, y_pred)	Mean squared logarithmic error regression loss
-    metrics.median_absolute_error(y_true, y_pred)	Median absolute error regression loss
-    metrics.r2_score(y_true, y_pred[, …])	R^2 (coefficient of determination) regression score function.
-    """
-
-    if regression:
-        f = mean_absolute_error
-    else:
-        f = accuracy_score
+    f = accuracy_score
 
     train_metric = f(train_prediction, train.target)
     test_metric = f(test_prediction, test.target)
 
-    if regression:
-        baseline_test_metric = f([statistics.mean(test.target) for _ in range(len(test.target))], test.target)
-    else:
-        baseline_test_metric = f([target_mode(test.target) for _ in test.target], test.target)
+    baseline_test_metric = f([target_mode(test.target) for _ in test.target], test.target)
 
-    if not regression:
-        print('Confusion Matrix:')
-        print(confusion_matrix(test.target, test_prediction))
+    print('Confusion Matrix:')
+    print(confusion_matrix(test.target, test_prediction))
 
-    result = Result(train_metric, test_metric, baseline_test_metric, regression=regression)
+    result = Result(train_metric, test_metric, baseline_test_metric)
     result.print()
 
     return result
 
 
-def print_feature_importance(model, data, regression):
+def print_feature_importance(model, data):
     """
     It assumes the model is a RandomForest, for now
     :param model: sklearn model
     :param data: Dataframe
-    :param regression: Boolean
     :return:
     """
-    if not regression:
-        iterator = reversed(sorted(zip(list(data), model.feature_importances_), key=lambda x: x[1]))
-        print([e for e in iterator])
+    iterator = reversed(sorted(zip(list(data), model.feature_importances_), key=lambda x: x[1]))
+    print([e for e in iterator])
 
 
-def get_model(regression=True):
+def get_model():
     """
     Calculates the match of each candidate, based on a learning algorithm.
     :return: model.
     """
     data = load_data_for_learning()
 
-    train, test = prepare_train_test(data, regression=regression)
+    train, test = prepare_train_test(data)
 
-    model = learn_model(train, regression=regression)
+    model = learn_model(train)
 
     # Used only for data exploration.
-    print_feature_importance(model, data, regression)
+    print_feature_importance(model, data)
 
-    return model, eval_model(model, train, test, regression=regression)
+    return model, eval_model(model, train, test)

@@ -146,7 +146,7 @@ def update_candidate_state(candidate, evaluation):
         #TODO: this is not the right place to do this, it should be a overnight clock, after the CV is scanned. And the
         # guy had a chance of inputting addicional info
         # overrides the passed property with ML
-        #evaluation.passed = model.predict_match_and_save([candidate], regression=False)
+        #evaluation.passed = model.predict_match_and_save([candidate])
         #evaluation.save()
 
         if evaluation.passed:

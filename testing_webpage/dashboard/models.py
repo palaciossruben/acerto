@@ -101,7 +101,6 @@ class Candidate(models.Model):
     evaluation_summary = models.ForeignKey(EvaluationSummary, null=True)
     surveys = models.ManyToManyField(Survey)
     text_match = models.FloatField(null=True, default=None)
-    match_regression = models.FloatField(null=True, default=None)
     match_classification = models.IntegerField(null=True, default=None)
     screening = models.ForeignKey(Screening, null=True, on_delete=models.SET_NULL)
     screening_explanation = models.CharField(max_length=200, default='')
