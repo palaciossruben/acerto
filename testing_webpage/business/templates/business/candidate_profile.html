@@ -155,7 +155,9 @@
                     <strong class="accordion">Ver datos de contacto 	&#x25BE;</strong>
                     <div class="panel">
                         {% if candidate.user.phone %}
-                            <p>{{ candidate.user.phone }}</p>
+                            <a href="https://api.whatsapp.com/send?phone={{ candidate.user.phone }}" target="_blank">
+                                <p>{{ candidate.user.phone }}</p>
+                            </a>
                         {% endif %}
                         {% if candidate.user.email %}
                             <p>{{ candidate.user.email }}</p>
@@ -163,28 +165,28 @@
                     </div>
                 </div>
                 <div class="col-lg-7 col-xs-12 contact-data">
-                    <strong class="accordion no-style">Ver información adicional 	&#x25BE;</strong>
+                    <strong class="accordion no-style">Ver información adicional &#x25BE;</strong>
                     <div class="panel">
                         <div class="col-lg-6 col-xs-6">
                             {% if candidate.user.salary %}
-                                <p>Aspiración salarial: {{ candidate.user.salary }}</p>
+                                <p><strong>Aspiración salarial:</strong> {{ candidate.user.salary }}</p>
                             {% endif %}
                             {% if candidate.user.birthday %}
-                                <p>Fecha de cumpleaños: {{ candidate.user.birthday }}</p>
+                                <p><strong>Edad:</strong> {{ candidate.user.get_user_age }} años</p>
                             {% endif %}
                             {% if candidate.user.languages %}
-                                <p>Idiomas: {{ candidate.user.languages }}</p>
+                                <p><strong>Idiomas:</strong> {{ candidate.user.languages }}</p>
                             {% endif %}
                         </div>
                         <div class="col-lg-6 col-xs-6">
                             {% if candidate.user.gender %}
-                                <p>Género: {{ candidate.user.gender }}</p>
+                                <p><strong>Género:</strong> {{ candidate.user.gender.name_es }}</p>
                             {% endif %}
                             {% if candidate.user.dream_job %}
-                                <p>Empresa soñada: {{ candidate.user.dream_job }}</p>
+                                <p><strong>Empresa soñada:</strong> {{ candidate.user.dream_job }}</p>
                             {% endif %}
                             {% if candidate.user.hobbies %}
-                                <p>Hobbies: {{ candidate.user.hobbies }}</p>
+                                <p><strong>Hobbies:</strong> {{ candidate.user.hobbies }}</p>
                             {% endif %}
                         </div>
                     </div>

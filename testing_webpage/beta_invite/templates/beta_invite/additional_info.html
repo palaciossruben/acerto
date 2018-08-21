@@ -95,7 +95,7 @@ function removeAnyDots() {
 				{% endfor %}
 			</select>
 			<input type="number" id="experience" min="0" max="100" step='1' name="experience" placeholder="Años de experiencia">
-			<input type="number" pattern="[0-9]{3-10}" oninput="removeAnyDots();" name="salary" placeholder="Aspiración salarial" id="salary">
+			<input type="number" pattern="[0-9]{3-10}" oninput="removeAnyDots();" name="salary" step="100000" placeholder="Aspiración salarial" id="salary">
 			<input type="button" name="previous" class="previous action-button" value="Atrás" />
 			<input type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'work_area_id':$('#work_area').val(), 'experience':$('#experience').val(), 'salary':$('#salary').val()})"/>
 		</fieldset>

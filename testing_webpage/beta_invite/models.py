@@ -771,6 +771,15 @@ class User(models.Model):
         else:
             return None
 
+    def get_user_age(self):
+        born = datetime(int(self.birthday.strftime("%Y")), int(self.birthday.strftime("%m")), int(self.birthday.strftime("%d")))
+        today = datetime.today()
+        age = today - born
+        if age is not None:
+            return int(age.total_seconds()/31536000)
+        else:
+            return None
+
     def change_to_international_phone_number(self):
 
         if self.phone:
