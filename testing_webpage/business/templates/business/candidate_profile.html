@@ -49,7 +49,7 @@
                     <div class="candidate-circle male-avatar"></div>
                     {% endif %}
                 </div>
-                <div class="col-lg-7 col-xs-12">
+                <div class="col-lg-7 col-xs-12 responsive-center">
                     <p><strong>{{ candidate.user.name }}</strong></p>
                     {% if candidate.user.profession.name_es %}
                     <p>{{ candidate.user.profession.name_es }}</p>
@@ -71,61 +71,107 @@
                         </a>
                     {% endif %}
                 </div>
+
                 <div class="col-lg-7 col-xs-12">
                     <div class="row condoms-row">
                         {% if candidate.evaluation_summary.cognitive_score %}
-                            <div class="test-name">
-                                Capacidad cognitiva
+                            <div class="test-name" id="cognitive">
+                                <span class="test-title">Capacidad cognitiva</span>
                                 {% if candidate.evaluation_summary.cognitive_score >= 0 %}
-                                    <div id="{{ candidate.pk }}-recommended-cognitive-id" class="fill">
+                                    <div id="{{ candidate.pk }}-recommended-cognitive-id" onclick="off_order(cognitive)" class="fill">
                                         {{ candidate.evaluation_summary.cognitive_score|print_score }}
                                     </div>
                                 {% endif %}
+                                <div class="test-distinction">
+                                    {% for e in candidate.evaluations.all %}
+                                        {% for score in e.scores.all %}
+                                            {% if score.test.type.pk == 1 %}
+                                                <p><strong>{{ score.test.name_es }}: </strong>{{ score.value|print_score }}</p>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
                             </div>
                         {% endif %}
 
                         {% if candidate.evaluation_summary.technical_score %}
-                        <div class="test-name">
-                            Conocimiento técnico
-                            {% if candidate.evaluation_summary.technical_score >= 0 %}
-                                <div id="{{ candidate.pk }}-recommended-technical-id" class="fill">
-                                    {{ candidate.evaluation_summary.technical_score|print_score }}
+                            <div class="test-name" id="technical">
+                                <span class="test-title">Conocimiento técnico</span>
+                                {% if candidate.evaluation_summary.technical_score >= 0 %}
+                                    <div id="{{ candidate.pk }}-recommended-technical-id" onclick="off_order(technical)" class="fill">
+                                        {{ candidate.evaluation_summary.technical_score|print_score }}
+                                    </div>
+                                {% endif %}
+                                <div class="test-distinction">
+                                    {% for e in candidate.evaluations.all %}
+                                        {% for score in e.scores.all %}
+                                            {% if score.test.type.pk == 2 %}
+                                                <p><strong>{{ score.test.name_es }}: </strong>{{ score.value|print_score }}</p>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
                                 </div>
-                            {% endif %}
-                        </div>
+                            </div>
                         {% endif %}
 
                         {% if candidate.evaluation_summary.requirements_score %}
-                        <div class="test-name">
-                            Requisitos
-                            {% if candidate.evaluation_summary.requirements_score >= 0 %}
-                                <div id="{{ candidate.pk }}-recommended-requirement-id" class="fill">
-                                    {{ candidate.evaluation_summary.requirements_score|print_score }}
+                            <div class="test-name" id="requirements">
+                                <span class="test-title">Requisitos</span>
+                                {% if candidate.evaluation_summary.requirements_score >= 0 %}
+                                    <div id="{{ candidate.pk }}-recommended-requirement-id" onclick="off_order(requirements)" class="fill">
+                                        {{ candidate.evaluation_summary.requirements_score|print_score }}
+                                    </div>
+                                {% endif %}
+                                <div class="test-distinction">
+                                    {% for e in candidate.evaluations.all %}
+                                        {% for score in e.scores.all %}
+                                            {% if score.test.type.pk == 3 %}
+                                                <p><strong>Requisitos: </strong>{{ score.value|print_score }}</p>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
                                 </div>
-                            {% endif %}
-                        </div>
+                            </div>
                         {% endif %}
 
                         {% if candidate.evaluation_summary.motivation_score %}
-                        <div class="test-name">
-                            Motivación
-                            {% if candidate.evaluation_summary.motivation_score >= 0 %}
-                                <div id="{{ candidate.pk }}-recommended-motivation-id" class="fill">
-                                    {{ candidate.evaluation_summary.motivation_score|print_score }}
+                            <div class="test-name" id="motivation">
+                                <span class="test-title">Motivación</span>
+                                {% if candidate.evaluation_summary.motivation_score >= 0 %}
+                                    <div id="{{ candidate.pk }}-recommended-motivation-id" onclick="off_order(motivation)" class="fill">
+                                        {{ candidate.evaluation_summary.motivation_score|print_score }}
+                                    </div>
+                                {% endif %}
+                                <div class="test-distinction">
+                                    {% for e in candidate.evaluations.all %}
+                                        {% for score in e.scores.all %}
+                                            {% if score.test.type.pk == 4 %}
+                                                <p><strong>{{ score.test.name_es }}: </strong>{{ score.value|print_score }}</p>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
                                 </div>
-                            {% endif %}
-                        </div>
+                            </div>
                         {% endif %}
 
                         {% if candidate.evaluation_summary.cultural_fit_score %}
-                        <div class="test-name">
-                            Fit cultural
-                            {% if candidate.evaluation_summary.cultural_fit_score >= 0 %}
-                                <div id="{{ candidate.pk }}-recommended-cultural-id" class="fill">
-                                    {{ candidate.evaluation_summary.cultural_fit_score|print_score }}
+                            <div class="test-name" id="cultural">
+                                <span class="test-title">Fit cultural</span>
+                                {% if candidate.evaluation_summary.cultural_fit_score >= 0 %}
+                                    <div id="{{ candidate.pk }}-recommended-cultural-id" onclick="off_order(cultural)" class="fill">
+                                        {{ candidate.evaluation_summary.cultural_fit_score|print_score }}
+                                    </div>
+                                {% endif %}
+                                <div class="test-distinction">
+                                    {% for e in candidate.evaluations.all %}
+                                        {% for score in e.scores.all %}
+                                            {% if score.test.type.pk == 5 %}
+                                                <p><strong>{{ score.test.name_es }}: </strong>{{ score.value|print_score }}</p>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
                                 </div>
-                            {% endif %}
-                        </div>
+                            </div>
                         {% endif %}
                     </div>
                 </div>
@@ -153,7 +199,7 @@
             <div class="row another-info-section">
                 <div class="col-lg-5 col-xs-12 contact-data">
                     <strong class="accordion">Ver datos de contacto 	&#x25BE;</strong>
-                    <div class="panel">
+                    <div class="panel col-xs-12">
                         {% if candidate.user.phone %}
                             <a href="https://api.whatsapp.com/send?phone={{ candidate.user.phone }}" target="_blank">
                                 <p>{{ candidate.user.phone }}</p>
@@ -167,7 +213,7 @@
                 <div class="col-lg-7 col-xs-12 contact-data">
                     <strong class="accordion no-style">Ver información adicional &#x25BE;</strong>
                     <div class="panel">
-                        <div class="col-lg-6 col-xs-6">
+                        <div class="col-lg-6 col-xs-12 no-padding">
                             {% if candidate.user.salary %}
                                 <p><strong>Aspiración salarial:</strong> {{ candidate.user.salary }}</p>
                             {% endif %}
@@ -253,6 +299,7 @@
                 set_circle_color({{ candidate.evaluation_summary.requirements_score|int_rounding }}, "{{ candidate.pk }}-recommended-requirement-id");
                 set_circle_color({{ candidate.evaluation_summary.motivation_score|int_rounding }}, "{{ candidate.pk }}-recommended-motivation-id");
                 set_circle_color({{ candidate.evaluation_summary.cultural_fit_score|int_rounding }}, "{{ candidate.pk }}-recommended-cultural-id");
+
             });
         </script>
         <script>
@@ -279,6 +326,42 @@
                         panel.style.display = "block";
                     }
                 });
+            }
+        </script>
+        <script>
+             function on_order(test_type) {
+                $(test_type).prependTo('.condoms-row');
+                $(test_type).css("width","100%");
+                $(test_type).find(".test-title").css("display", "none");
+                $(test_type).find(".test-distinction").css("display", "inline-block");
+                $(test_type).find(".test-distinction").css("margin-left", "40px");
+                $(test_type).find(".fill").css("height", "130px");
+                $(test_type).find(".fill").css("width", "130px");
+                $(test_type).find(".fill").css("padding-top", "40px");
+                $(test_type).find(".fill").css("font-size", "30px");
+            }
+
+            function off_order(test_type) {
+                var n = $(test_type).css("width");
+                console.log(n);
+                if(n != '80px'){
+                    $(".test-name").css("width","80px");
+                    $(".test-title").css("display", "block");
+                    $(".test-distinction").css("display", "none");
+                    $(".fill").css("height", "70px");
+                    $(".fill").css("width", "70px");
+                    $(".fill").css("padding-top", "20px");
+                    $(".fill").css("font-size", "12px");
+                }else{
+                    $(".test-name").css("width","80px");
+                    $(".test-title").css("display", "block");
+                    $(".test-distinction").css("display", "none");
+                    $(".fill").css("height", "70px");
+                    $(".fill").css("width", "70px");
+                    $(".fill").css("padding-top", "20px");
+                    $(".fill").css("font-size", "12px");
+                    on_order(test_type);
+                }
             }
         </script>
     </body>

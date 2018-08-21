@@ -2,11 +2,11 @@
 {% load i18n %}
 {% load app_filters %}
 
-<div class="row">
+<div class="row candidate-info-div">
     <div class="email-checkbox">
         <input type="checkbox" name="{{ candidate.id }}_checkbox">
     </div>
-    <div class="col-lg-1 col-xs-6 candidate-avatar-column">
+    <div class="col-lg-1 col-xs-12 candidate-avatar-column">
         {% if candidate.user.photo_url != '#' %}
         <div class="circle candidate-circle" style="background-image: url({% static candidate.user.photo_url %});"></div>
         {% elif candidate.user.gender.sex == 2 %}
@@ -33,19 +33,19 @@
         <div class="separator"></div>
     </div>
     {% if candidate.user.profile %}
-        <div class="col-lg-4 profile">
+        <div class="col-lg-4 col-xs-12 profile">
             <p>{{ candidate.user.profile }}</p>
         </div>
     {% elif candidate.user.get_short_curriculum %}
-        <div class="col-lg-4 profile">
+        <div class="col-lg-4 col-xs-12 profile">
             <p class="no-profile">{{ candidate.user.get_short_curriculum }}</p>
         </div>
     {% else %}
-        <div class="col-lg-4 profile">
+        <div class="col-lg-4 col-xs-12 profile">
             <p class="no-profile">Sin descripción</p>
         </div>
     {% endif %}
-    <div class="col-lg-4 condoms-row">
+    <div class="col-lg-4 col-xs-12 condoms-row">
         <div class="row">
             {% if candidate.evaluation_summary.cognitive_score >= 0 %}
             <div class="test-name small">

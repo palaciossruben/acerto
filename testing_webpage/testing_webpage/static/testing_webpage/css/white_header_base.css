@@ -26,6 +26,16 @@ body {
     display: none;
 }
 
+.navButton{
+    font-size: 15px;
+    width:170px;
+    color: white;
+    border-radius:40px;
+    margin-top: 30px;
+    padding:5px 16px;
+    background:#F47B20;
+}
+
 /************************************RESPONSIVE TOPNAV*****************************************************************/
 
 @media screen and (max-width: 768px) {
