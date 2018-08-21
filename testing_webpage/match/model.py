@@ -72,6 +72,19 @@ def predict_match_and_save(candidates):
         c.save()
 
 
+def get_candidate_match_and_save(candidate):
+    """
+    Given single candidate, gets prediction.
+    :param candidate: Candidate obj
+    :return: boolean, passing or not
+    """
+    predictions, _ = predict_match(candidate)
+    p = predictions[0]
+    candidate.match_classification = p
+    candidate.save()
+    return p
+
+
 def save_other_values():
     """
     Saves default field values and hashes for real time prediction later on.

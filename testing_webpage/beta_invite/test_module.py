@@ -4,6 +4,7 @@ Test related methods.
 from beta_invite import text_analizer
 from beta_invite.models import Question, Survey, Score, Evaluation, EvaluationSummary, Test
 from dashboard.models import Candidate, State
+from match import model
 
 
 def get_tests_questions_dict(tests):
@@ -131,7 +132,23 @@ def get_scores(campaign, user_id, questions_dict, request):
     return scores
 
 
-def update_candidate_state(candidate, evaluation):
+def alter_candidate_state(candidate, evaluation):
+    """
+    Given tests results it alters the candidate state.
+    :param candidate: Candidate
+    :param evaluation: Evaluation
+    :return: None
+    """
+    if candidate:
+        if evaluation.passed:
+            candidate.state = State.objects.get(code='WFI')
+        else:  # Fails tests
+            candidate.state = State.objects.get(code='FT')
+
+        candidate.save()
+
+
+def add_evaluation_to_candidate(candidate, evaluation):
     """
     Args:
         candidate: obj
@@ -139,21 +156,8 @@ def update_candidate_state(candidate, evaluation):
     Returns: Updates the candidate state if passes or not the test.
     """
     if candidate:
-
         candidate.evaluations.add(evaluation)
         candidate.evaluation_summary = EvaluationSummary.create(candidate.evaluations.all())
-
-        #TODO: this is not the right place to do this, it should be a overnight clock, after the CV is scanned. And the
-        # guy had a chance of inputting addicional info
-        # overrides the passed property with ML
-        #evaluation.passed = model.predict_match_and_save([candidate])
-        #evaluation.save()
-
-        if evaluation.passed:
-            candidate.state = State.objects.get(code='WFI')
-        else:  # Fails tests
-            candidate.state = State.objects.get(code='FT')
-
         candidate.save()
 
 
@@ -169,7 +173,8 @@ def get_evaluation(scores, candidate):
     evaluation = Evaluation.create(scores=scores)
     update_scores(evaluation, scores, candidate)
 
-    update_candidate_state(candidate, evaluation)
+    add_evaluation_to_candidate(candidate, evaluation)
+    alter_candidate_state(candidate, evaluation)
 
     return evaluation
 
@@ -220,9 +225,13 @@ def update_scores(evaluation, scores, candidate):
         evaluation.cut_score = average_list([s.test.cut_score for s in evaluation.scores.all()])
         evaluation.final_score = average_list([s.value for s in evaluation.scores.all()])
 
-        # This is a default simple rule. Can be overridden by ML
         if evaluation.final_score is not None and evaluation.cut_score is not None:
-            evaluation.passed = evaluation.final_score >= evaluation.cut_score and \
+
+            ml_criteria = model.get_candidate_match_and_save(candidate)
+
+            # TODO: change this line if AI takes over the world!!!
+            # evaluation.passed = evaluation.final_score >= evaluation.cut_score and \
+            evaluation.passed = ml_criteria and \
                                 passed_all_excluding_tests(evaluation) and \
                                 passed_all_excluding_questions(evaluation, candidate)
 

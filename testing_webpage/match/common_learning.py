@@ -213,14 +213,6 @@ def load_raw_data(candidates=get_filtered_candidates()):
     data['motivation_score'] = [c.get_last_motivation_score() for c in candidates]
     data['cultural_fit_score'] = [c.get_last_cultural_fit_score() for c in candidates]
 
-    """
-    data['cognitive_score'] = [c.get_average_cognitive_score() for c in candidates]
-    data['technical_score'] = [c.get_average_technical_score() for c in candidates]
-    data['requirements_score'] = [c.get_average_requirements_score() for c in candidates]
-    data['motivation_score'] = [c.get_average_motivation_score() for c in candidates]
-    data['cultural_fit_score'] = [c.get_average_cultural_fit_score() for c in candidates]
-    """
-
     # Dirty code: INDIVIDUAL TESTS
     # TODO: currently not giving any significant improvement
     """
