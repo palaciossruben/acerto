@@ -140,7 +140,11 @@ def learn_model(train, xgboost=False):
         #model = xgboost_scikit_wrapper.XGBoostClassifier(num_boost_round=20, params=params)
 
     else:
-        model = RandomForestClassifier(max_depth=9, random_state=0)
+        model = RandomForestClassifier(max_depth=9,
+                                       random_state=0,
+                                       # guarantees that we do not miss many candidates with potential
+                                       class_weight={0: 1, 1: 3}
+                                       )
 
     model.fit(train.features, train.target)
     return model
@@ -158,6 +162,18 @@ def target_mode(target):
         return 1
 
 
+def print_confusion_matrix(test, test_prediction):
+
+    print('Confusion Matrix:')
+    my_confusion_matrix = confusion_matrix(test.target, test_prediction)
+    print(my_confusion_matrix)
+
+    total = sum(my_confusion_matrix[0]) + sum(my_confusion_matrix[1])
+
+    print('false positives: {}%'.format(round(my_confusion_matrix[0][1]/total, 2) * 100))
+    print('should minimize false negatives: {}%'.format(round(my_confusion_matrix[1][0]/total, 2)*100))
+
+
 def eval_model(model, train, test):
 
     train_prediction = model.predict(train.features)
@@ -170,8 +186,7 @@ def eval_model(model, train, test):
 
     baseline_test_metric = f([target_mode(test.target) for _ in test.target], test.target)
 
-    print('Confusion Matrix:')
-    print(confusion_matrix(test.target, test_prediction))
+    print_confusion_matrix(test, test_prediction)
 
     result = Result(train_metric, test_metric, baseline_test_metric)
     result.print()

@@ -120,7 +120,7 @@ class Candidate(models.Model):
     def get_last_evaluation(self):
         try:
             return self.evaluations.latest('created_at')
-        except IndexError:
+        except models.ObjectDoesNotExist:
             return None
 
     def print_attribute(self, attribute):
@@ -172,6 +172,48 @@ class Candidate(models.Model):
             self.evaluation_summary = EvaluationSummary.create(self.evaluations.all())
             self.save()
             return self.evaluation_summary
+
+    def get_last_evaluation_attr(self, attr):
+        if self.get_last_evaluation():
+            return getattr(self.get_last_evaluation(), attr)
+        else:
+            return None
+
+    def get_evaluation_summary_attr(self, attr):
+        if self.get_evaluation_summary():
+            return getattr(self.get_evaluation_summary(), attr)
+        else:
+            return None
+
+    def get_average_cognitive_score(self):
+        return self.get_evaluation_summary_attr('cognitive_score')
+
+    def get_average_technical_score(self):
+        return self.get_evaluation_summary_attr('technical_score')
+
+    def get_average_requirements_score(self):
+        return self.get_evaluation_summary_attr('requirements_score')
+
+    def get_average_motivation_score(self):
+        return self.get_evaluation_summary_attr('motivation_score')
+
+    def get_average_cultural_fit_score(self):
+        return self.get_evaluation_summary_attr('cultural_fit_score')
+
+    def get_last_cognitive_score(self):
+        return self.get_last_evaluation_attr('cognitive_score')
+
+    def get_last_technical_score(self):
+        return self.get_last_evaluation_attr('technical_score')
+
+    def get_last_requirements_score(self):
+        return self.get_last_evaluation_attr('requirements_score')
+
+    def get_last_motivation_score(self):
+        return self.get_last_evaluation_attr('motivation_score')
+
+    def get_last_cultural_fit_score(self):
+        return self.get_last_evaluation_attr('cultural_fit_score')
 
     def get_business_user(self):
         """

@@ -18,7 +18,6 @@ from sklearn.preprocessing import StandardScaler
 from match.pickle_models import pickle_handler
 import common
 from beta_invite import constants
-from beta_invite.models import Test
 
 
 def get_test_score(candidate, field, f):
@@ -72,10 +71,12 @@ def get_hashing_info():
     hashing_info['profession'] = 1
     hashing_info['campaign_profession'] = 3
     hashing_info['gender'] = 1
-    hashing_info['work_area'] = 1
+    hashing_info['candidate_work_area'] = 1
     hashing_info['neighborhood'] = 1
     hashing_info['languages'] = 1
     hashing_info['dream_job'] = 1
+    hashing_info['campaign_work_area'] = 1
+
     # TODO: ADD NEW FIELD HERE
 
     # TODO: different hashes for the same property, eg: candidate country and campaign country
@@ -128,13 +129,14 @@ def get_columns():
             'education',
             'campaign_education',
             'gender',
-            'work_area',
+            'candidate_work_area',
             # TODO: had only None, can add later on with more data
             #'salary',
             'neighborhood',
             'languages',
             'dream_job',
-            ]
+            'campaign_work_area',
+    ]
 
 
 def from_list_to_query_set(candidates):
@@ -161,6 +163,7 @@ def add_synthetic_fields(data):
     data['profession_match'] = data['campaign_profession'] == data['profession']
     data['education_match'] = data['campaign_education'] == data['education']
     data['min_education'] = data['campaign_education'] <= data['education']
+    data['work_area_match'] = data['campaign_work_area'] == data['candidate_work_area']
 
     return data
 
@@ -182,14 +185,14 @@ def load_raw_data(candidates=get_filtered_candidates()):
                                             'campaign__profession_id',
                                             'user__education__level',
                                             'campaign__education__level',
-                                            'user__gender',
-                                            'user__work_area',
+                                            'user__gender_id',
+                                            'user__work_area_id',
                                             # TODO: had only None, can add later on with more data
                                             #'user__salary',
                                             'user__neighborhood',  # TODO: improve input
                                             'user__languages',  # TODO: improve input
                                             'user__dream_job',  # TODO: improve input
-
+                                            'campaign__work_area_id',
                                             # TODO: ADD NEW FIELD HERE
                                             ))
 
@@ -203,6 +206,20 @@ def load_raw_data(candidates=get_filtered_candidates()):
     # similar accuracy with high and low complexity:
     #data = add_test_features(data, candidates, ['passed', 'final_score'])
     data['median_test_final_score'] = [get_test_score(c, 'final_score', statistics.median) for c in candidates]
+
+    data['cognitive_score'] = [c.get_last_cognitive_score() for c in candidates]
+    data['technical_score'] = [c.get_last_technical_score() for c in candidates]
+    data['requirements_score'] = [c.get_last_requirements_score() for c in candidates]
+    data['motivation_score'] = [c.get_last_motivation_score() for c in candidates]
+    data['cultural_fit_score'] = [c.get_last_cultural_fit_score() for c in candidates]
+
+    """
+    data['cognitive_score'] = [c.get_average_cognitive_score() for c in candidates]
+    data['technical_score'] = [c.get_average_technical_score() for c in candidates]
+    data['requirements_score'] = [c.get_average_requirements_score() for c in candidates]
+    data['motivation_score'] = [c.get_average_motivation_score() for c in candidates]
+    data['cultural_fit_score'] = [c.get_average_cultural_fit_score() for c in candidates]
+    """
 
     # Dirty code: INDIVIDUAL TESTS
     # TODO: currently not giving any significant improvement
@@ -303,10 +320,17 @@ def calculate_defaults(data):
     defaults['education'] = np.nanmedian(data['education'])
     defaults['campaign_education'] = np.nanmedian(data['campaign_education'])
     defaults['gender'] = right_mode(data['gender'])
-    defaults['work_area'] = right_mode(data['work_area'])
+    defaults['candidate_work_area'] = right_mode(data['candidate_work_area'])
     defaults['neighborhood'] = right_mode(data['neighborhood'])
     defaults['languages'] = right_mode(data['languages'])
     defaults['dream_job'] = right_mode(data['dream_job'])
+    defaults['campaign_work_area'] = right_mode(data['campaign_work_area'])
+    defaults['cognitive_score'] = np.nanmedian(data['cognitive_score'])
+    defaults['technical_score'] = np.nanmedian(data['technical_score'])
+    defaults['requirements_score'] = np.nanmedian(data['requirements_score'])
+    defaults['motivation_score'] = np.nanmedian(data['motivation_score'])
+    defaults['cultural_fit_score'] = np.nanmedian(data['cultural_fit_score'])
+
     # TODO: ADD NEW FIELD HERE
 
     # TODO: had only None, can add later on with more data
@@ -325,32 +349,8 @@ def fill_missing_values(data, defaults=None):
     if defaults is None:
         defaults = calculate_defaults(data)
 
-    #data['text_match'].fillna(defaults['text_match'], inplace=True)
-    data['education'].fillna(defaults['education'], inplace=True)
-    data['candidate_country'].fillna(defaults['candidate_country'], inplace=True)
-    data['candidate_city'].fillna(defaults['candidate_city'], inplace=True)
-    data['campaign_country'].fillna(defaults['campaign_country'], inplace=True)
-    data['campaign_city'].fillna(defaults['campaign_city'], inplace=True)
-    data['profession'].fillna(defaults['profession'], inplace=True)
-    data['campaign_profession'].fillna(defaults['campaign_profession'], inplace=True)
-    data['campaign_education'].fillna(defaults['campaign_education'], inplace=True)
-    data['gender'].fillna(defaults['gender'], inplace=True)
-    data['work_area'].fillna(defaults['work_area'], inplace=True)
-#    data['salary'].fillna(defaults['salary'], inplace=True)
-    data['neighborhood'].fillna(defaults['neighborhood'], inplace=True)
-    data['languages'].fillna(defaults['languages'], inplace=True)
-    data['dream_job'].fillna(defaults['dream_job'], inplace=True)
-
-    # TODO: ADD NEW FIELD HERE
-
     for column in list(data):
-        if 'test' in column:
-            data[column].fillna(defaults[column], inplace=True)
-
-    """
-    for column in list(data):
-        if defaults.get(column):
-            data[column].fillna(defaults[column], inplace=True)"""
+        data[column].fillna(defaults[column], inplace=True)
 
     return data
 
