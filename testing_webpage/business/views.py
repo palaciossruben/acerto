@@ -328,7 +328,7 @@ def contact_form(request):
     return render(request, cts.CONTACT_FORM_VIEW_PATH)
 
 
-def contact_us(request):
+def contact_form_post(request):
     """
     Save a comment from the contact form
     Args:
@@ -343,12 +343,6 @@ def contact_us(request):
     contact.save()
 
     send_contact_emails(contact, request.LANGUAGE_CODE)
-
-    # TODO: make this shit work
-    # Send emails without blocking
-    #loop = asyncio.get_event_loop()
-    #loop.run_until_complete(send_contact_emails(contact, request.LANGUAGE_CODE))
-    #loop.close()
 
     return render(request, cts.CONTACT_VIEW_PATH, {'main_message': _("Discover amazing people"), })
 
@@ -400,22 +394,7 @@ def start(request):
                                                  'keywords': sorted(KeyWord.objects.all(), key=lambda key: key.name)})
 
 
-@login_required
-def create(request):
-    """
-    Displays creation of campaign but no registration form.
-    """
-
-    requirement_bullet_id = BulletType.objects.get(name='requirement').id
-    perk_bullet_id = BulletType.objects.get(name='perk').id
-
-    return render(request, cts.CREATE_VIEW_PATH, {'requirement_bullet_id': requirement_bullet_id,
-                                                  'perk_bullet_id': perk_bullet_id,
-                                                  'business_user_id': request.POST.get('business_user_id'),
-                                                  'work_areas': common.translate_list_of_objects(WorkArea.objects.all(), request.LANGUAGE_CODE)
-                                                  })
-
-
+# This for create campaign when the user is logged
 @login_required
 def create_post(request):
     """
@@ -425,7 +404,6 @@ def create_post(request):
     """
 
     business_user = BusinessUser.objects.get(auth_user=request.user)
-
     campaign = campaign_module.create_campaign(request)
     business_user.campaigns.add(campaign)
     business_user.save()
@@ -553,9 +531,9 @@ def dashboard(request, business_user_id, campaign_id, state_name):
     relevant = common.get_relevant_candidates(campaign)
     recommended = common.get_recommended_candidates(campaign)
 
-    if business_state.name == 'applicant':
+    if business_state.name == 'aplicantes':
         campaign_evaluation = campaign.applicant_evaluation
-    elif business_state.name == 'relevant':
+    elif business_state.name == 'relevantes':
         campaign_evaluation = campaign.relevant_evaluation
     else:
         campaign_evaluation = campaign.recommended_evaluation

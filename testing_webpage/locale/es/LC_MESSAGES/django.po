@@ -196,7 +196,6 @@ msgid "Create Campaign"
 msgstr "Crear Campaña"
 
 #: business/templates/business/business_signup.html:5
-#: business/templates/business/new/create.html:5
 msgid "Personnel Selection - PeakU"
 msgstr "Selección de Personal - PeakU"
 
@@ -368,30 +367,6 @@ msgstr "Inicia Sesión"
 #: business/templates/business/login_buttons.html:5
 msgid "Log Out"
 msgstr "Cerrar Sesión"
-
-#: business/templates/business/new/create.html:27
-msgid "CAMPAIGN CREATION"
-msgstr "CREACIÓN DE CAMPAÑA"
-
-#: business/templates/business/new/create.html:29
-msgid ""
-"Enter the information of the vacancy and the company, register and start "
-"receiving applicants"
-msgstr ""
-"Ingresa la información del cargo y de tu empresa, regístrate y comienza a "
-"recibir aplicantes"
-
-#: business/templates/business/new/create.html:30
-msgid "Everything in less than ten minutes. That easy !"
-msgstr "Todo en menos de diez minutos. Así de fácil !"
-
-#: business/templates/business/new/create.html:34
-msgid "JOB DETAILS"
-msgstr "DETALLES DEL CARGO"
-
-#: business/templates/business/new/create.html:35
-msgid "COMPANY DETAILS"
-msgstr "DETALLES DE TU EMPRESA"
 
 #: business/templates/business/new/tab_company.html:15
 msgid "Describe Your Company"
