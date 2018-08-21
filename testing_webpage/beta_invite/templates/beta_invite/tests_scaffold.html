@@ -1,44 +1,27 @@
-{% extends 'base.html'%}
-{% load i18n %}
+{% extends 'white_header_base.html'%}
 {% load static %}
-
-
+{% load i18n %}
+{% load app_filters %}
+{% load compress %}
 {% block title %}{% trans "PeakU - Test" %}{% endblock %}
-
-{% block extra_head %}
-
+{% block extra_meta %}
+    <meta name="description"  content="En PeakU te ayudamos a encontrar el empleo que buscas en compañias que se ajustan a tu perfil, experiencia y salario. Somos una empresa que trabaja en selección de personal, no una temporal." />
+    <meta name="keywords" content="computrabajo, servicio de empleo, empleo, empleos, trabajos, trabaja con nosotros, buscador de empleo, bolsa de empleo, agencia de empleo" />
 {% endblock %}
-
-
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'beta_invite/css/test_scaffold.css' %}">
+{% endblock %}
 {% block content %}
-    <br>
-    <br>
-    <div class="title" align="center">
-
-        <div class="container" align="center" style="margin-top:5px;">
+    <div class="title">
+        <div class="container space">
             <div>
                 <script>fbq('track', 'CompleteRegistration');</script>
                 <span>
-                    <h1 style="color:var(--blue)">{% trans "Thanks for registering!" %}</h1>
+                    <h1 class="blue">{% trans "Thanks for registering!" %}</h1>
                 </span>
                 <br>
                 {% include "beta_invite/tests.html" with tests=tests %}
             </div>
         </div>
-        <br>
-        <br>
     </div>
-    <style>
-        #submit-button{
-        width: auto;
-        background: var(--orange);
-        font-weight: bold;
-        color: white;
-        border: 0 none;
-        border-radius: 1px;
-        cursor: pointer;
-        padding: 10px 10px;
-        border-radius:4px;
-    }
-    </style>
 {% endblock %}

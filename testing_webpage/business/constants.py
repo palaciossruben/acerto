@@ -3,9 +3,9 @@ START_VIEW_PATH = 'business/new/start.html'
 SUMMARY_VIEW_PATH = 'business/summary.html'
 
 
-
 SEARCH_VIEW_PATH = 'business/search.html'
 RESULTS_VIEW_PATH = 'business/results.html'
+
 CONTACT_VIEW_PATH = 'business/contact.html'
 
 CONTACT_FORM_VIEW_PATH = 'business/contact_form.html'
@@ -18,4 +18,4 @@ BUSINESS_SIGNUP_VIEW_PATH = 'business/business_signup.html'
 BUSINESS_APPLIED_VIEW_PATH = 'business/business_applied.html'
 BUSINESS_LOGIN = 'business/login.html'
 BUSINESS_CAMPAIGNS_VIEW_PATH = 'business/business_campaigns.html'
-CREATE_VIEW_PATH = 'business/new/create.html'
+

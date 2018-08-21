@@ -1,0 +1,30 @@
+.space{
+    margin-top:5px;
+}
+
+.title{
+    text-align: center;
+    margin-top:50px;
+}
+
+.blue{
+    color:var(--blue);
+}
+
+.center{
+    text-align:center;
+}
+
+#submit-button{
+    width: auto;
+    background: var(--orange);
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 1px;
+    cursor: pointer;
+    padding: 10px 10px;
+    border-radius:4px;
+    margin: 50px auto;
+}
+

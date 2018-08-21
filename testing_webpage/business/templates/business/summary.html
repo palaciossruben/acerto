@@ -73,27 +73,27 @@
                                 </div>
                                 <div class="col-lg-9 col-xs-12 recommended">
                                     <div class="row">
-                                        {% if campaign.recommended_evaluation.cognitive_score %}
+                                        {% if campaign.recommended_evaluation.cognitive_score >= 0 %}
                                         <div class="test-name small">
                                             Capacidad cognitiva
                                         </div>
                                         {% endif %}
-                                        {% if campaign.recommended_evaluation.technical_score %}
+                                        {% if campaign.recommended_evaluation.technical_score >= 0 %}
                                         <div class="test-name small">
                                             Conocimiento técnico
                                         </div>
                                         {% endif %}
-                                        {% if campaign.recommended_evaluation.requirements_score %}
+                                        {% if campaign.recommended_evaluation.requirements_score >= 0 %}
                                         <div class="test-name small">
                                             Requisitos
                                         </div>
                                         {% endif %}
-                                        {% if campaign.recommended_evaluation.motivation_score %}
+                                        {% if campaign.recommended_evaluation.motivation_score >= 0 %}
                                         <div class="test-name small">
                                             Motivación
                                         </div>
                                         {% endif %}
-                                        {% if campaign.recommended_evaluation.cultural_fit_score %}
+                                        {% if campaign.recommended_evaluation.cultural_fit_score >= 0 %}
                                         <div class="test-name small">
                                             Fit cultural
                                         </div>

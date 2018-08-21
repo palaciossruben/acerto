@@ -11,6 +11,17 @@ h6{
     color: #3B4754;
 }
 
+.center{
+    text-align:center;
+}
+
+.arrow{
+    font-size: 128px;
+    z-index: 5;
+    position: absolute;
+    color : rgb(203, 221, 104, 1);
+}
+
 .conjonction {
     margin: 0px 2.4%;
 }
@@ -503,6 +514,25 @@ width: 170px;
 .final{
     background-position: 86% 0%;
 }
+
+.navButton {
+    float: right;
+    font-size: 12px;
+    width:160px;
+    background-color: white;
+	border-radius:40px;
+    border: none;
+    margin: 15px 10px;
+    cursor: pointer;
+    z-index:1;
+    text-align:center;
+    background : -moz-linear-gradient(52.11% -28.76% -98deg,rgba(249, 241, 129, 1) 0%,rgba(192, 226, 125, 1) 17.36%,rgba(124, 208, 119, 1) 39.74%,rgba(71, 194, 115, 1) 60.01%,rgba(32, 184, 112, 1) 77.44%,rgba(9, 177, 111, 1) 91.35%,rgba(0, 175, 110, 1) 100%);
+    background : -webkit-linear-gradient(-98deg, rgba(249, 241, 129, 1) 0%, rgba(192, 226, 125, 1) 17.36%, rgba(124, 208, 119, 1) 39.74%, rgba(71, 194, 115, 1) 60.01%, rgba(32, 184, 112, 1) 77.44%, rgba(9, 177, 111, 1) 91.35%, rgba(0, 175, 110, 1) 100%);
+    background : -webkit-gradient(linear,52.11% -28.76% ,47.89% 128.76% ,color-stop(0,rgba(249, 241, 129, 1) ),color-stop(0.1736,rgba(192, 226, 125, 1) ),color-stop(0.3974,rgba(124, 208, 119, 1) ),color-stop(0.6001,rgba(71, 194, 115, 1) ),color-stop(0.7744,rgba(32, 184, 112, 1) ),color-stop(0.9135,rgba(9, 177, 111, 1) ),color-stop(1,rgba(0, 175, 110, 1) ));
+    background : -o-linear-gradient(-98deg, rgba(249, 241, 129, 1) 0%, rgba(192, 226, 125, 1) 17.36%, rgba(124, 208, 119, 1) 39.74%, rgba(71, 194, 115, 1) 60.01%, rgba(32, 184, 112, 1) 77.44%, rgba(9, 177, 111, 1) 91.35%, rgba(0, 175, 110, 1) 100%);
+    background : -ms-linear-gradient(-98deg, rgba(249, 241, 129, 1) 0%, rgba(192, 226, 125, 1) 17.36%, rgba(124, 208, 119, 1) 39.74%, rgba(71, 194, 115, 1) 60.01%, rgba(32, 184, 112, 1) 77.44%, rgba(9, 177, 111, 1) 91.35%, rgba(0, 175, 110, 1) 100%);
+    background : linear-gradient(188deg, rgba(249, 241, 129, 1) 0%, rgba(192, 226, 125, 1) 17.36%, rgba(124, 208, 119, 1) 39.74%, rgba(71, 194, 115, 1) 60.01%, rgba(32, 184, 112, 1) 77.44%, rgba(9, 177, 111, 1) 91.35%, rgba(0, 175, 110, 1) 100%);
+}
 /**************************************************TRIX EDITOR*********************************************************/
 
 trix-toolbar [data-trix-attribute='quote'],
@@ -559,25 +589,6 @@ trix-editor ul {
   position: relative;
 }
 
-.navButton {
-    float: right;
-    font-size: 12px;
-    width:160px;
-    background-color: white;
-	border-radius:40px;
-    border: none;
-    margin: 15px 10px;
-    cursor: pointer;
-    z-index:1;
-    background : -moz-linear-gradient(52.11% -28.76% -98deg,rgba(249, 241, 129, 1) 0%,rgba(192, 226, 125, 1) 17.36%,rgba(124, 208, 119, 1) 39.74%,rgba(71, 194, 115, 1) 60.01%,rgba(32, 184, 112, 1) 77.44%,rgba(9, 177, 111, 1) 91.35%,rgba(0, 175, 110, 1) 100%);
-    background : -webkit-linear-gradient(-98deg, rgba(249, 241, 129, 1) 0%, rgba(192, 226, 125, 1) 17.36%, rgba(124, 208, 119, 1) 39.74%, rgba(71, 194, 115, 1) 60.01%, rgba(32, 184, 112, 1) 77.44%, rgba(9, 177, 111, 1) 91.35%, rgba(0, 175, 110, 1) 100%);
-    background : -webkit-gradient(linear,52.11% -28.76% ,47.89% 128.76% ,color-stop(0,rgba(249, 241, 129, 1) ),color-stop(0.1736,rgba(192, 226, 125, 1) ),color-stop(0.3974,rgba(124, 208, 119, 1) ),color-stop(0.6001,rgba(71, 194, 115, 1) ),color-stop(0.7744,rgba(32, 184, 112, 1) ),color-stop(0.9135,rgba(9, 177, 111, 1) ),color-stop(1,rgba(0, 175, 110, 1) ));
-    background : -o-linear-gradient(-98deg, rgba(249, 241, 129, 1) 0%, rgba(192, 226, 125, 1) 17.36%, rgba(124, 208, 119, 1) 39.74%, rgba(71, 194, 115, 1) 60.01%, rgba(32, 184, 112, 1) 77.44%, rgba(9, 177, 111, 1) 91.35%, rgba(0, 175, 110, 1) 100%);
-    background : -ms-linear-gradient(-98deg, rgba(249, 241, 129, 1) 0%, rgba(192, 226, 125, 1) 17.36%, rgba(124, 208, 119, 1) 39.74%, rgba(71, 194, 115, 1) 60.01%, rgba(32, 184, 112, 1) 77.44%, rgba(9, 177, 111, 1) 91.35%, rgba(0, 175, 110, 1) 100%);
-    background : linear-gradient(188deg, rgba(249, 241, 129, 1) 0%, rgba(192, 226, 125, 1) 17.36%, rgba(124, 208, 119, 1) 39.74%, rgba(71, 194, 115, 1) 60.01%, rgba(32, 184, 112, 1) 77.44%, rgba(9, 177, 111, 1) 91.35%, rgba(0, 175, 110, 1) 100%);
-
-}
-
 .navText {
     margin: 15px 10px;
 }
@@ -622,6 +633,9 @@ trix-editor ul {
   .topnav.responsive a {
     float: none;
     display: block;
+  }
+
+  .topnav.responsive a:not(.navButton) {
     text-align: left;
   }
 }
@@ -667,6 +681,12 @@ trix-editor ul {
         margin: 30px auto 60px auto;
     }
 
+    .navButton {
+        width:160px;
+        margin: 15px 10px;
+        text-align:center;
+    }
+
     .slide-css {
     margin-right: 10px;
     }
@@ -683,7 +703,7 @@ trix-editor ul {
         width:100%;
     }
 
-    .resume {
+    .resume, .arrow, .svg-container {
         display:none;
     }
 
