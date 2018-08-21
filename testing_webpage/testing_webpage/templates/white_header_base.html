@@ -12,7 +12,7 @@
         {% if 'seleccion_de_personal' in request.path %}
             {% if user.is_authenticated %}
                 <a href="{% url 'business:logout' %}">{% trans "LOG OUT" %}</a>
-                <a class="navButton" style="font-size: 15px;width:170px;color: white;border-radius:40px;margin-top: 30px;padding:5px 16px;background:#F47B20;" role="button" href="{% url 'business:start' %}">+  CREAR OFERTA</a>
+                <a class="navButton" role="button" href="{% url 'business:start' %}">+  CREAR OFERTA</a>
                 {% if not 'campañas' in request.path %}
                     <a href="{% url 'business:business_campaigns' user|get_business_user_id_from_auth_user %}">Mis campañas</a>
                 {% endif %}

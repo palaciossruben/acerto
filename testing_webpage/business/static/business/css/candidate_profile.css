@@ -124,14 +124,11 @@ body {
 }
 /********************************************Accordion******************************************************************/
 .accordion {
-    color: #444;
     cursor: pointer;
-    padding: 18px;
     width: 100%;
     border: none;
     text-align: left;
     outline: none;
-    font-size: 15px;
     transition: 0.4s;
 }
 
@@ -144,8 +141,16 @@ body {
     background-color: white;
     overflow: hidden;
     text-align:left;
+    padding:20px 0;
 }
 
+.no-padding{
+    padding:0;
+}
+
+.test-distinction{
+    display:none;
+}
 /**********************************************************************************************************************/
 
 .curriculum{
@@ -501,6 +506,7 @@ body {
 /***********************************************TEST CIRCLES***********************************************************/
 .condoms-row{
     text-align: left;
+    display:inline-table;
 }
 
 .fill{
@@ -517,6 +523,7 @@ body {
     color: black;
     font-size: 12px;
     text-align: center;
+    cursor:pointer;
     /*background: linear-gradient(to top, rgba(238, 235, 52, 0.7) 85%, transparent 85%);
     border-color:rgba(238, 235, 52, 1);*/
 }
@@ -728,4 +735,7 @@ footer {
         text-align:center;
     }
 
+    .responsive-center{
+        text-align: center;
+    }
 }
