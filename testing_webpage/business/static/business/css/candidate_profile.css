@@ -152,6 +152,28 @@ body {
     display:none;
 }
 /**********************************************************************************************************************/
+.test-distinction-label{
+    padding: 0 25px;
+    text-align:left;
+}
+
+.listno-light {
+    color:#bdbcc2;
+    background-image:url(../img/no-light.png);
+    background-repeat:no-repeat;
+    background-position:5px 5px;
+    padding: 0 25px;
+    text-align:left;
+}
+
+.listyes-light {
+    color:#3d4753;
+    background-image:url(../img/yes-light.png);
+    background-repeat:no-repeat;
+    background-position:5px 5px;
+    padding: 0 25px;
+    text-align:left;
+}
 
 .curriculum{
     text-align:center;
