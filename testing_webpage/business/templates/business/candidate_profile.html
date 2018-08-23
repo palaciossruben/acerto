@@ -74,12 +74,12 @@
 
                 <div class="col-lg-7 col-xs-12">
                     <div class="row condoms-row">
-                        {% if candidate.evaluation_summary.cognitive_score %}
+                        {% if candidate.get_last_evaluation.cognitive_score %}
                             <div class="test-name" id="cognitive">
                                 <span class="test-title">Capacidad cognitiva</span>
-                                {% if candidate.evaluation_summary.cognitive_score >= 0 %}
+                                {% if candidate.get_last_evaluation.cognitive_score >= 0 %}
                                     <div id="{{ candidate.pk }}-recommended-cognitive-id" onclick="off_order(cognitive)" class="fill">
-                                        {{ candidate.evaluation_summary.cognitive_score|print_score }}
+                                        {{ candidate.get_last_evaluation.cognitive_score|print_score }}
                                     </div>
                                 {% endif %}
                                 <div class="test-distinction">
@@ -94,12 +94,12 @@
                             </div>
                         {% endif %}
 
-                        {% if candidate.evaluation_summary.technical_score %}
+                        {% if candidate.get_last_evaluation.technical_score %}
                             <div class="test-name" id="technical">
                                 <span class="test-title">Conocimiento técnico</span>
-                                {% if candidate.evaluation_summary.technical_score >= 0 %}
+                                {% if candidate.get_last_evaluation.technical_score >= 0 %}
                                     <div id="{{ candidate.pk }}-recommended-technical-id" onclick="off_order(technical)" class="fill">
-                                        {{ candidate.evaluation_summary.technical_score|print_score }}
+                                        {{ candidate.get_last_evaluation.technical_score|print_score }}
                                     </div>
                                 {% endif %}
                                 <div class="test-distinction">
@@ -114,12 +114,12 @@
                             </div>
                         {% endif %}
 
-                        {% if candidate.evaluation_summary.requirements_score %}
+                        {% if candidate.get_last_evaluation.requirements_score %}
                             <div class="test-name" id="requirements">
                                 <span class="test-title">Requisitos</span>
-                                {% if candidate.evaluation_summary.requirements_score >= 0 %}
+                                {% if candidate.get_last_evaluation.requirements_score >= 0 %}
                                     <div id="{{ candidate.pk }}-recommended-requirement-id" onclick="off_order(requirements)" class="fill">
-                                        {{ candidate.evaluation_summary.requirements_score|print_score }}
+                                        {{ candidate.get_last_evaluation.requirements_score|print_score }}
                                     </div>
                                 {% endif %}
                                 <div class="test-distinction">
@@ -134,12 +134,12 @@
                             </div>
                         {% endif %}
 
-                        {% if candidate.evaluation_summary.motivation_score %}
+                        {% if candidate.get_last_evaluation.motivation_score %}
                             <div class="test-name" id="motivation">
                                 <span class="test-title">Motivación</span>
-                                {% if candidate.evaluation_summary.motivation_score >= 0 %}
+                                {% if candidate.get_last_evaluation.motivation_score >= 0 %}
                                     <div id="{{ candidate.pk }}-recommended-motivation-id" onclick="off_order(motivation)" class="fill">
-                                        {{ candidate.evaluation_summary.motivation_score|print_score }}
+                                        {{ candidate.get_last_evaluation.motivation_score|print_score }}
                                     </div>
                                 {% endif %}
                                 <div class="test-distinction">
@@ -154,12 +154,12 @@
                             </div>
                         {% endif %}
 
-                        {% if candidate.evaluation_summary.cultural_fit_score %}
+                        {% if candidate.get_last_evaluation.cultural_fit_score %}
                             <div class="test-name" id="cultural">
                                 <span class="test-title">Fit cultural</span>
-                                {% if candidate.evaluation_summary.cultural_fit_score >= 0 %}
+                                {% if candidate.get_last_evaluation.cultural_fit_score >= 0 %}
                                     <div id="{{ candidate.pk }}-recommended-cultural-id" onclick="off_order(cultural)" class="fill">
-                                        {{ candidate.evaluation_summary.cultural_fit_score|print_score }}
+                                        {{ candidate.get_last_evaluation.cultural_fit_score|print_score }}
                                     </div>
                                 {% endif %}
                                 <div class="test-distinction">
@@ -294,11 +294,11 @@
         </footer>
         <script>
             $(document).ready(function() {
-                set_circle_color({{ candidate.evaluation_summary.cognitive_score|int_rounding }}, "{{ candidate.pk }}-recommended-cognitive-id");
-                set_circle_color({{ candidate.evaluation_summary.technical_score|int_rounding }}, "{{ candidate.pk }}-recommended-technical-id");
-                set_circle_color({{ candidate.evaluation_summary.requirements_score|int_rounding }}, "{{ candidate.pk }}-recommended-requirement-id");
-                set_circle_color({{ candidate.evaluation_summary.motivation_score|int_rounding }}, "{{ candidate.pk }}-recommended-motivation-id");
-                set_circle_color({{ candidate.evaluation_summary.cultural_fit_score|int_rounding }}, "{{ candidate.pk }}-recommended-cultural-id");
+                set_circle_color({{ candidate.get_last_evaluation.cognitive_score|int_rounding }}, "{{ candidate.pk }}-recommended-cognitive-id");
+                set_circle_color({{ candidate.get_last_evaluation.technical_score|int_rounding }}, "{{ candidate.pk }}-recommended-technical-id");
+                set_circle_color({{ candidate.get_last_evaluation.requirements_score|int_rounding }}, "{{ candidate.pk }}-recommended-requirement-id");
+                set_circle_color({{ candidate.get_last_evaluation.motivation_score|int_rounding }}, "{{ candidate.pk }}-recommended-motivation-id");
+                set_circle_color({{ candidate.get_last_evaluation.cultural_fit_score|int_rounding }}, "{{ candidate.pk }}-recommended-cultural-id");
 
             });
         </script>
