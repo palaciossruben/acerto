@@ -401,8 +401,6 @@ class Score(models.Model):
         db_table = 'scores'
 
 
-
-
 class Evaluation(models.Model):
     """
     Summary of all tests results for a given user.

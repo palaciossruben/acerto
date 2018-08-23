@@ -1,16 +1,15 @@
 """
 Calculates a match value with learning algorithm
 """
-from sklearn import svm
 import statistics
 import numpy as np
 import pandas as pd
-from sklearn.metrics import accuracy_score, confusion_matrix, mean_absolute_error
+import re
+from sklearn.metrics import accuracy_score, confusion_matrix
 from imblearn.over_sampling import ADASYN
 from sklearn.ensemble import RandomForestClassifier
 
 from match import common_learning
-#from match import xgboost_scikit_wrapper
 
 # make reproducible results
 np.random.seed(seed=0)
@@ -202,7 +201,16 @@ def print_feature_importance(model, data):
     :return:
     """
     iterator = reversed(sorted(zip(list(data), model.feature_importances_), key=lambda x: x[1]))
-    print([e for e in iterator])
+    importance = [e for e in iterator]
+    importance_dict = dict()
+    for key, value in importance:
+        real_key = re.compile(r'_\d+').split(key)[0]
+        importance_dict[real_key] = importance_dict.get(real_key, 0) + value
+
+    importance_tuples = [(k, v) for k, v in importance_dict.items()]
+    importance_tuples.sort(key=lambda x: x[1], reverse=True)
+
+    print(importance_tuples)
 
 
 def get_model():

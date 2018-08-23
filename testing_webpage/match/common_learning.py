@@ -63,7 +63,7 @@ def get_hashing_info():
 
     # Uncomment for high complexity
     hashing_info = dict()
-    #hashing_info['campaign'] = 5
+    hashing_info['campaign'] = 5
     hashing_info['candidate_country'] = 1
     hashing_info['candidate_city'] = 1
     hashing_info['campaign_country'] = 1
@@ -117,9 +117,9 @@ def get_filtered_candidates():
 
 
 def get_columns():
-    return [#'campaign',
+    return ['campaign',
             #'id',
-            #'text_match',
+            'text_match',
             'candidate_country',
             'candidate_city',
             'campaign_country',
@@ -131,12 +131,19 @@ def get_columns():
             'gender',
             'candidate_work_area',
             # TODO: had only None, can add later on with more data
-            #'salary',
+            'salary',
             'neighborhood',
             'languages',
             'dream_job',
             'campaign_work_area',
-    ]
+            'has_photo',
+            'has_profile',
+            'has_twitter',
+            'has_facebook',
+            'has_instagram',
+            'has_linkedin',
+            'has_brochure_url',
+            ]
 
 
 def from_list_to_query_set(candidates):
@@ -168,15 +175,20 @@ def add_synthetic_fields(data):
     return data
 
 
+def has_url(data, field):
+    data[field] = data[field].apply(lambda x: 1 if isinstance(x, str) and x != '#' else 0)
+    return data
+
+
 def load_raw_data(candidates=get_filtered_candidates()):
 
     if isinstance(candidates, list):
         candidates = from_list_to_query_set(candidates)
 
     # With QuerySet it is much faster.
-    data_list = list(candidates.values_list(#'campaign_id',
+    data_list = list(candidates.values_list('campaign_id',
                                             #'id',  # only to trace the candidate
-                                            #'text_match',
+                                            'text_match',
                                             'user__country_id',
                                             'user__city_id',
                                             'campaign__country_id',
@@ -188,11 +200,18 @@ def load_raw_data(candidates=get_filtered_candidates()):
                                             'user__gender_id',
                                             'user__work_area_id',
                                             # TODO: had only None, can add later on with more data
-                                            #'user__salary',
+                                            'user__salary',
                                             'user__neighborhood',  # TODO: improve input
                                             'user__languages',  # TODO: improve input
                                             'user__dream_job',  # TODO: improve input
                                             'campaign__work_area_id',
+                                            'user__photo_url',
+                                            'user__profile',
+                                            'user__twitter',
+                                            'user__facebook',
+                                            'user__instagram',
+                                            'user__linkedin',
+                                            'user__brochure_url',
                                             # TODO: ADD NEW FIELD HERE
                                             ))
 
@@ -202,6 +221,13 @@ def load_raw_data(candidates=get_filtered_candidates()):
     data['neighborhood'] = [lower_str(common.remove_accents(n)) for n in data['neighborhood']]
     data['languages'] = [lower_str(common.remove_accents(n)) for n in data['languages']]
     data['dream_job'] = [lower_str(common.remove_accents(n)) for n in data['dream_job']]
+    data = has_url(data, 'has_photo')
+    data['has_profile'] = data['has_profile'].apply(lambda x: 1 if isinstance(x, str) and len(x) > 50 else 0)  # more tan 50 chars
+    data = has_url(data, 'has_twitter')
+    data = has_url(data, 'has_facebook')
+    data = has_url(data, 'has_instagram')
+    data = has_url(data, 'has_linkedin')
+    data = has_url(data, 'has_brochure_url')
 
     # similar accuracy with high and low complexity:
     #data = add_test_features(data, candidates, ['passed', 'final_score'])
@@ -301,7 +327,9 @@ def calculate_defaults(data):
 
     defaults = dict()
 
-    #defaults['text_match'] = np.nanmedian(data['text_match'])
+    defaults['campaign'] = right_mode(data['campaign'])
+    #defaults['id'] = right_mode(data['id'])
+    defaults['text_match'] = np.nanmedian(data['text_match'])
     defaults['education'] = np.nanmedian(data['education'])
     defaults['candidate_country'] = right_mode(data['candidate_country'])
     defaults['candidate_city'] = right_mode(data['candidate_city'])
@@ -322,12 +350,19 @@ def calculate_defaults(data):
     defaults['requirements_score'] = np.nanmedian(data['requirements_score'])
     defaults['motivation_score'] = np.nanmedian(data['motivation_score'])
     defaults['cultural_fit_score'] = np.nanmedian(data['cultural_fit_score'])
+    defaults['has_photo'] = right_mode(data['has_photo'])
+    defaults['has_profile'] = right_mode(data['has_profile'])
+    defaults['has_twitter'] = right_mode(data['has_twitter'])
+    defaults['has_facebook'] = right_mode(data['has_facebook'])
+    defaults['has_instagram'] = right_mode(data['has_instagram'])
+    defaults['has_linkedin'] = right_mode(data['has_linkedin'])
+    defaults['has_brochure_url'] = right_mode(data['has_brochure_url'])
 
     # TODO: ADD NEW FIELD HERE
 
     # TODO: had only None, can add later on with more data
     # print(data['salary'])
-    # defaults['salary'] = np.mean(data['salary'])
+    defaults['salary'] = np.mean(data['salary'])
 
     for column in data.columns.values:
         if 'test' in column:
