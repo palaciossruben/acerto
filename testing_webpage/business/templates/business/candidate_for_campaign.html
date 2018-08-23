@@ -47,56 +47,56 @@
     {% endif %}
     <div class="col-lg-4 col-xs-12 condoms-row">
         <div class="row">
-            {% if candidate.evaluation_summary.cognitive_score >= 0 %}
+            {% if candidate.get_last_evaluation.cognitive_score >= 0 %}
             <div class="test-name small">
                 Capacidad cognitiva
-                {% if candidate.evaluation_summary.cognitive_score >= 0 %}
+                {% if candidate.get_last_evaluation.cognitive_score >= 0 %}
             <div id="{{ candidate.pk }}-recommended-cognitive-id" class="fill small-fill">
-                {{ candidate.evaluation_summary.cognitive_score|print_score }}
+                {{ candidate.get_last_evaluation.cognitive_score|print_score }}
             </div>
             {% endif %}
             </div>
             {% endif %}
 
-            {% if candidate.evaluation_summary.technical_score >= 0 %}
+            {% if candidate.get_last_evaluation.technical_score >= 0 %}
             <div class="test-name small">
                 Conocimiento técnico
-                {% if candidate.evaluation_summary.technical_score >= 0 %}
+                {% if candidate.get_last_evaluation.technical_score >= 0 %}
             <div id="{{ candidate.pk }}-recommended-technical-id" class="fill small-fill">
-                {{ candidate.evaluation_summary.technical_score|print_score }}
+                {{ candidate.get_last_evaluation.technical_score|print_score }}
             </div>
             {% endif %}
             </div>
             {% endif %}
 
-            {% if candidate.evaluation_summary.requirements_score >= 0 %}
+            {% if candidate.get_last_evaluation.requirements_score >= 0 %}
             <div class="test-name small">
                 Requisitos
-                {% if candidate.evaluation_summary.requirements_score >= 0 %}
+                {% if candidate.get_last_evaluation.requirements_score >= 0 %}
             <div id="{{ candidate.pk }}-recommended-requirement-id" class="fill small-fill">
-                {{ candidate.evaluation_summary.requirements_score|print_score }}
+                {{ candidate.get_last_evaluation.requirements_score|print_score }}
             </div>
             {% endif %}
             </div>
             {% endif %}
 
-            {% if candidate.evaluation_summary.motivation_score >= 0 %}
+            {% if candidate.get_last_evaluation.motivation_score >= 0 %}
             <div class="test-name small">
                 Motivación
-                {% if candidate.evaluation_summary.motivation_score >= 0 %}
+                {% if candidate.get_last_evaluation.motivation_score >= 0 %}
             <div id="{{ candidate.pk }}-recommended-motivation-id" class="fill small-fill">
-                {{ candidate.evaluation_summary.motivation_score|print_score }}
+                {{ candidate.get_last_evaluation.motivation_score|print_score }}
             </div>
             {% endif %}
             </div>
             {% endif %}
 
-            {% if candidate.evaluation_summary.cultural_fit_score >= 0 %}
+            {% if candidate.get_last_evaluation.cultural_fit_score >= 0 %}
             <div class="test-name small">
                 Fit cultural
-                {% if candidate.evaluation_summary.cultural_fit_score >= 0 %}
+                {% if candidate.get_last_evaluation.cultural_fit_score >= 0 %}
             <div id="{{ candidate.pk }}-recommended-cultural-id" class="fill small-fill">
-                {{ candidate.evaluation_summary.cultural_fit_score|print_score }}
+                {{ candidate.get_last_evaluation.cultural_fit_score|print_score }}
             </div>
             {% endif %}
             </div>
@@ -108,11 +108,11 @@
 
 <script>
     $(document).ready(function() {
-        set_circle_color({{ candidate.evaluation_summary.cognitive_score|int_rounding }}, "{{ candidate.pk }}-recommended-cognitive-id");
-        set_circle_color({{ candidate.evaluation_summary.technical_score|int_rounding }}, "{{ candidate.pk }}-recommended-technical-id");
-        set_circle_color({{ candidate.evaluation_summary.requirements_score|int_rounding }}, "{{ candidate.pk }}-recommended-requirement-id");
-        set_circle_color({{ candidate.evaluation_summary.motivation_score|int_rounding }}, "{{ candidate.pk }}-recommended-motivation-id");
-        set_circle_color({{ candidate.evaluation_summary.cultural_fit_score|int_rounding }}, "{{ candidate.pk }}-recommended-cultural-id");
+        set_circle_color({{ candidate.get_last_evaluation.cognitive_score|int_rounding }}, "{{ candidate.pk }}-recommended-cognitive-id");
+        set_circle_color({{ candidate.get_last_evaluation.technical_score|int_rounding }}, "{{ candidate.pk }}-recommended-technical-id");
+        set_circle_color({{ candidate.get_last_evaluation.requirements_score|int_rounding }}, "{{ candidate.pk }}-recommended-requirement-id");
+        set_circle_color({{ candidate.get_last_evaluation.motivation_score|int_rounding }}, "{{ candidate.pk }}-recommended-motivation-id");
+        set_circle_color({{ candidate.get_last_evaluation.cultural_fit_score|int_rounding }}, "{{ candidate.pk }}-recommended-cultural-id");
     });
 </script>
 
