@@ -401,6 +401,8 @@ class Score(models.Model):
         db_table = 'scores'
 
 
+
+
 class Evaluation(models.Model):
     """
     Summary of all tests results for a given user.
@@ -517,6 +519,9 @@ class EvaluationSummary(models.Model):
         :return: None
         """
 
+        # filter None
+        evaluations = [e for e in evaluations if e is not None]
+
         if len(evaluations) > 0:
 
             if isinstance(evaluations[0], Evaluation):
@@ -615,6 +620,11 @@ class Campaign(models.Model):
     relevant_evaluation = models.ForeignKey(EvaluationSummary, null=True, related_name='relevant_evaluation')
     applicant_evaluation = models.ForeignKey(EvaluationSummary, null=True, related_name='applicant_evaluation')
     rejected_evaluation = models.ForeignKey(EvaluationSummary, null=True, related_name='rejected_evaluation')
+
+    recommended_evaluation_last = models.ForeignKey(EvaluationSummary, null=True, related_name='recommended_evaluation_last')
+    relevant_evaluation_last = models.ForeignKey(EvaluationSummary, null=True, related_name='relevant_evaluation_last')
+    applicant_evaluation_last = models.ForeignKey(EvaluationSummary, null=True, related_name='applicant_evaluation_last')
+    rejected_evaluation_last = models.ForeignKey(EvaluationSummary, null=True, related_name='rejected_evaluation_last')
 
     # TODO: remove circular dependency
     # plan = models.ForeignKey(Plan, null=True, on_delete=models.DO_NOTHING)

@@ -532,11 +532,11 @@ def dashboard(request, business_user_id, campaign_id, state_name):
     recommended = common.get_recommended_candidates(campaign)
 
     if business_state.name == 'aplicantes':
-        campaign_evaluation = campaign.applicant_evaluation
+        campaign_evaluation = campaign.applicant_evaluation_last
     elif business_state.name == 'relevantes':
-        campaign_evaluation = campaign.relevant_evaluation
+        campaign_evaluation = campaign.relevant_evaluation_last
     else:
-        campaign_evaluation = campaign.recommended_evaluation
+        campaign_evaluation = campaign.recommended_evaluation_last
 
     return render(request, cts.DASHBOARD_VIEW_PATH, {'candidates': {'applicants': applicants,
                                                                     'relevant': relevant,

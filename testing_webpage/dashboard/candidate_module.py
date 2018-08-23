@@ -11,9 +11,9 @@ from beta_invite import test_module
 
 
 def add_property(candidate, request, property_name):
-    property = request.POST.get('{0}_{1}'.format(candidate.id, property_name))
-    if property is not None and property != '':
-        setattr(candidate, property_name, property)
+    my_property = request.POST.get('{0}_{1}'.format(candidate.id, property_name))
+    if my_property is not None and my_property != '':
+        setattr(candidate, property_name, my_property)
 
 
 def update_test_value(evaluation, scores, value, test):

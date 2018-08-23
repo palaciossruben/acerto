@@ -73,56 +73,56 @@
                                 </div>
                                 <div class="col-lg-9 col-xs-12 recommended">
                                     <div class="row">
-                                        {% if campaign.recommended_evaluation.cognitive_score >= 0 %}
+                                        {% if campaign.recommended_evaluation_last.cognitive_score >= 0 %}
                                         <div class="test-name small">
                                             Capacidad cognitiva
                                         </div>
                                         {% endif %}
-                                        {% if campaign.recommended_evaluation.technical_score >= 0 %}
+                                        {% if campaign.recommended_evaluation_last.technical_score >= 0 %}
                                         <div class="test-name small">
                                             Conocimiento técnico
                                         </div>
                                         {% endif %}
-                                        {% if campaign.recommended_evaluation.requirements_score >= 0 %}
+                                        {% if campaign.recommended_evaluation_last.requirements_score >= 0 %}
                                         <div class="test-name small">
                                             Requisitos
                                         </div>
                                         {% endif %}
-                                        {% if campaign.recommended_evaluation.motivation_score >= 0 %}
+                                        {% if campaign.recommended_evaluation_last.motivation_score >= 0 %}
                                         <div class="test-name small">
                                             Motivación
                                         </div>
                                         {% endif %}
-                                        {% if campaign.recommended_evaluation.cultural_fit_score >= 0 %}
+                                        {% if campaign.recommended_evaluation_last.cultural_fit_score >= 0 %}
                                         <div class="test-name small">
                                             Fit cultural
                                         </div>
                                         {% endif %}
                                     </div>
                                     <div class="row">
-                                        {% if campaign.recommended_evaluation.cognitive_score >= 0 %}
+                                        {% if campaign.recommended_evaluation_last.cognitive_score >= 0 %}
                                         <div id="recommended-cognitive-id" class="fill five-fills">
-                                            {{ campaign.recommended_evaluation.cognitive_score|print_score }}
+                                            {{ campaign.recommended_evaluation_last.cognitive_score|print_score }}
                                         </div>
                                         {% endif %}
-                                        {% if campaign.recommended_evaluation.technical_score >= 0 %}
+                                        {% if campaign.recommended_evaluation_last.technical_score >= 0 %}
                                         <div id="recommended-technical-id" class="fill five-fills">
-                                            {{ campaign.recommended_evaluation.technical_score|print_score }}
+                                            {{ campaign.recommended_evaluation_last.technical_score|print_score }}
                                         </div>
                                         {% endif %}
-                                        {% if campaign.recommended_evaluation.requirements_score >= 0 %}
+                                        {% if campaign.recommended_evaluation_last.requirements_score >= 0 %}
                                         <div id="recommended-requirement-id" class="fill five-fills">
-                                            {{ campaign.recommended_evaluation.requirements_score|print_score }}
+                                            {{ campaign.recommended_evaluation_last.requirements_score|print_score }}
                                         </div>
                                         {% endif %}
-                                        {% if campaign.recommended_evaluation.motivation_score >= 0 %}
+                                        {% if campaign.recommended_evaluation_last.motivation_score >= 0 %}
                                         <div id="recommended-motivation-id" class="fill five-fills">
-                                            {{ campaign.recommended_evaluation.motivation_score|print_score }}
+                                            {{ campaign.recommended_evaluation_last.motivation_score|print_score }}
                                         </div>
                                         {% endif %}
-                                        {% if campaign.recommended_evaluation.cultural_fit_score >= 0 %}
+                                        {% if campaign.recommended_evaluation_last.cultural_fit_score >= 0 %}
                                         <div id="recommended-cultural-id" class="fill five-fills">
-                                            {{ campaign.recommended_evaluation.cultural_fit_score|print_score }}
+                                            {{ campaign.recommended_evaluation_last.cultural_fit_score|print_score }}
                                         </div>
                                         {% endif %}
                                     </div>
@@ -155,22 +155,22 @@
                             </div>
                             <div class="col-lg-8 col-xs-8 relevant">
                                 <div class="row">
-                                    {% if campaign.relevant_evaluation.cognitive_score >= 0 %}
+                                    {% if campaign.relevant_evaluation_last.cognitive_score >= 0 %}
                                     <div class="test-name">Prueba cognitiva</div>
                                     {% endif %}
-                                    {% if campaign.relevant_evaluation.technical_score >= 0 %}
+                                    {% if campaign.relevant_evaluation_last.technical_score >= 0 %}
                                     <div class="test-name">Prueba técnica</div>
                                     {% endif %}
                                 </div>
                                 <div class="row">
-                                    {% if campaign.relevant_evaluation.cognitive_score >= 0 %}
+                                    {% if campaign.relevant_evaluation_last.cognitive_score >= 0 %}
                                     <div id="relevant-cognitive-id" class="fill">
-                                        {{ campaign.relevant_evaluation.cognitive_score|print_score }}
+                                        {{ campaign.relevant_evaluation_last.cognitive_score|print_score }}
                                     </div>
                                     {% endif %}
-                                    {% if campaign.relevant_evaluation.technical_score >= 0 %}
+                                    {% if campaign.relevant_evaluation_last.technical_score >= 0 %}
                                     <div id="relevant-technical-id" class="fill">
-                                        {{ campaign.relevant_evaluation.technical_score|print_score }}
+                                        {{ campaign.relevant_evaluation_last.technical_score|print_score }}
                                     </div>
                                     {% endif %}
                                 </div>
@@ -201,14 +201,14 @@
                             </div>
                             <div class="col-lg-12 col-xs-8 applicant">
                                 <div class="row">
-                                    {% if campaign.applicant_evaluation.cognitive_score >= 0 %}
+                                    {% if campaign.applicant_evaluation_last.cognitive_score >= 0 %}
                                     <div class="final-test-name">Prueba cognitiva</div>
                                     {% endif %}
                                 </div>
                                 <div class="row">
-                                    {% if campaign.applicant_evaluation.cognitive_score >= 0 %}
+                                    {% if campaign.applicant_evaluation_last.cognitive_score >= 0 %}
                                     <div id="applicant-cognitive-id" class="fill">
-                                        {{ campaign.applicant_evaluation.cognitive_score|print_score }}
+                                        {{ campaign.applicant_evaluation_last.cognitive_score|print_score }}
                                     </div>
                                     {% endif %}
                                 </div>
@@ -243,16 +243,16 @@
         </script>
         <script>
             $(document).ready(function() {
-                set_circle_color({{ campaign.recommended_evaluation.cognitive_score|int_rounding }}, "recommended-cognitive-id");
-                set_circle_color({{ campaign.recommended_evaluation.technical_score|int_rounding }}, "recommended-technical-id");
-                set_circle_color({{ campaign.recommended_evaluation.requirements_score|int_rounding }}, "recommended-requirement-id");
-                set_circle_color({{ campaign.recommended_evaluation.motivation_score|int_rounding }}, "recommended-motivation-id");
-                set_circle_color({{ campaign.recommended_evaluation.cultural_fit_score|int_rounding }}, "recommended-cultural-id");
+                set_circle_color({{ campaign.recommended_evaluation_last.cognitive_score|int_rounding }}, "recommended-cognitive-id");
+                set_circle_color({{ campaign.recommended_evaluation_last.technical_score|int_rounding }}, "recommended-technical-id");
+                set_circle_color({{ campaign.recommended_evaluation_last.requirements_score|int_rounding }}, "recommended-requirement-id");
+                set_circle_color({{ campaign.recommended_evaluation_last.motivation_score|int_rounding }}, "recommended-motivation-id");
+                set_circle_color({{ campaign.recommended_evaluation_last.cultural_fit_score|int_rounding }}, "recommended-cultural-id");
 
-                set_circle_color({{ campaign.relevant_evaluation.technical_score|int_rounding }}, "relevant-technical-id");
-                set_circle_color({{ campaign.relevant_evaluation.cognitive_score|int_rounding }}, "relevant-cognitive-id");
+                set_circle_color({{ campaign.relevant_evaluation_last.technical_score|int_rounding }}, "relevant-technical-id");
+                set_circle_color({{ campaign.relevant_evaluation_last.cognitive_score|int_rounding }}, "relevant-cognitive-id");
 
-                set_circle_color({{ campaign.applicant_evaluation.cognitive_score|int_rounding }}, "applicant-cognitive-id");
+                set_circle_color({{ campaign.applicant_evaluation_last.cognitive_score|int_rounding }}, "applicant-cognitive-id");
             });
         </script>
 {% endblock %}
