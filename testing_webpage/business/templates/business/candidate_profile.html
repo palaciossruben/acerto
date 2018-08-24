@@ -145,11 +145,11 @@
                                         {% endif %}
                                     {% endfor %}
 
-                                    {% for e in candidate.surveys.all %}
-                                        {% if e.test.type.pk == 3 and e.score > 0 %}
-                                            <p class="listyes-light">{{ e.question.text_es }}{{ e.answer.name_es }}</p>
-                                        {% elif e.test.type.pk == 3 and e.score <= 0 %}
-                                            <p class="listno-light">{{ e.question.text_es }}{{ e.answer.name_es }}</p>
+                                    {% for s in candidate.get_last_requirement_surveys %}
+                                        {% if s.score > 0 %}
+                                            <p class="listyes-light">{{ s.question.text_es }}{{ s.answer.name_es }}</p>
+                                        {% elif s.score <= 0 %}
+                                            <p class="listno-light">{{ s.question.text_es }}{{ s.answer.name_es }}</p>
                                         {% endif %}
                                     {% endfor %}
                                 </div>

@@ -117,6 +117,11 @@ class Candidate(models.Model):
     class Meta:
         db_table = 'candidates'
 
+    def get_last_requirement_surveys(self):
+        return Survey.objects.filter(campaign=self.campaign,
+                                     test__type__name='requirement',
+                                     user=self.user).order_by('-try_number').all()
+
     def get_last_evaluation(self):
         try:
             return self.evaluations.latest('created_at')
