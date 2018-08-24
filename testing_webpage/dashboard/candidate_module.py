@@ -53,6 +53,7 @@ def updates_or_creates_score(evaluation, cultural_value, motivation_value):
     update_test_value(evaluation, scores, cultural_value, dummy_cultural_test)
 
 
+# TODO: this is a duplicated method: please remove taking the first line, that's good.
 def change_candidate_state(candidate, evaluation):
 
     # don't downgrade someone that is passing
@@ -60,10 +61,9 @@ def change_candidate_state(candidate, evaluation):
         return
 
     if evaluation.passed:
-        candidate.state = State.objects.get(code='WFI')
+        candidate.change_state(code='WFI')
     else:  # Fails tests
-        candidate.state = State.objects.get(code='FT')
-    candidate.save()
+        candidate.change_state(code='FT')
 
 
 def update_candidate_with_tests(candidate, motivation_value, cultural_value):
@@ -102,14 +102,16 @@ def update_candidate_with_tests(candidate, motivation_value, cultural_value):
             change_candidate_state(candidate, evaluation)
 
 
-def update_candidate(request, candidate):
+def update_candidate_manually(request, candidate):
     """
     Args:
         request: HTTP
         candidate: Object
     Returns: Saves Candidate and optionally the curriculum.
     """
-    candidate.state_id = request.POST.get('{}_state'.format(candidate.id))
+    state_id = request.POST.get('{}_state'.format(candidate.id))
+    candidate.change_state(state_code=State.objects.get(pk=state_id).code,
+                           auth_user=request.user)
 
     text = request.POST.get('{}_comment'.format(candidate.id))
     if text is not None and text != '':
@@ -142,7 +144,7 @@ def add_candidate_to_campaign(request, candidate):
     """
 
     # Updates latest changes, first.
-    update_candidate(request, candidate)
+    update_candidate_manually(request, candidate)
 
     selected_campaign_id = int(request.POST.get('{}_selected_campaign'.format(candidate.id)))
 

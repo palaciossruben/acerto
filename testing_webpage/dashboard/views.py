@@ -77,7 +77,7 @@ def edit_campaign_candidates(request, campaign_id):
         candidate = Candidate.objects.get(pk=int(candidate_id))
 
         if action == 'update':
-            candidate_module.update_candidate(request, candidate)
+            candidate_module.update_candidate_manually(request, candidate)
         elif action == 'add':
             candidate_module.add_candidate_to_campaign(request, candidate)
         elif action == 'remove':

@@ -141,9 +141,9 @@ def alter_candidate_state(candidate, evaluation):
     """
     if candidate:
         if evaluation.passed:
-            candidate.state = State.objects.get(code='WFI')
+            candidate.change_state(state_code='WFI')
         else:  # Fails tests
-            candidate.state = State.objects.get(code='FT')
+            candidate.change_state(state_code='FT')
 
         candidate.save()
 

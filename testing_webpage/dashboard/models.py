@@ -2,6 +2,7 @@ import statistics
 import numpy as np
 from django.db import models
 from django.db.models.signals import post_init
+from django.contrib.auth.models import User as AuthUser
 
 from beta_invite.models import User, Campaign, Evaluation, Survey, EvaluationSummary, Score, Test
 from dashboard import constants as cts
@@ -85,6 +86,48 @@ class Screening(models.Model):
         db_table = 'screenings'
 
 
+class StateEvent(models.Model):
+    """
+    Any change in state is logged here.
+    """
+
+    from_state = models.ForeignKey(State, related_name='from_state')
+    to_state = models.ForeignKey(State, related_name='to_state')
+    auth_user = models.ForeignKey(AuthUser, null=True, on_delete=models.SET_NULL)
+    automatic = models.BooleanField(default=False)
+    place = models.TextField(null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    @classmethod
+    def create(cls, from_state, to_state, auth_user, place):
+        """
+        If no auth user is given then it is a automated event.
+        """
+
+        state_event = cls(from_state=from_state,
+                          to_state=to_state,
+                          auth_user=auth_user,
+                          automatic=True if auth_user is None else False,
+                          place=place)
+        state_event.save()
+
+        return state_event
+
+    def __str__(self):
+        return 'from: {0}, to: {1} on: {2}, automatic: {3}, user: {4}, place: {5}'.format(self.from_state,
+                                                                                          self.to_state,
+                                                                                          self.created_at,
+                                                                                          self.automatic,
+                                                                                          self.auth_user,
+                                                                                          self.place)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'state_events'
+
+
 class Candidate(models.Model):
     """
     This model should be unique for any (user, campaign) pair. A ser can have multiple candidacies in different
@@ -106,6 +149,7 @@ class Candidate(models.Model):
     screening_explanation = models.CharField(max_length=200, default='')
     rating = models.IntegerField(null=True)
     mean_scores = models.ManyToManyField(Score)
+    state_events = models.ManyToManyField(StateEvent)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -116,6 +160,30 @@ class Candidate(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'candidates'
+
+    # TODO: add traceback to default place... wow, great idea!
+    def change_state(self, state_code, auth_user=None, place=None):
+        """
+        from one state to another everything is logged for debugging and further analysis
+        :param state_code: the code, its a str defined in the State model
+        :param auth_user: Django users
+        :param place: open description of the place where stuff is happening!
+        :return: None
+        """
+
+        to_state = State.objects.get(code=state_code)
+
+        event = StateEvent.create(from_state=self.state,
+                                  to_state=to_state,
+                                  auth_user=auth_user,
+                                  place=place)
+        if auth_user is None:
+            event.automatic = True
+        event.save()
+
+        self.state = to_state
+        self.state_events.add(event)
+        self.save()
 
     def get_last_evaluation(self):
         try:
