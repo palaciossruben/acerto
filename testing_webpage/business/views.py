@@ -552,3 +552,14 @@ def dashboard(request, business_user_id, campaign_id, state_name):
                                                      'total_relevant': len(relevant),
                                                      'campaign_evaluation': campaign_evaluation
                                                      })
+
+
+def save_comments(request):
+
+    if request.method == 'POST':
+        candidate = common.get_candidate_from_request(request)
+        new_user_module.update_user_with_request(request, candidate.user)
+
+        return HttpResponse('')
+    else:
+        return HttpResponseBadRequest('<h1>HTTP CODE 400: Client sent bad request with missing params</h1>')

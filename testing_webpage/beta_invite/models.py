@@ -783,8 +783,9 @@ class User(models.Model):
         born = datetime(int(self.birthday.strftime("%Y")), int(self.birthday.strftime("%m")), int(self.birthday.strftime("%d")))
         today = datetime.today()
         age = today - born
+        seconds_in_a_year = 365*24*60*60
         if age is not None:
-            return int(age.total_seconds()/31536000)
+            return int(age.total_seconds()/seconds_in_a_year)
         else:
             return None
 
