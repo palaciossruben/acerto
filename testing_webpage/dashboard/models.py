@@ -118,9 +118,14 @@ class Candidate(models.Model):
         db_table = 'candidates'
 
     def get_last_requirement_surveys(self):
-        return Survey.objects.filter(campaign=self.campaign,
-                                     test__type__name='requirement',
-                                     user=self.user).order_by('-try_number').all()
+
+        surveys = []
+        last_evaluation = self.get_last_evaluation()
+        for score in last_evaluation.scores.filter(test__type__name='requirements'):
+            for question in score.test.questions.all():
+                surveys.append(Survey.get_last_try(self, score.test, question))
+
+        return surveys
 
     def get_last_evaluation(self):
         try:

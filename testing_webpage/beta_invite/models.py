@@ -835,6 +835,10 @@ class Survey(models.Model):
         else:
             return None
 
+    @staticmethod
+    def get_last_try(candidate, test, question):
+        return Survey.get_last_try(candidate.campaign, test, question, candidate.user)
+
     @classmethod
     def create(cls, campaign, test_id, question_id, user_id):
         """
