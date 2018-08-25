@@ -41,23 +41,23 @@ class State(models.Model):
 
     @staticmethod
     def get_recommended_states():
-        return [s for s in State.objects.filter(code__in=['GTJ', 'STC'])]
+        return State.objects.filter(code__in=['GTJ', 'STC']).all()
 
     @staticmethod
     def get_relevant_states():
-        return [s for s in State.objects.filter(code__in=['WFI', 'DI', 'GTJ', 'STC'])]
+        return State.objects.filter(code__in=['WFI', 'DI', 'GTJ', 'STC']).all()
 
     @staticmethod
     def get_applicant_states(): 
-        return [s for s in State.objects.filter(code__in=['P', 'BL', 'RBC', 'SR', 'FT', 'ROT', 'ROI'])]
+        return State.objects.filter(code__in=['P', 'BL', 'RBC', 'SR', 'FT', 'ROT', 'ROI']).all()
 
     @staticmethod
     def get_rejected_states():
-        return [s for s in State.objects.filter(code__in=['ROI', 'RBC', 'SR', 'FT', 'ROT'])]
+        return State.objects.filter(code__in=['ROI', 'RBC', 'SR', 'FT', 'ROT']).all()
 
     @staticmethod
     def get_rejected_by_human_states():
-        return [s for s in State.objects.filter(code__in=['ROI', 'RBC', 'SR'])]
+        return State.objects.filter(code__in=['ROI', 'RBC', 'SR']).all()
 
 
 class Comment(models.Model):

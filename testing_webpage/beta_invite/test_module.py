@@ -132,7 +132,7 @@ def get_scores(campaign, user_id, questions_dict, request):
     return scores
 
 
-def alter_candidate_state(candidate, evaluation):
+def automated_candidate_state_change(candidate, evaluation):
     """
     Given tests results it alters the candidate state.
     :param candidate: Candidate
@@ -140,6 +140,11 @@ def alter_candidate_state(candidate, evaluation):
     :return: None
     """
     if candidate:
+
+        # don't override human decisions
+        if candidate.state in State.get_rejected_by_human_states() + State.get_recommended_states():
+            return
+
         if evaluation.passed:
             candidate.change_state(state_code='WFI')
         else:  # Fails tests
@@ -163,7 +168,6 @@ def add_evaluation_to_candidate(candidate, evaluation):
 
 def get_evaluation(scores, candidate):
     """
-    simple average and percentage
     Args:
         scores: objects with current scores.
         candidate: obj
@@ -174,7 +178,7 @@ def get_evaluation(scores, candidate):
     update_scores(evaluation, scores, candidate)
 
     add_evaluation_to_candidate(candidate, evaluation)
-    alter_candidate_state(candidate, evaluation)
+    automated_candidate_state_change(candidate, evaluation)
 
     return evaluation
 

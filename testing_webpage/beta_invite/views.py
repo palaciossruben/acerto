@@ -292,7 +292,7 @@ def active_campaigns(request):
     last_evaluation = candidate.get_last_evaluation()
     if last_evaluation:
         test_module.update_scores(last_evaluation, last_evaluation.scores.all(), candidate)
-        test_module.alter_candidate_state(candidate, last_evaluation)
+        test_module.automated_candidate_state_change(candidate, last_evaluation)
 
     return render(request, cts.ACTIVE_CAMPAIGNS_VIEW_PATH)
 
