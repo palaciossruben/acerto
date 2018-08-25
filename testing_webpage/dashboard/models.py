@@ -1,5 +1,7 @@
 import statistics
 import numpy as np
+import traceback
+
 from django.db import models
 from django.db.models.signals import post_init
 from django.contrib.auth.models import User as AuthUser
@@ -116,16 +118,22 @@ class StateEvent(models.Model):
         return state_event
 
     def __str__(self):
-        return 'from: {0}, to: {1} on: {2}, automatic: {3}, user: {4}, place: {5}'.format(self.from_state,
-                                                                                          self.to_state,
-                                                                                          self.created_at,
-                                                                                          self.automatic,
-                                                                                          self.auth_user,
-                                                                                          self.place)
+        return 'from: {0}\nto: {1}\non: {2}\nautomatic: {3}\nuser: {4}\nplace: {5}'.format(self.from_state,
+                                                                                           self.to_state,
+                                                                                           self.created_at,
+                                                                                           self.automatic,
+                                                                                           self.auth_user,
+                                                                                           self.place)
 
     # adds custom table name
     class Meta:
         db_table = 'state_events'
+
+
+def exception_to_string(excp):
+    stack = traceback.extract_stack()[:-3] + traceback.extract_tb(excp.__traceback__)  # add limit=??
+    pretty = traceback.format_list(stack)
+    return ''.join(pretty) + '\n  {} {}'.format(excp.__class__, excp)
 
 
 class Candidate(models.Model):
@@ -170,6 +178,11 @@ class Candidate(models.Model):
         :param place: open description of the place where stuff is happening!
         :return: None
         """
+        if place is None:
+            try:
+                raise ValueError
+            except ValueError as e:
+                place = ''.join(exception_to_string(e).split('testing_webpage')[3:])
 
         to_state = State.objects.get(code=state_code)
 

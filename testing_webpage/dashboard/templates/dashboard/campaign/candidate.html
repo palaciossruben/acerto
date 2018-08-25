@@ -45,24 +45,9 @@
 <input type="file" name="photo_url" id="photo">
 </p>
 
-    <p><strong>city: </strong>{{ candidate.user.city.name }}</p>
-<p><strong>candidate created_at: </strong>{{ candidate.user.created_at }}</p>
-
     {% for e in candidate.evaluations.all %}
         <p><strong>test (cut: {{ e.cut_score }}): </strong> {{ e.final_score }}</p>
     {% endfor %}
-
-    {% for e in candidate.evaluations.all %}
-        <p><strong>Pruebas:</strong></p>
-        {% for score in e.scores.all %}
-            {% if score.test.type.pk == 3 %}
-                <p><strong>Requisitos: </strong>{{ score.value }}</p>
-            {% else %}
-                <p><strong>{{ score.test.name_es }}: </strong>{{ score.value }}</p>
-            {% endif %}
-        {% endfor %}
-    {% endfor %}
-
 
     <p><strong>Salary: </strong><input type="text" name="{{ candidate.id }}_salary" value="{{ candidate.salary }}"
     placeholder="add salary"></p>
@@ -87,10 +72,8 @@
                                                   value="{{ candidate.screening_explanation }}"
     placeholder="add brief explanation"></p>
 
-    {% if candidate.surveys.all %}
-        <a href="{% url 'dashboard:candidate_detail' candidate.id %}">view details</a>
-        <br>
-    {% endif %}
+    <a href="{% url 'dashboard:candidate_detail' candidate.id %}">view details</a>
+    <br>
 
 <textarea name="{{ candidate.id }}_comment" cols="40" rows="5"
 placeholder="add a comment!"></textarea>
