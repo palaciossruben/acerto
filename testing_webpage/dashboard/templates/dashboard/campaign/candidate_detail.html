@@ -78,6 +78,15 @@
         <p>to: {{ e.to_state.name }}</p>
         <p>user: {{ e.auth_user }}</p>
         <p>automatic: {{ e.automatic }}</p>
+        {% if e.forecast is not None %}
+            {% if e.forecast %}
+                <p><strong>Forecast: Passes</strong></p>
+            {% else %}
+                <p><strong>Forecast: Fails</strong></p>
+            {% endif %}
+        {% else %}
+            <p><strong>Forecast: Not predicted</strong></p>
+        {% endif %}
         <p>where: {{ e.place }}</p>
         <p>on: {{ e.created_at }}</p>
     {% endfor %}

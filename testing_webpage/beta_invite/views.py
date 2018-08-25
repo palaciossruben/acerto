@@ -291,8 +291,8 @@ def active_campaigns(request):
     # Does a last update of the ML prediction with the additional info provided before.
     last_evaluation = candidate.get_last_evaluation()
     if last_evaluation:
-        test_module.update_scores(last_evaluation, last_evaluation.scores.all(), candidate)
-        test_module.automated_candidate_state_change(candidate, last_evaluation)
+        test_module.update_scores(last_evaluation, last_evaluation.scores.all())
+        test_module.classify_evaluation_and_change_state(candidate)
 
     return render(request, cts.ACTIVE_CAMPAIGNS_VIEW_PATH)
 

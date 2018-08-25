@@ -41,23 +41,23 @@ class State(models.Model):
 
     @staticmethod
     def get_recommended_states():
-        return State.objects.filter(code__in=['GTJ', 'STC']).all()
+        return list(State.objects.filter(code__in=['GTJ', 'STC']))
 
     @staticmethod
     def get_relevant_states():
-        return State.objects.filter(code__in=['WFI', 'DI', 'GTJ', 'STC']).all()
+        return list(State.objects.filter(code__in=['WFI', 'DI', 'GTJ', 'STC']))
 
     @staticmethod
     def get_applicant_states(): 
-        return State.objects.filter(code__in=['P', 'BL', 'RBC', 'SR', 'FT', 'ROT', 'ROI']).all()
+        return list(State.objects.filter(code__in=['P', 'BL', 'RBC', 'SR', 'FT', 'ROT', 'ROI']))
 
     @staticmethod
     def get_rejected_states():
-        return State.objects.filter(code__in=['ROI', 'RBC', 'SR', 'FT', 'ROT']).all()
+        return list(State.objects.filter(code__in=['ROI', 'RBC', 'SR', 'FT', 'ROT']))
 
     @staticmethod
     def get_rejected_by_human_states():
-        return State.objects.filter(code__in=['ROI', 'RBC', 'SR']).all()
+        return list(State.objects.filter(code__in=['ROI', 'RBC', 'SR']))
 
 
 class Comment(models.Model):
@@ -97,13 +97,14 @@ class StateEvent(models.Model):
     to_state = models.ForeignKey(State, related_name='to_state')
     auth_user = models.ForeignKey(AuthUser, null=True, on_delete=models.SET_NULL)
     automatic = models.BooleanField(default=False)
+    forecast = models.NullBooleanField(default=None, null=True)
     place = models.TextField(null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     @classmethod
-    def create(cls, from_state, to_state, auth_user, place):
+    def create(cls, from_state, to_state, auth_user, forecast, place):
         """
         If no auth user is given then it is a automated event.
         """
@@ -112,18 +113,20 @@ class StateEvent(models.Model):
                           to_state=to_state,
                           auth_user=auth_user,
                           automatic=True if auth_user is None else False,
+                          forecast=forecast,
                           place=place)
         state_event.save()
 
         return state_event
 
     def __str__(self):
-        return 'from: {0}\nto: {1}\non: {2}\nautomatic: {3}\nuser: {4}\nplace: {5}'.format(self.from_state,
-                                                                                           self.to_state,
-                                                                                           self.created_at,
-                                                                                           self.automatic,
-                                                                                           self.auth_user,
-                                                                                           self.place)
+        return 'from: {0}\nto: {1}\non: {2}\nautomatic: {3}\nforecast: {4}\nuser: {5}\nplace: {6}'.format(self.from_state,
+                                                                                                          self.to_state,
+                                                                                                          self.created_at,
+                                                                                                          self.automatic,
+                                                                                                          self.forecast,
+                                                                                                          self.auth_user,
+                                                                                                          self.place)
 
     # adds custom table name
     class Meta:
@@ -170,12 +173,13 @@ class Candidate(models.Model):
         db_table = 'candidates'
 
     # TODO: add traceback to default place... wow, great idea!
-    def change_state(self, state_code, auth_user=None, place=None):
+    def change_state(self, state_code, auth_user=None, place=None, forecast=None):
         """
         from one state to another everything is logged for debugging and further analysis
         :param state_code: the code, its a str defined in the State model
         :param auth_user: Django users
         :param place: open description of the place where stuff is happening!
+        :param forecast: boolean, indicating AI decision
         :return: None
         """
         if place is None:
@@ -189,6 +193,7 @@ class Candidate(models.Model):
         event = StateEvent.create(from_state=self.state,
                                   to_state=to_state,
                                   auth_user=auth_user,
+                                  forecast=forecast,
                                   place=place)
         if auth_user is None:
             event.automatic = True

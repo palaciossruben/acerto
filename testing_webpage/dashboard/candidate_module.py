@@ -53,19 +53,6 @@ def updates_or_creates_score(evaluation, cultural_value, motivation_value):
     update_test_value(evaluation, scores, cultural_value, dummy_cultural_test)
 
 
-# TODO: this is a duplicated method: please remove taking the first line, that's good.
-def change_candidate_state(candidate, evaluation):
-
-    # don't downgrade someone that is passing
-    if evaluation.passed and candidate.state in [State.objects.get(code='STC'), State.objects.get(code='GTJ')]:
-        return
-
-    if evaluation.passed:
-        candidate.change_state(code='WFI')
-    else:  # Fails tests
-        candidate.change_state(code='FT')
-
-
 def update_candidate_with_tests(candidate, motivation_value, cultural_value):
     """
     Updates latest evaluation with scores of cultural fit and motivation
@@ -92,14 +79,14 @@ def update_candidate_with_tests(candidate, motivation_value, cultural_value):
             updates_or_creates_score(evaluation,
                                      motivation_value=motivation_value,
                                      cultural_value=cultural_value)
-            test_module.update_scores(evaluation, evaluation.scores.all(), candidate)
+            test_module.update_scores(evaluation, evaluation.scores.all())
 
             if candidate.evaluation_summary:
                 candidate.evaluation_summary.update_evaluations(candidate.evaluations.all())
             else:
                 candidate.evaluation_summary = EvaluationSummary.create(candidate.evaluations.all())
 
-            change_candidate_state(candidate, evaluation)
+            test_module.classify_evaluation_and_change_state(candidate)
 
 
 def update_candidate_manually(request, candidate):
