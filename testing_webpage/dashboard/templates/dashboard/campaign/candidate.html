@@ -8,7 +8,7 @@
 <br>
 <br>
 
-    {% if candidate.match_classification %}
+{% if candidate.match_classification %}
     <p><strong>Forecast: Passes</strong></p>
 {% else %}
     <p><strong>Forecast: Fails</strong></p>
@@ -87,35 +87,10 @@
                                                   value="{{ candidate.screening_explanation }}"
     placeholder="add brief explanation"></p>
 
-    {% if candidate.text_match %}
-        <p><strong>Text Match (higher is better): </strong>{{ candidate.text_match }}</p>
-    {% endif %}
-
-    <br>
-
     {% if candidate.surveys.all %}
-        <p><strong> PREGUNTAS Y RESPUESTAS DEL TEST : </strong></p>
+        <a href="{% url 'dashboard:candidate_detail' candidate.id %}">view details</a>
+        <br>
     {% endif %}
-    {% for e in candidate.surveys.all %}
-
-    <p>{{ e.question.pk }}<strong> {{ e.question.text_es }} </strong></p>
-        {% if e.answer %}
-    <p> {{ e.answer.name_es }} </p>
-        {% endif %}
-        {% if e.numeric_answer %}
-    <p> {{ e.numeric_answer|floatformat }}</p>
-        {% endif %}
-        {% if e.text_answer %}
-    <p> {{ e.text_answer }} </p>
-        {% endif %}
-    {% endfor %}
-
-
-{% for c in candidate.comments.all %}
-    <p><strong>{{ c.created_at }}</strong></p>
-    <p>{{ c.text }}</p>
-{% endfor %}
-
 
 <textarea name="{{ candidate.id }}_comment" cols="40" rows="5"
 placeholder="add a comment!"></textarea>
@@ -149,7 +124,7 @@ placeholder="add a comment!"></textarea>
 <select class="selectpicker" name="{{ candidate.id }}_selected_campaign" style="width: 140px">
   <option value="0">Select Campaign</option>
   {% for campaign in campaigns%}
-     <option value="{{ campaign.id }}">{{ campaign.name }}/{{ campaign.title_es }}</option>
+    <option value="{{ campaign.id }}">{{ campaign.name }}/{{ campaign.title_es }}</option>
   {% endfor %}
 </select>
 

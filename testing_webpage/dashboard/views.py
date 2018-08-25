@@ -40,6 +40,15 @@ def index(request):
 # ------------------------------- CAMPAIGN -------------------------------
 
 
+def candidate_detail(request, candidate_id):
+    """
+    :param request: HTTP request
+    :param candidate_id: int Candidate id
+    :return: render view
+    """
+    return render(request, cts.CANDIDATE_DETAIL, {'candidate': Candidate.objects.get(pk=candidate_id)})
+
+
 def add_to_message_queue(candidates, text):
     """
     Adds objects to the message table. So later on this table will serve as a message queue.
