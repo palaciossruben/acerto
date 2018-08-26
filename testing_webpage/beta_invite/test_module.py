@@ -143,7 +143,7 @@ def automated_candidate_state_change(candidate, evaluation, forecast):
     if candidate:
 
         # don't override human decisions
-        if candidate.state in State.get_rejected_by_human_states() + State.get_recommended_states():
+        if candidate.state in State.get_human_intervention_states():
             return
 
         if evaluation.passed:

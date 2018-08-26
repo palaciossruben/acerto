@@ -59,6 +59,12 @@ class State(models.Model):
     def get_rejected_by_human_states():
         return list(State.objects.filter(code__in=['ROI', 'RBC', 'SR']))
 
+    @staticmethod
+    def get_human_intervention_states():
+        return list(State.objects.filter(code__in=['DI'])) +\
+               State.get_recommended_states() +\
+               State.get_rejected_by_human_states()
+
 
 class Comment(models.Model):
 
