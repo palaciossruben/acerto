@@ -16,8 +16,8 @@ from match import common_learning
 np.random.seed(seed=0)
 
 
-PARAMS = {'n_estimators': [50, 75, 100, 120], 'max_depth': [15, 20, 25]}
-CLASS_WEIGHTS = {0: 1, 1: 10}
+PARAMS = {'n_estimators': [90, 100, 110], 'max_depth': [17, 20, 23]}
+CLASS_WEIGHTS = {0: 1, 1: 100}
 
 
 def balance(data):

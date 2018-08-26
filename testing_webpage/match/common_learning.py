@@ -199,7 +199,6 @@ def load_raw_data(candidates=get_filtered_candidates()):
                                             'campaign__education__level',
                                             'user__gender_id',
                                             'user__work_area_id',
-                                            # TODO: had only None, can add later on with more data
                                             'user__salary',
                                             'user__neighborhood',  # TODO: improve input
                                             'user__languages',  # TODO: improve input
@@ -212,6 +211,9 @@ def load_raw_data(candidates=get_filtered_candidates()):
                                             'user__instagram',
                                             'user__linkedin',
                                             'user__brochure_url',
+                                            # TODO: add new fields campaign.salary_low_range
+                                            # TODO: add new fields campaign.salary_low_high
+
                                             # TODO: ADD NEW FIELD HERE
                                             ))
 
