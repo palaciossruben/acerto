@@ -613,6 +613,8 @@ class Campaign(models.Model):
     work_area = models.ForeignKey(WorkArea, null=True, on_delete=models.SET_NULL)
     operational_efficiency = models.FloatField(null=True)
     image = models.CharField(max_length=500, null=True)
+    salary_low_range = models.IntegerField(null=True)
+    salary_high_range = models.IntegerField(null=True)
 
     recommended_evaluation = models.ForeignKey(EvaluationSummary, null=True, related_name='recommended_evaluation')
     relevant_evaluation = models.ForeignKey(EvaluationSummary, null=True, related_name='relevant_evaluation')

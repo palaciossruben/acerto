@@ -63,7 +63,7 @@ def get_hashing_info():
 
     # Uncomment for high complexity
     hashing_info = dict()
-    hashing_info['campaign'] = 5
+    #hashing_info['campaign'] = 5
     hashing_info['candidate_country'] = 1
     hashing_info['candidate_city'] = 1
     hashing_info['campaign_country'] = 1
@@ -117,7 +117,7 @@ def get_filtered_candidates():
 
 
 def get_columns():
-    return ['campaign',
+    return [#'campaign',
             #'id',
             'text_match',
             'candidate_country',
@@ -186,7 +186,7 @@ def load_raw_data(candidates=get_filtered_candidates()):
         candidates = from_list_to_query_set(candidates)
 
     # With QuerySet it is much faster.
-    data_list = list(candidates.values_list('campaign_id',
+    data_list = list(candidates.values_list(#'campaign_id',
                                             #'id',  # only to trace the candidate
                                             'text_match',
                                             'user__country_id',
@@ -327,7 +327,7 @@ def calculate_defaults(data):
 
     defaults = dict()
 
-    defaults['campaign'] = right_mode(data['campaign'])
+    #defaults['campaign'] = right_mode(data['campaign'])
     #defaults['id'] = right_mode(data['id'])
     defaults['text_match'] = np.nanmedian(data['text_match'])
     defaults['education'] = np.nanmedian(data['education'])

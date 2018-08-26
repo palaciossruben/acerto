@@ -8,11 +8,16 @@ import re
 from sklearn.metrics import accuracy_score, confusion_matrix
 from imblearn.over_sampling import ADASYN
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import GridSearchCV, cross_val_score
 
 from match import common_learning
 
 # make reproducible results
 np.random.seed(seed=0)
+
+
+PARAMS = {'n_estimators': [50, 75, 100, 120], 'max_depth': [15, 20, 25]}
+CLASS_WEIGHTS = {0: 1, 1: 10}
 
 
 def balance(data):
@@ -139,10 +144,22 @@ def learn_model(train, xgboost=False):
         #model = xgboost_scikit_wrapper.XGBoostClassifier(num_boost_round=20, params=params)
 
     else:
-        model = RandomForestClassifier(max_depth=9,
+
+        clf = GridSearchCV(RandomForestClassifier(random_state=0,
+                                                  class_weight=CLASS_WEIGHTS),
+                           PARAMS,
+                           cv=10)
+        clf.fit(train.features, train.target)
+
+        print('best params are:')
+        print('max_depth {}'.format(clf.best_params_['max_depth']))
+        print('n_estimators {}'.format(clf.best_params_['n_estimators']))
+
+        model = RandomForestClassifier(max_depth=clf.best_params_['max_depth'],
                                        random_state=0,
+                                       n_estimators=clf.best_params_['n_estimators'],
                                        # guarantees that we do not miss many candidates with potential
-                                       class_weight={0: 1, 1: 3}
+                                       class_weight=CLASS_WEIGHTS
                                        )
 
     model.fit(train.features, train.target)
@@ -173,22 +190,30 @@ def print_confusion_matrix(test, test_prediction):
     print('should minimize false negatives: {}%'.format(round(my_confusion_matrix[1][0]/total, 2)*100))
 
 
+def percent_format(a_number):
+    return round(a_number * 100, 1)
+
+
 def eval_model(model, train, test):
 
     train_prediction = model.predict(train.features)
     test_prediction = model.predict(test.features)
 
-    f = accuracy_score
+    train_metric = accuracy_score(train_prediction, train.target)
+    test_metric = accuracy_score(test_prediction, test.target)
 
-    train_metric = f(train_prediction, train.target)
-    test_metric = f(test_prediction, test.target)
-
-    baseline_test_metric = f([target_mode(test.target) for _ in test.target], test.target)
+    baseline_test_metric = accuracy_score([target_mode(test.target) for _ in test.target], test.target)
 
     print_confusion_matrix(test, test_prediction)
 
     result = Result(train_metric, test_metric, baseline_test_metric)
     result.print()
+
+    # TODO: CV is a bit high understand why?????
+    cross_validation_accuracies = cross_val_score(model, test.features, test.target,
+                                                  scoring='accuracy', cv=10)
+    print('CV AVERAGE (%): {}'.format(percent_format(np.mean(cross_validation_accuracies))))
+    print('CV STD (%): {}'.format(percent_format(np.std(cross_validation_accuracies))))
 
     return result
 
