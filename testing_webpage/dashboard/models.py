@@ -178,6 +178,16 @@ class Candidate(models.Model):
     class Meta:
         db_table = 'candidates'
 
+    def get_last_requirement_surveys(self):
+
+        surveys = []
+        last_evaluation = self.get_last_evaluation()
+        for score in last_evaluation.scores.filter(test__type__name='requirements'):
+            for question in score.test.questions.all():
+                surveys.append(Survey.get_last_try_with_candidate(self, score.test, question))
+
+        return surveys
+
     # TODO: add traceback to default place... wow, great idea!
     def change_state(self, state_code, auth_user=None, place=None, forecast=None):
         """
@@ -208,6 +218,7 @@ class Candidate(models.Model):
         self.state = to_state
         self.state_events.add(event)
         self.save()
+
 
     def get_last_evaluation(self):
         try:

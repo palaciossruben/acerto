@@ -19,7 +19,7 @@
         <link rel="stylesheet" type="text/css" href="{% static 'business/css/candidate_profile.css' %}">
         <!-- Latest jQuery library -->
 
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
         <!-- Latest compiled Bootstrap JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -27,6 +27,25 @@
         <script src="{% static 'business/js/summary.js' %}"></script>
     </head>
     <body>
+    <script>
+        function save_comment(param_dict)
+        {
+            general_dict = {candidate_id:{{ candidate.id }}, csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()}
+                console.log(general_dict);
+                $.ajax
+                ({
+                    type:'POST',
+                    url:'../save_comments',
+                    data: Object.assign({}, general_dict, param_dict),
+                    success:function(response)
+                    {
+                        document.getElementById("all_comments").innerHTML=response+document.getElementById("all_comments").innerHTML
+                        document.getElementById("comments").value="";
+                    }
+                });
+            return false;
+        }
+    </script>
         <div class="topnav" id="myTopnav">
             <a href="/staffing" class="logo"><img src="{% static 'business/img/logo-color-negro.png' %}"></a>
             <a href="{% url 'business:logout' %}">{% trans "LOG OUT" %}</a>
@@ -82,13 +101,12 @@
                                         {{ candidate.get_last_evaluation.cognitive_score|print_score }}
                                     </div>
                                 {% endif %}
+
                                 <div class="test-distinction">
-                                    {% for e in candidate.evaluations.all %}
-                                        {% for score in e.scores.all %}
-                                            {% if score.test.type.pk == 1 %}
-                                                <p><strong>{{ score.test.name_es }}: </strong>{{ score.value|print_score }}</p>
-                                            {% endif %}
-                                        {% endfor %}
+                                    {% for score in candidate.get_last_evaluation.scores.all %}
+                                        {% if score.test.type.name == 'cognitive' %}
+                                            <p><strong>{{ score.test.name_es }}: </strong>{{ score.value|print_score }}</p>
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
@@ -103,12 +121,10 @@
                                     </div>
                                 {% endif %}
                                 <div class="test-distinction">
-                                    {% for e in candidate.evaluations.all %}
-                                        {% for score in e.scores.all %}
-                                            {% if score.test.type.pk == 2 %}
-                                                <p><strong>{{ score.test.name_es }}: </strong>{{ score.value|print_score }}</p>
-                                            {% endif %}
-                                        {% endfor %}
+                                    {% for score in candidate.get_last_evaluation.scores.all %}
+                                        {% if score.test.type.name == 'technical' %}
+                                            <p><strong>{{ score.test.name_es }}: </strong>{{ score.value|print_score }}</p>
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
@@ -123,12 +139,18 @@
                                     </div>
                                 {% endif %}
                                 <div class="test-distinction">
-                                    {% for e in candidate.evaluations.all %}
-                                        {% for score in e.scores.all %}
-                                            {% if score.test.type.pk == 3 %}
-                                                <p><strong>Requisitos: </strong>{{ score.value|print_score }}</p>
-                                            {% endif %}
-                                        {% endfor %}
+                                    {% for score in candidate.get_last_evaluation.scores.all %}
+                                        {% if score.test.type.name == 'requirements' %}
+                                            <p class="center"><strong>Requisitos: </strong>{{ score.value|print_score }}</p>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    {% for s in candidate.get_last_requirement_surveys%}
+                                        {% if s.score > 0 %}
+                                    <strong class="listyes-light"><strong>{{ s.question.internal_name }}:</strong></strong>{{ s.answer.name_es }}</p>
+                                        {% elif s.score <= 0 %}
+                                            <strong class="listno-light"><strong>{{ s.question.internal_name }}:</strong></strong>{{ s.answer.name_es }}</p>
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
@@ -143,12 +165,10 @@
                                     </div>
                                 {% endif %}
                                 <div class="test-distinction">
-                                    {% for e in candidate.evaluations.all %}
-                                        {% for score in e.scores.all %}
-                                            {% if score.test.type.pk == 4 %}
-                                                <p><strong>{{ score.test.name_es }}: </strong>{{ score.value|print_score }}</p>
-                                            {% endif %}
-                                        {% endfor %}
+                                    {% for score in candidate.get_last_evaluation.scores.all %}
+                                        {% if score.test.type.name == 'motivation' %}
+                                            <p><strong>{{ score.test.name_es }}: </strong>{{ score.value|print_score }}</p>
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
@@ -163,12 +183,10 @@
                                     </div>
                                 {% endif %}
                                 <div class="test-distinction">
-                                    {% for e in candidate.evaluations.all %}
-                                        {% for score in e.scores.all %}
-                                            {% if score.test.type.pk == 5 %}
-                                                <p><strong>{{ score.test.name_es }}: </strong>{{ score.value|print_score }}</p>
-                                            {% endif %}
-                                        {% endfor %}
+                                    {% for score in candidate.get_last_evaluation.scores.all %}
+                                        {% if score.test.type.name == 'cultural fit' %}
+                                            <p><strong>{{ score.test.name_es }}: </strong>{{ score.value|print_score }}</p>
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
@@ -244,11 +262,16 @@
                 <div class="col-lg-7 col-xs-12 comments-section">
                     <p class="comments-tittle">Comentarios acerca del aspirante</p>
                     <div class="line"></div>
-                    <textarea id="comments" name="comments" class="comments-area" placeholder="Escribe tu opinión aquí"></textarea>
-                    <input type="button" onclick="" class="comment-button" value="COMENTAR"/>
+                        <form id="msform" autocomplete="off" method="post" action="" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="hidden" name="candidate_id" value="{{ candidate.pk }}" />
+                            <textarea id="comments" name="comment" class="comments-area" placeholder="Escribe tu opinión aquí"></textarea>
+                            <input type="button" id="submit" class="comment-button" value="COMENTAR" onclick="save_comment({'comment':$('#comments').val(),'date':$('#date').val()})"/>
+                        </form>
 
-                    <div class="comments-block">
-                        {% for c in candidate.comments.all %}
+
+                    <div class="comments-block" id="all_comments">
+                        {% for c in candidate.comments.all|dictsortreversed:"created_at" %}
                             <p><strong>{{ c.created_at }}</strong></p>
                             <p>{{ c.text }}</p>
                         {% endfor %}

@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^contáctanos$', views.contact_form, name='contact_form'),
     url(r'^contact_form_post$', views.contact_form_post, name='contact_form_post'),
 
+    url(r'^save_comments$', views.save_comments, name='save_comments'),
 
 
     url(r'^search$', views.search, name='search'),
