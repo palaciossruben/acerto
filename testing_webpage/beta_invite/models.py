@@ -198,7 +198,7 @@ class Answer(models.Model):
 
 
 class Question(models.Model):
-
+    internal_name = models.CharField(max_length=1500, null=True)
     text = models.CharField(max_length=1500, null=True)
     text_es = models.CharField(max_length=1500, null=True)
     answers = models.ManyToManyField(Answer)
