@@ -141,7 +141,7 @@
                                 <div class="test-distinction">
                                     {% for score in candidate.get_last_evaluation.scores.all %}
                                         {% if score.test.type.name == 'requirements' %}
-                                            <p><strong>Requisitos: </strong>{{ score.value|print_score }}</p>
+                                            <p class="center"><strong>Requisitos: </strong>{{ score.value|print_score }}</p>
                                         {% endif %}
                                     {% endfor %}
 
