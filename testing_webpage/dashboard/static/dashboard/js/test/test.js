@@ -302,6 +302,9 @@ function addQuestion(question_types){
 
         addBr(question_container);addBr(question_container);
 
+        var text_name = get_question_name(QUESTION_NUMBER, "internal_name")
+        addQuestionTextArea(question_container, text_name, "internal_name")
+
         var text_name = get_question_name(QUESTION_NUMBER, "text")
         addQuestionTextArea(question_container, text_name, "Question in English")
 
