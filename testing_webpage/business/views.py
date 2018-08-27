@@ -29,7 +29,7 @@ from business.models import Plan, Contact, Search, KeyWord
 from business.models import BusinessUser
 from business.custom_user_creation_form import CustomUserCreationForm
 from dashboard import campaign_module
-from dashboard.models import Candidate, BusinessState
+from dashboard.models import Candidate, BusinessState, Comment
 from business import dashboard_module
 from testing_webpage.models import BusinessUserPendingEmail
 
@@ -552,3 +552,17 @@ def dashboard(request, business_user_id, campaign_id, state_name):
                                                      'total_relevant': len(relevant),
                                                      'campaign_evaluation': campaign_evaluation
                                                      })
+
+
+def save_comments(request):
+
+    if request.method == 'POST':
+        candidate = common.get_candidate_from_request(request)
+        comment = Comment(text=request.POST.get('comment'))
+        comment.save()
+        candidate.comments.add(comment)
+        candidate.save()
+        return HttpResponse(comment.text)
+    else:
+        return HttpResponseBadRequest('<h1>HTTP CODE 400: Client sent bad request with missing params</h1>')
+

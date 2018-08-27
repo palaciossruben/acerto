@@ -785,8 +785,9 @@ class User(models.Model):
         born = datetime(int(self.birthday.strftime("%Y")), int(self.birthday.strftime("%m")), int(self.birthday.strftime("%d")))
         today = datetime.today()
         age = today - born
+        seconds_in_a_year = 365*24*60*60
         if age is not None:
-            return int(age.total_seconds()/31536000)
+            return int(age.total_seconds()/seconds_in_a_year)
         else:
             return None
 
@@ -826,15 +827,16 @@ class Survey(models.Model):
 
     @staticmethod
     def get_last_try(campaign, test, question, user):
-        surveys = [s for s in Survey.objects.filter(campaign=campaign,
-                                                    test=test,
-                                                    question=question,
-                                                    user=user).order_by('-try_number')]
+        survey = Survey.objects.filter(campaign=campaign,
+                                       test=test,
+                                       question=question,
+                                       user=user).order_by('-try_number').first()
 
-        if len(surveys) > 0:
-            return surveys[0]
-        else:
-            return None
+        return survey
+
+    @staticmethod
+    def get_last_try_with_candidate(candidate, test, question):
+        return Survey.get_last_try(candidate.campaign, test, question, candidate.user)
 
     @classmethod
     def create(cls, campaign, test_id, question_id, user_id):
