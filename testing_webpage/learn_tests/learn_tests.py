@@ -206,6 +206,6 @@ if __name__ == '__main__':
     for test in Test.objects.all():
 
         # TODO: remove test condition
-        #if 'Basic Accounting Test' == test.name:
-        update_importance(test)
+        if 'Entity Framework' == test.name:
+            update_importance(test)
         #    break
