@@ -40,6 +40,15 @@ def index(request):
 # ------------------------------- CAMPAIGN -------------------------------
 
 
+def candidate_detail(request, candidate_id):
+    """
+    :param request: HTTP request
+    :param candidate_id: int Candidate id
+    :return: render view
+    """
+    return render(request, cts.CANDIDATE_DETAIL, {'candidate': Candidate.objects.get(pk=candidate_id)})
+
+
 def add_to_message_queue(candidates, text):
     """
     Adds objects to the message table. So later on this table will serve as a message queue.
@@ -77,7 +86,7 @@ def edit_campaign_candidates(request, campaign_id):
         candidate = Candidate.objects.get(pk=int(candidate_id))
 
         if action == 'update':
-            candidate_module.update_candidate(request, candidate)
+            candidate_module.update_candidate_manually(request, candidate)
         elif action == 'add':
             candidate_module.add_candidate_to_campaign(request, candidate)
         elif action == 'remove':

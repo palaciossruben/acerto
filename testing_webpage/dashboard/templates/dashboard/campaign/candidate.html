@@ -3,18 +3,22 @@
 <li>
 <input id="{{ candidate.id }}_checkbox"  type="checkbox" name="{{ candidate.id }}_checkbox">
 
-<!--<button class="accordion"></button>
-<div class="panel">
--->
-<h4 style="display:inline;">{{ candidate.user.name }} (U:{{ candidate.user.id }} / C:{{ candidate.pk }}):</h4>
 
+<h4 style="display:inline;">{{ candidate.user.name }} (U:{{ candidate.user.id }} / C:{{ candidate.pk }}):</h4>
 <br>
 <br>
-    {% if candidate.user.email %}
-        <p><strong>email:</strong> {{ candidate.user.email }}</p>
-    {% else %}
-        <p><strong>email:</strong>not available</p>
-    {% endif %}
+
+{% if candidate.match_classification %}
+    <p><strong>Forecast: Passes</strong></p>
+{% else %}
+    <p><strong>Forecast: Fails</strong></p>
+{% endif %}
+
+{% if candidate.user.email %}
+    <p><strong>email:</strong> {{ candidate.user.email }}</p>
+{% else %}
+    <p><strong>email:</strong>not available</p>
+{% endif %}
 <p><strong>phone:</strong>
 {% if candidate.user.phone is None %}
     not available
@@ -25,7 +29,6 @@
 
 <p> <strong>cv:</strong>
 {% if candidate.user.curriculum_url != '#' %}
-    <!--<a href="http://peaku.co/static/{{ candidate.user.curriculum_url }}">link</a>-->
     <a href="{% static candidate.user.curriculum_url %}">link</a>
 {% else %}
     not available
@@ -35,7 +38,6 @@
 
 <p> <strong>photo:</strong>
 {% if candidate.user.photo_url != '#' %}
-    <!--<a href="http://peaku.co/static/{{ candidate.user.curriculum_url }}">link</a>-->
     <a href="{% static candidate.user.photo_url %}">link</a>
 {% else %}
     not available
@@ -43,49 +45,21 @@
 <input type="file" name="photo_url" id="photo">
 </p>
 
-    <p><strong>city: </strong>{{ candidate.user.city.name }}</p>
-<p><strong>created_at: </strong>{{ candidate.user.created_at }}</p>
-
-    <!--TODO: remove this for loop, this is deprecated.-->
-    {% for e in candidate.user.evaluations.all %}
-        {% if candidate.campaign_id == e.campaign_id %}
-            <p><strong>test (cut: {{ e.cut_score }}): </strong> {{ e.final_score }}</p>
-        {% endif %}
-    {% endfor %}
-
     {% for e in candidate.evaluations.all %}
         <p><strong>test (cut: {{ e.cut_score }}): </strong> {{ e.final_score }}</p>
     {% endfor %}
 
-    {% for e in candidate.evaluations.all %}
-        <p><strong>Pruebas:</strong></p>
-        {% for score in e.scores.all %}
-            {% if score.test.type.pk == 3 %}
-                <p><strong>Requisitos: </strong>{{ score.value }}</p>
-            {% else %}
-                <p><strong>{{ score.test.name_es }}: </strong>{{ score.value }}</p>
-            {% endif %}
-        {% endfor %}
-    {% endfor %}
-
-
     <p><strong>Salary: </strong><input type="text" name="{{ candidate.id }}_salary" value="{{ candidate.salary }}"
     placeholder="add salary"></p>
-
-    <br>
-    <br>
 
     <p><strong>Motivation: </strong>
     <input style="width:200px" type="number" min="0" max="100" step='1' name="{{ candidate.id }}_motivation"
            placeholder="Add % of motivation" value="{{ candidate.print_motivation_score }}">
 
-    <br>
     <p><strong>Cultural Fit: </strong>
     <input style="width:200px" type="number" min="0" max="100" step='1' name="{{ candidate.id }}_cultural_fit"
            placeholder="Add % of motivation" value="{{ candidate.print_cultural_fit_score }}">
 
-    <br>
-    <br>
     <p><strong>Screening: </strong>
     <select class="selectpicker" name="{{ candidate.id }}_screening_id">
       <option value="{{ candidate.screening.id }}">{{ candidate.screening.name }}</option>
@@ -98,55 +72,14 @@
                                                   value="{{ candidate.screening_explanation }}"
     placeholder="add brief explanation"></p>
 
-    {% if candidate.text_match %}
-        <p><strong>Text Match (higher is better): </strong>{{ candidate.text_match }}</p>
-    {% endif %}
-
-    {% if candidate.match_classification %}
-        <p><strong>Forecast: Passes</strong></p>
-    {% else %}
-        <p><strong>Forecast: Fails</strong></p>
-    {% endif %}
-
+    <a href="{% url 'dashboard:candidate_detail' candidate.id %}">view details</a>
     <br>
-    <br>
-
-    {% if candidate.surveys.all %}
-        <p><strong> PREGUNTAS Y RESPUESTAS DEL TEST : </strong></p>
-    {% endif %}
-    {% for e in candidate.surveys.all %}
-
-    <p>{{ e.question.pk }}<strong> {{ e.question.text_es }} </strong></p>
-        {% if e.answer %}
-    <p> {{ e.answer.name_es }} </p>
-        {% endif %}
-        {% if e.numeric_answer %}
-    <p> {{ e.numeric_answer|floatformat }}</p>
-        {% endif %}
-        {% if e.text_answer %}
-    <p> {{ e.text_answer }} </p>
-        {% endif %}
-    {% endfor %}
-
-<a href="check_interview?candidate_id={{ candidate.id }}">Interview</a>
-
-<br>
-
-<input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}" />
-
-<br>
-
-{% for c in candidate.comments.all %}
-    <p><strong>{{ c.created_at }}</strong></p>
-    <p>{{ c.text }}</p>
-{% endfor %}
-
-<br>
 
 <textarea name="{{ candidate.id }}_comment" cols="40" rows="5"
 placeholder="add a comment!"></textarea>
 
-<br>
+<input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}" />
+
 <select class="selectpicker" name="{{ candidate.id }}_state">
       <option value="{{ candidate.state_id}}">{{ candidate.state.name }}</option>
       {% for state in states %}
@@ -154,28 +87,27 @@ placeholder="add a comment!"></textarea>
       {% endfor %}
 </select>
 
+
 <br>
-<br>
+    <br>
+
 <input type="button" class="btn btn-success" name="save_changes" value="Save Candidate!"
     onclick="send_additional_params_in_form({{ candidate.id }}, 'update')">
 
 </li>
 
-
 <br>
 
-<!--TODO: make this great again: Add and move people from a campaign-->
 <input type="button" class="btn btn-primary" name="add_to_campaign" value="Add" onclick="send_additional_params_in_form('{{ candidate.id }}', 'add')">
 <p style="display: inline;"><strong>or</strong></p>
 <input type="button" class="btn btn-primary" name="move_to_campaign" value="Move" onclick="send_additional_params_in_form({{ candidate.id }}, 'move')">
-<br>
-<br>
+
 <p style="display: inline;"><strong>to</strong></p>
 
 <select class="selectpicker" name="{{ candidate.id }}_selected_campaign" style="width: 140px">
   <option value="0">Select Campaign</option>
   {% for campaign in campaigns%}
-     <option value="{{ campaign.id }}">{{ campaign.name }}/{{ campaign.title_es }}</option>
+    <option value="{{ campaign.id }}">{{ campaign.name }}/{{ campaign.title_es }}</option>
   {% endfor %}
 </select>
 
@@ -185,6 +117,4 @@ placeholder="add a comment!"></textarea>
 <input type="button" class="btn btn-danger" name="remove_from_campaign" value="Delete!"
     onclick="send_additional_params_in_form({{ candidate.id }}, 'remove')">
 
-<br>
 <hr>
-
