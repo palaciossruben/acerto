@@ -184,7 +184,7 @@ class Candidate(models.Model):
         last_evaluation = self.get_last_evaluation()
         for score in last_evaluation.scores.filter(test__type__name='requirements'):
             for question in score.test.questions.all():
-                surveys.append(Survey.get_last_try(self, score.test, question))
+                surveys.append(Survey.get_last_try_with_candidate(self, score.test, question))
 
         return surveys
 

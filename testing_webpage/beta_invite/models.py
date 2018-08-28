@@ -827,18 +827,15 @@ class Survey(models.Model):
 
     @staticmethod
     def get_last_try(campaign, test, question, user):
-        surveys = Survey.objects.filter(campaign=campaign,
-                                        test=test,
-                                        question=question,
-                                        user=user).order_by('-try_number').all()
+        survey = Survey.objects.filter(campaign=campaign,
+                                       test=test,
+                                       question=question,
+                                       user=user).order_by('-try_number').first()
 
-        if len(surveys) > 0:
-            return surveys[0]
-        else:
-            return None
+        return survey
 
     @staticmethod
-    def get_last_try(candidate, test, question):
+    def get_last_try_with_candidate(candidate, test, question):
         return Survey.get_last_try(candidate.campaign, test, question, candidate.user)
 
     @classmethod

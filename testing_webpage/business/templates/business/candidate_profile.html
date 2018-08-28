@@ -264,15 +264,14 @@
                     <div class="line"></div>
                         <form id="msform" autocomplete="off" method="post" action="" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <input type="hidden" name="candidate_id" value="{{ candidate.pk }}" />
-
-                            <textarea id="comments" name="{{ candidate.id }}_comment" class="comments-area" placeholder="Escribe tu opinión aquí"></textarea>
-                            <input type="button" id="submit" class="comment-button" value="COMENTAR" onclick="save_comment({'{{ candidate.id }}_comment':$('#comments').val()})"/>
+                            <input type="hidden" name="candidate_id" value="{{ candidate.pk }}" />q
+                            <textarea id="comments" name="comment" class="comments-area" placeholder="Escribe tu opinión aquí"></textarea>
+                            <input type="button" id="submit" class="comment-button" value="COMENTAR" onclick="save_comment({'comment':$('#comments').val(),'date':$('#date').val()})"/>
                         </form>
 
 
                     <div class="comments-block" id="all_comments">
-                        {% for c in candidate.comments.all %}
+                        {% for c in candidate.comments.all|dictsortreversed:"created_at" %}
                             <p><strong>{{ c.created_at }}</strong></p>
                             <p>{{ c.text }}</p>
                         {% endfor %}
