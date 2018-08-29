@@ -97,8 +97,8 @@ body {
 /*****************************************BACKGROUND*******************************************************************/
 
 .background{
-    background: url(../img/Start_BG-01-min.jpg) no-repeat top center scroll ;
-    background-size:cover;
+    background-size:contain;
+    background-repeat: no-repeat;
 }
 
 .gradient1 {
@@ -118,7 +118,7 @@ body {
     background:linear-gradient(90deg, rgba(0,184,162,0) 0%, rgba(0,184,162,1) 100%);
     z-index: 4;
     right: 0px;
-    padding: 15px;
+    padding: 15px 15px 0 0;
     text-align:right;
     margin-top: 6%;
 }
@@ -130,7 +130,7 @@ body {
     background-color:white;
     position:relative;
     z-index:200;
-    margin-top:8%;
+    margin-top:6%;
 }
 
 .quantity {
@@ -176,7 +176,7 @@ body {
     font-size: 38px;
     text-shadow: 7px 5px 3px rgba(0,0,0,0.5);
     text-align: right;
-    margin-top:15%;
+    margin-top:2%;
     margin-right: 15px;
 }
 
@@ -219,11 +219,13 @@ body {
     margin-left:25%;
     box-shadow: 0px 8px 5px rgba(0,0,0,0.1);
     text-align: center;
+    margin-top:2%;
 }
 
 .div2{
     width:95%;
     box-shadow: 0px 8px 5px rgba(0,0,0,0.1);
+    margin-top:2%;
 }
 
 .div3{
@@ -265,7 +267,8 @@ body {
 
 .status-name{
     color:#b5ce53;
-    font-size:27px;
+    font-size:40px;
+    font-family:BertholdAkzidenzGroteskBold;
     margin-bottom: 0;
 }
 
@@ -289,9 +292,35 @@ body {
 
 .status-description{
     color:#666666;
-    font-size:15px;
+    font-size:17px;
+    font-family:BertholdAkzidenzGroteskRegular;
     margin-bottom: 0;
 }
+
+.name{
+    color:#666666;
+    font-size:24px;
+    font-family:BertholdAkzidenzGroteskBold;
+}
+
+.name:hover{
+    text-decoration:none;
+    color:#666666;
+}
+
+.profession{
+    color:#666666;
+    font-size:20px;
+    font-family:BertholdAkzidenzGroteskRegular;
+}
+
+.city, .work-area{
+    color:#666666;
+    font-size:15px;
+    font-family:BertholdAkzidenzGroteskRegular;
+}
+
+
 
 .circle{
     height:90px;
@@ -617,10 +646,6 @@ footer {
 }
 
 @media screen and (max-width: 768px) {
-    .background{
-        background: url(../img/cel-Start_BG-01-min.jpg) no-repeat top center scroll ;
-        background-size:contain;
-    }
 
     .div1, .div2, .div3, .div4, .div5, .div6{
         margin-left:0;

@@ -22,7 +22,7 @@
         <!-- Latest compiled Bootstrap JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <!--Our JS-->
-        <script src="{% static 'business/js/summary.js' %}"></script>
+        <script src="{% static 'business/js/dashboard.js' %}"></script>
     </head>
     <body>
         <div class="topnav" id="myTopnav">
@@ -44,12 +44,13 @@
                 <div class="blur">
                 </div>
             </div>-->
-        <div class="background">
+        <div class="background" id="background">
             <div class="gradient1">
                 <div class="row one"></div>
                 <div class="row two">
                     <div class="col-lg-12 campaign bold">{{ campaign.title_es }}</div>
                 </div>
+                <div class="row plan-type"></div>
                 <div class="row three">
                     <div class="col-lg-3 col-xs-12"></div>
                     <div class="col-lg-9 col-xs-12 gradient2">
@@ -85,7 +86,7 @@
                     {% endif %}
                 </div>
                 <div class="col-lg-4 col-xs-12">
-                    <p class="status-name bold">{{ business_state.name }}</p>
+                    <p class="status-name bold">{{ business_state.name|upper }}</p>
                     <div class="line2"></div>
                     <p class="status-description">{{ business_state.description }}</p>
                     <div class="email-button" role="button" onclick="">ENVIAR CORREO MASIVO</div>
@@ -214,6 +215,16 @@
                 set_circle_color({{ campaign_evaluation.requirements_score|int_rounding }}, "requirement-id");
                 set_circle_color({{ campaign_evaluation.motivation_score|int_rounding }}, "motivation-id");
                 set_circle_color({{ campaign_evaluation.cultural_fit_score|int_rounding }}, "cultural-id");
+            });
+        </script>
+        <script>
+           $(document).ready(function() {
+               set_background("{{ campaign.image }}", "background")
+           });
+        </script>
+        <script>
+            $( window ).resize(function() {
+                set_background("{{ campaign.image }}", "background")
             });
         </script>
     </body>

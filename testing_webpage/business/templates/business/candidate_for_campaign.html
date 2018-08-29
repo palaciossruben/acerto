@@ -16,17 +16,17 @@
         {% endif %}
     </div>
     <div class="col-lg-2 col-xs-12">
-        <p><a href="/seleccion_de_personal/perfil_del_candidato/{{ candidate.id }}"><strong>{{ candidate.user.name }}</strong></a></p>
+        <p><a href="/seleccion_de_personal/perfil_del_candidato/{{ candidate.id }}" class="name"><strong>{{ candidate.user.name }}</strong></a></p>
         {% if candidate.user.profession.name_es %}
-            <p>{{ candidate.user.profession.name_es }}</p>
+            <p class="profession">{{ candidate.user.profession.name_es }}</p>
         {% endif %}
 
         {% if candidate.user.city.name and candidate.user.city.name != "not available" %}
-            <p style="font-size:10px;">{{ candidate.user.city.name }}, {{ candidate.user.country.name }}</p>
+            <p class="city">{{ candidate.user.city.name }}, {{ candidate.user.country.name }}</p>
         {% endif %}
 
         {% if candidate.user.work_area.name_es %}
-            <p>{{ candidate.user.work_area.name_es }}</p>
+            <p class="work-area">{{ candidate.user.work_area.name_es }}</p>
         {% endif %}
     </div>
     <div class="col-lg-1 separator-div">
