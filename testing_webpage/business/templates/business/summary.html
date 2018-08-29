@@ -23,7 +23,7 @@
                 <div class="blur">
                 </div>
             </div>-->
-        <div class="background">
+        <div class="background" id="background">
             <div class="gradient1">
                 <div class="row bold">
                     <div class="campaign">{{ campaign.title_es }}</div>
@@ -253,6 +253,16 @@
                 set_circle_color({{ campaign.relevant_evaluation_last.cognitive_score|int_rounding }}, "relevant-cognitive-id");
 
                 set_circle_color({{ campaign.applicant_evaluation_last.cognitive_score|int_rounding }}, "applicant-cognitive-id");
+            });
+        </script>
+        <script>
+           $(document).ready(function() {
+               set_background("{{ campaign.image }}", "background")
+           });
+        </script>
+        <script>
+            $( window ).resize(function() {
+                set_background("{{ campaign.image }}", "background")
             });
         </script>
 {% endblock %}

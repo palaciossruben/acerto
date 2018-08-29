@@ -1,24 +1,55 @@
-var total = 0;
+function set_circle_color(score, id_string){
 
-function count_candidates_in_a_column(column_name){
-    /* Changes the UI to reflect counting the number of items in a column */
-    var div = document.getElementById(column_name);
-    var candidate_list = div.getElementsByTagName("li");
-    document.getElementById("quantity_" + column_name).innerHTML = candidate_list.length;
-    total = total + candidate_list.length;
-    document.getElementById("total").innerHTML = total;
+    var color;
+
+    if (score < 50){
+        color = 'rgba(221, 81, 51,';
+    }else if (score < 59){
+        color = 'rgba(232, 144, 61,';
+    }else if (score < 69){
+        color = 'rgba(238, 165, 64,';
+    }else if (score < 74){
+        color = 'rgba(247, 212, 71,';
+    }else if (score < 79){
+        color = 'rgba(251, 212, 71,';
+    }else if (score < 84){
+        color = 'rgba(255, 230, 73,';
+    }else if (score < 89){
+        color = 'rgba(224, 225, 89,';
+    }else if (score < 94){
+        color = 'rgba(172, 203, 84,';
+    }else if (score < 99){
+        color = 'rgba(72, 171, 88,';
+    }else{
+        color = "rgba(74, 180, 166,";
+    }
+
+    if (score === null){
+    }else{
+        var me = document.getElementById(id_string);
+        if(me == null){
+        }else{
+            me.style["border-color"] = color + '1)';
+            me.style["background"] = 'linear-gradient(to top,' + color + '0.7)' + score + '%, transparent ' + score + '% )';
+        }
+    }
 }
 
+function set_background(image_name, id_string){
 
-function count_candidates() {
-    /* Counts items in all columns */
+    image_name = image_name.replace("&#39;","");
+    if (image_name == 'default'){
+        image_name = "Start_BG-07-min.jpg)"
+    }
 
-    states = ["backlog",
-              "waiting_interview",
-              "sent_to_client",
-              "rejected"]
+    if ($(window).width() < 768) {
+        image_name = 'cel-' + image_name;
+    }
 
-    for (i = 0; i < states.length; i++)  {
-        count_candidates_in_a_column(states[i])
+    var me = document.getElementById(id_string);
+    if(me == null){
+    }else{
+        var url = 'url(../../../../../static/business/img/' + image_name;
+        me.style["background-image"] = url;
     }
 }
