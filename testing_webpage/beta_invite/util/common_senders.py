@@ -94,6 +94,10 @@ def get_message_path():
     return os.path.join(get_file_path(), 'messages')
 
 
+def get_public_post_path():
+    return os.path.join(get_file_path(), 'public_posts')
+
+
 def get_basic_params(override_dict={}):
     """
     Limited version of the get_params_with_candidate(). For specific cases.

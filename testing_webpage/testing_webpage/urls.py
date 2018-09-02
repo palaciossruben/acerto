@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^servicio_de_empleo/', include('beta_invite.urls')),
     url(r'^seleccion_de_personal/', include('business.urls')),
     url(r'^dashboard/', include('dashboard.urls')),
+    url(r'^api/', include('api.urls')),
     url(r'^admin/', admin.site.urls)
 ]
 

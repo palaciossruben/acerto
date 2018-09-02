@@ -1,0 +1,3 @@
+{title}
+Aplica Ya! en:
+{campaign_url}

@@ -23,7 +23,6 @@ import beta_invite
 from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
-from beta_invite import new_user_module
 from beta_invite.models import User, BulletType, WorkArea, EmailType, Campaign
 from business.models import Plan, Contact, Search, KeyWord
 from business.models import BusinessUser
@@ -32,6 +31,7 @@ from dashboard import campaign_module
 from dashboard.models import Candidate, BusinessState, Comment
 from business import dashboard_module
 from testing_webpage.models import BusinessUserPendingEmail
+from api.models import PublicPost
 
 
 def index(request):
@@ -294,14 +294,7 @@ def home(request):
     if login_form.is_valid() and request.POST.get('username') != 'g.comercialrmi2@redmilatam.com':  # Block access
 
         business_user = simple_login_and_business_user(login_form, request)
-
-        # TODO: hack to show investors a good campaing, without an ugly interface
-        if 115 in [c.pk for c in business_user.campaigns.all()]:
-            return redirect('resumen/115')
-        elif 76 in [c.pk for c in business_user.campaigns.all()]:
-            return redirect('resumen/76')
-        else:
-            return redirect('campañas/{}'.format(business_user.pk))
+        return redirect('campañas/{}'.format(business_user.pk))
 
     else:
         error_message = get_first_error_message(login_form)
@@ -407,6 +400,7 @@ def create_post(request):
     campaign = campaign_module.create_campaign(request)
     business_user.campaigns.add(campaign)
     business_user.save()
+    PublicPost.add_to_public_post_queue(campaign)
 
     return redirect('resumen/{campaign_pk}'.format(campaign_pk=campaign.pk))
 
@@ -426,6 +420,7 @@ def start_post(request):
         business_user = first_sign_in(signup_form, campaign, request)
         business_user.campaigns.add(campaign)
         business_user.save()
+        PublicPost.add_to_public_post_queue(campaign)
 
         return redirect('resumen/{campaign_pk}'.format(campaign_pk=campaign.pk))
 

@@ -451,8 +451,9 @@ class Message(models.Model):
         Adds format to message and returns itself
         :return: self
         """
-        candidate = self.candidate
-        params = common_senders.get_params_with_candidate(candidate, candidate.user.language_code, {})
+        params = common_senders.get_params_with_candidate(self.candidate,
+                                                          self.candidate.user.language_code,
+                                                          {})
         self.text = self.text.format(**params)
         self.sent = True
         self.save()

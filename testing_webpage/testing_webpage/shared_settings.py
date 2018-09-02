@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'beta_invite.apps.BetaInviteConfig',
     'business.apps.BusinessConfig',
     'dashboard.apps.DashboardConfig',
+    'api.apps.ApiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
