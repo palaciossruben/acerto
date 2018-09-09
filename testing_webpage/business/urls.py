@@ -17,6 +17,8 @@ urlpatterns = [
     # BUSINESS USER LOGGED
     url(r'^campañas/(?P<business_user_id>\d+)$', views.business_campaigns, name='business_campaigns'),
     url(r'^resumen/(?P<campaign_id>\d+)$', views.summary, name='summary'),
+    url(r'^online_demo$', views.online_demo, name='online_demo'),
+
     url(r'^tablero_de_control/(?P<business_user_id>\d+)/(?P<campaign_id>\d+)/(?P<state_name>.*)/$', views.dashboard, name='dashboard'),
     url(r'^perfil_del_candidato/(?P<pk>\d+)$', views.candidate_profile, name='candidate_profile'),
     # CONTACT

@@ -318,19 +318,6 @@ class Candidate(models.Model):
     def get_last_cultural_fit_score(self):
         return self.get_last_evaluation_attr('cultural_fit_score')
 
-    def get_business_user(self):
-        """
-        Given a campaign gets the business_user if it exists, else None
-        :return: business_user or None
-        """
-
-        business_users = [b for b in BusinessUser.objects.filter(campaign=self.campaign)]
-
-        if len(business_users) > 0:
-            return business_users[0]
-        else:
-            return np.nan
-
     def get_average_final_score(self):
         evaluations = self.evaluations.all()
 

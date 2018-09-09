@@ -242,11 +242,7 @@ def get_business_user(request):
         request: HTTP request object.
     Returns: A BusinessUser object.
     """
-
-    auth_user_id = request.user.id
-    business_user = BusinessUser.objects.get(auth_user_id=auth_user_id)
-
-    return business_user
+    return BusinessUser.objects.get(auth_user_id=request.user.id)
 
 
 def get_first_error_message(form):
@@ -482,12 +478,14 @@ def business_applied(request):
 
 
 @login_required
-def summary(request, campaign_id):
-    business_user = get_business_user(request)
+def summary(request, campaign_id, business_user=None):
+
     campaign = Campaign.objects.get(pk=campaign_id)
     common.calculate_evaluation_summaries(campaign)
 
-    if common.access_for_users(request, campaign, business_user):
+    if business_user is None:
+        business_user = get_business_user(request)
+        if common.access_for_users(request, campaign, business_user):
             return redirect('business:login')
 
     created_at = formats.date_format(campaign.created_at, "DATE_FORMAT")
@@ -561,3 +559,10 @@ def save_comments(request):
     else:
         return HttpResponseBadRequest('<h1>HTTP CODE 400: Client sent bad request with missing params</h1>')
 
+
+def online_demo(request):
+
+    campaign = Campaign.objects.get(pk=156)
+    business_user = common.get_business_user_with_campaign(campaign)
+    s = summary.__wrapped__
+    return s(request, 156, business_user=business_user)

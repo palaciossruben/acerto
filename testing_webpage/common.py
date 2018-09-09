@@ -14,6 +14,7 @@ from beta_invite.models import User, Campaign, Country, City, Profession, Educat
 from beta_invite import constants as beta_cts
 from dashboard.models import Candidate, State
 from testing_webpage import settings
+from business.models import BusinessUser
 
 
 INTERVIEW_INTRO_VIDEO = './interview_intro_video.txt'
@@ -172,6 +173,7 @@ def get_candidates_from_campaign(campaign):
         return [c for c in Candidate.objects.filter(campaign=campaign)]
     else:
         return []
+
 
 # TODO: Make method present on common.py a method of the class User. For this to happen, Candidate class has
 # to be moved to testing_webpage to solve circular dependency problem.
@@ -457,3 +459,16 @@ def calculate_operational_efficiency(campaign):
 def access_for_users(request, campaign, business_user):
     return request.user.username != ADMIN_USER_EMAIL and (request.user.id != business_user.auth_user.id or campaign
                                                           not in business_user.campaigns.all())
+
+
+def get_business_user_with_campaign(campaign):
+    """
+    Given a campaign gets the business_user if it exists, else None
+    :return: business_user or None
+    """
+
+    for b in BusinessUser.objects.all():
+        if campaign in b.campaigns.all():
+            return b
+
+    return None
