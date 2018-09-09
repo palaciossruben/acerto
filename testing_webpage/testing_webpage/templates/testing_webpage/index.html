@@ -3,7 +3,7 @@
 {% load i18n %}
 {% load app_filters %}
 {% load compress %}
-{% block title %}Agencia de empleo y trabajo{% endblock %}
+{% block title %}{% trans 'Jobs' %}{% endblock %}
 {% block extra_meta %}
     <meta name="description"  content="En PeakU te ayudamos a encontrar el empleo que buscas en compañias que se ajustan a tu perfil, experiencia y salario. Somos una empresa que trabaja en selección de personal, no una temporal." />
     <meta name="keywords" content="computrabajo, servicio de empleo, empleo, empleos, trabajos, trabaja con nosotros, buscador de empleo, bolsa de empleo, agencia de empleo" />
@@ -19,11 +19,11 @@
         <div class="row blankbanner"></div>
         <div class="section1">
             <div class="row" id="main-copy">
-                <h1 id="main-copy-title">Tu empleo ideal</h1>
-                <p id="main-copy-big-title">TE ESPERA</p>
-                <span class="first-description">Déjanos tu correo, nosotros hacemos el resto.</span>
+                <h1 id="main-copy-title">{% trans 'Your ideal job' %}</h1>
+                <p id="main-copy-big-title">{% trans 'AWAITS YOU'%}</p>
+                <span class="first-description">{% trans 'Leave us your mail, we do the rest' %}</span>
                 <form action="{% url 'beta_invite:index' %}">
-                    <button class="button-cta" role="button">Aplicar</button>
+                    <button class="button-cta" role="button">{% trans 'Apply' %}</button>
                 </form>
             </div>
             <div class="row blankabout responsive-no"></div>
@@ -32,8 +32,8 @@
         <div class="row section2">
             <div class="col-lg-6 col-md-6 col-xs-12 woman-working"></div>
             <div class="col-lg-6 col-md-6 col-xs-12 description2">
-                <h5>En PeakU te ayudamos a encontrar el empleo que buscas en compañías que se ajustan a tu perfil, experiencia y salario. Somos una empresa que trabaja en selección de personal, no una temporal.</h5>
-                <h4>Puedes aplicar a todas nuestras ofertas de trabajo fácilmente y sin costo.</h4>
+                <h5>{% trans 'At PeakU we help you find the job you are looking for in companies that fit your profile, experience and salary.' %}</h5>
+                <h4>{% trans 'You can apply to all our job offers easily and without any cost' %}</h4>
             </div>
         </div>
         <div class="row conectors-row">
@@ -41,18 +41,18 @@
                 <div class="play-div">
                     <a href="https://www.youtube.com/watch?v=QbNDO2ShXIs" target="_blank">
                         <img class="play-button" src="{% static 'testing_webpage/img/play_button.png' %}">
-                        <span class="video">VER VIDEO</span>
+                        <span class="video">{% trans 'WATCH VIDEO' %}</span>
                     </a>
                 </div>
             </div>
         </div>
         <div class="row section3">
-            <div class="col-lg-push-6 col-md-6 col-xs-12 working-people"></div>
+            <div class="col-lg-push-6 col-md-6 col-xs-12 workg-people"></div>
             <div class="col-lg-pull-6 col-md-6 col-xs-12 description3">
-                <h3>Trabaja con las empresas más importantes</h3>
-                <h2>del mundo</h2>
+                <h3>{% trans 'Work with the most important companies' %}</h3>
+                <h2>{% trans 'in the world' %}</h2>
                 <br>
-                <h5 class="last-description">Con PeakU aplicas una sola vez y tienes acceso a una infinidad de vacantes de empleo de múltiples empresas y múltiples roles</h5>
+                <h5 class="last-description">{% trans 'With PeakU you apply only once and you have access to many job openings with multiple companies and multiple roles' %}</h5>
             </div>
         </div>
     </div>

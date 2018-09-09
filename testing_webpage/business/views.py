@@ -562,7 +562,10 @@ def save_comments(request):
 
 def online_demo(request):
 
-    campaign = Campaign.objects.get(pk=156)
+    campaign_id = 156
+    campaign = Campaign.objects.get(pk=campaign_id)
     business_user = common.get_business_user_with_campaign(campaign)
+
+    # removes login decorator
     s = summary.__wrapped__
-    return s(request, 156, business_user=business_user)
+    return s(request, campaign_id, business_user=business_user)
