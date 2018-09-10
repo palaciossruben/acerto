@@ -19,12 +19,12 @@
                     <li id="candidates-button"><a id="option1" href="{% url 'index' %}">{% trans 'Candidates' %}</a></li>
                     <li id="contact-us-button"><a id="option2" href="{% url 'business:contact_form' %}">{% trans 'Contact Us' %}</a></li>
                     {% if user.is_authenticated %}
-                        <li><a class="button-user" href="{% url 'business:business_campaigns' user|get_business_user_id_from_auth_user %}">Mis campañas</a></li>
-                        <li><a class="button-user logout" role="button" href="{% url 'business:logout' %}">Cerrar sesión</a></li>
+                        <li><a class="button-user" href="{% url 'business:business_campaigns' user|get_business_user_id_from_auth_user %}">{% trans 'My campaigns' %}</a></li>
+                        <li><a class="button-user logout" role="button" href="{% url 'business:logout' %}">{% trans 'Sign off' %}</a></li>
                     {% else %}
-                        <li id="login-button"><a class="button-user" role="button" onclick="on_login()">Inicia sesión</a></li>
+                        <li id="login-button"><a class="button-user" role="button" onclick="on_login()">{% trans 'Sign in' %}</a></li>
                         {% if not 'seleccion_gratis' in request.path %}
-                            <li id="register-button"><a class="button-user" role="button" onclick="on_signup()">Crea tu cuenta</a></li>
+                            <li id="register-button"><a class="button-user" role="button" onclick="on_signup()">{% trans 'Sign up' %}</a></li>
                         {% endif %}
                     {% endif %}
                 {% else %}

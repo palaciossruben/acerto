@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-09 23:52+0000\n"
+"POT-Creation-Date: 2018-09-10 01:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -103,6 +103,7 @@ msgid "Perks"
 msgstr "Beneficios"
 
 #: beta_invite/templates/beta_invite/index.html:47
+#: business/templates/business/summary.html:86
 msgid "Requirements"
 msgstr "Requerimientos"
 
@@ -416,10 +417,8 @@ msgid "Search"
 msgstr "Búsqueda"
 
 #: business/templates/business/signup_choice.html:6
-#, fuzzy
-#| msgid "Employment Exchange - PeakU"
-msgid "Employment Agency - PeakU"
-msgstr "Bolsa de Empleo - PeakU"
+msgid "PeakU - Jobs"
+msgstr "PeakU - Trabajos"
 
 #: business/templates/business/signup_choice.html:15
 msgid "SIGN UP"
@@ -440,6 +439,88 @@ msgstr "Soy"
 #: business/templates/business/signup_choice.html:34
 msgid "Business"
 msgstr "Empresa"
+
+#: business/templates/business/summary.html:6
+msgid "Recruitment and selection of personnel"
+msgstr "Reclutamiento y selección de personal"
+
+#: business/templates/business/summary.html:35
+msgid "PUBLISH DATE"
+msgstr "FECHA DE PUBLICACION"
+
+#: business/templates/business/summary.html:37
+msgid "STATE: active"
+msgstr "ESTADO: activa"
+
+#: business/templates/business/summary.html:39
+msgid "STATE: inactive"
+msgstr "ESTADO: inactiva"
+
+#: business/templates/business/summary.html:41
+msgid "TOTAL APPLICANTS"
+msgstr "TOTAL APLICANTES"
+
+#: business/templates/business/summary.html:51
+#: business/templates/business/summary.html:68
+msgid "SELECTED"
+msgstr "SELECCIONADOS"
+
+#: business/templates/business/summary.html:53
+#: business/templates/business/summary.html:70
+msgid ""
+"Suggested candidates that are your first hiring option and have passed all "
+"filters"
+msgstr "Candidatos sugeridos que son tu primera opción de contratación y han superado todos los filtros"
+
+#: business/templates/business/summary.html:57
+#: business/templates/business/summary.html:65
+#: business/templates/business/summary.html:151
+msgid "PROFILES"
+msgstr "PERFILES"
+
+#: business/templates/business/summary.html:76
+#: business/templates/business/summary.html:157
+#: business/templates/business/summary.html:203
+msgid "Cognitive capacity"
+msgstr "Capacidad cognitiva"
+
+#: business/templates/business/summary.html:81
+#: business/templates/business/summary.html:160
+msgid "Technical knowledge"
+msgstr "Conocimientos técnicos"
+
+#: business/templates/business/summary.html:91
+msgid "Motivation"
+msgstr "Motivación"
+
+#: business/templates/business/summary.html:96
+msgid "Cultural fit"
+msgstr "Fit cultural"
+
+#: business/templates/business/summary.html:140
+#: business/templates/business/summary.html:152
+msgid "PRESELECTED"
+msgstr "PRE-SELECCIONADOS"
+
+#: business/templates/business/summary.html:142
+msgid ""
+"All candidates who approved initial tests and specific requirements for your "
+"campaign"
+msgstr "Todos los candidatos que aprobaron pruebas iniciales y requisitos específicos para tu campaña"
+
+#: business/templates/business/summary.html:187
+msgid "APPLICANTS"
+msgstr "APLICANTES"
+
+#: business/templates/business/summary.html:189
+msgid ""
+"Other candidates who have not done the tests or candidates that have been "
+"discarded by any of the filters"
+msgstr "Otros candidatos que no han realizado las pruebas ó candidatos que han sido descartados por alguno de los filtros"
+
+#: business/templates/business/summary.html:198
+msgid "ADDITIONAL PROFILES"
+msgstr "PERFILES ADICIONALES"
 
 #: business/views.py:64 business/views.py:106 business/views.py:336
 msgid "Discover amazing people"
@@ -474,6 +555,23 @@ msgstr "Personas"
 #: testing_webpage/templates/base.html:133
 msgid "Copyright 2018 © PeakU. All rights reserved."
 msgstr "Copyright 2018 © PeakU. Todos los derechos reservados."
+
+#: testing_webpage/templates/no_header_base.html:22
+#: testing_webpage/templates/white_header_base.html:17
+msgid "My campaigns"
+msgstr "Mis campañas"
+
+#: testing_webpage/templates/no_header_base.html:23
+msgid "Sign off"
+msgstr "Cerrar sesión"
+
+#: testing_webpage/templates/no_header_base.html:25
+msgid "Sign in"
+msgstr "Inicia Sesión"
+
+#: testing_webpage/templates/no_header_base.html:27
+msgid "Sign up"
+msgstr "Regístrate"
 
 #: testing_webpage/templates/no_header_base.html:32
 #: testing_webpage/templates/no_header_base.html:34
@@ -530,7 +628,17 @@ msgstr "del mundo"
 msgid ""
 "With PeakU you apply only once and you have access to many job openings with "
 "multiple companies and multiple roles"
-msgstr "Con PeakU aplicas una sola vez y tienes acceso a una infinidad de vacantes de empleo de múltiples empresas y múltiples roles"
+msgstr ""
+"Con PeakU aplicas una sola vez y tienes acceso a una infinidad de vacantes "
+"de empleo de múltiples empresas y múltiples roles"
+
+#: testing_webpage/templates/white_header_base.html:15
+msgid "+ NEW JOB POST"
+msgstr "+ CREAR OFERTA"
+
+#: testing_webpage/templates/white_header_base.html:20
+msgid "SIGN IN"
+msgstr "INICIA SESION"
 
 #~ msgid "APPLY NOW!"
 #~ msgstr "¡APLICA YA!"
@@ -606,17 +714,11 @@ msgstr "Con PeakU aplicas una sola vez y tienes acceso a una infinidad de vacant
 #~ msgid "If you have any questions, you can write to: contacto@peaku.co"
 #~ msgstr "Si tienes alguna duda, puedes escribirnos a: contacto@peaku.co"
 
-#~ msgid "APPLICANTS"
-#~ msgstr "APLICANTES"
-
 #~ msgid "RELEVANT"
 #~ msgstr "RELEVANTES"
 
 #~ msgid "RECOMMENDED"
 #~ msgstr "RECOMENDADOS"
-
-#~ msgid "REJECTED"
-#~ msgstr "RECHAZADOS"
 
 #~ msgid "Send e-mail"
 #~ msgstr "Enviar email"
