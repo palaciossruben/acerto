@@ -159,8 +159,8 @@ def get_city_question(campaign):
 
 
 def get_salary_question(campaign):
-    q = Question(text=f'What is your salary expectation?',
-                 text_es=f'¿Cúal es tu salario esperado?',
+    q = Question(text='What is your salary expectation?',
+                 text_es='¿Cúal es tu salario esperado?',
                  type=QuestionType.objects.get(code='NI'))
     q.params = {'min': 0,
                 'max': 30_000_000,
@@ -176,8 +176,8 @@ def get_salary_question(campaign):
 
 def get_experience_question(campaign):
 
-    q = Question(text=f'How many years of experience do you have?',
-                 text_es=f'¿Cuantos años de experiencia tienes?',
+    q = Question(text='How many years of experience do you have?',
+                 text_es='¿Cuantos años de experiencia tienes?',
                  type=QuestionType.objects.get(code='NI'))
     q.params = {'min': 0, 'max': 100, 'min_correct': campaign.experience, 'max_correct': 100, 'default': 1}
     q.save()
