@@ -5,7 +5,7 @@ import re
 from django.shortcuts import redirect
 
 import common
-from beta_invite.models import Bullet, Campaign, City
+from beta_invite.models import Bullet, Campaign, City, Test, Question, QuestionType, Answer
 from business import prospect_module
 
 
@@ -100,6 +100,18 @@ def update_campaign_bullets(campaign, request):
     campaign.save()
 
 
+def add_user_tests(campaign, request):
+    """
+    Adds tests that are not yet on the campaign
+    :param campaign:
+    :param request:
+    :return:
+    """
+    tests_ids = {int(id) for id in request.POST.getlist('test_ids')}.difference({t.id for t in campaign.tests.all()})
+    campaign.tests.add(*tests_ids)
+    campaign.save()
+
+
 def create_campaign(request):
     """
     saves to create id first.
@@ -122,4 +134,79 @@ def create_campaign(request):
     candidate_prospects = prospect_module.get_candidates(campaign)
     prospect_module.send_mails(candidate_prospects)
 
+    add_default_tests(campaign)
+    add_user_tests(campaign, request)
+
     return campaign
+
+
+def get_city_question(campaign):
+    q = Question(text='Are you willing to move to {} for this job?'.format(campaign.city.name),
+                 text_es='¿Estarías dispuesto/a a mudarte a {} por este trabajo?'.format(campaign.city.name),
+                 type=QuestionType.objects.get(code='SA'))
+    q.save()
+
+    yes = Answer(name='Yes', name_es='Si', order=1)
+    yes.save()
+    no = Answer(name='No', name_es='No', order=2)
+    no.save()
+
+    q.answers = [yes, no]
+    q.correct_answers = [yes]
+    q.save()
+
+    return q
+
+
+def get_salary_question(campaign):
+    q = Question(text=f'What is your salary expectation?',
+                 text_es=f'¿Cúal es tu salario esperado?',
+                 type=QuestionType.objects.get(code='NI'))
+    q.params = {'min': 0,
+                'max': 30_000_000,
+                'min_correct': campaign.salary_low_range,
+                'max_correct': campaign.salary_high_range,
+                'default': 1_000_000
+                }
+
+    q.save()
+
+    return q
+
+
+def get_experience_question(campaign):
+
+    q = Question(text=f'How many years of experience do you have?',
+                 text_es=f'¿Cuantos años de experiencia tienes?',
+                 type=QuestionType.objects.get(code='NI'))
+    q.params = {'min': 0, 'max': 100, 'min_correct': campaign.experience, 'max_correct': 100, 'default': 1}
+    q.save()
+
+    return q
+
+
+def get_requirements_test(campaign):
+    """
+    Simple test, asking for city,
+    :param campaign:
+    :return:
+    """
+    q1 = get_city_question(campaign)
+    q2 = get_salary_question(campaign)
+    q3 = get_experience_question(campaign)
+
+    test = Test(name='Requirements: {}'.format(campaign.title_es),
+                name_es='Requisitos: {}'.format(campaign.title_es),)
+    test.save()
+    test.questions = [q1, q2, q3]
+    test.save()
+
+    return test
+
+
+def add_default_tests(campaign):
+    cognitive_test = Test.objects.get(name='Cognitive Test')
+    requirement_test = get_requirements_test(campaign)
+
+    campaign.tests = [cognitive_test, requirement_test]
+    campaign.save()

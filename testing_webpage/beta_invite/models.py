@@ -198,6 +198,7 @@ class Answer(models.Model):
 
 
 class Question(models.Model):
+
     internal_name = models.CharField(max_length=1500, null=True)
     text = models.CharField(max_length=1500, null=True)
     text_es = models.CharField(max_length=1500, null=True)
@@ -300,6 +301,7 @@ class Test(models.Model):
                                     default='',
                                     null=True)
     excluding = models.BooleanField(default=False)  # if didn't passed the test, then rejects candidate
+    public = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

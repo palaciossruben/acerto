@@ -72,6 +72,15 @@
         {% endif %}
 
         <br>
+
+        <p>Public?</p>
+        {% if test.public %}
+            <input name="public" type="checkbox" checked>
+        {% else %}
+            <input name="public" type="checkbox">
+        {% endif %}
+
+        <br>
         <br>
         <br>
         <br>

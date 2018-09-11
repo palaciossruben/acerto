@@ -300,6 +300,7 @@ def update_test(request, pk):
     test.cut_score = int(request.POST.get('cut_score'))
     test.feedback_url = request.POST.get('feedback_url')
     test.excluding = bool(request.POST.get('excluding'))
+    test.public = bool(request.POST.get('public'))
 
     test.save()  # save first, for saving questions
 

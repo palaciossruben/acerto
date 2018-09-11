@@ -23,7 +23,7 @@ import beta_invite
 from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
-from beta_invite.models import User, BulletType, WorkArea, EmailType, Campaign
+from beta_invite.models import User, BulletType, WorkArea, EmailType, Campaign, Test
 from business.models import Plan, Contact, Search, KeyWord
 from business.models import BusinessUser
 from business.custom_user_creation_form import CustomUserCreationForm
@@ -380,7 +380,8 @@ def start(request):
                                                  'work_areas': common.translate_list_of_objects(WorkArea.objects.all(), request.LANGUAGE_CODE),
                                                  'cities': common.get_cities(),
                                                  'default_city': city,
-                                                 'keywords': sorted(KeyWord.objects.all(), key=lambda key: key.name)})
+                                                 'keywords': sorted(KeyWord.objects.all(), key=lambda key: key.name),
+                                                 'tests': Test.objects.filter(public=True)})
 
 
 # This for create campaign when the user is logged
