@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-10 01:49+0000\n"
+"POT-Creation-Date: 2018-09-11 01:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -213,6 +213,177 @@ msgstr "Tu teléfono (opcional)"
 msgid "Add a message (optional)"
 msgstr "Escríbe un comentario (opcional)"
 
+#: business/templates/business/index.html:6
+msgid "PeakU - Personnel selection"
+msgstr "PeakU - Selección de Personal"
+
+#: business/templates/business/index.html:34
+#: business/templates/business/results.html:100
+msgid "Name"
+msgstr "Nombre"
+
+#: business/templates/business/index.html:38
+msgid "Company"
+msgstr "Empresa"
+
+#: business/templates/business/index.html:41
+msgid "Mail"
+msgstr "Correo"
+
+#: business/templates/business/index.html:44
+msgid "Phone"
+msgstr "Teléfono"
+
+#: business/templates/business/index.html:48
+msgid "Password"
+msgstr "Contraseña"
+
+#: business/templates/business/index.html:51
+msgid "Confirm Password"
+msgstr "Confirma la contraseña"
+
+#: business/templates/business/index.html:54
+msgid "START NOW"
+msgstr "COMIENZA YA"
+
+#: business/templates/business/index.html:56
+msgid "Already a registered user? Log in"
+msgstr "¿Ya eres un usuario registrado? Inicia sesión Aquí"
+
+#: business/templates/business/index.html:58
+msgid "Here"
+msgstr "Aquí"
+
+#: business/templates/business/index.html:76
+msgid "I forgot my password"
+msgstr "Olvidé mi contraseña"
+
+#: business/templates/business/index.html:78
+msgid "I'm not yet registered"
+msgstr "Aún no estoy registrado"
+
+#: business/templates/business/index.html:83
+msgid "ACCESS"
+msgstr "ACCEDER"
+
+#: business/templates/business/index.html:93
+msgid "\tPublish your job offer and expedite"
+msgstr "	Publica tu oferta laboral y agiliza"
+
+#: business/templates/business/index.html:93
+msgid " the personnel selection process"
+msgstr " el proceso de selección de personal"
+
+#: business/templates/business/index.html:97
+msgid ""
+"You can search candidates, do technical tests and have a fluent conversation "
+"with them"
+msgstr "Podrás hacer búsquedas, pruebas técnicas y contarás con toda la logística para encontrar al personal que tu empresa necesita"
+
+#: business/templates/business/index.html:102
+msgid "PUBLISH FOR FREE"
+msgstr "PUBLICA GRATIS"
+
+#: business/templates/business/index.html:113
+#: business/templates/business/index.html:131
+msgid "The best candidates in 10 business days"
+msgstr "Los mejores candidatos en 10 días hábiles"
+
+#: business/templates/business/index.html:115
+msgid "Five candidates guaranteed for the position in 10 business days."
+msgstr "Cinco candidatos garantizados para el cargo en 10 días hábiles."
+
+#: business/templates/business/index.html:119
+msgid "Publish your job postings for free"
+msgstr "Publica gratis tus vacantes de forma ilimitada"
+
+#: business/templates/business/index.html:121
+msgid "Access candidates and share your publication to reach more people."
+msgstr "Accede a candidatos y comparte tu publicación para llegar a más personas."
+
+#: business/templates/business/index.html:125
+msgid "Optimize your selection processes with our platform"
+msgstr "Optimiza tus procesos de selección con nuestra plataforma"
+
+#: business/templates/business/index.html:127
+msgid ""
+"Allow candidates to do technical tests online, we facilitate the monitoring "
+"of processes and communication."
+msgstr "Permite que los candidatos hagan pruebas técnicas en línea, facilitamos el seguimiento de los procesos y la comunicación."
+
+#: business/templates/business/index.html:132
+msgid ""
+"Post free offers and optimize selection processes to find the candidate you "
+"need in record time."
+msgstr "Publica ofertas gratis y optimiza procesos de selección para que encuentres al candidato que necesitas en tiempo récord."
+
+#: business/templates/business/index.html:149
+msgid "ABOUT THE PLATFORM"
+msgstr "ACERCA DE LA PLATAFORMA"
+
+#: business/templates/business/index.html:151
+msgid ""
+"Publish and share job offers, perform tests related to the position and "
+"select the best personnel. You can easily search, filter and communicate "
+"with candidates at all stages of the process."
+msgstr "Publica y comparte ofertas laborales, realiza pruebas relacionadas al cargo y selecciona al mejor personal. Podrás buscar, filtrar y comunicarte fácilmente con los candidatos en todas las etapas del proceso."
+
+#: business/templates/business/index.html:153
+msgid "START HERE"
+msgstr "COMIENZA AQUÍ"
+
+#: business/templates/business/index.html:166
+msgid "FREE PLAN"
+msgstr "PLAN GRATUITO"
+
+#: business/templates/business/index.html:167
+#: business/templates/business/index.html:182
+msgid "START"
+msgstr "COMENZAR"
+
+#: business/templates/business/index.html:169
+msgid "Free"
+msgstr "Gratis"
+
+#: business/templates/business/index.html:172
+#: business/templates/business/index.html:194
+#: business/templates/business/index.html:217
+#: business/templates/business/index.html:240
+msgid " Unlimited access to the platform "
+msgstr " Acceso ilimitado a la plataforma "
+
+#: business/templates/business/index.html:188
+msgid "BASIC PLAN"
+msgstr "PLAN BÁSICO"
+
+#: business/templates/business/index.html:189
+#: business/templates/business/index.html:205
+#: business/templates/business/index.html:212
+#: business/templates/business/index.html:228
+msgid "GET"
+msgstr "OBTENER"
+
+#: business/templates/business/index.html:211
+msgid "PREMIUM PLAN"
+msgstr "PLAN PREMIUM"
+
+#: business/templates/business/index.html:234
+msgid "HEADHUNTER PLAN"
+msgstr "PLAN HEADHUNTER"
+
+#: business/templates/business/index.html:235
+#: business/templates/business/index.html:251
+msgid "QUOTE"
+msgstr "COTIZAR"
+
+#: business/templates/business/index.html:237
+msgid "From"
+msgstr "Desde"
+
+#: business/templates/business/index.html:262
+msgid "First hand, success stories"
+msgstr "Historias de éxito, de primera mano"
+
 #: business/templates/business/login.html:17
 msgid "Log in to our platform"
 msgstr "Inicia sesión en nuestra plataforma"
@@ -376,10 +547,6 @@ msgstr ""
 "Actualmente no hay perfiles con estas características, para solucionar este "
 "problema, llamanos (+57 311 6109340) o mandanos un email a contacto@peak.co"
 
-#: business/templates/business/results.html:100
-msgid "Name"
-msgstr "Nombre"
-
 #: business/templates/business/results.html:102
 msgid "Email"
 msgstr "Correo"
@@ -417,8 +584,8 @@ msgid "Search"
 msgstr "Búsqueda"
 
 #: business/templates/business/signup_choice.html:6
-msgid "PeakU - Jobs"
-msgstr "PeakU - Trabajos"
+msgid "Employment Agency - PeakU"
+msgstr ""
 
 #: business/templates/business/signup_choice.html:15
 msgid "SIGN UP"
@@ -470,7 +637,9 @@ msgstr "SELECCIONADOS"
 msgid ""
 "Suggested candidates that are your first hiring option and have passed all "
 "filters"
-msgstr "Candidatos sugeridos que son tu primera opción de contratación y han superado todos los filtros"
+msgstr ""
+"Candidatos sugeridos que son tu primera opción de contratación y han "
+"superado todos los filtros"
 
 #: business/templates/business/summary.html:57
 #: business/templates/business/summary.html:65
@@ -479,13 +648,13 @@ msgid "PROFILES"
 msgstr "PERFILES"
 
 #: business/templates/business/summary.html:76
-#: business/templates/business/summary.html:157
-#: business/templates/business/summary.html:203
+#: business/templates/business/summary.html:156
+#: business/templates/business/summary.html:202
 msgid "Cognitive capacity"
 msgstr "Capacidad cognitiva"
 
 #: business/templates/business/summary.html:81
-#: business/templates/business/summary.html:160
+#: business/templates/business/summary.html:159
 msgid "Technical knowledge"
 msgstr "Conocimientos técnicos"
 
@@ -498,7 +667,6 @@ msgid "Cultural fit"
 msgstr "Fit cultural"
 
 #: business/templates/business/summary.html:140
-#: business/templates/business/summary.html:152
 msgid "PRESELECTED"
 msgstr "PRE-SELECCIONADOS"
 
@@ -506,19 +674,23 @@ msgstr "PRE-SELECCIONADOS"
 msgid ""
 "All candidates who approved initial tests and specific requirements for your "
 "campaign"
-msgstr "Todos los candidatos que aprobaron pruebas iniciales y requisitos específicos para tu campaña"
+msgstr ""
+"Todos los candidatos que aprobaron pruebas iniciales y requisitos "
+"específicos para tu campaña"
 
-#: business/templates/business/summary.html:187
+#: business/templates/business/summary.html:186
 msgid "APPLICANTS"
 msgstr "APLICANTES"
 
-#: business/templates/business/summary.html:189
+#: business/templates/business/summary.html:188
 msgid ""
 "Other candidates who have not done the tests or candidates that have been "
 "discarded by any of the filters"
-msgstr "Otros candidatos que no han realizado las pruebas ó candidatos que han sido descartados por alguno de los filtros"
+msgstr ""
+"Otros candidatos que no han realizado las pruebas ó candidatos que han sido "
+"descartados por alguno de los filtros"
 
-#: business/templates/business/summary.html:198
+#: business/templates/business/summary.html:197
 msgid "ADDITIONAL PROFILES"
 msgstr "PERFILES ADICIONALES"
 
@@ -640,6 +812,9 @@ msgstr "+ CREAR OFERTA"
 msgid "SIGN IN"
 msgstr "INICIA SESION"
 
+#~ msgid "PeakU - Jobs"
+#~ msgstr "PeakU - Trabajos"
+
 #~ msgid "APPLY NOW!"
 #~ msgstr "¡APLICA YA!"
 
@@ -660,9 +835,6 @@ msgstr "INICIA SESION"
 
 #~ msgid "e-mail"
 #~ msgstr "email"
-
-#~ msgid "Phone"
-#~ msgstr "Teléfono"
 
 #~ msgid "Without a registered phone"
 #~ msgstr "Sin teléfono registrado"
@@ -693,9 +865,6 @@ msgstr "INICIA SESION"
 
 #~ msgid "Staff Pick - PeakU"
 #~ msgstr "Selección de Personal - PeakU"
-
-#~ msgid "FREE POST"
-#~ msgstr "PRUEBA GRATIS"
 
 #~ msgid "CAMPAIGN"
 #~ msgstr "CAMPAÑA"
@@ -1020,9 +1189,6 @@ msgstr "INICIA SESION"
 #~ msgid "We deliver only the best 10%% of applicants"
 #~ msgstr "Entregamos el mejor 10% de los aplicantes"
 
-#~ msgid "The whole process in 10 business days"
-#~ msgstr "Todo el proceso en 10 días hábiles"
-
 #~ msgid "We accelerate your recruitment processes"
 #~ msgstr "Aceleramos tus procesos de reclutamiento"
 
@@ -1126,9 +1292,6 @@ msgstr "INICIA SESION"
 
 #~ msgid "Search on social media"
 #~ msgstr "Búsqueda en redes sociales"
-
-#~ msgid "Search on other platforms"
-#~ msgstr "Búsqueda en otras plataformas"
 
 #~ msgid "Custom technical tests"
 #~ msgstr "Pruebas técnicas a la medida"
