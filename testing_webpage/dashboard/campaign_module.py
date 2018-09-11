@@ -163,10 +163,10 @@ def get_salary_question(campaign):
                  text_es='¿Cúal es tu salario esperado?',
                  type=QuestionType.objects.get(code='NI'))
     q.params = {'min': 0,
-                'max': 30_000_000,
+                'max': 30000000,
                 'min_correct': campaign.salary_low_range,
                 'max_correct': campaign.salary_high_range,
-                'default': 1_000_000
+                'default': 1000000
                 }
 
     q.save()
