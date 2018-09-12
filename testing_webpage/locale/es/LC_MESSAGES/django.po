@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-11 01:41+0000\n"
+"POT-Creation-Date: 2018-09-12 01:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -268,7 +268,7 @@ msgstr "ACCEDER"
 
 #: business/templates/business/index.html:93
 msgid "\tPublish your job offer and expedite"
-msgstr "	Publica tu oferta laboral y agiliza"
+msgstr "\tPublica tu oferta laboral y agiliza"
 
 #: business/templates/business/index.html:93
 msgid " the personnel selection process"
@@ -278,7 +278,9 @@ msgstr " el proceso de selección de personal"
 msgid ""
 "You can search candidates, do technical tests and have a fluent conversation "
 "with them"
-msgstr "Podrás hacer búsquedas, pruebas técnicas y contarás con toda la logística para encontrar al personal que tu empresa necesita"
+msgstr ""
+"Podrás hacer búsquedas, pruebas técnicas y contarás con toda la logística "
+"para encontrar al personal que tu empresa necesita"
 
 #: business/templates/business/index.html:102
 msgid "PUBLISH FOR FREE"
@@ -299,7 +301,8 @@ msgstr "Publica gratis tus vacantes de forma ilimitada"
 
 #: business/templates/business/index.html:121
 msgid "Access candidates and share your publication to reach more people."
-msgstr "Accede a candidatos y comparte tu publicación para llegar a más personas."
+msgstr ""
+"Accede a candidatos y comparte tu publicación para llegar a más personas."
 
 #: business/templates/business/index.html:125
 msgid "Optimize your selection processes with our platform"
@@ -309,13 +312,17 @@ msgstr "Optimiza tus procesos de selección con nuestra plataforma"
 msgid ""
 "Allow candidates to do technical tests online, we facilitate the monitoring "
 "of processes and communication."
-msgstr "Permite que los candidatos hagan pruebas técnicas en línea, facilitamos el seguimiento de los procesos y la comunicación."
+msgstr ""
+"Permite que los candidatos hagan pruebas técnicas en línea, facilitamos el "
+"seguimiento de los procesos y la comunicación."
 
 #: business/templates/business/index.html:132
 msgid ""
 "Post free offers and optimize selection processes to find the candidate you "
 "need in record time."
-msgstr "Publica ofertas gratis y optimiza procesos de selección para que encuentres al candidato que necesitas en tiempo récord."
+msgstr ""
+"Publica ofertas gratis y optimiza procesos de selección para que encuentres "
+"al candidato que necesitas en tiempo récord."
 
 #: business/templates/business/index.html:149
 msgid "ABOUT THE PLATFORM"
@@ -326,7 +333,10 @@ msgid ""
 "Publish and share job offers, perform tests related to the position and "
 "select the best personnel. You can easily search, filter and communicate "
 "with candidates at all stages of the process."
-msgstr "Publica y comparte ofertas laborales, realiza pruebas relacionadas al cargo y selecciona al mejor personal. Podrás buscar, filtrar y comunicarte fácilmente con los candidatos en todas las etapas del proceso."
+msgstr ""
+"Publica y comparte ofertas laborales, realiza pruebas relacionadas al cargo "
+"y selecciona al mejor personal. Podrás buscar, filtrar y comunicarte "
+"fácilmente con los candidatos en todas las etapas del proceso."
 
 #: business/templates/business/index.html:153
 msgid "START HERE"
@@ -400,6 +410,24 @@ msgstr "Inicia Sesión"
 #: business/templates/business/login_buttons.html:5
 msgid "Log Out"
 msgstr "Cerrar Sesión"
+
+#: business/templates/business/new/start.html:242
+#: business/templates/business/results.html:104
+msgid "Experience"
+msgstr "Experiencia"
+
+#: business/templates/business/new/start.html:243
+msgid "What is the minimum number of years of experience you are expecting?"
+msgstr ""
+
+#: business/templates/business/new/start.html:246
+msgid "Tests"
+msgstr "Pruebas"
+
+#: business/templates/business/new/start.html:247
+msgid ""
+"Add tests you want your candidates to do online, and be filtered by them"
+msgstr "Agrega las pruebas que quieres que tus candidatos hagan en línea"
 
 #: business/templates/business/plan.html:32
 msgid "I want it"
@@ -554,10 +582,6 @@ msgstr "Correo"
 #: business/templates/business/results.html:103
 msgid "Education"
 msgstr "Educación"
-
-#: business/templates/business/results.html:104
-msgid "Experience"
-msgstr "Experiencia"
 
 #: business/templates/business/results.html:105
 msgid "Search Rating"
