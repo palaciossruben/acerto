@@ -805,6 +805,8 @@ class User(models.Model):
             elif re.search(r'^' + self.get_calling_code() + '.+', self.phone) is not None:
                 self.phone = '+' + self.phone
 
+        return self.phone
+
     # adds custom table name
     class Meta:
         db_table = 'users'

@@ -85,7 +85,7 @@
             <div class="row">
                 <div class="col-lg-5 col-xs-12">
                     {% if candidate.user.phone %}
-                        <a href="https://api.whatsapp.com/send?phone=57{{ candidate.user.phone }}" target="_blank">
+                        <a href="https://api.whatsapp.com/send?phone={{ candidate.user.change_to_international_phone_number }}" target="_blank">
                             <div type="button" class="wp-button center">
                                 <div class="wp-logo"><span class="wp-text">ENVIAR WHATSAPP</span></div>
                             </div>

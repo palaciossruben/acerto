@@ -1,7 +1,6 @@
 import requests
 import unicodedata
 from decouple import config
-from multiprocessing import Process
 
 from dashboard.models import Candidate
 from beta_invite.util import common_senders
