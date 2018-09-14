@@ -153,7 +153,7 @@
     <br>
     <br>
     <div>
-        <ol style="margin-left:10%">
+        <ul style="margin-left:10%">
             {% for campaign in active_campaigns %}
                 <li style="">
                     <a href="{% url 'beta_invite:index' %}?campaign_id={{ campaign.pk }}">
@@ -165,12 +165,12 @@
                         <br>
                     {% endif %}
                     {% if campaign.salary_high_range %}
-                        {% trans 'Salary from' %}': '{{ campaign.salary_high_range }} {% trans 'to' %}: {{ campaign.salary_high_range }}
+                        {% trans 'Salary from' %}: {{ campaign.salary_high_range|print_money }} {% trans 'to' %}: {{ campaign.salary_high_range|print_money }}
                         <br>
                     {% endif %}
                     <br>
                 </li>
             {% endfor %}
-        </ol>
+        </ul>
     </div>
 {% endblock %}
