@@ -165,7 +165,7 @@
                         <br>
                     {% endif %}
                     {% if campaign.salary_high_range %}
-                        {% trans 'Salary from' %}: {{ campaign.salary_high_range|print_money }} {% trans 'to' %}: {{ campaign.salary_high_range|print_money }}
+                        {% trans 'Salary from' %}: {{ campaign.print_low_salary }} {% trans 'to' %}: {{ campaign.print_high_salary }}
                         <br>
                     {% endif %}
                     <br>
