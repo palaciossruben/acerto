@@ -23,6 +23,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^trabajos$', views.jobs, name='index'),
     url('^', include('django.contrib.auth.urls')),
     url(r'^servicio_de_empleo/', include('beta_invite.urls')),
     url(r'^seleccion_de_personal/', include('business.urls')),
@@ -34,7 +35,7 @@ urlpatterns = [
 urlpatterns += i18n_patterns(
     url(r'^staffing$', views.index, name='index'),
     url(r'^sitemap.xml$', views.sitemap, name='sitemap'),
-    url(r'^BingSiteAuth.xml$', views.BingSiteAuth, name='BingSiteAuth'),
+    url(r'^BingSiteAuth.xml$', views.bing_site_auth, name='BingSiteAuth'),
     url(r'^robots.txt$', views.robots, name='robots')
 )
 

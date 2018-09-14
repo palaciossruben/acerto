@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-12 01:48+0000\n"
+"POT-Creation-Date: 2018-09-14 21:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,6 +71,7 @@ msgstr "PeakU"
 
 #: beta_invite/templates/beta_invite/add_cv.html:23
 #: beta_invite/templates/beta_invite/index.html:100
+#: testing_webpage/templates/testing_webpage/jobs.html:66
 msgid "Upload your resume"
 msgstr "Anexar hoja de vida"
 
@@ -78,6 +79,7 @@ msgstr "Anexar hoja de vida"
 #: beta_invite/templates/beta_invite/index.html:106
 #: business/templates/business/business_signup.html:49
 #: business/templates/business/contact_form.html:46
+#: testing_webpage/templates/testing_webpage/jobs.html:72
 msgid "Sure!"
 msgstr "¡Enviar!"
 
@@ -110,6 +112,7 @@ msgstr "Requerimientos"
 #: beta_invite/templates/beta_invite/index.html:69
 #: business/templates/business/business_signup.html:35
 #: business/templates/business/contact_form.html:35
+#: testing_webpage/templates/testing_webpage/jobs.html:35
 msgid "Your Full Name"
 msgstr "Tu nombre completo"
 
@@ -117,11 +120,13 @@ msgstr "Tu nombre completo"
 #: business/templates/business/business_signup.html:38
 #: business/templates/business/contact_form.html:38
 #: business/templates/business/login.html:24
+#: testing_webpage/templates/testing_webpage/jobs.html:39
 msgid "Your email"
 msgstr "Tu correo"
 
 #: beta_invite/templates/beta_invite/index.html:77
 #: business/templates/business/business_signup.html:41
+#: testing_webpage/templates/testing_webpage/jobs.html:43
 msgid "Your phone"
 msgstr "Tu teléfono"
 
@@ -775,6 +780,7 @@ msgid "Companies"
 msgstr "Empresas"
 
 #: testing_webpage/templates/testing_webpage/index.html:6
+#: testing_webpage/templates/testing_webpage/jobs.html:6
 msgid "Jobs"
 msgstr "Trabajos"
 
@@ -827,6 +833,22 @@ msgid ""
 msgstr ""
 "Con PeakU aplicas una sola vez y tienes acceso a una infinidad de vacantes "
 "de empleo de múltiples empresas y múltiples roles"
+
+#: testing_webpage/templates/testing_webpage/jobs.html:21
+msgid "AVAILABLE POSITIONS"
+msgstr "POSICIONES DISPONIBLES"
+
+#: testing_webpage/templates/testing_webpage/jobs.html:164
+msgid "City"
+msgstr "Ciudad"
+
+#: testing_webpage/templates/testing_webpage/jobs.html:168
+msgid "Salary from"
+msgstr "Salario desde"
+
+#: testing_webpage/templates/testing_webpage/jobs.html:168
+msgid "to"
+msgstr "hasta"
 
 #: testing_webpage/templates/white_header_base.html:15
 msgid "+ NEW JOB POST"

@@ -332,6 +332,3 @@ def add_cv_changes(request):
 
 def security_politics(request):
     return render(request, cts.SECURITY_POLITICS_VIEW_PATH)
-
-
-
