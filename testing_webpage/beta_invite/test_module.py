@@ -52,7 +52,7 @@ def update_survey(question, answer_text, survey, question_id):
     elif question.type.code == 'NI':
         number = int(answer_text)
         survey.numeric_answer = number
-        if question.params['min_correct'] <= number <= question.params['max_correct']:
+        if int(question.params['min_correct']) <= number <= int(question.params['max_correct']):
             survey.score = 1
         else:
             survey.score = 0
