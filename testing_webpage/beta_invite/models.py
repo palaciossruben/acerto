@@ -702,7 +702,8 @@ class User(models.Model):
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
     city = models.ForeignKey(City, null=True, on_delete=models.SET_NULL)
     curriculum_url = models.CharField(max_length=200, default='#')
-    curriculum_text = models.TextField(default='')
+    curriculum_text = models.TextField(default=None, null=True)
+    curriculum_s3_url = models.CharField(max_length=200, default='#')
 
     # indicates if added to messenger
     added = models.BooleanField(default=False)
@@ -785,6 +786,10 @@ class User(models.Model):
                     return None
 
     def get_short_curriculum(self):
+
+        if self.curriculum_text is None:
+            return None
+
         short_curriculum = self.curriculum_text.replace("\n", "")
         short_curriculum = re.sub(' +', ' ', short_curriculum)
         start_idx = User.get_short_curriculum_index(short_curriculum)

@@ -49,7 +49,10 @@ def get_text_corpus():
     """
     Returns: OrderedDict with {user_id: text}
     """
-    text_dict = [(u.id, u.curriculum_text) for u in User.objects.filter(~Q(curriculum_text=None)).all()]
+
+    # TODO: use values_list
+    text_dict = [(u.id, u.curriculum_text) for u in User.objects.filter(~Q(curriculum_text=None) &
+                                                                        ~Q(curriculum_text='')).all()]
     text_dict = OrderedDict(text_dict)
 
     # filter any numbers:
