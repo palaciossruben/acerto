@@ -106,10 +106,10 @@
                 <ul>
                     <div>
                         <li><a href="#">{% trans 'Us' %}</a></li>
-                        {% if 'servicio_de_empleo' in request.path %}
-                            <li><a href="{% url 'beta_invite:index' %}">{% trans 'Contact Us' %}</a></li>
-                        {% else %}
+                        {% if 'seleccion_de_personal' in request.path %}
                             <li><a href="{% url 'business:contact_form' %}">{% trans 'Contact Us' %}</a></li>
+                        {% else %}
+                            <li><a href="{% url 'beta_invite:index' %}">{% trans 'Contact Us' %}</a></li>
                         {% endif %}
                         <li><a href="{% url 'beta_invite:index' %}">{% trans 'Candidates' %}</a></li>
                     </div>
