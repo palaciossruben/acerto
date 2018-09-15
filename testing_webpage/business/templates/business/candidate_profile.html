@@ -113,7 +113,7 @@
                                 <div class="test-distinction">
                                     {% for score in candidate.get_last_evaluation.scores.all %}
                                         {% if score.test.type.name == 'cognitive' %}
-                                            <p class="test-distinction-name center"><strong>{{ score.test.name_es }}: </strong>{{ score.value|print_score }}</p>
+                                            <p class="test-distinction-name"><strong>{{ score.test.name_es }}: </strong>{{ score.value|print_score }}</p>
                                         {% endif %}
                                     {% endfor %}
                                 </div>
@@ -132,7 +132,7 @@
                                 <div class="test-distinction">
                                     {% for score in candidate.get_last_evaluation.scores.all %}
                                         {% if score.test.type.name == 'technical' %}
-                                            <p class="test-distinction-name center"><strong>{{ score.test.name_es }}: </strong>{{ score.value|print_score }}</p>
+                                            <p class="test-distinction-name"><strong>{{ score.test.name_es }}: </strong>{{ score.value|print_score }}</p>
                                         {% endif %}
                                     {% endfor %}
                                 </div>
@@ -151,7 +151,7 @@
                                 <div class="test-distinction">
                                     {% for score in candidate.get_last_evaluation.scores.all %}
                                         {% if score.test.type.name == 'requirements' %}
-                                            <p class="test-distinction-name center"><strong>Requisitos: </strong>{{ score.value|print_score }}</p>
+                                            <p class="test-distinction-name"><strong>Requisitos: </strong>{{ score.value|print_score }}</p>
                                         {% endif %}
                                     {% endfor %}
 
@@ -178,7 +178,7 @@
                                 <div class="test-distinction">
                                     {% for score in candidate.get_last_evaluation.scores.all %}
                                         {% if score.test.type.name == 'motivation' %}
-                                            <p class="test-distinction-name center"><strong>{{ score.test.name_es }}: </strong>{{ score.value|print_score }}</p>
+                                            <p class="test-distinction-name"><strong>{{ score.test.name_es }}: </strong>{{ score.value|print_score }}</p>
                                         {% endif %}
                                     {% endfor %}
                                 </div>
@@ -197,7 +197,7 @@
                                 <div class="test-distinction">
                                     {% for score in candidate.get_last_evaluation.scores.all %}
                                         {% if score.test.type.name == 'cultural fit' %}
-                                            <p class="test-distinction-name center"><strong>{{ score.test.name_es }}: </strong>{{ score.value|print_score }}</p>
+                                            <p class="test-distinction-name"><strong>{{ score.test.name_es }}: </strong>{{ score.value|print_score }}</p>
                                         {% endif %}
                                     {% endfor %}
                                 </div>
