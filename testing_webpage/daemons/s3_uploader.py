@@ -16,7 +16,6 @@ from django.db.models import Q
 from queue import Queue
 
 from testing_webpage import settings
-from subscribe import cts as subscribe_cts
 
 
 NUM_WORKERS = 3
