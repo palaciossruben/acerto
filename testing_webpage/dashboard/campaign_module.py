@@ -5,7 +5,7 @@ import re
 from django.shortcuts import redirect
 
 import common
-from beta_invite.models import Bullet, Campaign, City, Test, Question, QuestionType, Answer
+from beta_invite.models import Bullet, Campaign, City, Test, Question, QuestionType, Answer, TestType
 from business import prospect_module
 
 
@@ -196,7 +196,8 @@ def get_requirements_test(campaign):
     q3 = get_experience_question(campaign)
 
     test = Test(name='Requirements: {}'.format(campaign.title_es),
-                name_es='Requisitos: {}'.format(campaign.title_es),)
+                name_es='Requisitos: {}'.format(campaign.title_es),
+                type=TestType.objects.get(name='requirements'))
     test.save()
     test.questions = [q1, q2, q3]
     test.save()
