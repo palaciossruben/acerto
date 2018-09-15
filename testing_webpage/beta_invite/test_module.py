@@ -248,15 +248,15 @@ def classify_evaluation_and_change_state(candidate):
     last_evaluation = candidate.get_last_evaluation()
 
     if last_evaluation is not None:
-        forecast = model.get_candidate_match_and_save(candidate)
 
-        # TODO: change this line if AI takes over the world!!!
-        # last_evaluation.passed = last_evaluation.final_score >= last_evaluation.cut_score and \
-        last_evaluation.passed = forecast and \
+        # TODO: On a second thought there is not enough candidate information to make a reasonable prediction here!
+        #forecast = model.get_candidate_match_and_save(candidate)
+        # automated_candidate_state_change(candidate, last_evaluation, forecast)
+        #last_evaluation.passed = forecast and \
+        last_evaluation.passed = last_evaluation.final_score >= last_evaluation.cut_score and \
                                  passed_all_excluding_tests(last_evaluation) and \
                                  passed_all_excluding_questions(last_evaluation, candidate)
         last_evaluation.save()
 
-        automated_candidate_state_change(candidate, last_evaluation, forecast)
     else:
         raise NotImplementedError('should not reach this, something wrong with candidate_id: {}'.format(candidate.id))
