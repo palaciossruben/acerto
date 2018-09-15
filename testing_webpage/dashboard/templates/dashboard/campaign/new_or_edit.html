@@ -63,6 +63,16 @@
         </select>
         <br>
         <br>
+
+        <h3>Salary</h3>
+        <span >from: </span>
+        <input class="origin-salary" step="100000" type="number" min="0" name="salary_low_range" value="1000000">
+        <span >to: </span>
+        <input class="origin-salary" step="100000" type="number" min="0" name="salary_high_range" value="2000000">
+
+        <br>
+        <br>
+
         <textarea name="description" cols="40" rows="5"
         placeholder="add description in English">{{ campaign.description }}</textarea>
         <br>

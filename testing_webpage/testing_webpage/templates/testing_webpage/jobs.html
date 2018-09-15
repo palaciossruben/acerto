@@ -158,6 +158,10 @@
                         {% trans 'City' %}: {{ campaign.city.name }}
                         <br>
                     {% endif %}
+                    {% if campaign.salary_low_range %}
+                        {% trans 'Salary from' %}: {{ campaign.print_low_salary }} {% trans 'to' %}: {{ campaign.print_high_salary }}
+                        <br>
+                    {% endif %}
                     <br>
                 </li>
             {% endfor %}

@@ -641,16 +641,16 @@ class Campaign(models.Model):
     class Meta:
         db_table = 'campaigns'
 
-    @classmethod
     @staticmethod
-    def print_money(amount):
-        return '$ ' + str(amount)
+    def print_cop_money(amount):
+        reversed_string = [e + (idx % 3 == 0 and idx > 0) * '.' for idx, e in enumerate(reversed(str(amount)))]
+        return '$ ' + ''.join(reversed(reversed_string))
 
     def print_low_salary(self):
-        return Campaign.print_money(self.salary_low_range)
+        return Campaign.print_cop_money(self.salary_low_range)
 
     def print_high_salary(self):
-        return Campaign.print_money(self.salary_high_range)
+        return Campaign.print_cop_money(self.salary_high_range)
 
     def translate(self, language_code):
         """
