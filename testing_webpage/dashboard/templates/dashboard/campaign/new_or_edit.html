@@ -66,9 +66,17 @@
 
         <h3>Salary</h3>
         <span >from: </span>
-        <input class="origin-salary" step="100000" type="number" min="0" name="salary_low_range" value="1000000">
+        {% if campaign.salary_low_range %}
+            <input step="100000" type="number" min="0" name="salary_low_range" value="{{ campaign.salary_low_range }}">
+        {% else %}
+            <input step="100000" type="number" min="0" name="salary_low_range" value="1000000">
+        {% endif %}
         <span >to: </span>
-        <input class="origin-salary" step="100000" type="number" min="0" name="salary_high_range" value="2000000">
+        {% if campaign.salary_high_range %}
+            <input step="100000" type="number" min="0" name="salary_high_range" value="{{ campaign.salary_high_range }}">
+        {% else %}
+            <input step="100000" type="number" min="0" name="salary_high_range" value="2000000">
+        {% endif %}
 
         <br>
         <br>
