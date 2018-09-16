@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-14 21:36+0000\n"
+"POT-Creation-Date: 2018-09-16 12:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -205,7 +205,8 @@ msgid "Thanks for reaching out!"
 msgstr "¡Gracias por tu interés!"
 
 #: business/templates/business/contact_form.html:28
-#: testing_webpage/templates/base.html:109
+#: testing_webpage/templates/base.html:110
+#: testing_webpage/templates/base.html:112
 #: testing_webpage/templates/no_header_base.html:20
 msgid "Contact Us"
 msgstr "Contáctanos"
@@ -748,12 +749,12 @@ msgstr "Español"
 msgid "Us"
 msgstr "Nosotros"
 
-#: testing_webpage/templates/base.html:110
+#: testing_webpage/templates/base.html:114
 #: testing_webpage/templates/no_header_base.html:19
 msgid "Candidates"
 msgstr "Personas"
 
-#: testing_webpage/templates/base.html:133
+#: testing_webpage/templates/base.html:137
 msgid "Copyright 2018 © PeakU. All rights reserved."
 msgstr "Copyright 2018 © PeakU. Todos los derechos reservados."
 
@@ -838,15 +839,15 @@ msgstr ""
 msgid "AVAILABLE POSITIONS"
 msgstr "POSICIONES DISPONIBLES"
 
-#: testing_webpage/templates/testing_webpage/jobs.html:164
+#: testing_webpage/templates/testing_webpage/jobs.html:158
 msgid "City"
 msgstr "Ciudad"
 
-#: testing_webpage/templates/testing_webpage/jobs.html:168
+#: testing_webpage/templates/testing_webpage/jobs.html:162
 msgid "Salary from"
 msgstr "Salario desde"
 
-#: testing_webpage/templates/testing_webpage/jobs.html:168
+#: testing_webpage/templates/testing_webpage/jobs.html:162
 msgid "to"
 msgstr "hasta"
 
