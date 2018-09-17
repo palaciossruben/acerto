@@ -219,7 +219,6 @@ class Candidate(models.Model):
         self.state_events.add(event)
         self.save()
 
-
     def get_last_evaluation(self):
         try:
             return self.evaluations.latest('created_at')

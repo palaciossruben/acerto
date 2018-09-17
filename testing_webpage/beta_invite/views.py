@@ -287,11 +287,11 @@ def active_campaigns(request):
     candidate = common.get_candidate_from_request(request)
     new_user_module.update_user(candidate.campaign, candidate.user, {}, request)
 
-    # TODO: If AI takes over the world comment the next 3 lines.
-    # Does a last update of the ML prediction with the additional info provided before.
     last_evaluation = candidate.get_last_evaluation()
     if last_evaluation:
         test_module.update_scores(last_evaluation, last_evaluation.scores.all())
+
+        # TODO: activate AI by use_ml=True
         test_module.classify_evaluation_and_change_state(candidate)
 
     return render(request, cts.ACTIVE_CAMPAIGNS_VIEW_PATH)

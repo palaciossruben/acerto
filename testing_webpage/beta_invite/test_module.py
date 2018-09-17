@@ -50,7 +50,7 @@ def update_survey(question, answer_text, survey, question_id):
         pass
 
     elif question.type.code == 'NI':
-        number = int(answer_text)
+        number = int(answer_text.replace('.', ''))
         survey.numeric_answer = number
         if int(question.params['min_correct']) <= number <= int(question.params['max_correct']):
             survey.score = 1
@@ -132,12 +132,11 @@ def get_scores(campaign, user_id, questions_dict, request):
     return scores
 
 
-def automated_candidate_state_change(candidate, evaluation, forecast):
+def automated_candidate_state_change(candidate, evaluation):
     """
     Given tests results it alters the candidate state.
     :param candidate: Candidate
     :param evaluation: Evaluation
-    :param forecast: AI decision
     :return: None
     """
     if candidate:
@@ -147,9 +146,9 @@ def automated_candidate_state_change(candidate, evaluation, forecast):
             return
 
         if evaluation.passed:
-            candidate.change_state(state_code='WFI', forecast=forecast)
+            candidate.change_state(state_code='WFI', forecast=evaluation.passed)
         else:  # Fails tests
-            candidate.change_state(state_code='FT', forecast=forecast)
+            candidate.change_state(state_code='FT', forecast=evaluation.passed)
 
         candidate.save()
 
@@ -239,24 +238,25 @@ def update_scores(evaluation, scores):
     evaluation.save()
 
 
-def classify_evaluation_and_change_state(candidate):
+def classify_evaluation_and_change_state(candidate, use_ml=False):
     """
     does the ML and changes candidate state
     :param candidate: given a candidate last saved state. Classifies
+    :param use_ml: if True will use machine learning algorithm, else will use simple heuristic
     :return: None or raises Error
     """
     last_evaluation = candidate.get_last_evaluation()
 
     if last_evaluation is not None:
 
-        # TODO: On a second thought there is not enough candidate information to make a reasonable prediction here!
-        #forecast = model.get_candidate_match_and_save(candidate)
-        # automated_candidate_state_change(candidate, last_evaluation, forecast)
-        #last_evaluation.passed = forecast and \
-        last_evaluation.passed = last_evaluation.final_score >= last_evaluation.cut_score and \
-                                 passed_all_excluding_tests(last_evaluation) and \
-                                 passed_all_excluding_questions(last_evaluation, candidate)
+        forecast = model.get_candidate_match_and_save(candidate) if use_ml else last_evaluation.final_score >= last_evaluation.cut_score
+
+        last_evaluation.passed = forecast and \
+            passed_all_excluding_tests(last_evaluation) and \
+            passed_all_excluding_questions(last_evaluation, candidate)
         last_evaluation.save()
+
+        automated_candidate_state_change(candidate, last_evaluation)
 
     else:
         raise NotImplementedError('should not reach this, something wrong with candidate_id: {}'.format(candidate.id))
