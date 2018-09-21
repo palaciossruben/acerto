@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.db.models import Q
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 from beta_invite.models import Campaign, Test, TestType, BulletType, Interview, Survey, Bullet, QuestionType, Question, Answer
 from dashboard.models import Candidate, Message, Screening
@@ -17,12 +18,17 @@ from match import model
 CANDIDATE_FORECAST_LIMIT = 20
 
 
+@login_required
 def index(request):
     """
     Args:
         request: HTTP
     Returns: renders main view with a list of campaigns
     """
+
+    # TODO: this basic login... works but the real admin users can be used instead
+    if common.not_admin_user(request):
+        return redirect('business:login')
 
     campaigns = Campaign.objects.filter(removed=False).order_by('-active', 'name', 'title_es')
 

@@ -453,9 +453,13 @@ def calculate_operational_efficiency(campaign):
     campaign.save()
 
 
+def not_admin_user(request):
+    return request.user.username != ADMIN_USER_EMAIL
+
+
 def access_for_users(request, campaign, business_user):
-    return request.user.username != ADMIN_USER_EMAIL and (request.user.id != business_user.auth_user.id or campaign
-                                                          not in business_user.campaigns.all())
+    return not_admin_user(request) and (request.user.id != business_user.auth_user.id or campaign
+                                        not in business_user.campaigns.all())
 
 
 def get_business_user_with_campaign(campaign):
