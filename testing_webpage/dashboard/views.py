@@ -27,6 +27,7 @@ def index(request):
     """
 
     # TODO: this basic login... works but the real admin users can be used instead
+    # TODO: how to add the same auth to all the app????
     if common.not_admin_user(request):
         return redirect('business:login')
 
