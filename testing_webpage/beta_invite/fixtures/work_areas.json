@@ -14,7 +14,7 @@
   "fields":{
     "name": "Almacén / Logística / Transporte",
     "name_es": "Almacén / Logística / Transporte",
-    "segment_id": 1
+    "segment_id": 3
   }
 },
 {
@@ -75,8 +75,8 @@
   "model": "beta_invite.workarea",
   "pk": 9,
   "fields":{
-    "name": "Diseño / Artes gráficas",
-    "name_es": "Diseño / Artes gráficas",
+    "name": "Diseño / Artes gráficas / Arquitectura",
+    "name_es": "Diseño / Artes gráficas / Arquitectura",
     "segment_id": 4
   }
 },
@@ -140,7 +140,7 @@
   "fields":{
     "name": "Mantenimiento y Reparaciones Técnicas",
     "name_es": "Mantenimiento y Reparaciones Técnicas",
-    "segment_id": 8
+    "segment_id": 3
   }
 },
 {
@@ -185,7 +185,7 @@
   "fields":{
     "name": "Servicios Generales, Aseo y Seguridad",
     "name_es": "Servicios Generales, Aseo y Seguridad",
-    "segment_id": 11
+    "segment_id": 8
   }
 },
 {
@@ -194,7 +194,7 @@
   "fields":{
     "name": "Ventas",
     "name_es": "Ventas",
-    "segment_id": 12
+    "segment_id": 2
   }
 }
 ]

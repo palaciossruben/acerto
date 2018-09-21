@@ -3,8 +3,8 @@
   "model": "beta_invite.workareasegment",
   "pk": 1,
   "fields":{
-    "name": "Administration / Logistics",
-    "name_es": "Administración / Lógistica",
+    "name": "Administration",
+    "name_es": "Administración",
     "code": "AL"
   }
 },
@@ -12,105 +12,81 @@
   "model": "beta_invite.workareasegment",
   "pk": 2,
   "fields":{
-    "name": "Atención a clientes",
-    "name_es": "Atención a clientes",
-    "code": "AAC"
+    "name": "Atención a clientes / Ventas",
+    "name_es": "Atención a clientes / Ventas",
+    "code": "ACV"
   }
 },
 {
   "model": "beta_invite.workareasegment",
   "pk": 3,
   "fields":{
-    "name": "Construcción y obra",
-    "name_es": "Construcción y obra",
-    "code": "CO"
+    "name": "Construcción / Mantenimiento / Transporte",
+    "name_es": "Construcción / Mantenimiento / Transporte",
+    "code": "CMT"
   }
 },
 {
   "model": "beta_invite.workareasegment",
   "pk": 4,
   "fields":{
-    "name": "Diseño / Artes gráficas",
-    "name_es": "Diseño / Artes gráficas",
-    "code": "DA"
+    "name": "Diseño / Publicidad",
+    "name_es": "Diseño / Publicidad",
+    "code": "DP"
   }
 },
   {
   "model": "beta_invite.workareasegment",
   "pk": 5,
   "fields":{
-    "name": "Diseño / Artes gráficas",
-    "name_es": "Diseño / Artes gráficas",
-    "code": "5"
+    "name": "Docencia",
+    "name_es": "Docencia",
+    "code": "D"
   }
 },
   {
   "model": "beta_invite.workareasegment",
   "pk": 6,
   "fields":{
-    "name": "Diseño / Artes gráficas",
-    "name_es": "Diseño / Artes gráficas",
-        "code": "6"
+    "name": "Informática / Ingeniería / Investigación",
+    "name_es": "Informática / Ingeniería / Investigación",
+    "code": "II"
   }
 },
   {
   "model": "beta_invite.workareasegment",
   "pk": 7,
   "fields":{
-    "name": "Diseño / Artes gráficas",
-    "name_es": "Diseño / Artes gráficas",
-        "code": "7"
-
+    "name": "Legal / Asesoría",
+    "name_es": "Legal / Asesoría",
+    "code": "LA"
   }
 },
   {
   "model": "beta_invite.workareasegment",
   "pk": 8,
   "fields":{
-    "name": "Diseño / Artes gráficas",
-    "name_es": "Diseño / Artes gráficas",
-        "code": "8"
-
+    "name": "General / Operarios / Aseo / Seguridad",
+    "name_es": "General / Operarios / Aseo / Seguridad",
+    "code": "GOAS"
   }
 },
   {
   "model": "beta_invite.workareasegment",
   "pk": 9,
   "fields":{
-    "name": "Diseño / Artes gráficas",
-    "name_es": "Diseño / Artes gráficas",
-        "code": "9"
-
+    "name": "Medicina / Salud",
+    "name_es": "Medicina / Salud",
+    "code": "MS"
   }
 },
   {
   "model": "beta_invite.workareasegment",
   "pk": 10,
   "fields":{
-    "name": "Diseño / Artes gráficas",
-    "name_es": "Diseño / Artes gráficas",
-        "code": "10"
-
-  }
-},
-  {
-  "model": "beta_invite.workareasegment",
-  "pk": 11,
-  "fields":{
-    "name": "Diseño / Artes gráficas",
-    "name_es": "Diseño / Artes gráficas",
-        "code": "11"
-
-  }
-},
-  {
-  "model": "beta_invite.workareasegment",
-  "pk": 12,
-  "fields":{
-    "name": "Diseño / Artes gráficas",
-    "name_es": "Diseño / Artes gráficas",
-        "code": "12"
-
+    "name": "Recursos Humanos",
+    "name_es": "Recursos Humanos",
+    "code": "RH"
   }
 }
 ]
