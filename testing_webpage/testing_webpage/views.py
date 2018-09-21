@@ -23,4 +23,11 @@ def robots(request):
 
 
 def jobs(request):
-    return render(request, cts.JOBS_VIEW_PATH, {'active_campaigns': Campaign.objects.filter(active=True)})
+    segment_code = request.GET.get('segment_code')
+    if segment_code is None:  # if code not found will return everything
+        return render(request, cts.JOBS_VIEW_PATH,
+                      {'active_campaigns': Campaign.objects.filter(active=True)})
+    else:
+        return render(request, cts.JOBS_VIEW_PATH,
+                      {'active_campaigns': Campaign.objects.filter(active=True,
+                                                                   work_area__segment__code=segment_code)})

@@ -50,26 +50,25 @@ class Profession(models.Model):
         db_table = 'professions'
 
 
-class WorkAreaType(models.Model):
-    """
-    Groups similar workAreas
-    """
+class WorkAreaSegment(models.Model):
+
     name = models.CharField(max_length=200)
     name_es = models.CharField(max_length=200, null=True)
+    code = models.CharField(max_length=4, null=True)
 
     def __str__(self):
         return '{0}'.format(self.name)
 
     # adds custom table name
     class Meta:
-        db_table = 'work_area_types'
+        db_table = 'work_area_segments'
 
 
 class WorkArea(models.Model):
 
     name = models.CharField(max_length=200)
     name_es = models.CharField(max_length=200, null=True)
-    type = models.ForeignKey(WorkAreaType, null=True, on_delete=models.SET_NULL)
+    segment = models.ForeignKey(WorkAreaSegment, null=True)
 
     def __str__(self):
         return '{0}'.format(self.name)
