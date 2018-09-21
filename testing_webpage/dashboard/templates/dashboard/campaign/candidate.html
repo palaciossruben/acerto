@@ -28,8 +28,8 @@
 </p>
 
 <p> <strong>cv:</strong>
-{% if candidate.user.curriculum_url != '#' %}
-    <a href="{% static candidate.user.curriculum_url %}">link</a>
+{% if candidate.user.get_curriculum_url != '#' %}
+    <a href="{{ candidate.user.get_curriculum_url }}">link</a>
 {% else %}
     not available
 {% endif %}

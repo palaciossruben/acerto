@@ -92,8 +92,8 @@
                         </a>
                     {% endif %}
 
-                    {% if candidate.user.curriculum_url != '#' %}
-                        <a class="curriculum center" href="{% static candidate.user.curriculum_url %}" target="_blank">
+                    {% if candidate.user.get_curriculum_url != '#' %}
+                        <a class="curriculum center" href="{{ candidate.user.get_curriculum_url }}" target="_blank">
                             <p class="download"><strong><span class="arrow">&#x21E9;</span> Descargar hoja de vida</strong></p>
                         </a>
                     {% endif %}

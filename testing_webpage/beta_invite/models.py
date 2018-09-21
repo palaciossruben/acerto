@@ -755,6 +755,17 @@ class User(models.Model):
     def __str__(self):
         return '{0}, {1}'.format(self.name, self.email)
 
+    def get_curriculum_url(self):
+        """
+        Tries S3 first
+        :return:
+        """
+
+        if self.curriculum_s3_url not in {None, '#'}:
+            return self.curriculum_s3_url
+        else:  # returns entire url from local machine
+            return 'https://peaku.co/static/{url}'.format(url=self.curriculum_url)
+
     def get_calling_code(self):
         if self.country is not None:
             return str(self.country.calling_code)
