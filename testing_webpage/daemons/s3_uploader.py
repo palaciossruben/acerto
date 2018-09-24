@@ -1,7 +1,9 @@
 import os
+import sys
 from django.core.wsgi import get_wsgi_application
 
 # Environment can use the models as if inside the Django app
+sys.path.insert(0, '/'.join(os.getcwd().split('/')[:-1]))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
@@ -52,6 +54,9 @@ def upload_resource_to_s3(user):
         return s3_url
     except FileNotFoundError:
         print('FileNotFoundError: {}'.format(get_local_path(user)))
+        #print('Will remove the fake cv url')
+        #user.curriculum_url = '#'
+        #user.save()
         print('daemon will continue...')
         return '#'
     except EndpointConnectionError:
