@@ -21,7 +21,7 @@ from queue import Queue
 from testing_webpage import settings
 
 
-NUM_WORKERS = 1
+NUM_WORKERS = 3
 WAITING_TIME_WORKERS = 1  # seconds
 WAITING_TIME_DB = 60  # seconds
 users_queue = Queue()
