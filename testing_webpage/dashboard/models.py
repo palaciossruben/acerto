@@ -9,7 +9,6 @@ from django.contrib.auth.models import User as AuthUser
 from beta_invite.models import User, Campaign, Evaluation, Survey, EvaluationSummary, Score, Test
 from dashboard import constants as cts
 from beta_invite.util import common_senders
-from business.models import BusinessUser
 
 
 class State(models.Model):

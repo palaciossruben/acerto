@@ -14,6 +14,7 @@ from beta_invite.util import email_sender
 from beta_invite.views import get_drop_down_values
 from dashboard import interview_module, candidate_module, campaign_module, test_module
 from match import model
+from api.models import LeadMessage
 
 CANDIDATE_FORECAST_LIMIT = 20
 
@@ -544,6 +545,32 @@ def mark_as_added(users):
         u.save()
 
 
+def get_candidate_users():
+    users = [m.candidate.user for m in Message.objects.filter(~Q(candidate__user__phone=None),
+                                                              sent=False)]
+
+    for u in users:
+        u.change_to_international_phone_number()
+        u.name = email_sender.remove_accents(u.name)
+
+    mark_as_added(users)
+
+    return users
+
+
+def get_leads():
+    leads = [m.lead for m in LeadMessage.objects.filter(~Q(lead__phone=None),
+                                                        sent=False)]
+
+    for l in leads:
+        l.change_to_international_phone_number()
+        l.name = email_sender.remove_accents(l.name)
+
+    mark_as_added(leads)
+
+    return leads
+
+
 def send_new_contacts(request):
     """
      Works as API for auto-messenger app
@@ -558,18 +585,10 @@ def send_new_contacts(request):
     :return: json
     """
 
-    users = {m.candidate.user for m in Message.objects.filter(~Q(candidate__user__phone=None),
-                                                              sent=False)}  # [:50]
+    leads = get_leads()
+    users = get_candidate_users()
 
-    for u in users:
-        u.change_to_international_phone_number()
-        u.name = email_sender.remove_accents(u.name)
-
-    #json_data = serializers.serialize('json', users)
-
-    mark_as_added(users)
-
-    json_data = json.dumps([{'pk': u.pk, 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}} for u in users])
+    json_data = json.dumps([{'pk': u.pk, 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}} for u in users + leads])
 
     return JsonResponse(json_data, safe=False)
 
@@ -581,9 +600,11 @@ def send_messages(request):
     :return: json
     """
 
+    lead_messages = [m.add_format_and_mark_as_sent() for m in LeadMessage.objects.filter(sent=False,
+                                                                                         lead__added=True)]
     messages = [m.add_format_and_mark_as_sent() for m in Message.objects.filter(sent=False,
                                                                                 candidate__user__added=True)]
 
-    messages_json = serializers.serialize('json', messages)
+    messages_json = serializers.serialize('json', messages + lead_messages)
 
     return JsonResponse(messages_json, safe=False)

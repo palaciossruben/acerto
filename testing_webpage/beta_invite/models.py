@@ -69,6 +69,7 @@ class WorkArea(models.Model):
     name = models.CharField(max_length=200)
     name_es = models.CharField(max_length=200, null=True)
     segment = models.ForeignKey(WorkAreaSegment, null=True)
+    code = models.CharField(max_length=4, null=True)
 
     def __str__(self):
         return '{0}'.format(self.name)
@@ -819,6 +820,7 @@ class User(models.Model):
         else:
             return None
 
+    # TODO: merge with Lead method, when we have the country of the lead.
     def change_to_international_phone_number(self):
 
         if self.phone:

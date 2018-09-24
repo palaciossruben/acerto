@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'raven.contrib.django.raven_compat',
     'compressor',
     #'storages',
+    'rest_framework',
 ]
 
 
@@ -203,3 +204,12 @@ LOGIN_REDIRECT_URL = 'business:home'
 
 # Disables this limit.
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
+
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}

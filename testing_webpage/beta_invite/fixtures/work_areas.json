@@ -5,7 +5,8 @@
   "fields":{
     "name": "Administración / Oficina",
     "name_es": "Administración / Oficina",
-    "segment_id": 1
+    "segment_id": 1,
+    "code": "AO"
   }
 },
 {
@@ -14,7 +15,8 @@
   "fields":{
     "name": "Almacén / Logística / Transporte",
     "name_es": "Almacén / Logística / Transporte",
-    "segment_id": 3
+    "segment_id": 3,
+    "code": "ALT"
   }
 },
 {
@@ -23,7 +25,8 @@
   "fields":{
     "name": "Atención a clientes",
     "name_es": "Atención a clientes",
-    "segment_id": 2
+    "segment_id": 2,
+    "code": "AC"
   }
 },
 {
@@ -32,7 +35,8 @@
   "fields":{
     "name": "CallCenter / Telemercadeo",
     "name_es": "CallCenter / Telemercadeo",
-    "segment_id": 2
+    "segment_id": 2,
+    "code": "CT"
   }
 },
 {
@@ -41,7 +45,8 @@
   "fields":{
     "name": "Compras / Comercio Exterior",
     "name_es": "Compras / Comercio Exterior",
-    "segment_id": 1
+    "segment_id": 1,
+    "code": "CC"
   }
 },
 {
@@ -50,7 +55,8 @@
   "fields":{
     "name": "Construcción y obra",
     "name_es": "Construcción y obra",
-    "segment_id": 3
+    "segment_id": 3,
+    "code": "CO"
   }
 },
 {
@@ -59,7 +65,8 @@
   "fields":{
     "name": "Contabilidad / Finanzas",
     "name_es": "Contabilidad / Finanzas",
-    "segment_id": 1
+    "segment_id": 1,
+    "code": "CF"
   }
 },
 {
@@ -68,7 +75,8 @@
   "fields":{
     "name": "Dirección / Gerencia",
     "name_es": "Dirección / Gerencia",
-    "segment_id": 1
+    "segment_id": 1,
+    "code": "DG"
   }
 },
 {
@@ -77,7 +85,8 @@
   "fields":{
     "name": "Diseño / Artes gráficas / Arquitectura",
     "name_es": "Diseño / Artes gráficas / Arquitectura",
-    "segment_id": 4
+    "segment_id": 4,
+    "code": "DAA"
   }
 },
 {
@@ -86,7 +95,8 @@
   "fields":{
     "name": "Docencia",
     "name_es": "Docencia",
-    "segment_id": 5
+    "segment_id": 5,
+    "code": "D"
   }
 },
 {
@@ -95,7 +105,8 @@
   "fields":{
     "name": "Hotelería / Turismo",
     "name_es": "Hotelería / Turismo",
-    "segment_id": 1
+    "segment_id": 1,
+    "code": "HT"
   }
 },
 {
@@ -104,7 +115,8 @@
   "fields":{
     "name": "Informática / Telecomunicaciones",
     "name_es": "Informática / Telecomunicaciones",
-    "segment_id": 6
+    "segment_id": 6,
+    "code": "IT"
   }
 },
 {
@@ -113,7 +125,8 @@
   "fields":{
     "name": "Ingeniería",
     "name_es": "Ingeniería",
-    "segment_id": 6
+    "segment_id": 6,
+    "code": "I"
   }
 },
 {
@@ -122,7 +135,8 @@
   "fields":{
     "name": "Investigación y Calidad",
     "name_es": "Investigación y Calidad",
-    "segment_id": 6
+    "segment_id": 6,
+    "code": "IC"
   }
 },
 {
@@ -131,7 +145,8 @@
   "fields":{
     "name": "Legal / Asesoría",
     "name_es": "Legal / Asesoría",
-    "segment_id": 7
+    "segment_id": 7,
+    "code": "LA"
   }
 },
 {
@@ -140,7 +155,8 @@
   "fields":{
     "name": "Mantenimiento y Reparaciones Técnicas",
     "name_es": "Mantenimiento y Reparaciones Técnicas",
-    "segment_id": 3
+    "segment_id": 3,
+    "code": "MRT"
   }
 },
 {
@@ -149,7 +165,8 @@
   "fields":{
     "name": "Medicina / Salud",
     "name_es": "Medicina / Salud",
-    "segment_id": 9
+    "segment_id": 9,
+    "code": "MS"
   }
 },
 {
@@ -158,7 +175,8 @@
   "fields":{
     "name": "Mercadotecnia / Publicidad / Comunicación",
     "name_es": "Mercadotecnia / Publicidad / Comunicación",
-    "segment_id": 4
+    "segment_id": 4,
+    "code": "MPC"
   }
 },
 {
@@ -167,7 +185,8 @@
   "fields":{
     "name": "Producción / Operarios / Manufactura",
     "name_es": "Producción / Operarios / Manufactura",
-    "segment_id": 8
+    "segment_id": 8,
+    "code": "POM"
   }
 },
 {
@@ -176,7 +195,8 @@
   "fields":{
     "name": "Recursos Humanos",
     "name_es": "Recursos Humanos",
-    "segment_id": 10
+    "segment_id": 10,
+    "code": "RH"
   }
 },
 {
@@ -185,7 +205,8 @@
   "fields":{
     "name": "Servicios Generales, Aseo y Seguridad",
     "name_es": "Servicios Generales, Aseo y Seguridad",
-    "segment_id": 8
+    "segment_id": 8,
+    "code": "SGAS"
   }
 },
 {
@@ -194,7 +215,8 @@
   "fields":{
     "name": "Ventas",
     "name_es": "Ventas",
-    "segment_id": 2
+    "segment_id": 2,
+    "code": "V"
   }
 }
 ]
