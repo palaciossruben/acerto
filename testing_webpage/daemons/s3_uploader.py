@@ -59,7 +59,7 @@ def upload_resource_to_s3(user):
         print('daemon will continue...')
         return '#'
     except UnicodeEncodeError:
-        print('UnicodeEncodeError with: {}'.format(get_local_path(user)))
+        print('UnicodeEncodeError with CV of user_id: {}'.format(user.id))
         print('daemon will continue...')
         return '#'
 

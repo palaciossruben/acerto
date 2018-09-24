@@ -764,8 +764,10 @@ class User(models.Model):
 
         if self.curriculum_s3_url not in {None, '#'}:
             return self.curriculum_s3_url
-        else:  # returns entire url from local machine
+        elif self.curriculum_url not in {None, '#'}:  # returns entire url from local machine
             return 'https://peaku.co/static/{url}'.format(url=self.curriculum_url)
+        else:
+            return '#'
 
     def get_calling_code(self):
         if self.country is not None:
