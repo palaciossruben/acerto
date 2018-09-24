@@ -18,8 +18,6 @@ from decouple import config
 from django.db.models import Q
 from queue import Queue
 
-from testing_webpage import settings
-
 
 NUM_WORKERS = 3
 WAITING_TIME_WORKERS = 1  # seconds
@@ -54,9 +52,6 @@ def upload_resource_to_s3(user):
         return s3_url
     except FileNotFoundError:
         print('FileNotFoundError: {}'.format(get_local_path(user)))
-        #print('Will remove the fake cv url')
-        #user.curriculum_url = '#'
-        #user.save()
         print('daemon will continue...')
         return '#'
     except EndpointConnectionError:
