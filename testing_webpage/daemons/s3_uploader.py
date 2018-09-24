@@ -49,7 +49,7 @@ def upload_resource_to_s3(user):
         s3client.upload_file(get_local_path(user), bucket, s3_key)
         s3_url = get_s3_path(bucket, s3_key)
 
-        print(f"Uploaded: {get_local_path(user)} to: {s3_url}")
+        print("Uploaded: {} to: {}".format(get_local_path(user), s3_url))
 
         return s3_url
     except FileNotFoundError:
