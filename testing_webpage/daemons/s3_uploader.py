@@ -1,5 +1,6 @@
 import os
 import sys
+from datetime import datetime
 from django.core.wsgi import get_wsgi_application
 
 # Environment can use the models as if inside the Django app
@@ -64,7 +65,7 @@ def upload_resource_to_s3(user):
         return '#'
 
 
-def add_new_users(queue):
+def add_new_users(queue, created_since):
     """
     Users with
      1. missing a s3 url
@@ -72,11 +73,17 @@ def add_new_users(queue):
      3. text analysis already done
     :return:
     """
-    # tODO: make it more efficient by usinf the SQL LIMIT
-    [queue.put(u) for u in User.objects.filter(~Q(curriculum_url='#') &
-                                               Q(curriculum_s3_url='#') &
-                                               ~Q(curriculum_text=None)).all()]
-    return queue
+    # tODO: make it more efficient by using the SQL LIMIT
+    users = User.objects.filter(~Q(curriculum_url='#') &
+                                Q(curriculum_s3_url='#') &
+                                ~Q(curriculum_text=None) &
+                                Q(created_at__gt=created_since)).all()
+    print('total new users, to add on S3: {}'.format(len(users)))
+    [queue.put(u) for u in users]
+
+    created_since = created_since if len(users) == 0 else max({u.created_at for u in users})
+
+    return queue, created_since
 
 
 def get_s3_path(bucket, s3_key):
@@ -114,8 +121,9 @@ def init_workers(num_workers=NUM_WORKERS):
 if __name__ == '__main__':
 
     init_workers()
+    created_since = datetime(day=9, month=4, year=1948)
 
     while True:
         if users_queue.empty:
-            users_queue = add_new_users(users_queue)
+            users_queue, created_since = add_new_users(users_queue, created_since)
         time.sleep(WAITING_TIME_DB)
