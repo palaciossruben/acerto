@@ -19,7 +19,7 @@ from django.db.models import Q
 from queue import Queue
 
 
-NUM_WORKERS = 3
+NUM_WORKERS = 1
 WAITING_TIME_WORKERS = 1  # seconds
 WAITING_TIME_DB = 60  # seconds
 users_queue = Queue()
