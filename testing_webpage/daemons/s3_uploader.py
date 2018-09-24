@@ -8,6 +8,7 @@ application = get_wsgi_application()
 import boto3
 import time
 import pickle
+import urllib.parse
 from botocore.exceptions import EndpointConnectionError
 from threading import Thread
 from beta_invite.models import User
@@ -18,11 +19,11 @@ from queue import Queue
 from testing_webpage import settings
 
 
-NUM_WORKERS = 3
-MAX_NUM_OF_UPLOADS = 1
+NUM_WORKERS = 1
 WAITING_TIME_WORKERS = 1  # seconds
 WAITING_TIME_DB = 60  # seconds
 users_queue = Queue()
+DEBUG = False
 
 
 def load_object(filename):
@@ -44,10 +45,11 @@ def upload_resource_to_s3(user):
 
     try:
         s3client.upload_file(get_local_path(user), bucket, s3_key)
+        s3_url = get_s3_path(bucket, s3_key)
 
-        print(f"Uploaded {get_local_path(user)}")
+        print(f"Uploaded: {get_local_path(user)} to: {s3_url}")
 
-        return get_s3_path(bucket, s3_key)
+        return s3_url
     except FileNotFoundError:
         print('FileNotFoundError: {}'.format(get_local_path(user)))
         print('daemon will continue...')
@@ -74,11 +76,11 @@ def add_new_users(queue):
 
 
 def get_s3_path(bucket, s3_key):
-    return config('s3_base_url') + bucket + s3_key
+    return urllib.parse.urljoin(config('s3_base_url'), bucket + '/' + s3_key)
 
 
 def get_local_path(user):
-    return os.path.join('static', user.curriculum_url)
+    return urllib.parse.urljoin('static', user.curriculum_url)
 
 
 # each worker does this job
@@ -90,7 +92,7 @@ def upload_users_cv():
 
     while True:
         user = users_queue.get()
-        if False and settings.DEBUG:
+        if DEBUG:
             user.curriculum_s3_url = 'LE FINI'
         else:
             user.curriculum_s3_url = upload_resource_to_s3(user)
