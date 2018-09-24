@@ -58,6 +58,10 @@ def upload_resource_to_s3(user):
         print('EndpointConnectionError with: {}'.format(get_local_path(user)))
         print('daemon will continue...')
         return '#'
+    except UnicodeEncodeError:
+        print('UnicodeEncodeError with: {}'.format(get_local_path(user)))
+        print('daemon will continue...')
+        return '#'
 
 
 def add_new_users(queue):
