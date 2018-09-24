@@ -21,7 +21,7 @@ from queue import Queue
 
 
 NUM_WORKERS = 1
-WAITING_TIME_WORKERS = 1  # seconds
+WAITING_TIME_WORKERS = 0 # seconds
 WAITING_TIME_DB = 60  # seconds
 users_queue = Queue()
 DEBUG = False
