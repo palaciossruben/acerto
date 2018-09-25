@@ -1,5 +1,4 @@
 {% load app_filters %}
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -32,7 +31,7 @@
                     <p>operational efficiency = recommended/(recommended + rejected manually) = {% widthratio campaign.operational_efficiency 1 100 %}%</p>
                 {% endif %}
                 <br>
-                <form action="campaign/delete/{{ campaign.id }}" method="post">
+                <form action="{% url 'dashboard:delete_campaign'  campaign.id %}" method="post">
                     {% csrf_token %}
                     <input type="button" class="btn btn-danger" value="Delete!" onclick="this.form.submit();">
                 </form>

@@ -1,5 +1,6 @@
 import json
 import common
+import datetime
 from django.core import serializers
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
@@ -20,11 +21,19 @@ from business.models import BusinessUser
 CANDIDATE_FORECAST_LIMIT = 20
 
 
-def get_business_users_order_by_active_campaigns():
-    business_users = BusinessUser.objects.all()
+def sort_users_by_campaign_count(business_users):
     business_users = [(b, b.campaigns.filter(removed=False).count()) for b in business_users]
     business_users.sort(key=lambda x: x[1], reverse=True)
     return [b for b, _ in business_users]
+
+
+def get_business_users_order_by_active_campaigns():
+    weeks_old = 5
+    weeks_ago = datetime.datetime.today() - datetime.timedelta(weeks=weeks_old)
+    new_business_users = BusinessUser.objects.filter(created_at_gte=weeks_ago).all()
+    old_business_users = BusinessUser.objects.filter(created_at_lt=weeks_ago).all()
+
+    return sort_users_by_campaign_count(new_business_users) + sort_users_by_campaign_count(old_business_users)
 
 
 @login_required
