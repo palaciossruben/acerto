@@ -823,17 +823,19 @@ class User(models.Model):
             return None
 
     # TODO: merge with Lead method, when we have the country of the lead.
-    def change_to_international_phone_number(self):
+    def change_to_international_phone_number(self, add_plus=False):
+
+        plus_symbol = '+' if add_plus else ''
 
         if self.phone:
             # Adds the '+' and country code
             if self.phone[0] != '+':
 
-                self.phone = '+' + self.get_calling_code() + self.phone
+                self.phone = plus_symbol + self.get_calling_code() + self.phone
 
                 # Adds the '+' only
             elif re.search(r'^' + self.get_calling_code() + '.+', self.phone) is not None:
-                self.phone = '+' + self.phone
+                self.phone = plus_symbol + self.phone
 
         return self.phone
 

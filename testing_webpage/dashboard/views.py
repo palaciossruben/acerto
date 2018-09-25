@@ -579,7 +579,7 @@ def get_candidate_users():
                                                               sent=False)]
 
     for u in users:
-        u.change_to_international_phone_number()
+        u.change_to_international_phone_number(add_plus=True)
         u.name = email_sender.remove_accents(u.name)
 
     mark_as_added(users)
