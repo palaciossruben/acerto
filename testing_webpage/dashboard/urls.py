@@ -9,7 +9,8 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
 
     # Campaign
-    url(r'^campaign/(?P<campaign_id>\d+)$', views.edit_campaign_candidates, name='edit_campaign_candidates'),
+    url(r'^business_user_campaigns/(?P<business_user_id>\d+)$', views.business_user_campaigns, name='business_user_campaigns'),
+    url(r'^campaign/(?P<campaign_id>\d+)$', views.edit_campaign_candidates, name='campaign'),
     url(r'^campaign/new$', views.new_campaign, name='new_campaign'),
     url(r'^campaign/create$', views.create_campaign, name='create_campaign'),
     url(r'^campaign/edit/(?P<pk>\d+)$', views.edit_campaign, name='edit_campaign'),

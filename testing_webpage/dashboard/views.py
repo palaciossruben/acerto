@@ -15,8 +15,16 @@ from beta_invite.views import get_drop_down_values
 from dashboard import interview_module, candidate_module, campaign_module, test_module
 from match import model
 from api.models import LeadMessage
+from business.models import BusinessUser
 
 CANDIDATE_FORECAST_LIMIT = 20
+
+
+def get_business_users_order_by_active_campaigns():
+    business_users = BusinessUser.objects.all()
+    business_users = [(b, b.campaigns.filter(active=True).count()) for b in business_users]
+    business_users.sort(key=lambda x: x[1], reverse=True)
+    return [b for b, _ in business_users]
 
 
 @login_required
@@ -32,16 +40,28 @@ def index(request):
     if common.not_admin_user(request):
         return redirect('business:login')
 
-    campaigns = Campaign.objects.filter(removed=False).order_by('-active', 'name', 'title_es')
-
-    for campaign in campaigns:
-        common.calculate_operational_efficiency(campaign)
-
-    return render(request, cts.MAIN_DASHBOARD, {'campaigns': campaigns,
+    return render(request, cts.MAIN_DASHBOARD, {'business_users': get_business_users_order_by_active_campaigns(),
                                                 'tests': Test.get_all()})
 
 
 # ------------------------------- CAMPAIGN -------------------------------
+
+
+def business_user_campaigns(request, business_user_id):
+    """
+    :param request: HTTP request
+    :param business_user_id: int BusinessUser id
+    :return: render view
+    """
+
+    business_user = BusinessUser.objects.get(pk=int(business_user_id))
+
+    campaigns = business_user.campaigns.filter(removed=False).order_by('-active', 'name', 'title_es').all()
+    for campaign in campaigns:
+        common.calculate_operational_efficiency(campaign)
+
+    return render(request, cts.BUSINESS_USER_CAMPAIGNS, {'campaigns': campaigns,
+                                                         'business_user': business_user})
 
 
 def candidate_detail(request, candidate_id):
