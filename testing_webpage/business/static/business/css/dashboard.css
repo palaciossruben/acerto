@@ -310,7 +310,7 @@ body {
 
 .profession{
     color:#666666;
-    font-size:20px;
+    font-size:15px;
     font-family:BertholdAkzidenzGroteskRegular;
 }
 
@@ -319,9 +319,30 @@ body {
     font-size:15px;
     font-family:BertholdAkzidenzGroteskRegular;
 }
+/**********************************************************************************************************************/
+.tooltip {
+    position: relative;
+    display: contents;
+}
 
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 50%;
+    background-color: #F47B20;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 30px 15px;
+    font-size: 20px;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 5;
+}
 
-
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+/**********************************************************************************************************************/
 .circle{
     height:90px;
     width:90px;
@@ -379,6 +400,9 @@ body {
 
 .profile{
     width:37%;
+    color:#666666;
+    font-size:16px;
+    font-family:BertholdAkzidenzGroteskRegular;
 }
 
 .female-avatar{
