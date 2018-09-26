@@ -424,7 +424,7 @@ msgstr "Experiencia"
 
 #: business/templates/business/new/start.html:243
 msgid "What is the minimum number of years of experience you are expecting?"
-msgstr ""
+msgstr "¿Cuál es el mínimo número de años de experiencia que estás esperando de los candidatos?"
 
 #: business/templates/business/new/start.html:246
 msgid "Tests"
