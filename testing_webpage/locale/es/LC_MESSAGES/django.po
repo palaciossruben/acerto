@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-26 08:58-0500\n"
+"POT-Creation-Date: 2018-09-26 10:18-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,7 +61,7 @@ msgid "Let's record your interview now!"
 msgstr "¡Graba tu entrevista ya!"
 
 #: .\beta_invite\new_user_module.py:105 .\business\views.py:166
-#: .\business\views.py:306
+#: .\business\views.py:309
 msgid "Welcome to PeakU"
 msgstr "Bienvenido a PeakU"
 
@@ -220,8 +220,8 @@ msgid "Add a message (optional)"
 msgstr "Escríbe un comentario (opcional)"
 
 #: .\business\templates\business\index.html:6
-msgid "Recruitment Service | Personnel selection | Headhunter"
-msgstr "Servicio de Reclutamiento | Seleccion de personal | Headhunter"
+msgid "Servicio de Reclutamiento | Seleccion de personal | Headhunter"
+msgstr ""
 
 #: .\business\templates\business\index.html:34
 #: .\business\templates\business\results.html:100
@@ -656,8 +656,8 @@ msgid "STATE: inactive"
 msgstr "ESTADO: inactiva"
 
 #: .\business\templates\business\summary.html:41
-msgid "TOTAL APPLICANTS"
-msgstr "TOTAL APLICANTES"
+msgid "TOTAL CANDIDATES"
+msgstr "TOTAL DE CANDIDATOS"
 
 #: .\business\templates\business\summary.html:51
 #: .\business\templates\business\summary.html:68
@@ -711,8 +711,8 @@ msgstr ""
 "específicos para tu campaña"
 
 #: .\business\templates\business\summary.html:186
-msgid "APPLICANTS"
-msgstr "APLICANTES"
+msgid "PROSPECTS"
+msgstr "PROSPECTOS"
 
 #: .\business\templates\business\summary.html:188
 msgid ""
@@ -726,7 +726,7 @@ msgstr ""
 msgid "ADDITIONAL PROFILES"
 msgstr "PERFILES ADICIONALES"
 
-#: .\business\views.py:64 .\business\views.py:106 .\business\views.py:336
+#: .\business\views.py:64 .\business\views.py:106 .\business\views.py:339
 msgid "Discover amazing people"
 msgstr "Descubre personas increíbles"
 
@@ -780,11 +780,11 @@ msgstr "Regístrate"
 #: .\testing_webpage\templates\no_header_base.html:32
 #: .\testing_webpage\templates\no_header_base.html:34
 msgid "Companies"
-msgstr "Empresas"
+msgstr "Portal Empresas"
 
 #: .\testing_webpage\templates\testing_webpage\index.html:6
-msgid "Jobs in Colombia | Work offers. Jobs search"
-msgstr "Empleos en Colombia | Ofertas de Trabajo. Buscar empleo"
+msgid "Empleos en Colombia | Ofertas de Trabajo. Buscar empleo"
+msgstr ""
 
 #: .\testing_webpage\templates\testing_webpage\index.html:22
 msgid "Your ideal job"
@@ -863,6 +863,12 @@ msgstr "+ CREAR OFERTA"
 #: .\testing_webpage\templates\white_header_base.html:20
 msgid "SIGN IN"
 msgstr "INICIA SESION"
+
+#~ msgid "Recruitment Service | Personnel selection | Headhunter"
+#~ msgstr "Servicio de Reclutamiento | Seleccion de personal | Headhunter"
+
+#~ msgid "Jobs in Colombia | Work offers. Jobs search"
+#~ msgstr "Empleos en Colombia | Ofertas de Trabajo. Buscar empleo"
 
 #~ msgid "PeakU - Personnel selection"
 #~ msgstr "PeakU - Selección de Personal"

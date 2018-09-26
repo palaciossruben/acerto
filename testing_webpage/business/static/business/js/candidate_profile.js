@@ -2,6 +2,8 @@ function set_circle_color(score, id_string){
 
     var color;
 
+
+
     if (score < 50){
         color = 'rgba(221, 81, 51,';
     }else if (score < 59){
@@ -29,8 +31,20 @@ function set_circle_color(score, id_string){
         var me = document.getElementById(id_string);
         if(me == null){
         }else{
+
             me.style["border-color"] = color + '1)';
             me.style["background"] = 'linear-gradient(to top,' + color + '0.7)' + score + '%, transparent ' + score + '% )';
+
+            $(me).mouseover(function() {
+                me.style["border-color"] = 'rgba(255, 156, 51, 1)';
+                me.style["background"] = 'linear-gradient(to top,' + 'rgba(255, 156, 51, 0.7)' + score + '%, transparent ' + score + '% )';
+                me.style["cursor"] = 'pointer';
+            });
+
+            $(me).mouseout(function() {
+                me.style["border-color"] = color + '1)';
+                me.style["background"] = 'linear-gradient(to top,' + color + '0.7)' + score + '%, transparent ' + score + '% )';
+            });
         }
     }
 }
