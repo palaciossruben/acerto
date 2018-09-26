@@ -30,8 +30,8 @@ def sort_users_by_campaign_count(business_users):
 def get_business_users_order_by_active_campaigns():
     weeks_old = 5
     weeks_ago = datetime.datetime.today() - datetime.timedelta(weeks=weeks_old)
-    new_business_users = BusinessUser.objects.filter(created_at_gte=weeks_ago).all()
-    old_business_users = BusinessUser.objects.filter(created_at_lt=weeks_ago).all()
+    new_business_users = BusinessUser.objects.filter(created_at__gte=weeks_ago).all()
+    old_business_users = BusinessUser.objects.filter(created_at__lt=weeks_ago).all()
 
     return sort_users_by_campaign_count(new_business_users) + sort_users_by_campaign_count(old_business_users)
 
