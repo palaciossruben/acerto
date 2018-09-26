@@ -220,8 +220,8 @@ msgid "Add a message (optional)"
 msgstr "Escríbe un comentario (opcional)"
 
 #: .\business\templates\business\index.html:6
-msgid "Servicio de Reclutamiento | Seleccion de personal | Headhunter"
-msgstr "Recruitment Service | Personnel selection | Headhunter"
+msgid "Recruitment Service | Personnel selection | Headhunter"
+msgstr "Servicio de Reclutamiento | Seleccion de personal | Headhunter"
 
 #: .\business\templates\business\index.html:34
 #: .\business\templates\business\results.html:100
@@ -783,8 +783,8 @@ msgid "Companies"
 msgstr "Empresas"
 
 #: .\testing_webpage\templates\testing_webpage\index.html:6
-msgid "Empleos en Colombia | Ofertas de Trabajo. Buscar empleo"
-msgstr "Jobs in Colombia | Work offers. Jobs search"
+msgid "Jobs in Colombia | Work offers. Jobs search"
+msgstr "Empleos en Colombia | Ofertas de Trabajo. Buscar empleo"
 
 #: .\testing_webpage\templates\testing_webpage\index.html:22
 msgid "Your ideal job"
