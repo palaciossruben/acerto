@@ -940,3 +940,18 @@ class EmailType(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'email_types'
+
+
+class RequirementBinaryQuestion(models.Model):
+
+    name = models.CharField(max_length=40, null=True)
+    name_es = models.CharField(max_length=40, null=True)
+    statement = models.CharField(max_length=400, null=True)
+    statement_es = models.CharField(max_length=400, null=True)
+
+    def __str__(self):
+        return 'id={0}, name={1}'.format(self.pk, self.name)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'requirement_binary_questions'
