@@ -21,10 +21,13 @@ INTERVIEW_INTRO_VIDEO = './interview_intro_video.txt'
 ZIGGEO_API_KEY = './ziggeo_api_key.txt'
 ADMIN_USER_EMAIL = 'admin@peaku.co'
 
-if settings.DEBUG:
-    HOST = '//127.0.0.1:8000'
-else:
-    HOST = 'https://peaku.co'
+
+def get_host():
+    if settings.DEBUG:
+        host = '//127.0.0.1:8000'
+    else:
+        host = 'https://peaku.co'
+    return host
 
 
 def remove_accents(text):

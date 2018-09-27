@@ -64,11 +64,11 @@
                         <br>
                         {% endif %}
                         {% if business_state.name == 'relevantes' %}
-                        <p class="total regular">TOTAL {{ business_state.name }}: {{ total_relevant }}</p>
+                        <p class="total regular">TOTAL {{ campaign_state_name }}: {{ total_relevant }}</p>
                         {% elif business_state.name == 'recomendados' %}
-                        <p class="total regular">TOTAL {{ business_state.name }}: {{ total_recommended }}</p>
+                        <p class="total regular">TOTAL {{ campaign_state_name }}: {{ total_recommended }}</p>
                         {% else %}
-                        <p class="total regular">TOTAL {{ business_state.name }}: {{ total_applicants }}</p>
+                        <p class="total regular">TOTAL {{ campaign_state_name }}: {{ total_applicants }}</p>
                         {% endif %}
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                     {% endif %}
                 </div>
                 <div class="col-lg-4 col-xs-12">
-                    <p class="status-name bold">{{ business_state.name|upper }}</p>
+                    <p class="status-name bold">{{ campaign_state_name|upper }}</p>
                     <div class="line2"></div>
                     <p class="status-description">{{ business_state.description }}</p>
                     <div class="email-button" role="button" onclick="">ENVIAR CORREO MASIVO</div>

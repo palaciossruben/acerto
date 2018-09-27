@@ -290,7 +290,10 @@ def home(request):
     if login_form.is_valid() and request.POST.get('username') != 'g.comercialrmi2@redmilatam.com':  # Block access
 
         business_user = simple_login_and_business_user(login_form, request)
-        return redirect('campañas/{}'.format(business_user.pk))
+        if request.POST.get('username') == 'admin@peaku.co':
+            return redirect(common.get_host()+'/dashboard')
+        else:
+            return redirect('campañas/{}'.format(business_user.pk))
 
     else:
         error_message = get_first_error_message(login_form)
@@ -527,10 +530,13 @@ def dashboard(request, business_user_id, campaign_id, state_name):
 
     if business_state.name == 'aplicantes':
         campaign_evaluation = campaign.applicant_evaluation_last
+        campaign_state_name = 'prospectos'
     elif business_state.name == 'relevantes':
         campaign_evaluation = campaign.relevant_evaluation_last
+        campaign_state_name = 'pre-seleccionados'
     else:
         campaign_evaluation = campaign.recommended_evaluation_last
+        campaign_state_name = 'seleccionados'
 
     return render(request, cts.DASHBOARD_VIEW_PATH, {'candidates': {'applicants': applicants,
                                                                     'relevant': relevant,
@@ -544,7 +550,8 @@ def dashboard(request, business_user_id, campaign_id, state_name):
                                                      'total_applicants': len(applicants),
                                                      'total_recommended': len(recommended),
                                                      'total_relevant': len(relevant),
-                                                     'campaign_evaluation': campaign_evaluation
+                                                     'campaign_evaluation': campaign_evaluation,
+                                                     'campaign_state_name': campaign_state_name
                                                      })
 
 
