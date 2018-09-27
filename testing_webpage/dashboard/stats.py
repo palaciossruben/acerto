@@ -70,7 +70,7 @@ def candidates_count(request):
     return render(request, cts.STATS_INDEX, {'output': column_2d.render()})
 
 
-def campaigns_count(request):
+def campaign_count(request):
     # Chart data is passed to the `dataSource` parameter, as dict, in the form of key-value pairs.
     data_source = dict()
     data_source['chart'] = {
@@ -111,14 +111,16 @@ def campaigns_count(request):
     gp = pd.groupby(data, by='month').aggregate({'id': 'count'})
     gp = pd.DataFrame(gp)
 
-    print(gp)
-
     for idx, row in gp.iterrows():
         data = dict()
         data['label'] = idx
         data['value'] = str(row['id'])
         data_source['data'].append(data)
 
-        # Create an object for the Column 2D chart using the FusionCharts class constructor
+    # Create an object for the Column 2D chart using the FusionCharts class constructor
     column_2d = FusionCharts("column2D", "ex1", "600", "350", "chart-1", "json", data_source)
     return render(request, cts.STATS_INDEX, {'output': column_2d.render()})
+
+
+def operational_efficiency():
+    pass

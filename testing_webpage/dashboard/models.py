@@ -104,6 +104,7 @@ class StateEvent(models.Model):
     automatic = models.BooleanField(default=False)
     forecast = models.NullBooleanField(default=None, null=True)
     place = models.TextField(null=True)
+    use_machine_learning = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -188,13 +189,14 @@ class Candidate(models.Model):
         return surveys
 
     # TODO: add traceback to default place... wow, great idea!
-    def change_state(self, state_code, auth_user=None, place=None, forecast=None):
+    def change_state(self, state_code, auth_user=None, place=None, forecast=None, use_machine_learning=False):
         """
         from one state to another everything is logged for debugging and further analysis
         :param state_code: the code, its a str defined in the State model
         :param auth_user: Django users
         :param place: open description of the place where stuff is happening!
         :param forecast: boolean, indicating AI decision
+        :param use_machine_learning: Boolean, is it using machine learning???
         :return: None
         """
         if place is None:
@@ -209,7 +211,8 @@ class Candidate(models.Model):
                                   to_state=to_state,
                                   auth_user=auth_user,
                                   forecast=forecast,
-                                  place=place)
+                                  place=place,
+                                  use_machine_learning=use_machine_learning)
         if auth_user is None:
             event.automatic = True
         event.save()

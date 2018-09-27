@@ -291,7 +291,7 @@ def active_campaigns(request):
     if last_evaluation:
         test_module.update_scores(last_evaluation, last_evaluation.scores.all())
 
-        # TODO: activate AI by use_ml=True
+        # TODO: activate AI by use_machine_learning=True
         test_module.classify_evaluation_and_change_state(candidate)
 
     return render(request, cts.ACTIVE_CAMPAIGNS_VIEW_PATH)

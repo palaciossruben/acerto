@@ -52,5 +52,5 @@ urlpatterns = [
 
     # stats
     url(r'^candidates_stats$', stats.candidates_count, name='candidates_stats'),
-    url(r'^campaign_stats$', stats.campaigns_count, name='campaign_stats'),
+    url(r'^campaign_stats$', stats.campaign_count, name='campaign_stats'),
 ]

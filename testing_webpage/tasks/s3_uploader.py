@@ -1,3 +1,7 @@
+"""
+This is a daemon, that uploads CV to S3
+"""
+
 import os
 import sys
 from datetime import datetime
