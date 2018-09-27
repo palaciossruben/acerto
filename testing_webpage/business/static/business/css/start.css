@@ -95,10 +95,6 @@ h6{
     margin: 10px auto 50px auto;
 }
 
-.slide-1{
-    data-background= 'business/img/Start_BG-02-min.jpg';
-}
-
 .slide-css{
     margin-right: 10px;
 }
@@ -168,7 +164,7 @@ width: 170px;
 
 .main-section {
 	width:auto;
-	background: url(../img/Start_BG-01-min.jpg);
+	background: url(../img/Start_BG-01.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	position: relative;
@@ -185,7 +181,7 @@ width: 170px;
 .little-section {
     width:80%;
     height:250px;
-    background: url(../img/Start_BG-01-min.jpg);
+    background: url(../img/Start_BG-01.jpg);
     background-size: cover;
     position: absolute;
     border-radius:40px;
@@ -636,7 +632,7 @@ trix-editor ul {
 @media  (max-width: 768px){
 
 	.main-section {
-        background: url(../img/Start_BG-01-cel.jpg) no-repeat top center scroll ;
+        background: url(../img/cel-Start_BG-01.jpg) no-repeat top center scroll ;
         background-size:cover;
     }
 
