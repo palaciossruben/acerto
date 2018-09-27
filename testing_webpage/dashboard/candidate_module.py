@@ -86,7 +86,7 @@ def update_candidate_with_tests(candidate, motivation_value, cultural_value):
             else:
                 candidate.evaluation_summary = EvaluationSummary.create(candidate.evaluations.all())
 
-            # TODO: activate AI by use_machine_learning=True
+            # TODO: activate AI by use_machine_learning=True and change success and fail_states
             test_module.classify_evaluation_and_change_state(candidate)
 
 

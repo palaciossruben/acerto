@@ -110,7 +110,7 @@ class StateEvent(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     @classmethod
-    def create(cls, from_state, to_state, auth_user, forecast, place):
+    def create(cls, from_state, to_state, auth_user, forecast, place, use_machine_learning):
         """
         If no auth user is given then it is a automated event.
         """
@@ -120,7 +120,8 @@ class StateEvent(models.Model):
                           auth_user=auth_user,
                           automatic=True if auth_user is None else False,
                           forecast=forecast,
-                          place=place)
+                          place=place,
+                          use_machine_learning=use_machine_learning)
         state_event.save()
 
         return state_event
