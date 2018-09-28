@@ -135,31 +135,31 @@
                         <div class="row hidejs">
                             <div class="col-lg-12 col-xs-12">
                                 <section class="regular slider">
-                                    <div class="slide-0 slide-css" data-background="{% static 'business/img/Start_BG-01-min.jpg' %}">
+                                    <div class="slide-0 slide-css" data-background="{% static 'business/img/Start_BG-01.jpg' %}">
                                         <img class="img-rounded" src="{% static 'business/img/Start-carrusel-01.jpg' %}">
                                         <p>Administrativos</p>
                                     </div>
-                                    <div class="slide-1 slide-css" data-background="{% static 'business/img/Start_BG-02-min.jpg' %}">
+                                    <div class="slide-1 slide-css" data-background="{% static 'business/img/Start_BG-02.jpg' %}">
                                         <img class="img-rounded" src="{% static 'business/img/Start-carrusel-02.jpg' %}">
                                         <p>Operativos</p>
                                     </div>
-                                    <div class="slide-2 slide-css" data-background="{% static 'business/img/Start_BG-03-min.jpg' %}">
+                                    <div class="slide-2 slide-css" data-background="{% static 'business/img/Start_BG-03.jpg' %}">
                                         <img class="img-rounded"src="{% static 'business/img/Start-carrusel-03.jpg' %}">
                                         <p>Técnicos</p>
                                     </div>
-                                    <div class="slide-3 slide-css" data-background="{% static 'business/img/Start_BG-04-min.jpg' %}">
+                                    <div class="slide-3 slide-css" data-background="{% static 'business/img/Start_BG-04.jpg' %}">
                                         <img class="img-rounded" src="{% static 'business/img/Start-carrusel-04.jpg' %}">
                                         <p>Arquitectos</p>
                                     </div>
-                                    <div class="slide-4 slide-css" data-background="{% static 'business/img/Start_BG-05-min.jpg' %}">
+                                    <div class="slide-4 slide-css" data-background="{% static 'business/img/Start_BG-05.jpg' %}">
                                         <img class="img-rounded" src="{% static 'business/img/Start-carrusel-05.jpg' %}">
                                         <p>Diseñadores</p>
                                     </div>
-                                    <div class="slide-5 slide-css" data-background="{% static 'business/img/Start_BG-06-min.jpg' %}">
+                                    <div class="slide-5 slide-css" data-background="{% static 'business/img/Start_BG-06.jpg' %}">
                                         <img class="img-rounded" src="{% static 'business/img/Start-carrusel-06.jpg' %}">
                                         <p>Recursos humanos</p>
                                     </div>
-                                    <div class="slide-6 slide-css" data-background="{% static 'business/img/Start_BG-07-min.jpg' %}">
+                                    <div class="slide-6 slide-css" data-background="{% static 'business/img/Start_BG-07.jpg' %}">
                                         <img class="img-rounded" src="{% static 'business/img/Start-carrusel-07.jpg' %}">
                                         <p>Ingenieros</p>
                                     </div>
@@ -392,7 +392,7 @@
                 if ($(window).width() < 768) {
                     var background = $('.slide-' + nextSlide).data('background');
                     $(".little-section").css('background', 'url(' + background + ') 0% 0% / cover')
-            	    var background = $('.slide-' + nextSlide).data('background').replace('min', 'cel');
+            	    var background = $('.slide-' + nextSlide).data('background').replace('Start', 'cel-Start');
 
                 }else{
                     var background = $('.slide-' + nextSlide).data('background');
@@ -537,14 +537,13 @@
             $("html").css("overflow-y", "scroll");
             }
         </script>
-
+        <!--Set background-->
         <script>
             $(document).ready(function() {
                get_background()
             });
         </script>
-
-        <!-- any incoming error_message will print as an alert.-->
+        <!-- any incoming error_message will print as an alert-->
         <script>
             {% if error_message %}
                 alert("{{ error_message }}");
