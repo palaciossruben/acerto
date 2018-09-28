@@ -129,7 +129,7 @@ class Search(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return 'id: {0}, ip: {1}, user_ids: {2}'.format(self.id, self.ip, self.user_ids)
+        return 'id: {0}, ip: {1}, user_ids: {2}'.format(self.pk, self.ip, self.user_ids)
 
     # adds custom table name
     class Meta:

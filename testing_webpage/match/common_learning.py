@@ -65,13 +65,13 @@ def get_hashing_info():
     hashing_info = dict()
     #hashing_info['campaign'] = 5
     hashing_info['candidate_country'] = 1
-    hashing_info['candidate_city'] = 1
+    #hashing_info['candidate_city'] = 1  # TODO: mystery bug (see mystery bug)
     hashing_info['campaign_country'] = 1
     hashing_info['campaign_city'] = 1
     hashing_info['profession'] = 1
     hashing_info['campaign_profession'] = 3
     hashing_info['gender'] = 1
-    hashing_info['candidate_work_area'] = 1
+    #hashing_info['candidate_work_area'] = 1  # TODO: mystery bug (see mystery bug)
     hashing_info['neighborhood'] = 1
     hashing_info['languages'] = 1
     hashing_info['dream_job'] = 1
@@ -121,7 +121,7 @@ def get_columns():
             #'id',
             'text_match',
             'candidate_country',
-            'candidate_city',
+            #'candidate_city',  # TODO: mystery bug (see mystery bug)
             'campaign_country',
             'campaign_city',
             'profession',
@@ -129,7 +129,7 @@ def get_columns():
             'education',
             'campaign_education',
             'gender',
-            'candidate_work_area',
+            #'candidate_work_area',  # TODO: mystery bug (see mystery bug)
             # TODO: had only None, can add later on with more data
             'salary',
             'neighborhood',
@@ -166,11 +166,11 @@ def add_synthetic_fields(data):
     """Calculated fields"""
 
     data['country_match'] = data['candidate_country'] == data['campaign_country']
-    data['city_match'] = data['candidate_city'] == data['campaign_city']
+    #data['city_match'] = data['candidate_city'] == data['campaign_city']  # TODO: mystery bug (see mystery bug)
     data['profession_match'] = data['campaign_profession'] == data['profession']
     data['education_match'] = data['campaign_education'] == data['education']
     data['min_education'] = data['campaign_education'] <= data['education']
-    data['work_area_match'] = data['campaign_work_area'] == data['candidate_work_area']
+    #data['work_area_match'] = data['campaign_work_area'] == data['candidate_work_area']  # TODO: mystery bug (see mystery bug)
 
     return data
 
@@ -190,7 +190,7 @@ def load_raw_data(candidates=get_filtered_candidates()):
                                             #'id',  # only to trace the candidate
                                             'text_match',
                                             'user__country_id',
-                                            'user__city_id',
+                                            #'user__city_id',  # TODO: mystery bug (see mystery bug)
                                             'campaign__country_id',
                                             'campaign__city__id',
                                             'user__profession_id',
@@ -198,7 +198,7 @@ def load_raw_data(candidates=get_filtered_candidates()):
                                             'user__education__level',
                                             'campaign__education__level',
                                             'user__gender_id',
-                                            'user__work_area_id',
+                                            #'user__work_area_id',  # TODO: mystery bug (see mystery bug)
                                             'user__salary',
                                             'user__neighborhood',  # TODO: improve input
                                             'user__languages',  # TODO: improve input
@@ -334,7 +334,7 @@ def calculate_defaults(data):
     defaults['text_match'] = np.nanmedian(data['text_match'])
     defaults['education'] = np.nanmedian(data['education'])
     defaults['candidate_country'] = right_mode(data['candidate_country'])
-    defaults['candidate_city'] = right_mode(data['candidate_city'])
+    #defaults['candidate_city'] = right_mode(data['candidate_city'])  # TODO: mystery bug (see mystery bug)
     defaults['campaign_country'] = right_mode(data['campaign_country'])
     defaults['campaign_city'] = right_mode(data['campaign_city'])
     defaults['profession'] = right_mode(data['profession'])
@@ -342,7 +342,7 @@ def calculate_defaults(data):
     defaults['education'] = np.nanmedian(data['education'])
     defaults['campaign_education'] = np.nanmedian(data['campaign_education'])
     defaults['gender'] = right_mode(data['gender'])
-    defaults['candidate_work_area'] = right_mode(data['candidate_work_area'])
+    #defaults['candidate_work_area'] = right_mode(data['candidate_work_area'])  # TODO: mystery bug (see mystery bug)
     defaults['neighborhood'] = right_mode(data['neighborhood'])
     defaults['languages'] = right_mode(data['languages'])
     defaults['dream_job'] = right_mode(data['dream_job'])
