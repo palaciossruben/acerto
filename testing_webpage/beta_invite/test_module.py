@@ -50,12 +50,15 @@ def update_survey(question, answer_text, survey, question_id):
         pass
 
     elif question.type.code == 'NI':
-        number = int(answer_text.replace('.', '').replace(' ', ''))
-        survey.numeric_answer = number
-        if int(question.params['min_correct']) <= number <= int(question.params['max_correct']):
-            survey.score = 1
-        else:
+        if answer_text is None or answer_text == '':
             survey.score = 0
+        else:
+            number = int(answer_text.replace('.', '').replace(' ', ''))
+            survey.numeric_answer = number
+            if int(question.params['min_correct']) <= number <= int(question.params['max_correct']):
+                survey.score = 1
+            else:
+                survey.score = 0
 
     survey.save()
 

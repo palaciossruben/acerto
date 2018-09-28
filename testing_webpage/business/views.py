@@ -458,7 +458,7 @@ def business_campaigns(request, business_user_id):
     if request.user.id != business_user.auth_user.id:
         return redirect('business:login')
 
-    campaigns = business_user.campaigns.all()  
+    campaigns = business_user.campaigns.filter(removed=False).all()
 
     return render(request, cts.BUSINESS_CAMPAIGNS_VIEW_PATH, {'campaigns': campaigns,
                                                               'business_user_id': business_user.pk
