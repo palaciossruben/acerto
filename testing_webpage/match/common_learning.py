@@ -20,28 +20,6 @@ import common
 from beta_invite import constants
 
 
-def get_test_score(candidate, field, f):
-    scores = [float(getattr(e, field)) for e in candidate.evaluations.all()]
-    if len(scores):
-        return f(scores)
-    else:
-        return np.nan
-
-
-def add_test_field(features, candidates, field):
-    features['min_test_' + field] = [get_test_score(c, field, min) for c in candidates]
-    features['median_test_' + field] = [get_test_score(c, field, statistics.median) for c in candidates]
-    features['mean_test_' + field] = [get_test_score(c, field, statistics.mean) for c in candidates]
-    features['max_test_' + field] = [get_test_score(c, field, max) for c in candidates]
-    return features
-
-
-def add_test_features(features, candidates, fields):
-    for f in fields:
-        features = add_test_field(features, candidates, f)
-    return features
-
-
 def get_target_for_candidate(candidate):
     """
     Contrast between very good and very bad candidates, where decisions have already been made explicitly
@@ -64,18 +42,18 @@ def get_hashing_info():
     # Uncomment for high complexity
     hashing_info = dict()
     #hashing_info['campaign'] = 5
-    hashing_info['candidate_country'] = 1
-    #hashing_info['candidate_city'] = 1  # TODO: mystery bug (see mystery bug)
-    hashing_info['campaign_country'] = 1
-    hashing_info['campaign_city'] = 1
-    hashing_info['profession'] = 1
-    hashing_info['campaign_profession'] = 3
-    hashing_info['gender'] = 1
-    #hashing_info['candidate_work_area'] = 1  # TODO: mystery bug (see mystery bug)
-    hashing_info['neighborhood'] = 1
-    hashing_info['languages'] = 1
-    hashing_info['dream_job'] = 1
-    hashing_info['campaign_work_area'] = 1
+    #hashing_info['candidate_country'] = 1
+    #hashing_info['candidate_city'] = 1
+    #hashing_info['campaign_country'] = 1
+    #hashing_info['campaign_city'] = 1
+    #hashing_info['profession'] = 1
+    #hashing_info['campaign_profession'] = 3
+    #hashing_info['gender'] = 1
+    #hashing_info['candidate_work_area'] = 1
+    #hashing_info['neighborhood'] = 1
+    #hashing_info['languages'] = 1
+    #hashing_info['dream_job'] = 1
+    #hashing_info['campaign_work_area'] = 1
 
     # TODO: ADD NEW FIELD HERE
 
@@ -121,7 +99,7 @@ def get_columns():
             #'id',
             'text_match',
             'candidate_country',
-            #'candidate_city',  # TODO: mystery bug (see mystery bug)
+            'candidate_city',
             'campaign_country',
             'campaign_city',
             'profession',
@@ -129,12 +107,12 @@ def get_columns():
             'education',
             'campaign_education',
             'gender',
-            #'candidate_work_area',  # TODO: mystery bug (see mystery bug)
+            'candidate_work_area',
             # TODO: had only None, can add later on with more data
             'salary',
-            'neighborhood',
-            'languages',
-            'dream_job',
+            #'neighborhood',
+            #'languages',
+            #'dream_job',
             'campaign_work_area',
             'has_photo',
             'has_profile',
@@ -143,6 +121,8 @@ def get_columns():
             'has_instagram',
             'has_linkedin',
             'has_brochure_url',
+            'campaign_salary_low',
+            'campaign_salary_high',
             ]
 
 
@@ -162,15 +142,30 @@ def get_test_column_name(test):
     return str(test.id) + '_' + common.remove_accents(test.name).lower()
 
 
+def get_salary_match(data):
+    """
+    I candidate in a soft salary range?
+    :param data:
+    :return:
+    """
+    avg = (data['campaign_salary_high'] + data['campaign_salary_low']) / 2
+    added_range = avg * 0.25
+    soft_high = data['campaign_salary_high'] + added_range
+    soft_low = data['campaign_salary_low'] - added_range
+
+    return soft_low <= data['salary'] <= soft_high
+
+
 def add_synthetic_fields(data):
     """Calculated fields"""
 
     data['country_match'] = data['candidate_country'] == data['campaign_country']
-    #data['city_match'] = data['candidate_city'] == data['campaign_city']  # TODO: mystery bug (see mystery bug)
+    data['city_match'] = data['candidate_city'] == data['campaign_city']
     data['profession_match'] = data['campaign_profession'] == data['profession']
     data['education_match'] = data['campaign_education'] == data['education']
     data['min_education'] = data['campaign_education'] <= data['education']
-    #data['work_area_match'] = data['campaign_work_area'] == data['candidate_work_area']  # TODO: mystery bug (see mystery bug)
+    data['work_area_match'] = data['campaign_work_area'] == data['candidate_work_area']
+    data['salary_match'] = get_salary_match(data)
 
     return data
 
@@ -190,7 +185,7 @@ def load_raw_data(candidates=get_filtered_candidates()):
                                             #'id',  # only to trace the candidate
                                             'text_match',
                                             'user__country_id',
-                                            #'user__city_id',  # TODO: mystery bug (see mystery bug)
+                                            'user__city_id',
                                             'campaign__country_id',
                                             'campaign__city__id',
                                             'user__profession_id',
@@ -198,11 +193,11 @@ def load_raw_data(candidates=get_filtered_candidates()):
                                             'user__education__level',
                                             'campaign__education__level',
                                             'user__gender_id',
-                                            #'user__work_area_id',  # TODO: mystery bug (see mystery bug)
+                                            'user__work_area_id',
                                             'user__salary',
-                                            'user__neighborhood',  # TODO: improve input
-                                            'user__languages',  # TODO: improve input
-                                            'user__dream_job',  # TODO: improve input
+                                            #'user__neighborhood',  # TODO: improve input
+                                            #'user__languages',  # TODO: improve input
+                                            #'user__dream_job',  # TODO: improve input
                                             'campaign__work_area_id',
                                             'user__photo_url',
                                             'user__profile',
@@ -211,8 +206,8 @@ def load_raw_data(candidates=get_filtered_candidates()):
                                             'user__instagram',
                                             'user__linkedin',
                                             'user__brochure_url',
-                                            # TODO: add new fields campaign.salary_low_range
-                                            # TODO: add new fields campaign.salary_low_high
+                                            'campaign__salary_low_range',
+                                            'campaign__salary_high_range',
 
                                             # TODO: ADD NEW FIELD HERE
                                             ))
@@ -220,9 +215,9 @@ def load_raw_data(candidates=get_filtered_candidates()):
     data = pd.DataFrame(data_list, columns=get_columns())
 
     # Pre-Processing
-    data['neighborhood'] = [lower_str(common.remove_accents(n)) for n in data['neighborhood']]
-    data['languages'] = [lower_str(common.remove_accents(n)) for n in data['languages']]
-    data['dream_job'] = [lower_str(common.remove_accents(n)) for n in data['dream_job']]
+    #data['neighborhood'] = [lower_str(common.remove_accents(n)) for n in data['neighborhood']]
+    #data['languages'] = [lower_str(common.remove_accents(n)) for n in data['languages']]
+    #data['dream_job'] = [lower_str(common.remove_accents(n)) for n in data['dream_job']]
     data = has_url(data, 'has_photo')
     data['has_profile'] = data['has_profile'].apply(lambda x: 1 if isinstance(x, str) and len(x) > 50 else 0)  # more tan 50 chars
     data = has_url(data, 'has_twitter')
@@ -232,8 +227,7 @@ def load_raw_data(candidates=get_filtered_candidates()):
     data = has_url(data, 'has_brochure_url')
 
     # similar accuracy with high and low complexity:
-    #data = add_test_features(data, candidates, ['passed', 'final_score'])
-    data['median_test_final_score'] = [get_test_score(c, 'final_score', statistics.median) for c in candidates]
+    data['last_mean_test_score'] = [c.get_last_score() for c in candidates]
 
     data['cognitive_score'] = [c.get_last_cognitive_score() for c in candidates]
     data['technical_score'] = [c.get_last_technical_score() for c in candidates]
@@ -334,7 +328,7 @@ def calculate_defaults(data):
     defaults['text_match'] = np.nanmedian(data['text_match'])
     defaults['education'] = np.nanmedian(data['education'])
     defaults['candidate_country'] = right_mode(data['candidate_country'])
-    #defaults['candidate_city'] = right_mode(data['candidate_city'])  # TODO: mystery bug (see mystery bug)
+    defaults['candidate_city'] = right_mode(data['candidate_city'])
     defaults['campaign_country'] = right_mode(data['campaign_country'])
     defaults['campaign_city'] = right_mode(data['campaign_city'])
     defaults['profession'] = right_mode(data['profession'])
@@ -342,10 +336,10 @@ def calculate_defaults(data):
     defaults['education'] = np.nanmedian(data['education'])
     defaults['campaign_education'] = np.nanmedian(data['campaign_education'])
     defaults['gender'] = right_mode(data['gender'])
-    #defaults['candidate_work_area'] = right_mode(data['candidate_work_area'])  # TODO: mystery bug (see mystery bug)
-    defaults['neighborhood'] = right_mode(data['neighborhood'])
-    defaults['languages'] = right_mode(data['languages'])
-    defaults['dream_job'] = right_mode(data['dream_job'])
+    defaults['candidate_work_area'] = right_mode(data['candidate_work_area'])
+    #defaults['neighborhood'] = right_mode(data['neighborhood'])
+    #defaults['languages'] = right_mode(data['languages'])
+    #defaults['dream_job'] = right_mode(data['dream_job'])
     defaults['campaign_work_area'] = right_mode(data['campaign_work_area'])
     defaults['cognitive_score'] = np.nanmedian(data['cognitive_score'])
     defaults['technical_score'] = np.nanmedian(data['technical_score'])
@@ -359,12 +353,11 @@ def calculate_defaults(data):
     defaults['has_instagram'] = right_mode(data['has_instagram'])
     defaults['has_linkedin'] = right_mode(data['has_linkedin'])
     defaults['has_brochure_url'] = right_mode(data['has_brochure_url'])
+    defaults['campaign_low_salary'] = np.nanmedian(data['campaign_low_salary'])
+    defaults['campaign_high_salary'] = np.nanmedian(data['campaign_high_salary'])
+    defaults['salary'] = np.mean(data['salary'])
 
     # TODO: ADD NEW FIELD HERE
-
-    # TODO: had only None, can add later on with more data
-    # print(data['salary'])
-    defaults['salary'] = np.mean(data['salary'])
 
     for column in data.columns.values:
         if 'test' in column:
@@ -430,6 +423,7 @@ def get_matrix_from_saved_hash(data, field):
 
 
 def add_hash_fields_from_saved_hashes(data):
+
     for field, num_features in get_hashing_info().items():
         matrix = get_matrix_from_saved_hash(data, field)
         data = add_hashed_matrix_to_data(matrix, data, field, num_features)
@@ -488,7 +482,7 @@ def predict_property(candidates, model, selected_fields=None):
     data = load_raw_data(candidates)
     data = fill_missing_values(data, defaults=pickle_handler.load_defaults())
     data = add_synthetic_fields(data)
-    data = add_hash_fields_from_saved_hashes(data)
+    #data = add_hash_fields_from_saved_hashes(data)  # TODO: removed due to a bug on sklearn hash library, small vectors give different values than big ones
     data = filter_fields(data, selected_fields)
     #data = scale_data_from_saved_scaler(data, fields=selected_fields)
 

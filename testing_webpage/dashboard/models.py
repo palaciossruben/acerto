@@ -228,6 +228,14 @@ class Candidate(models.Model):
         except models.ObjectDoesNotExist:
             return None
 
+    def get_last_score(self):
+
+        e = self.get_last_evaluation()
+        if e:
+            return e.final_score
+        else:
+            return None
+
     def print_attribute(self, attribute):
 
         last_evaluation = self.get_last_evaluation()

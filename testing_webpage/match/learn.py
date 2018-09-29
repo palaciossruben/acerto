@@ -128,42 +128,26 @@ class DataPair:
         self.target = target
 
 
-def learn_model(train, xgboost=False):
+def learn_model(train):
 
     # TODO: missing xgboost; has bugs. Missing hard instalation on Linux also. Or using conda.
-    # TODO: grid_search(model, train_set, train_target)
-    if xgboost:
+    clf = GridSearchCV(RandomForestClassifier(random_state=0,
+                                              class_weight=CLASS_WEIGHTS),
+                       PARAMS,
+                       cv=3,
+                       verbose=1)
+    clf.fit(train.features, train.target)
 
-        params = {
-            'max_depth': 3,  # the maximum depth of each tree
-            'eta': 0.3,  # the training step for each iteration
-            'silent': 1,  # logging mode - quiet
-            'objective': 'binary:logistic',  # error evaluation for binary training
-            'num_class': 2}  # the number of classes that exist in this data set
+    cv_accuracy = get_cv_scores(clf, train)
 
-        #model = xgboost_scikit_wrapper.XGBoostClassifier(num_boost_round=20, params=params)
+    print('cv accuracy is: {}'.format(cv_accuracy))
+    print('cv mean accuracy is: {}'.format(np.mean(cv_accuracy)))
 
-    else:
+    print('best params are:')
+    print('max_depth {}'.format(clf.best_params_['max_depth']))
+    print('n_estimators {}'.format(clf.best_params_['n_estimators']))
 
-        clf = GridSearchCV(RandomForestClassifier(random_state=0,
-                                                  class_weight=CLASS_WEIGHTS),
-                           PARAMS,
-                           cv=10)
-        clf.fit(train.features, train.target)
-
-        print('best params are:')
-        print('max_depth {}'.format(clf.best_params_['max_depth']))
-        print('n_estimators {}'.format(clf.best_params_['n_estimators']))
-
-        model = RandomForestClassifier(max_depth=clf.best_params_['max_depth'],
-                                       random_state=0,
-                                       n_estimators=clf.best_params_['n_estimators'],
-                                       # guarantees that we do not miss many candidates with potential
-                                       class_weight=CLASS_WEIGHTS
-                                       )
-
-    model.fit(train.features, train.target)
-    return model
+    return clf.best_estimator_
 
 
 def target_mode(target):
@@ -194,6 +178,17 @@ def percent_format(a_number):
     return round(a_number * 100, 1)
 
 
+def get_cv_scores(model, data):
+
+    scores = np.array(cross_val_score(estimator=model,
+                                      X=data.features,
+                                      y=data.target,
+                                      cv=3,
+                                      scoring='accuracy'))
+
+    return np.array(scores)
+
+
 def eval_model(model, train, test):
 
     train_prediction = model.predict(train.features)
@@ -208,12 +203,6 @@ def eval_model(model, train, test):
 
     result = Result(train_metric, test_metric, baseline_test_metric)
     result.print()
-
-    # TODO: CV is a bit high understand why?????
-    cross_validation_accuracies = cross_val_score(model, test.features, test.target,
-                                                  scoring='accuracy', cv=10)
-    print('CV AVERAGE (%): {}'.format(percent_format(np.mean(cross_validation_accuracies))))
-    print('CV STD (%): {}'.format(percent_format(np.std(cross_validation_accuracies))))
 
     return result
 
