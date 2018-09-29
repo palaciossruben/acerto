@@ -1,4 +1,3 @@
-
 import sys
 import os
 from django.core.wsgi import get_wsgi_application
@@ -10,10 +9,10 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
 from match.model import predict_match
-from dashboard.models import Candidate
+from dashboard.models import Candidate, State
 import numpy as np
 
-candidates = Candidate.objects.all().order_by('-created_at')[:1000]
+candidates = Candidate.objects.filter(state=State.objects.get(code='WFI')).order_by('-created_at')[:1000]
 
 prediction_array = np.array([])
 for c in candidates:
