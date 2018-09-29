@@ -8,8 +8,8 @@ from django.core.files.storage import FileSystemStorage
 from ipware.ip import get_ip
 import geoip2.database
 import inflection
-from beta_invite.apps import ip_country_reader, ip_city_reader
 
+from beta_invite.apps import ip_country_reader, ip_city_reader
 from beta_invite.models import User, Campaign, Country, City, Profession, Education, EvaluationSummary, WorkArea, Gender
 from beta_invite import constants as beta_cts
 from dashboard.models import Candidate, State
@@ -471,8 +471,7 @@ def get_business_user_with_campaign(campaign):
     :return: business_user or None
     """
 
-    for b in BusinessUser.objects.all():
-        if campaign in b.campaigns.all():
-            return b
-
-    return None
+    try:
+        return BusinessUser.objects.get(campaigns__id__contains=199)
+    except ObjectDoesNotExist:
+        return None
