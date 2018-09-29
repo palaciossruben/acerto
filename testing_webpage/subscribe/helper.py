@@ -177,7 +177,7 @@ def get_image_num_name(image, count):
 
 
 def get_pdf_text_with_ocr(filename):
-    """Convert to png and use OCR, this is  a last resort."""
+    """Convert to png and use OCR, this is a last resort."""
 
     image_basename = os.path.splitext(filename)[0]
 
@@ -186,22 +186,26 @@ def get_pdf_text_with_ocr(filename):
 
     # converts each page to an image.
     command = 'pdftoppm -png {filename} {image}'.format(filename=filename, image=image_basename)
-    subprocess.run(command, shell=True)
 
-    # removes unnecessary file
-    os.remove(image_basename)
+    try:
+        subprocess.run(command, shell=True)
 
-    # Reads with OCR whatever pages the poppler converted to png.
-    count = 1
-    text = ''
-    image_num = get_image_num_name(image_basename, count)
-    while os.path.exists(image_num):
-        text += get_image_text(image_num)
-        os.remove(image_num)
-        count += 1
+        # removes unnecessary file
+        os.remove(image_basename)
+
+        # Reads with OCR whatever pages the poppler converted to png.
+        count = 1
+        text = ''
         image_num = get_image_num_name(image_basename, count)
+        while os.path.exists(image_num):
+            text += get_image_text(image_num)
+            os.remove(image_num)
+            count += 1
+            image_num = get_image_num_name(image_basename, count)
 
-    return text
+        return text
+    except OSError:  # [Errno 12] Cannot allocate memory
+        return ''
 
 
 def get_text_with_traditional_strategy(folder_path, filename):
