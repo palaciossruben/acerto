@@ -21,6 +21,7 @@ from beta_invite.models import User
 
 
 VALID_EXTENSIONS = {'.jpg', '.jpeg', '.doc', '.docx', '.png', '.pdf', '.txt'}
+INVALID_FOLDERS = ['10587']  # this folders produce a out of memory error
 
 
 def get_text(folder_path, doc, extension):
@@ -99,9 +100,9 @@ def read_all(force=False):
     for user in users:
         folder = str(user.id)
         if folder in folders:
-            print(folder)
+            print('analysing folder: {}'.format(folder))
             folder_path = os.path.join(cts.RESUMES_PATH, folder)
-            if os.path.isdir(folder_path):
+            if os.path.isdir(folder_path) and folder not in INVALID_FOLDERS:
                 docs = os.listdir(folder_path)
 
                 parsed_filename = '{}.txt'.format(folder)
