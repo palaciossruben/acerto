@@ -3,7 +3,7 @@ import inspect
 import unicodedata
 from django.conf import settings
 from urllib.parse import urlencode, urlunparse, urlparse, parse_qsl, parse_qs
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.core.files.storage import FileSystemStorage
 from ipware.ip import get_ip
 import geoip2.database
@@ -472,6 +472,8 @@ def get_business_user_with_campaign(campaign):
     """
 
     try:
-        return BusinessUser.objects.get(campaigns__id__contains=campaign.id)
+        return BusinessUser.objects.get(campaigns__id__contains=campaign.pk)
     except ObjectDoesNotExist:
         return None
+    except MultipleObjectsReturned:
+        return BusinessUser.objects.filter(campaigns__id__contains=campaign.pk).all()[0]
