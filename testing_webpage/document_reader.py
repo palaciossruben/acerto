@@ -1,6 +1,6 @@
 """
 To run do:
-python3 subscribe/document_reader.py
+python3 document_reader.py
 """
 import os
 import sys
@@ -112,12 +112,8 @@ def read_all(force=False):
                 if parsed_filename not in docs or force:
                     text = read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename)
                     write_last_updated_at(user)
-                else:
-                    with open(parsed_path, 'r', encoding='UTF-8') as f:
-                        text = f.read()
-
-                user.curriculum_text = text.replace('\x00', '')  # removes char null
-                user.save()
+                    user.curriculum_text = text.replace('\x00', '')  # removes char null
+                    user.save()
 
 
 def run():
