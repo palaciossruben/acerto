@@ -21,7 +21,7 @@ from beta_invite.models import User
 
 
 VALID_EXTENSIONS = {'.jpg', '.jpeg', '.doc', '.docx', '.png', '.pdf', '.txt'}
-INVALID_FOLDERS = ['10587']  # this folders produce a out of memory error
+INVALID_FOLDERS = ['10587', '9598']  # this folders produce a out of memory error
 
 
 def get_text(folder_path, doc, extension):
