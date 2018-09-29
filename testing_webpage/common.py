@@ -472,6 +472,6 @@ def get_business_user_with_campaign(campaign):
     """
 
     try:
-        return BusinessUser.objects.get(campaigns__id__contains=199)
+        return BusinessUser.objects.get(campaigns__id__contains=campaign.id)
     except ObjectDoesNotExist:
         return None
