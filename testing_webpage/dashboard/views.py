@@ -24,7 +24,7 @@ CANDIDATE_FORECAST_LIMIT = 20
 def sort_users_by_campaign_count(business_users):
     business_users = [(b, b.campaigns.filter(removed=False).count()) for b in business_users]
     business_users.sort(key=lambda x: x[1], reverse=True)
-    return [b for b, _ in business_users]
+    return [b for b, count in business_users if count > 0]
 
 
 def get_business_users_order_by_active_campaigns():
