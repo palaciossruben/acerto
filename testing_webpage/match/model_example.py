@@ -1,21 +1,17 @@
+
+import sys
+import os
+from django.core.wsgi import get_wsgi_application
+
+
+# Environment can use the models as if inside the Django app
+sys.path.insert(0, '/'.join(os.getcwd().split('/')[:-1]))
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
+application = get_wsgi_application()
+
 from match.model import predict_match
 from dashboard.models import Candidate
 import numpy as np
-import pandas as pd
-from match.pickle_models import pickle_handler
-
-
-def make_column_hashable(data, column_name):
-    if not isinstance(data.loc[0, column_name], str):
-        data[column_name] = data[column_name].apply(lambda x: str(x))
-    return data
-
-
-def get_matrix_from_saved_hash(data, field):
-    data = make_column_hashable(data, field)
-    hasher = pickle_handler.load_hasher(field)
-    return hasher.transform(data[field])
-
 
 candidates = Candidate.objects.all().order_by('-created_at')[:1000]
 
@@ -25,20 +21,4 @@ for c in candidates:
     print(prediction)
     prediction_array = np.append(prediction_array, prediction)
 
-print(np.mean(prediction_array))
-
-print(candidates)
-
-
-"""
-data = pd.DataFrame([2, 2, 15], columns=['campaign_city'])
-
-out = get_matrix_from_saved_hash(data, 'campaign_city')
-print(out)
-
-
-data = pd.DataFrame([2, 2], columns=['campaign_city'])
-
-out = get_matrix_from_saved_hash(data, 'campaign_city')
-print(out)
-"""
+print('percentage who paased: {}'.format(np.mean(prediction_array)))
