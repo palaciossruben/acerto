@@ -21,7 +21,7 @@ from beta_invite.models import User
 
 
 VALID_EXTENSIONS = {'.jpg', '.jpeg', '.doc', '.docx', '.png', '.pdf', '.txt'}
-INVALID_FOLDERS = ['10587', '9598']  # this folders produce a out of memory error
+INVALID_FOLDERS = []#['10587', '9598']  # this folders produce a out of memory error
 
 
 def get_text(folder_path, doc, extension):
@@ -108,7 +108,7 @@ def read_all(force=False):
                 parsed_filename = '{}.txt'.format(folder)
                 parsed_path = os.path.join(folder_path, parsed_filename)
 
-                # Will used saved version, to save time parsing.
+                # Only parses an un-parsed files
                 if parsed_filename not in docs or force:
                     text = read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename)
                     write_last_updated_at(user)
@@ -117,8 +117,9 @@ def read_all(force=False):
 
 
 def run():
-    sys.stdout = h.Unbuffered(open('document_reader.log', 'a'))
-    read_all(force=False)
+    with open('document_reader.log', 'a') as f:
+        sys.stdout = h.Unbuffered(f)
+        read_all(force=False)
 
 
 if __name__ == "__main__":
