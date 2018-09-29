@@ -236,6 +236,14 @@ class Candidate(models.Model):
         else:
             return None
 
+    def get_last_cut_score(self):
+
+        e = self.get_last_evaluation()
+        if e:
+            return e.cut_score
+        else:
+            return None
+
     def print_attribute(self, attribute):
 
         last_evaluation = self.get_last_evaluation()

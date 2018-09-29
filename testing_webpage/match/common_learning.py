@@ -153,7 +153,9 @@ def get_salary_match(data):
     soft_high = data['campaign_salary_high'] + added_range
     soft_low = data['campaign_salary_low'] - added_range
 
-    return soft_low <= data['salary'] <= soft_high
+    df_tmp = pd.DataFrame([data['salary'], soft_high, soft_low], columns=['salary', 'soft_high', 'soft_low'])
+
+    return df_tmp.apply(lambda row: row['soft_low'] <= row['salary'] <= row['soft_high'], axis=1)
 
 
 def add_synthetic_fields(data):
@@ -165,7 +167,8 @@ def add_synthetic_fields(data):
     data['education_match'] = data['campaign_education'] == data['education']
     data['min_education'] = data['campaign_education'] <= data['education']
     data['work_area_match'] = data['campaign_work_area'] == data['candidate_work_area']
-    data['salary_match'] = get_salary_match(data)
+    #data['salary_match'] = get_salary_match(data)
+    data['test_delta'] = data['last_test_score'] - data['last_cut_score']
 
     return data
 
@@ -227,7 +230,8 @@ def load_raw_data(candidates=get_filtered_candidates()):
     data = has_url(data, 'has_brochure_url')
 
     # similar accuracy with high and low complexity:
-    data['last_mean_test_score'] = [c.get_last_score() for c in candidates]
+    data['last_test_score'] = [c.get_last_score() for c in candidates]
+    data['last_cut_score'] = [c.get_last_cut_score() for c in candidates]
 
     data['cognitive_score'] = [c.get_last_cognitive_score() for c in candidates]
     data['technical_score'] = [c.get_last_technical_score() for c in candidates]
@@ -288,7 +292,7 @@ def load_data(candidates=get_filtered_candidates(),
     data = load_raw_data(candidates)
     data = fill_missing_values(data)
     data = add_synthetic_fields(data)
-    data = hash_columns(data, hashing_info)
+    #data = hash_columns(data, hashing_info)
     data = filter_fields(data, selected_fields)
     #data = scale(data)
 
@@ -325,6 +329,7 @@ def calculate_defaults(data):
 
     #defaults['campaign'] = right_mode(data['campaign'])
     #defaults['id'] = right_mode(data['id'])
+    defaults['last_test_score'] = np.nanmedian(data['last_test_score'])
     defaults['text_match'] = np.nanmedian(data['text_match'])
     defaults['education'] = np.nanmedian(data['education'])
     defaults['candidate_country'] = right_mode(data['candidate_country'])
@@ -353,9 +358,10 @@ def calculate_defaults(data):
     defaults['has_instagram'] = right_mode(data['has_instagram'])
     defaults['has_linkedin'] = right_mode(data['has_linkedin'])
     defaults['has_brochure_url'] = right_mode(data['has_brochure_url'])
-    defaults['campaign_low_salary'] = np.nanmedian(data['campaign_low_salary'])
-    defaults['campaign_high_salary'] = np.nanmedian(data['campaign_high_salary'])
-    defaults['salary'] = np.mean(data['salary'])
+    defaults['campaign_salary_low'] = np.nanmedian(data['campaign_salary_low'])
+    defaults['campaign_salary_high'] = np.nanmedian(data['campaign_salary_high'])
+    defaults['salary'] = np.nanmedian(data['salary'])
+    defaults['last_cut_score'] = np.nanmedian(data['last_cut_score'])
 
     # TODO: ADD NEW FIELD HERE
 

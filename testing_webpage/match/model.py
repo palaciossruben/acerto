@@ -67,7 +67,7 @@ def save_other_values():
 
     # Order is key, Hashers are calculated before hashing the data.
     save_hashers(data)
-    data = common_learning.hash_columns(data, common_learning.get_hashing_info())
+    #data = common_learning.hash_columns(data, common_learning.get_hashing_info())
 
     # Order is key, save scaler, then scale
     #common_learning.get_scaler_and_save(data)
