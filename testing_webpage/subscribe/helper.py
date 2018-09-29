@@ -55,15 +55,17 @@ def get_text_from_pdf_images(folder_path, pdf_path):
 
     command = 'pdfimages {} {}'.format(pdf_path, os.path.join(images_path, 'image'))
 
-    subprocess.run(command, shell=True)
+    try:
+        subprocess.run(command, shell=True)
 
-    text = ''
-    # only reads up to 2 images: usually when there are many, they have no content and take too much time.
-    images = os.listdir(images_path)
-    for image in images[:min(2, len(images))]:
-        text += get_image_text(os.path.join(images_path, image))
-
-    return text
+        text = ''
+        # only reads up to 2 images: usually when there are many, they have no content and take too much time.
+        images = os.listdir(images_path)
+        for image in images[:min(2, len(images))]:
+            text += get_image_text(os.path.join(images_path, image))
+        return text
+    except OSError:  # [Errno 12] Cannot allocate memory
+        return ''
 
 
 def get_word_text(filename):
