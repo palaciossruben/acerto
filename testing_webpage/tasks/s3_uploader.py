@@ -66,7 +66,6 @@ def add_new_users(queue, created_since):
     # tODO: make it more efficient by using the SQL LIMIT
     users = User.objects.filter(~Q(curriculum_url='#') &
                                 Q(curriculum_s3_url='#') &
-                                ~Q(curriculum_text=None) &
                                 Q(created_at__gt=created_since)).all()
     print('total new users, to add on S3: {}'.format(len(users)))
     [queue.put(u) for u in users]
