@@ -24,7 +24,7 @@ VALID_EXTENSIONS = {'.jpg', '.jpeg', '.doc', '.docx', '.png', '.pdf', '.txt'}
 INVALID_FOLDERS = ['10587', '9598']  # this folders produce a out of memory error
 
 
-def get_text(folder_path, doc, extension):
+def get_text(folder_path, doc, extension, fast=True):
     """Gets the text regardless of the extension"""
 
     filename = os.path.join(folder_path, doc)
@@ -36,7 +36,7 @@ def get_text(folder_path, doc, extension):
         elif extension in {'.doc', '.docx'}:  # word doc.
             text = h.get_word_text(filename)
         elif extension == '.pdf':
-            text = h.get_pdf_text(folder_path, filename)
+            text = h.get_pdf_text(folder_path, filename, fast=fast)
         elif extension == '.txt':
             text = h.get_text_from_txt_file(filename)
 
@@ -59,7 +59,7 @@ def multilingual_stemmer(text):
     return ' '.join([spa_stemmer.stem(eng_stemmer.stem(w)) for w in nltk.word_tokenize(text)])
 
 
-def read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename):
+def read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename, fast=True):
     """Will iterate over all documents from a User and extract all text, then write and return it."""
     text = ''
     for d in docs:
@@ -70,7 +70,7 @@ def read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename):
             d = h.rename_filename(folder_path, d)
 
             extension = os.path.splitext(d)[1].lower()
-            text += get_text(folder_path, d, extension)
+            text += get_text(folder_path, d, extension, fast=fast)
 
     text = h.remove_accents_and_non_ascii(text).lower()
 
@@ -89,7 +89,7 @@ def write_last_updated_at(user):
     pickle.dump(user.updated_at, open(cts.LAST_USER_UPDATED_AT, 'wb'))
 
 
-def read_all(force=False):
+def read_all(fast=True, force=False):
     """Reads all files inside the resumes folder. Files can have several different extensions.
     :param force: Boolean indicating if the Curriculum have to be read again.
     """
@@ -110,7 +110,7 @@ def read_all(force=False):
 
                 # Only parses an un-parsed files
                 if parsed_filename not in docs or force:
-                    text = read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename)
+                    text = read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename, fast=fast)
                     write_last_updated_at(user)
                     user.curriculum_text = text.replace('\x00', '')  # removes char null
                     user.save()
@@ -119,8 +119,8 @@ def read_all(force=False):
 def run():
     with open('document_reader.log', 'a') as f:
         sys.stdout = h.Unbuffered(f)
-        read_all(force=False)
+        read_all(fast=True, force=False)
 
 
 if __name__ == "__main__":
-    read_all(force=False)
+    read_all(fast=True, force=False)

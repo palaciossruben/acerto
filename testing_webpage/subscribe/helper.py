@@ -210,7 +210,7 @@ def get_pdf_text_with_ocr(filename):
         return ''
 
 
-def get_text_with_traditional_strategy(folder_path, filename):
+def get_text_fast(folder_path, filename):
     """
     Follows path from greater chance of success to least.
     This is not perfect. Some tricky PDFS can join all words or separate every other character.
@@ -286,17 +286,21 @@ def get_text_with_relevance_index(folder_path, filename, relevance_dictionary):
     return text
 
 
-def get_pdf_text(folder_path, filename):
+def get_pdf_text(folder_path, filename, fast=True):
     """Tries different libraries"""
     print('on a .pdf')
 
-    # Opens word_user_dict, or returns unordered users.
-    try:
-        relevance_dictionary = pickle.load(open('subscribe/relevance_dictionary.p', 'rb'))
-        return get_text_with_relevance_index(folder_path, filename, relevance_dictionary)
-    except FileNotFoundError:
-        print('traditional strategy')
-        return get_text_with_traditional_strategy(folder_path, filename)
+    if fast:
+        print('simple fast strategy')
+        return get_text_fast(folder_path, filename)
+    else:  # Slow strategy, 3 methods compete to see who is more precise.
+        # Opens word_user_dict, or returns unordered users.
+        try:
+            relevance_dictionary = pickle.load(open('subscribe/relevance_dictionary.p', 'rb'))
+            return get_text_with_relevance_index(folder_path, filename, relevance_dictionary)
+        except FileNotFoundError:
+            print('simple fast strategy')
+            return get_text_fast(folder_path, filename)
 
 
 def remove_accents_in_string(element):
