@@ -12,6 +12,7 @@ sys.path.insert(0, '/'.join(os.getcwd().split('/')[:-1]))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
+import daemon
 import boto3
 import time
 import pickle
@@ -122,8 +123,7 @@ def init_workers(num_workers=NUM_WORKERS):
         t.start()
 
 
-if __name__ == '__main__':
-
+def run():
     init_workers()
     created_since = datetime(day=9, month=4, year=1948)
 
@@ -131,3 +131,9 @@ if __name__ == '__main__':
         if users_queue.empty:
             users_queue, created_since = add_new_users(users_queue, created_since)
         time.sleep(WAITING_TIME_DB)
+
+
+if __name__ == '__main__':
+
+    with daemon.DaemonContext():
+        run()
