@@ -20,6 +20,7 @@ from beta_invite.models import User
 from decouple import config
 from django.db.models import Q
 from queue import Queue
+from subscribe import helper as h
 
 
 # the actual upload
@@ -98,7 +99,7 @@ def upload_users(users_queue, wait_time_workers, debug):
     time.sleep(wait_time_workers)
 
 
-def run():
+def upload_all():
 
     wait_time_workers = 10  # seconds
     wait_time_db = 60  # 10 minutes
@@ -115,5 +116,11 @@ def run():
         time.sleep(wait_time_db)
 
 
+def run():
+    with open('tasks/s3_daemon.log', 'a') as f:
+        sys.stdout = h.Unbuffered(f)
+        upload_all()
+
+
 if __name__ == '__main__':
-    run()
+    upload_all()
