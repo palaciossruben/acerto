@@ -292,11 +292,10 @@ def active_campaigns(request):
         test_module.update_scores(last_evaluation, last_evaluation.scores.all())
 
         # Uses ML if on a free trial and send to STC state!!! 100% automation reached?
-        if candidate.campaign.free_trial and candidate.state.code == 'WFI':
-            test_module.classify_evaluation_and_change_state(candidate,
-                                                             use_machine_learning=True,
-                                                             success_state='STC',
-                                                             fail_state='WFI')
+        test_module.classify_evaluation_and_change_state(candidate,
+                                                         use_machine_learning=True,
+                                                         success_state='STC',
+                                                         fail_state='WFI')
 
     return render(request, cts.ACTIVE_CAMPAIGNS_VIEW_PATH)
 
