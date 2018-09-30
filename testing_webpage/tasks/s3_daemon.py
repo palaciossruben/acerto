@@ -1,5 +1,5 @@
 import daemon
-from tasks.s3_uploader import upload_all
+from tasks.s3_uploader import run
 
 with daemon.DaemonContext():
-    upload_all()
+    run()
