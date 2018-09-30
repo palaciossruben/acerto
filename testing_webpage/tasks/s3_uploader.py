@@ -135,14 +135,14 @@ def run():
     #init_workers()
     created_since = datetime(day=9, month=4, year=1948)
 
-    #while True:
-    if users_queue.empty:
-        users_queue, created_since = add_new_users(users_queue, created_since)
+    while True:
+        if users_queue.empty:
+            users_queue, created_since = add_new_users(users_queue, created_since)
 
-    for _ in range(NUM_PROCESS):
-        users_queue = upload_users(users_queue)
+        for _ in range(NUM_PROCESS):
+            users_queue = upload_users(users_queue)
 
-        #time.sleep(WAITING_TIME_DB)
+        time.sleep(WAITING_TIME_DB)
 
 
 if __name__ == '__main__':
