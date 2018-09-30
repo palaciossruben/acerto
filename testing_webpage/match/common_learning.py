@@ -70,7 +70,7 @@ def hash_columns(data, hashing_info):
 
 def get_filtered_candidates():
     """Very good candidates contrasted with very bad ones"""
-    return Candidate.objects.exclude(campaign_id=constants.DEFAULT_CAMPAIGN_ID)\
+    return Candidate.objects.exclude(campaign_id__in=[constants.DEFAULT_CAMPAIGN_ID])\
         .filter(state__in=State.get_recommended_states() + State.get_rejected_states())
 
 

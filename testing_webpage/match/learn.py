@@ -327,11 +327,6 @@ def get_model():
     # The hold_out is a pristine untouched data set
     train, hold_out = split_data(data, DATA_SPLIT_RATE)
 
-    #candidate_idx = pd.Series(hold_out.index.values, index=hold_out.index.values)
-    #wfi_filter = candidate_idx.apply(
-    #    lambda idx: 'WFI' in [e.to_state.code for e in Candidate.objects.get(pk=idx).state_events.all()])
-    #wfi_test = hold_out[wfi_filter]
-
     model = get_model_with_strict_eval(train, hold_out)
 
     # train with all what you have: MAKE SURE THIS IS DONE AT THE END
