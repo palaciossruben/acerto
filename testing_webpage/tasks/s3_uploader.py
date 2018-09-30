@@ -12,7 +12,6 @@ sys.path.insert(0, '/'.join(os.getcwd().split('/')[:-1]))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
-import daemon
 import boto3
 import time
 import urllib.parse
@@ -131,9 +130,3 @@ def run():
             users_queue = upload_users(users_queue, wait_time_workers, debug)
 
         time.sleep(wait_time_db)
-
-
-if __name__ == '__main__':
-
-    with daemon.DaemonContext():
-        run()
