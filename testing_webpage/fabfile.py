@@ -126,7 +126,7 @@ def deploy():
             #    pass
 
             # collect static files, then restart nginx.
-            #run('python3 manage.py collectstatic -v0 --noinput')
+            run('python3 manage.py collectstatic -v0 --noinput')
             run('sudo /etc/init.d/nginx restart')
 
             # updates translations to spanish

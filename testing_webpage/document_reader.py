@@ -90,31 +90,6 @@ def read_text_and_save(user, folder_path, parsed_path, parsed_filename, fast=Tru
     return text
 
 
-def read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename, fast=True):
-    """Will iterate over all documents from a User and extract all text, then write and return it."""
-    text = ''
-    for d in docs:
-        if d != '.DS_Store' and d != parsed_filename:
-
-            # renames any file that has spaces for one with no spaces.
-            # because it's easier to execute shell commands.
-            d = h.rename_filename(folder_path, d)
-
-            extension = os.path.splitext(d)[1].lower()
-            text += get_text(folder_path, d, extension, fast=fast)
-
-    text = h.remove_accents_and_non_ascii(text).lower()
-
-    # TODO: Activate stemming: adding only the roots of words
-    #text = multilingual_stemmer(text)
-
-    with open(parsed_path, 'w', encoding='UTF-8') as f:
-        f.write(text)
-        h.log('new document: {}'.format(parsed_path))
-
-    return text
-
-
 def write_last_updated_at(user):
     """Up until this id all users have been inspected at least once"""
     pickle.dump(user.updated_at, open(cts.LAST_USER_UPDATED_AT, 'wb'))
@@ -141,7 +116,6 @@ def read_all(fast=True, force=False):
 
                 # Only parses an un-parsed files
                 if parsed_filename not in docs or force:
-                    #text = read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename, fast=fast)
                     text = read_text_and_save(user, folder_path, parsed_path, parsed_filename, fast=fast)
                     write_last_updated_at(user)
                     user.curriculum_text = text.replace('\x00', '')  # removes char null

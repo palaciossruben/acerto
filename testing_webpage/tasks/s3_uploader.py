@@ -95,7 +95,7 @@ def get_s3_path(bucket, s3_key):
 
 
 def get_local_path(user):
-    return os.path.join('../static', user.curriculum_url)
+    return os.path.join('../media', user.curriculum_url)
 
 
 # each worker does this job
