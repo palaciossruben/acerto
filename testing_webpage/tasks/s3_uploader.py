@@ -72,7 +72,7 @@ def add_new_users(queue, created_since):
 
     created_since = created_since if len(users) == 0 else max({u.created_at for u in users})
 
-    return queue, created_since
+    return created_since
 
 
 def get_s3_path(bucket, s3_key):
@@ -89,16 +89,13 @@ def upload_users(users_queue, wait_time_workers, debug):
     Uploads a User to s3, then waits some time, and repeats...
     :return:
     """
-    if not users_queue.empty:
-        user = users_queue.get()
-        if debug:
-            user.curriculum_s3_url = 'LE FINI'
-        else:
-            user.curriculum_s3_url = upload_resource_to_s3(user)
-        user.save()
-        time.sleep(wait_time_workers)
-
-    return users_queue
+    user = users_queue.get()
+    if debug:
+        user.curriculum_s3_url = 'LE FINI'
+    else:
+        user.curriculum_s3_url = upload_resource_to_s3(user)
+    user.save()
+    time.sleep(wait_time_workers)
 
 
 def run():
@@ -111,9 +108,9 @@ def run():
     created_since = datetime(day=9, month=4, year=1948)
 
     while True:
-        users_queue, created_since = add_new_users(users_queue, created_since)
-        while not users_queue.empty:
-            users_queue = upload_users(users_queue, wait_time_workers, debug)
+        created_since = add_new_users(users_queue, created_since)
+        while not users_queue.qsize() == 0:
+            upload_users(users_queue, wait_time_workers, debug)
 
         time.sleep(wait_time_db)
 
