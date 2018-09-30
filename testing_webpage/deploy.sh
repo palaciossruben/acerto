@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 git pull origin master;
 crontab cron.txt;
-pidof s3_uploader_pid || (cd tasks/ && bash -c "exec -a s3_uploader_pid python3 s3_uploader.py &");
 python3 manage.py collectstatic -v0 --noinput;
 sudo /etc/init.d/nginx restart;
 python3 manage.py compilemessages -l es;

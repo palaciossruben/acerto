@@ -11,7 +11,7 @@ import common
 from beta_invite import constants as cts
 from beta_invite import interview_module
 from beta_invite import test_module, new_user_module
-from beta_invite.models import User, Visitor, Education, Country, Campaign, BulletType, Gender, City, WorkArea
+from beta_invite.models import User, Visitor, Campaign, BulletType, City
 from beta_invite.util import email_sender
 from beta_invite.util import messenger_sender, common_senders
 

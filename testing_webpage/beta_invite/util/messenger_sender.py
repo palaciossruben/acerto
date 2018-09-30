@@ -8,7 +8,7 @@ from dashboard.models import Message
 def send(candidates, language_code, body_input, with_localization=True, body_is_filename=True,
          override_dict={}):
     """
-    Sends an email
+    Sends a message
     Args:
         candidates: a Candidate object or a list of Candidates. has fields 'name', 'email' and campaign
         language_code: eg: 'es' or 'en'
@@ -18,6 +18,7 @@ def send(candidates, language_code, body_input, with_localization=True, body_is_
         override_dict: Dictionary where keys are fields and values to override the keyword behavior.
     Returns: Sends message to queue
     """
+    original_body_input = body_input
 
     body_input, candidates = common_senders.process_inputs(with_localization, language_code, body_input, candidates)
 
@@ -27,4 +28,7 @@ def send(candidates, language_code, body_input, with_localization=True, body_is_
         body = common_senders.get_body(body_input,
                                        body_is_filename=body_is_filename,
                                        path=common_senders.get_message_path())
-        Message(candidate=candidate, text=body.format(**params)).save()
+        m = Message(candidate=candidate, text=body.format(**params))
+        if body_is_filename:
+            m.filename = original_body_input
+        m.save()

@@ -440,6 +440,7 @@ class Message(models.Model):
     text = models.CharField(max_length=10000, default='')
     sent = models.BooleanField(default=False)
     contact_name = models.CharField(max_length=200, default='')
+    filename = models.CharField(max_length=200, null=True)  # the filename of the message, so messages will not repeat
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

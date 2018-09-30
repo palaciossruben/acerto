@@ -125,9 +125,6 @@ def deploy():
             #except:  # shitty pdfminer
             #    pass
 
-            # run the s3 uploader on background
-            run('pidof {pid_name} || (cd tasks/ && bash -c "exec -a {pid_name} python3 s3_uploader.py &")'.format(pid_name='s3_uploader_pid'))
-
             # collect static files, then restart nginx.
             run('python3 manage.py collectstatic -v0 --noinput')
             run('sudo /etc/init.d/nginx restart')
