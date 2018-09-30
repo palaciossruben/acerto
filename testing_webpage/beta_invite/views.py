@@ -291,7 +291,7 @@ def active_campaigns(request):
     if last_evaluation:
         test_module.update_scores(last_evaluation, last_evaluation.scores.all())
 
-        # Uses ML if on a free trial and send to STC state!!! 100% automation reached?
+        # Uses ML to send to STC state!!! 100% automation reached?
         test_module.classify_evaluation_and_change_state(candidate,
                                                          use_machine_learning=True,
                                                          success_state='STC',
