@@ -22,7 +22,7 @@ from subscribe import cts
 from beta_invite.models import User
 
 
-MAX_USERS_TO_UPDATE = 500
+MAX_USERS_TO_UPDATE = 250
 
 
 def get_word_array_lower_case_and_no_accents(search_text):
