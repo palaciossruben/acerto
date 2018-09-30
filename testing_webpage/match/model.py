@@ -87,7 +87,7 @@ def save_hashers(data):
 
 def do_your_stuff():
     text_match.update()
-    model, _ = learn.get_model()
+    model = learn.get_model()
     save_model(model)
     save_other_values()
 

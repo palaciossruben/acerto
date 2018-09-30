@@ -267,19 +267,20 @@ def save_user_relevance_dictionary():
 
 
 def run():
-    sys.stdout = h.Unbuffered(open('search_engine.log', 'a'))
+    with open('search_engine.log', 'a') as f:
+        sys.stdout = h.Unbuffered(f)
 
-    h.log("STARTED RELEVANCE DICT")
-    t0 = time.time()
-    save_relevance_dictionary()
-    t1 = time.time()
-    h.log('RELEVANCE DICTIONARY, time: {}'.format(t1 - t0))
+        h.log("STARTED RELEVANCE DICT")
+        t0 = time.time()
+        save_relevance_dictionary()
+        t1 = time.time()
+        h.log('RELEVANCE DICTIONARY, time: {}'.format(t1 - t0))
 
-    h.log("STARTED USER RELEVANCE DICT")
-    t0 = time.time()
-    save_user_relevance_dictionary()
-    t1 = time.time()
-    h.log('USER RELEVANCE DICTIONARY, time: {}'.format(t1 - t0))
+        h.log("STARTED USER RELEVANCE DICT")
+        t0 = time.time()
+        save_user_relevance_dictionary()
+        t1 = time.time()
+        h.log('USER RELEVANCE DICTIONARY, time: {}'.format(t1 - t0))
 
 
 if __name__ == "__main__":

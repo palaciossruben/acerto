@@ -955,3 +955,14 @@ class RequirementBinaryQuestion(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'requirement_binary_questions'
+
+
+class CampaignState(models.Model):
+
+    name = models.CharField(max_length=40, null=True)
+    name_es = models.CharField(max_length=40, null=True)
+    code = models.CharField(max_length=4, null=True)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'campaign_states'

@@ -82,15 +82,7 @@ def get_filtered_candidates():
     phone2 = models.CharField(max_length=40, null=True)
     phone3 = models.CharField(max_length=40, null=True)
     document = models.CharField(max_length=50, null=True)
-    dream_job = models.CharField(max_length=50, null=True)
     hobbies = models.CharField(max_length=250, null=True)
-    twitter = models.CharField(max_length=250, null=True)
-    facebook = models.CharField(max_length=250, null=True)
-    instagram = models.CharField(max_length=250, null=True)
-    linkedin = models.CharField(max_length=250, null=True)
-    photo_url = models.CharField(max_length=200, default='#')
-    brochure_url = models.CharField(max_length=200, default='#')
-    politics = models.BooleanField(default=False)
 """
 
 
@@ -161,20 +153,20 @@ def get_salary_match(data):
 def add_synthetic_fields(data):
     """Calculated fields"""
 
-    data['country_match'] = data['candidate_country'] == data['campaign_country']
-    data['city_match'] = data['candidate_city'] == data['campaign_city']
-    data['profession_match'] = data['campaign_profession'] == data['profession']
-    data['education_match'] = data['campaign_education'] == data['education']
-    data['min_education'] = data['campaign_education'] <= data['education']
-    data['work_area_match'] = data['campaign_work_area'] == data['candidate_work_area']
+    data.loc[:, 'country_match'] = data['candidate_country'] == data['campaign_country']
+    data.loc[:, 'city_match'] = data['candidate_city'] == data['campaign_city']
+    data.loc[:, 'profession_match'] = data['campaign_profession'] == data['profession']
+    data.loc[:, 'education_match'] = data['campaign_education'] == data['education']
+    data.loc[:, 'min_education'] = data['campaign_education'] <= data['education']
+    data.loc[:, 'work_area_match'] = data['campaign_work_area'] == data['candidate_work_area']
     #data['salary_match'] = get_salary_match(data)
-    data['test_delta'] = data['last_test_score'] - data['last_cut_score']
+    data.loc[:, 'test_delta'] = data['last_test_score'] - data['last_cut_score']
 
     return data
 
 
 def has_url(data, field):
-    data[field] = data[field].apply(lambda x: 1 if isinstance(x, str) and x != '#' else 0)
+    data.loc[:, field] = data[field].apply(lambda x: 1 if isinstance(x, str) and x != '#' else 0)
     return data
 
 
@@ -215,14 +207,14 @@ def load_raw_data(candidates=get_filtered_candidates()):
                                             # TODO: ADD NEW FIELD HERE
                                             ))
 
-    data = pd.DataFrame(data_list, columns=get_columns())
+    data = pd.DataFrame(data_list, columns=get_columns(), index=[c.id for c in candidates])
 
     # Pre-Processing
     #data['neighborhood'] = [lower_str(common.remove_accents(n)) for n in data['neighborhood']]
     #data['languages'] = [lower_str(common.remove_accents(n)) for n in data['languages']]
     #data['dream_job'] = [lower_str(common.remove_accents(n)) for n in data['dream_job']]
     data = has_url(data, 'has_photo')
-    data['has_profile'] = data['has_profile'].apply(lambda x: 1 if isinstance(x, str) and len(x) > 50 else 0)  # more tan 50 chars
+    data.loc[:, 'has_profile'] = data['has_profile'].apply(lambda x: 1 if isinstance(x, str) and len(x) > 50 else 0)  # more tan 50 chars
     data = has_url(data, 'has_twitter')
     data = has_url(data, 'has_facebook')
     data = has_url(data, 'has_instagram')
@@ -230,14 +222,14 @@ def load_raw_data(candidates=get_filtered_candidates()):
     data = has_url(data, 'has_brochure_url')
 
     # similar accuracy with high and low complexity:
-    data['last_test_score'] = [c.get_last_score() for c in candidates]
-    data['last_cut_score'] = [c.get_last_cut_score() for c in candidates]
+    data.loc[:, 'last_test_score'] = [c.get_last_score() for c in candidates]
+    data.loc[:, 'last_cut_score'] = [c.get_last_cut_score() for c in candidates]
 
-    data['cognitive_score'] = [c.get_last_cognitive_score() for c in candidates]
-    data['technical_score'] = [c.get_last_technical_score() for c in candidates]
-    data['requirements_score'] = [c.get_last_requirements_score() for c in candidates]
-    data['motivation_score'] = [c.get_last_motivation_score() for c in candidates]
-    data['cultural_fit_score'] = [c.get_last_cultural_fit_score() for c in candidates]
+    data.loc[:, 'cognitive_score'] = [c.get_last_cognitive_score() for c in candidates]
+    data.loc[:, 'technical_score'] = [c.get_last_technical_score() for c in candidates]
+    data.loc[:, 'requirements_score'] = [c.get_last_requirements_score() for c in candidates]
+    data.loc[:, 'motivation_score'] = [c.get_last_motivation_score() for c in candidates]
+    data.loc[:, 'cultural_fit_score'] = [c.get_last_cultural_fit_score() for c in candidates]
 
     # Dirty code: INDIVIDUAL TESTS
     # TODO: currently not giving any significant improvement
@@ -270,21 +262,7 @@ def load_raw_data(candidates=get_filtered_candidates()):
     return data
 
 
-def filter_fields(data, selected_fields):
-    """
-    If selected_fields is not None then do the selection, otherwise do nothing
-    :param data:
-    :param selected_fields:
-    :return:
-    """
-    if selected_fields:
-        return data[selected_fields]
-    else:
-        return data
-
-
-def load_data(candidates=get_filtered_candidates(),
-              hashing_info=get_hashing_info(), selected_fields=None):
+def load_data(candidates=get_filtered_candidates(), hashing_info=get_hashing_info()):
     """
     Loads and prepares all data.
     :return: data DataFrame with features and target + candidates.
@@ -293,8 +271,6 @@ def load_data(candidates=get_filtered_candidates(),
     data = fill_missing_values(data)
     data = add_synthetic_fields(data)
     #data = hash_columns(data, hashing_info)
-    data = filter_fields(data, selected_fields)
-    #data = scale(data)
 
     return data, candidates
 
@@ -378,7 +354,7 @@ def fill_missing_values(data, defaults=None):
         defaults = calculate_defaults(data)
 
     for column in list(data):
-        data[column].fillna(defaults[column], inplace=True)
+        data.loc[:, column] = data[column].fillna(defaults[column])
 
     return data
 
@@ -470,12 +446,11 @@ def scale_data_from_saved_scaler(data, fields=None):
     return scale(data, scaler=scaler)
 
 
-def predict_property(candidates, model, selected_fields=None):
+def predict_property(candidates, model):
     """
     Generic method to predict any property the model (second input) can do.
     :param candidates: Can be either a list of candidates or a single candidate.
     :param model: Any model implementing the sklearn interface.
-    :param selected_fields: optional array of fields to select from the data.
     :return: None
     """
 
@@ -489,7 +464,6 @@ def predict_property(candidates, model, selected_fields=None):
     data = fill_missing_values(data, defaults=pickle_handler.load_defaults())
     data = add_synthetic_fields(data)
     #data = add_hash_fields_from_saved_hashes(data)  # TODO: removed due to a bug on sklearn hash library, small vectors give different values than big ones
-    data = filter_fields(data, selected_fields)
-    #data = scale_data_from_saved_scaler(data, fields=selected_fields)
+    #data = scale_data_from_saved_scaler(data)
 
     return model.predict(data), candidates

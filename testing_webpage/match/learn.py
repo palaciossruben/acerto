@@ -5,89 +5,102 @@ import statistics
 import numpy as np
 import pandas as pd
 import re
-from sklearn.metrics import accuracy_score, confusion_matrix
+from sklearn.metrics import accuracy_score
 from imblearn.over_sampling import ADASYN
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV, cross_val_score
+from sklearn.model_selection import cross_val_predict
+from sklearn.metrics import confusion_matrix
+from sklearn.utils import resample
 
+from dashboard.models import Candidate
 from match import common_learning
 
 # make reproducible results
 np.random.seed(seed=0)
 
 
-PARAMS = {'n_estimators': [50, 100, 200], 'max_depth': [15, 20, 30]}
-CLASS_WEIGHTS = {0: 1, 1: 100}
+PARAMS = {'n_estimators': [10, 50, 200], 'max_depth': [5, 15, 30]}
+CLASS_WEIGHTS = {0: 1, 1: 1}
+TARGET = 'target'
+DATA_SPLIT_RATE = 0.8
 
 
-def balance(data):
+def synthetic_balance(data):
     """
     Balances samples with ADASYN algorithm:
     http://sci2s.ugr.es/keel/pdf/algorithm/congreso/2008-He-ieee.pdf
     :param data: the dataframe
-    :return: train_features, train_target
+    :return: balanced dataframe
     """
 
-    print('unbalanced positive weight: ' + str(np.mean(data.target)))
+    target = data[TARGET]
+    features = data.drop(TARGET, axis=1)
+
+    print('unbalanced positive weight: ' + str(np.mean(target)))
 
     # Apply the random over-sampling
     ada = ADASYN()
     try:
-        data.features, data.target = ada.fit_sample(data.features, data.target)
+        features, target = ada.fit_sample(features, target)
     except ValueError:  # ValueError: No samples will be generated with the provided ratio settings.
         pass
 
-    print('balanced positive weight: ' + str(np.mean(data.target)))
+    print('balanced positive weight: ' + str(np.mean(target)))
 
+    columns = list(data)
+    columns.remove(TARGET)
+    data = pd.DataFrame(features, columns=columns)
+    data.loc[:, TARGET] = target
     return data
 
 
-def prepare_train_test(data):
+def resample_balance(data):
     """
-    From splitting to removing Nan, routine tasks.
-    :param data: dataframe
-    :return: train and test tuple
+    Basic Over sampling to balance classes
+    :param data:
+    :return:
+    """
+    # There will always be more rejected than recommended
+    majority = data[data[TARGET] == 0]
+    minority = data[data[TARGET] == 1]
+
+    # Up sample minority class
+    minority_up_sampled = resample(minority,
+                                   replace=True,  # sample with replacement
+                                   n_samples=majority.shape[0],  # to match majority class
+                                   random_state=123)
+
+    return pd.concat([majority, minority_up_sampled])
+
+
+def split_data(data, train_percent):
+    """
+    CAn work with or without candidates, either has 2 or 4 outputs
+    :param data:
+    :param train_percent:
+    :return:
     """
 
-    train = DataPair()
-    test = DataPair()
-    train.features, train.target, test.features, test.target = get_train_test(data, 0.7)
-
-    return balance(train), balance(test)
-
-
-def get_train_test(data, train_percent):
-
-    msk = np.random.rand(len(data)) < train_percent
-    train = data[msk]
-    test = data[~msk]
-    return train.drop('target', axis=1), train['target'], test.drop('target', axis=1), test['target']
+    data = data.copy()  # copies to avoid the annoying copy dataframe warning
+    msk = np.random.rand(data.shape[0]) < train_percent
+    return data[msk], data[~msk]
 
 
 def my_accuracy(a, b):
     return statistics.mean([int(e1 == e2) for e1, e2 in zip(a, b)])
 
 
-def load_target(data, candidates):
+def load_target(data):
     """
     :param data: the X
-    :param candidates: list of candidates
     :return:
     """
 
-    data['target'] = [common_learning.get_target_for_candidate(c) for c in candidates]
-    data = data[[not pd.isnull(t) for t in data['target']]]
+    data.loc[:, TARGET] = [common_learning.get_target_for_candidate(Candidate.objects.get(pk=candidate_idx))
+                           for candidate_idx in data.index]
+    data = data[[not pd.isnull(t) for t in data[TARGET]]]
 
-    return data
-
-
-def load_data_for_learning():
-    """
-    Loads and prepares all data.
-    :return: data DataFrame with features and target.
-    """
-    data, candidates = common_learning.load_data()
-    data = load_target(data, candidates)
     return data
 
 
@@ -138,10 +151,16 @@ def learn_model(train):
                        verbose=1)
     clf.fit(train.features, train.target)
 
+    y_prediction = cross_val_predict(clf, train.features, train.target, cv=3)
+
     cv_accuracy = get_cv_scores(clf, train)
 
+    print()
+    print()
+    print('ON TRAIN DATA:')
+    print_confusion_matrix(train.target, y_prediction)
     print('cv accuracy is: {}'.format(cv_accuracy))
-    print('cv mean accuracy is: {}'.format(np.mean(cv_accuracy)))
+    print('cv mean accuracy is: {}%'.format(np.round(np.mean(cv_accuracy)*100, 2)))
 
     print('best params are:')
     print('max_depth {}'.format(clf.best_params_['max_depth']))
@@ -162,16 +181,47 @@ def target_mode(target):
         return 1
 
 
-def print_confusion_matrix(test, test_prediction):
+def get_values(my_confusion_matrix):
+
+    my_confusion_matrix = pd.DataFrame(my_confusion_matrix)
+
+    FP = my_confusion_matrix.sum(axis=0) - np.diag(my_confusion_matrix)  # False positives
+    FN = my_confusion_matrix.sum(axis=1) - np.diag(my_confusion_matrix)  # False negatives
+    TP = np.diag(my_confusion_matrix)  # True positives
+    TN = my_confusion_matrix.values.sum() - (FP + FN + TP)  # True negatives
+
+    return FP, FN, TP, TN
+
+
+def get_false_positive_rate(FP, TN):
+    """
+    Takes the [1] element as we are interested in the positive class, only
+    :param FN: False Negatives, Series
+    :param TP: True Positive, Series
+    :return:
+    """
+    return round(FP / (FP + TN) * 100, 2)[1]
+
+
+def get_false_negative_rate(FN, TP):
+    """
+    Takes the [1] element as we are interested in the positive class, only
+    :param FN: False Negatives, Series
+    :param TP: True Positive, Series
+    :return:
+    """
+    return round(FN / (TP + FN) * 100, 2)[1]
+
+
+def print_confusion_matrix(y_true, y_prediction):
 
     print('Confusion Matrix:')
-    my_confusion_matrix = confusion_matrix(test.target, test_prediction)
-    print(my_confusion_matrix)
+    cf = confusion_matrix(y_true, y_prediction)
+    print(cf)
 
-    total = sum(my_confusion_matrix[0]) + sum(my_confusion_matrix[1])
-
-    print('false positives: {}%'.format(round(my_confusion_matrix[0][1]/total, 2) * 100))
-    print('should minimize false negatives: {}%'.format(round(my_confusion_matrix[1][0]/total, 2)*100))
+    FP, FN, TP, TN = get_values(cf)
+    print('False positive rate: {}'.format(get_false_positive_rate(FP, TN)))
+    print('False negative rate: {}'.format(get_false_negative_rate(FN, TP)))
 
 
 def percent_format(a_number):
@@ -190,6 +240,9 @@ def get_cv_scores(model, data):
 
 
 def eval_model(model, train, test):
+    print()
+    print()
+    print('ON HOLD OUT DATA:')
 
     train_prediction = model.predict(train.features)
     test_prediction = model.predict(test.features)
@@ -199,7 +252,7 @@ def eval_model(model, train, test):
 
     baseline_test_metric = accuracy_score([target_mode(test.target) for _ in test.target], test.target)
 
-    print_confusion_matrix(test, test_prediction)
+    print_confusion_matrix(test.target, test_prediction)
 
     result = Result(train_metric, test_metric, baseline_test_metric)
     result.print()
@@ -227,18 +280,62 @@ def print_feature_importance(model, data):
     print(importance_tuples)
 
 
+def get_balanced_data_pair(data):
+    #data = resample_balance(data)
+    data = synthetic_balance(data)
+
+    data_pair = DataPair()
+    data_pair.features = data.drop(TARGET, axis=1)
+    data_pair.target = data[TARGET]
+    return data_pair
+
+
+def process_raw_data(data, defaults):
+    data = common_learning.fill_missing_values(data, defaults=defaults)
+    data = common_learning.add_synthetic_fields(data)
+    data = load_target(data)
+    return get_balanced_data_pair(data)
+
+
+def get_model_with_strict_eval(train, hold_out):
+
+    print('size of train after split: {}'.format(train.shape[0]))
+    print('size of hold out split: {}'.format(hold_out.shape[0]))
+
+    defaults = common_learning.calculate_defaults(train)
+
+    train = process_raw_data(train, defaults)
+    hold_out = process_raw_data(hold_out, defaults)
+
+    model = learn_model(train)
+    print_feature_importance(model, train.features)
+
+    eval_model(model, train=train, test=hold_out)
+
+    return model
+
+
 def get_model():
     """
     Calculates the match of each candidate, based on a learning algorithm.
     :return: model.
     """
-    data = load_data_for_learning()
+    candidates = common_learning.get_filtered_candidates()
+    data = common_learning.load_raw_data(candidates)
+    print('size of raw data: {}'.format(data.shape[0]))
 
-    train, test = prepare_train_test(data)
+    # The hold_out is a pristine untouched data set
+    train, hold_out = split_data(data, DATA_SPLIT_RATE)
 
-    model = learn_model(train)
+    #candidate_idx = pd.Series(hold_out.index.values, index=hold_out.index.values)
+    #wfi_filter = candidate_idx.apply(
+    #    lambda idx: 'WFI' in [e.to_state.code for e in Candidate.objects.get(pk=idx).state_events.all()])
+    #wfi_test = hold_out[wfi_filter]
 
-    # Used only for data exploration.
-    print_feature_importance(model, data)
+    model = get_model_with_strict_eval(train, hold_out)
 
-    return model, eval_model(model, train, test)
+    # train with all what you have: MAKE SURE THIS IS DONE AT THE END
+    defaults = common_learning.calculate_defaults(data)
+    data = process_raw_data(data, defaults)
+    model.fit(data.features, data.target)
+    return model
