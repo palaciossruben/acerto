@@ -11,6 +11,7 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
+import ntpath
 import pickle
 from nltk.stem.snowball import SnowballStemmer
 import nltk
@@ -57,6 +58,36 @@ def multilingual_stemmer(text):
     # TODO add new lang here
 
     return ' '.join([spa_stemmer.stem(eng_stemmer.stem(w)) for w in nltk.word_tokenize(text)])
+
+
+def path_leaf(path):
+    head, tail = ntpath.split(path)
+    return tail or ntpath.basename(head)
+
+
+def read_text_and_save(user, folder_path, parsed_path, parsed_filename, fast=True):
+    """Will iterate over all documents from a User and extract all text, then write and return it."""
+    text = ''
+    filename = path_leaf(user.curriculum_url)
+    if filename != parsed_filename:
+
+        # renames any file that has spaces for one with no spaces.
+        # because it's easier to execute shell commands.
+        filename = h.rename_filename(folder_path, filename)
+
+        extension = os.path.splitext(filename)[1].lower()
+        text += get_text(folder_path, filename, extension, fast=fast)
+
+    text = h.remove_accents_and_non_ascii(text).lower()
+
+    # TODO: Activate stemming: adding only the roots of words
+    #text = multilingual_stemmer(text)
+
+    with open(parsed_path, 'w', encoding='UTF-8') as f:
+        f.write(text)
+        h.log('new document: {}'.format(parsed_path))
+
+    return text
 
 
 def read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename, fast=True):
@@ -110,7 +141,8 @@ def read_all(fast=True, force=False):
 
                 # Only parses an un-parsed files
                 if parsed_filename not in docs or force:
-                    text = read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename, fast=fast)
+                    #text = read_all_text_and_save(docs, folder_path, parsed_path, parsed_filename, fast=fast)
+                    text = read_text_and_save(user, folder_path, parsed_path, parsed_filename, fast=fast)
                     write_last_updated_at(user)
                     user.curriculum_text = text.replace('\x00', '')  # removes char null
                     user.save()
