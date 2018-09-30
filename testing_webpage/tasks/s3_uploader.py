@@ -117,7 +117,7 @@ def upload_all():
 
 
 def run():
-    with open('tasks/s3_daemon.log', 'a') as f:
+    with open('s3_daemon.log', 'a') as f:
         sys.stdout = h.Unbuffered(f)
         upload_all()
 
