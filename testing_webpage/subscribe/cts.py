@@ -1,6 +1,6 @@
 import os
 
-RESUMES_PATH = 'media/resumes'
+RESUMES_PATH = 'static/resumes'
 ACCENT_N_PATTERN = '(?:n|ﬁ|ñ)'
 WORD_USER_PATH = os.path.join('subscribe', 'word_user_dictionary.p')
 SEARCH_ENGINE_DATE = os.path.join('subscribe', 'search_engine_date.p')

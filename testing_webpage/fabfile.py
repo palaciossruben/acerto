@@ -20,11 +20,10 @@ def list_dir(directory=None):
     return files
 
 
-def sync(sync_media=False, db_update=True, copy_db_to_local=True):
+def sync(db_update=True, copy_db_to_local=True):
     """
-    Synchronizes local machine with last backup from DB and media files
+    Synchronizes local machine with last backup from DB
     Args:
-        sync_media: Boolean indicating if the sync will be done only for the DB or the media files as well.
         db_update: updates the db by running the pgdump command. needs copy_db_to_local=True for it to work
         copy_db_to_local: copies de pg_dump file to local machine.
         but will not execute
@@ -41,10 +40,6 @@ def sync(sync_media=False, db_update=True, copy_db_to_local=True):
     # BACKUP PATHS:
     backup_remote = '/home/ubuntu/db_backup.sql'
     local_backup = '/Users/juanpabloisaza/Desktop/acerto/db_backup.sql'
-
-    # MEDIA PATHS:
-    media_remote = '/home/ubuntu/acerto/testing_webpage/media/resumes'
-    media_local = '/Users/juanpabloisaza/Desktop/masteringmymind/acerto/testing_webpage/media'
 
     # PSQL
     abstract_local_psql = 'psql -U {user} -p 5432 -h localhost {db_option}'
@@ -99,18 +94,9 @@ def sync(sync_media=False, db_update=True, copy_db_to_local=True):
             else:
                 raise Exception("WTF are you trying to do!!! Be careful not to erase production.")
 
-    if sync_media:
-
-        # Syncs media folder. Only rewrites new or updated files. Note the syntax to consider the ssh key.
-        media_command = "rsync -au -i -e \"ssh -i production_key.pem\" ubuntu@ec2-52-38-133-146.us-west-2.compute.amazonaws.com:/home/ubuntu/acerto/testing_webpage/media/ /Users/juanpabloisaza/Desktop/masteringmymind/acerto/testing_webpage/media/"
-
-        print('MEDIA COMMAND: ' + str(media_command))
-        media_out = subprocess.check_output(media_command, cwd=local_cwd, shell=True)
-        print('MEDIA_COMMAND output: ' + str(media_out))
-
 
 def deploy():
-    """Includes a sync_local with sync_media=False"""
+    """Deploy to cloud"""
 
     local_cwd = '/Users/juanpabloisaza/Desktop/masteringmymind/acerto/API/testing_webpage'
 
@@ -118,7 +104,7 @@ def deploy():
     subprocess.check_output("git push origin master", cwd=local_cwd, shell=True)
 
     # Then overwrites the backup file and copies it to local
-    sync(sync_media=False, db_update=False, copy_db_to_local=False)
+    sync(db_update=False, copy_db_to_local=False)
 
     with cd(WORKING_PATH):
         with prefix(". /usr/local/bin/virtualenvwrapper.sh; workon myenv"):
