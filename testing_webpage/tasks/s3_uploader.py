@@ -15,7 +15,6 @@ application = get_wsgi_application()
 import daemon
 import boto3
 import time
-import pickle
 import urllib.parse
 from botocore.exceptions import EndpointConnectionError
 from threading import Thread
@@ -28,13 +27,9 @@ from queue import Queue
 NUM_WORKERS = 1
 WAITING_TIME_WORKERS = 60  # seconds
 WAITING_TIME_DB = 600  # 10 minutes
-users_queue = Queue()
+#users_queue = Queue()
+NUM_PROCESS = 5
 DEBUG = False
-
-
-def load_object(filename):
-    with open(filename, 'rb') as f:
-        return pickle.load(f, "rb")
 
 
 # the actual upload
@@ -100,37 +95,54 @@ def get_local_path(user):
 
 
 # each worker does this job
-def upload_users_cv():
+def upload_users(users_queue):
     """
     Uploads a User to s3, then waits some time, and repeats...
     :return:
     """
 
+    user = users_queue.get()
+    if DEBUG:
+        user.curriculum_s3_url = 'LE FINI'
+    else:
+        user.curriculum_s3_url = upload_resource_to_s3(user)
+    user.save()
+    time.sleep(WAITING_TIME_WORKERS)
+
+    return users_queue
+
+
+# each worker does this job
+def upload_users_while_loop(users_queue):
+    """
+    Uploads a User to s3, then waits some time, and repeats...
+    :return:
+    """
     while True:
-        user = users_queue.get()
-        if DEBUG:
-            user.curriculum_s3_url = 'LE FINI'
-        else:
-            user.curriculum_s3_url = upload_resource_to_s3(user)
-        user.save()
-        time.sleep(WAITING_TIME_WORKERS)
+        upload_users(users_queue)
 
 
 def init_workers(num_workers=NUM_WORKERS):
     for _ in range(num_workers):
-        t = Thread(target=upload_users_cv)
+        t = Thread(target=upload_users_while_loop)
         t.daemon = True
         t.start()
 
 
 def run():
-    init_workers()
+    users_queue = Queue()
+
+    #init_workers()
     created_since = datetime(day=9, month=4, year=1948)
 
-    while True:
-        if users_queue.empty:
-            users_queue, created_since = add_new_users(users_queue, created_since)
-        time.sleep(WAITING_TIME_DB)
+    #while True:
+    if users_queue.empty:
+        users_queue, created_since = add_new_users(users_queue, created_since)
+
+    for _ in range(NUM_PROCESS):
+        users_queue = upload_users(users_queue)
+
+        #time.sleep(WAITING_TIME_DB)
 
 
 if __name__ == '__main__':
