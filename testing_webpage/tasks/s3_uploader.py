@@ -90,43 +90,34 @@ def upload_users(users_queue, wait_time_workers, debug):
     Uploads a User to s3, then waits some time, and repeats...
     :return:
     """
-
-    user = users_queue.get()
-    if debug:
-        user.curriculum_s3_url = 'LE FINI'
-    else:
-        user.curriculum_s3_url = upload_resource_to_s3(user)
-    user.save()
-    time.sleep(wait_time_workers)
+    if not users_queue.empty:
+        user = users_queue.get()
+        if debug:
+            user.curriculum_s3_url = 'LE FINI'
+        else:
+            user.curriculum_s3_url = upload_resource_to_s3(user)
+        user.save()
+        time.sleep(wait_time_workers)
 
     return users_queue
-
-
-# each worker does this job
-def upload_users_while_loop(users_queue, wait_time_workers, debug):
-    """
-    Uploads a User to s3, then waits some time, and repeats...
-    :return:
-    """
-    while True:
-        upload_users(users_queue, wait_time_workers, debug)
 
 
 def run():
 
     wait_time_workers = 10  # seconds
     wait_time_db = 60  # 10 minutes
-    num_process = 1
     debug = False
     users_queue = Queue()
 
     created_since = datetime(day=9, month=4, year=1948)
 
     while True:
-        if users_queue.empty:
-            users_queue, created_since = add_new_users(users_queue, created_since)
-
-        for _ in range(num_process):
+        users_queue, created_since = add_new_users(users_queue, created_since)
+        while not users_queue.empty:
             users_queue = upload_users(users_queue, wait_time_workers, debug)
 
         time.sleep(wait_time_db)
+
+
+if __name__ == '__main__':
+    run()
