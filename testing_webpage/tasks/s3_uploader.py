@@ -25,10 +25,10 @@ from queue import Queue
 
 
 NUM_WORKERS = 1
-WAITING_TIME_WORKERS = 60  # seconds
-WAITING_TIME_DB = 600  # 10 minutes
+WAITING_TIME_WORKERS = 10  # seconds
+WAITING_TIME_DB = 60  # 10 minutes
 #users_queue = Queue()
-NUM_PROCESS = 5
+NUM_PROCESS = 1
 DEBUG = False
 
 
