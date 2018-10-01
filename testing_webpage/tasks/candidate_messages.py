@@ -20,6 +20,9 @@ from beta_invite.util import messenger_sender
 
 def run():
 
+    # TODO: THIS IS INACTIVE, needs the cron job:
+    # 0 * * * * cd / home / ubuntu / acerto / testing_webpage / tasks & & python3 candidate_messages.py
+
     message_filename = 'candidate_backlog'
 
     # TODO: add English
