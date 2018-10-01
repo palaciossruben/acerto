@@ -171,6 +171,27 @@
             <option value="1">True</option>
             <option value="0">False</option>
         </select>
+
+        <br>
+        <br>
+
+        <p>STATE</p>
+        <select name="state_id" required>
+
+            <!--Update-->
+            {% if campaign %}
+                {% with default=campaign.state %}
+                    <option value="{{ default.pk }}">{{ default.name }}</option>
+                {% endwith %}
+            {% else %} <!-- New, starts in inactive, ie id=1 -->
+                <option value="1">Inactive</option>
+            {% endif %}
+
+            {% for state in campaign_states %}
+                <option value="{{ state.id }}">{{ state.name }}</option>
+            {% endfor %}
+        </select>
+
         <br>
         <br>
         <p>Calendly Url</p>

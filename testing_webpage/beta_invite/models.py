@@ -589,6 +589,17 @@ class JobFunctions(models.Model):
         return '{0}'.format(self.name)
 
 
+class CampaignState(models.Model):
+
+    name = models.CharField(max_length=40, null=True)
+    name_es = models.CharField(max_length=40, null=True)
+    code = models.CharField(max_length=4, null=True)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'campaign_states'
+
+
 class Campaign(models.Model):
 
     name = models.CharField(max_length=200)
@@ -606,6 +617,7 @@ class Campaign(models.Model):
     interviews = models.ManyToManyField(Interview)
     calendly = models.BooleanField(default=True)
     active = models.BooleanField(default=False)
+    state = models.ForeignKey(CampaignState, default=1)  # id of Inactive State, this is NOT NICE
     calendly_url = models.CharField(max_length=200, default=cts.INTERVIEW_CALENDLY)
     removed = models.BooleanField(default=False)
     free_trial = models.BooleanField(default=False)
@@ -955,14 +967,3 @@ class RequirementBinaryQuestion(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'requirement_binary_questions'
-
-
-class CampaignState(models.Model):
-
-    name = models.CharField(max_length=40, null=True)
-    name_es = models.CharField(max_length=40, null=True)
-    code = models.CharField(max_length=4, null=True)
-
-    # adds custom table name
-    class Meta:
-        db_table = 'campaign_states'

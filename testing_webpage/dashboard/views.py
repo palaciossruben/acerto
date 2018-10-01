@@ -8,7 +8,7 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
-from beta_invite.models import Campaign, Test, TestType, BulletType, Interview, Survey, Bullet, QuestionType, Question, Answer
+from beta_invite.models import Campaign, Test, TestType, BulletType, Interview, Survey, Bullet, QuestionType, Question, Answer, CampaignState
 from dashboard.models import Candidate, Message, Screening
 from dashboard import constants as cts
 from beta_invite.util import email_sender
@@ -208,6 +208,7 @@ def edit_campaign(request, pk):
                                                       'campaign': campaign,
                                                       'action_url': '/dashboard/campaign/update_basic_properties',
                                                       'title': 'Update Campaign',
+                                                      'campaign_states': CampaignState.objects.all(),
                                                       })
 
 
