@@ -620,7 +620,7 @@ class Campaign(models.Model):
     state = models.ForeignKey(CampaignState, default=1)  # id of Inactive State, this is NOT NICE
     calendly_url = models.CharField(max_length=200, default=cts.INTERVIEW_CALENDLY)
     removed = models.BooleanField(default=False)
-    free_trial = models.BooleanField(default=False)
+    free_trial = models.BooleanField(default=True)
     seniority = models.ForeignKey(Seniority, null=True)
     job_function = models.ForeignKey(JobFunctions, null=True)
     has_email = models.BooleanField(default=True)

@@ -391,6 +391,21 @@ def start(request):
                                                  'tests': Test.objects.filter(public=True)})
 
 
+def send_new_campaign_notification(business_user, language_code, campaign):
+
+    body_filename = 'business_new_campaign_notification_email_body'
+
+    try:
+
+        email_sender.send_internal(contact=business_user,
+                                   language_code=language_code,
+                                   body_filename=body_filename,
+                                   subject='Un usuario ya registrado ha creado una nueva campaña',
+                                   campaign=campaign)
+    except (smtplib.SMTPRecipientsRefused, smtplib.SMTPAuthenticationError, UnicodeEncodeError) as e:
+        pass
+
+
 # This for create campaign when the user is logged
 @login_required
 def create_post(request):
@@ -404,6 +419,7 @@ def create_post(request):
     campaign = campaign_module.create_campaign(request)
     business_user.campaigns.add(campaign)
     business_user.save()
+    send_new_campaign_notification(business_user, request.LANGUAGE_CODE, campaign)
     PublicPost.add_to_public_post_queue(campaign)
 
     return redirect('resumen/{campaign_pk}'.format(campaign_pk=campaign.pk))

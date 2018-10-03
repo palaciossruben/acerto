@@ -99,7 +99,7 @@ mixpanel.init("d60ac5ae289f60c7f824d49a4d15be30");</script>
 					  <tr>
 						<th>{% trans "Name" %}</th>
 						<th>id</th>
-						<th>{% trans "Email" %}</th>
+						<th>Ciudad</th>
 						<th>{% trans "Education" %}</th>
 						<th>{% trans "Experience" %}</th>
 						  <!--<th>{% trans "Search Rating" %}</th>-->
@@ -110,7 +110,7 @@ mixpanel.init("d60ac5ae289f60c7f824d49a4d15be30");</script>
 						<tr style="text-align:left; cursor:pointer;" onclick="window.document.location='{{ user.get_curriculum_url }}';">
 							<td>{{ user.name }}</td>
                             <td>{{ user.id }}</td>
-							<td>{{ user.email }}</td>
+                            <td>{{ user.city.name }}</td>
 							<td>{{ user.education.name }}</td>
 							<td>{{ user.experience }} {% trans "years" %}</td>
 						</tr>
