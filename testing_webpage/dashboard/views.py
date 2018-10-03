@@ -20,7 +20,8 @@ from business.models import BusinessUser
 
 CANDIDATE_FORECAST_LIMIT = 20
 
-
+'''
+                     DON'T DELETE, THIS WILL BE USEFUL FOR AUTOMATIC STATE CHANGES OR SORTING
 def sort_users_by_campaign_count(business_users):
     business_users = [(b, b.campaigns.filter(removed=False).count()) for b in business_users]
     business_users.sort(key=lambda x: x[1], reverse=True)
@@ -34,8 +35,7 @@ def get_business_users_order_by_active_campaigns():
     old_business_users = BusinessUser.objects.filter(created_at__lt=weeks_ago).all()
 
     return sort_users_by_campaign_count(new_business_users) + sort_users_by_campaign_count(old_business_users)
-
-# 'business_users': get_business_users_order_by_active_campaigns(),
+'''
 
 
 @login_required
