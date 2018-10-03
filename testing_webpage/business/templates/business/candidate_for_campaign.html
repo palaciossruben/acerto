@@ -1,11 +1,11 @@
 {% load static %}
 {% load i18n %}
 {% load app_filters %}
-{% if campaign.active %}
+{% if campaign.state.name != 'inactive' %}
     <a href="/seleccion_de_personal/perfil_del_candidato/{{ candidate.id }}">
 {% else %}
     <a href="#" onclick="return false" class="tooltip">
-        {% if not campaign.active %}
+        {% if campaign.state.name == 'inactive' %}
                 <span class="tooltiptext">Para poder ver la información adicional del candidato, la campaña debe estar activa</span>
             {% endif %}
 {% endif %}

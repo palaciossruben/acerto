@@ -1,0 +1,27 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="row">
+    <h1>PRUEBAS</h1>
+    <p><a href="test/new">Crear nuevo test</a></p>
+    <ul>
+        {% for test in tests %}
+        <li>{{ test.name }}
+            <a href="test/{{ test.id }}">Edit</a>
+        </li>
+        <br>
+        <form action="test/duplicate/{{ test.id }}" method="post">
+            {% csrf_token %}
+            <input type="button" class="btn btn-success" value="Duplicate!" onclick="this.form.submit();">
+        </form>
+        {% endfor %}
+    </ul>
+</div>
+<div class="row">
+    <a href="edit_intro_video">Edit interview intro video</a>
+</div>
+</body>
+</html>

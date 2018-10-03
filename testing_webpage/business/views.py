@@ -25,7 +25,7 @@ from beta_invite.util import email_sender
 from business import constants as cts
 from beta_invite.models import User, BulletType, WorkArea, EmailType, Campaign, Test
 from business.models import Plan, Contact, Search, KeyWord
-from business.models import BusinessUser
+from business.models import BusinessUser, Company
 from business.custom_user_creation_form import CustomUserCreationForm
 from dashboard import campaign_module
 from dashboard.models import Candidate, BusinessState, Comment
@@ -192,8 +192,12 @@ def first_sign_in(signup_form, campaign, request):
     auth_user = authenticate(username=username,
                              password=password)
 
+    company_name = Company(name=request.POST.get('company'))
+    company_name.save()
+
     # New BusinessUser pointing to the AuthUser
     business_user = business.models.BusinessUser(name=request.POST.get('name'),
+                                                 company=company_name,
                                                  email=request.POST.get('username'),
                                                  phone=request.POST.get('phone'),
                                                  ip=get_ip(request),
@@ -287,7 +291,7 @@ def home(request):
     login_form = AuthenticationForm(data=request.POST)
 
     # TODO: generalize to set of blocked emails.
-    if login_form.is_valid() and request.POST.get('username') != 'g.comercialrmi2@redmilatam.com':  # Block access
+    if login_form.is_valid():
 
         business_user = simple_login_and_business_user(login_form, request)
         if request.POST.get('username') == 'admin@peaku.co':
@@ -572,7 +576,7 @@ def online_demo(request):
 
     campaign_id = 156
     campaign = Campaign.objects.get(pk=campaign_id)
-    business_user = common.get_business_user_with_campaign(campaign)
+    business_user = common.get_business_user_with_campaign(campaign, 'object')
 
     # removes login decorator
     s = summary.__wrapped__

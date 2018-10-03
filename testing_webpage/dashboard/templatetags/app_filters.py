@@ -3,6 +3,7 @@ from django import template
 from business.models import BusinessUser
 from django.core.serializers import serialize
 from django.db.models.query import QuerySet
+import common
 
 register = template.Library()
 
@@ -48,3 +49,13 @@ def int_rounding(score):
         return round(score)
     else:
         return 0
+
+
+@register.filter
+def get_business_user_name_with_campaign(campaign):
+    return common.get_business_user_with_campaign(campaign, 'name')
+
+
+@register.filter
+def get_business_user_company_with_campaign(campaign):
+    return common.get_business_user_with_campaign(campaign, 'company')

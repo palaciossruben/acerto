@@ -1,59 +1,117 @@
-{% load app_filters %}
-{% load i18n %}
+{% extends 'base.html'%}
 {% load static %}
+{% load i18n %}
+{% load app_filters %}
+{% load compress %}
+{% block title %}DASHBOARD{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'dashboard/css/index.css' %}">
+{% endblock %}
+{% block content %}
+<div class="row">
+    <form action="{% url 'business:results' %}">
+        <input style="width:500px;" id="search-input" type="text" name="search_text" placeholder="{% trans 'Search positions (eg android developer)' %}">
+    </form>
+</div>
+<div class="row">
+    <h2>Stats for nerds</h2>
+    <p><a href="{% url 'dashboard:candidates_stats' %}" target="_blank">Total candidates per month</a></p>
+    <p><a href="{% url 'dashboard:campaign_stats' %}" target="_blank">Total campaigns per month</a></p>
+    <p><a href="{% url 'dashboard:number_of_forecasts' %}" target="_blank">Total Forecasts</a></p>
+    <p><a href="{% url 'dashboard:positive_forecasts' %}" target="_blank">Positive Forecasts</a></p>
+    <p><a href="{% url 'dashboard:negative_forecasts' %}" target="_blank">Negative Forecasts</a></p>
 
-<form action="{% url 'business:results' %}">
-    <input style="width:500px;" id="search-input" type="text" name="search_text" placeholder="{% trans 'Search positions (eg android developer)' %}">
-</form>
+    <p class="tests"><a href="{% url 'dashboard:tests_list' %}" target="_blank">Ver Pruebas</a></p>
+    <h2 style="text-align:center; font-size:60px;">CAMPAÑAS</h2>
+    <p><a href="campaign/new">Nueva campaña</a></p>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <ul>
+            <h2 class="center">PAGAS</h2>
+            {% for campaign in campaigns %}
+            {% if not campaign.free_trial %}
+            <div class="campaign-div">
+                <div class="row">
+                    <p class="tittle">{{ campaign.title_es }}</p>
+                <div class="col-lg-5">
 
-
-<a href="{% url 'dashboard:candidates_stats' %}">Total candidates per month</a>
-<br>
-<a href="{% url 'dashboard:campaign_stats' %}">Total campaigns per month</a>
-<br>
-<a href="{% url 'dashboard:number_of_forecasts' %}">Total Forecasts</a>
-<br>
-<a href="{% url 'dashboard:positive_forecasts' %}">Positive Forecasts</a>
-<br>
-<a href="{% url 'dashboard:negative_forecasts' %}">Negative Forecasts</a>
-
-<h1>Business Users</h1>
-<br>
-<br>
-<ul>
-    {% for business_user in business_users %}
-
-        <li><a href="{% url 'dashboard:business_user_campaigns' business_user.id %}">{{ business_user.name }}</a>
+                    <a href="{{ campaign|get_campaign_url }}" target="_blank">Ver publicación (long_form)</a>
+                    <br>
+                    <a href="{% url 'dashboard:campaign' campaign.id %}" target="_blank">Ver candidatos</a>
+                    <br>
+                    <a href="{% url 'dashboard:edit_campaign' campaign.id %}" target="_blank">Editar campaña</a>
+                    <br>
+                    <a href="{% url 'dashboard:campaign' campaign.id %}/bullets" target="_blank">Bullets</a>
+                    <br>
+                    <a href="{% url 'business:summary' campaign_id=campaign.id %}" target="_blank">Ver Dashboard Empresarial</a>
+                    <br>
+                    <a href="{% url 'dashboard:campaign' campaign.id %}/tests" target="_blank">Ver pruebas</a>
+                    <br>
+                    <br>
+                    <form action="{% url 'dashboard:delete_campaign'  campaign.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="button" class="btn btn-danger" value="Delete!" onclick="this.form.submit();">
+                    </form>
+                </div>
+                <div class="col-lg-7">
+                    <p><b>EMPRESA:</b> {{ campaign|get_business_user_company_with_campaign }}</p>
+                    <p><b>REPRESENTANTE:</b> {{ campaign|get_business_user_name_with_campaign }}</p>
+                    <p><b>ESTADO:</b> {{ campaign.state.name_es }}</p>
+                    <p><b>FECHA DE CREACIÓN:</b> {{ campaign.local_date }}</p>
+                    {% if campaign.operational_efficiency %}
+                    <p><b>EFICIENCIA (STC/(STC + RECHAZADOS MANUALES)):</b> {% widthratio campaign.operational_efficiency 1 100 %}%</p>
+                    {% endif %}
+                </div>
+                </div>
+            </div>
             <br>
-            <p>created_at: {{ business_user.created_at }}</p>
-            <p>company: {{ business_user.company.name }}</p>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-lg-6">
+        <ul>
+            <h2 class="center">GRATIS</h2>
+            {% for campaign in campaigns %}
+            {% if campaign.free_trial %}
+                <div class="campaign-div">
+                <div class="row">
+                    <p class="tittle">{{ campaign.title_es }}</p>
+                <div class="col-lg-5">
+                    <a href="{{ campaign|get_campaign_url }}" target="_blank">Ver publicación (long_form)</a>
+                    <br>
+                    <a href="{% url 'dashboard:campaign' campaign.id %}" target="_blank">Ver candidatos</a>
+                    <br>
+                    <a href="{% url 'dashboard:edit_campaign' campaign.id %}" target="_blank">Editar campaña</a>
+                    <br>
+                    <a href="{% url 'dashboard:campaign' campaign.id %}/bullets" target="_blank">Bullets</a>
+                    <br>
+                    <a href="{% url 'business:summary' campaign_id=campaign.id %}" target="_blank">Ver Dashboard Empresarial</a>
+                    <br>
+                    <a href="{% url 'dashboard:campaign' campaign.id %}/tests" target="_blank">Ver pruebas</a>
+                    <br>
+                    <br>
+                    <form action="{% url 'dashboard:delete_campaign'  campaign.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="button" class="btn btn-danger" value="Delete!" onclick="this.form.submit();">
+                    </form>
+                </div>
+                <div class="col-lg-7">
+                    <p><b>EMPRESA:</b> {{ campaign|get_business_user_company_with_campaign }}</p>
+                    <p><b>REPRESENTANTE:</b> {{ campaign|get_business_user_name_with_campaign }}</p>
+                    <p><b>ESTADO:</b> {{ campaign.state.name_es }}</p>
+                    <p><b>FECHA DE CREACIÓN:</b> {{ campaign.local_date }}</p>
+                    {% if campaign.operational_efficiency %}
+                    <p><b>EFICIENCIA (STC/(STC + RECHAZADOS MANUALES)):</b> {% widthratio campaign.operational_efficiency 1 100 %}%</p>
+                    {% endif %}
+                </div>
+                </div>
+            </div>
             <br>
-        </li>
-    {% endfor %}
-</ul>
-
-<a href="campaign/new">New</a>
-
-<hr>
-
-<h1>Tests</h1>
-<ul>
-    {% for test in tests %}
-        <li>{{ test.name }}
-        <a href="test/{{ test.id }}">Edit</a>
-        </li>
-        <br>
-        <form action="test/duplicate/{{ test.id }}" method="post">
-            {% csrf_token %}
-            <input type="button" class="btn btn-success" value="Duplicate!" onclick="this.form.submit();">
-        </form>
-    {% endfor %}
-</ul>
-
-<a href="test/new">New</a>
-
-<hr>
-
-<br>
-
-<a href="edit_intro_video">Edit interview intro video</a>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

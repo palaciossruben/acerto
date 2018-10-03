@@ -465,15 +465,33 @@ def access_for_users(request, campaign, business_user):
                                         not in business_user.campaigns.all())
 
 
-def get_business_user_with_campaign(campaign):
+def get_business_user_with_campaign(campaign, option):
     """
     Given a campaign gets the business_user if it exists, else None
     :return: business_user or None
     """
-
-    try:
-        return BusinessUser.objects.get(campaigns__id__contains=campaign.pk)
-    except ObjectDoesNotExist:
+    if option == 'object':
+        try:
+            return BusinessUser.objects.get(campaigns__id=campaign.pk)
+        except ObjectDoesNotExist:
+            return None
+        except MultipleObjectsReturned:
+            return BusinessUser.objects.filter(campaigns__id=campaign.pk).all()[0]
+    elif option == 'name':
+        try:
+            return BusinessUser.objects.get(campaigns__id=campaign.pk).name
+        except ObjectDoesNotExist:
+            return None
+        except MultipleObjectsReturned:
+            return BusinessUser.objects.filter(campaigns__id=campaign.pk).all()[0].name
+    elif option == 'company':
+        try:
+            return BusinessUser.objects.get(campaigns__id=campaign.pk).company
+        except ObjectDoesNotExist:
+            return None
+        except MultipleObjectsReturned:
+            return BusinessUser.objects.filter(campaigns__id=campaign.pk).all()[0].company
+    else:
         return None
-    except MultipleObjectsReturned:
-        return BusinessUser.objects.filter(campaigns__id__contains=campaign.pk).all()[0]
+
+

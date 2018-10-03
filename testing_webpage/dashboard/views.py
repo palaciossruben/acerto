@@ -35,6 +35,8 @@ def get_business_users_order_by_active_campaigns():
 
     return sort_users_by_campaign_count(new_business_users) + sort_users_by_campaign_count(old_business_users)
 
+# 'business_users': get_business_users_order_by_active_campaigns(),
+
 
 @login_required
 def index(request):
@@ -49,28 +51,25 @@ def index(request):
     if common.not_admin_user(request):
         return redirect('business:login')
 
-    return render(request, cts.MAIN_DASHBOARD, {'business_users': get_business_users_order_by_active_campaigns(),
-                                                'tests': Test.get_all()})
+    campaigns = Campaign.objects.filter(removed=False).order_by('-created_at', 'name', 'title_es').all()
 
+    for campaign in campaigns:
+        common.calculate_operational_efficiency(campaign)
+
+    return render(request, cts.MAIN_DASHBOARD, {'campaigns': campaigns})
 
 # ------------------------------- CAMPAIGN -------------------------------
 
 
-def business_user_campaigns(request, business_user_id):
+def tests_list(request):
     """
     :param request: HTTP request
-    :param business_user_id: int BusinessUser id
     :return: render view
     """
 
-    business_user = BusinessUser.objects.get(pk=int(business_user_id))
+    tests = Test.get_all()
 
-    campaigns = business_user.campaigns.filter(removed=False).order_by('-active', 'name', 'title_es').all()
-    for campaign in campaigns:
-        common.calculate_operational_efficiency(campaign)
-
-    return render(request, cts.BUSINESS_USER_CAMPAIGNS, {'campaigns': campaigns,
-                                                         'business_user': business_user})
+    return render(request, cts.TEST_LIST, {'tests': tests})
 
 
 def candidate_detail(request, candidate_id):
