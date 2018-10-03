@@ -1,5 +1,5 @@
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from django.db import models
 from django.contrib.postgres.fields import JSONField
@@ -687,6 +687,14 @@ class Campaign(models.Model):
 
     def get_search_text(self):
         return ' '.join([self.title_es] + self.get_requirement_names())
+
+    def local_date(self):
+        date = self.created_at - timedelta(hours=5)
+
+        if date is not None:
+            return date
+        else:
+            return None
 
 
 def average_list(my_list):

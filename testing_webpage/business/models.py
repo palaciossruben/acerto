@@ -73,7 +73,7 @@ class BusinessUser(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return '{0}, {1}'.format(self.name, self.email)
+        return '{0}, {1}, {2}'.format(self.name, self.email, self.company)
 
     # adds custom table name
     class Meta:

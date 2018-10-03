@@ -149,6 +149,7 @@
     <div>
         <ul style="margin-left:10%">
             {% for campaign in active_campaigns %}
+                {% if campaign.title_es %}
                 <li style="">
                     <a href="{% url 'beta_invite:index' %}?campaign_id={{ campaign.pk }}">
                         {{ campaign.title_es }}
@@ -164,6 +165,7 @@
                     {% endif %}
                     <br>
                 </li>
+                {% endif %}
             {% endfor %}
         </ul>
     </div>
