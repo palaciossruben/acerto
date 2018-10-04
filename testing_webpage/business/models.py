@@ -140,13 +140,12 @@ class KeyWord(models.Model):
 
     name = models.CharField(max_length=20)
     work_area = models.ForeignKey(WorkArea, null=True)
-    frequency = models.IntegerField(default=1)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return 'name: {0}, frequency: {1}'.format(self.name, self.frequency)
+        return 'name: {0}, work_area: {1}'.format(self.name, self.work_area)
 
     # adds custom table name
     class Meta:

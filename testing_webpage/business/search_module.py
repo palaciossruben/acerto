@@ -5,7 +5,6 @@ import pickle
 from django.db.models import Case, When
 from collections import OrderedDict
 
-import common
 from business import util
 from beta_invite.models import User
 from subscribe import cts as cts_subscribe
