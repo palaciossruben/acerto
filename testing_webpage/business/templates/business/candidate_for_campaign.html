@@ -1,7 +1,7 @@
 {% load static %}
 {% load i18n %}
 {% load app_filters %}
-{% if campaign.state.name != 'Inactive' %}
+{% if campaign.free_trial == False and campaign.state.name != 'Inactive' %}
     <a href="/seleccion_de_personal/perfil_del_candidato/{{ candidate.id }}">
 {% else %}
     <a href="#" onclick="return false" class="tooltip">
