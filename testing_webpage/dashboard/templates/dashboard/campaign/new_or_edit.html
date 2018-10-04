@@ -67,15 +67,15 @@
         <h3>Salary</h3>
         <span >from: </span>
         {% if campaign.salary_low_range %}
-            <input step="100000" type="number" min="0" name="salary_low_range" value="{{ campaign.salary_low_range }}">
+            <input  type="number" min="0" name="salary_low_range" value="{{ campaign.salary_low_range }}">
         {% else %}
-            <input step="100000" type="number" min="0" name="salary_low_range" value="1000000">
+            <input  type="number" min="0" name="salary_low_range" value="1000000">
         {% endif %}
         <span >to: </span>
         {% if campaign.salary_high_range %}
-            <input step="100000" type="number" min="0" name="salary_high_range" value="{{ campaign.salary_high_range }}">
+            <input type="number" min="0" name="salary_high_range" value="{{ campaign.salary_high_range }}">
         {% else %}
-            <input step="100000" type="number" min="0" name="salary_high_range" value="2000000">
+            <input type="number" min="0" name="salary_high_range" value="2000000">
         {% endif %}
 
         <br>
@@ -154,24 +154,6 @@
             <option value="1">True</option>
             <option value="0">False</option>
         </select>
-        <br>
-        <br>
-        <p>ACTIVE?</p>
-        <select name="active" required>
-
-            <!--Update-->
-            {% if campaign %}
-                {% with default=campaign.active %}
-                    <option value="{{ default }}">{{ default }}</option>
-                {% endwith %}
-            {% else %} <!--New-->
-                <option value="1">True</option>
-            {% endif %}
-
-            <option value="1">True</option>
-            <option value="0">False</option>
-        </select>
-
         <br>
         <br>
 

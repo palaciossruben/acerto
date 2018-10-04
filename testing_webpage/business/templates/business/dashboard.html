@@ -56,11 +56,14 @@
                     <div class="col-lg-9 col-xs-12 gradient2">
                         <p class="date regular">FECHA DE PUBLICACIÓN: {{ campaign.created_at }}</p>
                         <br>
-                        {% if campaign.active %}
+                        {% if campaign.state.name == 'Active' %}
                         <p class="status bold">ESTADO: activa</p>
                         <br>
-                        {% else %}
+                        {% elif campaign.state.name == 'Inactive' %}
                         <p class="status bold">ESTADO: inactiva</p>
+                        <br>
+                        {% else %}
+                        <p class="status bold">ESTADO: terminada</p>
                         <br>
                         {% endif %}
                         {% if business_state.name == 'relevantes' %}
