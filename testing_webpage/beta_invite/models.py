@@ -616,7 +616,6 @@ class Campaign(models.Model):
     tests = models.ManyToManyField(Test)
     interviews = models.ManyToManyField(Interview)
     calendly = models.BooleanField(default=True)
-    active = models.BooleanField(default=False)
     state = models.ForeignKey(CampaignState, default=1)  # id of Inactive State, this is NOT NICE
     calendly_url = models.CharField(max_length=200, default=cts.INTERVIEW_CALENDLY)
     removed = models.BooleanField(default=False)

@@ -85,6 +85,22 @@ def get_campaign_name(candidate, language_code):
     return ''
 
 
+def get_campaign_description(candidate, language_code):
+    """
+    For a object that has no associated campaign it will not return the title
+    Args:
+        candidate: User or Contact object.
+    Returns: string with title
+    """
+    if candidate and hasattr(candidate.campaign, 'description') and candidate.campaign.description:
+        if language_code == 'es':
+            return candidate.campaign.description_es
+        else:
+            return candidate.campaign.description
+
+    return ''
+
+
 def get_cv_url(user):
     return HOST + '/servicio_de_empleo/add_cv?user_id={user_id}'.format(user_id=user.id)
 
@@ -163,7 +179,9 @@ def get_params_with_candidate(candidate, language_code, override_dict={}):
               'peaku_address': config('peaku_address'),
               'campaign': get_campaign_name(candidate, language_code),
               'campaign_url': get_campaign_url(candidate),
-              'campaign_salary_range': get_campaign_salary_range(candidate)}
+              'campaign_salary_range': get_campaign_salary_range(candidate),
+              'campaign_city': candidate.campaign.city.name,
+              'campaign_description': get_campaign_description(candidate, language_code)}
 
     if hasattr(candidate, 'campaign_id'):
         params['test_url'] = get_test_url(candidate.user, candidate.campaign)

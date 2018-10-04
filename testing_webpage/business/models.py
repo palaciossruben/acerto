@@ -140,7 +140,6 @@ class KeyWord(models.Model):
 
     name = models.CharField(max_length=200)
     work_area = models.ForeignKey(WorkArea, null=True)
-
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

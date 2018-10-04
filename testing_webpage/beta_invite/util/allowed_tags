@@ -9,6 +9,8 @@ This are the allowed tags for emails and messages:
 {campaign}:                 Campaign.name
 {video_url}:                Url redirecting to add the video of the interview
 {campaign_url}:             The url of a campaign for candidate
+{campaign_city}             The campaign city
+{campaign_description}      The campaigns description
 {complete_name}:            The complete value of User.name
 {business_campaign_url}:    The url of a campaign for business_user
 {additional_info_url}:      The url for complete the additional info forms, for candidates
