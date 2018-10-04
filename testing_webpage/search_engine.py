@@ -70,6 +70,7 @@ def get_text_stats(use_idf):
     Gets tf_idf transformed data and the vocabulary
     Returns: Tuple containing Sparse Matrix with tf_idf data,  vocabulary dictionary and text_corpus (OrderedDict)
     """
+    print('getting text_stats...')
     count_vectorizer = CountVectorizer()
     text_corpus = get_text_corpus()
     data_counts = count_vectorizer.fit_transform([e for e in text_corpus.values()])
@@ -159,6 +160,7 @@ def print_common_words_percentiles(words):
 
 def get_common_words(text_corpus, number_of_top_words=20000):
     """Gets a list of the most common words"""
+    print('getting common user_words')
 
     word_frequency = dict()
     for text in text_corpus.values():
@@ -231,9 +233,12 @@ def save_user_relevance_dictionary():
     Returns: Saves file with dictionary
     """
     data_tf_idf, vocabulary, text_corpus = get_text_stats(use_idf=True)
+    print('finished get_text_stats')
 
     try:
+        print('loading pickle...')
         user_relevance_dictionary = pickle.load(open(cts.WORD_USER_PATH, 'rb'))
+        print('pickle loaded')
     except FileNotFoundError:
         print('FileNotFoundError: user_relevance_dictionary.p')
         print('current working directory: ' + str(os.getcwd()))
