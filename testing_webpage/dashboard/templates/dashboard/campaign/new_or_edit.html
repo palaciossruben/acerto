@@ -156,24 +156,6 @@
         </select>
         <br>
         <br>
-        <p>ACTIVE?</p>
-        <select name="active" required>
-
-            <!--Update-->
-            {% if campaign %}
-                {% with default=campaign.active %}
-                    <option value="{{ default }}">{{ default }}</option>
-                {% endwith %}
-            {% else %} <!--New-->
-                <option value="1">True</option>
-            {% endif %}
-
-            <option value="1">True</option>
-            <option value="0">False</option>
-        </select>
-
-        <br>
-        <br>
 
         <p>STATE</p>
         <select name="state_id" required>
