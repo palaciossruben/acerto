@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User as AuthUser
 from django.contrib.postgres.fields import JSONField
 
-from beta_invite.models import Country, Education, Profession, Campaign
+from beta_invite.models import Country, Education, Profession, Campaign, WorkArea
 
 
 class Plan(models.Model):
@@ -139,6 +139,7 @@ class Search(models.Model):
 class KeyWord(models.Model):
 
     name = models.CharField(max_length=20)
+    work_area = models.ForeignKey(WorkArea, null=True)
     frequency = models.IntegerField(default=1)
 
     created_at = models.DateTimeField(auto_now_add=True)

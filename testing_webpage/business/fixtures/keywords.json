@@ -1,11 +1,14 @@
 [
 {
-  "model": "beta_invite.workarea",
+  "model": "business.keywords",
 "pk":1,
   "fields":{
     "name": "Facilidad para las matemáticas",
+    "work_area":"",
+    "frequency":"",
     "created_at": "2018-10-02 10:54:49.0957+00",
     "updated_at": "2018-10-02 10:54:49.0957+00"
   }
 }
 ]
+
