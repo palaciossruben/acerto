@@ -33,10 +33,15 @@
                     <div class="col-lg-4"></div>
                     <div class="col-lg-8 col-xs-12 gradient2">
                         <p class="date regular">{% trans 'PUBLISH DATE' %}: {{ created_at }}</p>
-                        {% if campaign.active %}
-                        <p class="status bold">{% trans 'STATE: active' %}</p>
+                        {% if campaign.state.name == 'Active' %}
+                        <p class="status bold">ESTADO: activa</p>
+                        <br>
+                        {% elif campaign.state.name == 'Inactive' %}
+                        <p class="status bold">ESTADO: inactiva</p>
+                        <br>
                         {% else %}
-                        <p class="status bold">{% trans 'STATE: inactive' %}</p>
+                        <p class="status bold">ESTADO: terminada</p>
+                        <br>
                         {% endif %}
                         <p class="total regular">{% trans 'TOTAL CANDIDATES' %}: {{ num_total }}</p>
                     </div>
