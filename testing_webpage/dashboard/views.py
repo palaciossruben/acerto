@@ -50,8 +50,7 @@ def index(request):
     # TODO: how to add the same auth to all the app????
     if common.not_admin_user(request):
         return redirect('business:login')
-
-    campaigns = Campaign.objects.filter(removed=False).order_by('-created_at', 'name', 'title_es').all()
+    campaigns = Campaign.objects.filter(removed=False).order_by('-created_at', 'state', 'title_es').all()
 
     for campaign in campaigns:
         common.calculate_operational_efficiency(campaign)

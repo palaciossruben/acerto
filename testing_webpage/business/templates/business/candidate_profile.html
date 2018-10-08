@@ -157,9 +157,9 @@
 
                                     {% for s in candidate.get_last_requirement_surveys%}
                                         {% if s.score > 0 %}
-                                            <strong class="listyes-light"><strong class="test-distinction-question">{{ s.question.internal_name }}:</strong></strong> {{ s.answer.name_es }}</p>
+                                            <strong class="listyes-light"><strong class="test-distinction-question">{{ s.question.internal_name }}:</strong></strong> {{ s.answer.name_es }} {{ s.numeric_answer|floatformat }}</p>
                                         {% elif s.score <= 0 %}
-                                            <strong class="listno-light"><strong class="test-distinction-question">{{ s.question.internal_name }}:</strong></strong> {{ s.answer.name_es }}</p>
+                                            <strong class="listno-light"><strong class="test-distinction-question">{{ s.question.internal_name }}:</strong></strong> {{ s.answer.name_es }} {{ s.numeric_answer|floatformat }}</p>
                                         {% endif %}
                                     {% endfor %}
                                 </div>
