@@ -1,12 +1,11 @@
 import os
-
+import json
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.testing_webpage.settings')
 application = get_wsgi_application()
 
 import smtplib
-
 from django.contrib.auth.decorators import login_required
 from ipware.ip import get_ip
 from django.shortcuts import render, redirect
@@ -15,7 +14,7 @@ from django.contrib.auth import login, authenticate
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils import formats
-from django.http import HttpResponseBadRequest, HttpResponse
+from django.http import HttpResponseBadRequest, HttpResponse, JsonResponse
 
 import common
 import business
@@ -387,7 +386,7 @@ def start(request):
                                                  'work_areas': common.translate_list_of_objects(WorkArea.objects.all(), request.LANGUAGE_CODE),
                                                  'cities': common.get_cities(),
                                                  'default_city': city,
-                                                 'keywords': sorted(KeyWord.objects.all(), key=lambda key: key.name),
+                                                 'keywords': KeyWord.objects.all(),
                                                  'tests': Test.objects.filter(public=True)})
 
 
@@ -597,3 +596,12 @@ def online_demo(request):
     # removes login decorator
     s = summary.__wrapped__
     return s(request, campaign_id, business_user=business_user)
+
+
+def get_work_area_requirement(request, work_area_id):
+
+    keywords = KeyWord.objects.filter(work_area_id=work_area_id)
+
+    json_data = json.dumps([{'pk': k.pk, 'name': k.name} for k in keywords])
+
+    return JsonResponse(json_data, safe=False)
