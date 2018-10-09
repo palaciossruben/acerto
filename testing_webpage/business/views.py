@@ -23,8 +23,8 @@ from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
 from beta_invite.models import User, BulletType, WorkArea, EmailType, Campaign, Test
-from business.models import Plan, Contact, Search
-from business.models import BusinessUser, Company
+from business.models import Plan, Contact, Search, BusinessUser, Company
+from beta_invite.models import KeyWord
 from business.custom_user_creation_form import CustomUserCreationForm
 from dashboard import campaign_module
 from dashboard.models import Candidate, BusinessState, Comment
@@ -597,7 +597,7 @@ def online_demo(request):
     s = summary.__wrapped__
     return s(request, campaign_id, business_user=business_user)
 
-'''
+
 def get_work_area_requirement(request, work_area_id):
 
     keywords = KeyWord.objects.filter(work_area_id=work_area_id)
@@ -605,4 +605,3 @@ def get_work_area_requirement(request, work_area_id):
     json_data = json.dumps([{'pk': k.pk, 'name': k.name} for k in keywords])
 
     return JsonResponse(json_data, safe=False)
-'''

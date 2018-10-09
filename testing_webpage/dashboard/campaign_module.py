@@ -112,6 +112,12 @@ def add_user_tests(campaign, request):
     campaign.save()
 
 
+def get_keywords(campaign, request):
+    keywords = {int(id) for id in request.POST.getlist('keywords')}
+    campaign.keywords.add(*keywords)
+    campaign.save()
+
+
 def create_campaign(request):
     """
     saves to create id first.
@@ -134,6 +140,7 @@ def create_campaign(request):
     candidate_prospects = prospect_module.get_candidates(campaign)
     prospect_module.send_mails(candidate_prospects)
 
+    get_keywords(campaign, request)
     add_default_tests(campaign)
     add_user_tests(campaign, request)
 
@@ -185,6 +192,29 @@ def get_experience_question(campaign):
     return q
 
 
+def get_others_requirements(campaign):
+
+    questions = []
+    for k in campaign.keywords.all():
+
+        q = Question(text='Do you have knowledge in {}?'.format(k.name),
+                     text_es='¿Tienes conocimiento en {}?'.format(k.name),
+                     type=QuestionType.objects.get(code='SA'))
+        q.save()
+
+        yes = Answer(name='Yes', name_es='Si', order=1)
+        yes.save()
+        no = Answer(name='No', name_es='No', order=2)
+        no.save()
+
+        q.answers = [yes, no]
+        q.correct_answers = [yes]
+        q.save()
+        questions.append(q)
+
+    return questions
+
+
 def get_requirements_test(campaign):
     """
     Simple test, asking for city,
@@ -194,12 +224,15 @@ def get_requirements_test(campaign):
     q1 = get_city_question(campaign)
     q2 = get_salary_question(campaign)
     q3 = get_experience_question(campaign)
+    requirements_questions = get_others_requirements(campaign)
 
     test = Test(name='Requirements: {}'.format(campaign.title_es),
                 name_es='Requisitos: {}'.format(campaign.title_es),
                 type=TestType.objects.get(name='requirements'))
     test.save()
-    test.questions = [q1, q2, q3]
+
+    test.questions = [q1, q2, q3] + requirements_questions
+
     test.save()
 
     return test

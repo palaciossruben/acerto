@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^contact_form_post$', views.contact_form_post, name='contact_form_post'),
 
     # START
-    # url(r'^get_work_area_requirement/(?P<work_area_id>\d+)$', views.get_work_area_requirement, name='get_work_area_requirement'),
+    url(r'^get_work_area_requirement/(?P<work_area_id>\d+)$', views.get_work_area_requirement, name='get_work_area_requirement'),
 
     url(r'^save_comments$', views.save_comments, name='save_comments'),
 

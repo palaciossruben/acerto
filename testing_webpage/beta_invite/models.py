@@ -600,6 +600,21 @@ class CampaignState(models.Model):
         db_table = 'campaign_states'
 
 
+class KeyWord(models.Model):
+
+    name = models.CharField(max_length=200)
+    work_area = models.ForeignKey(WorkArea, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return 'name: {0}, work_area: {1}'.format(self.name, self.work_area)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'keywords'
+
+
 class Campaign(models.Model):
 
     name = models.CharField(max_length=200)
@@ -614,6 +629,7 @@ class Campaign(models.Model):
     title_es = models.CharField(max_length=200, null=True)
     bullets = models.ManyToManyField(Bullet)
     tests = models.ManyToManyField(Test)
+    keywords = models.ManyToManyField(KeyWord)
     interviews = models.ManyToManyField(Interview)
     calendly = models.BooleanField(default=True)
     state = models.ForeignKey(CampaignState, default=1)  # id of Inactive State, this is NOT NICE
