@@ -30,6 +30,14 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
         <!--Our js-->
         <script type="text/javascript" src="{% static 'business/js/start.js' %}"></script>
+
+        <script>
+        function getRequirements(work_area) {
+            var url = "/seleccion_de_personal/get_work_area_requirement/";
+            var complete_url = url + work_area.value;
+            dynamic_select_values(complete_url);
+            }
+	    </script>
 {% endblock %}
 {% block content %}
 <section class="main-section" id="main-section">
@@ -39,6 +47,7 @@
                         <a href="/staffing" class="logo"><img src="{% static 'business/img/logo-color.png' %}"></a>
                         {% if user.is_authenticated %}
                             <a class="navButton" role="button" href="{% url 'business:logout' %}">CERRAR SESIÓN</a>
+                            <a class="navText" href="{% url 'business:business_campaigns' user|get_business_user_id_from_auth_user %}">{% trans 'My campaigns' %}</a>
                         {% else %}
                             <a class="navButton regular" role="button" onclick="off_signup() & on_login()">INICIA SESIÓN</a>
                             {% if not 'seleccion_gratis' in request.path %}
@@ -58,18 +67,16 @@
                                     <br>
                                     <br>
                                     <span>Nombre</span>
-                                    <input class="form-input" name="name"
-                                        required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
+                                    <input class="form-input" name="name" required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
                                     <br>
                                     <span>Empresa</span>
-                                    <input class="form-input" name="company">
+                                    <input class="form-input" name="company" required="required">
                                     <br>
                                     <span>Correo</span>
                                     <input class="form-input" type="email" name="username" required="required">
                                     <br>
                                     <span>Teléfono</span>
-                                    <input class="form-input" type="tel" name="phone"
-                                        required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
+                                    <input class="form-input" type="tel" name="phone" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
                                     <br>
                                     <span>Contraseña</span>
                                     <input class="form-input" type="password" name="password1" required="required">
@@ -190,11 +197,11 @@
         </section>
         <!----------------------------------------------SECTION 2------------------------------------------------------>
         {% if user.is_authenticated %}
-        <form id="big-form" class="noBorderForm hidejs" action="{% url 'business:create_post' %}" method="post">
-            <input type="hidden" name="business_user_id" value="{{ business_user_id }}" />
-            {% else %}
-        <form id="big-form" class="noBorderForm hidejs" action="{% url 'business:start_post' %}" method="post">
-            {% endif %}
+            <form id="big-form" class="noBorderForm hidejs" action="{% url 'business:create_post' %}" method="post">
+                <input type="hidden" name="business_user_id" value="{{ business_user_id }}" />
+        {% else %}
+            <form id="big-form" class="noBorderForm hidejs" action="{% url 'business:start_post' %}" method="post">
+        {% endif %}
             {% csrf_token %}
             <section class="section-two" id="section-two">
                 <div class="container">
@@ -216,7 +223,7 @@
                             <fieldset class="section2-content">
                                 <br>
                                 <h3>Ciudad</h3>
-                                <select class="origin-city" name="city_id" >
+                                <select class="origin-city" name="city_id" required>
                                     <option value="{{ default_city.id }}">{{ default_city.name }}</option>
                                     {% for city in cities %}
                                     <option value="{{ city.id }}">{{ city.name }}</option>
@@ -224,24 +231,30 @@
                                 </select>
                                 <h3>Título de la oferta</h3>
                                 <h6>Usa un título específico para que los candidatos tengan muy claro a que están aplicando</h6>
-                                <input class="origin-vacancy" name="title_es" placeholder="Selecciona un título"><br>
+                                <input class="origin-vacancy" name="title_es" placeholder="Selecciona un título" required><br>
                                 <h3>Cargo solicitado</h3>
                                 <h6>Selecciona el área que más se adapte al perfil que estás buscando</h6>
-                                <select class="origin-workarea" name="work_area_id" required>
+                                <select class="origin-workarea" id="first-choice" name="work_area_id" required="required" onchange="getRequirements(this)">
                                     <option value="" disabled selected>Selecciona un area de trabajo</option>
                                     {% for work_area in work_areas %}
                                     <option value="{{ work_area.id }}">{{ work_area.name }}</option>
                                     {% endfor %}
                                 </select>
+                                <h3>Requisitos</h3>
+                                <h6>Agrega palabras clave que ayuden a distinguir los requerimientos más importantes para la oferta</h6>
+                                <select class="origin-keywords js-example-basic-multiple" id="second-choice" name="keywords" multiple="multiple">
+                                    <option>Debes seleccionar primero algún cargo o área de trabajo (opción anterior)</option>
+                                </select>
+                                <br>
                                 <h3>Rango salarial</h3>
                                 <h6>Asigna el rango salarial que estás dispuesto a ofrecer</h6>
-                                <input class="origin-salary" step="100000" type="number" min="0" name="salary_low_range" value="1000000">
+                                <input class="origin-salary" step="100000" type="number" min="0" name="salary_low_range" value="1000000" required>
                                 <span class="conjunction">a</span>
-                                <input class="origin-salary" step="100000" type="number" min="0" name="salary_high_range" value="2000000">
+                                <input class="origin-salary" step="100000" type="number" min="0" name="salary_high_range" value="2000000" required>
 
                                 <h3>{% trans 'Experience' %}</h3>
                                 <h6>{% trans 'What is the minimum number of years of experience you are expecting?' %}</h6>
-                                <input class="origin-salary" step="1" type="number" min="0" max="100" name="experience" value="1">
+                                <input class="origin-salary" step="1" type="number" min="0" max="100" name="experience" value="1" required>
 
                                 <h3>{% trans 'Tests' %}</h3>
                                 <h6>{% trans 'Add tests you want your candidates to do online, and be filtered by them' %}</h6>
@@ -250,13 +263,6 @@
                                         <option value="{{ test.id }}">{{ test.name_es }}</option>
                                     {% endfor %}
                                 </select>
-                                <!--<h3>Requisitos</h3>
-                                    <h6>Agrega palabras clave que ayuden a distinguir los requerimientos más importantes para la oferta</h6>
-                                    <select class="origin-keywords js-example-basic-multiple" name="keywords" multiple="multiple">
-                                        <option value="AL">Alabama</option>
-                                        <option value="O">Otra</option>
-                                        <option value="WY">Wyoming</option>
-                                    </select>-->
                             </fieldset>
                         </div>
                         <div class="col-md-1"></div>
@@ -304,7 +310,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a id="publish-campaign-button" class="button-cta" role="button" onclick="on({{user.is_authenticated|yesno:'true,false'}})">PUBLICAR MI OFERTA</a>
+                            <button id="publish-campaign-button" class="button-cta"  type="submit" onclick="on({{user.is_authenticated|yesno:'true,false'}})">PUBLICAR MI OFERTA</button>
                         </div>
                         <div class="col-md-4">
                             <fieldset>
@@ -456,7 +462,6 @@
         <script>
             function on(is_user_logged) {
             if (is_user_logged) {
-                document.getElementById("big-form").submit();
 
             } else { // enters here upon the second click
                 if (document.getElementById("overlay").style.display != "block") {
@@ -472,7 +477,6 @@
                     $("#publish-campaign-button").css('position', 'absolute');
                     $(".final-hide").animate({"opacity": '0'}, 1500,"swing");
                 }
-                    else {document.getElementById("big-form").submit();}
             }}
 
             function off() {
@@ -540,7 +544,7 @@
         <!--Set background-->
         <script>
             $(document).ready(function() {
-               get_background()
+               get_background();
             });
         </script>
         <!-- any incoming error_message will print as an alert-->
