@@ -113,7 +113,7 @@ def add_user_tests(campaign, request):
 
 
 def get_keywords(campaign, request):
-    keywords = {int(id) for id in request.POST.getlist('keywords')}
+    keywords = {int(id) for id in request.POST.getlist('keyword_ids')}
     campaign.keywords.add(*keywords)
     campaign.save()
 
@@ -134,13 +134,11 @@ def create_campaign(request):
     campaign = Campaign(country=country, city=city)
     campaign.save()
 
+    get_keywords(campaign, request)
     update_campaign_basic_properties(campaign, request)
     update_campaign_bullets(campaign, request)
-
     candidate_prospects = prospect_module.get_candidates(campaign)
     prospect_module.send_mails(candidate_prospects)
-
-    get_keywords(campaign, request)
     add_default_tests(campaign)
     add_user_tests(campaign, request)
 
