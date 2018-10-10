@@ -3,12 +3,13 @@
 {% load app_filters %}
 {% if campaign.free_trial == False and campaign.state.name != 'Inactive' %}
     <a href="/seleccion_de_personal/perfil_del_candidato/{{ candidate.id }}">
-{% elif campaign.free_trial == True and campaign.state.name == 'Inactive'%}
+{% elif campaign.free_trial == True and campaign.state.name != 'Inactive'%}
     <a href="/seleccion_de_personal/perfil_del_candidato/{{ candidate.id }}/remove" onclick="return false" class="tooltip">
     <span class="tooltiptext">Esta es una prueba gratis, solo podrás ver los primeros candidatos, para tener acceso completo contáctanos, correo: contacto@peaku.co, wp: +57 3136362874</span>
+{% elif campaign.free_trial == True and campaign.state.name != 'Inactive'%}
 {% else %}
     <a href="#" onclick="return false" class="tooltip">
-        <span class="tooltiptext">Para poder ver la información adicional del candidato, la campaña debe estar activa</span>
+    <span class="tooltiptext">Para poder ver la información adicional del candidato, la campaña debe estar activa</span>
 {% endif %}
 <div class="row candidate-info-div">
     <div class="email-checkbox">
