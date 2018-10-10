@@ -54,3 +54,23 @@ function set_background(image_name, id_string){
         me.style["background-image"] = url;
     }}
 }
+
+function not_blocked(state){
+    var limit = 0;
+    if (state == 'aplicantes'){
+        limit = 3;
+    }else{
+        limit = 1;
+    }
+
+    var candidate_divs= $('.candidate-div a');
+        for (var i = 0; i < limit; i++) {
+            $(candidate_divs[i]).attr('href', $(candidate_divs[i]).attr('href').replace('/remove',''));
+            $(candidate_divs[i]).attr('onclick', "");
+
+        }
+        var candidate_divs= $('.candidate-div span');
+        for (var i = 0; i < limit; i++) {
+            $(candidate_divs[i]).hide();
+        }
+}
