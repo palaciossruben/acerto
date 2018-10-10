@@ -26,7 +26,11 @@
         <div class="background" id="background">
             <div class="gradient1">
                 <div class="row bold">
-                    <div class="campaign">{{ campaign.title_es }}</div>
+                    {% if campaign.free_trial == False %}
+                        <div class="col-lg-12 campaign bold">{{ campaign.title_es }}</div>
+                    {% else %}
+                        <div class="col-lg-12 campaign bold">{{ campaign.title_es }} <br> (PRUEBA GRATIS)</div>
+                    {% endif %}
                 </div>
                 <div class="row plan-type"></div>
                 <div class="row">

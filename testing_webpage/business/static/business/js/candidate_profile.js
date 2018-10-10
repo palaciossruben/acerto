@@ -2,8 +2,6 @@ function set_circle_color(score, id_string){
 
     var color;
 
-
-
     if (score < 50){
         color = 'rgba(221, 81, 51,';
     }else if (score < 59){
