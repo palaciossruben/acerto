@@ -55,22 +55,31 @@ function set_background(image_name, id_string){
     }}
 }
 
-function not_blocked(state){
+function not_blocked(business_state, free_trial, campaign_state){
+
     var limit = 0;
-    if (state == 'aplicantes'){
-        limit = 3;
+
+    if (free_trial == 'False'){
+        limit = 0;
+    }
+    else if(free_trial == 'True' && campaign_state != "Inactive" ){
+        if (business_state == 'aplicantes'){
+            limit = 3;
+        }else{
+            limit = 1;
+        }
     }else{
-        limit = 1;
+        limit = 0;
     }
 
     var candidate_divs= $('.candidate-div a');
-        for (var i = 0; i < limit; i++) {
-            $(candidate_divs[i]).attr('href', $(candidate_divs[i]).attr('href').replace('/remove',''));
-            $(candidate_divs[i]).attr('onclick', "");
+    for (var i = 0; i < limit; i++) {
+        $(candidate_divs[i]).attr('href', $(candidate_divs[i]).attr('href').replace('/remove',''));
+        $(candidate_divs[i]).attr('onclick', "");
 
-        }
-        var candidate_divs= $('.candidate-div span');
-        for (var i = 0; i < limit; i++) {
-            $(candidate_divs[i]).hide();
-        }
+    }
+    var candidate_divs= $('.candidate-div span');
+    for (var i = 0; i < limit; i++) {
+        $(candidate_divs[i]).hide();
+    }
 }

@@ -48,11 +48,7 @@
             <div class="gradient1">
                 <div class="row one"></div>
                 <div class="row two">
-                    {% if campaign.free_trial == False %}
                         <div class="col-lg-12 campaign bold">{{ campaign.title_es }}</div>
-                    {% else %}
-                        <div class="col-lg-12 campaign bold">{{ campaign.title_es }} <br> (PRUEBA GRATIS)</div>
-                    {% endif %}
                 </div>
                 <div class="row plan-type"></div>
                 <div class="row three">
@@ -61,21 +57,23 @@
                         <p class="date regular">FECHA DE PUBLICACIÓN: {{ campaign.created_at }}</p>
                         <br>
                         {% if campaign.state.name == 'Active' %}
-                        <p class="status bold">ESTADO: activa</p>
-                        <br>
+                            <p class="status bold">ESTADO: activa</p>
                         {% elif campaign.state.name == 'Inactive' %}
-                        <p class="status bold">ESTADO: inactiva</p>
-                        <br>
+                            <p class="status bold">ESTADO: inactiva</p>
                         {% else %}
-                        <p class="status bold">ESTADO: terminada</p>
+                            <p class="status bold">ESTADO: terminada</p>
+                        {% endif%}
+
+                        {% if campaign.free_trial == True %}
+                            <p class="status bold">(Prueba gratis)</p>
+                        {% endif%}
                         <br>
-                        {% endif %}
                         {% if business_state.name == 'relevantes' %}
-                        <p class="total regular">TOTAL {{ campaign_state_name }}: {{ total_relevant }}</p>
+                            <p class="total regular">TOTAL {{ campaign_state_name }}: {{ total_relevant }}</p>
                         {% elif business_state.name == 'recomendados' %}
-                        <p class="total regular">TOTAL {{ campaign_state_name }}: {{ total_recommended }}</p>
+                            <p class="total regular">TOTAL {{ campaign_state_name }}: {{ total_recommended }}</p>
                         {% else %}
-                        <p class="total regular">TOTAL {{ campaign_state_name }}: {{ total_applicants }}</p>
+                            <p class="total regular">TOTAL {{ campaign_state_name }}: {{ total_applicants }}</p>
                         {% endif %}
                     </div>
                 </div>
