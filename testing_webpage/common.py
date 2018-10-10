@@ -164,7 +164,7 @@ def get_candidate(user, campaign):
 
     if user and campaign:
         try:
-            return Candidate.objects.get(campaign=campaign, user=user)
+            return Candidate.objects.get(campaign=campaign, user=user, removed=False)
         except ObjectDoesNotExist:
             return None
     else:
