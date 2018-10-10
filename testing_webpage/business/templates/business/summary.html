@@ -26,11 +26,7 @@
         <div class="background" id="background">
             <div class="gradient1">
                 <div class="row bold">
-                    {% if campaign.free_trial == False %}
-                        <div class="col-lg-12 campaign bold">{{ campaign.title_es }}</div>
-                    {% else %}
-                        <div class="col-lg-12 campaign bold">{{ campaign.title_es }} <br> (PRUEBA GRATIS)</div>
-                    {% endif %}
+                    <div class="col-lg-12 campaign bold">{{ campaign.title_es }}</div>
                 </div>
                 <div class="row plan-type"></div>
                 <div class="row">
@@ -38,15 +34,17 @@
                     <div class="col-lg-8 col-xs-12 gradient2">
                         <p class="date regular">{% trans 'PUBLISH DATE' %}: {{ created_at }}</p>
                         {% if campaign.state.name == 'Active' %}
-                        <p class="status bold">ESTADO: activa</p>
-                        <br>
+                            <p class="status bold">ESTADO: activa</p>
                         {% elif campaign.state.name == 'Inactive' %}
-                        <p class="status bold">ESTADO: inactiva</p>
-                        <br>
+                            <p class="status bold">ESTADO: inactiva</p>
                         {% else %}
-                        <p class="status bold">ESTADO: terminada</p>
-                        <br>
+                            <p class="status bold">ESTADO: terminada</p>
                         {% endif %}
+
+                        {% if campaign.free_trial == True %}
+                            <p class="status bold">(Prueba gratis)</p>
+                        {% endif %}
+                        <br>
                         <p class="total regular">{% trans 'TOTAL CANDIDATES' %}: {{ num_total }}</p>
                     </div>
                 </div>

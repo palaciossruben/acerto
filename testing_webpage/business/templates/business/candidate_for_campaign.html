@@ -9,7 +9,7 @@
 {% elif campaign.free_trial == True and campaign.state.name != 'Inactive'%}
 {% else %}
     <a href="#" onclick="return false" class="tooltip">
-    <span class="tooltiptext">Para poder ver la información adicional del candidato, la campaña debe estar activa</span>
+        <span class="tooltiptext">Para poder ver la información adicional del candidato, la campaña debe estar activa</span>
 {% endif %}
 <div class="row candidate-info-div">
     <div class="email-checkbox">
@@ -27,7 +27,6 @@
     <div class="col-lg-2 col-xs-12">
         <p class="name">
             <strong>{{ candidate.user.name }}</strong>
-
         </p>
         {% if candidate.user.profession.name_es %}
             <p class="profession">{{ candidate.user.profession.name_es }}</p>
@@ -131,6 +130,6 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        not_blocked("{{ business_state.name }}");
+        not_blocked("{{ business_state.name }}", "{{ campaign.free_trial }}", "{{ campaign.state.name }}");
     });
 </script>
