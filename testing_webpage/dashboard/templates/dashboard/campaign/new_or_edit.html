@@ -16,10 +16,10 @@
         {% csrf_token %}
         <br>
         <br>
-        {% if company %}
+
             <input class="title_text_box" type="text" name="company" value="{{ company.name }}"
               placeholder="Digita el nombre de la empresa" required>
-        {% endif %}
+
         <br>
         <br>
         <input class="title_text_box" type="text" name="title" value="{{ campaign.title }}"
