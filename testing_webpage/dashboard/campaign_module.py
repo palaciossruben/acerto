@@ -148,7 +148,8 @@ def create_campaign(request):
 def get_city_question(campaign):
     q = Question(text='Are you willing to move to {} for this job?'.format(campaign.city.name),
                  text_es='¿Estarías dispuesto/a a mudarte a {} por este trabajo?'.format(campaign.city.name),
-                 type=QuestionType.objects.get(code='SA'))
+                 type=QuestionType.objects.get(code='SA'),
+                 internal_name='Ciudad')
     q.save()
 
     yes = Answer(name='Yes', name_es='Si', order=1)
@@ -166,7 +167,8 @@ def get_city_question(campaign):
 def get_salary_question(campaign):
     q = Question(text='What is your salary expectation?',
                  text_es='¿Cúal es tu salario esperado?',
-                 type=QuestionType.objects.get(code='NI'))
+                 type=QuestionType.objects.get(code='NI'),
+                 internal_name='Aspiración salarial')
     q.params = {'min': 0,
                 'max': 30000000,
                 'min_correct': campaign.salary_low_range,
@@ -183,7 +185,8 @@ def get_experience_question(campaign):
 
     q = Question(text='How many years of experience do you have?',
                  text_es='¿Cuantos años de experiencia tienes?',
-                 type=QuestionType.objects.get(code='NI'))
+                 type=QuestionType.objects.get(code='NI'),
+                 internal_name='Experiencia')
     q.params = {'min': 0, 'max': 100, 'min_correct': campaign.experience, 'max_correct': 100, 'default': 1}
     q.save()
 
@@ -197,7 +200,8 @@ def get_others_requirements(campaign):
 
         q = Question(text='Do you have knowledge in {}?'.format(k.name),
                      text_es='¿Tienes conocimiento en {}?'.format(k.name),
-                     type=QuestionType.objects.get(code='SA'))
+                     type=QuestionType.objects.get(code='SA'),
+                     internal_name='{}'.format(k.name).capitalize())
         q.save()
 
         yes = Answer(name='Yes', name_es='Si', order=1)
