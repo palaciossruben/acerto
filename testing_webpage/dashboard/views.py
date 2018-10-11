@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 from beta_invite.models import Campaign, Test, TestType, BulletType, Interview, Survey, Bullet, QuestionType, Question, Answer, CampaignState
+from business.models import Company
 from dashboard.models import Candidate, Message, Screening
 from dashboard import constants as cts
 from beta_invite.util import email_sender
@@ -169,7 +170,7 @@ def new_campaign(request):
                                                       'professions': professions,
                                                       'bullet_types_json': bullet_types_json,
                                                       'action_url': '/dashboard/campaign/create',
-                                                      'title': 'New Campaign',
+                                                      'title': 'Nueva Campaña',
                                                       })
 
 
@@ -197,6 +198,11 @@ def edit_campaign(request, pk):
     """
     campaign = Campaign.objects.get(pk=pk)
     countries, cities, education, professions, work_areas, genders = get_drop_down_values(request.LANGUAGE_CODE)
+    business_user = common.get_business_user_with_campaign(campaign, 'object')
+    if not business_user:
+        company = ""
+    else:
+        company = business_user.company
 
     return render(request, cts.NEW_OR_EDIT_CAMPAIGN, {'countries': countries,
                                                       'cities': cities,
@@ -205,8 +211,9 @@ def edit_campaign(request, pk):
                                                       'work_areas': work_areas,
                                                       'campaign': campaign,
                                                       'action_url': '/dashboard/campaign/update_basic_properties',
-                                                      'title': 'Update Campaign',
+                                                      'title': 'Update {}'.format(campaign.title_es),
                                                       'campaign_states': CampaignState.objects.all(),
+                                                      'company': company
                                                       })
 
 
@@ -219,6 +226,20 @@ def update_basic_properties(request):
     campaign = common.get_campaign_from_request(request)
 
     campaign_module.update_campaign_basic_properties(campaign, request)
+    business_user = common.get_business_user_with_campaign(campaign, 'object')
+    if business_user:
+        company = business_user.company
+        if company:
+            company.name = request.POST.get('company')
+            company.save()
+        else:
+            company = Company()
+            company.name = request.POST.get('company')
+            company.save()
+            business_user.company = company
+            business_user.save()
+    else:
+        pass
 
     return campaign_module.get_campaign_edit_url(campaign)
 
