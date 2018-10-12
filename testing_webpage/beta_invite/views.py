@@ -285,17 +285,19 @@ def save_partial_additional_info(request):
 def active_campaigns(request):
 
     candidate = common.get_candidate_from_request(request)
-    new_user_module.update_user(candidate.campaign, candidate.user, {}, request)
 
-    last_evaluation = candidate.get_last_evaluation()
-    if last_evaluation:
-        test_module.update_scores(last_evaluation, last_evaluation.scores.all())
+    if candidate is not None:
+        new_user_module.update_user(candidate.campaign, candidate.user, {}, request)
 
-        # Uses ML to send to STC state!!! 100% automation reached?
-        test_module.classify_evaluation_and_change_state(candidate,
-                                                         use_machine_learning=True,
-                                                         success_state='STC',
-                                                         fail_state='WFI')
+        last_evaluation = candidate.get_last_evaluation()
+        if last_evaluation:
+            test_module.update_scores(last_evaluation, last_evaluation.scores.all())
+
+            # Uses ML to send to STC state!!! 100% automation reached?
+            test_module.classify_evaluation_and_change_state(candidate,
+                                                             use_machine_learning=True,
+                                                             success_state='STC',
+                                                             fail_state='WFI')
 
     return render(request, cts.ACTIVE_CAMPAIGNS_VIEW_PATH)
 
