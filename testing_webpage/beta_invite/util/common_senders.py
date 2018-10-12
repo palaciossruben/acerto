@@ -85,6 +85,13 @@ def get_campaign_name(candidate, language_code):
     return ''
 
 
+def get_campaign_city_name(candidate):
+
+    if candidate and candidate.campaign and candidate.campaign.city:
+        return candidate.campaign.city.name
+    return ''
+
+
 def get_campaign_description(candidate, language_code):
     """
     For a object that has no associated campaign it will not return the title
@@ -180,7 +187,7 @@ def get_params_with_candidate(candidate, language_code, override_dict={}):
               'campaign': get_campaign_name(candidate, language_code),
               'campaign_url': get_campaign_url(candidate),
               'campaign_salary_range': get_campaign_salary_range(candidate),
-              'campaign_city': candidate.campaign.city.name,
+              'campaign_city': get_campaign_city_name(candidate),
               'campaign_description': get_campaign_description(candidate, language_code)}
 
     if hasattr(candidate, 'campaign_id'):
