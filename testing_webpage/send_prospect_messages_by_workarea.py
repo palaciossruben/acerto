@@ -25,7 +25,7 @@ def candidates_filter(candidates):
 def send_prospect_messages(segment_code):
 
     candidates = Candidate.objects.filter(~Q(user=None), ~Q(user__phone=None), ~Q(campaign__city=None),
-                                          ~Q(state__in=[5, 7]), ~Q(removed=False),
+                                          ~Q(state__in=[5, 7]), removed=False,
                                           user__work_area__segment=WorkAreaSegment.objects.get(code=segment_code)).order_by('-user_id')#[:10]
 
     candidates = [c for c in candidates]
