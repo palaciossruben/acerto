@@ -10,18 +10,37 @@ from beta_invite.models import WorkAreaSegment
 from dashboard.models import Candidate
 
 
+def candidates_filter(candidates):
+
+    users = set()
+    new_candidates = list()
+
+    for c in candidates:
+        if c.user_id not in users:
+            users.add(c.user_id)
+            new_candidates.append(c.pk)
+    return sorted(new_candidates)
+
+
 def send_prospect_messages(segment_code):
 
+    candidates = Candidate.objects.filter(~Q(user=None), ~Q(user__phone=None), ~Q(campaign__city=None),
+                                          ~Q(state__in=[5, 7]), ~Q(removed=False),
+                                          user__work_area__segment=WorkAreaSegment.objects.get(code=segment_code)).order_by('-user_id')#[:10]
 
-    candidates = Candidate.objects.filter(~Q(user=None), ~Q(user__phone=None), user__work_area__segment=WorkAreaSegment.objects.get(code=segment_code)).order_by('-user_id')[:10]
     candidates = [c for c in candidates]
 
     print([c.user_id for c in candidates])
 
-    messenger_sender.send(candidates=candidates,
+    new_candidates = candidates_filter(candidates)
+
+    new_candidates = Candidate.objects.filter(pk__in=new_candidates).order_by('-user_id')
+
+    print([c.user_id for c in new_candidates].__len__())
+
+    messenger_sender.send(candidates=new_candidates,
                           language_code='es',
                           body_input='prospects_invitation_message_body')
-
 
 
 # Precaution: If script imported for another module, this lines avoid the execution of this entire file
