@@ -30,11 +30,13 @@ def send_prospect_messages(segment_code):
 
     candidates = [c for c in candidates]
 
-    print([c.user_id for c in candidates])
-
     new_candidates = candidates_filter(candidates)
 
     new_candidates = Candidate.objects.filter(pk__in=new_candidates).order_by('-user_id')
+
+    new_candidates = [c for c in new_candidates]
+
+    print([c.user_id for c in candidates].__len__())
 
     print([c.user_id for c in new_candidates].__len__())
 
