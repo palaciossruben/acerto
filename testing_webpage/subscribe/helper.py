@@ -210,12 +210,11 @@ def get_pdf_text_with_ocr(filename):
         return ''
 
 
-def get_text_fast(folder_path, filename):
+def get_text_fast(filename):
     """
     Follows path from greater chance of success to least.
     This is not perfect. Some tricky PDFS can join all words or separate every other character.
     Args:
-        folder_path:
         filename:
     Returns: String with text
     """
@@ -229,8 +228,8 @@ def get_text_fast(folder_path, filename):
     # Still nothing; then take out the big gun. Convert to png and use OCR
     if text_has_no_data(text):
         text = get_pdf_text_with_ocr(filename)
-    else:  # If things are OK still some images might be missing:
-        text += get_text_from_pdf_images(folder_path, filename)
+    #else:  # If things are OK still some images might be missing:
+    #    text += get_text_from_pdf_images(folder_path, filename)
 
     return text
 
@@ -292,7 +291,7 @@ def get_pdf_text(folder_path, filename, fast=True):
 
     if fast:
         print('simple fast strategy')
-        return get_text_fast(folder_path, filename)
+        return get_text_fast(filename)
     else:  # Slow strategy, 3 methods compete to see who is more precise.
         # Opens word_user_dict, or returns unordered users.
         try:
@@ -300,7 +299,7 @@ def get_pdf_text(folder_path, filename, fast=True):
             return get_text_with_relevance_index(folder_path, filename, relevance_dictionary)
         except FileNotFoundError:
             print('simple fast strategy')
-            return get_text_fast(folder_path, filename)
+            return get_text_fast(filename)
 
 
 def remove_accents_in_string(element):

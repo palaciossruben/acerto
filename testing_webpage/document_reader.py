@@ -11,13 +11,13 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
+import nltk
 import ntpath
 import pickle
 from nltk.stem.snowball import SnowballStemmer
-import nltk
 
-from subscribe import helper as h
 from subscribe import cts
+from subscribe import helper as h
 from beta_invite.models import User
 
 

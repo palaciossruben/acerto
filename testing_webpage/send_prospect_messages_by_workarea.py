@@ -7,38 +7,35 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 from beta_invite.util import messenger_sender
 from beta_invite.models import WorkAreaSegment
-from dashboard.models import Candidate
+from dashboard.models import Candidate, State
 
 
 def candidates_filter(candidates):
 
-    users = set()
-    new_candidates = list()
+    user_ids = set()
+    filtered_candidates = list()
 
     for c in candidates:
-        if c.user_id not in users:
-            users.add(c.user_id)
-            new_candidates.append(c.pk)
-    return sorted(new_candidates)
+        if c.user_id not in user_ids:
+            user_ids.add(c.user_id)
+            filtered_candidates.append(c)
+    return filtered_candidates
 
 
 def send_prospect_messages(segment_code):
 
-    candidates = Candidate.objects.filter(~Q(user=None), ~Q(user__phone=None), ~Q(campaign__city=None),
-                                          ~Q(state__in=[5, 7]), removed=False,
+    candidates = Candidate.objects.filter(~Q(user=None),
+                                          ~Q(user__phone=None),
+                                          ~Q(state__in=State.objects.filter(code__in=['STC', 'GTJ']).all()),
+                                          removed=False,
                                           user__work_area__segment=WorkAreaSegment.objects.get(code=segment_code)).order_by('-user_id')#[:10]
 
     candidates = [c for c in candidates]
 
     new_candidates = candidates_filter(candidates)
 
-    new_candidates = Candidate.objects.filter(pk__in=new_candidates).order_by('-user_id')
-
-    new_candidates = [c for c in new_candidates]
-
-    print([c.user_id for c in candidates].__len__())
-
-    print([c.user_id for c in new_candidates].__len__())
+    print(len(candidates))
+    print(len(new_candidates))
 
     messenger_sender.send(candidates=new_candidates,
                           language_code='es',

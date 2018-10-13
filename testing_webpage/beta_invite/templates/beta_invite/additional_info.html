@@ -35,8 +35,6 @@ function removeAnyDots() {
     }
 </script>
 
-
-
 	<!-- multistep form -->
 	<form id="msform" autocomplete="off" method="post" action="active_campaigns" enctype="multipart/form-data">
 		{% csrf_token %}
@@ -122,7 +120,7 @@ function removeAnyDots() {
 		 <fieldset> <!-- two items asked -->
 			<h2 class="fs-title">Perfil</h2>
 			<h3 class="fs-subtitle">Descríbete brevemente</h3>
-			<textarea name="profile" id="profile" placeholder="Perfil (máximo 250 caracteres)" rows="6" cols="50" maxlength="250" ></textarea>
+			<textarea name="profile" id="profile" placeholder="Describe lo que haces de forma concreta y concisa" rows="6" cols="50" maxlength="250" ></textarea>
 			<input type="text" name="languages" id="languages" placeholder="Idiomas que manejas" maxlength="100"/>
 			<input type="button" name="previous" class="previous action-button" value="Atrás" />
 			<input type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'profile':$('#profile').val(), 'languages':$('#languages').val()})"/>
