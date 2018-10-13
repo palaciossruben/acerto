@@ -24,7 +24,7 @@ from beta_invite.util import email_sender
 from business import constants as cts
 from beta_invite.models import User, BulletType, WorkArea, EmailType, Campaign, Test
 from business.models import Plan, Contact, Search, BusinessUser, Company
-from beta_invite.models import KeyWord
+from beta_invite.models import Requirement
 from business.custom_user_creation_form import CustomUserCreationForm
 from dashboard import campaign_module
 from dashboard.models import Candidate, BusinessState, Comment
@@ -386,7 +386,7 @@ def start(request):
                                                  'work_areas': common.translate_list_of_objects(WorkArea.objects.all(), request.LANGUAGE_CODE),
                                                  'cities': common.get_cities(),
                                                  'default_city': city,
-                                                 'keywords': KeyWord.objects.all(),
+                                                 'requirements': Requirement.objects.all(),
                                                  'tests': Test.objects.filter(public=True)})
 
 
@@ -601,8 +601,8 @@ def online_demo(request):
 
 def get_work_area_requirement(request, work_area_id):
 
-    keywords = KeyWord.objects.filter(work_area_id=work_area_id)
+    requirements = Requirement.objects.filter(work_area_id=work_area_id)
 
-    json_data = json.dumps([{'pk': k.pk, 'name': k.name} for k in keywords])
+    json_data = json.dumps([{'pk': k.pk, 'name': k.name} for k in requirements])
 
     return JsonResponse(json_data, safe=False)

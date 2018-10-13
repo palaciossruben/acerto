@@ -112,9 +112,9 @@ def add_user_tests(campaign, request):
     campaign.save()
 
 
-def get_keywords(campaign, request):
-    keywords = {int(id) for id in request.POST.getlist('keyword_ids')}
-    campaign.keywords.add(*keywords)
+def get_requirements(campaign, request):
+    requirements = {int(id) for id in request.POST.getlist('keyword_ids')}
+    campaign.requirements.add(*requirements)
     campaign.save()
 
 
@@ -134,7 +134,7 @@ def create_campaign(request):
     campaign = Campaign(country=country, city=city)
     campaign.save()
 
-    get_keywords(campaign, request)
+    get_requirements(campaign, request)
     update_campaign_basic_properties(campaign, request)
     update_campaign_bullets(campaign, request)
     candidate_prospects = prospect_module.get_candidates(campaign)
@@ -196,7 +196,7 @@ def get_experience_question(campaign):
 def get_others_requirements(campaign):
 
     questions = []
-    for k in campaign.keywords.all():
+    for k in campaign.requirements.all():
 
         q = Question(text='Do you have knowledge in {}?'.format(k.name),
                      text_es='¿Tienes conocimiento en {}?'.format(k.name),
