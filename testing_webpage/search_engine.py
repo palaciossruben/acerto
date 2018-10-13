@@ -160,7 +160,7 @@ def print_common_words_percentiles(words):
 
 def get_common_words(text_corpus, number_of_top_words=20000):
     """Gets a list of the most common words"""
-    print('getting common user_words')
+    print('getting common user_words...')
 
     word_frequency = dict()
     for text in text_corpus.values():
@@ -272,20 +272,21 @@ def save_user_relevance_dictionary():
 
 
 def run():
-    with open('search_engine.log', 'a') as f:
-        sys.stdout = h.Unbuffered(f)
+    #f = open('search_engine.log', 'a')
+    #sys.stdout = h.Unbuffered(f)
 
-        h.log("STARTED RELEVANCE DICT")
-        t0 = time.time()
-        save_relevance_dictionary()
-        t1 = time.time()
-        h.log('RELEVANCE DICTIONARY, time: {}'.format(t1 - t0))
+    h.log("STARTED RELEVANCE DICT")
+    t0 = time.time()
+    save_relevance_dictionary()
+    t1 = time.time()
+    h.log('RELEVANCE DICTIONARY, time: {}'.format(t1 - t0))
 
-        h.log("STARTED USER RELEVANCE DICT")
-        t0 = time.time()
-        save_user_relevance_dictionary()
-        t1 = time.time()
-        h.log('USER RELEVANCE DICTIONARY, time: {}'.format(t1 - t0))
+    h.log("STARTED USER RELEVANCE DICT")
+    t0 = time.time()
+    save_user_relevance_dictionary()
+    t1 = time.time()
+    h.log('USER RELEVANCE DICTIONARY, time: {}'.format(t1 - t0))
+    #f.close()
 
 
 if __name__ == "__main__":
