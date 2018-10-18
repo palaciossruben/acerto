@@ -8,5 +8,1165 @@
       "to_salary": 1000000,
       "price": 350000
     }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 2,
+    "fields":{
+      "work_area_id": 1,
+      "from_salary": 1000000,
+      "to_salary": 2000000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 3,
+    "fields":{
+      "work_area_id": 1,
+      "from_salary": 2000000,
+      "to_salary": 3500000,
+      "price": 450000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 4,
+    "fields":{
+      "work_area_id": 1,
+      "from_salary": 3500000,
+      "to_salary": 5000000,
+      "price": 800000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 5,
+    "fields":{
+      "work_area_id": 1,
+      "from_salary": 5000000,
+      "to_salary": 7000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 6,
+    "fields":{
+      "work_area_id": 1,
+      "from_salary": 7000000,
+      "to_salary": 10000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 7,
+    "fields":{
+      "work_area_id": 2,
+      "from_salary": 0,
+      "to_salary": 1000000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 8,
+    "fields":{
+      "work_area_id": 2,
+      "from_salary": 1000000,
+      "to_salary": 2000000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 9,
+    "fields":{
+      "work_area_id": 2,
+      "from_salary": 2000000,
+      "to_salary": 3500000,
+      "price": 450000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 10,
+    "fields":{
+      "work_area_id": 2,
+      "from_salary": 3500000,
+      "to_salary": 5000000,
+      "price": 800000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 11,
+    "fields":{
+      "work_area_id": 2,
+      "from_salary": 5000000,
+      "to_salary": 7000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 12,
+    "fields":{
+      "work_area_id": 2,
+      "from_salary": 7000000,
+      "to_salary": 10000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 13,
+    "fields":{
+      "work_area_id": 3,
+      "from_salary": 0,
+      "to_salary": 1000000,
+      "price": 150000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 14,
+    "fields":{
+      "work_area_id": 3,
+      "from_salary": 1000000,
+      "to_salary": 2000000,
+      "price": 150000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 15,
+    "fields":{
+      "work_area_id": 3,
+      "from_salary": 2000000,
+      "to_salary": 3500000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 16,
+    "fields":{
+      "work_area_id": 3,
+      "from_salary": 3500000,
+      "to_salary": 5000000,
+      "price": 450000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 17,
+    "fields":{
+      "work_area_id": 3,
+      "from_salary": 5000000,
+      "to_salary": 7000000,
+      "price": 800000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 18,
+    "fields":{
+      "work_area_id": 3,
+      "from_salary": 7000000,
+      "to_salary": 10000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 19,
+    "fields":{
+      "work_area_id": 4,
+      "from_salary": 0,
+      "to_salary": 1000000,
+      "price": 150000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 20,
+    "fields":{
+      "work_area_id": 4,
+      "from_salary": 1000000,
+      "to_salary": 2000000,
+      "price": 150000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 21,
+    "fields":{
+      "work_area_id": 4,
+      "from_salary": 2000000,
+      "to_salary": 3500000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 22,
+    "fields":{
+      "work_area_id": 4,
+      "from_salary": 3500000,
+      "to_salary": 5000000,
+      "price": 450000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 23,
+    "fields":{
+      "work_area_id": 4,
+      "from_salary": 5000000,
+      "to_salary": 7000000,
+      "price": 800000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 24,
+    "fields":{
+      "work_area_id": 4,
+      "from_salary": 7000000,
+      "to_salary": 10000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 25,
+    "fields":{
+      "work_area_id": 5,
+      "from_salary": 0,
+      "to_salary": 1000000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 26,
+    "fields":{
+      "work_area_id": 5,
+      "from_salary": 1000000,
+      "to_salary": 2000000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 27,
+    "fields":{
+      "work_area_id": 5,
+      "from_salary": 2000000,
+      "to_salary": 3500000,
+      "price": 450000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 28,
+    "fields":{
+      "work_area_id": 5,
+      "from_salary": 3500000,
+      "to_salary": 5000000,
+      "price": 800000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 29,
+    "fields":{
+      "work_area_id": 5,
+      "from_salary": 5000000,
+      "to_salary": 7000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 30,
+    "fields":{
+      "work_area_id": 5,
+      "from_salary": 7000000,
+      "to_salary": 10000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 31,
+    "fields":{
+      "work_area_id": 6,
+      "from_salary": 0,
+      "to_salary": 1000000,
+      "price": 150000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 32,
+    "fields":{
+      "work_area_id": 6,
+      "from_salary": 1000000,
+      "to_salary": 2000000,
+      "price": 150000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 33,
+    "fields":{
+      "work_area_id": 6,
+      "from_salary": 2000000,
+      "to_salary": 3500000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 34,
+    "fields":{
+      "work_area_id": 6,
+      "from_salary": 3500000,
+      "to_salary": 5000000,
+      "price": 450000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 35,
+    "fields":{
+      "work_area_id": 6,
+      "from_salary": 5000000,
+      "to_salary": 7000000,
+      "price": 800000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 36,
+    "fields":{
+      "work_area_id": 6,
+      "from_salary": 7000000,
+      "to_salary": 10000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 37,
+    "fields":{
+      "work_area_id": 7,
+      "from_salary": 0,
+      "to_salary": 1000000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 38,
+    "fields":{
+      "work_area_id": 7,
+      "from_salary": 1000000,
+      "to_salary": 2000000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 39,
+    "fields":{
+      "work_area_id": 7,
+      "from_salary": 2000000,
+      "to_salary": 3500000,
+      "price": 450000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 40,
+    "fields":{
+      "work_area_id": 7,
+      "from_salary": 3500000,
+      "to_salary": 5000000,
+      "price": 800000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 41,
+    "fields":{
+      "work_area_id": 7,
+      "from_salary": 5000000,
+      "to_salary": 7000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 42,
+    "fields":{
+      "work_area_id": 7,
+      "from_salary": 7000000,
+      "to_salary": 10000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 43,
+    "fields":{
+      "work_area_id": 8,
+      "from_salary": 0,
+      "to_salary": 10000000,
+      "price": 0
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 44,
+    "fields":{
+      "work_area_id": 9,
+      "from_salary": 0,
+      "to_salary": 1000000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 45,
+    "fields":{
+      "work_area_id": 9,
+      "from_salary": 1000000,
+      "to_salary": 2000000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 46,
+    "fields":{
+      "work_area_id": 9,
+      "from_salary": 2000000,
+      "to_salary": 3500000,
+      "price": 450000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 47,
+    "fields":{
+      "work_area_id": 9,
+      "from_salary": 3500000,
+      "to_salary": 5000000,
+      "price": 800000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 48,
+    "fields":{
+      "work_area_id": 9,
+      "from_salary": 5000000,
+      "to_salary": 7000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 49,
+    "fields":{
+      "work_area_id": 9,
+      "from_salary": 7000000,
+      "to_salary": 10000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 50,
+    "fields":{
+      "work_area_id": 10,
+      "from_salary": 0,
+      "to_salary": 1000000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 51,
+    "fields":{
+      "work_area_id": 10,
+      "from_salary": 1000000,
+      "to_salary": 2000000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 52,
+    "fields":{
+      "work_area_id": 10,
+      "from_salary": 2000000,
+      "to_salary": 3500000,
+      "price": 450000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 53,
+    "fields":{
+      "work_area_id": 10,
+      "from_salary": 3500000,
+      "to_salary": 5000000,
+      "price": 800000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 54,
+    "fields":{
+      "work_area_id": 10,
+      "from_salary": 5000000,
+      "to_salary": 7000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 55,
+    "fields":{
+      "work_area_id": 10,
+      "from_salary": 7000000,
+      "to_salary": 10000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 56,
+    "fields":{
+      "work_area_id": 11,
+      "from_salary": 0,
+      "to_salary": 1000000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 57,
+    "fields":{
+      "work_area_id": 11,
+      "from_salary": 1000000,
+      "to_salary": 2000000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 58,
+    "fields":{
+      "work_area_id": 11,
+      "from_salary": 2000000,
+      "to_salary": 3500000,
+      "price": 450000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 59,
+    "fields":{
+      "work_area_id": 11,
+      "from_salary": 3500000,
+      "to_salary": 5000000,
+      "price": 800000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 60,
+    "fields":{
+      "work_area_id": 11,
+      "from_salary": 5000000,
+      "to_salary": 7000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 61,
+    "fields":{
+      "work_area_id": 11,
+      "from_salary": 7000000,
+      "to_salary": 10000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 62,
+    "fields":{
+      "work_area_id": 12,
+      "from_salary": 0,
+      "to_salary": 1000000,
+      "price": 450000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 63,
+    "fields":{
+      "work_area_id": 12,
+      "from_salary": 1000000,
+      "to_salary": 2000000,
+      "price": 675000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 64,
+    "fields":{
+      "work_area_id": 12,
+      "from_salary": 2000000,
+      "to_salary": 3500000,
+      "price": 800000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 65,
+    "fields":{
+      "work_area_id": 12,
+      "from_salary": 3500000,
+      "to_salary": 5000000,
+      "price": 800000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 66,
+    "fields":{
+      "work_area_id": 12,
+      "from_salary": 5000000,
+      "to_salary": 7000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 67,
+    "fields":{
+      "work_area_id": 12,
+      "from_salary": 7000000,
+      "to_salary": 10000000,
+      "price": 3000000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 68,
+    "fields":{
+      "work_area_id": 13,
+      "from_salary": 0,
+      "to_salary": 1000000,
+      "price": 450000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 69,
+    "fields":{
+      "work_area_id": 13,
+      "from_salary": 1000000,
+      "to_salary": 2000000,
+      "price": 675000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 70,
+    "fields":{
+      "work_area_id": 13,
+      "from_salary": 2000000,
+      "to_salary": 3500000,
+      "price": 800000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 71,
+    "fields":{
+      "work_area_id": 13,
+      "from_salary": 3500000,
+      "to_salary": 5000000,
+      "price": 800000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 72,
+    "fields":{
+      "work_area_id": 13,
+      "from_salary": 5000000,
+      "to_salary": 7000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 73,
+    "fields":{
+      "work_area_id": 13,
+      "from_salary": 7000000,
+      "to_salary": 10000000,
+      "price": 3000000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 74,
+    "fields":{
+      "work_area_id": 14,
+      "from_salary": 0,
+      "to_salary": 10000000,
+      "price": 0
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 75,
+    "fields":{
+      "work_area_id": 15,
+      "from_salary": 0,
+      "to_salary": 1000000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 76,
+    "fields":{
+      "work_area_id": 15,
+      "from_salary": 1000000,
+      "to_salary": 2000000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 77,
+    "fields":{
+      "work_area_id": 15,
+      "from_salary": 2000000,
+      "to_salary": 3500000,
+      "price": 450000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 78,
+    "fields":{
+      "work_area_id": 15,
+      "from_salary": 3500000,
+      "to_salary": 5000000,
+      "price": 800000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 79,
+    "fields":{
+      "work_area_id": 15,
+      "from_salary": 5000000,
+      "to_salary": 7000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 80,
+    "fields":{
+      "work_area_id": 15,
+      "from_salary": 7000000,
+      "to_salary": 10000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 81,
+    "fields":{
+      "work_area_id": 16,
+      "from_salary": 0,
+      "to_salary": 1000000,
+      "price": 150000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 82,
+    "fields":{
+      "work_area_id": 16,
+      "from_salary": 1000000,
+      "to_salary": 2000000,
+      "price": 150000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 83,
+    "fields":{
+      "work_area_id": 16,
+      "from_salary": 2000000,
+      "to_salary": 3500000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 84,
+    "fields":{
+      "work_area_id": 16,
+      "from_salary": 3500000,
+      "to_salary": 5000000,
+      "price": 450000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 85,
+    "fields":{
+      "work_area_id": 16,
+      "from_salary": 5000000,
+      "to_salary": 7000000,
+      "price": 800000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 86,
+    "fields":{
+      "work_area_id": 16,
+      "from_salary": 7000000,
+      "to_salary": 10000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 87,
+    "fields":{
+      "work_area_id": 17,
+      "from_salary": 0,
+      "to_salary": 10000000,
+      "price": 0
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 88,
+    "fields":{
+      "work_area_id": 18,
+      "from_salary": 0,
+      "to_salary": 1000000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 89,
+    "fields":{
+      "work_area_id": 18,
+      "from_salary": 1000000,
+      "to_salary": 2000000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 90,
+    "fields":{
+      "work_area_id": 18,
+      "from_salary": 2000000,
+      "to_salary": 3500000,
+      "price": 450000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 91,
+    "fields":{
+      "work_area_id": 18,
+      "from_salary": 3500000,
+      "to_salary": 5000000,
+      "price": 800000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 92,
+    "fields":{
+      "work_area_id": 18,
+      "from_salary": 5000000,
+      "to_salary": 7000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 93,
+    "fields":{
+      "work_area_id": 18,
+      "from_salary": 7000000,
+      "to_salary": 10000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 94,
+    "fields":{
+      "work_area_id": 19,
+      "from_salary": 0,
+      "to_salary": 1000000,
+      "price": 150000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 95,
+    "fields":{
+      "work_area_id": 19,
+      "from_salary": 1000000,
+      "to_salary": 2000000,
+      "price": 150000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 96,
+    "fields":{
+      "work_area_id": 19,
+      "from_salary": 2000000,
+      "to_salary": 3500000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 97,
+    "fields":{
+      "work_area_id": 19,
+      "from_salary": 3500000,
+      "to_salary": 5000000,
+      "price": 450000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 98,
+    "fields":{
+      "work_area_id": 19,
+      "from_salary": 5000000,
+      "to_salary": 7000000,
+      "price": 8000000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 99,
+    "fields":{
+      "work_area_id": 19,
+      "from_salary": 7000000,
+      "to_salary": 10000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 100,
+    "fields":{
+      "work_area_id": 20,
+      "from_salary": 0,
+      "to_salary": 1000000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 101,
+    "fields":{
+      "work_area_id": 20,
+      "from_salary": 1000000,
+      "to_salary": 2000000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 102,
+    "fields":{
+      "work_area_id": 20,
+      "from_salary": 2000000,
+      "to_salary": 3500000,
+      "price": 450000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 103,
+    "fields":{
+      "work_area_id": 20,
+      "from_salary": 3500000,
+      "to_salary": 5000000,
+      "price": 800000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 104,
+    "fields":{
+      "work_area_id": 20,
+      "from_salary": 5000000,
+      "to_salary": 7000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 105,
+    "fields":{
+      "work_area_id": 20,
+      "from_salary": 7000000,
+      "to_salary": 10000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 106,
+    "fields":{
+      "work_area_id": 21,
+      "from_salary": 0,
+      "to_salary": 1000000,
+      "price": 150000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 107,
+    "fields":{
+      "work_area_id": 21,
+      "from_salary": 1000000,
+      "to_salary": 2000000,
+      "price": 150000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 108,
+    "fields":{
+      "work_area_id": 21,
+      "from_salary": 2000000,
+      "to_salary": 3500000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 109,
+    "fields":{
+      "work_area_id": 21,
+      "from_salary": 3500000,
+      "to_salary": 5000000,
+      "price": 450000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 110,
+    "fields":{
+      "work_area_id": 21,
+      "from_salary": 5000000,
+      "to_salary": 7000000,
+      "price": 800000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 111,
+    "fields":{
+      "work_area_id": 21,
+      "from_salary": 7000000,
+      "to_salary": 10000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 112,
+    "fields":{
+      "work_area_id": 22,
+      "from_salary": 0,
+      "to_salary": 1000000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 113,
+    "fields":{
+      "work_area_id": 22,
+      "from_salary": 1000000,
+      "to_salary": 2000000,
+      "price": 350000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 114,
+    "fields":{
+      "work_area_id": 22,
+      "from_salary": 2000000,
+      "to_salary": 3500000,
+      "price": 450000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 115,
+    "fields":{
+      "work_area_id": 22,
+      "from_salary": 3500000,
+      "to_salary": 5000000,
+      "price": 800000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 116,
+    "fields":{
+      "work_area_id": 22,
+      "from_salary": 5000000,
+      "to_salary": 7000000,
+      "price": 1200000
+    }
+  },
+  {
+    "model": "beta_invite.price",
+    "pk": 117,
+    "fields":{
+      "work_area_id": 22,
+      "from_salary": 7000000,
+      "to_salary": 10000000,
+      "price": 1200000
+    }
   }
 ]

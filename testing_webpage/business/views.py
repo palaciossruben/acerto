@@ -38,6 +38,7 @@ from api.models import PublicPost
 
 TAX = 0.19
 DEFAULT_BASE_PRICE = 600000
+INVALID_WORK_AREAS = [8, 14, 17]
 
 
 def index(request):
@@ -487,13 +488,15 @@ def business_campaigns(request, business_user_id):
     apikey = config('payu_api_key')
     merchant_id = config('merchant_id')
     account_id = config('account_id')
+    invalid_work_areas = INVALID_WORK_AREAS
 
     for c in campaigns:
         if c.salary_high_range:
             c.reference_code = str(c.id) + "-" + date
             try:
-                c.base = round(float(Price.objects.get(from_salary__lte=c.salary_high_range,
-                                                       to_salary__gt=c.salary_high_range,
+
+                c.base = round(float(Price.objects.get(from_salary__gte=c.salary_low_range,
+                                                       to_salary__lte=c.salary_high_range,
                                                        work_area=c.work_area).price))
             except models.ObjectDoesNotExist:
                 c.base = DEFAULT_BASE_PRICE
@@ -514,7 +517,8 @@ def business_campaigns(request, business_user_id):
                                                               'test': '0',
                                                               'description': 'Activación de la oferta Premium',
                                                               'buyer_name': business_user.name,
-                                                              'buyer_email': business_user.email
+                                                              'buyer_email': business_user.email,
+                                                              'invalid_work_areas': invalid_work_areas
                                                               })
 
 
