@@ -64,7 +64,6 @@ def add_new_users(queue, created_since):
      3. text analysis already done
     :return:
     """
-    # tODO: make it more efficient by using the SQL LIMIT
     users = User.objects.filter(~Q(curriculum_url='#') &
                                 Q(curriculum_s3_url='#') &
                                 Q(created_at__gt=created_since)).all()
