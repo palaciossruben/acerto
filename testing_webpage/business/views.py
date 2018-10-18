@@ -6,15 +6,19 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.testing_webpage
 application = get_wsgi_application()
 
 import smtplib
+import hashlib
+from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from ipware.ip import get_ip
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import login, authenticate
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils import formats
 from django.http import HttpResponseBadRequest, HttpResponse, JsonResponse
+from decouple import config
+from django.db import models
 
 import common
 import business
@@ -22,7 +26,7 @@ import beta_invite
 from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
-from beta_invite.models import User, BulletType, WorkArea, EmailType, Campaign, Test
+from beta_invite.models import User, WorkArea, EmailType, Campaign, Test, Price
 from business.models import Plan, Contact, Search, BusinessUser, Company
 from beta_invite.models import Requirement
 from business.custom_user_creation_form import CustomUserCreationForm
@@ -31,6 +35,10 @@ from dashboard.models import Candidate, BusinessState, Comment
 from business import dashboard_module
 from testing_webpage.models import BusinessUserPendingEmail
 from api.models import PublicPost
+
+TAX = 0.19
+DEFAULT_BASE_PRICE = 600000
+INVALID_WORK_AREAS = [8, 14, 17]
 
 
 def index(request):
@@ -376,13 +384,9 @@ def start(request):
     Only displays initial view.
     """
 
-    requirement_bullet_id = BulletType.objects.get(name='requirement').id
-    perk_bullet_id = BulletType.objects.get(name='perk').id
     city = common.get_city(request)
 
-    return render(request, cts.START_VIEW_PATH, {'requirement_bullet_id': requirement_bullet_id,
-                                                 'perk_bullet_id': perk_bullet_id,
-                                                 'error_message': '',
+    return render(request, cts.START_VIEW_PATH, {'error_message': '',
                                                  'work_areas': common.translate_list_of_objects(WorkArea.objects.all(), request.LANGUAGE_CODE),
                                                  'cities': common.get_cities(),
                                                  'default_city': city,
@@ -477,11 +481,59 @@ def business_campaigns(request, business_user_id):
     if request.user.id != business_user.auth_user.id:
         return redirect('business:login')
 
-    campaigns = business_user.campaigns.filter(removed=False).all()
+    campaigns = business_user.campaigns.filter(removed=False).order_by('-created_at', 'state', 'title_es').all()
+    currency = 'COP'
+    date = str(datetime.now())
+
+    apikey = config('payu_api_key')
+    merchant_id = config('merchant_id')
+    account_id = config('account_id')
+    invalid_work_areas = INVALID_WORK_AREAS
+
+    for c in campaigns:
+        if c.salary_high_range:
+            c.reference_code = str(c.id) + "-" + date
+            try:
+                c.base = round(float(Price.objects.get(work_area=c.work_area,
+                                                       from_salary__gte=c.salary_low_range,
+                                                       to_salary__lt=(c.salary_high_range+1)).price))
+            except models.ObjectDoesNotExist:
+                c.base = DEFAULT_BASE_PRICE
+
+            except MultipleObjectsReturned:
+                c.base = Price.objects.filter(work_area=c.work_area,
+                                              from_salary__gte=c.salary_low_range,
+                                              to_salary__lt=(c.salary_high_range+1)).all().order_by('-to_salary')[0].price
+
+            c.tax = round(c.base * TAX, 2)
+            c.amount = round(float(c.base+c.tax), 2)
+            c.amount = str(c.amount)
+            c.tax = str(c.tax)
+            c.base = str(c.base)
+            c.signature = hashlib.md5((apikey + "~" + merchant_id + "~" + c.reference_code + "~" + str(c.amount) + "~" + currency).encode('utf-8')).hexdigest()
 
     return render(request, cts.BUSINESS_CAMPAIGNS_VIEW_PATH, {'campaigns': campaigns,
-                                                              'business_user_id': business_user.pk
+                                                              'business_user_id': business_user.pk,
+                                                              'apikey': apikey,
+                                                              'merchant_id': merchant_id,
+                                                              'account_id': account_id,
+                                                              'currency': currency,
+                                                              'test': '0',
+                                                              'description': 'Activación de la oferta Premium',
+                                                              'buyer_name': business_user.name,
+                                                              'buyer_email': business_user.email,
+                                                              'invalid_work_areas': invalid_work_areas
                                                               })
+
+
+def payment_response(request):
+
+    return render(request, cts.PAYMENT_RESPONSE_VIEW_PATH, {})
+
+
+def payment_confirmation(request):
+
+    return render(request, cts.PAYMENT_CONFIRMATION_VIEW_PATH, {})
 
 
 def candidate_profile(request, pk):

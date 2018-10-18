@@ -959,6 +959,24 @@ class EmailType(models.Model):
         db_table = 'email_types'
 
 
+class Price(models.Model):
+
+    work_area = models.ForeignKey(WorkArea)
+    from_salary = models.IntegerField()
+    to_salary = models.IntegerField()
+    price = models.IntegerField()
+
+    def __str__(self):
+        return 'work_area: {0}, from: {1}, to:{2}, price:{3}'.format(self.work_area,
+                                                                     self.from_salary,
+                                                                     self.to_salary,
+                                                                     self.price)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'prices'
+
+
 class RequirementBinaryQuestion(models.Model):
 
     name = models.CharField(max_length=40, null=True)
