@@ -1,0 +1,12 @@
+[
+  {
+    "model": "beta_invite.price",
+    "pk": 1,
+    "fields":{
+      "work_area_id": 1,
+      "from_salary": 0,
+      "to_salary": 1000000,
+      "price": 350000
+    }
+  }
+]

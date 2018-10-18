@@ -18,6 +18,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.utils import formats
 from django.http import HttpResponseBadRequest, HttpResponse, JsonResponse
 from decouple import config
+from django.db import models
 
 import common
 import business
@@ -25,7 +26,7 @@ import beta_invite
 from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
-from beta_invite.models import User, BulletType, WorkArea, EmailType, Campaign, Test
+from beta_invite.models import User, WorkArea, EmailType, Campaign, Test, Price
 from business.models import Plan, Contact, Search, BusinessUser, Company
 from beta_invite.models import Requirement
 from business.custom_user_creation_form import CustomUserCreationForm
@@ -34,6 +35,9 @@ from dashboard.models import Candidate, BusinessState, Comment
 from business import dashboard_module
 from testing_webpage.models import BusinessUserPendingEmail
 from api.models import PublicPost
+
+TAX = 0.19
+DEFAULT_BASE_PRICE = 600000
 
 
 def index(request):
@@ -479,7 +483,7 @@ def business_campaigns(request, business_user_id):
     campaigns = business_user.campaigns.filter(removed=False).order_by('-created_at', 'state', 'title_es').all()
     currency = 'COP'
     date = str(datetime.now())
-    tax = 0.19
+
     apikey = config('payu_api_key')
     merchant_id = config('merchant_id')
     account_id = config('account_id')
@@ -487,8 +491,14 @@ def business_campaigns(request, business_user_id):
     for c in campaigns:
         if c.salary_high_range:
             c.reference_code = str(c.id) + "-" + date
-            c.base = round(float(c.salary_high_range))
-            c.tax = round(c.base * tax, 2)
+            try:
+                c.base = round(float(Price.objects.get(from_salary__lte=c.salary_high_range,
+                                                       to_salary__gt=c.salary_high_range,
+                                                       work_area=c.work_area).price))
+            except models.ObjectDoesNotExist:
+                c.base = DEFAULT_BASE_PRICE
+
+            c.tax = round(c.base * TAX, 2)
             c.amount = round(float(c.base+c.tax), 2)
             c.amount = str(c.amount)
             c.tax = str(c.tax)

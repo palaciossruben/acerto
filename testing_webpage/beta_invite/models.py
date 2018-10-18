@@ -966,9 +966,6 @@ class Price(models.Model):
     to_salary = models.IntegerField()
     price = models.IntegerField()
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
     def __str__(self):
         return 'work_area: {0}, from: {1}, to:{2}, price:{3}'.format(self.work_area,
                                                                      self.from_salary,
