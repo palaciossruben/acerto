@@ -242,7 +242,7 @@
                                 </select>
                                 <h3>Requisitos</h3>
                                 <h6>Agrega palabras clave que ayuden a distinguir los requerimientos más importantes para la oferta</h6>
-                                <select class="origin-keywords js-example-basic-multiple" id="second-choice" name="keyword_ids" multiple="multiple">
+                                <select class="origin-requirements js-example-basic-multiple" id="second-choice" name="keyword_ids" multiple="multiple">
                                     <option disabled>Debes seleccionar primero algún cargo o área de trabajo (opción anterior)</option>
                                 </select>
                                 <br>
@@ -255,6 +255,13 @@
                                 <h3>{% trans 'Experience' %}</h3>
                                 <h6>{% trans 'What is the minimum number of years of experience you are expecting?' %}</h6>
                                 <input class="origin-salary" step="1" type="number" min="0" max="100" name="experience" value="1" required>
+                                <h3>{% trans 'Tests' %}</h3>
+                                <h6>{% trans 'Add tests you want your candidates to do online, and be filtered by them' %}</h6>
+                                <select class="origin-requirements js-example-basic-multiple" name="test_ids" multiple="multiple">
+                                    {% for test in tests.all %}
+                                        <option value="{{ test.id }}">{{ test.name_es }}</option>
+                                    {% endfor %}
+                                </select>
                             </fieldset>
                         </div>
                         <div class="col-md-1"></div>

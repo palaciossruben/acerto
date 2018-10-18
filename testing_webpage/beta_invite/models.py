@@ -600,7 +600,7 @@ class CampaignState(models.Model):
         db_table = 'campaign_states'
 
 
-class KeyWord(models.Model):
+class Requirement(models.Model):
 
     name = models.CharField(max_length=200)
     work_area = models.ForeignKey(WorkArea, null=True)
@@ -612,7 +612,7 @@ class KeyWord(models.Model):
 
     # adds custom table name
     class Meta:
-        db_table = 'keywords'
+        db_table = 'requirements'
 
 
 class Campaign(models.Model):
@@ -629,7 +629,7 @@ class Campaign(models.Model):
     title_es = models.CharField(max_length=200, null=True)
     bullets = models.ManyToManyField(Bullet)
     tests = models.ManyToManyField(Test)
-    keywords = models.ManyToManyField(KeyWord)
+    requirements = models.ManyToManyField(Requirement)
     interviews = models.ManyToManyField(Interview)
     calendly = models.BooleanField(default=True)
     state = models.ForeignKey(CampaignState, default=2)  # id of Active State, this is NOT NICE
@@ -739,7 +739,7 @@ class User(models.Model):
     curriculum_url = models.CharField(max_length=200, default='#')
     curriculum_text = models.TextField(default=None, null=True)
     curriculum_s3_url = models.CharField(max_length=200, default='#')
-    #unique_cv_words = models.Field(default={}, null=True)
+    uploaded_to_es = models.BooleanField(default=False)
 
     # indicates if added to messenger
     added = models.BooleanField(default=False)
