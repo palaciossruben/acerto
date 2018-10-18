@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from testing_webpage import constants as cts
 from beta_invite.models import Campaign
+from django.db.models import Q
 
 
 def index(request):
@@ -26,8 +27,12 @@ def jobs(request):
     segment_code = request.GET.get('segment_code')
     if segment_code is None:  # if code not found will return everything
         return render(request, cts.JOBS_VIEW_PATH,
-                      {'active_campaigns': Campaign.objects.filter(state__code__in=['I', 'A'], removed=False)})
+                      {'active_campaigns': Campaign.objects.filter(~Q(title_es=None),
+                                                                   state__code__in=['I', 'A'],
+                                                                   removed=False)})
     else:
         return render(request, cts.JOBS_VIEW_PATH,
-                      {'active_campaigns': Campaign.objects.filter(state__code__in=['I', 'A'], removed=False,
-                                                                   work_area__segment__code=segment_code)})
+                      {'active_campaigns': Campaign.objects.filter(~Q(title_es=None),
+                                                                   state__code__in=['I', 'A'], removed=False,
+                                                                   work_area__segment__code=segment_code
+                                                                   )})
