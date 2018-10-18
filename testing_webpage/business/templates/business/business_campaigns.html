@@ -19,6 +19,7 @@
         <input type="hidden" name="business_user_id" value="{{ business_user_id }}" />
     </form>
     <h1 style="text-align:center; margin:50px 0px">{% trans "Campaigns" %}</h1>
+        <div style="min-height: 500px;">
         {% for campaign in campaigns %}
             <div class="campaign-div">
                 <div class="row">
@@ -72,5 +73,6 @@
                 </div>
             </div>
         {% endfor %}
+        </div>
 {% endblock %}
 
