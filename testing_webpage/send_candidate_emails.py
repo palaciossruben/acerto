@@ -9,14 +9,30 @@ from beta_invite.util import email_sender
 from dashboard.models import Candidate
 
 
+def candidates_filter(candidates):
+
+    user_ids = set()
+    filtered_candidates = list()
+
+    for c in candidates:
+        if c.user_id not in user_ids:
+            user_ids.add(c.user_id)
+            filtered_candidates.append(c)
+    return filtered_candidates
+
+
 def send_candidates_emails():
 
     candidates = Candidate.objects.filter(~Q(user=None), ~Q(user__email=None), user__gender_id=None).order_by('-user_id')
 
     candidates = [c for c in candidates]
 
-    print([c.user_id for c in candidates])
-    email_sender.send(objects=candidates,
+    new_candidates = candidates_filter(candidates)
+
+    print(len(candidates))
+    print(len(new_candidates))
+
+    email_sender.send(objects=new_candidates,
                       language_code='es',
                       body_input='candidates_form_reminder_email_body',
                       subject='Información adicional')
