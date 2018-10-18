@@ -97,25 +97,6 @@ COMMUNICATION = 'communication'
 LAW_AND_POLITICAL_SCIENCE = 'law_and_political_science'
 ENVIRONMENTAL_SCIENCES = 'environmental_science'
 
-
-PROFESSION_KEYWORDS = {
-    DESIGN: ['dise' + ACCENT_N_PATTERN + 'o', 'dise' + ACCENT_N_PATTERN + 'ador', 'fotografia', 'dise' + ACCENT_N_PATTERN + 'adora'],
-    ARTS: ['arte'],
-    ENGINEERING: ['ingenieria', 'ingeniero', 'ingeniera', 'backend', 'frontend', 'SQL', 'programador', 'software', 'hardware', 'planos'],
-    TECHNICAL_TRADES: ['serigrafia', 'serigrafica'],
-    ARCHITECTURE: ['arquitectura', 'urbano'],
-    BUSINESS: ['administracion', 'administrador', 'economia', 'administrativo', 'administrativa', 'finanzas', 'financiero', 'MBA'],
-    SCIENCE: ['investigacion', 'biologia', 'fisica', 'quimica'],
-    MARKETING: ['marketing', 'mercadeo'],
-    SOCIAL_SCIENCE: ['ciencias sociales', 'investigacion', 'cultura', 'docencia', 'sociales', 'historico', 'investigadora', 'museo'],
-    HEALTH_SCIENCES: ['ciencias de la salud', 'enfermedad', 'medicos?', 'cirugia', 'quirurgico', 'salud ocupacional', 'emergencias'],
-    PSYCHOLOGY: ['psicologia', 'talento humano', 'recursos humanos', 'seleccion de personal'],
-    COMMUNICATION: ['comunicacion', 'audiovisual', 'tv', 'comunicacion social', 'periodismo', 'periodisticas', 'periodistica', 'comunicacion organizacional', 'television'],
-    LAW_AND_POLITICAL_SCIENCE: ['derecho', 'politica'],
-    ENVIRONMENTAL_SCIENCES: ['ambiente'],
-    OPERATOR: ['atencion al cliente']
-}
-
 PROFESSIONS = [DESIGN,
                ENGINEERING,
                TECHNICAL_TRADES,
@@ -270,19 +251,6 @@ class User:
     @staticmethod
     def transform_to_pattern(keyword):
         return '(?:(?![a-z]).|^|\n)' + keyword + '(?:(?![a-z]).|$|\n)'
-
-    def get_profession(self, text):
-
-        score_dict = {}
-        for profession, keywords in PROFESSION_KEYWORDS.items():
-            count = [len(re.findall(self.transform_to_pattern(keyword), text, re.IGNORECASE)) for keyword in keywords]
-            total_sum = sum(count)
-            opportunities = len(keywords)  # opportunities of doing a match, or number of keywords. This is statistics!
-            #score = total_sum/opportunities
-            score = total_sum
-            score_dict[profession] = score
-
-        return self.find_highest_scoring_profession(score_dict)
 
     def set_attribute(self, value, text, attribute_name):
 

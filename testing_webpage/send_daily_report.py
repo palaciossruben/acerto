@@ -45,7 +45,7 @@ def send_campaign_report(recipients, campaign_id):
 def business_daily_report():
     business_users = BusinessUser.objects.all()
     for business_user in business_users:
-        for campaign in business_user.campaigns.filter(active=True):
+        for campaign in business_user.campaigns.filter(state=2):
 
             candidates = Candidate.objects.filter(
                 created_at__range=[str(timezone.now() - timedelta(days=1)), str(timezone.now())],

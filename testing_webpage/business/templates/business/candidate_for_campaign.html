@@ -1,7 +1,16 @@
 {% load static %}
 {% load i18n %}
 {% load app_filters %}
-
+{% if campaign.free_trial == False and campaign.state.name != 'Inactive' %}
+    <a href="/seleccion_de_personal/perfil_del_candidato/{{ candidate.id }}">
+{% elif campaign.free_trial == True and campaign.state.name != 'Inactive'%}
+    <a href="/seleccion_de_personal/perfil_del_candidato/{{ candidate.id }}/remove" onclick="return false" class="tooltip">
+    <span class="tooltiptext">Esta es una prueba gratis, solo podrás ver los primeros candidatos, para tener acceso completo contáctanos, correo: contacto@peaku.co, wp: +57 3136362874</span>
+{% elif campaign.free_trial == True and campaign.state.name != 'Inactive'%}
+{% else %}
+    <a href="#" onclick="return false" class="tooltip">
+        <span class="tooltiptext">Para poder ver la información adicional del candidato, la campaña debe estar activa</span>
+{% endif %}
 <div class="row candidate-info-div">
     <div class="email-checkbox">
         <input type="checkbox" name="{{ candidate.id }}_checkbox">
@@ -16,17 +25,19 @@
         {% endif %}
     </div>
     <div class="col-lg-2 col-xs-12">
-        <p><a href="/seleccion_de_personal/perfil_del_candidato/{{ candidate.id }}"><strong>{{ candidate.user.name }}</strong></a></p>
+        <p class="name">
+            <strong>{{ candidate.user.name }}</strong>
+        </p>
         {% if candidate.user.profession.name_es %}
-            <p>{{ candidate.user.profession.name_es }}</p>
+            <p class="profession">{{ candidate.user.profession.name_es }}</p>
         {% endif %}
 
         {% if candidate.user.city.name and candidate.user.city.name != "not available" %}
-            <p style="font-size:10px;">{{ candidate.user.city.name }}, {{ candidate.user.country.name }}</p>
+            <p class="city">{{ candidate.user.city.name }}, {{ candidate.user.country.name }}</p>
         {% endif %}
 
         {% if candidate.user.work_area.name_es %}
-            <p>{{ candidate.user.work_area.name_es }}</p>
+            <p class="work-area">{{ candidate.user.work_area.name_es }}</p>
         {% endif %}
     </div>
     <div class="col-lg-1 separator-div">
@@ -104,6 +115,7 @@
         </div>
     </div>
 </div>
+</a>
 <input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}"/>
 
 <script>
@@ -116,4 +128,8 @@
     });
 </script>
 
-
+<script type="text/javascript">
+    $(document).ready(function() {
+        not_blocked("{{ business_state.name }}", "{{ campaign.free_trial }}", "{{ campaign.state.name }}");
+    });
+</script>

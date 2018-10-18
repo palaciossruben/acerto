@@ -1,26 +1,45 @@
 import json
 import common
+import datetime
 from django.core import serializers
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.db.models import Q
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
-from beta_invite.models import Campaign, Test, TestType, BulletType, Interview, Survey, Bullet, QuestionType, Question, Answer
+from beta_invite.models import Campaign, Test, TestType, BulletType, Interview, Survey, Bullet, QuestionType, Question, Answer, CampaignState
+from business.models import Company
 from dashboard.models import Candidate, Message, Screening
 from dashboard import constants as cts
 from beta_invite.util import email_sender
 from beta_invite.views import get_drop_down_values
 from dashboard import interview_module, candidate_module, campaign_module, test_module
 from match import model
-from business import dashboard_module
+from api.models import LeadMessage
 from business.models import BusinessUser
-import business
-
 
 CANDIDATE_FORECAST_LIMIT = 20
 
+'''
+                     DON'T DELETE, THIS WILL BE USEFUL FOR AUTOMATIC STATE CHANGES OR SORTING
+def sort_users_by_campaign_count(business_users):
+    business_users = [(b, b.campaigns.filter(removed=False).count()) for b in business_users]
+    business_users.sort(key=lambda x: x[1], reverse=True)
+    return [b for b, count in business_users if count > 0]
 
+
+def get_business_users_order_by_active_campaigns():
+    weeks_old = 5
+    weeks_ago = datetime.datetime.today() - datetime.timedelta(weeks=weeks_old)
+    new_business_users = BusinessUser.objects.filter(created_at__gte=weeks_ago).all()
+    old_business_users = BusinessUser.objects.filter(created_at__lt=weeks_ago).all()
+
+    return sort_users_by_campaign_count(new_business_users) + sort_users_by_campaign_count(old_business_users)
+'''
+
+
+@login_required
 def index(request):
     """
     Args:
@@ -28,16 +47,38 @@ def index(request):
     Returns: renders main view with a list of campaigns
     """
 
-    campaigns = Campaign.objects.filter(removed=False).order_by('-active', 'name', 'title_es')
+    # TODO: this basic login... works but the real admin users can be used instead
+    # TODO: how to add the same auth to all the app????
+    if common.not_admin_user(request):
+        return redirect('business:login')
+    campaigns = Campaign.objects.filter(removed=False).order_by('-created_at', 'state', 'title_es').all()
 
     for campaign in campaigns:
         common.calculate_operational_efficiency(campaign)
 
-    return render(request, cts.MAIN_DASHBOARD, {'campaigns': campaigns,
-                                                'tests': Test.get_all()})
-
+    return render(request, cts.MAIN_DASHBOARD, {'campaigns': campaigns})
 
 # ------------------------------- CAMPAIGN -------------------------------
+
+
+def tests_list(request):
+    """
+    :param request: HTTP request
+    :return: render view
+    """
+
+    tests = Test.get_all()
+
+    return render(request, cts.TEST_LIST, {'tests': tests})
+
+
+def candidate_detail(request, candidate_id):
+    """
+    :param request: HTTP request
+    :param candidate_id: int Candidate id
+    :return: render view
+    """
+    return render(request, cts.CANDIDATE_DETAIL, {'candidate': Candidate.objects.get(pk=candidate_id)})
 
 
 def add_to_message_queue(candidates, text):
@@ -77,7 +118,7 @@ def edit_campaign_candidates(request, campaign_id):
         candidate = Candidate.objects.get(pk=int(candidate_id))
 
         if action == 'update':
-            candidate_module.update_candidate(request, candidate)
+            candidate_module.update_candidate_manually(request, candidate)
         elif action == 'add':
             candidate_module.add_candidate_to_campaign(request, candidate)
         elif action == 'remove':
@@ -129,7 +170,7 @@ def new_campaign(request):
                                                       'professions': professions,
                                                       'bullet_types_json': bullet_types_json,
                                                       'action_url': '/dashboard/campaign/create',
-                                                      'title': 'New Campaign',
+                                                      'title': 'Nueva Campaña',
                                                       })
 
 
@@ -157,6 +198,11 @@ def edit_campaign(request, pk):
     """
     campaign = Campaign.objects.get(pk=pk)
     countries, cities, education, professions, work_areas, genders = get_drop_down_values(request.LANGUAGE_CODE)
+    business_user = common.get_business_user_with_campaign(campaign, 'object')
+    if not business_user:
+        company = ""
+    else:
+        company = business_user.company
 
     return render(request, cts.NEW_OR_EDIT_CAMPAIGN, {'countries': countries,
                                                       'cities': cities,
@@ -165,7 +211,9 @@ def edit_campaign(request, pk):
                                                       'work_areas': work_areas,
                                                       'campaign': campaign,
                                                       'action_url': '/dashboard/campaign/update_basic_properties',
-                                                      'title': 'Update Campaign',
+                                                      'title': 'Update {}'.format(campaign.title_es),
+                                                      'campaign_states': CampaignState.objects.all(),
+                                                      'company': company
                                                       })
 
 
@@ -178,6 +226,20 @@ def update_basic_properties(request):
     campaign = common.get_campaign_from_request(request)
 
     campaign_module.update_campaign_basic_properties(campaign, request)
+    business_user = common.get_business_user_with_campaign(campaign, 'object')
+    if business_user:
+        company = business_user.company
+        if company:
+            company.name = request.POST.get('company')
+            company.save()
+        else:
+            company = Company()
+            company.name = request.POST.get('company')
+            company.save()
+            business_user.company = company
+            business_user.save()
+    else:
+        pass
 
     return campaign_module.get_campaign_edit_url(campaign)
 
@@ -295,6 +357,7 @@ def update_test(request, pk):
     test.cut_score = int(request.POST.get('cut_score'))
     test.feedback_url = request.POST.get('feedback_url')
     test.excluding = bool(request.POST.get('excluding'))
+    test.public = bool(request.POST.get('public'))
 
     test.save()  # save first, for saving questions
 
@@ -531,6 +594,32 @@ def mark_as_added(users):
         u.save()
 
 
+def get_candidate_users():
+    users = [m.candidate.user for m in Message.objects.filter(~Q(candidate__user__phone=None),
+                                                              sent=False)]
+
+    for u in users:
+        u.change_to_international_phone_number(add_plus=True)
+        u.name = email_sender.remove_accents(u.name)
+
+    mark_as_added(users)
+
+    return users
+
+
+def get_leads():
+    leads = [m.lead for m in LeadMessage.objects.filter(~Q(lead__phone=None),
+                                                        sent=False)]
+
+    for l in leads:
+        l.change_to_international_phone_number()
+        l.name = email_sender.remove_accents(l.name)
+
+    mark_as_added(leads)
+
+    return leads
+
+
 def send_new_contacts(request):
     """
      Works as API for auto-messenger app
@@ -545,18 +634,10 @@ def send_new_contacts(request):
     :return: json
     """
 
-    users = {m.candidate.user for m in Message.objects.filter(~Q(candidate__user__phone=None),
-                                                              sent=False)}  # [:50]
+    leads = get_leads()
+    users = get_candidate_users()
 
-    for u in users:
-        u.change_to_international_phone_number()
-        u.name = email_sender.remove_accents(u.name)
-
-    #json_data = serializers.serialize('json', users)
-
-    mark_as_added(users)
-
-    json_data = json.dumps([{'pk': u.pk, 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}} for u in users])
+    json_data = json.dumps([{'pk': u.pk, 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}} for u in users + leads])
 
     return JsonResponse(json_data, safe=False)
 
@@ -568,9 +649,11 @@ def send_messages(request):
     :return: json
     """
 
+    lead_messages = [m.add_format_and_mark_as_sent() for m in LeadMessage.objects.filter(sent=False,
+                                                                                         lead__added=True)]
     messages = [m.add_format_and_mark_as_sent() for m in Message.objects.filter(sent=False,
                                                                                 candidate__user__added=True)]
 
-    messages_json = serializers.serialize('json', messages)
+    messages_json = serializers.serialize('json', messages + lead_messages)
 
     return JsonResponse(messages_json, safe=False)

@@ -55,15 +55,17 @@ def get_text_from_pdf_images(folder_path, pdf_path):
 
     command = 'pdfimages {} {}'.format(pdf_path, os.path.join(images_path, 'image'))
 
-    subprocess.run(command, shell=True)
+    try:
+        subprocess.run(command, shell=True)
 
-    text = ''
-    # only reads up to 2 images: usually when there are many, they have no content and take too much time.
-    images = os.listdir(images_path)
-    for image in images[:min(2, len(images))]:
-        text += get_image_text(os.path.join(images_path, image))
-
-    return text
+        text = ''
+        # only reads up to 2 images: usually when there are many, they have no content and take too much time.
+        images = os.listdir(images_path)
+        for image in images[:min(2, len(images))]:
+            text += get_image_text(os.path.join(images_path, image))
+        return text
+    except OSError:  # [Errno 12] Cannot allocate memory
+        return ''
 
 
 def get_word_text(filename):
@@ -177,7 +179,7 @@ def get_image_num_name(image, count):
 
 
 def get_pdf_text_with_ocr(filename):
-    """Convert to png and use OCR, this is  a last resort."""
+    """Convert to png and use OCR, this is a last resort."""
 
     image_basename = os.path.splitext(filename)[0]
 
@@ -186,30 +188,33 @@ def get_pdf_text_with_ocr(filename):
 
     # converts each page to an image.
     command = 'pdftoppm -png {filename} {image}'.format(filename=filename, image=image_basename)
-    subprocess.run(command, shell=True)
 
-    # removes unnecessary file
-    os.remove(image_basename)
+    try:
+        subprocess.run(command, shell=True)
 
-    # Reads with OCR whatever pages the poppler converted to png.
-    count = 1
-    text = ''
-    image_num = get_image_num_name(image_basename, count)
-    while os.path.exists(image_num):
-        text += get_image_text(image_num)
-        os.remove(image_num)
-        count += 1
+        # removes unnecessary file
+        os.remove(image_basename)
+
+        # Reads with OCR whatever pages the poppler converted to png.
+        count = 1
+        text = ''
         image_num = get_image_num_name(image_basename, count)
+        while os.path.exists(image_num):
+            text += get_image_text(image_num)
+            os.remove(image_num)
+            count += 1
+            image_num = get_image_num_name(image_basename, count)
 
-    return text
+        return text
+    except OSError:  # [Errno 12] Cannot allocate memory
+        return ''
 
 
-def get_text_with_traditional_strategy(folder_path, filename):
+def get_text_fast(filename):
     """
     Follows path from greater chance of success to least.
     This is not perfect. Some tricky PDFS can join all words or separate every other character.
     Args:
-        folder_path:
         filename:
     Returns: String with text
     """
@@ -223,8 +228,8 @@ def get_text_with_traditional_strategy(folder_path, filename):
     # Still nothing; then take out the big gun. Convert to png and use OCR
     if text_has_no_data(text):
         text = get_pdf_text_with_ocr(filename)
-    else:  # If things are OK still some images might be missing:
-        text += get_text_from_pdf_images(folder_path, filename)
+    #else:  # If things are OK still some images might be missing:
+    #    text += get_text_from_pdf_images(folder_path, filename)
 
     return text
 
@@ -280,17 +285,21 @@ def get_text_with_relevance_index(folder_path, filename, relevance_dictionary):
     return text
 
 
-def get_pdf_text(folder_path, filename):
+def get_pdf_text(folder_path, filename, fast=True):
     """Tries different libraries"""
     print('on a .pdf')
 
-    # Opens word_user_dict, or returns unordered users.
-    try:
-        relevance_dictionary = pickle.load(open('subscribe/relevance_dictionary.p', 'rb'))
-        return get_text_with_relevance_index(folder_path, filename, relevance_dictionary)
-    except FileNotFoundError:
-        print('traditional strategy')
-        return get_text_with_traditional_strategy(folder_path, filename)
+    if fast:
+        print('simple fast strategy')
+        return get_text_fast(filename)
+    else:  # Slow strategy, 3 methods compete to see who is more precise.
+        # Opens word_user_dict, or returns unordered users.
+        try:
+            relevance_dictionary = pickle.load(open('subscribe/relevance_dictionary.p', 'rb'))
+            return get_text_with_relevance_index(folder_path, filename, relevance_dictionary)
+        except FileNotFoundError:
+            print('simple fast strategy')
+            return get_text_fast(filename)
 
 
 def remove_accents_in_string(element):

@@ -1,1 +1,26 @@
-mensaje de prueba
+Hola {name},
+
+Recibí tu información a través de un portal de empleo público o nuestra página web, teniendo en cuenta tu perfil, me gustaría invitarte a un proceso de selección, estas son las condiciones:
+
+{campaign}
+{campaign_salary_range}
+
+Para continuar con el proceso, te comparto un enlace con algunas pruebas y/o preguntas que nos ayudarán a conocerte mejor:
+
+{test_url}
+
+Recuerda que somos una empresa de selección, es decir, en caso de pasar las pruebas exitosamente, la compañía en búsqueda de la vacante se pondrá en contacto contigo para hacer una entrevista personal y posteriormente la contratación.
+No dudes en escribirme si requieres información adicional.
+
+
+Saludos,
+
+
+Santiago González
+https://www.linkedin.com/in/santiagogonzalezr/
+Director de Operaciones
+PeakU
+
+Siguenos en redes:
+Facebook: https://www.facebook.com/peakulatam/
+Instagram: @peaku_latam

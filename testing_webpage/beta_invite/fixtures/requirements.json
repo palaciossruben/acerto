@@ -1,0 +1,6482 @@
+[
+{
+  "model": "beta_invite.requirement",
+  "pk": 1,
+  "fields":{
+    "name": "nomenclatura",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 2,
+  "fields":{
+    "name": "logística",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 3,
+  "fields":{
+    "name": "transporte",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 4,
+  "fields":{
+    "name": "conducción",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 5,
+  "fields":{
+    "name": "manejo de elementos del almacen",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 6,
+  "fields":{
+    "name": "almacén: conteos cíclicos, inventarios, entradas y salidas de almacén, surtido de mercancía, acomodo",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 7,
+  "fields":{
+    "name": "montacargas",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 8,
+  "fields":{
+    "name": "inglés avanzado",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 9,
+  "fields":{
+    "name": "inglés intermedio",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 10,
+  "fields":{
+    "name": "inglés básico",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 11,
+  "fields":{
+    "name": "SAP",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 12,
+  "fields":{
+    "name": "manejo de personal",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 13,
+  "fields":{
+    "name": "manejo de Sistema SAI",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 14,
+  "fields":{
+    "name": "programación de rutas de entrega",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 15,
+  "fields":{
+    "name": "matemáticas",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 16,
+  "fields":{
+    "name": "las principales herramientas ofimáticas",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 17,
+  "fields":{
+    "name": "metodologías y orden en el trabajo",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 18,
+  "fields":{
+    "name": "habilidades de trabajo en equipo",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 19,
+  "fields":{
+    "name": "manejo de recursos habituales en una oficina, como los ordenadores o las fotocopiadoras",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 20,
+  "fields":{
+    "name": "habilidades comunicativas orales y escritas",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 21,
+  "fields":{
+    "name": "servicio al cliente",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 22,
+  "fields":{
+    "name": "logística en transporte marítimo, terrestre o en áreo",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 23,
+  "fields":{
+    "name": "administración de empresas turísticas u hoteleras",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 24,
+  "fields":{
+    "name": "el manejo de algún software contable",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 25,
+  "fields":{
+    "name": "archivo y digitalización",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 26,
+  "fields":{
+    "name": "cobro de cartera",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 27,
+  "fields":{
+    "name": "ordenes de compra",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 28,
+  "fields":{
+    "name": "manejo de proveedores",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 29,
+  "fields":{
+    "name": "realización de cotizaciones",
+    "work_area": 2,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 30,
+  "fields":{
+    "name": "servicio al cliente",
+    "work_area": 3,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 31,
+  "fields":{
+    "name": "ventas en frio",
+    "work_area": 3,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 32,
+  "fields":{
+    "name": "telemercadeo",
+    "work_area": 3,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 33,
+  "fields":{
+    "name": "ventas a empresas",
+    "work_area": 3,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 34,
+  "fields":{
+    "name": "ventas a usuario final",
+    "work_area": 3,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 35,
+  "fields":{
+    "name": "manejo de objeciones",
+    "work_area": 3,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 36,
+  "fields":{
+    "name": "habilidades de trabajo en equipo",
+    "work_area": 3,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 37,
+  "fields":{
+    "name": "manejo de recursos habituales en una oficina, como los ordenadores o las fotocopiadoras",
+    "work_area": 3,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 38,
+  "fields":{
+    "name": "habilidades comunicativas orales y escritas",
+    "work_area": 3,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 39,
+  "fields":{
+    "name": "servicio al cliente",
+    "work_area": 3,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 40,
+  "fields":{
+    "name": "inglés avanzado",
+    "work_area": 3,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 41,
+  "fields":{
+    "name": "inglés intermedio",
+    "work_area": 3,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 42,
+  "fields":{
+    "name": "inglés básico",
+    "work_area": 3,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 43,
+  "fields":{
+    "name": "manejo de personal",
+    "work_area": 3,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 44,
+  "fields":{
+    "name": "archivo y digitalización",
+    "work_area": 3,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 45,
+  "fields":{
+    "name": "cobro de cartera",
+    "work_area": 3,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 46,
+  "fields":{
+    "name": "ordenes de compra",
+    "work_area": 3,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 47,
+  "fields":{
+    "name": "manejo de proveedores",
+    "work_area": 3,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 48,
+  "fields":{
+    "name": "realización de cotizaciones",
+    "work_area": 3,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 49,
+  "fields":{
+    "name": "habilidades de comunicación orales y escritas",
+    "work_area": 5,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 50,
+  "fields":{
+    "name": "negociación",
+    "work_area": 5,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 51,
+  "fields":{
+    "name": "interpretación de cifras e información",
+    "work_area": 5,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 52,
+  "fields":{
+    "name": "matemáticas",
+    "work_area": 5,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 53,
+  "fields":{
+    "name": "habilidades de gestión del tiempo y habilidades de planificación",
+    "work_area": 5,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 54,
+  "fields":{
+    "name": "contacto con proveedores locales",
+    "work_area": 5,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 55,
+  "fields":{
+    "name": "inglés avanzado",
+    "work_area": 5,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 56,
+  "fields":{
+    "name": "inglés intermedio",
+    "work_area": 5,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 57,
+  "fields":{
+    "name": "inglés básico",
+    "work_area": 5,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 58,
+  "fields":{
+    "name": "manejo de recursos habituales en una oficina, como los ordenadores o las fotocopiadoras",
+    "work_area": 5,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 59,
+  "fields":{
+    "name": "habilidades comunicativas orales y escritas",
+    "work_area": 5,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 60,
+  "fields":{
+    "name": "servicio al cliente",
+    "work_area": 5,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 61,
+  "fields":{
+    "name": "manejo de personal",
+    "work_area": 5,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 62,
+  "fields":{
+    "name": "relaciones con proveedores del exterior",
+    "work_area": 5,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 63,
+  "fields":{
+    "name": "aduanas",
+    "work_area": 5,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 64,
+  "fields":{
+    "name": "relaciones con empresas de transporte",
+    "work_area": 5,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 65,
+  "fields":{
+    "name": "archivo y digitalización",
+    "work_area": 5,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 66,
+  "fields":{
+    "name": "cobro de cartera",
+    "work_area": 5,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 67,
+  "fields":{
+    "name": "ordenes de compra",
+    "work_area": 5,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 68,
+  "fields":{
+    "name": "manejo de proveedores",
+    "work_area": 5,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 69,
+  "fields":{
+    "name": "realización de cotizaciones",
+    "work_area": 5,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 70,
+  "fields":{
+    "name": "inglés avanzado",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 71,
+  "fields":{
+    "name": "inglés intermedio",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 72,
+  "fields":{
+    "name": "inglés básico",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 73,
+  "fields":{
+    "name": "habilidades de comunicación orales y escritas",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 74,
+  "fields":{
+    "name": "negociación",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 75,
+  "fields":{
+    "name": "interpretación de cifras e información",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 76,
+  "fields":{
+    "name": "matemáticas",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 77,
+  "fields":{
+    "name": "habilidades de gestión del tiempo y habilidades de planificación",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 78,
+  "fields":{
+    "name": "contacto con proveedores locales",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 79,
+  "fields":{
+    "name": "manejo de recursos habituales en una oficina, como los ordenadores o las fotocopiadoras",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 80,
+  "fields":{
+    "name": "habilidades comunicativas orales y escritas",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 81,
+  "fields":{
+    "name": "servicio al cliente",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 82,
+  "fields":{
+    "name": "manejo de personal",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 83,
+  "fields":{
+    "name": "el área comercial y licitaciones",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 84,
+  "fields":{
+    "name": "manejo con contratos en el sector publico",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 85,
+  "fields":{
+    "name": "manejo de las plataformas Secop",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 86,
+  "fields":{
+    "name": "manejor de alturas y que el curso esté vigente",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 87,
+  "fields":{
+    "name": "la norma RETIE",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 88,
+  "fields":{
+    "name": "puente de grúa",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 89,
+  "fields":{
+    "name": "el sector constructor ferretero",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 90,
+  "fields":{
+    "name": "manejo de maquinas industriales",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 91,
+  "fields":{
+    "name": "manejo de maquinaria amarilla",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 92,
+  "fields":{
+    "name": "obras civiles",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 93,
+  "fields":{
+    "name": "pintura, colores, tonos y mezclas",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 94,
+  "fields":{
+    "name": "manejo de herramientas básicas como taladro, pulidora, lijadora, entre otras ",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 95,
+  "fields":{
+    "name": "construcción o ladrilleras ",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 96,
+  "fields":{
+    "name": "plomería",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 97,
+  "fields":{
+    "name": "residencia de obra",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 98,
+  "fields":{
+    "name": "manejo de placas de cemento",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 99,
+  "fields":{
+    "name": "albañilería",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 100,
+  "fields":{
+    "name": "carpintería",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 101,
+  "fields":{
+    "name": "fontanería",
+    "work_area": 6,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 102,
+  "fields":{
+    "name": "inglés avanzado",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 103,
+  "fields":{
+    "name": "inglés intermedio",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 104,
+  "fields":{
+    "name": "inglés básico",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 105,
+  "fields":{
+    "name": "habilidades de comunicación orales y escritas",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 106,
+  "fields":{
+    "name": "negociación",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 107,
+  "fields":{
+    "name": "interpretación de cifras e información",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 108,
+  "fields":{
+    "name": "matemáticas",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 109,
+  "fields":{
+    "name": "habilidades de gestión del tiempo y habilidades de planificación",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 110,
+  "fields":{
+    "name": "manejo de recursos habituales en una oficina, como los ordenadores o las fotocopiadoras",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 111,
+  "fields":{
+    "name": "habilidades comunicativas orales y escritas",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 112,
+  "fields":{
+    "name": "servicio al cliente",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 113,
+  "fields":{
+    "name": "manejo de personal",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 114,
+  "fields":{
+    "name": "el área comercial y licitaciones",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 115,
+  "fields":{
+    "name": "finanzas",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 116,
+  "fields":{
+    "name": "contabilidad",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 117,
+  "fields":{
+    "name": "manejo del sistema SIESA",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 118,
+  "fields":{
+    "name": "manejo básico de excel",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 119,
+  "fields":{
+    "name": "manejo intermedio de excel",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 120,
+  "fields":{
+    "name": "manejo avanzado de excel",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 121,
+  "fields":{
+    "name": "planeación financiera",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 122,
+  "fields":{
+    "name": "manejo de finanzas corporativas",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 123,
+  "fields":{
+    "name": "elaboración y gestión de presupuesto corporativo",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 124,
+  "fields":{
+    "name": "modelación y planeación financiera",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 125,
+  "fields":{
+    "name": "elaboración y gestión de indicadores claves",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 126,
+  "fields":{
+    "name": "el sector financiero y bursátil",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 127,
+  "fields":{
+    "name": "manejo de bases de datos",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 128,
+  "fields":{
+    "name": "el manejo con fuerzas militares",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 129,
+  "fields":{
+    "name": "consumo, libranza y tarjetas de credito",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 130,
+  "fields":{
+    "name": "manejo con pensionados",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 131,
+  "fields":{
+    "name": "manejo con entes publicos",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 132,
+  "fields":{
+    "name": "conciliaciones bancarias",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 133,
+  "fields":{
+    "name": "archivo de documentos contables, ingresos, egresos",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 134,
+  "fields":{
+    "name": "habilidades de comunicación orales y escritas",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 135,
+  "fields":{
+    "name": "negociación",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 136,
+  "fields":{
+    "name": "interpretación de cifras e información",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 137,
+  "fields":{
+    "name": "matemáticas",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 138,
+  "fields":{
+    "name": "habilidades de gestión del tiempo y habilidades de planificación",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 139,
+  "fields":{
+    "name": "contacto con proveedores locales",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 140,
+  "fields":{
+    "name": "inglés avanzado",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 141,
+  "fields":{
+    "name": "inglés intermedio",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 142,
+  "fields":{
+    "name": "inglés básico",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 143,
+  "fields":{
+    "name": "habilidades de trabajo en equipo",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 144,
+  "fields":{
+    "name": "manejo de recursos habituales en una oficina, como los ordenadores o las fotocopiadoras",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 145,
+  "fields":{
+    "name": "habilidades comunicativas orales y escritas",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 146,
+  "fields":{
+    "name": "servicio al cliente",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 147,
+  "fields":{
+    "name": "el manejo de algún software contable",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 148,
+  "fields":{
+    "name": "archivo y digitalización",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 149,
+  "fields":{
+    "name": "cobro de cartera",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 150,
+  "fields":{
+    "name": "ordenes de compra",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 151,
+  "fields":{
+    "name": "manejo de proveedores",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 152,
+  "fields":{
+    "name": "realización de cotizaciones",
+    "work_area": 7,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 153,
+  "fields":{
+    "name": "director en empresas del sector",
+    "work_area": 8,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 154,
+  "fields":{
+    "name": "negociación con distribuidores",
+    "work_area": 8,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 155,
+  "fields":{
+    "name": "comerciales",
+    "work_area": 8,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 156,
+  "fields":{
+    "name": "manejo de personal",
+    "work_area": 8,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 157,
+  "fields":{
+    "name": "compañias B2B",
+    "work_area": 8,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 158,
+  "fields":{
+    "name": "compañías B2C",
+    "work_area": 8,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 159,
+  "fields":{
+    "name": "producción",
+    "work_area": 8,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 160,
+  "fields":{
+    "name": "comercialización",
+    "work_area": 8,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 161,
+  "fields":{
+    "name": "gerencia de proyectos",
+    "work_area": 8,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 162,
+  "fields":{
+    "name": "manejo de adobe CC 2018 (Ilustrator, Photoshop, Indesing ).",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 163,
+  "fields":{
+    "name": "manejo de After Effects",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 164,
+  "fields":{
+    "name": "manejo de Corel Draw",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 165,
+  "fields":{
+    "name": "elaboración de brochure",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 166,
+  "fields":{
+    "name": "UX/UI",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 167,
+  "fields":{
+    "name": "UX",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 168,
+  "fields":{
+    "name": "diseño de logos",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 169,
+  "fields":{
+    "name": "community manager",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 170,
+  "fields":{
+    "name": "redacción de texto/libros/publicaciones",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 171,
+  "fields":{
+    "name": "fotografia (general)",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 172,
+  "fields":{
+    "name": "fotografia productos o alimentos",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 173,
+  "fields":{
+    "name": "planificación y dirección de redes Sociales y la Web",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 174,
+  "fields":{
+    "name": "desarrollo de estrategias de precios",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 175,
+  "fields":{
+    "name": "tarjetas de presentación",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 176,
+  "fields":{
+    "name": "ilustración",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 177,
+  "fields":{
+    "name": "retratos y caricatura",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 178,
+  "fields":{
+    "name": "volates y brochures",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 179,
+  "fields":{
+    "name": "libros y cuviertas",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 180,
+  "fields":{
+    "name": "diseño de paquetes o cajas",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 181,
+  "fields":{
+    "name": "diseño web y movil",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 182,
+  "fields":{
+    "name": "diseño de social media",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 183,
+  "fields":{
+    "name": "diseño de banners",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 184,
+  "fields":{
+    "name": "edición photoshop",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 185,
+  "fields":{
+    "name": "arquitectura y planos",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 186,
+  "fields":{
+    "name": "modelos 3D y diseño de producto",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 187,
+  "fields":{
+    "name": "diseño de camisetas y mercadería",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 188,
+  "fields":{
+    "name": "diseño de invitaciones",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 189,
+  "fields":{
+    "name": "desarrollo de infograficos",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 190,
+  "fields":{
+    "name": "marketing en social media",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 191,
+  "fields":{
+    "name": "SEO",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 192,
+  "fields":{
+    "name": "content marketing",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 193,
+  "fields":{
+    "name": "video marketing",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 194,
+  "fields":{
+    "name": "E-mail marketing",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 195,
+  "fields":{
+    "name": "SEM",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 196,
+  "fields":{
+    "name": "encuestas",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 197,
+  "fields":{
+    "name": "web analytics",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 198,
+  "fields":{
+    "name": "influencer marketing",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 199,
+  "fields":{
+    "name": "e-commerce",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 200,
+  "fields":{
+    "name": "Web traffic",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 201,
+  "fields":{
+    "name": "promoción musical",
+    "work_area": 9,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 202,
+  "fields":{
+    "name": "informática",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 203,
+  "fields":{
+    "name": "inglés",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 204,
+  "fields":{
+    "name": "música",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 205,
+  "fields":{
+    "name": "preescolar",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 206,
+  "fields":{
+    "name": "Idiomas",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 207,
+  "fields":{
+    "name": "psicología",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 208,
+  "fields":{
+    "name": "biología",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 209,
+  "fields":{
+    "name": "fonoaudiología",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 210,
+  "fields":{
+    "name": "seguridad y salud en el trabajo",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 211,
+  "fields":{
+    "name": "fisioterapia",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 212,
+  "fields":{
+    "name": "arte",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 213,
+  "fields":{
+    "name": "medicina",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 214,
+  "fields":{
+    "name": "gestión empresarial",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 215,
+  "fields":{
+    "name": "matemáticas",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 216,
+  "fields":{
+    "name": "salud pública",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 217,
+  "fields":{
+    "name": "neumología",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 218,
+  "fields":{
+    "name": "odontología",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 219,
+  "fields":{
+    "name": "negocios digitales",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 220,
+  "fields":{
+    "name": "deportes",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 221,
+  "fields":{
+    "name": "gerencia financiera",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 222,
+  "fields":{
+    "name": "ingenieria de sistemas",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 223,
+  "fields":{
+    "name": "educación fisica",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 224,
+  "fields":{
+    "name": "administración de empresas",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 225,
+  "fields":{
+    "name": "ingenieria civil",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 226,
+  "fields":{
+    "name": "enfermeria",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 227,
+  "fields":{
+    "name": "ingeniería industrial",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 228,
+  "fields":{
+    "name": "desarrollo de software",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 229,
+  "fields":{
+    "name": "ciencias sociales",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 230,
+  "fields":{
+    "name": "mecatronica",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 231,
+  "fields":{
+    "name": "medico cirujano",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 232,
+  "fields":{
+    "name": "ciencias básicas",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 233,
+  "fields":{
+    "name": "recursos multimedia",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 234,
+  "fields":{
+    "name": "danzas",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 235,
+  "fields":{
+    "name": "artes y fotografía",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 236,
+  "fields":{
+    "name": "cocina",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 237,
+  "fields":{
+    "name": "geología",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 238,
+  "fields":{
+    "name": "trabajo social",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 239,
+  "fields":{
+    "name": "áreas especializadas del saber",
+    "work_area": 10,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 240,
+  "fields":{
+    "name": "matemáticas",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 241,
+  "fields":{
+    "name": "las principales herramientas ofimáticas",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 242,
+  "fields":{
+    "name": "metodologías y orden en el trabajo",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 243,
+  "fields":{
+    "name": "habilidades de trabajo en equipo",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 244,
+  "fields":{
+    "name": "manejo de recursos habituales en una oficina, como los ordenadores o las fotocopiadoras",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 245,
+  "fields":{
+    "name": "habilidades comunicativas orales y escritas",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 246,
+  "fields":{
+    "name": "servicio al cliente",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 247,
+  "fields":{
+    "name": "inglés avanzado",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 248,
+  "fields":{
+    "name": "inglés intermedio",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 249,
+  "fields":{
+    "name": "inglés básico",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 250,
+  "fields":{
+    "name": "manejo de personal",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 251,
+  "fields":{
+    "name": "el manejo de algún software contable",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 252,
+  "fields":{
+    "name": "archivo y digitalización",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 253,
+  "fields":{
+    "name": "cobro de cartera",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 254,
+  "fields":{
+    "name": "ordenes de compra",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 255,
+  "fields":{
+    "name": "manejo de proveedores",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 256,
+  "fields":{
+    "name": "realización de cotizaciones",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 257,
+  "fields":{
+    "name": "finanzas",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 258,
+  "fields":{
+    "name": "contabilidad",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 259,
+  "fields":{
+    "name": "manejo del sistema SIESA",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 260,
+  "fields":{
+    "name": "manejo básico de excel",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 261,
+  "fields":{
+    "name": "manejo intermedio de excel",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 262,
+  "fields":{
+    "name": "manejo avanzado de excel",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 263,
+  "fields":{
+    "name": "planeación financiera",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 264,
+  "fields":{
+    "name": "manejo de finanzas corporativas",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 265,
+  "fields":{
+    "name": "elaboración y gestión de presupuesto corporativo",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 266,
+  "fields":{
+    "name": "modelación y planeación financiera",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 267,
+  "fields":{
+    "name": "elaboración y gestión de indicadores claves",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 268,
+  "fields":{
+    "name": "el sector financiero y bursátil",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 269,
+  "fields":{
+    "name": "manejo de bases de datos",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 270,
+  "fields":{
+    "name": "el manejo con fuerzas militares",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 271,
+  "fields":{
+    "name": "consumo, libranza y tarjetas de credito",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 272,
+  "fields":{
+    "name": "manejo con pensionados",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 273,
+  "fields":{
+    "name": "manejo con entes publicos",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 274,
+  "fields":{
+    "name": "conciliaciones bancarias",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 275,
+  "fields":{
+    "name": "archivo de documentos contables, ingresos, egresos",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 276,
+  "fields":{
+    "name": "habilidades de comunicación orales y escritas",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 277,
+  "fields":{
+    "name": "negociación",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 278,
+  "fields":{
+    "name": "interpretación de cifras e información",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 279,
+  "fields":{
+    "name": "matemáticas",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 280,
+  "fields":{
+    "name": "habilidades de gestión del tiempo y habilidades de planificación",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 281,
+  "fields":{
+    "name": "contacto con proveedores locales",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 282,
+  "fields":{
+    "name": "director en empresas del sector",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 283,
+  "fields":{
+    "name": "negociación con distribuidores",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 284,
+  "fields":{
+    "name": "comerciales",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 285,
+  "fields":{
+    "name": "manejo de personal",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 286,
+  "fields":{
+    "name": "compañias B2B",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 287,
+  "fields":{
+    "name": "compañías B2C",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 288,
+  "fields":{
+    "name": "producción",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 289,
+  "fields":{
+    "name": "comercialización",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 290,
+  "fields":{
+    "name": "gerencia de proyectos",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 291,
+  "fields":{
+    "name": "Zeus",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 292,
+  "fields":{
+    "name": "manejo de Sabre o Amadeus",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 293,
+  "fields":{
+    "name": "reservas, revisados y traslados",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 294,
+  "fields":{
+    "name": "realizando atención al cliente telefónico, emisión de tiquetes y manejo de reservas hoteleras",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 295,
+  "fields":{
+    "name": "manipulación de alimentos",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 296,
+  "fields":{
+    "name": "mesa y bar",
+    "work_area": 11,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 297,
+  "fields":{
+    "name": "matemáticas",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 298,
+  "fields":{
+    "name": "metodologías y orden en el trabajo",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 299,
+  "fields":{
+    "name": "habilidades de trabajo en equipo",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 300,
+  "fields":{
+    "name": "habilidades comunicativas orales y escritas",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 301,
+  "fields":{
+    "name": "servicio al cliente",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 302,
+  "fields":{
+    "name": "inglés avanzado",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 303,
+  "fields":{
+    "name": "inglés intermedio",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 304,
+  "fields":{
+    "name": "inglés básico",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 305,
+  "fields":{
+    "name": "manejo de personal",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 306,
+  "fields":{
+    "name": "Android (java)",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 307,
+  "fields":{
+    "name": "Android (Kotlin)",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 308,
+  "fields":{
+    "name": "IOS (Objective C)",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 309,
+  "fields":{
+    "name": "IOS (Swift)",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 310,
+  "fields":{
+    "name": "React Native",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 311,
+  "fields":{
+    "name": "Flutter",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 312,
+  "fields":{
+    "name": "Ionic",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 313,
+  "fields":{
+    "name": "Cordova",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 314,
+  "fields":{
+    "name": "JavaScript (Express)",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 315,
+  "fields":{
+    "name": "Ruby (Rails, Sinatra)",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 316,
+  "fields":{
+    "name": "Java (Play Framework)",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 317,
+  "fields":{
+    "name": "PHP (Larvel)",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 318,
+  "fields":{
+    "name": "Python (Django, Flask)",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 319,
+  "fields":{
+    "name": "Scala",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 320,
+  "fields":{
+    "name": "Elixir (Phoenix)",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 321,
+  "fields":{
+    "name": "MySQL",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 322,
+  "fields":{
+    "name": "Postgres",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 323,
+  "fields":{
+    "name": "SQLite",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 324,
+  "fields":{
+    "name": "NoSQL",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 325,
+  "fields":{
+    "name": "Mongo",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 326,
+  "fields":{
+    "name": "Cassandra",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 327,
+  "fields":{
+    "name": "Redis",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 328,
+  "fields":{
+    "name": "ReactJS",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 329,
+  "fields":{
+    "name": "VueJS",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 330,
+  "fields":{
+    "name": "web Components",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 331,
+  "fields":{
+    "name": "AngularJS",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 332,
+  "fields":{
+    "name": "AWS",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 333,
+  "fields":{
+    "name": "google cloud platform, firebase",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 334,
+  "fields":{
+    "name": "microsoft Azure",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 335,
+  "fields":{
+    "name": "Docker",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 336,
+  "fields":{
+    "name": "Kubernetes",
+    "work_area": 12,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 337,
+  "fields":{
+    "name": "matemáticas",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 338,
+  "fields":{
+    "name": "metodologías y orden en el trabajo",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 339,
+  "fields":{
+    "name": "habilidades de trabajo en equipo",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 340,
+  "fields":{
+    "name": "habilidades comunicativas orales y escritas",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 341,
+  "fields":{
+    "name": "servicio al cliente",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 342,
+  "fields":{
+    "name": "inglés avanzado",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 343,
+  "fields":{
+    "name": "inglés intermedio",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 344,
+  "fields":{
+    "name": "inglés básico",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 345,
+  "fields":{
+    "name": "manejo de personal",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 346,
+  "fields":{
+    "name": "Android (java)",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 347,
+  "fields":{
+    "name": "Android (Kotlin)",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 348,
+  "fields":{
+    "name": "IOS (Objective C)",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 349,
+  "fields":{
+    "name": "IOS (Swift)",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 350,
+  "fields":{
+    "name": "React Native",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 351,
+  "fields":{
+    "name": "Flutter",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 352,
+  "fields":{
+    "name": "Ionic",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 353,
+  "fields":{
+    "name": "Cordova",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 354,
+  "fields":{
+    "name": "JavaScript (Express)",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 355,
+  "fields":{
+    "name": "Ruby (Rails, Sinatra)",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 356,
+  "fields":{
+    "name": "Java (Play Framework)",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 357,
+  "fields":{
+    "name": "PHP (Larvel)",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 358,
+  "fields":{
+    "name": "Python (Django, Flask)",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 359,
+  "fields":{
+    "name": "Scala",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 360,
+  "fields":{
+    "name": "Elixir (Phoenix)",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 361,
+  "fields":{
+    "name": "MySQL",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 362,
+  "fields":{
+    "name": "Postgres",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 363,
+  "fields":{
+    "name": "SQLite",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 364,
+  "fields":{
+    "name": "NoSQL",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 365,
+  "fields":{
+    "name": "Mongo",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 366,
+  "fields":{
+    "name": "Cassandra",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 367,
+  "fields":{
+    "name": "Redis",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 368,
+  "fields":{
+    "name": "ReactJS",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 369,
+  "fields":{
+    "name": "VueJS",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 370,
+  "fields":{
+    "name": "web Components",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 371,
+  "fields":{
+    "name": "AngularJS",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 372,
+  "fields":{
+    "name": "AWS",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 373,
+  "fields":{
+    "name": "google cloud platform, firebase",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 374,
+  "fields":{
+    "name": "microsoft Azure",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 375,
+  "fields":{
+    "name": "Docker",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 376,
+  "fields":{
+    "name": "Kubernetes",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 377,
+  "fields":{
+    "name": "control y administración de planta",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 378,
+  "fields":{
+    "name": "programación de maquinaria CNC",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 379,
+  "fields":{
+    "name": "Conocimientos en la normal conocimiento en la ISO2859 ",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 380,
+  "fields":{
+    "name": "jefe de área",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 381,
+  "fields":{
+    "name": "manejo de SAP",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 382,
+  "fields":{
+    "name": "ITIL ",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 383,
+  "fields":{
+    "name": "IPV6",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 384,
+  "fields":{
+    "name": "IPV6 Network engineer",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 385,
+  "fields":{
+    "name": "IPv6 Avanzado Lacnic",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 386,
+  "fields":{
+    "name": "fabricación de Switch",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 387,
+  "fields":{
+    "name": "redes",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 388,
+  "fields":{
+    "name": "seguridad de la información",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 389,
+  "fields":{
+    "name": "manejo de plataformas Microsoft Windows Sever",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 390,
+  "fields":{
+    "name": "diseño y administración de cableados estructurados",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 391,
+  "fields":{
+    "name": "administración de redes LAN WAN y sistemas inalámbricos",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 392,
+  "fields":{
+    "name": "Hardware",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 393,
+  "fields":{
+    "name": "instalación, soporte y mantenimiento de equipos de cómputo",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 394,
+  "fields":{
+    "name": "gestión de copias de seguridad",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 395,
+  "fields":{
+    "name": "configuración de Switches, Acces Points y Routers",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 396,
+  "fields":{
+    "name": "manejo de buenas Practicas de Manufactura",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 397,
+  "fields":{
+    "name": "configuración y administración de equipos activos de redes y seguridad perimetral",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 398,
+  "fields":{
+    "name": "el manejo de costos, elaboración y control de presupuestos",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 399,
+  "fields":{
+    "name": "redes IP, sistemas de Audio, Vídeo y Transmisión de vídeos",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 400,
+  "fields":{
+    "name": "operaciones de Mudloggin",
+    "work_area": 13,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 401,
+  "fields":{
+    "name": "matemáticas",
+    "work_area": 14,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 402,
+  "fields":{
+    "name": "metodologías y orden en el trabajo",
+    "work_area": 14,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 403,
+  "fields":{
+    "name": "habilidades de trabajo en equipo",
+    "work_area": 14,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 404,
+  "fields":{
+    "name": "habilidades comunicativas orales y escritas",
+    "work_area": 14,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 405,
+  "fields":{
+    "name": "servicio al cliente",
+    "work_area": 14,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 406,
+  "fields":{
+    "name": "inglés avanzado",
+    "work_area": 14,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 407,
+  "fields":{
+    "name": "inglés intermedio",
+    "work_area": 14,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 408,
+  "fields":{
+    "name": "inglés básico",
+    "work_area": 14,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 409,
+  "fields":{
+    "name": "manejo de personal",
+    "work_area": 14,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 410,
+  "fields":{
+    "name": "matemáticas",
+    "work_area": 15,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 411,
+  "fields":{
+    "name": "metodologías y orden en el trabajo",
+    "work_area": 15,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 412,
+  "fields":{
+    "name": "habilidades de trabajo en equipo",
+    "work_area": 15,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 413,
+  "fields":{
+    "name": "habilidades comunicativas orales y escritas",
+    "work_area": 15,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 414,
+  "fields":{
+    "name": "servicio al cliente",
+    "work_area": 15,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 415,
+  "fields":{
+    "name": "inglés avanzado",
+    "work_area": 15,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 416,
+  "fields":{
+    "name": "inglés intermedio",
+    "work_area": 15,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 417,
+  "fields":{
+    "name": "inglés básico",
+    "work_area": 15,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 418,
+  "fields":{
+    "name": "manejo de personal",
+    "work_area": 15,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 419,
+  "fields":{
+    "name": "derecho administrativo",
+    "work_area": 15,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 420,
+  "fields":{
+    "name": "derecho constitucional",
+    "work_area": 15,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 421,
+  "fields":{
+    "name": "derecho internacional público",
+    "work_area": 15,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 422,
+  "fields":{
+    "name": "derecho penal",
+    "work_area": 15,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 423,
+  "fields":{
+    "name": "derecho tributario o fiscal",
+    "work_area": 15,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 424,
+  "fields":{
+    "name": "derecho laboral",
+    "work_area": 15,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 425,
+  "fields":{
+    "name": "derecho mercantil",
+    "work_area": 15,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 426,
+  "fields":{
+    "name": "derecho internacional privado",
+    "work_area": 15,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 427,
+  "fields":{
+    "name": "derecho civil",
+    "work_area": 15,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 428,
+  "fields":{
+    "name": "matemáticas",
+    "work_area": 16,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 429,
+  "fields":{
+    "name": "metodologías y orden en el trabajo",
+    "work_area": 16,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 430,
+  "fields":{
+    "name": "habilidades de trabajo en equipo",
+    "work_area": 16,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 431,
+  "fields":{
+    "name": "habilidades comunicativas orales y escritas",
+    "work_area": 16,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 432,
+  "fields":{
+    "name": "servicio al cliente",
+    "work_area": 16,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 433,
+  "fields":{
+    "name": "inglés avanzado",
+    "work_area": 16,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 434,
+  "fields":{
+    "name": "inglés intermedio",
+    "work_area": 16,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 435,
+  "fields":{
+    "name": "inglés básico",
+    "work_area": 16,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 436,
+  "fields":{
+    "name": "manejo de personal",
+    "work_area": 16,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 437,
+  "fields":{
+    "name": "matemáticas",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 438,
+  "fields":{
+    "name": "metodologías y orden en el trabajo",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 439,
+  "fields":{
+    "name": "habilidades de trabajo en equipo",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 440,
+  "fields":{
+    "name": "habilidades comunicativas orales y escritas",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 441,
+  "fields":{
+    "name": "servicio al cliente",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 442,
+  "fields":{
+    "name": "inglés avanzado",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 443,
+  "fields":{
+    "name": "inglés intermedio",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 444,
+  "fields":{
+    "name": "inglés básico",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 445,
+  "fields":{
+    "name": "manejo de personal",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 446,
+  "fields":{
+    "name": "alergología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 447,
+  "fields":{
+    "name": "anestesiología y reanimación",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 448,
+  "fields":{
+    "name": "cardiología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 449,
+  "fields":{
+    "name": "gastroenterología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 450,
+  "fields":{
+    "name": "endocrinología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 451,
+  "fields":{
+    "name": "geriatría",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 452,
+  "fields":{
+    "name": "hematología y hemoterapia",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 453,
+  "fields":{
+    "name": "infectología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 454,
+  "fields":{
+    "name": "medicina aeroespacial",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 455,
+  "fields":{
+    "name": "medicina del deporte",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 456,
+  "fields":{
+    "name": "medicina del trabajo",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 457,
+  "fields":{
+    "name": "medicina de urgencias",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 458,
+  "fields":{
+    "name": "medicina familiar y comunitaria",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 459,
+  "fields":{
+    "name": "medicina física y rehabilitación",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 460,
+  "fields":{
+    "name": "medicina intensiva",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 461,
+  "fields":{
+    "name": "medicina interna",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 462,
+  "fields":{
+    "name": "medicina legal y forense",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 463,
+  "fields":{
+    "name": "medicina preventiva y salud pública",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 464,
+  "fields":{
+    "name": "medicina veterinaria",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 465,
+  "fields":{
+    "name": "nefrología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 466,
+  "fields":{
+    "name": "neumología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 467,
+  "fields":{
+    "name": "neurología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 468,
+  "fields":{
+    "name": "nutriología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 469,
+  "fields":{
+    "name": "oftalmología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 470,
+  "fields":{
+    "name": "oncología médica",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 471,
+  "fields":{
+    "name": "oncología radioterápica",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 472,
+  "fields":{
+    "name": "pediatría",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 473,
+  "fields":{
+    "name": "psiquiatría",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 474,
+  "fields":{
+    "name": "rehabilitación",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 475,
+  "fields":{
+    "name": "reumatología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 476,
+  "fields":{
+    "name": "toxicología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 477,
+  "fields":{
+    "name": "urología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 478,
+  "fields":{
+    "name": "cirugía cardiovascular",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 479,
+  "fields":{
+    "name": "cirugía general y del aparato digestivo",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 480,
+  "fields":{
+    "name": "cirugía oral y maxilofacial",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 481,
+  "fields":{
+    "name": "cirugía ortopédica y traumatología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 482,
+  "fields":{
+    "name": "cirugía pediátrica",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 483,
+  "fields":{
+    "name": "cirugía plástica, estética y reparadora",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 484,
+  "fields":{
+    "name": "cirugía torácica",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 485,
+  "fields":{
+    "name": "neurocirugía",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 486,
+  "fields":{
+    "name": "proctología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 487,
+  "fields":{
+    "name": "angiología y cirugía vascular",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 488,
+  "fields":{
+    "name": "dermatología médico-quirúrgica y venereología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 489,
+  "fields":{
+    "name": "odontología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 490,
+  "fields":{
+    "name": "ginecología y obstetricia o tocología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 491,
+  "fields":{
+    "name": "oftalmología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 492,
+  "fields":{
+    "name": "otorrinolaringología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 493,
+  "fields":{
+    "name": "urología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 494,
+  "fields":{
+    "name": "traumatología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 495,
+  "fields":{
+    "name": "análisis clínicos",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 496,
+  "fields":{
+    "name": "anatomía patológica",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 497,
+  "fields":{
+    "name": "bioquímica clínica",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 498,
+  "fields":{
+    "name": "farmacología clínica",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 499,
+  "fields":{
+    "name": "genética médica",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 500,
+  "fields":{
+    "name": "inmunología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 501,
+  "fields":{
+    "name": "medicina nuclear",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 502,
+  "fields":{
+    "name": "microbiología y parasitología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 503,
+  "fields":{
+    "name": "neurofisiología clínica",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 504,
+  "fields":{
+    "name": "radiodiagnóstico o radiología",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 505,
+  "fields":{
+    "name": "farmacia",
+    "work_area": 17,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 506,
+  "fields":{
+    "name": "matemáticas",
+    "work_area": 18,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 507,
+  "fields":{
+    "name": "metodologías y orden en el trabajo",
+    "work_area": 18,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 508,
+  "fields":{
+    "name": "habilidades de trabajo en equipo",
+    "work_area": 18,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 509,
+  "fields":{
+    "name": "habilidades comunicativas orales y escritas",
+    "work_area": 18,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 510,
+  "fields":{
+    "name": "servicio al cliente",
+    "work_area": 18,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 511,
+  "fields":{
+    "name": "inglés avanzado",
+    "work_area": 18,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 512,
+  "fields":{
+    "name": "inglés intermedio",
+    "work_area": 18,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 513,
+  "fields":{
+    "name": "inglés básico",
+    "work_area": 18,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 514,
+  "fields":{
+    "name": "manejo de personal",
+    "work_area": 18,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 515,
+  "fields":{
+    "name": "community manager",
+    "work_area": 18,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 516,
+  "fields":{
+    "name": "ortografía y redacción",
+    "work_area": 18,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 517,
+  "fields":{
+    "name": "matemáticas",
+    "work_area": 19,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 518,
+  "fields":{
+    "name": "metodologías y orden en el trabajo",
+    "work_area": 19,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 519,
+  "fields":{
+    "name": "habilidades de trabajo en equipo",
+    "work_area": 19,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 520,
+  "fields":{
+    "name": "habilidades comunicativas orales y escritas",
+    "work_area": 19,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 521,
+  "fields":{
+    "name": "servicio al cliente",
+    "work_area": 19,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 522,
+  "fields":{
+    "name": "inglés avanzado",
+    "work_area": 19,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 523,
+  "fields":{
+    "name": "inglés intermedio",
+    "work_area": 19,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 524,
+  "fields":{
+    "name": "inglés básico",
+    "work_area": 19,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 525,
+  "fields":{
+    "name": "manejo de personal",
+    "work_area": 19,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 526,
+  "fields":{
+    "name": "operación de maquina plana",
+    "work_area": 19,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 527,
+  "fields":{
+    "name": "operación de inyección",
+    "work_area": 19,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 528,
+  "fields":{
+    "name": "operación maquinaria amarilla",
+    "work_area": 19,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 529,
+  "fields":{
+    "name": "operación de corte",
+    "work_area": 19,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 530,
+  "fields":{
+    "name": "operación de producción",
+    "work_area": 19,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 531,
+  "fields":{
+    "name": "operación de confección",
+    "work_area": 19,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 532,
+  "fields":{
+    "name": "auxiliar de bodega",
+    "work_area": 19,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 533,
+  "fields":{
+    "name": "operación de fundición",
+    "work_area": 19,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 534,
+  "fields":{
+    "name": "operación de cavas",
+    "work_area": 19,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 535,
+  "fields":{
+    "name": "operación de metal mecánica",
+    "work_area": 19,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 536,
+  "fields":{
+    "name": "islero",
+    "work_area": 19,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 537,
+  "fields":{
+    "name": "matemáticas",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 538,
+  "fields":{
+    "name": "metodologías y orden en el trabajo",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 539,
+  "fields":{
+    "name": "habilidades de trabajo en equipo",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 540,
+  "fields":{
+    "name": "habilidades comunicativas orales y escritas",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 541,
+  "fields":{
+    "name": "servicio al cliente",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 542,
+  "fields":{
+    "name": "inglés avanzado",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 543,
+  "fields":{
+    "name": "inglés intermedio",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 544,
+  "fields":{
+    "name": "inglés básico",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 545,
+  "fields":{
+    "name": "manejo de personal",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 546,
+  "fields":{
+    "name": "nomina",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 547,
+  "fields":{
+    "name": "selección",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 548,
+  "fields":{
+    "name": "facturación",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 549,
+  "fields":{
+    "name": "aplicación de pruebas psicotécnicas",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 550,
+  "fields":{
+    "name": "evaluación de clima laboral",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 551,
+  "fields":{
+    "name": "bienestar laboral",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 552,
+  "fields":{
+    "name": "SENTRY",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 553,
+  "fields":{
+    "name": "SAP",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 554,
+  "fields":{
+    "name": "ZEUS",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 555,
+  "fields":{
+    "name": "manejo de excel",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 556,
+  "fields":{
+    "name": "selección de ingenieros",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 557,
+  "fields":{
+    "name": "selección de personal",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 558,
+  "fields":{
+    "name": "entrevistas para selección",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 559,
+  "fields":{
+    "name": "reclutamiento",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 560,
+  "fields":{
+    "name": "informes de pruebas técnicas",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 561,
+  "fields":{
+    "name": "afiliaciones y contratos laborales",
+    "work_area": 20,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 562,
+  "fields":{
+    "name": "matemáticas",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 563,
+  "fields":{
+    "name": "metodologías y orden en el trabajo",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 564,
+  "fields":{
+    "name": "habilidades de trabajo en equipo",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 565,
+  "fields":{
+    "name": "habilidades comunicativas orales y escritas",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 566,
+  "fields":{
+    "name": "servicio al cliente",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 567,
+  "fields":{
+    "name": "inglés avanzado",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 568,
+  "fields":{
+    "name": "inglés intermedio",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 569,
+  "fields":{
+    "name": "inglés básico",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 570,
+  "fields":{
+    "name": "manejo de personal",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 571,
+  "fields":{
+    "name": "limpieza",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 572,
+  "fields":{
+    "name": "jardinería",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 573,
+  "fields":{
+    "name": "lavado de platos",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 574,
+  "fields":{
+    "name": "recolección de basura",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 575,
+  "fields":{
+    "name": "repostería",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 576,
+  "fields":{
+    "name": "cocina para el area del cargo",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 577,
+  "fields":{
+    "name": "cocina",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 578,
+  "fields":{
+    "name": "vigilancia",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 579,
+  "fields":{
+    "name": "seguridad",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 580,
+  "fields":{
+    "name": "barista",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 581,
+  "fields":{
+    "name": "vendedor punto de venta",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 582,
+  "fields":{
+    "name": "visitador",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 583,
+  "fields":{
+    "name": "visitas domiciliarias",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 584,
+  "fields":{
+    "name": "auxiliar de cocina",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 585,
+  "fields":{
+    "name": "camarero",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 586,
+  "fields":{
+    "name": "mesero",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 587,
+  "fields":{
+    "name": "recepcionista",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 588,
+  "fields":{
+    "name": "sobrecargo",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 589,
+  "fields":{
+    "name": "bartender",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 590,
+  "fields":{
+    "name": "concerje",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 591,
+  "fields":{
+    "name": "todero",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 592,
+  "fields":{
+    "name": "manicurista",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 593,
+  "fields":{
+    "name": "peluquera",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 594,
+  "fields":{
+    "name": "manicurista y pedicurista",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 595,
+  "fields":{
+    "name": "carpintero",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 596,
+  "fields":{
+    "name": "soldador",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 597,
+  "fields":{
+    "name": "plomero",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 598,
+  "fields":{
+    "name": "fontanero",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 599,
+  "fields":{
+    "name": "recojebola",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 600,
+  "fields":{
+    "name": "caddy",
+    "work_area": 21,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 601,
+  "fields":{
+    "name": "matemáticas",
+    "work_area": 22,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 602,
+  "fields":{
+    "name": "metodologías y orden en el trabajo",
+    "work_area": 22,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 603,
+  "fields":{
+    "name": "habilidades de trabajo en equipo",
+    "work_area": 22,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 604,
+  "fields":{
+    "name": "habilidades comunicativas orales y escritas",
+    "work_area": 22,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 605,
+  "fields":{
+    "name": "servicio al cliente",
+    "work_area": 22,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 606,
+  "fields":{
+    "name": "inglés avanzado",
+    "work_area": 22,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 607,
+  "fields":{
+    "name": "inglés intermedio",
+    "work_area": 22,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 608,
+  "fields":{
+    "name": "inglés básico",
+    "work_area": 22,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 609,
+  "fields":{
+    "name": "manejo de personal",
+    "work_area": 22,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 610,
+  "fields":{
+    "name": "ventas a empresas",
+    "work_area": 22,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 611,
+  "fields":{
+    "name": "ventas a personas",
+    "work_area": 22,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 612,
+  "fields":{
+    "name": "ventas TAT",
+    "work_area": 22,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 613,
+  "fields":{
+    "name": "ventas call center",
+    "work_area": 22,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 614,
+  "fields":{
+    "name": "ventas para la industria del cargo",
+    "work_area": 22,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 615,
+  "fields":{
+    "name": "matemáticas",
+    "work_area": 1,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 616,
+  "fields":{
+    "name": "herramientas ofimáticas",
+    "work_area": 1,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 617,
+  "fields":{
+    "name": "manejo de recursos habituales en una oficina, como los ordenadores o las fotocopiadoras",
+    "work_area": 1,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 618,
+  "fields":{
+    "name": "habilidades comunicativas orales y escritas.",
+    "work_area": 1,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 619,
+  "fields":{
+    "name": "Servicio al cliente",
+    "work_area": 1,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 620,
+  "fields":{
+    "name": "inglés avanzado",
+    "work_area": 1,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 621,
+  "fields":{
+    "name": "inglés intermedio",
+    "work_area": 1,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 622,
+  "fields":{
+    "name": "ingles básico",
+    "work_area": 1,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 623,
+  "fields":{
+    "name": "manejo de personal",
+    "work_area": 1,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 624,
+  "fields":{
+    "name": "el manejo de algún software contable",
+    "work_area": 1,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 625,
+  "fields":{
+    "name": "archivo y digitalización",
+    "work_area": 1,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 626,
+  "fields":{
+    "name": "cobro de cartera",
+    "work_area": 1,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 627,
+  "fields":{
+    "name": "ordenes de compra",
+    "work_area": 1,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 628,
+  "fields":{
+    "name": "manejo de proveedores",
+    "work_area": 1,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 629,
+  "fields":{
+    "name": "realización de cotizaciones",
+    "work_area": 1,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 630,
+  "fields":{
+    "name": "servicio al cliente",
+    "work_area": 4,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 631,
+  "fields":{
+    "name": "ventas en frio",
+    "work_area": 4,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 632,
+  "fields":{
+    "name": "telemercadeo",
+    "work_area": 4,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 633,
+  "fields":{
+    "name": "ventas a empresas",
+    "work_area": 4,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 634,
+  "fields":{
+    "name": "ventas a usuario final",
+    "work_area": 4,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 635,
+  "fields":{
+    "name": "manejo de objeciones",
+    "work_area": 4,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 636,
+  "fields":{
+    "name": "habilidades de trabajo en equipo",
+    "work_area": 4,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 637,
+  "fields":{
+    "name": "manejo de recursos habituales en una oficina, como los ordenadores o las fotocopiadoras",
+    "work_area": 4,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 638,
+  "fields":{
+    "name": "habilidades comunicativas orales y escritas",
+    "work_area": 4,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 639,
+  "fields":{
+    "name": "servicio al cliente",
+    "work_area": 4,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 640,
+  "fields":{
+    "name": "inglés avanzado",
+    "work_area": 4,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 641,
+  "fields":{
+    "name": "inglés intermedio",
+    "work_area": 4,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 642,
+  "fields":{
+    "name": "inglés básico",
+    "work_area": 4,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 643,
+  "fields":{
+    "name": "manejo de personal",
+    "work_area": 4,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 644,
+  "fields":{
+    "name": "archivo y digitalización",
+    "work_area": 4,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 645,
+  "fields":{
+    "name": "cobro de cartera",
+    "work_area": 4,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 646,
+  "fields":{
+    "name": "ordenes de compra",
+    "work_area": 4,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 647,
+  "fields":{
+    "name": "manejo de proveedores",
+    "work_area": 4,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+},
+{
+  "model": "beta_invite.requirement",
+  "pk": 648,
+  "fields":{
+    "name": "realización de cotizaciones",
+    "work_area": 4,
+    "created_at": "2018-10-02 10:54:49.0957+00",
+    "updated_at": "2018-10-02 10:54:49.0957+00"
+  }
+}
+]

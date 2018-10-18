@@ -6,7 +6,6 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" types="text/css" href="{% static 'dashboard/css/common.css' %}">
-
     <title>{{ title }}</title>
 </head>
 <body class="indent_style">
@@ -17,8 +16,10 @@
         {% csrf_token %}
         <br>
         <br>
-        <input class="title_text_box" type="text" name="name" value="{{ campaign.name }}"
-          placeholder="Digita el nombre de la empresa" required>
+
+            <input class="title_text_box" type="text" name="company" value="{{ company.name }}"
+              placeholder="Digita el nombre de la empresa" required>
+
         <br>
         <br>
         <input class="title_text_box" type="text" name="title" value="{{ campaign.title }}"
@@ -63,6 +64,24 @@
         </select>
         <br>
         <br>
+
+        <h3>Salary</h3>
+        <span >from: </span>
+        {% if campaign.salary_low_range %}
+            <input  type="number" min="0" name="salary_low_range" value="{{ campaign.salary_low_range }}">
+        {% else %}
+            <input  type="number" min="0" name="salary_low_range" value="1000000">
+        {% endif %}
+        <span >to: </span>
+        {% if campaign.salary_high_range %}
+            <input type="number" min="0" name="salary_high_range" value="{{ campaign.salary_high_range }}">
+        {% else %}
+            <input type="number" min="0" name="salary_high_range" value="2000000">
+        {% endif %}
+
+        <br>
+        <br>
+
         <textarea name="description" cols="40" rows="5"
         placeholder="add description in English">{{ campaign.description }}</textarea>
         <br>
@@ -71,21 +90,7 @@
         placeholder="add description in Spanish">{{ campaign.description_es }}</textarea>
         <br>
         <br>
-        <select name="profession_id" required>
 
-            <!--Update-->
-            {% if campaign and campaign.profession %}
-                <option value="{{ campaign.profession.id }}">{{ campaign.profession.name }}</option>
-            {% else %} <!--New-->
-                <option value="">Select Profession</option>
-            {% endif %}
-
-          {% for profession in professions %}
-             <option value="{{ profession.id }}">{{ profession.name }}</option>
-          {% endfor %}
-        </select>
-        <br>
-        <br>
         <select name="work_area_id" required>
 
             {% if campaign and campaign.work_area %} <!--Update-->
@@ -100,26 +105,10 @@
         </select>
         <br>
         <br>
-        <select name="education_id" required>
-
-            <!--Update-->
-            {% if campaign and campaign.education %}
-                <option value="{{ campaign.education.id }}">{{ campaign.education.name }}</option>
-            {% else %} <!--New-->
-                <option value="">Select Education</option>
-            {% endif %}
-
-          {% for level in education %}
-             <option value="{{ level.id }}">{{ level.name }}</option>
-          {% endfor %}
-        </select>
-        <br>
-        <br>
         <div style="margin-top:-10px;">
             <label>Experience in years:</label>
             <input name="experience" id="experience"type="number" value="{{ campaign.experience }}" min="0" max="60" required>
         </div>
-        <br>
         <br>
         <p>CALENDLY?</p>
         <select name="calendly" required>
@@ -138,21 +127,24 @@
         </select>
         <br>
         <br>
-        <p>ACTIVE?</p>
-        <select name="active" required>
+
+        <p>STATE</p>
+        <select name="state_id" required>
 
             <!--Update-->
             {% if campaign %}
-                {% with default=campaign.active %}
-                    <option value="{{ default }}">{{ default }}</option>
+                {% with default=campaign.state %}
+                    <option value="{{ default.pk }}">{{ default.name }}</option>
                 {% endwith %}
-            {% else %} <!--New-->
-                <option value="1">True</option>
+            {% else %} <!-- New, starts in inactive, ie id=1 -->
+                <option value="1">Inactive</option>
             {% endif %}
 
-            <option value="1">True</option>
-            <option value="0">False</option>
+            {% for state in campaign_states %}
+                <option value="{{ state.id }}">{{ state.name }}</option>
+            {% endfor %}
         </select>
+
         <br>
         <br>
         <p>Calendly Url</p>

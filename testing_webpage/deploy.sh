@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 git pull origin master;
 crontab cron.txt;
 python3 manage.py collectstatic -v0 --noinput;

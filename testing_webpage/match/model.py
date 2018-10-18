@@ -20,40 +20,6 @@ from match.pickle_models import pickle_handler
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 
 
-def load_data_for_prediction():
-    """
-    Loads and prepares all data.
-    :return: data DataFrame with features and target.
-    """
-    data, candidates = common_learning.load_data()
-    return data, candidates
-
-
-def predict_and_save(data, model, candidates):
-
-    data['prediction'] = model.predict(data)
-
-    for candidate, (pk, row) in zip(candidates, data.iterrows()):
-        candidate.match_classification = int(row['prediction'])
-
-        #from django.utils.encoding import smart_text
-        # Encoding prevents error when screening_explanation has special chars.
-        #candidate.screening_explanation = smart_text(candidate.screening_explanation)
-        candidate.save()
-
-
-def learn_and_predict():
-    """
-    Predict matches and stores them on the candidates.
-    :return: None
-    """
-
-    model, _ = learn.get_model()
-    save_model(model)
-    data, candidates = load_data_for_prediction()
-    predict_and_save(data, model, candidates)
-
-
 def predict_match(candidates):
     """
     Given candidates predict their match.
@@ -101,7 +67,7 @@ def save_other_values():
 
     # Order is key, Hashers are calculated before hashing the data.
     save_hashers(data)
-    data = common_learning.hash_columns(data, common_learning.get_hashing_info())
+    #data = common_learning.hash_columns(data, common_learning.get_hashing_info())
 
     # Order is key, save scaler, then scale
     #common_learning.get_scaler_and_save(data)
@@ -121,7 +87,8 @@ def save_hashers(data):
 
 def do_your_stuff():
     text_match.update()
-    learn_and_predict()
+    model = learn.get_model()
+    save_model(model)
     save_other_values()
 
 

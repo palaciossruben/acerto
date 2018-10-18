@@ -62,6 +62,13 @@ def get_campaign_url(candidate):
         return ''
 
 
+def get_campaign_salary_range(candidate):
+    if hasattr(candidate, 'campaign_id') and candidate.campaign_id:
+        return '{} - {}'.format(candidate.campaign.salary_low_range, candidate.campaign.salary_high_range)
+    else:
+        return ''
+
+
 def get_campaign_name(candidate, language_code):
     """
     For a object that has no associated campaign it will not return the title
@@ -74,6 +81,29 @@ def get_campaign_name(candidate, language_code):
             return candidate.campaign.title_es
         else:
             return candidate.campaign.title
+
+    return ''
+
+
+def get_campaign_city_name(candidate):
+
+    if candidate and candidate.campaign and candidate.campaign.city:
+        return candidate.campaign.city.name
+    return ''
+
+
+def get_campaign_description(candidate, language_code):
+    """
+    For a object that has no associated campaign it will not return the title
+    Args:
+        candidate: User or Contact object.
+    Returns: string with title
+    """
+    if candidate and hasattr(candidate.campaign, 'description') and candidate.campaign.description:
+        if language_code == 'es':
+            return candidate.campaign.description_es
+        else:
+            return candidate.campaign.description
 
     return ''
 
@@ -92,6 +122,10 @@ def get_email_path():
 
 def get_message_path():
     return os.path.join(get_file_path(), 'messages')
+
+
+def get_public_post_path():
+    return os.path.join(get_file_path(), 'public_posts')
 
 
 def get_basic_params(override_dict={}):
@@ -151,7 +185,10 @@ def get_params_with_candidate(candidate, language_code, override_dict={}):
               'sender_position': config('sender_position'),
               'peaku_address': config('peaku_address'),
               'campaign': get_campaign_name(candidate, language_code),
-              'campaign_url': get_campaign_url(candidate)}
+              'campaign_url': get_campaign_url(candidate),
+              'campaign_salary_range': get_campaign_salary_range(candidate),
+              'campaign_city': get_campaign_city_name(candidate),
+              'campaign_description': get_campaign_description(candidate, language_code)}
 
     if hasattr(candidate, 'campaign_id'):
         params['test_url'] = get_test_url(candidate.user, candidate.campaign)

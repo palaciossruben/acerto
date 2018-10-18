@@ -89,7 +89,7 @@ def send_possible_job_matches():
     """
 
     # Active campaigns that are not the default campaign
-    active_campaigns = Campaign.objects.filter(active=True)
+    active_campaigns = Campaign.objects.filter(state=2)
 
     for campaign in active_campaigns:
         candidate_prospects = prospect_module.get_candidates(campaign)

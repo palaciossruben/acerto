@@ -3,9 +3,9 @@
 {% load i18n %}
 {% load app_filters %}
 {% load compress %}
-{% block title %}Selección, contratación y reclutamiento de personal{% endblock %}
+{% block title %}{% trans 'Servicio de Reclutamiento | Seleccion de personal | Headhunter' %}{% endblock %}
 {% block extra_meta %}
-    <meta name="description"  content="Publica y comparte ofertas laborales, realiza pruebas relacionadas al cargo y selecciona al mejor personal. Podrás buscar, filtrar y comunícarte fácilmente con los candidatos en todas las etapas del proceso." />
+    <meta name="description"  content="Facilitamos el proceso de reclutamiento y selección de personal para Empresas. Publica y comparte vacantes en Colombia, Chile, Ecuador, Perú y Argentina." />
     <meta name="keywords" content="cazatalentos, selección de personal, reclutamiento personal, contratacion personal, selección personal, agencias, reclutamiento, reclutamiento empleados, busqueda personal, preselección personal, headhunter, agencia empleo" />
 {% endblock %}
 {% block extra_css %}
@@ -31,31 +31,31 @@
                 <span class="exitDingbat" onclick="off_signup()">X</span>
                 <br>
                 <br>
-                <span>Nombre</span>
+                <span>{% trans 'Name' %}</span>
                 <input class="form-input" name="name"
                     required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
                 <br>
-                <span>Empresa</span>
+                <span>{% trans 'Company' %}</span>
                 <input class="form-input" name="company">
                 <br>
-                <span>Correo</span>
+                <span>{% trans 'Mail' %}</span>
                 <input class="form-input" type="email" name="username" required="required">
                 <br>
-                <span>Teléfono</span>
+                <span>{% trans 'Phone' %}</span>
                 <input class="form-input" type="tel" name="phone"
                     required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
                 <br>
-                <span>Contraseña</span>
+                <span>{% trans 'Password' %}</span>
                 <input class="form-input" type="password" name="password1" required="required">
                 <br>
-                <span>Confirmar contraseña</span>
+                <span>{% trans 'Confirm Password' %}</span>
                 <input class="form-input" type="password" name="password2" required="required">
                 <br>
-                <input type="submit" class="submit" value="COMIENZA AHORA">
+                <input type="submit" class="submit" value="{% trans 'START NOW' %}">
             </fieldset>
-            <span style="color:white;margin-left:30px; s">¿Ya eres un usuario registrado? Inicia sesión
+            <span style="color:white;margin-left:30px; s">{% trans 'Already a registered user? Log in' %}
             <a style="color:white" href="javascript:void(0);" onclick="off_signup() & on_login()">
-            <strong>Aquí</strong>
+            <strong>{% trans 'Here' %}</strong>
             </a>
             </span>
         </form>
@@ -73,14 +73,14 @@
                 <input name="username" class="form-input"><br>
                 <span>Contraseña</span>
                 <input name="password" class="form-input" type="password"><br>
-                <span style="font-size:10px;"><a href="#" style="color:white">Olvidé mi contraseña</a></span>
+                <span style="font-size:10px;"><a href="#" style="color:white">{% trans 'I forgot my password' %}</a></span>
                 <span style="font-size:10px">
-                <a href="javascript:void(0);" style="color:white" onclick="off_login() & on_signup()">Aun no estoy registrado
+                <a href="javascript:void(0);" style="color:white" onclick="off_login() & on_signup()">{% trans "I'm not yet registered" %}
                 </a>
                 </span>
                 <br>
                 <br>
-                <input type="submit" class="submit" value="ACCEDER">
+                <input type="submit" class="submit" value="{% trans 'ACCESS' %}">
             </fieldset>
         </form>
     </div>
@@ -90,16 +90,16 @@
     <div class="row" style="margin-right: 0px;" id="main-copy">
         <div class="col-lg-5"></div>
         <div class="col-lg-7">
-            <h1 style="color: white">	Publica tu oferta laboral y agiliza<br> el proceso de selección de personal</h1>
+            <h1 style="color: white">{% trans '	Publish your job offer and expedite' %}<br>{% trans ' the personnel selection process' %}</h1>
         </div>
         <div class="col-lg-5"></div>
         <div class="col-lg-7">
-            <h5 style="color: white">Podrás hacer búsquedas, pruebas técnicas y contarás con toda la logística para encontrar al personal que tu empresa necesita</h5>
+            <h5 style="color: white">{% trans 'You can search candidates, do technical tests and have a fluent conversation with them' %}</h5>
         </div>
         <div class="col-lg-5"></div>
         <div class="col-lg-7">
             <form action="{% url 'business:start' %}">
-                <button class="button-cta" role="button">PUBLICA GRATIS</button>
+                <button class="button-cta" role="button">{% trans 'PUBLISH FOR FREE' %}</button>
             </form>
         </div>
     </div>
@@ -110,26 +110,26 @@
         </div>
         <div class="col-lg-4 col-md-4 beneficios">
             <img src="{% static 'business/img/10dias.png' %}">
-            <h6 class="push20">Los mejores candidatos en 10 días hábiles</h6>
+            <h6 class="push20">{% trans 'The best candidates in 10 business days' %}</h6>
             <br>
-            Cinco candidatos garantizados para el cargo en 10 días hábiles.
+            {% trans 'Five candidates guaranteed for the position in 10 business days.' %}
         </div>
         <div class="col-lg-4 col-md-4 beneficios pull50">
             <img src="{% static 'business/img/publicar-gratis.png' %}">
-            <h6 class="push20">Publica gratis tus vacantes de forma ilimitada</h6>
+            <h6 class="push20">{% trans 'Publish your job postings for free' %}</h6>
             <br>
-            Accede a candidatos y comparte tu publicación para llegar a más personas.
+            {% trans 'Access candidates and share your publication to reach more people.' %}
         </div>
         <div class="col-lg-4 col-md-4 beneficios pull100">
             <img src="{% static 'business/img/mejora-proceso.png' %}">
-            <h6 class="push20">Optimiza tus procesos de selección con nuestra plataforma<br></h6>
+            <h6 class="push20">{% trans 'Optimize your selection processes with our platform' %}<br></h6>
             <br>
-            Permite que los candidatos hagan pruebas técnicas en línea, facilitamos el seguimiento de los procesos y la comunicación.
+            {% trans 'Allow candidates to do technical tests online, we facilitate the monitoring of processes and communication.' %}
         </div>
         <div class="col-md-12 beneficioscel pull100">
             <img src="{% static 'business/img/beneficios-cel.jpg' %}">
-            <h6 class="push20">Los mejores candidatos en 10 días hábiles<br></h6>
-            Publica ofertas gratis y optimiza procesos de selección para que encuentres al candidato que necesitas en tiempo récord.
+            <h6 class="push20">{% trans 'The best candidates in 10 business days' %}<br></h6>
+            {% trans 'Post free offers and optimize selection processes to find the candidate you need in record time.' %}
         </div>
     </div>
     <div class="row blankabout" style="margin-right: 0px;margin-left: 0px;"></div>
@@ -146,10 +146,11 @@
             <div class="col-lg-1 col-md-1">
             </div>
             <div class="col-lg-5 col-md-5 about">
-                <h1>ACERCA DE LA PLATAFORMA</h1>
+                <h1>{% trans 'ABOUT THE PLATFORM' %}</h1>
                 <br>
-                Publica y comparte ofertas laborales, realiza pruebas relacionadas al cargo y selecciona al mejor personal. Podrás buscar, filtrar y comunicarte fácilmente con los candidatos en todas las etapas del proceso.<br>
-                <a href="{% url 'business:start' %}" class="button-cta" role="button" id="button-cta-about">COMIENZA AQUÍ</a>
+                {% trans 'Publish and share job offers, perform tests related to the position and select the best personnel. You can easily search, filter and communicate with candidates at all stages of the process.' %}
+                <br>
+                <a href="{% url 'business:start' %}" class="button-cta" role="button" id="button-cta-about">{% trans 'START HERE' %}</a>
             </div>
             <div class="col-lg-1 col-md-1">
             </div>
@@ -162,13 +163,13 @@
             <!--free-->
             <div class="col-lg-3 col-md-6 leftipad">
                 <div class="freebg">
-                    <div class="button-plans">PLAN GRATUITO</div>
-                    <a href="#" class="button-buy-cel" role="button">COMENZAR</a>
+                    <div class="button-plans">{% trans 'FREE PLAN' %}</div>
+                    <a href="#" class="button-buy-cel" role="button">{% trans 'START' %}</a>
                     <br>
-                    <p class="price">Gratis</p>
+                    <p class="price">{% trans 'Free' %}</p>
                     <div class="plancontainer">
                         <ul class="itemyes-light">
-                            <li class="listyes-light"> Acceso ilimitado a la plataforma </li>
+                            <li class="listyes-light">{% trans ' Unlimited access to the platform ' %}</li>
                             <li class="listyes-light"> Creación ilimitada de vacantes </li>
                             <li class="listno-light"> Publicación de vacantes en redes sociales</li>
                             <li class="listno-light"> Comunicación masiva por email y Whatsapp</li>
@@ -178,19 +179,19 @@
                             <li class="listno-light"> Proceso para candidatos especializados o gerenciales</li>
                         </ul>
                     </div>
-                    <a href="{% url 'business:plan' 1 %}" class="button-buy" role="button">COMENZAR</a>
+                    <a href="{% url 'business:plan' 1 %}" class="button-buy" role="button">{% trans 'START' %}</a>
                 </div>
             </div>
             <!--basic-->
             <div class="col-lg-3 col-md-6">
                 <div class="basicbg pull50">
-                    <div class="button-plan-top">PLAN BÁSICO</div>
-                    <a href="#" class="button-buy-cel" role="button">OBTENER</a>
+                    <div class="button-plan-top">{% trans 'BASIC PLAN' %}</div>
+                    <a href="#" class="button-buy-cel" role="button">{% trans 'GET' %}</a>
                     <br>
                     <p class="price">$675 mil COP + IVA</p>
                     <div class="plancontainer">
                         <ul class="itemyes-light">
-                            <li class="listyes-dark"> Acceso ilimitado a la plataforma </li>
+                            <li class="listyes-dark">{% trans ' Unlimited access to the platform ' %}</li>
                             <li class="listyes-dark"> Creación ilimitada de vacantes </li>
                             <li class="listyes-dark"> Publicación de vacantes en redes sociales</li>
                             <li class="listyes-dark"> Comunicación masiva por email y Whatsapp</li>
@@ -201,19 +202,19 @@
                             <li class="listno-dark"> Proceso para candidatos especializados o gerenciales</li>
                         </ul>
                     </div>
-                    <a href="{% url 'business:plan' 1 %}" class="button-buy" role="button">OBTENER</a>
+                    <a href="{% url 'business:plan' 1 %}" class="button-buy" role="button">{% trans 'GET' %}</a>
                 </div>
             </div>
             <!--premium-->
             <div class="col-lg-3 col-md-6">
                 <div class="premiumbg">
-                    <div class="button-plans">PLAN PREMIUM</div>
-                    <a href="#" class="button-buy-cel" role="button">OBTENER</a>
+                    <div class="button-plans">{% trans 'PREMIUM PLAN' %}</div>
+                    <a href="#" class="button-buy-cel" role="button">{% trans 'GET' %}</a>
                     <br>
                     <p class="price" style="color: white">$1.2M COP + IVA</p>
                     <div class="plancontainer">
                         <ul class="itemyes-light">
-                            <li class="listyes-dark"> Acceso ilimitado a la plataforma </li>
+                            <li class="listyes-dark">{% trans ' Unlimited access to the platform ' %}</li>
                             <li class="listyes-dark"> Creación ilimitada de vacantes </li>
                             <li class="listyes-dark"> Publicación de vacantes en redes sociales</li>
                             <li class="listyes-dark"> Comunicación masiva por email y Whatsapp</li>
@@ -224,19 +225,19 @@
                             <li class="listno-dark"> Proceso para candidatos especializados o gerenciales</li>
                         </ul>
                     </div>
-                    <a href="{% url 'business:plan' 2 %}" class="button-buy" role="button">OBTENER</a>
+                    <a href="{% url 'business:plan' 2 %}" class="button-buy" role="button">{% trans 'GET' %}</a>
                 </div>
             </div>
             <!--headhunterc-->
             <div class="col-lg-3 col-md-6">
                 <div class="headhunterbg">
-                    <div class="button-plans">PLAN HEADHUNTER</div>
-                    <a href="#" class="button-buy-cel" role="button">COTIZAR</a>
+                    <div class="button-plans">{% trans 'HEADHUNTER PLAN' %}</div>
+                    <a href="#" class="button-buy-cel" role="button">{% trans 'QUOTE' %}</a>
                     <br>
-                    <span class="price"><span class="pricesmall">Desde</span><br>$2.9M COP + IVA<br></span>
+                    <span class="price"><span class="pricesmall">{% trans 'From' %}</span><br>$2.9M COP + IVA<br></span>
                     <div class="plancontainer">
                         <ul class="itemyes-light">
-                            <li class="listyes-light"> Acceso ilimitado a la plataforma </li>
+                            <li class="listyes-light">{% trans ' Unlimited access to the platform ' %}</li>
                             <li class="listyes-light"> Creación ilimitada de vacantes </li>
                             <li class="listyes-light"> Publicación de vacantes en redes sociales</li>
                             <li class="listyes-light"> Comunicación masiva por email y Whatsapp</li>
@@ -247,7 +248,7 @@
                             <li class="listyes-light"> Proceso para candidatos especializados o gerenciales</li>
                         </ul>
                     </div>
-                    <a href="{% url 'business:plan' 3 %}" class="button-buy" role="button">COTIZAR</a>
+                    <a href="{% url 'business:plan' 3 %}" class="button-buy" role="button">{% trans 'QUOTE' %}</a>
                 </div>
             </div>
             <div class="blankplanspost"></div>
@@ -258,7 +259,7 @@
         <div class="row" style="margin-right: 0px;margin-left: 0px;">
             <div id="hide3" class="row blankreviewspic" style="margin-right: 0px;margin-left: 0px;"> </div>
             <div class="col-lg-12" style="text-align:center; z-index:-99;" >
-                <h3 class="push100" id="pushtitleiphone">Historias de éxito, de primera mano</h3>
+                <h3 class="push100" id="pushtitleiphone">{% trans 'First hand, success stories' %}</h3>
             </div>
             <div class="col-lg-3 "></div>
             <div class="col-lg-2 col-md-4 reviewsingle">

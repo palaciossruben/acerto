@@ -1,0 +1,22 @@
+[
+  {
+    "model": "beta_invite.requirementbinaryquestion",
+    "pk": 1,
+    "fields":{
+      "name": "Industry experience",
+      "name_es": "Experiencia en industria",
+      "statement": "Do you have experience in this industry?",
+      "statement_es": "¿Tienes experiencia en esta industria?"
+    }
+  },
+  {
+    "model": "beta_invite.requirementbinaryquestion",
+    "pk": 2,
+    "fields":{
+      "name": "Experience selling B2B",
+      "name_es": "Experiencia ventas B2B",
+      "statement": "Do you have experience selling B2B products?",
+      "statement_es": "¿Tienes experiencia en ventas B2B?"
+    }
+  }
+]

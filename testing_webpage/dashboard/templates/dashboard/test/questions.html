@@ -34,6 +34,11 @@
             <br>
             <br>
         {% endif %}
+        {% if test.type.name == 'requirements' %}
+            <textarea cols="10" rows="1" name="{{ question.order }}_question_internal_name"
+                      placeholder="internal_name">{{ question.internal_name }}</textarea>
+            <br>
+        {% endif %}
 
         <textarea cols="120" rows="5" name="{{ question.order }}_question_text"
                   placeholder="Question in English">{{ question.text }}</textarea>

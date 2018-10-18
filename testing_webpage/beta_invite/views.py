@@ -11,7 +11,7 @@ import common
 from beta_invite import constants as cts
 from beta_invite import interview_module
 from beta_invite import test_module, new_user_module
-from beta_invite.models import User, Visitor, Education, Country, Campaign, BulletType, Gender, City, WorkArea
+from beta_invite.models import User, Visitor, Campaign, BulletType, City
 from beta_invite.util import email_sender
 from beta_invite.util import messenger_sender, common_senders
 
@@ -285,14 +285,19 @@ def save_partial_additional_info(request):
 def active_campaigns(request):
 
     candidate = common.get_candidate_from_request(request)
-    new_user_module.update_user(candidate.campaign, candidate.user, {}, request)
 
-    # TODO: If AI takes over the world comment the next 3 lines.
-    # Does a last update of the ML prediction with the additional info provided before.
-    last_evaluation = candidate.get_last_evaluation()
-    if last_evaluation:
-        test_module.update_scores(last_evaluation, last_evaluation.scores.all(), candidate)
-        test_module.alter_candidate_state(candidate, last_evaluation)
+    if candidate is not None:
+        new_user_module.update_user(candidate.campaign, candidate.user, {}, request)
+
+        last_evaluation = candidate.get_last_evaluation()
+        if last_evaluation:
+            test_module.update_scores(last_evaluation, last_evaluation.scores.all())
+
+            # Uses ML to send to STC state!!! 100% automation reached?
+            test_module.classify_evaluation_and_change_state(candidate,
+                                                             use_machine_learning=True,
+                                                             success_state='STC',
+                                                             fail_state='WFI')
 
     return render(request, cts.ACTIVE_CAMPAIGNS_VIEW_PATH)
 
@@ -332,6 +337,3 @@ def add_cv_changes(request):
 
 def security_politics(request):
     return render(request, cts.SECURITY_POLITICS_VIEW_PATH)
-
-
-

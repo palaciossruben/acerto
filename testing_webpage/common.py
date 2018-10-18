@@ -3,27 +3,31 @@ import inspect
 import unicodedata
 from django.conf import settings
 from urllib.parse import urlencode, urlunparse, urlparse, parse_qsl, parse_qs
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.core.files.storage import FileSystemStorage
 from ipware.ip import get_ip
 import geoip2.database
 import inflection
-from beta_invite.apps import ip_country_reader, ip_city_reader
 
+from beta_invite.apps import ip_country_reader, ip_city_reader
 from beta_invite.models import User, Campaign, Country, City, Profession, Education, EvaluationSummary, WorkArea, Gender
 from beta_invite import constants as beta_cts
 from dashboard.models import Candidate, State
 from testing_webpage import settings
+from business.models import BusinessUser
 
 
 INTERVIEW_INTRO_VIDEO = './interview_intro_video.txt'
 ZIGGEO_API_KEY = './ziggeo_api_key.txt'
 ADMIN_USER_EMAIL = 'admin@peaku.co'
 
-if settings.DEBUG:
-    HOST = '//127.0.0.1:8000'
-else:
-    HOST = 'https://peaku.co'
+
+def get_host():
+    if settings.DEBUG:
+        host = '//127.0.0.1:8000'
+    else:
+        host = 'https://peaku.co'
+    return host
 
 
 def remove_accents(text):
@@ -160,7 +164,7 @@ def get_candidate(user, campaign):
 
     if user and campaign:
         try:
-            return Candidate.objects.get(campaign=campaign, user=user)
+            return Candidate.objects.get(campaign=campaign, user=user, removed=False)
         except ObjectDoesNotExist:
             return None
     else:
@@ -172,6 +176,7 @@ def get_candidates_from_campaign(campaign):
         return [c for c in Candidate.objects.filter(campaign=campaign)]
     else:
         return []
+
 
 # TODO: Make method present on common.py a method of the class User. For this to happen, Candidate class has
 # to be moved to testing_webpage to solve circular dependency problem.
@@ -376,9 +381,6 @@ def save_resource_from_request(request, my_object, param_name, folder_name):
 
         fs.save(file_path, my_file)
 
-        # once saved it will collect the file
-        # subprocess.call('python3 manage.py collectstatic -v0 --noinput', shell=True)
-
         # at last returns the curriculum url
         return file_path
 
@@ -454,6 +456,42 @@ def calculate_operational_efficiency(campaign):
     campaign.save()
 
 
+def not_admin_user(request):
+    return request.user.username != ADMIN_USER_EMAIL
+
+
 def access_for_users(request, campaign, business_user):
-    return request.user.username != ADMIN_USER_EMAIL and (request.user.id != business_user.auth_user.id or campaign
-                                                          not in business_user.campaigns.all())
+    return not_admin_user(request) and (request.user.id != business_user.auth_user.id or campaign
+                                        not in business_user.campaigns.all())
+
+
+def get_business_user_with_campaign(campaign, option):
+    """
+    Given a campaign gets the business_user if it exists, else None
+    :return: business_user or None
+    """
+    if option == 'object':
+        try:
+            return BusinessUser.objects.get(campaigns__id=campaign.pk)
+        except ObjectDoesNotExist:
+            return None
+        except MultipleObjectsReturned:
+            return BusinessUser.objects.filter(campaigns__id=campaign.pk).all()[0]
+    elif option == 'name':
+        try:
+            return BusinessUser.objects.get(campaigns__id=campaign.pk).name
+        except ObjectDoesNotExist:
+            return None
+        except MultipleObjectsReturned:
+            return BusinessUser.objects.filter(campaigns__id=campaign.pk).all()[0].name
+    elif option == 'company':
+        try:
+            return BusinessUser.objects.get(campaigns__id=campaign.pk).company
+        except ObjectDoesNotExist:
+            return None
+        except MultipleObjectsReturned:
+            return BusinessUser.objects.filter(campaigns__id=campaign.pk).all()[0].company
+    else:
+        return None
+
+

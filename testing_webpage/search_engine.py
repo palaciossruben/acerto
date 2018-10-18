@@ -22,7 +22,7 @@ from subscribe import cts
 from beta_invite.models import User
 
 
-MAX_USERS_TO_UPDATE = 500
+MAX_USERS_TO_UPDATE = 250
 
 
 def get_word_array_lower_case_and_no_accents(search_text):
@@ -49,7 +49,10 @@ def get_text_corpus():
     """
     Returns: OrderedDict with {user_id: text}
     """
-    text_dict = [(u.id, u.curriculum_text) for u in User.objects.filter(~Q(curriculum_text=None)).all()]
+
+    # TODO: use values_list
+    text_dict = [(u.id, u.curriculum_text) for u in User.objects.filter(~Q(curriculum_text=None) &
+                                                                        ~Q(curriculum_text='')).all()]
     text_dict = OrderedDict(text_dict)
 
     # filter any numbers:
@@ -67,6 +70,7 @@ def get_text_stats(use_idf):
     Gets tf_idf transformed data and the vocabulary
     Returns: Tuple containing Sparse Matrix with tf_idf data,  vocabulary dictionary and text_corpus (OrderedDict)
     """
+    print('getting text_stats...')
     count_vectorizer = CountVectorizer()
     text_corpus = get_text_corpus()
     data_counts = count_vectorizer.fit_transform([e for e in text_corpus.values()])
@@ -156,6 +160,7 @@ def print_common_words_percentiles(words):
 
 def get_common_words(text_corpus, number_of_top_words=20000):
     """Gets a list of the most common words"""
+    print('getting common user_words...')
 
     word_frequency = dict()
     for text in text_corpus.values():
@@ -228,9 +233,12 @@ def save_user_relevance_dictionary():
     Returns: Saves file with dictionary
     """
     data_tf_idf, vocabulary, text_corpus = get_text_stats(use_idf=True)
+    print('finished get_text_stats')
 
     try:
+        print('loading pickle...')
         user_relevance_dictionary = pickle.load(open(cts.WORD_USER_PATH, 'rb'))
+        print('pickle loaded')
     except FileNotFoundError:
         print('FileNotFoundError: user_relevance_dictionary.p')
         print('current working directory: ' + str(os.getcwd()))
@@ -264,7 +272,8 @@ def save_user_relevance_dictionary():
 
 
 def run():
-    sys.stdout = h.Unbuffered(open('search_engine.log', 'a'))
+    #f = open('search_engine.log', 'a')
+    #sys.stdout = h.Unbuffered(f)
 
     h.log("STARTED RELEVANCE DICT")
     t0 = time.time()
@@ -277,6 +286,7 @@ def run():
     save_user_relevance_dictionary()
     t1 = time.time()
     h.log('USER RELEVANCE DICTIONARY, time: {}'.format(t1 - t0))
+    #f.close()
 
 
 if __name__ == "__main__":

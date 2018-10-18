@@ -15,14 +15,7 @@ h6{
     text-align:center;
 }
 
-.arrow{
-    font-size: 128px;
-    z-index: 5;
-    position: absolute;
-    color : rgb(203, 221, 104, 1);
-}
-
-.conjonction {
+.conjunction {
     margin: 0px 2.4%;
 }
 
@@ -44,14 +37,14 @@ h6{
 }
 
 .first-row{
-    min-height:450px;
+    min-height:430px;
 }
 
 .number-div{
     top:300px;
 }
 
-.origin-keywords{
+.origin-requirements{
     padding:10px;
     width:100%;
     border:2px solid #aaa;
@@ -98,12 +91,8 @@ h6{
 .regular, .slider {
     z-index:2;
     position:relative;
-    width:100%;
-    margin: 0 auto 50px -5%;
-}
-
-.slide-1{
-    data-background= 'business/img/Start_BG-02-min.jpg';
+    width:65%;
+    margin: 10px auto 50px auto;
 }
 
 .slide-css{
@@ -175,7 +164,7 @@ width: 170px;
 
 .main-section {
 	width:auto;
-	background: url(../img/Start_BG-01-min.jpg);
+	background: url(../img/Start_BG-01.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	position: relative;
@@ -192,7 +181,7 @@ width: 170px;
 .little-section {
     width:80%;
     height:250px;
-    background: url(../img/Start_BG-01-min.jpg);
+    background: url(../img/Start_BG-01.jpg);
     background-size: cover;
     position: absolute;
     border-radius:40px;
@@ -643,7 +632,7 @@ trix-editor ul {
 @media  (max-width: 768px){
 
 	.main-section {
-        background: url(../img/Start_BG-01-cel.jpg) no-repeat top center scroll ;
+        background: url(../img/cel-Start_BG-01.jpg) no-repeat top center scroll ;
         background-size:cover;
     }
 

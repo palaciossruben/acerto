@@ -1,0 +1,29 @@
+[
+{
+  "model": "beta_invite.campaignstate",
+  "pk": 1,
+  "fields":{
+    "name": "Inactive",
+    "name_es": "Inactiva",
+    "code": "I"
+  }
+},
+  {
+  "model": "beta_invite.campaignstate",
+  "pk": 2,
+  "fields":{
+    "name": "Active",
+    "name_es": "Activa",
+    "code": "A"
+  }
+},
+  {
+  "model": "beta_invite.campaignstate",
+  "pk": 3,
+  "fields":{
+    "name": "Finished",
+    "name_es": "Terminada",
+    "code": "F"
+  }
+}
+]

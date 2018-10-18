@@ -1,13 +1,30 @@
-Hello {name}
+Hi {name},
 
-I looked at your CV and we have a position that could interest you:
+I received your information through a public employment portal or our website, taking into account your profile, I would like to invite you to a selection process, this is the available offer:
 
-{campaign_url}
+Title of the offer: {campaign}
+Salary: {campaign_salary_range}
+Offer city: {campaign_city}
+More information: {campaign_description}
 
-If it catches your attention I invite you to apply.
+Below, I share a link with some tests and / or questions to apply to this offer:
 
-Regards!
+{test_url}
+
+Remember that we are a selection company, that is, if you pass the tests successfully, the company in search of the vacancy will contact you to make a personal interview and then recruitment.
+
+
+Do not hesitate to write me if you require additional information.
+
+
+Regards,
+
 
 {sender_name}
+https://www.linkedin.com/in/santiagogonzalezr/
 {sender_position}
-{peaku_address}
+PeakU
+
+Follow us in networks:
+Facebook: https://www.facebook.com/peakulatam/
+Instagram: @peaku_latam

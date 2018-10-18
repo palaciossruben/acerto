@@ -1,5 +1,5 @@
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from django.db import models
 from django.contrib.postgres.fields import JSONField
@@ -50,26 +50,26 @@ class Profession(models.Model):
         db_table = 'professions'
 
 
-class WorkAreaType(models.Model):
-    """
-    Groups similar workAreas
-    """
+class WorkAreaSegment(models.Model):
+
     name = models.CharField(max_length=200)
     name_es = models.CharField(max_length=200, null=True)
+    code = models.CharField(max_length=4, null=True)
 
     def __str__(self):
         return '{0}'.format(self.name)
 
     # adds custom table name
     class Meta:
-        db_table = 'work_area_types'
+        db_table = 'work_area_segments'
 
 
 class WorkArea(models.Model):
 
     name = models.CharField(max_length=200)
     name_es = models.CharField(max_length=200, null=True)
-    type = models.ForeignKey(WorkAreaType, null=True, on_delete=models.SET_NULL)
+    segment = models.ForeignKey(WorkAreaSegment, null=True)
+    code = models.CharField(max_length=4, null=True)
 
     def __str__(self):
         return '{0}'.format(self.name)
@@ -199,6 +199,7 @@ class Answer(models.Model):
 
 class Question(models.Model):
 
+    internal_name = models.CharField(max_length=1500, null=True)
     text = models.CharField(max_length=1500, null=True)
     text_es = models.CharField(max_length=1500, null=True)
     answers = models.ManyToManyField(Answer)
@@ -300,6 +301,7 @@ class Test(models.Model):
                                     default='',
                                     null=True)
     excluding = models.BooleanField(default=False)  # if didn't passed the test, then rejects candidate
+    public = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -587,6 +589,32 @@ class JobFunctions(models.Model):
         return '{0}'.format(self.name)
 
 
+class CampaignState(models.Model):
+
+    name = models.CharField(max_length=40, null=True)
+    name_es = models.CharField(max_length=40, null=True)
+    code = models.CharField(max_length=4, null=True)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'campaign_states'
+
+
+class Requirement(models.Model):
+
+    name = models.CharField(max_length=200)
+    work_area = models.ForeignKey(WorkArea, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return 'name: {0}, work_area: {1}'.format(self.name, self.work_area)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'requirements'
+
+
 class Campaign(models.Model):
 
     name = models.CharField(max_length=200)
@@ -601,9 +629,10 @@ class Campaign(models.Model):
     title_es = models.CharField(max_length=200, null=True)
     bullets = models.ManyToManyField(Bullet)
     tests = models.ManyToManyField(Test)
+    requirements = models.ManyToManyField(Requirement)
     interviews = models.ManyToManyField(Interview)
     calendly = models.BooleanField(default=True)
-    active = models.BooleanField(default=False)
+    state = models.ForeignKey(CampaignState, default=2)  # id of Active State, this is NOT NICE
     calendly_url = models.CharField(max_length=200, default=cts.INTERVIEW_CALENDLY)
     removed = models.BooleanField(default=False)
     free_trial = models.BooleanField(default=True)
@@ -613,6 +642,8 @@ class Campaign(models.Model):
     work_area = models.ForeignKey(WorkArea, null=True, on_delete=models.SET_NULL)
     operational_efficiency = models.FloatField(null=True)
     image = models.CharField(max_length=500, null=True)
+    salary_low_range = models.IntegerField(null=True)
+    salary_high_range = models.IntegerField(null=True)
 
     recommended_evaluation = models.ForeignKey(EvaluationSummary, null=True, related_name='recommended_evaluation')
     relevant_evaluation = models.ForeignKey(EvaluationSummary, null=True, related_name='relevant_evaluation')
@@ -637,6 +668,17 @@ class Campaign(models.Model):
     class Meta:
         db_table = 'campaigns'
 
+    @staticmethod
+    def print_cop_money(amount):
+        reversed_string = [e + (idx % 3 == 0 and idx > 0) * '.' for idx, e in enumerate(reversed(str(amount)))]
+        return '$ ' + ''.join(reversed(reversed_string))
+
+    def print_low_salary(self):
+        return Campaign.print_cop_money(self.salary_low_range)
+
+    def print_high_salary(self):
+        return Campaign.print_cop_money(self.salary_high_range)
+
     def translate(self, language_code):
         """
         Args:
@@ -660,6 +702,14 @@ class Campaign(models.Model):
 
     def get_search_text(self):
         return ' '.join([self.title_es] + self.get_requirement_names())
+
+    def local_date(self):
+        date = self.created_at - timedelta(hours=5)
+
+        if date is not None:
+            return date
+        else:
+            return None
 
 
 def average_list(my_list):
@@ -687,7 +737,9 @@ class User(models.Model):
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
     city = models.ForeignKey(City, null=True, on_delete=models.SET_NULL)
     curriculum_url = models.CharField(max_length=200, default='#')
-    curriculum_text = models.TextField(default='')
+    curriculum_text = models.TextField(default=None, null=True)
+    curriculum_s3_url = models.CharField(max_length=200, default='#')
+    uploaded_to_es = models.BooleanField(default=False)
 
     # indicates if added to messenger
     added = models.BooleanField(default=False)
@@ -724,21 +776,25 @@ class User(models.Model):
     photo_url = models.CharField(max_length=200, default='#')
     brochure_url = models.CharField(max_length=200, default='#')
     politics = models.BooleanField(default=False)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    # TODO: Make method present on common.py a method of the class User. For this to happen Candidate class has
-    # to be moved to testing_webpage to solve circular dependency problem.
-    #def get_campaigns(self):
-    #    """
-    #    Users are unique and have multiple Candidates associated. Each one of which has 1 campaign. This method
-    #    returns all campaigns from all Candidates associated to user.
-    #    Returns: a list of campaigns where the user is a candidate.
-    #    """
-    #    return [candidate.campaign for candidate in Candidate.objects.filter(user=self)]
-
     def __str__(self):
         return '{0}, {1}'.format(self.name, self.email)
+
+    def get_curriculum_url(self):
+        """
+        Tries S3 first
+        :return:
+        """
+
+        if self.curriculum_s3_url not in {None, '#'}:
+            return self.curriculum_s3_url
+        elif self.curriculum_url not in {None, '#'}:  # returns entire url from local machine
+            return 'https://peaku.co/static/{url}'.format(url=self.curriculum_url)
+        else:
+            return '#'
 
     def get_calling_code(self):
         if self.country is not None:
@@ -770,6 +826,10 @@ class User(models.Model):
                     return None
 
     def get_short_curriculum(self):
+
+        if self.curriculum_text is None:
+            return None
+
         short_curriculum = self.curriculum_text.replace("\n", "")
         short_curriculum = re.sub(' +', ' ', short_curriculum)
         start_idx = User.get_short_curriculum_index(short_curriculum)
@@ -789,17 +849,22 @@ class User(models.Model):
         else:
             return None
 
-    def change_to_international_phone_number(self):
+    # TODO: merge with Lead method, when we have the country of the lead.
+    def change_to_international_phone_number(self, add_plus=False):
+
+        plus_symbol = '+' if add_plus else ''
 
         if self.phone:
             # Adds the '+' and country code
             if self.phone[0] != '+':
 
-                self.phone = '+' + self.get_calling_code() + self.phone
+                self.phone = plus_symbol + self.get_calling_code() + self.phone
 
                 # Adds the '+' only
             elif re.search(r'^' + self.get_calling_code() + '.+', self.phone) is not None:
-                self.phone = '+' + self.phone
+                self.phone = plus_symbol + self.phone
+
+        return self.phone
 
     # adds custom table name
     class Meta:
@@ -825,18 +890,15 @@ class Survey(models.Model):
 
     @staticmethod
     def get_last_try(campaign, test, question, user):
-        surveys = Survey.objects.filter(campaign=campaign,
-                                        test=test,
-                                        question=question,
-                                        user=user).order_by('-try_number').all()
+        survey = Survey.objects.filter(campaign=campaign,
+                                       test=test,
+                                       question=question,
+                                       user=user).order_by('-try_number').first()
 
-        if len(surveys) > 0:
-            return surveys[0]
-        else:
-            return None
+        return survey
 
     @staticmethod
-    def get_last_try(candidate, test, question):
+    def get_last_try_with_candidate(candidate, test, question):
         return Survey.get_last_try(candidate.campaign, test, question, candidate.user)
 
     @classmethod
@@ -926,3 +988,18 @@ class Price(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'prices'
+
+
+class RequirementBinaryQuestion(models.Model):
+
+    name = models.CharField(max_length=40, null=True)
+    name_es = models.CharField(max_length=40, null=True)
+    statement = models.CharField(max_length=400, null=True)
+    statement_es = models.CharField(max_length=400, null=True)
+
+    def __str__(self):
+        return 'id={0}, name={1}'.format(self.pk, self.name)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'requirement_binary_questions'

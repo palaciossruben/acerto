@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User as AuthUser
 from django.contrib.postgres.fields import JSONField
 
-from beta_invite.models import Country, Education, Profession, Campaign
+from beta_invite.models import Country, Education, Profession, Campaign, WorkArea
 
 
 class Plan(models.Model):
@@ -73,7 +73,7 @@ class BusinessUser(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return '{0}, {1}'.format(self.name, self.email)
+        return '{0}, {1}, {2}'.format(self.name, self.email, self.company)
 
     # adds custom table name
     class Meta:
@@ -129,24 +129,8 @@ class Search(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return 'id: {0}, ip: {1}, user_ids: {2}'.format(self.id, self.ip, self.user_ids)
+        return 'id: {0}, ip: {1}, user_ids: {2}'.format(self.pk, self.ip, self.user_ids)
 
     # adds custom table name
     class Meta:
         db_table = 'searches'
-
-
-class KeyWord(models.Model):
-
-    name = models.CharField(max_length=20)
-    frequency = models.IntegerField(default=1)
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return 'name: {0}, frequency: {1}'.format(self.name, self.frequency)
-
-    # adds custom table name
-    class Meta:
-        db_table = 'keywords'

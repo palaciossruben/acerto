@@ -141,7 +141,7 @@ body {
     background-color: white;
     overflow: hidden;
     text-align:left;
-    padding:20px 0;
+    padding: 30px 0 0 70px;
 }
 
 .no-padding{
@@ -150,6 +150,7 @@ body {
 
 .test-distinction{
     display:none;
+    text-align:left;
 }
 /**********************************************************************************************************************/
 .test-distinction-label{
@@ -162,21 +163,15 @@ body {
     background-image:url(../img/no-light.png);
     background-repeat:no-repeat;
     background-position:5px 5px;
-    padding: 0 25px;
-    text-align:left;
+    padding: 0 0 0 25px;
 }
 
 .listyes-light {
     color:#3d4753;
-    background-image:url(../img/yes-light.png);
+    background-image:url(../img/req-yes-light.png);
     background-repeat:no-repeat;
     background-position:5px 5px;
-    padding: 0 25px;
-    text-align:left;
-}
-
-.curriculum{
-    text-align:center;
+    padding: 0 0 0 25px;
 }
 
 .curriculum:hover{
@@ -254,7 +249,48 @@ body {
     margin-top: 50px;
     padding:70px 30px;
     margin-bottom: 20px;
+    font-family:BertholdAkzidenzGroteskRegular;
+}
 
+.candidate-name{
+    font-family:BertholdAkzidenzGroteskBold;
+    font-size:48.23px;
+    color:#666666;
+}
+
+.profession{
+    font-family:BertholdAkzidenzGroteskRegular;
+    font-size:36.17px;
+    color:#666666;
+}
+
+.city, .work-area{
+    font-family:BertholdAkzidenzGroteskRegular;
+    font-size:24.11px;
+    color:#666666;
+}
+
+.test-distinction-name{
+    font-family:BertholdAkzidenzGroteskRegular;
+    font-size:20px;
+    color:#666666;
+}
+
+.test-distinction-question{
+    font-family:BertholdAkzidenzGroteskRegular;
+    font-size:18px;
+    color:#666666;
+}
+
+.download{
+    font-family:BertholdAkzidenzGroteskBold;
+    font-size:24.11px;
+    color:#666666;
+}
+
+.arrow{
+    color: #666666;
+    font-size: 35px;
 }
 
 .internal-div{
@@ -280,6 +316,9 @@ body {
     text-align: center;
 }
 
+.center{
+    text-align:center;
+}
 .div2{
     width:95%;
     box-shadow: 0px 8px 5px rgba(0,0,0,0.1);
@@ -399,8 +438,8 @@ body {
 }
 
 .candidate-circle{
-    height:150px;
-    width:150px;
+    height:200px;
+    width:200px;
     margin:0 auto;
     border-radius:100%;
     margin-bottom:15px;
@@ -432,6 +471,36 @@ body {
     margin-top: 10px;
     margin-bottom: 30px;
     text-align: center;
+}
+
+
+
+.wp-button{
+    font-size: 12px;
+    width: 190px;
+    height: 30px;
+    background: rgba(0, 174, 77, 1);
+    color: white;
+    border-radius: 40px;
+    margin: 0 auto 25px auto;
+    text-align: center;
+    padding: 5px 15px;
+}
+
+a:hover{
+    text-decoration:none;
+}
+
+.wp-logo{
+    background-image:url(../img/wp_logo.png);
+    background-repeat:no-repeat;
+    padding-top: 3px;
+    padding-left: 15px;
+}
+
+.wp-text{
+    text-decoration: none;
+    margin-top: 12px;
 }
 
 .email-button:hover{
@@ -560,6 +629,10 @@ body {
     font-size: 12px;
     vertical-align: bottom;
     text-align: center;
+}
+
+.test-title-short{
+    display:none;
 }
 
 .final-row{
@@ -697,6 +770,9 @@ footer {
         display:none;
     }
 
+    .panel{
+        padding: 30px 0 0 0;
+    }
 }
 
 @media screen and (max-height: 450px) {
@@ -759,5 +835,13 @@ footer {
 
     .responsive-center{
         text-align: center;
+    }
+
+    .big-div{
+        width:90%;
+    }
+
+    .test-distinction{
+        margin:0;
     }
 }

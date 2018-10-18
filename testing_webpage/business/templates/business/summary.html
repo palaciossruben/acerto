@@ -3,7 +3,7 @@
 {% load i18n %}
 {% load app_filters %}
 {% load compress %}
-{% block title %}Selección, contratación y reclutamiento de personal{% endblock %}
+{% block title %}{% trans 'Recruitment and selection of personnel' %}{% endblock %}
 {% block extra_meta %}
     <meta name="description"  content="Publica y comparte ofertas laborales, realiza pruebas relacionadas al cargo y selecciona al mejor personal. Podrás buscar, filtrar y comunícarte fácilmente con los candidatos en todas las etapas del proceso." />
     <meta name="keywords" content="cazatalentos, selección de personal, reclutamiento personal, contratacion personal, selección personal, agencias, reclutamiento, reclutamiento empleados, busqueda personal, preselección personal, headhunter, agencia empleo" />
@@ -16,86 +16,95 @@
 {% endblock %}
 {% block content %}
         <!--
-            <div class="sidenav">
-                <a href="{% url 'business:business_campaigns' business_user_id=business_user.pk %}"><span class="arrow">&#xFE64;<br><span class="arrow-text">Mis ofertas</span></span></a>
-                <a href="{% url 'business:start' %}"><span class="plus">&#x002B;<br><span class="plus-text">Nueva oferta</span></span></a>
-                <!--<a href="#"><span class="setup">&#x2699;<br><span class="setup-text">Configuración</span></span></a>
-                <div class="blur">
-                </div>
-            </div>-->
-        <div class="background">
+        <div class="sidenav">
+            <a href="{% url 'business:business_campaigns' business_user_id=business_user.pk %}"><span class="arrow">&#xFE64;<br><span class="arrow-text">Mis ofertas</span></span></a>
+            <a href="{% url 'business:start' %}"><span class="plus">&#x002B;<br><span class="plus-text">Nueva oferta</span></span></a>
+            <!--<a href="#"><span class="setup">&#x2699;<br><span class="setup-text">Configuración</span></span></a>
+            <div class="blur">
+            </div>
+        </div>-->
+        <div class="background" id="background">
             <div class="gradient1">
                 <div class="row bold">
-                    <div class="campaign">{{ campaign.title_es }}</div>
+                    <div class="col-lg-12 campaign bold">{{ campaign.title_es }}</div>
                 </div>
                 <div class="row plan-type"></div>
                 <div class="row">
                     <div class="col-lg-4"></div>
                     <div class="col-lg-8 col-xs-12 gradient2">
-                        <p class="date regular">FECHA DE PUBLICACIÓN: {{ created_at }}</p>
-                        {% if campaign.active %}
-                        <p class="status bold">ESTADO: activa</p>
+                        <p class="date regular">{% trans 'PUBLISH DATE' %}: {{ created_at }}</p>
+                        {% if campaign.state.name == 'Active' %}
+                            <p class="status bold">ESTADO: activa</p>
+                        {% elif campaign.state.name == 'Inactive' %}
+                            <p class="status bold">ESTADO: inactiva</p>
                         {% else %}
-                        <p class="status bold">ESTADO: inactiva</p>
+                            <p class="status bold">ESTADO: terminada</p>
                         {% endif %}
-                        <p class="total regular">TOTAL APLICANTES: {{ num_total }}</p>
+
+                        {% if campaign.free_trial == True %}
+                            <p class="status bold">(Prueba gratis)</p>
+                        {% endif %}
+                        <br>
+                        <p class="total regular">{% trans 'TOTAL CANDIDATES' %}: {{ num_total }}</p>
                     </div>
                 </div>
                 <div class="row responsive-row">
-                    <a href="{% url 'business:dashboard' business_user_id=business_user.pk campaign_id=campaign.id state_name='recommended' %}">
+
                         <div class="col-xs-12 col-lg-6 responsive-column">
+
                             <div class="state div1">
+                                <a href="{% url 'business:dashboard' business_user_id=business_user.pk campaign_id=campaign.id state_name='recommended' %}">
                                 <div class="col-xs-6 col-lg-12 circle avatar1"></div>
                                 <input name="campaign_id" type="hidden" value="{{ campaign.id }}">
                                 <div class="col-lg-12 responsive-hide">
-                                    <p class="status-name bold">RECOMENDADOS</p>
+                                    <p class="status-name bold">{% trans 'SELECTED' %}</p>
                                     <div class="line"></div>
-                                    <p class="status-description">Sugerencias de candidatos que son tu mejor opción de contratación y han superado todos los filtros</p>
+                                    <p class="status-description">{% trans 'Suggested candidates that are your first hiring option and have passed all filters' %}</p>
                                 </div>
                                 <div class="col-xs-6 state-info right responsive-show">
                                     <span class="quantity bold">{{ num_recommended }}</span><br>
-                                    <span class="primary bold">PERFILES</span><br>
-                                    <span class="secondary regular">SELECCIONADOS</span>
+                                    <span class="primary bold">{% trans 'PROFILES' %}</span><br>
                                 </div>
+                                </a>
                             </div>
                         </div>
                         <div class="col-xs-12 col-lg-6 responsive-column">
                             <div class="state div2">
+                                <a href="{% url 'business:dashboard' business_user_id=business_user.pk campaign_id=campaign.id state_name='recommended' %}">
                                 <div class="col-lg-3 state-info responsive-hide">
                                     <span class="quantity bold">{{ num_recommended }}</span><br>
-                                    <span class="primary bold">PERFILES</span><br>
-                                    <span class="secondary regular">SELECCIONADOS</span>
+                                    <span class="primary bold">{% trans 'PROFILES' %}</span><br>
                                 </div>
                                 <div class="col-xs-12 responsive-show">
-                                    <p class="status-name center bold">RECOMENDADOS</p>
+                                    <p class="status-name center bold">{% trans 'SELECTED' %}</p>
                                     <div class="line"></div>
-                                    <p class="status-description">Sugerencias de candidatos que son tu mejor opción de contratación y han superado todos los filtros</p>
+                                    <p class="status-description">{% trans 'Suggested candidates that are your first hiring option and have passed all filters' %}</p>
                                 </div>
                                 <div class="col-lg-9 col-xs-12 recommended">
                                     <div class="row">
                                         {% if campaign.recommended_evaluation_last.cognitive_score >= 0 %}
                                         <div class="test-name small">
-                                            Capacidad cognitiva
+                                            {% trans 'Cognitive capacity' %}
                                         </div>
                                         {% endif %}
                                         {% if campaign.recommended_evaluation_last.technical_score >= 0 %}
                                         <div class="test-name small">
-                                            Conocimiento técnico
+                                            {% trans 'Technical knowledge' %}
                                         </div>
                                         {% endif %}
                                         {% if campaign.recommended_evaluation_last.requirements_score >= 0 %}
                                         <div class="test-name small">
-                                            Requisitos
+                                            {% trans 'Requirements' %}
                                         </div>
                                         {% endif %}
                                         {% if campaign.recommended_evaluation_last.motivation_score >= 0 %}
                                         <div class="test-name small">
-                                            Motivación
+                                            {% trans 'Motivation' %}
                                         </div>
                                         {% endif %}
                                         {% if campaign.recommended_evaluation_last.cultural_fit_score >= 0 %}
                                         <div class="test-name small">
-                                            Fit cultural
+                                            {% trans 'Cultural fit' %}
                                         </div>
                                         {% endif %}
                                     </div>
@@ -127,39 +136,41 @@
                                         {% endif %}
                                     </div>
                                 </div>
+                                </a>
                             </div>
                         </div>
-                    </a>
                 </div>
             </div>
         </div>
         <div class="row responsive-row">
-            <a href="{% url 'business:dashboard' business_user_id=business_user.pk campaign_id=campaign.id state_name='relevant' %}">
+
                 <div class="col-lg-6 col-xs-12 responsive-column">
                     <div class="state div3">
+                        <a href="{% url 'business:dashboard' business_user_id=business_user.pk campaign_id=campaign.id state_name='relevant' %}">
                         <div class="col-xs-4 circle avatar2"></div>
                         <div class="col-xs-8 col-lg-12">
-                            <p class="status-name bold">RELEVANTES</p>
+                            <p class="status-name bold">{% trans 'PRESELECTED' %}</p>
                             <div class="line"></div>
-                            <p class="status-description">Todos los candidatos que aprobaron pruebas iniciales y requerimientos específicos para tu campaña</p>
+                            <p class="status-description">{% trans 'All candidates who approved initial tests and specific requirements for your campaign' %}</p>
                         </div>
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-xs-12 responsive-column">
                     <div class="state div4">
+                        <a href="{% url 'business:dashboard' business_user_id=business_user.pk campaign_id=campaign.id state_name='relevant' %}">
                         <div class="row">
                             <div class="col-lg-4 col-xs-4 state-info">
                                 <span class="quantity bold">{{ num_relevant }}</span><br>
-                                <span class="primary bold">PERFILES</span><br>
-                                <span class="secondary regular">PRESELECCIONADOS</span>
+                                <span class="primary bold">{% trans 'PROFILES' %}</span><br>
                             </div>
                             <div class="col-lg-8 col-xs-8 relevant">
                                 <div class="row">
                                     {% if campaign.relevant_evaluation_last.cognitive_score >= 0 %}
-                                    <div class="test-name">Prueba cognitiva</div>
+                                    <div class="test-name">{% trans 'Cognitive capacity' %}</div>
                                     {% endif %}
                                     {% if campaign.relevant_evaluation_last.technical_score >= 0 %}
-                                    <div class="test-name">Prueba técnica</div>
+                                    <div class="test-name">{% trans 'Technical knowledge' %}</div>
                                     {% endif %}
                                 </div>
                                 <div class="row">
@@ -176,33 +187,36 @@
                                 </div>
                             </div>
                         </div>
+                        </a>
                     </div>
                 </div>
-            </a>
         </div>
         <div class="row responsive-row final-row">
-            <a href="{% url 'business:dashboard' business_user_id=business_user.pk campaign_id=campaign.id state_name='applicants' %}">
+
                 <div class="col-lg-6 col-xs-12 responsive-column">
                     <div class="state div5">
+                        <a href="{% url 'business:dashboard' business_user_id=business_user.pk campaign_id=campaign.id state_name='applicants' %}">
                         <div class="col-xs-4 circle avatar3"></div>
                         <div class="col-xs-8 col-lg-12">
-                            <p class="status-name bold">INSCRITOS</p>
+                            <p class="status-name bold">{% trans 'PROSPECTS' %}</p>
                             <div class="line"></div>
-                            <p class="status-description">Otros candidatos que no han realizado las pruebas y candidatos que han sido descartados por alguno de los filtros</p>
+                            <p class="status-description">{% trans 'Other candidates who have not done the tests or candidates that have been discarded by any of the filters' %}</p>
                         </div>
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-xs-12 responsive-column">
                     <div class="state div6">
+                        <a href="{% url 'business:dashboard' business_user_id=business_user.pk campaign_id=campaign.id state_name='applicants' %}">
                         <div class="row">
                             <div class="col-lg-12 col-xs-4 state-info">
                                 <span class="quantity3 bold">{{ num_applicants }}</span><br>
-                                <span class="applicant-text bold">PERFILES ADICIONALES</span><br>
+                                <span class="applicant-text bold">{% trans 'ADDITIONAL PROFILES' %}</span><br>
                             </div>
                             <div class="col-lg-12 col-xs-8 applicant">
                                 <div class="row">
                                     {% if campaign.applicant_evaluation_last.cognitive_score >= 0 %}
-                                    <div class="final-test-name">Prueba cognitiva</div>
+                                        <div class="final-test-name">{% trans 'Cognitive capacity' %}</div>
                                     {% endif %}
                                 </div>
                                 <div class="row">
@@ -214,6 +228,7 @@
                                 </div>
                             </div>
                         </div>
+                        </a>
                     </div>
                 </div>
             </a>
@@ -253,6 +268,16 @@
                 set_circle_color({{ campaign.relevant_evaluation_last.cognitive_score|int_rounding }}, "relevant-cognitive-id");
 
                 set_circle_color({{ campaign.applicant_evaluation_last.cognitive_score|int_rounding }}, "applicant-cognitive-id");
+            });
+        </script>
+        <script>
+           $(document).ready(function() {
+               set_background("{{ campaign.image }}", "background")
+           });
+        </script>
+        <script>
+            $( window ).resize(function() {
+                set_background("{{ campaign.image }}", "background")
             });
         </script>
 {% endblock %}

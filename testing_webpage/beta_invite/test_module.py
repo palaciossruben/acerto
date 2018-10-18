@@ -50,12 +50,15 @@ def update_survey(question, answer_text, survey, question_id):
         pass
 
     elif question.type.code == 'NI':
-        number = int(answer_text)
-        survey.numeric_answer = number
-        if question.params['min_correct'] <= number <= question.params['max_correct']:
-            survey.score = 1
-        else:
+        if answer_text is None or answer_text == '':
             survey.score = 0
+        else:
+            number = int(answer_text.replace('.', '').replace(' ', ''))
+            survey.numeric_answer = number
+            if int(question.params['min_correct']) <= number <= int(question.params['max_correct']):
+                survey.score = 1
+            else:
+                survey.score = 0
 
     survey.save()
 
@@ -132,18 +135,30 @@ def get_scores(campaign, user_id, questions_dict, request):
     return scores
 
 
-def alter_candidate_state(candidate, evaluation):
+def automated_candidate_state_change(candidate, evaluation, use_machine_learning, success_state='WFI', fail_state='FT'):
     """
     Given tests results it alters the candidate state.
     :param candidate: Candidate
     :param evaluation: Evaluation
+    :param use_machine_learning: Boolean indicating if ML is used
+    :param success_state: if success will move to state.
+    :param fail_state: if fail will move to state.
     :return: None
     """
     if candidate:
+
+        # don't override human decisions
+        if candidate.state in State.get_human_intervention_states():
+            return
+
         if evaluation.passed:
-            candidate.state = State.objects.get(code='WFI')
+            candidate.change_state(state_code=success_state,
+                                   forecast=evaluation.passed,
+                                   use_machine_learning=use_machine_learning)
         else:  # Fails tests
-            candidate.state = State.objects.get(code='FT')
+            candidate.change_state(state_code=fail_state,
+                                   forecast=evaluation.passed,
+                                   use_machine_learning=use_machine_learning)
 
         candidate.save()
 
@@ -163,7 +178,6 @@ def add_evaluation_to_candidate(candidate, evaluation):
 
 def get_evaluation(scores, candidate):
     """
-    simple average and percentage
     Args:
         scores: objects with current scores.
         candidate: obj
@@ -171,11 +185,10 @@ def get_evaluation(scores, candidate):
     """
 
     evaluation = Evaluation.create(scores=scores)
-    update_scores(evaluation, scores, candidate)
-
+    update_scores(evaluation, scores)
     add_evaluation_to_candidate(candidate, evaluation)
-    alter_candidate_state(candidate, evaluation)
 
+    classify_evaluation_and_change_state(candidate)
     return evaluation
 
 
@@ -216,7 +229,7 @@ def passed_all_excluding_questions(evaluation, candidate):
     return True
 
 
-def update_scores(evaluation, scores, candidate):
+def update_scores(evaluation, scores):
 
     evaluation.scores = scores
 
@@ -224,16 +237,6 @@ def update_scores(evaluation, scores, candidate):
 
         evaluation.cut_score = average_list([s.test.cut_score for s in evaluation.scores.all()])
         evaluation.final_score = average_list([s.value for s in evaluation.scores.all()])
-
-        if evaluation.final_score is not None and evaluation.cut_score is not None:
-
-            ml_criteria = model.get_candidate_match_and_save(candidate)
-
-            # TODO: change this line if AI takes over the world!!!
-            # evaluation.passed = evaluation.final_score >= evaluation.cut_score and \
-            evaluation.passed = ml_criteria and \
-                                passed_all_excluding_tests(evaluation) and \
-                                passed_all_excluding_questions(evaluation, candidate)
 
         evaluation.cognitive_score = evaluation.get_score_for_test_type('cognitive')
         evaluation.technical_score = evaluation.get_score_for_test_type('technical')
@@ -243,3 +246,32 @@ def update_scores(evaluation, scores, candidate):
         # TODO: add any new score here
 
     evaluation.save()
+
+
+def classify_evaluation_and_change_state(candidate, use_machine_learning=False, success_state='WFI', fail_state='FT'):
+    """
+    does the ML and changes candidate state
+    :param candidate: given a candidate last saved state. Classifies
+    :param use_machine_learning: if True will use machine learning algorithm, else will use simple heuristic
+    :param success_state: State if success
+    :param fail_state: State if fails
+    :return: None or raises Error
+    """
+    last_evaluation = candidate.get_last_evaluation()
+
+    if last_evaluation is not None:
+
+        forecast = model.get_candidate_match_and_save(candidate) if use_machine_learning else last_evaluation.final_score >= last_evaluation.cut_score
+
+        last_evaluation.passed = forecast and \
+            passed_all_excluding_tests(last_evaluation) and \
+            passed_all_excluding_questions(last_evaluation, candidate)
+        last_evaluation.save()
+
+        automated_candidate_state_change(candidate, last_evaluation,
+                                         use_machine_learning=use_machine_learning,
+                                         success_state=success_state,
+                                         fail_state=fail_state)
+
+    else:
+        raise NotImplementedError('should not reach this, something wrong with candidate_id: {}'.format(candidate.id))

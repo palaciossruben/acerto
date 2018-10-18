@@ -8,30 +8,32 @@
 {% endblock %}
 {% block header %}
     <nav class="row" style="margin-right: 0px; margin-left: 0px;" id="myTopnav">
-        <div class="col-lg-2 col-md-2 col-sm-2"><a href="/staffing"><img id="logo" src="{% static 'business/img/logo-color.png' %}" width="110px"></a>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <a href="/staffing">
+                <img id="logo" src="{% static 'business/img/logo-color.png' %}" width="110px">
+            </a>
         </div>
         <div class="col-lg-10 col-md-10 col-sm-10 push10">
             <ul class="topnav-list">
                 {% if 'seleccion_de_personal' in request.path %}
-                    <li id="candidates-button"><a id="option1" href="{% url 'index' %}">Personas</a></li>
-                    <li id="contact-us-button"><a id="option2" href="{% url 'business:contact_form' %}">Contáctanos</a></li>
+                    <li id="candidates-button"><a id="option1" href="{% url 'index' %}">{% trans 'Candidates' %}</a></li>
+                    <li id="contact-us-button"><a id="option2" href="{% url 'business:contact_form' %}">{% trans 'Contact Us' %}</a></li>
                     {% if user.is_authenticated %}
-                        <li><a class="button-user" href="{% url 'business:business_campaigns' user|get_business_user_id_from_auth_user %}">Mis campañas</a></li>
-                        <li><a class="button-user logout" role="button" href="{% url 'business:logout' %}">Cerrar sesión</a></li>
+                        <li><a class="button-user" href="{% url 'business:business_campaigns' user|get_business_user_id_from_auth_user %}">{% trans 'My campaigns' %}</a></li>
+                        <li><a class="button-user logout" role="button" href="{% url 'business:logout' %}">{% trans 'Sign off' %}</a></li>
                     {% else %}
-                        <li id="login-button"><a class="button-user" role="button" onclick="on_login()">Inicia sesión</a></li>
+                        <li id="login-button"><a class="button-user" role="button" onclick="on_login()">{% trans 'Sign in' %}</a></li>
                         {% if not 'seleccion_gratis' in request.path %}
-                            <li id="register-button"><a class="button-user" role="button" onclick="on_signup()">Crea tu cuenta</a></li>
+                            <li id="register-button"><a class="button-user" role="button" onclick="on_signup()">{% trans 'Sign up' %}</a></li>
                         {% endif %}
                     {% endif %}
                 {% else %}
                     {% if user.is_authenticated %}
-                        <li id="companies-button"><a id="option1" href="{% url 'business:business_campaigns' user|get_business_user_id_from_auth_user %}" class="button-user" role="button">Portal Empresas</a></li>
+                        <li id="companies-button"><a id="option1" href="{% url 'business:business_campaigns' user|get_business_user_id_from_auth_user %}" class="button-user" role="button">{% trans 'Companies' %}</a></li>
                     {% else %}
-                        <li id="companies-button"><a id="option1" href="{% url 'business:index' %}" class="button-user" role="button">Portal Empresas</a></li>
+                        <li id="companies-button"><a id="option1" href="{% url 'business:index' %}" class="button-user" role="button">{% trans 'Companies' %}</a></li>
                     {% endif %}
-                    <li id="register-button"><a href="{% url 'beta_invite:index' %}" class="button-user" role="button">Crea tu cuenta</a></li>
-                    <!--<li id="login-button"><a href="{% url 'beta_invite:index' %}" class="button-user" role="button">Inicia sesión</a></li>-->
+                    <li id="register-button"><a href="{% url 'beta_invite:index' %}" class="button-user" role="button">{% trans 'Sign Up' %}</a></li>
                 {% endif %}
             </ul>
         </div>

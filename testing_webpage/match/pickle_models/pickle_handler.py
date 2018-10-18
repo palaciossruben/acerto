@@ -93,6 +93,7 @@ def save_hasher(hasher, field):
 
 def save_model(model):
     save_object(model, CLASSIFIER)
+    print('saved model successfully')
 
 
 def load_model():

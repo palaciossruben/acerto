@@ -1,12 +1,13 @@
 import os
-
+import json
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.testing_webpage.settings')
 application = get_wsgi_application()
 
 import smtplib
-
+import hashlib
+from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from ipware.ip import get_ip
 from django.shortcuts import render, redirect
@@ -15,7 +16,8 @@ from django.contrib.auth import login, authenticate
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils import formats
-from django.http import HttpResponseBadRequest, HttpResponse
+from django.http import HttpResponseBadRequest, HttpResponse, JsonResponse
+from decouple import config
 
 import common
 import business
@@ -23,15 +25,15 @@ import beta_invite
 from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
-from beta_invite import new_user_module
-from beta_invite.models import User, BulletType, WorkArea, EmailType, Campaign
-from business.models import Plan, Contact, Search, KeyWord
-from business.models import BusinessUser
+from beta_invite.models import User, BulletType, WorkArea, EmailType, Campaign, Test
+from business.models import Plan, Contact, Search, BusinessUser, Company
+from beta_invite.models import Requirement
 from business.custom_user_creation_form import CustomUserCreationForm
 from dashboard import campaign_module
-from dashboard.models import Candidate, BusinessState
+from dashboard.models import Candidate, BusinessState, Comment
 from business import dashboard_module
 from testing_webpage.models import BusinessUserPendingEmail
+from api.models import PublicPost
 
 
 def index(request):
@@ -192,8 +194,12 @@ def first_sign_in(signup_form, campaign, request):
     auth_user = authenticate(username=username,
                              password=password)
 
+    company_name = Company(name=request.POST.get('company'))
+    company_name.save()
+
     # New BusinessUser pointing to the AuthUser
     business_user = business.models.BusinessUser(name=request.POST.get('name'),
+                                                 company=company_name,
                                                  email=request.POST.get('username'),
                                                  phone=request.POST.get('phone'),
                                                  ip=get_ip(request),
@@ -242,11 +248,7 @@ def get_business_user(request):
         request: HTTP request object.
     Returns: A BusinessUser object.
     """
-
-    auth_user_id = request.user.id
-    business_user = BusinessUser.objects.get(auth_user_id=auth_user_id)
-
-    return business_user
+    return BusinessUser.objects.get(auth_user_id=request.user.id)
 
 
 def get_first_error_message(form):
@@ -291,15 +293,11 @@ def home(request):
     login_form = AuthenticationForm(data=request.POST)
 
     # TODO: generalize to set of blocked emails.
-    if login_form.is_valid() and request.POST.get('username') != 'g.comercialrmi2@redmilatam.com':  # Block access
+    if login_form.is_valid():
 
         business_user = simple_login_and_business_user(login_form, request)
-
-        # TODO: hack to show investors a good campaing, without an ugly interface
-        if 115 in [c.pk for c in business_user.campaigns.all()]:
-            return redirect('resumen/115')
-        elif 76 in [c.pk for c in business_user.campaigns.all()]:
-            return redirect('resumen/76')
+        if request.POST.get('username') == 'admin@peaku.co':
+            return redirect(common.get_host()+'/dashboard')
         else:
             return redirect('campañas/{}'.format(business_user.pk))
 
@@ -381,17 +379,29 @@ def start(request):
     Only displays initial view.
     """
 
-    requirement_bullet_id = BulletType.objects.get(name='requirement').id
-    perk_bullet_id = BulletType.objects.get(name='perk').id
     city = common.get_city(request)
 
-    return render(request, cts.START_VIEW_PATH, {'requirement_bullet_id': requirement_bullet_id,
-                                                 'perk_bullet_id': perk_bullet_id,
-                                                 'error_message': '',
+    return render(request, cts.START_VIEW_PATH, {'error_message': '',
                                                  'work_areas': common.translate_list_of_objects(WorkArea.objects.all(), request.LANGUAGE_CODE),
                                                  'cities': common.get_cities(),
                                                  'default_city': city,
-                                                 'keywords': sorted(KeyWord.objects.all(), key=lambda key: key.name)})
+                                                 'requirements': Requirement.objects.all(),
+                                                 'tests': Test.objects.filter(public=True)})
+
+
+def send_new_campaign_notification(business_user, language_code, campaign):
+
+    body_filename = 'business_new_campaign_notification_email_body'
+
+    try:
+
+        email_sender.send_internal(contact=business_user,
+                                   language_code=language_code,
+                                   body_filename=body_filename,
+                                   subject='Un usuario ya registrado ha creado una nueva campaña',
+                                   campaign=campaign)
+    except (smtplib.SMTPRecipientsRefused, smtplib.SMTPAuthenticationError, UnicodeEncodeError) as e:
+        pass
 
 
 # This for create campaign when the user is logged
@@ -407,6 +417,8 @@ def create_post(request):
     campaign = campaign_module.create_campaign(request)
     business_user.campaigns.add(campaign)
     business_user.save()
+    send_new_campaign_notification(business_user, request.LANGUAGE_CODE, campaign)
+    PublicPost.add_to_public_post_queue(campaign)
 
     return redirect('resumen/{campaign_pk}'.format(campaign_pk=campaign.pk))
 
@@ -426,6 +438,7 @@ def start_post(request):
         business_user = first_sign_in(signup_form, campaign, request)
         business_user.campaigns.add(campaign)
         business_user.save()
+        PublicPost.add_to_public_post_queue(campaign)
 
         return redirect('resumen/{campaign_pk}'.format(campaign_pk=campaign.pk))
 
@@ -463,17 +476,53 @@ def business_campaigns(request, business_user_id):
     if request.user.id != business_user.auth_user.id:
         return redirect('business:login')
 
-    campaigns = business_user.campaigns.all()  
+    campaigns = business_user.campaigns.filter(removed=False).order_by('-created_at', 'state', 'title_es').all()
+    currency = 'COP'
+    date = str(datetime.now())
+    tax = 0.19
+    apikey = config('payu_api_key')
+    merchant_id = config('merchant_id')
+    account_id = config('account_id')
+
+    for c in campaigns:
+        if c.salary_high_range:
+            c.reference_code = str(c.id) + "-" + date
+            c.base = round(float(c.salary_high_range))
+            c.tax = round(c.base * tax, 2)
+            c.amount = round(float(c.base+c.tax), 2)
+            c.amount = str(c.amount)
+            c.tax = str(c.tax)
+            c.base = str(c.base)
+            c.signature = hashlib.md5((apikey + "~" + merchant_id + "~" + c.reference_code + "~" + str(c.amount) + "~" + currency).encode('utf-8')).hexdigest()
 
     return render(request, cts.BUSINESS_CAMPAIGNS_VIEW_PATH, {'campaigns': campaigns,
-                                                              'business_user_id': business_user.pk
+                                                              'business_user_id': business_user.pk,
+                                                              'apikey': apikey,
+                                                              'merchant_id': merchant_id,
+                                                              'account_id': account_id,
+                                                              'currency': currency,
+                                                              'test': '0',
+                                                              'description': 'Activación de la oferta Premium',
+                                                              'buyer_name': business_user.name,
+                                                              'buyer_email': business_user.email
                                                               })
+
+
+def payment_response(request):
+
+    return render(request, cts.PAYMENT_RESPONSE_VIEW_PATH, {})
+
+
+def payment_confirmation(request):
+
+    return render(request, cts.PAYMENT_CONFIRMATION_VIEW_PATH, {})
 
 
 def candidate_profile(request, pk):
 
     candidate = Candidate.objects.get(pk=pk)
     business_user = get_business_user(request)
+
     return render(request, cts.CANDIDATE_PROFILE_VIEW_PATH, {'candidate': candidate,
                                                              'business_user': business_user})
 
@@ -487,12 +536,14 @@ def business_applied(request):
 
 
 @login_required
-def summary(request, campaign_id):
-    business_user = get_business_user(request)
+def summary(request, campaign_id, business_user=None):
+
     campaign = Campaign.objects.get(pk=campaign_id)
     common.calculate_evaluation_summaries(campaign)
 
-    if common.access_for_users(request, campaign, business_user):
+    if business_user is None:
+        business_user = get_business_user(request)
+        if common.access_for_users(request, campaign, business_user):
             return redirect('business:login')
 
     created_at = formats.date_format(campaign.created_at, "DATE_FORMAT")
@@ -533,10 +584,13 @@ def dashboard(request, business_user_id, campaign_id, state_name):
 
     if business_state.name == 'aplicantes':
         campaign_evaluation = campaign.applicant_evaluation_last
+        campaign_state_name = 'prospectos'
     elif business_state.name == 'relevantes':
         campaign_evaluation = campaign.relevant_evaluation_last
+        campaign_state_name = 'pre-seleccionados'
     else:
         campaign_evaluation = campaign.recommended_evaluation_last
+        campaign_state_name = 'seleccionados'
 
     return render(request, cts.DASHBOARD_VIEW_PATH, {'candidates': {'applicants': applicants,
                                                                     'relevant': relevant,
@@ -550,7 +604,8 @@ def dashboard(request, business_user_id, campaign_id, state_name):
                                                      'total_applicants': len(applicants),
                                                      'total_recommended': len(recommended),
                                                      'total_relevant': len(relevant),
-                                                     'campaign_evaluation': campaign_evaluation
+                                                     'campaign_evaluation': campaign_evaluation,
+                                                     'campaign_state_name': campaign_state_name
                                                      })
 
 
@@ -558,8 +613,30 @@ def save_comments(request):
 
     if request.method == 'POST':
         candidate = common.get_candidate_from_request(request)
-        new_user_module.update_user_with_request(request, candidate.user)
-
-        return HttpResponse('')
+        comment = Comment(text=request.POST.get('comment'))
+        comment.save()
+        candidate.comments.add(comment)
+        candidate.save()
+        return HttpResponse(comment.text)
     else:
         return HttpResponseBadRequest('<h1>HTTP CODE 400: Client sent bad request with missing params</h1>')
+
+
+def online_demo(request):
+
+    campaign_id = 156
+    campaign = Campaign.objects.get(pk=campaign_id)
+    business_user = common.get_business_user_with_campaign(campaign, 'object')
+
+    # removes login decorator
+    s = summary.__wrapped__
+    return s(request, campaign_id, business_user=business_user)
+
+
+def get_work_area_requirement(request, work_area_id):
+
+    requirements = Requirement.objects.filter(work_area_id=work_area_id)
+
+    json_data = json.dumps([{'pk': k.pk, 'name': k.name} for k in requirements])
+
+    return JsonResponse(json_data, safe=False)

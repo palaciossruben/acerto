@@ -12,12 +12,12 @@
         {% if 'seleccion_de_personal' in request.path %}
             {% if user.is_authenticated %}
                 <a href="{% url 'business:logout' %}">{% trans "LOG OUT" %}</a>
-                <a class="navButton" style="font-size: 15px;width:170px;color: white;border-radius:40px;margin-top: 30px;padding:5px 16px;background:#F47B20;" role="button" href="{% url 'business:start' %}">+  CREAR OFERTA</a>
+                <a class="navButton" style="font-size: 15px;width:170px;color: white;border-radius:40px;margin-top: 30px;padding:5px 16px;background:#F47B20;" role="button" href="{% url 'business:start' %}">{% trans '+ NEW JOB POST' %}</a>
                 {% if not 'campañas' in request.path %}
-                    <a href="{% url 'business:business_campaigns' user|get_business_user_id_from_auth_user %}">Mis campañas</a>
+                    <a href="{% url 'business:business_campaigns' user|get_business_user_id_from_auth_user %}">{% trans 'My campaigns' %}</a>
                 {% endif %}
             {% else %}
-                <a href="{% url 'business:logout' %}">INICIA SESIÓN</a>
+                <a href="{% url 'business:logout' %}">{% trans 'SIGN IN' %}</a>
             {% endif %}
             <!--<a href="#about">Ayuda</a>-->
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>

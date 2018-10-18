@@ -101,12 +101,6 @@ def get_search_score():
     scores = []
     campaigns = Campaign.objects.all()
 
-    # Tpaga single candidate example
-    #campaigns = [c for c in Campaign.objects.filter(pk=13)]
-
-    # Conekta, 2 candidate example
-    #campaigns = [c for c in Campaign.objects.filter(pk=8)]
-
     for campaign in campaigns:
 
         top_users = prospect_module.get_top_users(campaign)

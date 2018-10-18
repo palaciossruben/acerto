@@ -28,7 +28,7 @@ from match import learn
 
 
 NUMBER_OF_TRIALS = 20
-MIN_NUMBER_OF_CANDIDATES = 20
+MIN_NUMBER_OF_CANDIDATES = 2
 PARAMS = {'max_depth': (2, 4, 8, 16), 'n_estimators': [5, 10, 20, 40, 80]}
 
 
@@ -206,6 +206,6 @@ if __name__ == '__main__':
     for test in Test.objects.all():
 
         # TODO: remove test condition
-        #if 'Basic Accounting Test' == test.name:
-        update_importance(test)
+        if 'Entity Framework' == test.name:
+            update_importance(test)
         #    break

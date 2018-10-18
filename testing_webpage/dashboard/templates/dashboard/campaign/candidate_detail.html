@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Candidate Detail</title>
+</head>
+<body>
+
+    <h4 style="display:inline;">{{ candidate.user.name }} (U:{{ candidate.user.id }} / C:{{ candidate.pk }}):</h4>
+    <br>
+    <br>
+
+    {% if candidate.comments.all %}
+        <p><strong>COMMENTS:</strong></p>
+    {% endif %}
+
+    {% for c in candidate.comments.all %}
+        <p><strong>{{ c.created_at }}</strong></p>
+        <p>{{ c.text }}</p>
+    {% endfor %}
+    <br>
+    <br>
+    <p><strong>city: </strong>{{ candidate.user.city.name }}</p>
+    <p><strong>candidate created_at: </strong>{{ candidate.user.created_at }}</p>
+    <br>
+    <br>
+
+    {% if candidate.surveys.all %}
+        <p><strong>TESTS SUMMARY:</strong></p>
+    {% endif %}
+
+    {% for e in candidate.evaluations.all %}
+        <p><strong>Tests:</strong></p>
+        {% for score in e.scores.all %}
+            {% if score.test.type.name == 'requirements' %}
+                <p><strong>Requirements: </strong>{{ score.value }}</p>
+            {% else %}
+                <p><strong>{{ score.test.name_es }}: </strong>{{ score.value }}</p>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+
+    <br>
+    <br>
+
+    {% if candidate.text_match %}
+        <p><strong>Text Match (higher is better): </strong>{{ candidate.text_match }}</p>
+    {% endif %}
+
+    <br>
+
+    {% if candidate.surveys.all %}
+        <p><strong>QUESTIONS AND ANSWERS FROM TEST:</strong></p>
+    {% endif %}
+
+    {% for e in candidate.surveys.all %}
+
+        <p>{{ e.question.pk }}<strong> {{ e.question.text_es }} </strong></p>
+        {% if e.answer %}
+            <p> {{ e.answer.name_es }} </p>
+        {% endif %}
+        {% if e.numeric_answer %}
+            <p> {{ e.numeric_answer|floatformat }}</p>
+        {% endif %}
+        {% if e.text_answer %}
+            <p> {{ e.text_answer }} </p>
+        {% endif %}
+    {% endfor %}
+
+
+    {% if candidate.state_events.all %}
+        <p><strong>STATE EVENTS:</strong></p>
+    {% endif %}
+
+    {% for e in candidate.state_events.all %}
+        <hr>
+        <p>from: {{ e.from_state.name }}</p>
+        <p>to: {{ e.to_state.name }}</p>
+        <p>user: {{ e.auth_user }}</p>
+        <p>uses machine learning: {{ e.use_machine_learning }}</p>
+        <p>automatic: {{ e.automatic }}</p>
+        {% if e.forecast is not None %}
+            {% if e.forecast %}
+                <p><strong>Forecast: Passes</strong></p>
+            {% else %}
+                <p><strong>Forecast: Fails</strong></p>
+            {% endif %}
+        {% else %}
+            <p><strong>Forecast: Not predicted</strong></p>
+        {% endif %}
+        <p>where: {{ e.place }}</p>
+        <p>on: {{ e.created_at }}</p>
+    {% endfor %}
+
+</body>
+</html>

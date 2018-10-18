@@ -17,15 +17,21 @@ urlpatterns = [
     # BUSINESS USER LOGGED
     url(r'^campañas/(?P<business_user_id>\d+)$', views.business_campaigns, name='business_campaigns'),
     url(r'^resumen/(?P<campaign_id>\d+)$', views.summary, name='summary'),
+    url(r'^online_demo$', views.online_demo, name='online_demo'),
     url(r'^tablero_de_control/(?P<business_user_id>\d+)/(?P<campaign_id>\d+)/(?P<state_name>.*)/$', views.dashboard, name='dashboard'),
     url(r'^perfil_del_candidato/(?P<pk>\d+)$', views.candidate_profile, name='candidate_profile'),
     # CONTACT
     url(r'^contáctanos$', views.contact_form, name='contact_form'),
     url(r'^contact_form_post$', views.contact_form_post, name='contact_form_post'),
+    # START
+    url(r'^get_work_area_requirement/(?P<work_area_id>\d+)$', views.get_work_area_requirement, name='get_work_area_requirement'),
+    # PAYU
+    url(r'payment_response$', views.payment_response, name='payment_response'),
+    url(r'payment_confirmation$', views.payment_confirmation, name='payment_confirmation'),
+
 
     url(r'^save_comments$', views.save_comments, name='save_comments'),
-
-
+    # TODO: This search url should be deleted?
     url(r'^search$', views.search, name='search'),
     url(r'^results$', views.calculate_result, name='results'),
     url(r'^signup_choice$', views.signup_choice, name='signup_choice'),
@@ -37,3 +43,11 @@ urlpatterns = [
     url(r'^popup_signup$', views.popup_signup, name='popup_signup'),
     url(r'^plan/(?P<pk>\d+)$', views.plan, name='plan'),
 ]
+
+'''
+url(r'^password_reset/$', auth_views.password_reset, name='password_reset'),
+url(r'^password_reset/done/$', auth_views.password_reset_done, name='password_reset_done'),
+url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+    auth_views.password_reset_confirm, name='password_reset_confirm'),
+url(r'^reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
+'''

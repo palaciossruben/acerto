@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'beta_invite.apps.BetaInviteConfig',
     'business.apps.BusinessConfig',
     'dashboard.apps.DashboardConfig',
+    'api.apps.ApiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
     'raven.contrib.django.raven_compat',
     'compressor',
     #'storages',
+    'rest_framework',
 ]
 
 
@@ -163,7 +165,7 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-STATICFILES_DIRS = [('resumes', 'media/resumes'),
+STATICFILES_DIRS = [#('resumes', 'media/resumes'),
                     ('candidate_photo', 'media/candidate_photo'),
                     ('candidate_brochure', 'media/candidate_brochure'),
                     ('questions', 'media/questions'), ]
@@ -202,3 +204,12 @@ LOGIN_REDIRECT_URL = 'business:home'
 
 # Disables this limit.
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
+
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}

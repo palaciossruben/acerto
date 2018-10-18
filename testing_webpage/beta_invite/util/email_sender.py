@@ -1,7 +1,6 @@
 import requests
 import unicodedata
 from decouple import config
-from multiprocessing import Process
 
 from dashboard.models import Candidate
 from beta_invite.util import common_senders
@@ -129,8 +128,8 @@ def create_nice_resumes_message(candidates):
 
     resume_summaries = []
     for c in candidates:
-        if c.user.curriculum_url != '#':
-            cv_url = 'https://peaku.co/static/{url}'.format(url=c.user.curriculum_url)
+        if c.user.get_curriculum_url() != '#':
+            cv_url = c.user.get_curriculum_url()
         else:
             cv_url = 'Hoja de vida no disponible'
 

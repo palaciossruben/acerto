@@ -14,12 +14,9 @@ def my_parent_path():
     return str(os.path.dirname(os.path.abspath(__file__)).rpartition('/')[0])
 
 
-def sync_local(sync_media=False):
+def sync_local():
     """
-    Synchronizes local machine with last backup from DB and media files
-    Args:
-        sync_media: Boolean indicating if the sync will be done only for the DB or the media files as well.
-    Returns:
+    Synchronizes local machine with last backup from DB
     """
 
     # BE CAREFUL: THIS IS THE ONLY COMMAND THAT RUNS ON THE SERVER ON THIS TASK!!!
@@ -32,10 +29,6 @@ def sync_local(sync_media=False):
     # BACKUP PATHS:
     backup_remote = '/home/ubuntu/db_backup.sql'
     local_backup = '/Users/juanpabloisaza/Desktop/acerto/db_backup.sql'
-
-    # MEDIA PATHS:
-    media_remote = my_parent_path() + '/media/resumes'
-    media_local = my_parent_path() + '/media'
 
     # PSQL
     abstract_local_psql = 'psql -U {user} -p 5432 -h localhost {db_option}'
@@ -88,15 +81,6 @@ def sync_local(sync_media=False):
 
     else:
         raise Exception("WTF are you trying to do!!! Be careful not to erase production.")
-
-    if sync_media:
-
-        # Syncs media folder. Only rewrites new or updated files. Note the syntax to consider the ssh key.
-        media_command = "rsync -au -i -e \"ssh -i production_key.pem\" ubuntu@ec2-52-38-133-146.us-west-2.compute.amazonaws.com:/home/ubuntu/acerto/testing_webpage/media/ /Users/juanpabloisaza/Desktop/masteringmymind/acerto/testing_webpage/media/"
-
-        print('MEDIA COMMAND: ' + str(media_command))
-        media_out = subprocess.check_output(media_command, cwd=local_cwd, shell=True)
-        print('MEDIA_COMMAND output: ' + str(media_out))
 
 
 def deploy():
