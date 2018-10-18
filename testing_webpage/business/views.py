@@ -13,7 +13,7 @@ from ipware.ip import get_ip
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import login, authenticate
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils import formats
 from django.http import HttpResponseBadRequest, HttpResponse, JsonResponse
@@ -494,12 +494,16 @@ def business_campaigns(request, business_user_id):
         if c.salary_high_range:
             c.reference_code = str(c.id) + "-" + date
             try:
-
-                c.base = round(float(Price.objects.get(from_salary__gte=c.salary_low_range,
-                                                       to_salary__lte=c.salary_high_range,
-                                                       work_area=c.work_area).price))
+                c.base = round(float(Price.objects.get(work_area=c.work_area,
+                                                       from_salary__gte=c.salary_low_range,
+                                                       to_salary__lt=(c.salary_high_range+1)).price))
             except models.ObjectDoesNotExist:
                 c.base = DEFAULT_BASE_PRICE
+
+            except MultipleObjectsReturned:
+                c.base = Price.objects.filter(work_area=c.work_area,
+                                              from_salary__gte=c.salary_low_range,
+                                              to_salary__lt=(c.salary_high_range+1)).all().order_by('-to_salary')[0].price
 
             c.tax = round(c.base * TAX, 2)
             c.amount = round(float(c.base+c.tax), 2)
