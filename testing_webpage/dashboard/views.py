@@ -1,6 +1,5 @@
 import json
 import common
-import datetime
 from django.core import serializers
 from django.shortcuts import render, redirect
 from django.http import JsonResponse

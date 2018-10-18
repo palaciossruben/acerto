@@ -740,20 +740,10 @@ class User(models.Model):
     curriculum_text = models.TextField(default=None, null=True)
     curriculum_s3_url = models.CharField(max_length=200, default='#')
     uploaded_to_es = models.BooleanField(default=False)
-
-    # indicates if added to messenger
-    added = models.BooleanField(default=False)
-
-    # TODO: deprecated: remove when sure there are no dependencies remaining. Not saving anymore
-    campaign = models.ForeignKey(Campaign, null=True)
+    added = models.BooleanField(default=False)  # indicates if added to messenger
     phone = models.CharField(max_length=40, null=True)
-
-    # TODO: remove evaluations, this is deprecated. Not saving anymore.
-    evaluations = models.ManyToManyField(Evaluation)
     language_code = models.CharField(max_length=3, default='es')
-
-    # Detects if the user is in a mobile phone when registering.
-    is_mobile = models.NullBooleanField()
+    is_mobile = models.NullBooleanField()  # Detects if the user is in a mobile phone when registering.
 
     # Additional info
     gender = models.ForeignKey(Gender, null=True, on_delete=models.SET_NULL)
