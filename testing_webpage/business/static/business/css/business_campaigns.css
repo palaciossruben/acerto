@@ -1,3 +1,11 @@
+body {
+    background : white;
+}
+
+.content{
+    margin-bottom:30px
+}
+
 #create-campaign-button{
     margin-left:30px;
     font-size: 15px;
@@ -9,4 +17,109 @@
     background:#F47B20;
 }
 
+@charset "UTF-8";
 
+/**************************************************GENERIC*************************************************************/
+
+* { margin: 0; padding: 0; outline:0; box-sizing:border-box;}
+
+html {
+	height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+.row{
+    margin-right:0;
+    margin-left:0;
+}
+/**************************************************FONTS***************************************************************/
+@font-face {
+    font-family: BigJohn;
+    src: url(/static/fonts/BIG_JOHN.otf);
+    unicode-range: U+?????;
+}
+
+@font-face {
+    font-family: NorthernBlock;
+    src: url(/static/fonts/TheNorthernBlockLtdLoewHeavy.otf);
+}
+
+@font-face {
+    font-family: BertholdAkzidenzGroteskRegular;
+    src: url(/static/fonts/BertholdAkzidenzGroteskRegular.otf);
+}
+
+@font-face {
+    font-family: BertholdAkzidenzGroteskLight;
+    src: url(/static/fonts/BertholdAkzidenzGroteskBELight.otf);
+}
+
+@font-face {
+    font-family: BertholdAkzidenzGroteskBold;
+    src: url(/static/fonts/BertholdAkzidenzGroteskBold.otf);
+}
+
+@font-face {
+    font-family: BertholdAkzidenzGroteskItalic;
+    src: url(/static/fonts/BertholdAkzidenzGroteskItalic.otf);
+}
+
+@font-face {
+    font-family: BertholdAkzidenzGroteskSuper;
+    src: url(/static/fonts/BertholdAkzidenzGroteskSuper.otf);
+}
+
+.super{
+    font-family: BertholdAkzidenzGroteskSuper;
+}
+
+.bold{
+    font-family: BertholdAkzidenzGroteskBold;
+}
+
+.regular{
+    font-family: BertholdAkzidenzGroteskRegular;
+}
+
+
+.campaign-div{
+    width: 80%;
+    min-height:300px;
+    margin: 0 auto;
+    border-radius: 25px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #F1F1EB;
+    padding: 10px;
+    margin-bottom: 20px;
+    color:#666666;
+}
+
+.campaign-div a{
+    color:#666666;
+}
+
+.campaign-div a:hover{
+    color:orange;
+}
+
+.tittle{
+    font-size:25px;
+    font-family:BertholdAkzidenzGroteskBold;
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.tests{
+    font-size:18px;
+    font-family:BertholdAkzidenzGroteskBold;
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.center{
+    text-align:center;
+}

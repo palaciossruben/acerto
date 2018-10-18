@@ -23,15 +23,16 @@ urlpatterns = [
     # CONTACT
     url(r'^contáctanos$', views.contact_form, name='contact_form'),
     url(r'^contact_form_post$', views.contact_form_post, name='contact_form_post'),
-
     # START
     url(r'^get_work_area_requirement/(?P<work_area_id>\d+)$', views.get_work_area_requirement, name='get_work_area_requirement'),
+    # PAYU
+    url(r'payment_response$', views.payment_response, name='payment_response'),
+    url(r'payment_confirmation$', views.payment_confirmation, name='payment_confirmation'),
+
 
     url(r'^save_comments$', views.save_comments, name='save_comments'),
-
     # TODO: This search url should be deleted?
     url(r'^search$', views.search, name='search'),
-
     url(r'^results$', views.calculate_result, name='results'),
     url(r'^signup_choice$', views.signup_choice, name='signup_choice'),
     url(r'^business_signup$', views.business_signup, name='business_signup'),
