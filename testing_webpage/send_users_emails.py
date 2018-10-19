@@ -21,7 +21,7 @@ def candidates_filter(candidates):
     return filtered_candidates
 
 
-def send_candidates_emails():
+def send_users_additional_info_reminder():
 
     candidates = Candidate.objects.filter(~Q(user=None), ~Q(user__email=None), user__gender_id=None).order_by('-user_id')
 
@@ -31,13 +31,22 @@ def send_candidates_emails():
 
     print(len(candidates))
     print(len(new_candidates))
+    test_candidates = new_candidates[:2]
 
+    '''
     email_sender.send(objects=new_candidates,
                       language_code='es',
                       body_input='candidates_form_reminder_email_body',
                       subject='Información adicional')
+    '''
+
+    email_sender.send_report(language_code='es',
+                             body_filename='business_daily_report_email_body',
+                             subject='Reporte de candidatos recomendados',
+                             recipients=['juan.rendon@peaku.co'],
+                             candidates=test_candidates)
 
 
 # Precaution: If script imported for another module, this lines avoid the execution of this entire file
 if __name__ == '__main__':
-    send_candidates_emails()
+    send_users_additional_info_reminder()
