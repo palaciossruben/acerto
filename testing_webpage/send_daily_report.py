@@ -17,7 +17,7 @@ def send_general_report():
     candidates = Candidate.objects.filter(created_at__range=[str(timezone.now() - timedelta(days=1)), str(timezone.now())])
 
     # Only send if there is something.
-    if len(candidates) > 0:
+    if True: #len(candidates) > 0:
         email_sender.send_report(language_code='es',
                                  body_filename='daily_report_email_body',
                                  subject='Daily report',
@@ -62,6 +62,5 @@ def business_daily_report():
                                          candidates=candidates)
 
 
-send_campaign_report(['juan@peaku.co', 'santiago@peaku.co'], campaign_id=10)
 send_general_report()
-business_daily_report()
+# business_daily_report()

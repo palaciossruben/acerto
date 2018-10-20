@@ -12,17 +12,13 @@
     <link rel="stylesheet" type="text/css" href="{% static 'beta_invite/css/additional_info.css' %}">
 {% endblock %}
 
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'beta_invite/js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'beta_invite/js/jquery_easing_plugin.js' %}"></script>
+    <script type="text/javascript" src="{% static 'beta_invite/js/additional_info.js' %}"></script>
+{% endblock %}
+
 {% block content %}
-<script>
-function removeAnyDots() {
-
-    var text = $(salary).val();
-
-    text = text.replace(/\D/g, '');
-
-     $(salary).val(text);
-}
-</script>
 <script>
     function sendPartial(param_dict) {
         general_dict = {candidate_id:{{ candidate.id }}, csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()}
@@ -56,7 +52,7 @@ function removeAnyDots() {
 		<fieldset> <!-- three item asked -->
 			<h2 class="fs-title">Género</h2>
 			<h3 class="fs-subtitle">¿Eres hombre o mujer?</h3>
-			<select id="gender" name="gender_id">
+			<select id="gender" name="gender_id" required>
 				<option value="" disabled selected>Selecciona tu género</option>
 				{% for sex in genders %}
 					<option value="{{ sex.id }}">{{ sex.name }}</option>
@@ -92,8 +88,8 @@ function removeAnyDots() {
 					<option value="{{ profession.id }}">{{ profession.name }}</option>
 				{% endfor %}
 			</select>
-			<input type="number" id="experience" min="0" max="100" step='1' name="experience" placeholder="Años de experiencia">
-			<input type="number" pattern="[0-9]{3-10}" oninput="removeAnyDots();" name="salary" step="100000" placeholder="Aspiración salarial" id="salary">
+			<input type="number" id="experience" oninput="removeAnyDots(this);" min="0" max="100" step='1' name="experience" placeholder="Años de experiencia">
+			<input type="number" pattern="[0-9]{3-10}" oninput="removeAnyDots(this);" name="salary" step="100000" placeholder="Aspiración salarial" id="salary">
 			<input type="button" name="previous" class="previous action-button" value="Atrás" />
 			<input type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'work_area_id':$('#work_area').val(), 'experience':$('#experience').val(), 'salary':$('#salary').val()})"/>
 		</fieldset>
@@ -137,7 +133,7 @@ function removeAnyDots() {
 			<h2 class="fs-title">Información personal</h2>
 			<h3 class="fs-subtitle"></h3>
 			<input type="text" id="document" name="document" placeholder="Documento de identificación" maxlength="50"/>
-			<input placeholder="Fecha de nacimiento" type="text" id="birthday" name="birthday" onfocus="(this.type='date')" onblur="(this.type='text')" title="Ingresa tu fecha de nacimiento en el formato específicado">
+			<input placeholder="Fecha de nacimiento" oninput="limitDate(this);" type="text" id="birthday" name="birthday" onfocus="(this.type='date')" onblur="(this.type='text')" title="Ingresa tu fecha de nacimiento en el formato específicado">
 			<input type="button" name="previous" class="previous action-button" value="Atrás" />
 			<input type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'document':$('#document').val(), 'birthday':$('#birthday').val()})"/>
 		</fieldset>
@@ -171,9 +167,12 @@ function removeAnyDots() {
 			<input type="submit" name="submit" class="submit action-button" value="¡ Enviar !" />
 		</fieldset>
 	</form>
-<script type="text/javascript" src="{% static 'beta_invite/js/jquery.js' %}"></script>
-    <script type="text/javascript" src="{% static 'beta_invite/js/jquery_easing_plugin.js' %}"></script>
-    <script type="text/javascript" src="{% static 'beta_invite/js/additional_info.js' %}"></script>
 
+	<script>
+		$(document).ready(function() {
+			additional_info();
+			removeAnyDots();
+		});
+	</script>
 {% endblock %}
 

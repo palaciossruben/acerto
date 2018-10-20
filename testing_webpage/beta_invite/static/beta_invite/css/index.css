@@ -1,12 +1,111 @@
-/**************************************************CONTENT*************************************************************/
+/**************************************************FONTS***************************************************************/
+@font-face {
+    font-family: BigJohn;
+    src: url(/static/fonts/BIG_JOHN.otf);
+    unicode-range: U+?????;
+}
 
+@font-face {
+    font-family: NorthernBlock;
+    src: url(/static/fonts/TheNorthernBlockLtdLoewHeavy.otf);
+}
+
+@font-face {
+    font-family: BertholdAkzidenzGroteskRegular;
+    src: url(/static/fonts/BertholdAkzidenzGroteskRegular.otf);
+}
+
+@font-face {
+    font-family: BertholdAkzidenzGroteskLight;
+    src: url(/static/fonts/BertholdAkzidenzGroteskBELight.otf);
+}
+
+@font-face {
+    font-family: BertholdAkzidenzGroteskBold;
+    src: url(/static/fonts/BertholdAkzidenzGroteskBold.otf);
+}
+
+@font-face {
+    font-family: BertholdAkzidenzGroteskItalic;
+    src: url(/static/fonts/BertholdAkzidenzGroteskItalic.otf);
+}
+
+@font-face {
+    font-family: BertholdAkzidenzGroteskSuper;
+    src: url(/static/fonts/BertholdAkzidenzGroteskSuper.otf);
+}
+
+.super{
+    font-family: BertholdAkzidenzGroteskSuper;
+}
+
+.bold{
+    font-family: BertholdAkzidenzGroteskBold;
+}
+
+.regular{
+    font-family: BertholdAkzidenzGroteskRegular;
+}
+
+
+.campaign-div{
+    width: 50%;
+    min-height:230px;
+    margin: 0 auto;
+    border-radius: 25px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #F1F1EB;
+    padding: 10px;
+    margin-top: 20px;
+    color:#666666;
+    background-color:white;
+}
+
+.campaign-div a{
+    color:#666666;
+}
+
+.campaign-div a:hover{
+    color:orange;
+}
+
+.tittle{
+    font-size:25px;
+    font-family:BertholdAkzidenzGroteskBold;
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.tests{
+    font-size:18px;
+    font-family:BertholdAkzidenzGroteskBold;
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.center{
+    text-align:center;
+}
+
+/**************************************************CONTENT*************************************************************/
 .main-section {
 	width:auto;
+	background: url(../img/Start_BG-01.jpg) no-repeat top center scroll;
 	background-size: contain;
 	background-repeat: no-repeat;
 	position: relative;
 	z-index:1;
 	height:400px;
+	margin-bottom:10px;
+}
+
+.jobs-background{
+    background: url(../img/jobs_background.jpg) repeat top center scroll;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
 }
 
 .main-title{
@@ -29,6 +128,7 @@
     padding-left: 80px;
     margin-bottom: 20px;
 }
+
 
 .main-description{
     min-height: 140px;
@@ -331,6 +431,10 @@ input:-webkit-autofill {
     width:70px;
 }
 
+.logo2{
+   margin-left:70px;
+   width:80px;
+}
 /**************************************************RESPONSIVE**********************************************************/
 
 @media  (max-width: 768px){
@@ -373,6 +477,15 @@ input:-webkit-autofill {
     .only-register-form {
         width:320px;
     }
+
+    .campaign-div{
+        width: 90%;
+        min-height:230px;
+    }
+
+    .logo2{
+       margin-left:0;
+   }
 }
 
 

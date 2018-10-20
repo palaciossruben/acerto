@@ -198,6 +198,8 @@ def tests(request):
     # Adds the user id to the params, to be able to track answers, later on.
     user = common.get_user_from_request(request)
     candidate = common.get_candidate(user, campaign)
+    if not candidate:
+        return redirect('/servicio_de_empleo?campaign_id={}'.format(campaign.id))
     if user is not None:
         end_point_params['user_id'] = int(user.id)
 
@@ -238,12 +240,15 @@ def get_test_result(request):
     questions_dict = test_module.get_tests_questions_dict(campaign.tests.all())
     user = common.get_user_from_request(request)
     user_id = user.id if user else None
+    if not user:
+        return redirect('/servicio_de_empleo?campaign_id={campaign_id}'.format(campaign_id=campaign.id))
     candidate = common.get_candidate(user, campaign)
     name = common_senders.get_first_name(candidate.user.name)
 
     scores = test_module.get_scores(campaign, user_id, questions_dict, request)
     evaluation = test_module.get_evaluation(scores, candidate)
     failed_scores = [s for s in evaluation.scores.all() if not s.passed and s.test.feedback_url]
+
     if evaluation.passed or len(failed_scores) == 0:
         return redirect('/servicio_de_empleo/additional_info?candidate_id={candidate_id}'.format(candidate_id=candidate.pk))
 

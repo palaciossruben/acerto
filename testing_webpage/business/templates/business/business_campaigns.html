@@ -19,6 +19,7 @@
         <input type="hidden" name="business_user_id" value="{{ business_user_id }}" />
     </form>
     <h1 style="text-align:center; margin:50px 0px">{% trans "Campaigns" %}</h1>
+        <div style="min-height: 500px;">
         {% for campaign in campaigns %}
             <div class="campaign-div">
                 <div class="row">
@@ -34,39 +35,44 @@
                     <p><b>REPRESENTANTE:</b> {{ campaign|get_business_user_name_with_campaign }}</p>
                     <p><b>ESTADO:</b> {{ campaign.state.name_es }}</p>
                     <p><b>FECHA DE CREACIÓN:</b> {{ campaign.local_date }}</p>
-                    {% if campaign.salary_low_range %}
+                    {% if campaign.salary_low_range >= 0 %}
                         <p><b>SALARIO:</b> ${{ campaign.salary_low_range }} a ${{ campaign.salary_high_range }} </p>
                     {% endif %}
-                    {% if campaign.salary_high_range %}
-                        <form method="post" action="https://checkout.payulatam.com/ppp-web-gateway-payu" accept-charset="UTF-8">
-                            <!--Producción :  action="https://checkout.payulatam.com/ppp-web-gateway-payu/" -->
-                            <!--Producción2 :  action="https://gateway.payulatam.com/ppp-web-gateway/pb.zul" -->
-                            <!--Pruebas :  action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/" -->
-                            <!--PAYMENT GENERIC INFO-->
-                            <input name="ApiKey" type="hidden" value="{{ apikey }}"/>
-                            <input name="merchantId" type="hidden" value="{{ merchant_id }}"/>
-                            <input name="accountId" type="hidden" value="{{ account_id }}"/>
-                            <input name="currency" type="hidden" value="{{ currency }}"/>
-                            <input name="test" type="hidden" value="{{ test }}"/>
-                            <input name="description" type="hidden" value="{{ description }}"/>
-                            <!--PAYMENT DYNAMIC INFO-->
-                            <input name="buyerFullName" type="hidden" value="{{ buyer_name }}"/>
-                            <input name="buyerEmail" type="hidden" value="{{ buyer_email }}"/>
-                            <!--PAYMENT UNIQUE DYNAMIC INFO-->
-                            <input name="referenceCode" type="hidden" value="{{ campaign.reference_code }}"/>
-                            <input name="amount" type="hidden" value="{{ campaign.amount }}"/>
-                            <input name="tax" type="hidden" value="{{ campaign.tax }}"/>
-                            <input name="taxReturnBase" type="hidden" value="{{ campaign.base }}"/>
-                            <input name="signature"  type="hidden" value="{{ campaign.signature }}"/>
-                            <!--BUTTON-->
-                            <input type="image" border="0" alt="" src="http://www.payulatam.com/img-secure-2015/boton_pagar_pequeno.png" onClick="this.form.urlOrigen.value = window.location.href;"/>
-                           <input name="buttonId" type="hidden" value="uHXTlFj9y4bMS9srB5O11WLUxNGBJ1tcne4nSsYZt/7VQHZZ7X8vCg=="/>
-                            <input name="buttonType" value="SIMPLE" type="hidden"/>
-                        </form>
+                    {% if campaign.id == 5 %}
+                        {% if campaign.salary_low_range >= 0 and campaign.work_area.pk not in invalid_work_areas %}
+                            <form method="post" action="https://checkout.payulatam.com/ppp-web-gateway-payu" accept-charset="UTF-8">
+                                <!--Producción :  action="https://checkout.payulatam.com/ppp-web-gateway-payu/" -->
+                                <!--Producción2 :  action="https://gateway.payulatam.com/ppp-web-gateway/pb.zul" -->
+                                <!--Pruebas :  action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/" -->
+                                <!--PAYMENT GENERIC INFO-->
+                                <input name="ApiKey" type="hidden" value="{{ apikey }}"/>
+                                <input name="merchantId" type="hidden" value="{{ merchant_id }}"/>
+                                <input name="accountId" type="hidden" value="{{ account_id }}"/>
+                                <input name="currency" type="hidden" value="{{ currency }}"/>
+                                <input name="test" type="hidden" value="{{ test }}"/>
+                                <input name="description" type="hidden" value="{{ description }}"/>
+                                <!--PAYMENT DYNAMIC INFO-->
+                                <input name="buyerFullName" type="hidden" value="{{ buyer_name }}"/>
+                                <input name="buyerEmail" type="hidden" value="{{ buyer_email }}"/>
+                                <!--PAYMENT UNIQUE DYNAMIC INFO-->
+                                <input name="referenceCode" type="hidden" value="{{ campaign.reference_code }}"/>
+                                <input name="amount" type="hidden" value="{{ campaign.amount }}"/>
+                                <input name="tax" type="hidden" value="{{ campaign.tax }}"/>
+                                <input name="taxReturnBase" type="hidden" value="{{ campaign.base }}"/>
+                                <input name="signature"  type="hidden" value="{{ campaign.signature }}"/>
+                                <!--BUTTON-->
+                                <input type="image" border="0" alt="" src="http://www.payulatam.com/img-secure-2015/boton_pagar_pequeno.png" onClick="this.form.urlOrigen.value = window.location.href;"/>
+                               <input name="buttonId" type="hidden" value="uHXTlFj9y4bMS9srB5O11WLUxNGBJ1tcne4nSsYZt/7VQHZZ7X8vCg=="/>
+                                <input name="buttonType" value="SIMPLE" type="hidden"/>
+                            </form>
+                        {% else %}
+                            <p>Para activar esta campaña debe comunicarse con nosotros</p>
+                        {% endif %}
                     {% endif %}
                 </div>
                 </div>
             </div>
         {% endfor %}
+        </div>
 {% endblock %}
 
