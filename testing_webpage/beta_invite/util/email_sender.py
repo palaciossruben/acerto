@@ -24,33 +24,36 @@ def validate_emails(emails):
     return [e for e in emails if e is not None]
 
 
-def mail_gun_post(recipients, subject, body, attachment):
+def mail_gun_post(recipients, subject, body, html, attachment):
     try:
+
         requests.post(config('mailgun_url'),
                       auth=("api", config('mailgun_api_key')),
                       data={"from": config('email'),
                             "to": recipients,
                             "subject": subject,
-                            "text": body},
+                            "text": body,
+                            "html": html},
                       files=get_files(attachment), )
     except ConnectionError:
         pass
 
 
-def send_with_mailgun(recipients, subject, body, attachment=None):
+def send_with_mailgun(recipients, subject, body, html=None, attachment=None):
     """
     Sends emails over mailgun service
     Args:
         recipients: email or lists of emails.
         subject: email subject, string
         body: email body, string
+        html: optional
         attachment: optional param for attaching content to email
     Returns: sends emails.
     """
     recipients = validate_emails(recipients)
 
     if len(recipients) > 0:
-        mail_gun_post(recipients, subject, body, attachment)
+        mail_gun_post(recipients, subject, body, html, attachment)
 
         # TODO: make it async
         #p = Process(target=mail_gun_post, args=(sender_data, recipients, subject, body, attachment))

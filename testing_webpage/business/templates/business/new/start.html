@@ -277,16 +277,6 @@
                                 <trix-editor></trix-editor>
                                 <textarea name="description_es" class="backend-description"></textarea>
                             </fieldset>
-
-                            <h3>{% trans 'Tests' %}</h3>
-                            <h6>{% trans 'Add tests you want your candidates to do online, and be filtered by them' %}</h6>
-                            <select class="origin-keywords js-example-basic-multiple" name="test_ids" multiple="multiple">
-                                {% for test in tests.all %}
-                                    <option value="{{ test.id }}">{{ test.name_es }}</option>
-                                {% endfor %}
-                            </select>
-                            <br>
-                            <br>
                         </div>
                     </div>
                 </div>
