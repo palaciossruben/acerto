@@ -11,7 +11,6 @@ sys.path.insert(0, '/'.join(os.getcwd().split('/')[:-1]))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
-import boto3
 import time
 import urllib.parse
 import requests
@@ -19,8 +18,6 @@ from botocore.exceptions import EndpointConnectionError
 from beta_invite.models import User
 from decouple import config
 from queue import Queue
-from elasticsearch import Elasticsearch, RequestsHttpConnection
-from requests_aws4auth import AWS4Auth
 
 
 def get_user_dict(user):
@@ -49,28 +46,7 @@ def get_user_dict(user):
 
 def upload_resource_to_es(user):
 
-    #credentials = boto3.Session().get_credentials()
-    #awsauth = AWS4Auth(credentials.access_key, credentials.secret_key, 'us-west-2', 'es')
-    #awsauth = AWS4Auth(config('aws_access_key'), config('secret_key'), 'us-west-2', 'es')
-
-    #print(session.get_available_services())
-
-    #es = Elasticsearch(['https://ec2-xx-xx-xxx-xxx.us-west-2.compute.amazonaws.com:9200'])
-
-    """
-    es = Elasticsearch(hosts=[{'host': config('elastic_search_host'), 'port': 443}],
-                       http_auth=awsauth,
-                       use_ssl=True,
-                       verify_certs=True,
-                       connection_class=RequestsHttpConnection)
-    """
-
     try:
-
-        #es.index(index="users", doc_type="user", id=user.pk, body=get_user_dict(user))
-
-        # TODO: remove:
-        #print(es.get(index="movies", doc_type="movie", id=1))  #, id=user.pk))
 
         print("Indexing: {} in elastic search".format(user))
         r = requests.put(urllib.parse.urljoin(config('elastic_search_host'), 'users/user/{}'.format(user.pk)),
