@@ -137,10 +137,12 @@ def create_campaign(request):
     get_requirements(campaign, request)
     update_campaign_basic_properties(campaign, request)
     update_campaign_bullets(campaign, request)
-    candidate_prospects = prospect_module.get_candidates(campaign)
-    prospect_module.send_mails(candidate_prospects)
+
     add_default_tests(campaign)
     add_user_tests(campaign, request)
+
+    candidate_prospects = prospect_module.get_candidates(campaign)
+    prospect_module.send_mails(candidate_prospects)
 
     return campaign
 

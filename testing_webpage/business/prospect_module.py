@@ -1,4 +1,6 @@
 
+from django.db.models import Q
+
 import common
 
 from dashboard.models import State
@@ -45,6 +47,18 @@ def non_null_equal(a, b):
     return False
 
 
+def non_null_lte(a, b):
+    if a is not None and b is not None:
+        return a <= b
+    return False
+
+
+def non_null_gte(a, b):
+    if a is not None and b is not None:
+        return a >= b
+    return False
+
+
 def simple_filter(campaign, users):
     """
     Filters by:
@@ -58,11 +72,47 @@ def simple_filter(campaign, users):
     candidates = [Candidate(user=u, campaign=campaign, pk=1) for u in users]
 
     candidates = [c for c in candidates if non_null_equal(c.user.city, c.campaign.city) and
-                  non_null_equal(c.user.work_area, c.campaign.work_area)]
+                  non_null_equal(c.user.work_area, c.campaign.work_area) and
+                  non_null_lte(campaign.get_very_low_salary(), c.user.salary) and
+                  non_null_gte(campaign.get_very_high_salary(), c.user.salary)]
 
     # Cuts top candidates because its too expensive a job filter.
     candidates = candidates[:MAX_MATCHES]
-    return [c.user for c in candidates if not common.user_has_job(c.user)]
+    return [c.user for c in candidates if not common.user_has_been_recommended(c.user)]
+
+
+def get_users_from_tests(campaign):
+    """
+    An additional source of candidates are the ones who both pass the simple filter conditions and
+    pass all the tests that the campaign is asking in a cognitive and technical aspect.
+    :param campaign: Campaign
+    :return: users
+    """
+    campaign_tests = [t for t in campaign.tests.all() if t.type.code in ['C', 'T']]
+
+    # implicit implementation of the simple filter.
+    candidates = Candidate.objects.filter(~Q(state__code__in=State.get_recommended_states()),
+                                          user__work_area=campaign.work_area,
+                                          user__city=campaign.city,
+                                          user__salary__gte=campaign.get_very_low_salary(),
+                                          user__salary__lte=campaign.get_very_high_salary())
+
+    # TODO: missing complementary tests from the same user in different candidates
+    # example:
+    # campaign_tests = [1, 2, 3]
+    # candidate1.tests = [1, 2]
+    # candidate2.tests = [3]
+    # True = candidate1.user == candidate2.user
+
+    prospects = []
+    for c in candidates:
+        last_evaluation = c.get_last_evaluation()
+        if last_evaluation:
+            passing_tests = [s.test for s in last_evaluation.scores.all() if s.passed]
+            if all([t in passing_tests for t in campaign_tests]):
+                prospects.append(c)
+
+    return [c.user for c in prospects]
 
 
 def get_top_users(campaign):
@@ -71,8 +121,10 @@ def get_top_users(campaign):
     search_text = campaign.get_search_text()
     search_array = search_module.get_word_array_lower_case_and_no_accents(search_text)
     users = search_module.get_matching_users(search_array)
+    users += get_users_from_tests(campaign)
 
-    return simple_filter(campaign, users)
+    users = simple_filter(campaign, users)
+    return search_module.remove_duplicates(users)
 
 
 def get_candidates(campaign):
