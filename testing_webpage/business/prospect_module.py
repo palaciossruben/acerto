@@ -1,10 +1,13 @@
 
+import urllib.parse
 from django.db.models import Q
+import requests
+from decouple import config
 
 import common
 
 from dashboard.models import State
-from beta_invite.models import EmailType
+from beta_invite.models import EmailType, User
 from testing_webpage.models import CandidatePendingEmail
 from business import search_module
 from dashboard.models import Candidate
@@ -81,6 +84,18 @@ def simple_filter(campaign, users):
     return [c.user for c in candidates if not common.user_has_been_recommended(c.user)]
 
 
+def get_users_from_es(search_array):
+    """
+    es=elastic_search
+    :param search_array: array of search words
+    :return: Users
+    """
+
+    search_text = '%20'.join(search_array)
+    r = requests.get(urllib.parse.urljoin(config('elastic_search_host'), '_search?q={}'.format(search_text)))
+    return User.objects.filter(pk__in=[u['_id'] for u in r.json()['hits']['hits']]).all()
+
+
 def get_users_from_tests(campaign):
     """
     An additional source of candidates are the ones who both pass the simple filter conditions and
@@ -120,10 +135,11 @@ def get_top_users(campaign):
     # TODO: this feature only supports Spanish.
     search_text = campaign.get_search_text()
     search_array = search_module.get_word_array_lower_case_and_no_accents(search_text)
-    users = search_module.get_matching_users(search_array)
-    users += get_users_from_tests(campaign)
-
+    users = get_users_from_tests(campaign)
+    users += search_module.get_matching_users(search_array)
+    users += get_users_from_es(search_array)
     users = simple_filter(campaign, users)
+
     return search_module.remove_duplicates(users)
 
 

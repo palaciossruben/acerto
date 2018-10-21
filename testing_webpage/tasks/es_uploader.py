@@ -1,0 +1,134 @@
+"""
+This is a daemon, that uploads Users to ES (elastic search)
+"""
+
+import os
+import sys
+from django.core.wsgi import get_wsgi_application
+
+# Environment can use the models as if inside the Django app
+sys.path.insert(0, '/'.join(os.getcwd().split('/')[:-1]))
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
+application = get_wsgi_application()
+
+import boto3
+import time
+import urllib.parse
+import requests
+from botocore.exceptions import EndpointConnectionError
+from beta_invite.models import User
+from decouple import config
+from queue import Queue
+from elasticsearch import Elasticsearch, RequestsHttpConnection
+from requests_aws4auth import AWS4Auth
+
+
+def get_user_dict(user):
+    return {'pk': user.pk,
+            'email': user.email,
+            'name': user.name,
+            'experience': user.experience,
+            'profession': user.profession_id,
+            'education': user.education_id,
+            'country': user.country_id,
+            'city': user.city_id,
+            'curriculum_text': user.curriculum_text,
+            'phone': user.phone,
+            'programs': user.programs,
+            'work_area': user.work_area_id,
+            'salary': user.salary,
+            'address': user.address,
+            'neighborhood': user.neighborhood,
+            'languages': user.languages,
+            'phone2': user.phone2,
+            'phone3': user.phone3,
+            'profile': user.profile,
+            'dream_job': user.dream_job,
+            'hobbies': user.hobbies, }
+
+
+def upload_resource_to_es(user):
+
+    #credentials = boto3.Session().get_credentials()
+    #awsauth = AWS4Auth(credentials.access_key, credentials.secret_key, 'us-west-2', 'es')
+    #awsauth = AWS4Auth(config('aws_access_key'), config('secret_key'), 'us-west-2', 'es')
+
+    #print(session.get_available_services())
+
+    #es = Elasticsearch(['https://ec2-xx-xx-xxx-xxx.us-west-2.compute.amazonaws.com:9200'])
+
+    """
+    es = Elasticsearch(hosts=[{'host': config('elastic_search_host'), 'port': 443}],
+                       http_auth=awsauth,
+                       use_ssl=True,
+                       verify_certs=True,
+                       connection_class=RequestsHttpConnection)
+    """
+
+    try:
+
+        #es.index(index="users", doc_type="user", id=user.pk, body=get_user_dict(user))
+
+        # TODO: remove:
+        #print(es.get(index="movies", doc_type="movie", id=1))  #, id=user.pk))
+
+        print("Indexing: {} in elastic search".format(user))
+        r = requests.put(urllib.parse.urljoin(config('elastic_search_host'), 'users/user/{}'.format(user.pk)),
+                         json=get_user_dict(user))
+        print(r.status_code, r.reason)
+
+        return True
+    except EndpointConnectionError:
+        print('EndpointConnectionError with: {}'.format(user))
+        print('daemon will continue...')
+
+    return False
+
+
+def add_new_users(queue):
+    """
+    Users with
+     1. missing a s3 url
+     2. having a local resource
+     3. text analysis already done
+    :return:
+    """
+    users = User.objects.filter(uploaded_to_es=False).all()
+    print('total new users, to add on ES: {}'.format(len(users)))
+    [queue.put(u) for u in users]
+
+
+# each worker does this job
+def upload_users(users_queue, wait_time_workers):
+    """
+    Uploads a User to es, then waits some time, and repeats...
+    :return:
+    """
+    user = users_queue.get()
+    user.uploaded_to_es = upload_resource_to_es(user)
+    user.save()
+    time.sleep(wait_time_workers)
+
+
+def upload_all():
+
+    wait_time_workers = 10  # seconds
+    wait_time_db = 60  # 1 minute
+    users_queue = Queue()
+
+    while True:
+        add_new_users(users_queue)
+        while not users_queue.qsize() == 0:
+            upload_users(users_queue, wait_time_workers)
+
+        time.sleep(wait_time_db)
+
+
+def run():
+    #f = open('es_daemon.log', 'a')
+    upload_all()
+    #f.close()
+
+
+if __name__ == '__main__':
+    run()
