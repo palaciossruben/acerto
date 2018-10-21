@@ -53,7 +53,7 @@ class Lead(models.Model):
     name = models.CharField(max_length=200, default='')
     phone = models.CharField(max_length=40, null=True)
     email = models.CharField(max_length=200, null=True)
-
+    facebook_url = models.CharField(max_length=300, null=True)
     # messenger variables
     added = models.BooleanField(default=False)
 
@@ -68,12 +68,13 @@ class Lead(models.Model):
         db_table = 'leads'
 
     @staticmethod
-    def create_leads(names, phones, emails):
+    def create_leads(names, phones, emails, facebook_urls):
         leads = []
-        for n, p, e in zip(names, phones, emails):
-            l = Lead(name=n, phone=p, email=e)
-            l.save()
-            leads.append(l)
+        for n, p, e, f in zip(names, phones, emails, facebook_urls):
+            if f not in [l.facebook_url for l in Lead.objects.all()]:
+                l = Lead(name=n, phone=p, email=e, facebook_url=f)
+                l.save()
+                leads.append(l)
 
         return leads
 
