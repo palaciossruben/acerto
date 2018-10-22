@@ -69,7 +69,7 @@ def add_new_users(queue):
      3. text analysis already done
     :return:
     """
-    users = User.objects.filter(uploaded_to_es=False).all()
+    users = User.objects.filter(uploaded_to_es=False).order_by('id').all()
     print('total new users, to add on ES: {}'.format(len(users)))
     [queue.put(u) for u in users]
 
