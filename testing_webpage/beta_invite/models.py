@@ -782,7 +782,7 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return '{0}, {1}'.format(self.name, self.email)
+        return '{0}, {1}, {2}'.format(self.name, self.email, self.pk)
 
     def get_curriculum_url(self):
         """
