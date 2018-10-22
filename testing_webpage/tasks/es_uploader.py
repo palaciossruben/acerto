@@ -49,8 +49,7 @@ def get_user_dict(user):
 def upload_resource_to_es(user):
 
     try:
-
-        print("Indexing: {} in elastic search".format(user))
+        print("Indexing: {} in elastic search".format(user.pk))
         r = requests.put(urllib.parse.urljoin(config('elastic_search_host'), 'users/user/{}'.format(user.pk)),
                          json=get_user_dict(user))
         print(r.status_code, r.reason)
@@ -58,10 +57,10 @@ def upload_resource_to_es(user):
         # returns True only if its successful; either a created new user or an update
         return True if str(r.status_code)[0] == '2' else False
     except EndpointConnectionError:
-        print('EndpointConnectionError with: {}'.format(user))
+        print('EndpointConnectionError with: {}'.format(user.pk))
         print('daemon will continue...')
     except UnicodeEncodeError:
-        print('UnicodeEncodeError with: {}, will skip...'.format(user))
+        print('UnicodeEncodeError with: {}, will skip...'.format(user.pk))
 
     return False
 
