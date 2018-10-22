@@ -52,8 +52,7 @@ def upload_resource_to_es(user):
         r = requests.put(urllib.parse.urljoin(config('elastic_search_host'), 'users/user/{}'.format(user.pk)),
                          json=get_user_dict(user))
         print(r.status_code, r.reason)
-
-        return True
+        return True if r.status_code == 201 else False
     except EndpointConnectionError:
         print('EndpointConnectionError with: {}'.format(user))
         print('daemon will continue...')
