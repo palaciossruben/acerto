@@ -18,31 +18,31 @@ from botocore.exceptions import EndpointConnectionError
 from beta_invite.models import User
 from decouple import config
 from queue import Queue
-import common
+from subscribe import helper
 
 
 def get_user_dict(user):
     return {'pk': user.pk,
             'email': user.email,
-            'name': common.remove_accents(user.name),
+            'name': helper.remove_accents_and_non_ascii(user.name),
             'experience': user.experience,
             'profession': user.profession_id,
             'education': user.education_id,
             'country': user.country_id,
             'city': user.city_id,
-            'curriculum_text': common.remove_accents(user.curriculum_text),
+            'curriculum_text': helper.remove_accents_and_non_ascii(user.curriculum_text),
             'phone': user.phone,
-            'programs': common.remove_accents(user.programs),
+            'programs': helper.remove_accents_and_non_ascii(user.programs),
             'work_area': user.work_area_id,
             'salary': user.salary,
-            'address': common.remove_accents(user.address),
-            'neighborhood': common.remove_accents(user.neighborhood),
-            'languages': common.remove_accents(user.languages),
+            'address': helper.remove_accents_and_non_ascii(user.address),
+            'neighborhood': helper.remove_accents_and_non_ascii(user.neighborhood),
+            'languages': helper.remove_accents_and_non_ascii(user.languages),
             'phone2': user.phone2,
             'phone3': user.phone3,
-            'profile': common.remove_accents(user.profile),
-            'dream_job': common.remove_accents(user.dream_job),
-            'hobbies': common.remove_accents(user.hobbies),
+            'profile': helper.remove_accents_and_non_ascii(user.profile),
+            'dream_job': helper.remove_accents_and_non_ascii(user.dream_job),
+            'hobbies': helper.remove_accents_and_non_ascii(user.hobbies),
             }
 
 
