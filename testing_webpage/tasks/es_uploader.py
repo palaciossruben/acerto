@@ -60,6 +60,8 @@ def upload_resource_to_es(user):
     except EndpointConnectionError:
         print('EndpointConnectionError with: {}'.format(user))
         print('daemon will continue...')
+    except UnicodeEncodeError:
+        print('UnicodeEncodeError with: {}, will skip...'.format(user))
 
     return False
 
