@@ -18,30 +18,32 @@ from botocore.exceptions import EndpointConnectionError
 from beta_invite.models import User
 from decouple import config
 from queue import Queue
+import common
 
 
 def get_user_dict(user):
     return {'pk': user.pk,
             'email': user.email,
-            'name': user.name,
+            'name': common.remove_accents(user.name),
             'experience': user.experience,
             'profession': user.profession_id,
             'education': user.education_id,
             'country': user.country_id,
             'city': user.city_id,
-            'curriculum_text': user.curriculum_text,
+            'curriculum_text': common.remove_accents(user.curriculum_text),
             'phone': user.phone,
-            'programs': user.programs,
+            'programs': common.remove_accents(user.programs),
             'work_area': user.work_area_id,
             'salary': user.salary,
-            'address': user.address,
-            'neighborhood': user.neighborhood,
-            'languages': user.languages,
+            'address': common.remove_accents(user.address),
+            'neighborhood': common.remove_accents(user.neighborhood),
+            'languages': common.remove_accents(user.languages),
             'phone2': user.phone2,
             'phone3': user.phone3,
-            'profile': user.profile,
-            'dream_job': user.dream_job,
-            'hobbies': user.hobbies, }
+            'profile': common.remove_accents(user.profile),
+            'dream_job': common.remove_accents(user.dream_job),
+            'hobbies': common.remove_accents(user.hobbies),
+            }
 
 
 def upload_resource_to_es(user):

@@ -92,10 +92,14 @@ def get_users_from_es(search_array):
     """
 
     search_text = '%20'.join(search_array)
-    r = requests.get(urllib.parse.urljoin(config('elastic_search_host'), '_search?q={}'.format(search_text)))
-    if str(r.status_code)[0] == 2:
-        return User.objects.filter(pk__in=[u['_id'] for u in r.json()['hits']['hits']]).all()
-    else:
+    try:
+        r = requests.get(urllib.parse.urljoin(config('elastic_search_host'), '_search?q={}'.format(search_text)))
+
+        if str(r.status_code)[0] == 2:
+            return User.objects.filter(pk__in=[u['_id'] for u in r.json()['hits']['hits']]).all()
+        else:
+            return []
+    except:  # TODO: fix, WTF: there are connections errors not caught
         return []
 
 
@@ -138,6 +142,7 @@ def get_top_users(campaign):
     # TODO: this feature only supports Spanish.
     search_text = campaign.get_search_text()
     search_array = search_module.get_word_array_lower_case_and_no_accents(search_text)
+    search_array += search_module.add_related_words(search_array)
     users = get_users_from_tests(campaign)
     users += search_module.get_matching_users(search_array)
     users += get_users_from_es(search_array)
