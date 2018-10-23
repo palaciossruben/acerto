@@ -101,12 +101,11 @@ def read_all(fast=True, force=False):
     """
     folders = os.listdir(cts.RESUMES_PATH)
 
-    users = [u for u in User.objects.all().order_by('updated_at')]
+    users = [u for u in User.objects.all().order_by('id')]
 
     for user in users:
         folder = str(user.id)
         if folder in folders:
-            print('analysing folder: {}'.format(folder))
             folder_path = os.path.join(cts.RESUMES_PATH, folder)
             if os.path.isdir(folder_path) and folder not in INVALID_FOLDERS:
                 docs = os.listdir(folder_path)
