@@ -6,7 +6,8 @@ from django.contrib.postgres.fields import JSONField
 from django.conf import settings
 from beta_invite import constants as cts
 
-SALARY_MARGIN = 0.3
+LOW_SALARY_MARGIN = 0.3
+HIGH_SALARY_MARGIN = 0.1
 
 
 class Visitor(models.Model):
@@ -716,11 +717,11 @@ class Campaign(models.Model):
 
     def get_very_low_salary(self):
         if self.salary_low_range:
-            return int(self.salary_low_range) * (1 - SALARY_MARGIN)
+            return int(self.salary_low_range) * (1 - LOW_SALARY_MARGIN)
 
     def get_very_high_salary(self):
         if self.salary_high_range:
-            return int(self.salary_high_range) * (1 + SALARY_MARGIN)
+            return int(self.salary_high_range) * (1 + HIGH_SALARY_MARGIN)
 
 
 def average_list(my_list):
