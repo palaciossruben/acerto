@@ -27,7 +27,7 @@ def add_messages(request):
     facebook_urls = request.GET.getlist('facebook_urls')
 
     if facebook_urls is not None and messages is not None:
-        LeadMessage.add_to_message_queue(Lead.objects.filter(facebook_url=facebook_urls), messages)
+        LeadMessage.add_to_message_queue(Lead.objects.filter(facebook_url__in=facebook_urls), messages)
         return HttpResponse('<h1>Oki doki</h1>', status=200)
     else:
         error_message = '<h1>The request misses crucial information (names, messages, phones or emails)</h1>'
