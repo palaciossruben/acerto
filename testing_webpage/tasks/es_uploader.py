@@ -73,7 +73,7 @@ def add_new_users(queue):
     :return:
     """
     users = User.objects.filter(uploaded_to_es=False)\
-        .exclude(curriculm_text=None).order_by('id').all()
+        .exclude(curriculum_text=None).order_by('id').all()
     print('total new users, to add on ES: {}'.format(len(users)))
     [queue.put(u) for u in users]
 
