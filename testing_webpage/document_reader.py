@@ -108,13 +108,12 @@ def read_all(fast=True, force=False):
         if folder in folders:
             folder_path = os.path.join(cts.RESUMES_PATH, folder)
             if os.path.isdir(folder_path) and folder not in INVALID_FOLDERS:
-                docs = os.listdir(folder_path)
 
                 parsed_filename = '{}.txt'.format(folder)
                 parsed_path = os.path.join(folder_path, parsed_filename)
 
                 # Only parses an un-parsed files
-                if parsed_filename not in docs or force:
+                if user.curriculum_text is None or force:
                     text = read_text_and_save(user, folder_path, parsed_path, parsed_filename, fast=fast)
                     write_last_updated_at(user)
                     user.curriculum_text = text.replace('\x00', '')  # removes char null
