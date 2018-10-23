@@ -18,7 +18,6 @@ from botocore.exceptions import EndpointConnectionError
 from beta_invite.models import User
 from decouple import config
 from queue import Queue
-from subscribe import helper
 
 
 def get_user_dict(user):
@@ -73,7 +72,8 @@ def add_new_users(queue):
      3. text analysis already done
     :return:
     """
-    users = User.objects.filter(uploaded_to_es=False).order_by('id').all()
+    users = User.objects.filter(uploaded_to_es=False)\
+        .exclude(curriculm_text=None).order_by('id').all()
     print('total new users, to add on ES: {}'.format(len(users)))
     [queue.put(u) for u in users]
 
