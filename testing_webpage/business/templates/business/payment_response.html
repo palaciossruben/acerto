@@ -1,10 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-<body>
-<div>
+{% extends 'white_header_base.html'%}
+{% load static %}
+{% load i18n %}
+{% load app_filters %}
+{% load compress %}
+{% block title %}Confirmación de pago{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'business/css/business_campaigns.css' %}">
+{% endblock %}
+
+{% block content %}
+<div style="min-height:350px">
+{% if create_signature == response_signature %}
+    <div style="margin-top:50px;" class="campaign-div">
+	<p class="tittle">Resumen Transacción</p>
+
+
+    <p><b>Estado de la transaccion:</b> {{ transaction_state }}</p>
+    <p><b>ID de la transaccion:</b> {{ transaction_id }}</p>
+    <p><b>Referencia de la venta:</b> {{ reference_pol }}</p>
+    {% if pse_bank %}
+        <p><b>CUS:</b> {{ cus }}</p>
+        <p><b>Banco:</b> {{ pse_bank }}</p>
+    {% endif %}
+    <p><b>Valor total:</b> {{ amount }}</p>
+    <p><b>Moneda:</b> {{ currency }}</p>
+    <p><b>Descripción:</b> {{ transaction_state }}</p>
+    <p><b>ID de la transaccion:</b> {{ transaction_id }}</p>
+    {% else %}
+        <h1>Error validando firma digital.</h1>
+    {% endif %}
+    <p><a href="http://127.0.0.1:8000/seleccion_de_personal/payment_confirmation"><b>IR A LA CAMPAÑA</b></a></p>
 
 </div>
-</body>
-</html>
+</div>
+{% endblock %}
