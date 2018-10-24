@@ -21,6 +21,7 @@ from decouple import config
 from django.db import models
 from django.conf import settings
 from decimal import Decimal, ROUND_DOWN, ROUND_UP
+from django.core import serializers
 
 import common
 import business
@@ -618,17 +619,24 @@ def payment_response(request):
 
 def payment_confirmation(request):
 
-    transaction_final_state = request.POST.get('state_pol')
-    campaign_id = request.POST.get('extra1')
+    if settings.DEBUG:
+        campaign_id = '1'
+        transaction_final_state = 4
+    else:
+        transaction_final_state = request.POST.get('state_pol')
+        campaign_id = request.POST.get('extra1')
+
+    campaign_id = int(campaign_id)
     campaign = Campaign.objects.get(pk=campaign_id)
 
     if transaction_final_state == 4 or transaction_final_state == 6:
         campaign.state = CampaignState.objects.get(code='A')
         campaign.save()
-
-        return JsonResponse(status=200)
+        message = '<h1>0K</h1>'
+        return HttpResponse(message, status=200)
     else:
-        return JsonResponse(status=400)
+        message = '<h1>Something is wrong</h1>'
+        return JsonResponse(message, status=400)
 
 
 def candidate_profile(request, pk):
