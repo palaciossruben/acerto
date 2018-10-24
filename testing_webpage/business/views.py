@@ -650,18 +650,16 @@ def payment_confirmation(request):
     campaign_id = int(campaign_id)
     campaign = Campaign.objects.get(pk=campaign_id)
 
-    if create_signature == sign:
-
-        if campaign_id and (transaction_final_state == 4 or transaction_final_state == 6):
-            campaign.state = CampaignState.objects.get(code='A')
-            campaign.save()
+    if transaction_final_state == 4 or transaction_final_state == 6:
+        campaign.state = CampaignState.objects.get(code='A')
+        campaign.save()
+        if create_signature == sign:
             message = '<h1>0K</h1>'
-            return HttpResponse(message, status=200)
         else:
-            message = '<h1>Something is wrong</h1>'
-            return HttpResponse(message, status=400)
+            '<h1>Sign is wrong!!!</h1>'
+        return HttpResponse(message, status=200)
     else:
-        message = '<h1>Data is wrong, the sign is different</h1>'
+        message = '<h1>Something is wrong</h1>'
         return HttpResponse(message, status=400)
 
 
