@@ -620,18 +620,15 @@ def payment_confirmation(request):
 
     transaction_final_state = request.POST.get('state_pol')
     campaign_id = request.POST.get('extra1')
-    if campaign_id:
-        campaign = Campaign.objects.get(pk=campaign_id)
-    else:
-        campaign = Campaign.objects.get(pk=396)
+    campaign = Campaign.objects.get(pk=campaign_id)
+
+    if transaction_final_state == 4 or transaction_final_state == 6:
         campaign.state = CampaignState.objects.get(code='A')
         campaign.save()
-    if campaign:
-        if transaction_final_state == 4 or transaction_final_state == 6:
-            campaign.state = CampaignState.objects.get(code='A')
-            campaign.save()
 
-    return render(request, cts.PAYMENT_CONFIRMATION_VIEW_PATH)
+        return render(request, cts.PAYMENT_CONFIRMATION_VIEW_PATH, status=200)
+    else:
+        return render(request, cts.PAYMENT_CONFIRMATION_VIEW_PATH, status=400)
 
 
 def candidate_profile(request, pk):
