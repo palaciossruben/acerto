@@ -23,6 +23,7 @@ from django.conf import settings
 from decimal import Decimal, ROUND_DOWN, ROUND_UP
 from django.core import serializers
 from rest_framework.decorators import authentication_classes, permission_classes
+from django.views.decorators.csrf import csrf_exempt
 
 import common
 import business
@@ -618,8 +619,7 @@ def payment_response(request):
                                                             })
 
 
-@authentication_classes([])
-@permission_classes([])
+@csrf_exempt
 def payment_confirmation(request):
 
     if settings.DEBUG:
