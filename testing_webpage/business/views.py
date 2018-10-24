@@ -19,6 +19,8 @@ from django.utils import formats
 from django.http import HttpResponseBadRequest, HttpResponse, JsonResponse
 from decouple import config
 from django.db import models
+from django.conf import settings
+from decimal import Decimal, ROUND_DOWN, ROUND_UP
 
 import common
 import business
@@ -26,7 +28,7 @@ import beta_invite
 from business import search_module
 from beta_invite.util import email_sender
 from business import constants as cts
-from beta_invite.models import User, WorkArea, EmailType, Campaign, Test, Price
+from beta_invite.models import User, WorkArea, EmailType, Campaign, Test, Price, CampaignState
 from business.models import Plan, Contact, Search, BusinessUser, Company
 from beta_invite.models import Requirement
 from business.custom_user_creation_form import CustomUserCreationForm
@@ -35,6 +37,7 @@ from dashboard.models import Candidate, BusinessState, Comment
 from business import dashboard_module
 from testing_webpage.models import BusinessUserPendingEmail
 from api.models import PublicPost
+
 
 TAX = 0.19
 DEFAULT_BASE_PRICE = 0
@@ -484,12 +487,25 @@ def business_campaigns(request, business_user_id):
     campaigns = business_user.campaigns.filter(removed=False).order_by('-created_at', 'state', 'title_es').all()
     currency = 'COP'
     date = str(datetime.now())
-
-    apikey = config('payu_api_key')
-    merchant_id = config('merchant_id')
-    account_id = config('account_id')
     invalid_work_areas = INVALID_WORK_AREAS
 
+    if settings.DEBUG:
+        action_url = "https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/"
+        apikey = '4Vj8eK4rloUd272L48hsrarnUA'
+        merchant_id = '508029'
+        account_id = '512321'
+        test = '1'
+        host = 'http://127.0.0.1:8000/'
+    else:
+        action_url = "https://checkout.payulatam.com/ppp-web-gateway-payu"
+        apikey = config('payu_api_key')
+        merchant_id = config('merchant_id')
+        account_id = config('account_id')
+        test = '0'
+        host = 'https://peaku.co/'
+
+    response_url = host + 'seleccion_de_personal/payment_response'
+    confirmation_url = host + 'seleccion_de_personal/payment_confirmation'
     for c in campaigns:
         if c.salary_high_range:
             c.reference_code = str(c.id) + "-" + date
@@ -499,7 +515,8 @@ def business_campaigns(request, business_user_id):
                                                        to_salary__gte=c.salary_high_range).price))
             except models.ObjectDoesNotExist:
                 c.base = DEFAULT_BASE_PRICE
-
+            if c.id == 395:
+                c.base = 1000
             c.tax = round(c.base * TAX, 2)
             c.amount = round(float(c.base+c.tax), 2)
             c.amount = str(c.amount)
@@ -509,26 +526,107 @@ def business_campaigns(request, business_user_id):
 
     return render(request, cts.BUSINESS_CAMPAIGNS_VIEW_PATH, {'campaigns': campaigns,
                                                               'business_user_id': business_user.pk,
+                                                              'action_url': action_url,
                                                               'apikey': apikey,
                                                               'merchant_id': merchant_id,
                                                               'account_id': account_id,
                                                               'currency': currency,
-                                                              'test': '0',
+                                                              'test': test,
                                                               'description': 'Activación de la oferta Premium',
                                                               'buyer_name': business_user.name,
                                                               'buyer_email': business_user.email,
-                                                              'invalid_work_areas': invalid_work_areas
+                                                              'invalid_work_areas': invalid_work_areas,
+                                                              'response_url': response_url,
+                                                              'confirmation_url': confirmation_url
                                                               })
 
 
 def payment_response(request):
 
-    return render(request, cts.PAYMENT_RESPONSE_VIEW_PATH, {})
+    if settings.DEBUG:
+        apikey = '4Vj8eK4rloUd272L48hsrarnUA'
+    else:
+        apikey = config('payu_api_key')
+
+    reference_code = request.GET.get('referenceCode')
+    currency = request.GET.get('currency')
+    merchant_id = request.GET.get('merchantId')
+
+    amount = request.GET.get('TX_VALUE')
+
+    if int(amount[-1]) == 5 and int(amount[-2]) % 2 == 0:
+        amount = Decimal(amount).quantize(Decimal('.1'), rounding=ROUND_DOWN)
+    elif int(amount[-1]) == 5 and int(amount[-2]) % 2 != 0:
+        amount = Decimal(amount).quantize(Decimal('.1'), rounding=ROUND_UP)
+    else:
+        amount = round(float(amount), 1)
+
+    # The transaction state
+    state = request.GET.get('transactionState')
+    # Important validation to check the integrity of the data
+    create_signature = hashlib.md5((apikey + "~" + merchant_id + "~" + reference_code + "~" + str(amount) + "~" + currency + "~" + state).encode('utf-8')).hexdigest()
+    signature = request.GET.get('signature')
+    # PSE INFO ONLY FOR COLOMBIA
+    cus = request.GET.get('cus')
+    pse_bank = request.GET.get('pseBank')
+    pse_cycle = request.GET.get('pseCycle')
+    pse_reference1 = request.GET.get('pseReference1')
+    pse_reference2 = request.GET.get('pseReference2')
+    pse_reference3 = request.GET.get('pseReference3')
+
+    # The reference or number of the transaction generated in PayU
+    reference_pol = request.GET.get('reference_pol')
+    # Transaction identifier
+    transaction_id = request.GET.get('transactionId')
+    # Description
+    description = request.GET.get('description')
+    extra1 = request.GET.get('extra1')
+
+    if state == 4:
+        transaction_state = "Transacción aprobada"
+
+    elif state == 6:
+        transaction_state = "Transacción rechazada"
+
+    elif state == 104:
+        transaction_state = "Error"
+
+    elif state == 7:
+        transaction_state = "Transacción pendiente"
+
+    else:
+        transaction_state = request.GET.get('message')
+
+    return render(request, cts.PAYMENT_RESPONSE_VIEW_PATH, {'create_signature': create_signature,
+                                                            'response_signature': request.GET.get('signature'),
+                                                            'cus': cus,
+                                                            'pse_bank': pse_bank,
+                                                            'pse_cycle': pse_cycle,
+                                                            'pse_reference1': pse_reference1,
+                                                            'pse_reference2': pse_reference2,
+                                                            'pse_reference3': pse_reference3,
+                                                            'reference_pol': reference_pol,
+                                                            'transaction_id': transaction_id,
+                                                            'transaction_state': transaction_state,
+                                                            'reference_code': reference_code,
+                                                            'amount': amount,
+                                                            'currency': currency,
+                                                            'description': description,
+                                                            'extra1': extra1
+                                                            })
 
 
 def payment_confirmation(request):
 
-    return render(request, cts.PAYMENT_CONFIRMATION_VIEW_PATH, {})
+    transaction_final_state = request.POST.get('state_pol')
+    campaign_id = int(request.POST.get('extra1'))
+    campaign = Campaign.objects.get(pk=campaign_id)
+    if campaign:
+        if transaction_final_state == 4:
+            campaign.state = CampaignState.objects.get(code='A')
+            campaign.save()
+
+    return campaign
 
 
 def candidate_profile(request, pk):
