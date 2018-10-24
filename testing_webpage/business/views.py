@@ -22,6 +22,7 @@ from django.db import models
 from django.conf import settings
 from decimal import Decimal, ROUND_DOWN, ROUND_UP
 from django.core import serializers
+from rest_framework.decorators import authentication_classes, permission_classes
 
 import common
 import business
@@ -617,26 +618,51 @@ def payment_response(request):
                                                             })
 
 
+@authentication_classes([])
+@permission_classes([])
 def payment_confirmation(request):
 
     if settings.DEBUG:
         campaign_id = '1'
         transaction_final_state = 4
+        sign = '1234'
+        create_signature = '1234'
     else:
         transaction_final_state = request.POST.get('state_pol')
+        response_code_pol = request.POST.get('response_code_pol')
+        payment_method_type = request.POST.get('payment_method_type')
+        currency = request.POST.get('currency')
+        payment_method_id = request.POST.get('payment_method_id')
+        response_message_pol = request.POST.get('response_message_pol')
         campaign_id = request.POST.get('extra1')
+        apikey = config('payu_api_key')
+        sign = request.POST.get('sign')
+        merchant_id = request.POST.get('merchant_id')
+        reference_sale = request.POST.get('reference_sale')
+        amount = request.GET.get('value')
+
+        if int(amount[-1]) == 0:
+            amount = round(amount, 1)
+
+        # Important validation to check the integrity of the data
+        create_signature = hashlib.md5((apikey + "~" + merchant_id + "~" + reference_sale + "~" + str(amount) + "." + + "~" + currency + "~" + transaction_final_state).encode('utf-8')).hexdigest()
 
     campaign_id = int(campaign_id)
     campaign = Campaign.objects.get(pk=campaign_id)
 
-    if transaction_final_state == 4 or transaction_final_state == 6:
-        campaign.state = CampaignState.objects.get(code='A')
-        campaign.save()
-        message = '<h1>0K</h1>'
-        return HttpResponse(message, status=200)
+    if create_signature == sign:
+
+        if campaign_id and (transaction_final_state == 4 or transaction_final_state == 6):
+            campaign.state = CampaignState.objects.get(code='A')
+            campaign.save()
+            message = '<h1>0K</h1>'
+            return HttpResponse(message, status=200)
+        else:
+            message = '<h1>Something is wrong</h1>'
+            return HttpResponse(message, status=400)
     else:
-        message = '<h1>Something is wrong</h1>'
-        return JsonResponse(message, status=400)
+        message = '<h1>Data is wrong, the sign is different</h1>'
+        return HttpResponse(message, status=400)
 
 
 def candidate_profile(request, pk):
