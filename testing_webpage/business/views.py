@@ -645,7 +645,7 @@ def payment_confirmation(request):
             amount = round(float(amount), 1)
 
         # Important validation to check the integrity of the data
-        create_signature = hashlib.md5((apikey + "~" + merchant_id + "~" + reference_sale + "~" + str(amount) + "." + + "~" + currency + "~" + transaction_final_state).encode('utf-8')).hexdigest()
+        create_signature = hashlib.md5((apikey + "~" + merchant_id + "~" + reference_sale + "~" + str(amount) + "." + "~" + currency + "~" + transaction_final_state).encode('utf-8')).hexdigest()
 
     campaign_id = int(campaign_id)
     campaign = Campaign.objects.get(pk=campaign_id)
