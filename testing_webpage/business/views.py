@@ -641,7 +641,7 @@ def payment_confirmation(request):
         reference_sale = request.POST.get('reference_sale')
         amount = request.POST.get('value')
 
-        if int(amount)[-1] == 0:
+        if float(amount)[-1] == 0:
             amount = round(float(amount, 1))
 
         # Important validation to check the integrity of the data
@@ -650,7 +650,7 @@ def payment_confirmation(request):
     campaign_id = int(campaign_id)
     campaign = Campaign.objects.get(pk=campaign_id)
 
-    if transaction_final_state == 4 or transaction_final_state == 6:
+    if transaction_final_state != 4:
         campaign.state = CampaignState.objects.get(code='A')
         campaign.save()
         if create_signature == sign:
