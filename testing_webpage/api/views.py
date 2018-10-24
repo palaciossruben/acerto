@@ -31,8 +31,7 @@ def add_messages(request):
         return HttpResponse('<h1>Oki doki</h1>', status=200)
     else:
         error_message = '<h1>The request misses crucial information (names, messages, phones or emails)</h1>'
-        return HttpResponse(error_message,
-                            status=400)
+        return HttpResponse(error_message, status=400)
 
 
 def save_leads(request):

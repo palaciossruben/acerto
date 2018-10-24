@@ -626,9 +626,9 @@ def payment_confirmation(request):
         campaign.state = CampaignState.objects.get(code='A')
         campaign.save()
 
-        return render(request, cts.PAYMENT_CONFIRMATION_VIEW_PATH, status=200)
+        return JsonResponse(status=200)
     else:
-        return render(request, cts.PAYMENT_CONFIRMATION_VIEW_PATH, status=400)
+        return JsonResponse(status=400)
 
 
 def candidate_profile(request, pk):
