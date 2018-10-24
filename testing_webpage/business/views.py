@@ -516,7 +516,7 @@ def business_campaigns(request, business_user_id):
             except models.ObjectDoesNotExist:
                 c.base = DEFAULT_BASE_PRICE
             if c.id == 395:
-                c.base = 1000
+                c.base = 9000
             c.tax = round(c.base * TAX, 2)
             c.amount = round(float(c.base+c.tax), 2)
             c.amount = str(c.amount)
@@ -622,7 +622,7 @@ def payment_confirmation(request):
     campaign_id = int(request.POST.get('extra1'))
     campaign = Campaign.objects.get(pk=campaign_id)
     if campaign:
-        if transaction_final_state == 4:
+        if transaction_final_state == 4 or transaction_final_state == 6:
             campaign.state = CampaignState.objects.get(code='A')
             campaign.save()
 
