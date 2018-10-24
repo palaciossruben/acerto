@@ -641,8 +641,8 @@ def payment_confirmation(request):
         reference_sale = request.POST.get('reference_sale')
         amount = request.POST.get('value')
 
-        if float(amount)[-1] == 0:
-            amount = round(float(amount, 1))
+        if amount[-1] == 0:
+            amount = round(float(amount), 1)
 
         # Important validation to check the integrity of the data
         create_signature = hashlib.md5((apikey + "~" + merchant_id + "~" + reference_sale + "~" + str(amount) + "." + + "~" + currency + "~" + transaction_final_state).encode('utf-8')).hexdigest()
