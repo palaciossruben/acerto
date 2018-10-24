@@ -92,7 +92,7 @@ def upload_users(users_queue, wait_time_workers):
 
 def upload_all():
 
-    wait_time_workers = 2  # seconds
+    wait_time_workers = 0  # seconds
     wait_time_db = 600  # 1 minute
     users_queue = Queue()
 
