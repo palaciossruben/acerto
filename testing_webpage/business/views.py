@@ -639,7 +639,7 @@ def payment_confirmation(request):
         sign = request.POST.get('sign')
         merchant_id = request.POST.get('merchant_id')
         reference_sale = request.POST.get('reference_sale')
-        amount = request.GET.get('value')
+        amount = request.POST.get('value')
 
         if int(amount[-1]) == 0:
             amount = round(amount, 1)
