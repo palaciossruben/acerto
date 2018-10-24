@@ -656,7 +656,7 @@ def payment_confirmation(request):
         if create_signature == sign:
             message = '<h1>0K</h1>'
         else:
-            '<h1>Sign is wrong!!!</h1>'
+            message = '<h1>Sign is wrong!!!</h1>'
         return HttpResponse(message, status=200)
     else:
         message = '<h1>Something is wrong</h1>'
