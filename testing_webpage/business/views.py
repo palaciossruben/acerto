@@ -652,6 +652,7 @@ def payment_confirmation(request):
 
     if transaction_final_state == '4':
         campaign.state = CampaignState.objects.get(code='A')
+        campaign.free_trial = False
         campaign.save()
         if create_signature == sign:
             message = '<h1>0K</h1>'
