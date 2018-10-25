@@ -37,7 +37,7 @@
                     {% if campaign.salary_low_range >= 0 %}
                         <p><b>SALARIO:</b> ${{ campaign.salary_low_range }} a ${{ campaign.salary_high_range }} </p>
                     {% endif %}
-                    {% if campaign.state.name_es != 'Activa' and campaign.base != 0 %}
+                    {% if campaign.free_trial == True and campaign.state.name_es != 'Activa' and campaign.base != 0 %}
                         {% if campaign.salary_low_range >= 0 and campaign.work_area.pk not in invalid_work_areas %}
                             <form method="post" action="{{ action_url }}" accept-charset="UTF-8">
                                 <!--PAYMENT GENERIC INFO-->
