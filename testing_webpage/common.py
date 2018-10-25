@@ -388,11 +388,12 @@ def save_resource_from_request(request, my_object, param_name, folder_name):
         return '#'
 
 
-def user_has_job(user):
+def user_has_been_recommended(user):
     """
     Returns boolean indicating if user already has a job.
     """
-    candidates = Candidate.objects.filter(user=user, state__code='GTJ')
+    candidates = Candidate.objects.filter(user=user,
+                                          state__code__in=State.get_recommended_states())
     return candidates.exists()
 
 

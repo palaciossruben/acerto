@@ -6,6 +6,9 @@ from django.contrib.postgres.fields import JSONField
 from django.conf import settings
 from beta_invite import constants as cts
 
+LOW_SALARY_MARGIN = 0.3
+HIGH_SALARY_MARGIN = 0.1
+
 
 class Visitor(models.Model):
 
@@ -281,6 +284,7 @@ class TestType(models.Model):
 
     name = models.CharField(max_length=200)
     name_es = models.CharField(max_length=200, null=True)
+    code = models.CharField(max_length=1, null=True)
 
     def __str__(self):
         return '{0}, {1}'.format(self.pk, self.name)
@@ -711,6 +715,14 @@ class Campaign(models.Model):
         else:
             return None
 
+    def get_very_low_salary(self):
+        if self.salary_low_range:
+            return int(self.salary_low_range) * (1 - LOW_SALARY_MARGIN)
+
+    def get_very_high_salary(self):
+        if self.salary_high_range:
+            return int(self.salary_high_range) * (1 + HIGH_SALARY_MARGIN)
+
 
 def average_list(my_list):
     """
@@ -771,7 +783,7 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return '{0}, {1}'.format(self.name, self.email)
+        return '{0}, {1}, {2}'.format(self.name, self.email, self.pk)
 
     def get_curriculum_url(self):
         """

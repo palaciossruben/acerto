@@ -187,3 +187,21 @@ def get_common_search_info(request):
 
     util.translate_users(users, request.LANGUAGE_CODE)
     return [u.id for u in users]
+
+
+# TODO: replace for ElasticSearch too!!!
+def add_related_words(search_array):
+
+    related = []
+
+    # A dictionary of the form: {'word': [('related_word', relevance) ...]}
+    related_words_dict = pickle.load(open(cts_subscribe.RELATED_WORDS_PATH, 'rb'))
+
+    for word in search_array:
+        related_words = related_words_dict.get(word, [])
+        print('for word {}, related:'.format(word))
+        print(related_words)
+        if related_words:
+            related.append(related_words[0][0])
+
+    return related
