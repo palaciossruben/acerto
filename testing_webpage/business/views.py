@@ -624,7 +624,7 @@ def payment_confirmation(request):
 
     if settings.DEBUG:
         campaign_id = '1'
-        transaction_final_state = 4
+        transaction_final_state = '4'
         sign = '1234'
         create_signature = '1234'
     else:
@@ -650,7 +650,7 @@ def payment_confirmation(request):
     campaign_id = int(campaign_id)
     campaign = Campaign.objects.get(pk=campaign_id)
 
-    if transaction_final_state == 4:
+    if transaction_final_state == '4':
         campaign.state = CampaignState.objects.get(code='A')
         campaign.save()
         if create_signature == sign:
