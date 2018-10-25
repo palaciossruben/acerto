@@ -227,8 +227,11 @@ def get_text_fast(filename):
 
     # Still nothing; then take out the big gun. Convert to png and use OCR
     if text_has_no_data(text):
-        text = get_pdf_text_with_ocr(filename)
-    #else:  # If things are OK still some images might be missing:
+        try:
+            text = get_pdf_text_with_ocr(filename)
+        except MemoryError:
+            pass
+    # else:  # If things are OK still some images might be missing:
     #    text += get_text_from_pdf_images(folder_path, filename)
 
     return text
