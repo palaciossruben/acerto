@@ -1,6 +1,22 @@
 {% load static %}
 {% load i18n %}
 {% load app_filters %}
+<script>
+    $(document).ready(function() {
+        set_circle_color({{ candidate.get_last_evaluation.cognitive_score|int_rounding }}, "{{ candidate.pk }}-recommended-cognitive-id");
+        set_circle_color({{ candidate.get_last_evaluation.technical_score|int_rounding }}, "{{ candidate.pk }}-recommended-technical-id");
+        set_circle_color({{ candidate.get_last_evaluation.requirements_score|int_rounding }}, "{{ candidate.pk }}-recommended-requirement-id");
+        set_circle_color({{ candidate.get_last_evaluation.motivation_score|int_rounding }}, "{{ candidate.pk }}-recommended-motivation-id");
+        set_circle_color({{ candidate.get_last_evaluation.cultural_fit_score|int_rounding }}, "{{ candidate.pk }}-recommended-cultural-id");
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        not_blocked("{{ business_state.name }}", "{{ campaign.free_trial }}", "{{ campaign.state.name }}");
+    });
+</script>
+
 {% if campaign.free_trial == False and campaign.state.name != 'Inactive' %}
     <a href="/seleccion_de_personal/perfil_del_candidato/{{ candidate.id }}">
 {% elif campaign.free_trial == True and campaign.state.name != 'Inactive'%}
@@ -116,19 +132,3 @@
 </div>
 </a>
 <input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}"/>
-
-<script>
-    $(document).ready(function() {
-        set_circle_color({{ candidate.get_last_evaluation.cognitive_score|int_rounding }}, "{{ candidate.pk }}-recommended-cognitive-id");
-        set_circle_color({{ candidate.get_last_evaluation.technical_score|int_rounding }}, "{{ candidate.pk }}-recommended-technical-id");
-        set_circle_color({{ candidate.get_last_evaluation.requirements_score|int_rounding }}, "{{ candidate.pk }}-recommended-requirement-id");
-        set_circle_color({{ candidate.get_last_evaluation.motivation_score|int_rounding }}, "{{ candidate.pk }}-recommended-motivation-id");
-        set_circle_color({{ candidate.get_last_evaluation.cultural_fit_score|int_rounding }}, "{{ candidate.pk }}-recommended-cultural-id");
-    });
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        not_blocked("{{ business_state.name }}", "{{ campaign.free_trial }}", "{{ campaign.state.name }}");
-    });
-</script>
