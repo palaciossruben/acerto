@@ -507,7 +507,7 @@ def business_campaigns(request, business_user_id):
         test = '0'
         host = 'https://peaku.co/'
 
-    response_url = host + 'seleccion_de_personal/payment_response'
+    response_url = host + 'seleccion_de_personal/resumen/'
     confirmation_url = host + 'seleccion_de_personal/payment_confirmation'
     for c in campaigns:
         if c.salary_high_range:
@@ -544,87 +544,15 @@ def business_campaigns(request, business_user_id):
                                                               })
 
 
-def payment_response(request):
-
-    if settings.DEBUG:
-        apikey = '4Vj8eK4rloUd272L48hsrarnUA'
-    else:
-        apikey = config('payu_api_key')
-
-    reference_code = request.GET.get('referenceCode')
-    currency = request.GET.get('currency')
-    merchant_id = request.GET.get('merchantId')
-
-    amount = request.GET.get('TX_VALUE')
-
-    if int(amount[-1]) == 5 and int(amount[-2]) % 2 == 0:
-        amount = Decimal(amount).quantize(Decimal('.1'), rounding=ROUND_DOWN)
-    elif int(amount[-1]) == 5 and int(amount[-2]) % 2 != 0:
-        amount = Decimal(amount).quantize(Decimal('.1'), rounding=ROUND_UP)
-    else:
-        amount = round(float(amount), 1)
-
-    # The transaction state
-    state = request.GET.get('transactionState')
-    # Important validation to check the integrity of the data
-    create_signature = hashlib.md5((apikey + "~" + merchant_id + "~" + reference_code + "~" + str(amount) + "~" + currency + "~" + state).encode('utf-8')).hexdigest()
-    signature = request.GET.get('signature')
-    # PSE INFO ONLY FOR COLOMBIA
-    cus = request.GET.get('cus')
-    pse_bank = request.GET.get('pseBank')
-    pse_cycle = request.GET.get('pseCycle')
-    pse_reference1 = request.GET.get('pseReference1')
-    pse_reference2 = request.GET.get('pseReference2')
-    pse_reference3 = request.GET.get('pseReference3')
-
-    # The reference or number of the transaction generated in PayU
-    reference_pol = request.GET.get('reference_pol')
-    # Transaction identifier
-    transaction_id = request.GET.get('transactionId')
-    # Description
-    description = request.GET.get('description')
-    extra1 = request.GET.get('extra1')
-
-    if state == 4:
-        transaction_state = "Transacción aprobada"
-
-    elif state == 6:
-        transaction_state = "Transacción rechazada"
-
-    elif state == 104:
-        transaction_state = "Error"
-
-    elif state == 7:
-        transaction_state = "Transacción pendiente"
-
-    else:
-        transaction_state = request.GET.get('message')
-
-    return render(request, cts.PAYMENT_RESPONSE_VIEW_PATH, {'create_signature': create_signature,
-                                                            'response_signature': request.GET.get('signature'),
-                                                            'cus': cus,
-                                                            'pse_bank': pse_bank,
-                                                            'pse_cycle': pse_cycle,
-                                                            'pse_reference1': pse_reference1,
-                                                            'pse_reference2': pse_reference2,
-                                                            'pse_reference3': pse_reference3,
-                                                            'reference_pol': reference_pol,
-                                                            'transaction_id': transaction_id,
-                                                            'transaction_state': transaction_state,
-                                                            'reference_code': reference_code,
-                                                            'amount': amount,
-                                                            'currency': currency,
-                                                            'description': description,
-                                                            'extra1': extra1
-                                                            })
-
-
 @csrf_exempt
 def payment_confirmation(request):
 
+    # This is Payu transaction approved code, only for confirmation page, not global variable
+    PAYU_APPROVED_CODE = '4'
+
     if settings.DEBUG:
         campaign_id = '1'
-        transaction_final_state = '4'
+        transaction_final_state = PAYU_APPROVED_CODE
         sign = '1234'
         create_signature = '1234'
     else:
@@ -641,6 +569,7 @@ def payment_confirmation(request):
         reference_sale = request.POST.get('reference_sale')
         amount = request.POST.get('value')
 
+        # Decimal validation, Payu requirement
         if amount[-1] == 0:
             amount = round(float(amount), 1)
 
@@ -650,17 +579,17 @@ def payment_confirmation(request):
     campaign_id = int(campaign_id)
     campaign = Campaign.objects.get(pk=campaign_id)
 
-    if transaction_final_state == '4':
+    if transaction_final_state == PAYU_APPROVED_CODE:
         campaign.state = CampaignState.objects.get(code='A')
         campaign.free_trial = False
         campaign.save()
         if create_signature == sign:
             message = '<h1>0K</h1>'
         else:
-            message = '<h1>Sign is wrong!!!</h1>'
+            message = '<h1>Sign is wrong check why!!!</h1>'
         return HttpResponse(message, status=200)
     else:
-        message = '<h1>Something is wrong</h1>'
+        message = '<h1>Something is wrong</h1>' + transaction_final_state
         return HttpResponse(message, status=400)
 
 

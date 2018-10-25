@@ -26,7 +26,6 @@ urlpatterns = [
     # START
     url(r'^get_work_area_requirement/(?P<work_area_id>\d+)$', views.get_work_area_requirement, name='get_work_area_requirement'),
     # PAYU
-    url(r'payment_response$', views.payment_response, name='payment_response'),
     url(r'payment_confirmation$', views.payment_confirmation, name='payment_confirmation'),
 
 

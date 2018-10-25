@@ -15,7 +15,6 @@
 {% block content %}
     <form class="content" action="{% url 'business:start' %}" method="post">
         {% csrf_token %}
-        <input class="submit-button-strong" id="create-campaign-button" type="submit" value="{% trans '+ NEW JOB POST' %}">
         <input type="hidden" name="business_user_id" value="{{ business_user_id }}" />
     </form>
     <h1 style="text-align:center; margin:50px 0px">{% trans "Campaigns" %}</h1>
@@ -38,8 +37,7 @@
                     {% if campaign.salary_low_range >= 0 %}
                         <p><b>SALARIO:</b> ${{ campaign.salary_low_range }} a ${{ campaign.salary_high_range }} </p>
                     {% endif %}
-                    {% if campaign.state.name_es != 'Activa' %}
-                    {% if campaign.id == 395 or 396 and campaign.base != 0 %}
+                    {% if campaign.state.name_es != 'Activa' and campaign.base != 0 %}
                         {% if campaign.salary_low_range >= 0 and campaign.work_area.pk not in invalid_work_areas %}
                             <form method="post" action="{{ action_url }}" accept-charset="UTF-8">
                                 <!--PAYMENT GENERIC INFO-->
@@ -58,20 +56,20 @@
                                 <input name="taxReturnBase" type="hidden" value="{{ campaign.base }}"/>
                                 <input name="signature"  type="hidden" value="{{ campaign.signature }}"/>
                                 <!--RESPONSE URL VISIBLE-->
-                                <input name="responseUrl" type="hidden"  value="{{ response_url }}" >
+                                <input name="responseUrl" type="hidden"  value="{{ response_url }}{{ campaign.pk }}" >
                                 <!--CONFIRMATION URL NOT VISIBLE-->
                                 <input name="confirmationUrl" type="hidden"  value="{{ confirmation_url }}" >
                                 <!--EXTRA INFO-->
                                 <input name="extra1" type="hidden"  value="{{ campaign.pk }}" >
-                                <!--BUTTON-->
+                                <input type="submit" class="submit-button-strong" value="Activar Premium"/>
+                                <!--BUTTON
                                 <input type="image" border="0" alt="" src="http://www.payulatam.com/img-secure-2015/boton_pagar_pequeno.png" onClick="this.form.urlOrigen.value = window.location.href;"/>
                                <input name="buttonId" type="hidden" value="uHXTlFj9y4bMS9srB5O11WLUxNGBJ1tcne4nSsYZt/7VQHZZ7X8vCg=="/>
-                                <input name="buttonType" value="SIMPLE" type="hidden"/>
+                                <input name="buttonType" value="SIMPLE" type="hidden"/>-->
                             </form>
                         {% else %}
                             <p>Para activar esta campaña debe comunicarse con nosotros</p>
                         {% endif %}
-                    {% endif %}
                     {% endif %}
                 </div>
                 </div>
