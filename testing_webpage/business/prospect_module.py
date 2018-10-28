@@ -7,7 +7,7 @@ from decouple import config
 import common
 
 from dashboard.models import State
-from beta_invite.models import EmailType, User
+from beta_invite.models import EmailType, User, SearchLog
 from testing_webpage.models import CandidatePendingEmail
 from business import search_module
 from dashboard.models import Candidate
@@ -143,12 +143,57 @@ def get_top_users(campaign):
     search_text = campaign.get_search_text()
     search_array = search_module.get_word_array_lower_case_and_no_accents(search_text)
     search_array += search_module.add_related_words(search_array)
-    users = get_users_from_tests(campaign)
-    users += search_module.get_matching_users(search_array)
-    users += get_users_from_es(search_array)
-    users = simple_filter(campaign, users)
 
-    return search_module.remove_duplicates(users)
+    search_log = SearchLog()
+    search_log.save()
+    search_log.campaign = campaign
+
+    # Tests
+    users_tests = get_users_from_tests(campaign)
+    search_log.users_from_tests.add(*users_tests)
+    users = users_tests
+
+    # Search
+    users_search = search_module.get_matching_users(search_array)
+    search_log.users_from_search.add(*users_search)
+    users += users_search
+
+    # ES
+    users_es = get_users_from_es(search_array)
+    search_log.users_from_es.add(*users_es)
+    users += users_es
+
+    # ALL
+    search_log.all_users.add(*users)
+
+    # FILTERS
+    candidates = [Candidate(user=u, campaign=campaign, pk=1) for u in users]
+
+    candidates = [c for c in candidates if non_null_equal(c.user.city, c.campaign.city)]
+    search_log.after_city_filter.add(*[c.user for c in candidates])
+
+    candidates = [c for c in candidates if non_null_equal(c.user.work_area, c.campaign.work_area)]
+    search_log.after_work_area_filter.add(*[c.user for c in candidates])
+
+    candidates = [c for c in candidates if non_null_lte(campaign.get_very_low_salary(), c.user.salary) and
+                  non_null_gte(campaign.get_very_high_salary(), c.user.salary)]
+    search_log.after_salary_filter.add(*[c.user for c in candidates])
+
+    # BACK TO USER
+    users = [c.user for c in candidates]
+
+    # Cuts top candidates first, because its too expensive a job filter.
+    users = users[:MAX_MATCHES]
+    search_log.after_cap_filter.add(*users)
+
+    users = [u for u in users if not common.user_has_been_recommended(u)]
+    search_log.after_recommended_filter.add(*users)
+
+    users = search_module.remove_duplicates(users)
+    search_log.after_duplicates_filter.add(*users)
+
+    search_log.save()
+    return users
 
 
 def get_candidates(campaign):
@@ -167,6 +212,9 @@ def get_candidates(campaign):
         if campaign.id not in common.get_all_campaign_ids(user):
 
             candidate = Candidate(campaign=campaign, user=user, state=State.objects.get(code='P'))
+
+            # TODO: adds tests
+            #candidate.pass_tests()
 
             candidates.append(candidate)
             candidate.save()

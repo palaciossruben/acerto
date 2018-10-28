@@ -1002,3 +1002,65 @@ class RequirementBinaryQuestion(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'requirement_binary_questions'
+
+
+class SearchLog(models.Model):
+
+    campaign = models.ForeignKey(Campaign, default=None, null=True)
+
+    users_from_tests = models.ManyToManyField(User, related_name='tests_search_log')
+    users_from_search = models.ManyToManyField(User, related_name='search_search_log')
+    users_from_es = models.ManyToManyField(User, related_name='es_search_log')
+
+    all_users = models.ManyToManyField(User, related_name='all_search_log')
+    after_salary_filter = models.ManyToManyField(User, related_name='salary_search_log')
+    after_city_filter = models.ManyToManyField(User, related_name='city_search_log')
+    after_work_area_filter = models.ManyToManyField(User, related_name='work_area_search_log')
+    after_cap_filter = models.ManyToManyField(User, related_name='cap_search_log')
+    after_recommended_filter = models.ManyToManyField(User, related_name='recommended_search_log')
+    after_duplicates_filter = models.ManyToManyField(User, related_name='duplicates_search_log')
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return """
+        id={id},
+        campaign={c}
+        users_from_tests({len_test})={test}
+        users_from_search({len_search})={search}
+        users_from_es({len_es})={es}
+        all_users({len_all})={all}
+        after_city_filter({len_city})={city}
+        after_work_area_filter({len_work_area})={work_area}
+        after_salary_filter({len_salary})={salary}
+        after_cap_filter({len_cap})={cap}
+        after_recommended_filter({len_recommended})={recommended}
+        after_duplicates_filter({len_duplicates})={duplicates}
+        """.format(id=self.pk,
+                   c=self.campaign,
+                   len_test=len(self.users_from_tests.all()),
+                   test=self.users_from_tests.all(),
+                   len_search=len(self.users_from_search.all()),
+                   search=self.users_from_search.all(),
+                   len_es=len(self.users_from_es.all()),
+                   es=self.users_from_es.all(),
+                   len_all=len(self.all_users.all()),
+                   all=self.all_users.all(),
+                   len_salary=len(self.after_salary_filter.all()),
+                   salary=self.after_salary_filter.all(),
+                   len_city=len(self.after_city_filter.all()),
+                   city=self.after_city_filter.all(),
+                   len_work_area=len(self.after_work_area_filter.all()),
+                   work_area=self.after_work_area_filter.all(),
+                   len_cap=len(self.after_cap_filter.all()),
+                   cap=self.after_cap_filter.all(),
+                   len_recommended=len(self.after_recommended_filter.all()),
+                   recommended=self.after_recommended_filter.all(),
+                   len_duplicates=len(self.after_duplicates_filter.all()),
+                   duplicates=self.after_duplicates_filter.all()
+                   )
+
+    # adds custom table name
+    class Meta:
+        db_table = 'search_logs'
