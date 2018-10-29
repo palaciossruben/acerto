@@ -40,8 +40,6 @@ def send_candidates_messages():
                           body_input='candidates_form_reminder_message_body')
 
 
-
-
 # Precaution: If script imported for another module, this lines avoid the execution of this entire file
 if __name__ == '__main__':
     send_candidates_messages()

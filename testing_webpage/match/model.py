@@ -7,7 +7,10 @@ import sys
 from django.core.wsgi import get_wsgi_application
 
 # Environment can use the models as if inside the Django app
-sys.path.insert(0, '/'.join(os.getcwd().split('/')[:-1]))
+if 'win' in sys.platform:
+    sys.path.insert(0, '\\'.join(os.getcwd().split('\\')[:-1]))
+else:
+    sys.path.insert(0, '/'.join(os.getcwd().split('/')[:-1]))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 

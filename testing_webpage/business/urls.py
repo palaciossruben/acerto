@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^tablero_de_control/(?P<business_user_id>\d+)/(?P<campaign_id>\d+)/(?P<state_name>.*)/$', views.dashboard, name='dashboard'),
     url(r'^perfil_del_candidato/(?P<pk>\d+)$', views.candidate_profile, name='candidate_profile'),
     # CONTACT
-    url(r'^contáctanos$', views.contact_form, name='contact_form'),
+    url(r'^contactanos$', views.contact_form, name='contact_form'),
     url(r'^contact_form_post$', views.contact_form_post, name='contact_form_post'),
     # START
     url(r'^get_work_area_requirement/(?P<work_area_id>\d+)$', views.get_work_area_requirement, name='get_work_area_requirement'),

@@ -494,5 +494,3 @@ def get_business_user_with_campaign(campaign, option):
             return BusinessUser.objects.filter(campaigns__id=campaign.pk).all()[0].company
     else:
         return None
-
-
