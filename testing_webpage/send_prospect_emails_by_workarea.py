@@ -6,7 +6,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
 from beta_invite.util import email_sender
-from dashboard.models import Candidate
+from dashboard.models import Candidate, State
 from beta_invite.models import User
 
 
@@ -17,7 +17,6 @@ def candidates_filter(candidates):
 
     users_emails = set()
     filtered_users = list()
-
     for c in candidates:
         users = User.objects.filter(pk=c.user_id)
         for u in users:
@@ -33,13 +32,12 @@ def candidates_filter(candidates):
     return filtered_candidates
 
 
-def send_users_additional_info_reminder():
+def send_prospect_emails():
 
-    candidates = (Candidate.objects.filter(~Q(user=None), ~Q(user__email=None), user__gender_id=None).order_by('-user_id')
-                  | Candidate.objects.filter(~Q(user=None), ~Q(user__email=None), user__experience=None).order_by('-user_id')
-                  | Candidate.objects.filter(~Q(user=None), ~Q(user__email=None), user__city=None).order_by('-user_id')
-                  | Candidate.objects.filter(~Q(user=None), ~Q(user__email=None), user__salary=None).order_by('-user_id')
-                  | Candidate.objects.filter(~Q(user=None), ~Q(user__email=None), user__work_area=None).order_by('-user_id'))
+    candidates = Candidate.objects.filter(~Q(user=None),
+                                          ~Q(state__in=State.objects.filter(code__in=['STC', 'GTJ']).all()),
+                                          ~Q(user__work_area__segment=None),
+                                          removed=False)
 
     candidates = [c for c in candidates]
 
@@ -47,14 +45,13 @@ def send_users_additional_info_reminder():
 
     print(len(candidates))
     print(len(new_candidates))
-    # test_candidates = new_candidates[:2]
 
     email_sender.send(objects=new_candidates,
                       language_code='es',
-                      body_input='candidates_form_reminder_email_body',
-                      subject='Información adicional')
+                      body_input='prospects_invitation_email_body',
+                      subject='Ofertas')
 
 
 # Precaution: If script imported for another module, this lines avoid the execution of this entire file
 if __name__ == '__main__':
-    send_users_additional_info_reminder()
+    send_prospect_emails()
