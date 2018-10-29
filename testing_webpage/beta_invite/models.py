@@ -756,6 +756,7 @@ class User(models.Model):
     phone = models.CharField(max_length=40, null=True)
     language_code = models.CharField(max_length=3, default='es')
     is_mobile = models.NullBooleanField()  # Detects if the user is in a mobile phone when registering.
+    google_token = models.CharField(max_length=1000, default=None, null=True)
 
     # Additional info
     gender = models.ForeignKey(Gender, null=True, on_delete=models.SET_NULL)

@@ -158,24 +158,14 @@ def register(request):
                        'language_code': request.LANGUAGE_CODE,
                        'politics': politics}
 
-        # TODO: update user instead of always creating a new one.
         user = new_user_module.user_if_exists(email, phone, campaign)
         if user:
             user = new_user_module.update_user(campaign, user, user_params, request)
         else:
             user = new_user_module.create_user(campaign, user_params, request, is_mobile)
 
-        # TODO: Remove 'if' when ready.
-        # Test to showcase new whatsapp feature
-        from django.conf import settings  # TODO: remove import also
-        if settings.DEBUG:
-            messenger_sender.send(candidates=common.get_candidate(user, campaign),
-                                  language_code=request.LANGUAGE_CODE,
-                                  body_input='candidate_backlog')
-
         return redirect('/servicio_de_empleo/pruebas?campaign_id={campaign_id}&user_id={user_id}'.format(campaign_id=campaign.id,
                                                                                                          user_id=user.id))
-
     else:
         return HttpResponseBadRequest('<h1>HTTP CODE 400: Client sent bad request with missing params</h1>')
 

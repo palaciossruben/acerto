@@ -20,9 +20,6 @@ from django.http import HttpResponseBadRequest, HttpResponse, JsonResponse
 from decouple import config
 from django.db import models
 from django.conf import settings
-from decimal import Decimal, ROUND_DOWN, ROUND_UP
-from django.core import serializers
-from rest_framework.decorators import authentication_classes, permission_classes
 from django.views.decorators.csrf import csrf_exempt
 
 import common
@@ -205,12 +202,12 @@ def first_sign_in(signup_form, campaign, request):
     auth_user = authenticate(username=username,
                              password=password)
 
-    company_name = Company(name=request.POST.get('company'))
-    company_name.save()
+    company = Company(name=request.POST.get('company'))
+    company.save()
 
     # New BusinessUser pointing to the AuthUser
     business_user = business.models.BusinessUser(name=request.POST.get('name'),
-                                                 company=company_name,
+                                                 company=company,
                                                  email=request.POST.get('username'),
                                                  phone=request.POST.get('phone'),
                                                  ip=get_ip(request),
@@ -224,32 +221,6 @@ def first_sign_in(signup_form, campaign, request):
     send_signup_emails(business_user, request.LANGUAGE_CODE, campaign)
 
     return business_user
-
-
-def popup_signup(request):
-    """
-    Args:
-        request: HTTP obj
-    Returns: Redirects.
-    """
-
-    signup_form = CustomUserCreationForm(request.POST)
-
-    if signup_form.is_valid():
-        campaign = None
-        first_sign_in(signup_form, campaign, request)
-        return redirect(request.POST.get('result_path'))
-    else:
-
-        path = request.POST.get('result_path')
-        if path is not None:
-            # last part of url is result_id
-            result_id = int(path.split('/')[-1])
-            return render_result(request, result_id)
-        else:
-            # Defensive programming: not the best, but better than an error.
-            # We have lost the result_id
-            return redirect('business:search')
 
 
 def get_business_user(request):
@@ -469,7 +440,6 @@ def business_signup(request):
     if signup_form.is_valid():
 
         campaign = None
-        # TODO: save the company field
         first_sign_in(signup_form, campaign, request)
 
         return render(request, cts.BUSINESS_CAMPAIGNS_VIEW_PATH)
