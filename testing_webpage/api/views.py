@@ -25,11 +25,11 @@ def get_public_posts(request):
     return JsonResponse(posts_json, safe=False)
 
 
+@csrf_exempt
 def add_messages(request):
 
-    # TODO: Change from GET to POST
-    messages = request.GET.getlist('messages')
-    facebook_urls = request.GET.getlist('facebook_urls')
+    messages = request.POST.getlist('messages')
+    facebook_urls = request.POST.getlist('facebook_urls')
 
     if facebook_urls is not None and messages is not None:
         LeadMessage.add_to_message_queue(Lead.objects.filter(facebook_url__in=facebook_urls), messages)
