@@ -1,6 +1,7 @@
 import os
 import math
 import nltk
+import sys
 
 
 def my_sigmoid(num_words, num_for_80_percent):
@@ -34,6 +35,12 @@ def get_score(text):
     length_score = my_sigmoid(len(words), 15)
 
     spelling = 0
+
+    # Environment can use the models as if inside the Django app
+    if 'win' in sys.platform:
+        my_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        os.chdir(my_path)
+        print(os.getcwd())
 
     with open(os.path.join('subscribe', 'es-MX.dic'), 'r', encoding='UTF-8') as vocabulary_file:
 
