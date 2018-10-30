@@ -187,7 +187,6 @@ def get_params_with_candidate(candidate, language_code, override_dict={}):
         override_dict: Dictionary that changes the default values.
     Returns:
     """
-
     params = {'name': get_first_name(candidate.user.name),
               'complete_name': candidate.user.name.title(),
               'cv_url': get_cv_url(candidate.user),
@@ -198,8 +197,11 @@ def get_params_with_candidate(candidate, language_code, override_dict={}):
               'campaign_url': get_campaign_url(candidate),
               'campaign_salary_range': get_campaign_salary_range(candidate),
               'campaign_city': get_campaign_city_name(candidate),
-              'campaign_description': get_campaign_description(candidate, language_code),
-              'jobs_url_by_workarea': get_jobs_segment_url(candidate.user.work_area.segment_id)}
+              'campaign_description': get_campaign_description(candidate, language_code)
+              }
+
+    if hasattr(candidate.user.work_area, 'segment_id'):
+        params['jobs_url_by_workarea'] = get_jobs_segment_url(candidate.user.work_area.segment_id)
 
     if hasattr(candidate, 'campaign_id'):
         params['test_url'] = get_test_url(candidate.user, candidate.campaign)

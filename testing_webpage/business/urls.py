@@ -33,9 +33,7 @@ urlpatterns = [
     # TODO: This search url should be deleted?
     url(r'^search$', views.search, name='search'),
     url(r'^results$', views.calculate_result, name='results'),
-    url(r'^signup_choice$', views.signup_choice, name='signup_choice'),
     url(r'^business_signup$', views.business_signup, name='business_signup'),
-    url(r'^business_applied$', views.business_applied, name='business_applied'),
     url(r'^home$', views.home, name='home'),
     # TODO: Worst hack ever, replace for something like: \?id=[0-9]+
     url(r'^results/(?P<pk>\d+)$', views.render_result, name='render_result'),

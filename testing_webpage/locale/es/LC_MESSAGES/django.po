@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-26 10:18-0500\n"
+"POT-Creation-Date: 2018-10-30 16:57-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,8 +60,8 @@ msgstr "¡Programemos una cita!"
 msgid "Let's record your interview now!"
 msgstr "¡Graba tu entrevista ya!"
 
-#: .\beta_invite\new_user_module.py:105 .\business\views.py:166
-#: .\business\views.py:309
+#: .\beta_invite\new_user_module.py:105 .\business\views.py:176
+#: .\business\views.py:297
 msgid "Welcome to PeakU"
 msgstr "Bienvenido a PeakU"
 
@@ -71,23 +71,23 @@ msgstr "PeakU"
 
 #: .\beta_invite\templates\beta_invite\add_cv.html:23
 #: .\beta_invite\templates\beta_invite\index.html:100
-#: .\testing_webpage\templates\testing_webpage\jobs.html:66
+#: .\testing_webpage\templates\testing_webpage\jobs.html:58
 msgid "Upload your resume"
 msgstr "Anexar hoja de vida"
 
 #: .\beta_invite\templates\beta_invite\add_cv.html:41
 #: .\beta_invite\templates\beta_invite\index.html:106
 #: .\business\templates\business\business_signup.html:49
-#: .\business\templates\business\contact_form.html:46
-#: .\testing_webpage\templates\testing_webpage\jobs.html:72
+#: .\business\templates\business\contact_form.html:31
+#: .\testing_webpage\templates\testing_webpage\jobs.html:64
 msgid "Sure!"
 msgstr "¡Enviar!"
 
-#: .\beta_invite\templates\beta_invite\additional_info.html:73
+#: .\beta_invite\templates\beta_invite\additional_info.html:67
 msgid "Select Education"
 msgstr "Selecciona tu Educación"
 
-#: .\beta_invite\templates\beta_invite\additional_info.html:92
+#: .\beta_invite\templates\beta_invite\additional_info.html:86
 msgid "Select Profession"
 msgstr "Selecciona tu Profesión"
 
@@ -105,28 +105,28 @@ msgid "Perks"
 msgstr "Beneficios"
 
 #: .\beta_invite\templates\beta_invite\index.html:47
-#: .\business\templates\business\summary.html:86
+#: .\business\templates\business\summary.html:97
 msgid "Requirements"
 msgstr "Requerimientos"
 
 #: .\beta_invite\templates\beta_invite\index.html:69
 #: .\business\templates\business\business_signup.html:35
-#: .\business\templates\business\contact_form.html:35
-#: .\testing_webpage\templates\testing_webpage\jobs.html:35
+#: .\business\templates\business\contact_form.html:21
+#: .\testing_webpage\templates\testing_webpage\jobs.html:33
 msgid "Your Full Name"
 msgstr "Tu nombre completo"
 
 #: .\beta_invite\templates\beta_invite\index.html:73
 #: .\business\templates\business\business_signup.html:38
-#: .\business\templates\business\contact_form.html:38
+#: .\business\templates\business\contact_form.html:24
 #: .\business\templates\business\login.html:24
-#: .\testing_webpage\templates\testing_webpage\jobs.html:39
+#: .\testing_webpage\templates\testing_webpage\jobs.html:36
 msgid "Your email"
 msgstr "Tu correo"
 
 #: .\beta_invite\templates\beta_invite\index.html:77
 #: .\business\templates\business\business_signup.html:41
-#: .\testing_webpage\templates\testing_webpage\jobs.html:43
+#: .\testing_webpage\templates\testing_webpage\jobs.html:39
 msgid "Your phone"
 msgstr "Tu teléfono"
 
@@ -155,27 +155,17 @@ msgid "Send Answers!!!"
 msgstr "¡Envia las Respuestas!"
 
 #: .\beta_invite\templates\beta_invite\tests_scaffold.html:20
-#: .\business\templates\business\business_applied.html:25
 msgid "Thanks for registering!"
-msgstr "¡Gracias por registrarte!"
+msgstr "¡Gracias por tu interés!"
 
-#: .\beta_invite\views.py:228
+#: .\beta_invite\views.py:220
 #, python-brace-format
 msgid "You can record the interview for {campaign}"
 msgstr "Puedes grabar la entrevista para {campaign}"
 
-#: .\business\templates\business\business_applied.html:31
-#: .\business\templates\business\contact.html:109
-msgid "We will contact you soon"
-msgstr "Nos pondremos en contacto pronto"
-
-#: .\business\templates\business\business_campaigns.html:16
+#: .\business\templates\business\business_campaigns.html:20
 msgid "Campaigns"
 msgstr "Campañas"
-
-#: .\business\templates\business\business_campaigns.html:34
-msgid "Create Campaign"
-msgstr "Crear Campaña"
 
 #: .\business\templates\business\business_signup.html:5
 msgid "Personnel Selection - PeakU"
@@ -200,22 +190,19 @@ msgstr "Confirma la contraseña"
 msgid "LOG OUT"
 msgstr "CERRAR SESIÓN"
 
-#: .\business\templates\business\contact.html:105
+#: .\business\templates\business\contact.html:21
 msgid "Thanks for reaching out!"
 msgstr "¡Gracias por tu interés!"
 
-#: .\business\templates\business\contact_form.html:28
-#: .\testing_webpage\templates\base.html:110
-#: .\testing_webpage\templates\base.html:112
-#: .\testing_webpage\templates\no_header_base.html:20
-msgid "Contact Us"
-msgstr "Contáctanos"
+#: .\business\templates\business\contact.html:23
+msgid "We will contact you soon"
+msgstr ""
 
-#: .\business\templates\business\contact_form.html:41
+#: .\business\templates\business\contact_form.html:27
 msgid "Your phone (optional)"
 msgstr "Tu teléfono (opcional)"
 
-#: .\business\templates\business\contact_form.html:44
+#: .\business\templates\business\contact_form.html:29
 msgid "Add a message (optional)"
 msgstr "Escríbe un comentario (opcional)"
 
@@ -417,22 +404,28 @@ msgstr "Inicia Sesión"
 msgid "Log Out"
 msgstr "Cerrar Sesión"
 
-#: .\business\templates\business\new\start.html:242
+#: .\business\templates\business\new\start.html:51
+#: .\testing_webpage\templates\no_header_base.html:22
+#: .\testing_webpage\templates\white_header_base.html:16
+msgid "My campaigns"
+msgstr "Mis campañas"
+
+#: .\business\templates\business\new\start.html:256
 #: .\business\templates\business\results.html:104
 msgid "Experience"
 msgstr "Experiencia"
 
-#: .\business\templates\business\new\start.html:243
+#: .\business\templates\business\new\start.html:257
 msgid "What is the minimum number of years of experience you are expecting?"
 msgstr ""
 "¿Cuál es el mínimo número de años de experiencia que estás esperando de los "
 "candidatos?"
 
-#: .\business\templates\business\new\start.html:246
+#: .\business\templates\business\new\start.html:259
 msgid "Tests"
 msgstr "Pruebas"
 
-#: .\business\templates\business\new\start.html:247
+#: .\business\templates\business\new\start.html:260
 msgid ""
 "Add tests you want your candidates to do online, and be filtered by them"
 msgstr "Agrega las pruebas que quieres que tus candidatos hagan en línea"
@@ -583,10 +576,6 @@ msgstr ""
 "Actualmente no hay perfiles con estas características, para solucionar este "
 "problema, llamanos (+57 311 6109340) o mandanos un email a contacto@peak.co"
 
-#: .\business\templates\business\results.html:102
-msgid "Email"
-msgstr "Correo"
-
 #: .\business\templates\business\results.html:103
 msgid "Education"
 msgstr "Educación"
@@ -615,30 +604,6 @@ msgstr "Experiencia en años:"
 msgid "Search"
 msgstr "Búsqueda"
 
-#: .\business\templates\business\signup_choice.html:6
-msgid "Employment Agency - PeakU"
-msgstr ""
-
-#: .\business\templates\business\signup_choice.html:15
-msgid "SIGN UP"
-msgstr "REGISTRO"
-
-#: .\business\templates\business\signup_choice.html:16
-msgid "We connect people and companies, fast and easy"
-msgstr "Conectamos personas con empresas, fácil y rápido"
-
-#: .\business\templates\business\signup_choice.html:23
-msgid "Person"
-msgstr "Persona"
-
-#: .\business\templates\business\signup_choice.html:29
-msgid "I'm"
-msgstr "Soy"
-
-#: .\business\templates\business\signup_choice.html:34
-msgid "Business"
-msgstr "Empresa"
-
 #: .\business\templates\business\summary.html:6
 msgid "Recruitment and selection of personnel"
 msgstr "Reclutamiento y selección de personal"
@@ -647,25 +612,17 @@ msgstr "Reclutamiento y selección de personal"
 msgid "PUBLISH DATE"
 msgstr "FECHA DE PUBLICACION"
 
-#: .\business\templates\business\summary.html:37
-msgid "STATE: active"
-msgstr "ESTADO: activa"
-
-#: .\business\templates\business\summary.html:39
-msgid "STATE: inactive"
-msgstr "ESTADO: inactiva"
-
-#: .\business\templates\business\summary.html:41
+#: .\business\templates\business\summary.html:48
 msgid "TOTAL CANDIDATES"
 msgstr "TOTAL DE CANDIDATOS"
 
-#: .\business\templates\business\summary.html:51
-#: .\business\templates\business\summary.html:68
+#: .\business\templates\business\summary.html:60
+#: .\business\templates\business\summary.html:79
 msgid "SELECTED"
 msgstr "SELECCIONADOS"
 
-#: .\business\templates\business\summary.html:53
-#: .\business\templates\business\summary.html:70
+#: .\business\templates\business\summary.html:62
+#: .\business\templates\business\summary.html:81
 msgid ""
 "Suggested candidates that are your first hiring option and have passed all "
 "filters"
@@ -673,36 +630,36 @@ msgstr ""
 "Candidatos sugeridos que son tu primera opción de contratación y han "
 "superado todos los filtros"
 
-#: .\business\templates\business\summary.html:57
-#: .\business\templates\business\summary.html:65
-#: .\business\templates\business\summary.html:151
+#: .\business\templates\business\summary.html:66
+#: .\business\templates\business\summary.html:76
+#: .\business\templates\business\summary.html:165
 msgid "PROFILES"
 msgstr "PERFILES"
 
-#: .\business\templates\business\summary.html:76
-#: .\business\templates\business\summary.html:156
-#: .\business\templates\business\summary.html:202
+#: .\business\templates\business\summary.html:87
+#: .\business\templates\business\summary.html:170
+#: .\business\templates\business\summary.html:219
 msgid "Cognitive capacity"
 msgstr "Capacidad cognitiva"
 
-#: .\business\templates\business\summary.html:81
-#: .\business\templates\business\summary.html:159
+#: .\business\templates\business\summary.html:92
+#: .\business\templates\business\summary.html:173
 msgid "Technical knowledge"
 msgstr "Conocimientos técnicos"
 
-#: .\business\templates\business\summary.html:91
+#: .\business\templates\business\summary.html:102
 msgid "Motivation"
 msgstr "Motivación"
 
-#: .\business\templates\business\summary.html:96
+#: .\business\templates\business\summary.html:107
 msgid "Cultural fit"
 msgstr "Fit cultural"
 
-#: .\business\templates\business\summary.html:140
+#: .\business\templates\business\summary.html:152
 msgid "PRESELECTED"
 msgstr "PRE-SELECCIONADOS"
 
-#: .\business\templates\business\summary.html:142
+#: .\business\templates\business\summary.html:154
 msgid ""
 "All candidates who approved initial tests and specific requirements for your "
 "campaign"
@@ -710,11 +667,11 @@ msgstr ""
 "Todos los candidatos que aprobaron pruebas iniciales y requisitos "
 "específicos para tu campaña"
 
-#: .\business\templates\business\summary.html:186
+#: .\business\templates\business\summary.html:201
 msgid "PROSPECTS"
 msgstr "PROSPECTOS"
 
-#: .\business\templates\business\summary.html:188
+#: .\business\templates\business\summary.html:203
 msgid ""
 "Other candidates who have not done the tests or candidates that have been "
 "discarded by any of the filters"
@@ -722,20 +679,20 @@ msgstr ""
 "Otros candidatos que no han realizado las pruebas ó candidatos que han sido "
 "descartados por alguno de los filtros"
 
-#: .\business\templates\business\summary.html:197
+#: .\business\templates\business\summary.html:214
 msgid "ADDITIONAL PROFILES"
 msgstr "PERFILES ADICIONALES"
 
-#: .\business\views.py:64 .\business\views.py:106 .\business\views.py:339
+#: .\business\views.py:74 .\business\views.py:116 .\business\views.py:327
 msgid "Discover amazing people"
 msgstr "Descubre personas increíbles"
 
-#: .\business\views.py:65 .\business\views.py:107
+#: .\business\views.py:75 .\business\views.py:117
 msgid ""
 "We search millions of profiles and find the ones that best suit your business"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
 
-#: .\dashboard\templates\dashboard\index.html:6
+#: .\dashboard\templates\dashboard\index.html:13
 msgid "Search positions (eg android developer)"
 msgstr "Busca posiciones (ej desarrollador de android)"
 
@@ -751,6 +708,12 @@ msgstr "Español"
 msgid "Us"
 msgstr "Nosotros"
 
+#: .\testing_webpage\templates\base.html:110
+#: .\testing_webpage\templates\base.html:112
+#: .\testing_webpage\templates\no_header_base.html:20
+msgid "Contact Us"
+msgstr "Contáctanos"
+
 #: .\testing_webpage\templates\base.html:114
 #: .\testing_webpage\templates\no_header_base.html:19
 msgid "Candidates"
@@ -759,11 +722,6 @@ msgstr "Personas"
 #: .\testing_webpage\templates\base.html:137
 msgid "Copyright 2018 © PeakU. All rights reserved."
 msgstr "Copyright 2018 © PeakU. Todos los derechos reservados."
-
-#: .\testing_webpage\templates\no_header_base.html:22
-#: .\testing_webpage\templates\white_header_base.html:17
-msgid "My campaigns"
-msgstr "Mis campañas"
 
 #: .\testing_webpage\templates\no_header_base.html:23
 msgid "Sign off"
@@ -840,29 +798,38 @@ msgstr ""
 msgid "Jobs"
 msgstr "Trabajos"
 
-#: .\testing_webpage\templates\testing_webpage\jobs.html:21
+#: .\testing_webpage\templates\testing_webpage\jobs.html:19
 msgid "AVAILABLE POSITIONS"
 msgstr "POSICIONES DISPONIBLES"
 
-#: .\testing_webpage\templates\testing_webpage\jobs.html:158
-msgid "City"
-msgstr "Ciudad"
-
-#: .\testing_webpage\templates\testing_webpage\jobs.html:162
-msgid "Salary from"
-msgstr "Salario desde"
-
-#: .\testing_webpage\templates\testing_webpage\jobs.html:162
-msgid "to"
-msgstr "hasta"
-
-#: .\testing_webpage\templates\white_header_base.html:15
+#: .\testing_webpage\templates\white_header_base.html:18
 msgid "+ NEW JOB POST"
 msgstr "+ CREAR OFERTA"
 
 #: .\testing_webpage\templates\white_header_base.html:20
 msgid "SIGN IN"
 msgstr "INICIA SESION"
+
+#~ msgid "Create Campaign"
+#~ msgstr "Crear Campaña"
+
+#~ msgid "Email"
+#~ msgstr "Correo"
+
+#~ msgid "STATE: active"
+#~ msgstr "ESTADO: activa"
+
+#~ msgid "STATE: inactive"
+#~ msgstr "ESTADO: inactiva"
+
+#~ msgid "City"
+#~ msgstr "Ciudad"
+
+#~ msgid "Salary from"
+#~ msgstr "Salario desde"
+
+#~ msgid "to"
+#~ msgstr "hasta"
 
 #~ msgid "Recruitment Service | Personnel selection | Headhunter"
 #~ msgstr "Servicio de Reclutamiento | Seleccion de personal | Headhunter"
