@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from api.models import LeadMessage, Lead
 from ipware.ip import get_ip
+from django.db.models import Q
 
 from beta_invite.models import City, WorkArea
 from beta_invite import new_user_module
@@ -25,11 +26,11 @@ def get_public_posts(request):
     return JsonResponse(posts_json, safe=False)
 
 
+@csrf_exempt
 def add_messages(request):
 
-    # TODO: Change from GET to POST
-    messages = request.GET.getlist('messages')
-    facebook_urls = request.GET.getlist('facebook_urls')
+    messages = request.POST.getlist('messages')
+    facebook_urls = request.POST.getlist('facebook_urls')
 
     if facebook_urls is not None and messages is not None:
         LeadMessage.add_to_message_queue(Lead.objects.filter(facebook_url__in=facebook_urls), messages)
@@ -39,17 +40,19 @@ def add_messages(request):
         return HttpResponse(error_message, status=400)
 
 
+@csrf_exempt
 def save_leads(request):
 
-    # TODO: Change from GET to POST
-    names = request.GET.getlist('names')
-    phones = request.GET.getlist('phones')
-    emails = request.GET.getlist('emails')
-    facebook_urls = request.GET.getlist('facebook_urls')
+    names = request.POST.getlist('names')
+    phones = request.POST.getlist('phones')
+    emails = request.POST.getlist('emails')
+    facebook_urls = request.POST.getlist('facebook_urls')
 
     if names is not None and phones is not None and emails is not None:
         new_leads = Lead.create_leads(names, phones, emails, facebook_urls)
-        return JsonResponse([l.facebook_url for l in new_leads], status=200)
+
+        return JsonResponse([l.facebook_url for l in new_leads], safe=False)
+        # return HttpResponse(status=200)
     else:
         error_message = '<h1>The request misses crucial information (names, messages, phones or emails)</h1>'
         return HttpResponse(error_message, status=400)

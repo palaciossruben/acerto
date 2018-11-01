@@ -5,7 +5,7 @@
 {% load compress %}
 {% block title %}Selección, contratación y reclutamiento de personal{% endblock %}
 {% block extra_meta %}
-    <meta name="description"  content="Publica y comparte ofertas laborales, realiza pruebas relacionadas al cargo y selecciona al mejor personal. Podrás buscar, filtrar y comunícarte fácilmente con los candidatos en todas las etapas del proceso." />
+    <meta name="description"  content="Facilitamos el proceso de reclutamiento y selección de personal para Empresas. Publica y comparte vacantes en Colombia, Chile, Ecuador, Perú y Argentina." />
     <meta name="keywords" content="cazatalentos, selección de personal, reclutamiento personal, contratacion personal, selección personal, agencias, reclutamiento, reclutamiento empleados, busqueda personal, preselección personal, headhunter, agencia empleo" />
 {% endblock %}
 {% block extra_css %}
@@ -14,8 +14,6 @@
         <!--Slider-->
         <link rel="stylesheet" type="text/css" href="{% static 'business/css/slick.css' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'business/css/slick-theme.css' %}"/>
-        <!--Trix-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/0.11.2/trix.css" />
         <!--Our Css-->
         <link rel="stylesheet" type="text/css" href="{% static 'business/css/start.css' %}">
 {% endblock %}
@@ -24,13 +22,16 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/1.0.19/jquery.scrollify.js"></script>
         <!--Slider-->
         <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-        <!--Trix-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/0.11.2/trix.js"></script>
         <!--Select2-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
         <!--Our js-->
         <script type="text/javascript" src="{% static 'business/js/start.js' %}"></script>
-
+        <!--Set background-->
+        <script>
+            $(document).ready(function() {
+               get_background();
+            });
+        </script>
         <script>
         function getRequirements(work_area) {
             var url = "/seleccion_de_personal/get_work_area_requirement/";
@@ -274,8 +275,8 @@
                                 <h6>Explica la oferta lo mejor posible, te recomendamos ingresar el detalle de la vacante, requisitos y beneficios.
                                     Trata de usar poco texto y dar mucha información !
                                 </h6>
-                                <trix-editor></trix-editor>
-                                <textarea name="description_es" class="backend-description"></textarea>
+                                <textarea name="description_es" id="field" rows="20" cols="40" autocomplete="off" maxlength="5000" required onkeyup="countChar(this)" class="backend-description"></textarea>
+                                <div id="charNum"></div>
                             </fieldset>
                         </div>
                     </div>
@@ -408,6 +409,13 @@
             });
 
         </script>
+        <!--Select2-->
+        <script>
+            $(document).ready(function() {
+                $('.js-example-basic-multiple').select2();
+                $('.select2-selection').css({'border-radius':'50px','border':'2px solid #aaa','padding':'6px', 'width':'100%'});
+            });
+        </script>
         <!--TopNav-->
         <script>
             function myFunction() {
@@ -419,7 +427,6 @@
                 }
             }
         </script>
-
         <!--Section 3 brief-->
         <script>
             $('.origin-city').on('change', function() {
@@ -436,7 +443,6 @@
             	var text = $(this).find('option:selected').text();
              	$('.workarea').text(text);
             });
-
         </script>
         <!--Copy text of trix-->
         <script type="text/javascript">
@@ -445,15 +451,6 @@
                 var html = element.value
                 $('.vacancy-description').html(html);
                 $('.backend-description').text(html);
-            });
-        </script>
-        <!--Form Transition-->
-        <!--Final form Transition-->
-        <!--Select2-->
-        <script>
-            $(document).ready(function() {
-                $('.js-example-basic-multiple').select2();
-                $('.select2-selection').css({'border-radius':'50px','border':'2px solid #aaa','padding':'6px', 'width':'100%'});
             });
         </script>
         <!--Form Transition-->
@@ -539,16 +536,21 @@
             $("html").css("overflow-y", "scroll");
             }
         </script>
-        <!--Set background-->
-        <script>
-            $(document).ready(function() {
-               get_background();
-            });
-        </script>
         <!-- any incoming error_message will print as an alert-->
         <script>
             {% if error_message %}
                 alert("{{ error_message }}");
             {% endif %}
+        </script>
+        <script>
+            function countChar(val) {
+            var len = val.value.length;
+            if (len >= 5000) {
+              val.value = val.value.substring(0, 5000);
+              $('#charNum').text('Caracteres restantes: 0');
+            } else {
+              $('#charNum').text('Caracteres restantes: ' + (5000 - len));
+            }
+            };
         </script>
 {% endblock %}

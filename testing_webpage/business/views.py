@@ -572,14 +572,6 @@ def candidate_profile(request, pk):
                                                              'business_user': business_user})
 
 
-def signup_choice(request):
-    return render(request, cts.SIGNUP_CHOICE_VIEW_PATH, {})
-
-
-def business_applied(request):
-    return render(request, cts.BUSINESS_APPLIED_VIEW_PATH, {})
-
-
 @login_required
 def summary(request, campaign_id, business_user=None):
 

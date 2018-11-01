@@ -2,7 +2,7 @@
 import os
 from django.conf import settings
 from decouple import config
-
+from beta_invite.models import User, WorkAreaSegment
 
 if settings.DEBUG:
     HOST = '//127.0.0.1:8000'
@@ -50,6 +50,16 @@ def get_video_url(user, campaign):
 def get_business_campaign_url(campaign):
     if campaign:
         return HOST + '/servicio_de_empleo?campaign_id={campaign_id}'.format(campaign_id=campaign.id)
+    else:
+        return ''
+
+
+def get_jobs_segment_url(segment_id):
+
+    work_area_segment = WorkAreaSegment.objects.get(pk=segment_id)
+
+    if work_area_segment:
+        return HOST + '/trabajos?segment_code={segment_code}'.format(segment_code=work_area_segment.code)
     else:
         return ''
 
@@ -177,7 +187,6 @@ def get_params_with_candidate(candidate, language_code, override_dict={}):
         override_dict: Dictionary that changes the default values.
     Returns:
     """
-
     params = {'name': get_first_name(candidate.user.name),
               'complete_name': candidate.user.name.title(),
               'cv_url': get_cv_url(candidate.user),
@@ -188,7 +197,11 @@ def get_params_with_candidate(candidate, language_code, override_dict={}):
               'campaign_url': get_campaign_url(candidate),
               'campaign_salary_range': get_campaign_salary_range(candidate),
               'campaign_city': get_campaign_city_name(candidate),
-              'campaign_description': get_campaign_description(candidate, language_code)}
+              'campaign_description': get_campaign_description(candidate, language_code)
+              }
+
+    if hasattr(candidate.user.work_area, 'segment_id'):
+        params['jobs_url_by_workarea'] = get_jobs_segment_url(candidate.user.work_area.segment_id)
 
     if hasattr(candidate, 'campaign_id'):
         params['test_url'] = get_test_url(candidate.user, candidate.campaign)

@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^tablero_de_control/(?P<business_user_id>\d+)/(?P<campaign_id>\d+)/(?P<state_name>.*)/$', views.dashboard, name='dashboard'),
     url(r'^perfil_del_candidato/(?P<pk>\d+)$', views.candidate_profile, name='candidate_profile'),
     # CONTACT
-    url(r'^contáctanos$', views.contact_form, name='contact_form'),
+    url(r'^contactanos$', views.contact_form, name='contact_form'),
     url(r'^contact_form_post$', views.contact_form_post, name='contact_form_post'),
     # START
     url(r'^get_work_area_requirement/(?P<work_area_id>\d+)$', views.get_work_area_requirement, name='get_work_area_requirement'),
@@ -33,9 +33,7 @@ urlpatterns = [
     # TODO: This search url should be deleted?
     url(r'^search$', views.search, name='search'),
     url(r'^results$', views.calculate_result, name='results'),
-    url(r'^signup_choice$', views.signup_choice, name='signup_choice'),
     url(r'^business_signup$', views.business_signup, name='business_signup'),
-    url(r'^business_applied$', views.business_applied, name='business_applied'),
     url(r'^home$', views.home, name='home'),
     # TODO: Worst hack ever, replace for something like: \?id=[0-9]+
     url(r'^results/(?P<pk>\d+)$', views.render_result, name='render_result'),

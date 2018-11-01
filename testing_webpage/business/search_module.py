@@ -193,9 +193,11 @@ def get_common_search_info(request):
 def add_related_words(search_array):
 
     related = []
-
-    # A dictionary of the form: {'word': [('related_word', relevance) ...]}
-    related_words_dict = pickle.load(open(cts_subscribe.RELATED_WORDS_PATH, 'rb'))
+    try:
+        # A dictionary of the form: {'word': [('related_word', relevance) ...]}
+        related_words_dict = pickle.load(open(cts_subscribe.RELATED_WORDS_PATH, 'rb'))
+    except FileNotFoundError:
+        return []
 
     for word in search_array:
         related_words = related_words_dict.get(word, [])

@@ -1,34 +1,20 @@
-{% extends 'no_header_base.html'%}
+{% extends 'white_header_base.html'%}
 {% load static %}
 {% load i18n %}
 {% load app_filters %}
 {% load compress %}
 {% block extra_meta %}
-    <meta name="description"  content="En PeakU te ayudamos a encontrar el empleo que buscas en compañias que se ajustan a tu perfil, experiencia y salario. Somos una empresa que trabaja en selección de personal, no una temporal." />
-    <meta name="keywords" content="computrabajo, servicio de empleo, empleo, empleos, trabajos, trabaja con nosotros, buscador de empleo, bolsa de empleo, agencia de empleo" />
+    <meta name="description" content="Resolvemos tus preguntas sobre nuestras ofertas de empleo y el procesos de selección y reclutamiento de personal para empresas en Colombia, Chile, Ecuador, Perú y Argentina." />
+    <meta name="keywords" content="cazatalentos, selección de personal, reclutamiento personal, contratacion personal, selección personal, agencias, reclutamiento, servicio de empleo , empleo, ofertas de empleo , headhunter, agencia empleo" />
 {% endblock %}
-
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'business/css/contact_form.css' %}">
+{% endblock %}
 {% block content %}
-
-    <section class="section-container" style="height: 300px;">
-        <div class="row"> <!-- bootstrap row class -->
-            <div class="col-sm-6">
-                <img class="people-talking" src="{% static 'business/img/people_talking.jpg' %}"
-                     srcset="{% static 'business/img/people_talking.jpg' %} 2x,
-                             {% static 'business/img/people_talking.jpg' %} 3x">
-            </div>
-            <div class="col-sm-6">
-
-                <!-- TODO: FIX THIS DIRTY TRICK. IT IS USED SO THAT THE ANCHOR WORKS FOR MOBILE-->
-                <h2 id="anchor-trick"></h2>
-
-                <!-- tag to scroll down to the contact form with url -->
-                <a name="contactForm"></a>
-
-                <h3 class="secondary-title" >{% trans "Contact Us"%}</h3>
-                <div class="secondary-yellow-bar"></div>
-
-                <form class="my-form" action="{% url 'business:contact_form_post' %}" method="post">
+    <section class="section-container">
+        <div class="row">
+            <div class="col-lg-12">
+                <form class="only-register-form" action="{% url 'business:contact_form_post' %}" method="post">
                     {% csrf_token %}
 
                     <input class="form-text" type="text" name="name"
@@ -40,8 +26,7 @@
                     <input class="form-text" type="tel" name="phone"
                          placeholder="{% trans 'Your phone (optional)' %}">
 
-                    <textarea class="form-text-area" name="message"
-                         placeholder="{% trans 'Add a message (optional)' %}"></textarea>
+                    <textarea class="form-text-area" name="message" rows="10" cols="20" autocomplete="off" maxlength="500" placeholder="{% trans 'Add a message (optional)' %}"></textarea>
 
                     <input class="form-submit" type="submit" value="{% trans 'Sure!' %}">
                 </form>

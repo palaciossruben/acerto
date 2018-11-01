@@ -594,8 +594,8 @@ def mark_as_added(users):
 
 
 def get_candidate_users():
-    users = [m.candidate.user for m in Message.objects.filter(~Q(candidate__user__phone=None),
-                                                              sent=False)]
+    users = {m.candidate.user for m in Message.objects.filter(~Q(candidate__user__phone=None),
+                                                              sent=False)}
 
     for u in users:
         u.change_to_international_phone_number(add_plus=True)
@@ -603,12 +603,12 @@ def get_candidate_users():
 
     mark_as_added(users)
 
-    return users
+    return list(users)
 
 
 def get_leads():
-    leads = [m.lead for m in LeadMessage.objects.filter(~Q(lead__phone=None),
-                                                        sent=False)]
+    leads = {m.lead for m in LeadMessage.objects.filter(~Q(lead__phone=None),
+                                                        sent=False)}
 
     for l in leads:
         l.change_to_international_phone_number()
@@ -616,7 +616,7 @@ def get_leads():
 
     mark_as_added(leads)
 
-    return leads
+    return list(leads)
 
 
 def send_new_contacts(request):

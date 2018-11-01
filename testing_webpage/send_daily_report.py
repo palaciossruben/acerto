@@ -21,7 +21,7 @@ def send_general_report():
         email_sender.send_report(language_code='es',
                                  body_filename='daily_report_email_body',
                                  subject='Daily report',
-                                 recipients=['juan@peaku.co', 'santiago@peaku.co', 'juan.rendon@peaku.co', 'daniela@peaku.co'],
+                                 recipients=['seleccion@peaku.co'],
                                  candidates=candidates)
 
 
@@ -58,9 +58,9 @@ def business_daily_report():
                 email_sender.send_report(language_code='es',
                                          body_filename='business_daily_report_email_body',
                                          subject='Reporte de candidatos recomendados',
-                                         recipients=[business_user.email, business_user.additional_email, 'juan.rendon@peaku.co', 'juan@peaku.co',  'santiago@peaku.co', 'daniela@peaku.co'],
+                                         recipients=[business_user.email, business_user.additional_email, 'seleccion@peaku.co'],
                                          candidates=candidates)
 
 
 send_general_report()
-# business_daily_report()
+business_daily_report()
