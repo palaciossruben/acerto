@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from api.models import LeadMessage, Lead
 from ipware.ip import get_ip
-from django.db.models import Q
+from user_agents import parse
 
 from beta_invite.models import City, WorkArea
 from beta_invite import new_user_module
@@ -91,7 +91,8 @@ def register(request):
     google_token = request.POST.get('google_token')
     politics = True if request.POST.get('politics') else False
 
-    if not google_token:
+    # Only validates google token for mobile devices
+    if parse(request.META['HTTP_USER_AGENT']).is_mobile and not google_token:
         return HttpResponse(400)
 
     campaign = common.get_campaign_from_request(request)
