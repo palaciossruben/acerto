@@ -672,6 +672,9 @@ class Campaign(models.Model):
     class Meta:
         db_table = 'campaigns'
 
+    def get_work_area_segment(self):
+        return self.work_area.segment if self.work_area else None
+
     @staticmethod
     def print_cop_money(amount):
         reversed_string = [e + (idx % 3 == 0 and idx > 0) * '.' for idx, e in enumerate(reversed(str(amount)))]
@@ -785,6 +788,9 @@ class User(models.Model):
 
     def __str__(self):
         return '{0}, {1}, {2}'.format(self.name, self.email, self.pk)
+
+    def get_work_area_segment(self):
+        return self.work_area.segment if self.work_area else None
 
     def get_curriculum_url(self):
         """

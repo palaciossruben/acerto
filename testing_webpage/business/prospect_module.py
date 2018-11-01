@@ -172,7 +172,8 @@ def get_top_users(campaign):
     candidates = [c for c in candidates if non_null_equal(c.user.city, c.campaign.city)]
     search_log.after_city_filter.add(*[c.user for c in candidates])
 
-    candidates = [c for c in candidates if non_null_equal(c.user.work_area, c.campaign.work_area)]
+    # Work Area Segment
+    candidates = [c for c in candidates if non_null_equal(c.user.get_work_area_segment(), c.campaign.get_work_area_segment())]
     search_log.after_work_area_filter.add(*[c.user for c in candidates])
 
     candidates = [c for c in candidates if non_null_lte(campaign.get_very_low_salary(), c.user.salary) and
