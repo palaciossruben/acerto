@@ -13,4 +13,6 @@ urlpatterns = [
     url(r'^v1/register$', views.register, name='register'),
     url(r'^v1/get_work_areas', views.get_work_areas, name='get_work_areas'),
     url(r'^v1/get_cities$', views.get_cities, name='get_cities'),
+    url(r'^v1/get_campaigns$', views.get_campaigns, name='get_campaigns'),
+
 ]

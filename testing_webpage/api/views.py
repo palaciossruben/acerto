@@ -7,7 +7,7 @@ from api.models import LeadMessage, Lead
 from ipware.ip import get_ip
 from user_agents import parse
 
-from beta_invite.models import City, WorkArea
+from beta_invite.models import City, WorkArea, Campaign
 from beta_invite import new_user_module
 import common
 
@@ -182,4 +182,30 @@ def get_cities(request):
     },
     """
     my_json = serializers.serialize('json', City.objects.all())
+    return JsonResponse(my_json, safe=False)
+
+
+@csrf_exempt
+def get_campaigns(request):
+    """
+    type=GET
+    end point: peaku.co/api/v1/get_campaigns
+
+    optional params:
+        None
+    optional FILES:
+        None
+
+    :param request: HTTP
+    :return: Campaign json:
+    {
+      "model":"beta_invite.campaign",
+      "pk":1,
+      "fields":{
+         "name":"blabla",
+         ...
+      }
+    },
+    """
+    my_json = serializers.serialize('json', Campaign.objects.all())
     return JsonResponse(my_json, safe=False)
