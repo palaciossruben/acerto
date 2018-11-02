@@ -1032,8 +1032,9 @@ class SearchLog(models.Model):
 
     def __str__(self):
         return """
-        id={id},
-        campaign={c}
+        id = {id}
+        campaign = {created_at}
+        campaign = {campaign}
         users_from_tests = {len_test}
         users_from_search = {len_search}
         users_from_es = {len_es}
@@ -1045,7 +1046,8 @@ class SearchLog(models.Model):
         after_recommended_filter = {len_recommended}
         after_duplicates_filter = {len_duplicates}
         """.format(id=self.pk,
-                   c=self.campaign.id if self.campaign else None,
+                   created_at=self.created_at,
+                   campaign=self.campaign.id if self.campaign else None,
                    len_test=len(self.users_from_tests.all()),
                    len_search=len(self.users_from_search.all()),
                    len_es=len(self.users_from_es.all()),
