@@ -1045,7 +1045,7 @@ class SearchLog(models.Model):
         after_recommended_filter = {len_recommended}
         after_duplicates_filter = {len_duplicates}
         """.format(id=self.pk,
-                   c=self.campaign.name,
+                   c=self.campaign.id,
                    len_test=len(self.users_from_tests.all()),
                    len_search=len(self.users_from_search.all()),
                    len_es=len(self.users_from_es.all()),
