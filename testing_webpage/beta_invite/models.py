@@ -1034,38 +1034,28 @@ class SearchLog(models.Model):
         return """
         id={id},
         campaign={c}
-        users_from_tests({len_test})={test}
-        users_from_search({len_search})={search}
-        users_from_es({len_es})={es}
-        all_users({len_all})={all}
-        after_city_filter({len_city})={city}
-        after_work_area_filter({len_work_area})={work_area}
-        after_salary_filter({len_salary})={salary}
-        after_cap_filter({len_cap})={cap}
-        after_recommended_filter({len_recommended})={recommended}
-        after_duplicates_filter({len_duplicates})={duplicates}
+        users_from_tests = {len_test}
+        users_from_search = {len_search}
+        users_from_es = {len_es}
+        all_users = {len_all}
+        after_city_filter = {len_city}
+        after_work_area_filter = {len_work_area}
+        after_salary_filter = {len_salary}
+        after_cap_filter = {len_cap}
+        after_recommended_filter = {len_recommended}
+        after_duplicates_filter = {len_duplicates}
         """.format(id=self.pk,
                    c=self.campaign,
                    len_test=len(self.users_from_tests.all()),
-                   test=self.users_from_tests.all(),
                    len_search=len(self.users_from_search.all()),
-                   search=self.users_from_search.all(),
                    len_es=len(self.users_from_es.all()),
-                   es=self.users_from_es.all(),
                    len_all=len(self.all_users.all()),
-                   all=self.all_users.all(),
                    len_salary=len(self.after_salary_filter.all()),
-                   salary=self.after_salary_filter.all(),
                    len_city=len(self.after_city_filter.all()),
-                   city=self.after_city_filter.all(),
                    len_work_area=len(self.after_work_area_filter.all()),
-                   work_area=self.after_work_area_filter.all(),
                    len_cap=len(self.after_cap_filter.all()),
-                   cap=self.after_cap_filter.all(),
                    len_recommended=len(self.after_recommended_filter.all()),
-                   recommended=self.after_recommended_filter.all(),
                    len_duplicates=len(self.after_duplicates_filter.all()),
-                   duplicates=self.after_duplicates_filter.all()
                    )
 
     # adds custom table name

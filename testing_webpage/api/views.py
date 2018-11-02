@@ -155,8 +155,7 @@ def get_work_areas(request):
           }
        },
     """
-    my_json = serializers.serialize('json', WorkArea.objects.all())
-    return JsonResponse(my_json, safe=False)
+    return JsonResponse(serializers.serialize('json', WorkArea.objects.all()), safe=False)
 
 
 @csrf_exempt
@@ -181,8 +180,7 @@ def get_cities(request):
       }
     },
     """
-    my_json = serializers.serialize('json', City.objects.all())
-    return JsonResponse(my_json, safe=False)
+    return JsonResponse(serializers.serialize('json', City.objects.all()), safe=False)
 
 
 @csrf_exempt
@@ -207,5 +205,4 @@ def get_campaigns(request):
       }
     },
     """
-    my_json = serializers.serialize('json', Campaign.objects.all())
-    return JsonResponse(my_json, safe=False)
+    return JsonResponse(serializers.serialize('json', Campaign.objects.all()), safe=False)
