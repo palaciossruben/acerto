@@ -128,6 +128,7 @@ class Country(models.Model):
 class City(models.Model):
 
     name = models.CharField(max_length=200, null=True)
+    alias = models.CharField(max_length=200, null=True)  # Optional alternative name
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
