@@ -5,6 +5,7 @@ import psycopg2 as pg
 from uuid import getnode as get_mac
 from fabric.api import run, env, prefix
 from fabric.context_managers import cd
+from decouple import config
 
 env.use_ssh_config = True
 env.always_use_pty = False
@@ -34,12 +35,6 @@ def sync(db_update=True, copy_db_to_local=True):
     run('pg_dump -U dbadmin -p 5432 -h localhost maindb > db_backup.sql')
 
     safe_machines = (181219919357696, )
-    local_cwd = '/Users/juanpabloisaza/Desktop/acerto/'
-    aws_machine = 'ubuntu@ec2-52-38-133-146.us-west-2.compute.amazonaws.com:'
-
-    # BACKUP PATHS:
-    backup_remote = '/home/ubuntu/db_backup.sql'
-    local_backup = '/Users/juanpabloisaza/Desktop/acerto/db_backup.sql'
 
     # PSQL
     abstract_local_psql = 'psql -U {user} -p 5432 -h localhost {db_option}'
@@ -48,11 +43,13 @@ def sync(db_update=True, copy_db_to_local=True):
 
     # COPY db_backup file to local machine. THIS IS EXECUTED LOCALLY!!!
     if copy_db_to_local:
-        backup_command = 'scp -i production_key.pem {aws}{from_path} {to_path}'.format(aws=aws_machine,
-                                                                                       from_path=backup_remote,
-                                                                                       to_path=local_backup)
+        backup_command = 'scp -i production_key.pem {aws}:{from_path} {to_path}'.format(aws=config('aws_machine'),
+                                                                                        from_path=config('backup_remote_path'),
+                                                                                        to_path=config('local_backup_path'))
         print('BACKUP COMMAND: ' + str(backup_command))
-        backup_out = subprocess.check_output(backup_command, cwd=local_cwd, shell=True)
+        backup_out = subprocess.check_output(backup_command,
+                                             cwd=config('local_sync_directory'),
+                                             shell=True)
         print('BACKUP_COMMAND output: ' + str(backup_out))
 
         # once backup is local then update DB:
@@ -73,7 +70,8 @@ def sync(db_update=True, copy_db_to_local=True):
                 subprocess.call(grant_sql, shell=True)
 
                 # Fill in with data
-                fill_sql = "{psql} -f {local_backup}".format(psql=dbadmin_psql, local_backup=local_backup)
+                fill_sql = "{psql} -f {local_backup}".format(psql=dbadmin_psql,
+                                                             local_backup=config('local_backup_path'))
                 subprocess.call(fill_sql, shell=True)
 
                 # get connected to the database
@@ -98,10 +96,8 @@ def sync(db_update=True, copy_db_to_local=True):
 def deploy():
     """Deploy to cloud"""
 
-    local_cwd = '/Users/juanpabloisaza/Desktop/masteringmymind/acerto/API/testing_webpage'
-
     # first uploads my local changes to the repo
-    subprocess.check_output("git push origin master", cwd=local_cwd, shell=True)
+    subprocess.check_output("git push origin master", cwd=config('project_directory'), shell=True)
 
     # Then overwrites the backup file and copies it to local
     sync(db_update=False, copy_db_to_local=False)
@@ -161,9 +157,10 @@ def dev_update():
     """
 
     python_cmd = 'python3'
-    local_cwd = '/Users/juanpabloisaza/Desktop/masteringmymind/acerto/API/testing_webpage'
 
-    subprocess.check_output('{} manage.py migrate'.format(python_cmd), cwd=local_cwd, shell=True)
+    subprocess.check_output('{} manage.py migrate'.format(python_cmd),
+                            cwd=config('project_directory'),
+                            shell=True)
 
     # reload fixtures: Will overwrite tables with DB fixtures.
     # beta_invite fixtures
@@ -171,5 +168,6 @@ def dev_update():
     fixtures_dirs = [f + '/fixtures/*' for f in fixtures_dirs]
 
     for f in fixtures_dirs:
-        subprocess.check_output('{python_cmd} manage.py loaddata {f}'.format(python_cmd=python_cmd,
-                                                                             f=f), cwd=local_cwd, shell=True)
+        subprocess.check_output('{python_cmd} manage.py loaddata {f}'.format(python_cmd=python_cmd, f=f),
+                                cwd=config('project_directory'),
+                                shell=True)
