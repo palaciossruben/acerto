@@ -354,3 +354,22 @@ npm install -g webpack
 # clean serve files:
 select array_agg(id) from (select * from users where curriculum_url !='#' and curriculum_s3_url != '#'
 and id > 2400 order by id limit 500) as my_table;
+
+
+# TO RENEW SSL CERTIFICATE DO:
+
+1. Buy the Fucking thing in namecheap
+
+2. Use the private key you already have in /etc/ssl/peaku_co.key and the public key /etc/ssl/peaku_co.csr
+
+3. Copy the /etc/ssl/peaku_co.csr to the certificate in namecheap
+
+4. Validate the ownership of domain, by changing the CNAME record in Route 53, according to the value given in namecheap
+
+5. Then donwload the certificate from namecheap; take the peaku_co.crt and replace it in /etc/ssl/peaku_co.crt
+
+6. Check correct configuration in nginx.conf
+
+7. Restart nginx
+
+8. Done!
