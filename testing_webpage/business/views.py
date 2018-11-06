@@ -304,7 +304,6 @@ def send_contact_emails(contact, language_code):
 
 
 def contact_form(request):
-
     return render(request, cts.CONTACT_FORM_VIEW_PATH)
 
 

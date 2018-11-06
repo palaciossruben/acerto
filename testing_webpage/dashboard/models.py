@@ -140,10 +140,10 @@ class StateEvent(models.Model):
         db_table = 'state_events'
 
 
-def exception_to_string(excp):
-    stack = traceback.extract_stack()[:-3] + traceback.extract_tb(excp.__traceback__)  # add limit=??
+def exception_to_string(exception):
+    stack = traceback.extract_stack()[:-3] + traceback.extract_tb(exception.__traceback__)  # add limit=??
     pretty = traceback.format_list(stack)
-    return ''.join(pretty) + '\n  {} {}'.format(excp.__class__, excp)
+    return ''.join(pretty) + '\n  {} {}'.format(exception.__class__, exception)
 
 
 class Candidate(models.Model):

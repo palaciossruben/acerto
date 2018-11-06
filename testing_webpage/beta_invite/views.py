@@ -8,12 +8,13 @@ from ipware.ip import get_ip
 from user_agents import parse
 
 import common
+from testing_webpage import constants as testing_webpage_cts
 from beta_invite import constants as cts
 from beta_invite import interview_module
 from beta_invite import test_module, new_user_module
 from beta_invite.models import User, Visitor, Campaign, BulletType, City
 from beta_invite.util import email_sender
-from beta_invite.util import messenger_sender, common_senders
+from beta_invite.util import common_senders
 
 
 def get_drop_down_values(language_code):
@@ -182,8 +183,7 @@ def tests(request):
     tests = translate_tests(campaign.tests.all(), request.LANGUAGE_CODE)
 
     end_point_params = {'campaign_id': campaign.id,
-                        'tests': tests,
-                        }
+                        'tests': tests}
 
     # Adds the user id to the params, to be able to track answers, later on.
     user = common.get_user_from_request(request)
@@ -233,20 +233,12 @@ def get_test_result(request):
     if not user:
         return redirect('/servicio_de_empleo?campaign_id={campaign_id}'.format(campaign_id=campaign.id))
     candidate = common.get_candidate(user, campaign)
-    name = common_senders.get_first_name(candidate.user.name)
 
     scores = test_module.get_scores(campaign, user_id, questions_dict, request)
-    evaluation = test_module.get_evaluation(scores, candidate)
-    failed_scores = [s for s in evaluation.scores.all() if not s.passed and s.test.feedback_url]
+    test_module.get_evaluation(scores, candidate)
 
-    if evaluation.passed or len(failed_scores) == 0:
-        return redirect('/servicio_de_empleo/additional_info?candidate_id={candidate_id}'.format(candidate_id=candidate.pk))
-
-    return render(request, cts.FAILED_TEST_VIEW_PATH, {'candidate': candidate,
-                                                       'campaign': campaign,
-                                                       'candidate_id': candidate.pk,
-                                                       'name': name,
-                                                       'failed_scores_with_feedback': failed_scores})
+    return redirect(
+        '/servicio_de_empleo/additional_info?candidate_id={candidate_id}'.format(candidate_id=candidate.pk))
 
 
 def additional_info(request):
@@ -294,7 +286,11 @@ def active_campaigns(request):
                                                              success_state='STC',
                                                              fail_state='WFI')
 
-    return render(request, cts.ACTIVE_CAMPAIGNS_VIEW_PATH)
+    # TODO: add salary and city filter
+    if candidate.user.get_work_area_segment():
+        return redirect('/trabajos?segment_code={}'.format(candidate.user.get_work_area_segment().code))
+    else:
+        return redirect('/trabajos')
 
 
 def add_cv(request):

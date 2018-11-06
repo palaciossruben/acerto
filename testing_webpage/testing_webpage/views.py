@@ -33,6 +33,7 @@ def jobs(request):
     else:
         return render(request, cts.JOBS_VIEW_PATH,
                       {'active_campaigns': Campaign.objects.filter(~Q(title_es=None),
-                                                                   state__code__in=['I', 'A'], removed=False,
+                                                                   state__code__in=['I', 'A'],
+                                                                   removed=False,
                                                                    work_area__segment__code=segment_code
                                                                    )})
