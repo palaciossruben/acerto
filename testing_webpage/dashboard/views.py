@@ -636,7 +636,7 @@ def send_new_contacts(request):
     leads = get_leads()
     users = get_candidate_users()
 
-    json_data = json.dumps([{'pk': u.pk, 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}} for u in users + leads])
+    json_data = json.dumps([{'pk': u.pk, 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}} for u in users])
 
     return JsonResponse(json_data, safe=False)
 
