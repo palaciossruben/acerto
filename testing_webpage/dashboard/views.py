@@ -638,7 +638,7 @@ def send_new_contacts(request):
 
     json_data = json.dumps([{'pk': str(u.pk), 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}} for u in users + leads])
 
-    return JsonResponse(json_data)
+    return JsonResponse(json_data, safe=False)
 
 
 def send_messages(request):
