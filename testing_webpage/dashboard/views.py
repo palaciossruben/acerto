@@ -619,6 +619,18 @@ def get_leads():
     return list(leads)
 
 
+from collections import OrderedDict
+
+
+class _OrderedDictMaker(object):
+    def __getitem__(self, keys):
+        if not isinstance(keys, tuple):
+            keys = (keys,)
+        assert all(isinstance(key, slice) for key in keys)
+
+        return OrderedDict([(k.start, k.stop) for k in keys])
+
+
 def send_new_contacts(request):
     """
      Works as API for auto-messenger app
@@ -636,11 +648,13 @@ def send_new_contacts(request):
     #leads = get_leads()
     users = get_candidate_users()
 
-    from collections import OrderedDict
+    ordered_dict = _OrderedDictMaker()
 
-    json_data = json.dumps([{'pk': str(u.pk), 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}} for u in users ]) #+ #leads])
+    #json_data = json.dumps([{'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}, 'pk': str(u.pk)} for u in users ]) #+ #leads])
 
-    return JsonResponse(json_data, safe=False)
+    list_of_users = [ordered_dict['pk': str(u.pk), 'fields': ordered_dict['phone': u.phone, 'name': u.name, 'email': u.email]] for u in users]  # + #leads])
+
+    return JsonResponse(json.dumps(list_of_users), safe=False)
 
 
 def send_messages(request):
