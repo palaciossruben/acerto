@@ -594,8 +594,8 @@ def mark_as_added(users):
 
 
 def get_candidate_users():
-    users = {m.candidate.user for m in Message.objects.filter(~Q(candidate__user__phone=None),
-                                                              sent=False)}
+    users = [m.candidate.user for m in Message.objects.filter(~Q(candidate__user__phone=None),
+                                                              sent=False)]
 
     for u in users:
         u.change_to_international_phone_number(add_plus=True)
@@ -603,7 +603,7 @@ def get_candidate_users():
 
     mark_as_added(users)
 
-    return list(users)
+    return users
 
 
 def get_leads():
@@ -633,12 +633,12 @@ def send_new_contacts(request):
     :return: json
     """
 
-    leads = get_leads()
+    #leads = get_leads()
     users = get_candidate_users()
 
     from collections import OrderedDict
 
-    json_data = json.dumps([OrderedDict({'pk': str(u.pk), 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}}) for u in users + leads])
+    json_data = json.dumps([{'pk': str(u.pk), 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}} for u in users ]) #+ #leads])
 
     return JsonResponse(json_data, safe=False)
 
