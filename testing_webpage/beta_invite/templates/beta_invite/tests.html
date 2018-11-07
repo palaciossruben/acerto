@@ -15,9 +15,9 @@
                     {% if test.questions.all|length > 0 %}
                         <div class="format-div center">
                             <h2>{% trans "Test: " %} {{ test.name }}</h2>
+                            <h3>{{ question.text_es }}</h3>
                         </div>
                     {% endif %}
-                    <h3>{{ question.text_es }}</h3>
                     {% if question.image_path %}
                         <div class="image-div" style="background-image: url({% static question.image_path %});
                         background-repeat: no-repeat;
@@ -58,6 +58,7 @@
 
 <script>
     $(document).ready(function() {
-        activate(1, 1)
+        activate(1, 1);
+        timer();
     });
 </script>
