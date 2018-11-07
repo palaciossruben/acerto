@@ -8,6 +8,8 @@ body {
     border-bottom: 2px groove;
     border-color:rgba(255, 255, 255, .5);
     background-color: white;
+    position:relative;
+    z-index:100;
 }
  .topnav a {
     float: left;
