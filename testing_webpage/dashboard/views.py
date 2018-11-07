@@ -636,7 +636,9 @@ def send_new_contacts(request):
     leads = get_leads()
     users = get_candidate_users()
 
-    json_data = json.dumps([{'pk': str(u.pk), 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}} for u in users + leads])
+    from collections import OrderedDict
+
+    json_data = json.dumps([OrderedDict({'pk': str(u.pk), 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}}) for u in users + leads])
 
     return JsonResponse(json_data, safe=False)
 
