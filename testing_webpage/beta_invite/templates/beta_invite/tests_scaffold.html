@@ -11,17 +11,15 @@
 {% block extra_css %}
     <link rel="stylesheet" type="text/css" href="{% static 'beta_invite/css/test_scaffold.css' %}">
 {% endblock %}
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'beta_invite/js/tests.js' %}"></script>
+{% endblock %}
 {% block content %}
     <div class="title">
-        <div class="container space">
-            <div>
-                <script>fbq('track', 'CompleteRegistration');</script>
-                <span>
-                    <h1 class="blue">{% trans "Thanks for registering!" %}</h1>
-                </span>
-                <br>
-                {% include "beta_invite/tests.html" with tests=tests %}
-            </div>
+        <script>fbq('track', 'CompleteRegistration');</script>
+        <div class="questions-container center">
+            <h2 class="blue">{% trans "Thanks for registering!" %}</h2>
+            {% include "beta_invite/tests.html" with tests=tests %}
         </div>
     </div>
 {% endblock %}
