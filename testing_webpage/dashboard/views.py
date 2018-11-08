@@ -652,9 +652,14 @@ def send_new_contacts(request):
 
     #json_data = json.dumps([{'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}, 'pk': str(u.pk)} for u in users ]) #+ #leads])
 
-    #list_of_users = [{'pk': u.pk, 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}} for u in users]  # + #leads])
+    list_of_users = [{'pk': u.pk, 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}} for u in users]  # + #leads])
 
-    return JsonResponse(serializers.serialize('json', users), safe=False)
+
+    json_data = json.dumps([{'pk': u.pk, 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}} for u in users])
+
+
+    #return JsonResponse(serializers.serialize('json', users), safe=False)
+    return JsonResponse(json_data, safe=False)
 
     #return JsonResponse(json.dumps(list_of_users), safe=False)
     #return JsonResponse(serializers.serialize('json', list_of_users), safe=False)
