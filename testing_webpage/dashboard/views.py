@@ -654,7 +654,7 @@ def send_new_contacts(request):
 
     list_of_users = [ordered_dict['pk': u.pk, 'fields': ordered_dict['phone': u.phone, 'name': u.name, 'email': u.email]] for u in users]  # + #leads])
 
-    return JsonResponse(json.dumps(list_of_users), safe=False)
+    return JsonResponse(list_of_users, safe=False)
 
 
 def send_messages(request):
