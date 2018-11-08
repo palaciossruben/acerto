@@ -618,7 +618,7 @@ def get_leads():
 
     return list(leads)
 
-
+"""
 from collections import OrderedDict
 
 
@@ -629,7 +629,7 @@ class _OrderedDictMaker(object):
         assert all(isinstance(key, slice) for key in keys)
 
         return OrderedDict([(k.start, k.stop) for k in keys])
-
+"""
 
 def send_new_contacts(request):
     """
@@ -648,11 +648,11 @@ def send_new_contacts(request):
     #leads = get_leads()
     users = get_candidate_users()
 
-    ordered_dict = _OrderedDictMaker()
+    #ordered_dict = _OrderedDictMaker()
 
     #json_data = json.dumps([{'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}, 'pk': str(u.pk)} for u in users ]) #+ #leads])
 
-    list_of_users = [ordered_dict['pk': u.pk, 'fields': ordered_dict['phone': u.phone, 'name': u.name, 'email': u.email]] for u in users]  # + #leads])
+    list_of_users = [{'pk': u.pk, 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}} for u in users]  # + #leads])
 
     return JsonResponse(serializers.serialize('json', list_of_users), safe=False)
 
