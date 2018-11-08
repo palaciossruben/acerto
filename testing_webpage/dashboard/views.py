@@ -654,7 +654,12 @@ def send_new_contacts(request):
 
     list_of_users = [{'pk': u.pk, 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}} for u in users]  # + #leads])
 
-    return JsonResponse(serializers.serialize('json', list_of_users), safe=False)
+    #return JsonResponse(json.dumps(list_of_users), safe=False)
+    #return JsonResponse(serializers.serialize('json', list_of_users), safe=False)
+    return HttpResponse(
+        json.dumps(list_of_users),
+        content_type='application/json; charset=utf8'
+    )
 
 
 def send_messages(request):
