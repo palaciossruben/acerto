@@ -1,10 +1,7 @@
-import json
 from django import template
 from business.models import BusinessUser
 from django.core.serializers import serialize
-from django.db.models.query import QuerySet
 import common
-
 register = template.Library()
 
 
@@ -59,3 +56,11 @@ def get_business_user_name_with_campaign(campaign):
 @register.filter
 def get_business_user_company_with_campaign(campaign):
     return common.get_business_user_with_campaign(campaign, 'company')
+
+
+@register.filter
+def get_number_questions_of_before_test(tests, i):
+    if int(i) < 1:
+        return len(tests[0].questions.all())
+    # the -2 is for an index based of 1 not in zero
+    return len(tests[int(i)-2].questions.all())

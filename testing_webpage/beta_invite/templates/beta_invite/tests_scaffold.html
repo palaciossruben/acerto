@@ -11,17 +11,33 @@
 {% block extra_css %}
     <link rel="stylesheet" type="text/css" href="{% static 'beta_invite/css/test_scaffold.css' %}">
 {% endblock %}
-{% block content %}
-    <div class="title">
-        <div class="container space">
-            <div>
-                <script>fbq('track', 'CompleteRegistration');</script>
-                <span>
-                    <h1 class="blue">{% trans "Thanks for registering!" %}</h1>
-                </span>
-                <br>
-                {% include "beta_invite/tests.html" with tests=tests %}
-            </div>
-        </div>
-    </div>
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'beta_invite/js/tests.js' %}"></script>
 {% endblock %}
+{% block content %}
+<div class="sidebar">
+    <div class="test-description">
+        <h2 class="center">PRUEBAS TÉCNICAS</h2>
+        <h5>Estas pruebas miden ciertas caracteristicas demandadas por el empleador. <br><br>No te preocupes si sientes que son díficiles, ¡siempre puedes volver a intentar!</h5>
+        <br>
+        <label class="timer" id="minutes">00</label>:<label id="seconds">00</label>
+        <label class="note">*No hay tiempo límite para contestar este test</label>
+    </div>
+</div>
+<div class="row">
+    <script>fbq('track', 'CompleteRegistration');</script>
+    <div class="col-lg-3"></div>
+    <div class="col-lg-9 questions-container center">
+        <h2 class="blue">{% trans "Thanks for registering!" %}</h2>
+        {% include "beta_invite/tests.html" with tests=tests %}
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+

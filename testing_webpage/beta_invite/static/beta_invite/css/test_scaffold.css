@@ -1,21 +1,60 @@
-.space{
-    margin-top:5px;
+html, body{
+    background: url(../img/tests_background.jpg) top center scroll;
+	background-size: contain;
+	background-repeat: repeat;
+	height:100%;
 }
 
-.title{
-    text-align: center;
-    margin-top:50px;
+.questions-container{
+    background: white;
+    width: 70%;
+    margin: 70px auto 90px auto;
+    border-radius: 70px;
+    padding: 15px 0px 0px 0px;
 }
 
 .blue{
     color:var(--blue);
+    padding-top:30px;
+    margin:0;
+}
+
+.question-info{
+    display:none;
+}
+
+#submit-button{
+    display:none;
+}
+
+.image-div{
+    border: solid 1px black;
+    border-radius: 30px;
+    width: 80%;
+    min-height: 400px;
+    margin: 30px auto;
+}
+
+.format-div{
+    width: 80%;
+    margin: 10px auto;
+}
+
+textarea{
+    width: 100%;
+    min-height: 200px;
+    resize:none;
 }
 
 .center{
     text-align:center;
 }
 
-#submit-button{
+.left{
+    text-align:left;
+}
+
+.nice-button{
     width: auto;
     background: var(--orange);
     font-weight: bold;
@@ -25,6 +64,67 @@
     cursor: pointer;
     padding: 10px 10px;
     border-radius:4px;
-    margin: 50px auto;
+    margin: 0 auto 10px auto;
 }
 
+.sidebar {
+	text-align: center;
+	padding: 2rem 1rem;
+	color: rgba(255, 255, 255, 0.5);
+	background : rgba(223, 227, 53, 0.6);
+	z-index:1;
+}
+
+.test-description{
+    margin-top: 10rem;
+    padding: 2rem 1rem;
+    font-size : 15px;
+    color : #656665;
+    text-align:left;
+}
+
+.note{
+    font-size : 10px;
+}
+
+@media (max-width: 768px){
+    .image-div {
+        width: 90%;
+        min-height: 176px;
+        border-radius:10px;
+        background-size: cover;
+    }
+
+    .questions-container {
+        width: 90%;
+        border-radius: 50px;
+        margin: 50px auto;
+        padding:5px;
+    }
+}
+
+@media (min-width: 48em) {
+	.sidebar {
+		position: fixed;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		width: 28rem;
+		text-align: left
+	}
+}
+
+@media (min-width: 48em) {
+	.sidebar-sticky {
+		position: absolute;
+		right: 1rem;
+		bottom: 1rem;
+		left: 1rem
+	}
+}
+
+@media (max-width: 48em) {
+	.sidebar {
+		margin: auto
+	}
+}

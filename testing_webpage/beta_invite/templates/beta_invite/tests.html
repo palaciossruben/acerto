@@ -1,55 +1,64 @@
 {% load i18n %}
 {% load static %}
-    <form action="test_result" method="post" id="test_form_id" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="hidden" name="campaign_id" value="{{ campaign_id }}" />
-        <input type="hidden" name="user_id" value="{{ user_id }}" />
+{% load app_filters %}
 
-        <h3 class="blue">{% trans "Complete this few questions to know you better" %}</h3>
-        <div class="center">
-            {% for test in tests %}
-                {% if test.questions.all|length > 0 %}
-                    <h2>{% trans "Test: " %} {{ test.name }}</h2>
-                {% endif %}
-                <!--Orders questions according to preset ordering-->
-                {% for question in test.questions.all|dictsort:"order" %}
-                    <h3>{{ question.text_es }}</h3>
-                    {% if question.image_path %}
-                        <img src="{% static question.image_path %}">
+<form action="test_result" method="post" id="test_form_id" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="hidden" name="campaign_id" value="{{ campaign_id }}" />
+    <input type="hidden" name="user_id" value="{{ user_id }}" />
+
+    <div class="center">
+        {% for test in tests %}
+            {% with forloop.counter as test_counter %}
+            {% for question in test.questions.all|dictsort:"order" %}
+                <div class="question-info" id="container-{{ test_counter }}-{{ forloop.counter }}">
+                    {% if test.questions.all|length > 0 %}
+                        <div class="format-div center">
+                            <h2>{% trans "Test: " %} {{ test.name }}</h2>
+                            <h3>{{ question.text_es }}</h3>
+                        </div>
                     {% endif %}
-                    <!-- TODO: implement multiple check boxes-->
+                    {% if question.image_path %}
+                        <div class="image-div" style="background-image: url({% static question.image_path %});
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        background-size: contain;"></div>
+                    {% endif %}
                     {% if question.type.code == 'SA' %}
                         {% get_current_language as LANGUAGE_CODE %}
-                        <div class="center">
+                        <div class="format-div left">
                             {% for answer in question.answers.all %}
                                 <input type="radio" name="test_{{ test.id }}_question_{{ question.id }}" value="{{ answer.id }}"> {{ answer.name_es }} <br>
                             {% endfor %}
                         </div>
                     {% elif question.type.code == 'OF' %}
+                        <div class="format-div left">
                         {% trans "Your Answer" as text_placeholder %}
-                        <textarea name="test_{{ test.id }}_question_{{ question.id }}"
-                            cols="60" rows="5" placeholder="{{ text_placeholder }}"></textarea>
-                    {% elif question.type.code == 'DOB' %}
-                        <div class="center">
-                            <div class="hidden-xs col-sm-3 caption left sets-answer">{% trans "Agree" %}</div>
-                            <input type="radio" name="test_{{ test.id }}_question_{{ question.id }}"
-                                 value="1"> {{ answer.name_es }}
-                            <input type="radio" name="test_{{ test.id }}_question_{{ question.id }}"
-                                value="0"> {{ answer.name_es }}
-                            <input type="radio" name="test_{{ test.id }}_question_{{ question.id }}"
-                                 value="-1"> {{ answer.name_es }}
-                            <div class="hidden-xs col-sm-3 caption left sets-answer">{% trans "Disagree" %}</div>
+                        <textarea name="test_{{ test.id }}_question_{{ question.id }}" placeholder="{{ text_placeholder }}"></textarea>
                         </div>
                     {% elif question.type.code == 'NI' %}
-                        <div>
-                            <input name="test_{{ test.id }}_question_{{ question.id }}"
-                                type="number" value="{{ question.params.default }}" min="{{ question.params.min }}" max="{{ question.params.max }}" />
+                        <div class="format-div left">
+                            <input name="test_{{ test.id }}_question_{{ question.id }}" type="number" value="{{ question.params.default }}" min="{{ question.params.min }}" max="{{ question.params.max }}" />
                         </div>
                     {% endif %}
-                {% endfor %}
+                    {% if forloop.counter != 1 or test_counter != 1 %}
+                        <input type="button" class="nice-button" value="Atrás" onclick="back({{ test_counter }}, {{ forloop.counter }}, {{ tests|get_number_questions_of_before_test:test_counter }})">
+                    {% endif %}
+                    {% if forloop.counter != test.questions.all|length or test_counter != tests|length %}
+                        <input type="button" class="nice-button" value="Siguiente" onclick="next({{ test_counter }}, {{ forloop.counter }}, {{ test.questions.all|length}}, {{ tests|length }} )">
+                    {% endif %}
+                </div>
             {% endfor %}
-        </div>
+            {% endwith %}
+        {% endfor %}
         {% trans "Send Answers!!!" as submit_value %}
-        <input type="submit" id="submit-button" value="{{ submit_value }}">
-    </form>
+        <input type="submit" id="submit-button" class="nice-button" value="{{ submit_value }}">
+    </div>
+</form>
 
+<script>
+    $(document).ready(function() {
+        activate(1, 1);
+        timer();
+    });
+</script>
