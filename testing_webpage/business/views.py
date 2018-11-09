@@ -299,7 +299,7 @@ def send_contact_emails(contact, language_code):
                                    language_code=language_code,
                                    body_filename='contact_notification_email_body',
                                    subject='Business User acaba de llenar formulario de contacto!!!')
-    except (smtplib.SMTPRecipientsRefused, smtplib.SMTPAuthenticationError, UnicodeEncodeError) as e:  # cannot send emails
+    except (smtplib.SMTPRecipientsRefused, smtplib.SMTPAuthenticationError, UnicodeEncodeError) as e:
         pass
 
 
@@ -676,3 +676,37 @@ def get_work_area_requirement(request, work_area_id):
     json_data = json.dumps([{'pk': k.pk, 'name': k.name} for k in requirements])
 
     return JsonResponse(json_data, safe=False)
+
+
+def demo(request):
+    return render(request, cts.DEMO_VIEW_PATH)
+
+
+def send_demo_scheduled_notification(request, contact):
+
+    try:
+        email_sender.send(objects=contact,
+                          language_code=request.LANGUAGE_CODE,
+                          body_input='business_contact_email_body',
+                          subject=_('Welcome to PeakU'))
+        email_sender.send_internal(contact=contact,
+                                   language_code=request.LANGUAGE_CODE,
+                                   body_filename='demo_sheduled_notification_email_body',
+                                   subject='Se ha programado un demo!!!!!')
+
+    except (smtplib.SMTPRecipientsRefused, smtplib.SMTPAuthenticationError, UnicodeEncodeError) as e:
+        pass
+
+
+def demo_scheduled(request):
+
+    contact = Contact(name=request.POST.get('name'),
+                      email=request.POST.get('email'),
+                      phone=request.POST.get('phone'),
+                      message=request.POST.get('message'), )
+
+    contact.save()
+
+    send_demo_scheduled_notification(request, contact)
+
+    return render(request, cts.DEMO_SCHEDULED_VIEW_PATH)
