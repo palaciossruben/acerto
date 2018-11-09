@@ -6,11 +6,11 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
 from beta_invite.util import email_sender
-from dashboard.models import Candidate, State
-from beta_invite.models import User
+from dashboard.models import Candidate, State, Campaign
+from beta_invite.models import User, WorkAreaSegment
 
 
-def candidates_filter(candidates):
+def not_repeated_filter(candidates):
 
     user_ids = set()
     filtered_candidates = list()
@@ -32,6 +32,24 @@ def candidates_filter(candidates):
     return filtered_candidates
 
 
+def work_area_with_campaigns_filter(candidates):
+
+    final_candidates = list()
+
+    for c in candidates:
+
+        segment = WorkAreaSegment.objects.get(pk=c.user.work_area.segment_id)
+
+        campaigns = Campaign.objects.filter(~Q(title_es=None),
+                                            state__code__in=['I', 'A'],
+                                            removed=False,
+                                            work_area__segment__code=segment.code)
+        if len(campaigns) > 0:
+            final_candidates.append(c)
+
+    return final_candidates
+
+
 def send_prospect_emails():
 
     candidates = Candidate.objects.filter(~Q(user=None),
@@ -41,12 +59,15 @@ def send_prospect_emails():
 
     candidates = [c for c in candidates]
 
-    new_candidates = candidates_filter(candidates)
+    new_candidates = not_repeated_filter(candidates)
+
+    final_candidates = work_area_with_campaigns_filter(new_candidates)
 
     print(len(candidates))
     print(len(new_candidates))
+    print(len(final_candidates))
 
-    email_sender.send(objects=new_candidates,
+    email_sender.send(objects=final_candidates,
                       language_code='es',
                       body_input='prospects_invitation_email_body',
                       subject='Ofertas')
