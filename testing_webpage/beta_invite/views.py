@@ -243,19 +243,28 @@ def get_test_result(request):
 
 def additional_info(request):
     candidate = common.get_candidate_from_request(request)
-    param_dict = dict()
-    countries, cities, education, professions, work_areas, genders = get_drop_down_values(request.LANGUAGE_CODE)
 
-    # Dictionary parameters
-    param_dict['candidate'] = candidate
-    param_dict['genders'] = genders
-    param_dict['work_areas'] = work_areas
-    param_dict['education'] = education
-    param_dict['professions'] = professions
-    param_dict['countries'] = countries
-    param_dict['cities'] = cities
+    # probably a first timer
+    if candidate.user.gender is None:
+        param_dict = dict()
+        countries, cities, education, professions, work_areas, genders = get_drop_down_values(request.LANGUAGE_CODE)
 
-    return render(request, cts.ADDITIONAL_INFO_VIEW_PATH, param_dict)
+        # Dictionary parameters
+        param_dict['candidate'] = candidate
+        param_dict['genders'] = genders
+        param_dict['work_areas'] = work_areas
+        param_dict['education'] = education
+        param_dict['professions'] = professions
+        param_dict['countries'] = countries
+        param_dict['cities'] = cities
+
+        return render(request, cts.ADDITIONAL_INFO_VIEW_PATH, param_dict)
+    else:
+        # will no longer bother user with additional info
+        if candidate is not None:
+            return redirect('/servicio_de_empleo/active_campaigns?candidate_id={}'.format(candidate.id))
+        else:
+            return redirect('/servicio_de_empleo/active_campaigns')
 
 
 def save_partial_additional_info(request):
@@ -287,7 +296,7 @@ def active_campaigns(request):
                                                              fail_state='WFI')
 
     # TODO: add salary and city filter
-    if candidate.user.get_work_area_segment():
+    if candidate and candidate.user.get_work_area_segment():
         return redirect('/trabajos?segment_code={}'.format(candidate.user.get_work_area_segment().code))
     else:
         return redirect('/trabajos')
