@@ -23,9 +23,7 @@
         <h2 class="descriptions">{% trans "GENERAL DESCRIPTION" %}</h2>
     </div>
     <div class="row">
-        <div class="col-lg-8 description-text main-description">
-            <span>{% autoescape off %}{{ campaign.description }}{% endautoescape %}</span>
-        </div>
+        <div class="col-lg-8 description-text main-description">{{ campaign.description }}</div>
         <div class="col-lg-4 email-column">
             <input class="apply hide2" type="button" onclick="on_signup()" value="APLICAR">
         </div>
@@ -113,31 +111,6 @@
             </form>
         </div>
     </div>
-    <!--
-    <div id="overlay-login">
-        <div class="form-image">
-            <form id="login-form" method="post" action="{% url 'business:home' %}" >
-                {% csrf_token %}
-                <fieldset>
-                    <span class="exitDingbat" onclick="off_login()">X</span>
-                    <br>
-                    <br>
-                    <span>Correo</span>
-                    <input name="username" class="form-input"><br>
-                    <span>Contraseña</span>
-                    <input name="password" class="form-input" type="password"><br>
-                    <span class="form-label"><a href="#">Olvidé mi contraseña</a></span>
-                    <span class="form-label">
-                    <a href="javascript:void(0);" onclick="off_login() & on_signup()">Aun no estoy registrado
-                    </a>
-                    </span>
-                    <br>
-                    <br>
-                    <input type="submit" class="submit" value="ACCEDER">
-                </fieldset>
-            </form>
-        </div>
-    </div>-->
 
     <script>
        $(document).ready(function() {

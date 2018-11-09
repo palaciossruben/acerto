@@ -1,9 +1,12 @@
 import requests
 import unicodedata
 from decouple import config
-
+from django.conf import settings
 from dashboard.models import Candidate
 from beta_invite.util import common_senders
+
+internal_team = ['santiago@peaku.co', 'juan@peaku.co', 'juan.rendon@peaku.co']
+testing_team = ['juan@peaku.co', 'juan.rendon@peaku.co']
 
 
 def get_files(attachment):
@@ -50,15 +53,13 @@ def send_with_mailgun(recipients, subject, body, html=None, attachment=None):
         attachment: optional param for attaching content to email
     Returns: sends emails.
     """
-    recipients = validate_emails(recipients)
+    if settings.DEBUG:
+        recipients = validate_emails(testing_team)
+    else:
+        recipients = validate_emails(recipients)
 
     if len(recipients) > 0:
         mail_gun_post(recipients, subject, body, html, attachment)
-
-        # TODO: make it async
-        #p = Process(target=mail_gun_post, args=(sender_data, recipients, subject, body, attachment))
-        #p.start()
-        #p.join()
 
 
 def send(objects, language_code, body_input, subject, with_localization=True, body_is_filename=True,
@@ -194,8 +195,6 @@ def send_internal(contact, language_code, body_filename, subject, campaign=None)
 
     Returns: Sends email
     """
-
-    internal_team = ['seleccion@peaku.co']
 
     if language_code != 'en':
         body_filename += '_{}'.format(language_code)
