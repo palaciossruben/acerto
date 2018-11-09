@@ -132,6 +132,7 @@
 
 .main-description{
     min-height: 140px;
+    white-space: pre-wrap;
 }
 
 .email-column{

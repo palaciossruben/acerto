@@ -17,28 +17,11 @@ def send_general_report():
     candidates = Candidate.objects.filter(created_at__range=[str(timezone.now() - timedelta(days=1)), str(timezone.now())])
 
     # Only send if there is something.
-    if True: #len(candidates) > 0:
+    if True:
         email_sender.send_report(language_code='es',
                                  body_filename='daily_report_email_body',
                                  subject='Daily report',
-                                 recipients=['seleccion@peaku.co'],
-                                 candidates=candidates)
-
-
-def send_campaign_report(recipients, campaign_id):
-
-    campaign = Campaign.objects.get(pk=campaign_id)
-    candidates = Candidate.objects.filter(created_at__range=[str(timezone.now() - timedelta(days=1)), str(timezone.now())],
-                                          campaign=campaign,
-                                          state_id__in=[1, 8]
-                                          )
-
-    # Only send if there is something.
-    if len(candidates) > 0:
-        email_sender.send_report(language_code='es',
-                                 body_filename='daily_report_email_body',
-                                 subject='Reporte diario para {campaign_name}'.format(campaign_name=campaign.title_es),
-                                 recipients=recipients,
+                                 recipients=['santiago@peaku.co', 'juan.rendon@peaku.co'],
                                  candidates=candidates)
 
 
@@ -58,8 +41,26 @@ def business_daily_report():
                 email_sender.send_report(language_code='es',
                                          body_filename='business_daily_report_email_body',
                                          subject='Reporte de candidatos recomendados',
-                                         recipients=[business_user.email, business_user.additional_email, 'seleccion@peaku.co'],
+                                         recipients=[business_user.email, business_user.additional_email, 'santiago@peaku.co', 'juan.rendon@peaku.co'],
                                          candidates=candidates)
+
+
+# This is not used, send daily report for campaign
+def send_campaign_report(campaign_id):
+
+    campaign = Campaign.objects.get(pk=campaign_id)
+    candidates = Candidate.objects.filter(created_at__range=[str(timezone.now() - timedelta(days=1)), str(timezone.now())],
+                                          campaign=campaign,
+                                          state_id__in=[1, 8]
+                                          )
+
+    # Only send if there is something.
+    if len(candidates) > 0:
+        email_sender.send_report(language_code='es',
+                                 body_filename='daily_report_email_body',
+                                 subject='Reporte diario para {campaign_name}'.format(campaign_name=campaign.title_es),
+                                 recipients=['santiago@peaku.co', 'juan.rendon@peaku.co'],
+                                 candidates=candidates)
 
 
 send_general_report()
