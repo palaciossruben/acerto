@@ -3,8 +3,9 @@ import json
 from django.db import models
 from django.contrib.auth.models import User as AuthUser
 from django.contrib.postgres.fields import JSONField
+from django.core.exceptions import ObjectDoesNotExist
 
-from beta_invite.models import Country, Education, Profession, Campaign, WorkArea
+from beta_invite.models import Country, Education, Profession, Campaign
 
 
 class Plan(models.Model):
@@ -74,6 +75,18 @@ class BusinessUser(models.Model):
 
     def __str__(self):
         return '{0}, {1}, {2}'.format(self.name, self.email, self.company)
+
+    @staticmethod
+    def get_business_user(user):
+        """
+        Given a auth User it gets the business User
+        :param user: Auth User
+        :return: Business User or None
+        """
+        try:
+            return BusinessUser.objects.get(auth_user=user)
+        except ObjectDoesNotExist:
+            return None
 
     # adds custom table name
     class Meta:

@@ -24,7 +24,7 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
-    #url(r'^$', views.index, name='index'),  # TODO social: solve the index colission with home
+    url(r'^$', views.index, name='index'),
     url(r'^trabajos$', views.jobs, name='index'),
     url('^', include('django.contrib.auth.urls')),
     url(r'^servicio_de_empleo/', include('beta_invite.urls')),
@@ -35,7 +35,7 @@ urlpatterns = [
     url(r'^oauth/', include('social_django.urls', namespace='social')),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, name='logout'),
-    url(r'^$', views.home, name='home'),
+    url(r'^home_test$', views.home, name='home'),
 
 ]
 

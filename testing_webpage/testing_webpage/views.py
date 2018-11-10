@@ -1,9 +1,10 @@
 from testing_webpage import constants as cts
 from beta_invite.models import Campaign, WorkAreaSegment
+from business.models import BusinessUser
 from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 def index(request):
@@ -50,4 +51,13 @@ def jobs(request):
 
 @login_required
 def home(request):
-    return render(request, 'testing_webpage/home.html')
+    """
+    This is a general login for home, can redirect to business_home
+    :param request:
+    :return:
+    """
+
+    if BusinessUser.get_business_user(request.user):
+        return redirect('business:home')
+    else:  # its a candidate user
+        return render(request, 'testing_webpage/home.html')
