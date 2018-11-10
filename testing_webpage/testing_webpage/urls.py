@@ -19,17 +19,24 @@ from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
+
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    #url(r'^$', views.index, name='index'),  # TODO social: solve the index colission with home
     url(r'^trabajos$', views.jobs, name='index'),
     url('^', include('django.contrib.auth.urls')),
     url(r'^servicio_de_empleo/', include('beta_invite.urls')),
     url(r'^seleccion_de_personal/', include('business.urls')),
     url(r'^dashboard/', include('dashboard.urls')),
     url(r'^api/', include('api.urls')),
-    url(r'^admin/', admin.site.urls)
+    url(r'^admin/', admin.site.urls),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
+    url(r'^login/$', auth_views.login, name='login'),
+    url(r'^logout/$', auth_views.logout, name='logout'),
+    url(r'^$', views.home, name='home'),
+
 ]
 
 urlpatterns += i18n_patterns(

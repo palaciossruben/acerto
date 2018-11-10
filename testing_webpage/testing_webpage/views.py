@@ -1,8 +1,10 @@
-from django.shortcuts import render
 from testing_webpage import constants as cts
 from beta_invite.models import Campaign, WorkAreaSegment
 from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+
 
 def index(request):
     """
@@ -44,3 +46,8 @@ def jobs(request):
         return render(request, cts.JOBS_VIEW_PATH, {'active_campaigns': Campaign.objects.filter(~Q(title_es=None),
                                                                                                 state__code__in=['I', 'A'],
                                                                                                 removed=False)})
+
+
+@login_required
+def home(request):
+    return render(request, 'testing_webpage/home.html')
