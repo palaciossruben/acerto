@@ -203,12 +203,12 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # TODO social: solve the colission with business user
-#LOGIN_URL = 'business:login'
-#LOGOUT_URL = 'business:logout'
+LOGIN_URL = 'business:login'
+LOGOUT_URL = 'business:logout'
 
 
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
+#LOGIN_URL = 'login'
+#LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'home'
 
 # Disables this limit.
