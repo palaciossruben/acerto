@@ -157,7 +157,7 @@ def negative_forecasts(request):
 
 
 # TODO: complete this shit!
-def candidates_per_new_user(request):
+def candidates_per_user(request):
     """
     This is equivalent to this SQL:
     select s.m, cast(s.candidate_count as float) / cast(s.user_count as float) from
