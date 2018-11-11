@@ -114,8 +114,6 @@ def render_forecast(request, graph_type):
     CHART["caption"] = "Total Forecasts"
     data_source['chart'] = CHART
 
-    data_source['data'] = []
-
     if graph_type == 'all':
         events = [e for e in StateEvent.objects.filter(use_machine_learning=True)]
     elif graph_type == 'positive':
@@ -135,8 +133,11 @@ def render_forecast(request, graph_type):
     gp = pd.groupby(data, by='month').aggregate({'id': 'count'})
     gp = pd.DataFrame(gp)
 
+    data_source['data'] = []
     for idx, row in gp.iterrows():
         data_source['data'].append({'label': idx, 'value': str(row['id'])})
+
+    print(data_source['data'])
 
     # Create an object for the Column 2D chart using the FusionCharts class constructor
     column_2d = FusionCharts("column2D", "ex1", "600", "350", "chart-1", "json", data_source)
@@ -162,22 +163,34 @@ def candidates_per_new_user(request):
     CHART["caption"] = "Average candidates per user"
     data_source['chart'] = CHART
 
-    data_source['data'] = []
-
     columns = ['id', 'user_id', 'user__created_at']
     data = pd.DataFrame(list(Candidate.objects.all().values_list(*columns)), columns=columns)
     data['month'] = data['user__created_at'].apply(lambda date: '{y}-{m}'.format(y=date.year,
                                                                                  m=get_month_format(date.month)))
     data.drop('user__created_at', inplace=True, axis=1)
 
+    print(data)
+
     gp = pd.groupby(data, by=['month', 'user_id']).aggregate({'id': 'count'})
     data = pd.DataFrame(gp)
     data.reset_index(inplace=True)
 
-    data.sort_values(by=['month'], inplace=True)
+    print('after first agg:')
+    print(data)
 
+    gp = pd.groupby(data, by=['month']).aggregate({'user_id': 'count',
+                                                   'id': 'sum'})
+    data = pd.DataFrame(gp)
+    data.reset_index(inplace=True)
+
+    data.sort_values(by=['month'], inplace=True)
+    data.set_index('month', inplace=True)
+
+    data_source['data'] = []
     for idx, row in data.iterrows():
         data_source['data'].append({'label': idx, 'value': str(row['id'] / row['user_id'])})
+
+    print(data_source['data'])
 
     # Create an object for the Column 2D chart using the FusionCharts class constructor
     column_2d = FusionCharts("column2D", "ex1", "600", "350", "chart-1", "json", data_source)
