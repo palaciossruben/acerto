@@ -4,6 +4,7 @@ from beta_invite.models import Campaign, WorkAreaSegment
 from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
 
+
 def index(request):
     """
     will render the intro
