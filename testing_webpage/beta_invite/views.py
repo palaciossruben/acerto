@@ -8,13 +8,11 @@ from ipware.ip import get_ip
 from user_agents import parse
 
 import common
-from testing_webpage import constants as testing_webpage_cts
 from beta_invite import constants as cts
 from beta_invite import interview_module
 from beta_invite import test_module, new_user_module
 from beta_invite.models import User, Visitor, Campaign, BulletType, City
 from beta_invite.util import email_sender
-from beta_invite.util import common_senders
 
 
 def get_drop_down_values(language_code):
