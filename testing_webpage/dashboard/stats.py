@@ -280,7 +280,7 @@ def recommended_candidates(request):
     """
 
     data_source = dict()
-    CHART["caption"] = "Candidates in backlog or prospect"
+    CHART["caption"] = "Recommended candidates"
     data_source['chart'] = CHART
 
     columns = ['id', 'created_at']
@@ -289,6 +289,67 @@ def recommended_candidates(request):
     data['month'] = data['created_at'].apply(lambda date: '{y}-{m}'.format(y=date.year,
                                                                            m=get_month_format(date.month)))
     data.drop('created_at', inplace=True, axis=1)
+
+    gp = pd.groupby(data, by='month').aggregate({'id': 'count'})
+    data = pd.DataFrame(gp)
+    data.sort_index(inplace=True)
+
+    data_source['data'] = []
+    for idx, row in data.iterrows():
+        data_source['data'].append({'label': idx, 'value': str(row['id'])})
+
+    # Create an object for the Column 2D chart using the FusionCharts class constructor
+    column_2d = FusionCharts("column2D", "ex1", "600", "350", "chart-1", "json", data_source)
+    return render(request, cts.STATS_INDEX, {'output': column_2d.render()})
+
+
+# TODO: make this with the orm we only have the query
+def ml_automation_percentage(request):
+    """
+    # What percentage of recommended have been automatic?
+    select m,
+      cast(count(distinct automatic.id) as float) / cast(count(distinct my_all.id) as float)
+      from (select date_trunc('month', c.created_at) m, c.id id
+            from candidates c
+              inner join states s on s.id = c.state_id
+            where s.code in ('STC', 'GTJ')
+              and c.created_at > '2018-10-01') my_all
+    left join
+      (select c.id id
+       from candidates c
+          inner join candidates_state_events ce on ce.candidate_id = c.id
+          inner join state_events e on e.id = ce.stateevent_id
+          inner join states s on s.id = e.to_state_id
+       where e.use_machine_learning
+          and e.forecast
+          and s.code='STC'
+          and c.created_at > '2018-10-01') automatic
+    on my_all.id = automatic.id
+    group by m
+    order by m;
+    """
+
+    data_source = dict()
+    CHART["caption"] = "Recommended candidates"
+    data_source['chart'] = CHART
+
+    columns = ['id', 'created_at']
+    recommended = pd.DataFrame(list(Candidate.objects.filter(state__code__in=['GTJ', 'STC'],
+                                                             removed=False)
+                                    .values_list(*columns)), columns=columns)
+    recommended['month'] = recommended['created_at'].apply(lambda date: '{y}-{m}'.format(y=date.year,
+                                                                                         m=get_month_format(date.month)))
+    recommended.drop('created_at', inplace=True, axis=1)
+
+    automatic_columns = ['automatic_id', 'created_at']
+    automatic = pd.DataFrame(list(Candidate.objects.filter(removed=False,
+                                                           state_events__in=StateEvent.objects.filter(use_machine_learning=True,
+                                                                                                      forecast=True,
+                                                                                                      to_state__code='STC'))
+                                  .values_list(*columns)), columns=automatic_columns)
+    automatic.drop('created_at', inplace=True, axis=1)
+    #lambda x: x.nunique()
+    data = recommended.join(automatic, how='left')
 
     gp = pd.groupby(data, by='month').aggregate({'id': 'count'})
     data = pd.DataFrame(gp)
