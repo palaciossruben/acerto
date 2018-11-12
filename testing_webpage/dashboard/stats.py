@@ -272,3 +272,32 @@ def stuck_candidates(request):
     # Create an object for the Column 2D chart using the FusionCharts class constructor
     column_2d = FusionCharts("column2D", "ex1", "600", "350", "chart-1", "json", data_source)
     return render(request, cts.STATS_INDEX, {'output': column_2d.render()})
+
+
+def recommended_candidates(request):
+    """
+    Recommended
+    """
+
+    data_source = dict()
+    CHART["caption"] = "Candidates in backlog or prospect"
+    data_source['chart'] = CHART
+
+    columns = ['id', 'created_at']
+    data = pd.DataFrame(list(Candidate.objects.filter(state__code__in=['GTJ', 'STC'], removed=False)
+                             .values_list(*columns)), columns=columns)
+    data['month'] = data['created_at'].apply(lambda date: '{y}-{m}'.format(y=date.year,
+                                                                           m=get_month_format(date.month)))
+    data.drop('created_at', inplace=True, axis=1)
+
+    gp = pd.groupby(data, by='month').aggregate({'id': 'count'})
+    data = pd.DataFrame(gp)
+    data.sort_index(inplace=True)
+
+    data_source['data'] = []
+    for idx, row in data.iterrows():
+        data_source['data'].append({'label': idx, 'value': str(row['id'])})
+
+    # Create an object for the Column 2D chart using the FusionCharts class constructor
+    column_2d = FusionCharts("column2D", "ex1", "600", "350", "chart-1", "json", data_source)
+    return render(request, cts.STATS_INDEX, {'output': column_2d.render()})
