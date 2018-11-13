@@ -296,34 +296,6 @@ h6 {
     padding-bottom:0px;
 }
 
-.listno-light {
-    color:#bdbcc2;
-    background-image:url(../img/no-light.png);
-    background-repeat:no-repeat;
-    background-position:5px 5px;
-}
-
-.listyes-light {
-    color:#3d4753;
-    background-image:url(../img/yes-light.png);
-    background-repeat:no-repeat;
-    background-position:5px 5px;
-}
-
-.listno-dark {
-    color:#6a9371;
-    background-image:url(../img/no-dark.png);
-    background-repeat:no-repeat;
-    background-position:5px 5px;
-}
-
-.listyes-dark {
-    color:#ffffff;
-    background-image:url(../img/yes-dark.png);
-    background-repeat:no-repeat;
-    background-position:5px 5px;
-}
-
 .reviewsingle {
     text-align:center;
     padding-bottom:100px;
@@ -419,20 +391,6 @@ circle:hover {
     font-size:25px;
     cursor:pointer;
     margin-right: -50px;
-}
-
-#form-image {
-    background: url(../img/form_bg.png) no-repeat top center scroll;
-			-webkit-background-size: contain;
-			-moz-background-size: contain;
-			-o-background-size: contain;
-			background-size: 580px 430px;
-			background-position: 186% 0%;
-			-webkit-transform: rotate(-7deg);
-            -moz-transform: rotate(-7deg);
-            -ms-transform: rotate(-7deg);
-            -o-transform: rotate(-7deg);
-            transform: rotate(-7deg);
 }
 
 #register-form {
@@ -926,11 +884,6 @@ h5{
     	height:590px;
 	}
 
-	#valuebanner { background-image:url('../img/mockup-bg-tablet.jpg');
-	    background-repeat: no-repeat;
-        background-size: contain;
-    }
-
     #image4video img{
 		width:150%;
 		margin-left:-100px;
@@ -1005,11 +958,6 @@ h5{
     .contact {
         margin: 0 auto;
         float:none;
-    }
-
-    #valuebanner { background-image:url('../img/mockup-bg-tablet.jpg');
-        background-repeat: no-repeat;
-        background-size: contain;
     }
 
     #image4video img{
