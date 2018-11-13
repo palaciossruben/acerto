@@ -23,6 +23,10 @@ from queue import Queue
 from subscribe import helper as h
 
 
+def cool_print(s):
+    print(str(datetime.today()) + ': ' + s)
+
+
 # the actual upload
 def upload_resource_to_s3(user):
 
@@ -39,20 +43,20 @@ def upload_resource_to_s3(user):
         s3client.upload_file(get_local_path(user), bucket, s3_key)
         s3_url = get_s3_path(bucket, s3_key)
 
-        print("Uploaded: {} to: {}".format(get_local_path(user), s3_url))
+        cool_print("Uploaded: {} to: {}".format(get_local_path(user), s3_url))
 
         return s3_url
     except FileNotFoundError:
-        print('FileNotFoundError: {}'.format(get_local_path(user)))
-        print('daemon will continue...')
+        cool_print('FileNotFoundError: {}'.format(get_local_path(user)))
+        cool_print('daemon will continue...')
         return '#'
     except EndpointConnectionError:
-        print('EndpointConnectionError with: {}'.format(get_local_path(user)))
-        print('daemon will continue...')
+        cool_print('EndpointConnectionError with: {}'.format(get_local_path(user)))
+        cool_print('daemon will continue...')
         return '#'
     except UnicodeEncodeError:
-        print('UnicodeEncodeError with CV of user_id: {}'.format(user.id))
-        print('daemon will continue...')
+        cool_print('UnicodeEncodeError with CV of user_id: {}'.format(user.id))
+        cool_print('daemon will continue...')
         return '#'
 
 
@@ -67,7 +71,7 @@ def add_new_users(queue, created_since):
     users = User.objects.filter(~Q(curriculum_url='#') &
                                 Q(curriculum_s3_url='#') &
                                 Q(created_at__gt=created_since)).all()
-    print('total new users, to add on S3: {}'.format(len(users)))
+    cool_print('total new users, to add on S3: {}'.format(len(users)))
     [queue.put(u) for u in users]
 
     created_since = created_since if len(users) == 0 else max({u.created_at for u in users})
@@ -116,7 +120,7 @@ def upload_all():
 
 
 def run():
-    with open('s3_daemon.log', 'a') as f:
+    with open('s3_uploader.log', 'a') as f:
         sys.stdout = h.Unbuffered(f)
         upload_all()
 

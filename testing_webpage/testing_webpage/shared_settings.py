@@ -31,7 +31,8 @@ SECRET_KEY = config('secret_key')
 
 ALLOWED_HOSTS = [config('my_instance'),
                  '127.0.0.1',
-                 'peaku.co']
+                 'peaku.co',
+                 'localhost']
 
 
 # Application definition
@@ -53,6 +54,7 @@ INSTALLED_APPS = [
     #'storages',
     'rest_framework',
     'clear_cache',
+    'social_django',
 ]
 
 
@@ -66,6 +68,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'testing_webpage.urls'
@@ -84,10 +87,17 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
                 'testing_webpage.context_processors.add_cloud_front_to_context',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 WSGI_APPLICATION = 'testing_webpage.wsgi.application'
 
@@ -193,15 +203,14 @@ LOGGING = {
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
-AUTHENTICATION_BACKENDS = (
-        'django.contrib.auth.backends.ModelBackend',
-    )
-
+# TODO social: solve the colission with business user
 LOGIN_URL = 'business:login'
 LOGOUT_URL = 'business:logout'
-LOGIN_REDIRECT_URL = 'business:home'
 
+
+#LOGIN_URL = 'login'
+#LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'home'
 
 # Disables this limit.
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
@@ -214,3 +223,6 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+SOCIAL_AUTH_FACEBOOK_KEY = config('social_auth_facebook_key')  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = config('social_auth_facebook_secret')  # App Secret
