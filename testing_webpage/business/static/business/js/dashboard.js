@@ -64,7 +64,7 @@ function not_blocked(business_state, free_trial, campaign_state){
     }
     else if(free_trial == 'True' && campaign_state != "Inactive" ){
         if (business_state == 'aplicantes'){
-            limit = 3;
+            limit = 10;
         }else{
             limit = 1;
         }
