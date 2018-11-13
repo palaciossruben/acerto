@@ -69,8 +69,8 @@ def add_new_users(queue, created_since):
     :return:
     """
     users = User.objects.filter(~Q(curriculum_url='#') &
-                                Q(curriculum_s3_url='#') &
-                                Q(created_at__gt=created_since)).all()
+                                Q(curriculum_s3_url='#')).all()
+    # Q(created_at__gt=created_since)).all()
     cool_print('total new users, to add on S3: {}'.format(len(users)))
     [queue.put(u) for u in users]
 
@@ -120,9 +120,9 @@ def upload_all():
 
 
 def run():
-    with open('s3_uploader.log', 'a') as f:
-        sys.stdout = h.Unbuffered(f)
-        upload_all()
+    # with open('s3_uploader.log', 'a') as f:
+    #    sys.stdout = h.Unbuffered(f)
+    upload_all()
 
 
 if __name__ == '__main__':
