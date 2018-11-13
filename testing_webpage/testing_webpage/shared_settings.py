@@ -227,5 +227,6 @@ SOCIAL_AUTH_FACEBOOK_KEY = config('social_auth_facebook_key')  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = config('social_auth_facebook_secret')  # App Secret
 
 
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 #'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
