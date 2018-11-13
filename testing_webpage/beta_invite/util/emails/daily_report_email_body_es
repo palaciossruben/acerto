@@ -5,3 +5,5 @@ Hojas de vida en las últimas 24 horas:
 {sender_name}
 {sender_position}
 {peaku_address}
+
+%mailing_list_unsubscribe_url%

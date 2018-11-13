@@ -5,3 +5,5 @@ Resumes received on the last 24 hours:
 {sender_name}
 {sender_position}
 {peaku_address}
+
+%unsubscribe_url%
