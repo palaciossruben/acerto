@@ -7,7 +7,8 @@ app_name = 'business'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     # LOGIN AND LOGOUT
-    url(r'^login$', auth_views.login, {'template_name': 'business/login.html', 'extra_context': {'error_message': ''}}, name='login'),
+    url(r'^login$', auth_views.login, {'template_name': 'business/login.html', 'extra_context': {'error_message': ''}},
+        name='login'),
     url(r'^logout$', auth_views.logout, {'next_page': 'business:index'}, name='logout'),
     # CREATE CAMPAIGN
     url(r'^seleccion_gratis$', views.start, name='start'),

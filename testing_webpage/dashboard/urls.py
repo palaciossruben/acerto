@@ -57,5 +57,8 @@ urlpatterns = [
     url(r'^number_of_forecasts$', stats.number_of_forecasts, name='number_of_forecasts'),
     url(r'^positive_forecasts$', stats.positive_forecasts, name='positive_forecasts'),
     url(r'^negative_forecasts$', stats.negative_forecasts, name='negative_forecasts'),
-    url(r'^candidates_per_new_user$', stats.candidates_per_new_user, name='candidates_per_new_user'),
+    url(r'^candidates_per_user$', stats.candidates_per_user, name='candidates_per_user'),
+    url(r'^candidates_from_old_users$', stats.candidates_from_old_users, name='candidates_from_old_users'),
+    url(r'^stuck_candidates$', stats.stuck_candidates, name='stuck_candidates'),
+    url(r'^recommended_candidates$', stats.recommended_candidates, name='recommended_candidates'),
 ]

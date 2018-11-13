@@ -46,9 +46,9 @@
                 <div class="gradient2">
                     <div class="topnav" id="myTopnav">
                         <a href="/staffing" class="logo"><img src="{% static 'business/img/logo-color.png' %}"></a>
-                        {% if user.is_authenticated %}
+                        {% if user|business_user_is_authenticated %}
                             <a class="navButton" role="button" href="{% url 'business:logout' %}">CERRAR SESIÓN</a>
-                            <a class="navText" href="{% url 'business:business_campaigns' user|get_business_user_id_from_auth_user %}">{% trans 'My campaigns' %}</a>
+                            <a class="navText" href="{% url 'business:business_campaigns' user|get_business_user_id %}">{% trans 'My campaigns' %}</a>
                         {% else %}
                             <a class="navButton regular" role="button" onclick="off_signup() & on_login()">INICIA SESIÓN</a>
                             {% if not 'seleccion_gratis' in request.path %}
