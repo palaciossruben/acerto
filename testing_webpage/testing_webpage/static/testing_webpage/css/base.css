@@ -29,7 +29,7 @@ html,body {
 /**************************************************FONTS***************************************************************/
 @font-face {
     font-family: BigJohn;
-    src: url(/static/fonts/BIG_JOHN.otf);
+    src: url(/static/fonts/BigJohn.otf);
     unicode-range: U+?????;
 }
 
