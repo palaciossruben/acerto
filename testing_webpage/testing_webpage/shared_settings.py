@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'compressor',
     #'storages',
     'rest_framework',
+    'clear_cache',
     'social_django',
 ]
 
