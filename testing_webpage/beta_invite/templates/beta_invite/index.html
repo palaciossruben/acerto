@@ -23,7 +23,7 @@
         <h2 class="descriptions">{% trans "GENERAL DESCRIPTION" %}</h2>
     </div>
     <div class="row">
-        <div class="col-lg-8 description-text main-description">{{ campaign.description }}</div>
+        <div class="col-lg-8 description-text main-description">{% autoescape off %}{{ campaign.description }}{% endautoescape %}</div>
         <div class="col-lg-4 email-column">
             <input class="apply hide2" type="button" onclick="on_signup()" value="APLICAR">
         </div>
