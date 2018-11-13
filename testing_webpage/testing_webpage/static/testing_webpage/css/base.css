@@ -43,10 +43,6 @@ html,body {
     src: url(/static/fonts/BertholdAkzidenzGroteskRegular.otf);
 }
 
-@font-face {
-    font-family: BertholdAkzidenzGroteskLight;
-    src: url(/static/fonts/BertholdAkzidenzGroteskBELight.otf);
-}
 
 @font-face {
     font-family: BertholdAkzidenzGroteskBold;
