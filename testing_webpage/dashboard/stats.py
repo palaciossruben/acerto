@@ -8,7 +8,7 @@ from fusioncharts import FusionCharts
 
 from dashboard.models import Candidate, StateEvent
 from dashboard import constants as cts
-from beta_invite.models import Campaign
+from beta_invite.models import Campaign, User
 
 
 CHART = {
@@ -136,10 +136,7 @@ def render_forecast(request, graph_type):
     gp = pd.DataFrame(gp)
 
     for idx, row in gp.iterrows():
-        data = dict()
-        data['label'] = idx
-        data['value'] = str(row['id'])
-        data_source['data'].append(data)
+        data_source['data'].append({'label': idx, 'value': str(row['id'])})
 
     # Create an object for the Column 2D chart using the FusionCharts class constructor
     column_2d = FusionCharts("column2D", "ex1", "600", "350", "chart-1", "json", data_source)
@@ -156,3 +153,32 @@ def positive_forecasts(request):
 
 def negative_forecasts(request):
     return render_forecast(request, 'negative')
+
+
+# TODO: complete this shit!
+def candidates_per_new_user(request):
+
+    data_source = dict()
+    CHART["caption"] = "Average candidates per user"
+    data_source['chart'] = CHART
+
+    data_source['data'] = []
+
+    columns = ['id', 'user_id', 'user__created_at']
+    data = pd.DataFrame(list(Candidate.objects.all().values_list(*columns)), columns=columns)
+    data['month'] = data['user__created_at'].apply(lambda date: '{y}-{m}'.format(y=date.year,
+                                                                                 m=get_month_format(date.month)))
+    data.drop('user__created_at', inplace=True, axis=1)
+
+    gp = pd.groupby(data, by=['month', 'user_id']).aggregate({'id': 'count'})
+    data = pd.DataFrame(gp)
+    data.reset_index(inplace=True)
+
+    data.sort_values(by=['month'], inplace=True)
+
+    for idx, row in data.iterrows():
+        data_source['data'].append({'label': idx, 'value': str(row['id'] / row['user_id'])})
+
+    # Create an object for the Column 2D chart using the FusionCharts class constructor
+    column_2d = FusionCharts("column2D", "ex1", "600", "350", "chart-1", "json", data_source)
+    return render(request, cts.STATS_INDEX, {'output': column_2d.render()})

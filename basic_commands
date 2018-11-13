@@ -366,10 +366,35 @@ and id > 2400 order by id limit 500) as my_table;
 
 4. Validate the ownership of domain, by changing the CNAME record in Route 53, according to the value given in namecheap
 
-5. Then donwload the certificate from namecheap; take the peaku_co.crt and replace it in /etc/ssl/peaku_co.crt
 
-6. Check correct configuration in nginx.conf
+5. Then donwload the certificates from namecheap; take the peaku_co.crt and concat with peaku_co.ca-bundle name it: complete_certificates_chain.crt
 
-7. Restart nginx
+see https://www.namecheap.com/support/knowledgebase/article.aspx/9419//installing-a-certificate-on-nginx
 
-8. Done!
+
+6. add complete_certificates_chain.crt to nginx.conf ssl_certificate property:
+
+ssl_certificate /etc/ssl/complete_dertificate_chain.crt;
+
+
+7. Check correct configuration in nginx.conf
+
+8. Restart nginx
+
+9. check intermediari certificates by:
+
+$ openssl s_client -connect peaku.co:443
+
+should see something like:
+
+Certificate chain
+ 0 s:/OU=Domain Control Validated/OU=PositiveSSL/CN=peaku.co
+   i:/C=GB/ST=Greater Manchester/L=Salford/O=COMODO CA Limited/CN=COMODO RSA Domain Validation Secure Server CA
+ 1 s:/C=GB/ST=Greater Manchester/L=Salford/O=COMODO CA Limited/CN=COMODO RSA Domain Validation Secure Server CA
+   i:/C=GB/ST=Greater Manchester/L=Salford/O=COMODO CA Limited/CN=COMODO RSA Certification Authority
+ 2 s:/C=GB/ST=Greater Manchester/L=Salford/O=COMODO CA Limited/CN=COMODO RSA Certification Authority
+   i:/C=SE/O=AddTrust AB/OU=AddTrust External TTP Network/CN=AddTrust External CA Root
+ 3 s:/C=SE/O=AddTrust AB/OU=AddTrust External TTP Network/CN=AddTrust External CA Root
+   i:/C=SE/O=AddTrust AB/OU=AddTrust External TTP Network/CN=AddTrust External CA Root
+
+10. Done!

@@ -99,12 +99,22 @@ def get_user_from_request(request):
 
 
 def get_candidate_from_request(request):
-    """Tries 2 ways to get the candidate, 1. on GET params, 2. on POST params.
+    """Tries 3 ways to get the candidate, 1. on GET params, 2. on POST params. 3. with GET params of user and campaign
     If nothing works outputs None"""
 
     candidate_id = request.GET.get('candidate_id')
     if candidate_id is None:
         candidate_id = request.POST.get('candidate_id')
+        if candidate_id is None:
+            user_id = request.GET.get('user_id')
+            campaign_id = request.GET.get('campaign_id')
+            if user_id and campaign_id:
+                try:
+                    return Candidate.objects.get(user_id=user_id, campaign_id=campaign_id)
+                except ObjectDoesNotExist:
+                    return None
+                except MultipleObjectsReturned:
+                    return None
 
     # different from None, '' and False
     if candidate_id:

@@ -16,7 +16,6 @@ from beta_invite.views import get_drop_down_values
 from dashboard import interview_module, candidate_module, campaign_module, test_module
 from match import model
 from api.models import LeadMessage
-from business.models import BusinessUser
 
 CANDIDATE_FORECAST_LIMIT = 20
 
@@ -618,18 +617,6 @@ def get_leads():
 
     return list(leads)
 
-"""
-from collections import OrderedDict
-
-
-class _OrderedDictMaker(object):
-    def __getitem__(self, keys):
-        if not isinstance(keys, tuple):
-            keys = (keys,)
-        assert all(isinstance(key, slice) for key in keys)
-
-        return OrderedDict([(k.start, k.stop) for k in keys])
-"""
 
 def send_new_contacts(request):
     """
@@ -645,28 +632,12 @@ def send_new_contacts(request):
     :return: json
     """
 
-    #leads = get_leads()
+    leads = get_leads()
     users = get_candidate_users()
 
-    #ordered_dict = _OrderedDictMaker()
+    list_of_users = [{'pk': u.pk, 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}} for u in users + leads]
 
-    #json_data = json.dumps([{'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}, 'pk': str(u.pk)} for u in users ]) #+ #leads])
-
-    list_of_users = [{'pk': u.pk, 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}} for u in users]  # + #leads])
-
-
-    json_data = json.dumps([{'pk': u.pk, 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}} for u in users])
-
-
-    #return JsonResponse(serializers.serialize('json', users), safe=False)
-    return JsonResponse(json_data, safe=False)
-
-    #return JsonResponse(json.dumps(list_of_users), safe=False)
-    #return JsonResponse(serializers.serialize('json', list_of_users), safe=False)
-    #return HttpResponse(
-    #    json.dumps(list_of_users),
-    #    content_type='application/json; charset=utf8'
-    #)
+    return JsonResponse(list_of_users, safe=False)
 
 
 def send_messages(request):
