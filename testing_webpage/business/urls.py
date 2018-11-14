@@ -41,7 +41,6 @@ urlpatterns = [
     url(r'^home$', views.home, name='home'),
     # TODO: Worst hack ever, replace for something like: \?id=[0-9]+
     url(r'^results/(?P<pk>\d+)$', views.render_result, name='render_result'),
-    url(r'^plan/(?P<pk>\d+)$', views.plan, name='plan'),
 ]
 
 '''
