@@ -114,6 +114,10 @@ h6 {
     z-index:1;
 }
 
+.last-description{
+    margin-bottom:50px;
+    margin-top:20px;
+}
 		
 .button-cta {
     background-color: #ff9933;
@@ -501,6 +505,10 @@ circle:hover {
     margin-top: 20px;
 }
 
+.section3{
+    margin-bottom: 50px;
+}
+
 .conectors-row{
     margin-top:0;
 }
@@ -792,11 +800,6 @@ h5{
     .h5{
         font-size: 20px;
     }
-
-    .last-description{
-        margin-bottom:50px;
-    }
-
 }
 
 

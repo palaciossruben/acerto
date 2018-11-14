@@ -85,7 +85,7 @@
             <div class="row">
                 <div class="col-lg-5 col-xs-12">
                     {% if candidate.user.phone %}
-                        <a href="https://api.whatsapp.com/send?phone={{ candidate.user.change_to_international_phone_number }}" target="_blank">
+                        <a href="https://api.whatsapp.com/send?phone={{ phone }}" target="_blank">
                             <div type="button" class="wp-button center">
                                 <div class="wp-logo"><span class="wp-text">ENVIAR WHATSAPP</span></div>
                             </div>
@@ -228,7 +228,7 @@
 
             <div class="row another-info-section">
                 <div class="col-lg-5 col-xs-12 contact-data">
-                    <strong class="accordion">Ver datos de contacto 	&#x25BE;</strong>
+                    <strong class="accordion">Datos de contacto 	&#x25BE;</strong>
                     <div class="panel col-xs-12">
                         <div>
                         {% if candidate.user.phone %}
@@ -241,7 +241,8 @@
                     </div>
                 </div>
                 <div class="col-lg-7 col-xs-12 contact-data">
-                    <strong class="accordion no-style">Ver información adicional &#x25BE;</strong>
+                    {% if candidate.user.salary or candidate.user.birthday or candidate.user.languages or candidate.user.gender or candidate.user.dream_job or candidate.user.hobbies %}
+                    <strong class="accordion no-style">Información adicional &#x25BE;</strong>
                     <div class="panel">
                         <div class="col-lg-6 col-xs-12 no-padding">
                             {% if candidate.user.salary %}
@@ -266,6 +267,7 @@
                             {% endif %}
                         </div>
                     </div>
+                    {% endif %}
                 </div>
             </div>
 
@@ -355,10 +357,10 @@
                 acc[i].addEventListener("click", function() {
                     this.classList.toggle("active");
                     var panel = this.nextElementSibling;
-                    if (panel.style.display === "block") {
-                        panel.style.display = "none";
-                    } else {
+                    if (panel.style.display === "none") {
                         panel.style.display = "block";
+                    } else {
+                        panel.style.display = "none";
                     }
                 });
             }

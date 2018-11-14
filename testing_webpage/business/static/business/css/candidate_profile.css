@@ -96,7 +96,7 @@ body {
 }
 
 .panel {
-    display: none;
+    display: block;
     background-color: white;
     overflow: hidden;
     text-align:left;
