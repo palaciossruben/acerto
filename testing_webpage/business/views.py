@@ -566,9 +566,11 @@ def candidate_profile(request, pk):
 
     candidate = Candidate.objects.get(pk=pk)
     business_user = get_business_user(request)
+    phone = candidate.user.phone.replace('+', '')
 
     return render(request, cts.CANDIDATE_PROFILE_VIEW_PATH, {'candidate': candidate,
-                                                             'business_user': business_user})
+                                                             'business_user': business_user,
+                                                             'phone': phone})
 
 
 @login_required

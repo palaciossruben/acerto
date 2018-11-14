@@ -65,8 +65,7 @@ def send_reminder(email_template, state_name, subject_function, email_type):
     for candidate in candidates:
         if candidate.campaign.pk != 5:
             #  Do not send if there are no tests or is on the 'WFI' and has no interviews.
-            if not candidate.campaign.tests or state_name == 'Waiting For Interview' \
-                    and not interview_module.has_recorded_interview(candidate.campaign):
+            if not candidate.campaign.tests:
                 continue
 
             # check that emails are not sent twice with respect to a candidate:
