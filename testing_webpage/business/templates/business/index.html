@@ -53,7 +53,7 @@
                 <br>
                 <input type="submit" class="submit" value="{% trans 'START NOW' %}">
             </fieldset>
-            <span style="color:white;margin-left:30px; s">{% trans 'Already a registered user? Log in' %}
+            <span style="color:white;margin-left:30px; s">¿Ya eres un usuario registrado? Inicia sesión
             <a style="color:white" href="javascript:void(0);" onclick="off_signup() & on_login()">
             <strong>{% trans 'Here' %}</strong>
             </a>
@@ -85,6 +85,35 @@
         </form>
     </div>
 </div>
+<div id="overlay-demo">
+    <div id="form-image3">
+        <form id="demo-form" action="{% url 'business:demo_scheduled' %}" method="post">
+            {% csrf_token %}
+            <fieldset>
+                <span class="exitDingbat" onclick="off_demo()">X</span>
+                <br>
+                <br>
+                <span>{% trans 'Name' %}</span>
+                <input class="form-input" name="name"
+                    required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
+                <br>
+                <span>{% trans 'Mail' %}</span>
+                <input class="form-input" type="email" name="email" required="required">
+                <br>
+                <span>{% trans 'Phone' %}</span>
+                <input class="form-input" type="tel" name="phone"
+                    required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
+                <br>
+                <input type="submit" class="submit large" value="PROGRAMA UN DEMO!">
+            </fieldset>
+            <span style="color:white;margin-left:30px; s">¿Ya eres un usuario registrado? Inicia sesión
+            <a style="color:white" href="javascript:void(0);" onclick="off_demo() & on_login()">
+            <strong>{% trans 'Here' %}</strong>
+            </a>
+            </span>
+        </form>
+    </div>
+</div>
 <div class="row blankbanner" style="margin-right: 0px;margin-left: 0px;"></div>
 <div id="hide1">
     <div class="row" style="margin-right: 0px;" id="main-copy">
@@ -98,9 +127,7 @@
         </div>
         <div class="col-lg-5"></div>
         <div class="col-lg-7">
-            <form action="{% url 'business:demo' %}">
-                <button class="button-cta" role="button">PROGRAMA UN DEMO</button>
-            </form>
+            <button class="button-cta" role="button" onclick="on_demo()">PROGRAMA UN DEMO</button>
         </div>
     </div>
     <div class="row blankabout responsive-no" style="margin-right: 0px;margin-left: 0px;"></div>

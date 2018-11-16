@@ -54,6 +54,34 @@ function off_login() {
     $("html").css("overflow-y", "scroll");
 }
 
+function on_demo() {
+    $("#overlay-demo").css("display", "block");
+    $("#hide1").css("display", "none");
+    $("#hide2").css("display", "none");
+    $("#demo-form").css("display", "block");
+    $("html").css("background-size", "cover");
+    $("#option1").css("color", "white");
+    $("#option2").css("color", "white");
+    $("#demo-form").animate({"marginLeft": '60%'}, 650,"swing");
+    $("#form-imag3e").animate({"backgroundPosition": '86%'}, 690,"swing");
+    $("html").css("overflow", "hidden");
+    $("nav").css("margin-bottom", "40px");
+}
+
+function off_demo() {
+    document.getElementById("overlay-demo").style.display = "none";
+    document.getElementById("hide1").style.display = "block";
+    document.getElementById("hide2").style.display = "block";
+    document.getElementById("demo-form").style.display = "none";
+    $("html").css("background-size", "contain");
+    $("#option1").css("color", "#3d4753");
+    $("#option2").css("color", "#3d4753");
+    $("nav").css("margin-bottom", "");
+    $("#demo-form").animate({marginLeft: '160%'});
+    $("#form-image3").animate({"backgroundPosition": '186%'}, 650,"swing");
+    $("html").css("overflow-y", "scroll");
+}
+
 function myFunction() {
     var x = document.getElementById("myTopnav");
     if (x.className === "row") {
