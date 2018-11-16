@@ -1,18 +1,19 @@
-from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseBadRequest, HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
-from django.utils.translation import ugettext as _
 from ipware.ip import get_ip
 from user_agents import parse
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import AuthenticationForm
+
 
 import common
 from beta_invite import constants as cts
-from beta_invite import interview_module
 from beta_invite import test_module, new_user_module
 from beta_invite.models import User, Visitor, Campaign, BulletType, City
-from beta_invite.util import email_sender
+from dashboard.models import Candidate
+from business.custom_user_creation_form import CustomUserCreationForm
 
 
 def get_drop_down_values(language_code):
@@ -73,10 +74,7 @@ def translate_tests(tests, lang_code):
         return tests
 
 
-def index(request):
-    """
-    will render a form to input user data.
-    """
+def get_index_params(request):
 
     # Gets information of client: such as if it is mobile
     is_desktop = not parse(request.META['HTTP_USER_AGENT']).is_mobile
@@ -116,7 +114,28 @@ def index(request):
         except ObjectDoesNotExist:
             pass
 
-    return render(request, cts.INDEX_VIEW_PATH, param_dict)
+    return param_dict
+
+
+def index(request):
+    """
+    will render a form to input user data.
+    """
+    return render(request, cts.INDEX_VIEW_PATH, get_index_params(request))
+
+
+# TODO: refactor with the other method of same name in business/views
+def get_first_error_message(form):
+    """
+    :param form: AuthenticationForm or UserCreationForm
+    :return: str with first error_message
+    """
+    error_messages = [m[0] for m in form.errors.values()]
+    if len(error_messages) > 0:  # Takes first element from the errors dictionary
+        error_message = error_messages[0]
+    else:
+        error_message = 'unknown error'
+    return error_message
 
 
 def register(request):
@@ -125,48 +144,80 @@ def register(request):
         request: Request object
     Returns: Saves or updates the User, now it will not be creating new user objects for the same email.
     """
-    # Gets information of client: such as if it is mobile.
-    is_mobile = parse(request.META['HTTP_USER_AGENT']).is_mobile
 
-    email = request.POST.get('email')
-    name = request.POST.get('name')
-    phone = request.POST.get('phone')
-    work_area_id = request.POST.get('work_area_id')
-    city_id = request.POST.get('city_id')
+    signup_form = CustomUserCreationForm(request.POST)
 
-    politics_accepted = request.POST.get('politics')
-    if politics_accepted:
-        politics = True
+    if signup_form.is_valid():
+
+        # Gets information of client: such as if it is mobile.
+        is_mobile = parse(request.META['HTTP_USER_AGENT']).is_mobile
+
+        email = request.POST.get('username')
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        work_area_id = request.POST.get('work_area_id')
+        city_id = request.POST.get('city_id')
+
+        politics_accepted = request.POST.get('politics')
+        if politics_accepted:
+            politics = True
+        else:
+            politics = False
+        campaign = common.get_campaign_from_request(request)
+
+        # Validates all fields
+        if campaign and name and phone and (email or not campaign.has_email):
+
+            country = common.get_country_with_request(request)
+
+            user_params = {'name': name,
+                           'email': email,
+                           'phone': phone,
+                           'work_area_id': work_area_id,
+                           'country': country,
+                           'city': City.objects.get(pk=city_id),
+                           'ip': get_ip(request),
+                           'is_mobile': is_mobile,
+                           'language_code': request.LANGUAGE_CODE,
+                           'politics': politics}
+
+            user = new_user_module.user_if_exists(email, phone, campaign)
+            if user:
+                user = new_user_module.update_user(campaign, user, user_params, request, signup_form=signup_form)
+            else:
+                user = new_user_module.create_user(campaign, user_params, request, is_mobile, signup_form=signup_form)
+
+            return redirect('/servicio_de_empleo/pruebas?campaign_id={campaign_id}&user_id={user_id}'.format(
+                campaign_id=campaign.id,
+                user_id=user.id))
+        else:
+            return HttpResponseBadRequest('<h1>HTTP CODE 400: Client sent bad request with missing params</h1>')
+
     else:
-        politics = False
+
+        error_message = get_first_error_message(signup_form)
+        params_dict = get_index_params(request)
+        params_dict['error_message'] = error_message
+        return render(request, cts.INDEX_VIEW_PATH, params_dict)
+
+
+def apply(request):
+    """
+    When the user is logged in and applies to a second campaign
+    :return:
+    """
+
+    user = User.get_user_from_request(request)
+
     campaign = common.get_campaign_from_request(request)
 
-    # Validates all fields
-    if campaign and name and phone and (email or not campaign.has_email):
+    candidate = new_user_module.candidate_if_exists(campaign, user)
+    if not candidate:
+        Candidate(campaign=campaign, user=user).save()
 
-        country = common.get_country_with_request(request)
-
-        user_params = {'name': name,
-                       'email': email,
-                       'phone': phone,
-                       'work_area_id': work_area_id,
-                       'country': country,
-                       'city': City.objects.get(pk=city_id),
-                       'ip': get_ip(request),
-                       'is_mobile': is_mobile,
-                       'language_code': request.LANGUAGE_CODE,
-                       'politics': politics}
-
-        user = new_user_module.user_if_exists(email, phone, campaign)
-        if user:
-            user = new_user_module.update_user(campaign, user, user_params, request)
-        else:
-            user = new_user_module.create_user(campaign, user_params, request, is_mobile)
-
-        return redirect('/servicio_de_empleo/pruebas?campaign_id={campaign_id}&user_id={user_id}'.format(campaign_id=campaign.id,
-                                                                                                         user_id=user.id))
-    else:
-        return HttpResponseBadRequest('<h1>HTTP CODE 400: Client sent bad request with missing params</h1>')
+    return redirect('/servicio_de_empleo/pruebas?campaign_id={campaign_id}&user_id={user_id}'.format(
+        campaign_id=campaign.id,
+        user_id=user.id))
 
 
 def tests(request):
@@ -197,25 +248,47 @@ def tests(request):
         return redirect('/servicio_de_empleo/additional_info?candidate_id={candidate_id}'.format(candidate_id=candidate.pk))
 
 
-@login_required
+def simple_login_and_user(login_form, request):
+    """
+    :param login_form: a AuthenticationForm object
+    :param request: HTTP
+    :return: BusinessUser obj
+    """
+    username = login_form.cleaned_data.get('username')
+    password = login_form.cleaned_data.get('password')
+
+    # Creates a Authentication user
+    auth_user = authenticate(username=username,
+                             password=password)
+
+    login(request, auth_user)
+
+    return User.objects.get(auth_user=auth_user)
+
+
 def home(request):
-    return render(request, 'success.html')
-
-
-def send_interview_mail(email_template, candidate):
     """
+    Leads to Dashboard view.
     Args:
-        email_template: name of email body, in beta_invite/util.
-        candidate: Object.
-    Returns: sends email.
+        request: HTTP request.
+    Returns: displays all offers of a business
     """
-    if candidate and interview_module.has_recorded_interview(candidate.campaign):
-        candidate.campaign.translate(candidate.user.language_code)
 
-        email_sender.send(objects=candidate,
-                          language_code=candidate.user.language_code,
-                          body_input=email_template,
-                          subject=_('You can record the interview for {campaign}').format(campaign=candidate.campaign.title))
+    login_form = AuthenticationForm(data=request.POST)
+
+    # TODO: generalize to set of blocked emails.
+    if login_form.is_valid():
+
+        user = simple_login_and_user(login_form, request)
+        segment_code = user.get_work_area_segment_code()
+        if segment_code:
+            return redirect('/trabajos?segment_code={}'.format(segment_code))
+        else:
+            return redirect('/trabajos')
+
+    else:
+        error_message = get_first_error_message(login_form)
+        return render(request, cts.INDEX_VIEW_PATH, {'error_message': error_message})
 
 
 def get_test_result(request):
@@ -294,8 +367,8 @@ def active_campaigns(request):
                                                              fail_state='WFI')
 
     # TODO: add salary and city filter
-    if candidate and candidate.user.get_work_area_segment():
-        return redirect('/trabajos?segment_code={}'.format(candidate.user.get_work_area_segment().code))
+    if candidate and candidate.user.get_work_area_segment_code():
+        return redirect('/trabajos?segment_code={}'.format(candidate.user.get_work_area_segment_code()))
     else:
         return redirect('/trabajos')
 

@@ -16,18 +16,40 @@
 {% endblock %}
 {% block content %}
     <!----------------------------------------------SECTION 1---------------------------------------------------------->
-    <div class="row">
-        <div class="col-lg-4 email-column">
-            <input class="apply hide1" type="button" onclick="on_signup()" value="APLICAR">
+    {% if user|user_is_authenticated %}
+        <div class="row">
+            <div class="col-lg-4 email-column">
+                <a href=""></a>
+                <form action="{% url 'beta_invite:apply' %}" method="post">
+                    {% csrf_token %}
+                    <input class="submit apply hide1" type="submit" value="APLICAR">
+                </form>
+            </div>
+            <h2 class="descriptions">{% trans "GENERAL DESCRIPTION" %}</h2>
         </div>
-        <h2 class="descriptions">{% trans "GENERAL DESCRIPTION" %}</h2>
-    </div>
-    <div class="row">
-        <div class="col-lg-8 description-text main-description">{% autoescape off %}{{ campaign.description }}{% endautoescape %}</div>
-        <div class="col-lg-4 email-column">
-            <input class="apply hide2" type="button" onclick="on_signup()" value="APLICAR">
+        <div class="row">
+            <div class="col-lg-8 description-text main-description">{% autoescape off %}{{ campaign.description }}{% endautoescape %}</div>
+            <div class="col-lg-4 email-column">
+                <form action="{% url 'beta_invite:apply' %}" method="post">
+                    {% csrf_token %}
+                    <input class="submit apply hide2" type="submit" value="APLICAR">
+                </form>
+            </div>
         </div>
-    </div>
+    {% else %}
+        <div class="row">
+            <div class="col-lg-4 email-column">
+                <input class="apply hide1" type="button" onclick="on_signup()" value="APLICAR">
+            </div>
+            <h2 class="descriptions">{% trans "GENERAL DESCRIPTION" %}</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 description-text main-description">{% autoescape off %}{{ campaign.description }}{% endautoescape %}</div>
+            <div class="col-lg-4 email-column">
+                <input class="apply hide2" type="button" onclick="on_signup()" value="APLICAR">
+            </div>
+        </div>
+    {% endif %}
     <div class="row">
         {% if campaign.city %}
             <h2 class="descriptions">Ciudad</h2>
@@ -75,6 +97,30 @@
             {% endfor %}
         </ul>
     </div>
+    <div id="overlay-login">
+        <div id="form-image2">
+            <form id="login-form" method="post" action="{% url 'beta_invite:home' %}" >
+                {% csrf_token %}
+                <fieldset>
+                    <span class="exitDingbat" onclick="off_login()">X</span>
+                    <br>
+                    <br>
+                    <span>Correo</span>
+                    <input name="username" class="form-input"><br>
+                    <span>Contraseña</span>
+                    <input name="password" class="form-input" type="password"><br>
+                    <span style="font-size:10px;"><a href="#" style="color:white">{% trans 'I forgot my password' %}</a></span>
+                    <span style="font-size:10px">
+                    <a href="javascript:void(0);" style="color:white" onclick="off_login() & on_signup()">{% trans "I'm not yet registered" %}
+                    </a>
+                    </span>
+                    <br>
+                    <br>
+                    <input type="submit" class="submit" value="{% trans 'ACCESS' %}">
+                </fieldset>
+            </form>
+        </div>
+    </div>
 
     <div id="overlay-signup">
         <div class="form-image">
@@ -92,7 +138,7 @@
 
                 {% if campaign.has_email %}
                 <span>{% trans 'Your email' %}</span>
-                <input class="form-input" id="email" type="email" name="email" required="required">
+                <input class="form-input" id="email" type="email" name="username" required="required">
                 {% endif %}
 
                 <span>{% trans 'Your phone' %}</span>
@@ -120,6 +166,12 @@
                 <input type="file" id="file" name="curriculum_url" class="form-inputfile" onchange="pressed()">
                 <label for="file" id="fileLabel">{% trans "Upload your resume" %}</label>
                 <label class="form-checkbox-container">
+                    <span>Contraseña</span>
+                <input class="form-input" type="password" name="password1" required="required">
+                <br>
+                <span>Confirmar contraseña</span>
+                <input class="form-input" type="password" name="password2" required="required">
+                <br>
                 <input class="form-checkbox" type="checkbox" id="politics" name="politics" required>
                 <a href="security_politics" target="_blank"> He leído y acepto las políticas de privacidad</a>
                 </label>
@@ -201,5 +253,11 @@
         $(".only-register-form").animate({marginLeft: '160%'});
         $(".form-image").animate({"backgroundPosition": '186%'}, 1,"swing");
         }
+    </script>
+    <!-- any incoming error_message will print as an alert-->
+    <script>
+        {% if error_message %}
+            alert("{{ error_message }}");
+        {% endif %}
     </script>
 {% endblock %}

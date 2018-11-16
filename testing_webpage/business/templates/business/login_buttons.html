@@ -1,6 +1,7 @@
 {% load i18n %}
+{% load app_filters %}
 
-{% if user.is_authenticated %}
+{% if user|business_user_is_authenticated %}
 
     {% trans "Log Out" as logout_value %}
     <div align="right" style="margin-top:15px; margin-right:15px; cursor:pointer;">

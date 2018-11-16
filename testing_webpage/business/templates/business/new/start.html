@@ -197,7 +197,7 @@
             </div>
         </section>
         <!----------------------------------------------SECTION 2------------------------------------------------------>
-        {% if user.is_authenticated %}
+        {% if user|business_user_is_authenticated %}
             <form id="big-form" class="noBorderForm hidejs" action="{% url 'business:create_post' %}" method="post">
                 <input type="hidden" name="business_user_id" value="{{ business_user_id }}" />
         {% else %}
@@ -310,7 +310,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button id="publish-campaign-button" class="button-cta"  type="submit" onclick="on({{user.is_authenticated|yesno:'true,false'}})">PUBLICAR MI OFERTA</button>
+                            <button id="publish-campaign-button" class="button-cta"  type="submit" onclick="on({{user|business_user_is_authenticated|yesno:'true,false'}})">PUBLICAR MI OFERTA</button>
                         </div>
                         <div class="col-md-4">
                             <fieldset>
@@ -325,7 +325,7 @@
                         <div class="col-md-2"></div>
                     </div>
                 </div>
-                {% if not user.is_authenticated %}
+                {% if not user|business_user_is_authenticated %}
                 <div id="overlay">
                     <div class="form-image final">
                         <div id="register-form">
