@@ -258,42 +258,46 @@ nav a:hover {
 
 .freebg {
     width:261px;
-    height:415px;
+    height:355px;
     background-color:#f2f2f2;
     border-radius:20px;
     position:absolute;
     text-align:center;
     z-index:99;
+    padding-bottom: 30px;
 }
 
 .basicbg {
     width:261px;
-    height:415px;
+    height:355px;
     background: linear-gradient(145deg,  #f8f090, #3bab74);
     border-radius:20px;
     position:absolute;
     text-align:center;
     z-index:100;
+    padding-bottom: 30px;
 }
 
 .premiumbg {
     width:261px;
-    height:415px;
+    height:355px;
     background: linear-gradient(145deg,  #418277, #468365);
     border-radius:20px;
     position:absolute;
     text-align:center;
     z-index:99;
+    padding-bottom: 30px;
 }
 
 .headhunterbg {
     width:261px;
-    height:415px;
+    height:355px;
     background-color:#f2f2f2;
     border-radius:20px;
     position:absolute;
     text-align:center;
     z-index:97;
+    padding-bottom: 30px;
 }
 
 .price {

@@ -9,7 +9,7 @@
     box-sizing:border-box;
 }
 
-a:hover{
+a, a:hover, a:active, a: visited, a:focus{
     text-decoration:none;
 }
 
@@ -29,7 +29,7 @@ html,body {
 /**************************************************FONTS***************************************************************/
 @font-face {
     font-family: BigJohn;
-    src: url(/static/fonts/BIG_JOHN.otf);
+    src: url(/static/fonts/BigJohn.otf);
     unicode-range: U+?????;
 }
 
@@ -43,10 +43,6 @@ html,body {
     src: url(/static/fonts/BertholdAkzidenzGroteskRegular.otf);
 }
 
-@font-face {
-    font-family: BertholdAkzidenzGroteskLight;
-    src: url(/static/fonts/BertholdAkzidenzGroteskBELight.otf);
-}
 
 @font-face {
     font-family: BertholdAkzidenzGroteskBold;

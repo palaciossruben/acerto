@@ -38,8 +38,8 @@ function set_circle_color(score, id_string){
 function set_background(image_name, id_string){
 
     image_name = image_name.replace("&#39;","");
-    if (image_name == 'default' || image_name == ''){
-        image_name = "Start_BG-07.jpg)"
+    if (image_name == 'default' || image_name == 'None'){
+        image_name = "Start_BG-07.jpg)";
     }
 
     var me = document.getElementById(id_string);

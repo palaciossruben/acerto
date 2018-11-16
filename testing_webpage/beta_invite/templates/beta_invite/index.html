@@ -29,6 +29,29 @@
         </div>
     </div>
     <div class="row">
+        {% if campaign.city %}
+            <h2 class="descriptions">Ciudad</h2>
+        {% endif %}
+    </div>
+    <div class="row">
+        <p class="description-text">{{ campaign.city.name }}</p>
+    </div>
+
+    <div class="row">
+        {% if campaign.salary_low_range >= 0 %}
+            <h2 class="descriptions">Salario</h2>
+        {% endif %}
+    </div>
+    <div class="row">
+        <p class="description-text">
+            {% if campaign.salary_low_range == campaign.salary_high_range %}
+                ${{ campaign.salary_low_range }}
+            {% else %}
+                ${{ campaign.salary_low_range }} a ${{ campaign.salary_high_range }}
+            {% endif %}
+        </p>
+    </div>
+    <div class="row">
         {% if perks %}
             <h2 class="descriptions">{% trans "Perks" %}</h2>
         {% endif %}

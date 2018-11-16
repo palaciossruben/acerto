@@ -1,8 +1,6 @@
 0 0 * * * python3 /home/ubuntu/acerto/testing_webpage/send_user_reminder_emails.py
 0 6 * * * cd /home/ubuntu/acerto/testing_webpage && python3 process_manager.py
 0 12 * * * python3 /home/ubuntu/acerto/testing_webpage/send_daily_report.py
-0 12 * * 1 python3 /home/ubuntu/acerto/testing_webpage/send_users_emails.py
-0 22 * * 4 python3 /home/ubuntu/acerto/testing_webpage/send_prospect_emails_by_workarea.py
 * * * * * python3 /home/ubuntu/acerto/testing_webpage/testing_webpage/email/consumer.py
 * * * * * cd /home/ubuntu/acerto/testing_webpage/tasks && (pidof s3_daemon_pid || bash -c "exec -a s3_daemon_pid python3 s3_uploader.py")
 * * * * * cd /home/ubuntu/acerto/testing_webpage/tasks && (pidof es_daemon_pid || bash -c "exec -a es_daemon_pid python3 es_uploader.py")

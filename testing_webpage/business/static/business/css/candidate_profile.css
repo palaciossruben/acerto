@@ -18,42 +18,6 @@ body {
     margin-left:0;
 }
 /**************************************************FONTS***************************************************************/
-@font-face {
-    font-family: BigJohn;
-    src: url(/static/fonts/BIG_JOHN.otf);
-    unicode-range: U+?????;
-}
-
-@font-face {
-    font-family: NorthernBlock;
-    src: url(/static/fonts/TheNorthernBlockLtdLoewHeavy.otf);
-}
-
-@font-face {
-    font-family: BertholdAkzidenzGroteskRegular;
-    src: url(/static/fonts/BertholdAkzidenzGroteskRegular.otf);
-}
-
-@font-face {
-    font-family: BertholdAkzidenzGroteskLight;
-    src: url(/static/fonts/BertholdAkzidenzGroteskBELight.otf);
-}
-
-@font-face {
-    font-family: BertholdAkzidenzGroteskBold;
-    src: url(/static/fonts/BertholdAkzidenzGroteskBold.otf);
-}
-
-@font-face {
-    font-family: BertholdAkzidenzGroteskItalic;
-    src: url(/static/fonts/BertholdAkzidenzGroteskItalic.otf);
-}
-
-@font-face {
-    font-family: BertholdAkzidenzGroteskSuper;
-    src: url(/static/fonts/BertholdAkzidenzGroteskSuper.otf);
-}
-
 .super{
     font-family: BertholdAkzidenzGroteskSuper;
 }
@@ -96,11 +60,6 @@ body {
 }
 /*****************************************BACKGROUND*******************************************************************/
 
-.background{
-    background: url(../img/Start_BG-01-min.jpg) no-repeat top center scroll ;
-    background-size:cover;
-}
-
 .gradient1 {
     background:-webkit-linear-gradient(180deg, rgba(246,246,246,0) 30%, rgba(246,246,246,1) 100%);
     background:-o-linear-gradient(180deg, rgba(246,246,246,0) 30%, rgba(246,246,246,1) 100%);
@@ -137,7 +96,7 @@ body {
 }
 
 .panel {
-    display: none;
+    display: block;
     background-color: white;
     overflow: hidden;
     text-align:left;
@@ -781,10 +740,6 @@ footer {
 }
 
 @media screen and (max-width: 768px) {
-    .background{
-        background: url(../img/cel-Start_BG-01-min.jpg) no-repeat top center scroll ;
-        background-size:contain;
-    }
 
     .div1, .div2, .div3, .div4, .div5, .div6{
         margin-left:0;

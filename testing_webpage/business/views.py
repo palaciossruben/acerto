@@ -342,19 +342,6 @@ def translate_plan(plan_obj, language_code):
     return plan_obj
 
 
-def plan(request, pk):
-    """
-    Args:
-        request: HTTP request
-        pk: primary key of the Plan object.
-    Returns: Renders the plan detailed explanation
-    """
-    plan_obj = Plan.objects.get(pk=pk)
-    plan_obj = translate_plan(plan_obj, request.LANGUAGE_CODE)
-
-    return render(request, cts.PLAN_VIEW_PATH, {'plan': plan_obj})
-
-
 def start(request):
     """
     Only displays initial view.
@@ -566,9 +553,11 @@ def candidate_profile(request, pk):
 
     candidate = Candidate.objects.get(pk=pk)
     business_user = get_business_user(request)
+    phone = candidate.user.phone.replace('+', '')
 
     return render(request, cts.CANDIDATE_PROFILE_VIEW_PATH, {'candidate': candidate,
-                                                             'business_user': business_user})
+                                                             'business_user': business_user,
+                                                             'phone': phone})
 
 
 @login_required

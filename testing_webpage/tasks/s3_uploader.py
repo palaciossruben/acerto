@@ -68,6 +68,7 @@ def add_new_users(queue, created_since):
      3. text analysis already done
     :return:
     """
+    # TODO fix cv updates
     users = User.objects.filter(~Q(curriculum_url='#') &
                                 Q(curriculum_s3_url='#')).all()
     cool_print('total new users, to add on S3: {}'.format(len(users)))
