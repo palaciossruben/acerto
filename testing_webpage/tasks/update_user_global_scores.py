@@ -11,14 +11,14 @@ sys.path.insert(0, '/'.join(os.getcwd().split('/')[:-1]))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
-import common
+from beta_invite import test_module
 from beta_invite.models import User
 
 
 users = User.objects.all()
 
 for u in users:
-    common.update_scores_of_user(u)
+    test_module.update_scores_of_user(u)
     print('updated scores from user_id: {}'.format(u.id))
 
 

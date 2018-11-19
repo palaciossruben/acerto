@@ -5,6 +5,7 @@ from beta_invite import text_analizer
 from beta_invite.models import Question, Survey, Score, Evaluation, EvaluationSummary, Test
 from dashboard.models import Candidate, State
 from match import model
+import common
 
 
 def get_tests_questions_dict(tests):
@@ -271,3 +272,80 @@ def classify_evaluation_and_change_state(candidate, use_machine_learning=False, 
 
     else:
         raise NotImplementedError('should not reach this, something wrong with candidate_id: {}'.format(candidate.id))
+
+
+def get_score(scores, test_id):
+    result = [s for s in scores if s.test_id == test_id]
+    if len(result) == 1:
+        return result[0]
+    else:
+        return None
+
+
+def update_scores_of_candidate(candidate):
+    """
+    Updates the user.scores according to a candidate
+    :param candidate: Candidate
+    :return: None
+    """
+
+    scores = list(candidate.user.scores.all())
+
+    last_evaluation = candidate.get_last_evaluation()
+    if last_evaluation:
+        for last_score in last_evaluation.scores.all():
+            another_score = get_score(scores, last_score.test_id)
+
+            if another_score:  # already has the test
+                if another_score.created_at < last_score.created_at:  # has a more recent test
+                    common.replace(scores, another_score, last_score)
+            else:  # does not have the test
+                scores.append(last_score)
+
+        candidate.user.scores = scores
+        candidate.user.save()
+
+
+def update_scores_of_user(user):
+    """
+    Will update scores according to all its candidates
+    :param user: just a User
+    :return: None
+    """
+
+    candidates = common.get_candidates(user)
+    for c in candidates:
+        update_scores_of_candidate(c)
+
+
+def get_high_scores(candidate):
+    """
+    Will get scores higher than average between 100 and cut_score
+    :param candidate:
+    :return:
+    """
+    all_tests = list(candidate.campaign.tests.all())
+    high_scores = candidate.user.scores.filter(test__in=all_tests, passed=True).all()
+    return [s for s in high_scores if s.value > (100 + s.test.cut_score)/2]
+
+
+def get_missing_tests(candidate):
+    """
+    Gets the tests that the user should present either because:
+    1. He/she has never presented it
+    2. Failed the test, the last time he/she presented it
+    3. Passed with a low score
+
+    high_score = above the average between test.cut_score and 100
+    :param candidate: Candidate object
+    :return: list of tests
+    """
+    all_tests = list(candidate.campaign.tests.all())
+    high_score_tests = [s.test for s in get_high_scores(candidate)]
+
+    # filters for low or non existent tests
+    tests = [t for t in all_tests if t not in high_score_tests]
+
+    # sorts by test_type.order
+    return sorted(tests, key=lambda t: t.type.order)
+

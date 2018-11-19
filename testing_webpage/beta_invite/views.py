@@ -208,7 +208,6 @@ def apply(request):
     """
 
     user = User.get_user_from_request(request)
-
     campaign = common.get_campaign_from_request(request)
 
     candidate = new_user_module.candidate_if_exists(campaign, user)
@@ -229,18 +228,18 @@ def tests(request):
     """
 
     campaign = common.get_campaign_from_request(request)
-    tests = translate_tests(campaign.tests.all(), request.LANGUAGE_CODE)
+    user = common.get_user_from_request(request)
+    candidate = common.get_candidate(user, campaign)
+
+    tests = translate_tests(test_module.get_missing_tests(candidate), request.LANGUAGE_CODE)
 
     end_point_params = {'campaign_id': campaign.id,
                         'tests': tests}
 
-    # Adds the user id to the params, to be able to track answers, later on.
-    user = common.get_user_from_request(request)
-    candidate = common.get_candidate(user, campaign)
     if not candidate:
         return redirect('/servicio_de_empleo?campaign_id={}'.format(campaign.id))
     if user is not None:
-        end_point_params['user_id'] = int(user.id)
+        end_point_params['user_id'] = int(user.id)  # Adds the user id to the params, to be able to track answers, later
 
     if tests:
         return render(request, cts.TESTS_VIEW_PATH, end_point_params)
@@ -298,18 +297,21 @@ def get_test_result(request):
     Returns: Either end process or invites to interview.
     """
     campaign = common.get_campaign_from_request(request)
-    questions_dict = test_module.get_tests_questions_dict(campaign.tests.all())
     user = common.get_user_from_request(request)
     user_id = user.id if user else None
     if not user:
         return redirect('/servicio_de_empleo?campaign_id={campaign_id}'.format(campaign_id=campaign.id))
     candidate = common.get_candidate(user, campaign)
 
-    scores = test_module.get_scores(campaign, user_id, questions_dict, request)
-    test_module.get_evaluation(scores, candidate)
+    questions_dict = test_module.get_tests_questions_dict(test_module.get_missing_tests(candidate))
+    missing_scores = test_module.get_scores(campaign, user_id, questions_dict, request)
+
+    all_scores = missing_scores + test_module.get_high_scores(candidate)
+
+    test_module.get_evaluation(all_scores, candidate)
 
     # once it has the evaluation will update the canonical user scores
-    common.update_scores_of_candidate(candidate)
+    test_module.update_scores_of_candidate(candidate)
 
     return redirect(
         '/servicio_de_empleo/additional_info?candidate_id={candidate_id}'.format(candidate_id=candidate.pk))

@@ -170,6 +170,17 @@ def remove_params_from_url(url):
     return urlunparse(u)
 
 
+def replace(my_list, to_remove, to_replace):
+    """
+    Some replacing action in a list
+    :param my_list: any list
+    :param to_remove: to be removed
+    :param to_replace: for this other stuff
+    :return: list
+    """
+    return [to_replace if e == to_remove else e for e in my_list]
+
+
 def get_candidates(user):
 
     if user:
@@ -179,61 +190,6 @@ def get_candidates(user):
             return []
     else:
         return []
-
-
-def get_score(scores, test_id):
-    result = [s for s in scores if s.test_id == test_id]
-    if len(result) == 1:
-        return result[0]
-    else:
-        return None
-
-
-def replace(my_list, to_remove, to_replace):
-    """
-    Some replacing action in list
-    :param my_list: any list
-    :param to_remove: to be removed
-    :param to_replace: for this other stuff
-    :return: list
-    """
-    return [to_replace if e == to_remove else e for e in my_list]
-
-
-def update_scores_of_candidate(candidate):
-    """
-    Updates the user.scores according to a candidate
-    :param candidate: Candidate
-    :return: None
-    """
-
-    scores = list(candidate.user.scores.all())
-
-    last_evaluation = candidate.get_last_evaluation()
-    if last_evaluation:
-        for last_score in last_evaluation.scores.all():
-            another_score = get_score(scores, last_score.test_id)
-
-            if another_score:  # already has the test
-                if another_score.created_at < last_score.created_at:  # has a more recent test
-                    replace(scores, another_score, last_score)
-            else:  # does not have the test
-                scores.append(last_score)
-
-        candidate.user.scores = scores
-        candidate.user.save()
-
-
-def update_scores_of_user(user):
-    """
-    Will update scores according to all its candidates
-    :param user: just a User
-    :return: None
-    """
-
-    candidates = get_candidates(user)
-    for c in candidates:
-        update_scores_of_candidate(c)
 
 
 def get_candidate(user, campaign):

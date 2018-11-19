@@ -23,6 +23,7 @@
                 <form action="{% url 'beta_invite:apply' %}" method="post">
                     {% csrf_token %}
                     <input class="submit apply hide1" type="submit" value="APLICAR">
+                    <input type="hidden" name="campaign_id" value="{{ campaign_id }}"/>
                 </form>
             </div>
             <h2 class="descriptions">{% trans "GENERAL DESCRIPTION" %}</h2>
@@ -33,6 +34,7 @@
                 <form action="{% url 'beta_invite:apply' %}" method="post">
                     {% csrf_token %}
                     <input class="submit apply hide2" type="submit" value="APLICAR">
+                    <input type="hidden" name="campaign_id" value="{{ campaign_id }}"/>
                 </form>
             </div>
         </div>
