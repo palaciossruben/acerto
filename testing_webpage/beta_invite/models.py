@@ -898,6 +898,9 @@ class User(models.Model):
         plus_symbol = '+' if add_plus else ''
 
         if self.phone:
+
+            self.phone = self.phone.replace('-', '')
+
             # Adds the '+' and country code
             if self.phone[0] != '+':
 
