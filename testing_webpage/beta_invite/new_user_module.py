@@ -90,7 +90,7 @@ def add_auth_and_login(signup_form, user, request):
     auth_user = authenticate(username=username,
                              password=password)
 
-    # New BusinessUser pointing to the AuthUser
+    # New User pointing to the AuthUser
     user.auth_user = auth_user
     user.save()
 

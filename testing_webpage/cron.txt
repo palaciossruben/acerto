@@ -4,3 +4,4 @@
 * * * * * python3 /home/ubuntu/acerto/testing_webpage/testing_webpage/email/consumer.py
 * * * * * cd /home/ubuntu/acerto/testing_webpage/tasks && (pidof s3_daemon_pid || bash -c "exec -a s3_daemon_pid python3 s3_uploader.py")
 * * * * * cd /home/ubuntu/acerto/testing_webpage/tasks && (pidof es_daemon_pid || bash -c "exec -a es_daemon_pid python3 es_uploader.py")
+0 * * * * cd /home/ubuntu/acerto/testing_webpage/tasks && python3 candidate_messages.py
