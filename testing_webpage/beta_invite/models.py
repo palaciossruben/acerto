@@ -902,12 +902,12 @@ class User(models.Model):
             self.phone = self.phone.replace('-', '')
 
             # Adds the '+' and country code
-            if self.phone[0] != '+':
+            if re.search(r'^' + self.get_calling_code() + '.+', self.phone) is None:
 
                 self.phone = plus_symbol + self.get_calling_code() + self.phone
 
                 # Adds the '+' only
-            elif re.search(r'^' + self.get_calling_code() + '.+', self.phone) is not None:
+            elif self.phone[0] != '+':
                 self.phone = plus_symbol + self.phone
 
         return self.phone
