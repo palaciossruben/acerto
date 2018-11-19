@@ -901,14 +901,14 @@ class User(models.Model):
 
             self.phone = self.phone.replace('-', '')
 
-            # Adds the '+' and country code
-            if re.search(r'^' + self.get_calling_code() + '.+', self.phone) is None:
+            if self.phone[0] != '+':
 
-                self.phone = plus_symbol + self.get_calling_code() + self.phone
+                if re.search(r'^' + self.get_calling_code() + '.+', self.phone) is None:
 
-                # Adds the '+' only
-            elif self.phone[0] != '+':
-                self.phone = plus_symbol + self.phone
+                    self.phone = plus_symbol + self.get_calling_code() + self.phone
+
+                else:
+                    self.phone = plus_symbol + self.phone
 
         return self.phone
 
