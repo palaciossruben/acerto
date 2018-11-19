@@ -1,6 +1,7 @@
 from django import template
 from business.models import BusinessUser
 from django.core.serializers import serialize
+from beta_invite.models import User
 
 import common
 register = template.Library()
@@ -35,6 +36,11 @@ def get_business_user_id(user):
 @register.filter
 def business_user_is_authenticated(user):
     return True if user.is_authenticated() and BusinessUser.get_business_user(user) else False
+
+
+@register.filter
+def user_is_authenticated(user):
+    return True if user.is_authenticated() and User.get_user(user) else False
 
 
 @register.filter

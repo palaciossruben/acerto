@@ -10,7 +10,7 @@
     <div class="topnav" id="myTopnav">
         <a href="/staffing" class="logo"><img src="{% static 'business/img/logo-color-negro.png' %}" style="text-decoration:none;"></a>
         {% if 'seleccion_de_personal' in request.path and 'contactanos' not in request.path %}
-            {% if user.is_authenticated %}
+            {% if user|business_user_is_authenticated %}
                 <a href="{% url 'business:logout' %}" style="text-decoration:none;">{% trans "LOG OUT" %}</a>
                 {% if not 'campañas' in request.path  and user|business_user_is_authenticated %}
                     <a href="{% url 'business:business_campaigns' user|get_business_user_id %}" style="text-decoration:none;">{% trans 'My campaigns' %}</a>

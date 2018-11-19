@@ -30,7 +30,6 @@ urlpatterns = [
     url(r'payment_confirmation$', views.payment_confirmation, name='payment_confirmation'),
 
     # DEMO SCHEDULED
-    url(r'^demo$', views.demo, name='demo'),
     url(r'^demo_scheduled$', views.demo_scheduled, name='demo_scheduled'),
 
     url(r'^save_comments$', views.save_comments, name='save_comments'),

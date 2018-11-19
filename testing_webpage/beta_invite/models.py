@@ -1,5 +1,7 @@
 import re
 from datetime import datetime, timedelta
+from django.contrib.auth.models import User as AuthUser
+from django.core.exceptions import ObjectDoesNotExist
 
 from django.db import models
 from django.contrib.postgres.fields import JSONField
@@ -761,6 +763,8 @@ class User(models.Model):
     language_code = models.CharField(max_length=3, default='es')
     is_mobile = models.NullBooleanField()  # Detects if the user is in a mobile phone when registering.
     google_token = models.CharField(max_length=1000, default=None, null=True)
+    auth_user = models.ForeignKey(AuthUser, null=True, on_delete=models.SET_NULL)
+    scores = models.ManyToManyField(Score)
 
     # Additional info
     gender = models.ForeignKey(Gender, null=True, on_delete=models.SET_NULL)
@@ -790,8 +794,37 @@ class User(models.Model):
     def __str__(self):
         return '{0}, {1}, {2}'.format(self.name, self.email, self.pk)
 
+    @staticmethod
+    def get_user_from_request(request):
+        """
+        Given a request that has the AuthUser.id will get the User
+        Args:
+            request: HTTP request object.
+        Returns: A User object.
+        """
+        return User.objects.get(auth_user_id=request.user.id)
+
+    @staticmethod
+    def get_user(user):
+        """
+        Given a auth User it gets the User
+        :param user: Auth User
+        :return: Business User or None
+        """
+        try:
+            return User.objects.get(auth_user=user)
+        except ObjectDoesNotExist:
+            return None
+
     def get_work_area_segment(self):
         return self.work_area.segment if self.work_area else None
+
+    def get_work_area_segment_code(self):
+        s = self.get_work_area_segment()
+        if s:
+            return s.code
+        else:
+            return None
 
     def get_curriculum_url(self):
         """

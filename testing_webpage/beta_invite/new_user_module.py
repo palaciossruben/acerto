@@ -1,5 +1,5 @@
 from datetime import datetime
-
+from django.contrib.auth import login, authenticate
 from django.utils.translation import ugettext as _
 
 import common
@@ -35,14 +35,19 @@ def candidate_if_exists(campaign, user):
         return c
 
 
-def update_user(campaign, user, user_params, request):
+def update_user(campaign, user, user_params, request, signup_form=None):
     """
     Args:
+        campaign: campaign
         user: Obj
         user_params: dict with fields of a User obj
         request: HTTP
+        signup_form: sign up form, it will add a AuthUser
     Returns: None
     """
+
+    if signup_form:
+        add_auth_and_login(signup_form, user, request)
 
     common.update_object(user, user_params)
     user.updated_at = datetime.utcnow()
@@ -76,17 +81,39 @@ def update_user_with_request(request, user):
     user.save()
 
 
-def create_user(campaign, user_params, request, is_mobile):
+def add_auth_and_login(signup_form, user, request):
+
+    signup_form.save()
+    username = signup_form.cleaned_data.get('username')
+    password = signup_form.cleaned_data.get('password1')
+    # Creates a Authentication user
+    auth_user = authenticate(username=username,
+                             password=password)
+
+    # New BusinessUser pointing to the AuthUser
+    user.auth_user = auth_user
+    user.save()
+
+    login(request, auth_user)
+
+    return user
+
+
+def create_user(campaign, user_params, request, is_mobile, signup_form=None):
     """
     Args:
         campaign: obj
         user_params: Dict with user params
         request: HTTP
         is_mobile: Boolean
+        signup_form: the form with which it did sign up
     Returns: Creates a new user on the DB.
     """
     user = User(**user_params)
     user.save()  # Saves here to get an id
+
+    if signup_form:
+        add_auth_and_login(signup_form, user, request)
 
     update_resource(request, user, 'curriculum_url', 'resumes')
     user.save()
