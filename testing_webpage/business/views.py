@@ -667,10 +667,6 @@ def get_work_area_requirement(request, work_area_id):
     return JsonResponse(json_data, safe=False)
 
 
-def demo(request):
-    return render(request, cts.DEMO_VIEW_PATH)
-
-
 def send_demo_scheduled_notification(request, contact):
 
     try:
@@ -691,8 +687,7 @@ def demo_scheduled(request):
 
     contact = Contact(name=request.POST.get('name'),
                       email=request.POST.get('email'),
-                      phone=request.POST.get('phone'),
-                      message=request.POST.get('message'), )
+                      phone=request.POST.get('phone'),)
 
     contact.save()
 

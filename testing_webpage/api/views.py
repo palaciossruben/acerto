@@ -114,7 +114,7 @@ def register(request):
         user_params['phone'] = phone
 
     if work_area_id:
-        user_params['phone'] = work_area_id
+        user_params['work_area_id'] = work_area_id
 
     if city_id:
         user_params['city'] = City.objects.get(pk=city_id)
