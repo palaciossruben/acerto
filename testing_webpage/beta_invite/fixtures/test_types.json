@@ -5,7 +5,8 @@
     "fields":{
       "name": "cognitive",
       "name_es":"cognitivo",
-      "code": "C"
+      "code": "C",
+      "order": 2
     }
   },
   {
@@ -14,7 +15,8 @@
     "fields":{
       "name": "technical",
       "name_es":"técnico",
-      "code": "T"
+      "code": "T",
+      "order": 5
     }
   },
   {
@@ -23,7 +25,8 @@
     "fields":{
       "name": "requirements",
       "name_es":"requisitos",
-      "code": "R"
+      "code": "R",
+      "order": 1
     }
   },
   {
@@ -32,7 +35,8 @@
     "fields":{
       "name": "motivation",
       "name_es":"motivación",
-      "code": "M"
+      "code": "M",
+      "order": 3
     }
   },
   {
@@ -41,7 +45,8 @@
     "fields":{
       "name": "cultural fit",
       "name_es":"fit cultural",
-      "code": "F"
+      "code": "F",
+      "order": 4
     }
   }
 ]
