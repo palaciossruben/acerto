@@ -52,7 +52,7 @@
 		<fieldset> <!-- three item asked -->
 			<h2 class="fs-title">Género</h2>
 			<h3 class="fs-subtitle">¿Eres hombre o mujer?</h3>
-			<select id="gender" name="gender_id" required>
+			<select id="gender" name="gender_id">
 				<option value="" disabled selected>Selecciona tu género</option>
 				{% for sex in genders %}
 					<option value="{{ sex.id }}">{{ sex.name }}</option>
