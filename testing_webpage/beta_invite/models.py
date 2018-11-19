@@ -639,7 +639,7 @@ class Campaign(models.Model):
     requirements = models.ManyToManyField(Requirement)
     interviews = models.ManyToManyField(Interview)
     calendly = models.BooleanField(default=True)
-    state = models.ForeignKey(CampaignState, default=2)  # id of Active State, this is NOT NICE
+    state = models.ForeignKey(CampaignState, default=2)  # Id of Active State, this is NOT NICE
     calendly_url = models.CharField(max_length=200, default=cts.INTERVIEW_CALENDLY)
     removed = models.BooleanField(default=False)
     free_trial = models.BooleanField(default=True)

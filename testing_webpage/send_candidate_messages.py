@@ -7,6 +7,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 from beta_invite.util import messenger_sender
 from dashboard.models import Candidate
+from beta_invite.models import User
 
 
 def candidates_filter(candidates):
