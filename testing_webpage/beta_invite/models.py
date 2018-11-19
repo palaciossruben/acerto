@@ -764,6 +764,7 @@ class User(models.Model):
     is_mobile = models.NullBooleanField()  # Detects if the user is in a mobile phone when registering.
     google_token = models.CharField(max_length=1000, default=None, null=True)
     auth_user = models.ForeignKey(AuthUser, null=True, on_delete=models.SET_NULL)
+    scores = models.ManyToManyField(Score)
 
     # Additional info
     gender = models.ForeignKey(Gender, null=True, on_delete=models.SET_NULL)

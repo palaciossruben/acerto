@@ -308,6 +308,9 @@ def get_test_result(request):
     scores = test_module.get_scores(campaign, user_id, questions_dict, request)
     test_module.get_evaluation(scores, candidate)
 
+    # once it has the evaluation will update the canonical user scores
+    common.update_scores_of_candidate(candidate)
+
     return redirect(
         '/servicio_de_empleo/additional_info?candidate_id={candidate_id}'.format(candidate_id=candidate.pk))
 
