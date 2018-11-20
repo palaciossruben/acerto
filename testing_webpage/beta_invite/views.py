@@ -278,7 +278,12 @@ def home(request):
     # TODO: generalize to set of blocked emails.
     if login_form.is_valid():
 
-        user = simple_login_and_user(login_form, request)
+        try:
+            user = simple_login_and_user(login_form, request)
+        except ObjectDoesNotExist:
+            # TODO: how to reload the exact campaign and at the same time pass on the error_message?
+            return render(request, cts.INDEX_VIEW_PATH, {'error_message': 'Usuario no existe'})
+
         segment_code = user.get_work_area_segment_code()
         if segment_code:
             return redirect('/trabajos?segment_code={}'.format(segment_code))

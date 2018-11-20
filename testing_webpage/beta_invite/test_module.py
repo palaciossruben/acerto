@@ -298,7 +298,7 @@ def update_scores_of_candidate(candidate):
 
             if another_score:  # already has the test
                 if another_score.created_at < last_score.created_at:  # has a more recent test
-                    common.replace(scores, another_score, last_score)
+                    scores = common.replace(scores, another_score, last_score)
             else:  # does not have the test
                 scores.append(last_score)
 

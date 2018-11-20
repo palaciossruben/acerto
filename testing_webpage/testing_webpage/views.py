@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.contrib.auth import logout
 
 
 def index(request):
@@ -61,3 +62,12 @@ def home(request):
         return redirect('business:home')
     else:  # its a candidate user
         return render(request, 'testing_webpage/home.html')
+
+
+def my_logout(request):
+    if BusinessUser.get_business_user(request.user):
+        logout(request)
+        return redirect('business:index')
+    else:  # its a candidate user
+        logout(request)
+        return redirect('jobs')

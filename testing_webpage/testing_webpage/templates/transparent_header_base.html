@@ -11,7 +11,7 @@
         <div class="topnav" id="myTopnav">
             <a href="/staffing" class="logo" style="text-decoration:none;"><img src="{% static 'business/img/logo-color.png' %}"></a>
             {% if user|user_is_authenticated %}
-                <a class="navButton" href="/logout" style="text-decoration:none;">CERRAR SESIÓN</a>
+                <a class="navButton" href="my_logout" style="text-decoration:none;">CERRAR SESIÓN</a>
             {% else %}
                 <a class="navButton" role="button" onclick="on_signup()" style="text-decoration:none;">CREA TU CUENTA</a>
                 <a class="navButton regular" role="button" onclick="on_login()">INICIA SESIÓN</a>
