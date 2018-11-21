@@ -1,7 +1,7 @@
 import re
 from datetime import datetime, timedelta
 from django.contrib.auth.models import User as AuthUser
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 
 from django.db import models
 from django.contrib.postgres.fields import JSONField
@@ -803,7 +803,12 @@ class User(models.Model):
             request: HTTP request object.
         Returns: A User object.
         """
-        return User.objects.get(auth_user_id=request.user.id)
+        try:
+            return User.objects.get(auth_user_id=request.user.id)
+        except MultipleObjectsReturned:
+            return None
+        except ObjectDoesNotExist:
+            return None
 
     @staticmethod
     def get_user(user):

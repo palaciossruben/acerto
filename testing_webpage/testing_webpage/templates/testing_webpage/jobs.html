@@ -92,9 +92,12 @@
                     {% endif %}
                 </div>
                 <div class="col-lg-6">
-
-
-
+                    {% for passed_test in campaign.passed_tests %}
+                        <strong class="listyes-light-base"><strong class="test-distinction-question"></strong>{{ passed_test.name_es }}</strong>
+                    {% endfor %}
+                    {% for missing_test in campaign.missing_tests %}
+                        <strong class="listno-light-base"><strong class="test-distinction-question"></strong>{{ missing_test.name_es }}</strong>
+                    {% endfor %}
                 </div>
             </a>
         </div>

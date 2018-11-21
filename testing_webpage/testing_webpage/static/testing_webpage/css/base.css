@@ -181,6 +181,20 @@ footer {
     }
 }
 
+.listyes-light-base {
+    color:#3d4753;
+    background-image:url(/static/testing_webpage/img/yes-light.png);
+    background-repeat:no-repeat;
+    background-position:5px 5px;
+}
+
+.listno-light-base {
+    color:#bdbcc2;
+    background-image:url(/static/testing_webpage/img/no-light.png);
+    background-repeat:no-repeat;
+    background-position:5px 5px;
+}
+
 /**************************************************FOOTER V2 ASK WHAT IS BETTER***************************************
 
 footer {

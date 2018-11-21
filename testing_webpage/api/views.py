@@ -50,12 +50,15 @@ def save_leads(request):
 
     if names is not None and phones is not None and emails is not None:
         new_leads = Lead.create_leads(names, phones, emails, facebook_urls)
-
         return JsonResponse([l.facebook_url for l in new_leads], safe=False)
-        # return HttpResponse(status=200)
     else:
         error_message = '<h1>The request misses crucial information (names, messages, phones or emails)</h1>'
         return HttpResponse(error_message, status=400)
+
+
+@csrf_exempt
+def get_leads_to_filter(request):
+    return JsonResponse([l.facebook_url for l in Lead.objects.all()], safe=False)
 
 
 @csrf_exempt
