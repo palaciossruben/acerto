@@ -36,7 +36,6 @@ urlpatterns = [
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^my[-_]logout$', views.my_logout, name='logout'),
     url(r'^home[-_]test$', views.home, name='home'),
-
 ]
 
 urlpatterns += i18n_patterns(
