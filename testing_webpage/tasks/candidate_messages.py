@@ -16,6 +16,7 @@ from django.db.models import Q
 
 from dashboard.models import Candidate
 from beta_invite.util import messenger_sender
+from beta_invite import constants as beta_cts
 
 
 def run():
@@ -27,7 +28,8 @@ def run():
     candidates = [c for c in Candidate.objects.filter(Q(created_at__lt=datetime.datetime.today() - datetime.timedelta(hours=1)) &
                                                       Q(created_at__gt=datetime.datetime.today() - datetime.timedelta(hours=2)) &
                                                       Q(state__code='BL') &
-                                                      ~Q(message__filename=message_filename))]
+                                                      ~Q(message__filename=message_filename) &
+                                                      ~Q(campaign_id=beta_cts.DEFAULT_CAMPAIGN_ID))]
 
     messenger_sender.send(candidates=candidates,
                           language_code='es',

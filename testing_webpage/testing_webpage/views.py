@@ -32,6 +32,12 @@ def robots(request):
 
 
 def add_missing_tests(user, campaigns):
+    """
+    Will add to temp properties to the campaigns, in order to show tests that are completed or missing
+    :param user:
+    :param campaigns:
+    :return:
+    """
     if user:
         for campaign in campaigns:
             prospective_candidate = Candidate(user=user, campaign=campaign)
