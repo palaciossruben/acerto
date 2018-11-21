@@ -138,6 +138,10 @@ def get_first_error_message(form):
     return error_message
 
 
+def has_segment_match(user, campaign):
+    return campaign.get_work_area_segment() == user.get_work_area_segment()
+
+
 def register(request):
     """
     Args:
@@ -187,9 +191,13 @@ def register(request):
             else:
                 user = new_user_module.create_user(campaign, user_params, request, is_mobile, signup_form=signup_form)
 
-            return redirect('/servicio_de_empleo/pruebas?campaign_id={campaign_id}&user_id={user_id}'.format(
-                campaign_id=campaign.id,
-                user_id=user.id))
+            if has_segment_match(user, campaign):
+                return redirect('/servicio_de_empleo/pruebas?campaign_id={campaign_id}&user_id={user_id}'.format(
+                    campaign_id=campaign.id,
+                    user_id=user.id))
+            else:
+                return redirect('/trabajos?segment_code={code}'.format(code=user.get_work_area_segment_code()))
+
         else:
             return HttpResponseBadRequest('<h1>HTTP CODE 400: Client sent bad request with missing params</h1>')
 
