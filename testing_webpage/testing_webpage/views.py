@@ -7,6 +7,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 
+from beta_invite.models import User
+from beta_invite import test_module
+from dashboard.models import Candidate
+
 
 def index(request):
     """
@@ -27,8 +31,23 @@ def robots(request):
     return render(request, 'testing_webpage/robots.txt', {}, content_type="application/xhtml+txt")
 
 
+def add_missing_tests(user, campaigns):
+    """
+    Will add to temp properties to the campaigns, in order to show tests that are completed or missing
+    :param user:
+    :param campaigns:
+    :return:
+    """
+    if user:
+        for campaign in campaigns:
+            prospective_candidate = Candidate(user=user, campaign=campaign)
+            campaign.passed_tests = [s.test for s in test_module.get_high_scores(prospective_candidate)]
+            campaign.missing_tests = test_module.get_missing_tests(prospective_candidate)
+
+
 def jobs(request):
     code = request.GET.get('segment_code')
+    user = User.get_user_from_request(request)
 
     try:
         segment = WorkAreaSegment.objects.get(code=code)
@@ -42,12 +61,16 @@ def jobs(request):
             active_campaigns = Campaign.objects.filter(~Q(title_es=None),
                                                        state__code__in=['I', 'A'],
                                                        removed=False)
+
+        add_missing_tests(user, active_campaigns)
         return render(request, cts.JOBS_VIEW_PATH, {'active_campaigns': active_campaigns})
 
     except ObjectDoesNotExist:
-        return render(request, cts.JOBS_VIEW_PATH, {'active_campaigns': Campaign.objects.filter(~Q(title_es=None),
-                                                                                                state__code__in=['I', 'A'],
-                                                                                                removed=False)})
+        active_campaigns = Campaign.objects.filter(~Q(title_es=None),
+                                                   state__code__in=['I', 'A'],
+                                                   removed=False)
+        add_missing_tests(user, active_campaigns)
+        return render(request, cts.JOBS_VIEW_PATH, {'active_campaigns': active_campaigns})
 
 
 @login_required

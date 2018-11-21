@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^get_public_posts$', views.get_public_posts, name='get_public_posts'),
     url(r'^add_messages$', views.add_messages, name='add_messages'),
     url(r'^save_leads$', views.save_leads, name='save_leads'),
+    url(r'^get_leads_to_filter$', views.get_leads_to_filter, name='get_leads_to_filter'),
 
     # API v1
     url(r'^v1/register$', views.register, name='register'),
