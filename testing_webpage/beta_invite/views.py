@@ -374,7 +374,7 @@ def active_campaigns(request):
             test_module.classify_evaluation_and_change_state(candidate,
                                                              use_machine_learning=True,
                                                              success_state='STC',
-                                                             fail_state='WFI')
+                                                             fail_state=candidate.state.code)
 
     # TODO: add salary and city filter
     if candidate and candidate.user.get_work_area_segment_code():
