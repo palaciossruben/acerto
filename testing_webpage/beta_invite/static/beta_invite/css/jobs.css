@@ -1,0 +1,451 @@
+/**************************************************FONTS***************************************************************/
+
+.super{
+    font-family: BertholdAkzidenzGroteskSuper;
+}
+
+.bold{
+    font-family: BertholdAkzidenzGroteskBold;
+}
+
+.regular{
+    font-family: BertholdAkzidenzGroteskRegular;
+}
+
+
+.campaign-div{
+    width: 50%;
+    min-height:230px;
+    margin: 0 auto;
+    border-radius: 25px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #F1F1EB;
+    padding: 10px;
+    margin-top: 20px;
+    color:#666666;
+    background-color:white;
+}
+
+.campaign-div a{
+    color:#666666;
+}
+
+.campaign-div a:hover{
+    color:orange;
+}
+
+.tittle{
+    font-size:25px;
+    font-family:BertholdAkzidenzGroteskBold;
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.tests{
+    font-size:18px;
+    font-family:BertholdAkzidenzGroteskBold;
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.center{
+    text-align:center;
+}
+
+/**************************************************CONTENT*************************************************************/
+.main-section {
+	width:auto;
+	position: relative;
+	z-index:1;
+}
+
+.jobs-background{
+    background: url(../img/jobs_background.jpg) repeat top center scroll;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+}
+
+.main-title{
+    float:right;
+    margin-top:90px;
+    color:white;
+    text-shadow: 3px 4px 5px rgba(0,0,0,0.7);
+}
+
+.descriptions{
+    border-bottom: 2px groove;
+    border-color:rgba(255, 255, 255, .5);
+    text-align:left;
+    margin-left: 80px;
+    width: 50%;
+}
+
+.description-text{
+    text-align:left;
+    padding-left: 80px;
+    margin-bottom: 20px;
+}
+
+
+.main-description{
+    min-height: 140px;
+    white-space: pre-wrap;
+}
+
+.email-column{
+    text-align: center;
+}
+
+.email-input{
+    border-radius: 20px;
+    padding: 8px 20px;
+    background: gainsboro;
+    border: none;
+    text-align: center;
+}
+
+.bullet{
+    margin-left: 20px;
+}
+
+.final-row{
+    margin-bottom: 50px;
+}
+
+.tests-tittle{
+    text-align:center;
+}
+
+.tests{
+    margin-top:-10px;
+    margin-bottom:10px;
+
+}
+
+#file{
+    display:none;
+}
+
+.logo-white{
+    width:20%;
+    float:left;
+    display:block;
+    margin-top:10px;
+    margin-left:-30px;
+}
+
+.button-cta {
+    background-color: #ff9933;
+	border-radius:40px;
+    border: none;
+    color: white;
+    padding: 9px 35px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    cursor: pointer;
+	font-weight:600;
+}
+
+.submit {
+    width:142px;
+    background: orange;
+	border-radius:40px;
+    border: none;
+    color: white;
+    padding: 5px 25px;
+    text-align: center;
+    text-decoration: none;
+	font-size:18px;
+    display: inline-block;
+    cursor: pointer;
+    margin-left:20px;
+    margin-top:0;
+    margin-bottom:10px;
+}
+
+.apply{
+    display: block;
+    margin: 0 auto;
+    background: orange;
+    border-radius: 20px;
+    padding: 6px 20px;
+    margin-top: 20px;
+    color: white;
+    border: none;
+}
+/**************************************************GRADIENTS AND OVERLAYS**********************************************/
+
+.gradient1 {
+
+    background:-webkit-linear-gradient(90deg, rgba(23,32,42,0) 0%, rgba(23,32,42,1) 100%);
+    background:-o-linear-gradient(90deg, rgba(23,32,42,0) 0%, rgba(23,32,42,1) 100%);
+    background:-moz-linear-gradient(90deg, rgba(23,32,42,0) 0%, rgba(23,32,42,1) 100%);
+    background:linear-gradient(90deg, rgba(23,32,42,0) 40%, rgba(23,32,42,0.3) 50%, rgba(23,32,42,0.5) 80%, rgba(0,0,0,0.6) 90%, rgba(0,0,0,1)100%);
+}
+
+.gradient2 {
+    background:-webkit-linear-gradient(180deg, rgba(23,32,42,0) 0%, rgba(23,32,42,1) 100%);
+    background:-o-linear-gradient(180deg, rgba(23,32,42,0) 0%, rgba(23,32,42,1) 100%);
+    background:-moz-linear-gradient(180deg, rgba(23,32,42,0) 0%, rgba(23,32,42,1) 100%);
+    background:linear-gradient(180deg, rgba(23,32,42,0) 60%,  rgba(23,32,42,0.5) 80%, rgba(0,0,0,0.6) 100%);
+}
+
+#overlay {
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    left:0;
+    bottom: 0;
+    display:none;
+    background:transparent;
+    }
+
+#overlay-login {
+    display:none;
+    position:absolute;
+    width: 100%;
+    top: 0;
+    right: 0;
+    left:0;
+    bottom: 0;
+    background:-webkit-linear-gradient(311deg, rgba(158,186,82,1) 0%, rgba(126,180,104,1) 8%, rgba(62,174,140,1) 26%, rgba(25,32,41,1) 72%, rgba(25,32,41,1) 100%);
+    background:-o-linear-gradient(311deg, rgba(158,186,82,1) 0%, rgba(126,180,104,1) 8%, rgba(62,174,140,1) 26%, rgba(25,32,41,1) 72%, rgba(25,32,41,1) 100%);
+    background:-moz-linear-gradient(311deg, rgba(158,186,82,1) 0%, rgba(126,180,104,1) 8%, rgba(62,174,140,1) 26%, rgba(25,32,41,1) 72%, rgba(25,32,41,1) 100%);
+    background:linear-gradient(-49deg, rgba(158,186,82,1) 0%, rgba(126,180,104,0.9) 8%, rgba(62,174,140,0.9) 26%, rgba(25,32,41,0.5) 72%, rgba(25,32,41,0.5) 100%);
+}
+
+#login-form {
+    z-index:1;
+    position: relative;
+    background:rgba(61,71,83,0.42);
+    width:380px;
+    box-sizing: border-box;
+    margin-bottom: 100px;
+    margin-top: 180px;
+    margin-left: 160%;
+    font-size:13px;
+    border-radius:30px;
+    box-shadow: 5px 5px 5px rgba(61,71,83,0.1);
+}
+
+#login-form fieldset{
+    padding:0 22%;
+}
+
+#login-form fieldset span{
+    color:white;
+}
+
+#overlay-signup {
+    display:none;
+    z-index:5;
+    position:fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    left:0;
+    bottom: 0;
+    background:-webkit-linear-gradient(-49deg, rgba(158,186,82,1) 0%, rgba(126,180,104,0.9) 8%, rgba(62,174,140,0.9) 26%, rgba(25,32,41,0.5) 72%, rgba(25,32,41,0.5) 100%);
+    background:-o-linear-gradient(-49deg, rgba(158,186,82,1) 0%, rgba(126,180,104,0.9) 8%, rgba(62,174,140,0.9) 26%, rgba(25,32,41,0.5) 72%, rgba(25,32,41,0.5) 100%);
+    background:-moz-linear-gradient(-49deg, rgba(158,186,82,1) 0%, rgba(126,180,104,0.9) 8%, rgba(62,174,140,0.9) 26%, rgba(25,32,41,0.5) 72%, rgba(25,32,41,0.5) 100%);
+    background:linear-gradient(-49deg, rgba(158,186,82,1) 0%, rgba(126,180,104,0.9) 8%, rgba(62,174,140,0.9) 26%, rgba(25,32,41,0.5) 72%, rgba(25,32,41,0.5) 100%);
+}
+
+/**************************************************TRANSITIONS*********************************************************/
+
+#register-form {
+    z-index:1;
+    position: absolute;
+    background:rgba(255,255,255,0.42);
+    width:360px;
+    box-sizing: border-box;
+    margin-bottom: 100px;
+    margin-top: 180px;
+    margin-left: 8%;
+    font-size:13px;
+    border-radius:30px;
+    box-shadow: 5px 5px 5px rgba(61,71,83,0.1);
+    opacity:0;
+}
+
+#register-form fieldset {
+    padding:0 22%;
+}
+
+#register-form fieldset span {
+    color:black;
+}
+
+.only-register-form {
+    z-index:1;
+    position: relative;
+    background:rgba(61,71,83,0.65);
+    width:360px;
+    box-sizing: border-box;
+    margin-bottom: 100px;
+    margin-top: 50px;
+    margin-left: 150%;
+    font-size:13px;
+    border-radius:30px;
+    box-shadow: 5px 5px 5px rgba(61,71,83,0.1);
+}
+.only-register-form fieldset {
+    padding:0 22%;
+}
+
+.only-register-form fieldset span {
+    color:white;
+}
+
+.backend-description{
+    display:none;
+}
+
+.description{
+    width:80%;
+}
+
+#fileLabel{
+    color:black;
+    background: white;
+    border-radius: 10px;
+    padding: 5px 20px;
+    cursor: pointer;
+}
+
+.form-checkbox-container a{
+    color:white;
+}
+
+.form-checkbox-container a:hover{
+    text-decoration:none;
+}
+
+.form-input {
+    margin-top:1px;
+    margin-bottom:10px;
+    width:200px;
+    background: rgba(255,255,255,0.1);
+    border-style: groove;
+    border-color: rgba(61,71,83,0.2);
+    border-width: 0.5px;
+    padding: 1px 0;
+    color:black;
+}
+
+@-webkit-keyframes autofill {
+    to {
+        color: black;
+        background: white;
+    }
+}
+
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+.white{
+    background: white;
+}
+
+.exitDingbat {
+    color:white;
+    float:right;
+    font-size:25px;
+    cursor:pointer;
+    margin-right: -50px;
+}
+
+.form-label {
+    color:white;
+}
+
+.register {
+    margin-left:30px;
+}
+
+.form-label a{
+    color:white;
+}
+
+.hide1{
+    display:none;
+}
+
+/**************************************************HEADER**************************************************************/
+
+.logo {
+    float:left;
+}
+
+.logo img{
+    margin-left:30px;
+    width:70px;
+}
+
+.logo2{
+   margin-left:70px;
+   width:80px;
+}
+/**************************************************RESPONSIVE**********************************************************/
+
+@media  (max-width: 768px){
+
+    .main-title{
+        float: left;
+        margin-bottom: 30px;
+        position:absolute;
+        bottom:0;
+        font-size: 20px;
+        text-shadow: 3px -1px 1px rgba(0,0,0,0.4);
+        margin-left:9px;
+    }
+
+    .descriptions, .description-text{
+        margin-left:20px;
+        padding-left: 0;
+    }
+
+    .logo-white {
+        margin-left: 35px;
+    }
+
+    .contact{
+        width: auto;
+    }
+
+
+    .hide1{
+        display:block;
+    }
+
+    .hide2{
+        display:none;
+    }
+
+    .only-register-form {
+        width:320px;
+    }
+
+    .campaign-div{
+        width: 90%;
+        min-height:230px;
+    }
+
+    .logo2{
+       margin-left:0;
+   }
+}
+
+
+
+

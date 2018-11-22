@@ -52,14 +52,14 @@ def jobs(request):
     try:
         segment = WorkAreaSegment.objects.get(code=code)
         campaigns = Campaign.objects.filter(~Q(title_es=None),
-                                            state__code__in=['I', 'A'],
+                                            state__code__in=['A'],
                                             removed=False,
                                             work_area__segment__code=segment.code)
         if len(campaigns) > 0:
             active_campaigns = campaigns
         else:
             active_campaigns = Campaign.objects.filter(~Q(title_es=None),
-                                                       state__code__in=['I', 'A'],
+                                                       state__code__in=['A'],
                                                        removed=False)
 
         add_missing_tests(user, active_campaigns)
@@ -67,7 +67,7 @@ def jobs(request):
 
     except ObjectDoesNotExist:
         active_campaigns = Campaign.objects.filter(~Q(title_es=None),
-                                                   state__code__in=['I', 'A'],
+                                                   state__code__in=['A'],
                                                    removed=False)
         add_missing_tests(user, active_campaigns)
         return render(request, cts.JOBS_VIEW_PATH, {'active_campaigns': active_campaigns})
