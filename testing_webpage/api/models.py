@@ -83,6 +83,9 @@ class Lead(models.Model):
     def change_to_international_phone_number(self):
 
         if self.phone:
+
+            self.phone = self.phone.replace('-', '')
+
             # Adds the '+' and country code
             if self.phone[0] != '+':
 

@@ -496,7 +496,8 @@ def business_campaigns(request, business_user_id):
                                                               'buyer_email': business_user.email,
                                                               'invalid_work_areas': invalid_work_areas,
                                                               'response_url': response_url,
-                                                              'confirmation_url': confirmation_url
+                                                              'confirmation_url': confirmation_url,
+                                                              'state_name': 'relevant',
                                                               })
 
 
