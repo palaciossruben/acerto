@@ -8,7 +8,7 @@ application = get_wsgi_application()
 
 from beta_invite.models import Campaign
 from beta_invite.util import email_sender
-from dashboard.models import Candidate
+from dashboard.models import Candidate, StateEvent
 from business.models import BusinessUser
 from django.utils import timezone
 
@@ -31,10 +31,10 @@ def business_daily_report():
         for campaign in business_user.campaigns.filter(state=2):
 
             candidates = Candidate.objects.filter(
-                created_at__range=[str(timezone.now() - timedelta(days=1)), str(timezone.now())],
+                state__code__in=['STC'],
                 campaign=campaign,
                 removed=False,
-                state_id__in=[5])
+                sent_to_client=False)
 
             # Only send if there is something.
             if len(candidates) > 0:
@@ -43,6 +43,15 @@ def business_daily_report():
                                          subject='Reporte de candidatos recomendados',
                                          recipients=[business_user.email, business_user.additional_email, 'santiago@peaku.co', 'juan.rendon@peaku.co'],
                                          candidates=candidates)
+
+                message = 'Se enviaron ', len(candidates), 'correos'
+                for c in candidates:
+                    c.sent_to_client = True
+                    c.save()
+            else:
+                message = 'No se enviaron correos'
+
+    print(message)
 
 
 # This is not used, send daily report for campaign
