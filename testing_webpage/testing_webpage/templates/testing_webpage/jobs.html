@@ -1,4 +1,4 @@
-{% extends 'transparent_header_base.html'%}
+{% extends 'white_header_base.html'%}
 {% load static %}
 {% load i18n %}
 {% load app_filters %}
@@ -9,15 +9,12 @@
 <meta name="keywords" content="computrabajo, servicio de empleo, empleo, empleos, trabajos, trabaja con nosotros, buscador de empleo, bolsa de empleo, agencia de empleo" />
 {% endblock %}
 {% block extra_css %}
-<link rel="stylesheet" type="text/css" href="{% static 'beta_invite/css/index.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'beta_invite/css/jobs.css' %}">
 {% endblock %}
 {% block extra_js %}
 <script type="text/javascript" src="{% static 'beta_invite/js/index.js' %}"></script>
 {% endblock %}
 {% block content %}
-<div class="row" style="margin-bottom:40px;">
-    <h2 class="descriptions">{% trans "AVAILABLE POSITIONS" %}</h2>
-</div>
 <div class="jobs-background">
     <!----------------------------------------------SECTION 1---------------------------------------------------------->
     <div id="overlay-signup">
@@ -160,15 +157,5 @@
     $(".only-register-form").animate({marginLeft: '160%'});
     $(".form-image").animate({"backgroundPosition": '186%'}, 1,"swing");
     }
-</script>
-<script>
-    $(document).ready(function() {
-        set_background("Start_BG-01.jpg", "main-section")
-    });
-</script>
-<script>
-    $( window ).resize(function() {
-        set_background("Start_BG-01.jpg", "main-section")
-    });
 </script>
 {% endblock %}

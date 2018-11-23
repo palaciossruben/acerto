@@ -6,12 +6,14 @@ from django.http import JsonResponse
 from django.db.models import Q
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+import datetime
 
+from beta_invite import constants as beta_cts
 from beta_invite.models import Campaign, Test, TestType, BulletType, Interview, Survey, Bullet, QuestionType, Question, Answer, CampaignState
 from business.models import Company
 from dashboard.models import Candidate, Message, Screening
 from dashboard import constants as cts
-from beta_invite.util import email_sender
+from beta_invite.util import email_sender, messenger_sender
 from beta_invite.views import get_drop_down_values
 from dashboard import interview_module, candidate_module, campaign_module, test_module
 from match import model
@@ -618,6 +620,24 @@ def get_leads():
     return list(leads)
 
 
+def add_backlog_messages():
+
+    message_filename = 'candidate_backlog'
+
+    # TODO: add English
+    candidates = [c for c in
+                  Candidate.objects.filter(Q(created_at__lt=datetime.datetime.today() - datetime.timedelta(hours=24)) &
+                                           Q(created_at__gt=datetime.datetime.today() - datetime.timedelta(hours=96)) &
+                                           Q(state__code='BL') &
+                                           Q(campaign__state__name='Active') &
+                                           ~Q(message__filename=message_filename) &
+                                           ~Q(campaign_id=beta_cts.DEFAULT_CAMPAIGN_ID))]
+
+    messenger_sender.send(candidates=candidates,
+                          language_code='es',
+                          body_input=message_filename)
+
+
 def send_new_contacts(request):
     """
      Works as API for auto-messenger app
@@ -631,6 +651,8 @@ def send_new_contacts(request):
     :param request: HTTP
     :return: json
     """
+
+    add_backlog_messages()
 
     leads = get_leads()
     users = get_candidate_users()

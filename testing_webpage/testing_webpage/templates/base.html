@@ -41,14 +41,16 @@
             }
         }
     </script>
-    <!--Smartlook for record the users interactions-->
-    <script id="Heat-map" type="text/javascript">
-        window.smartlook||(function(d) {
-        var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
-        var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
-        c.charset='utf-8';c.src='https://rec.smartlook.com/recorder.js';h.appendChild(c);
-        })(document);
-        smartlook('init', '495c7bd6807a0ab2c17ade2e03cac13bab9f1b84');
+    <!--Hotjar Tracking UX Video Recorder-->
+    <script>
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:1097851,hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
     </script>
     <!--Google analytics-->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110863941-1"></script>
@@ -127,7 +129,9 @@
                     <div class="col-lg-4 logo-white"><a href="#"><img src="{% static 'business/img/logo-white.png' %}"></a></div>
                     <div class="col-lg-8 contact-data">
                         contacto@peaku.co<br>
-                        +57 311 6109340<br>
+                        {% if 'seleccion-de-personal' in request.path %}
+                        +57 3174236989<br>
+                        {% endif %}
                         Colombia
                     </div>
                 </div>

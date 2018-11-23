@@ -161,6 +161,11 @@ def automated_candidate_state_change(candidate, evaluation, use_machine_learning
                                    forecast=evaluation.passed,
                                    use_machine_learning=use_machine_learning)
 
+        else:
+            candidate.change_state(state_code=fail_state,
+                                   forecast=evaluation.passed,
+                                   use_machine_learning=use_machine_learning)
+
         candidate.save()
 
 
