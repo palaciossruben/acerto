@@ -290,7 +290,8 @@ def home(request):
             user = simple_login_and_user(login_form, request)
         except ObjectDoesNotExist:
             # TODO: how to reload the exact campaign and at the same time pass on the error_message?
-            return render(request, cts.INDEX_VIEW_PATH, {'error_message': 'Usuario no existe'})
+            #return render(request, cts.INDEX_VIEW_PATH, {'error_message': 'Usuario no existe'})
+            return redirect('/trabajos')
 
         segment_code = user.get_work_area_segment_code()
         if segment_code:
@@ -315,11 +316,13 @@ def get_test_result(request):
     if not user:
         return redirect('/servicio_de_empleo?campaign_id={campaign_id}'.format(campaign_id=campaign.id))
     candidate = common.get_candidate(user, campaign)
+    high_scores = test_module.get_high_scores(candidate)
 
-    questions_dict = test_module.get_tests_questions_dict(test_module.get_missing_tests(candidate))
+    questions_dict = test_module.get_tests_questions_dict(test_module.get_missing_tests(candidate,
+                                                                                        high_scores=high_scores))
     missing_scores = test_module.get_scores(campaign, user_id, questions_dict, request)
 
-    all_scores = missing_scores + test_module.get_high_scores(candidate)
+    all_scores = missing_scores + high_scores
 
     test_module.get_evaluation(all_scores, candidate)
 

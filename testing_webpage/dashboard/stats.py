@@ -10,7 +10,7 @@ from django.db.models import Q
 
 from dashboard.models import Candidate, StateEvent, State
 from dashboard import constants as cts
-from beta_invite.models import Campaign, User
+from beta_invite.models import Campaign
 
 
 CHART = {

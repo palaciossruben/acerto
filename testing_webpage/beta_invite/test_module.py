@@ -1,6 +1,10 @@
 """
 Test related methods.
 """
+
+from django.db.models import F
+
+
 from beta_invite import text_analizer
 from beta_invite.models import Question, Survey, Score, Evaluation, EvaluationSummary, Test
 from dashboard.models import Candidate, State
@@ -324,12 +328,16 @@ def get_high_scores(candidate):
     :param candidate:
     :return:
     """
+
+    # TODO: optimize this code:
     all_tests = list(candidate.campaign.tests.all())
-    high_scores = candidate.user.scores.filter(test__in=all_tests, passed=True).all()
-    return [s for s in high_scores if s.value > (100 + s.test.cut_score)/2]
+    high_scores = candidate.user.scores.filter(test__in=all_tests,  # F('candidate__campaign__tests'),
+                                               value__gt=(100 + F('test__cut_score'))/2,
+                                               passed=True).all()
+    return list(high_scores)
 
 
-def get_missing_tests(candidate):
+def get_missing_tests(candidate, high_scores=None):
     """
     Gets the tests that the user should present either because:
     1. He/she has never presented it
@@ -338,10 +346,14 @@ def get_missing_tests(candidate):
 
     high_score = above the average between test.cut_score and 100
     :param candidate: Candidate object
+    :param high_scores: can have this param to save time calculating it
     :return: list of tests
     """
     all_tests = list(candidate.campaign.tests.all())
-    high_score_tests = [s.test for s in get_high_scores(candidate)]
+
+    if high_scores is None:
+        high_scores = get_high_scores(candidate)
+    high_score_tests = [s.test for s in high_scores]
 
     # filters for low or non existent tests
     tests = [t for t in all_tests if t not in high_score_tests]
