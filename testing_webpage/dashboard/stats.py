@@ -156,7 +156,23 @@ def negative_forecasts(request):
     return render_forecast(request, 'negative')
 
 
+# TODO: translate SQL into django orm
 def get_number_of_candidates_df():
+    """
+    select date_trunc('month', created_at) m,
+      count(*) new_candidates
+    from candidates
+    where id not in (select min(id) first_candidate_id
+                       from candidates
+                       where not removed
+                       and state_id!=11
+                       group by user_id)
+    and state_id!=11
+    and not removed
+    group by m
+    order by m;
+    """
+
     columns = ['id', 'user_id', 'user__created_at']
     data = pd.DataFrame(list(Candidate.objects.filter(~Q(state=State.objects.get(code='P')),
                                                       removed=False,
@@ -212,12 +228,18 @@ def candidates_per_user(request):
 
 def candidates_from_old_users(request):
     """
-    select date_trunc('month', u.created_at) as m,
-        count(distinct c.id) - count(distinct u.id)
-    from candidates c inner join users u on c.user_id = u.id
-        where not removed and c.state_id != 11
-        and u.created_at > '2018-01-01'
-    group by m order by m;
+    select date_trunc('month', created_at) m,
+      count(*) new_candidates
+    from candidates
+    where id not in (select min(id) first_candidate_id
+                       from candidates
+                       where not removed
+                       and state_id!=11
+                       group by user_id)
+    and state_id!=11
+    and not removed
+    group by m
+    order by m;
     """
 
     data_source = dict()
