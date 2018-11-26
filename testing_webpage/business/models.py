@@ -6,6 +6,7 @@ from django.contrib.postgres.fields import JSONField
 from django.core.exceptions import ObjectDoesNotExist
 
 from beta_invite.models import Country, Education, Profession, Campaign
+from business.more_models import Company
 
 
 class Plan(models.Model):
@@ -39,18 +40,6 @@ class Industry(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'industries'
-
-    def __str__(self):
-        return '{0}'.format(self.name)
-
-
-class Company(models.Model):
-
-    name = models.CharField(max_length=200)
-
-    # adds custom table name
-    class Meta:
-        db_table = 'companies'
 
     def __str__(self):
         return '{0}'.format(self.name)
