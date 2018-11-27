@@ -36,15 +36,16 @@ def business_daily_report():
                 removed=False,
                 sent_to_client=False)
 
+            recipients = [business_user.email, business_user.additional_email, 'santiago@peaku.co', 'juan.rendon@peaku.co']
             # Only send if there is something.
             if len(candidates) > 0:
                 email_sender.send_report(language_code='es',
                                          body_filename='business_daily_report_email_body',
                                          subject='Reporte de candidatos recomendados',
-                                         recipients=[business_user.email, business_user.additional_email, 'santiago@peaku.co', 'juan.rendon@peaku.co'],
+                                         recipients=recipients,
                                          candidates=candidates)
 
-                message = 'Se enviaron ', len(candidates), 'correos'
+                message = 'Se enviaron: ', len(recipients)-2, 'correos'
                 for c in candidates:
                     c.sent_to_client = True
                     c.save()
