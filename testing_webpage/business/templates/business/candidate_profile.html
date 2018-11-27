@@ -31,7 +31,6 @@
         function save_comment(param_dict)
         {
             general_dict = {candidate_id:{{ candidate.id }}, csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()}
-                console.log(general_dict);
                 $.ajax
                 ({
                     type:'POST',
@@ -52,7 +51,6 @@
             <a class="navButton" style="font-size: 15px;width:170px;color: white;border-radius:40px;margin-top: 30px;padding:5px 16px;background:#F47B20;"
                 role="button" href="{% url 'business:start' %}">+  CREAR OFERTA</a>
             <a href="{% url 'business:business_campaigns' business_user_id=business_user.pk %}">Mis campañas</a>
-            <a href="#about">Ayuda</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
             <i class="fa fa-bars"></i>
             </a>
@@ -155,7 +153,7 @@
                                         {% endif %}
                                     {% endfor %}
 
-                                    {% for s in candidate.get_last_requirement_surveys%}
+                                    {% for s in candidate.get_last_requirement_surveys %}
                                         {% if s.score > 0 %}
                                             <strong class="listyes-light"><strong class="test-distinction-question">{{ s.question.internal_name }}:</strong></strong> {{ s.answer.name_es }} {{ s.numeric_answer|floatformat }}</p>
                                         {% elif s.score <= 0 %}

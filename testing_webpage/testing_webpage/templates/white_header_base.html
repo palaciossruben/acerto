@@ -9,7 +9,7 @@
 {% block header %}
     <div class="topnav" id="myTopnav">
         <a href="/staffing" class="logo"><img src="{% static 'business/img/logo-color-negro.png' %}" style="text-decoration:none;"></a>
-        {% if 'seleccion_de_personal' in request.path and 'contactanos' not in request.path %}
+        {% if 'seleccion-de-personal' in request.path and 'contactanos' not in request.path %}
             {% if user|business_user_is_authenticated %}
                 <a href="{% url 'business:logout' %}" style="text-decoration:none;">{% trans "LOG OUT" %}</a>
                 {% if not 'campañas' in request.path  and user|business_user_is_authenticated %}
@@ -19,7 +19,6 @@
             {% else %}
                 <a href="{% url 'business:logout' %}" style="text-decoration:none;">{% trans 'SIGN IN' %}</a>
             {% endif %}
-            <!--<a href="#about">Ayuda</a>-->
             <a href="javascript:void(0);" class="icon" onclick="myFunction()" style="text-decoration:none;">&#9776;</a>
         {% endif %}
     </div>

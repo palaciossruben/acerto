@@ -695,3 +695,15 @@ def demo_scheduled(request):
     send_demo_scheduled_notification(request, contact)
 
     return render(request, cts.DEMO_SCHEDULED_VIEW_PATH)
+
+
+def change_state(request):
+
+    if request.method == 'POST':
+        candidate = Candidate.objects.get(pk=request.POST.get('candidate_id'))
+        state_code = request.POST.get('state_code')
+        candidate.change_state(state_code=state_code, place='Business User ha cambiado el estado del candidato')
+
+        return HttpResponse()
+    else:
+        return HttpResponseBadRequest('<h1>HTTP CODE 400: Client sent bad request with missing params</h1>')
