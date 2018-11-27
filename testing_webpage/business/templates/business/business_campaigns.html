@@ -30,7 +30,7 @@
                         {% if campaign.free_trial %}
                             <a href="{% url 'business:dashboard' business_user_id=business_user_id campaign_id=campaign.id state_name='applicants' %}" target="_blank"><b>TABLERO DE CONTROL</b></a>
                         {% else %}
-                            <a href="{% url 'business:dashboard' business_user_id=business_user_id campaign_id=campaign.id state_name='relevant' %}" target="_blank"><b>TABLERO DE CONTROL</b></a>
+                            <a href="{% url 'business:dashboard' business_user_id=business_user_id campaign_id=campaign.id state_name='recommended' %}" target="_blank"><b>TABLERO DE CONTROL</b></a>
                         {% endif %}
                     <br>
                     <br>
