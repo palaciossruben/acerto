@@ -33,7 +33,7 @@ urlpatterns = [
     # SAVE CANDIDATE COMMENTS
     url(r'^save[-_]comments$', views.save_comments, name='save_comments'),
     # CHANGE CANDIDATE STATE
-    url(r'^change[-_]state$', views.change_state, name='change-state'),
+    url(r'^change[-_]state$', views.change_state, name='change_state'),
 
     # TODO: This search url should be deleted?
     url(r'^search$', views.search, name='search'),
