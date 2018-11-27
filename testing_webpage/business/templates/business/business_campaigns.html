@@ -27,7 +27,11 @@
                         <a href="{{ campaign|get_campaign_url }}" target="_blank"><b>Ver la oferta que ven los candidatos</b></a>
                     <br>
                     <br>
-                        <a href="{% url 'business:summary' campaign_id=campaign.pk %}"><b>TABLERO DE CONTROL</b></a>
+                        {% if campaign.free_trial %}
+                            <a href="{% url 'business:dashboard' business_user_id=business_user_id campaign_id=campaign.id state_name='applicants' %}" target="_blank"><b>TABLERO DE CONTROL</b></a>
+                        {% else %}
+                            <a href="{% url 'business:dashboard' business_user_id=business_user_id campaign_id=campaign.id state_name='relevant' %}" target="_blank"><b>TABLERO DE CONTROL</b></a>
+                        {% endif %}
                     <br>
                     <br>
                     <p><b>EMPRESA:</b> {{ campaign|get_business_user_company_with_campaign }}</p>

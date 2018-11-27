@@ -28,11 +28,13 @@ urlpatterns = [
     url(r'^get[-_]work[-_]area[-_]requirement/(?P<work_area_id>\d+)$', views.get_work_area_requirement, name='get_work_area_requirement'),
     # PAYU
     url(r'payment[-_]confirmation$', views.payment_confirmation, name='payment_confirmation'),
-
     # DEMO SCHEDULED
     url(r'^demo[-_]scheduled$', views.demo_scheduled, name='demo_scheduled'),
-
+    # SAVE CANDIDATE COMMENTS
     url(r'^save[-_]comments$', views.save_comments, name='save_comments'),
+    # CHANGE CANDIDATE STATE
+    url(r'^change[-_]state$', views.change_state, name='change-state'),
+
     # TODO: This search url should be deleted?
     url(r'^search$', views.search, name='search'),
     url(r'^results$', views.calculate_result, name='results'),
