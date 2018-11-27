@@ -54,7 +54,7 @@ function set_background(image_name, id_string){
         me.style["background-image"] = url;
     }}
 }
-
+/*
 function not_blocked(business_state, free_trial, campaign_state){
 
     var limit = 0;
@@ -82,4 +82,4 @@ function not_blocked(business_state, free_trial, campaign_state){
     for (var i = 0; i < limit; i++) {
         $(candidate_divs[i]).hide();
     }
-}
+}*/
