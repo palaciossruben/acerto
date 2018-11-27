@@ -440,7 +440,7 @@ def get_recommended_candidates(campaign):
 
 def get_relevant_candidates(campaign):
     candidates = Candidate.objects.filter(campaign=campaign, state__in=State.get_relevant_states(), removed=False)
-    return sorted(candidates, key=lambda c: c.evaluation_summary.final_score + c.state.code == 'STC'*100 if c.evaluation_summary and c.evaluation_summary.final_score else -1, reverse=True)
+    return sorted(candidates, key=lambda c: c.evaluation_summary.final_score + (c.state.code == 'STC')*100 if c.evaluation_summary and c.evaluation_summary.final_score else -1, reverse=True)
 
 
 def get_application_candidates(campaign):
