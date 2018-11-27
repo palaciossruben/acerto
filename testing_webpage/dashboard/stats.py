@@ -156,8 +156,7 @@ def negative_forecasts(request):
     return render_forecast(request, 'negative')
 
 
-# TODO: translate SQL into django orm
-def get_number_of_candidates_df():
+def get_number_of_second_candidates():
     """
     select date_trunc('month', created_at) m,
       count(*) new_candidates
@@ -173,24 +172,52 @@ def get_number_of_candidates_df():
     order by m;
     """
 
-    columns = ['id', 'user_id', 'user__created_at']
+    first_candidate_columns = ['id', 'user_id']
+    values = Candidate.objects.filter(~Q(state=State.objects.get(code='P')),
+                                      removed=False).values_list(*first_candidate_columns)
+
+    candidates = pd.DataFrame(list(values), columns=first_candidate_columns)
+
+    gb = candidates.groupby('user_id').agg({'id': min})
+    first_ids = pd.DataFrame(gb)['id']
+
+    columns = ['id', 'created_at']
     data = pd.DataFrame(list(Candidate.objects.filter(~Q(state=State.objects.get(code='P')),
-                                                      removed=False,
-                                                      user__created_at__gt=datetime.datetime(year=2018, month=1,
-                                                                                             day=1)).values_list(
+                                                      ~Q(pk__in=first_ids),
+                                                      removed=False).values_list(
         *columns)), columns=columns)
+
+    data['month'] = data['created_at'].apply(lambda date: '{y}-{m}'.format(y=date.year,
+                                                                           m=get_month_format(date.month)))
+    data.drop('created_at', inplace=True, axis=1)
+
+    gp = pd.groupby(data, by='month').aggregate({'id': 'count'})
+    data = pd.DataFrame(gp)
+
+    return data
+
+
+def get_number_of_unique_users():
+    """
+    select date_trunc('month', created_at) m,
+      count(distinct user_id) unique_users
+    from candidates
+    where state_id!=11
+    and not removed
+    group by m
+    order by m;
+    """
+
+    first_candidate_columns = ['user_id', 'user__created_at']
+    data = pd.DataFrame(list(Candidate.objects.filter(~Q(state=State.objects.get(code='P')), removed=False)
+                             .values_list(*first_candidate_columns)), columns=first_candidate_columns)
+
     data['month'] = data['user__created_at'].apply(lambda date: '{y}-{m}'.format(y=date.year,
                                                                                  m=get_month_format(date.month)))
     data.drop('user__created_at', inplace=True, axis=1)
 
-    gp = pd.groupby(data, by=['month', 'user_id']).aggregate({'id': 'count'})
+    gp = pd.groupby(data, by='month').aggregate({'user_id': pd.Series.nunique})
     data = pd.DataFrame(gp)
-    data.reset_index(inplace=True)
-
-    gp = pd.groupby(data, by=['month']).aggregate({'user_id': 'count',
-                                                   'id': 'sum'})
-    data = pd.DataFrame(gp)
-    data.sort_index(inplace=True)
 
     return data
 
@@ -212,10 +239,12 @@ def candidates_per_user(request):
     """
 
     data_source = dict()
-    CHART["caption"] = "Average candidates per user"
+    CHART["caption"] = "Second candidates vs new Users"
     data_source['chart'] = CHART
 
-    data = get_number_of_candidates_df()
+    data = get_number_of_second_candidates()
+    users = get_number_of_unique_users()
+    data = data.join(users)
 
     data_source['data'] = []
     for idx, row in data.iterrows():
@@ -246,11 +275,11 @@ def candidates_from_old_users(request):
     CHART["caption"] = "Candidates from old user"
     data_source['chart'] = CHART
 
-    data = get_number_of_candidates_df()
+    data = get_number_of_second_candidates()
 
     data_source['data'] = []
     for idx, row in data.iterrows():
-        data_source['data'].append({'label': idx, 'value': str(round(row['id'] - row['user_id']))})
+        data_source['data'].append({'label': idx, 'value': str(round(row['id']))})
 
     # Create an object for the Column 2D chart using the FusionCharts class constructor
     column_2d = FusionCharts("column2D", "ex1", "600", "350", "chart-1", "json", data_source)

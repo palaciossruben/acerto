@@ -30,5 +30,13 @@
       "name": "numeric integer",
       "code": "NI"
     }
+  },
+  {
+    "model": "beta_invite.questiontype",
+    "pk": 6,
+    "fields":{
+      "name": "recording",
+      "code": "R"
+    }
   }
 ]
