@@ -17,6 +17,10 @@ body {
     margin-right:0;
     margin-left:0;
 }
+
+a, a:hover, a:active, a: visited, a:focus{
+    text-decoration:none;
+}
 /**************************************************FONTS***************************************************************/
 .super{
     font-family: BertholdAkzidenzGroteskSuper;
@@ -164,6 +168,11 @@ body {
 
 .internal-div{
     padding:40px;
+}
+
+
+.favorite{
+    display:none;
 }
 
 .like-dislike{
