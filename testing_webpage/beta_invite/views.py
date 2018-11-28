@@ -6,12 +6,13 @@ from ipware.ip import get_ip
 from user_agents import parse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
+from django.views.decorators.csrf import csrf_exempt
 
 
 import common
 from beta_invite import constants as cts
 from beta_invite import test_module, new_user_module
-from beta_invite.models import User, Visitor, Campaign, BulletType, City
+from beta_invite.models import User, Visitor, Campaign, BulletType, City, Question
 from dashboard.models import Candidate
 from business.custom_user_creation_form import CustomUserCreationForm
 
@@ -310,6 +311,7 @@ def get_test_result(request):
         request: HTTP object
     Returns: Either end process or invites to interview.
     """
+
     campaign = common.get_campaign_from_request(request)
     user = common.get_user_from_request(request)
     user_id = user.id if user else None
@@ -429,3 +431,10 @@ def add_cv_changes(request):
 
 def security_politics(request):
     return render(request, cts.SECURITY_POLITICS_VIEW_PATH)
+
+
+@csrf_exempt
+def upload_audio_file(request):
+    question = Question.objects.get(pk=request.POST.get('question_id'))
+    common.save_resource_from_request(request, question, 'audio', 'audio')
+    return HttpResponse(200)

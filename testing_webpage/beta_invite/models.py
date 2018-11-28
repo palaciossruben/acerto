@@ -220,6 +220,7 @@ class Question(models.Model):
     importance = models.FloatField(default=None, null=True)  # coming from RandomForrest
     valid_answer_count = models.IntegerField(default=None, null=True)
     difficulty = models.FloatField(default=None, null=True)
+    audio_url = models.CharField(max_length=200, default='#')
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
