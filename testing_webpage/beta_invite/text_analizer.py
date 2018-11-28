@@ -42,6 +42,7 @@ def get_score(text):
         os.chdir(my_path)
         print(os.getcwd())
 
+
     with open(os.path.join('subscribe', 'es-MX.dic'), 'r', encoding='UTF-8') as vocabulary_file:
 
         vocabulary = vocabulary_file.read().split('\n')
