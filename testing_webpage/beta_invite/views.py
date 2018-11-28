@@ -463,23 +463,38 @@ def upload_audio_file(request):
     return HttpResponse(200)
 
 
+def describe_wav(filename):
+    with wave.open(filename, "rb") as wave_file:
+        sample_rate = wave_file.getframerate()
+        num_channels = wave_file.getnchannels()
+        print('sample rate is: {}'.format(sample_rate))
+        return sample_rate, num_channels
+
+
 def run_google_speech(filename):
 
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(CONFIG('project_directory'), 'testing_webpage', 'google_cloud_speech_key.json')
     client = speech.SpeechClient()
 
     # The name of the audio file to transcribe
-    file_name = common.get_media_path(filename)
+    filename = common.get_media_path(filename)
 
     # Loads the audio into memory
-    with io.open(file_name, 'rb') as audio_file:
+    with io.open(filename, 'rb') as audio_file:
         content = audio_file.read()
         audio = types.RecognitionAudio(content=content)
 
-    with wave.open(file_name, "rb") as wave_file:
-        sample_rate = wave_file.getframerate()
+    sample_rate, num_channels = describe_wav(filename)
 
-    print('sample rate is: {}'.format(sample_rate))
+    test_module.down_sample_wave(filename,
+                                 filename,
+                                 inrate=sample_rate,
+                                 outrate=16000,
+                                 inchannels=num_channels,
+                                 outchannels=1)
+
+    print('AFTER down sample:')
+    sample_rate, num_channels = describe_wav(filename)
 
     config = types.RecognitionConfig(
         encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
