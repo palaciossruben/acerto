@@ -41,11 +41,10 @@
                             <input name="test_{{ test.id }}_question_{{ question.id }}" type="number" value="{{ question.params.default }}" min="{{ question.params.min }}" max="{{ question.params.max }}" />
                         </div>
                     {% elif question.type.code == 'R' %}
-                        <div id="controls" >
-                           <button id="recordButton">Record</button>
-                           <button id="stopButton" disabled>Stop</button>
+                        <div id="controls">
+                            <button class="record-control-button" id="recordButton"><span id="mic"><img style="vertical-align: bottom;width: 40px;" src="{% static 'beta_invite/img/microphone.png' %}"></span></button>
+                            <button class="record-control-button" id="stopButton" disabled><span id="stop">&#x25A0;</span></button>
                         </div>
-                        <h3>Recordings</h3>
                         <ol id="recordingsList"></ol>
                         <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
                         <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>

@@ -134,8 +134,6 @@ function createDownloadLink(blob) {
     //link the a element to the blob
     link.href = url;
     link.download = 'audio_file.wav';
-    link.innerHTML = link.download;
-
     //add the new audio and a elements to the li element
     li.appendChild(au);
     li.appendChild(link);

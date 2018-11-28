@@ -5,6 +5,8 @@ html, body{
 	height:100%;
 }
 
+
+
 .questions-container{
     background: white;
     width: 70%;
@@ -17,6 +19,25 @@ html, body{
     color:var(--blue);
     padding-top:30px;
     margin:0;
+}
+
+.record-control-button{
+    background:none;
+    border:none;
+}
+
+#mic{
+    vertical-align: bottom;
+}
+
+#stop{
+    font-size: 60px;
+    color: red;
+}
+
+#stop:disable{
+    font-size:20px;
+    color:gray;
 }
 
 .question-info{
