@@ -1,5 +1,6 @@
 import os
 import io
+import wave
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseBadRequest, HttpResponse
@@ -475,7 +476,6 @@ def run_google_speech(filename):
         content = audio_file.read()
         audio = types.RecognitionAudio(content=content)
 
-    import wave
     with wave.open(file_name, "rb") as wave_file:
         sample_rate = wave_file.getframerate()
 
@@ -484,7 +484,7 @@ def run_google_speech(filename):
     config = types.RecognitionConfig(
         encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
         language_code='es-CO',
-        sample_rate=sample_rate)
+        sample_rate_hertz=sample_rate)
 
     # Detects speech in the audio file
     response = client.recognize(config, audio)
