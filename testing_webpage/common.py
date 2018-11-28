@@ -9,6 +9,7 @@ from django.core.files.storage import FileSystemStorage
 from ipware.ip import get_ip
 import geoip2.database
 import inflection
+from decouple import config
 
 from beta_invite.apps import ip_country_reader, ip_city_reader
 from beta_invite.models import User, Campaign, Country, City, Profession, Education, EvaluationSummary, WorkArea, Gender
@@ -395,7 +396,7 @@ def get_object_attribute_name(key, my_object):
 
 
 def get_media_path(end_path):
-    return os.path.join(os.getcwd(), 'media', end_path)
+    return os.path.join(config('project_directory'), 'media', end_path)
 
 
 def save_resource_from_request(request, my_object, param_name, folder_name, clean_directory_on_writing=False):
