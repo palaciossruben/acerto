@@ -178,7 +178,8 @@ STATICFILES_FINDERS = (
 STATICFILES_DIRS = [#('resumes', 'media/resumes'),
                     ('candidate_photo', 'media/candidate_photo'),
                     ('candidate_brochure', 'media/candidate_brochure'),
-                    ('questions', 'media/questions'), ]
+                    ('questions', 'media/questions'),
+                    ('audio', 'media/audio')]
 
 LOGGING = {
     'version': 1,

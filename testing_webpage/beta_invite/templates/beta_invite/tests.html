@@ -40,6 +40,17 @@
                         <div class="format-div left">
                             <input name="test_{{ test.id }}_question_{{ question.id }}" type="number" value="{{ question.params.default }}" min="{{ question.params.min }}" max="{{ question.params.max }}" />
                         </div>
+                    {% elif question.type.code == 'R' %}
+                        <div id="controls">
+                           <button id="recordButton">Record</button>
+                           <button id="pauseButton" disabled>Pause</button>
+                           <button id="stopButton" disabled>Stop</button>
+                        </div>
+                        <h3>Recordings</h3>
+                        <ol id="recordingsList"></ol>
+                        <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+                        <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+                        <script type="text/javascript" src="{% static 'beta_invite/js/tests.js' %}"></script>
                     {% endif %}
                     {% if forloop.counter != 1 or test_counter != 1 %}
                         <input type="button" class="nice-button" value="Atrás" onclick="back({{ test_counter }}, {{ forloop.counter }}, {{ tests|get_number_questions_of_before_test:test_counter }})">
