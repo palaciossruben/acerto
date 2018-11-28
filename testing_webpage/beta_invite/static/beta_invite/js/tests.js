@@ -147,10 +147,6 @@ function createDownloadLink(blob) {
     var au = document.createElement('audio');
     var li = document.createElement('li');
     var link = document.createElement('a');
-    var my_input = document.createElement('input');
-    my_input.name = 'question_id'
-    my_input.value = 249
-
 
     //add controls to the <audio> element
     au.controls = true;
@@ -164,7 +160,6 @@ function createDownloadLink(blob) {
     //add the new audio and a elements to the li element
     li.appendChild(au);
     li.appendChild(link);
-    li.appendChild(my_input)
 
     //add the li element to the ordered list
     recordingsList.appendChild(li);
@@ -177,10 +172,15 @@ function createDownloadLink(blob) {
 
     var fd = new FormData();
     fd.append('audio', blob);
-    fd.append('question_id', 249)
+
+    //TODO: These can not be hardcoded!
+    fd.append('question_id', 249);
+    fd.append('campaign_id', 301);
+    fd.append('test_id', 15);
+
     $.ajax({
         type: 'POST',
-        url: 'https://peaku.co/servicio_de_empleo/upload-audio-file', //'https://peaku.co/servicio_de_empleo/upload-audio-file'
+        url: 'https://peaku.co/servicio_de_empleo/upload-audio-file', //'http://127.0.0.1:8000/servicio_de_empleo/upload-audio-file'
         data: fd,
         processData: false,
         contentType: false

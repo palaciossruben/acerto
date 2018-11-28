@@ -20,7 +20,7 @@ def get_tests_questions_dict(tests):
         tests: List of Test objects.
     Returns: {test_id: [question_id ...]}
     """
-    return {test.id: [q.id for q in test.questions.all()] for test in tests}
+    return {test.id: [q for q in test.questions.all()] for test in tests}
 
 
 def get_cosine_similarity(*strings):
@@ -84,10 +84,15 @@ def update_survey(question, answer_text, survey, question_id):
             else:
                 survey.score = 0
     elif question.type.code == 'R':
+        """
+        Compares similarities between detected text and real text
+        """
         # TODO: add English
-        question_text = question.name_es
+        question_text = question.text_es
+
+        # takes the inside of double quotes
         matches = re.findall(r'\".+\"', question_text)
-        if len(matches) > 0:
+        if len(matches) > 0 and len(matches[-1]) > 2:
             original_text = matches[-1][1:-1]
             survey.score = get_cosine_similarity(answer_text, original_text)
         else:
@@ -98,40 +103,50 @@ def update_survey(question, answer_text, survey, question_id):
     survey.save()
 
 
-def process_question_and_get_score(campaign, question_id, request, test_id, user_id):
-    """
-    Args:
-        campaign: Campaign Object
-        question_id: int
-        request: HTTP
-        test_id: int
-        user_id: int
-    Returns: creates a Survey object and gets the score.
-    """
-    question = Question.objects.get(pk=question_id)
-    answer_text = request.POST.get('test_{}_question_{}'.format(test_id, question_id))
-
+def add_survey_to_candidate(campaign, test_id, question, user_id, answer_text):
     survey = Survey.create(campaign=campaign,
                            test_id=test_id,
-                           question_id=question_id,
+                           question_id=question.id,
                            user_id=user_id)
 
-    update_survey(question, answer_text, survey, question_id)
+    update_survey(question, answer_text, survey, question.id)
 
     candidate = Candidate.objects.get(campaign=campaign,
                                       user_id=user_id)
 
     candidate.surveys.add(survey)
     candidate.save()
+    return survey
+
+
+def process_question_and_get_score(campaign, question, request, test_id, user_id):
+    """
+    Args:
+        campaign: Campaign Object
+        question: Question
+        request: HTTP
+        test_id: int
+        user_id: int
+    Returns: creates a Survey object and gets the score.
+    """
+    answer_text = request.POST.get('test_{}_question_{}'.format(test_id, question.id))
+
+    if question.type.code == 'R':  # In this case the solution should be ready by transcribing!
+        survey = Survey.objects.filter(campaign=campaign,
+                                       test_id=test_id,
+                                       question_id=question.id,
+                                       user_id=user_id).order_by('-created_at').first()
+    else:
+        survey = add_survey_to_candidate(campaign, test_id, question, user_id, answer_text)
 
     return survey.score
 
 
-def get_test_score(campaign, question_ids, user_id, test_id, request):
+def get_test_score(campaign, questions, user_id, test_id, request):
     """
     Args:
         campaign: Campaign Object
-        question_ids: collection of question ids
+        questions: collection of questions
         user_id: int
         test_id: int
         request: HTTP
@@ -140,9 +155,9 @@ def get_test_score(campaign, question_ids, user_id, test_id, request):
     total = 0
     result = 0
 
-    for question_id in question_ids:
+    for question in questions:
         total += 1
-        result += process_question_and_get_score(campaign, question_id, request, test_id, user_id)
+        result += process_question_and_get_score(campaign, question, request, test_id, user_id)
 
     return text_analizer.handle_division_by_zero(result, total)*100
 
@@ -157,12 +172,9 @@ def get_scores(campaign, user_id, questions_dict, request):
     Returns: tuple: cut_scores, scores
     """
     scores = []
-    for test_id, question_ids in questions_dict.items():
-
-        test_score = get_test_score(campaign, question_ids, user_id, test_id, request)
-
-        score = Score.create(test=Test.objects.get(pk=test_id),
-                             value=test_score)
+    for test_id, questions in questions_dict.items():
+        test_score = get_test_score(campaign, questions, user_id, test_id, request)
+        score = Score.create(test=Test.objects.get(pk=test_id), value=test_score)
         score.save()
 
         scores.append(score)

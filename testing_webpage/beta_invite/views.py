@@ -441,18 +441,22 @@ def security_politics(request):
 
 @csrf_exempt
 def upload_audio_file(request):
+    campaign = common.get_campaign_from_request(request)
+    user = common.get_user_from_request(request)
     question = Question.objects.get(pk=request.POST.get('question_id'))
+    test_id = request.POST.get('test_id')
+
     audio_path = common.save_resource_from_request(request, question, 'audio', 'audio', clean_directory_on_writing=True)
 
-    # TODO: should save on survey rather than question
-    #if audio_path != '#':
-    #    question.audio_path = audio_path
-    #    question.save()
+    #try:
+    transcript = run_google_speech(audio_path)
+    survey = test_module.add_survey_to_candidate(campaign, test_id, question, user.id, transcript)
 
-    try:
-        transcipt = run_google_speech(audio_path)
-    except Exception as e:
-        print(e)
+    if audio_path != '#':
+        survey.audio_path = audio_path
+        survey.save()
+    #except Exception as e:
+    #    print(e)
 
     return HttpResponse(200)
 
