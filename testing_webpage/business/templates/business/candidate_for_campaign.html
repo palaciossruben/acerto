@@ -143,7 +143,7 @@
     </div>
 </div>
 </a>
-<!--
+
 <div class="like-selection-div">
 <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
     {% csrf_token %}
@@ -154,5 +154,5 @@
     {% csrf_token %}
     <input type="button" class="dislike" id="dislike-{{ candidate.pk }}" onclick="change_state({'state_code':'RBC', 'candidate_id':{{ candidate.pk }}})" value="&#x274C;">
 </form>
-</div>-->
+</div>
 <input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}"/>
