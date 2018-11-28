@@ -30,11 +30,12 @@ def get_cosine_similarity(*strings):
     :return:
     """
     vectors = [t for t in get_vectors(*strings)]
-    return cosine_similarity(vectors)
+    similarity = cosine_similarity(vectors)
+    return similarity[0][1]
 
 
 def get_vectors(*strings):
-    text = [t for t in strings]
+    text = [t.lower() for t in strings]
     vectorizer = CountVectorizer(text)
     vectorizer.fit(text)
     return vectorizer.transform(text).toarray()
@@ -87,6 +88,8 @@ def update_survey(question, answer_text, survey, question_id):
         """
         Compares similarities between detected text and real text
         """
+        survey.text_answer = answer_text
+
         # TODO: add English
         question_text = question.text_es
 

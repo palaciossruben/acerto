@@ -177,10 +177,11 @@ function createDownloadLink(blob) {
     fd.append('question_id', 249);
     fd.append('campaign_id', 301);
     fd.append('test_id', 15);
+    //fd.append('user_id', 13053);
 
     $.ajax({
         type: 'POST',
-        url: 'https://peaku.co/servicio_de_empleo/upload-audio-file', //'http://127.0.0.1:8000/servicio_de_empleo/upload-audio-file'
+        url: 'https://peaku.co/servicio_de_empleo/upload-audio-file', //'https://peaku.co/servicio_de_empleo/upload-audio-file'
         data: fd,
         processData: false,
         contentType: false

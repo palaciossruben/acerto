@@ -448,15 +448,15 @@ def upload_audio_file(request):
 
     audio_path = common.save_resource_from_request(request, question, 'audio', 'audio', clean_directory_on_writing=True)
 
-    #try:
-    transcript = run_google_speech(audio_path)
-    survey = test_module.add_survey_to_candidate(campaign, test_id, question, user.id, transcript)
+    try:
+        transcript = run_google_speech(audio_path)
+        survey = test_module.add_survey_to_candidate(campaign, test_id, question, user.id, transcript)
 
-    if audio_path != '#':
-        survey.audio_path = audio_path
-        survey.save()
-    #except Exception as e:
-    #    print(e)
+        if audio_path != '#':
+            survey.audio_path = audio_path
+            survey.save()
+    except Exception as e:
+        print(e)
 
     return HttpResponse(200)
 
