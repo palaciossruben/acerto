@@ -429,20 +429,28 @@ def user_has_been_recommended(user):
     return candidates.exists()
 
 
+def sort_candidates_by_tests(candidates):
+    return sorted(candidates, key=lambda c: c.evaluation_summary.final_score if c.evaluation_summary and c.evaluation_summary.final_score else -1, reverse=True)
+
+
 def get_recommended_candidates(campaign):
-    return Candidate.objects.filter(campaign=campaign, state__in=State.get_recommended_states(), removed=False)
+    candidates = Candidate.objects.filter(campaign=campaign, state__in=State.get_recommended_states(), removed=False)
+    return sort_candidates_by_tests(candidates)
 
 
 def get_relevant_candidates(campaign):
-    return Candidate.objects.filter(campaign=campaign, state__in=State.get_relevant_states(), removed=False)
+    candidates = Candidate.objects.filter(campaign=campaign, state__in=State.get_relevant_states(), removed=False)
+    return sorted(candidates, key=lambda c: c.evaluation_summary.final_score + (c.state.code == 'STC')*100 if c.evaluation_summary and c.evaluation_summary.final_score else -1, reverse=True)
 
 
 def get_application_candidates(campaign):
-    return Candidate.objects.filter(campaign=campaign, state__in=State.get_applicant_states(), removed=False)
+    candidates = Candidate.objects.filter(campaign=campaign, state__in=State.get_applicant_states(), removed=False)
+    return sort_candidates_by_tests(candidates)
 
 
 def get_rejected_candidates(campaign):
-    return Candidate.objects.filter(campaign=campaign, state__in=State.get_rejected_states(), removed=False)
+    candidates = Candidate.objects.filter(campaign=campaign, state__in=State.get_rejected_states(), removed=False)
+    return sort_candidates_by_tests(candidates)
 
 
 def calculate_evaluation_summaries(campaign):
@@ -478,7 +486,7 @@ def calculate_operational_efficiency(campaign):
     This percentage should as high as possible,
     otherwise to much time is spent on operation (interviews, messages, etc.)
     """
-    recommended_count = get_recommended_candidates(campaign).count()
+    recommended_count = len(get_recommended_candidates(campaign))
     not_that_good_count = Candidate.objects.filter(campaign=campaign, state__in=State.get_rejected_by_human_states()).count()
     total = recommended_count + not_that_good_count
 

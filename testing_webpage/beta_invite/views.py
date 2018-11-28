@@ -139,6 +139,10 @@ def get_first_error_message(form):
     return error_message
 
 
+def has_segment_match(user, campaign):
+    return campaign.get_work_area_segment() == user.get_work_area_segment()
+
+
 def register(request):
     """
     Args:
@@ -188,9 +192,13 @@ def register(request):
             else:
                 user = new_user_module.create_user(campaign, user_params, request, is_mobile, signup_form=signup_form)
 
-            return redirect('/servicio_de_empleo/pruebas?campaign_id={campaign_id}&user_id={user_id}'.format(
-                campaign_id=campaign.id,
-                user_id=user.id))
+            if has_segment_match(user, campaign):
+                return redirect('/servicio_de_empleo/pruebas?campaign_id={campaign_id}&user_id={user_id}'.format(
+                    campaign_id=campaign.id,
+                    user_id=user.id))
+            else:
+                return redirect('/trabajos?segment_code={code}'.format(code=user.get_work_area_segment_code()))
+
         else:
             return HttpResponseBadRequest('<h1>HTTP CODE 400: Client sent bad request with missing params</h1>')
 
@@ -283,7 +291,8 @@ def home(request):
             user = simple_login_and_user(login_form, request)
         except ObjectDoesNotExist:
             # TODO: how to reload the exact campaign and at the same time pass on the error_message?
-            return render(request, cts.INDEX_VIEW_PATH, {'error_message': 'Usuario no existe'})
+            #return render(request, cts.INDEX_VIEW_PATH, {'error_message': 'Usuario no existe'})
+            return redirect('/trabajos')
 
         segment_code = user.get_work_area_segment_code()
         if segment_code:
@@ -313,11 +322,13 @@ def get_test_result(request):
     if not user:
         return redirect('/servicio_de_empleo?campaign_id={campaign_id}'.format(campaign_id=campaign.id))
     candidate = common.get_candidate(user, campaign)
+    high_scores = test_module.get_high_scores(candidate)
 
-    questions_dict = test_module.get_tests_questions_dict(test_module.get_missing_tests(candidate))
+    questions_dict = test_module.get_tests_questions_dict(test_module.get_missing_tests(candidate,
+                                                                                        high_scores=high_scores))
     missing_scores = test_module.get_scores(campaign, user_id, questions_dict, request)
 
-    all_scores = missing_scores + test_module.get_high_scores(candidate)
+    all_scores = missing_scores + high_scores
 
     test_module.get_evaluation(all_scores, candidate)
 
@@ -380,7 +391,7 @@ def active_campaigns(request):
             test_module.classify_evaluation_and_change_state(candidate,
                                                              use_machine_learning=True,
                                                              success_state='STC',
-                                                             fail_state='WFI')
+                                                             fail_state=candidate.state.code)
 
     # TODO: add salary and city filter
     if candidate and candidate.user.get_work_area_segment_code():

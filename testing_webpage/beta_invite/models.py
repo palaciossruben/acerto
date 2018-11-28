@@ -7,6 +7,7 @@ from django.db import models
 from django.contrib.postgres.fields import JSONField
 from django.conf import settings
 from beta_invite import constants as cts
+from business.more_models import Company, School
 
 LOW_SALARY_MARGIN = 0.3
 HIGH_SALARY_MARGIN = 0.1
@@ -745,6 +746,38 @@ def average_list(my_list):
         return None
 
 
+class Experience(models.Model):
+
+    company = models.ForeignKey(Company)
+    role = models.CharField(max_length=40)
+    highlight = models.CharField(max_length=140)
+    number_of_months = models.IntegerField(null=True)
+    number_of_years = models.IntegerField(null=True)
+
+    def __str__(self):
+        return 'id={0}, company={1}, role={2}'.format(self.pk, self.company, self.role)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'experiences'
+
+
+class EducationExperience(models.Model):
+
+    school = models.ForeignKey(School)
+    title = models.CharField(max_length=40)
+    highlight = models.CharField(max_length=140)
+    number_of_months = models.IntegerField(null=True)
+    number_of_years = models.IntegerField(null=True)
+
+    def __str__(self):
+        return 'id={0}, company={1}, title={2}'.format(self.pk, self.school, self.title)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'education_experiences'
+
+
 class User(models.Model):
 
     email = models.CharField(max_length=200, null=True)
@@ -767,6 +800,8 @@ class User(models.Model):
     google_token = models.CharField(max_length=1000, default=None, null=True)
     auth_user = models.ForeignKey(AuthUser, null=True, on_delete=models.SET_NULL)
     scores = models.ManyToManyField(Score)
+    experiences = models.ManyToManyField(Experience)
+    education_experiences = models.ManyToManyField(EducationExperience)
 
     # Additional info
     gender = models.ForeignKey(Gender, null=True, on_delete=models.SET_NULL)
@@ -908,14 +943,14 @@ class User(models.Model):
 
             self.phone = self.phone.replace('-', '')
 
-            # Adds the '+' and country code
             if self.phone[0] != '+':
 
-                self.phone = plus_symbol + self.get_calling_code() + self.phone
+                if re.search(r'^' + self.get_calling_code() + '.+', self.phone) is None:
 
-                # Adds the '+' only
-            elif re.search(r'^' + self.get_calling_code() + '.+', self.phone) is not None:
-                self.phone = plus_symbol + self.phone
+                    self.phone = plus_symbol + self.get_calling_code() + self.phone
+
+                else:
+                    self.phone = plus_symbol + self.phone
 
         return self.phone
 

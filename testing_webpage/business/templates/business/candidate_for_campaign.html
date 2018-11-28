@@ -11,21 +11,24 @@
     });
 </script>
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        not_blocked("{{ business_state.name }}", "{{ campaign.free_trial }}", "{{ campaign.state.name }}");
-    });
-</script>
+<script>
+        function change_state(param_dict)
+        {
+            general_dict = {csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()}
+                $.ajax
+                ({
+                    type:'POST',
+                    url:'../../../../change-state',
+                    data: Object.assign({}, general_dict, param_dict),
+                    success:function(response)
+                    {
+                    }
+                });
+            return false;
+        }
+    </script>
 
-{% if campaign.free_trial == False and campaign.state.name != 'Inactive' %}
-    <a href="/seleccion_de_personal/perfil_del_candidato/{{ candidate.id }}">
-{% elif campaign.free_trial == True and campaign.state.name != 'Inactive'%}
-    <a href="/seleccion_de_personal/perfil_del_candidato/{{ candidate.id }}/remove" onclick="return false" class="tooltip">
-    <span class="tooltiptext">Esta es una prueba gratis, solo podrás ver los primeros candidatos, para tener acceso completo contáctanos, correo: contacto@peaku.co, wp: +57 3116109340</span>
-{% else %}
-    <a href="#" onclick="return false" class="tooltip">
-        <span class="tooltiptext">Para poder ver la información adicional del candidato, la campaña debe estar activa</span>
-{% endif %}
+<a href="/seleccion_de_personal/perfil_del_candidato/{{ candidate.id }}">
 <div class="row candidate-info-div">
     <div class="email-checkbox">
         <input type="checkbox" name="{{ candidate.id }}_checkbox">
@@ -131,4 +134,16 @@
     </div>
 </div>
 </a>
+<!--
+<div class="like-selection-div">
+<form method="post" class="like-dislike" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="button" class="like" onclick="change_state({'state_code':'STC', 'candidate_id':{{ candidate.pk }}})" value="&#x2714;">
+</form>
+
+<form method="post" class="like-dislike" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="button" class="dislike" onclick="change_state({'state_code':'RBC', 'candidate_id':{{ candidate.pk }}})" value="&#x274C;">
+</form>
+</div>-->
 <input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}"/>

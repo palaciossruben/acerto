@@ -41,8 +41,9 @@ def add_missing_tests(user, campaigns):
     if user:
         for campaign in campaigns:
             prospective_candidate = Candidate(user=user, campaign=campaign)
-            campaign.passed_tests = [s.test for s in test_module.get_high_scores(prospective_candidate)]
-            campaign.missing_tests = test_module.get_missing_tests(prospective_candidate)
+            high_scores = test_module.get_high_scores(prospective_candidate)
+            campaign.passed_tests = [s.test for s in high_scores]
+            campaign.missing_tests = test_module.get_missing_tests(prospective_candidate, high_scores=high_scores)
 
 
 def jobs(request):
@@ -52,14 +53,14 @@ def jobs(request):
     try:
         segment = WorkAreaSegment.objects.get(code=code)
         campaigns = Campaign.objects.filter(~Q(title_es=None),
-                                            state__code__in=['I', 'A'],
+                                            state__code__in=['A'],
                                             removed=False,
                                             work_area__segment__code=segment.code)
         if len(campaigns) > 0:
             active_campaigns = campaigns
         else:
             active_campaigns = Campaign.objects.filter(~Q(title_es=None),
-                                                       state__code__in=['I', 'A'],
+                                                       state__code__in=['A'],
                                                        removed=False)
 
         add_missing_tests(user, active_campaigns)
@@ -67,7 +68,7 @@ def jobs(request):
 
     except ObjectDoesNotExist:
         active_campaigns = Campaign.objects.filter(~Q(title_es=None),
-                                                   state__code__in=['I', 'A'],
+                                                   state__code__in=['A'],
                                                    removed=False)
         add_missing_tests(user, active_campaigns)
         return render(request, cts.JOBS_VIEW_PATH, {'active_campaigns': active_campaigns})

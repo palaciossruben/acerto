@@ -156,6 +156,7 @@ class Candidate(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     state = models.ForeignKey(State, null=True, on_delete=models.SET_NULL, default=cts.DEFAULT_STATE)
     removed = models.BooleanField(default=False)
+    sent_to_client = models.BooleanField(default=False)
     salary = models.CharField(max_length=100, default='')
     comments = models.ManyToManyField(Comment, default=[])
     evaluations = models.ManyToManyField(Evaluation)

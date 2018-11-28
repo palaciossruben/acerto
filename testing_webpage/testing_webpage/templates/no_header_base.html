@@ -15,7 +15,7 @@
         </div>
         <div class="col-lg-10 col-md-10 col-sm-10 push10">
             <ul class="topnav-list">
-                {% if 'seleccion_de_personal' in request.path %}
+                {% if 'seleccion-de-personal' in request.path %}
                     <li id="candidates-button"><a id="option1" href="{% url 'index' %} " style="text-decoration:none;">{% trans 'Candidates' %}</a></li>
                     <li id="contact-us-button"><a id="option2" href="{% url 'business:contact_form' %}" style="text-decoration:none;">{% trans 'Contact Us' %}</a></li>
                     {% if user|business_user_is_authenticated %}

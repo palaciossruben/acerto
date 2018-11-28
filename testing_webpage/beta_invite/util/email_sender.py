@@ -6,7 +6,7 @@ from dashboard.models import Candidate
 from beta_invite.util import common_senders
 
 internal_team = ['santiago@peaku.co', 'juan@peaku.co', 'juan.rendon@peaku.co']
-testing_team = ['juan@peaku.co', 'juan.rendon@peaku.co']
+testing_team = ['juan@peaku.co', 'juan.rendon@peaku.co', 'ing.pendiente@gmail.com']
 
 
 def get_files(attachment):
@@ -42,7 +42,7 @@ def mail_gun_post(recipients, subject, body, html, attachment):
         pass
 
 
-def send_with_mailgun(recipients, subject, body, html=None, attachment=None):
+def send_with_mailgun(recipients, subject, body, attachment=None):
     """
     Sends emails over mailgun service
     Args:
@@ -53,6 +53,9 @@ def send_with_mailgun(recipients, subject, body, html=None, attachment=None):
         attachment: optional param for attaching content to email
     Returns: sends emails.
     """
+
+    html = body.replace('\n', '<br>') + '<br><a href=%unsubscribe_url%>Desuscribir</a>'
+
     if settings.DEBUG:
         recipients = validate_emails(testing_team)
     else:

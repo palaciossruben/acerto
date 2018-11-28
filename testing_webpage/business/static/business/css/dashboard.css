@@ -166,6 +166,22 @@ body {
     padding:40px;
 }
 
+.like-dislike{
+    display: inline-block;
+    width:50px;
+}
+
+.like{
+    border: none;
+    background: rgb(72, 171, 88);
+    width: 100%;
+}
+
+.dislike{
+    border: none;
+    background: rgb(221, 81, 51);
+    width: 100%;
+}
 
 .candidate-div{
     width: 100%;

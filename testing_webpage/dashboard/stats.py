@@ -10,7 +10,7 @@ from django.db.models import Q
 
 from dashboard.models import Candidate, StateEvent, State
 from dashboard import constants as cts
-from beta_invite.models import Campaign, User
+from beta_invite.models import Campaign
 
 
 CHART = {
@@ -156,7 +156,23 @@ def negative_forecasts(request):
     return render_forecast(request, 'negative')
 
 
+# TODO: translate SQL into django orm
 def get_number_of_candidates_df():
+    """
+    select date_trunc('month', created_at) m,
+      count(*) new_candidates
+    from candidates
+    where id not in (select min(id) first_candidate_id
+                       from candidates
+                       where not removed
+                       and state_id!=11
+                       group by user_id)
+    and state_id!=11
+    and not removed
+    group by m
+    order by m;
+    """
+
     columns = ['id', 'user_id', 'user__created_at']
     data = pd.DataFrame(list(Candidate.objects.filter(~Q(state=State.objects.get(code='P')),
                                                       removed=False,
@@ -212,15 +228,18 @@ def candidates_per_user(request):
 
 def candidates_from_old_users(request):
     """
-    select s.m,
-           s.candidate_count - s.user_count
-           from (select date_trunc('month', u.created_at) as m,
-                        count(distinct u.id) user_count,
-                        count(distinct c.id) candidate_count
-                 from candidates c inner join users u on c.user_id = u.id
-                        where not removed and c.state_id != 11
-                        and u.created_at > '2018-01-01'
-                        group by m order by m) as s;
+    select date_trunc('month', created_at) m,
+      count(*) new_candidates
+    from candidates
+    where id not in (select min(id) first_candidate_id
+                       from candidates
+                       where not removed
+                       and state_id!=11
+                       group by user_id)
+    and state_id!=11
+    and not removed
+    group by m
+    order by m;
     """
 
     data_source = dict()
@@ -350,6 +369,67 @@ def ml_automation_percentage(request):
     automatic.drop('created_at', inplace=True, axis=1)
     #lambda x: x.nunique()
     data = recommended.join(automatic, how='left')
+
+    gp = pd.groupby(data, by='month').aggregate({'id': 'count'})
+    data = pd.DataFrame(gp)
+    data.sort_index(inplace=True)
+
+    data_source['data'] = []
+    for idx, row in data.iterrows():
+        data_source['data'].append({'label': idx, 'value': str(row['id'])})
+
+    # Create an object for the Column 2D chart using the FusionCharts class constructor
+    column_2d = FusionCharts("column2D", "ex1", "600", "350", "chart-1", "json", data_source)
+    return render(request, cts.STATS_INDEX, {'output': column_2d.render()})
+
+
+# TODO: make the SQL query work in django work
+def work_area_segment_match(request):
+    """
+    Get the percentage of match between workAreaSegments by month
+
+    Checks if the candidate and its campaign have a match
+
+    select date_trunc('month', c.created_at) as m,
+      count(distinct (case when w.segment_id = wcam.segment_id then c.id end)),
+      count(*) as all,
+      cast(count(distinct (case when w.segment_id = wcam.segment_id then c.id end)) as float) / count(*)
+    from candidates c
+    inner join users u on u.id = c.user_id
+    inner join work_areas w on w.id = u.work_area_id
+    inner join campaigns cam on cam.id = c.campaign_id
+    inner join work_areas wcam on wcam.id = cam.work_area_id
+      where not cam.removed
+    group by m order by m;
+    """
+
+    data_source = dict()
+    CHART["caption"] = "WorkAreaSegment match percentage"
+    data_source['chart'] = CHART
+
+    columns = ['id', 'created_at', 'campaign__work_area__segment_id', 'user__work_area__segment_id']
+    df = pd.DataFrame(list(Candidate.objects.filter(removed=False)
+                                    .values_list(*columns)), columns=columns)
+    df['month'] = df['created_at'].apply(lambda date: '{y}-{m}'.format(y=date.year,
+                                                                       m=get_month_format(
+                                                                         date.month)))
+    df.drop('created_at', inplace=True, axis=1)
+
+    #df['match'] = df.apply(lambda row: )
+
+    #gb = df.groupby('month').agg({'percentage': })
+    #df = pd.DataFrame(gb)
+
+    automatic_columns = ['automatic_id', 'created_at']
+    automatic = pd.DataFrame(list(Candidate.objects.filter(removed=False,
+                                                           state_events__in=StateEvent.objects.filter(
+                                                               use_machine_learning=True,
+                                                               forecast=True,
+                                                               to_state__code='STC'))
+                                  .values_list(*columns)), columns=automatic_columns)
+    automatic.drop('created_at', inplace=True, axis=1)
+    # lambda x: x.nunique()
+    data = df.join(automatic, how='left')
 
     gp = pd.groupby(data, by='month').aggregate({'id': 'count'})
     data = pd.DataFrame(gp)
