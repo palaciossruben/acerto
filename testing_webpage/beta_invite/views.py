@@ -480,7 +480,7 @@ def run_google_speech(filename):
     # The name of the audio file to transcribe
     filename = common.get_media_path(filename)
 
-    describe_wav(filename)
+    sample_rate, num_channels = describe_wav(filename)
 
     """
     test_module.down_sample_wave(filename,
@@ -489,15 +489,23 @@ def run_google_speech(filename):
                                  outrate=ideal_sample_rate,
                                  inchannels=num_channels,
                                  outchannels=1)
+
+
+    """
+
+    """
     import librosa
-    audio_time_series, _ = librosa.load(filename, sr=ideal_sample_rate)
+    audio_time_series, _ = librosa.load(filename, sr=None)
+    audio_time_series = librosa.core.resample(audio_time_series,
+                                              orig_sr=sample_rate,
+                                              target_sr=ideal_sample_rate)
 
     filename = filename + '.wav'
     librosa.output.write_wav(filename, audio_time_series, ideal_sample_rate)
+    """
 
     print('AFTER down sample:')
     describe_wav(filename)
-    """
 
     # Loads the audio into memory
     with io.open(filename, 'rb') as audio_file:
@@ -506,8 +514,7 @@ def run_google_speech(filename):
 
     config = types.RecognitionConfig(
         encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
-        language_code='es-CO',
-        sample_rate_hertz=ideal_sample_rate)
+        language_code='es-CO')
 
     # Detects speech in the audio file
     response = client.recognize(config, audio)
