@@ -435,13 +435,13 @@ def down_sample_wave(src, dst, inrate=44100, outrate=16000, inchannels=2, outcha
     n_frames = s_read.getnframes()
     data = s_read.readframes(n_frames)
 
-    try:
-        converted = audioop.ratecv(data, 2, inchannels, inrate, outrate, None)
-        if outchannels == 1:
-            converted = audioop.tomono(converted[0], 2, 1, 0)
-    except:
-        print('Failed to downsample wav')
-        return False
+    #try:
+    converted = audioop.ratecv(data, 2, inchannels, inrate, outrate, None)
+    if outchannels == 1:
+        converted = audioop.tomono(converted[0], 2, 1, 0)
+    #except:
+    #    print('Failed to downsample wav')
+    #    return False
 
     try:
         s_write.setparams((outchannels, 2, outrate, 0, 'NONE', 'Uncompressed'))
