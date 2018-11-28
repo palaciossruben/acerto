@@ -475,9 +475,16 @@ def run_google_speech(filename):
         content = audio_file.read()
         audio = types.RecognitionAudio(content=content)
 
+    import wave
+    with wave.open(file_name, "rb") as wave_file:
+        sample_rate = wave_file.getframerate()
+
+    print('sample rate is: {}'.format(sample_rate))
+
     config = types.RecognitionConfig(
         encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
-        language_code='es-CO')
+        language_code='es-CO',
+        sample_rate=sample_rate)
 
     # Detects speech in the audio file
     response = client.recognize(config, audio)
