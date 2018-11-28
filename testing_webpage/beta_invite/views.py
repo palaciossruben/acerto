@@ -1,3 +1,6 @@
+import os
+import io
+
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseBadRequest, HttpResponse
 from django.shortcuts import redirect
@@ -8,6 +11,9 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.decorators.csrf import csrf_exempt
 
+from google.cloud import speech
+from google.cloud.speech import enums
+from google.cloud.speech import types
 
 import common
 from beta_invite import constants as cts
@@ -436,5 +442,42 @@ def security_politics(request):
 @csrf_exempt
 def upload_audio_file(request):
     question = Question.objects.get(pk=request.POST.get('question_id'))
-    common.save_resource_from_request(request, question, 'audio', 'audio')
+    audio_path = common.save_resource_from_request(request, question, 'audio', 'audio', clean_directory_on_writing=True)
+
+    # TODO: should save on survey rather than question
+    #if audio_path != '#':
+    #    question.audio_path = audio_path
+    #    question.save()
+
+    try:
+        transcipt = run_google_speech(audio_path)
+    except Exception as e:
+        print(e)
+
     return HttpResponse(200)
+
+
+def run_google_speech(filename):
+
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(os.getcwd(), 'testing_webpage', 'google_cloud_speech_key.json')
+    client = speech.SpeechClient()
+
+    # The name of the audio file to transcribe
+    file_name = common.get_media_path(filename)
+
+    # Loads the audio into memory
+    with io.open(file_name, 'rb') as audio_file:
+        content = audio_file.read()
+        audio = types.RecognitionAudio(content=content)
+
+    config = types.RecognitionConfig(
+        encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
+        language_code='es-CO')
+
+    # Detects speech in the audio file
+    response = client.recognize(config, audio)
+
+    for result in response.results:
+        print('Transcript: {}'.format(result.alternatives[0].transcript))
+
+    return response.results[0].alternatives[0].transcript

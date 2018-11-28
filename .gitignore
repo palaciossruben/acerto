@@ -97,3 +97,4 @@ testing_webpage/subscribe/search_engine_date.p
 testing_webpage/subscribe/last_user_id.p
 testing_webpage/subscribe/last_user_updated_at.p
 testing_webpage/cron2.txt
+testing_webpage/testing_webpage/google_cloud_speech_key.json

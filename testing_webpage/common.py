@@ -1,4 +1,5 @@
 import os
+import shutil
 import inspect
 import unicodedata
 from django.conf import settings
@@ -388,7 +389,11 @@ def get_object_attribute_name(key, my_object):
     return class_name.join(key.split(class_name)[1:])
 
 
-def save_resource_from_request(request, my_object, param_name, folder_name):
+def get_media_path(end_path):
+    return os.path.join(os.getcwd(), 'media', end_path)
+
+
+def save_resource_from_request(request, my_object, param_name, folder_name, clean_directory_on_writing=False):
     """
     Saves file on machine resumes/* file system
     Args:
@@ -396,6 +401,7 @@ def save_resource_from_request(request, my_object, param_name, folder_name):
         my_object: Any saved Object with a valid id.
         param_name: string, name of File on the request
         folder_name: string with name of folder
+        clean_directory_on_writing: if True will clean the object_id folder each time there is a writting
     Returns: file url or None if nothing is saves.
     """
 
@@ -408,6 +414,9 @@ def save_resource_from_request(request, my_object, param_name, folder_name):
         my_object_id_folder = str(my_object.id)
 
         folder = os.path.join(folder_name, my_object_id_folder)
+
+        if os.path.isdir(get_media_path(folder)) and clean_directory_on_writing:
+            shutil.rmtree(get_media_path(folder))
 
         file_path = os.path.join(folder, rename_filename(my_file.name))
 

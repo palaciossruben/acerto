@@ -138,17 +138,8 @@ function stopRecording() {
 
     //create the wav blob and pass it on to createDownloadLink
     rec.exportWAV(createDownloadLink);
-
-    /*$.post('/upload-audio-file', { data: result, name: 'audio_file.wav'}, continueSubmission);*/
 }
 
-
-/*
-function send_recording(event) {
-    var result = event.target.result;
-    var filename = newDate().toISOString(); //filename to send to server without extension
-    $.post('/upload-audio-file', { data: result, name: fileName }, continueSubmission);
-}*/
 
 function createDownloadLink(blob) {
 
@@ -183,26 +174,13 @@ function createDownloadLink(blob) {
 
     var formData = new FormData(formElement);
     formData.append('audio_file.wav', blob, 'audio_file.wav');
-    /*formData.append('question_id', 249)*/
-
-    /*$('<input>').attr({
-        type: 'hidden',
-        id: 'question_id',
-        name: 249
-    }).appendTo('test_result');*/
-
-    /*var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'upload-audio-file', true);
-    xhr.send(formData);*/
-
 
     var fd = new FormData();
-    //fd.append('audio.wav', 'audio.wav');
     fd.append('audio', blob);
     fd.append('question_id', 249)
     $.ajax({
         type: 'POST',
-        url: 'https://peaku.co/servicio_de_empleo/upload-audio-file',//'http://127.0.0.1:8000/servicio_de_empleo/upload-audio-file',
+        url: 'https://peaku.co/servicio_de_empleo/upload-audio-file', //'https://peaku.co/servicio_de_empleo/upload-audio-file'
         data: fd,
         processData: false,
         contentType: false
