@@ -1,6 +1,7 @@
 import os
 import io
 import wave
+from scipy.io import wavfile
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseBadRequest, HttpResponse
@@ -480,8 +481,7 @@ def run_google_speech(filename):
     # The name of the audio file to transcribe
     filename = common.get_media_path(filename)
 
-    sample_rate, num_channels = describe_wav(filename)
-
+    # TODO: remove?
     """
     test_module.down_sample_wave(filename,
                                  filename,
@@ -504,7 +504,27 @@ def run_google_speech(filename):
     librosa.output.write_wav(filename, audio_time_series, ideal_sample_rate)
     """
 
-    print('AFTER down sample:')
+    # With scipy
+    """
+    print('BEFORE:')
+    in_rate, _ = describe_wav(filename)
+
+    ds = test_module.DownSample(in_rate=in_rate, out_rate=ideal_sample_rate)
+    opens = ds.open_file(filename)
+    if opens:
+        ds.resample(filename)
+    """
+
+    """
+    freq, audio = wavfile.read(filename)
+
+    print(audio)
+    print(freq)
+
+    wavfile.write(filename, 16000, audio)
+    """
+
+    print('AFTER:')
     describe_wav(filename)
 
     # Loads the audio into memory
