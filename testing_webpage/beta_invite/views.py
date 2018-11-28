@@ -10,7 +10,7 @@ from user_agents import parse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.decorators.csrf import csrf_exempt
-
+from decouple import config as CONFIG
 from google.cloud import speech
 from google.cloud.speech import enums
 from google.cloud.speech import types
@@ -457,13 +457,14 @@ def upload_audio_file(request):
             survey.save()
     except Exception as e:
         print(e)
+        raise e
 
     return HttpResponse(200)
 
 
 def run_google_speech(filename):
 
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(os.getcwd(), 'testing_webpage', 'google_cloud_speech_key.json')
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(CONFIG('project_directory'), 'testing_webpage', 'google_cloud_speech_key.json')
     client = speech.SpeechClient()
 
     # The name of the audio file to transcribe
