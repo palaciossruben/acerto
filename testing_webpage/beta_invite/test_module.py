@@ -1,7 +1,7 @@
 """
 Test related methods.
 """
-
+import re
 from django.db.models import F
 
 
@@ -10,6 +10,8 @@ from beta_invite.models import Question, Survey, Score, Evaluation, EvaluationSu
 from dashboard.models import Candidate, State
 from match import model
 import common
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 
 def get_tests_questions_dict(tests):
@@ -19,6 +21,23 @@ def get_tests_questions_dict(tests):
     Returns: {test_id: [question_id ...]}
     """
     return {test.id: [q.id for q in test.questions.all()] for test in tests}
+
+
+def get_cosine_similarity(*strings):
+    """
+    see: https://towardsdatascience.com/overview-of-text-similarity-metrics-3397c4601f50
+    :param strings:
+    :return:
+    """
+    vectors = [t for t in get_vectors(*strings)]
+    return cosine_similarity(vectors)
+
+
+def get_vectors(*strings):
+    text = [t for t in strings]
+    vectorizer = CountVectorizer(text)
+    vectorizer.fit(text)
+    return vectorizer.transform(text).toarray()
 
 
 def update_survey(question, answer_text, survey, question_id):
@@ -64,6 +83,17 @@ def update_survey(question, answer_text, survey, question_id):
                 survey.score = 1
             else:
                 survey.score = 0
+    elif question.type.code == 'R':
+        # TODO: add English
+        question_text = question.name_es
+        matches = re.findall(r'\".+\"', question_text)
+        if len(matches) > 0:
+            original_text = matches[-1][1:-1]
+            survey.score = get_cosine_similarity(answer_text, original_text)
+        else:
+            survey.score = 0  # THIS IS A TEST FAILURE
+    else:
+        raise NotImplementedError('question type not implemented')
 
     survey.save()
 
