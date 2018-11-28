@@ -69,7 +69,6 @@ function startRecording() {
 
     recordButton.disabled = true;
     stopButton.disabled = false;
-    pauseButton.disabled = false
 
     /*
     We're using the standard promise based getUserMedia()
@@ -100,24 +99,8 @@ function startRecording() {
         //enable the record button if getUserMedia() fails
         recordButton.disabled = false;
         stopButton.disabled = true;
-        pauseButton.disabled = true
     });
 }
-
-
-function pauseRecording(){
-    console.log("pauseButton clicked rec.recording=",rec.recording );
-    if (rec.recording){
-        //pause
-        rec.stop();
-        pauseButton.innerHTML="Resume";
-    }else{
-        //resume
-        rec.record()
-        pauseButton.innerHTML="Pause";
-    }
-}
-
 
 function stopRecording() {
     console.log("stopButton clicked");
@@ -125,10 +108,6 @@ function stopRecording() {
     //disable the stop button, enable the record too allow for new recordings
     stopButton.disabled = true;
     recordButton.disabled = false;
-    pauseButton.disabled = true;
-
-    //reset button just in case the recording is stopped while paused
-    pauseButton.innerHTML="Pause";
 
     //tell the recorder to stop the recording
     rec.stop();
@@ -174,14 +153,18 @@ function createDownloadLink(blob) {
     fd.append('audio', blob);
 
     //TODO: These can not be hardcoded!
-    fd.append('question_id', 249);
-    fd.append('campaign_id', 301);
-    fd.append('test_id', 15);
-    //fd.append('user_id', 13053);
+    /*
+    fd.append('question_id', 1682);
+    fd.append('campaign_id', 464);
+    fd.append('test_id', 357);
+*/
+    fd.append('question_id', 444);
+    fd.append('campaign_id', 22);
+    fd.append('test_id', 109);
 
     $.ajax({
         type: 'POST',
-        url: 'https://peaku.co/servicio_de_empleo/upload-audio-file', //'https://peaku.co/servicio_de_empleo/upload-audio-file'
+        url: /*'https://peaku.co/servicio_de_empleo/upload-audio-file',  */ 'http://127.0.0.1:8000/servicio_de_empleo/upload-audio-file',
         data: fd,
         processData: false,
         contentType: false
@@ -203,9 +186,7 @@ var audioContext = new AudioContext; //new audio context to help us record
 
 var recordButton = document.getElementById("recordButton");
 var stopButton = document.getElementById("stopButton");
-var pauseButton = document.getElementById("pauseButton");
 
 //add events to those 3 buttons
 recordButton.addEventListener("click", startRecording);
 stopButton.addEventListener("click", stopRecording);
-pauseButton.addEventListener("click", pauseRecording);

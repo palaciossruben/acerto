@@ -41,9 +41,8 @@
                             <input name="test_{{ test.id }}_question_{{ question.id }}" type="number" value="{{ question.params.default }}" min="{{ question.params.min }}" max="{{ question.params.max }}" />
                         </div>
                     {% elif question.type.code == 'R' %}
-                        <div id="controls">
+                        <div id="controls" >
                            <button id="recordButton">Record</button>
-                           <button id="pauseButton" disabled>Pause</button>
                            <button id="stopButton" disabled>Stop</button>
                         </div>
                         <h3>Recordings</h3>
@@ -56,7 +55,7 @@
                         <input type="button" class="nice-button" value="Atrás" onclick="back({{ test_counter }}, {{ forloop.counter }}, {{ tests|get_number_questions_of_before_test:test_counter }})">
                     {% endif %}
                     {% if forloop.counter != test.questions.all|length or test_counter != tests|length %}
-                        <input type="button" class="nice-button" value="Siguiente" onclick="next({{ test_counter }}, {{ forloop.counter }}, {{ test.questions.all|length}}, {{ tests|length }} )">
+                        <input type="button" class="nice-button" value="Siguiente" onclick="next({{ test_counter }}, {{ forloop.counter }}, {{ test.questions.all|length }}, {{ tests|length }} )">
                     {% endif %}
                 </div>
             {% endfor %}
