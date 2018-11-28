@@ -467,7 +467,7 @@ def describe_wav(filename):
     with wave.open(filename, "rb") as wave_file:
         sample_rate = wave_file.getframerate()
         num_channels = wave_file.getnchannels()
-        print('sample rate is: {}'.format(sample_rate))
+        print('sample rate is: {}, channels: {}'.format(sample_rate, num_channels))
         return sample_rate, num_channels
 
 
@@ -480,22 +480,29 @@ def run_google_speech(filename):
     # The name of the audio file to transcribe
     filename = common.get_media_path(filename)
 
-    # Loads the audio into memory
-    with io.open(filename, 'rb') as audio_file:
-        content = audio_file.read()
-        audio = types.RecognitionAudio(content=content)
+    describe_wav(filename)
 
-    sample_rate, num_channels = describe_wav(filename)
-
+    """
     test_module.down_sample_wave(filename,
                                  filename,
                                  inrate=sample_rate,
                                  outrate=ideal_sample_rate,
                                  inchannels=num_channels,
                                  outchannels=1)
+    import librosa
+    audio_time_series, _ = librosa.load(filename, sr=ideal_sample_rate)
+
+    filename = filename + '.wav'
+    librosa.output.write_wav(filename, audio_time_series, ideal_sample_rate)
 
     print('AFTER down sample:')
-    sample_rate, num_channels = describe_wav(filename)
+    describe_wav(filename)
+    """
+
+    # Loads the audio into memory
+    with io.open(filename, 'rb') as audio_file:
+        content = audio_file.read()
+        audio = types.RecognitionAudio(content=content)
 
     config = types.RecognitionConfig(
         encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
