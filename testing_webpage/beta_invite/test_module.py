@@ -142,7 +142,10 @@ def process_question_and_get_score(campaign, question, request, test_id, user_id
     else:
         survey = add_survey_to_candidate(campaign, test_id, question, user_id, answer_text)
 
-    return survey.score
+    if survey is not None:
+        return survey.score
+    else:
+        return 0
 
 
 def get_test_score(campaign, questions, user_id, test_id, request):
