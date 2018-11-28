@@ -17,4 +17,5 @@ urlpatterns = [
     url(r'^security[-_]politics$', views.security_politics, name='security_politics'),
     url(r'^apply$', views.apply, name='apply'),
     url(r'^home$', views.home, name='home'),
+    url(r'^upload-audio-file$', views.upload_audio_file, name='upload-audio-file'),
 ]

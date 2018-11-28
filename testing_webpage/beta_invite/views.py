@@ -311,10 +311,6 @@ def get_test_result(request):
         request: HTTP object
     Returns: Either end process or invites to interview.
     """
-    question_id = request.POST.get('question_id')
-
-    question = Question.objects.get(pk=question_id)
-    common.save_resource_from_request(request, question, 'audio_file.wav', 'audio')
 
     campaign = common.get_campaign_from_request(request)
     user = common.get_user_from_request(request)
@@ -440,5 +436,5 @@ def security_politics(request):
 @csrf_exempt
 def upload_audio_file(request):
     question = Question.objects.get(pk=request.POST.get('question_id'))
-    common.save_resource_from_request(request, question, 'audio_file.wav', 'audio')
+    common.save_resource_from_request(request, question, 'audio', 'audio')
     return HttpResponse(200)

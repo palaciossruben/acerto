@@ -197,11 +197,12 @@ function createDownloadLink(blob) {
 
 
     var fd = new FormData();
-    fd.append('audio.wav', 'audio.wav');
-    fd.append('data', soundBlob);
+    //fd.append('audio.wav', 'audio.wav');
+    fd.append('audio', blob);
+    fd.append('question_id', 249)
     $.ajax({
         type: 'POST',
-        url: '/upload.php',
+        url: 'https://peaku.co/servicio_de_empleo/upload-audio-file',//'http://127.0.0.1:8000/servicio_de_empleo/upload-audio-file',
         data: fd,
         processData: false,
         contentType: false
