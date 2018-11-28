@@ -193,11 +193,26 @@ def get_common_search_info(request):
 def add_related_words(search_array):
 
     related = []
+<<<<<<< Updated upstream
     try:
         # A dictionary of the form: {'word': [('related_word', relevance) ...]}
         related_words_dict = pickle.load(open(cts_subscribe.RELATED_WORDS_PATH, 'rb'))
     except FileNotFoundError:
         return []
+=======
+
+    RELATED_WORDS_PATH = os.path.join('subscribe', 'related_words_dict.p')
+    my_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    os.chdir(my_path)
+    print(os.getcwd())
+
+    # A dictionary of the form: {'word': [('related_word', relevance) ...]}
+    open(os.path.join('subscribe', 'related_words_dict.p'), encoding="utf8")
+    with open(path, 'rb') as f:
+        text = f.read()
+
+    related_words_dict = pickle.load(text)
+>>>>>>> Stashed changes
 
     for word in search_array:
         related_words = related_words_dict.get(word, [])

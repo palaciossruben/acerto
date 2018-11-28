@@ -22,14 +22,23 @@
                     data: Object.assign({}, general_dict, param_dict),
                     success:function(response)
                     {
+                        if (param_dict['state_code']=='STC'){
+                            $("#favorite-"+param_dict['candidate_id']).css("display", "block");
+
+                        }else{
+                            $("#favorite-"+param_dict['candidate_id']).css("display", "none");
+                        }
+                    $("#like-"+param_dict['candidate_id']).css("display", "none");
+                    $("#dislike-"+param_dict['candidate_id']).css("display", "none");
                     }
                 });
             return false;
         }
     </script>
 
-<a href="/seleccion_de_personal/perfil_del_candidato/{{ candidate.id }}">
+<a href="/seleccion_de_personal/perfil_del_candidato/{{ candidate.id }}" style="text-decoration:none">
 <div class="row candidate-info-div">
+    <div class="favorite" id="favorite-{{ candidate.pk }}"><span class="crown">&#x1F451;</span></div>
     <div class="email-checkbox">
         <input type="checkbox" name="{{ candidate.id }}_checkbox">
     </div>
@@ -138,12 +147,12 @@
 <div class="like-selection-div">
 <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
     {% csrf_token %}
-    <input type="button" class="like" onclick="change_state({'state_code':'STC', 'candidate_id':{{ candidate.pk }}})" value="&#x2714;">
+    <input type="button" class="like" id="like-{{ candidate.pk }}" onclick="change_state({'state_code':'STC', 'candidate_id':{{ candidate.pk }}})" value="&#x2714;">
 </form>
 
 <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
     {% csrf_token %}
-    <input type="button" class="dislike" onclick="change_state({'state_code':'RBC', 'candidate_id':{{ candidate.pk }}})" value="&#x274C;">
+    <input type="button" class="dislike" id="dislike-{{ candidate.pk }}" onclick="change_state({'state_code':'RBC', 'candidate_id':{{ candidate.pk }}})" value="&#x274C;">
 </form>
 </div>-->
 <input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}"/>
