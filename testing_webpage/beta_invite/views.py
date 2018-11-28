@@ -472,6 +472,7 @@ def describe_wav(filename):
 
 
 def run_google_speech(filename):
+    ideal_sample_rate = 16000
 
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(CONFIG('project_directory'), 'testing_webpage', 'google_cloud_speech_key.json')
     client = speech.SpeechClient()
@@ -489,7 +490,7 @@ def run_google_speech(filename):
     test_module.down_sample_wave(filename,
                                  filename,
                                  inrate=sample_rate,
-                                 outrate=16000,
+                                 outrate=ideal_sample_rate,
                                  inchannels=num_channels,
                                  outchannels=1)
 
@@ -499,7 +500,7 @@ def run_google_speech(filename):
     config = types.RecognitionConfig(
         encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
         language_code='es-CO',
-        sample_rate_hertz=sample_rate)
+        sample_rate_hertz=ideal_sample_rate)
 
     # Detects speech in the audio file
     response = client.recognize(config, audio)
