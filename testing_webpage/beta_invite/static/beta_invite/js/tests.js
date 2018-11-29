@@ -151,24 +151,26 @@ function createDownloadLink(blob) {
 
     //TODO: These can not be hardcoded!
 
-    /*question_id = document.getElementById("question-id").val;
+/*
+
+    question_id = document.getElementById("question-id").val;
     campaign_id = document.getElementById("campaign-id").val;
     test_id = document.getElementById("test-id").val;
     console.log(campaign_id);
     console.log(test_id);
+*/
 
-/*
     fd.append('question_id', 1682);
     fd.append('campaign_id', 464);
     fd.append('test_id', 357);
-*/
+/*
     fd.append('question_id', 444);
     fd.append('campaign_id', 22);
     fd.append('test_id', 109);
-
+*/
     $.ajax({
         type: 'POST',
-        url: /*'https://peaku.co/servicio_de_empleo/upload-audio-file',  */ 'http://127.0.0.1:8000/servicio_de_empleo/upload-audio-file',
+        url: 'https://peaku.co/servicio_de_empleo/upload-audio-file',  // 'http://127.0.0.1:8000/servicio_de_empleo/upload-audio-file',
         data: fd,
         processData: false,
         contentType: false
