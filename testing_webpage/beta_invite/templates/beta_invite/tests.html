@@ -41,15 +41,17 @@
                         </div>
                     {% elif question.type.code == 'R' %}
                         <div id="controls">
-                            <button class="record-control-button" id="recordButton" onclick="startRecord()"><span id="mic"><img style="vertical-align: bottom;width: 40px;" src="{% static 'beta_invite/img/microphone.png' %}"></span></button>
-                            <button class="record-control-button" id="stopButton" onclick="stopRecord()" disabled><span id="stop">&#x25A0;</span></button>
+                            <button class="record-control-button" id="recordButton" onclick="startRecord()"><span id="mic"><img style="width: 40px;" src="{% static 'beta_invite/img/microphone.png' %}"></span></button>
+                            <button class="record-control-button" id="stopButton" onclick="stopRecord()"><span id="stop">&#x25A0;</span></button>
                         </div>
                         <p id="recording">Grabando...</p>
-                        <ol id="recordingsList"></ol>
+                        <br>
+                        <ul id="recordingsList" style="list-style-type: none;"></ul>
                         <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
                         <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
                         <script type="text/javascript" src="{% static 'beta_invite/js/tests.js' %}"></script>
                         <input type="hidden" id="test-id" value="{{ test.pk }}">
+                        <p>Da clic en siguiente una vez tengas el audio que quieres enviar</p>
                     {% endif %}
                     {% if forloop.counter != 1 or test_counter != 1 %}
                         <input type="button" class="nice-button" value="Atrás" onclick="back({{ test_counter }}, {{ forloop.counter }}, {{ tests|get_number_questions_of_before_test:test_counter }})">
