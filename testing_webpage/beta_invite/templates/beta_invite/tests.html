@@ -4,9 +4,8 @@
 
 <form action="test_result" method="post" id="test_form_id" enctype="multipart/form-data">
     {% csrf_token %}
-    <input type="hidden" name="campaign_id" value="{{ campaign_id }}" />
+    <input type="hidden" id="campaign-id" name="campaign_id" value="{{ campaign_id }}" />
     <input type="hidden" name="user_id" value="{{ user_id }}" />
-
     <div class="center">
         {% for test in tests %}
             {% with forloop.counter as test_counter %}
@@ -42,13 +41,15 @@
                         </div>
                     {% elif question.type.code == 'R' %}
                         <div id="controls">
-                            <button class="record-control-button" id="recordButton"><span id="mic"><img style="vertical-align: bottom;width: 40px;" src="{% static 'beta_invite/img/microphone.png' %}"></span></button>
-                            <button class="record-control-button" id="stopButton" disabled><span id="stop">&#x25A0;</span></button>
+                            <button class="record-control-button" id="recordButton" onclick="startRecord()"><span id="mic"><img style="vertical-align: bottom;width: 40px;" src="{% static 'beta_invite/img/microphone.png' %}"></span></button>
+                            <button class="record-control-button" id="stopButton" onclick="stopRecord()" disabled><span id="stop">&#x25A0;</span></button>
                         </div>
+                        <p id="recording">Grabando...</p>
                         <ol id="recordingsList"></ol>
                         <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
                         <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
                         <script type="text/javascript" src="{% static 'beta_invite/js/tests.js' %}"></script>
+                        <input type="hidden" id="test-id" value="{{ test.pk }}">
                     {% endif %}
                     {% if forloop.counter != 1 or test_counter != 1 %}
                         <input type="button" class="nice-button" value="Atrás" onclick="back({{ test_counter }}, {{ forloop.counter }}, {{ tests|get_number_questions_of_before_test:test_counter }})">
@@ -64,6 +65,8 @@
         <input type="submit" id="submit-button" class="nice-button" value="{{ submit_value }}">
     </div>
 </form>
+
+<input type="hidden" id="question-id-{{ question.pk }}" class="question-id" value="{{ question.pk }}">
 
 <script>
     $(document).ready(function() {
