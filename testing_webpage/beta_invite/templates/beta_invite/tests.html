@@ -14,7 +14,12 @@
                     {% if test.questions.all|length > 0 %}
                         <div class="format-div center">
                             <h2>{% trans "Test: " %} {{ test.name }}</h2>
-                            <h3>{{ question.text_es }}</h3>
+                            {% if question.type.code == 'R'%}
+                                <h3>Por favor grábate leyendo la siguiente oración:</h3>
+                                <h3>{{ question.text_es }}</h3>
+                            {% else %}
+                                <h3>{{ question.text_es }}</h3>
+                            {% endif%}
                         </div>
                     {% endif %}
                     {% if question.image_path %}
@@ -57,7 +62,7 @@
                         <input type="button" class="nice-button" value="Atrás" onclick="back({{ test_counter }}, {{ forloop.counter }}, {{ tests|get_number_questions_of_before_test:test_counter }})">
                     {% endif %}
                     {% if forloop.counter != test.questions.all|length or test_counter != tests|length %}
-                        <input type="button" class="nice-button" value="Siguiente" onclick="next({{ test_counter }}, {{ forloop.counter }}, {{ test.questions.all|length }}, {{ tests|length }} )">
+                        <input type="button" class="nice-button" id="next-btn" value="Siguiente" onclick="next({{ test_counter }}, {{ forloop.counter }}, {{ test.questions.all|length }}, {{ tests|length }} )">
                     {% endif %}
                 </div>
             {% endfor %}
