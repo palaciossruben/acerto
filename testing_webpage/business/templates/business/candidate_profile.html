@@ -224,6 +224,15 @@
                 </div>
             </div>
 
+            <div class="row open-field-answers">
+                <strong>RESPUESTAS DE CAMPO ABIERTO</strong>
+                {% for s in candidate.get_last_technical_surveys %}
+                    {% if s.question.code == 'OF' %}
+                        <p>{{ s.answer.name_es }}</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
             <div class="row another-info-section">
                 <div class="col-lg-5 col-xs-12 contact-data">
                     <strong class="accordion">Datos de contacto 	&#x25BE;</strong>

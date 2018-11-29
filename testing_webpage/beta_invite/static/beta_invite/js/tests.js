@@ -119,7 +119,6 @@ function stopRecording() {
     rec.exportWAV(createDownloadLink);
 }
 
-
 function createDownloadLink(blob) {
 
     var url = URL.createObjectURL(blob);
@@ -137,7 +136,7 @@ function createDownloadLink(blob) {
     //add the new audio and a elements to the li element
     li.appendChild(au);
     li.appendChild(link);
-
+    li.className  = 'records';
     //add the li element to the ordered list
     recordingsList.appendChild(li);
 
@@ -152,17 +151,24 @@ function createDownloadLink(blob) {
 
     //TODO: These can not be hardcoded!
 
+    /*question_id = document.getElementById("question-id").val;
+    campaign_id = document.getElementById("campaign-id").val;
+    test_id = document.getElementById("test-id").val;
+    console.log(campaign_id);
+    console.log(test_id);
+
+/*
     fd.append('question_id', 1682);
     fd.append('campaign_id', 464);
     fd.append('test_id', 357);
-/*
+*/
     fd.append('question_id', 444);
     fd.append('campaign_id', 22);
     fd.append('test_id', 109);
-*/
+
     $.ajax({
         type: 'POST',
-        url: 'https://peaku.co/servicio_de_empleo/upload-audio-file',  // 'http://127.0.0.1:8000/servicio_de_empleo/upload-audio-file',
+        url: /*'https://peaku.co/servicio_de_empleo/upload-audio-file',  */ 'http://127.0.0.1:8000/servicio_de_empleo/upload-audio-file',
         data: fd,
         processData: false,
         contentType: false
@@ -188,3 +194,12 @@ var stopButton = document.getElementById("stopButton");
 //add events to those 3 buttons
 recordButton.addEventListener("click", startRecording);
 stopButton.addEventListener("click", stopRecording);
+
+function startRecord(){
+    document.getElementById("recording").style.display = "block";
+    $(".records").css("display", "none");
+}
+
+function stopRecord(){
+    document.getElementById("recording").style.display = "none";
+}

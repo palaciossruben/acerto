@@ -30,6 +30,10 @@ html, body{
     vertical-align: bottom;
 }
 
+#recording{
+    display:none;
+}
+
 #stop{
     font-size: 60px;
     color: red;

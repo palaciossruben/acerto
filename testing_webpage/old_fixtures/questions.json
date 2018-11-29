@@ -2557,8 +2557,8 @@
     "model": "beta_invite.question",
     "pk": 178,
     "fields":{
-      "text": "Quieres poder sacar al mercado tu propia línea de jabones antibacteriales en seco (gel desinfectante), ya tienes algunos clientes pero necesitas cada vez más pues la empresa está en cecimiento. ¿Cómo harías contacto con el gerente de compras del exito?",
-      "text_es": "Quieres poder sacar al mercado tu propia línea de jabones antibacteriales en seco (gel desinfectante), ya tienes algunos clientes pero necesitas cada vez más pues la empresa está en cecimiento. ¿Cómo harías contacto con el gerente de compras del exito?",
+      "text": "Quieres poder sacar al mercado tu propia línea de jabones antibacteriales en seco (gel desinfectante), ya tienes algunos clientes pero necesitas cada vez más pues la empresa está en crecimiento. ¿Cómo harías contacto con el gerente de compras del exito?",
+      "text_es": "Quieres poder sacar al mercado tu propia línea de jabones antibacteriales en seco (gel desinfectante), ya tienes algunos clientes pero necesitas cada vez más pues la empresa está en crecimiento. ¿Cómo harías contacto con el gerente de compras del exito?",
       "answers": [],
       "type": 3,
       "correct_answers": [],
