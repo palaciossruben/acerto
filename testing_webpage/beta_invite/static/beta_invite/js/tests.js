@@ -200,8 +200,12 @@ stopButton.addEventListener("click", stopRecording);
 function startRecord(){
     document.getElementById("recording").style.display = "block";
     $(".records").css("display", "none");
+    $("#mic").css("display", "none");
+    $("#stop").css("display", "block");
 }
 
 function stopRecord(){
     document.getElementById("recording").style.display = "none";
+    $("#stop").css("display", "none");
+    $("#mic").css("display", "block");
 }
