@@ -95,11 +95,8 @@ def update_survey(question, answer_text, survey, question_id):
         # TODO: add English
         question_text = question.text_es
 
-        # takes the inside of double quotes
-        matches = re.findall(r'\".+\"', question_text)
-        if len(matches) > 0 and len(matches[-1]) > 2:
-            original_text = matches[-1][1:-1]
-            survey.score = get_cosine_similarity(answer_text, original_text)
+        if len(question_text) > 0:
+            survey.score = get_cosine_similarity(answer_text, question_text)
         else:
             survey.score = 0  # THIS IS A TEST FAILURE
     else:
