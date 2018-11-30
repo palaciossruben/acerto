@@ -421,7 +421,7 @@ def get_paid_campaign_registrations(request):
     data_source['chart'] = CHART
 
     columns = ['id', 'created_at']
-    data = pd.DataFrame(list(User.objects.filter(free_trial=False, removed=False)
+    data = pd.DataFrame(list(Campaign.objects.filter(free_trial=False, removed=False)
                              .values_list(*columns)), columns=columns)
     data['month'] = data['created_at'].apply(lambda date: '{y}-{m}'.format(y=date.year,
                                                                            m=get_month_format(date.month)))
@@ -450,7 +450,7 @@ def get_unique_users_registrations(request):
     data_source['chart'] = CHART
 
     columns = ['id', 'created_at']
-    data = pd.DataFrame(list(Campaign.objects.filter(free_trial=False, removed=False)
+    data = pd.DataFrame(list(User.objects.all()
                              .values_list(*columns)), columns=columns)
     data['month'] = data['created_at'].apply(lambda date: '{y}-{m}'.format(y=date.year,
                                                                            m=get_month_format(date.month)))
