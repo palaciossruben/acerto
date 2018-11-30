@@ -2,13 +2,12 @@
 Has views of stats.
 """
 
-import datetime
 import pandas as pd
 from django.shortcuts import render
 from fusioncharts import FusionCharts
 from django.db.models import Q
 
-from dashboard.models import Candidate, StateEvent, State
+from dashboard.models import Candidate, StateEvent, State, User
 from dashboard import constants as cts
 from beta_invite.models import Campaign
 
@@ -113,7 +112,7 @@ def operational_efficiency():
 def render_forecast(request, graph_type):
 
     data_source = dict()
-    CHART["caption"] = "Total Forecasts"
+    CHART["caption"] = graph_type + "forecasts"
     data_source['chart'] = CHART
 
     if graph_type == 'all':
@@ -398,6 +397,64 @@ def ml_automation_percentage(request):
     automatic.drop('created_at', inplace=True, axis=1)
     #lambda x: x.nunique()
     data = recommended.join(automatic, how='left')
+
+    gp = pd.groupby(data, by='month').aggregate({'id': 'count'})
+    data = pd.DataFrame(gp)
+    data.sort_index(inplace=True)
+
+    data_source['data'] = []
+    for idx, row in data.iterrows():
+        data_source['data'].append({'label': idx, 'value': str(row['id'])})
+
+    # Create an object for the Column 2D chart using the FusionCharts class constructor
+    column_2d = FusionCharts("column2D", "ex1", "600", "350", "chart-1", "json", data_source)
+    return render(request, cts.STATS_INDEX, {'output': column_2d.render()})
+
+
+def get_paid_campaign_registrations(request):
+    """
+    Paid registrations
+    """
+
+    data_source = dict()
+    CHART["caption"] = "Paid Campaign registrations"
+    data_source['chart'] = CHART
+
+    columns = ['id', 'created_at']
+    data = pd.DataFrame(list(User.objects.filter(free_trial=False, removed=False)
+                             .values_list(*columns)), columns=columns)
+    data['month'] = data['created_at'].apply(lambda date: '{y}-{m}'.format(y=date.year,
+                                                                           m=get_month_format(date.month)))
+    data.drop('created_at', inplace=True, axis=1)
+
+    gp = pd.groupby(data, by='month').aggregate({'id': 'count'})
+    data = pd.DataFrame(gp)
+    data.sort_index(inplace=True)
+
+    data_source['data'] = []
+    for idx, row in data.iterrows():
+        data_source['data'].append({'label': idx, 'value': str(row['id'])})
+
+    # Create an object for the Column 2D chart using the FusionCharts class constructor
+    column_2d = FusionCharts("column2D", "ex1", "600", "350", "chart-1", "json", data_source)
+    return render(request, cts.STATS_INDEX, {'output': column_2d.render()})
+
+
+def get_unique_users_registrations(request):
+    """
+    Unique users registered per month
+    """
+
+    data_source = dict()
+    CHART["caption"] = "Unique user registrations"
+    data_source['chart'] = CHART
+
+    columns = ['id', 'created_at']
+    data = pd.DataFrame(list(Campaign.objects.filter(free_trial=False, removed=False)
+                             .values_list(*columns)), columns=columns)
+    data['month'] = data['created_at'].apply(lambda date: '{y}-{m}'.format(y=date.year,
+                                                                           m=get_month_format(date.month)))
+    data.drop('created_at', inplace=True, axis=1)
 
     gp = pd.groupby(data, by='month').aggregate({'id': 'count'})
     data = pd.DataFrame(gp)

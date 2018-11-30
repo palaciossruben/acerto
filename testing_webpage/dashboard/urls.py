@@ -61,4 +61,6 @@ urlpatterns = [
     url(r'^candidates[-_]from[-_]old[-_]users$', stats.candidates_from_old_users, name='candidates_from_old_users'),
     url(r'^stuck[-_]candidates$', stats.stuck_candidates, name='stuck_candidates'),
     url(r'^recommended[-_]candidates$', stats.recommended_candidates, name='recommended_candidates'),
+    url(r'^paid-campaign-registrations$', stats.get_paid_campaign_registrations, name='paid_campaign_registrations'),
+    url(r'^unique-users-registrations$', stats.get_unique_users_registrations, name='unique_users_registrations'),
 ]
