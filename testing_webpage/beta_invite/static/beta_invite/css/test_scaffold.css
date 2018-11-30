@@ -26,18 +26,14 @@ html, body{
     border:none;
 }
 
-#mic{
-    vertical-align: bottom;
+#recording{
+    display:none;
 }
 
 #stop{
-    font-size: 60px;
+    font-size: 50px;
     color: red;
-}
-
-#stop:disable{
-    font-size:20px;
-    color:gray;
+    display:none;
 }
 
 .question-info{

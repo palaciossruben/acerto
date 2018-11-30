@@ -90,10 +90,22 @@
                 </div>
                 <div class="col-lg-6">
                     {% for passed_test in campaign.passed_tests %}
-                        <strong class="listyes-light-base"><strong class="test-distinction-question"></strong>{{ passed_test.name_es }}</strong>
+                        {% if passed_test.type.name == 'requirements' %}
+                            <strong class="listyes-light-base"><strong class="test-distinction-question"></strong><span style="margin: 0 20px;">Prueba de requisitos</span></strong>
+                        {% else %}
+                            <strong class="listyes-light-base"><strong class="test-distinction-question"></strong><span style="margin: 0 20px;">{{ passed_test.name_es }}</span></strong>
+                        {% endif %}
+                    <br>
+                        <br>
                     {% endfor %}
                     {% for missing_test in campaign.missing_tests %}
-                        <strong class="listno-light-base"><strong class="test-distinction-question"></strong>{{ missing_test.name_es }}</strong>
+                        {% if missing_test.type.name == 'requirements' %}
+                            <strong class="listno-light-base"><strong class="test-distinction-question"></strong><span style="margin: 0 20px;">Prueba de requisitos</span></strong>
+                        {% else %}
+                            <strong class="listno-light-base"><strong class="test-distinction-question"></strong><span style="margin: 0 20px;">{{ missing_test.name_es }}</span></strong>
+                        {% endif %}
+                        <br>
+                        <br>
                     {% endfor %}
                 </div>
             </a>

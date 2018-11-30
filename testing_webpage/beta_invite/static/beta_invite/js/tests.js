@@ -119,7 +119,6 @@ function stopRecording() {
     rec.exportWAV(createDownloadLink);
 }
 
-
 function createDownloadLink(blob) {
 
     var url = URL.createObjectURL(blob);
@@ -137,7 +136,7 @@ function createDownloadLink(blob) {
     //add the new audio and a elements to the li element
     li.appendChild(au);
     li.appendChild(link);
-
+    li.className  = 'records';
     //add the li element to the ordered list
     recordingsList.appendChild(li);
 
@@ -151,6 +150,15 @@ function createDownloadLink(blob) {
     fd.append('audio', blob);
 
     //TODO: These can not be hardcoded!
+
+/*
+
+    question_id = document.getElementById("question-id").val;
+    campaign_id = document.getElementById("campaign-id").val;
+    test_id = document.getElementById("test-id").val;
+    console.log(campaign_id);
+    console.log(test_id);
+*/
 
     fd.append('question_id', 1682);
     fd.append('campaign_id', 464);
@@ -188,3 +196,16 @@ var stopButton = document.getElementById("stopButton");
 //add events to those 3 buttons
 recordButton.addEventListener("click", startRecording);
 stopButton.addEventListener("click", stopRecording);
+
+function startRecord(){
+    document.getElementById("recording").style.display = "block";
+    $(".records").css("display", "none");
+    $("#mic").css("display", "none");
+    $("#stop").css("display", "block");
+}
+
+function stopRecord(){
+    document.getElementById("recording").style.display = "none";
+    $("#stop").css("display", "none");
+    $("#mic").css("display", "block");
+}

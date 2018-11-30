@@ -4,9 +4,8 @@
 
 <form action="test_result" method="post" id="test_form_id" enctype="multipart/form-data">
     {% csrf_token %}
-    <input type="hidden" name="campaign_id" value="{{ campaign_id }}" />
+    <input type="hidden" id="campaign-id" name="campaign_id" value="{{ campaign_id }}" />
     <input type="hidden" name="user_id" value="{{ user_id }}" />
-
     <div class="center">
         {% for test in tests %}
             {% with forloop.counter as test_counter %}
@@ -15,7 +14,12 @@
                     {% if test.questions.all|length > 0 %}
                         <div class="format-div center">
                             <h2>{% trans "Test: " %} {{ test.name }}</h2>
-                            <h3>{{ question.text_es }}</h3>
+                            {% if question.type.code == 'R'%}
+                                <h3>Por favor grábate leyendo la siguiente oración:</h3>
+                                <h3>{{ question.text_es }}</h3>
+                            {% else %}
+                                <h3>{{ question.text_es }}</h3>
+                            {% endif%}
                         </div>
                     {% endif %}
                     {% if question.image_path %}
@@ -42,19 +46,23 @@
                         </div>
                     {% elif question.type.code == 'R' %}
                         <div id="controls">
-                            <button class="record-control-button" id="recordButton"><span id="mic"><img style="vertical-align: bottom;width: 40px;" src="{% static 'beta_invite/img/microphone.png' %}"></span></button>
-                            <button class="record-control-button" id="stopButton" disabled><span id="stop">&#x25A0;</span></button>
+                            <button class="record-control-button" id="recordButton" onclick="startRecord()"><span id="mic"><img style="width: 40px;" src="{% static 'beta_invite/img/microphone.png' %}"></span></button>
+                            <button class="record-control-button" id="stopButton" onclick="stopRecord()"><span id="stop">&#x25A0;</span></button>
                         </div>
-                        <ol id="recordingsList"></ol>
+                        <p id="recording">Grabando...</p>
+                        <br>
+                        <ul id="recordingsList" style="list-style-type: none;"></ul>
                         <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
                         <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
                         <script type="text/javascript" src="{% static 'beta_invite/js/tests.js' %}"></script>
+                        <input type="hidden" id="test-id" value="{{ test.pk }}">
+                        <p>Da clic en siguiente una vez tengas el audio que quieres enviar</p>
                     {% endif %}
                     {% if forloop.counter != 1 or test_counter != 1 %}
                         <input type="button" class="nice-button" value="Atrás" onclick="back({{ test_counter }}, {{ forloop.counter }}, {{ tests|get_number_questions_of_before_test:test_counter }})">
                     {% endif %}
                     {% if forloop.counter != test.questions.all|length or test_counter != tests|length %}
-                        <input type="button" class="nice-button" value="Siguiente" onclick="next({{ test_counter }}, {{ forloop.counter }}, {{ test.questions.all|length }}, {{ tests|length }} )">
+                        <input type="button" class="nice-button" id="next-btn" value="Siguiente" onclick="next({{ test_counter }}, {{ forloop.counter }}, {{ test.questions.all|length }}, {{ tests|length }} )">
                     {% endif %}
                 </div>
             {% endfor %}
@@ -64,6 +72,8 @@
         <input type="submit" id="submit-button" class="nice-button" value="{{ submit_value }}">
     </div>
 </form>
+
+<input type="hidden" id="question-id-{{ question.pk }}" class="question-id" value="{{ question.pk }}">
 
 <script>
     $(document).ready(function() {
