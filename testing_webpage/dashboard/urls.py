@@ -52,7 +52,7 @@ urlpatterns = [
     url(r'^send[-_]messages$', views.send_messages, name='send_messages'),
 
     # stats
-    url(r'^candidates[-_]stats$', stats.candidates_count, name='candidates_stats'),
+    url(r'^candidates[-_]stats$', stats.candidate_count, name='candidates_stats'),
     url(r'^campaign[-_]stats$', stats.campaign_count, name='campaign_stats'),
     url(r'^number[-_]of[-_]forecasts$', stats.number_of_forecasts, name='number_of_forecasts'),
     url(r'^positive[-_]forecasts$', stats.positive_forecasts, name='positive_forecasts'),

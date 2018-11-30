@@ -42,7 +42,7 @@ def get_month_format(number):
         return str(number)
 
 
-def candidates_count(request):
+def candidate_count(request):
     # Chart data is passed to the `dataSource` parameter, as dict, in the form of key-value pairs.
     data_source = dict()
     CHART["caption"] = "Total candidates registrations"
@@ -50,15 +50,16 @@ def candidates_count(request):
 
     data_source['data'] = []
 
-    my_candidates = [c for c in Candidate.objects.filter(removed=False)]
+    columns = ['id', 'created_at']
+    data = pd.DataFrame(list(Candidate.objects.filter(~Q(state=State.objects.get(code='P'), removed=False))
+                             .values_list(*columns)), columns=columns)
 
-    data = pd.DataFrame()
-    data['id'] = [c.pk for c in my_candidates]
-    data['created_at'] = [c.created_at for c in my_candidates]
     data['month'] = data['created_at'].apply(lambda date: '{y}-{m}'.format(y=date.year,
                                                                            m=get_month_format(date.month)))
-    data.sort_values(by=['month'], inplace=True)
 
+    data.drop('created_at', axis=1, inplace=True)
+
+    data.sort_values(by=['month'], inplace=True)
     gp = pd.groupby(data, by='month').aggregate({'id': 'count'})
     gp = pd.DataFrame(gp)
 
