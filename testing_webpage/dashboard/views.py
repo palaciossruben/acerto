@@ -620,9 +620,23 @@ def get_leads():
     return list(leads)
 
 
-def add_backlog_messages():
+def add_prospect_messages(message_filename):
 
-    message_filename = 'candidate_backlog'
+    # TODO: add English
+    candidates = [c for c in
+                  Candidate.objects.filter(Q(created_at__lt=datetime.datetime.today() - datetime.timedelta(hours=0)) &
+                                           Q(created_at__gt=datetime.datetime.today() - datetime.timedelta(hours=72)) &
+                                           Q(state__code='P') &
+                                           Q(campaign__state__name='Active') &
+                                           ~Q(message__filename=message_filename) &
+                                           ~Q(campaign_id=beta_cts.DEFAULT_CAMPAIGN_ID))]
+
+    messenger_sender.send(candidates=candidates,
+                          language_code='es',
+                          body_input=message_filename)
+
+
+def add_backlog_messages(message_filename):
 
     # TODO: add English
     candidates = [c for c in
@@ -652,7 +666,8 @@ def send_new_contacts(request):
     :return: json
     """
 
-    add_backlog_messages()
+    add_backlog_messages('candidate_backlog')
+    add_prospect_messages('candidate_prospect')
 
     leads = get_leads()
     users = get_candidate_users()

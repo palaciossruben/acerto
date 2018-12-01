@@ -7,7 +7,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 from beta_invite.util import messenger_sender
 from dashboard.models import Candidate
-from beta_invite.models import User
 
 
 def candidates_filter(candidates):
@@ -41,6 +40,6 @@ def send_candidates_messages():
                           body_input='candidates_form_reminder_message_body')
 
 
-# Precaution: If script imported for another module, this lines avoid the execution of this entire file
+# Caution: If script imported for another module, this lines avoid the execution of this entire file
 if __name__ == '__main__':
     send_candidates_messages()

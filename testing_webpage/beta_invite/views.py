@@ -473,7 +473,6 @@ def describe_wav(filename):
 
 
 def run_google_speech(filename):
-    ideal_sample_rate = 16000
 
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(CONFIG('project_directory'), 'testing_webpage', 'google_cloud_speech_key.json')
     client = speech.SpeechClient()
