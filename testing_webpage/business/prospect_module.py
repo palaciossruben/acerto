@@ -93,7 +93,7 @@ def get_users_from_es(search_array):
 
     search_text = '%20'.join(search_array)
     try:
-        r = requests.get(urllib.parse.urljoin(config('elastic_search_host'), '_search?q={}'.format(search_text)))
+        r = requests.get(urllib.parse.urljoin(config('elastic_search_host'), '/users/_search?q={}'.format(search_text)))
 
         if str(r.status_code)[0] == 2:
             return User.objects.filter(pk__in=[u['_id'] for u in r.json()['hits']['hits']]).all()
