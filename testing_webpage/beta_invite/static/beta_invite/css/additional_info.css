@@ -19,6 +19,7 @@ body {
 	margin-left:55%;
 	text-align: center;
 	position: relative;
+	margin-bottom: 150px;
 }
 
 #msform fieldset {
@@ -37,7 +38,7 @@ body {
 }
 
 /*inputs*/
-#msform input, #msform textarea, #msform select {
+.normal-input, #msform textarea, #msform select {
     padding: 20px;
 	border: 1px solid #ccc;
 	border-radius: 3px;
@@ -49,6 +50,11 @@ body {
 	font-size: 15px;
 	background: rgba(255,255,255,0.5);
 }
+
+.half-input{
+    width: 48%;
+}
+
 /*buttons*/
 #msform .action-button {
 	width: 100px;

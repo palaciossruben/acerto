@@ -214,8 +214,10 @@
 
 #overlay-login {
     display:none;
+    z-index:5;
     position:absolute;
     width: 100%;
+    height: 1000px;
     top: 0;
     right: 0;
     left:0;
@@ -251,9 +253,9 @@
 #overlay-signup {
     display:none;
     z-index:5;
-    position:fixed;
+    position:absolute;
+    height: 1000px;
     width: 100%;
-    height: 100%;
     top: 0;
     right: 0;
     left:0;
@@ -375,7 +377,8 @@ input:-webkit-autofill {
 }
 
 .register {
-    margin-left:30px;
+    margin-left:50px;
+    font-size:11px;
 }
 
 .form-label a{

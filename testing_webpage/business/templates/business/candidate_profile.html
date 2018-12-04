@@ -257,6 +257,8 @@
                             {% endif %}
                             {% if candidate.user.birthday %}
                                 <p><strong>Edad:</strong> {{ candidate.user.get_user_age }} años</p>
+                            {% elif candidate.user.age %}
+                                <p><strong>Edad:</strong> {{ candidate.user.age }} años</p>
                             {% endif %}
                             {% if candidate.user.languages %}
                                 <p><strong>Idiomas:</strong> {{ candidate.user.languages }}</p>

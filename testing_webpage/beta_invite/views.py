@@ -20,7 +20,7 @@ from google.cloud.speech import types
 import common
 from beta_invite import constants as cts
 from beta_invite import test_module, new_user_module
-from beta_invite.models import User, Visitor, Campaign, BulletType, City, Question
+from beta_invite.models import User, Visitor, Campaign, BulletType, City, Question, Experience, EducationExperience, School, Company
 from dashboard.models import Candidate
 from business.custom_user_creation_form import CustomUserCreationForm
 
@@ -147,10 +147,6 @@ def get_first_error_message(form):
     return error_message
 
 
-def has_segment_match(user, campaign):
-    return campaign.get_work_area_segment() == user.get_work_area_segment()
-
-
 def register(request):
     """
     Args:
@@ -168,8 +164,8 @@ def register(request):
         email = request.POST.get('username')
         name = request.POST.get('name')
         phone = request.POST.get('phone')
-        work_area_id = request.POST.get('work_area_id')
         city_id = request.POST.get('city_id')
+        work_area_id = request.POST.get('work_area_id')
 
         politics_accepted = request.POST.get('politics')
         if politics_accepted:
@@ -200,18 +196,11 @@ def register(request):
             else:
                 user = new_user_module.create_user(campaign, user_params, request, is_mobile, signup_form=signup_form)
 
-            if has_segment_match(user, campaign):
-                return redirect('/servicio_de_empleo/pruebas?campaign_id={campaign_id}&user_id={user_id}'.format(
-                    campaign_id=campaign.id,
-                    user_id=user.id))
-            else:
-                return redirect('/trabajos?segment_code={code}'.format(code=user.get_work_area_segment_code()))
-
+            return redirect('/servicio_de_empleo/pruebas?campaign_id={campaign_id}&user_id={user_id}'.format(campaign_id=campaign.id, user_id=user.id))
         else:
             return HttpResponseBadRequest('<h1>HTTP CODE 400: Client sent bad request with missing params</h1>')
 
     else:
-
         error_message = get_first_error_message(signup_form)
         params_dict = get_index_params(request)
         params_dict['error_message'] = error_message
@@ -350,7 +339,6 @@ def additional_info(request):
     if candidate.user.gender is None:
         param_dict = dict()
         countries, cities, education, professions, work_areas, genders = get_drop_down_values(request.LANGUAGE_CODE)
-
         # Dictionary parameters
         param_dict['candidate'] = candidate
         param_dict['genders'] = genders
@@ -369,11 +357,72 @@ def additional_info(request):
             return redirect('/servicio_de_empleo/active_campaigns')
 
 
+def update_educations_experiences(request, school_name, candidate):
+    school = School(name=school_name)
+    school.save()
+    study = EducationExperience(school=school,
+                                highlight=request.POST.get('highlight'),
+                                order=request.POST.get('order'),
+                                start_year=request.POST.get('start-year'))
+    study.save()
+    user = User.objects.get(pk=candidate.user.pk)
+    user.education_experiences.add(study)
+    user.save()
+
+
+def get_company(company_name):
+    try:
+        return Company.objects.get(name=company_name)
+
+    except ObjectDoesNotExist:
+        company = Company(name=company_name)
+        company.save()
+        return company
+
+
+def update_work_experiences(request, company_name, candidate):
+
+    user = User.objects.get(pk=candidate.user.pk)
+    order = request.POST.get('order')
+
+    try:
+        work_experience = Experience.objects.get(order=order,
+                                            user=user)
+
+        work_experience.company = get_company(company_name)
+        work_experience.role = request.POST.get('role')
+        work_experience.highlight = request.POST.get('highlight')
+        work_experience.number_of_months = request.POST.get('number-of-months')
+        work_experience.number_of_years = request.POST.get('number-of-years')
+        work_experience.order = order
+        work_experience.save()
+
+    except ObjectDoesNotExist:
+
+        work_experience = Experience(company=get_company(company_name),
+                                     role=request.POST.get('role'),
+                                     highlight=request.POST.get('highlight'),
+                                     number_of_months=request.POST.get('number-of-months'),
+                                     number_of_years=request.POST.get('number-of-years'),
+                                     order=order)
+        work_experience.save()
+        user.experiences.add(work_experience)
+        user.save()
+
+
 def save_partial_additional_info(request):
 
     if request.method == 'POST':
         candidate = common.get_candidate_from_request(request)
         new_user_module.update_user_with_request(request, candidate.user)
+        school_name = request.POST.get('school')
+        company_name = request.POST.get('company-name')
+
+        if school_name:
+            update_educations_experiences(request, school_name, candidate)
+
+        if company_name:
+            update_educations_experiences(request, company_name, candidate)
 
         return HttpResponse('')
     else:
@@ -385,6 +434,7 @@ def active_campaigns(request):
     candidate = common.get_candidate_from_request(request)
 
     if candidate is not None:
+
         new_user_module.update_user(candidate.campaign, candidate.user, {}, request)
 
         last_evaluation = candidate.get_last_evaluation()
