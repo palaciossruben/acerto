@@ -153,37 +153,24 @@
                 <option value="{{ city.id }}">{{ city.name }}</option>
                 {% endfor %}
                 </select>
-
-                <span>Área de trabajo</span>
-                <select class="form-input white" name="work_area_id" required>
-                <option value="" selected disabled></option>
-                {% for work_area in work_areas %}
-                <option value="{{ work_area.id }}">{{ work_area.name }}</option>
-                {% endfor %}
-                </select>
-
                 <br>
 
                 <div>
-                <input type="file" id="file" name="curriculum_url" class="form-inputfile" onchange="pressed()">
-                <label for="file" id="fileLabel">{% trans "Upload your resume" %}</label>
-                <label class="form-checkbox-container">
-                    <span>Contraseña</span>
-                <input class="form-input" type="password" name="password1" required="required">
-                <br>
-                <span>Confirmar contraseña</span>
-                <input class="form-input" type="password" name="password2" required="required">
-                <br>
-                <input class="form-checkbox" type="checkbox" id="politics" name="politics" required>
-                <a href="security_politics" target="_blank"> He leído y acepto las políticas de privacidad</a>
-                </label>
+                    <label class="form-checkbox-container">
+                        <span>Contraseña</span>
+                    <input class="form-input" type="password" name="password1" required="required">
+                    <br>
+                    <span>Confirmar contraseña</span>
+                    <input class="form-input" type="password" name="password2" required="required">
+                    <br>
+                    <input class="form-checkbox" type="checkbox" id="politics" name="politics" required>
+                    <a href="security_politics" target="_blank"> He leído y acepto las políticas de privacidad</a>
+                    </label>
                 </div>
                 <input class="submit" type="submit" id="submit" value="{% trans 'Sure!' %}">
                 </fieldset>
-                <!--<span class="form-label register">¿Ya eres un usuario registrado? Inicia sesión
-                <a href="javascript:void(0);" onclick="off_signup() & on_login()">
-                <strong>Aquí</strong>
-                </a>-->
+                <span class="form-label register">¿Ya eres un usuario registrado? Inicia sesión
+                    <a href="javascript:void(0);" onclick="off_signup() & on_login()"><strong>Aquí</strong></a>
                 </span>
             </form>
         </div>

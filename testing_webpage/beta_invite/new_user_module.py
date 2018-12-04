@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.utils.translation import ugettext as _
 
 import common
-from beta_invite.models import User
+from beta_invite.models import User, Experience, EducationExperience
 from beta_invite.util import email_sender
 from dashboard.models import Candidate
 
@@ -77,8 +77,23 @@ def update_user_with_request(request, user):
         if hasattr(User, key):
             value = None if value == '' else value
             setattr(user, key, value)
-
     user.save()
+
+
+def update_education_experience_with_request(request, experience):
+    for key, value in request.POST.items():
+        if hasattr(EducationExperience, key):
+            value = None if value == '' else value
+            setattr(experience, key, value)
+    experience.save()
+
+
+def update_work_experience_with_request(request, experience):
+    for key, value in request.POST.items():
+        if hasattr(Experience, key):
+            value = None if value == '' else value
+            setattr(experience, key, value)
+    experience.save()
 
 
 def add_auth_and_login(signup_form, user, request):
