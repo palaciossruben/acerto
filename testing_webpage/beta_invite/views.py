@@ -358,16 +358,26 @@ def additional_info(request):
 
 
 def update_educations_experiences(request, school_name, candidate):
-    school = School(name=school_name)
-    school.save()
-    study = EducationExperience(school=school,
-                                highlight=request.POST.get('highlight'),
-                                order=request.POST.get('order'),
-                                start_year=request.POST.get('start-year'))
-    study.save()
+
     user = User.objects.get(pk=candidate.user.pk)
-    user.education_experiences.add(study)
-    user.save()
+
+    try:
+        school = School.objects.get(name=school_name, user=user)
+        study = EducationExperience(school=school)
+        study.title = request.POST.get('title')
+        study.save()
+
+    except ObjectDoesNotExist:
+
+        school = School(name=school_name)
+        school.save()
+        study = EducationExperience(school=school,
+                                    highlight=request.POST.get('highlight'),
+                                    order=request.POST.get('order'),
+                                    start_year=request.POST.get('start-year'))
+        study.save()
+        user.education_experiences.add(study)
+        user.save()
 
 
 def get_company(company_name):
@@ -386,9 +396,7 @@ def update_work_experiences(request, company_name, candidate):
     order = request.POST.get('order')
 
     try:
-        work_experience = Experience.objects.get(order=order,
-                                            user=user)
-
+        work_experience = Experience.objects.get(order=order, user=user)
         work_experience.company = get_company(company_name)
         work_experience.role = request.POST.get('role')
         work_experience.highlight = request.POST.get('highlight')
@@ -402,8 +410,9 @@ def update_work_experiences(request, company_name, candidate):
         work_experience = Experience(company=get_company(company_name),
                                      role=request.POST.get('role'),
                                      highlight=request.POST.get('highlight'),
-                                     number_of_months=request.POST.get('number-of-months'),
+                                     start_year=request.POST.get('start_year'),
                                      number_of_years=request.POST.get('number-of-years'),
+                                     number_of_months=request.POST.get('number-of-months'),
                                      order=order)
         work_experience.save()
         user.experiences.add(work_experience)
