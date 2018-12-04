@@ -766,7 +766,6 @@ class Experience(models.Model):
 class EducationExperience(models.Model):
 
     school = models.ForeignKey(School)
-    highlight = models.CharField(max_length=140)
     title = models.CharField(max_length=40)
 
     def __str__(self):
