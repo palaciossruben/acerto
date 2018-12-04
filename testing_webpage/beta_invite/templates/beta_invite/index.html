@@ -154,6 +154,16 @@
                 {% endfor %}
                 </select>
                 <br>
+                <span>Área de trabajo</span>
+                <select class="form-input white" name="work_area_id" required>
+                <option value="" selected disabled></option>
+                {% for work_area in work_areas %}
+                <option value="{{ work_area.id }}">{{ work_area.name }}</option>
+                {% endfor %}
+                </select>
+
+                <input type="file" id="file" name="curriculum_url" class="form-inputfile" onchange="pressed()">
+                <label for="file" id="fileLabel">{% trans "Upload your resume" %}</label>
 
                 <div>
                     <label class="form-checkbox-container">

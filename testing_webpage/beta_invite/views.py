@@ -164,6 +164,7 @@ def register(request):
         name = request.POST.get('name')
         phone = request.POST.get('phone')
         city_id = request.POST.get('city_id')
+        work_area_id = request.POST.get('work_area_id')
 
         politics_accepted = request.POST.get('politics')
         if politics_accepted:
@@ -180,6 +181,7 @@ def register(request):
             user_params = {'name': name,
                            'email': email,
                            'phone': phone,
+                           'work_area_id': work_area_id,
                            'country': country,
                            'city': City.objects.get(pk=city_id),
                            'ip': get_ip(request),
