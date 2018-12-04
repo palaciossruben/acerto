@@ -43,14 +43,10 @@
 			<li></li>
 			<li></li>
 			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
 		</ul>
-		<!-- fieldsets 27 items for ask -->
-		<fieldset> <!-- three item asked -->
-			<h2 class="fs-title">Género</h2>
+		<fieldset>
+            <h2 style="color:red; font-size:14px;">Toda la información de este formulario es opcional</h2>
+			<h2 class="fs-title">Información personal</h2>
 			<h3 class="fs-subtitle">¿Eres hombre o mujer?</h3>
 			<select id="gender" name="gender_id">
 				<option value="" disabled selected>Selecciona tu género</option>
@@ -58,120 +54,112 @@
 					<option value="{{ sex.id }}">{{ sex.name }}</option>
 				{% endfor %}
 			</select>
-			<input type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'gender_id':$('#gender').val()})"/>
+			<input class="normal-input" placeholder="¿Cuál es tu edad?" type="number" id="age" name="age">
+			<input type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'gender_id':$('#gender').val(), sendPartial({'age':$('#age').val()})"/>
 		</fieldset>
-		<fieldset> <!-- three items asked -->
-			<h2 class="fs-title">Datos académicos</h2>
-			<h3 class="fs-subtitle">Tu información académica</h3>
+        <fieldset>
+			<h2 class="fs-title">Área de trabajo</h2>
+			<h3 class="fs-subtitle">Breve información de tu actual área de trabajo</h3>
+            <select id="work_area" name="work_area_id">
+				<option value="" disabled selected>Área de trabajo</option>
+				{% for work_area in work_areas %}
+					<option value="{{ work_area.id }}">{{ work_area.name }}</option>
+				{% endfor %}
+			</select>
+			<input class="normal-input" type="number" id="experience" oninput="removeAnyDots(this);" min="0" max="100" step='1' name="experience" placeholder="Años de experiencia">
+			<input class="normal-input" type="number" pattern="[0-9]{3-10}" oninput="removeAnyDots(this);" name="salary" step="100000" placeholder="Aspiración salarial" id="salary">
+			<input type="button" name="previous" class="previous action-button" value="Atrás" />
+			<input type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'work_area_id':$('#work_area').val(), 'experience':$('#experience').val(), 'salary':$('#salary').val()})"/>
+		</fieldset>
+        <fieldset>
+			<h2 class="fs-title">Experiencia laboral</h2>
+			<h3 class="fs-subtitle">Última experiencia relevante</h3>
+            <input class="normal-input" type="text" id="company-name" name="role" placeholder="Empresa en dónde trabajaste" maxlength="40"/>
+            <input class="normal-input" type="hidden" id="order" value="1" name="order"/>
+			<input class="normal-input" type="text" id="role" name="role" placeholder="Cargo" maxlength="40"/>
+			<input class="normal-input" type="text" id="work-highlight" name="highlight" placeholder="¿Cuál fue tu mayor logro?" maxlength="140"/>
+			<input class="normal-input" type="number" min="1920" step="10" id="start-year" name="start-year" placeholder="Año de inicio"/>
+            <p>Duración:</p>
+			<input type="number" class="half-input" id="number-of-months" name="number-of-months" min="0" step="1" placeholder="Meses"/>
+			<input type="number" class="half-input" id="number-of-years" name="number-of-months" min="0" step="1" placeholder="Años"/>
+			<input type="button" name="previous" class="previous action-button" value="Atrás" />
+			<input type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'company-name':$('#company-name').val(), 'order':$('#order').val(), 'role':$('#role').val(), 'highlight':$('#work-highlight').val(), 'start-year':$('#start-year').val(), 'number-of-months':$('#number-of-months').val(), 'number-of-years':$('#number-of-years').val()})"/>
+		</fieldset>
+		<fieldset>
+			<h2 class="fs-title">Experiencia laboral</h2>
+			<h3 class="fs-subtitle">Penúltima experiencia relevante</h3>
+            <input class="normal-input" type="text" id="company-name2" name="role" placeholder="Empresa en dónde trabajaste" maxlength="40"/>
+            <input class="normal-input" type="hidden" id="order2" value="1" name="order"/>
+			<input class="normal-input" type="text" id="role2" name="role" placeholder="Cargo" maxlength="40"/>
+			<input class="normal-input" type="text" id="work-highlight2" name="highlight" placeholder="¿Cuál fue tu mayor logro?" maxlength="140"/>
+			<input class="normal-input" type="number" min="1920" step="10" id="start-year2" name="start-year" placeholder="Año de inicio"/>
+            <p>Duración:</p>
+			<input type="number" id="number-of-months2" name="number-of-months" min="0" step="1" placeholder="Meses"/>
+			<input type="number" id="number-of-years2" name="number-of-months" min="0" step="1" placeholder="Años"/>
+			<input type="button" name="previous" class="previous action-button" value="Atrás" />
+			<input type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'company-name':$('#company-name2').val(), 'order':$('#order2').val(), 'role':$('#role2').val(), 'highlight':$('#work-highlight2').val(), 'start-year':$('#start-year2').val(), 'number-of-months':$('#number-of-months2').val(), 'number-of-years':$('#number-of-years2').val()})"/>
+		</fieldset>
+		<fieldset>
+			<h2 class="fs-title">Experiencia laboral</h2>
+			<h3 class="fs-subtitle">Eexperiencia relevante adicional</h3>
+            <input class="normal-input" type="text" id="company-name3" name="role" placeholder="Empresa en dónde trabajaste" maxlength="40"/>
+            <input class="normal-input" type="hidden" id="order3" value="1" name="order"/>
+			<input class="normal-input" type="text" id="role3" name="role" placeholder="Cargo" maxlength="40"/>
+			<input class="normal-input" type="text" id="work-highlight3" name="highlight" placeholder="¿Cuál fue tu mayor logro?" maxlength="140"/>
+			<input class="normal-input" type="number" min="1920" step="10" id="start-year3" name="start-year" placeholder="Año de inicio"/>
+            <p>Duración:</p>
+			<input type="number" id="number-of-months3" name="number-of-months" min="0" step="1" placeholder="Meses"/>
+			<input type="number" id="number-of-years3" name="number-of-months" min="0" step="1" placeholder="Años"/>
+			<input type="button" name="previous" class="previous action-button" value="Atrás" />
+			<input type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'company-name':$('#company-name3').val(), 'order':$('#order3').val(), 'role':$('#role3').val(), 'highlight':$('#work-highlight3').val(), 'start-year':$('#start-year3').val(), 'number-of-months':$('#number-of-months3').val(), 'number-of-years':$('#number-of-years3').val()})"/>
+		</fieldset>
+		<fieldset>
+			<h2 class="fs-title">Formación</h2>
+			<h3 class="fs-subtitle">Última formación relevante</h3>
 			<select id="education" name="education_id" >
 				<option value="" disabled selected>{% trans "Select Education" %}</option>
 				{% for level in education %}
 					<option value="{{ level.id }}">{{ level.name }}</option>
 				{% endfor %}
 			</select>
-			<select id="work_area" name="work_area_id">
-				<option value="" disabled selected>Área de trabajo</option>
-				{% for work_area in work_areas %}
-					<option value="{{ work_area.id }}">{{ work_area.name }}</option>
-				{% endfor %}
-			</select>
-			<textarea name="programs_id" id="programs" placeholder="Programas que manejas" rows="6" cols="50" maxlength="250" ></textarea>
-			<input type="button" name="previous" class="previous action-button" value="Atrás" />
-			<input type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'education_id':$('#education').val(), 'profession_id':$('#profession').val(), 'programs':$('#programs').val()})"/>
-		</fieldset>
-		<fieldset> <!-- three items asked -->
-			<h2 class="fs-title">Experiencia</h2>
-			<h3 class="fs-subtitle">Breve información laboral</h3>
-			<select id="profession" name="profession_id" >
+            <select id="profession" name="profession_id" >
 				<option value="" disabled selected>{% trans "Select Profession" %}</option>
 				{% for profession in professions %}
 					<option value="{{ profession.id }}">{{ profession.name }}</option>
 				{% endfor %}
 			</select>
-			<input type="number" id="experience" oninput="removeAnyDots(this);" min="0" max="100" step='1' name="experience" placeholder="Años de experiencia">
-			<input type="number" pattern="[0-9]{3-10}" oninput="removeAnyDots(this);" name="salary" step="100000" placeholder="Aspiración salarial" id="salary">
-			<input type="button" name="previous" class="previous action-button" value="Atrás" />
-			<input type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'work_area_id':$('#work_area').val(), 'experience':$('#experience').val(), 'salary':$('#salary').val()})"/>
+            <input class="normal-input" type="text" id="school" name="school" placeholder="¿Dónde estudiante?" maxlength="200"/>
+            <input class="normal-input" type="text" id="education-highlight" name="highlight" placeholder="¿Cuál fue tu mayor logro?" maxlength="140"/>
+
+			<input  type="button" name="previous" class="previous action-button" value="Atrás" />
+			<input  type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'education_id':$('#education').val(), 'profession_id':$('#profession').val(), 'school':$('#school').val(), 'highlight':$('#education-highlight').val()})"/>
 		</fieldset>
-		<fieldset> <!-- four items asked -->
-			<h2 class="fs-title">Ubicación</h2>
-			<h3 class="fs-subtitle">Información de contacto adicional</h3>
-			<select id="country" name="country" >
-				<option value="" disabled selected>Selecciona tu país</option>
-				{% for country in countries %}
-					<option value="{{ country.id }}">{{ country.name }}</option>
-				{% endfor %}
-			</select>
-			<select id="city" name="city" >
-				<option value="" disabled selected>Selecciona tu ciudad</option>
-				{% for city in cities %}
-					<option value="{{ city.id }}">{{ city.name }}</option>
-				{% endfor %}
-			</select>
-			<input type="text" id="address" name="address" placeholder="Dirección" maxlength="100"/>
-			<input type="text" id="neighborhood" name="neighborhood" placeholder="Barrio" maxlength="40"/>
-			<input type="button" name="previous" class="previous action-button" value="Atrás" />
-			<input type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'country_id':$('#country').val(), 'city_id':$('#city').val(), 'address':$('#address').val(), 'neighborhood':$('#neighborhood').val()})"/>
-		</fieldset>
-		 <fieldset> <!-- two items asked -->
+        <fieldset>
 			<h2 class="fs-title">Perfil</h2>
 			<h3 class="fs-subtitle">Descríbete brevemente</h3>
 			<textarea name="profile" id="profile" placeholder="Describe lo que haces de forma concreta y concisa" rows="6" cols="50" maxlength="250" ></textarea>
-			<input type="text" name="languages" id="languages" placeholder="Idiomas que manejas" maxlength="100"/>
+			<input class="normal-input" type="text" name="languages" id="languages" placeholder="Idiomas que manejas" maxlength="100"/>
 			<input type="button" name="previous" class="previous action-button" value="Atrás" />
 			<input type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'profile':$('#profile').val(), 'languages':$('#languages').val()})"/>
 		</fieldset>
-		<fieldset> <!-- two items asked -->
-			<h2 class="fs-title">Teléfonos adicionales</h2>
-			<h3 class="fs-subtitle">Información de contacto adicional</h3>
-			<input type="text" id="phone2" name="phone2" placeholder="Fijo" maxlength="40"/>
-			<input type="text" id="phone3" name="phone3" placeholder="Celular alterno" maxlength="40"/>
-			<input type="button" name="previous" class="previous action-button" value="Atrás" />
-			<input type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'phone2':$('#phone2').val(), 'phone3':$('#phone3').val()})"/>
-		</fieldset>
-		<fieldset> <!-- two items asked -->
-			<h2 class="fs-title">Información personal</h2>
-			<h3 class="fs-subtitle"></h3>
-			<input type="text" id="document" name="document" placeholder="Documento de identificación" maxlength="50"/>
-			<input placeholder="Fecha de nacimiento" oninput="limitDate(this);" type="text" id="birthday" name="birthday" onfocus="(this.type='date')" onblur="(this.type='text')" title="Ingresa tu fecha de nacimiento en el formato específicado">
-			<input type="button" name="previous" class="previous action-button" value="Atrás" />
-			<input type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'document':$('#document').val(), 'birthday':$('#birthday').val()})"/>
-		</fieldset>
-		<fieldset> <!-- two items asked -->
-			<h2 class="fs-title">Información adicional</h2>
-			<h3 class="fs-subtitle">Puede ser útil</h3>
-			<input type="text" id="dream_job" name="dream_job" placeholder="Empresa soñada" maxlength="50"/>
-			<textarea name="hobbies" id="hobbies" placeholder="Hobbies" rows="6" cols="50" maxlength="250" ></textarea>
-			<input type="button" name="previous" class="previous action-button" value="Atrás" />
-			<input type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'dream_job':$('#dream_job').val(), 'hobbies':$('#hobbies').val()})"/>
-		</fieldset>
-		<fieldset> <!-- four items asked -->
-			<h2 class="fs-title">Redes sociales</h2>
-			<h3 class="fs-subtitle">Tu presencia en redes sociales</h3>
-			<input type="text" id="twitter" name="twitter" placeholder="Twitter" maxlength="250"/>
-			<input type="text" id="facebook" name="facebook" placeholder="Facebook" maxlength="250"/>
-			<input type="text" id="instagram" name="instagram" placeholder="Instagram" maxlength="250"/>
-			<input type="text" id="linkedin" name="linkedin" placeholder="Linkedin" maxlength="250"/>
-			<input type="button" name="previous" class="previous action-button" value="Atrás" />
-			<input type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'twitter':$('#twitter').val(), 'facebook':$('#facebook').val(), 'instagram':$('#instagram').val(), 'linkedin':$('#linkedin').val()})"/>
-		</fieldset>
-		<fieldset> <!-- two items asked -->
+		<fieldset>
 			<h2 class="fs-title">Anexos</h2>
-			<h3 class="fs-subtitle">Sería bueno tener tu foto y si cuentas con un brochure</h3>
-			<input type="file" id="photo" name="photo_url" class="form-inputfile">
+			<h3 class="fs-subtitle">Sería bueno tener tu curriculum, tu foto y si cuentas con un brochure</h3>
+            <input class="normal-input" type="file" id="curriculum" name="curriculum_url" class="form-inputfile">
+			<label for="curriculum">Sube tu curriculum</label>
+			<input class="normal-input" type="file" id="photo" name="photo_url" class="form-inputfile">
 			<label for="photo">Sube tu foto</label>
-			<input type="file" id="brochure" name="brochure_url" class="form-inputfile">
+			<input class="normal-input" type="file" id="brochure" name="brochure_url" class="form-inputfile">
 			<label for="brochure">Sube tu brochure</label>
 			<br>
-			<input type="button" name="previous" class="previous action-button" value="Atrás" />
-			<input type="submit" name="submit" class="submit action-button" value="¡ Enviar !" />
+			<input  type="button" name="previous" class="previous action-button" value="Atrás" />
+			<input  type="submit" name="submit" id="submit" class="submit action-button" value="¡ Enviar !"/>
 		</fieldset>
 	</form>
 
 	<script>
 		$(document).ready(function() {
 			additional_info();
-			removeAnyDots();
 		});
 	</script>
 {% endblock %}

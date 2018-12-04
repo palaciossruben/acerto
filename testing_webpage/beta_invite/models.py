@@ -752,6 +752,8 @@ class Experience(models.Model):
     highlight = models.CharField(max_length=140)
     number_of_months = models.IntegerField(null=True)
     number_of_years = models.IntegerField(null=True)
+    order = models.IntegerField(null=True)
+    start_year = models.IntegerField(null=True)
 
     def __str__(self):
         return 'id={0}, company={1}, role={2}'.format(self.pk, self.company, self.role)
@@ -764,13 +766,11 @@ class Experience(models.Model):
 class EducationExperience(models.Model):
 
     school = models.ForeignKey(School)
-    title = models.CharField(max_length=40)
     highlight = models.CharField(max_length=140)
-    number_of_months = models.IntegerField(null=True)
-    number_of_years = models.IntegerField(null=True)
+    title = models.CharField(max_length=40)
 
     def __str__(self):
-        return 'id={0}, company={1}, title={2}'.format(self.pk, self.school, self.title)
+        return 'id={0}, school={1}, title={2}'.format(self.pk, self.school, self.title)
 
     # adds custom table name
     class Meta:
@@ -801,7 +801,7 @@ class User(models.Model):
     scores = models.ManyToManyField(Score)
     experiences = models.ManyToManyField(Experience)
     education_experiences = models.ManyToManyField(EducationExperience)
-
+    age = models.IntegerField(null=True)
     # Additional info
     gender = models.ForeignKey(Gender, null=True, on_delete=models.SET_NULL)
     programs = models.CharField(max_length=250, null=True)
