@@ -154,9 +154,9 @@ def get_top_users(campaign):
     users = users_tests
 
     # Search
-    users_search = search_module.get_matching_users(search_array)
-    search_log.users_from_search.add(*users_search)
-    users += users_search
+    #users_search = search_module.get_matching_users(search_array)
+    #search_log.users_from_search.add(*users_search)
+    #users += users_search
 
     # ES
     users_es = get_users_from_es(search_array)

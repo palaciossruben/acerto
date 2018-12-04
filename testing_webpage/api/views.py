@@ -104,8 +104,7 @@ def register(request):
     user_params = {'country': country,
                    'ip': get_ip(request),
                    'is_mobile': True,
-                   'language_code': request.LANGUAGE_CODE
-                   }
+                   'language_code': request.LANGUAGE_CODE}
 
     if name:
         user_params['name'] = name

@@ -5,8 +5,8 @@ from django.conf import settings
 from dashboard.models import Candidate
 from beta_invite.util import common_senders
 
-internal_team = ['santiago@peaku.co', 'juan@peaku.co', 'juan.rendon@peaku.co']
-testing_team = ['juan@peaku.co', 'juan.rendon@peaku.co', 'ing.pendiente@gmail.com']
+INTERNAL_TEAM = ['santiago@peaku.co', 'juan@peaku.co', 'juan.rendon@peaku.co']
+TESTING_TEAM = ['juan@peaku.co', 'juan.rendon@peaku.co', 'ing.pendiente@gmail.com']
 
 
 def get_files(attachment):
@@ -49,7 +49,6 @@ def send_with_mailgun(recipients, subject, body, attachment=None):
         recipients: email or lists of emails.
         subject: email subject, string
         body: email body, string
-        html: optional
         attachment: optional param for attaching content to email
     Returns: sends emails.
     """
@@ -57,7 +56,7 @@ def send_with_mailgun(recipients, subject, body, attachment=None):
     html = body.replace('\n', '<br>') + '<br><a href=%unsubscribe_url%>Desuscribir</a>'
 
     if settings.DEBUG:
-        recipients = validate_emails(testing_team)
+        recipients = validate_emails(TESTING_TEAM)
     else:
         recipients = validate_emails(recipients)
 
@@ -217,6 +216,6 @@ def send_internal(contact, language_code, body_filename, subject, campaign=None)
     d['business_campaign_url'] = common_senders.get_business_campaign_url(campaign)
     body = body.format(**d)
 
-    send_with_mailgun(recipients=internal_team,
+    send_with_mailgun(recipients=INTERNAL_TEAM,
                       subject=subject,
                       body=body)
