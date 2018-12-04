@@ -218,7 +218,15 @@
         $("#login-form").css("display", "block");
         $("html").css("background-size", "cover");
         $("nav").css("margin-bottom", "40px");
-        $("#login-form").animate({"marginLeft": '60%'}, 650,"swing");
+
+        if ($(window).width() < 769) {
+            $("#login-form").animate({"marginLeft": 'auto'}, 650,"swing");
+            $("#login-form").css("margin", "50px auto");
+        }
+        else {
+            $("#login-form").animate({"marginLeft": '60%'}, 650,"swing");
+        }
+
         }
 
         function off_login() {
@@ -237,6 +245,7 @@
         if ($(window).width() < 769) {
             $(".only-register-form").animate({"marginLeft": 'auto'}, 650,"swing");
             $(".only-register-form").css("margin", "50px auto");
+            $(".register").css("margin-left", "30px");
         }
         else {
             $(".only-register-form").animate({"marginLeft": '60%'}, 650,"swing");
