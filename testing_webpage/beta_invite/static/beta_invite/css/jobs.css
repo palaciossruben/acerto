@@ -445,7 +445,7 @@ input:-webkit-autofill {
 
     .campaign-div{
         width: 90%;
-        height:360px;
+        height:auto;
     }
 
     .logo2{
