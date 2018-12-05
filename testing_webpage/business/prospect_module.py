@@ -103,6 +103,7 @@ def get_users_from_es(search_array):
     # 6. adding back the tests stuff -> has to correct for ignoring requisites!
     # 7. return more results size=1000?
     # 8. return only the id, for less json parsing
+    # 9. adds city to the elastic search filter, rather than having it in python (gains speed a num results)
 
     search_text = '+'.join(search_array)
     #search_text = ' '.join(search_array)
