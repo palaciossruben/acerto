@@ -713,7 +713,7 @@ class Campaign(models.Model):
         return [b.name_es for b in self.bullets.all() if b.bullet_type and b.bullet_type.name == 'requirement']
 
     def get_search_text(self):
-        return ' '.join([self.title_es] + self.get_requirement_names())
+        return self.title_es
 
     def local_date(self):
         date = self.created_at - timedelta(hours=5)

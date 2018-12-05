@@ -408,7 +408,8 @@ def start_post(request):
         business_user.save()
         PublicPost.add_to_public_post_queue(campaign)
 
-        return redirect('resumen/{campaign_pk}'.format(campaign_pk=campaign.pk))
+        return redirect('tablero-de-control/{business_user_id}/{campaign_id}/applicants'.format(business_user_id=business_user.pk,
+                                                                                                campaign_id=campaign.pk))
 
     else:
 

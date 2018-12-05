@@ -12,10 +12,10 @@ application = get_wsgi_application()
 
 from beta_invite.models import SearchLog
 
-#search_logs = SearchLog.objects.all()
+search_logs = SearchLog.objects.all()
 
-#for s in search_logs:
-#    print(s)
+for s in search_logs:
+    print(s)
 
 # Last campaign
 last_search = SearchLog.objects.all().order_by('-created_at').first()

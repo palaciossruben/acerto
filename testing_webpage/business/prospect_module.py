@@ -1,5 +1,7 @@
 
 import urllib.parse
+from raven import Client
+
 from django.db.models import Q
 import requests
 from decouple import config
@@ -13,6 +15,7 @@ from business import search_module
 from dashboard.models import Candidate
 
 MAX_MATCHES = 40
+SENTRY_CLIENT = Client(config('sentry_dsn'))
 
 
 def translate_email_job_match_subject(candidate):
@@ -91,16 +94,41 @@ def get_users_from_es(search_array):
     :return: Users
     """
 
-    search_text = '%20'.join(search_array)
-    try:
-        r = requests.get(urllib.parse.urljoin(config('elastic_search_host'), '/users/_search?q={}'.format(search_text)))
+    # TODO: can search be improved?
+    # 1. taking different weights for different terms
+    # 2. adding related terms
+    # 3. more people on original search
+    # 4. using elasticsearch DSL????
+    # 5. including job description
 
-        if str(r.status_code)[0] == 2:
+    search_text = '+'.join(search_array)
+    #search_text = ' '.join(search_array)
+
+    try:
+
+        url = urllib.parse.urljoin(config('elastic_search_host'), '/users/_search?q={}&size=100'.format(search_text))
+        #url = urllib.parse.urljoin(config('elastic_search_host'), '/users/_search')
+        #print(url)
+        """data = {
+              #"size": 200,
+
+              "query": {
+                "query_string": {
+                   "query": search_text
+                }
+              }
+        }"""
+
+        r = requests.get(url)
+        #r = requests.post(url, data=data)
+
+        if str(r.status_code)[0] == '2':
             return User.objects.filter(pk__in=[u['_id'] for u in r.json()['hits']['hits']]).all()
         else:
             return []
-    except:  # TODO: fix, WTF: there are connections errors not caught
-        return []
+    except Exception as e:
+        SENTRY_CLIENT.captureException()
+        raise e
 
 
 def get_users_from_tests(campaign):
@@ -142,16 +170,17 @@ def get_top_users(campaign):
     # TODO: this feature only supports Spanish.
     search_text = campaign.get_search_text()
     search_array = search_module.get_word_array_lower_case_and_no_accents(search_text)
-    search_array += search_module.add_related_words(search_array)
+    #search_array += search_module.add_related_words(search_array)
 
     search_log = SearchLog()
     search_log.save()
     search_log.campaign = campaign
+    users = []
 
     # Tests
-    users_tests = get_users_from_tests(campaign)
-    search_log.users_from_tests.add(*users_tests)
-    users = users_tests
+    #users_tests = get_users_from_tests(campaign)
+    #search_log.users_from_tests.add(*users_tests)
+    #users = users_tests
 
     # Search
     #users_search = search_module.get_matching_users(search_array)
