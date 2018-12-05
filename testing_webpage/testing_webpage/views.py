@@ -64,14 +64,25 @@ def jobs(request):
                                                        removed=False)
 
         add_missing_tests(user, active_campaigns)
-        return render(request, cts.JOBS_VIEW_PATH, {'active_campaigns': active_campaigns})
+
+        half = int(len(active_campaigns)/2)
+        left_campaigns = active_campaigns[:half]
+        right_campaigns = active_campaigns[half:]
+
+        return render(request, cts.JOBS_VIEW_PATH, {'left_campaigns': left_campaigns,
+                                                    'right_campaigns': right_campaigns})
 
     except ObjectDoesNotExist:
         active_campaigns = Campaign.objects.filter(~Q(title_es=None),
                                                    state__code__in=['A'],
                                                    removed=False)
         add_missing_tests(user, active_campaigns)
-        return render(request, cts.JOBS_VIEW_PATH, {'active_campaigns': active_campaigns})
+        half = int(len(active_campaigns)/2)
+        left_campaigns = active_campaigns[:half]
+        right_campaigns = active_campaigns[half:]
+
+        return render(request, cts.JOBS_VIEW_PATH, {'left_campaigns': left_campaigns,
+                                                    'right_campaigns': right_campaigns})
 
 
 @login_required
