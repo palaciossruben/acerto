@@ -680,14 +680,6 @@ class Campaign(models.Model):
     def get_work_area_segment(self):
         return self.work_area.segment if self.work_area else None
 
-    def remove_html(s):
-        tags = ['div', 'em', 'br', 'p', 'strong']
-
-        for t in tags:
-            s = s.replace('<{}>'.format(t), '')
-            s = s.replace('</{}>'.format(t), '')
-        return s
-
     def get_short_description(self):
 
         tags = ['div', 'em', 'br', 'p', 'strong']
