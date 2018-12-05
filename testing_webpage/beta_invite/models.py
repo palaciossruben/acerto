@@ -682,7 +682,13 @@ class Campaign(models.Model):
 
     def get_short_description(self):
 
+        tags = ['div', 'em', 'br', 'p', 'strong']
+
         description = self.description_es
+
+        for t in tags:
+            description = description.replace('<{}>'.format(t), '')
+            description = description.replace('</{}>'.format(t), '')
 
         if description is None:
             return None
