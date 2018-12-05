@@ -100,6 +100,9 @@ def get_users_from_es(search_array):
     # 3. more people on original search
     # 4. using elasticsearch DSL????
     # 5. including job description
+    # 6. adding back the tests stuff -> has to correct for ignoring requisites!
+    # 7. return more results size=1000?
+    # 8. return only the id, for less json parsing
 
     search_text = '+'.join(search_array)
     #search_text = ' '.join(search_array)
