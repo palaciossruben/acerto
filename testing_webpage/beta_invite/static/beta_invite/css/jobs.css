@@ -20,8 +20,8 @@
 }
 
 .campaign-div{
-    width: 80%;
-    height:240px;
+    width: 93%;
+    height:275px;
     margin: 0 auto;
     border-radius: 25px;
     border-style: solid;
@@ -445,7 +445,7 @@ input:-webkit-autofill {
 
     .campaign-div{
         width: 90%;
-        height:360px;
+        height:auto;
     }
 
     .logo2{
