@@ -87,7 +87,7 @@
 				<p style="color:orange;margin-bottom:0;">${{ campaign.salary_low_range }} a ${{ campaign.salary_high_range }} </p>
 				{% endif %}
 				<div>
-					{% autoescape off %}{{ campaign.get_short_description }}{% endautoescape %}
+					{{ campaign.get_short_description }}
 				</div>
 				<div>
 					{% for passed_test in campaign.passed_tests %}
@@ -134,7 +134,7 @@
 				<p style="color:orange;margin-bottom:0;">${{ campaign.salary_low_range }} a ${{ campaign.salary_high_range }} </p>
 				{% endif %}
 				<div>
-					{% autoescape off %}{{ campaign.get_short_description }}{% endautoescape %}
+				{{ campaign.get_short_description }}
 				</div>
 				<div>
 					{% for passed_test in campaign.passed_tests %}
