@@ -680,6 +680,15 @@ class Campaign(models.Model):
     def get_work_area_segment(self):
         return self.work_area.segment if self.work_area else None
 
+    def get_short_description(self):
+
+        description = self.description_es
+
+        if description is None:
+            return None
+
+        return description[:250] + '...'
+
     @staticmethod
     def print_cop_money(amount):
         reversed_string = [e + (idx % 3 == 0 and idx > 0) * '.' for idx, e in enumerate(reversed(str(amount)))]
