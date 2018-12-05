@@ -12,23 +12,30 @@
     font-family: BertholdAkzidenzGroteskRegular;
 }
 
+.location-logo{
+    background-image:url(../img/location.png);
+    background-repeat:no-repeat;
+    background-size: contain;
+    padding-left: 15px;
+}
 
 .campaign-div{
-    width: 50%;
-    min-height:230px;
+    width: 80%;
+    height:240px;
     margin: 0 auto;
     border-radius: 25px;
     border-style: solid;
     border-width: 3px;
     border-color: #F1F1EB;
-    padding: 10px;
+    padding: 30px;
     margin-top: 20px;
     color:#666666;
     background-color:white;
 }
 
-.campaign-div a{
+.campaign-div a, a{
     color:#666666;
+    text-decoration:none;
 }
 
 .campaign-div a:hover{
@@ -38,8 +45,8 @@
 .tittle{
     font-size:25px;
     font-family:BertholdAkzidenzGroteskBold;
-    text-align:center;
-    margin-bottom:25px;
+    text-align:left;
+    margin-bottom:0px;
 }
 
 .tests{
@@ -61,11 +68,11 @@
 }
 
 .jobs-background{
-    background: url(../img/jobs_background.jpg) repeat top center scroll;
-    -webkit-background-size: contain;
-    -moz-background-size: contain;
-    -o-background-size: contain;
-    background-size: contain;
+    background: url(../img/jobs_background.jpg) no-repeat top center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .main-title{
@@ -438,7 +445,7 @@ input:-webkit-autofill {
 
     .campaign-div{
         width: 90%;
-        min-height:230px;
+        height:360px;
     }
 
     .logo2{
