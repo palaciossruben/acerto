@@ -208,6 +208,8 @@ def get_candidate(user, campaign):
             return Candidate.objects.get(campaign=campaign, user=user, removed=False)
         except ObjectDoesNotExist:
             return None
+        except MultipleObjectsReturned:
+            return None
     else:
         return None
 
