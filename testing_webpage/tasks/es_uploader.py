@@ -105,9 +105,9 @@ def upload_all():
 
 
 def run():
-    #f = open('es_daemon.log', 'a')
+    f = open('es_uploader.log', 'a')
     upload_all()
-    #f.close()
+    f.close()
 
 
 if __name__ == '__main__':
