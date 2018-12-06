@@ -421,7 +421,7 @@ def get_missing_tests(candidate, campaign, high_scores=None):
     tests = [t for t in all_tests if t not in high_score_tests]
 
     # sorts by test_type.order
-    return sorted(tests, key=lambda t: t.type.order)
+    return sorted(tests, key=lambda t: t.type.order if t.type else 100)
 
 
 def down_sample_wave(src, dst, inrate=44100, outrate=16000, inchannels=2, outchannels=1):
