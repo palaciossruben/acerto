@@ -123,7 +123,7 @@ def read_all(fast=True, force=False):
                         write_last_updated_at(user)
                         user.curriculum_text = text.replace('\x00', '')  # removes char null
                         user.save()
-                    except Exception as e:
+                    except:
                         SENTRY_CLIENT.captureException()
 
 
