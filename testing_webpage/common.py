@@ -139,7 +139,7 @@ def get_campaign_from_request(request):
     """Tries 2 ways to get the campaign_id, 1. on GET params, 2. on POST params.
     If nothing works outputs the default campaign."""
 
-    campaign_id = request.GET.get('campaign_id')
+    campaign_id = request.GET.get('campaign_id', None)
     if campaign_id is None:
         campaign_id = request.POST.get('campaign_id', beta_cts.DEFAULT_CAMPAIGN_ID)
 
