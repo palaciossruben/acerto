@@ -359,24 +359,32 @@ def additional_info(request):
             return redirect('/servicio_de_empleo/active_campaigns')
 
 
-def update_educations_experiences(request, school_name, candidate):
+def get_object_id(request, request_param):
+    try:
+        return int(request.POST.get(request_param))
+    except ValueError:
+        return None
+
+
+def update_education_experience(request, school_name, candidate):
 
     user = User.objects.get(pk=candidate.user.pk)
+    order = int(request.POST.get('order'))
 
     try:
-        school = School.objects.get(name=school_name, user=user)
-        study = EducationExperience(school=school)
-        study.title = request.POST.get('title')
+        study = EducationExperience.objects.get(order=order, user=user)
+        study.school = get_school(school_name)
+        study.profession_id = get_object_id(request, 'profession_id')
+        study.education_id = get_object_id(request, 'education_id')
         study.save()
 
     except ObjectDoesNotExist:
 
-        school = School(name=school_name)
-        school.save()
-        study = EducationExperience(school=school,
-                                    highlight=request.POST.get('highlight'),
-                                    order=request.POST.get('order'),
-                                    start_year=request.POST.get('start-year'))
+        study = EducationExperience(order=order,
+                                    user=user,
+                                    school=get_school(school_name),
+                                    profession_id=get_object_id(request, 'profession_id'),
+                                    education_id=get_object_id(request, 'education_id'))
         study.save()
         user.education_experiences.add(study)
         user.save()
@@ -392,10 +400,19 @@ def get_company(company_name):
         return company
 
 
+def get_school(school_name):
+    try:
+        return School.objects.get(name=school_name)
+    except ObjectDoesNotExist:
+        school = School(name=school_name)
+        school.save()
+        return school
+
+
 def update_work_experiences(request, company_name, candidate):
 
     user = User.objects.get(pk=candidate.user.pk)
-    order = request.POST.get('order')
+    order = int(request.POST.get('order'))
 
     try:
         work_experience = Experience.objects.get(order=order, user=user)
@@ -407,7 +424,7 @@ def update_work_experiences(request, company_name, candidate):
         work_experience.order = order
         work_experience.save()
 
-    except ObjectDoesNotExist:
+    except ObjectDoesNotExist:  # when it has to create the object from scratch
 
         work_experience = Experience(company=get_company(company_name),
                                      role=request.POST.get('role'),
@@ -430,10 +447,10 @@ def save_partial_additional_info(request):
         company_name = request.POST.get('company-name')
 
         if school_name:
-            update_educations_experiences(request, school_name, candidate)
+            update_education_experience(request, school_name, candidate)
 
         if company_name:
-            update_educations_experiences(request, company_name, candidate)
+            update_work_experiences(request, company_name, candidate)
 
         return HttpResponse('')
     else:

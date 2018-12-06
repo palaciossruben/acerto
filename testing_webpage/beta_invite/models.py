@@ -784,10 +784,15 @@ class Experience(models.Model):
 class EducationExperience(models.Model):
 
     school = models.ForeignKey(School)
-    title = models.CharField(max_length=40)
+    profession = models.ForeignKey(Profession, null=True)
+    education = models.ForeignKey(Education, null=True)
+    order = models.IntegerField(default=1)
 
     def __str__(self):
-        return 'id={0}, school={1}, title={2}'.format(self.pk, self.school, self.title)
+        return 'id={0}, school={1}, profession={2}, education={3}'.format(self.pk,
+                                                                          self.school,
+                                                                          self.profession,
+                                                                          self.education)
 
     # adds custom table name
     class Meta:
@@ -819,6 +824,7 @@ class User(models.Model):
     experiences = models.ManyToManyField(Experience)
     education_experiences = models.ManyToManyField(EducationExperience)
     age = models.IntegerField(null=True)
+
     # Additional info
     gender = models.ForeignKey(Gender, null=True, on_delete=models.SET_NULL)
     programs = models.CharField(max_length=250, null=True)
