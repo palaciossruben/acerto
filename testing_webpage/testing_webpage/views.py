@@ -41,9 +41,11 @@ def add_missing_tests(user, campaigns):
     if user:
         for campaign in campaigns:
             prospective_candidate = Candidate(user=user, campaign=campaign)
-            high_scores = test_module.get_high_scores(prospective_candidate)
+            high_scores = test_module.get_high_scores(prospective_candidate, campaign)
             campaign.passed_tests = [s.test for s in high_scores]
-            campaign.missing_tests = test_module.get_missing_tests(prospective_candidate, high_scores=high_scores)
+            campaign.missing_tests = test_module.get_missing_tests(prospective_candidate,
+                                                                   campaign,
+                                                                   high_scores=high_scores)
 
 
 def jobs(request):

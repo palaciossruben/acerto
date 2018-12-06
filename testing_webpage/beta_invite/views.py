@@ -237,7 +237,7 @@ def tests(request):
     user = common.get_user_from_request(request)
     candidate = common.get_candidate(user, campaign)
 
-    tests = translate_tests(test_module.get_missing_tests(candidate), request.LANGUAGE_CODE)
+    tests = translate_tests(test_module.get_missing_tests(candidate, campaign), request.LANGUAGE_CODE)
 
     end_point_params = {'campaign_id': campaign.id,
                         'tests': tests}
@@ -316,9 +316,10 @@ def get_test_result(request):
         return redirect('/servicio_de_empleo?campaign_id={campaign_id}'.format(campaign_id=campaign.id))
 
     candidate = common.get_candidate(user, campaign)
-    high_scores = test_module.get_high_scores(candidate)
+    high_scores = test_module.get_high_scores(candidate, campaign)
 
     questions_dict = test_module.get_tests_questions_dict(test_module.get_missing_tests(candidate,
+                                                                                        campaign,
                                                                                         high_scores=high_scores))
     missing_scores = test_module.get_scores(campaign, user_id, questions_dict, request)
 
