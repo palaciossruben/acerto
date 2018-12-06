@@ -89,10 +89,12 @@ def get_user_from_request(request):
     user_id = request.GET.get('user_id')
     if user_id is None:
         user_id = request.POST.get('user_id')
-        if user_id is None:
+        if user_id is None and request.user.id is not None:
             try:
                 user_id = User.objects.get(auth_user_id=request.user.id).id
             except ObjectDoesNotExist:
+                user_id = None
+            except MultipleObjectsReturned:
                 user_id = None
 
     # different from None, '' and False
