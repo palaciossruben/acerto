@@ -115,7 +115,7 @@ def get_users_from_es(search_array, campaign):
         print(url)
         my_json = {
             "_source": ["pk"],
-            "size": 1000,
+            "size": 2000,
             #"query": {
             #    "bool": {
             #        "must": [
