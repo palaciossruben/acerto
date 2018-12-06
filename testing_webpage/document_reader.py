@@ -24,7 +24,7 @@ from beta_invite.models import User
 
 
 VALID_EXTENSIONS = {'.jpg', '.jpeg', '.doc', '.docx', '.png', '.pdf', '.txt'}
-INVALID_FOLDERS = ['10587', '9598', '9189', '9196', '8842', '9240', '7999', '10075', '11201']  # this folders produce a out of memory error
+INVALID_FOLDERS = ['10587', '9598', '9189', '9196', '8842', '9240', '7999', '10075', '11201', '11150']  # this folders produce a out of memory error
 SENTRY_CLIENT = Client(config('sentry_dsn'))
 
 
