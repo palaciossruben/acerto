@@ -503,16 +503,13 @@ def add_cv_changes(request):
     Returns: Adds a CV to the User profile, given that the user exists.
     """
 
-    user_id = request.POST.get('user_id')
+    user = common.get_user_from_request(request)
 
-    if user_id:
-        user = User.objects.get(pk=int(user_id))
+    if user.id:
+        user = User.objects.get(pk=int(user.id))
         new_user_module.update_resource(request, user, 'curriculum_url', 'resumes')
 
-        return render(request, cts.ACTIVE_CAMPAIGNS_VIEW_PATH, {})
-
-    # if any inconsistency, then do nothing, ignore it.
-    return render(request, cts.ADD_CV, {'user_id': user_id})
+    return redirect('/trabajos')
 
 
 def security_politics(request):

@@ -48,16 +48,26 @@ def add_missing_tests(user, campaigns):
                                                                    high_scores=high_scores)
 
 
-def jobs(request):
+def get_segment_code(request, user):
     code = request.GET.get('segment_code')
+
+    if code is None:
+        segment = user.get_work_area_segment()
+        if segment:
+            return segment.code
+
+    return code
+
+
+def jobs(request):
     user = User.get_user_from_request(request)
+    segment_code = get_segment_code(request, user)
 
     try:
-        segment = WorkAreaSegment.objects.get(code=code)
         campaigns = Campaign.objects.filter(~Q(title_es=None),
                                             state__code__in=['A'],
                                             removed=False,
-                                            work_area__segment__code=segment.code)
+                                            work_area__segment__code=segment_code)
         if len(campaigns) > 0:
             active_campaigns = campaigns
         else:
