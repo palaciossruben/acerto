@@ -14,6 +14,8 @@ application = get_wsgi_application()
 import nltk
 import ntpath
 import pickle
+from decouple import config
+from raven import Client
 from nltk.stem.snowball import SnowballStemmer
 
 from subscribe import cts
@@ -23,6 +25,7 @@ from beta_invite.models import User
 
 VALID_EXTENSIONS = {'.jpg', '.jpeg', '.doc', '.docx', '.png', '.pdf', '.txt'}
 INVALID_FOLDERS = ['10587', '9598', '9189', '9196', '8842', '9240', '7999']  # this folders produce a out of memory error
+SENTRY_CLIENT = Client(config('sentry_dsn'))
 
 
 def get_text(folder_path, doc, extension, fast=True):
@@ -114,11 +117,14 @@ def read_all(fast=True, force=False):
 
                 # Only parses an un-parsed files
                 if user.curriculum_text is None or force:
-                    print('analysing user: {}'.format(user.id))
-                    text = read_text_and_save(user, folder_path, parsed_path, parsed_filename, fast=fast)
-                    write_last_updated_at(user)
-                    user.curriculum_text = text.replace('\x00', '')  # removes char null
-                    user.save()
+                    try:
+                        print('analysing user: {}'.format(user.id))
+                        text = read_text_and_save(user, folder_path, parsed_path, parsed_filename, fast=fast)
+                        write_last_updated_at(user)
+                        user.curriculum_text = text.replace('\x00', '')  # removes char null
+                        user.save()
+                    except Exception as e:
+                        SENTRY_CLIENT.captureException()
 
 
 def run():
