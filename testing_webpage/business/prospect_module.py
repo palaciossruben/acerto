@@ -87,7 +87,7 @@ def simple_filter(campaign, users):
     return [c.user for c in candidates if not common.user_has_been_recommended(c.user)]
 
 
-def get_users_from_es(search_array):
+def get_users_from_es(search_array, campaign):
     """
     es=elastic_search
     :param search_array: array of search words
@@ -110,20 +110,34 @@ def get_users_from_es(search_array):
 
     try:
 
-        url = urllib.parse.urljoin(config('elastic_search_host'), '/users/_search?q={}&size=100'.format(search_text))
         #url = urllib.parse.urljoin(config('elastic_search_host'), '/users/_search')
-        #print(url)
-        """data = {
-              #"size": 200,
+        url = urllib.parse.urljoin(config('elastic_search_host'), '/users/_search?q={}'.format(search_text))
+        print(url)
+        my_json = {
+            "_source": ["pk"],
+            "size": 1000,
+            #"query": {
+            #    "bool": {
+            #        "must": [
+            #            {"match": {"_all": search_text}}
+            #        ]#,
+                    #"filter": [
+                    #    {"term": {"city_id": campaign.city_id}}
+                    #]#,
+                    #"terms_set": {
+                    #    "work_area_id": {
+                    #        {"term": [w.pk for w in campaign.get_work_area_segment().get_work_areas()]}
+                    #    }
+                    #}
+            #    },
+            #},
+        }
+        print(my_json)
 
-              "query": {
-                "query_string": {
-                   "query": search_text
-                }
-              }
-        }"""
+        r = requests.get(url, json=my_json)
+        print(r.status_code)
+        print(r.json())
 
-        r = requests.get(url)
         #r = requests.post(url, data=data)
 
         if str(r.status_code)[0] == '2':
@@ -192,7 +206,7 @@ def get_top_users(campaign):
     #users += users_search
 
     # ES
-    users_es = get_users_from_es(search_array)
+    users_es = get_users_from_es(search_array, campaign)
     search_log.users_from_es.add(*users_es)
     users += users_es
 
@@ -254,3 +268,12 @@ def get_candidates(campaign):
             candidate.save()
 
     return candidates
+
+
+def remove_html(s):
+    tags = ['div', 'em', 'br', 'p', 'strong']
+
+    for t in tags:
+        s = s.replace('<{}>'.format(t), '')
+        s = s.replace('</{}>'.format(t), '')
+    return s

@@ -314,6 +314,7 @@ def get_test_result(request):
     user_id = user.id if user else None
     if not user:
         return redirect('/servicio_de_empleo?campaign_id={campaign_id}'.format(campaign_id=campaign.id))
+
     candidate = common.get_candidate(user, campaign)
     high_scores = test_module.get_high_scores(candidate)
 

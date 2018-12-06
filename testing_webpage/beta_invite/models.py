@@ -65,6 +65,9 @@ class WorkAreaSegment(models.Model):
     def __str__(self):
         return '{0}'.format(self.name)
 
+    def get_work_areas(self):
+        return WorkArea.objects.filter(segment_id=self.pk).all()
+
     # adds custom table name
     class Meta:
         db_table = 'work_area_segments'

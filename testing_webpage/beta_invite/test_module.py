@@ -401,6 +401,8 @@ def get_missing_tests(candidate, high_scores=None):
     :param high_scores: can have this param to save time calculating it
     :return: list of tests
     """
+
+    # TODO: optimize
     all_tests = list(candidate.campaign.tests.all())
 
     if high_scores is None:
