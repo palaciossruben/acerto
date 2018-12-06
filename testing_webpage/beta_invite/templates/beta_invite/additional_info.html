@@ -56,8 +56,8 @@
 					<option value="{{ sex.id }}">{{ sex.name }}</option>
 				{% endfor %}
 			</select>
-			<input class="normal-input" placeholder="¿Cuál es tu edad?" type="number" id="age" name="age">
-			<input type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'gender_id':$('#gender').val(), sendPartial({'age':$('#age').val()})"/>
+			<input class="normal-input" placeholder="¿Cuál es tu edad?" type="number" id="age" name="age" min="18" step="1" max="100">
+			<input type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'gender_id':$('#gender').val(), 'age':$('#age').val()})"/>
 		</fieldset>
         <fieldset>
 			<h2 class="fs-title">Aspiración salarial</h2>
@@ -104,7 +104,7 @@
             <input class="normal-input" type="hidden" id="order3" value="1" name="order"/>
 			<input class="normal-input" type="text" id="role3" name="role" placeholder="Cargo" maxlength="40"/>
 			<input class="normal-input" type="text" id="work-highlight3" name="highlight" placeholder="¿Cuál fue tu mayor logro?" maxlength="140"/>
-			<input class="normal-input" type="number" min="1920" step="1" id="start-year3" name="start-year" placeholder="Año de inicio"/>
+			<input class="normal-input" type="number" min="1990" step="1" id="start-year3" name="start-year" placeholder="Año de inicio"/>
             <p>Duración:</p>
 			<input type="number" class="half-input" id="number-of-years3" name="number-of-years" min="0" step="1" placeholder="Años"/>
 			<input type="number" class="half-input" id="number-of-months3" name="number-of-months" min="0" step="1" placeholder="Meses"/>
@@ -128,7 +128,7 @@
 			</select>
             <input class="normal-input" type="text" id="school" name="school" placeholder="¿Dónde estudiante?" maxlength="200"/>
 			<input  type="button" name="previous" class="previous action-button" value="Atrás" />
-			<input  type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'education_id':$('#education').val(), 'profession_id':$('#profession').val(), 'school':$('#school').val()})"/>
+			<input  type="button" name="next" class="next action-button" value="Siguiente" onclick="sendPartial({'education_id':$('#education').val(), 'profession_id':$('#profession').val(), 'school':$('#school').val(), 'order': 1})"/>
 		</fieldset>
         <fieldset>
 			<h2 class="fs-title">Perfil</h2>
@@ -140,9 +140,11 @@
 		</fieldset>
 		<fieldset>
 			<h2 class="fs-title">Anexos</h2>
-			<h3 class="fs-subtitle">Sería bueno tener tu curriculum, tu foto y si cuentas con un brochure</h3>
-            <input  type="file" id="curriculum" name="curriculum_url" class="form-inputfile">
-			<label for="curriculum">Sube tu curriculum</label>
+			<h3 class="fs-subtitle">Sube algunos documentos que te ayudarán en el proceso</h3>
+			{% if candidate.user.curriculum_url is None %}
+            	<input  type="file" id="curriculum" name="curriculum_url" class="form-inputfile">
+				<label for="curriculum">Sube tu curriculum</label>
+			{% endif %}
 			<input  type="file" id="photo" name="photo_url" class="form-inputfile">
 			<label for="photo">Sube tu foto</label>
 			<input  type="file" id="brochure" name="brochure_url" class="form-inputfile">

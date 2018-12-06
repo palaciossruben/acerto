@@ -51,7 +51,7 @@ def add_missing_tests(user, campaigns):
 def get_segment_code(request, user):
     code = request.GET.get('segment_code')
 
-    if code is None:
+    if user and code is None:
         segment = user.get_work_area_segment()
         if segment:
             return segment.code

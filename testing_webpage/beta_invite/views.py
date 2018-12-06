@@ -330,33 +330,34 @@ def get_test_result(request):
     # once it has the evaluation will update the canonical user scores
     test_module.update_scores_of_candidate(candidate)
 
-    return redirect(
-        '/servicio_de_empleo/additional_info?candidate_id={candidate_id}'.format(candidate_id=candidate.pk))
-
-
-def additional_info(request):
-    candidate = common.get_candidate_from_request(request)
-
-    # probably a first timer
+    # probably a new comer
     if candidate.user.gender is None:
-        param_dict = dict()
-        countries, cities, education, professions, work_areas, genders = get_drop_down_values(request.LANGUAGE_CODE)
-        # Dictionary parameters
-        param_dict['candidate'] = candidate
-        param_dict['genders'] = genders
-        param_dict['work_areas'] = work_areas
-        param_dict['education'] = education
-        param_dict['professions'] = professions
-        param_dict['countries'] = countries
-        param_dict['cities'] = cities
-
-        return render(request, cts.ADDITIONAL_INFO_VIEW_PATH, param_dict)
+        return redirect(
+            '/servicio_de_empleo/additional_info?candidate_id={candidate_id}'.format(candidate_id=candidate.pk))
     else:
         # will no longer bother user with additional info
         if candidate is not None:
             return redirect('/servicio_de_empleo/active_campaigns?candidate_id={}'.format(candidate.id))
         else:
             return redirect('/servicio_de_empleo/active_campaigns')
+
+
+def additional_info(request):
+    candidate = common.get_candidate_from_request(request)
+
+    param_dict = dict()
+    countries, cities, education, professions, work_areas, genders = get_drop_down_values(request.LANGUAGE_CODE)
+    # Dictionary parameters
+    param_dict['candidate'] = candidate
+    param_dict['genders'] = genders
+    param_dict['work_areas'] = work_areas
+    param_dict['education'] = education
+    param_dict['professions'] = professions
+    param_dict['countries'] = countries
+    param_dict['cities'] = cities
+    param_dict['candidate'] = candidate
+
+    return render(request, cts.ADDITIONAL_INFO_VIEW_PATH, param_dict)
 
 
 def get_object_id(request, request_param):
