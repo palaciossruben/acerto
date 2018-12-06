@@ -114,6 +114,7 @@ def read_all(fast=True, force=False):
 
                 # Only parses an un-parsed files
                 if user.curriculum_text is None or force:
+                    print('analysing user: {}'.format(user.id))
                     text = read_text_and_save(user, folder_path, parsed_path, parsed_filename, fast=fast)
                     write_last_updated_at(user)
                     user.curriculum_text = text.replace('\x00', '')  # removes char null
