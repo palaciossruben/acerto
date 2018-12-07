@@ -360,7 +360,7 @@ def additional_info(request):
     return render(request, cts.ADDITIONAL_INFO_VIEW_PATH, param_dict)
 
 
-def get_object_id(request, request_param):
+def get_int_param(request, request_param):
     try:
         return int(request.POST.get(request_param))
     except ValueError:
@@ -375,8 +375,8 @@ def update_education_experience(request, school_name, candidate):
     try:
         study = EducationExperience.objects.get(order=order, user=user)
         study.school = get_school(school_name)
-        study.profession_id = get_object_id(request, 'profession_id')
-        study.education_id = get_object_id(request, 'education_id')
+        study.profession_id = get_int_param(request, 'profession_id')
+        study.education_id = get_int_param(request, 'education_id')
         study.save()
 
     except ObjectDoesNotExist:
@@ -384,8 +384,8 @@ def update_education_experience(request, school_name, candidate):
         study = EducationExperience(order=order,
                                     user=user,
                                     school=get_school(school_name),
-                                    profession_id=get_object_id(request, 'profession_id'),
-                                    education_id=get_object_id(request, 'education_id'))
+                                    profession_id=get_int_param(request, 'profession_id'),
+                                    education_id=get_int_param(request, 'education_id'))
         study.save()
         user.education_experiences.add(study)
         user.save()
@@ -420,8 +420,9 @@ def update_work_experiences(request, company_name, candidate):
         work_experience.company = get_company(company_name)
         work_experience.role = request.POST.get('role')
         work_experience.highlight = request.POST.get('highlight')
-        work_experience.number_of_months = request.POST.get('number-of-months')
-        work_experience.number_of_years = request.POST.get('number-of-years')
+        work_experience.number_of_months = get_int_param(request, 'start_year')
+        work_experience.number_of_months = get_int_param(request, 'number_of_months')
+        work_experience.number_of_years = get_int_param(request, 'number_of_years')
         work_experience.order = order
         work_experience.save()
 
@@ -430,9 +431,9 @@ def update_work_experiences(request, company_name, candidate):
         work_experience = Experience(company=get_company(company_name),
                                      role=request.POST.get('role'),
                                      highlight=request.POST.get('highlight'),
-                                     start_year=request.POST.get('start_year'),
-                                     number_of_years=request.POST.get('number-of-years'),
-                                     number_of_months=request.POST.get('number-of-months'),
+                                     start_year=get_int_param(request, 'start_year'),
+                                     number_of_years=get_int_param(request, 'number_of_years'),
+                                     number_of_months=get_int_param(request, 'number_of_months'),
                                      order=order)
         work_experience.save()
         user.experiences.add(work_experience)
@@ -445,7 +446,7 @@ def save_partial_additional_info(request):
         candidate = common.get_candidate_from_request(request)
         new_user_module.update_user_with_request(request, candidate.user)
         school_name = request.POST.get('school')
-        company_name = request.POST.get('company-name')
+        company_name = request.POST.get('company_name')
 
         if school_name:
             update_education_experience(request, school_name, candidate)

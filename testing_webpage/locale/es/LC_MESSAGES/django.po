@@ -73,7 +73,7 @@ msgstr "PeakU"
 #: .\beta_invite\templates\beta_invite\index.html:100
 #: .\testing_webpage\templates\testing_webpage\jobs.html:58
 msgid "Upload your resume"
-msgstr "Anexar hoja de vida"
+msgstr "hoja de vida (opcional)"
 
 #: .\beta_invite\templates\beta_invite\add_cv.html:41
 #: .\beta_invite\templates\beta_invite\index.html:106
