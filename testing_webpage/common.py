@@ -472,6 +472,23 @@ def get_rejected_candidates(campaign):
     return sort_candidates_by_tests(candidates)
 
 
+# This methods are for the sake of speed!!!
+def get_relevant_candidates_count(campaign):
+    return Candidate.objects.filter(campaign=campaign, state__in=State.get_relevant_states(), removed=False).count()
+
+
+def get_application_candidates_count(campaign):
+    return Candidate.objects.filter(campaign=campaign, state__in=State.get_applicant_states(), removed=False).count()
+
+
+def get_rejected_candidate_count(campaign):
+    return Candidate.objects.filter(campaign=campaign, state__in=State.get_rejected_states(), removed=False).count()
+
+
+def get_recommended_candidates_count(campaign):
+    return Candidate.objects.filter(campaign=campaign, state__in=State.get_recommended_states(), removed=False).count()
+
+
 def calculate_evaluation_summaries(campaign):
     """
     Gets all candidates for each BusinessState and calculates the average scores. If the candidate is missing its

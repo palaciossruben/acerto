@@ -577,10 +577,10 @@ def summary(request, campaign_id, business_user=None):
 
     return render(request, cts.SUMMARY_VIEW_PATH, {'business_user': business_user,
                                                    'campaign': campaign,
-                                                   'num_total': len(common.get_application_candidates(campaign))+len(common.get_relevant_candidates(campaign)),
-                                                   'num_applicants': len(common.get_application_candidates(campaign)),
-                                                   'num_relevant': len(common.get_relevant_candidates(campaign)),
-                                                   'num_recommended': len(common.get_recommended_candidates(campaign)),
+                                                   'num_total': common.get_application_candidates_count(campaign) + common.get_relevant_candidates_count(campaign),
+                                                   'num_applicants': common.get_application_candidates_count(campaign),
+                                                   'num_relevant': common.get_relevant_candidates_count(campaign),
+                                                   'num_recommended': common.get_recommended_candidates_count(campaign),
                                                    'created_at': created_at})
 
 

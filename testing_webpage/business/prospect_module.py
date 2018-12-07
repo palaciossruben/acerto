@@ -216,13 +216,15 @@ def get_top_users(campaign):
     # FILTERS
     candidates = [Candidate(user=u, campaign=campaign, pk=1) for u in users]
 
+    # CITY FILTER
     candidates = [c for c in candidates if non_null_equal(c.user.city, c.campaign.city)]
     search_log.after_city_filter.add(*[c.user for c in candidates])
 
-    # Work Area Segment
+    # WORK AREA SEGMENT FILTER
     candidates = [c for c in candidates if non_null_equal(c.user.get_work_area_segment(), c.campaign.get_work_area_segment())]
     search_log.after_work_area_filter.add(*[c.user for c in candidates])
 
+    # SALARY FILTER
     candidates = [c for c in candidates if non_null_lte(campaign.get_very_low_salary(), c.user.salary) and
                   non_null_gte(campaign.get_very_high_salary(), c.user.salary)]
     search_log.after_salary_filter.add(*[c.user for c in candidates])

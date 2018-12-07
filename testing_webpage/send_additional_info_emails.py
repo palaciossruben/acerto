@@ -36,10 +36,7 @@ def candidates_filter(candidates):
 def send_users_additional_info_reminder():
 
     candidates = (Candidate.objects.filter(~Q(user=None), ~Q(user__email=None), user__gender_id=None).order_by('-user_id')
-                  | Candidate.objects.filter(~Q(user=None), ~Q(user__email=None), user__experience=None).order_by('-user_id')
-                  | Candidate.objects.filter(~Q(user=None), ~Q(user__email=None), user__city=None).order_by('-user_id')
-                  | Candidate.objects.filter(~Q(user=None), ~Q(user__email=None), user__salary=None).order_by('-user_id')
-                  | Candidate.objects.filter(~Q(user=None), ~Q(user__email=None), user__work_area=None).order_by('-user_id'))
+                  | Candidate.objects.filter(~Q(user=None), ~Q(user__email=None), user__salary=None).order_by('-user_id'))
 
     candidates = [c for c in candidates]
 
