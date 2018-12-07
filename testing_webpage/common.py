@@ -10,6 +10,7 @@ from ipware.ip import get_ip
 import geoip2.database
 import inflection
 from decouple import config
+from datetime import datetime, timedelta
 
 from beta_invite.apps import ip_country_reader, ip_city_reader
 from beta_invite.models import User, Campaign, Country, City, Profession, Education, EvaluationSummary, WorkArea, Gender
@@ -494,6 +495,7 @@ def calculate_evaluation_summaries(campaign):
     Gets all candidates for each BusinessState and calculates the average scores. If the candidate is missing its
     calculation it will also try doing that internally.
     """
+
     campaign.recommended_evaluation = EvaluationSummary.create([c.get_evaluation_summary()
                                                                 for c in get_recommended_candidates(campaign)])
     campaign.relevant_evaluation = EvaluationSummary.create([c.get_evaluation_summary()
@@ -514,6 +516,23 @@ def calculate_evaluation_summaries(campaign):
                                                              for c in get_rejected_candidates(campaign)])
 
     campaign.save()
+
+
+def calculate_evaluation_summaries_with_caching(campaign):
+    """
+    Will only update evaluations after an hour or if the don't exist
+    :param campaign:
+    :return:
+    """
+
+    if campaign:
+        if campaign.applicant_evaluation is not None:
+            if datetime.today() - campaign.recommended_evaluation.created_at.replace(tzinfo=None) > timedelta(hours=1):
+                calculate_evaluation_summaries(campaign)
+            else:
+                pass  # do not update... does not worth it
+        else:
+            calculate_evaluation_summaries(campaign)
 
 
 def calculate_operational_efficiency(campaign):
