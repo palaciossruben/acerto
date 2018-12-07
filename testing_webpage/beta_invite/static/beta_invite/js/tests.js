@@ -17,6 +17,11 @@ function back(test_number, question_number, last_test_number_of_questions){
 
 function next(test_number, question_number, number_of_questions, number_of_tests){
 
+    if(! $('#test_form_id')[0].checkValidity()) {
+            $('#submit-button').click();
+            return true;
+        }
+
     if (question_number == number_of_questions) {
         activate(test_number +1, 1);
     }else{
