@@ -43,6 +43,13 @@ def send_condition(an_object, email):
            not BusinessUserEmailSent.objects.filter(business_user=an_object, email_type=email.email_type)
 
 
+def get_email(an_object):
+    if isinstance(an_object, Candidate):
+        return an_object.user.email
+    else:
+        return an_object.email
+
+
 def send_pending_emails():
     """
     Returns: Sends
@@ -74,7 +81,7 @@ def send_pending_emails():
 
                 email.sent = True
                 email.save()
-                print('sent email "{}" to {}'.format(email.subject, an_object.email))
+                print('sent email "{}" to {}'.format(email.subject, get_email(an_object)))
 
                 # Records sending email
                 if isinstance(an_object, Candidate):
