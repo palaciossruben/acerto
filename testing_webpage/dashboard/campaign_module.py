@@ -143,11 +143,8 @@ def create_campaign(request):
     add_user_tests(campaign, request)
 
     prospects = prospect_module.get_candidates(campaign)
-    prospect_module.send_mails(prospects)
-    messenger_sender.send(candidates=prospects,
-                          language_code='es',
-                          body_input='candidate_prospect')
-    return campaign
+
+    return campaign, prospects
 
 
 def get_city_question(campaign):

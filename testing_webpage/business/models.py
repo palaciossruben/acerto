@@ -77,6 +77,9 @@ class BusinessUser(models.Model):
         except ObjectDoesNotExist:
             return None
 
+    def is_peaku(self):
+        return 'peaku' in self.email
+
     # adds custom table name
     class Meta:
         db_table = 'business_users'

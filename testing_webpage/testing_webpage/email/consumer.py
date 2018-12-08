@@ -27,7 +27,7 @@ from subscribe import helper as h
 
 
 # The maximum number of mails that sends at once.
-MAX_NUMBER_OF_MAILS = 1  # TODO: change to 10 or 20!!!
+MAX_NUMBER_OF_MAILS = 10
 TEST_EMAIL = 'juan@peaku.co'
 
 
@@ -67,11 +67,11 @@ def send_pending_emails():
 
             if send_condition(an_object, email):
 
-                #if settings.DEBUG:  # TODO: add this now!!!
-                if isinstance(an_object, Candidate):
-                    an_object.user.email = TEST_EMAIL
-                else:
-                    an_object.email = TEST_EMAIL
+                if settings.DEBUG:
+                    if isinstance(an_object, Candidate):
+                        an_object.user.email = TEST_EMAIL
+                    else:
+                        an_object.email = TEST_EMAIL
 
                 email_sender.send(objects=an_object,
                                   language_code=email.language_code,
@@ -91,7 +91,7 @@ def send_pending_emails():
 
 
 if __name__ == '__main__':
-    # TODO: add!!!
+
     with open('consumer.log', 'a') as f:
         sys.stdout = h.Unbuffered(f)
         print('sending emails...')

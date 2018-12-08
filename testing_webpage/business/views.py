@@ -25,7 +25,9 @@ from django.views.decorators.csrf import csrf_exempt
 import common
 import business
 import beta_invite
-from business import search_module
+
+from beta_invite.util import messenger_sender
+from business import search_module, prospect_module
 from beta_invite.util import email_sender
 from business import constants as cts
 from beta_invite.models import User, WorkArea, EmailType, Campaign, Test, Price, CampaignState
@@ -382,9 +384,15 @@ def create_post(request):
     """
 
     business_user = BusinessUser.objects.get(auth_user=request.user)
-    campaign = campaign_module.create_campaign(request)
+    campaign, prospects = campaign_module.create_campaign(request)
     business_user.campaigns.add(campaign)
     business_user.save()
+    if not business_user.is_peaku():
+        prospect_module.send_mails(prospects)
+        messenger_sender.send(candidates=prospects,
+                              language_code='es',
+                              body_input='candidate_prospect')
+
     send_new_campaign_notification(business_user, request.LANGUAGE_CODE, campaign)
     PublicPost.add_to_public_post_queue(campaign)
 
@@ -402,11 +410,16 @@ def start_post(request):
 
     if signup_form.is_valid():
 
-        campaign = campaign_module.create_campaign(request)
+        campaign, prospects = campaign_module.create_campaign(request)
         business_user = first_sign_in(signup_form, campaign, request)
         business_user.campaigns.add(campaign)
         business_user.save()
         PublicPost.add_to_public_post_queue(campaign)
+        if not business_user.is_peaku():
+            prospect_module.send_mails(prospects)
+            messenger_sender.send(candidates=prospects,
+                                  language_code='es',
+                                  body_input='candidate_prospect')
 
         return redirect('tablero-de-control/{business_user_id}/{campaign_id}/applicants'.format(business_user_id=business_user.pk,
                                                                                                 campaign_id=campaign.pk))
