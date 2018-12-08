@@ -92,8 +92,8 @@ def send_pending_emails():
 
 if __name__ == '__main__':
     # TODO: add!!!
-    #with open('consumer.log', 'a') as f:
-    #    sys.stdout = h.Unbuffered(f)
-    print('sending emails...')
-    send_pending_emails()
-    print('finished sending emails...')
+    with open('consumer.log', 'a') as f:
+        sys.stdout = h.Unbuffered(f)
+        print('sending emails...')
+        send_pending_emails()
+        print('finished sending emails...')
