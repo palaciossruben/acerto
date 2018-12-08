@@ -7,9 +7,9 @@ from django.core.wsgi import get_wsgi_application
 
 # Environment can use the models as if inside the Django app
 if 'win' in sys.platform:
-    sys.path.insert(0, '\\'.join(os.getcwd().split('\\')[:-1]))
+    sys.path.insert(0, '\\'.join(os.getcwd().split('\\')[:-2]))
 else:
-    sys.path.insert(0, '/'.join(os.getcwd().split('/')[:-1]))
+    sys.path.insert(0, '/'.join(os.getcwd().split('/')[:-2]))
 
 # Environment can use the models as if inside the Django app
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
@@ -71,6 +71,7 @@ def send_pending_emails():
 
                 email.sent = True
                 email.save()
+                print('sent email "{}" to {}'.format(email.subject, an_object.email))
 
                 # Records sending email
                 if isinstance(an_object, Candidate):
@@ -80,5 +81,6 @@ def send_pending_emails():
 
 
 if __name__ == '__main__':
-
+    print('sending emails...')
     send_pending_emails()
+    print('finished sending emails...')
