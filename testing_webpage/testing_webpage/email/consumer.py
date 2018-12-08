@@ -10,9 +10,10 @@ if 'win' in sys.platform:
     sys.path.insert(0, '\\'.join(os.getcwd().split('\\')[:-1]))
 else:
     sys.path.insert(0, '/'.join(os.getcwd().split('/')[:-1]))
+print(sys.path)
 
 # Environment can use the models as if inside the Django app
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
 from testing_webpage.models import CandidatePendingEmail, CandidateEmailSent, BusinessUserEmailSent,\
