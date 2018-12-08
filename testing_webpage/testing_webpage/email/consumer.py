@@ -23,10 +23,11 @@ from beta_invite.util import email_sender
 from testing_webpage import settings
 from dashboard.models import Candidate
 from business.models import BusinessUser
+from subscribe import helper as h
 
 
 # The maximum number of mails that sends at once.
-MAX_NUMBER_OF_MAILS = 1  # TODO: change this later
+MAX_NUMBER_OF_MAILS = 1  # TODO: change to 10 or 20!!!
 TEST_EMAIL = 'juan@peaku.co'
 
 
@@ -83,6 +84,9 @@ def send_pending_emails():
 
 
 if __name__ == '__main__':
+    # TODO: add!!!
+    #with open('consumer.log', 'a') as f:
+    #    sys.stdout = h.Unbuffered(f)
     print('sending emails...')
     send_pending_emails()
     print('finished sending emails...')
