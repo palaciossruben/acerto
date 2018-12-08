@@ -97,5 +97,14 @@
       "code": "P",
       "is_rejected": false
     }
+  },
+  {
+    "model": "dashboard.state",
+    "pk": 12,
+    "fields":{
+      "name": "Accepted by client",
+      "code": "ABC",
+      "is_rejected": false
+    }
   }
 ]

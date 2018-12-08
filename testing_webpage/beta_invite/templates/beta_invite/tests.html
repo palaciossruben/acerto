@@ -38,7 +38,7 @@
                     {% elif question.type.code == 'OF' %}
                         <div class="format-div left">
                         {% trans "Your Answer" as text_placeholder %}
-                        <textarea name="test_{{ test.id }}_question_{{ question.id }}" placeholder="{{ text_placeholder }}"></textarea>
+                        <textarea name="test_{{ test.id }}_question_{{ question.id }}" placeholder="{{ text_placeholder }}" maxlength="1000"></textarea>
                         </div>
                     {% elif question.type.code == 'NI' %}
                         <div class="format-div left">
