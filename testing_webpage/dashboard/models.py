@@ -40,11 +40,11 @@ class State(models.Model):
 
     @staticmethod
     def get_recommended_state_codes():
-        return ['GTJ', 'STC']
+        return ['GTJ', 'STC', 'ABC']
 
     @staticmethod
     def get_relevant_state_codes():
-        return ['WFI', 'DI', 'GTJ', 'STC']
+        return ['WFI', 'DI', 'GTJ', 'STC', 'ABC']
 
     @staticmethod
     def get_applicant_state_codes():
