@@ -738,7 +738,7 @@ msgstr "Regístrate"
 #: .\testing_webpage\templates\no_header_base.html:32
 #: .\testing_webpage\templates\no_header_base.html:34
 msgid "Companies"
-msgstr "Portal Empresas"
+msgstr "Empresas"
 
 #: .\testing_webpage\templates\testing_webpage\index.html:6
 msgid "Empleos en Colombia | Ofertas de Trabajo. Buscar empleo"

@@ -6,6 +6,7 @@ from django.conf import settings
 from urllib.parse import urlencode, urlunparse, urlparse, parse_qsl, parse_qs
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.core.files.storage import FileSystemStorage
+from django.db.transaction import atomic
 from ipware.ip import get_ip
 import geoip2.database
 import inflection
@@ -603,3 +604,9 @@ def get_business_user_with_campaign(campaign, option):
             return BusinessUser.objects.filter(campaigns__id=campaign.pk).all()[0].company
     else:
         return None
+
+
+@atomic
+def bulk_save(objects):
+    for item in objects:
+        item.save()

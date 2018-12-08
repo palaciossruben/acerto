@@ -106,5 +106,14 @@
       "code": "ABC",
       "is_rejected": false
     }
+  },
+  {
+    "model": "dashboard.state",
+    "pk": 13,
+    "fields":{
+      "name": "Pre-Prospect",
+      "code": "PP",
+      "is_rejected": false
+    }
   }
 ]
