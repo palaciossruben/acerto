@@ -2,7 +2,14 @@
 This task runs sync and sends emails from a table.
 """
 import os
+import sys
 from django.core.wsgi import get_wsgi_application
+
+# Environment can use the models as if inside the Django app
+if 'win' in sys.platform:
+    sys.path.insert(0, '\\'.join(os.getcwd().split('\\')[:-1]))
+else:
+    sys.path.insert(0, '/'.join(os.getcwd().split('/')[:-1]))
 
 # Environment can use the models as if inside the Django app
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
