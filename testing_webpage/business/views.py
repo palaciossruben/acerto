@@ -614,10 +614,12 @@ def dashboard(request, business_user_id, campaign_id, state_name):
         applicants = common.get_application_candidates(campaign)
         campaign_evaluation = campaign.applicant_evaluation_last
         campaign_state_name = 'prospectos'
+
     elif business_state.name == 'relevantes':
         relevant = common.get_relevant_candidates(campaign)
         campaign_evaluation = campaign.relevant_evaluation_last
         campaign_state_name = 'pre-seleccionados'
+
     else:
         recommended = common.get_recommended_candidates(campaign)
         campaign_evaluation = campaign.recommended_evaluation_last

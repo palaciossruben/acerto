@@ -39,28 +39,52 @@ class State(models.Model):
     # IMPORTANT: These states must speak perfectly with business_states.json, must be homologous
 
     @staticmethod
+    def get_recommended_state_codes():
+        return ['GTJ', 'STC']
+
+    @staticmethod
+    def get_relevant_state_codes():
+        return ['WFI', 'DI', 'GTJ', 'STC']
+
+    @staticmethod
+    def get_applicant_state_codes():
+        return ['P', 'BL', 'RBC', 'SR', 'FT', 'ROT', 'ROI']
+
+    @staticmethod
+    def get_rejected_state_codes():
+        return ['ROI', 'RBC', 'SR', 'FT', 'ROT']
+
+    @staticmethod
+    def get_rejected_by_human_state_codes():
+        return ['ROI', 'RBC', 'SR']
+
+    @staticmethod
+    def get_human_intervention_state_codes():
+        return ['DI']
+
+    @staticmethod
     def get_recommended_states():
-        return list(State.objects.filter(code__in=['GTJ', 'STC']))
+        return list(State.objects.filter(code__in=State.get_recommended_state_codes()))
 
     @staticmethod
     def get_relevant_states():
-        return list(State.objects.filter(code__in=['WFI', 'DI', 'GTJ', 'STC']))
+        return list(State.objects.filter(code__in=State.get_relevant_state_codes()))
 
     @staticmethod
     def get_applicant_states(): 
-        return list(State.objects.filter(code__in=['P', 'BL', 'RBC', 'SR', 'FT', 'ROT', 'ROI']))
+        return list(State.objects.filter(code__in=State.get_applicant_state_codes()))
 
     @staticmethod
     def get_rejected_states():
-        return list(State.objects.filter(code__in=['ROI', 'RBC', 'SR', 'FT', 'ROT']))
+        return list(State.objects.filter(code__in=State.get_rejected_state_codes()))
 
     @staticmethod
     def get_rejected_by_human_states():
-        return list(State.objects.filter(code__in=['ROI', 'RBC', 'SR']))
+        return list(State.objects.filter(code__in=State.get_rejected_by_human_state_codes()))
 
     @staticmethod
     def get_human_intervention_states():
-        return list(State.objects.filter(code__in=['DI'])) +\
+        return list(State.objects.filter(code__in=State.get_human_intervention_state_codes())) +\
                State.get_recommended_states() +\
                State.get_rejected_by_human_states()
 
@@ -169,6 +193,7 @@ class Candidate(models.Model):
     rating = models.IntegerField(null=True)
     mean_scores = models.ManyToManyField(Score)
     state_events = models.ManyToManyField(StateEvent)
+    last_evaluation = models.ForeignKey(Evaluation, null=True, related_name='last_evaluation')
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -224,10 +249,13 @@ class Candidate(models.Model):
         self.save()
 
     def get_last_evaluation(self):
-        try:
-            return self.evaluations.latest('created_at')
-        except models.ObjectDoesNotExist:
-            return None
+        if self.last_evaluation is None:
+            try:
+                return self.evaluations.latest('created_at')
+            except models.ObjectDoesNotExist:
+                return None
+        else:
+            return self.last_evaluation
 
     def get_last_score(self):
 
