@@ -7,12 +7,11 @@ import platform
 from django.core.wsgi import get_wsgi_application
 
 # Environment can use the models as if inside the Django app
-print(sys.path)
 dir_separator = '\\' if 'Windows' == platform.system() else '/'
-path_to_add = dir_separator.join(os.getcwd().split(dir_separator)[:-2])
-print(path_to_add)
+# how deep is this file from the project working directory?
+dir_depth = len(''.join(os.getcwd().split('testing_webpage/', 1)[1]).split(dir_separator))
+path_to_add = dir_separator.join(os.getcwd().split(dir_separator)[:-dir_depth])
 sys.path.insert(0, path_to_add)
-print(sys.path)
 
 # Environment can use the models as if inside the Django app
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
