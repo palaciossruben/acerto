@@ -3,13 +3,15 @@ This task runs sync and sends emails from a table.
 """
 import os
 import sys
+import platform
 from django.core.wsgi import get_wsgi_application
 
 # Environment can use the models as if inside the Django app
-if 'win' in sys.platform:
-    sys.path.insert(0, '\\'.join(os.getcwd().split('\\')[:-1]))
-else:
-    sys.path.insert(0, '/'.join(os.getcwd().split('/')[:-1]))
+print(sys.path)
+dir_separator = '\\' if 'Windows' == platform.system() else '/'
+path_to_add = dir_separator.join(os.getcwd().split(dir_separator)[:-2])
+print(path_to_add)
+sys.path.insert(0, path_to_add)
 print(sys.path)
 
 # Environment can use the models as if inside the Django app
