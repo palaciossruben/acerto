@@ -72,10 +72,12 @@ class BusinessUser(models.Model):
         :param user: Auth User
         :return: Business User or None
         """
-        try:
-            return BusinessUser.objects.get(auth_user=user)
-        except ObjectDoesNotExist:
-            return None
+        if user and user.id:
+            try:
+                return BusinessUser.objects.get(auth_user=user)
+            except ObjectDoesNotExist:
+                return None
+        return None
 
     def is_peaku(self):
         return 'peaku' in self.email
