@@ -1,6 +1,17 @@
 """
 For this to work you have to install pdfkit and wkhtmltopdf see:
 https://github.com/JazzCore/python-pdfkit
+
+VERY IMPORTANT:
+IN LINUX a bug had to be solved by patching the pdfkit library:
+Had to install xvfb:
+sudo apt-get install xvfb
+
+And then add 'xvfb-run' infront of the wkhtmltopdf command inside the library done by adding:
+        yield 'xvfb-run'
+in line 83 of pdfkit.py internal library...
+see:
+https://unix.stackexchange.com/questions/192642/wkhtmltopdf-qxcbconnection-could-not-connect-to-display/223694#223694
 """
 
 import os
