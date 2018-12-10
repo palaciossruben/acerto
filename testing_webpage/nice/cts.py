@@ -1,0 +1,1 @@
+ELON_CV = 'nice/elon_cv.html'

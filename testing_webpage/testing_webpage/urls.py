@@ -24,15 +24,18 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
-    url(r'^trabajos$', views.jobs, name='jobs'),
     url('^', include('django.contrib.auth.urls')),
     url(r'^servicio[-_]de[-_]empleo/', include('beta_invite.urls')),
     url(r'^seleccion[-_]de[-_]personal/', include('business.urls')),
     url(r'^dashboard/', include('dashboard.urls')),
     url(r'^api/', include('api.urls')),
-    url(r'^admin/', admin.site.urls),
+    url(r'^api/', include('api.urls')),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
+    url(r'^cv/', include('nice.urls')),
+
+    url(r'^$', views.index, name='index'),
+    url(r'^trabajos$', views.jobs, name='jobs'),
+    url(r'^admin/', admin.site.urls),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^my[-_]logout$', views.my_logout, name='logout'),
     url(r'^home[-_]test$', views.home, name='home'),
