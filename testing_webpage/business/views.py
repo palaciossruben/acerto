@@ -356,7 +356,7 @@ def start(request):
                                                  'cities': common.get_cities(),
                                                  'default_city': city,
                                                  'requirements': Requirement.objects.all(),
-                                                 'tests': Test.objects.filter(public=True)})
+                                                 'tests': Test.objects.filter(public=True).order_by('name_es')})
 
 
 def send_new_campaign_notification(business_user, language_code, campaign):
