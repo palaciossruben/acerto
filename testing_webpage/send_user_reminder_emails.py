@@ -10,7 +10,6 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
-from beta_invite import interview_module
 from beta_invite.util import email_sender
 from dashboard.models import Candidate
 from beta_invite.models import Campaign, EmailType

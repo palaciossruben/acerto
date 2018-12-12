@@ -1,5 +1,5 @@
 from testing_webpage import constants as cts
-from beta_invite.models import Campaign, WorkAreaSegment
+from beta_invite.models import Campaign
 from business.models import BusinessUser
 from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
@@ -16,6 +16,15 @@ def index(request):
     """
     will render the intro
     """
+
+    # TODO: redirects to home of each candidate, but is not working well!!!
+    """
+    if BusinessUser.get_business_user(request.user):
+        return redirect('business:home')
+    elif User.get_user_from_request(request):  # it its a candidate user
+        return redirect('jobs')
+    """
+
     return render(request, cts.INDEX_VIEW_PATH)
 
 

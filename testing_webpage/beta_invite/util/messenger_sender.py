@@ -1,6 +1,7 @@
 """
 Sends messages.
 """
+import common
 from beta_invite.util import common_senders
 from dashboard.models import Message
 
@@ -22,13 +23,15 @@ def send(candidates, language_code, body_input, with_localization=True, body_is_
 
     body_input, candidates = common_senders.process_inputs(with_localization, language_code, body_input, candidates)
 
-    for candidate in candidates:
+    # More obscurity for very needed speed... sorry
+    messages = Message.objects.bulk_create([Message(candidate=c,
+                                                    text=common_senders.get_body(body_input,
+                                                                                 body_is_filename=body_is_filename,
+                                                                                 path=common_senders.get_message_path())
+                                                    .format(**common_senders.get_params_with_candidate(c,
+                                                                                                       language_code,
+                                                                                                       override_dict)),
+                                                    filename=original_body_input if body_is_filename else None)
+                                            for c in candidates])
 
-        params = common_senders.get_params_with_candidate(candidate, language_code, override_dict)
-        body = common_senders.get_body(body_input,
-                                       body_is_filename=body_is_filename,
-                                       path=common_senders.get_message_path())
-        m = Message(candidate=candidate, text=body.format(**params))
-        if body_is_filename:
-            m.filename = original_body_input
-        m.save()
+    common.bulk_save(messages)

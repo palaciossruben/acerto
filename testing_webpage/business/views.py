@@ -25,7 +25,9 @@ from django.views.decorators.csrf import csrf_exempt
 import common
 import business
 import beta_invite
-from business import search_module
+
+from beta_invite.util import messenger_sender
+from business import search_module, prospect_module
 from beta_invite.util import email_sender
 from business import constants as cts
 from beta_invite.models import User, WorkArea, EmailType, Campaign, Test, Price, CampaignState
@@ -354,7 +356,7 @@ def start(request):
                                                  'cities': common.get_cities(),
                                                  'default_city': city,
                                                  'requirements': Requirement.objects.all(),
-                                                 'tests': Test.objects.filter(public=True)})
+                                                 'tests': Test.objects.filter(public=True).order_by('name_es')})
 
 
 def send_new_campaign_notification(business_user, language_code, campaign):
@@ -382,9 +384,15 @@ def create_post(request):
     """
 
     business_user = BusinessUser.objects.get(auth_user=request.user)
-    campaign = campaign_module.create_campaign(request)
+    campaign, prospects = campaign_module.create_campaign(request)
     business_user.campaigns.add(campaign)
     business_user.save()
+    if not business_user.is_peaku():
+        prospect_module.send_mails(prospects)
+        messenger_sender.send(candidates=prospects,
+                              language_code='es',
+                              body_input='candidate_prospect')
+
     send_new_campaign_notification(business_user, request.LANGUAGE_CODE, campaign)
     PublicPost.add_to_public_post_queue(campaign)
 
@@ -402,11 +410,16 @@ def start_post(request):
 
     if signup_form.is_valid():
 
-        campaign = campaign_module.create_campaign(request)
+        campaign, prospects = campaign_module.create_campaign(request)
         business_user = first_sign_in(signup_form, campaign, request)
         business_user.campaigns.add(campaign)
         business_user.save()
         PublicPost.add_to_public_post_queue(campaign)
+        if not business_user.is_peaku():
+            prospect_module.send_mails(prospects)
+            messenger_sender.send(candidates=prospects,
+                                  language_code='es',
+                                  body_input='candidate_prospect')
 
         return redirect('tablero-de-control/{business_user_id}/{campaign_id}/applicants'.format(business_user_id=business_user.pk,
                                                                                                 campaign_id=campaign.pk))
@@ -566,7 +579,7 @@ def candidate_profile(request, pk):
 def summary(request, campaign_id, business_user=None):
 
     campaign = Campaign.objects.get(pk=campaign_id)
-    common.calculate_evaluation_summaries(campaign)
+    common.calculate_evaluation_summaries_with_caching(campaign)
 
     if business_user is None:
         business_user = get_business_user(request)
@@ -577,10 +590,10 @@ def summary(request, campaign_id, business_user=None):
 
     return render(request, cts.SUMMARY_VIEW_PATH, {'business_user': business_user,
                                                    'campaign': campaign,
-                                                   'num_total': len(common.get_application_candidates(campaign))+len(common.get_relevant_candidates(campaign)),
-                                                   'num_applicants': len(common.get_application_candidates(campaign)),
-                                                   'num_relevant': len(common.get_relevant_candidates(campaign)),
-                                                   'num_recommended': len(common.get_recommended_candidates(campaign)),
+                                                   'num_total': common.get_application_candidates_count(campaign) + common.get_relevant_candidates_count(campaign),
+                                                   'num_applicants': common.get_application_candidates_count(campaign),
+                                                   'num_relevant': common.get_relevant_candidates_count(campaign),
+                                                   'num_recommended': common.get_recommended_candidates_count(campaign),
                                                    'created_at': created_at})
 
 
@@ -604,18 +617,24 @@ def dashboard(request, business_user_id, campaign_id, state_name):
         return redirect('business:login')
 
     dashboard_module.send_email_from_dashboard(request, campaign)
-    common.calculate_evaluation_summaries(campaign)
-    applicants = common.get_application_candidates(campaign)
-    relevant = common.get_relevant_candidates(campaign)
-    recommended = common.get_recommended_candidates(campaign)
+    common.calculate_evaluation_summaries_with_caching(campaign)
+
+    applicants = []
+    relevant = []
+    recommended = []
 
     if business_state.name == 'aplicantes':
+        applicants = common.get_application_candidates(campaign)
         campaign_evaluation = campaign.applicant_evaluation_last
         campaign_state_name = 'prospectos'
+
     elif business_state.name == 'relevantes':
+        relevant = common.get_relevant_candidates(campaign)
         campaign_evaluation = campaign.relevant_evaluation_last
         campaign_state_name = 'pre-seleccionados'
+
     else:
+        recommended = common.get_recommended_candidates(campaign)
         campaign_evaluation = campaign.recommended_evaluation_last
         campaign_state_name = 'seleccionados'
 

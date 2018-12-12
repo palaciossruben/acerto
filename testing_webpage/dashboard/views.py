@@ -666,7 +666,7 @@ def send_new_contacts(request):
     """
 
     add_backlog_messages('candidate_backlog')
-    add_prospect_messages('candidate_prospect')
+    #add_prospect_messages('candidate_prospect')
 
     leads = get_leads()
     users = get_candidate_users()

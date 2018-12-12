@@ -42,6 +42,10 @@ def get_month_format(number):
         return str(number)
 
 
+def get_prospect_states():
+    return list(State.objects.filter(code__in=['P', 'PP']))
+
+
 def candidate_count(request):
     # Chart data is passed to the `dataSource` parameter, as dict, in the form of key-value pairs.
     data_source = dict()
@@ -51,7 +55,8 @@ def candidate_count(request):
     data_source['data'] = []
 
     columns = ['id', 'created_at']
-    data = pd.DataFrame(list(Candidate.objects.filter(~Q(state=State.objects.get(code='P'), removed=False))
+    data = pd.DataFrame(list(Candidate.objects.filter(~Q(state__in=get_prospect_states(),
+                                                         removed=False))
                              .values_list(*columns)), columns=columns)
 
     data['month'] = data['created_at'].apply(lambda date: '{y}-{m}'.format(y=date.year,
@@ -173,7 +178,7 @@ def get_number_of_second_candidates():
     """
 
     first_candidate_columns = ['id', 'user_id']
-    values = Candidate.objects.filter(~Q(state=State.objects.get(code='P')),
+    values = Candidate.objects.filter(~Q(state__in=get_prospect_states()),
                                       removed=False).values_list(*first_candidate_columns)
 
     candidates = pd.DataFrame(list(values), columns=first_candidate_columns)
@@ -182,7 +187,7 @@ def get_number_of_second_candidates():
     first_ids = pd.DataFrame(gb)['id']
 
     columns = ['id', 'created_at']
-    data = pd.DataFrame(list(Candidate.objects.filter(~Q(state=State.objects.get(code='P')),
+    data = pd.DataFrame(list(Candidate.objects.filter(~Q(state__in=get_prospect_states()),
                                                       ~Q(pk__in=first_ids),
                                                       removed=False).values_list(
         *columns)), columns=columns)
@@ -209,7 +214,7 @@ def get_number_of_unique_users():
     """
 
     first_candidate_columns = ['user_id', 'user__created_at']
-    data = pd.DataFrame(list(Candidate.objects.filter(~Q(state=State.objects.get(code='P')), removed=False)
+    data = pd.DataFrame(list(Candidate.objects.filter(~Q(state__in=get_prospect_states()), removed=False)
                              .values_list(*first_candidate_columns)), columns=first_candidate_columns)
 
     data['month'] = data['user__created_at'].apply(lambda date: '{y}-{m}'.format(y=date.year,

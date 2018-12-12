@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 import common
 from beta_invite.models import Bullet, Campaign, City, Test, Question, QuestionType, Answer, TestType
 from business import prospect_module
+from beta_invite.util import messenger_sender
 
 
 def update_bullet_attr(campaign, dict_id, key_bullet_dict, value, attribute_name):
@@ -141,10 +142,9 @@ def create_campaign(request):
     add_default_tests(campaign)
     add_user_tests(campaign, request)
 
-    candidate_prospects = prospect_module.get_candidates(campaign)
-    prospect_module.send_mails(candidate_prospects)
+    prospects = prospect_module.get_candidates(campaign)
 
-    return campaign
+    return campaign, prospects
 
 
 def get_city_question(campaign):

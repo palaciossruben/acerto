@@ -2,7 +2,16 @@
 This task runs sync and sends emails from a table.
 """
 import os
+import sys
+import platform
 from django.core.wsgi import get_wsgi_application
+
+# Environment can use the models as if inside the Django app
+dir_separator = '\\' if 'Windows' == platform.system() else '/'
+# how deep is this file from the project working directory?
+dir_depth = len(''.join(os.getcwd().split('testing_webpage/', 1)[1]).split(dir_separator))
+path_to_add = dir_separator.join(os.getcwd().split(dir_separator)[:-dir_depth])
+sys.path.insert(0, path_to_add)
 
 # Environment can use the models as if inside the Django app
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
@@ -14,10 +23,11 @@ from beta_invite.util import email_sender
 from testing_webpage import settings
 from dashboard.models import Candidate
 from business.models import BusinessUser
+from subscribe import helper as h
 
 
 # The maximum number of mails that sends at once.
-MAX_NUMBER_OF_MAILS = 20
+MAX_NUMBER_OF_MAILS = 10
 TEST_EMAIL = 'juan@peaku.co'
 
 
@@ -31,6 +41,13 @@ def send_condition(an_object, email):
            not CandidateEmailSent.objects.filter(candidate=an_object, email_type=email.email_type) or \
            isinstance(an_object, BusinessUser) and \
            not BusinessUserEmailSent.objects.filter(business_user=an_object, email_type=email.email_type)
+
+
+def get_email(an_object):
+    if isinstance(an_object, Candidate):
+        return an_object.user.email
+    else:
+        return an_object.email
 
 
 def send_pending_emails():
@@ -64,6 +81,7 @@ def send_pending_emails():
 
                 email.sent = True
                 email.save()
+                print('sent email "{}" to {}'.format(email.subject, get_email(an_object)))
 
                 # Records sending email
                 if isinstance(an_object, Candidate):
@@ -73,4 +91,9 @@ def send_pending_emails():
 
 
 if __name__ == '__main__':
-    send_pending_emails()
+
+    with open('consumer.log', 'a') as f:
+        sys.stdout = h.Unbuffered(f)
+        print('sending emails...')
+        send_pending_emails()
+        print('finished sending emails...')

@@ -1,9 +1,7 @@
 """
 Test related methods.
 """
-import re
 from django.db.models import F
-import wave
 import os
 import audioop
 
@@ -226,6 +224,7 @@ def add_evaluation_to_candidate(candidate, evaluation):
     if candidate:
         candidate.evaluations.add(evaluation)
         candidate.evaluation_summary = EvaluationSummary.create(candidate.evaluations.all())
+        candidate.last_evaluation = evaluation
         candidate.save()
 
 

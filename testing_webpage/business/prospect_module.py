@@ -1,20 +1,21 @@
 
 import urllib.parse
-from raven import Client
 
-from django.db.models import Q
 import requests
 from decouple import config
+from django.db.models import Q
+from raven import Client
 
 import common
-
-from dashboard.models import State
 from beta_invite.models import EmailType, User, SearchLog
-from testing_webpage.models import CandidatePendingEmail
 from business import search_module
+from common import bulk_save
 from dashboard.models import Candidate
+from dashboard.models import State
+from testing_webpage.models import CandidatePendingEmail
 
 MAX_MATCHES = 40
+MAX_MORE_USERS = 200
 SENTRY_CLIENT = Client(config('sentry_dsn'))
 
 
@@ -87,7 +88,7 @@ def simple_filter(campaign, users):
     return [c.user for c in candidates if not common.user_has_been_recommended(c.user)]
 
 
-def get_users_from_es(search_array, campaign):
+def get_user_ids_from_es(search_array):
     """
     es=elastic_search
     :param search_array: array of search words
@@ -132,16 +133,16 @@ def get_users_from_es(search_array, campaign):
             #    },
             #},
         }
-        print(my_json)
+        #print(my_json)
 
         r = requests.get(url, json=my_json)
-        print(r.status_code)
-        print(r.json())
+        #print(r.status_code)
+        #print(r.json())
 
         #r = requests.post(url, data=data)
 
         if str(r.status_code)[0] == '2':
-            return User.objects.filter(pk__in=[u['_id'] for u in r.json()['hits']['hits']]).all()
+            return [u['_id'] for u in r.json()['hits']['hits']]
         else:
             return []
     except Exception as e:
@@ -183,7 +184,13 @@ def get_users_from_tests(campaign):
     return [c.user for c in prospects]
 
 
-def get_top_users(campaign):
+def get_top_users_with_log(campaign):
+    """
+    This function is slow but has a amazing log of what is happening with the filter. Very helpful to understand
+    prospects, but extremly slow...
+    :param campaign:
+    :return:
+    """
 
     # TODO: this feature only supports Spanish.
     search_text = campaign.get_search_text()
@@ -193,20 +200,20 @@ def get_top_users(campaign):
     search_log = SearchLog()
     search_log.save()
     search_log.campaign = campaign
-    users = []
 
     # Tests
     #users_tests = get_users_from_tests(campaign)
     #search_log.users_from_tests.add(*users_tests)
     #users = users_tests
+    users = []
 
-    # Search
+    # Traditional Search: hard to scale
     #users_search = search_module.get_matching_users(search_array)
     #search_log.users_from_search.add(*users_search)
     #users += users_search
 
     # ES
-    users_es = get_users_from_es(search_array, campaign)
+    users_es = User.objects.filter(pk__in=get_user_ids_from_es(search_array))
     search_log.users_from_es.add(*users_es)
     users += users_es
 
@@ -216,13 +223,15 @@ def get_top_users(campaign):
     # FILTERS
     candidates = [Candidate(user=u, campaign=campaign, pk=1) for u in users]
 
+    # CITY FILTER
     candidates = [c for c in candidates if non_null_equal(c.user.city, c.campaign.city)]
     search_log.after_city_filter.add(*[c.user for c in candidates])
 
-    # Work Area Segment
-    candidates = [c for c in candidates if non_null_equal(c.user.get_work_area_segment(), c.campaign.get_work_area_segment())]
+    # WORK AREA SEGMENT FILTER
+    candidates = [c for c in candidates if non_null_equal(c.user.get_work_area_segment(), campaign.get_work_area_segment())]
     search_log.after_work_area_filter.add(*[c.user for c in candidates])
 
+    # SALARY FILTER
     candidates = [c for c in candidates if non_null_lte(campaign.get_very_low_salary(), c.user.salary) and
                   non_null_gte(campaign.get_very_high_salary(), c.user.salary)]
     search_log.after_salary_filter.add(*[c.user for c in candidates])
@@ -244,30 +253,85 @@ def get_top_users(campaign):
     return users
 
 
+def get_top_users_fast(campaign):
+    """
+    This function is fast but is a black box as it has no log of each filter (see: get_top_users_with_log()).
+    This is for production and speed.
+    :param campaign:
+    :return:
+    """
+
+    # TODO: this feature only supports Spanish.
+    search_text = campaign.get_search_text()
+    search_array = search_module.get_word_array_lower_case_and_no_accents(search_text)
+
+    # Gets the newest fit users, as those are likely to still be looking for a job...
+    users = User.objects.filter(~Q(city_id=None),
+                                ~Q(work_area=None),
+                                ~Q(salary=None),
+                                city_id=campaign.city_id,
+                                salary__gte=campaign.get_very_low_salary(),
+                                salary__lte=campaign.get_very_high_salary(),
+                                work_area__segment_id=campaign.get_work_area_segment().id,
+                                pk__in=get_user_ids_from_es(search_array),
+                                ).order_by('-id')[:MAX_MATCHES]
+
+    users = [u for u in users if not common.user_has_been_recommended(u)]
+
+    return users
+
+
+def add_candidates_to_campaign(campaign, users, state_code):
+
+    state = State.objects.get(code=state_code)
+    candidates = Candidate.objects.bulk_create([Candidate(campaign=campaign, user=u, state=state) for u in users])
+    bulk_save(candidates)
+    return candidates
+
+
+    #candidates = []
+    #for user in top_users:
+
+        # only users who are not on the campaign will be added to the mail
+        #if campaign.id not in common.get_all_campaign_ids(user):
+    #    candidate = Candidate(campaign=campaign, user=user, state=State.objects.get(code='P'))
+    #    candidates.append(candidate)
+    #    candidate.save()
+
+
+
+def get_more_users(campaign):
+
+    # Gets the newest fit users, as those are likely to still be looking for a job...
+    users = User.objects.filter(~Q(city_id=None),
+                                ~Q(work_area=None),
+                                ~Q(salary=None),
+                                city_id=campaign.city_id,
+                                salary__gte=campaign.get_very_low_salary(),
+                                salary__lte=campaign.get_very_high_salary(),
+                                work_area__segment_id=campaign.get_work_area_segment().id,
+                                ).order_by('-id')[:MAX_MORE_USERS]
+
+    return {u for u in users if not common.user_has_been_recommended(u)}
+
+
 def get_candidates(campaign):
     """
     Args:
         campaign: obj
-    Returns: Creates a list of prospect users on the DB. And sends all ot them an email.
+    Returns: Creates a list of unique prospect users. The top ones are added to the DB and shown as prospects,
+    the other ones are only invited to apply
     """
 
-    top_users = get_top_users(campaign)
+    # Top candidates have the best match will be added to the campaign
+    top_users = get_top_users_fast(campaign)
+    top_candidates = add_candidates_to_campaign(campaign, top_users, 'P')
 
-    candidates = []
-    for user in top_users:
+    # other candidates will receive a cordial invitation only...
+    more_users = get_more_users(campaign).difference({t for t in top_users})
+    more_candidates = add_candidates_to_campaign(campaign, more_users, 'PP')
 
-        # only users who are not on the campaign will be added to the mail
-        if campaign.id not in common.get_all_campaign_ids(user):
-
-            candidate = Candidate(campaign=campaign, user=user, state=State.objects.get(code='P'))
-
-            # TODO: adds tests
-            #candidate.pass_tests()
-
-            candidates.append(candidate)
-            candidate.save()
-
-    return candidates
+    return top_candidates + more_candidates
 
 
 def remove_html(s):

@@ -1,0 +1,107 @@
+{% load static %}
+{% load i18n %}
+{% load app_filters %}
+<script>
+    $(document).ready(function() {
+        set_circle_color({{ candidate.last_evaluation.cognitive_score|int_rounding }}, "{{ candidate.pk }}-cognitive-id");
+        set_circle_color({{ candidate.last_evaluation.technical_score|int_rounding }}, "{{ candidate.pk }}-technical-id");
+        set_circle_color({{ candidate.last_evaluation.requirements_score|int_rounding }}, "{{ candidate.pk }}-requirement-id");
+        set_circle_color({{ candidate.last_evaluation.motivation_score|int_rounding }}, "{{ candidate.pk }}-motivation-id");
+        set_circle_color({{ candidate.last_evaluation.cultural_fit_score|int_rounding }}, "{{ candidate.pk }}-cultural-id");
+    });
+</script>
+
+<a href="/seleccion_de_personal/perfil_del_candidato/{{ candidate.id }}" style="text-decoration:none">
+<div class="row candidate-info-div">
+    <div class="favorite" id="favorite-{{ candidate.pk }}"><span class="crown">&#x1F451;</span></div>
+    <div class="email-checkbox">
+        <input type="checkbox" name="{{ candidate.id }}_checkbox">
+    </div>
+    <div class="col-lg-1 col-xs-12 candidate-avatar-column">
+        {% if candidate.user.photo_url != '#' %}
+        <div class="circle candidate-circle" style="background-image: url({% static candidate.user.photo_url %});"></div>
+        {% elif candidate.user.gender.sex == 2 %}
+        <div class="circle candidate-circle female-avatar"></div>
+        {% else %}
+        <div class="circle candidate-circle male-avatar"></div>
+        {% endif %}
+    </div>
+    <div class="col-lg-2 col-xs-12">
+        <p class="name">
+            <strong>{{ candidate.user.name }}</strong>
+        </p>
+        {% if candidate.user.profession.name_es %}
+            <p class="profession">{{ candidate.user.profession.name_es }}</p>
+        {% endif %}
+
+        {% if candidate.user.city.name and candidate.user.city.name != "not available" %}
+            <p class="city">{{ candidate.user.city.name }}, {{ candidate.user.country.name }}</p>
+        {% endif %}
+
+        {% if candidate.user.work_area.name_es %}
+            <p class="work-area">{{ candidate.user.work_area.name_es }}</p>
+        {% endif %}
+    </div>
+    <div class="col-lg-1 separator-div">
+        <div class="separator"></div>
+    </div>
+    {% if candidate.user.profile %}
+        <div class="col-lg-4 col-xs-12 profile">
+            <p>{{ candidate.user.profile }}</p>
+        </div>
+    {% elif candidate.user.get_short_curriculum %}
+        <div class="col-lg-4 col-xs-12 profile">
+            <p class="no-profile">{{ candidate.user.get_short_curriculum }}</p>
+        </div>
+    {% else %}
+        <div class="col-lg-4 col-xs-12 profile">
+            <p class="no-profile">Sin descripción</p>
+        </div>
+    {% endif %}
+    <div class="col-lg-4 col-xs-12 condoms-row">
+        <div class="row">
+
+            {% if candidate.last_evaluation.cognitive_score >= 0 %}
+                <div class="test-name small">
+                    Capacidad cognitiva
+                    <div id="{{ candidate.pk }}-cognitive-id" class="fill small-fill">
+                        {{ candidate.last_evaluation.cognitive_score|print_score }}
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if candidate.last_evaluation.technical_score >= 0 %}
+                <div class="test-name small">
+                    Conocimiento técnico
+                    <div id="{{ candidate.pk }}-technical-id" class="fill small-fill">
+                        {{ candidate.last_evaluation.technical_score|print_score }}
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if candidate.last_evaluation.requirements_score >= 0 %}
+                <div class="test-name small">
+                    Requisitos
+                    <div id="{{ candidate.pk }}-requirement-id" class="fill small-fill">
+                        {{ candidate.last_evaluation.requirements_score|print_score }}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</a>
+<!--
+<div class="like-selection-div">
+<form method="post" class="like-dislike" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="button" class="like" id="like-{{ candidate.pk }}" onclick="change_state({'state_code':'STC', 'candidate_id':{{ candidate.pk }}})" value="&#x2714;">
+</form>
+
+<form method="post" class="like-dislike" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="button" class="dislike" id="dislike-{{ candidate.pk }}" onclick="change_state({'state_code':'RBC', 'candidate_id':{{ candidate.pk }}})" value="&#x274C;">
+</form>
+</div>
+-->
+<input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}"/>

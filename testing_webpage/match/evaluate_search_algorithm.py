@@ -103,7 +103,7 @@ def get_search_score():
 
     for campaign in campaigns:
 
-        top_users = prospect_module.get_top_users(campaign)
+        top_users = prospect_module.get_top_users_with_log(campaign)
         candidates = candidates_from_users(top_users, campaign)
         print(candidates)
 

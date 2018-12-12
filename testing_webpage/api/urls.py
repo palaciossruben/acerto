@@ -9,6 +9,8 @@ urlpatterns = [
     url(r'^add[-_]messages$', views.add_messages, name='add_messages'),
     url(r'^save[-_]leads$', views.save_leads, name='save_leads'),
     url(r'^get[-_]leads[-_]to[-_]filter$', views.get_leads_to_filter, name='get_leads_to_filter'),
+    url(r'^get[-_]domains[-_]to[-_]filter$', views.get_domains_to_filter, name='get_domains_to_filter'),
+
     # API v1
     url(r'^v1/register$', views.register, name='register'),
     url(r'^v1/get[-_]work[-_]areas', views.get_work_areas, name='get_work_areas'),

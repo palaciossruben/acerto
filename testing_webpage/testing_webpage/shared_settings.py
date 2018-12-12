@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'business.apps.BusinessConfig',
     'dashboard.apps.DashboardConfig',
     'api.apps.ApiConfig',
+    'nice.apps.NiceConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

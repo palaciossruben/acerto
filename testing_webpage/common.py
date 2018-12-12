@@ -6,10 +6,14 @@ from django.conf import settings
 from urllib.parse import urlencode, urlunparse, urlparse, parse_qsl, parse_qs
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.core.files.storage import FileSystemStorage
+from django.db.transaction import atomic
 from ipware.ip import get_ip
 import geoip2.database
 import inflection
 from decouple import config
+from datetime import datetime, timedelta
+from django.db.models import F
+
 
 from beta_invite.apps import ip_country_reader, ip_city_reader
 from beta_invite.models import User, Campaign, Country, City, Profession, Education, EvaluationSummary, WorkArea, Gender
@@ -444,32 +448,61 @@ def user_has_been_recommended(user):
     Returns boolean indicating if user already has a job.
     """
     candidates = Candidate.objects.filter(user=user,
-                                          state__code__in=State.get_recommended_states())
+                                          state__code__in=State.get_recommended_state_codes())
     return candidates.exists()
 
 
-def sort_candidates_by_tests(candidates):
-    return sorted(candidates, key=lambda c: c.evaluation_summary.final_score if c.evaluation_summary and c.evaluation_summary.final_score else -1, reverse=True)
-
-
 def get_recommended_candidates(campaign):
-    candidates = Candidate.objects.filter(campaign=campaign, state__in=State.get_recommended_states(), removed=False)
-    return sort_candidates_by_tests(candidates)
+    return Candidate.objects.filter(campaign=campaign,
+                                    state__code__in=State.get_recommended_state_codes(),
+                                    removed=False)\
+        .order_by(F('evaluation_summary__final_score').desc(nulls_last=True))
 
 
 def get_relevant_candidates(campaign):
-    candidates = Candidate.objects.filter(campaign=campaign, state__in=State.get_relevant_states(), removed=False)
+    candidates = Candidate.objects.filter(campaign=campaign,
+                                          state__code__in=State.get_relevant_state_codes(),
+                                          removed=False)
     return sorted(candidates, key=lambda c: c.evaluation_summary.final_score + (c.state.code == 'STC')*100 if c.evaluation_summary and c.evaluation_summary.final_score else -1, reverse=True)
 
 
 def get_application_candidates(campaign):
-    candidates = Candidate.objects.filter(campaign=campaign, state__in=State.get_applicant_states(), removed=False)
-    return sort_candidates_by_tests(candidates)
+    return Candidate.objects.filter(campaign=campaign,
+                                    state__code__in=State.get_applicant_state_codes(),
+                                    removed=False)\
+        .order_by(F('evaluation_summary__final_score').desc(nulls_last=True))
 
 
 def get_rejected_candidates(campaign):
-    candidates = Candidate.objects.filter(campaign=campaign, state__in=State.get_rejected_states(), removed=False)
-    return sort_candidates_by_tests(candidates)
+    return Candidate.objects.filter(campaign=campaign,
+                                    state__code__in=State.get_rejected_state_codes(),
+                                    removed=False)\
+        .order_by(F('evaluation_summary__final_score').desc(nulls_last=True))
+
+
+# This methods are for the sake of speed!!!
+def get_relevant_candidates_count(campaign):
+    return Candidate.objects.filter(campaign=campaign,
+                                    state__code__in=State.get_relevant_state_codes(),
+                                    removed=False).count()
+
+
+def get_application_candidates_count(campaign):
+    return Candidate.objects.filter(campaign=campaign,
+                                    state__code__in=State.get_applicant_state_codes(),
+                                    removed=False).count()
+
+
+def get_rejected_candidate_count(campaign):
+    return Candidate.objects.filter(campaign=campaign,
+                                    state__code__in=State.get_rejected_state_codes(),
+                                    removed=False).count()
+
+
+def get_recommended_candidates_count(campaign):
+    return Candidate.objects.filter(campaign=campaign,
+                                    state__code__in=State.get_recommended_state_codes(),
+                                    removed=False).count()
 
 
 def calculate_evaluation_summaries(campaign):
@@ -477,6 +510,7 @@ def calculate_evaluation_summaries(campaign):
     Gets all candidates for each BusinessState and calculates the average scores. If the candidate is missing its
     calculation it will also try doing that internally.
     """
+
     campaign.recommended_evaluation = EvaluationSummary.create([c.get_evaluation_summary()
                                                                 for c in get_recommended_candidates(campaign)])
     campaign.relevant_evaluation = EvaluationSummary.create([c.get_evaluation_summary()
@@ -499,13 +533,30 @@ def calculate_evaluation_summaries(campaign):
     campaign.save()
 
 
+def calculate_evaluation_summaries_with_caching(campaign):
+    """
+    Will only update evaluations after an hour or if the don't exist
+    :param campaign:
+    :return:
+    """
+
+    if campaign:
+        if campaign.applicant_evaluation is not None:
+            if datetime.today() - campaign.recommended_evaluation.created_at.replace(tzinfo=None) > timedelta(hours=1):
+                calculate_evaluation_summaries(campaign)
+            else:
+                pass  # do not update... does not worth it
+        else:
+            calculate_evaluation_summaries(campaign)
+
+
 def calculate_operational_efficiency(campaign):
     """
     Important KPI answering how difficult is to find a good candidate on late stages of process
     This percentage should as high as possible,
     otherwise to much time is spent on operation (interviews, messages, etc.)
     """
-    recommended_count = len(get_recommended_candidates(campaign))
+    recommended_count = get_recommended_candidates_count(campaign)
     not_that_good_count = Candidate.objects.filter(campaign=campaign, state__in=State.get_rejected_by_human_states()).count()
     total = recommended_count + not_that_good_count
 
@@ -553,3 +604,9 @@ def get_business_user_with_campaign(campaign, option):
             return BusinessUser.objects.filter(campaigns__id=campaign.pk).all()[0].company
     else:
         return None
+
+
+@atomic
+def bulk_save(objects):
+    for item in objects:
+        item.save()
