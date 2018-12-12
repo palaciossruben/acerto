@@ -22,9 +22,10 @@
                 <h1 id="main-copy-title">{% trans 'Your ideal job' %}</h1>
                 <p id="main-copy-big-title">{% trans 'AWAITS YOU'%}</p>
                 <span class="first-description">{% trans 'Leave us your mail, we do the rest' %}</span>
-                <form action="{% url 'jobs' %}">
-                    <button class="button-cta" role="button">{% trans 'Apply' %}</button>
-                </form>
+                <br>
+                <a href="{% url 'jobs' %}">
+                    <button class="button-cta" role="button" onclick="r">{% trans 'Apply' %}</button>
+                </a>
             </div>
             <div class="row blankabout responsive-no"></div>
             <div class="blankabout no-space"></div>

@@ -13,209 +13,245 @@
 {% endblock %}
 {% block extra_js %}
 <script type="text/javascript" src="{% static 'beta_invite/js/index.js' %}"></script>
+<script>
+    filterSelection("all")
+    function filterSelection(c) {
+      var x, i;
+      x = document.getElementsByClassName("filterDiv");
+      if (c == "all") c = "";
+      for (i = 0; i < x.length; i++) {
+        w3RemoveClass(x[i], "show");
+        if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+      }
+    }
+
+    function w3AddClass(element, name) {
+      var i, arr1, arr2;
+      arr1 = element.className.split(" ");
+      arr2 = name.split(" ");
+      for (i = 0; i < arr2.length; i++) {
+        if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+      }
+    }
+
+    function w3RemoveClass(element, name) {
+      var i, arr1, arr2;
+      arr1 = element.className.split(" ");
+      arr2 = name.split(" ");
+      for (i = 0; i < arr2.length; i++) {
+        while (arr1.indexOf(arr2[i]) > -1) {
+          arr1.splice(arr1.indexOf(arr2[i]), 1);
+        }
+      }
+      element.className = arr1.join(" ");
+    }
+
+    // Add active class to the current button (highlight it)
+    var btnContainer = document.getElementById("myBtnContainer");
+    var btns = btnContainer.getElementsByClassName("btn");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function(){
+        var current = document.getElementsByClassName("active");
+        current[0].className = current[0].className.replace(" active", "");
+        this.className += " active";
+      });
+    }
+</script>
 {% endblock %}
 {% block content %}
 <div class="jobs-background" style="height:200px">
-	<p style="color:white;font-size:20px;text-align:center; padding:70px 0px;">Las mejores ofertas para tu perfil en un solo lugar</p>
 </div>
 <!----------------------------------------------SECTION 1---------------------------------------------------------->
+<div id="overlay-login">
+    <div id="form-image2">
+        <form id="login-form" method="post" action="{% url 'beta_invite:home' %}" >
+            {% csrf_token %}
+            <fieldset>
+                <span class="exitDingbat" onclick="off_login()">X</span>
+                <br>
+                <br>
+                <span>Correo</span>
+                <input name="username" class="form-input"><br>
+                <span>Contraseña</span>
+                <input name="password" class="form-input" type="password"><br>
+                <span style="font-size:10px;"><a href="#" style="color:white">{% trans 'I forgot my password' %}</a></span>
+                <span style="font-size:10px">
+                <a href="javascript:void(0);" style="color:white" onclick="off_login() & on_signup()">{% trans "I'm not yet registered" %}
+                </a>
+                </span>
+                <br>
+                <br>
+                <input type="submit" class="submit" value="{% trans 'ACCESS' %}">
+            </fieldset>
+        </form>
+    </div>
+</div>
 <div id="overlay-signup">
-	<div class="form-image">
-		<form class="only-register-form" action="{% url 'beta_invite:register' %}" method="post" enctype="multipart/form-data">
-			{% csrf_token %}
-			<fieldset>
-				<span class="exitDingbat" onclick="off_signup()">X</span>
-				<br>
-				<br>
-				<input type="hidden" name="campaign_id" value="{{ campaign_id }}"/>
-				<input type="hidden" name="candidate_id" value="{{ candidate.pk }}"/>
-				<span>{% trans 'Your Full Name' %}</span>
-				<input class="form-input" id="name" type="text" name="name" required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
-				{% if campaign.has_email %}
-				<span>{% trans 'Your email' %}</span>
-				<input class="form-input" id="email" type="email" name="email" required="required">
-				{% endif %}
-				<span>{% trans 'Your phone' %}</span>
-				<input class="form-input" id="phone" type="tel" name="phone" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
-				<span>Ciudad de residencia</span>
-				<select class="form-input white" name="city_id" >
-					<option value="{{ default_city.id }}">{{ default_city.name }}</option>
-					{% for city in cities %}
-					<option value="{{ city.id }}">{{ city.name }}</option>
-					{% endfor %}
-				</select>
-				<span>Área de trabajo</span>
-				<select class="form-input white" name="work_area_id" required>
-					<option value="" selected disabled></option>
-					{% for work_area in work_areas %}
-					<option value="{{ work_area.id }}">{{ work_area.name }}</option>
-					{% endfor %}
-				</select>
-				<br>
-				<div>
-					<input type="file" id="file" name="curriculum_url" class="form-inputfile" onchange="pressed()">
-					<label for="file" id="fileLabel">{% trans "Upload your resume" %}</label>
-					<label class="form-checkbox-container">
-					<input class="form-checkbox" type="checkbox" id="politics" name="politics" required>
-					<a href="security_politics" target="_blank"> He leído y acepto las políticas de privacidad</a>
-					</label>
-				</div>
-				<input class="submit" type="submit" id="submit" value="{% trans 'Sure!' %}">
-			</fieldset>
-			</span>
-		</form>
-	</div>
+    <div class="form-image">
+        <form class="only-register-form" action="{% url 'beta_invite:register' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset>
+                <span class="exitDingbat" onclick="off_signup()">X</span>
+                <br>
+                <br>
+                <input type="hidden" name="campaign_id" value="{{ campaign_id }}"/>
+                <input type="hidden" name="candidate_id" value="{{ candidate.pk }}"/>
+                <span>{% trans 'Your Full Name' %}</span>
+                <input class="form-input" id="name" type="text" name="name" required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
+                {% if campaign.has_email %}
+                <span>{% trans 'Your email' %}</span>
+                <input class="form-input" id="email" type="email" name="email" required="required">
+                {% endif %}
+                <span>{% trans 'Your phone' %}</span>
+                <input class="form-input" id="phone" type="tel" name="phone" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
+                <span>Ciudad de residencia</span>
+                <select class="form-input white" name="city_id" >
+                    <option value="{{ default_city.id }}">{{ default_city.name }}</option>
+                    {% for city in cities %}
+                    <option value="{{ city.id }}">{{ city.name }}</option>
+                    {% endfor %}
+                </select>
+                <span>Área de trabajo</span>
+                <select class="form-input white" name="work_area_id" required>
+                    <option value="" selected disabled></option>
+                    {% for work_area in work_areas %}
+                    <option value="{{ work_area.id }}">{{ work_area.name }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <div>
+                    <input type="file" id="file" name="curriculum_url" class="form-inputfile" onchange="pressed()">
+                    <label for="file" id="fileLabel">{% trans "Upload your resume" %}</label>
+                    <label class="form-checkbox-container">
+                    <input class="form-checkbox" type="checkbox" id="politics" name="politics" required>
+                    <a href="security_politics" target="_blank"> He leído y acepto las políticas de privacidad</a>
+                    </label>
+                </div>
+                <input class="submit" type="submit" id="submit" value="{% trans 'Sure!' %}">
+            </fieldset>
+            </span>
+        </form>
+    </div>
 </div>
 <br>
 <br>
 <div class="row">
-	<div class="col-lg-6">
-		{% for campaign in left_campaigns %}
-		<div class="campaign-div">
-			<a href="{{ campaign|get_campaign_url }}" target="_blank">
-				{% if campaign.title_es %}
-				<p class="tittle">{{ campaign.title_es }}</p>
-				{% else %}
-				<p class="tittle">{{ campaign.title }}</p>
-				{% endif %}
-				{% if campaign.city and campaign.city.name %}
-				<div class="location-logo">{{ campaign.city.name }}</div>
-				<br>
-				<br>
-				{% endif %}
-				{% if campaign.salary_low_range >= 0 %}
-				<p style="color:orange;margin-bottom:0;">${{ campaign.salary_low_range }} a ${{ campaign.salary_high_range }} </p>
-				{% endif %}
-				<div>
-					{{ campaign.get_short_description }}
-				</div>
-				<div>
-					{% for passed_test in campaign.passed_tests %}
-					{% if passed_test.type.name == 'requirements' %}
-					<strong class="listyes-light-base"><strong class="test-distinction-question"></strong><span style="margin: 0 20px;">Prueba de requisitos</span></strong>
-					{% else %}
-					<strong class="listyes-light-base"><strong class="test-distinction-question"></strong><span style="margin: 0 20px;">{{ passed_test.name_es }}</span></strong>
-					{% endif %}
-					<br>
-					<br>
-					{% endfor %}
-					{% for missing_test in campaign.missing_tests %}
-					{% if missing_test.type.name == 'requirements' %}
-					<strong class="listno-light-base"><strong class="test-distinction-question"></strong><span style="margin: 0 20px;">Prueba de requisitos</span></strong>
-					{% else %}
-					<strong class="listno-light-base"><strong class="test-distinction-question"></strong><span style="margin: 0 20px;">{{ missing_test.name_es }}</span></strong>
-					{% endif %}
-					<br>
-					<br>
-					{% endfor %}
-				</div>
-			</a>
-		</div>
-		<br>
-		<br>
-		{% endfor %}
-	</div>
-
-	<div class="col-lg-6">
-		{% for campaign in right_campaigns %}
-		<div class="campaign-div">
-			<a href="{{ campaign|get_campaign_url }}" target="_blank">
-				{% if campaign.title_es %}
-				<p class="tittle">{{ campaign.title_es }}</p>
-				{% else %}
-				<p class="tittle">{{ campaign.title }}</p>
-				{% endif %}
-				{% if campaign.city and campaign.city.name %}
-				<div class="location-logo">{{ campaign.city.name }}</div>
-				<br>
-				<br>
-				{% endif %}
-				{% if campaign.salary_low_range >= 0 %}
-				<p style="color:orange;margin-bottom:0;">${{ campaign.salary_low_range }} a ${{ campaign.salary_high_range }} </p>
-				{% endif %}
-				<div>
-				{{ campaign.get_short_description }}
-				</div>
-				<div>
-					{% for passed_test in campaign.passed_tests %}
-					{% if passed_test.type.name == 'requirements' %}
-					<strong class="listyes-light-base"><strong class="test-distinction-question"></strong><span style="margin: 0 20px;">Prueba de requisitos</span></strong>
-					{% else %}
-					<strong class="listyes-light-base"><strong class="test-distinction-question"></strong><span style="margin: 0 20px;">{{ passed_test.name_es }}</span></strong>
-					{% endif %}
-					<br>
-					<br>
-					{% endfor %}
-					{% for missing_test in campaign.missing_tests %}
-					{% if missing_test.type.name == 'requirements' %}
-					<strong class="listno-light-base"><strong class="test-distinction-question"></strong><span style="margin: 0 20px;">Prueba de requisitos</span></strong>
-					{% else %}
-					<strong class="listno-light-base"><strong class="test-distinction-question"></strong><span style="margin: 0 20px;">{{ missing_test.name_es }}</span></strong>
-					{% endif %}
-					<br>
-					<br>
-					{% endfor %}
-				</div>
-			</a>
-		</div>
-		<br>
-		<br>
-		{% endfor %}
-	</div>
+    <div class="col-lg-6">
+        {% for campaign in left_campaigns %}
+        <div class="campaign-div">
+            <div class="row">
+                <a href="{{ campaign|get_campaign_url }}" target="_blank">
+                    {% if campaign.title_es %}
+                    <p class="tittle">{{ campaign.title_es }}</p>
+                    {% else %}
+                    <p class="tittle">{{ campaign.title }}</p>
+                    {% endif %}
+                    {% if campaign.city and campaign.city.name %}
+                    <div class="location-logo">{{ campaign.city.name }}</div>
+                    <br>
+                    <br>
+                    {% endif %}
+                    {% if campaign.salary_low_range >= 0 %}
+                    <p style="color:orange;margin-bottom:0;">${{ campaign.salary_low_range }} a ${{ campaign.salary_high_range }} </p>
+                    {% endif %}
+                    <div>
+                        {{ campaign.get_short_description }}
+                    </div>
+                </a>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-6">
+                    <strong><p>Ya hiciste</p></strong>
+                    {% for passed_test in campaign.passed_tests %}
+                    {% if passed_test.type.name == 'requirements' %}
+                    <strong class="listno-light-base"><strong class="test-distinction-question"></strong><span style="margin: 0 20px;">Prueba de requisitos</span></strong>
+                    {% else %}
+                    <strong class="listno-light-base"><strong class="test-distinction-question"></strong><span style="margin: 0 20px;">{{ passed_test.name_es }}</span></strong>
+                    {% endif %}
+                    <br>
+                    <br>
+                    {% endfor %}
+                </div>
+                <div class="col-lg-6">
+                    <strong><p>Te faltan</p></strong>
+                    {% for missing_test in campaign.missing_tests %}
+                    {% if missing_test.type.name == 'requirements' %}
+                    <strong class="listyes-light-base"><strong class="test-distinction-question"></strong><span style="margin: 0 20px;">Prueba de requisitos</span></strong>
+                    {% else %}
+                    <strong class="listyes-light-base"><strong class="test-distinction-question"></strong><span style="margin: 0 20px;">{{ missing_test.name_es }}</span></strong>
+                    {% endif %}
+                    <br>
+                    <br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        {% endfor %}
+    </div>
 </div>
 <script>
-	window.pressed = function(){
-	    var a = document.getElementById('file');
-	    if(a.value == "")
-	    {
-	        fileLabel.innerHTML = "Selecciona un archivo";
-	    }
-	    else
-	    {
-	        var theSplit = a.value.split('\\');
-	        fileLabel.innerHTML = theSplit[theSplit.length-1];
-	    }
-	};
+    window.pressed = function(){
+        var a = document.getElementById('file');
+        if(a.value == "")
+        {
+            fileLabel.innerHTML = "Selecciona un archivo";
+        }
+        else
+        {
+            var theSplit = a.value.split('\\');
+            fileLabel.innerHTML = theSplit[theSplit.length-1];
+        }
+    };
 </script>
 <script>
-	function on_login() {
-	$("#overlay-login").css("display", "block");
-	$("#login-form").css("display", "block");
-	$("html").css("background-size", "cover");
-	$("nav").css("margin-bottom", "40px");
-	$("#login-form").animate({"marginLeft": '60%'}, 650,"swing");
-	}
+    function on_login() {
+    $("#overlay-login").css("display", "block");
+    $("#login-form").css("display", "block");
+    $("html").css("background-size", "cover");
+    $("nav").css("margin-bottom", "40px");
 
-	function off_login() {
-	$("#overlay-login").css("display", "none");
-	$("#login-form").css("display", "none");
-	$("nav").css("margin-bottom", "");
-	$("#login-form").animate({marginLeft: '160%'});
-	}
+    if ($(window).width() < 769) {
+        $("#login-form").animate({"marginLeft": 'auto'}, 650,"swing");
+        $("#login-form").css("margin", "120px auto");
+    }
+    else {
+        $("#login-form").animate({"marginLeft": '60%'}, 650,"swing");
+        }
+    }
 
-	function on_signup() {
-	$("#overlay-signup").css("display", "block");
-	$(".only-register-form").css("display", "block");
-	$("html").css("background-size", "cover");
-	$("nav").css("margin-bottom", "40px");
+    function off_login() {
+    $("#overlay-login").css("display", "none");
+    $("#login-form").css("display", "none");
+    $("nav").css("margin-bottom", "");
+    $("#login-form").animate({marginLeft: '160%'});
+    }
 
-	if ($(window).width() < 769) {
-	    $(".only-register-form").animate({"marginLeft": 'auto'}, 650,"swing");
-	    $(".only-register-form").css("margin", "100px auto");
-	}
-	else {
-	    $(".only-register-form").animate({"marginLeft": '60%'}, 650,"swing");
-	}
-	$(".form-image").animate({"backgroundPosition": '86%'}, 690,"swing");
-	}
+    function on_signup() {
+    $("#overlay-signup").css("display", "block");
+    $(".only-register-form").css("display", "block");
+    $("html").css("background-size", "cover");
+    $("nav").css("margin-bottom", "40px");
 
+    if ($(window).width() < 769) {
+        $(".only-register-form").animate({"marginLeft": 'auto'}, 650,"swing");
+        $(".only-register-form").css("margin", "120px auto");
+        $(".register").css("margin-left", "30px");
+    }
+    else {
+        $(".only-register-form").animate({"marginLeft": '60%'}, 650,"swing");
+    }
+    $(".form-image").animate({"backgroundPosition": '86%'}, 690,"swing");
+    }
 
-	function off_signup() {
-	$("#overlay-signup").css("display", "none");
-	$(".only-register-form").css("display", "none");
-	$("nav").css("margin-bottom", "");
-	$(".only-register-form").animate({marginLeft: '160%'});
-	$(".form-image").animate({"backgroundPosition": '186%'}, 1,"swing");
-	}
+    function off_signup() {
+    $("#overlay-signup").css("display", "none");
+    $(".only-register-form").css("display", "none");
+    $("nav").css("margin-bottom", "");
+    $(".only-register-form").animate({marginLeft: '160%'});
+    $(".form-image").animate({"backgroundPosition": '186%'}, 1,"swing");
+    }
 </script>
 {% endblock %}

@@ -40,11 +40,11 @@ class State(models.Model):
 
     @staticmethod
     def get_recommended_states():
-        return list(State.objects.filter(code__in=['GTJ', 'STC']))
+        return list(State.objects.filter(code__in=['GTJ', 'ABC', 'STC']))
 
     @staticmethod
     def get_relevant_states():
-        return list(State.objects.filter(code__in=['WFI', 'DI', 'GTJ', 'STC']))
+        return list(State.objects.filter(code__in=['WFI', 'DI', 'GTJ', 'ABC', 'STC']))
 
     @staticmethod
     def get_applicant_states(): 
@@ -169,6 +169,8 @@ class Candidate(models.Model):
     rating = models.IntegerField(null=True)
     mean_scores = models.ManyToManyField(Score)
     state_events = models.ManyToManyField(StateEvent)
+    change_by_client = models.BooleanField(default=False)
+    liked = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

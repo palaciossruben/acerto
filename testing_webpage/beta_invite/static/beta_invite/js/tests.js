@@ -184,23 +184,28 @@ function createDownloadLink(blob) {
     });
 }
 
-//webkitURL is deprecated but nevertheless
-URL = window.URL || window.webkitURL;
+    //webkitURL is deprecated but nevertheless
+    URL = window.URL || window.webkitURL;
 
-var gumStream; //stream from getUserMedia()
-var rec; //Recorder.js object
-var input; //MediaStreamAudioSourceNode we'll be recording
+    var gumStream; //stream from getUserMedia()
+    var rec; //Recorder.js object
+    var input; //MediaStreamAudioSourceNode we'll be recording
 
-// shim for AudioContext when it's not avb.
-var AudioContext = window.AudioContext || window.webkitAudioContext;
-var audioContext = new AudioContext; //new audio context to help us record
+    // shim for AudioContext when it's not avb.
+    var AudioContext = window.AudioContext || window.webkitAudioContext;
+    var audioContext = new AudioContext; //new audio context to help us record
 
-var recordButton = document.getElementById("recordButton");
-var stopButton = document.getElementById("stopButton");
+    var recordButton = document.getElementById("recordButton");
+    var stopButton = document.getElementById("stopButton");
 
-//add events to those 3 buttons
-recordButton.addEventListener("click", startRecording);
-stopButton.addEventListener("click", stopRecording);
+    if (recordButton){
+        recordButton.addEventListener("click", startRecording);
+    }
+
+    if (stopButton){
+        stopButton.addEventListener("click", stopRecording);
+    }
+
 
 function startRecord(){
     document.getElementById("recording").style.display = "block";
