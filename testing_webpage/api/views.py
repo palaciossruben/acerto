@@ -9,6 +9,7 @@ from user_agents import parse
 
 from beta_invite.models import City, WorkArea, Campaign
 from beta_invite import new_user_module
+from business.models import BusinessUser
 import common
 
 
@@ -58,7 +59,36 @@ def save_leads(request):
 
 @csrf_exempt
 def get_leads_to_filter(request):
+    """
+    Gets a filter of leads identified by the fb_url
+    :param request:
+    :return:
+    """
     return JsonResponse([l.facebook_url for l in Lead.objects.all()], safe=False)
+
+
+@csrf_exempt
+def get_domains_to_filter(request):
+    """
+    Filters by email
+    :param request:
+    :return:
+    """
+    business_domains = [e1[0] for e1 in BusinessUser.objects.filter(email__icontains='@').values_list('email')]
+    lead_domains = [e1[0] for e1 in Lead.objects.filter(email__icontains='@').values_list('email')]
+    domains = [e.split('@')[1] for e in business_domains + lead_domains]
+    return JsonResponse(domains, safe=False)
+
+
+@csrf_exempt
+def get_phones_to_filter(request):
+    """
+    Filters by phone
+    :param request:
+    :return:
+    """
+    phones = BusinessUser.objects.all().values_list('phone') + Lead.objects.all().values_list('phone')
+    return JsonResponse(phones, safe=False)
 
 
 @csrf_exempt
