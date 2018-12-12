@@ -64,19 +64,11 @@ class State(models.Model):
 
     @staticmethod
     def get_recommended_states():
-<<<<<<< HEAD
-        return list(State.objects.filter(code__in=['GTJ', 'ABC', 'STC']))
-
-    @staticmethod
-    def get_relevant_states():
-        return list(State.objects.filter(code__in=['WFI', 'DI', 'GTJ', 'ABC', 'STC']))
-=======
         return list(State.objects.filter(code__in=State.get_recommended_state_codes()))
 
     @staticmethod
     def get_relevant_states():
         return list(State.objects.filter(code__in=State.get_relevant_state_codes()))
->>>>>>> master
 
     @staticmethod
     def get_applicant_states(): 
