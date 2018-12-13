@@ -177,47 +177,5 @@
         </form>
     {% endif %}
 </div>
-    <!--
-    {% else %}
-        {% if not candidate.change_by_client and business_state.name != 'aplicantes' %}
-            <form method="post" action="" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="reason" id="reason-{{ candidate.pk }}">
-                    <input type="text" class="reason-input" placeholder="Ingresa la razón del rechazo">
-                    <br>
-                    <input type="button" class="send" value="Enviar" onclick="change_state({'feedback':'Yes', 'candidate_id':{{ candidate.pk }}})">
-                </div>
-            </form>
-            <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
-                {% csrf_token %}
-                <input type="button" class="like" id="like-{{ candidate.pk }}" onclick="change_state({'state_code':'ABC', 'candidate_id':{{ candidate.pk }}})" value="&#x2714; Marcar como finalista {{ campaign.likes }}/5">
-            </form>
-            <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
-                {% csrf_token %}
-                <input type="button" class="dislike" id="dislike-{{ candidate.pk }}" onclick="change_state({'state_code':'RBC', 'candidate_id':{{ candidate.pk }}})" value="&#x274C; Rechazar candidato">
-            </form>
-        {% elif candidate.change_by_client and business_state.name != 'aplicantes' %}
-            {% if candidate.liked %}
-                <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <input type="button" class="like-on" id="like-{{ candidate.pk }}"  value="&#x2714; Marcardo como finalista {{ campaign.likes }}/5">
-                </form>
-                <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <input type="button" class="dislike off" id="dislike-{{ candidate.pk }}"  value="&#x274C; Rechazar candidato">
-                </form>
-            {% else %}
-                <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <input type="button" class="like off" id="like-{{ candidate.pk }}"  value="&#x2714; Marcardo como finalista {{ campaign.likes }}/5">
-                </form>
-                <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <input type="button" class="dislike-on" id="dislike-{{ candidate.pk }}"  value="&#x274C; Rechazar candidato">
-                </form>
-            {% endif %}
-        {% endif %}
-    {% endif %}
-</div>
--->
+
 <input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}"/>
