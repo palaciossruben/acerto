@@ -19,10 +19,41 @@
     padding-left: 15px;
 }
 
+.test-circle{
+    width:12px;
+    height:12px;
+    border-radius:100%;
+    background:#A8CF38;
+    display:inline-block;
+    margin:0;
+}
+
+.division{
+    width:45%;
+    display: inline-block;
+}
+
+.passed{
+    background:#A8CF38;
+}
+
+.missed{
+    background:#F26122;
+}
+
+.no{
+    color:#3d4753;
+    display: inline-block;
+}
+
+.yes{
+    color:#bdbcc2;
+    display: inline-block;
+}
+
 .campaign-div{
     width: 93%;
-    min-height:250px;
-    height:auto;
+    height:325px;
     margin: 0 auto;
     border-radius: 25px;
     border-style: solid;

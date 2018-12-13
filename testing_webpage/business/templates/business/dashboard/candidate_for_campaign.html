@@ -3,105 +3,216 @@
 {% load app_filters %}
 <script>
     $(document).ready(function() {
-        set_circle_color({{ candidate.last_evaluation.cognitive_score|int_rounding }}, "{{ candidate.pk }}-cognitive-id");
-        set_circle_color({{ candidate.last_evaluation.technical_score|int_rounding }}, "{{ candidate.pk }}-technical-id");
-        set_circle_color({{ candidate.last_evaluation.requirements_score|int_rounding }}, "{{ candidate.pk }}-requirement-id");
-        set_circle_color({{ candidate.last_evaluation.motivation_score|int_rounding }}, "{{ candidate.pk }}-motivation-id");
-        set_circle_color({{ candidate.last_evaluation.cultural_fit_score|int_rounding }}, "{{ candidate.pk }}-cultural-id");
+        set_circle_color({{ candidate.get_last_evaluation.cognitive_score|int_rounding }}, "{{ candidate.pk }}-recommended-cognitive-id");
+        set_circle_color({{ candidate.get_last_evaluation.technical_score|int_rounding }}, "{{ candidate.pk }}-recommended-technical-id");
+        set_circle_color({{ candidate.get_last_evaluation.requirements_score|int_rounding }}, "{{ candidate.pk }}-recommended-requirement-id");
+        set_circle_color({{ candidate.get_last_evaluation.motivation_score|int_rounding }}, "{{ candidate.pk }}-recommended-motivation-id");
+        set_circle_color({{ candidate.get_last_evaluation.cultural_fit_score|int_rounding }}, "{{ candidate.pk }}-recommended-cultural-id");
     });
 </script>
+<script>
+    var likes = {{ campaign.likes }};
+    function change_state(param_dict)
+    {
+        general_dict = {csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()}
+            $.ajax
+            ({
+                type:'POST',
+                url:'../../../../change-state',
+                data: Object.assign({}, general_dict, param_dict),
+                success:function(response)
+                {
 
+                    if(param_dict['feedback']=='Yes'){
+                        $("#reason-"+param_dict['candidate_id']).css("display", "none");
+                        console.log('Entró');
+                    }else{
+                        likes = likes + 1;
+                        if (param_dict['state_code']=='ABC'){
+                        $("#like-"+param_dict['candidate_id']).attr("onclick", "");
+                        $("#like-"+param_dict['candidate_id']).css("background", "#A8CF38");
+                        $("#like-"+param_dict['candidate_id']).css("color", "white");
+                        $("#like-"+param_dict['candidate_id']).css("border", "2px solid #A8CF38");
+                        $("#dislike-"+param_dict['candidate_id']).attr("onclick", "");
+                        $("#dislike-"+param_dict['candidate_id']).css("color", "#9F9C9B;");
+                        $("#dislike-"+param_dict['candidate_id']).css("border", "2px solid #9F9C9B");
+
+                        $(".like-on").val("Marcardo como finalista " + likes + "/5");
+                        $(".like").val("Marcar como finalista " + likes + "/5");
+
+                        }else{
+                            $("#dislike-"+param_dict['candidate_id']).attr("onclick", "");
+                            $("#dislike-"+param_dict['candidate_id']).css("background", "#F26122");
+                            $("#dislike-"+param_dict['candidate_id']).css("color", "white");
+                            $("#dislike-"+param_dict['candidate_id']).css("border", "2px solid #F26122");
+                            $("#like-"+param_dict['candidate_id']).attr("onclick", "");
+
+                            $("#reason-"+param_dict['candidate_id']).css("display", "block");
+
+                        }
+                    }
+                }
+            });
+        return false;
+    }
+</script>
 <a href="/seleccion_de_personal/perfil_del_candidato/{{ candidate.id }}" style="text-decoration:none">
-<div class="row candidate-info-div">
-    <div class="favorite" id="favorite-{{ candidate.pk }}"><span class="crown">&#x1F451;</span></div>
-    <div class="email-checkbox">
-        <input type="checkbox" name="{{ candidate.id }}_checkbox">
-    </div>
-    <div class="col-lg-1 col-xs-12 candidate-avatar-column">
-        {% if candidate.user.photo_url != '#' %}
-        <div class="circle candidate-circle" style="background-image: url({% static candidate.user.photo_url %});"></div>
-        {% elif candidate.user.gender.sex == 2 %}
-        <div class="circle candidate-circle female-avatar"></div>
-        {% else %}
-        <div class="circle candidate-circle male-avatar"></div>
-        {% endif %}
-    </div>
-    <div class="col-lg-2 col-xs-12">
-        <p class="name">
-            <strong>{{ candidate.user.name }}</strong>
-        </p>
-        {% if candidate.user.profession.name_es %}
+    <div class="row candidate-info-div">
+        <div class="email-checkbox">
+            <input type="checkbox" name="{{ candidate.id }}_checkbox">
+        </div>
+        <div class="col-lg-1 col-xs-12 candidate-avatar-column">
+            {% if candidate.user.photo_url != '#' %}
+            <div class="circle candidate-circle" style="background-image: url({% static candidate.user.photo_url %});"></div>
+            {% elif candidate.user.gender.sex == 2 %}
+            <div class="circle candidate-circle female-avatar"></div>
+            {% else %}
+            <div class="circle candidate-circle male-avatar"></div>
+            {% endif %}
+        </div>
+        <div class="col-lg-2 col-xs-12">
+            <p class="name">
+                <strong>{{ candidate.user.name }}</strong>
+            </p>
+            {% if candidate.user.profession.name_es %}
             <p class="profession">{{ candidate.user.profession.name_es }}</p>
-        {% endif %}
-
-        {% if candidate.user.city.name and candidate.user.city.name != "not available" %}
+            {% endif %}
+            {% if candidate.user.city.name and candidate.user.city.name != "not available" %}
             <p class="city">{{ candidate.user.city.name }}, {{ candidate.user.country.name }}</p>
-        {% endif %}
-
-        {% if candidate.user.work_area.name_es %}
+            {% endif %}
+            {% if candidate.user.work_area.name_es %}
             <p class="work-area">{{ candidate.user.work_area.name_es }}</p>
-        {% endif %}
-    </div>
-    <div class="col-lg-1 separator-div">
-        <div class="separator"></div>
-    </div>
-    {% if candidate.user.profile %}
+            {% endif %}
+        </div>
+        <div class="col-lg-1 separator-div">
+            <div class="separator"></div>
+        </div>
+        {% if candidate.user.profile %}
         <div class="col-lg-4 col-xs-12 profile">
             <p>{{ candidate.user.profile }}</p>
+            {% for e in candidate.user.experiences.all %}
+                <h2>{{ e.role }}</h2>
+                <h3>{{ e.company }}</h3>
+                <p>Logros:</p>
+                <p>* {{ e.highlight }}</p>
+            {% endfor %}
         </div>
-    {% elif candidate.user.get_short_curriculum %}
+        {% elif candidate.user.get_short_curriculum %}
         <div class="col-lg-4 col-xs-12 profile">
             <p class="no-profile">{{ candidate.user.get_short_curriculum }}</p>
         </div>
-    {% else %}
+        {% else %}
         <div class="col-lg-4 col-xs-12 profile">
             <p class="no-profile">Sin descripción</p>
         </div>
-    {% endif %}
-    <div class="col-lg-4 col-xs-12 condoms-row">
-        <div class="row">
-
-            {% if candidate.last_evaluation.cognitive_score >= 0 %}
+        {% endif %}
+        <div class="col-lg-4 col-xs-12 condoms-row">
+            <div class="row">
+                {% if candidate.get_last_evaluation.cognitive_score >= 0 %}
                 <div class="test-name small">
                     Capacidad cognitiva
-                    <div id="{{ candidate.pk }}-cognitive-id" class="fill small-fill">
-                        {{ candidate.last_evaluation.cognitive_score|print_score }}
+                    {% if candidate.get_last_evaluation.cognitive_score >= 0 %}
+                    <div id="{{ candidate.pk }}-recommended-cognitive-id" class="fill small-fill">
+                        {{ candidate.get_last_evaluation.cognitive_score|print_score }}
                     </div>
+                    {% endif %}
                 </div>
-            {% endif %}
-
-            {% if candidate.last_evaluation.technical_score >= 0 %}
+                {% endif %}
+                {% if candidate.get_last_evaluation.technical_score >= 0 %}
                 <div class="test-name small">
                     Conocimiento técnico
-                    <div id="{{ candidate.pk }}-technical-id" class="fill small-fill">
-                        {{ candidate.last_evaluation.technical_score|print_score }}
+                    {% if candidate.get_last_evaluation.technical_score >= 0 %}
+                    <div id="{{ candidate.pk }}-recommended-technical-id" class="fill small-fill">
+                        {{ candidate.get_last_evaluation.technical_score|print_score }}
                     </div>
+                    {% endif %}
                 </div>
-            {% endif %}
-
-            {% if candidate.last_evaluation.requirements_score >= 0 %}
+                {% endif %}
+                {% if candidate.get_last_evaluation.requirements_score >= 0 %}
                 <div class="test-name small">
                     Requisitos
-                    <div id="{{ candidate.pk }}-requirement-id" class="fill small-fill">
-                        {{ candidate.last_evaluation.requirements_score|print_score }}
+                    {% if candidate.get_last_evaluation.requirements_score >= 0 %}
+                    <div id="{{ candidate.pk }}-recommended-requirement-id" class="fill small-fill">
+                        {{ candidate.get_last_evaluation.requirements_score|print_score }}
                     </div>
+                    {% endif %}
                 </div>
-            {% endif %}
+                {% endif %}
+                {% if candidate.get_last_evaluation.motivation_score >= 0 %}
+                <div class="test-name small">
+                    Motivación
+                    {% if candidate.get_last_evaluation.motivation_score >= 0 %}
+                    <div id="{{ candidate.pk }}-recommended-motivation-id" class="fill small-fill">
+                        {{ candidate.get_last_evaluation.motivation_score|print_score }}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+                {% if candidate.get_last_evaluation.cultural_fit_score >= 0 %}
+                <div class="test-name small">
+                    Fit cultural
+                    {% if candidate.get_last_evaluation.cultural_fit_score >= 0 %}
+                    <div id="{{ candidate.pk }}-recommended-cultural-id" class="fill small-fill">
+                        {{ candidate.get_last_evaluation.cultural_fit_score|print_score }}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
         </div>
     </div>
-</div>
 </a>
 <!--
 <div class="like-selection-div">
-<form method="post" class="like-dislike" action="" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="button" class="like" id="like-{{ candidate.pk }}" onclick="change_state({'state_code':'STC', 'candidate_id':{{ candidate.pk }}})" value="&#x2714;">
-</form>
-
-<form method="post" class="like-dislike" action="" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="button" class="dislike" id="dislike-{{ candidate.pk }}" onclick="change_state({'state_code':'RBC', 'candidate_id':{{ candidate.pk }}})" value="&#x274C;">
-</form>
+    {% if logged_user == 'admin' %}
+        <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="button" class="like" id="like-{{ candidate.pk }}" onclick="change_state({'state_code':'ABC', 'candidate_id':{{ candidate.pk }}, 'feedback':'No'})" value="&#x2714; Marcar como finalista {{ campaign.likes }}/5">
+        </form>
+        <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="button" class="dislike" id="dislike-{{ candidate.pk }}" onclick="change_state({'state_code':'RBC', 'candidate_id':{{ candidate.pk }}, 'feedback':'No'})" value="&#x274C; Rechazar candidato">
+        </form>
+    {% else %}
+        {% if not candidate.change_by_client and business_state.name != 'aplicantes' %}
+            <form method="post" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="reason" id="reason-{{ candidate.pk }}">
+                    <input type="text" class="reason-input" placeholder="Ingresa la razón del rechazo">
+                    <br>
+                    <input type="button" class="send" value="Enviar" onclick="change_state({'feedback':'Yes', 'candidate_id':{{ candidate.pk }}})">
+                </div>
+            </form>
+            <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="button" class="like" id="like-{{ candidate.pk }}" onclick="change_state({'state_code':'ABC', 'candidate_id':{{ candidate.pk }}})" value="&#x2714; Marcar como finalista {{ campaign.likes }}/5">
+            </form>
+            <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="button" class="dislike" id="dislike-{{ candidate.pk }}" onclick="change_state({'state_code':'RBC', 'candidate_id':{{ candidate.pk }}})" value="&#x274C; Rechazar candidato">
+            </form>
+        {% elif candidate.change_by_client and business_state.name != 'aplicantes' %}
+            {% if candidate.liked %}
+                <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="button" class="like-on" id="like-{{ candidate.pk }}"  value="&#x2714; Marcardo como finalista {{ campaign.likes }}/5">
+                </form>
+                <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="button" class="dislike off" id="dislike-{{ candidate.pk }}"  value="&#x274C; Rechazar candidato">
+                </form>
+            {% else %}
+                <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="button" class="like off" id="like-{{ candidate.pk }}"  value="&#x2714; Marcardo como finalista {{ campaign.likes }}/5">
+                </form>
+                <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="button" class="dislike-on" id="dislike-{{ candidate.pk }}"  value="&#x274C; Rechazar candidato">
+                </form>
+            {% endif %}
+        {% endif %}
+    {% endif %}
 </div>
 -->
 <input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}"/>

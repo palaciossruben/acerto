@@ -59,8 +59,7 @@
 </script>
 {% endblock %}
 {% block content %}
-<div class="jobs-background" style="height:200px">
-</div>
+<div class="jobs-background" style="height:200px"></div>
 <!----------------------------------------------SECTION 1---------------------------------------------------------->
 <div id="overlay-login">
     <div id="form-image2">
@@ -139,8 +138,8 @@
     <div class="col-lg-6">
         {% for campaign in left_campaigns %}
         <div class="campaign-div">
-            <div class="row">
-                <a href="{{ campaign|get_campaign_url }}" target="_blank">
+            <a href="{{ campaign|get_campaign_url }}" target="_blank">
+                <div class="row">
                     {% if campaign.title_es %}
                     <p class="tittle">{{ campaign.title_es }}</p>
                     {% else %}
@@ -151,46 +150,121 @@
                     <br>
                     <br>
                     {% endif %}
-                    {% if campaign.salary_low_range >= 0 %}
+                    {% if campaign.salary_low_range > 0 %}
+                    {% if campaign.salary_low_range == campaign.salary_high_range %}
+                    <p style="color:orange;margin-bottom:0;">${{ campaign.salary_low_range }}</p>
+                    {% else %}
                     <p style="color:orange;margin-bottom:0;">${{ campaign.salary_low_range }} a ${{ campaign.salary_high_range }} </p>
+                    {% endif %}
                     {% endif %}
                     <div>
                         {{ campaign.get_short_description }}
                     </div>
-                </a>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-lg-6">
-                    <strong><p>Ya hiciste</p></strong>
-                    {% for passed_test in campaign.passed_tests %}
-                    {% if passed_test.type.name == 'requirements' %}
-                    <strong class="listno-light-base"><strong class="test-distinction-question"></strong><span style="margin: 0 20px;">Prueba de requisitos</span></strong>
-                    {% else %}
-                    <strong class="listno-light-base"><strong class="test-distinction-question"></strong><span style="margin: 0 20px;">{{ passed_test.name_es }}</span></strong>
-                    {% endif %}
-                    <br>
-                    <br>
-                    {% endfor %}
                 </div>
-                <div class="col-lg-6">
-                    <strong><p>Te faltan</p></strong>
-                    {% for missing_test in campaign.missing_tests %}
-                    {% if missing_test.type.name == 'requirements' %}
-                    <strong class="listyes-light-base"><strong class="test-distinction-question"></strong><span style="margin: 0 20px;">Prueba de requisitos</span></strong>
-                    {% else %}
-                    <strong class="listyes-light-base"><strong class="test-distinction-question"></strong><span style="margin: 0 20px;">{{ missing_test.name_es }}</span></strong>
-                    {% endif %}
-                    <br>
-                    <br>
-                    {% endfor %}
+                <br>
+                <div class="row">
+                    <div class="col-lg-12">
+                        {% for passed_test in campaign.passed_tests %}
+                        {% if passed_test.type.name == 'requirements' %}
+                        <div class="division">
+                            <div class="test-circle passed"></div>
+                            <div class="yes">Prueba de requisitos</div>
+                        </div>
+                        {% else %}
+                        <div class="division">
+                            <div class="test-circle passed"></div>
+                            <div class="yes">{{ passed_test.name_es }}</div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        {% for missing_test in campaign.missing_tests %}
+                        {% if missing_test.type.name == 'requirements' %}
+                        <div class="division">
+                            <div class="test-circle missed"></div>
+                            <div class="no">Prueba de requisitos</div>
+                        </div>
+                        {% else %}
+                        <div class="division">
+                            <div class="test-circle missed"></div>
+                            <div class="no">{{ missing_test.name_es }}</div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
         <br>
         <br>
         {% endfor %}
     </div>
+
+
+    <div class="col-lg-6">
+        {% for campaign in right_campaigns %}
+        <div class="campaign-div">
+            <a href="{{ campaign|get_campaign_url }}" class="link" target="_blank">
+                <div class="row">
+                    {% if campaign.title_es %}
+                    <p class="tittle">{{ campaign.title_es }}</p>
+                    {% else %}
+                    <p class="tittle">{{ campaign.title }}</p>
+                    {% endif %}
+                    {% if campaign.city and campaign.city.name %}
+                    <div class="location-logo">{{ campaign.city.name }}</div>
+                    <br>
+                    <br>
+                    {% endif %}
+                    {% if campaign.salary_low_range > 0 %}
+                    {% if campaign.salary_low_range == campaign.salary_high_range %}
+                    <p style="color:orange;margin-bottom:0;">${{ campaign.salary_low_range }}</p>
+                    {% else %}
+                    <p style="color:orange;margin-bottom:0;">${{ campaign.salary_low_range }} a ${{ campaign.salary_high_range }} </p>
+                    {% endif %}
+                    {% endif %}
+                    <div>
+                        {{ campaign.get_short_description }}
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-12">
+                        {% for passed_test in campaign.passed_tests %}
+                        {% if passed_test.type.name == 'requirements' %}
+                        <div class="division">
+                            <div class="test-circle passed"></div>
+                            <div class="yes">Prueba de requisitos</div>
+                        </div>
+                        {% else %}
+                        <div class="division">
+                            <div class="test-circle passed"></div>
+                            <div class="yes">{{ passed_test.name_es }}</div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        {% for missing_test in campaign.missing_tests %}
+                        {% if missing_test.type.name == 'requirements' %}
+                        <div class="division">
+                            <div class="test-circle missed"></div>
+                            <div class="no">Prueba de requisitos</div>
+                        </div>
+                        {% else %}
+                        <div class="division">
+                            <div class="test-circle missed"></div>
+                            <div class="no">{{ missing_test.name_es }}</div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </a>
+        </div>
+        <br>
+        <br>
+        {% endfor %}
+    </div>
+
+
 </div>
 <script>
     window.pressed = function(){
