@@ -620,21 +620,6 @@ def get_leads():
     return list(leads)
 
 
-def add_prospect_messages(message_filename):
-
-    # TODO: add English
-    candidates = [c for c in
-                  Candidate.objects.filter(Q(created_at__gt=datetime.datetime.today() - datetime.timedelta(days=5)) &
-                                           Q(state__code='P') &
-                                           Q(campaign__state__name='Active') &
-                                           ~Q(message__filename=message_filename) &
-                                           ~Q(campaign_id=beta_cts.DEFAULT_CAMPAIGN_ID))]
-
-    messenger_sender.send(candidates=candidates,
-                          language_code='es',
-                          body_input=message_filename)
-
-
 def add_backlog_messages(message_filename):
 
     # TODO: add English
@@ -643,6 +628,22 @@ def add_backlog_messages(message_filename):
                                            Q(created_at__gt=datetime.datetime.today() - datetime.timedelta(days=5)) &
                                            Q(state__code='BL') &
                                            Q(campaign__state__name='Active') &
+                                           ~Q(message__filename=message_filename) &
+                                           ~Q(campaign__tests=None) &
+                                           ~Q(campaign_id=beta_cts.DEFAULT_CAMPAIGN_ID))]
+
+    messenger_sender.send(candidates=candidates,
+                          language_code='es',
+                          body_input=message_filename)
+
+
+def add_external_job_exchange_messages(message_filename):
+    # TODO: add English
+    candidates = [c for c in
+                  Candidate.objects.filter(Q(created_at__gt=datetime.datetime.today() - datetime.timedelta(days=5)) &
+                                           Q(state__code='BL') &
+                                           Q(campaign__state__name='Active') &
+                                           Q(campaign__tests=None) &
                                            ~Q(message__filename=message_filename) &
                                            ~Q(campaign_id=beta_cts.DEFAULT_CAMPAIGN_ID))]
 
@@ -666,7 +667,7 @@ def send_new_contacts(request):
     """
 
     add_backlog_messages('candidate_backlog')
-    #add_prospect_messages('candidate_prospect')
+    add_external_job_exchange_messages('external_job_exchange')
 
     leads = get_leads()
     users = get_candidate_users()
