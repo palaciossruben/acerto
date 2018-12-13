@@ -727,7 +727,7 @@ def change_state(request):
         state_code = request.POST.get('state_code')
         feedback = request.POST.get('feedback')
         if state_code and feedback != 'No':
-            candidate.change_state(state_code=state_code, place='Business User ha cambiado el estado del candidato')
+            candidate.change_state(state_code=state_code, auth_user=request.user, place='Business User ha cambiado el estado del candidato')
             candidate.change_by_client = True
             candidate.save()
             if state_code == 'ABC':
@@ -736,7 +736,7 @@ def change_state(request):
                 candidate.liked = True
                 candidate.save()
         else:
-            candidate.change_state(state_code=state_code, place='admin ha cambiado el estado del candidato')
+            candidate.change_state(state_code=state_code, auth_user=request.user, place='Admin ha cambiado el estado del candidato')
 
         return HttpResponse()
     else:

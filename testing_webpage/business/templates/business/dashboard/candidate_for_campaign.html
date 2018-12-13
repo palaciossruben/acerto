@@ -169,11 +169,11 @@
     {% if logged_user == 'admin' %}
         <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="button" class="like" id="like-{{ candidate.pk }}" onclick="change_state({'state_code':'ABC', 'candidate_id':{{ candidate.pk }}, 'feedback':'No'})" value="&#x2714; Marcar como finalista {{ campaign.likes }}/5">
+            <input type="button" class="like" id="like-{{ candidate.pk }}" onclick="change_state({'state_code':'STC', 'candidate_id':{{ candidate.pk }}, 'feedback':'No'})" value="&#x2714; Marcar como finalista {{ campaign.likes }}/5">
         </form>
         <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="button" class="dislike" id="dislike-{{ candidate.pk }}" onclick="change_state({'state_code':'RBC', 'candidate_id':{{ candidate.pk }}, 'feedback':'No'})" value="&#x274C; Rechazar candidato">
+            <input type="button" class="dislike" id="dislike-{{ candidate.pk }}" onclick="change_state({'state_code':'SR', 'candidate_id':{{ candidate.pk }}, 'feedback':'No'})" value="&#x274C; Rechazar candidato">
         </form>
     {% endif %}
 </div>

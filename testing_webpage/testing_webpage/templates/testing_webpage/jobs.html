@@ -85,55 +85,7 @@
         </form>
     </div>
 </div>
-<div id="overlay-signup">
-    <div class="form-image">
-        <form class="only-register-form" action="{% url 'beta_invite:register' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <fieldset>
-                <span class="exitDingbat" onclick="off_signup()">X</span>
-                <br>
-                <br>
-                <input type="hidden" name="campaign_id" value="{{ campaign_id }}"/>
-                <input type="hidden" name="candidate_id" value="{{ candidate.pk }}"/>
-                <span>{% trans 'Your Full Name' %}</span>
-                <input class="form-input" id="name" type="text" name="name" required="required" pattern="[A-Za-z\sáéíóúÑñÜüÁÉÍÓÚ]{1,200}">
-                {% if campaign.has_email %}
-                <span>{% trans 'Your email' %}</span>
-                <input class="form-input" id="email" type="email" name="email" required="required">
-                {% endif %}
-                <span>{% trans 'Your phone' %}</span>
-                <input class="form-input" id="phone" type="tel" name="phone" required="required" pattern="[0-9\(\)\+\-\s\.extension]{7,40}">
-                <span>Ciudad de residencia</span>
-                <select class="form-input white" name="city_id" >
-                    <option value="{{ default_city.id }}">{{ default_city.name }}</option>
-                    {% for city in cities %}
-                    <option value="{{ city.id }}">{{ city.name }}</option>
-                    {% endfor %}
-                </select>
-                <span>Área de trabajo</span>
-                <select class="form-input white" name="work_area_id" required>
-                    <option value="" selected disabled></option>
-                    {% for work_area in work_areas %}
-                    <option value="{{ work_area.id }}">{{ work_area.name }}</option>
-                    {% endfor %}
-                </select>
-                <br>
-                <div>
-                    <input type="file" id="file" name="curriculum_url" class="form-inputfile" onchange="pressed()">
-                    <label for="file" id="fileLabel">{% trans "Upload your resume" %}</label>
-                    <label class="form-checkbox-container">
-                    <input class="form-checkbox" type="checkbox" id="politics" name="politics" required>
-                    <a href="security_politics" target="_blank"> He leído y acepto las políticas de privacidad</a>
-                    </label>
-                </div>
-                <input class="submit" type="submit" id="submit" value="{% trans 'Sure!' %}">
-            </fieldset>
-            </span>
-        </form>
-    </div>
-</div>
-<br>
-<br>
+
 <div class="row">
     <div class="col-lg-6">
         {% for campaign in left_campaigns %}
@@ -147,7 +99,6 @@
                     {% endif %}
                     {% if campaign.city and campaign.city.name %}
                     <div class="location-logo">{{ campaign.city.name }}</div>
-                    <br>
                     <br>
                     {% endif %}
                     {% if campaign.salary_low_range > 0 %}
@@ -212,7 +163,6 @@
                     {% endif %}
                     {% if campaign.city and campaign.city.name %}
                     <div class="location-logo">{{ campaign.city.name }}</div>
-                    <br>
                     <br>
                     {% endif %}
                     {% if campaign.salary_low_range > 0 %}
