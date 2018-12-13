@@ -60,21 +60,20 @@
     <div class="row">
         <p class="description-text">{{ campaign.city.name }}</p>
     </div>
-
-    <div class="row">
-        {% if campaign.salary_low_range >= 0 %}
+    {% if campaign.salary_low_range > 0 %}
+        <div class="row">
             <h2 class="descriptions">Salario</h2>
-        {% endif %}
-    </div>
-    <div class="row">
-        <p class="description-text">
-            {% if campaign.salary_low_range == campaign.salary_high_range %}
-                ${{ campaign.salary_low_range }}
-            {% else %}
-                ${{ campaign.salary_low_range }} a ${{ campaign.salary_high_range }}
-            {% endif %}
-        </p>
-    </div>
+        </div>
+        <div class="row">
+            <p class="description-text">
+                {% if campaign.salary_low_range == campaign.salary_high_range %}
+                    ${{ campaign.salary_low_range }}
+                {% else %}
+                    ${{ campaign.salary_low_range }} a ${{ campaign.salary_high_range }}
+                {% endif %}
+            </p>
+        </div>
+    {% endif %}
     <div class="row">
         {% if perks %}
             <h2 class="descriptions">{% trans "Perks" %}</h2>
@@ -221,12 +220,11 @@
 
         if ($(window).width() < 769) {
             $("#login-form").animate({"marginLeft": 'auto'}, 650,"swing");
-            $("#login-form").css("margin", "50px auto");
+            $("#login-form").css("margin", "120px auto");
         }
         else {
             $("#login-form").animate({"marginLeft": '60%'}, 650,"swing");
-        }
-
+            }
         }
 
         function off_login() {
@@ -244,7 +242,7 @@
 
         if ($(window).width() < 769) {
             $(".only-register-form").animate({"marginLeft": 'auto'}, 650,"swing");
-            $(".only-register-form").css("margin", "50px auto");
+            $(".only-register-form").css("margin", "120px auto");
             $(".register").css("margin-left", "30px");
         }
         else {
@@ -252,7 +250,6 @@
         }
         $(".form-image").animate({"backgroundPosition": '86%'}, 690,"swing");
         }
-
 
         function off_signup() {
         $("#overlay-signup").css("display", "none");

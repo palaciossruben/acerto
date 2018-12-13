@@ -609,6 +609,7 @@ def dashboard(request, business_user_id, campaign_id, state_name):
     """
 
     business_user = BusinessUser.objects.get(pk=business_user_id)
+    logged_user = BusinessUser.objects.get(auth_user_id=request.user.id)
     campaign = Campaign.objects.get(pk=campaign_id)
     business_state = BusinessState.objects.get(name=state_name)
     business_state.translate(request.LANGUAGE_CODE)
@@ -651,7 +652,8 @@ def dashboard(request, business_user_id, campaign_id, state_name):
                                                      'total_recommended': len(recommended),
                                                      'total_relevant': len(relevant),
                                                      'campaign_evaluation': campaign_evaluation,
-                                                     'campaign_state_name': campaign_state_name
+                                                     'campaign_state_name': campaign_state_name,
+                                                     'logged_user': logged_user.name
                                                      })
 
 
@@ -721,8 +723,20 @@ def change_state(request):
 
     if request.method == 'POST':
         candidate = Candidate.objects.get(pk=request.POST.get('candidate_id'))
+        campaign = candidate.campaign
         state_code = request.POST.get('state_code')
-        candidate.change_state(state_code=state_code, place='Business User ha cambiado el estado del candidato')
+        feedback = request.POST.get('feedback')
+        if state_code and feedback != 'No':
+            candidate.change_state(state_code=state_code, place='Business User ha cambiado el estado del candidato')
+            candidate.change_by_client = True
+            candidate.save()
+            if state_code == 'ABC':
+                campaign.likes = campaign.likes + 1
+                campaign.save()
+                candidate.liked = True
+                candidate.save()
+        else:
+            candidate.change_state(state_code=state_code, place='admin ha cambiado el estado del candidato')
 
         return HttpResponse()
     else:

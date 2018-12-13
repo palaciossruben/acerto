@@ -399,19 +399,6 @@ circle:hover {
 	text-decoration:none;
 }
 
-#contact-buttons {
-	position:fixed;
-	margin-top:77vh;
-	margin-left:100%;
-	left:-100px;
-	z-index:100;
-	float:right;
-}
-
-#contact-buttons img {
-	padding-bottom:5px;
-}
-
 /**********************************************************************************************/
 
 #overlay-signup, #overlay-login, #overlay-demo {
@@ -753,7 +740,6 @@ circle:hover {
 
     #contact-buttons {
 	    left:-46px;
-	    margin-top:82vh;
 	}
 
 }
@@ -821,10 +807,6 @@ circle:hover {
 
     .blankreviewspic {
         height:1840px;
-    }
-
-    #contact-buttons {
-        margin-top:76vh;
     }
 
 }
@@ -931,11 +913,6 @@ circle:hover {
 
     .button-buy-cel {
 		display:none;
-	}
-
-
-	#contact-buttons {
-	    margin-top:83vh;
 	}
 
 	#whatsapp-pc {

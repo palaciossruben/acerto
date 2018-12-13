@@ -91,6 +91,31 @@ a, a:hover, a:active, a: visited, a:focus{
     margin-top: 6%;
 }
 /**********************************************************************************************************************/
+.reason{
+    display:none;
+}
+
+.candidate-info-div{
+    margin-bottom: 20px;
+}
+
+.reason-input{
+    padding: 8px 10px;
+    margin: 10px auto;
+    border: 2px solid #F26122;
+    border-radius:5px;
+    width: 200px;
+}
+
+.send{
+    font-size: 12px;
+    color: white;
+    border-radius: 20px;
+    padding: 6px 30px;
+    background: #F47B20;
+    margin: 3px 0 6px 0;
+    text-align: center;
+}
 
 .state{
     border-radius:25px;
@@ -177,19 +202,61 @@ a, a:hover, a:active, a: visited, a:focus{
 
 .like-dislike{
     display: inline-block;
-    width:50px;
+}
+
+.like-selection-div{
+    text-align:center;
+    margin-bottom: -20px;
 }
 
 .like{
-    border: none;
-    background: rgb(72, 171, 88);
-    width: 100%;
+    width: 195px;
+    border: 2px solid #A8CF38;
+    background:white;
+    padding: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-right:none;
+}
+
+.like-on{
+    width: 195px;
+    border: 2px solid #A8CF38;
+    background:#A8CF38;
+    color:white;
+    padding: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-right:none;
+    cursor:default;
 }
 
 .dislike{
-    border: none;
-    background: rgb(221, 81, 51);
-    width: 100%;
+    width: 195px;
+    border: 2px solid #F26122;
+    background:white;
+    padding: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left:none;
+}
+
+.dislike-on{
+    width: 195px;
+    border: 2px solid #F26122;
+    background:#F26122;
+    color:white;
+    padding: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-right:none;
+    cursor:default;
+}
+
+.off{
+    border: 2px solid #9F9C9B;
+    color:9F9C9B;
+    cursor:default;
 }
 
 .candidate-div{
@@ -200,7 +267,8 @@ a, a:hover, a:active, a: visited, a:focus{
     border-width:3px;
     border-color: #F1F1EB;
     padding:10px;
-    margin-bottom:20px;
+    margin-bottom:50px;
+    padding-bottom:0;
 }
 
 .div1{
@@ -592,19 +660,6 @@ footer {
 	text-decoration:none;
 }
 
-#contact-buttons {
-	position:fixed;
-	margin-top:77vh;
-	margin-left:100%;
-	left:-100px;
-	z-index:100;
-	float:right;
-}
-
-#contact-buttons img {
-	padding-bottom:5px;
-}
-
 .logo {
     float:left;
 }
@@ -621,6 +676,19 @@ footer {
     padding-left: 30px;
     margin-top: -50px;
 
+}
+
+#contact-buttons {
+	position:fixed;
+	margin-left:100%;
+	left:-100px;
+	z-index:300;
+	float:right;
+	bottom:0;
+}
+
+#contact-buttons img {
+	padding-bottom:5px;
 }
 
 /**************************************************RESPONSIVE**********************************************************/
@@ -650,12 +718,26 @@ footer {
     .sidenav {
         display:none;
     }
-
 }
 
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
+}
+
+@media screen and (max-width: 450px) {
+    .like{
+        border-right: 2px solid #A8CF38;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+
+    }
+
+    .dislike {
+        border-left: 2px solid #F26122;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
 }
 
 @media screen and (max-width: 768px) {

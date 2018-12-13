@@ -59,6 +59,10 @@
                         <a class="navText" href="{% url 'beta_invite:index' %}">Personas</a>
                         <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
                     </div>
+                    <div id="contact-buttons">
+                        <a href="https://api.whatsapp.com/send?phone=573174236989" target="_blank"><img src="{% static 'business/img/boton-whatsapp.png' %}" width="100px" id="whatsapp-pc"></a>
+
+                    </div>
                     <div id="overlay-signup">
                         <div class="form-image">
                             <form class="only-register-form" action="{% url 'business:business_signup' %}" method="post">

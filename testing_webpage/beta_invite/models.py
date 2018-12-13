@@ -656,6 +656,7 @@ class Campaign(models.Model):
     image = models.CharField(max_length=500, null=True)
     salary_low_range = models.IntegerField(null=True)
     salary_high_range = models.IntegerField(null=True)
+    likes = models.IntegerField(default=0)
 
     recommended_evaluation = models.ForeignKey(EvaluationSummary, null=True, related_name='recommended_evaluation')
     relevant_evaluation = models.ForeignKey(EvaluationSummary, null=True, related_name='relevant_evaluation')
@@ -767,7 +768,7 @@ class Experience(models.Model):
 
     company = models.ForeignKey(Company)
     role = models.CharField(max_length=40)
-    highlight = models.CharField(max_length=140)
+    highlight = models.CharField(max_length=300)
     number_of_months = models.IntegerField(null=True)
     number_of_years = models.IntegerField(null=True)
     order = models.IntegerField(null=True)

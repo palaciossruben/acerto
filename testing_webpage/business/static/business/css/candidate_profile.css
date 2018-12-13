@@ -672,11 +672,11 @@ footer {
 
 #contact-buttons {
 	position:fixed;
-	margin-top:77vh;
 	margin-left:100%;
 	left:-100px;
-	z-index:100;
+	z-index:300;
 	float:right;
+	bottom:0;
 }
 
 #contact-buttons img {

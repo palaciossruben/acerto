@@ -607,19 +607,6 @@ trix-editor ul {
     margin: 15px 10px;
 }
 
-#contact-buttons {
-	position:fixed;
-	margin-top:77vh;
-	margin-left:100%;
-	left:-100px;
-	z-index:100;
-	float:right;
-}
-
-#contact-buttons img {
-	padding-bottom:5px;
-}
-
 .contact{
     width:80%;
     float:right;
