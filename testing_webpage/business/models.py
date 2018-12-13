@@ -5,6 +5,7 @@ from django.contrib.auth.models import User as AuthUser
 from django.contrib.postgres.fields import JSONField
 from django.core.exceptions import ObjectDoesNotExist
 
+import basic_common
 from beta_invite.models import Country, Education, Profession, Campaign
 from business.more_models import Company
 
@@ -64,6 +65,11 @@ class BusinessUser(models.Model):
 
     def __str__(self):
         return '{0}, {1}, {2}'.format(self.name, self.email, self.company)
+
+    def change_to_international_phone_number(self, campaign, add_plus=False):
+        calling_code = campaign.get_calling_code()
+        self.phone = basic_common.change_to_international_phone_number(self.phone, calling_code, add_plus=add_plus)
+        return self.phone
 
     @staticmethod
     def get_business_user(user):

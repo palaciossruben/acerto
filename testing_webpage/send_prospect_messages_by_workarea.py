@@ -58,7 +58,7 @@ def send_prospect_messages(segment_code):
     print(len(new_candidates))
     print(len(final_candidates))
 
-    messenger_sender.send(candidates=final_candidates,
+    messenger_sender.send(objects=final_candidates,
                           language_code='es',
                           body_input='prospects_invitation_message_body')
 

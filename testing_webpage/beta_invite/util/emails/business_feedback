@@ -1,0 +1,31 @@
+Hola {name},
+
+Gracias por publicar tu oferta laboral con nosotros,
+
+Se ha terminado la publicación {campaign_name}, lo que significa que ya no aplicarán candidatos nuevos, en todo caso puedes acceder a la plataforma normalmente y acceder a todos los candidatos que aplicaron,
+
+
+Los resultados de tu publicación fueron así:
+
+Candidatos aplicantes: {total_applicant_candidates}
+
+Candidatos preseleccionados: {total_relevant_candidates}
+
+<h2>Candidatos seleccionados: {total_recommended_candidates} </h2>
+
+
+Recuerda que puedes ingresar a la plataforma y ver todos los procesos <a href="{business_campaign_url}">aquí</a>
+
+Nos encantaría conocer tu opinión y te tomará máximo 5 minutos: <a href="https://goo.gl/forms/SHMxNti2IIr4aYzY2">encuesta</a>
+
+Puedes contactarnos en cualquier momento por Whatsapp <a href="http://wa.me/573174236989">aquí</a>
+
+
+Atento a tus comentarios,
+{sender_name}
+{sender_position}
+{peaku_address}
+
+Síguenos en redes:
+Facebook: https://www.facebook.com/peakulatam/
+Instagram: @peaku_latam

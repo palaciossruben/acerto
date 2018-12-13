@@ -9,7 +9,7 @@ register = template.Library()
 
 @register.filter
 def get_campaign_url(campaign):
-    return campaign.get_url()
+    return campaign.get_url_for_candidates()
 
 
 @register.filter
@@ -71,12 +71,14 @@ def int_rounding(score):
 
 @register.filter
 def get_business_user_name_with_campaign(campaign):
-    return common.get_business_user_with_campaign(campaign, 'name')
+    business_user = common.get_business_user_with_campaign(campaign)
+    return business_user.name if business_user else None
 
 
 @register.filter
 def get_business_user_company_with_campaign(campaign):
-    return common.get_business_user_with_campaign(campaign, 'company')
+    business_user = common.get_business_user_with_campaign(campaign)
+    return business_user.company if business_user else None
 
 
 @register.filter

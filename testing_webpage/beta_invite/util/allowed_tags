@@ -1,17 +1,24 @@
 This are the allowed tags for emails and messages:
 
-{name}:                     First word of User.name
-{test_url}:                 Url redirecting to tests for a given user and campaign
-{cv_url}:                   Url redirecting to add cv for a given user
-{sender_name}:              Ex Juan
-{sender_position}:          Ex CTO
-{peaku_address}:            Ex Calle 107...
-{campaign}:                 Campaign.name
-{video_url}:                Url redirecting to add the video of the interview
-{campaign_url}:             The url of a campaign for candidate
-{campaign_city}             The campaign city
-{campaign_description}      The campaigns description
-{complete_name}:            The complete value of User.name
-{business_campaign_url}:    The url of a campaign for business_user
-{additional_info_url}:      The url for complete the additional info forms, for candidates
-{campaign_salary_range}:    The campaign Salary range, set by business user
+{name}:                                       First word of User.name, BusinessUser.name or Lead.name
+{test_url}:                                   Url redirecting to tests for a given user and campaign
+{cv_url}:                                     Url redirecting to add cv for a given user
+{sender_name}:                                Ex Juan
+{sender_position}:                            Ex CTO
+{peaku_address}:                              Ex Calle 107...
+{campaign}:                                   Campaign.name
+{video_url}:                                  Url redirecting to add the video of the interview
+{campaign_url}:                               The url of a campaign for candidate
+{campaign_city}                               The campaign city
+{campaign_description}                        The campaigns description
+{complete_name}:                              The complete value of User.name, BusinessUser.name or Lead.name
+{business_campaign_url}:                      The url of a campaign for business_user
+{additional_info_url}:                        The url for complete the additional info forms, for candidates
+{campaign_salary_range}:                      The campaign Salary range, set by business user
+{campaign_name}                               Name of the campaign
+{campaign_salary_range}                       Salary from to...
+{campaign_city}                               City of the campaign
+{campaign_description}                        Description of the campaign
+{total_applicant_candidates}                  Total applicants for campaign
+{total_relevant_candidates}                   Total relevant for campaign
+{total_recommended_candidates}                Total recommended for campaign

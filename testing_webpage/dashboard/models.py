@@ -8,7 +8,6 @@ from django.contrib.auth.models import User as AuthUser
 
 from beta_invite.models import User, Campaign, Evaluation, Survey, EvaluationSummary, Score, Test
 from dashboard import constants as cts
-from beta_invite.util import common_senders
 
 
 class State(models.Model):
@@ -483,14 +482,12 @@ class Message(models.Model):
     class Meta:
         db_table = 'messages'
 
-    def add_format_and_mark_as_sent(self):
+    def add_format_and_mark_as_sent(self, params):
         """
         Adds format to message and returns itself
         :return: self
         """
-        params = common_senders.get_params_with_candidate(self.candidate,
-                                                          self.candidate.user.language_code,
-                                                          {})
+
         self.text = self.text.format(**params)
         self.sent = True
         self.save()

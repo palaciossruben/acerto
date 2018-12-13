@@ -14,7 +14,7 @@ urlpatterns = [
     url(r'^campaign/(?P<campaign_id>\d+)$', views.edit_campaign_candidates, name='campaign'),
     url(r'^campaign/new$', views.new_campaign, name='new_campaign'),
     url(r'^campaign/create$', views.create_campaign, name='create_campaign'),
-    url(r'^campaign/edit/(?P<pk>\d+)$', views.edit_campaign, name='edit_campaign'),
+    url(r'^campaign/edit/(?P<campaign_id>\d+)$', views.edit_campaign, name='edit_campaign'),
     url(r'^campaign/update[-_]basic[-_]properties$', views.update_basic_properties),
     url(r'^campaign/delete/(?P<pk>\d+)$', views.delete_campaign, name='delete_campaign'),
     url(r'^campaign/candidate/(?P<candidate_id>\d+)$', views.candidate_detail, name='candidate_detail'),

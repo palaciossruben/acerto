@@ -2,7 +2,9 @@
 import os
 from django.conf import settings
 from decouple import config
-from beta_invite.models import User, WorkAreaSegment
+
+import common
+from beta_invite.models import WorkAreaSegment
 
 if settings.DEBUG:
     HOST = '//127.0.0.1:8000'
@@ -67,14 +69,14 @@ def get_jobs_segment_url(segment_id):
 def get_campaign_url(candidate):
 
     if hasattr(candidate, 'campaign_id') and candidate.campaign_id:
-        return candidate.campaign.get_url()
+        return candidate.campaign.get_url_for_candidates()
     else:
         return ''
 
 
 def get_campaign_salary_range(candidate):
-    if hasattr(candidate, 'campaign_id') and candidate.campaign_id:
-        return '{} - {}'.format(candidate.campaign.salary_low_range, candidate.campaign.salary_high_range)
+    if candidate and candidate.campaign_id:
+        return candidate.campaign.get_campaign_salary_range()
     else:
         return ''
 
@@ -96,10 +98,7 @@ def get_campaign_name(candidate, language_code):
 
 
 def get_campaign_city_name(candidate):
-
-    if candidate and candidate.campaign and candidate.campaign.city:
-        return candidate.campaign.city.name
-    return ''
+    return candidate.campaign.get_campaign_city_name() if candidate and candidate.campaign else ''
 
 
 def get_campaign_description(candidate, language_code):
@@ -109,13 +108,7 @@ def get_campaign_description(candidate, language_code):
         candidate: User or Contact object.
     Returns: string with title
     """
-    if candidate and hasattr(candidate.campaign, 'description') and candidate.campaign.description:
-        if language_code == 'es':
-            return candidate.campaign.description_es
-        else:
-            return candidate.campaign.description
-
-    return ''
+    return candidate.campaign.get_description(language_code) if candidate and candidate.campaign else ''
 
 
 def get_cv_url(user):
@@ -168,18 +161,13 @@ def get_params_with_user(user, override_dict={}):
     params = {'name': get_first_name(user.name),
               'complete_name': user.name.title(),
               'cv_url': get_cv_url(user),
-              'sender_name': config('sender_name'),
-              'sender_position': config('sender_position'),
-              'peaku_address': config('peaku_address'),
               }
 
-    for k, v in override_dict.items():
-        params[k] = v
-
+    params.update(get_basic_params(override_dict))
     return params
 
 
-def get_params_with_candidate(candidate, language_code, override_dict={}):
+def get_params_with_candidate(candidate, language_code='es', override_dict={}):
     """
     Args:
         candidate: Object.
@@ -190,9 +178,6 @@ def get_params_with_candidate(candidate, language_code, override_dict={}):
     params = {'name': get_first_name(candidate.user.name),
               'complete_name': candidate.user.name.title(),
               'cv_url': get_cv_url(candidate.user),
-              'sender_name': config('sender_name'),
-              'sender_position': config('sender_position'),
-              'peaku_address': config('peaku_address'),
               'campaign': get_campaign_name(candidate, language_code),
               'campaign_url': get_campaign_url(candidate),
               'campaign_salary_range': get_campaign_salary_range(candidate),
@@ -207,9 +192,53 @@ def get_params_with_candidate(candidate, language_code, override_dict={}):
         params['test_url'] = get_test_url(candidate.user, candidate.campaign)
         params['video_url'] = get_video_url(candidate.user, candidate.campaign)
         params['additional_info_url'] = get_additional_info_url(candidate)
-    for k, v in override_dict.items():
-        params[k] = v
 
+    params.update(get_basic_params(override_dict))
+    return params
+
+
+def get_params_with_campaign(campaign, language_code='es', override_dict={}):
+    """
+    Args:
+        campaign: Object.
+        language_code: just that.
+        override_dict: Dictionary that changes the default values.
+    Returns:
+    """
+    params = {'campaign_name': campaign.name,
+              'campaign_url': campaign.get_url_for_candidates(),
+              'campaign_salary_range': campaign.get_campaign_salary_range(),
+              'campaign_city': campaign.get_campaign_city_name(),
+              'campaign_description': campaign.get_description(language_code),
+              'total_applicant_candidates': common.get_application_candidates_count(campaign),
+              'total_relevant_candidates': common.get_relevant_candidates_count(campaign),
+              'total_recommended_candidates': common.get_recommended_candidates_count(campaign),
+              'campaign_summary_url': campaign.get_url_for_company(),
+              'business_campaign_url': campaign.get_url_for_company(),
+              }
+
+    business_user = common.get_business_user_with_campaign(campaign)
+    if business_user:
+        params['name'] = get_first_name(business_user.name)
+        params['complete_name'] = business_user.name.title()
+
+    params.update(get_basic_params(override_dict))
+    return params
+
+
+def get_params_with_business_user(business_user, language_code='es', override_dict={}):
+    """
+        Args:
+            business_user: Object.
+            language_code: just that.
+            override_dict: Dictionary that changes the default values.
+        Returns:
+        """
+    params = {'name': get_first_name(business_user.name),
+              'complete_name': business_user.name.title(),
+             }
+
+    params.update(get_basic_params(override_dict))
     return params
 
 
@@ -222,17 +251,21 @@ def get_body(body_input, body_is_filename=True, path=get_email_path()):
     Returns:
     """
     if body_is_filename:
-        with open(os.path.join(path, body_input), encoding='utf-8') as fp:
-            return fp.read()
+        try:
+            with open(os.path.join(path, body_input), encoding='utf-8') as fp:
+                return fp.read()
+        except FileNotFoundError:  # tries on both folders, emails and messages
+            with open(os.path.join(get_message_path(), body_input), encoding='utf-8') as fp:
+                return fp.read()
     else:
         return body_input
 
 
-def process_inputs(with_localization, language_code, body_input, candidates):
+def process_inputs(with_localization, language_code, body_input, objects):
     if with_localization and language_code != 'en':
         body_input += '_{}'.format(language_code)
 
-    if type(candidates) != list:
-        candidates = [candidates]
+    if type(objects) != list:
+        objects = [objects]
 
-    return body_input, candidates
+    return body_input, objects

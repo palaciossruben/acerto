@@ -1,15 +1,16 @@
-import json
-import common
+import datetime
 from django.core import serializers
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.db.models import Q
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-import datetime
 
+
+import common
+from beta_invite.util import common_senders
 from beta_invite import constants as beta_cts
-from beta_invite.models import Campaign, Test, TestType, BulletType, Interview, Survey, Bullet, QuestionType, Question, Answer, CampaignState
+from beta_invite.models import Campaign, Test, TestType, BulletType, Interview, Survey, Bullet, QuestionType, Question, Answer, CampaignState, CampaignMessage
 from business.models import Company
 from dashboard.models import Candidate, Message, Screening
 from dashboard import constants as cts
@@ -18,25 +19,9 @@ from beta_invite.views import get_drop_down_values
 from dashboard import interview_module, candidate_module, campaign_module, test_module
 from match import model
 from api.models import LeadMessage
+from testing_webpage.models import CampaignPendingEmail, EmailType
 
 CANDIDATE_FORECAST_LIMIT = 20
-
-'''
-                     DON'T DELETE, THIS WILL BE USEFUL FOR AUTOMATIC STATE CHANGES OR SORTING
-def sort_users_by_campaign_count(business_users):
-    business_users = [(b, b.campaigns.filter(removed=False).count()) for b in business_users]
-    business_users.sort(key=lambda x: x[1], reverse=True)
-    return [b for b, count in business_users if count > 0]
-
-
-def get_business_users_order_by_active_campaigns():
-    weeks_old = 5
-    weeks_ago = datetime.datetime.today() - datetime.timedelta(weeks=weeks_old)
-    new_business_users = BusinessUser.objects.filter(created_at__gte=weeks_ago).all()
-    old_business_users = BusinessUser.objects.filter(created_at__lt=weeks_ago).all()
-
-    return sort_users_by_campaign_count(new_business_users) + sort_users_by_campaign_count(old_business_users)
-'''
 
 
 @login_required
@@ -189,16 +174,16 @@ def create_campaign(request):
     return redirect('/dashboard')
 
 
-def edit_campaign(request, pk):
+def edit_campaign(request, campaign_id):
     """
     Args:
         request: HTTP
-        pk: campaign_id
+        campaign_id: campaign_id
     Returns: Renders basic properties of a campaign
     """
-    campaign = Campaign.objects.get(pk=pk)
+    campaign = Campaign.objects.get(pk=campaign_id)
     countries, cities, education, professions, work_areas, genders = get_drop_down_values(request.LANGUAGE_CODE)
-    business_user = common.get_business_user_with_campaign(campaign, 'object')
+    business_user = common.get_business_user_with_campaign(campaign)
     if not business_user:
         company = ""
     else:
@@ -217,6 +202,23 @@ def edit_campaign(request, pk):
                                                       })
 
 
+def send_feedback_message_and_mail(business_user, campaign, request):
+
+    # goes from active to finish, will ask for feedback
+    if campaign.state == CampaignState.objects.get(code='A') and \
+                    int(request.POST.get('state_id')) == CampaignState.objects.get(code='F').id:
+
+        # TODO: this is really worng
+        CampaignPendingEmail.add_to_queue(campaigns=campaign,
+                                          language_code='es',
+                                          body_input='business_feedback',
+                                          subject='Publicación terminada {campaign_name}',
+                                          email_type=EmailType.objects.get(name='business_feedback'))
+        messenger_sender.send(objects=campaign,
+                              language_code='es',
+                              body_input='business_feedback')
+
+
 def update_basic_properties(request):
     """
     Args:
@@ -224,9 +226,11 @@ def update_basic_properties(request):
     Returns: Updates just the basics of a campaign.
     """
     campaign = common.get_campaign_from_request(request)
+    business_user = common.get_business_user_with_campaign(campaign)
+
+    send_feedback_message_and_mail(business_user, campaign, request)
 
     campaign_module.update_campaign_basic_properties(campaign, request)
-    business_user = common.get_business_user_with_campaign(campaign, 'object')
     if business_user:
         company = business_user.company
         if company:
@@ -583,15 +587,15 @@ def check_interview(request):
                                            'question_answer_tuples': interview_module.get_sorted_tuples(surveys)})
 
 
-def mark_as_added(users):
+def mark_as_added(objects):
     """
     Flag added to True value.
-    :param users: collection
+    :param objects: collection
     :return: none
     """
-    for u in users:
-        u.added = True
-        u.save()
+    for o in objects:
+        o.added = True
+        o.save()
 
 
 def get_candidate_users():
@@ -620,6 +624,25 @@ def get_leads():
     return list(leads)
 
 
+def get_business_users():
+    """
+    Gets the business_users from messages sending to campaigns
+    :return:
+    """
+    campaigns = {m.campaign for m in CampaignMessage.objects.filter(sent=False)}
+    mark_as_added(campaigns)
+
+    business_users = []
+    for campaign in campaigns:
+        business_user = common.get_business_user_with_campaign(campaign)
+        if business_user and business_user.phone:
+            business_user.change_to_international_phone_number(campaign)
+            business_user.name = email_sender.remove_accents(business_user.name)
+            business_users.append(business_user)
+
+    return list(business_users)
+
+
 def add_prospect_messages(message_filename):
 
     # TODO: add English
@@ -630,7 +653,7 @@ def add_prospect_messages(message_filename):
                                            ~Q(message__filename=message_filename) &
                                            ~Q(campaign_id=beta_cts.DEFAULT_CAMPAIGN_ID))]
 
-    messenger_sender.send(candidates=candidates,
+    messenger_sender.send(objects=candidates,
                           language_code='es',
                           body_input=message_filename)
 
@@ -646,7 +669,7 @@ def add_backlog_messages(message_filename):
                                            ~Q(message__filename=message_filename) &
                                            ~Q(campaign_id=beta_cts.DEFAULT_CAMPAIGN_ID))]
 
-    messenger_sender.send(candidates=candidates,
+    messenger_sender.send(objects=candidates,
                           language_code='es',
                           body_input=message_filename)
 
@@ -666,14 +689,27 @@ def send_new_contacts(request):
     """
 
     add_backlog_messages('candidate_backlog')
-    #add_prospect_messages('candidate_prospect')
 
     leads = get_leads()
     users = get_candidate_users()
+    business_users = get_business_users()
 
-    list_of_users = [{'pk': u.pk, 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}} for u in users + leads]
+    list_of_users = [{'pk': u.pk, 'fields': {'phone': u.phone, 'name': u.name, 'email': u.email}} for u in users + leads + business_users]
 
     return JsonResponse(list_of_users, safe=False)
+
+
+def add_contact_name(campaign_messages):
+
+    for m in campaign_messages:
+
+        business_user = common.get_business_user_with_campaign(m.campaign)
+        name = business_user.name if business_user else ''
+
+        m.contact_name = '{name} {pk}'.format(name=name,
+                                              pk=str(m.campaign.pk))
+
+    return campaign_messages
 
 
 def send_messages(request):
@@ -683,11 +719,24 @@ def send_messages(request):
     :return: json
     """
 
-    lead_messages = [m.add_format_and_mark_as_sent() for m in LeadMessage.objects.filter(sent=False,
-                                                                                         lead__added=True)]
-    messages = [m.add_format_and_mark_as_sent() for m in Message.objects.filter(sent=False,
-                                                                                candidate__user__added=True)]
+    lead_messages = [
+        m.add_format_and_mark_as_sent({'name': common_senders.get_first_name(m.lead.name)})
+        for m in LeadMessage.objects.filter(sent=False, lead__added=True)
+    ]
 
-    messages_json = serializers.serialize('json', messages + lead_messages)
+    messages = [
+        m.add_format_and_mark_as_sent(common_senders.get_params_with_candidate(m.candidate,
+                                                                               m.candidate.user.language_code,
+                                                                               {}))
+        for m in Message.objects.filter(sent=False, candidate__user__added=True)
+    ]
+
+    campaign_messages = [
+        m.add_format_and_mark_as_sent(common_senders.get_params_with_campaign(m.campaign))
+        for m in CampaignMessage.objects.filter(sent=False, campaign__added=True)
+    ]
+    campaign_messages = add_contact_name(campaign_messages)
+
+    messages_json = serializers.serialize('json', messages + lead_messages + campaign_messages)
 
     return JsonResponse(messages_json, safe=False)

@@ -43,7 +43,15 @@
     "model": "beta_invite.emailtype",
     "pk": 6,
     "fields":{
-      "name": "business welcome",
+      "name": "business_welcome",
+      "sync": false
+    }
+  },
+  {
+    "model": "beta_invite.emailtype",
+    "pk": 7,
+    "fields":{
+      "name": "business_feedback",
       "sync": false
     }
   }

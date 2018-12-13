@@ -7,7 +7,6 @@ from django.shortcuts import redirect
 import common
 from beta_invite.models import Bullet, Campaign, City, Test, Question, QuestionType, Answer, TestType
 from business import prospect_module
-from beta_invite.util import messenger_sender
 
 
 def update_bullet_attr(campaign, dict_id, key_bullet_dict, value, attribute_name):

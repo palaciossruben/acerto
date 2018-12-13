@@ -1,11 +1,16 @@
 import re
+import urllib.parse
+
 from datetime import datetime, timedelta
 from django.contrib.auth.models import User as AuthUser
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
-
 from django.db import models
 from django.contrib.postgres.fields import JSONField
 from django.conf import settings
+from django.db.models.signals import post_init
+
+
+import basic_common
 from beta_invite import constants as cts
 from business.more_models import Company, School
 
@@ -657,6 +662,7 @@ class Campaign(models.Model):
     salary_low_range = models.IntegerField(null=True)
     salary_high_range = models.IntegerField(null=True)
     likes = models.IntegerField(default=0)
+    added = models.BooleanField(default=False)  # indicates if added to messenger
 
     recommended_evaluation = models.ForeignKey(EvaluationSummary, null=True, related_name='recommended_evaluation')
     relevant_evaluation = models.ForeignKey(EvaluationSummary, null=True, related_name='relevant_evaluation')
@@ -681,8 +687,29 @@ class Campaign(models.Model):
     class Meta:
         db_table = 'campaigns'
 
+    def get_calling_code(self):
+        if self.country is not None:
+            return str(self.country.calling_code)
+        else:  # TODO: SHOULD NEVER DEFAULT to this, Defaults to Colombia
+            return str(Country.objects.get(name='Colombia').calling_code)
+
+    def get_campaign_salary_range(self):
+        return '{} - {}'.format(self.salary_low_range, self.salary_high_range)
+
+    def get_campaign_city_name(self):
+        return self.city.name if self.city else ''
+
     def get_work_area_segment(self):
         return self.work_area.segment if self.work_area else None
+
+    def get_description(self, language_code):
+        if self.description:
+            if language_code == 'es':
+                return self.description_es
+            else:
+                return self.description
+        else:
+            return ''
 
     def get_short_description(self):
 
@@ -728,8 +755,11 @@ class Campaign(models.Model):
     def get_host(self):
         return '//127.0.0.1:8000' if settings.DEBUG else 'https://peaku.co'
 
-    def get_url(self):
-        return self.get_host()+'/servicio_de_empleo?campaign_id={campaign_id}'.format(campaign_id=self.pk)
+    def get_url_for_candidates(self):
+        return urllib.parse.urljoin(self.get_host(), '/servicio-de-empleo?campaign_id={campaign_id}'.format(campaign_id=self.pk))
+
+    def get_url_for_company(self):
+        return urllib.parse.urljoin(self.get_host(), '/seleccion-de-personal/resumen/{campaign_id}'.format(campaign_id=self.pk))
 
     def get_requirement_names(self):
         # TODO: add support for english
@@ -961,24 +991,10 @@ class User(models.Model):
         else:
             return None
 
-    # TODO: merge with Lead method, when we have the country of the lead.
     def change_to_international_phone_number(self, add_plus=False):
-
-        plus_symbol = '+' if add_plus else ''
-
-        if self.phone:
-
-            self.phone = self.phone.replace('-', '')
-
-            if self.phone[0] != '+':
-
-                if re.search(r'^' + self.get_calling_code() + '.+', self.phone) is None:
-
-                    self.phone = plus_symbol + self.get_calling_code() + self.phone
-
-                else:
-                    self.phone = plus_symbol + self.phone
-
+        self.phone = basic_common.change_to_international_phone_number(self.phone,
+                                                                       self.get_calling_code(),
+                                                                       add_plus=add_plus)
         return self.phone
 
     # adds custom table name
@@ -1170,3 +1186,58 @@ class SearchLog(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'search_logs'
+
+
+class CampaignMessage(models.Model):
+    """
+    This table stores messages sent later on. is a kind of queue, but for business users
+    """
+    campaign = models.ForeignKey(Campaign)
+    text = models.CharField(max_length=10000, default='')
+
+    # The logic of contact_name (post_init) is done in the view, as there were conflicts importing dependencies here
+    contact_name = models.CharField(max_length=200, default='')
+
+    sent = models.BooleanField(default=False)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '{0}, {1}'.format(self.pk, self.text)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'campaign_messages'
+
+    def add_format_and_mark_as_sent(self, params):
+        """
+        Adds format to message and returns itself
+        :return: self
+        """
+        self.text = self.text.format(**params)
+        self.sent = True
+        self.save()
+        return self
+
+    @staticmethod
+    def add_to_message_queue(campaigns, messages):
+        """
+        Adds objects to the message table. So later on this table will serve as a message queue.
+        :param campaigns: list of business_users.
+        :param messages: list of strings
+        :return: writes on table messages to be sent.
+        """
+        for campaign, message in zip(campaigns, messages):
+            CampaignMessage(campaign=campaign, text=message).save()
+
+    @staticmethod
+    def mark_as_added(campaigns):
+        """
+        Flag added to True value.
+        :param campaigns: collection
+        :return: none
+        """
+        for c in campaigns:
+            c.added = True
+            c.save()

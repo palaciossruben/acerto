@@ -2,7 +2,7 @@ from django.db import models
 from picklefield.fields import PickledObjectField
 
 
-from beta_invite.models import EmailType
+from beta_invite.models import EmailType, Campaign
 from business.models import BusinessUser
 from dashboard.models import Candidate
 
@@ -37,6 +37,25 @@ class BusinessUserEmailSent(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'business_user_emails_sent'
+
+
+class CampaignEmailSent(models.Model):
+
+    email_type = models.ForeignKey(EmailType, on_delete=models.DO_NOTHING)
+    campaign = models.ForeignKey(Campaign, on_delete=models.DO_NOTHING, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return 'id={0}, candidate_id={1}, email_type={2}'.format(self.pk, self.campaign.id, self.email_type)
+
+    # adds custom table name
+    class Meta:
+        db_table = 'campaign_emails_sent'
+
+
+# -------------------------------------------------------------------------------------------------------------------- #
 
 
 class CandidatePendingEmail(models.Model):
@@ -131,3 +150,50 @@ class BusinessUserPendingEmail(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'business_user_pending_emails'
+
+
+class CampaignPendingEmail(models.Model):
+
+    campaigns = models.ManyToManyField(Campaign)
+    language_code = models.CharField(max_length=3)
+    body_input = models.CharField(max_length=10000)
+    subject = models.CharField(max_length=200)
+    email_type = models.ForeignKey(EmailType, on_delete=models.DO_NOTHING, null=True)
+
+    # optional
+    with_localization = models.BooleanField(default=True)
+    body_is_filename = models.BooleanField(default=True)
+    override_dict = PickledObjectField(default={})
+
+    # internal
+    sent = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return 'id={0}'.format(self.pk)
+
+    @staticmethod
+    def add_to_queue(**kwargs):
+
+        campaigns = kwargs.pop('campaigns', None)
+
+        email = CampaignPendingEmail(**kwargs)
+        email.save()
+        email.save_campaigns(campaigns)
+
+    def save_campaigns(self, campaigns):
+        """
+        Can __init__ with 1 campaign or a list of campaigns.
+        :param campaigns:
+        :return:
+        """
+        if campaigns and type(campaigns) != list:
+            campaigns = [campaigns]
+
+        self.campaigns = campaigns
+        self.save()
+
+    # adds custom table name
+    class Meta:
+        db_table = 'campaign_pending_emails'

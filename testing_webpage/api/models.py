@@ -1,9 +1,8 @@
 import os
-import re
+import basic_common
 from django.db import models
 from django.db.models.signals import post_init
 
-from beta_invite.util import common_senders
 from beta_invite.models import Campaign
 
 
@@ -44,7 +43,7 @@ class PublicPost(models.Model):
         :return: writes on table messages to be sent.
         """
         # TODO: add English support
-        with open(os.path.join(common_senders.get_public_post_path(), 'publication_es.txt'), 'r') as f:
+        with open(os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'public_posts'), 'publication_es.txt'), 'r') as f:
             PublicPost(campaign=campaign, text=f.read()).save()
 
 
@@ -78,23 +77,14 @@ class Lead(models.Model):
 
         return leads
 
-    # TODO: merge with User method when we have the country of the Lead
-    # For now it assumes it is colombia in all cases
-    def change_to_international_phone_number(self):
+    # TODO: have leads for different countries
+    def get_calling_code(self):
+        return '57'
 
-        if self.phone:
-
-            self.phone = self.phone.replace('-', '')
-
-            # Adds the '+' and country code
-            if self.phone[0] != '+':
-
-                self.phone = '+' + '57' + self.phone
-
-                # Adds the '+' only
-            elif re.search(r'^' + '57' + '.+', self.phone) is not None:
-                self.phone = '+' + self.phone
-
+    def change_to_international_phone_number(self, add_plus=False):
+        self.phone = basic_common.change_to_international_phone_number(self.phone,
+                                                                       self.get_calling_code(),
+                                                                       add_plus=add_plus)
         return self.phone
 
 
@@ -118,12 +108,11 @@ class LeadMessage(models.Model):
     class Meta:
         db_table = 'lead_messages'
 
-    def add_format_and_mark_as_sent(self):
+    def add_format_and_mark_as_sent(self, params):
         """
         Adds format to message and returns itself
         :return: self
         """
-        params = {'name': common_senders.get_first_name(self.lead.name)}
         self.text = self.text.format(**params)
         self.sent = True
         self.save()

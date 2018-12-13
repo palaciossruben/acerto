@@ -2,8 +2,11 @@ import requests
 import unicodedata
 from decouple import config
 from django.conf import settings
-from dashboard.models import Candidate
+
+import common
+from dashboard.models import Candidate, User, Campaign
 from beta_invite.util import common_senders
+from business.models import BusinessUser
 
 INTERNAL_TEAM = ['santiago@peaku.co', 'juan@peaku.co', 'juan.rendon@peaku.co']
 TESTING_TEAM = ['juan@peaku.co', 'juan.rendon@peaku.co', 'ing.pendiente@gmail.com']
@@ -86,10 +89,19 @@ def send(objects, language_code, body_input, subject, with_localization=True, bo
 
         if isinstance(an_object, Candidate):
             params = common_senders.get_params_with_candidate(an_object, language_code, override_dict)
-            recipients = [an_object.user.email]
-        else:
+            recipients = an_object.user.email
+        elif isinstance(an_object, User):
             params = common_senders.get_params_with_user(an_object, override_dict)
             recipients = an_object.email
+        elif isinstance(an_object, BusinessUser):
+            params = common_senders.get_params_with_business_user(an_object, override_dict)
+            recipients = an_object.email
+        elif isinstance(an_object, Campaign):
+            params = common_senders.get_params_with_campaign(an_object)
+            business_user = common.get_business_user_with_campaign(an_object)
+            recipients = business_user.email
+        else:
+            raise NotImplementedError('Unimplemented email params for class: {}'.format(type(an_object)))
 
         body = common_senders.get_body(body_input, body_is_filename=body_is_filename)
 

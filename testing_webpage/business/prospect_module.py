@@ -44,7 +44,7 @@ def send_mails(candidate_prospects):
                                            language_code=candidate.user.language_code,
                                            body_input='user_job_match_email_body',
                                            subject=translate_email_job_match_subject(candidate),
-                                           override_dict={'campaign_url': candidate.campaign.get_url()},
+                                           override_dict={'campaign_url': candidate.campaign.get_url_for_candidates()},
                                            email_type=email_type)
 
 

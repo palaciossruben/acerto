@@ -35,7 +35,7 @@ def send_candidates_messages():
     print(len(new_candidates))
 
     # print([c.user_id for c in candidates])
-    messenger_sender.send(candidates=new_candidates,
+    messenger_sender.send(objects=new_candidates,
                           language_code='es',
                           body_input='candidates_form_reminder_message_body')
 

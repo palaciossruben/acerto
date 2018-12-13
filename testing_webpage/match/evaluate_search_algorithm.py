@@ -15,7 +15,6 @@ from django.db.models import Q
 
 from beta_invite.models import Campaign
 from business import prospect_module
-from match import common_learning
 from dashboard.models import Candidate, State
 
 

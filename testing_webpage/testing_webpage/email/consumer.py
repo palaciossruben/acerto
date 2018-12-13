@@ -17,30 +17,36 @@ sys.path.insert(0, path_to_add)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
+import common
 from testing_webpage.models import CandidatePendingEmail, CandidateEmailSent, BusinessUserEmailSent,\
-    BusinessUserPendingEmail
+    BusinessUserPendingEmail, CampaignPendingEmail, CampaignEmailSent
 from beta_invite.util import email_sender
 from testing_webpage import settings
-from dashboard.models import Candidate
+from dashboard.models import Candidate, Campaign
 from business.models import BusinessUser
 from subscribe import helper as h
-
+from decouple import config
+from raven import Client
 
 # The maximum number of mails that sends at once.
 MAX_NUMBER_OF_MAILS = 10
 TEST_EMAIL = 'juan@peaku.co'
+SENTRY_CLIENT = Client(config('sentry_dsn'))
 
 
 def take_oldest_unsent_emails():
-    return [e for e in BusinessUserPendingEmail.objects.filter(sent=False).order_by('created_at')] +\
-           [e for e in CandidatePendingEmail.objects.filter(sent=False).order_by('created_at')]
+    return list(BusinessUserPendingEmail.objects.filter(sent=False).order_by('created_at')[:MAX_NUMBER_OF_MAILS]) +\
+           list(CandidatePendingEmail.objects.filter(sent=False).order_by('created_at')[:MAX_NUMBER_OF_MAILS]) +\
+           list(CampaignPendingEmail.objects.filter(sent=False).order_by('created_at')[:MAX_NUMBER_OF_MAILS])
 
 
 def send_condition(an_object, email):
     return isinstance(an_object, Candidate) and \
            not CandidateEmailSent.objects.filter(candidate=an_object, email_type=email.email_type) or \
            isinstance(an_object, BusinessUser) and \
-           not BusinessUserEmailSent.objects.filter(business_user=an_object, email_type=email.email_type)
+           not BusinessUserEmailSent.objects.filter(business_user=an_object, email_type=email.email_type) or \
+           isinstance(an_object, Campaign) and \
+           not CampaignEmailSent.objects.filter(campaign=an_object, email_type=email.email_type)
 
 
 def get_email(an_object):
@@ -55,13 +61,17 @@ def send_pending_emails():
     Returns: Sends
     """
 
-    pending = take_oldest_unsent_emails()[:MAX_NUMBER_OF_MAILS]
+    pending = take_oldest_unsent_emails()
 
     for email in pending:
         if isinstance(email, CandidatePendingEmail):
             objects = email.candidates.all()
-        else:
+        elif isinstance(email, BusinessUserPendingEmail):
             objects = email.business_users.all()
+        elif isinstance(email, CampaignPendingEmail):
+            objects = email.campaigns.all()
+        else:
+            raise NotImplementedError('Unimplemented class: {}'.format(type(email)))
 
         for an_object in objects:
 
@@ -70,8 +80,14 @@ def send_pending_emails():
                 if settings.DEBUG:
                     if isinstance(an_object, Candidate):
                         an_object.user.email = TEST_EMAIL
-                    else:
+                    elif isinstance(an_object, BusinessUser):
                         an_object.email = TEST_EMAIL
+                    elif isinstance(an_object, Campaign):
+                        business_user = common.get_business_user_with_campaign(an_object)
+                        business_user.email = TEST_EMAIL
+                        business_user.save()  # heavy machete: no alternative here
+                    else:
+                        raise NotImplementedError('Unimplemented class: {}'.format(type(an_object)))
 
                 email_sender.send(objects=an_object,
                                   language_code=email.language_code,
@@ -86,14 +102,20 @@ def send_pending_emails():
                 # Records sending email
                 if isinstance(an_object, Candidate):
                     CandidateEmailSent(candidate=an_object, email_type=email.email_type).save()
-                else:
+                elif isinstance(an_object, BusinessUser):
                     BusinessUserEmailSent(business_user=an_object, email_type=email.email_type).save()
+                elif isinstance(an_object, Campaign):
+                    CampaignEmailSent(business_user=an_object, email_type=email.email_type).save()
+                else:
+                    raise NotImplementedError('Unimplemented class: {}'.format(type(an_object)))
 
 
 if __name__ == '__main__':
 
-    with open('consumer.log', 'a') as f:
-        sys.stdout = h.Unbuffered(f)
-        print('sending emails...')
-        send_pending_emails()
-        print('finished sending emails...')
+    try:
+        with open('consumer.log', 'a') as f:
+            sys.stdout = h.Unbuffered(f)
+            send_pending_emails()
+    except Exception as e:
+        SENTRY_CLIENT.captureException()
+        raise e

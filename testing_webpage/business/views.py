@@ -161,22 +161,13 @@ def send_signup_emails(business_user, language_code, campaign):
         body_filename = 'business_start_signup_notification_email_body'
         body_input = 'business_start_signup_email_body'
 
-    # TODO: make producer consumer work!
-    """
-    PendingEmail.add_to_queue(candidates=business_user,
-                              language_code=language_code,
-                              body_input=body_input,
-                              subject=_('Welcome to PeakU'),
-                              email_type=email_type)
-    """
-
     try:
 
         BusinessUserPendingEmail.add_to_queue(business_users=business_user,
                                               language_code=language_code,
                                               body_input=body_input,
                                               subject=_('Welcome to PeakU'),
-                                              email_type=EmailType.objects.get(name='business welcome'))
+                                              email_type=EmailType.objects.get(name='business_welcome'))
         email_sender.send_internal(contact=business_user,
                                    language_code=language_code,
                                    body_filename=body_filename,
@@ -370,7 +361,7 @@ def send_new_campaign_notification(business_user, language_code, campaign):
                                    body_filename=body_filename,
                                    subject='Un usuario ya registrado ha creado una nueva campaña',
                                    campaign=campaign)
-    except (smtplib.SMTPRecipientsRefused, smtplib.SMTPAuthenticationError, UnicodeEncodeError) as e:
+    except (smtplib.SMTPRecipientsRefused, smtplib.SMTPAuthenticationError, UnicodeEncodeError):
         pass
 
 
@@ -389,7 +380,7 @@ def create_post(request):
     business_user.save()
     if not business_user.is_peaku():
         prospect_module.send_mails(prospects)
-        messenger_sender.send(candidates=prospects,
+        messenger_sender.send(objects=prospects,
                               language_code='es',
                               body_input='candidate_prospect')
 
@@ -417,7 +408,7 @@ def start_post(request):
         PublicPost.add_to_public_post_queue(campaign)
         if not business_user.is_peaku():
             prospect_module.send_mails(prospects)
-            messenger_sender.send(candidates=prospects,
+            messenger_sender.send(objects=prospects,
                                   language_code='es',
                                   body_input='candidate_prospect')
 
@@ -674,7 +665,7 @@ def online_demo(request):
 
     campaign_id = 156
     campaign = Campaign.objects.get(pk=campaign_id)
-    business_user = common.get_business_user_with_campaign(campaign, 'object')
+    business_user = common.get_business_user_with_campaign(campaign)
 
     # removes login decorator
     s = summary.__wrapped__
