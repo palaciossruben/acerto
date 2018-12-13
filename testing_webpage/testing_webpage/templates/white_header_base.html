@@ -12,7 +12,7 @@
         {% if 'seleccion-de-personal' in request.path and 'contactanos' not in request.path %}
             {% if user|business_user_is_authenticated %}
                 <a href="{% url 'business:logout' %}" style="text-decoration:none;">{% trans "LOG OUT" %}</a>
-                {% if not 'campañas' in request.path  and user|business_user_is_authenticated %}
+                {% if not 'campañas' in request.path and user|business_user_is_authenticated %}
                     <a href="{% url 'business:business_campaigns' user|get_business_user_id %}" style="text-decoration:none;">{% trans 'My campaigns' %}</a>
                 {% endif %}
                 <a class="navButton" role="button" href="{% url 'business:start' %}" style="text-decoration:none; font-size: 15px;width:170px;color: white;border-radius:40px;margin-top: 30px;padding:5px 16px;background:#F47B20;">{% trans '+ NEW JOB POST' %}</a>
