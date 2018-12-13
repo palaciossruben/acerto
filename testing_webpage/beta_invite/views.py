@@ -367,6 +367,15 @@ def get_int_param(request, request_param):
         return None
 
 
+def get_school(school_name):
+    try:
+        return School.objects.get(name=school_name)
+    except ObjectDoesNotExist:
+        school = School(name=school_name)
+        school.save()
+        return school
+
+
 def update_education_experience(request, school_name, candidate):
 
     user = User.objects.get(pk=candidate.user.pk)
@@ -399,15 +408,6 @@ def get_company(company_name):
         company = Company(name=company_name)
         company.save()
         return company
-
-
-def get_school(school_name):
-    try:
-        return School.objects.get(name=school_name)
-    except ObjectDoesNotExist:
-        school = School(name=school_name)
-        school.save()
-        return school
 
 
 def update_work_experiences(request, company_name, candidate):
