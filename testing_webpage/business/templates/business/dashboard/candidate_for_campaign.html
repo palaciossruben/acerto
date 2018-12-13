@@ -90,12 +90,14 @@
         {% if candidate.user.profile %}
         <div class="col-lg-4 col-xs-12 profile">
             <p>{{ candidate.user.profile }}</p>
+            <!--
             {% for e in candidate.user.experiences.all %}
                 <h2>{{ e.role }}</h2>
                 <h3>{{ e.company }}</h3>
                 <p>Logros:</p>
                 <p>* {{ e.highlight }}</p>
             {% endfor %}
+            -->
         </div>
         {% elif candidate.user.get_short_curriculum %}
         <div class="col-lg-4 col-xs-12 profile">
@@ -162,7 +164,7 @@
         </div>
     </div>
 </a>
-<!--
+
 <div class="like-selection-div">
     {% if logged_user == 'admin' %}
         <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
@@ -173,6 +175,9 @@
             {% csrf_token %}
             <input type="button" class="dislike" id="dislike-{{ candidate.pk }}" onclick="change_state({'state_code':'RBC', 'candidate_id':{{ candidate.pk }}, 'feedback':'No'})" value="&#x274C; Rechazar candidato">
         </form>
+    {% endif %}
+</div>
+    <!--
     {% else %}
         {% if not candidate.change_by_client and business_state.name != 'aplicantes' %}
             <form method="post" action="" enctype="multipart/form-data">
