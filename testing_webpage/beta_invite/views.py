@@ -288,7 +288,6 @@ def home(request):
             user = simple_login_and_user(login_form, request)
         except ObjectDoesNotExist:
             # TODO: how to reload the exact campaign and at the same time pass on the error_message?
-            #return render(request, cts.INDEX_VIEW_PATH, {'error_message': 'Usuario no existe'})
             return redirect('/trabajos')
 
         segment_code = user.get_work_area_segment_code()
@@ -299,7 +298,8 @@ def home(request):
 
     else:
         error_message = get_first_error_message(login_form)
-        return render(request, cts.INDEX_VIEW_PATH, {'error_message': error_message})
+        # TODO: how to reload the exact page and at the same time pass on the error_message?
+        return redirect('/trabajos')
 
 
 def get_test_result(request):

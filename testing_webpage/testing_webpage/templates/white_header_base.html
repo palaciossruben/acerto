@@ -22,7 +22,6 @@
             {% if user|user_is_authenticated %}
                 <a class="navButton" href="/my-logout" style="text-decoration:none; font-size: 15px;width:170px;color: white;border-radius:40px;margin-top: 30px;padding:5px 16px;background:#F47B20;">CERRAR SESIÓN</a>
             {% else %}
-                <a class="navButton" role="button" onclick="on_signup()" style="text-decoration:none; font-size: 15px;width:170px;color: white;border-radius:40px;margin-top: 30px;padding:5px 16px;background:#F47B20;">CREA TU CUENTA</a>
                 <a class="navButton regular" role="button" onclick="on_login()" style="text-decoration:none; font-size: 15px;width:170px;color: white;border-radius:40px;margin-top: 30px;padding:5px 16px;background:#F47B20;">INICIA SESIÓN</a>
             {% endif %}
         {% endif %}

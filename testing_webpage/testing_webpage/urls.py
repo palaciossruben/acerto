@@ -29,7 +29,6 @@ urlpatterns = [
     url(r'^seleccion[-_]de[-_]personal/', include('business.urls')),
     url(r'^dashboard/', include('dashboard.urls')),
     url(r'^api/', include('api.urls')),
-    url(r'^api/', include('api.urls')),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
     url(r'^cv/', include('nice.urls')),
 
