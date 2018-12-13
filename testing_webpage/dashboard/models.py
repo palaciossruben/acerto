@@ -193,7 +193,7 @@ class Candidate(models.Model):
     rating = models.IntegerField(null=True)
     mean_scores = models.ManyToManyField(Score)
     state_events = models.ManyToManyField(StateEvent)
-    change_by_client = models.BooleanField(default=False)
+    change_by_client = models.BooleanField(default=False, null=True)
     liked = models.BooleanField(default=False)
     last_evaluation = models.ForeignKey(Evaluation, null=True, related_name='last_evaluation')
 
