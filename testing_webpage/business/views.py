@@ -173,7 +173,7 @@ def send_signup_emails(business_user, language_code, campaign):
                                    body_filename=body_filename,
                                    subject='Business User acaba de registrarse!!!',
                                    campaign=campaign)
-    except (smtplib.SMTPRecipientsRefused, smtplib.SMTPAuthenticationError, UnicodeEncodeError) as e:
+    except (smtplib.SMTPRecipientsRefused, smtplib.SMTPAuthenticationError, UnicodeEncodeError):
         pass
 
 
