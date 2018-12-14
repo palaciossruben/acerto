@@ -803,10 +803,9 @@ class Experience(models.Model):
     company = models.ForeignKey(Company)
     role = models.CharField(max_length=40)
     highlight = models.CharField(max_length=300)
-    number_of_months = models.IntegerField(null=True)
-    number_of_years = models.IntegerField(null=True)
     order = models.IntegerField(null=True)
-    start_year = models.IntegerField(null=True)
+    start_date = models.CharField(max_length=10, null=True)
+    finish_date = models.CharField(max_length=10, null=True)
 
     def __str__(self):
         return 'id={0}, company={1}, role={2}'.format(self.pk, self.company, self.role)
@@ -814,6 +813,20 @@ class Experience(models.Model):
     # adds custom table name
     class Meta:
         db_table = 'experiences'
+
+    def start_format(self):
+        s = self.start_date
+        if s is not None:
+            return s.replace('-', '/')
+        else:
+            return None
+
+    def finish_format(self):
+        f = self.finish_date
+        if f is not None:
+            return f.replace('-', '/')
+        else:
+            return None
 
 
 class EducationExperience(models.Model):

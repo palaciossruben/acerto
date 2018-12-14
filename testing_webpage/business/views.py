@@ -730,8 +730,8 @@ def change_state(request):
                 candidate.liked = True
                 candidate.save()
         else:
-            candidate.change_state(state_code=state_code, auth_user=request.user, place='Admin ha cambiado el estado del candidato')
-
+            # candidate.change_state(state_code=state_code, auth_user=request.user, place='Admin ha cambiado el estado del candidato')
+            print('Tests')
         return HttpResponse()
     else:
         return HttpResponseBadRequest('<h1>HTTP CODE 400: Client sent bad request with missing params</h1>')

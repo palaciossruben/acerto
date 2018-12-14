@@ -420,9 +420,8 @@ def update_work_experiences(request, company_name, candidate):
         work_experience.company = get_company(company_name)
         work_experience.role = request.POST.get('role')
         work_experience.highlight = request.POST.get('highlight')
-        work_experience.number_of_months = get_int_param(request, 'start_year')
-        work_experience.number_of_months = get_int_param(request, 'number_of_months')
-        work_experience.number_of_years = get_int_param(request, 'number_of_years')
+        work_experience.start_date = request.POST.get('start_date')
+        work_experience.finish_date = request.POST.get('finish_date')
         work_experience.order = order
         work_experience.save()
 
@@ -431,9 +430,8 @@ def update_work_experiences(request, company_name, candidate):
         work_experience = Experience(company=get_company(company_name),
                                      role=request.POST.get('role'),
                                      highlight=request.POST.get('highlight'),
-                                     start_year=get_int_param(request, 'start_year'),
-                                     number_of_years=get_int_param(request, 'number_of_years'),
-                                     number_of_months=get_int_param(request, 'number_of_months'),
+                                     start_date=request.POST.get('start_date'),
+                                     finish_date=request.POST.get('finish_date'),
                                      order=order)
         work_experience.save()
         user.experiences.add(work_experience)

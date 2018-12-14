@@ -41,7 +41,7 @@ def work_area_with_campaigns_filter(candidates):
         segment = WorkAreaSegment.objects.get(pk=c.user.work_area.segment_id)
 
         campaigns = Campaign.objects.filter(~Q(title_es=None),
-                                            state__code__in=['I', 'A'],
+                                            state__code__in=['A'],
                                             removed=False,
                                             work_area__segment__code=segment.code)
         if len(campaigns) > 0:
@@ -53,7 +53,7 @@ def work_area_with_campaigns_filter(candidates):
 def send_prospect_emails():
 
     candidates = Candidate.objects.filter(~Q(user=None),
-                                          ~Q(state__in=State.objects.filter(code__in=['STC', 'GTJ']).all()),
+                                          ~Q(state__in=State.objects.filter(code__in=['STC', 'GTJ', 'ABC']).all()),
                                           ~Q(user__work_area__segment=None),
                                           removed=False)
 
