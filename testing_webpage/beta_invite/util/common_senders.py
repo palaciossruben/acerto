@@ -205,7 +205,7 @@ def get_params_with_campaign(campaign, language_code='es', override_dict={}):
         override_dict: Dictionary that changes the default values.
     Returns:
     """
-    params = {'campaign_name': campaign.name,
+    params = {'campaign_name': campaign.title_es if language_code == 'es' else campaign.title,
               'campaign_url': campaign.get_url_for_candidates(),
               'campaign_salary_range': campaign.get_campaign_salary_range(),
               'campaign_city': campaign.get_campaign_city_name(),
