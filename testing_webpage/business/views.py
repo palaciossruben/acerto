@@ -183,13 +183,12 @@ def send_signup_emails(business_user, language_code, campaign):
         pass
 
 
-def first_sign_in(signup_form, campaign, request):
+def first_sign_in(signup_form, request):
     """
     This method is used to do stuff after validating signup-data. Also logs in.
     Args:
         signup_form: Form obj
         request: HTTP obj
-        campaign: campaign object
     Returns: None, first auth and sign-in, saves objects
     """
 
@@ -216,8 +215,6 @@ def first_sign_in(signup_form, campaign, request):
     business_user.save()
 
     login(request, auth_user)
-
-    send_signup_emails(business_user, request.LANGUAGE_CODE, campaign)
 
     return business_user
 
@@ -408,9 +405,11 @@ def start_post(request):
     if signup_form.is_valid():
 
         campaign, prospects = campaign_module.create_campaign(request)
-        business_user = first_sign_in(signup_form, campaign, request)
+        business_user = first_sign_in(signup_form, request)
         business_user.campaigns.add(campaign)
         business_user.save()
+        send_signup_emails(business_user, request.LANGUAGE_CODE, campaign)
+
         #PublicPost.add_to_public_post_queue(campaign)
         if not business_user.is_peaku():
             prospect_module.send_mails(prospects)
@@ -437,7 +436,8 @@ def business_signup(request):
     if signup_form.is_valid():
 
         campaign = None
-        first_sign_in(signup_form, campaign, request)
+        business_user = first_sign_in(signup_form, request)
+        send_signup_emails(business_user, request.LANGUAGE_CODE, campaign)
 
         return render(request, cts.BUSINESS_CAMPAIGNS_VIEW_PATH)
     else:
