@@ -391,7 +391,7 @@ def create_post(request):
                               body_input='candidate_prospect')
 
     send_new_campaign_notification(business_user, request.LANGUAGE_CODE, campaign)
-    PublicPost.add_to_public_post_queue(campaign)
+    #PublicPost.add_to_public_post_queue(campaign)
 
     return redirect('resumen/{campaign_pk}'.format(campaign_pk=campaign.pk))
 
@@ -411,7 +411,7 @@ def start_post(request):
         business_user = first_sign_in(signup_form, campaign, request)
         business_user.campaigns.add(campaign)
         business_user.save()
-        PublicPost.add_to_public_post_queue(campaign)
+        #PublicPost.add_to_public_post_queue(campaign)
         if not business_user.is_peaku():
             prospect_module.send_mails(prospects)
             messenger_sender.send(objects=prospects,

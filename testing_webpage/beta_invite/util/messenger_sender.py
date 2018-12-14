@@ -62,7 +62,7 @@ def send(objects, language_code, body_input, with_localization=True, body_is_fil
     if len(objects) == 0:
         return
 
-    # TODO: implement for new objects
+    # TODO: implement for new BusinessUser
     if type(objects[0]) is Candidate:
         save_candidate_messages(objects, body_input, body_is_filename, language_code, override_dict, original_body_input)
     elif type(objects[0]) is Campaign:
