@@ -56,21 +56,22 @@
         return false;
     }
 </script>
+
 <a href="/seleccion_de_personal/perfil_del_candidato/{{ candidate.id }}" style="text-decoration:none">
     <div class="row candidate-info-div">
-        <div class="email-checkbox">
-            <input type="checkbox" name="{{ candidate.id }}_checkbox">
-        </div>
-        <div class="col-lg-1 col-xs-12 candidate-avatar-column">
-            {% if candidate.user.photo_url != '#' %}
-            <div class="circle candidate-circle" style="background-image: url({% static candidate.user.photo_url %});"></div>
-            {% elif candidate.user.gender.sex == 2 %}
-            <div class="circle candidate-circle female-avatar"></div>
-            {% else %}
-            <div class="circle candidate-circle male-avatar"></div>
-            {% endif %}
-        </div>
-        <div class="col-lg-2 col-xs-12">
+        <div class="col-lg-3" style="text-align: center;">
+            <div class="email-checkbox">
+                <input type="checkbox" name="{{ candidate.id }}_checkbox">
+            </div>
+            <div>
+                {% if candidate.user.photo_url != '#' %}
+                <div class="circle candidate-circle" style="background-image: url({% static candidate.user.photo_url %});"></div>
+                {% elif candidate.user.gender.sex == 2 %}
+                <div class="circle candidate-circle female-avatar"></div>
+                {% else %}
+                <div class="circle candidate-circle male-avatar"></div>
+                {% endif %}
+            </div>
             <p class="name">
                 <strong>{{ candidate.user.name }}</strong>
             </p>
@@ -84,81 +85,71 @@
             <p class="work-area">{{ candidate.user.work_area.name_es }}</p>
             {% endif %}
         </div>
-        <div class="col-lg-1 separator-div">
-            <div class="separator"></div>
-        </div>
-        {% if candidate.user.profile %}
-        <div class="col-lg-4 col-xs-12 profile">
-            <p>{{ candidate.user.profile }}</p>
-            <!--
+
+        <div class="col-lg-6 profile">
+            {% if candidate.user.profile %}
+                <div>
+                    <p>{{ candidate.user.profile }}</p>
+                </div>
+            {% elif candidate.user.get_short_curriculum %}
+                <div>
+                    <p>{{ candidate.user.get_short_curriculum }}</p>
+                </div>
+            {% else %}
+                <div>
+                    <p>Sin descripción</p>
+                </div>
+            {% endif %}
             {% for e in candidate.user.experiences.all %}
-                <h2>{{ e.role }}</h2>
-                <h3>{{ e.company }}</h3>
-                <p>Logros:</p>
+                <h2>{{ e.company }}</h2>
                 <p>* {{ e.highlight }}</p>
             {% endfor %}
-            -->
         </div>
-        {% elif candidate.user.get_short_curriculum %}
-        <div class="col-lg-4 col-xs-12 profile">
-            <p class="no-profile">{{ candidate.user.get_short_curriculum }}</p>
-        </div>
-        {% else %}
-        <div class="col-lg-4 col-xs-12 profile">
-            <p class="no-profile">Sin descripción</p>
-        </div>
-        {% endif %}
-        <div class="col-lg-4 col-xs-12 condoms-row">
-            <div class="row">
+
+        <div class="col-lg-3">
+            <div class="tests1">
                 {% if candidate.get_last_evaluation.cognitive_score >= 0 %}
-                <div class="test-name small">
-                    Capacidad cognitiva
                     {% if candidate.get_last_evaluation.cognitive_score >= 0 %}
-                    <div id="{{ candidate.pk }}-recommended-cognitive-id" class="fill small-fill">
-                        {{ candidate.get_last_evaluation.cognitive_score|print_score }}
-                    </div>
+                        <div id="{{ candidate.pk }}-recommended-cognitive-id" class="fill small-fill">
+                            {{ candidate.get_last_evaluation.cognitive_score|print_score }}
+                        </div>
                     {% endif %}
-                </div>
                 {% endif %}
-                {% if candidate.get_last_evaluation.technical_score >= 0 %}
-                <div class="test-name small">
-                    Conocimiento técnico
-                    {% if candidate.get_last_evaluation.technical_score >= 0 %}
-                    <div id="{{ candidate.pk }}-recommended-technical-id" class="fill small-fill">
-                        {{ candidate.get_last_evaluation.technical_score|print_score }}
-                    </div>
-                    {% endif %}
-                </div>
-                {% endif %}
+
                 {% if candidate.get_last_evaluation.requirements_score >= 0 %}
-                <div class="test-name small">
-                    Requisitos
                     {% if candidate.get_last_evaluation.requirements_score >= 0 %}
-                    <div id="{{ candidate.pk }}-recommended-requirement-id" class="fill small-fill">
-                        {{ candidate.get_last_evaluation.requirements_score|print_score }}
-                    </div>
+                        <div id="{{ candidate.pk }}-recommended-requirement-id" class="fill small-fill">
+                            {{ candidate.get_last_evaluation.requirements_score|print_score }}
+                        </div>
                     {% endif %}
-                </div>
                 {% endif %}
+            </div>
+
+            <div class="tests2">
                 {% if candidate.get_last_evaluation.motivation_score >= 0 %}
-                <div class="test-name small">
-                    Motivación
                     {% if candidate.get_last_evaluation.motivation_score >= 0 %}
-                    <div id="{{ candidate.pk }}-recommended-motivation-id" class="fill small-fill">
-                        {{ candidate.get_last_evaluation.motivation_score|print_score }}
-                    </div>
+                        <div id="{{ candidate.pk }}-recommended-motivation-id" class="fill small-fill">
+                            {{ candidate.get_last_evaluation.motivation_score|print_score }}
+                        </div>
                     {% endif %}
-                </div>
                 {% endif %}
+
                 {% if candidate.get_last_evaluation.cultural_fit_score >= 0 %}
-                <div class="test-name small">
-                    Fit cultural
                     {% if candidate.get_last_evaluation.cultural_fit_score >= 0 %}
-                    <div id="{{ candidate.pk }}-recommended-cultural-id" class="fill small-fill">
-                        {{ candidate.get_last_evaluation.cultural_fit_score|print_score }}
-                    </div>
+                        <div id="{{ candidate.pk }}-recommended-cultural-id" class="fill small-fill">
+                            {{ candidate.get_last_evaluation.cultural_fit_score|print_score }}
+                        </div>
                     {% endif %}
-                </div>
+                {% endif %}
+            </div>
+
+            <div class="tests3">
+                {% if candidate.get_last_evaluation.technical_score >= 0 %}
+                    {% if candidate.get_last_evaluation.technical_score >= 0 %}
+                        <div id="{{ candidate.pk }}-recommended-technical-id" class="fill small-fill">
+                            {{ candidate.get_last_evaluation.technical_score|print_score }}
+                        </div>
+                    {% endif %}
                 {% endif %}
             </div>
         </div>

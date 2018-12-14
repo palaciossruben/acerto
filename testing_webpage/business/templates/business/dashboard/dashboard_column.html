@@ -1,31 +1,5 @@
 {% load static %}
 
-<!--TODO: can we move this thing out of here we are redeclaring hundreds of times-->
-<!--<script>
-        function change_state(param_dict)
-        {
-            general_dict = {csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()}
-                $.ajax
-                ({
-                    type:'POST',
-                    url:'../../../../change-state',
-                    data: Object.assign({}, general_dict, param_dict),
-                    success:function(response)
-                    {
-                        if (param_dict['state_code']=='STC'){
-                            $("#favorite-"+param_dict['candidate_id']).css("display", "block");
-
-                        }else{
-                            $("#favorite-"+param_dict['candidate_id']).css("display", "none");
-                        }
-                    $("#like-"+param_dict['candidate_id']).css("display", "none");
-                    $("#dislike-"+param_dict['candidate_id']).css("display", "none");
-                    }
-                });
-            return false;
-        }
-</script>-->
-
 <div class="line"></div>
 <div id="{{ state_name }}" class="internal-div">
 {% for candidate in candidate_list %}

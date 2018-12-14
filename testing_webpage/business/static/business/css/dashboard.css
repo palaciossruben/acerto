@@ -417,10 +417,6 @@ a, a:hover, a:active, a: visited, a:focus{
     background-attachment: scroll;
 }
 
-.candidate-avatar-column{
-    padding:0;
-}
-
 .email-checkbox{
     width: 20px;
     position: relative;
@@ -456,10 +452,13 @@ a, a:hover, a:active, a: visited, a:focus{
 }
 
 .profile{
-    width:37%;
     color:#666666;
     font-size:16px;
     font-family:BertholdAkzidenzGroteskRegular;
+    border-left-width: 6px;
+    border-left-color: aquamarine;
+    border-left-style: solid;
+    border-radius: 5px;
 }
 
 .female-avatar{
@@ -550,6 +549,12 @@ a, a:hover, a:active, a: visited, a:focus{
     color: black;
     /*background: linear-gradient(to top, rgba(238, 235, 52, 0.7) 85%, transparent 85%);
     border-color:rgba(238, 235, 52, 1);*/
+}
+
+.tests1, .tests2,.tests3{
+    display:inline-block;
+    width:100%;
+    text-align:center;
 }
 
 .test-name{
@@ -781,10 +786,6 @@ footer {
         padding: 10px;
     }
 
-    .profile{
-        width:100%;
-    }
-
     .condoms-row{
         text-align: center;
     }
@@ -799,5 +800,9 @@ footer {
 
     .email-button{
         margin: 30px auto;
+    }
+
+    .profile{
+        border:none;
     }
 }
