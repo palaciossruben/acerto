@@ -804,8 +804,9 @@ class Experience(models.Model):
     role = models.CharField(max_length=40)
     highlight = models.CharField(max_length=300)
     order = models.IntegerField(null=True)
-    start_date = models.CharField(max_length=10, null=True)
-    finish_date = models.CharField(max_length=10, null=True)
+    start = models.DateField(null=True)
+    finish = models.DateField(null=True)
+    present = models.BooleanField(default=False)
 
     def __str__(self):
         return 'id={0}, company={1}, role={2}'.format(self.pk, self.company, self.role)
@@ -814,19 +815,16 @@ class Experience(models.Model):
     class Meta:
         db_table = 'experiences'
 
-    def start_format(self):
-        s = self.start_date
-        if s is not None:
-            return s.replace('-', '/')
+    def get_date(self):
+        if self.start:
+            if self.present:
+                return '({}/{} - Actualmente)'.format(self.start.year, self.start.month)
+            elif self.finish:
+                return '({}/{} - {}/{})'.format(self.start.year, self.start.month, self.finish.year, self.finish.month)
+            else:
+                return '({}/{})'.format(self.start.year, self.start.month)
         else:
-            return None
-
-    def finish_format(self):
-        f = self.finish_date
-        if f is not None:
-            return f.replace('-', '/')
-        else:
-            return None
+            return ''
 
 
 class EducationExperience(models.Model):
