@@ -58,10 +58,15 @@ def get_email(an_object):
         business_user = common.get_business_user_with_campaign(an_object)
         return business_user.email
     else:
-        raise NotImplementedError('Unimplemented class: {}'.format(type(an_objects)))
+        raise NotImplementedError('Unimplemented class: {}'.format(type(an_object)))
 
 
 def send_one_email(email):
+    """
+    This email can have several recipients...
+    :param email:
+    :return:
+    """
     if isinstance(email, CandidatePendingEmail):
         objects = email.candidates.all()
     elif isinstance(email, BusinessUserPendingEmail):
