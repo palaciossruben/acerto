@@ -41,7 +41,7 @@ def work_area_with_campaigns_filter(candidates):
         segment = WorkAreaSegment.objects.get(pk=c.user.work_area.segment_id)
 
         campaigns = Campaign.objects.filter(~Q(title_es=None),
-                                            state__code__in=['I', 'A'],
+                                            state__code__in=['A'],
                                             removed=False,
                                             work_area__segment__code=segment.code)
         if len(campaigns) > 0:
