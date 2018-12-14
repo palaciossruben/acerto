@@ -37,8 +37,7 @@ from business.custom_user_creation_form import CustomUserCreationForm
 from dashboard import campaign_module
 from dashboard.models import Candidate, BusinessState, Comment
 from business import dashboard_module
-from testing_webpage.models import BusinessUserPendingEmail
-from api.models import PublicPost
+from testing_webpage.models import BusinessUserPendingEmail, CampaignPendingEmail
 
 
 TAX = 0.19
@@ -157,30 +156,28 @@ def send_signup_emails(business_user, language_code, campaign):
     if campaign is None:
         body_filename = 'business_signup_notification_email_body'
         body_input = 'business_signup_email_body'
-        subject = _('Welcome to PeakU')
-    else:
-        body_filename = 'business_start_signup_notification_email_body'
-        body_input = 'business_start_signup_email_body'
-        subject = 'Oferta publicada exitosamente - {campaign_name}'
-
-        messenger_sender.send(objects=campaign,
-                              language_code=language_code,
-                              body_input=body_input)
-
-    try:
         BusinessUserPendingEmail.add_to_queue(business_users=business_user,
                                               language_code=language_code,
                                               body_input=body_input,
-                                              subject=subject,
+                                              subject=_('Welcome to PeakU'),
                                               email_type=EmailType.objects.get(name='business_welcome'))
+    else:
+        body_filename = 'business_start_signup_notification_email_body'
+        body_input = 'business_start_signup_email_body'
+        messenger_sender.send(objects=campaign,
+                              language_code=language_code,
+                              body_input=body_input)
+        CampaignPendingEmail.add_to_queue(campaigns=campaign,
+                                          language_code=language_code,
+                                          body_input=body_input,
+                                          subject='Oferta publicada exitosamente - {campaign_name}',
+                                          email_type=EmailType.objects.get(name='business_welcome'))
 
-        email_sender.send_internal(contact=business_user,
-                                   language_code=language_code,
-                                   body_filename=body_filename,
-                                   subject='Business User acaba de registrarse!!!',
-                                   campaign=campaign)
-    except (smtplib.SMTPRecipientsRefused, smtplib.SMTPAuthenticationError, UnicodeEncodeError):
-        pass
+    email_sender.send_internal(contact=business_user,
+                               language_code=language_code,
+                               body_filename=body_filename,
+                               subject='Business User acaba de registrarse!!!',
+                               campaign=campaign)
 
 
 def first_sign_in(signup_form, request):
