@@ -89,24 +89,32 @@
         <div class="col-lg-8 profile">
             {% if candidate.user.profile %}
                 <div>
-                    <p>{{ candidate.user.profile }}</p>
+                    {% if candidate.user.experiences.all %}
+                        <p>{{ candidate.user.profile }}</p>
+                    {% else %}
+                        <p style="margin-top:60px;">{{ candidate.user.profile }}</p>
+                    {% endif %}
                 </div>
             {% elif candidate.user.get_short_curriculum %}
                 <div>
-                    <p>{{ candidate.user.get_short_curriculum }}</p>
+                    {% if candidate.user.experiences.all %}
+                        <p>{{ candidate.user.get_short_curriculum }}</p>
+                    {% else %}
+                        <p style="margin-top:60px;">{{ candidate.user.get_short_curriculum }}</p>
+                    {% endif %}
                 </div>
             {% else %}
 
             {% endif %}
             {% for e in candidate.user.experiences.all %}
-                <strong>
-                    <p class="company">{{ e.company }}
-                </strong>
-                <span class="duration">({{ e.start_format }} - {{ e.finish_format }})</span></p>
-                <p class="">{{ e.highlight }}</p>
+                <p class="company"><strong>{{ e.company }}</strong>
+                    <span class="duration">({{ e.start_format }} - {{ e.finish_format }})</span></p>
+                <p class="role">{{ e.role }}</p>
+                <p>{{ e.highlight }}</p>
             {% endfor %}
         </div>
-        <div class="col-lg-1">
+
+        <div class="col-lg-1 tests-circles">
             {% if candidate.get_last_evaluation.requirements_score >= 0 %}
                 <p class="test-title">Requisitos</p>
                 <div id="{{ candidate.pk }}-recommended-requirement-id" class="fill small-fill">
