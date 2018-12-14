@@ -108,7 +108,7 @@ def send_one_email(email):
             elif isinstance(an_object, BusinessUser):
                 BusinessUserEmailSent(business_user=an_object, email_type=email.email_type).save()
             elif isinstance(an_object, Campaign):
-                CampaignEmailSent(business_user=an_object, email_type=email.email_type).save()
+                CampaignEmailSent(campaign=an_object, email_type=email.email_type).save()
             else:
                 raise NotImplementedError('Unimplemented class: {}'.format(type(an_object)))
 
