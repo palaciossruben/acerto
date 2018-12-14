@@ -784,6 +784,20 @@ class Experience(models.Model):
     class Meta:
         db_table = 'experiences'
 
+    def start_format(self):
+        s = self.start_date
+        if s is not None:
+            return s.replace('-', '/')
+        else:
+            return None
+
+    def finish_format(self):
+        f = self.finish_date
+        if f is not None:
+            return f.replace('-', '/')
+        else:
+            return None
+
 
 class EducationExperience(models.Model):
 

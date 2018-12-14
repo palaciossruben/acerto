@@ -209,14 +209,44 @@ a, a:hover, a:active, a: visited, a:focus{
     margin-bottom: -20px;
 }
 
+.option-text{
+    border:none;
+    background:none;
+}
+
+.like-img{
+    width:25px;
+    height: 25px;
+}
+
+.dislike-img{
+    width: 15px;
+    height: 15px;
+    margin: 5px 0px;
+}
+
 .like{
     width: 195px;
+    height: 35px;
     border: 2px solid #A8CF38;
     background:white;
     padding: 5px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border-right:none;
+    margin-right: -5px;
+}
+
+.dislike{
+    width: 195px;
+    height: 35px;
+    border: 2px solid #F26122;
+    background:white;
+    padding: 5px 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left:none;
+    margin-left: -5px;
 }
 
 .like-on{
@@ -229,16 +259,6 @@ a, a:hover, a:active, a: visited, a:focus{
     border-bottom-left-radius: 5px;
     border-right:none;
     cursor:default;
-}
-
-.dislike{
-    width: 195px;
-    border: 2px solid #F26122;
-    background:white;
-    padding: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-left:none;
 }
 
 .dislike-on{
@@ -355,26 +375,39 @@ a, a:hover, a:active, a: visited, a:focus{
 }
 
 .name{
-    color:#666666;
+    color:#231F20;
     font-size:24px;
     font-family:BertholdAkzidenzGroteskBold;
+    font-weight : bold;
+    line-height : 27px;
+    opacity : 0.68;
 }
 
 .name:hover{
     text-decoration:none;
-    color:#666666;
+}
+
+.test-title{
+    color: #231F20;
+    font-size: 10px;
+    font-family: BertholdAkzidenzGroteskBold;
+    font-weight: bold;
+    line-height: 12px;
+    opacity: 0.68;
+    text-align: center;
+    margin: 0;
 }
 
 .profession{
     color:#666666;
     font-size:15px;
-    font-family:BertholdAkzidenzGroteskRegular;
+    font-family:BertholdAkzidenzGroteskLight;
 }
 
 .city, .work-area{
     color:#666666;
     font-size:15px;
-    font-family:BertholdAkzidenzGroteskRegular;
+    font-family:BertholdAkzidenzGroteskLight;
 }
 /**********************************************************************************************************************/
 .tooltip {
@@ -409,8 +442,8 @@ a, a:hover, a:active, a: visited, a:focus{
 }
 
 .candidate-circle{
-    height:80px;
-    width:80px;
+    height:120px;
+    width:120px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -456,9 +489,18 @@ a, a:hover, a:active, a: visited, a:focus{
     font-size:16px;
     font-family:BertholdAkzidenzGroteskRegular;
     border-left-width: 6px;
-    border-left-color: aquamarine;
+    border-left-color: #00B7A6;
     border-left-style: solid;
     border-radius: 5px;
+}
+
+.company{
+    color: #00B7A6;
+    margin:0;
+}
+
+.duration{
+    font-size:12px;
 }
 
 .female-avatar{
@@ -587,16 +629,16 @@ a, a:hover, a:active, a: visited, a:focus{
 }
 
 .small-fill{
-    border-radius: 100%;
+        border-radius: 100%;
     height: 55px;
     width: 55px;
     position: relative;
     z-index: 3;
-    margin: 10px 2px;
+    margin: 10px auto;
     border-style: solid;
-    border-width: 8px;
+    border-width: 3px;
     display: inline-block;
-    padding-top: 11px;
+    padding-top: 17px;
     color: black;
     font-size: 12px;
     text-align: center;

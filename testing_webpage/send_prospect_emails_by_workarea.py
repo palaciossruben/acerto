@@ -53,7 +53,7 @@ def work_area_with_campaigns_filter(candidates):
 def send_prospect_emails():
 
     candidates = Candidate.objects.filter(~Q(user=None),
-                                          ~Q(state__in=State.objects.filter(code__in=['STC', 'GTJ']).all()),
+                                          ~Q(state__in=State.objects.filter(code__in=['STC', 'GTJ', 'ABC']).all()),
                                           ~Q(user__work_area__segment=None),
                                           removed=False)
 
