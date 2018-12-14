@@ -492,11 +492,17 @@ a, a:hover, a:active, a: visited, a:focus{
     border-left-color: #00B7A6;
     border-left-style: solid;
     border-radius: 5px;
+    min-height:300px;
+    margin-top:5px;
 }
 
-.company{
+.company, .role{
     color: #00B7A6;
     margin:0;
+}
+
+.role{
+    font-size:12px;
 }
 
 .duration{
@@ -591,6 +597,10 @@ a, a:hover, a:active, a: visited, a:focus{
     color: black;
     /*background: linear-gradient(to top, rgba(238, 235, 52, 0.7) 85%, transparent 85%);
     border-color:rgba(238, 235, 52, 1);*/
+}
+
+.tests-circles{
+    margin-top: 15px;
 }
 
 .tests1, .tests2,.tests3{
