@@ -157,17 +157,23 @@ def send_signup_emails(business_user, language_code, campaign):
     if campaign is None:
         body_filename = 'business_signup_notification_email_body'
         body_input = 'business_signup_email_body'
+        subject = _('Welcome to PeakU')
     else:
         body_filename = 'business_start_signup_notification_email_body'
         body_input = 'business_start_signup_email_body'
+        subject = 'Oferta publicada exitosamente - {campaign_name}'
+
+        messenger_sender.send(objects=campaign,
+                              language_code=language_code,
+                              body_input=body_input)
 
     try:
-
         BusinessUserPendingEmail.add_to_queue(business_users=business_user,
                                               language_code=language_code,
                                               body_input=body_input,
-                                              subject=_('Welcome to PeakU'),
+                                              subject=subject,
                                               email_type=EmailType.objects.get(name='business_welcome'))
+
         email_sender.send_internal(contact=business_user,
                                    language_code=language_code,
                                    body_filename=body_filename,
