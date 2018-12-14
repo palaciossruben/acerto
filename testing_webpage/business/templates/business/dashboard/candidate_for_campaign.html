@@ -57,7 +57,6 @@
         return false;
     }
 </script>
-
 <a href="/seleccion_de_personal/perfil_del_candidato/{{ candidate.id }}" style="text-decoration:none">
     <div class="row candidate-info-div">
         <div class="col-lg-3" style="text-align: center;margin: 60px 0 0 0;">
@@ -87,72 +86,66 @@
             {% endif %}
         </div>
 
-
-            {% if candidate.user.profile %}
         <div class="col-lg-8 profile">
+            {% if candidate.user.profile %}
                 <div>
                     <p>{{ candidate.user.profile }}</p>
                 </div>
             {% elif candidate.user.get_short_curriculum %}
-            <div class="col-lg-8 profile">
                 <div>
                     <p>{{ candidate.user.get_short_curriculum }}</p>
                 </div>
             {% else %}
-                <div class="col-lg-8">
+
             {% endif %}
             {% for e in candidate.user.experiences.all %}
-                <strong><p class="company">{{ e.company }}</strong><span class="duration">({{ e.start_format }} - {{ e.finish_format }})</span></p>
+                <strong>
+                    <p class="company">{{ e.company }}
+                </strong>
+                <span class="duration">({{ e.start_format }} - {{ e.finish_format }})</span></p>
                 <p class="">{{ e.highlight }}</p>
             {% endfor %}
         </div>
-
         <div class="col-lg-1">
-                {% if candidate.get_last_evaluation.requirements_score >= 0 %}
-                    <p class="test-title">Requisitos</p>
-                        <div id="{{ candidate.pk }}-recommended-requirement-id" class="fill small-fill">
-                            {{ candidate.get_last_evaluation.requirements_score|print_score }}
-                        </div>
-                {% endif %}
-
-                {% if candidate.get_last_evaluation.cognitive_score >= 0 %}
-                    <p class="test-title">Capacidad cognitiva</p>
-                    <div id="{{ candidate.pk }}-recommended-cognitive-id" class="fill small-fill">
-                        {{ candidate.get_last_evaluation.cognitive_score|print_score }}
-                    </div>
-                {% endif %}
-
-                {% if candidate.get_last_evaluation.technical_score >= 0 %}
-                    <p class="test-title">Conocimiento técnico</p>
-                        <div id="{{ candidate.pk }}-recommended-technical-id" class="fill small-fill">
-                            {{ candidate.get_last_evaluation.technical_score|print_score }}
-                        </div>
-                {% endif %}
-
-
+            {% if candidate.get_last_evaluation.requirements_score >= 0 %}
+                <p class="test-title">Requisitos</p>
+                <div id="{{ candidate.pk }}-recommended-requirement-id" class="fill small-fill">
+                    {{ candidate.get_last_evaluation.requirements_score|print_score }}
+                </div>
+            {% endif %}
+            {% if candidate.get_last_evaluation.cognitive_score >= 0 %}
+                <p class="test-title">Capacidad cognitiva</p>
+                <div id="{{ candidate.pk }}-recommended-cognitive-id" class="fill small-fill">
+                    {{ candidate.get_last_evaluation.cognitive_score|print_score }}
+                </div>
+            {% endif %}
+            {% if candidate.get_last_evaluation.technical_score >= 0 %}
+                <p class="test-title">Conocimiento técnico</p>
+                <div id="{{ candidate.pk }}-recommended-technical-id" class="fill small-fill">
+                    {{ candidate.get_last_evaluation.technical_score|print_score }}
+                </div>
+            {% endif %}
         </div>
     </div>
 </a>
-
 <div class="like-selection-div">
     {% if logged_user == 'admin' %}
-        <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="like" id="like-{{ candidate.pk }}">
-                <img class="like-img" src="{% static 'business/img/like.png' %}">
-                <input type="button" class="option-text" onclick="change_state({'state_code':'STC', 'candidate_id':{{ candidate.pk }}, 'feedback':'No'})" value="Marcar como finalista">
+    <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="like" id="like-{{ candidate.pk }}">
+            <img class="like-img" src="{% static 'business/img/like.png' %}">
+            <input type="button" class="option-text" onclick="change_state({'state_code':'STC', 'candidate_id':{{ candidate.pk }}, 'feedback':'No'})" value="Marcar como finalista">
+        </div>
+    </form>
+    <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="dislike" id="dislike-{{ candidate.pk }}">
+            <div style="border-left: 2px solid #DAD9D9;">
+                <img class="dislike-img" src="{% static 'business/img/dislike.png' %}">
+                <input type="button" class="option-text" onclick="change_state({'state_code':'SR', 'candidate_id':{{ candidate.pk }}, 'feedback':'No'})" value="Rechazar candidato">
             </div>
-        </form>
-        <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="dislike" id="dislike-{{ candidate.pk }}">
-                <div style="border-left: 2px solid #DAD9D9;">
-                    <img class="dislike-img" src="{% static 'business/img/dislike.png' %}">
-                    <input type="button" class="option-text" onclick="change_state({'state_code':'SR', 'candidate_id':{{ candidate.pk }}, 'feedback':'No'})" value="Rechazar candidato">
-                </div>
-            </div>
-        </form>
+        </div>
+    </form>
     {% endif %}
 </div>
-
 <input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}"/>
