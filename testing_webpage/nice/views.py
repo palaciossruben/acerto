@@ -41,8 +41,9 @@ def download_cv(request, candidate_id):
     template = get_template(template_path)
     html = template.render({'candidate': candidate})  # Renders the template with the context data.
 
-    css = os.path.join(nice_dir, 'static', 'nice', 'css', 'cv.css')
-    pdfkit.from_string(html, tmp_pdf, css=css)
+    #css = os.path.join(nice_dir, 'static', 'nice', 'css', 'cv.css')
+    #pdfkit.from_string(html, tmp_pdf, css=css)
+    pdfkit.from_string(html, tmp_pdf)
 
     try:
         with open(tmp_pdf, 'rb') as f:
