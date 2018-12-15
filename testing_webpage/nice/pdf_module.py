@@ -64,7 +64,7 @@ if __name__ == '__main__':
 
     for c in Candidate.objects.filter(~Q(user__experiences=None), render_cv=False)[:MAX_NUM_OF_RENDERS]:
         try:
-            render_cv(c)
+            render_cv(c, 'cv/{}.pdf'.format(c.id))
             c.render_cv = True
             c.save()
         except:
