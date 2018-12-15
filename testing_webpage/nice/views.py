@@ -11,7 +11,7 @@ from nice.cts import *
 
 def cv_test(request, candidate_id):
     candidate = Candidate.objects.get(pk=candidate_id)
-    return render(request, ELON_CV, {candidate: candidate})
+    return render(request, ELON_CV, {'candidate': candidate})
 
 
 def download_cv(request, candidate_id):
