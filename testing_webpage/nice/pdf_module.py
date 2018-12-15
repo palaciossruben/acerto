@@ -33,6 +33,7 @@ application = get_wsgi_application()
 import pdfkit
 import urllib.parse
 from django.db.models import Q
+from django.template.loader import get_template
 
 from testing_webpage import settings
 from dashboard.models import Candidate
@@ -44,16 +45,27 @@ MAX_NUM_OF_RENDERS = 10
 
 
 def render_cv(candidate_id, path_to_cv='cv'):
-    filename = 'cv_{}.pdf'.format(candidate_id)
+    """filename = 'cv_{}.pdf'.format(candidate_id)
     base_url = 'http://127.0.0.1:8000' if settings.DEBUG else 'https://peaku.co'
     file_path = os.path.join(path_to_cv, filename)
 
     content_url = urllib.parse.urljoin(base_url, 'cv/{}'.format(candidate_id))
-    pdfkit.from_url(content_url, file_path)
+    pdfkit.from_url(content_url, file_path)"""
+
+    candidate = Candidate.objects.get(pk=candidate_id)
+    tmp_pdf = 'cv_tmp.pdf'
+    nice_dir = os.path.dirname(os.path.realpath(__file__))
+
+    template_path = os.path.join(nice_dir, 'templates', 'nice', 'elon_cv.html')
+    template = get_template(template_path)
+    html = template.render({'candidate': candidate})  # Renders the template with the context data.
+
+    css = os.path.join(nice_dir, 'static', 'nice', 'css', 'cv.css')
+    pdfkit.from_string(html, tmp_pdf, css=css)
 
 
 if __name__ == '__main__':
-
+    """
     for c in Candidate.objects.filter(~Q(user__experiences=None), render_cv=False)[:MAX_NUM_OF_RENDERS]:
         try:
             render_cv(c.id)
@@ -61,3 +73,5 @@ if __name__ == '__main__':
             c.save()
         except:
             SENTRY_CLIENT.captureException()
+    """
+    render_cv(23000)
