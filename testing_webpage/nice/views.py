@@ -39,7 +39,7 @@ def download_cv(request, candidate_id):
     content_url = urllib.parse.urljoin(base_url, 'cv/{}'.format(candidate_id))
     print(content_url)
 
-    pdfkit.from_url(content_url, file_path)
+    #pdfkit.from_url(content_url, file_path)
     return HttpResponse(200)
 
     """with open(file_path, 'rb') as f:
