@@ -38,7 +38,7 @@ from testing_webpage import settings
 candidate_id = 23000
 filename = 'cv_{}.pdf'.format(candidate_id)
 base_url = 'http://127.0.0.1:8000' if settings.DEBUG else 'https://peaku.co'
-file_path = os.path.join('./nice', 'cv', filename)
+file_path = os.path.join('.', 'cv', filename)
 
 content_url = urllib.parse.urljoin(base_url, 'cv/{}'.format(candidate_id))
 pdfkit.from_url(content_url, file_path)
