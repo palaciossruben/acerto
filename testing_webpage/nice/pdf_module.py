@@ -31,7 +31,11 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
 import pdfkit
+import urllib.parse
 from testing_webpage import settings
 
+
+candidate_id = 23000
 base_url = 'http://127.0.0.1:8000' if settings.DEBUG else 'https://peaku.co'
+content_url = urllib.parse.urljoin(base_url, 'cv/{}'.format(candidate_id))
 pdfkit.from_url(base_url + '/cv', './static/nice/cvs/cv.pdf')
