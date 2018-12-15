@@ -32,13 +32,31 @@ application = get_wsgi_application()
 
 import pdfkit
 import urllib.parse
+from django.db.models import Q
+
 from testing_webpage import settings
+from dashboard.models import Candidate
+from decouple import config
+from raven import Client
+
+SENTRY_CLIENT = Client(config('sentry_dsn'))
 
 
-candidate_id = 23000
-filename = 'cv_{}.pdf'.format(candidate_id)
-base_url = 'http://127.0.0.1:8000' if settings.DEBUG else 'https://peaku.co'
-file_path = os.path.join('.', 'cv', filename)
+def render_cv(candidate_id):
+    filename = 'cv_{}.pdf'.format(candidate_id)
+    base_url = 'http://127.0.0.1:8000' if settings.DEBUG else 'https://peaku.co'
+    file_path = os.path.join('.', 'cv', filename)
 
-content_url = urllib.parse.urljoin(base_url, 'cv/{}'.format(candidate_id))
-pdfkit.from_url(content_url, file_path)
+    content_url = urllib.parse.urljoin(base_url, 'cv/{}'.format(candidate_id))
+    pdfkit.from_url(content_url, file_path)
+
+
+if __name__ == '__main__':
+
+    for c in Candidate.objects.filter(~Q(user__experiences=None), render_cv=False):
+        #try:
+        render_cv(c.id)
+        c.render_cv = True
+        c.save()
+    #except:
+        #SENTRY_CLIENT.captureException()

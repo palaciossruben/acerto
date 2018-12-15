@@ -32,18 +32,21 @@ def cv_test(request, candidate_id):
 
 @csrf_exempt
 def download_cv(request, candidate_id):
-    base_url = 'http://127.0.0.1:8000' if settings.DEBUG else 'https://peaku.co'
+    #base_url = 'http://127.0.0.1:8000' if settings.DEBUG else 'https://peaku.co'
     filename = 'cv_{}.pdf'.format(candidate_id)
     file_path = os.path.join('./nice', 'cv', filename)
     #content_url = urllib.parse.urljoin(base_url, 'seleccion-de-personal/perfil-del-candidato/{}'.format(candidate_id))
-    content_url = urllib.parse.urljoin(base_url, 'cv/{}'.format(candidate_id))
-    print(content_url)
-    print(file_path)
+    #content_url = urllib.parse.urljoin(base_url, 'cv/{}'.format(candidate_id))
+    #print(content_url)
+    #print(file_path)
 
     #pdfkit.from_url(content_url, file_path)
     #return HttpResponse(200)
 
-    with open(file_path, 'rb') as f:
-        response = HttpResponse(f, content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename={}'.format(filename)
-        return response
+    try:
+        with open(file_path, 'rb') as f:
+            response = HttpResponse(f, content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename={}'.format(filename)
+            return response
+    except FileNotFoundError:
+        return HttpResponse('Cannot find CV', status=404)
