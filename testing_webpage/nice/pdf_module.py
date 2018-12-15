@@ -54,9 +54,9 @@ def render_cv(candidate_id):
 if __name__ == '__main__':
 
     for c in Candidate.objects.filter(~Q(user__experiences=None), render_cv=False):
-        #try:
-        render_cv(c.id)
-        c.render_cv = True
-        c.save()
-    #except:
-        #SENTRY_CLIENT.captureException()
+        try:
+            render_cv(c.id)
+            c.render_cv = True
+            c.save()
+        except:
+            SENTRY_CLIENT.captureException()
