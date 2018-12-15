@@ -9,7 +9,7 @@ sudo apt-get install xvfb
 
 And then add 'xvfb-run' infront of the wkhtmltopdf command inside the library done by adding:
         yield 'xvfb-run'
-in line 83 of pdfkit.py internal library...
+in line 83 of /usr/local/lib/python3.5/dist-packages/pdfkit.py internal library...
 see:
 https://unix.stackexchange.com/questions/192642/wkhtmltopdf-qxcbconnection-could-not-connect-to-display/223694#223694
 """
@@ -40,6 +40,7 @@ from decouple import config
 from raven import Client
 
 SENTRY_CLIENT = Client(config('sentry_dsn'))
+MAX_NUM_OF_RENDERS = 10
 
 
 def render_cv(candidate_id):
@@ -53,7 +54,7 @@ def render_cv(candidate_id):
 
 if __name__ == '__main__':
 
-    for c in Candidate.objects.filter(~Q(user__experiences=None), render_cv=False):
+    for c in Candidate.objects.filter(~Q(user__experiences=None), render_cv=False)[:MAX_NUM_OF_RENDERS]:
         try:
             render_cv(c.id)
             c.render_cv = True
