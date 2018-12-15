@@ -20,6 +20,7 @@ from testing_webpage import settings
 from django.shortcuts import render
 from django.http import HttpResponse
 from dashboard.models import Candidate
+from django.views.decorators.csrf import csrf_exempt
 
 from nice.cts import *
 
@@ -29,6 +30,7 @@ def cv_test(request, candidate_id):
     return render(request, ELON_CV, {'candidate': candidate})
 
 
+@csrf_exempt
 def download_cv(request, candidate_id):
 
     base_url = 'http://127.0.0.1:8000' if settings.DEBUG else 'https://peaku.co'
