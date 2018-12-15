@@ -38,13 +38,12 @@ def download_cv(request, candidate_id):
     #content_url = urllib.parse.urljoin(base_url, 'seleccion-de-personal/perfil-del-candidato/{}'.format(candidate_id))
     content_url = urllib.parse.urljoin(base_url, 'cv/{}'.format(candidate_id))
     print(content_url)
+    print(file_path)
 
     #pdfkit.from_url(content_url, file_path)
-    return HttpResponse(200)
+    #return HttpResponse(200)
 
-    """with open(file_path, 'rb') as f:
+    with open(file_path, 'rb') as f:
         response = HttpResponse(f, content_type='application/pdf')
         response['Content-Disposition'] = 'attachment; filename={}'.format(filename)
         return response
-    """
-
