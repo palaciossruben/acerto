@@ -20,6 +20,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from dashboard.models import Candidate
 from django.views.decorators.csrf import csrf_exempt
+from django.core.exceptions import ObjectDoesNotExist
+
 from testing_webpage import settings
 from nice.cts import *
 
@@ -32,7 +34,11 @@ def cv_test(request, candidate_id):
 @csrf_exempt
 def download_cv(request, candidate_id):
 
-    candidate = Candidate.objects.get(pk=candidate_id)
+    try:
+        candidate = Candidate.objects.get(pk=candidate_id)
+    except ObjectDoesNotExist:
+        return HttpResponse('No existe este candidato', code_status=404)
+
     filename = '{}_CV.pdf'.format(candidate.user.name)
     tmp_pdf = 'cv_tmp.pdf'
     nice_dir = os.path.dirname(os.path.realpath(__file__))
