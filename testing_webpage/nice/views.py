@@ -32,7 +32,6 @@ def cv_test(request, candidate_id):
 
 @csrf_exempt
 def download_cv(request, candidate_id):
-
     base_url = 'http://127.0.0.1:8000' if settings.DEBUG else 'https://peaku.co'
     filename = 'cv_{}.pdf'.format(candidate_id)
     file_path = os.path.join('./nice', 'cv', filename)
@@ -41,7 +40,11 @@ def download_cv(request, candidate_id):
     print(content_url)
 
     pdfkit.from_url(content_url, file_path)
-    with open(file_path, 'rb') as f:
+    return HttpResponse(200)
+
+    """with open(file_path, 'rb') as f:
         response = HttpResponse(f, content_type='application/pdf')
         response['Content-Disposition'] = 'attachment; filename={}'.format(filename)
         return response
+    """
+
