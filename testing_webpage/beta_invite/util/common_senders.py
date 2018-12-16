@@ -213,7 +213,6 @@ def get_params_with_campaign(campaign, language_code='es', override_dict={}):
               'total_applicant_candidates': common.get_application_candidates_count(campaign),
               'total_relevant_candidates': common.get_relevant_candidates_count(campaign),
               'total_recommended_candidates': common.get_recommended_candidates_count(campaign),
-              'campaign_summary_url': campaign.get_url_for_company(),
               'business_campaign_url': campaign.get_url_for_company(),
               }
 
@@ -221,6 +220,9 @@ def get_params_with_campaign(campaign, language_code='es', override_dict={}):
     if business_user:
         params['name'] = get_first_name(business_user.name)
         params['complete_name'] = business_user.name.title()
+        params['campaign_recommended_url'] = campaign.get_recommended_url(business_user),
+        params['campaign_relevant_url'] = campaign.get_relevant_url(business_user),
+        params['campaign_applicant_url'] = campaign.get_applicant_url(business_user),
 
     params.update(get_basic_params(override_dict))
     return params

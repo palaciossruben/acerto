@@ -7,14 +7,15 @@ Se ha terminado la publicación {campaign_name}, lo que sígnifica que ya no apl
 
 Los resultados de tu publicación fueron así:
 
-Candidatos aplicantes: {total_applicant_candidates}
 
-Candidatos preseleccionados: {total_relevant_candidates}
+Candidatos seleccionados: <a href="{campaign_recommended_url}">{total_recommended_candidates}</a>
 
-Candidatos seleccionados: {total_recommended_candidates}
+Candidatos preseleccionados: <a href="{campaign_relevant_url}">{total_relevant_candidates}</a>
+
+Candidatos aplicantes: <a href="{campaign_applicant_url}">{total_applicant_candidates}</a>
 
 
-Recuerda que puedes ingresar a la plataforma y ver todos los procesos <a href="{business_campaign_url}">aquí</a>
+Recuerda que puedes ingresar a la plataforma y ver todo el proceso <a href="{business_campaign_url}">aquí</a>
 
 Nos encantaría conocer tu opinión y te tomará máximo 5 minutos llenar la <a href="https://goo.gl/forms/SHMxNti2IIr4aYzY2">encuesta</a>
 
