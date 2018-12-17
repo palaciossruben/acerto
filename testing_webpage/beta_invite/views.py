@@ -17,6 +17,7 @@ from google.cloud import speech
 from google.cloud.speech import enums
 from google.cloud.speech import types
 
+from datetime import datetime
 import common
 from beta_invite import constants as cts
 from beta_invite import test_module, new_user_module
@@ -410,18 +411,35 @@ def get_company(company_name):
         return company
 
 
+def parse_date(date_string):
+    split_list = date_string.split('-')
+    if len(split_list) == 2:
+        try:
+            return datetime(year=int(split_list[0]), month=int(split_list[1]), day=1)
+        except ValueError:
+            return None
+    else:
+        return None
+
+
 def update_work_experiences(request, company_name, candidate):
 
     user = User.objects.get(pk=candidate.user.pk)
     order = int(request.POST.get('order'))
+    present = request.POST.get('present')
+    start = parse_date(request.POST.get('start_date'))
+    if present:
+        finish = datetime.today()
+    else:
+        finish = parse_date(request.POST.get('finish_date'))
 
     try:
         work_experience = Experience.objects.get(order=order, user=user)
         work_experience.company = get_company(company_name)
         work_experience.role = request.POST.get('role')
         work_experience.highlight = request.POST.get('highlight')
-        work_experience.start_date = request.POST.get('start_date')
-        work_experience.finish_date = request.POST.get('finish_date')
+        work_experience.start = start
+        work_experience.finish = finish
         work_experience.order = order
         work_experience.save()
 
@@ -430,8 +448,8 @@ def update_work_experiences(request, company_name, candidate):
         work_experience = Experience(company=get_company(company_name),
                                      role=request.POST.get('role'),
                                      highlight=request.POST.get('highlight'),
-                                     start_date=request.POST.get('start_date'),
-                                     finish_date=request.POST.get('finish_date'),
+                                     start=start,
+                                     finish=finish,
                                      order=order)
         work_experience.save()
         user.experiences.add(work_experience)

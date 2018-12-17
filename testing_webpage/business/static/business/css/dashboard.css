@@ -200,13 +200,13 @@ a, a:hover, a:active, a: visited, a:focus{
     display:none;
 }
 
-.like-dislike{
-    display: inline-block;
-}
-
 .like-selection-div{
     text-align:center;
     margin-bottom: -20px;
+}
+
+.like-dislike{
+    display: inline-block;
 }
 
 .option-text{
@@ -225,12 +225,16 @@ a, a:hover, a:active, a: visited, a:focus{
     margin: 5px 0px;
 }
 
+.separator{
+    border-left: 2px solid #DAD9D9;
+}
+
 .like{
-    width: 195px;
+    width: 220px;
     height: 35px;
     border: 2px solid #A8CF38;
     background:white;
-    padding: 5px;
+    padding: 5px 14px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border-right:none;
@@ -238,11 +242,11 @@ a, a:hover, a:active, a: visited, a:focus{
 }
 
 .dislike{
-    width: 195px;
+    width: 220px;
     height: 35px;
     border: 2px solid #F26122;
     background:white;
-    padding: 5px 0;
+    padding: 5px 14px 0 0;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border-left:none;
@@ -250,27 +254,31 @@ a, a:hover, a:active, a: visited, a:focus{
 }
 
 .like-on{
-    width: 195px;
+    width: 220px;
+    height: 35px;
     border: 2px solid #A8CF38;
     background:#A8CF38;
     color:white;
-    padding: 5px;
+    padding: 5px 14px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border-right:none;
+    margin-right: -5px;
     cursor:default;
 }
 
 .dislike-on{
-    width: 195px;
+    width: 220px;
+    height: 35px;
     border: 2px solid #F26122;
     background:#F26122;
     color:white;
-    padding: 5px;
+    padding: 5px 14px 0 0;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border-right:none;
     cursor:default;
+    margin-left: -5px;
 }
 
 .off{
@@ -471,17 +479,6 @@ a, a:hover, a:active, a: visited, a:focus{
 
 .email-button:hover{
     text-decoration:none;
-}
-
-.separator-div{
-    width:1%;
-}
-
-.separator{
-    background-color: #b5ce53;;
-    width: 5px;
-    height: 110px;
-    border-radius: 30%;
 }
 
 .profile{
@@ -787,6 +784,7 @@ footer {
         border-right: 2px solid #A8CF38;
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
+        margin-right: 0px;
 
     }
 
@@ -794,6 +792,7 @@ footer {
         border-left: 2px solid #F26122;
         border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
+        margin-left: 0px;
     }
 }
 
@@ -824,10 +823,6 @@ footer {
 
     .logo-white{
         margin-bottom:20px;
-    }
-
-    .separator-div,.line{
-        display:none;
     }
 
     .big-div{

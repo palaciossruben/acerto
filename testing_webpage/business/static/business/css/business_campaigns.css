@@ -63,12 +63,20 @@ body {
     color:#666666;
 }
 
-.campaign-div a{
+.campaign-div{
     color:#666666;
 }
 
-.campaign-div a:hover{
+.cta{
     color:orange;
+}
+
+.cta:hover{
+    color:#9F9C9B;
+}
+
+.campaign-div a:hover{
+    text-decoration:none;
 }
 
 .tittle{
