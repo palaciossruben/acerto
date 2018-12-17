@@ -24,13 +24,13 @@
                 <div class="row">
                     <p class="tittle">{{ campaign.title_es }}</p>
                     <div class="col-lg-12">
-                        <a href="{{ campaign|get_campaign_url }}" target="_blank"><b>Ver la oferta que ven los candidatos</b></a>
+                        <a href="{{ campaign|get_campaign_url }}" class="cta" target="_blank"><b>Ver la oferta que ven los candidatos</b></a>
                     <br>
                     <br>
                         {% if campaign.free_trial %}
-                            <a href="{% url 'business:dashboard' business_user_id=business_user_id campaign_id=campaign.id state_name='applicants' %}" target="_blank"><b>TABLERO DE CONTROL</b></a>
+                            <a class="cta" href="{% url 'business:dashboard' business_user_id=business_user_id campaign_id=campaign.id state_name='applicants' %}" target="_blank"><b>VER CANDIDATOS</b></a>
                         {% else %}
-                            <a href="{% url 'business:dashboard' business_user_id=business_user_id campaign_id=campaign.id state_name='recommended' %}" target="_blank"><b>TABLERO DE CONTROL</b></a>
+                            <a class="cta" href="{% url 'business:dashboard' business_user_id=business_user_id campaign_id=campaign.id state_name='recommended' %}" target="_blank"><b>VER CANDIDATOS</b></a>
                         {% endif %}
                     <br>
                     <br>

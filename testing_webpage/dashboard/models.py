@@ -195,6 +195,7 @@ class Candidate(models.Model):
     change_by_client = models.BooleanField(default=False)
     liked = models.BooleanField(default=False)
     last_evaluation = models.ForeignKey(Evaluation, null=True, related_name='last_evaluation')
+    reason_for_rejection = models.CharField(max_length=100, null=True)
     render_cv = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
