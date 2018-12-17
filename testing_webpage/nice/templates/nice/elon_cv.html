@@ -3,13 +3,24 @@
 
 <html>
 <head>
+    <meta charset="utf-8"><!-- This is charset is important to print the non ascii chars in pdf -->
     <link rel="stylesheet" type="text/css" href="{% static 'nice/css/cv.css' %}">
 </head>
 <body>
+    <p>name: {{ candidate.user.name }}</p>
+    <p>email: {{ candidate.user.email }}</p>
+    <p>phone: {{ candidate.user.phone }}</p>
+    <p>country: {{ candidate.user.country.name }}</p>
+    <p>city: {{ candidate.user.city.name }}</p>
 
-<h1 class="my-title" >My First Heading</h1>
-
-<p>My first paragraph.</p>
+    {% for e in candidate.user.experiences.all %}
+        <p class="company"><strong>{{ e.company }}</strong>
+            {% if e.start_format and e.finish_format %}
+                <span class="duration">({{ e.start_format }} - {{ e.finish_format }})</span></p>
+            {% endif %}
+        <p class="role">{{ e.role }}</p>
+        <p>{{ e.highlight }}</p>
+    {% endfor %}
 
 </body>
 </html>

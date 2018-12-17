@@ -558,9 +558,9 @@ def payment_confirmation(request):
         return HttpResponse(message, status=400)
 
 
-def candidate_profile(request, pk):
+def candidate_profile(request, candidate_id):
 
-    candidate = Candidate.objects.get(pk=pk)
+    candidate = Candidate.objects.get(pk=candidate_id)
     business_user = get_business_user(request)
     phone = candidate.user.phone.replace('+', '')
 

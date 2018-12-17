@@ -761,6 +761,20 @@ class Campaign(models.Model):
     def get_url_for_company(self):
         return urllib.parse.urljoin(self.get_host(), '/seleccion-de-personal/resumen/{campaign_id}'.format(campaign_id=self.pk))
 
+    def get_state_url(self, business_user, state_name):
+        return urllib.parse.urljoin(self.get_host(), '/seleccion-de-personal/tablero-de-control/{business_user_id}/{campaign_id}/{state_name}'.format(business_user_id=business_user.id,
+                                                                                                                                                      campaign_id=self.pk,
+                                                                                                                                                      state_name=state_name))
+
+    def get_recommended_url(self, business_user):
+        return self.get_state_url(business_user, 'recommended')
+
+    def get_relevant_url(self, business_user):
+        return self.get_state_url(business_user, 'relevant')
+
+    def get_applicant_url(self, business_user):
+        return self.get_state_url(business_user, 'applicants')
+
     def get_requirement_names(self):
         # TODO: add support for english
         return [b.name_es for b in self.bullets.all() if b.bullet_type and b.bullet_type.name == 'requirement']

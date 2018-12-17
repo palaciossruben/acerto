@@ -20,7 +20,7 @@ urlpatterns = [
     url(r'^resumen/(?P<campaign_id>\d+)$', views.summary, name='summary'),
     url(r'^online[-_]demo$', views.online_demo, name='online_demo'),
     url(r'^tablero[-_]de[-_]control/(?P<business_user_id>\d+)/(?P<campaign_id>\d+)/(?P<state_name>.*)/$', views.dashboard, name='dashboard'),
-    url(r'^perfil[-_]del[-_]candidato/(?P<pk>\d+)$', views.candidate_profile, name='candidate_profile'),
+    url(r'^perfil[-_]del[-_]candidato/(?P<candidate_id>\d+)$', views.candidate_profile, name='candidate_profile'),
     # CONTACT
     url(r'^contactanos$', views.contact_form, name='contact_form'),
     url(r'^contact[-_]form[-_]post$', views.contact_form_post, name='contact_form_post'),
