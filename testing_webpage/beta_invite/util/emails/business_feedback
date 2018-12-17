@@ -8,11 +8,11 @@ Se ha terminado la publicación {campaign_name}, lo que sígnifica que ya no apl
 Los resultados de tu publicación fueron así:
 
 
-Candidatos seleccionados: <a href="{campaign_recommended_url}">{total_recommended_candidates}</a>
+Candidatos <a href="{campaign_recommended_url}">seleccionados</a>: {total_recommended_candidates}
 
-Candidatos preseleccionados: <a href="{campaign_relevant_url}">{total_relevant_candidates}</a>
+Candidatos <a href="{campaign_relevant_url}">preseleccionados</a>: {total_relevant_candidates}
 
-Candidatos aplicantes: <a href="{campaign_applicant_url}">{total_applicant_candidates}</a>
+Candidatos <a href="{campaign_applicant_url}">aplicantes</a>: {total_applicant_candidates}
 
 
 Recuerda que puedes ingresar a la plataforma y ver todo el proceso <a href="{business_campaign_url}">aquí</a>
