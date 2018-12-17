@@ -719,19 +719,25 @@ def change_state(request):
         candidate = Candidate.objects.get(pk=request.POST.get('candidate_id'))
         campaign = candidate.campaign
         state_code = request.POST.get('state_code')
-        feedback = request.POST.get('feedback')
-        if state_code and feedback != 'No':
-            candidate.change_state(state_code=state_code, auth_user=request.user, place='Business User ha cambiado el estado del candidato')
-            candidate.change_by_client = True
-            candidate.save()
+
+        if state_code:
             if state_code == 'ABC':
                 campaign.likes = campaign.likes + 1
                 campaign.save()
+                candidate.change_state(state_code=state_code, auth_user=request.user, place='Business User ha seleccionado a este candidato')
+                candidate.change_by_client = True
                 candidate.liked = True
                 candidate.save()
-        else:
-            candidate.change_state(state_code=state_code, auth_user=request.user, place='Admin ha cambiado el estado del candidato')
-            # print('Tests')
+            elif state_code == 'RBC':
+                candidate.reason_for_rejection = request.POST.get('reason')
+                candidate.change_state(state_code=state_code, auth_user=request.user, place='Business User ha rechazado a este candidato')
+                candidate.change_by_client = True
+                candidate.save()
+            else:
+                candidate.change_state(state_code=state_code, auth_user=request.user, place='Admin ha cambiado el estado del candidato')
+
+        print('Tests')
+
         return HttpResponse()
     else:
         return HttpResponseBadRequest('<h1>HTTP CODE 400: Client sent bad request with missing params</h1>')

@@ -22,34 +22,37 @@
                 data: Object.assign({}, general_dict, param_dict),
                 success:function(response)
                 {
+                    likes = likes + 1;
+                    if (param_dict['state_code']=='ABC' || param_dict['state_code']=='STC'){
+                        $("#like-"+param_dict['candidate_id']).attr("onclick", "");
+                        $("#like-"+param_dict['candidate_id']).css("background", "#A8CF38");
+                        $("#like-"+param_dict['candidate_id']).css("color", "white");
+                        $("#like-"+param_dict['candidate_id']).css("border-color", "#A8CF38");
+                        $("#dislike-"+param_dict['candidate_id']).attr("onclick", "");
+                        $("#dislike-"+param_dict['candidate_id']).css("color", "#9F9C9B;");
+                        $("#dislike-"+param_dict['candidate_id']).css("border-color", "#9F9C9B");
 
-                    if(param_dict['feedback']=='Yes'){
-                        $("#reason-"+param_dict['candidate_id']).css("display", "none");
-                        console.log('Entró');
+                        if(param_dict['state_code']=='ABC'){
+                            $(".liked").val("Marcar como finalista " + likes + "/5");
+                        }
+                        $("#separator-"+param_dict['candidate_id']).css("border", "none");
+
                     }else{
-                        likes = likes + 1;
-                        if (param_dict['state_code']=='ABC' || param_dict['state_code']=='STC'){
-                            $("#like-"+param_dict['candidate_id']).attr("onclick", "");
-                            $("#like-"+param_dict['candidate_id']).css("background", "#A8CF38");
-                            $("#like-"+param_dict['candidate_id']).css("color", "white");
-                            $("#like-"+param_dict['candidate_id']).css("border-color", "#A8CF38");
-                            $("#dislike-"+param_dict['candidate_id']).attr("onclick", "");
-                            $("#dislike-"+param_dict['candidate_id']).css("color", "#9F9C9B;");
-                            $("#dislike-"+param_dict['candidate_id']).css("border-color", "#9F9C9B");
+                        $("#dislike-"+param_dict['candidate_id']).attr("onclick", "");
+                        $("#dislike-"+param_dict['candidate_id']).css("background", "#F26122");
+                        $("#dislike-"+param_dict['candidate_id']).css("color", "white");
+                        $("#dislike-"+param_dict['candidate_id']).css("border-color", "#F26122");
+                        $("#like-"+param_dict['candidate_id']).attr("onclick", "");
+                        $("#like-"+param_dict['candidate_id']).css("color", "#9F9C9B;");
+                        $("#like-"+param_dict['candidate_id']).css("border-color", "#9F9C9B");
 
-                            $(".like-on").val("Marcardo como finalista " + likes + "/5");
-                            $(".like").val("Marcar como finalista " + likes + "/5");
-
-                        }else{
-                            $("#dislike-"+param_dict['candidate_id']).attr("onclick", "");
-                            $("#dislike-"+param_dict['candidate_id']).css("background", "#F26122");
-                            $("#dislike-"+param_dict['candidate_id']).css("color", "white");
-                            $("#dislike-"+param_dict['candidate_id']).css("border-color", "#F26122");
-                            $("#like-"+param_dict['candidate_id']).attr("onclick", "");
-                            $("#like-"+param_dict['candidate_id']).css("color", "#9F9C9B;");
-                            $("#like-"+param_dict['candidate_id']).css("border-color", "#9F9C9B");
-
+                        if(param_dict['state_code']=='RBC'){
                             $("#reason-"+param_dict['candidate_id']).css("display", "block");
+                        }
+                        $("#separator-"+param_dict['candidate_id']).css("border", "none");
+
+                        if(param_dict['feedback']=='yes'){
+                            $("#reason-"+param_dict['candidate_id']).css("display", "none");
                         }
                     }
                 }
@@ -138,22 +141,85 @@
 </a>
 <div class="like-selection-div">
     {% if logged_user == 'admin' %}
-    <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="like" id="like-{{ candidate.pk }}">
-            <img class="like-img" src="{% static 'business/img/like.png' %}">
-            <input type="button" class="option-text" onclick="change_state({'state_code':'STC', 'candidate_id':{{ candidate.pk }}, 'feedback':'No'})" value="Marcar como finalista">
-        </div>
-    </form>
-    <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="dislike" id="dislike-{{ candidate.pk }}">
-            <div style="border-left: 2px solid #DAD9D9;">
-                <img class="dislike-img" src="{% static 'business/img/dislike.png' %}">
-                <input type="button" class="option-text" onclick="change_state({'state_code':'SR', 'candidate_id':{{ candidate.pk }}, 'feedback':'No'})" value="Rechazar candidato">
+        <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="like" id="like-{{ candidate.pk }}">
+                <img class="like-img" src="{% static 'business/img/like.png' %}">
+                <input type="button" class="option-text" onclick="change_state({'state_code':'STC', 'candidate_id':{{ candidate.pk }}, 'feedback':'No'})" value="Marcar como finalista">
             </div>
-        </div>
-    </form>
+        </form>
+        <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="dislike" id="dislike-{{ candidate.pk }}">
+                <div class="separator" id="separator-{{ candidate.pk }}">
+                    <img class="dislike-img" src="{% static 'business/img/dislike.png' %}">
+                    <input type="button" class="option-text" onclick="change_state({'state_code':'SR', 'candidate_id':{{ candidate.pk }}, 'feedback':'No'})" value="Rechazar candidato">
+                </div>
+            </div>
+        </form>
+    {% else %}
+        {% if not candidate.change_by_client and business_state.name != 'aplicantes' %}
+            <form method="post" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="reason" id="reason-{{ candidate.pk }}">
+                    <input type="text" class="reason-input" id="reason-text-{{ candidate.pk }}" placeholder="Ingresa la razón del rechazo">
+                    <br>
+                    <input type="button" class="send" value="Enviar" onclick="change_state({'feedback':'yes', 'state_code':'RBC', 'reason':$('#reason-text-{{ candidate.pk }}').val(), 'candidate_id':{{ candidate.pk }}})">
+                </div>
+            </form>
+            <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="like" id="like-{{ candidate.pk }}">
+                    <img class="like-img" src="{% static 'business/img/like.png' %}">
+                    <input type="button" class="option-text liked" onclick="change_state({'state_code':'ABC', 'candidate_id':{{ candidate.pk }}})" value="Marcar como finalista {{ campaign.likes }}/5">
+                </div>
+            </form>
+            <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="dislike" id="dislike-{{ candidate.pk }}">
+                    <div class="separator" id="separator-{{ candidate.pk }}">
+                        <img class="dislike-img" src="{% static 'business/img/dislike.png' %}">
+                        <input type="button" class="option-text" onclick="change_state({'state_code':'RBC', 'candidate_id':{{ candidate.pk }}})" value="Rechazar candidato">
+                    </div>
+                </div>
+            </form>
+        {% elif candidate.change_by_client and business_state.name != 'aplicantes' %}
+            {% if candidate.liked %}
+                <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="like-on" id="like-{{ candidate.pk }}">
+                        <img class="like-img" src="{% static 'business/img/like.png' %}">
+                        <input type="button" class="option-text liked" onclick="change_state({'state_code':'ABC', 'candidate_id':{{ candidate.pk }}})" value="Marcar como finalista {{ campaign.likes }}/5">
+                    </div>
+                </form>
+                <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="dislike off" id="dislike-{{ candidate.pk }}">
+                        <div>
+                            <img class="dislike-img" src="{% static 'business/img/dislike.png' %}">
+                            <input type="button" class="option-text" onclick="change_state({'state_code':'RBC', 'candidate_id':{{ candidate.pk }}})" value="Rechazar candidato">
+                        </div>
+                    </div>
+                </form>
+            {% else %}
+                <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="like off" id="like-{{ candidate.pk }}">
+                        <img class="like-img" src="{% static 'business/img/like.png' %}">
+                        <input type="button" class="option-text liked" onclick="change_state({'state_code':'ABC', 'candidate_id':{{ candidate.pk }}})" value="Marcar como finalista {{ campaign.likes }}/5">
+                    </div>
+                </form>
+                <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="dislike-on" id="dislike-{{ candidate.pk }}">
+                        <div>
+                            <img class="dislike-img" src="{% static 'business/img/dislike.png' %}">
+                            <input type="button" class="option-text" onclick="change_state({'state_code':'RBC', 'candidate_id':{{ candidate.pk }}})" value="Rechazar candidato">
+                        </div>
+                    </div>
+                </form>
+            {% endif %}
+        {% endif %}
     {% endif %}
 </div>
 <input type="hidden" name="campaign_id" value="{{ candidate.campaign_id }}"/>
