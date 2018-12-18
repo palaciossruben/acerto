@@ -7,6 +7,7 @@ from urllib.parse import urlencode, urlunparse, urlparse, parse_qsl, parse_qs
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.core.files.storage import FileSystemStorage
 from django.db.transaction import atomic
+from django.db.models import Q
 from ipware.ip import get_ip
 import geoip2.database
 import inflection
@@ -355,7 +356,11 @@ def get_work_areas(language_code):
 
 
 def get_cities():
-    return City.objects.all().order_by('name')
+    alias_cities = [c for c in City.objects.filter(~Q(alias=None)).all()]
+    for alias_city in alias_cities:
+        alias_city.name = alias_city.alias
+
+    return sorted([c for c in City.objects.all()] + alias_cities, key=lambda c: c.name)
 
 
 def get_education(language_code):
