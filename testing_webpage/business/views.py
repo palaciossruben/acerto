@@ -614,22 +614,19 @@ def dashboard(request, business_user_id, campaign_id, state_name):
     dashboard_module.send_email_from_dashboard(request, campaign)
     common.calculate_evaluation_summaries_with_caching(campaign)
 
-    applicants = []
-    relevant = []
-    recommended = []
+    applicants = common.get_application_candidates(campaign)
+    relevant = common.get_relevant_candidates(campaign)
+    recommended = common.get_recommended_candidates(campaign)
 
     if business_state.name == 'aplicantes':
-        applicants = common.get_application_candidates(campaign)
         campaign_evaluation = campaign.applicant_evaluation_last
         campaign_state_name = 'prospectos'
 
     elif business_state.name == 'relevantes':
-        relevant = common.get_relevant_candidates(campaign)
         campaign_evaluation = campaign.relevant_evaluation_last
         campaign_state_name = 'pre-seleccionados'
 
     else:
-        recommended = common.get_recommended_candidates(campaign)
         campaign_evaluation = campaign.recommended_evaluation_last
         campaign_state_name = 'seleccionados'
 
@@ -735,6 +732,7 @@ def change_state(request):
                 candidate.save()
             else:
                 candidate.change_state(state_code=state_code, auth_user=request.user, place='Admin ha cambiado el estado del candidato')
+
 
         print('Tests')
 
