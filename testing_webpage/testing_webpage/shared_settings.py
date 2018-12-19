@@ -228,10 +228,10 @@ REST_FRAMEWORK = {
 SOCIAL_AUTH_FACEBOOK_KEY = config('social_auth_facebook_key')  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = config('social_auth_facebook_secret')  # App Secret
 
-
-# STATICFILES_STORAGE = 'testing_webpage.storage.MyManifestStaticFilesStorage'
-
-
 # Important!!!: This is for clearing the browser cache
-# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage import ManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'testing_webpage.storage.MyManifestStaticFilesStorage'
+
+
+
+#STATICFILES_STORAGE = 'django.contrib.staticfiles.storage import ManifestStaticFilesStorage'
 
