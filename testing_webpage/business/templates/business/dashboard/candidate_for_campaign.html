@@ -29,7 +29,11 @@
                         $("#dislike-"+param_dict['candidate_id']).css("border-color", "#9F9C9B");
 
                         if(param_dict['state_code']=='ABC'){
-                            $(".liked").val("Marcar como finalista " + likes + "/5");
+                            if(likes > 10){
+                                $(".liked").val("Marcar como finalista 10/10");
+                            }else{
+                                $(".liked").val("Marcar como finalista " + likes + "/10");
+                            }
                         }
 
                     }else{
