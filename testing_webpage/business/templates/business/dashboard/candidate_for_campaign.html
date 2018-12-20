@@ -20,14 +20,13 @@
                 data: Object.assign({}, general_dict, param_dict),
                 success:function(response)
                 {
-                    likes = likes + 1;
                     if (param_dict['state_code']=='ABC' || param_dict['state_code']=='STC'){
                         $("#like-"+param_dict['candidate_id']).css("background", "#A8CF38");
                         $("#like-"+param_dict['candidate_id']).css("color", "white");
                         $("#like-"+param_dict['candidate_id']).css("border-color", "#A8CF38");
                         $("#dislike-"+param_dict['candidate_id']).css("color", "#9F9C9B;");
                         $("#dislike-"+param_dict['candidate_id']).css("border-color", "#9F9C9B");
-
+                        likes = likes + 1;
                         if(param_dict['state_code']=='ABC'){
                             if(likes > 10){
                                 $(".liked").val("Marcar como finalista 10/10");
@@ -35,7 +34,6 @@
                                 $(".liked").val("Marcar como finalista " + likes + "/10");
                             }
                         }
-
                     }else{
                         $("#dislike-"+param_dict['candidate_id']).css("background", "#F26122");
                         $("#dislike-"+param_dict['candidate_id']).css("color", "white");
@@ -161,7 +159,7 @@
             </div>
         </form>
     {% else %}
-        {% if not candidate.change_by_client and business_state.name != 'aplicantes' %}
+        {% if not candidate.change_by_person and business_state.name != 'aplicantes' %}
             <form method="post" action="" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="reason" id="reason-{{ candidate.pk }}">
@@ -175,7 +173,7 @@
                 {% csrf_token %}
                 <div class="like" id="like-{{ candidate.pk }}">
                     <img class="like-img" src="{% static 'business/img/like.png' %}">
-                    <input type="button" class="option-text liked" onclick="change_state({'state_code':'ABC', 'candidate_id':{{ candidate.pk }}})" value="Marcar como finalista {{ campaign.likes }}/5">
+                    <input type="button" class="option-text liked" id="option-like-{{ candidate.pk }}" onclick="change_state({'state_code':'ABC', 'candidate_id':{{ candidate.pk }}})" value="Marcar como finalista {{ likes }}/10">
                 </div>
             </form>
             <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
@@ -183,17 +181,17 @@
                 <div class="dislike" id="dislike-{{ candidate.pk }}">
                     <div class="separator" id="separator-{{ candidate.pk }}">
                         <img class="dislike-img" src="{% static 'business/img/dislike.png' %}">
-                        <input type="button" class="option-text" onclick="change_state({'state_code':'RBC', 'candidate_id':{{ candidate.pk }}})" value="Rechazar candidato">
+                        <input type="button" class="option-text" id="option-dislike-{{ candidate.pk }}" onclick="change_state({'state_code':'RBC', 'candidate_id':{{ candidate.pk }}})" value="Rechazar candidato">
                     </div>
                 </div>
             </form>
-        {% elif candidate.change_by_client and business_state.name != 'aplicantes' %}
+        {% elif candidate.change_by_person and business_state.name != 'aplicantes' %}
             {% if candidate.liked %}
                 <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="like-on" id="like-{{ candidate.pk }}">
                         <img class="like-img" src="{% static 'business/img/like-green.png' %}">
-                        <input type="button" class="option-text liked" onclick="change_state({'state_code':'ABC', 'candidate_id':{{ candidate.pk }}})" value="Marcar como finalista {{ campaign.likes }}/5">
+                        <input type="button" class="option-text liked" id="option-like-{{ candidate.pk }}" onclick="" value="Marcar como finalista {{ likes }}/10">
                     </div>
                 </form>
                 <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
@@ -201,7 +199,7 @@
                     <div class="dislike off" id="dislike-{{ candidate.pk }}">
                         <div>
                             <img class="dislike-img" src="{% static 'business/img/dislike.png' %}">
-                            <input type="button" class="option-text" onclick="change_state({'state_code':'RBC', 'candidate_id':{{ candidate.pk }}})" value="Rechazar candidato">
+                            <input type="button" class="option-text" id="option-dislike-{{ candidate.pk }}" onclick="" value="Rechazar candidato">
                         </div>
                     </div>
                 </form>
@@ -210,7 +208,7 @@
                     {% csrf_token %}
                     <div class="like off" id="like-{{ candidate.pk }}">
                         <img class="like-img" src="{% static 'business/img/like.png' %}">
-                        <input type="button" class="option-text liked" onclick="change_state({'state_code':'ABC', 'candidate_id':{{ candidate.pk }}})" value="Marcar como finalista {{ campaign.likes }}/5">
+                        <input type="button" class="option-text liked" id="option-like-{{ candidate.pk }}" onclick="" value="Marcar como finalista {{ likes }}/10">
                     </div>
                 </form>
                 <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
@@ -218,7 +216,7 @@
                     <div class="dislike-on" id="dislike-{{ candidate.pk }}">
                         <div>
                             <img class="dislike-img" src="{% static 'business/img/dislike.png' %}">
-                            <input type="button" class="option-text" onclick="change_state({'state_code':'RBC', 'candidate_id':{{ candidate.pk }}})" value="Rechazar candidato">
+                            <input type="button" class="option-text" id="option-dislike-{{ candidate.pk }}" onclick="" value="Rechazar candidato">
                         </div>
                     </div>
                 </form>

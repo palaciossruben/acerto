@@ -573,8 +573,8 @@ def candidate_profile(request, candidate_id):
 def summary(request, campaign_id, business_user=None):
 
     campaign = Campaign.objects.get(pk=campaign_id)
+    #common.calculate_evaluation_summaries(campaign)
     common.calculate_evaluation_summaries_with_caching(campaign)
-
     if business_user is None:
         business_user = get_business_user(request)
         if common.access_for_users(request, campaign, business_user):
@@ -605,12 +605,17 @@ def dashboard(request, business_user_id, campaign_id, state_name):
     business_user = BusinessUser.objects.get(pk=business_user_id)
     logged_user = BusinessUser.objects.get(auth_user_id=request.user.id)
     campaign = Campaign.objects.get(pk=campaign_id)
+    if campaign.likes > 10:
+        likes = 10
+    else:
+        likes = campaign.likes
     business_state = BusinessState.objects.get(name=state_name)
 
     if common.access_for_users(request, campaign, business_user):
         return redirect('business:login')
 
     dashboard_module.send_email_from_dashboard(request, campaign)
+    # common.calculate_evaluation_summaries(campaign)
     common.calculate_evaluation_summaries_with_caching(campaign)
 
     applicants = common.get_application_candidates(campaign)
@@ -629,7 +634,8 @@ def dashboard(request, business_user_id, campaign_id, state_name):
                                                      'applicant_evaluation': campaign.applicant_evaluation_last,
                                                      'relevant_evaluation': campaign.relevant_evaluation_last,
                                                      'recommended_evaluation': campaign.recommended_evaluation_last,
-                                                     'logged_user': logged_user.name
+                                                     'logged_user': logged_user.name,
+                                                     'likes': likes
                                                      })
 
 
@@ -707,19 +713,22 @@ def change_state(request):
                 campaign.likes = campaign.likes + 1
                 campaign.save()
                 candidate.change_state(state_code=state_code, auth_user=request.user, place='Business User ha seleccionado a este candidato')
-                candidate.change_by_client = True
                 candidate.liked = True
+                candidate.change_by_person = True
                 candidate.save()
+
             elif state_code == 'RBC':
                 candidate.reason_for_rejection = request.POST.get('reason')
                 candidate.change_state(state_code=state_code, auth_user=request.user, place='Business User ha rechazado a este candidato')
-                candidate.change_by_client = True
+                candidate.change_by_person = True
                 candidate.save()
+
             else:
                 candidate.change_state(state_code=state_code, auth_user=request.user, place='Admin ha cambiado el estado del candidato')
-
-
-        print('Tests')
+                if state_code == 'SR':
+                    if candidate.liked:
+                        campaign.likes = campaign.likes - 1
+                        campaign.save()
 
         return HttpResponse()
     else:
