@@ -523,7 +523,7 @@ def add_cv_changes(request):
 
     user = common.get_user_from_request(request)
 
-    if user.id:
+    if user and user.id:
         user = User.objects.get(pk=int(user.id))
         new_user_module.update_resource(request, user, 'curriculum_url', 'resumes')
 
