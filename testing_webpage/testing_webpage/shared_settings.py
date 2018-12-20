@@ -231,7 +231,5 @@ SOCIAL_AUTH_FACEBOOK_SECRET = config('social_auth_facebook_secret')  # App Secre
 # Important!!!: This is for clearing the browser cache
 STATICFILES_STORAGE = 'testing_webpage.storage.MyManifestStaticFilesStorage'
 
-
-
 #STATICFILES_STORAGE = 'django.contrib.staticfiles.storage import ManifestStaticFilesStorage'
 

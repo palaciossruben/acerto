@@ -18,6 +18,28 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <!--Our JS-->
         <script src="{% static 'business/js/dashboard.js' %}"></script>
+        <script>
+            function openContent(evt, state) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                $("." + state).css("display", "block");
+                evt.currentTarget.className += " active";
+
+                if ($(window).width() > 768) {
+                    $(".tablinks").css("width", "100%");
+                    $(".tablinks").css("margin-left", "0%");
+                    evt.currentTarget.style.width = "115%";
+                    evt.currentTarget.style.marginLeft = "-15%";
+                }
+            }
+        </script>
     </head>
     <body>
         <div class="topnav" id="myTopnav">
@@ -33,21 +55,12 @@
         </div>
         <div id="contact-buttons">
             <a href="https://api.whatsapp.com/send?phone=573174236989" target="_blank"><img src="{% static 'business/img/boton-whatsapp.png' %}" width="100px" id="whatsapp-pc"></a>
-
         </div>
-        <!--
-            <div class="sidenav">
-                <a href="#"><span class="arrow">&#xFE64;<br><span class="arrow-text">Mis ofertas</span></span></a>
-                <a href="#"><span class="plus">&#x002B;<br><span class="plus-text">Nueva oferta</span></span></a>
-                <a href="#"><span class="setup">&#x2699;<br><span class="setup-text">Configuración</span></span></a>
-                <div class="blur">
-                </div>
-            </div>-->
         <div class="background" id="background">
             <div class="gradient1">
                 <div class="row one"></div>
                 <div class="row two">
-                        <div class="col-lg-12 campaign bold">{{ campaign.title_es }}</div>
+                    <div class="col-lg-12 campaign bold">{{ campaign.title_es }}</div>
                 </div>
                 <div class="row plan-type"></div>
                 <div class="row three">
@@ -62,103 +75,35 @@
                         {% else %}
                             <p class="status bold">ESTADO: terminada</p>
                         {% endif%}
-
+                        <br>
                         {% if campaign.free_trial == True %}
                             <p class="status bold">(Prueba gratis)</p>
-                        {% endif%}
-                        <br>
-                        {% if business_state.name == 'relevantes' %}
-                            <p class="total regular">TOTAL {{ campaign_state_name }}: {{ total_relevant }}</p>
-                        {% elif business_state.name == 'recomendados' %}
-                            <p class="total regular">TOTAL {{ campaign_state_name }}: {{ total_recommended }}</p>
-                        {% else %}
-                            <p class="total regular">TOTAL {{ campaign_state_name }}: {{ total_applicants }}</p>
                         {% endif %}
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row big-div">
-            <div class="row responsive-center">
-                <div class="col-lg-2">
-                    {% if business_state.name == 'relevant' %}
-                    <div class="circle avatar2"></div>
-                    {% elif business_state.name == 'recommended' %}
-                    <div class="circle avatar1"></div>
-                    {% else %}
-                    <div class="circle avatar3"></div>
-                    {% endif %}
+        <div class="row">
+            <div class="tab-div col-lg-2 col-md-2 col-sm-2 col-xs-12 no-padding">
+                <div class="tab" id="tab">
+                    <button class="tablinks" onclick="openContent(event, 'recommended-profiles')" id="active-recommended"><span class="tab-button-span">{{ recommended|length}}</span>Finalistas</button>
+                    <button class="tablinks" onclick="openContent(event, 'relevant-profiles')" id="active-relevant"><span class="tab-button-span">{{ relevant|length}}</span>Pre-seleccionados</button>
+                    <button class="tablinks" onclick="openContent(event, 'applicants-profiles')" id="active-applicants"><span class="tab-button-span">{{ applicants|length}}</span>Prospectos</button>
                 </div>
-                <div class="col-lg-4 col-xs-12">
-                    <p class="status-name bold">{{ campaign_state_name|upper }}</p>
-                    <div class="line2"></div>
-                    <p class="status-description">{{ business_state.description }}</p>
-                    <!--<div class="email-button" role="button" onclick="">ENVIAR CORREO MASIVO</div>-->
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                </div>
-                <div class="col-lg-6 col-xs-12 general-circles">
-                    <div class="row">
-                            {% if campaign_evaluation.cognitive_score >= 0 %}
-                            <div class="test-name">
-                                Capacidad cognitiva
-                                {% if campaign_evaluation.cognitive_score >= 0 %}
-                            <div id="cognitive-id" class="fill five-fills">
-                                {{ campaign_evaluation.cognitive_score|print_score }}
-                            </div>
-                            {% endif %}
-                            </div>
-                            {% endif %}
-
-                            {% if campaign_evaluation.technical_score >= 0 %}
-                            <div class="test-name">
-                                Conocimiento técnico
-                                {% if campaign_evaluation.technical_score >= 0 %}
-                            <div id="technical-id" class="fill five-fills">
-                                {{ campaign_evaluation.technical_score|print_score }}
-                            </div>
-                            {% endif %}
-                            </div>
-                            {% endif %}
-
-                            {% if campaign_evaluation.requirements_score >= 0 %}
-                            <div class="test-name">
-                                Requisitos
-                                {% if campaign_evaluation.requirements_score >= 0 %}
-                            <div id="requirement-id" class="fill five-fills">
-                                {{ campaign_evaluation.requirements_score|print_score }}
-                            </div>
-                            {% endif %}
-                            </div>
-                            {% endif %}
-
-                            {% if campaign_evaluation.motivation_score >= 0 %}
-                            <div class="test-name">
-                                Motivación
-                                {% if campaign_evaluation.motivation_score >= 0 %}
-                            <div id="motivation-id" class="fill five-fills">
-                                {{ campaign_evaluation.motivation_score|print_score }}
-                            </div>
-                            {% endif %}
-                            </div>
-                            {% endif %}
-
-                            {% if campaign_evaluation.cultural_fit_score >= 0 %}
-                            <div class="test-name">
-                                Fit cultural
-                                {% if campaign_evaluation.cultural_fit_score >= 0 %}
-                            <div id="cultural-id" class="fill five-fills">
-                                {{ campaign_evaluation.cultural_fit_score|print_score }}
-                            </div>
-                            {% endif %}
-                            </div>
-                            {% endif %}
+            </div>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 no-padding">
+                <div class="row big-div">
+                    <div class="tabcontent recommended-profiles">
+                        {% include "business/dashboard/dashboard_column.html" with candidates_list=recommended business_state='recomendados' campaign_evaluation=recommended_evaluation %}
+                    </div>
+                    <div class="tabcontent relevant-profiles">
+                        {% include "business/dashboard/dashboard_column.html" with candidates_list=relevant business_state='pre-seleccionados' campaign_evaluation=relevant_evaluation %}
+                    </div>
+                    <div class="tabcontent applicants-profiles">
+                        {% include "business/dashboard/dashboard_column.html" with candidates_list=applicants business_state='aplicantes' campaign_evaluation=applicant_evaluation %}
                     </div>
                 </div>
             </div>
-            {% include "business/dashboard/dashboard_column.html" with candidate_list=candidates state_name=business_state.name %}
         </div>
         <!----------------------------------------------FOOTER--------------------------------------------------------->
         <footer class="container-fluid">
@@ -205,34 +150,18 @@
             }
         </script>
         <script>
-            $(document).scroll(function() {
-                if($(window).scrollTop() >= 0.1){
-                    $(".sidenav").css("margin-top","0px");
-                    $(".blur").css("margin-top","0px");
-
-                }else if($(window).scrollTop() < 0.1){
-                    $(".sidenav").css("margin-top","84px");
-                    $(".blur").css("margin-top","84px");
-                }
-            });
-        </script>
-        <script>
             $(document).ready(function() {
-                set_circle_color({{ campaign_evaluation.cognitive_score|int_rounding }}, "cognitive-id");
-                set_circle_color({{ campaign_evaluation.technical_score|int_rounding }}, "technical-id");
-                set_circle_color({{ campaign_evaluation.requirements_score|int_rounding }}, "requirement-id");
-                set_circle_color({{ campaign_evaluation.motivation_score|int_rounding }}, "motivation-id");
-                set_circle_color({{ campaign_evaluation.cultural_fit_score|int_rounding }}, "cultural-id");
+                set_background("{{ campaign.image }}", "background");
+
+                if ($(window).width() > 768) {
+                    $.stickysidebarscroll("#tab",{offset: {top: 0, bottom: 250}});
+                }
+                document.getElementById("active-"+"{{ business_state.name }}").click();
             });
-        </script>
-        <script>
-           $(document).ready(function() {
-               set_background("{{ campaign.image }}", "background")
-           });
         </script>
         <script>
             $( window ).resize(function() {
-                set_background("{{ campaign.image }}", "background")
+                set_background("{{ campaign.image }}", "background");
             });
         </script>
     </body>

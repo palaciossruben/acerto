@@ -21,6 +21,10 @@ body {
 a, a:hover, a:active, a: visited, a:focus{
     text-decoration:none;
 }
+
+.no-padding{
+    padding:0;
+}
 /**************************************************FONTS***************************************************************/
 .super{
     font-family: BertholdAkzidenzGroteskSuper;
@@ -61,6 +65,71 @@ a, a:hover, a:active, a: visited, a:focus{
 
 .topnav .icon {
     display: none;
+}
+/*****************************************TABS*************************************************************************/
+.tab-div{
+    margin-left:5%;
+    width:10%;
+    margin-top:50px;
+}
+
+.tab {
+    background-color: white;
+}
+
+.tab button:hover {
+  background-color: #ddd;
+}
+
+.tab button.active {
+  background-color: #AED136;
+  color:white;
+}
+
+.tabcontent {
+  float: left;
+  padding: 0px 12px;
+  width: 100%;
+  border: none;
+}
+
+.tab button {
+    display: block;
+    background-color: inherit;
+    color: black;
+    padding: 22px 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
+    text-align:center;
+}
+
+.tab-button-span{
+    display:block;
+    margin-bottom:3px;
+}
+
+.content{
+    margin-right:5%;
+    width:80%;
+}
+
+.big-div{
+    width: 95%;
+    box-shadow: 0px 8px 5px rgba(0,0,0,0.1);
+    background-color: white;
+    position: relative;
+    z-index: 200;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    margin-left: 0;
+    padding:40px;
+    border-left-width: 6px;
+    border-left-color: #AED136;
+    border-left-style: solid;
 }
 /*****************************************BACKGROUND*******************************************************************/
 
@@ -177,18 +246,12 @@ a, a:hover, a:active, a: visited, a:focus{
     height:70px;
 }
 
-.big-div{
-    width: 92%;
-    margin:0 auto;
-    box-shadow: 0px 8px 5px rgba(0,0,0,0.1);
-    border-radius:25px;
-    background-color:white;
-    position:relative;
-    z-index:200;
-    margin-top: 50px;
+.big-div-content{
     padding:40px;
-    margin-bottom: 100px;
+}
 
+.big-div-tabs{
+    padding:0;
 }
 
 .internal-div{
@@ -215,8 +278,8 @@ a, a:hover, a:active, a: visited, a:focus{
 }
 
 .like-img{
-    width:25px;
-    height: 25px;
+    width:22px;
+    height: 22px;
 }
 
 .dislike-img{
@@ -234,7 +297,7 @@ a, a:hover, a:active, a: visited, a:focus{
     height: 35px;
     border: 2px solid #A8CF38;
     background:white;
-    padding: 5px 14px;
+    padding: 6px 14px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border-right:none;
@@ -259,7 +322,7 @@ a, a:hover, a:active, a: visited, a:focus{
     border: 2px solid #A8CF38;
     background:#A8CF38;
     color:white;
-    padding: 5px 14px;
+    padding: 6px 14px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border-right:none;
@@ -379,7 +442,7 @@ a, a:hover, a:active, a: visited, a:focus{
     color:#666666;
     font-size:17px;
     font-family:BertholdAkzidenzGroteskRegular;
-    margin-bottom: 0;
+    margin-bottom: 40px;
 }
 
 .name{
@@ -774,11 +837,6 @@ footer {
     }
 }
 
-@media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-}
-
 @media screen and (max-width: 450px) {
     .like{
         border-right: 2px solid #A8CF38;
@@ -825,10 +883,6 @@ footer {
         margin-bottom:20px;
     }
 
-    .big-div{
-        padding: 40px 0;
-    }
-
     .internal-div{
         padding: 10px;
     }
@@ -851,5 +905,43 @@ footer {
 
     .profile{
         border:none;
+    }
+
+    .tab-div {
+        margin-left: 0;
+        width: 100%;
+        margin-top: 0;
+    }
+
+    .tab{
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        margin-top: 0;
+        z-index: 500;
+        width: 100%;
+        font-size: 12px;
+    }
+
+    .tab button{
+        width: 32.5%;
+        display: inline-block;
+        top: 100;
+        height: 60px;
+        background-color: inherit;
+        color: black;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        transition: 0.3s;
+        text-align: center;
+        padding:0;
+        font-size:12px;
+    }
+
+    .big-div{
+        border:none;
+        padding:30px 0;
+        margin: 0 auto;
     }
 }

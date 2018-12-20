@@ -3,11 +3,9 @@
 {% load app_filters %}
 <script>
     $(document).ready(function() {
-        set_circle_color({{ candidate.get_last_evaluation.cognitive_score|int_rounding }}, "{{ candidate.pk }}-recommended-cognitive-id");
-        set_circle_color({{ candidate.get_last_evaluation.technical_score|int_rounding }}, "{{ candidate.pk }}-recommended-technical-id");
-        set_circle_color({{ candidate.get_last_evaluation.requirements_score|int_rounding }}, "{{ candidate.pk }}-recommended-requirement-id");
-        set_circle_color({{ candidate.get_last_evaluation.motivation_score|int_rounding }}, "{{ candidate.pk }}-recommended-motivation-id");
-        set_circle_color({{ candidate.get_last_evaluation.cultural_fit_score|int_rounding }}, "{{ candidate.pk }}-recommended-cultural-id");
+        set_circle_color({{ candidate.get_last_evaluation.cognitive_score|int_rounding }}, "{{ candidate.pk }}-{{ business_state }}-cognitive-id");
+        set_circle_color({{ candidate.get_last_evaluation.technical_score|int_rounding }}, "{{ candidate.pk }}-{{ business_state }}-technical-id");
+        set_circle_color({{ candidate.get_last_evaluation.requirements_score|int_rounding }}, "{{ candidate.pk }}-{{ business_state }}-requirement-id");
     });
 </script>
 <script>
@@ -24,37 +22,38 @@
                 {
                     likes = likes + 1;
                     if (param_dict['state_code']=='ABC' || param_dict['state_code']=='STC'){
-                        $("#like-"+param_dict['candidate_id']).attr("onclick", "");
                         $("#like-"+param_dict['candidate_id']).css("background", "#A8CF38");
                         $("#like-"+param_dict['candidate_id']).css("color", "white");
                         $("#like-"+param_dict['candidate_id']).css("border-color", "#A8CF38");
-                        $("#dislike-"+param_dict['candidate_id']).attr("onclick", "");
                         $("#dislike-"+param_dict['candidate_id']).css("color", "#9F9C9B;");
                         $("#dislike-"+param_dict['candidate_id']).css("border-color", "#9F9C9B");
 
                         if(param_dict['state_code']=='ABC'){
                             $(".liked").val("Marcar como finalista " + likes + "/5");
                         }
-                        $("#separator-"+param_dict['candidate_id']).css("border", "none");
 
                     }else{
-                        $("#dislike-"+param_dict['candidate_id']).attr("onclick", "");
                         $("#dislike-"+param_dict['candidate_id']).css("background", "#F26122");
                         $("#dislike-"+param_dict['candidate_id']).css("color", "white");
                         $("#dislike-"+param_dict['candidate_id']).css("border-color", "#F26122");
-                        $("#like-"+param_dict['candidate_id']).attr("onclick", "");
+                        $("#option-like-"+param_dict['candidate_id']).css("cursor", "default");
+                        $("#option-dislike-"+param_dict['candidate_id']).css("cursor", "default");
                         $("#like-"+param_dict['candidate_id']).css("color", "#9F9C9B;");
                         $("#like-"+param_dict['candidate_id']).css("border-color", "#9F9C9B");
 
                         if(param_dict['state_code']=='RBC'){
                             $("#reason-"+param_dict['candidate_id']).css("display", "block");
                         }
-                        $("#separator-"+param_dict['candidate_id']).css("border", "none");
 
                         if(param_dict['feedback']=='yes'){
                             $("#reason-"+param_dict['candidate_id']).css("display", "none");
                         }
                     }
+                    $("#option-like-"+param_dict['candidate_id']).attr("onclick", "");
+                    $("#option-dislike-"+param_dict['candidate_id']).attr("onclick", "");
+                    $("#option-like-"+param_dict['candidate_id']).css("cursor", "default");
+                    $("#option-dislike-"+param_dict['candidate_id']).css("cursor", "default");
+                    $("#separator-"+param_dict['candidate_id']).css("border", "none");
                 }
             });
         return false;
@@ -120,19 +119,19 @@
         <div class="col-lg-1 tests-circles">
             {% if candidate.get_last_evaluation.requirements_score >= 0 %}
                 <p class="test-title">Requisitos</p>
-                <div id="{{ candidate.pk }}-recommended-requirement-id" class="fill small-fill">
+                <div id="{{ candidate.pk }}-{{ business_state }}-requirement-id" class="fill small-fill">
                     {{ candidate.get_last_evaluation.requirements_score|print_score }}
                 </div>
             {% endif %}
             {% if candidate.get_last_evaluation.cognitive_score >= 0 %}
                 <p class="test-title">Capacidad cognitiva</p>
-                <div id="{{ candidate.pk }}-recommended-cognitive-id" class="fill small-fill">
+                <div id="{{ candidate.pk }}-{{ business_state }}-cognitive-id" class="fill small-fill">
                     {{ candidate.get_last_evaluation.cognitive_score|print_score }}
                 </div>
             {% endif %}
             {% if candidate.get_last_evaluation.technical_score >= 0 %}
                 <p class="test-title">Conocimiento técnico</p>
-                <div id="{{ candidate.pk }}-recommended-technical-id" class="fill small-fill">
+                <div id="{{ candidate.pk }}-{{ business_state }}-technical-id" class="fill small-fill">
                     {{ candidate.get_last_evaluation.technical_score|print_score }}
                 </div>
             {% endif %}
@@ -144,16 +143,16 @@
         <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="like" id="like-{{ candidate.pk }}">
-                <img class="like-img" src="{% static 'business/img/like.png' %}">
-                <input type="button" class="option-text" onclick="change_state({'state_code':'STC', 'candidate_id':{{ candidate.pk }}, 'feedback':'No'})" value="Marcar como finalista">
+                <img class="like-img" id="like-img-{{ candidate.pk }}" src="{% static 'business/img/like-green.png' %}">
+                <input type="button" class="option-text" id="option-like-{{ candidate.pk }}" onclick="change_state({'state_code':'STC', 'candidate_id':{{ candidate.pk }}, 'feedback':'No'})" value="Marcar como finalista">
             </div>
         </form>
         <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="dislike" id="dislike-{{ candidate.pk }}">
                 <div class="separator" id="separator-{{ candidate.pk }}">
-                    <img class="dislike-img" src="{% static 'business/img/dislike.png' %}">
-                    <input type="button" class="option-text" onclick="change_state({'state_code':'SR', 'candidate_id':{{ candidate.pk }}, 'feedback':'No'})" value="Rechazar candidato">
+                    <img class="dislike-img" id="dislike-img-{{ candidate.pk }}" src="{% static 'business/img/dislike.png' %}">
+                    <input type="button" class="option-text" id="option-dislike-{{ candidate.pk }}" onclick="change_state({'state_code':'SR', 'candidate_id':{{ candidate.pk }}, 'feedback':'No'})" value="Rechazar candidato">
                 </div>
             </div>
         </form>
@@ -163,6 +162,7 @@
                 {% csrf_token %}
                 <div class="reason" id="reason-{{ candidate.pk }}">
                     <input type="text" class="reason-input" id="reason-text-{{ candidate.pk }}" placeholder="Ingresa la razón del rechazo">
+                    <p>Esta información no será visible para el candidato</p>
                     <br>
                     <input type="button" class="send" value="Enviar" onclick="change_state({'feedback':'yes', 'state_code':'RBC', 'reason':$('#reason-text-{{ candidate.pk }}').val(), 'candidate_id':{{ candidate.pk }}})">
                 </div>
@@ -188,7 +188,7 @@
                 <form method="post" class="like-dislike" action="" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="like-on" id="like-{{ candidate.pk }}">
-                        <img class="like-img" src="{% static 'business/img/like.png' %}">
+                        <img class="like-img" src="{% static 'business/img/like-green.png' %}">
                         <input type="button" class="option-text liked" onclick="change_state({'state_code':'ABC', 'candidate_id':{{ candidate.pk }}})" value="Marcar como finalista {{ campaign.likes }}/5">
                     </div>
                 </form>

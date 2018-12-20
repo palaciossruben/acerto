@@ -1,13 +1,83 @@
 {% load static %}
+{% load app_filters %}
 
-<div class="line"></div>
-<div id="{{ state_name }}" class="internal-div">
-{% for candidate in candidate_list %}
-    <div class="candidate-div">
-        {% include "business/dashboard/candidate_for_campaign.html" with candidate=candidate %}
+<script>
+    $(document).ready(function() {
+        set_circle_color({{ campaign_evaluation.cognitive_score|int_rounding }}, "cognitive-id-{{ business_state }}");
+        set_circle_color({{ campaign_evaluation.technical_score|int_rounding }}, "technical-id-{{ business_state }}");
+        set_circle_color({{ campaign_evaluation.requirements_score|int_rounding }}, "requirement-id-{{ business_state }}");
+        set_circle_color({{ campaign_evaluation.motivation_score|int_rounding }}, "motivation-id-{{ business_state }}");
+        set_circle_color({{ campaign_evaluation.cultural_fit_score|int_rounding }}, "cultural-id-{{ business_state }}");
+    });
+</script>
+
+<div class="row responsive-center">
+    <div class="col-lg-2">
+        {% if business_state == 'recomendados' %}
+        <div class="circle avatar1"></div>
+        {% elif business_state == 'pre-seleccionados' %}
+        <div class="circle avatar2"></div>
+        {% else %}
+        <div class="circle avatar3"></div>
+        {% endif %}
     </div>
-{% endfor %}
+    <div class="col-lg-4 col-xs-12">
+        <p class="status-name bold">{{ business_state|upper }}</p>
+        <div class="line2"></div>
+        {% if business_state == 'recomendados' %}
+            <p class="status-description">Candidatos que son tu mejor opción de contratación ya que han superado todos los filtros</p>
+        {% elif business_state == 'pre-seleccionados' %}
+            <p class="status-description">Candidatos que aprobaron pruebas iniciales y requerimientos específicos para tu campaña</p>
+        {% else %}
+            <p class="status-description">Candidatos que no han realizado las pruebas o no las aprobaron</p>
+        {% endif %}
+        <!--<div class="email-button" role="button" onclick="">ENVIAR CORREO MASIVO</div>-->
+    </div>
+    <div class="col-lg-6 col-xs-12 general-circles">
+        <div class="row">
+            {% if campaign_evaluation.cognitive_score >= 0 %}
+            <div class="test-name">
+                Capacidad cognitiva
+                {% if campaign_evaluation.cognitive_score >= 0 %}
+                <div id="cognitive-id-{{ business_state }}" class="fill five-fills">
+                    {{ campaign_evaluation.cognitive_score|print_score }}
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+            {% if campaign_evaluation.technical_score >= 0 %}
+            <div class="test-name">
+                Conocimiento técnico
+                {% if campaign_evaluation.technical_score >= 0 %}
+                <div id="technical-id-{{ business_state }}" class="fill five-fills">
+                    {{ campaign_evaluation.technical_score|print_score }}
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+            {% if campaign_evaluation.requirements_score >= 0 %}
+            <div class="test-name">
+                Requisitos
+                {% if campaign_evaluation.requirements_score >= 0 %}
+                <div id="requirement-id-{{ business_state }}" class="fill five-fills">
+                    {{ campaign_evaluation.requirements_score|print_score }}
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
 </div>
+<div class="line"></div>
+
+<div id="{{ state_name }}" class="internal-div">
+    {% for candidate in candidates_list %}
+        <div class="candidate-div">
+            {% include "business/dashboard/candidate_for_campaign.html" with candidate=candidate business_state=business_state %}
+        </div>
+    {% endfor %}
+</div>
+
 
 
 
