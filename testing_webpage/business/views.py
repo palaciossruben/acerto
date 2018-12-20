@@ -606,7 +606,6 @@ def dashboard(request, business_user_id, campaign_id, state_name):
     logged_user = BusinessUser.objects.get(auth_user_id=request.user.id)
     campaign = Campaign.objects.get(pk=campaign_id)
     business_state = BusinessState.objects.get(name=state_name)
-    business_state.translate(request.LANGUAGE_CODE)
 
     if common.access_for_users(request, campaign, business_user):
         return redirect('business:login')
@@ -618,22 +617,7 @@ def dashboard(request, business_user_id, campaign_id, state_name):
     relevant = common.get_relevant_candidates(campaign)
     recommended = common.get_recommended_candidates(campaign)
 
-    if business_state.name == 'aplicantes':
-        campaign_evaluation = campaign.applicant_evaluation_last
-        campaign_state_name = 'prospectos'
-
-    elif business_state.name == 'relevantes':
-        campaign_evaluation = campaign.relevant_evaluation_last
-        campaign_state_name = 'pre-seleccionados'
-
-    else:
-        campaign_evaluation = campaign.recommended_evaluation_last
-        campaign_state_name = 'seleccionados'
-
-    return render(request, cts.DASHBOARD_VIEW_PATH, {'candidates': {'applicants': applicants,
-                                                                    'relevant': relevant,
-                                                                    'recommended': recommended}[state_name],
-                                                     'campaign': campaign,
+    return render(request, cts.DASHBOARD_VIEW_PATH, {'campaign': campaign,
                                                      'business_state': business_state,
                                                      'applicants': applicants,
                                                      'relevant': relevant,
@@ -642,8 +626,9 @@ def dashboard(request, business_user_id, campaign_id, state_name):
                                                      'total_applicants': len(applicants),
                                                      'total_recommended': len(recommended),
                                                      'total_relevant': len(relevant),
-                                                     'campaign_evaluation': campaign_evaluation,
-                                                     'campaign_state_name': campaign_state_name,
+                                                     'applicant_evaluation': campaign.applicant_evaluation_last,
+                                                     'relevant_evaluation': campaign.relevant_evaluation_last,
+                                                     'recommended_evaluation': campaign.recommended_evaluation_last,
                                                      'logged_user': logged_user.name
                                                      })
 

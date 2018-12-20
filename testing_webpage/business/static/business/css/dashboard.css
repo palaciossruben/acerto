@@ -89,9 +89,8 @@ a, a:hover, a:active, a: visited, a:focus{
 .tabcontent {
   float: left;
   padding: 0px 12px;
-  border: 1px solid #ccc;
-  width: 70%;
-  border-left: none;
+  width: 100%;
+  border: none;
 }
 
 .tab button {
@@ -443,7 +442,7 @@ a, a:hover, a:active, a: visited, a:focus{
     color:#666666;
     font-size:17px;
     font-family:BertholdAkzidenzGroteskRegular;
-    margin-bottom: 0;
+    margin-bottom: 40px;
 }
 
 .name{
@@ -943,5 +942,6 @@ footer {
     .big-div{
         border:none;
         padding:30px 0;
+        margin: 0 auto;
     }
 }

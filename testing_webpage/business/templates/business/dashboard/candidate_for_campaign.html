@@ -3,11 +3,9 @@
 {% load app_filters %}
 <script>
     $(document).ready(function() {
-        set_circle_color({{ candidate.get_last_evaluation.cognitive_score|int_rounding }}, "{{ candidate.pk }}-recommended-cognitive-id");
-        set_circle_color({{ candidate.get_last_evaluation.technical_score|int_rounding }}, "{{ candidate.pk }}-recommended-technical-id");
-        set_circle_color({{ candidate.get_last_evaluation.requirements_score|int_rounding }}, "{{ candidate.pk }}-recommended-requirement-id");
-        set_circle_color({{ candidate.get_last_evaluation.motivation_score|int_rounding }}, "{{ candidate.pk }}-recommended-motivation-id");
-        set_circle_color({{ candidate.get_last_evaluation.cultural_fit_score|int_rounding }}, "{{ candidate.pk }}-recommended-cultural-id");
+        set_circle_color({{ candidate.get_last_evaluation.cognitive_score|int_rounding }}, "{{ candidate.pk }}-{{ business_state }}-cognitive-id");
+        set_circle_color({{ candidate.get_last_evaluation.technical_score|int_rounding }}, "{{ candidate.pk }}-{{ business_state }}-technical-id");
+        set_circle_color({{ candidate.get_last_evaluation.requirements_score|int_rounding }}, "{{ candidate.pk }}-{{ business_state }}-requirement-id");
     });
 </script>
 <script>
@@ -121,19 +119,19 @@
         <div class="col-lg-1 tests-circles">
             {% if candidate.get_last_evaluation.requirements_score >= 0 %}
                 <p class="test-title">Requisitos</p>
-                <div id="{{ candidate.pk }}-recommended-requirement-id" class="fill small-fill">
+                <div id="{{ candidate.pk }}-{{ business_state }}-requirement-id" class="fill small-fill">
                     {{ candidate.get_last_evaluation.requirements_score|print_score }}
                 </div>
             {% endif %}
             {% if candidate.get_last_evaluation.cognitive_score >= 0 %}
                 <p class="test-title">Capacidad cognitiva</p>
-                <div id="{{ candidate.pk }}-recommended-cognitive-id" class="fill small-fill">
+                <div id="{{ candidate.pk }}-{{ business_state }}-cognitive-id" class="fill small-fill">
                     {{ candidate.get_last_evaluation.cognitive_score|print_score }}
                 </div>
             {% endif %}
             {% if candidate.get_last_evaluation.technical_score >= 0 %}
                 <p class="test-title">Conocimiento técnico</p>
-                <div id="{{ candidate.pk }}-recommended-technical-id" class="fill small-fill">
+                <div id="{{ candidate.pk }}-{{ business_state }}-technical-id" class="fill small-fill">
                     {{ candidate.get_last_evaluation.technical_score|print_score }}
                 </div>
             {% endif %}
