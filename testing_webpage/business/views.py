@@ -573,8 +573,8 @@ def candidate_profile(request, candidate_id):
 def summary(request, campaign_id, business_user=None):
 
     campaign = Campaign.objects.get(pk=campaign_id)
-    #common.calculate_evaluation_summaries(campaign)
-    common.calculate_evaluation_summaries_with_caching(campaign)
+    common.calculate_evaluation_summaries(campaign)
+    # common.calculate_evaluation_summaries_with_caching(campaign)
     if business_user is None:
         business_user = get_business_user(request)
         if common.access_for_users(request, campaign, business_user):
@@ -615,8 +615,8 @@ def dashboard(request, business_user_id, campaign_id, state_name):
         return redirect('business:login')
 
     dashboard_module.send_email_from_dashboard(request, campaign)
-    # common.calculate_evaluation_summaries(campaign)
-    common.calculate_evaluation_summaries_with_caching(campaign)
+    common.calculate_evaluation_summaries(campaign)
+    # common.calculate_evaluation_summaries_with_caching(campaign)
 
     applicants = common.get_application_candidates(campaign)
     relevant = common.get_relevant_candidates(campaign)
