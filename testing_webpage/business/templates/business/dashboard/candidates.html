@@ -1,0 +1,9 @@
+{% load static %}
+{% load app_filters %}
+{% load i18n %}
+
+{% for candidate in candidates_list %}
+    <div class="candidate-div">
+        {% include "business/dashboard/candidate_for_campaign.html" with candidate=candidate business_state=business_state %}
+    </div>
+{% endfor %}

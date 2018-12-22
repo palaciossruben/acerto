@@ -16,7 +16,7 @@ def get_campaign_url(campaign):
 def get_dashboard_campaign_url(campaign):
         query = BusinessUser.objects.filter(campaigns__id__in=[campaign.pk])
         user = [my_id for my_id in query][0]
-        return campaign.get_host()+'/seleccion_de_personal/candidatos/{user_id}?campaign_id={campaign_id}'.format(user_id=user.id, campaign_id=campaign.pk)
+        return campaign.get_host()+'/seleccion-de-personal/candidatos/{user_id}?campaign_id={campaign_id}'.format(user_id=user.id, campaign_id=campaign.pk)
 
 
 @register.filter

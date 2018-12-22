@@ -25,8 +25,8 @@ from . import views
 
 urlpatterns = [
     url('^', include('django.contrib.auth.urls')),
-    url(r'^servicio[-_]de[-_]empleo/', include('beta_invite.urls')),
-    url(r'^seleccion[-_]de[-_]personal/', include('business.urls')),
+    url(r'^servicio-de-empleo/', include('beta_invite.urls')),
+    url(r'^seleccion-de-personal/', include('business.urls')),
     url(r'^dashboard/', include('dashboard.urls')),
     url(r'^api/', include('api.urls')),
     url(r'^oauth/', include('social_django.urls', namespace='social')),

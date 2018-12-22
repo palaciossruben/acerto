@@ -86,21 +86,21 @@
         <div class="row">
             <div class="tab-div col-lg-2 col-md-2 col-sm-2 col-xs-12 no-padding">
                 <div class="tab" id="tab">
-                    <button class="tablinks" onclick="openContent(event, 'recommended-profiles')" id="active-recommended"><span class="tab-button-span">{{ recommended|length}}</span>Finalistas</button>
-                    <button class="tablinks" onclick="openContent(event, 'relevant-profiles')" id="active-relevant"><span class="tab-button-span">{{ relevant|length}}</span>Pre-seleccionados</button>
-                    <button class="tablinks" onclick="openContent(event, 'applicants-profiles')" id="active-applicants"><span class="tab-button-span">{{ applicants|length}}</span>Prospectos</button>
+                    <button class="tablinks" onclick="openContent(event, 'recommended-profiles')" id="active-recommended"><span class="tab-button-span">{{ num_recommended }}</span>{% trans 'Selected' %}</button>
+                    <button class="tablinks" onclick="openContent(event, 'relevant-profiles')" id="active-relevant"><span class="tab-button-span">{{ num_relevant }}</span>{% trans 'Pre-selected' %}</button>
+                    <button class="tablinks" onclick="openContent(event, 'applicants-profiles')" id="active-applicants"><span class="tab-button-span">{{ num_applicants }}</span>{% trans 'Prospects' %}</button>
                 </div>
             </div>
             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 no-padding">
                 <div class="row big-div">
                     <div class="tabcontent recommended-profiles">
-                        {% include "business/dashboard/dashboard_column.html" with candidates_list=recommended business_state='recomendados' campaign_evaluation=recommended_evaluation %}
+                        {% include "business/dashboard/dashboard_column.html" with candidates_list=recommended business_state='recommended' campaign_evaluation=recommended_evaluation %}
                     </div>
                     <div class="tabcontent relevant-profiles">
-                        {% include "business/dashboard/dashboard_column.html" with candidates_list=relevant business_state='pre-seleccionados' campaign_evaluation=relevant_evaluation %}
+                        {% include "business/dashboard/dashboard_column.html" with candidates_list=relevant business_state='relevant' campaign_evaluation=relevant_evaluation %}
                     </div>
                     <div class="tabcontent applicants-profiles">
-                        {% include "business/dashboard/dashboard_column.html" with candidates_list=applicants business_state='prospectos' campaign_evaluation=applicant_evaluation %}
+                        {% include "business/dashboard/dashboard_column.html" with candidates_list=applicants business_state='applicants' campaign_evaluation=applicant_evaluation %}
                     </div>
                 </div>
             </div>
@@ -162,6 +162,24 @@
         <script>
             $( window ).resize(function() {
                 set_background("{{ campaign.image }}", "background");
+            });
+        </script>
+        <script>
+            // Adds candidates as it scrolls down...
+            $(window).scroll(function() {
+               if($(window).scrollTop() + $(window).height() > $(document).height() - 2000) {
+                   recommended = $('.recommended-profiles');
+                   relevant = $('.relevant-profiles');
+                   prospect = $('.applicants-profiles');
+
+                   if (recommended.css('display') == 'block') {
+                        request_candidates('recommended', {{ campaign.pk }});
+                   }else if (relevant.css('display') == 'block') {
+                        request_candidates('relevant', {{ campaign.pk }});
+                   }else if (prospect.css('display') == 'block') {
+                        request_candidates('applicants', {{ campaign.pk }});
+                   }
+               }
             });
         </script>
     </body>

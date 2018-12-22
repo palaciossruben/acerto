@@ -808,6 +808,10 @@ footer {
 	padding-bottom:5px;
 }
 
+.tablinks{
+    font-size: 0.8em;
+}
+
 /**************************************************RESPONSIVE**********************************************************/
 
 @media screen and (max-width: 768px) {

@@ -175,7 +175,7 @@ function createDownloadLink(blob) {
 */
     $.ajax({
         type: 'POST',
-        url: 'https://peaku.co/servicio_de_empleo/upload-audio-file',  // 'http://127.0.0.1:8000/servicio_de_empleo/upload-audio-file',
+        url: 'https://peaku.co/servicio-de-empleo/upload-audio-file',  // 'http://127.0.0.1:8000/servicio-de-empleo/upload-audio-file',
         data: fd,
         processData: false,
         contentType: false

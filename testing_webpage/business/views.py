@@ -21,6 +21,7 @@ from decouple import config
 from django.db import models
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
+from django.template.loader import get_template
 
 import common
 import business
@@ -43,6 +44,7 @@ from testing_webpage.models import BusinessUserPendingEmail, CampaignPendingEmai
 TAX = 0.19
 DEFAULT_BASE_PRICE = 0
 INVALID_WORK_AREAS = [8, 14, 17]
+MAX_CANDIDATES_LOAD = 20
 
 
 def index(request):
@@ -458,9 +460,9 @@ def business_campaigns(request, business_user_id):
 
     if settings.DEBUG:
         action_url = "https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/"
-        apikey = '4Vj8eK4rloUd272L48hsrarnUA'
-        merchant_id = '508029'
-        account_id = '512321'
+        apikey = config('payu_api_key_sandbox')
+        merchant_id = config('merchant_id_sandbox')
+        account_id = config('account_id_sandbox')
         test = '1'
         host = 'http://127.0.0.1:8000/'
     else:
@@ -471,8 +473,8 @@ def business_campaigns(request, business_user_id):
         test = '0'
         host = 'https://peaku.co/'
 
-    response_url = host + 'seleccion_de_personal/resumen/'
-    confirmation_url = host + 'seleccion_de_personal/payment_confirmation'
+    response_url = host + 'seleccion-de-personal/resumen/'
+    confirmation_url = host + 'seleccion-de-personal/payment_confirmation'
     for c in campaigns:
         if c.salary_high_range:
             c.reference_code = str(c.id) + "-" + date
@@ -613,9 +615,9 @@ def dashboard(request, business_user_id, campaign_id, state_name):
     dashboard_module.send_email_from_dashboard(request, campaign)
     common.calculate_evaluation_summaries_with_caching(campaign)
 
-    applicants = common.get_application_candidates(campaign)
-    relevant = common.get_relevant_candidates(campaign)
-    recommended = common.get_recommended_candidates(campaign)
+    applicants = common.get_application_candidates(campaign)[:MAX_CANDIDATES_LOAD]
+    relevant = common.get_relevant_candidates(campaign)[:MAX_CANDIDATES_LOAD]
+    recommended = common.get_recommended_candidates(campaign)[:MAX_CANDIDATES_LOAD]
 
     return render(request, cts.DASHBOARD_VIEW_PATH, {'campaign': campaign,
                                                      'business_state': business_state,
@@ -629,8 +631,46 @@ def dashboard(request, business_user_id, campaign_id, state_name):
                                                      'applicant_evaluation': campaign.applicant_evaluation_last,
                                                      'relevant_evaluation': campaign.relevant_evaluation_last,
                                                      'recommended_evaluation': campaign.recommended_evaluation_last,
-                                                     'logged_user': logged_user.name
+                                                     'logged_user': logged_user.name,
+                                                     'num_applicants': common.get_application_candidates_count(campaign),
+                                                     'num_relevant': common.get_relevant_candidates_count(campaign),
+                                                     'num_recommended': common.get_recommended_candidates_count(campaign),
                                                      })
+
+
+def render_html(candidates_list, state_name, campaign):
+
+    business_dir = os.path.dirname(os.path.realpath(__file__))
+    template_path = os.path.join(business_dir, 'templates', 'business', 'dashboard', 'candidates.html')
+    template = get_template(template_path)
+    return template.render({'candidates_list': candidates_list,
+                            'business_state': state_name,
+                            'campaign': campaign})  # Renders the template with the context data.
+
+
+#@login_required
+def request_candidates(request, campaign_id):
+
+    state_name = request.GET.get('state')
+    current_num = int(request.GET.get('current_num'))
+    campaign = Campaign.objects.get(pk=campaign_id)
+
+    if request.method == 'GET' and state_name and current_num and campaign:
+
+        if state_name == 'applicants':
+            candidates_list = common.get_application_candidates(campaign)[current_num:current_num + MAX_CANDIDATES_LOAD]
+        elif state_name == 'relevant':
+            candidates_list = common.get_relevant_candidates(campaign)[current_num:current_num + MAX_CANDIDATES_LOAD]
+        elif state_name == 'recommended':
+            candidates_list = common.get_recommended_candidates(campaign)[current_num:current_num + MAX_CANDIDATES_LOAD]
+        else:
+            raise NotImplementedError('could not found a valid state')
+
+        html = render_html(candidates_list, state_name, campaign)
+
+        return HttpResponse(html)
+    else:
+        return HttpResponseBadRequest('<h1>HTTP CODE 400: Client sent bad request with missing params</h1>')
 
 
 def save_comments(request):

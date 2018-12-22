@@ -11,21 +11,22 @@ urlpatterns = [
         name='login'),
     url(r'^logout$', auth_views.logout, {'next_page': 'business:index'}, name='logout'),
     # CREATE CAMPAIGN
-    url(r'^seleccion[-_]gratis$', views.start, name='start'),
+    url(r'^seleccion-gratis$', views.start, name='start'),
     url(r'^seleccion[-_]gratis[-_]enviar$', views.start_post, name='start_post'),
     # CREATE CAMPAIGN WHEN USER IS LOGGED
     url(r'^crear[-_]enviar$', views.create_post, name='create_post'),
     # BUSINESS USER LOGGED
     url(r'^campañas/(?P<business_user_id>\d+)$', views.business_campaigns, name='business_campaigns'),
     url(r'^resumen/(?P<campaign_id>\d+)$', views.summary, name='summary'),
-    url(r'^online[-_]demo$', views.online_demo, name='online_demo'),
-    url(r'^tablero[-_]de[-_]control/(?P<business_user_id>\d+)/(?P<campaign_id>\d+)/(?P<state_name>.*)/$', views.dashboard, name='dashboard'),
-    url(r'^perfil[-_]del[-_]candidato/(?P<candidate_id>\d+)$', views.candidate_profile, name='candidate_profile'),
+    url(r'^online-demo$', views.online_demo, name='online_demo'),
+    url(r'^tablero-de-control/(?P<business_user_id>\d+)/(?P<campaign_id>\d+)/(?P<state_name>.*)/$', views.dashboard, name='dashboard'),
+    url(r'^tablero-de-control/(?P<campaign_id>\d+)/request-candidates$', views.request_candidates, name='request_candidates'),
+    url(r'^perfil-del-candidato/(?P<candidate_id>\d+)$', views.candidate_profile, name='candidate_profile'),
     # CONTACT
     url(r'^contactanos$', views.contact_form, name='contact_form'),
     url(r'^contact[-_]form[-_]post$', views.contact_form_post, name='contact_form_post'),
     # START
-    url(r'^get[-_]work[-_]area[-_]requirement/(?P<work_area_id>\d+)$', views.get_work_area_requirement, name='get_work_area_requirement'),
+    url(r'^get-work-area-requirement/(?P<work_area_id>\d+)$', views.get_work_area_requirement, name='get_work_area_requirement'),
     # PAYU
     url(r'payment[-_]confirmation$', views.payment_confirmation, name='payment_confirmation'),
     # DEMO SCHEDULED

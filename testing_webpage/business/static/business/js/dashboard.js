@@ -1,3 +1,7 @@
+var LAST_SHOWING_ROWS = {"recommended": 0,
+                         "relevant": 0,
+                         "applicants": 0};
+
 function set_circle_color(score, id_string){
 
     var color;
@@ -220,3 +224,26 @@ function not_blocked(business_state, free_trial, campaign_state){
         $(candidate_divs[i]).hide();
     }
 }*/
+
+
+function request_candidates(state, campaign_id){
+
+    let base_url = 'https://peaku.co' //'http://127.0.0.1:8000'
+    let current_num = $('#' + state + ' > div').length; // count direct descendants tags div...
+
+    if (LAST_SHOWING_ROWS[state] < current_num){
+        LAST_SHOWING_ROWS[state] = current_num
+
+        let url = `${base_url}/seleccion-de-personal/tablero-de-control/${campaign_id}/request-candidates?current_num=${current_num}&state=${state}`;
+        console.log(url)
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            processData: false,
+            contentType: false
+        }).done(function(data) {
+            $('#' + state).append(data);
+        });
+    }
+}

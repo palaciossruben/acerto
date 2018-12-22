@@ -61,7 +61,7 @@
       gtag('config', 'UA-110863941-1');
     </script>
     <!--Tawk chat-->
-    {% if 'seleccion_de_personal' in request.path %}
+    {% if 'seleccion-de-personal' in request.path %}
         <script type="text/javascript">
             var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
             (function(){
@@ -75,7 +75,7 @@
         </script>
     {% endif %}
     <!--Facebook pixel code for candidates campaigns-->
-    {% if 'servicio_de_empleo' in request.path %}
+    {% if 'servicio-de-empleo' in request.path %}
         <script>
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -108,7 +108,7 @@
                 <ul>
                     <div>
                         <li><a href="#">{% trans 'Us' %}</a></li>
-                        {% if 'seleccion_de_personal' in request.path %}
+                        {% if 'seleccion-de-personal' in request.path %}
                             <li><a href="{% url 'business:contact_form' %}">{% trans 'Contact Us' %}</a></li>
                         {% else %}
                             <li><a href="{% url 'beta_invite:index' %}">{% trans 'Contact Us' %}</a></li>

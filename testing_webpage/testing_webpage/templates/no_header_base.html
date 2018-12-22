@@ -23,7 +23,7 @@
                     {% else %}
                         <li id="candidates-button"><a id="option1" href="{% url 'index' %} " style="text-decoration:none;">{% trans 'Candidates' %}</a></li>
                         <li id="login-button"><a class="button-user" role="button" onclick="on_login()"style="text-decoration:none;">{% trans 'Sign in' %}</a></li>
-                        {% if not 'seleccion_gratis' in request.path %}
+                        {% if not 'seleccion-gratis' in request.path %}
                             <li id="register-button"><a class="button-user" role="button" onclick="on_signup()" style="text-decoration:none;">{% trans 'Sign up' %}</a></li>
                         {% endif %}
                     {% endif %}

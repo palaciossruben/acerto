@@ -34,7 +34,7 @@
         </script>
         <script>
         function getRequirements(work_area) {
-            var url = "/seleccion_de_personal/get_work_area_requirement/";
+            var url = "/seleccion-de-personal/get-work-area-requirement/";
             var complete_url = url + work_area.value;
             dynamic_select_values(complete_url);
             }
@@ -51,7 +51,7 @@
                             <a class="navText" href="{% url 'business:business_campaigns' user|get_business_user_id %}">{% trans 'My campaigns' %}</a>
                         {% else %}
                             <a class="navButton regular" role="button" onclick="off_signup() & on_login()">INICIA SESIÓN</a>
-                            {% if not 'seleccion_gratis' in request.path %}
+                            {% if not 'seleccion-gratis' in request.path %}
                                 <a class="navButton" role="button" onclick="off_login() & on_signup()">CREA TU CUENTA</a>
                             {% endif %}
                         {% endif %}

@@ -197,7 +197,7 @@ def register(request):
             else:
                 user = new_user_module.create_user(campaign, user_params, request, is_mobile, signup_form=signup_form)
 
-            return redirect('/servicio_de_empleo/pruebas?campaign_id={campaign_id}&user_id={user_id}'.format(campaign_id=campaign.id, user_id=user.id))
+            return redirect('/servicio-de-empleo/pruebas?campaign_id={campaign_id}&user_id={user_id}'.format(campaign_id=campaign.id, user_id=user.id))
         else:
             return HttpResponseBadRequest('<h1>HTTP CODE 400: Client sent bad request with missing params</h1>')
 
@@ -221,7 +221,7 @@ def apply(request):
     if not candidate:
         Candidate(campaign=campaign, user=user).save()
 
-    return redirect('/servicio_de_empleo/pruebas?campaign_id={campaign_id}&user_id={user_id}'.format(
+    return redirect('/servicio-de-empleo/pruebas?campaign_id={campaign_id}&user_id={user_id}'.format(
         campaign_id=campaign.id,
         user_id=user.id))
 
@@ -244,14 +244,14 @@ def tests(request):
                         'tests': tests}
 
     if not candidate:
-        return redirect('/servicio_de_empleo?campaign_id={}'.format(campaign.id))
+        return redirect('/servicio-de-empleo?campaign_id={}'.format(campaign.id))
     if user is not None:
         end_point_params['user_id'] = int(user.id)  # Adds the user id to the params, to be able to track answers, later
 
     if tests:
         return render(request, cts.TESTS_VIEW_PATH, end_point_params)
     else:
-        return redirect('/servicio_de_empleo/additional_info?candidate_id={candidate_id}'.format(candidate_id=candidate.pk))
+        return redirect('/servicio-de-empleo/additional_info?candidate_id={candidate_id}'.format(candidate_id=candidate.pk))
 
 
 def simple_login_and_user(login_form, request):
@@ -314,7 +314,7 @@ def get_test_result(request):
     user = common.get_user_from_request(request)
     user_id = user.id if user else None
     if not user:
-        return redirect('/servicio_de_empleo?campaign_id={campaign_id}'.format(campaign_id=campaign.id))
+        return redirect('/servicio-de-empleo?campaign_id={campaign_id}'.format(campaign_id=campaign.id))
 
     candidate = common.get_candidate(user, campaign)
     high_scores = test_module.get_high_scores(candidate, campaign)
@@ -334,13 +334,13 @@ def get_test_result(request):
     # probably a new comer
     if candidate.user.gender is None:
         return redirect(
-            '/servicio_de_empleo/additional_info?candidate_id={candidate_id}'.format(candidate_id=candidate.pk))
+            '/servicio-de-empleo/additional_info?candidate_id={candidate_id}'.format(candidate_id=candidate.pk))
     else:
         # will no longer bother user with additional info
         if candidate is not None:
-            return redirect('/servicio_de_empleo/active_campaigns?candidate_id={}'.format(candidate.id))
+            return redirect('/servicio-de-empleo/active_campaigns?candidate_id={}'.format(candidate.id))
         else:
-            return redirect('/servicio_de_empleo/active_campaigns')
+            return redirect('/servicio-de-empleo/active_campaigns')
 
 
 def additional_info(request):
