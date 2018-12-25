@@ -1,6 +1,6 @@
 Hola {name},
 
-Recibí tu información a través de un portal de empleo público o nuestra página web, teniendo en cuenta tu perfil, me gustaría invitarte a un proceso de selección, esta es la oferta disponible:
+Recibí tu información a través de un portal de empleo público o nuestra página web (https://www.peaku.co), teniendo en cuenta tu perfil, me gustaría invitarte a un proceso de selección, esta es la oferta disponible:
 
 Título de la oferta: {campaign}
 Salario: {campaign_salary_range}
