@@ -6,6 +6,7 @@ Título de la oferta: {campaign}
 Salario: {campaign_salary_range}
 Ciudad de la oferta: {campaign_city}
 Más información: {campaign_description}
+Detalles: {campaign_url}
 
 A continuación, te comparto un enlace con algunas pruebas y/o preguntas para aplicar a esta oferta:
 
