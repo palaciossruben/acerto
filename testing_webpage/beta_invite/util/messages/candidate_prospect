@@ -9,9 +9,11 @@ Si te interesa aplicar, te comparto un enlace con algunas pruebas y/o preguntas 
 
 {test_url}
 
-los detalles de la oferta están <a href="{campaign_url}">aquí</a>
+los detalles son:
+{campaign_url}
 
-O puedes aplicar a otras ofertas <a href="{candidate_jobs_url}">acá</a>
+O puedes aplicar a otras ofertas acá:
+{candidate_jobs_url}
 
 No dudes en escribirme si tienes cualquier pregunta.
 
