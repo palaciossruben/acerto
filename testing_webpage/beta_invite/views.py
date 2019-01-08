@@ -20,7 +20,7 @@ from datetime import datetime
 import common
 from beta_invite import constants as cts
 from beta_invite import test_module, new_user_module
-from beta_invite.models import User, Visitor, Campaign, BulletType, City, Question, Experience, EducationExperience, School, Company
+from beta_invite.models import User, Visitor, Campaign, BulletType, City, Question, Experience, EducationExperience, School, Company, EmailType
 from dashboard.models import Candidate
 from business.custom_user_creation_form import CustomUserCreationForm
 from testing_webpage.models import CandidatePendingEmail
@@ -498,7 +498,7 @@ def active_campaigns(request):
                                                language_code=candidate.user.language_code,
                                                body_input='user_application_confirmation',
                                                subject='Confirmación de aplicacion a {campaign}',
-                                               email_type__name='user_application_confirmation')
+                                               email_type=EmailType.objects.get(name='user_application_confirmation'))
 
     # TODO: add salary and city filter
     if candidate and candidate.user.get_work_area_segment_code():
