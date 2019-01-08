@@ -1,16 +1,23 @@
-Good day
+Hola {name},
 
-Below I share the information the new recommended candidates:
+Te cuento que tu oferta laboral {campaign_name}, está avanzando y tiene nuevos cadidatos seleccionados:
 
-{new_resumes}
+Candidatos <a href="{campaign_recommended_url}">seleccionados</a>: {total_recommended_candidates}
 
-You can see all the information in the control panel of the respective campaign, entering the following link:
+Candidatos <a href="{campaign_relevant_url}">preseleccionados</a>: {total_relevant_candidates}
 
-https://peaku.co/seleccion-de-personal/login
-
-We appreciate any feedback on this.
+Candidatos <a href="{campaign_applicant_url}">aplicantes</a>: {total_applicant_candidates}
 
 
+Ingresa a la plataforma para ver los candidatos <a href="{business_campaign_url}">acá</a>
+
+Además puedes contactarnos en cualquier momento por Whatsapp <a href="http://wa.me/573174236989">aquí</a>
+
+
+Atento a tus comentarios,
 {sender_name}
 {sender_position}
-{peaku_address}
+
+Síguenos en redes:
+Facebook: https://www.facebook.com/peakulatam/
+Instagram: @peaku_latam
