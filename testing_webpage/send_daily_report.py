@@ -6,9 +6,9 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
-from beta_invite.models import Campaign
+from beta_invite.models import Campaign, CampaignState
 from beta_invite.util import email_sender
-from dashboard.models import Candidate, StateEvent
+from dashboard.models import Candidate
 from business.models import BusinessUser
 from django.utils import timezone
 
@@ -28,7 +28,7 @@ def send_general_report():
 def business_daily_report():
     business_users = BusinessUser.objects.all()
     for business_user in business_users:
-        for campaign in business_user.campaigns.filter(state=2):
+        for campaign in business_user.campaigns.filter(state__code='A'):
 
             candidates = Candidate.objects.filter(
                 state__code__in=['STC'],
