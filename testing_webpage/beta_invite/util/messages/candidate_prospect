@@ -5,11 +5,15 @@ Teniendo en cuenta tu perfil y después de una cuidadosa revisión encontramos u
 {campaign}
 {campaign_salary_range}
 
-Si estas interesado continuar con el proceso, te comparto un enlace con algunas pruebas y/o preguntas que nos ayudarán a conocerte mejor:
+Si te interesa aplicar, te comparto un enlace con algunas pruebas y/o preguntas que nos ayudarán a conocerte mejor:
 
 {test_url}
 
-No dudes en escribirme si requieres información adicional.
+los detalles de la oferta están <a href="{campaign_url}">aquí</a>
+
+O puedes aplicar a otras ofertas <a href="{candidate_jobs_url}">acá</a>
+
+No dudes en escribirme si tienes cualquier pregunta.
 
 
 Saludos,
