@@ -182,7 +182,8 @@ def get_params_with_candidate(candidate, language_code='es', override_dict={}):
               'campaign_url': get_campaign_url(candidate),
               'campaign_salary_range': get_campaign_salary_range(candidate),
               'campaign_city': get_campaign_city_name(candidate),
-              'campaign_description': get_campaign_description(candidate, language_code)
+              'campaign_description': get_campaign_description(candidate, language_code),
+              'candidate_jobs_url': candidate.get_jobs_url()
               }
 
     if hasattr(candidate.user.work_area, 'segment_id'):

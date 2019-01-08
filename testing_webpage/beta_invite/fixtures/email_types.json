@@ -54,5 +54,13 @@
       "name": "business_feedback",
       "sync": false
     }
+  },
+  {
+    "model": "beta_invite.emailtype",
+    "pk": 8,
+    "fields":{
+      "name": "user_application_confirmation",
+      "sync": false
+    }
   }
 ]

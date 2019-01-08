@@ -22,3 +22,4 @@ This are the allowed tags for emails and messages:
 {total_applicant_candidates}                  Total applicants for campaign
 {total_relevant_candidates}                   Total relevant for campaign
 {total_recommended_candidates}                Total recommended for campaign
+{candidate_jobs_url}                          The jobs UI for each candidate

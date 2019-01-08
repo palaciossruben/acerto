@@ -1,7 +1,6 @@
 import os
 import io
 import wave
-from scipy.io import wavfile
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseBadRequest, HttpResponse
@@ -24,6 +23,7 @@ from beta_invite import test_module, new_user_module
 from beta_invite.models import User, Visitor, Campaign, BulletType, City, Question, Experience, EducationExperience, School, Company
 from dashboard.models import Candidate
 from business.custom_user_creation_form import CustomUserCreationForm
+from testing_webpage.models import CandidatePendingEmail
 
 
 def get_drop_down_values(language_code):
@@ -492,6 +492,13 @@ def active_campaigns(request):
                                                              use_machine_learning=True,
                                                              success_state='STC',
                                                              fail_state=candidate.state.code)
+
+            # send email with attachment of CV and test confirmation # TODO: attachment with CV
+            CandidatePendingEmail.add_to_queue(candidates=candidate,
+                                               language_code=candidate.user.language_code,
+                                               body_input='user_application_confirmation',
+                                               subject='Confirmación de aplicacion a {campaign}',
+                                               email_type__name='user_application_confirmation')
 
     # TODO: add salary and city filter
     if candidate and candidate.user.get_work_area_segment_code():

@@ -1,6 +1,7 @@
 import statistics
 import numpy as np
 import traceback
+import urllib.parse
 
 from django.db import models
 from django.db.models.signals import post_init
@@ -8,6 +9,7 @@ from django.contrib.auth.models import User as AuthUser
 
 from beta_invite.models import User, Campaign, Evaluation, Survey, EvaluationSummary, Score, Test
 from dashboard import constants as cts
+from django.conf import settings
 
 
 class State(models.Model):
@@ -440,6 +442,18 @@ class Candidate(models.Model):
         if self.user and self.user.city:
             return self.user.city.name
         return np.nan
+
+    @staticmethod
+    def get_host():
+        return '//127.0.0.1:8000' if settings.DEBUG else 'https://peaku.co'
+
+    def get_jobs_url(self):
+
+        if self.user.get_work_area_segment_code():
+            return urllib.parse.urljoin(Campaign.get_host(),
+                                        '/trabajos?segment_code={}'.format(self.user.get_work_area_segment_code()))
+        else:
+            return urllib.parse.urljoin(Campaign.get_host(), '/trabajos')
 
 
 class BusinessState(models.Model):

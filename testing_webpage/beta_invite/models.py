@@ -7,7 +7,6 @@ from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.db import models
 from django.contrib.postgres.fields import JSONField
 from django.conf import settings
-from django.db.models.signals import post_init
 
 
 import basic_common
@@ -752,19 +751,20 @@ class Campaign(models.Model):
             self.description = self.description_es
             self.title = self.title_es
 
-    def get_host(self):
+    @staticmethod
+    def get_host():
         return '//127.0.0.1:8000' if settings.DEBUG else 'https://peaku.co'
 
     def get_url_for_candidates(self):
-        return urllib.parse.urljoin(self.get_host(), '/servicio-de-empleo?campaign_id={campaign_id}'.format(campaign_id=self.pk))
+        return urllib.parse.urljoin(Campaign.get_host(), '/servicio-de-empleo?campaign_id={campaign_id}'.format(campaign_id=self.pk))
 
     def get_url_for_company(self):
-        return urllib.parse.urljoin(self.get_host(), '/seleccion-de-personal/resumen/{campaign_id}'.format(campaign_id=self.pk))
+        return urllib.parse.urljoin(Campaign.get_host(), '/seleccion-de-personal/resumen/{campaign_id}'.format(campaign_id=self.pk))
 
     def get_state_url(self, business_user, state_name):
-        return urllib.parse.urljoin(self.get_host(), '/seleccion-de-personal/tablero-de-control/{business_user_id}/{campaign_id}/{state_name}'.format(business_user_id=business_user.id,
-                                                                                                                                                      campaign_id=self.pk,
-                                                                                                                                                      state_name=state_name))
+        return urllib.parse.urljoin(Campaign.get_host(), '/seleccion-de-personal/tablero-de-control/{business_user_id}/{campaign_id}/{state_name}'.format(business_user_id=business_user.id,
+                                                                                                                                                          campaign_id=self.pk,
+                                                                                                                                                          state_name=state_name))
 
     def get_recommended_url(self, business_user):
         return self.get_state_url(business_user, 'recommended')
