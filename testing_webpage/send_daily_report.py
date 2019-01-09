@@ -6,11 +6,12 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
-from beta_invite.models import Campaign, CampaignState
+from beta_invite.models import Campaign, EmailType
 from beta_invite.util import email_sender
 from dashboard.models import Candidate
 from business.models import BusinessUser
 from django.utils import timezone
+from testing_webpage.models import CampaignPendingEmail
 
 
 def send_general_report():
@@ -39,11 +40,17 @@ def business_daily_report():
             recipients = [business_user.email, business_user.additional_email, 'santiago@peaku.co', 'juan.rendon@peaku.co']
             # Only send if there is something.
             if len(candidates) > 0:
-                email_sender.send_report(language_code='es',
-                                         body_filename='business_daily_report_email_body',
-                                         subject='Reporte de candidatos recomendados',
-                                         recipients=recipients,
-                                         candidates=candidates)
+                #email_sender.send_report(language_code='es',
+                #                         body_filename='business_daily_report_email_body',
+                #                         subject='Reporte de candidatos recomendados',
+                #                         recipients=recipients,
+                #                         candidates=candidates)
+                # TODO: this is really wrong
+                CampaignPendingEmail.add_to_queue(campaigns=campaign,
+                                                  language_code='es',
+                                                  body_input='business_daily_report_email_body',
+                                                  subject='Reporte de candidatos recomendados en oferta: {campaign}',
+                                                  email_type=EmailType.objects.get(name='business_daily_report'))
 
                 message = 'Se enviaron: ', len(recipients)-2, 'correos'
                 for c in candidates:

@@ -1114,6 +1114,7 @@ class PersonalityType(models.Model):
 class EmailType(models.Model):
 
     name = models.CharField(max_length=200, null=True)
+    send_more_than_ones = models.BooleanField(default=False)
 
     # True if it has a clock (ie chron tab). False for event driven emails.
     sync = models.NullBooleanField(null=True)

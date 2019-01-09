@@ -42,11 +42,11 @@ def take_oldest_unsent_emails():
 
 def send_condition(an_object, email):
     return isinstance(an_object, Candidate) and \
-           not CandidateEmailSent.objects.filter(candidate=an_object, email_type=email.email_type) or \
+           (email.email_type.send_more_than_ones and not CandidateEmailSent.objects.filter(candidate=an_object,email_type=email.email_type)) or \
            isinstance(an_object, BusinessUser) and \
-           not BusinessUserEmailSent.objects.filter(business_user=an_object, email_type=email.email_type) or \
+           (email.email_type.send_more_than_ones and not BusinessUserEmailSent.objects.filter(business_user=an_object, email_type=email.email_type)) or \
            isinstance(an_object, Campaign) and \
-           not CampaignEmailSent.objects.filter(campaign=an_object, email_type=email.email_type)
+           (email.email_type.send_more_than_ones and not CampaignEmailSent.objects.filter(campaign=an_object, email_type=email.email_type))
 
 
 def get_email(an_object):

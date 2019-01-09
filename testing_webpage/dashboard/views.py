@@ -208,7 +208,7 @@ def send_feedback_message_and_mail(business_user, campaign, request):
     if campaign.state == CampaignState.objects.get(code='A') and \
                     int(request.POST.get('state_id')) == CampaignState.objects.get(code='F').id:
 
-        # TODO: this is really worng
+        # TODO: this is really wrong
         CampaignPendingEmail.add_to_queue(campaigns=campaign,
                                           language_code='es',
                                           body_input='business_feedback',
