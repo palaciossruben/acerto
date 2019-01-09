@@ -1,6 +1,7 @@
 Hola {name},
 
-Has aplicado a {campaign} exitosamente. Para ver el estado de tu aplicación y aplicar a otras ofertas has click <a href="{candidate_jobs_url}">aquí</a>
+Has aplicado a {campaign} exitosamente. Para ver el estado de tu aplicación ó aplicar a otras ofertas visita:
+{candidate_jobs_url}
 
 {sender_name}
 {sender_position}
