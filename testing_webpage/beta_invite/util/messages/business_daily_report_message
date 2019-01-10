@@ -1,0 +1,21 @@
+Hola {name},
+
+Te cuento que tu oferta laboral {campaign_name}, está avanzando y tiene nuevos cadidatos seleccionados:
+
+Candidatos seleccionados: {total_recommended_candidates}
+
+Candidatos preseleccionados: {total_relevant_candidates}
+
+Candidatos aplicantes: {total_applicant_candidates}
+
+
+Ingresa a la plataforma para ver los candidatos <a href="{business_campaign_url}">acá</a>
+
+
+Atento a tus comentarios,
+{sender_name}
+{sender_position}
+
+Síguenos en redes:
+Facebook: https://www.facebook.com/peakulatam/
+Instagram: @peaku_latam
