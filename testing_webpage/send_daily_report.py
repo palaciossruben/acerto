@@ -7,7 +7,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
 
 from beta_invite.models import Campaign, EmailType
-from beta_invite.util import email_sender, messenger_sender
+from beta_invite.util import email_sender, messenger
 from dashboard.models import Candidate
 from business.models import BusinessUser
 from django.utils import timezone
@@ -51,9 +51,9 @@ def business_daily_report():
                                                   body_input='business_daily_report_email_body',
                                                   subject='Reporte de candidatos recomendados en oferta: {campaign_name}',
                                                   email_type=EmailType.objects.get(name='business_daily_report'))
-                messenger_sender.send(objects=campaign,
-                                      language_code='es',
-                                      body_input='business_daily_report_message')
+                messenger.send(objects=campaign,
+                               language_code='es',
+                               body_input='business_daily_report_message')
 
                 message = 'Se enviaron: ', len(recipients)-2, 'correos'
                 for c in candidates:

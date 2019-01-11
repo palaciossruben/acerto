@@ -27,7 +27,7 @@ import common
 import business
 import beta_invite
 
-from beta_invite.util import messenger_sender
+from beta_invite.util import messenger
 from business import search_module, prospect_module
 from beta_invite.util import email_sender
 from business import constants as cts
@@ -166,9 +166,9 @@ def send_signup_emails(business_user, language_code, campaign):
     else:
         body_filename = 'business_start_signup_notification_email_body'
         body_input = 'business_start_signup_email_body'
-        messenger_sender.send(objects=campaign,
-                              language_code=language_code,
-                              body_input=body_input)
+        messenger.send(objects=campaign,
+                       language_code=language_code,
+                       body_input=body_input)
         CampaignPendingEmail.add_to_queue(the_objects=campaign,
                                           language_code=language_code,
                                           body_input=body_input,
@@ -387,12 +387,18 @@ def create_post(request):
     business_user.save()
     if not business_user.is_peaku():
         prospect_module.send_mails(prospects)
-        messenger_sender.send(objects=prospects,
-                              language_code='es',
-                              body_input='candidate_prospect')
+        messenger.send(objects=prospects,
+                       language_code='es',
+                       body_input='candidate_prospect')
 
     send_new_campaign_notification(business_user, request.LANGUAGE_CODE, campaign)
     #PublicPost.add_to_public_post_queue(campaign)
+
+    if len(business_user.campaigns.all()) == 2:
+        # This crucial message should sell the service!!!
+        messenger.send(objects=campaign,
+                       language_code='es',
+                       body_input='business_paisa_sell')
 
     return redirect('campañas/{business_user_pk}'.format(business_user_pk=business_user.pk))
 
@@ -417,9 +423,9 @@ def start_post(request):
         #PublicPost.add_to_public_post_queue(campaign)
         if not business_user.is_peaku():
             prospect_module.send_mails(prospects)
-            messenger_sender.send(objects=prospects,
-                                  language_code='es',
-                                  body_input='candidate_prospect')
+            messenger.send(objects=prospects,
+                           language_code='es',
+                           body_input='candidate_prospect')
 
         return redirect('tablero-de-control/{business_user_id}/{campaign_id}/applicants'.format(business_user_id=business_user.pk,
                                                                                                 campaign_id=campaign.pk))

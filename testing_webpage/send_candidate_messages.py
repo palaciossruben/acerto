@@ -5,7 +5,7 @@ from django.db.models import Q
 # Environment can use the models as if inside the Django app
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'testing_webpage.settings')
 application = get_wsgi_application()
-from beta_invite.util import messenger_sender
+from beta_invite.util import messenger
 from dashboard.models import Candidate
 
 
@@ -35,9 +35,9 @@ def send_candidates_messages():
     print(len(new_candidates))
 
     # print([c.user_id for c in candidates])
-    messenger_sender.send(objects=new_candidates,
-                          language_code='es',
-                          body_input='candidates_form_reminder_message_body')
+    messenger.send(objects=new_candidates,
+                   language_code='es',
+                   body_input='candidates_form_reminder_message_body')
 
 
 # Caution: If script imported for another module, this lines avoid the execution of this entire file

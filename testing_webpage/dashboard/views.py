@@ -14,7 +14,7 @@ from beta_invite.models import Campaign, Test, TestType, BulletType, Interview, 
 from business.models import Company
 from dashboard.models import Candidate, Message, Screening
 from dashboard import constants as cts
-from beta_invite.util import email_sender, messenger_sender
+from beta_invite.util import email_sender, messenger
 from beta_invite.views import get_drop_down_values
 from dashboard import interview_module, candidate_module, campaign_module, test_module
 from match import model
@@ -214,9 +214,9 @@ def send_feedback_message_and_mail(business_user, campaign, request):
                                           body_input='business_feedback',
                                           subject='Publicación terminada {campaign_name}',
                                           email_type=EmailType.objects.get(name='business_feedback'))
-        messenger_sender.send(objects=campaign,
-                              language_code='es',
-                              body_input='business_feedback')
+        messenger.send(objects=campaign,
+                       language_code='es',
+                       body_input='business_feedback')
 
 
 def update_basic_properties(request):
@@ -655,9 +655,9 @@ def add_backlog_messages(message_filename):
                                            ~Q(campaign__tests=None) &
                                            ~Q(campaign_id=beta_cts.DEFAULT_CAMPAIGN_ID))]
 
-    messenger_sender.send(objects=candidates,
-                          language_code='es',
-                          body_input=message_filename)
+    messenger.send(objects=candidates,
+                   language_code='es',
+                   body_input=message_filename)
 
 
 def add_external_job_exchange_messages(message_filename):
@@ -670,9 +670,9 @@ def add_external_job_exchange_messages(message_filename):
                                            ~Q(message__filename=message_filename) &
                                            ~Q(campaign_id=beta_cts.DEFAULT_CAMPAIGN_ID))]
 
-    messenger_sender.send(objects=candidates,
-                          language_code='es',
-                          body_input=message_filename)
+    messenger.send(objects=candidates,
+                   language_code='es',
+                   body_input=message_filename)
 
 
 def send_new_contacts(request):
