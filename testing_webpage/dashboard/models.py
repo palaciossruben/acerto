@@ -210,6 +210,17 @@ class Candidate(models.Model):
     class Meta:
         db_table = 'candidates'
 
+    def get_campaign_name(self, language_code):
+        """
+        For a object that has no associated campaign it will not return the title
+        Args:
+            language_code: lang
+        Returns: string with title
+        """
+        if self.campaign:
+            return self.campaign.get_name(language_code)
+        return ''
+
     def get_last_requirement_surveys(self):
 
         surveys = []

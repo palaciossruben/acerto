@@ -692,6 +692,15 @@ class Campaign(models.Model):
         else:  # TODO: SHOULD NEVER DEFAULT to this, Defaults to Colombia
             return str(Country.objects.get(name='Colombia').calling_code)
 
+    def get_name(self, language_code):
+        """
+        For a object that has no associated campaign it will not return the title
+        Args:
+            language_code: lang
+        Returns: string with title
+        """
+        return self.title_es if language_code == 'es' else self.title
+
     def get_campaign_salary_range(self):
         return '{} - {}'.format(self.salary_low_range, self.salary_high_range)
 

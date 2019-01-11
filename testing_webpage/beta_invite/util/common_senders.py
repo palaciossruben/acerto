@@ -81,22 +81,6 @@ def get_campaign_salary_range(candidate):
         return ''
 
 
-def get_campaign_name(candidate, language_code):
-    """
-    For a object that has no associated campaign it will not return the title
-    Args:
-        candidate: User or Contact object.
-    Returns: string with title
-    """
-    if candidate and hasattr(candidate, 'campaign') and candidate.campaign:
-        if language_code == 'es':
-            return candidate.campaign.title_es
-        else:
-            return candidate.campaign.title
-
-    return ''
-
-
 def get_campaign_city_name(candidate):
     return candidate.campaign.get_campaign_city_name() if candidate and candidate.campaign else ''
 
@@ -178,7 +162,7 @@ def get_params_with_candidate(candidate, language_code='es', override_dict={}):
     params = {'name': get_first_name(candidate.user.name),
               'complete_name': candidate.user.name.title(),
               'cv_url': get_cv_url(candidate.user),
-              'campaign': get_campaign_name(candidate, language_code),
+              'campaign': candidate.get_campaign_name(language_code),
               'campaign_url': get_campaign_url(candidate),
               'campaign_salary_range': get_campaign_salary_range(candidate),
               'campaign_city': get_campaign_city_name(candidate),
@@ -206,7 +190,8 @@ def get_params_with_campaign(campaign, language_code='es', override_dict={}):
         override_dict: Dictionary that changes the default values.
     Returns:
     """
-    params = {'campaign_name': campaign.title_es if language_code == 'es' else campaign.title,
+    params = {'campaign': campaign.get_name(language_code),
+              'campaign_name': campaign.get_name(language_code),
               'campaign_url': campaign.get_url_for_candidates(),
               'campaign_salary_range': campaign.get_campaign_salary_range(),
               'campaign_city': campaign.get_campaign_city_name(),
