@@ -2,14 +2,10 @@
 
 
 Gracias por registrarte en PeakU ;).
-Para continuar con el proceso completa:
 
-{test_url}
+Para continuar con el proceso has click <a href="{test_url}">aquí</a>:
 
-O si quieres ver más ofertas:
-
-https:peaku.co/trabajos
-
+O si quieres ver más ofertas has click <a href="{candidate_jobs_url}">aquí</a>
 
 
 Saludos!!!

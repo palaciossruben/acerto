@@ -35,18 +35,38 @@ SENTRY_CLIENT = Client(config('sentry_dsn'))
 
 
 def take_oldest_unsent_emails():
-    return list(BusinessUserPendingEmail.objects.filter(sent=False).order_by('created_at')[:MAX_NUMBER_OF_MAILS]) +\
-           list(CandidatePendingEmail.objects.filter(sent=False).order_by('created_at')[:MAX_NUMBER_OF_MAILS]) +\
-           list(CampaignPendingEmail.objects.filter(sent=False).order_by('created_at')[:MAX_NUMBER_OF_MAILS])
+    return list(BusinessUserPendingEmail.objects.filter(sent=False, processed=False).order_by('created_at')[:MAX_NUMBER_OF_MAILS]) + \
+           list(CandidatePendingEmail.objects.filter(sent=False, processed=False).order_by('created_at')[:MAX_NUMBER_OF_MAILS]) + \
+           list(CampaignPendingEmail.objects.filter(sent=False, processed=False).order_by('created_at')[:MAX_NUMBER_OF_MAILS])
+
+
+def send_condition_with_class(an_object, object_class, email, email_class):
+
+    num_emails = len(email_class.objects.filter(an_object=an_object, email_type=email.email_type))
+
+    return isinstance(an_object, object_class) and \
+        (email.email_type.send_more_than_ones or not num_emails)
 
 
 def send_condition(an_object, email):
+    """
+    Sends if the EmailType should be sent many times or if hasn't been sent at least one time.
+    :param an_object: Candidate, BusinessUser, Campaign
+    :param email: obj
+    :return: Boolean
+    """
+
+    # TODO: missing a refactor
+    """return send_condition_with_class(an_object, Candidate, email, CandidatePendingEmail) or \
+           send_condition_with_class(an_object, BusinessUser, email, BusinessUserPendingEmail) or \
+           send_condition_with_class(an_object, Campaign, email, CampaignPendingEmail)"""
+
     return isinstance(an_object, Candidate) and \
-           (email.email_type.send_more_than_ones and not CandidateEmailSent.objects.filter(candidate=an_object,email_type=email.email_type)) or \
+           (email.email_type.send_more_than_ones or not CandidateEmailSent.objects.filter(an_object=an_object, email_type=email.email_type)) or \
            isinstance(an_object, BusinessUser) and \
-           (email.email_type.send_more_than_ones and not BusinessUserEmailSent.objects.filter(business_user=an_object, email_type=email.email_type)) or \
+           (email.email_type.send_more_than_ones or not BusinessUserEmailSent.objects.filter(an_object=an_object, email_type=email.email_type)) or \
            isinstance(an_object, Campaign) and \
-           (email.email_type.send_more_than_ones and not CampaignEmailSent.objects.filter(campaign=an_object, email_type=email.email_type))
+           (email.email_type.send_more_than_ones or not CampaignEmailSent.objects.filter(an_object=an_object, email_type=email.email_type))
 
 
 def get_email(an_object):
@@ -67,16 +87,7 @@ def send_one_email(email):
     :param email:
     :return:
     """
-    if isinstance(email, CandidatePendingEmail):
-        objects = email.candidates.all()
-    elif isinstance(email, BusinessUserPendingEmail):
-        objects = email.business_users.all()
-    elif isinstance(email, CampaignPendingEmail):
-        objects = email.campaigns.all()
-    else:
-        raise NotImplementedError('Unimplemented class: {}'.format(type(email)))
-
-    for an_object in objects:
+    for an_object in email.the_objects.all():
 
         if send_condition(an_object, email):
 
@@ -104,13 +115,16 @@ def send_one_email(email):
 
             # Records sending email
             if isinstance(an_object, Candidate):
-                CandidateEmailSent(candidate=an_object, email_type=email.email_type).save()
+                CandidateEmailSent(an_object=an_object, email_type=email.email_type).save()
             elif isinstance(an_object, BusinessUser):
-                BusinessUserEmailSent(business_user=an_object, email_type=email.email_type).save()
+                BusinessUserEmailSent(an_object=an_object, email_type=email.email_type).save()
             elif isinstance(an_object, Campaign):
-                CampaignEmailSent(campaign=an_object, email_type=email.email_type).save()
+                CampaignEmailSent(an_object=an_object, email_type=email.email_type).save()
             else:
                 raise NotImplementedError('Unimplemented class: {}'.format(type(an_object)))
+
+    email.processed = True
+    email.save()
 
 
 def send_pending_emails():
@@ -132,9 +146,12 @@ def send_pending_emails():
 if __name__ == '__main__':
 
     try:
-        with open('consumer.log', 'a') as f:
-            sys.stdout = h.Unbuffered(f)
+        if settings.DEBUG:
             send_pending_emails()
+        else:
+            with open('consumer.log', 'a') as f:
+                sys.stdout = h.Unbuffered(f)
+                send_pending_emails()
     except Exception as e:
         SENTRY_CLIENT.captureException()
         print(e)

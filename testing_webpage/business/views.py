@@ -158,7 +158,7 @@ def send_signup_emails(business_user, language_code, campaign):
     if campaign is None:
         body_filename = 'business_signup_notification_email_body'
         body_input = 'business_signup_email_body'
-        BusinessUserPendingEmail.add_to_queue(business_users=business_user,
+        BusinessUserPendingEmail.add_to_queue(the_objects=business_user,
                                               language_code=language_code,
                                               body_input=body_input,
                                               subject=_('Welcome to PeakU'),
@@ -169,7 +169,7 @@ def send_signup_emails(business_user, language_code, campaign):
         messenger_sender.send(objects=campaign,
                               language_code=language_code,
                               body_input=body_input)
-        CampaignPendingEmail.add_to_queue(campaigns=campaign,
+        CampaignPendingEmail.add_to_queue(the_objects=campaign,
                                           language_code=language_code,
                                           body_input=body_input,
                                           subject='Oferta publicada exitosamente - {campaign_name}',
@@ -564,11 +564,9 @@ def candidate_profile(request, candidate_id):
 
     candidate = Candidate.objects.get(pk=candidate_id)
     business_user = get_business_user(request)
-    phone = candidate.user.phone.replace('+', '')
-
     return render(request, cts.CANDIDATE_PROFILE_VIEW_PATH, {'candidate': candidate,
                                                              'business_user': business_user,
-                                                             'phone': phone})
+                                                             'phone': candidate.user.change_to_international_phone_number()})
 
 
 @login_required

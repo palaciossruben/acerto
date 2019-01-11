@@ -221,9 +221,9 @@ def get_params_with_campaign(campaign, language_code='es', override_dict={}):
     if business_user:
         params['name'] = get_first_name(business_user.name)
         params['complete_name'] = business_user.name.title()
-        params['campaign_recommended_url'] = campaign.get_recommended_url(business_user),
-        params['campaign_relevant_url'] = campaign.get_relevant_url(business_user),
-        params['campaign_applicant_url'] = campaign.get_applicant_url(business_user),
+        params['campaign_recommended_url'] = campaign.get_recommended_url(business_user)
+        params['campaign_relevant_url'] = campaign.get_relevant_url(business_user)
+        params['campaign_applicant_url'] = campaign.get_applicant_url(business_user)
 
     params.update(get_basic_params(override_dict))
     return params

@@ -10,13 +10,13 @@ from dashboard.models import Candidate
 class CandidateEmailSent(models.Model):
 
     email_type = models.ForeignKey(EmailType, on_delete=models.DO_NOTHING)
-    candidate = models.ForeignKey(Candidate, on_delete=models.DO_NOTHING, null=True)
+    an_object = models.ForeignKey(Candidate, on_delete=models.DO_NOTHING, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return 'id={0}, candidate_id={1}, email_type={2}'.format(self.pk, self.candidate.id, self.email_type)
+        return 'id={0}, candidate_id={1}, email_type={2}'.format(self.pk, self.an_object.id, self.email_type)
 
     # adds custom table name
     class Meta:
@@ -26,13 +26,13 @@ class CandidateEmailSent(models.Model):
 class BusinessUserEmailSent(models.Model):
 
     email_type = models.ForeignKey(EmailType, on_delete=models.DO_NOTHING)
-    business_user = models.ForeignKey(BusinessUser, on_delete=models.DO_NOTHING, null=True)
+    an_object = models.ForeignKey(BusinessUser, on_delete=models.DO_NOTHING, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return 'id={0}, candidate_id={1}, email_type={2}'.format(self.pk, self.business_user.id, self.email_type)
+        return 'id={0}, candidate_id={1}, email_type={2}'.format(self.pk, self.an_object.id, self.email_type)
 
     # adds custom table name
     class Meta:
@@ -42,13 +42,13 @@ class BusinessUserEmailSent(models.Model):
 class CampaignEmailSent(models.Model):
 
     email_type = models.ForeignKey(EmailType, on_delete=models.DO_NOTHING)
-    campaign = models.ForeignKey(Campaign, on_delete=models.DO_NOTHING, null=True)
+    an_object = models.ForeignKey(Campaign, on_delete=models.DO_NOTHING, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return 'id={0}, candidate_id={1}, email_type={2}'.format(self.pk, self.campaign.id, self.email_type)
+        return 'id={0}, candidate_id={1}, email_type={2}'.format(self.pk, self.an_object.id, self.email_type)
 
     # adds custom table name
     class Meta:
@@ -60,7 +60,7 @@ class CampaignEmailSent(models.Model):
 
 class CandidatePendingEmail(models.Model):
 
-    candidates = models.ManyToManyField(Candidate)
+    the_objects = models.ManyToManyField(Candidate)
     language_code = models.CharField(max_length=3)
     body_input = models.CharField(max_length=10000)
     subject = models.CharField(max_length=200)
@@ -73,6 +73,7 @@ class CandidatePendingEmail(models.Model):
 
     # internal
     sent = models.BooleanField(default=False)
+    processed = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -82,7 +83,7 @@ class CandidatePendingEmail(models.Model):
     @staticmethod
     def add_to_queue(**kwargs):
 
-        candidates = kwargs.pop('candidates', None)
+        candidates = kwargs.pop('the_objects', None)
 
         email = CandidatePendingEmail(**kwargs)
         email.save()
@@ -97,7 +98,7 @@ class CandidatePendingEmail(models.Model):
         if candidates and type(candidates) != list:
             candidates = [candidates]
 
-        self.candidates = candidates
+        self.the_objects = candidates
         self.save()
 
     # adds custom table name
@@ -107,7 +108,7 @@ class CandidatePendingEmail(models.Model):
 
 class BusinessUserPendingEmail(models.Model):
 
-    business_users = models.ManyToManyField(BusinessUser)
+    the_objects = models.ManyToManyField(BusinessUser)
     language_code = models.CharField(max_length=3)
     body_input = models.CharField(max_length=10000)
     subject = models.CharField(max_length=200)
@@ -120,6 +121,7 @@ class BusinessUserPendingEmail(models.Model):
 
     # internal
     sent = models.BooleanField(default=False)
+    processed = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -129,7 +131,7 @@ class BusinessUserPendingEmail(models.Model):
     @staticmethod
     def add_to_queue(**kwargs):
 
-        business_users = kwargs.pop('business_users', None)
+        business_users = kwargs.pop('the_objects', None)
 
         email = BusinessUserPendingEmail(**kwargs)
         email.save()
@@ -144,7 +146,7 @@ class BusinessUserPendingEmail(models.Model):
         if business_users and type(business_users) != list:
             business_users = [business_users]
 
-        self.business_users = business_users
+        self.the_objects = business_users
         self.save()
 
     # adds custom table name
@@ -154,7 +156,7 @@ class BusinessUserPendingEmail(models.Model):
 
 class CampaignPendingEmail(models.Model):
 
-    campaigns = models.ManyToManyField(Campaign)
+    the_objects = models.ManyToManyField(Campaign)
     language_code = models.CharField(max_length=3)
     body_input = models.CharField(max_length=10000)
     subject = models.CharField(max_length=200)
@@ -167,6 +169,7 @@ class CampaignPendingEmail(models.Model):
 
     # internal
     sent = models.BooleanField(default=False)
+    processed = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -176,7 +179,7 @@ class CampaignPendingEmail(models.Model):
     @staticmethod
     def add_to_queue(**kwargs):
 
-        campaigns = kwargs.pop('campaigns', None)
+        campaigns = kwargs.pop('the_objects', None)
 
         email = CampaignPendingEmail(**kwargs)
         email.save()
@@ -191,7 +194,7 @@ class CampaignPendingEmail(models.Model):
         if campaigns and type(campaigns) != list:
             campaigns = [campaigns]
 
-        self.campaigns = campaigns
+        self.the_objects = campaigns
         self.save()
 
     # adds custom table name

@@ -494,7 +494,7 @@ def active_campaigns(request):
                                                              fail_state=candidate.state.code)
 
             # send email with attachment of CV and test confirmation # TODO: attachment with CV
-            CandidatePendingEmail.add_to_queue(candidates=candidate,
+            CandidatePendingEmail.add_to_queue(the_objects=candidate,
                                                language_code=candidate.user.language_code,
                                                body_input='user_application_confirmation',
                                                subject='Confirmación de aplicacion a {campaign}',

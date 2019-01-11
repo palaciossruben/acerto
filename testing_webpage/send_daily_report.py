@@ -46,10 +46,10 @@ def business_daily_report():
                 #                         recipients=recipients,
                 #                         candidates=candidates)
                 # TODO: this is really wrong
-                CampaignPendingEmail.add_to_queue(campaigns=campaign,
+                CampaignPendingEmail.add_to_queue(the_objects=campaign,
                                                   language_code='es',
                                                   body_input='business_daily_report_email_body',
-                                                  subject='Reporte de candidatos recomendados en oferta: {campaign}',
+                                                  subject='Reporte de candidatos recomendados en oferta: {campaign_name}',
                                                   email_type=EmailType.objects.get(name='business_daily_report'))
                 messenger_sender.send(objects=campaign,
                                       language_code='es',

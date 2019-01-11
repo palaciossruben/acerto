@@ -68,7 +68,7 @@ def send_reminder(email_template, state_name, subject_function, email_type):
                 continue
 
             # check that emails are not sent twice with respect to a candidate:
-            if not CandidateEmailSent.objects.filter(candidate=candidate, email_type=email_type):
+            if not CandidateEmailSent.objects.filter(an_object=candidate, email_type=email_type):
 
                 email_sender.send(objects=candidate,
                                   language_code=candidate.user.language_code,
@@ -76,7 +76,7 @@ def send_reminder(email_template, state_name, subject_function, email_type):
                                   subject=subject_function(candidate))
 
                 # Records sending email
-                CandidateEmailSent(candidate=candidate, email_type=email_type).save()
+                CandidateEmailSent(an_object=candidate, email_type=email_type).save()
 
     return
 
