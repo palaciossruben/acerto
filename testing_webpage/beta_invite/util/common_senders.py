@@ -163,6 +163,7 @@ def get_params_with_candidate(candidate, language_code='es', override_dict={}):
               'complete_name': candidate.user.name.title(),
               'cv_url': get_cv_url(candidate.user),
               'campaign': candidate.get_campaign_name(language_code),
+              'campaign_name': candidate.get_campaign_name(language_code),
               'campaign_url': get_campaign_url(candidate),
               'campaign_salary_range': get_campaign_salary_range(candidate),
               'campaign_city': get_campaign_city_name(candidate),
