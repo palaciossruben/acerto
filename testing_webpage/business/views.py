@@ -564,9 +564,13 @@ def candidate_profile(request, candidate_id):
 
     candidate = Candidate.objects.get(pk=candidate_id)
     business_user = get_business_user(request)
+
+    # messenger won't admit + sign in url:
+    messenger_phone = candidate.user.change_to_international_phone_number().replace('+', '')
+
     return render(request, cts.CANDIDATE_PROFILE_VIEW_PATH, {'candidate': candidate,
                                                              'business_user': business_user,
-                                                             'phone': candidate.user.change_to_international_phone_number()})
+                                                             'phone': messenger_phone})
 
 
 @login_required
