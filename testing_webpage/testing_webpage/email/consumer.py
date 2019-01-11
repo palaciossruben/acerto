@@ -62,11 +62,11 @@ def send_condition(an_object, email):
            send_condition_with_class(an_object, Campaign, email, CampaignPendingEmail)"""
 
     return isinstance(an_object, Candidate) and \
-           (email.email_type.send_more_than_ones or not CandidateEmailSent.objects.filter(an_object=an_object, email_type=email.email_type)) or \
-           isinstance(an_object, BusinessUser) and \
-           (email.email_type.send_more_than_ones or not BusinessUserEmailSent.objects.filter(an_object=an_object, email_type=email.email_type)) or \
-           isinstance(an_object, Campaign) and \
-           (email.email_type.send_more_than_ones or not CampaignEmailSent.objects.filter(an_object=an_object, email_type=email.email_type))
+        (email.email_type.send_more_than_ones or not CandidateEmailSent.objects.filter(an_object=an_object, email_type=email.email_type)) or \
+        isinstance(an_object, BusinessUser) and \
+        (email.email_type.send_more_than_ones or not BusinessUserEmailSent.objects.filter(an_object=an_object, email_type=email.email_type)) or \
+        isinstance(an_object, Campaign) and \
+        (email.email_type.send_more_than_ones or not CampaignEmailSent.objects.filter(an_object=an_object, email_type=email.email_type))
 
 
 def get_email(an_object):
