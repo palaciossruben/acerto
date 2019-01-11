@@ -1,32 +1,31 @@
+import inspect
 import os
 import shutil
-import inspect
 import unicodedata
-from django.conf import settings
+from datetime import datetime, timedelta
 from urllib.parse import urlencode, urlunparse, urlparse, parse_qsl, parse_qs
-from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
-from django.core.files.storage import FileSystemStorage
-from django.db.transaction import atomic
-from django.db.models import Q
-from ipware.ip import get_ip
+
 import geoip2.database
 import inflection
 from decouple import config
-from datetime import datetime, timedelta
+from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
+from django.core.files.storage import FileSystemStorage
 from django.db.models import F
+from django.db.models import Q
+from django.db.transaction import atomic
+from ipware.ip import get_ip
 
-
+from basic_common import not_admin_user
+from beta_invite import constants as beta_cts
 from beta_invite.apps import ip_country_reader, ip_city_reader
 from beta_invite.models import User, Campaign, Country, City, Profession, Education, EvaluationSummary, WorkArea, Gender
-from beta_invite import constants as beta_cts
+from business.models import BusinessUser
 from dashboard.models import Candidate, State
 from testing_webpage import settings
-from business.models import BusinessUser
-
 
 INTERVIEW_INTRO_VIDEO = './interview_intro_video.txt'
 ZIGGEO_API_KEY = './ziggeo_api_key.txt'
-ADMIN_USER_EMAIL = 'admin@peaku.co'
 
 
 def get_host():
@@ -570,10 +569,6 @@ def calculate_operational_efficiency(campaign):
     else:
         campaign.operational_efficiency = None
     campaign.save()
-
-
-def not_admin_user(request):
-    return request.user.username != ADMIN_USER_EMAIL
 
 
 def access_for_users(request, campaign, business_user):

@@ -6,7 +6,7 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
-
+import basic_common
 import common
 from beta_invite.util import common_senders
 from beta_invite import constants as beta_cts
@@ -34,7 +34,7 @@ def index(request):
 
     # TODO: this basic login... works but the real admin users can be used instead
     # TODO: how to add the same auth to all the app????
-    if common.not_admin_user(request):
+    if basic_common.not_admin_user(request):
         return redirect('business:login')
     campaigns = Campaign.objects.filter(removed=False).order_by('-created_at', 'state', 'title_es').all()
 

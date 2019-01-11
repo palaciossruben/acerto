@@ -367,10 +367,10 @@ def send_new_campaign_notification(business_user, language_code, campaign):
         pass
 
 
-# This for create campaign when the user is logged
 @login_required
 def create_post(request):
     """
+    Creates campaign when user is already logged
     Args:
         request: HTTP post request
     Returns: Renders form.html
@@ -378,6 +378,11 @@ def create_post(request):
 
     business_user = BusinessUser.objects.get(auth_user=request.user)
     campaign, prospects = campaign_module.create_campaign(request)
+
+    # starts as inactive campaign, so that free users won't see
+    campaign.state = CampaignState.objects.get(code='I')
+    campaign.save()
+
     business_user.campaigns.add(campaign)
     business_user.save()
     if not business_user.is_peaku():
@@ -389,7 +394,7 @@ def create_post(request):
     send_new_campaign_notification(business_user, request.LANGUAGE_CODE, campaign)
     #PublicPost.add_to_public_post_queue(campaign)
 
-    return redirect('resumen/{campaign_pk}'.format(campaign_pk=campaign.pk))
+    return redirect('campañas/{business_user_pk}'.format(business_user_pk=business_user.pk))
 
 
 def start_post(request):

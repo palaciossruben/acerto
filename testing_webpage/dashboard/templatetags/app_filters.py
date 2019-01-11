@@ -4,6 +4,7 @@ from django.core.serializers import serialize
 from beta_invite.models import User
 
 import common
+import basic_common
 register = template.Library()
 
 
@@ -87,3 +88,8 @@ def get_number_questions_of_before_test(tests, i):
         return len(tests[0].questions.all())
     # the -2 is for an index based of 1 not in zero
     return len(tests[int(i)-2].questions.all())
+
+
+@register.simple_tag
+def show_candidates(campaign, user):
+    return basic_common.is_admin(user) or not campaign.free_trial or campaign.state.code == 'A'
