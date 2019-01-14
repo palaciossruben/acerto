@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-14 15:23+0000\n"
+"POT-Creation-Date: 2019-01-14 17:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -414,8 +414,8 @@ msgid "START HERE"
 msgstr "COMIENZA AQUÍ"
 
 #: business/templates/business/index.html:190
-msgid "1 OFFERING"
-msgstr "1 OFERTA"
+msgid "ONE OFFERING"
+msgstr "UNA OFERTA"
 
 #: business/templates/business/index.html:191
 msgid "START"
@@ -426,38 +426,38 @@ msgid "Free"
 msgstr "Gratis"
 
 #: business/templates/business/index.html:196
-#: business/templates/business/index.html:217
-#: business/templates/business/index.html:239
-#: business/templates/business/index.html:261
+#: business/templates/business/index.html:214
+#: business/templates/business/index.html:233
+#: business/templates/business/index.html:252
 msgid " Unlimited access to the platform "
 msgstr " Acceso ilimitado a la plataforma "
 
-#: business/templates/business/index.html:211
+#: business/templates/business/index.html:208
 msgid "OPERATIONAL STAFF"
 msgstr "PERSONAL OPERATIVO"
 
-#: business/templates/business/index.html:212
-#: business/templates/business/index.html:234
+#: business/templates/business/index.html:209
+#: business/templates/business/index.html:228
 msgid "GET"
 msgstr "OBTENER"
 
-#: business/templates/business/index.html:233
+#: business/templates/business/index.html:227
 msgid "TECHNICAL"
 msgstr "TECNICO"
 
-#: business/templates/business/index.html:255
+#: business/templates/business/index.html:246
 msgid "SPECIALIZED"
 msgstr "ESPECIALIZADO"
 
-#: business/templates/business/index.html:256
+#: business/templates/business/index.html:247
 msgid "QUOTE"
 msgstr "COTIZAR"
 
-#: business/templates/business/index.html:258
+#: business/templates/business/index.html:249
 msgid "From"
 msgstr "Desde"
 
-#: business/templates/business/index.html:282
+#: business/templates/business/index.html:270
 msgid "First hand, success stories"
 msgstr "Historias de éxito, de primera mano"
 
