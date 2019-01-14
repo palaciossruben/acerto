@@ -49,12 +49,6 @@ def get_user_dict(user):
               'profile': user.profile,
               'dream_job': user.dream_job,
               'hobbies': user.hobbies,
-              'company2': experience2.company.name,
-              'role2': experience2.role,
-              'highlight2': experience2.highlight,
-              'company3': experience3.company.name,
-              'role3': experience3.role,
-              'highlight3': experience3.highlight,
               }
 
     if experience1 is not None:
