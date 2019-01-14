@@ -379,9 +379,10 @@ def create_post(request):
     business_user = BusinessUser.objects.get(auth_user=request.user)
     campaign, prospects = campaign_module.create_campaign(request)
 
-    # starts as inactive campaign, so that free users won't see
-    campaign.state = CampaignState.objects.get(code='I')
-    campaign.save()
+    # starts as inactive campaign, so that free users won't see, if it is not the first campaign
+    if len(business_user.campaigns.all()) > 1:
+        campaign.state = CampaignState.objects.get(code='I')
+        campaign.save()
 
     business_user.campaigns.add(campaign)
     business_user.save()
