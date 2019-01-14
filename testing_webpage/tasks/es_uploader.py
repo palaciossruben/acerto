@@ -21,28 +21,58 @@ from queue import Queue
 
 
 def get_user_dict(user):
-    return {'pk': user.pk,
-            'email': user.email,
-            'name': user.name,
-            'experience': user.experience,
-            'profession': user.profession_id,
-            'education': user.education_id,
-            'country': user.country_id,
-            'city': user.city_id,
-            'curriculum_text': user.curriculum_text,
-            'phone': user.phone,
-            'programs': user.programs,
-            'work_area': user.work_area_id,
-            'salary': user.salary,
-            'address': user.address,
-            'neighborhood': user.neighborhood,
-            'languages': user.languages,
-            'phone2': user.phone2,
-            'phone3': user.phone3,
-            'profile': user.profile,
-            'dream_job': user.dream_job,
-            'hobbies': user.hobbies,
-            }
+
+    experiences = user.experiences.all()
+
+    experience1 = experiences[0] if len(experiences) > 0 else None
+    experience2 = experiences[1] if len(experiences) > 0 else None
+    experience3 = experiences[2] if len(experiences) > 0 else None
+
+    params = {'pk': user.pk,
+              'email': user.email,
+              'name': user.name,
+              'experience': user.experience,
+              'profession': user.profession_id,
+              'education': user.education_id,
+              'country': user.country_id,
+              'city': user.city_id,
+              'curriculum_text': user.curriculum_text,
+              'phone': user.phone,
+              'programs': user.programs,
+              'work_area': user.work_area_id,
+              'salary': user.salary,
+              'address': user.address,
+              'neighborhood': user.neighborhood,
+              'languages': user.languages,
+              'phone2': user.phone2,
+              'phone3': user.phone3,
+              'profile': user.profile,
+              'dream_job': user.dream_job,
+              'hobbies': user.hobbies,
+              'company2': experience2.company.name,
+              'role2': experience2.role,
+              'highlight2': experience2.highlight,
+              'company3': experience3.company.name,
+              'role3': experience3.role,
+              'highlight3': experience3.highlight,
+              }
+
+    if experience1 is not None:
+        params['company1'] = experience1.company.name
+        params['role1'] = experience1.role
+        params['highlight1'] = experience1.highlight
+
+    if experience2 is not None:
+        params['company2'] = experience2.company.name
+        params['role2'] = experience2.role
+        params['highlight2'] = experience2.highlight
+
+    if experience3 is not None:
+        params['company3'] = experience3.company.name
+        params['role3'] = experience3.role
+        params['highlight3'] = experience3.highlight
+
+    return params
 
 
 def upload_resource_to_es(user):
