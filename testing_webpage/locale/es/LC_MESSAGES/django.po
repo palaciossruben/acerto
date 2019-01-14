@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-21 12:08+0000\n"
+"POT-Creation-Date: 2019-01-14 15:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,8 +60,8 @@ msgstr "¡Programemos una cita!"
 msgid "Let's record your interview now!"
 msgstr "¡Graba tu entrevista ya!"
 
-#: beta_invite/new_user_module.py:147 business/views.py:163
-#: business/views.py:291 business/views.py:679
+#: beta_invite/new_user_module.py:147 business/views.py:164
+#: business/views.py:292 business/views.py:734
 msgid "Welcome to PeakU"
 msgstr "Bienvenido a PeakU"
 
@@ -414,8 +414,8 @@ msgid "START HERE"
 msgstr "COMIENZA AQUÍ"
 
 #: business/templates/business/index.html:190
-msgid "FREE PLAN"
-msgstr "PLAN GRATUITO"
+msgid "1 OFFERING"
+msgstr "1 OFERTA"
 
 #: business/templates/business/index.html:191
 msgid "START"
@@ -433,8 +433,8 @@ msgid " Unlimited access to the platform "
 msgstr " Acceso ilimitado a la plataforma "
 
 #: business/templates/business/index.html:211
-msgid "BASIC PLAN"
-msgstr "PLAN BÁSICO"
+msgid "OPERATIONAL STAFF"
+msgstr "PERSONAL OPERATIVO"
 
 #: business/templates/business/index.html:212
 #: business/templates/business/index.html:234
@@ -442,12 +442,12 @@ msgid "GET"
 msgstr "OBTENER"
 
 #: business/templates/business/index.html:233
-msgid "PREMIUM PLAN"
-msgstr "PLAN PREMIUM"
+msgid "TECHNICAL"
+msgstr "TECNICO"
 
 #: business/templates/business/index.html:255
-msgid "HEADHUNTER PLAN"
-msgstr "PLAN HEADHUNTER"
+msgid "SPECIALIZED"
+msgstr "ESPECIALIZADO"
 
 #: business/templates/business/index.html:256
 msgid "QUOTE"
@@ -621,11 +621,11 @@ msgstr "Experiencia en años:"
 msgid "Search"
 msgstr "Búsqueda"
 
-#: business/views.py:76 business/views.py:118 business/views.py:320
+#: business/views.py:77 business/views.py:119 business/views.py:321
 msgid "Discover amazing people"
 msgstr "Descubre personas increíbles"
 
-#: business/views.py:77 business/views.py:119
+#: business/views.py:78 business/views.py:120
 msgid ""
 "We search millions of profiles and find the ones that best suit your business"
 msgstr "Buscamos entre millones de trabajos y encontramos el perfecto para ti"
@@ -739,6 +739,24 @@ msgstr "Trabajos"
 #: testing_webpage/templates/white_header_base.html:18
 msgid "+ NEW JOB POST"
 msgstr "+ CREAR OFERTA"
+
+#~ msgid "ADMINISTRATIVE"
+#~ msgstr "ADMINISTRATIVO"
+
+#~ msgid "EXECUTIVE"
+#~ msgstr "EJECUTIVO"
+
+#~ msgid "FREE PLAN"
+#~ msgstr "PLAN GRATUITO"
+
+#~ msgid "BASIC PLAN"
+#~ msgstr "PLAN BÁSICO"
+
+#~ msgid "PREMIUM PLAN"
+#~ msgstr "PLAN PREMIUM"
+
+#~ msgid "HEADHUNTER PLAN"
+#~ msgstr "PLAN HEADHUNTER"
 
 #, fuzzy
 #~| msgid "PRESELECTED"
