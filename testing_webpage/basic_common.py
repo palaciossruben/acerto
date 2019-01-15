@@ -18,6 +18,11 @@ def change_to_international_phone_number(phone, calling_code, add_plus=False):
         if re.search(r'^' + calling_code + '.+', phone) is not None:
             phone = plus_symbol + phone
         elif phone[0] != '+':  # Adds the '+' and country code phone
+
+            # TODO: change for other countries
+            max_phone_length = 10
+            if len(phone) > max_phone_length:
+                phone = ''.join(phone[-10:-1])
             phone = plus_symbol + calling_code + phone
 
     return phone
