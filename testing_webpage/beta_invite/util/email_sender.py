@@ -156,10 +156,10 @@ def create_nice_resumes_message(candidates):
         else:
             campaign_name = None
 
-        resume_summaries.append('Campaña: {campaign_name}\n'
+        resume_summaries.append('Campaña: {campaign}\n'
                                 'Nombre: {name}\n'
                                 'Email: {email}\n'
-                                'Hoja de vida: \n{cv_url}'.format(campaign_name=campaign_name,
+                                'Hoja de vida: \n{cv_url}'.format(campaign=campaign_name,
                                                                   name=remove_accents(c.user.name),
                                                                   email=c.user.email,
                                                                   country=c.get_country_name(),

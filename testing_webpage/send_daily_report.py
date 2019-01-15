@@ -49,7 +49,7 @@ def business_daily_report():
                 CampaignPendingEmail.add_to_queue(the_objects=campaign,
                                                   language_code='es',
                                                   body_input='business_daily_report_email_body',
-                                                  subject='Reporte de candidatos recomendados en oferta: {campaign_name}',
+                                                  subject='Reporte de candidatos recomendados en oferta: {campaign}',
                                                   email_type=EmailType.objects.get(name='business_daily_report'))
                 messenger.send(objects=campaign,
                                language_code='es',
@@ -78,7 +78,7 @@ def send_campaign_report(campaign_id):
     if len(candidates) > 0:
         email_sender.send_report(language_code='es',
                                  body_filename='daily_report_email_body',
-                                 subject='Reporte diario para {campaign_name}'.format(campaign_name=campaign.title_es),
+                                 subject='Reporte diario para {campaign}'.format(campaign=campaign.title_es),
                                  recipients=['santiago@peaku.co', 'juan.rendon@peaku.co'],
                                  candidates=candidates)
 

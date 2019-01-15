@@ -1,6 +1,6 @@
 Hola {name},
 
-Te cuento que tu oferta laboral {campaign_name}, está avanzando y tiene nuevos cadidatos seleccionados:
+Te cuento que tu oferta laboral {campaign}, está avanzando y tiene nuevos cadidatos seleccionados:
 
 Candidatos seleccionados: {total_recommended_candidates}
 

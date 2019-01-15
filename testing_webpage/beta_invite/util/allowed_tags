@@ -6,7 +6,7 @@ This are the allowed tags for emails and messages:
 {sender_name}:                                Ex Juan
 {sender_position}:                            Ex CTO
 {peaku_address}:                              Ex Calle 107...
-{campaign}:                                   Campaign.name
+{campaign}:                                   Name of campaign
 {video_url}:                                  Url redirecting to add the video of the interview
 {campaign_url}:                               The url of a campaign for candidate
 {campaign_city}                               The campaign city
@@ -15,7 +15,6 @@ This are the allowed tags for emails and messages:
 {business_campaign_url}:                      The url of a campaign for business_user
 {additional_info_url}:                        The url for complete the additional info forms, for candidates
 {campaign_salary_range}:                      The campaign Salary range, set by business user
-{campaign_name}                               Name of the campaign
 {campaign_salary_range}                       Salary from to...
 {campaign_city}                               City of the campaign
 {campaign_description}                        Description of the campaign

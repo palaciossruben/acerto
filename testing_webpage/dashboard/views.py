@@ -212,7 +212,7 @@ def send_feedback_message_and_mail(business_user, campaign, request):
         CampaignPendingEmail.add_to_queue(the_objects=campaign,
                                           language_code='es',
                                           body_input='business_feedback',
-                                          subject='Publicación terminada {campaign_name}',
+                                          subject='Publicación terminada {campaign}',
                                           email_type=EmailType.objects.get(name='business_feedback'))
         messenger.send(objects=campaign,
                        language_code='es',

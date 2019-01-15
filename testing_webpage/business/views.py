@@ -172,7 +172,7 @@ def send_signup_emails(business_user, language_code, campaign):
         CampaignPendingEmail.add_to_queue(the_objects=campaign,
                                           language_code=language_code,
                                           body_input=body_input,
-                                          subject='Oferta publicada exitosamente - {campaign_name}',
+                                          subject='Oferta publicada exitosamente - {campaign}',
                                           email_type=EmailType.objects.get(name='business_welcome'))
 
     email_sender.send_internal(contact=business_user,
