@@ -142,7 +142,7 @@ def register(request):
     if email:
         user_params['email'] = email
 
-    if email:
+    if phone:
         user_params['phone'] = phone
 
     if work_area_id:

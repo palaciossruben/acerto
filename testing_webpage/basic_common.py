@@ -14,13 +14,11 @@ def change_to_international_phone_number(phone, calling_code, add_plus=False):
     if phone:
         phone = phone.replace('-', '')
 
-        # Adds the '+' and country code
-        if phone[0] != '+':
-            phone = plus_symbol + calling_code + phone
-
-            # Adds the '+' only
-        elif re.search(r'^' + calling_code + '.+', phone) is not None:
+        # Adds the '+' only
+        if re.search(r'^' + calling_code + '.+', phone) is not None:
             phone = plus_symbol + phone
+        elif phone[0] != '+':  # Adds the '+' and country code phone
+            phone = plus_symbol + calling_code + phone
 
     return phone
 
