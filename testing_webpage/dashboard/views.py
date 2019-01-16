@@ -648,8 +648,7 @@ def add_backlog_messages(message_filename):
 
     # TODO: add English
     candidates = [c for c in
-                  Candidate.objects.filter(Q(created_at__lt=datetime.datetime.today() - datetime.timedelta(hours=2)) &
-                                           Q(created_at__gt=datetime.datetime.today() - datetime.timedelta(days=5)) &
+                  Candidate.objects.filter(Q(created_at__gt=datetime.datetime.today() - datetime.timedelta(days=5)) &
                                            Q(state__code='BL') &
                                            Q(campaign__state__name='Active') &
                                            ~Q(message__filename=message_filename) &
