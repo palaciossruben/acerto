@@ -12,7 +12,7 @@ def change_to_international_phone_number(phone, calling_code, add_plus=False):
     plus_symbol = '+' if add_plus else ''
 
     if phone:
-        phone = phone.replace('-', '')
+        phone = phone.replace('-', '').replace(' ', '')
 
         # Adds the '+' only
         if re.search(r'^' + calling_code + '.+', phone) is not None:

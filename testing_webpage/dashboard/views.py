@@ -599,6 +599,7 @@ def mark_as_added(objects):
 
 
 def get_candidate_users():
+
     users = [m.candidate.user for m in Message.objects.filter(~Q(candidate__user__phone=None),
                                                               sent=False)]
 
