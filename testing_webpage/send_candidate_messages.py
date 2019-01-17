@@ -26,7 +26,7 @@ def send_candidates_messages():
     candidates = Candidate.objects.filter(user__work_area__code__in=['IT', 'I', 'IC'],
                                           user__salary__gte=2000000,
                                           user__salary__lte=10000000,
-                                          user__city__id=2).order_by('-id')[:1]  # City=Bogotá
+                                          user__city__id=2).order_by('-id')[1:20]  # City=Bogotá
 
     #candidates = list(Candidate.objects.filter(user__pk=1929))
 
