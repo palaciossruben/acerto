@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-14 17:19+0000\n"
+"POT-Creation-Date: 2019-01-17 17:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,7 +61,7 @@ msgid "Let's record your interview now!"
 msgstr "¡Graba tu entrevista ya!"
 
 #: beta_invite/new_user_module.py:147 business/views.py:164
-#: business/views.py:292 business/views.py:734
+#: business/views.py:292 business/views.py:737
 msgid "Welcome to PeakU"
 msgstr "Bienvenido a PeakU"
 
@@ -442,8 +442,8 @@ msgid "GET"
 msgstr "OBTENER"
 
 #: business/templates/business/index.html:227
-msgid "TECHNICAL"
-msgstr "TECNICO"
+msgid "ADMISTRATIVE"
+msgstr "ADMINISTRATIVO"
 
 #: business/templates/business/index.html:246
 msgid "SPECIALIZED"
@@ -740,8 +740,8 @@ msgstr "Trabajos"
 msgid "+ NEW JOB POST"
 msgstr "+ CREAR OFERTA"
 
-#~ msgid "ADMINISTRATIVE"
-#~ msgstr "ADMINISTRATIVO"
+#~ msgid "TECHNICAL"
+#~ msgstr "TECNICO"
 
 #~ msgid "EXECUTIVE"
 #~ msgstr "EJECUTIVO"
