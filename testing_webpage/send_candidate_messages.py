@@ -30,9 +30,13 @@ def send_candidates_messages():
     message = """
     Hola {name}
     
-    Esta es una prueba del mensaje para VIchara
-    
+    Tengo tu información por nuestra base de datos y te cuento que estamos buscando desarrolladores front end bilingues para Bogotá (salarios entre los 4-6 M) con conocimiento en Javascript. Si te interesa aplica acá:
+        
     https://peaku.co/servicio-de-empleo/?campaign_id=561
+    
+    Si conoces a alguien que le interese estamos entregando un bono de 300k en Ktronix si el candidato es contratado. Solo tienes que pasarnos su contacto de whatsapp. 
+    
+    Gracias y quedo atento!
     
     Saludos
     Juan Pablo de PeakU
