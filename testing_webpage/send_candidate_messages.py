@@ -23,17 +23,21 @@ def candidates_filter(candidates):
 
 def send_candidates_messages():
 
-    #candidates = Candidate.objects.filter(~Q(user=None),
-    #                                      ~Q(user__phone=None),
-    #                                      user__gender_id=None).order_by('-user_id')  # [:100]
+    candidates = Candidate.objects.filter(user__work_area__code__in=['IT', 'I', 'IC'],
+                                          user__salary__gte=2000000,
+                                          user__salary__lte=10000000,
+                                          user__city__id=2).order_by('-id')[:1]  # City=Bogotá
 
-    candidates = list(Candidate.objects.filter(user__pk=1929))
+    #candidates = list(Candidate.objects.filter(user__pk=1929))
 
-    print(len(candidates))
+    candidates = candidates_filter(candidates)
 
     messenger.send(objects=candidates,
                    language_code='en',
                    body_input='comodin')
+
+    print(candidates)
+    print(len(candidates))
 
 
 if __name__ == '__main__':
