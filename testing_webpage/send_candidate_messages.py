@@ -23,23 +23,30 @@ def candidates_filter(candidates):
 
 def send_candidates_messages():
 
-    candidates = Candidate.objects.filter(~Q(user=None),
-                                          ~Q(user__phone=None),
-                                          user__gender_id=None).order_by('-user_id')  # [:100]
+    #candidates = Candidate.objects.filter(~Q(user=None),
+    #                                      ~Q(user__phone=None),
+    #                                      user__gender_id=None).order_by('-user_id')  # [:100]
 
-    candidates = [c for c in candidates]
+    message = """
+    Hola {name}
+    
+    Esta es una prueba del mensaje para VIchara
+    
+    https://peaku.co/servicio-de-empleo/?campaign_id=561
+    
+    Saludos
+    Juan Pablo de PeakU
+    """
 
-    new_candidates = candidates_filter(candidates)
+    candidates = list(Candidate.objects.filter(user__pk=1929))
 
     print(len(candidates))
-    print(len(new_candidates))
 
-    # print([c.user_id for c in candidates])
-    messenger.send(objects=new_candidates,
+    messenger.send(objects=candidates,
                    language_code='es',
-                   body_input='candidates_form_reminder_message_body')
+                   body_input=message,
+                   body_is_filename=False)
 
 
-# Caution: If script imported for another module, this lines avoid the execution of this entire file
 if __name__ == '__main__':
     send_candidates_messages()
