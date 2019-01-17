@@ -36,7 +36,6 @@ def send_candidates_messages():
                    language_code='en',
                    body_input='comodin')
 
-    print(candidates)
     print(len(candidates))
 
 
