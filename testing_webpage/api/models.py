@@ -68,6 +68,9 @@ class Lead(models.Model):
 
     @staticmethod
     def create_leads(names, phones, emails, facebook_urls):
+        """
+        Creates only new leads that have a unique facebook_url
+        """
         leads = []
         for n, p, e, f in zip(names, phones, emails, facebook_urls):
             if f not in [l.facebook_url for l in Lead.objects.all()]:
