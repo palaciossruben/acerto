@@ -26,7 +26,7 @@ def send_candidates_messages():
     candidates = Candidate.objects.filter(user__work_area__code__in=['IT', 'I', 'IC'],
                                           user__salary__gte=2000000,
                                           user__salary__lte=10000000,
-                                          user__city__id=2).order_by('-id')[299:200000]  # City=Bogotá
+                                          user__city__id=2).order_by('-id')[:200000]  # City=Bogotá
 
     #candidates = list(Candidate.objects.filter(user__pk=1929))
 
@@ -35,6 +35,8 @@ def send_candidates_messages():
     for idx, c in enumerate(candidates):
         print('idx: {}, id: {}, name: {}'.format(idx, c.user_id, c.user.name))
     """
+
+    candidates = candidates[299:-1]
 
     messenger.send(objects=candidates,
                    language_code='en',
